@@ -71,16 +71,16 @@ public final class AvailabilitySets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (avset == null) {
-            throw new IllegalArgumentException("Parameter avset is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter avset is required and cannot be null."));
         }
         if (availabilitySetUpdateParametersTags == null) {
-            throw new IllegalArgumentException("Parameter availabilitySetUpdateParametersTags is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter availabilitySetUpdateParametersTags is required and cannot be null."));
         }
         AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
         tags.setTags(availabilitySetUpdateParametersTags);

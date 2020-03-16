@@ -70,19 +70,19 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
-            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter vault is required and cannot be null."));
         }
         if (secret == null) {
-            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter secret is required and cannot be null."));
         }
         if (this.client.getDnsSuffix() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
         }
         if (keyName == null) {
-            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmpty(vault, secret, this.client.getDnsSuffix(), keyName, this.client.getSubscriptionId(), keyVersion, context));
     }

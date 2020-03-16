@@ -122,7 +122,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
         if (this.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
     }
@@ -175,7 +175,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(String source) {
         if (this.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         SourcePath inputInternal = null;
         if (source != null) {

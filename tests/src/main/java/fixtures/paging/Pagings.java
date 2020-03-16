@@ -210,7 +210,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNoItemNamePages(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -296,7 +296,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -344,7 +344,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pagingGetMultiplePagesOptions != null) {
             pagingGetMultiplePagesOptions.validate();
@@ -411,7 +411,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pagingGetOdataMultiplePagesOptions != null) {
             pagingGetOdataMultiplePagesOptions.validate();
@@ -478,10 +478,10 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
-            throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null."));
         } else {
             pagingGetMultiplePagesWithOffsetOptions.validate();
         }
@@ -537,7 +537,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirst(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -582,7 +582,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecond(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -627,7 +627,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getSinglePagesFailure(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -672,7 +672,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesFailure(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -717,7 +717,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesFailureUri(this.client.getHost(), context))
             .map(res -> new PagedResponseBase<>(
@@ -765,13 +765,13 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion, String tenant) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (apiVersion == null) {
-            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         if (tenant == null) {
-            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter tenant is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant, context))
             .map(res -> new PagedResponseBase<>(
@@ -824,10 +824,10 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(CustomParameterGroup customParameterGroup) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (customParameterGroup == null) {
-            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null."));
         } else {
             customParameterGroup.validate();
         }
@@ -883,7 +883,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pagingGetMultiplePagesLroOptions != null) {
             pagingGetMultiplePagesLroOptions.validate();
@@ -951,16 +951,16 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (apiVersion == null) {
-            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         if (tenant == null) {
-            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter tenant is required and cannot be null."));
         }
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -984,13 +984,13 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String nextLink, CustomParameterGroup customParameterGroup) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         if (customParameterGroup == null) {
-            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null."));
         } else {
             customParameterGroup.validate();
         }
@@ -1017,7 +1017,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNoItemNamePagesNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1040,7 +1040,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getSinglePagesNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1063,7 +1063,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1086,7 +1086,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getOdataMultiplePagesNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1109,7 +1109,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesWithOffsetNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1132,7 +1132,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirstNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1155,7 +1155,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecondNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1178,7 +1178,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getSinglePagesFailureNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1201,7 +1201,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesFailureNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1224,7 +1224,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesFailureUriNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
@@ -1247,7 +1247,7 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
-            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesLRONext(nextLink, context))
             .map(res -> new PagedResponseBase<>(

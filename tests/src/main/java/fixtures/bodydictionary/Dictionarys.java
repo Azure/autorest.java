@@ -400,7 +400,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
@@ -443,7 +443,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
@@ -488,10 +488,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, context));
     }
@@ -532,7 +532,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNullValue(this.client.getHost(), context));
     }
@@ -575,7 +575,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNullKey(this.client.getHost(), context));
     }
@@ -618,7 +618,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyStringKey(this.client.getHost(), context));
     }
@@ -661,7 +661,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
@@ -704,7 +704,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), context));
     }
@@ -749,10 +749,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putBooleanTfft(this.client.getHost(), arrayBody, context));
     }
@@ -793,7 +793,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), context));
     }
@@ -836,7 +836,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), context));
     }
@@ -879,7 +879,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), context));
     }
@@ -924,10 +924,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putIntegerValid(this.client.getHost(), arrayBody, context));
     }
@@ -968,7 +968,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), context));
     }
@@ -1011,7 +1011,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), context));
     }
@@ -1054,7 +1054,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), context));
     }
@@ -1099,10 +1099,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, context));
     }
@@ -1143,7 +1143,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), context));
     }
@@ -1186,7 +1186,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), context));
     }
@@ -1229,7 +1229,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), context));
     }
@@ -1274,10 +1274,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putFloatValid(this.client.getHost(), arrayBody, context));
     }
@@ -1318,7 +1318,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), context));
     }
@@ -1361,7 +1361,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), context));
     }
@@ -1404,7 +1404,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), context));
     }
@@ -1449,10 +1449,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putDoubleValid(this.client.getHost(), arrayBody, context));
     }
@@ -1493,7 +1493,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), context));
     }
@@ -1536,7 +1536,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), context));
     }
@@ -1579,7 +1579,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), context));
     }
@@ -1624,10 +1624,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putStringValid(this.client.getHost(), arrayBody, context));
     }
@@ -1668,7 +1668,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), context));
     }
@@ -1711,7 +1711,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), context));
     }
@@ -1754,7 +1754,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), context));
     }
@@ -1799,10 +1799,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, context));
     }
@@ -1843,7 +1843,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), context));
     }
@@ -1886,7 +1886,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), context));
     }
@@ -1929,7 +1929,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), context));
     }
@@ -1974,10 +1974,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putDateTimeValid(this.client.getHost(), arrayBody, context));
     }
@@ -2018,7 +2018,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), context));
     }
@@ -2061,7 +2061,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), context));
     }
@@ -2104,7 +2104,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), context));
     }
@@ -2149,10 +2149,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         Map<String, DateTimeRfc1123> arrayBodyConverted = arrayBody.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
         return FluxUtil.withContext(context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, context));
@@ -2194,7 +2194,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), context));
     }
@@ -2239,10 +2239,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putDurationValid(this.client.getHost(), arrayBody, context));
     }
@@ -2283,7 +2283,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), context));
     }
@@ -2328,10 +2328,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, context));
     }
@@ -2372,7 +2372,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), context));
     }
@@ -2415,7 +2415,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), context));
     }
@@ -2458,7 +2458,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), context));
     }
@@ -2501,7 +2501,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), context));
     }
@@ -2544,7 +2544,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), context));
     }
@@ -2587,7 +2587,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), context));
     }
@@ -2630,7 +2630,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), context));
     }
@@ -2675,10 +2675,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         } else {
             arrayBody.values().forEach(e -> e.validate());
         }
@@ -2721,7 +2721,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), context));
     }
@@ -2764,7 +2764,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), context));
     }
@@ -2807,7 +2807,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), context));
     }
@@ -2850,7 +2850,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), context));
     }
@@ -2893,7 +2893,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), context));
     }
@@ -2938,10 +2938,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putArrayValid(this.client.getHost(), arrayBody, context));
     }
@@ -2982,7 +2982,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), context));
     }
@@ -3025,7 +3025,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), context));
     }
@@ -3068,7 +3068,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), context));
     }
@@ -3111,7 +3111,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), context));
     }
@@ -3154,7 +3154,7 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), context));
     }
@@ -3199,10 +3199,10 @@ public final class Dictionarys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayBody == null) {
-            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putDictionaryValid(this.client.getHost(), arrayBody, context));
     }

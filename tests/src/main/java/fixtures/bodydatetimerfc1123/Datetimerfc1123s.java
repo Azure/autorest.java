@@ -116,7 +116,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
@@ -159,7 +159,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
@@ -202,7 +202,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getOverflowWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), context));
     }
@@ -245,7 +245,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUnderflowWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), context));
     }
@@ -290,10 +290,10 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return FluxUtil.withContext(context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted, context));
@@ -335,7 +335,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), context));
     }
@@ -378,7 +378,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), context));
     }
@@ -423,10 +423,10 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
-            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return FluxUtil.withContext(context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted, context));
@@ -468,7 +468,7 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), context));
     }

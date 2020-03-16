@@ -82,7 +82,7 @@ public final class Durations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
@@ -127,10 +127,10 @@ public final class Durations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (durationBody == null) {
-            throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putPositiveDuration(this.client.getHost(), durationBody, context));
     }
@@ -171,7 +171,7 @@ public final class Durations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), context));
     }
@@ -214,7 +214,7 @@ public final class Durations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }

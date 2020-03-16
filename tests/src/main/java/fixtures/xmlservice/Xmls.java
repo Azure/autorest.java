@@ -223,7 +223,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexTypeRefNoMeta(this.client.getHost(), context));
     }
@@ -268,10 +268,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexTypeRefNoMetaWithResponseAsync(RootWithRefAndNoMeta model) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (model == null) {
-            throw new IllegalArgumentException("Parameter model is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter model is required and cannot be null."));
         } else {
             model.validate();
         }
@@ -314,7 +314,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getComplexTypeRefWithMeta(this.client.getHost(), context));
     }
@@ -359,10 +359,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexTypeRefWithMetaWithResponseAsync(RootWithRefAndMeta model) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (model == null) {
-            throw new IllegalArgumentException("Parameter model is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter model is required and cannot be null."));
         } else {
             model.validate();
         }
@@ -405,7 +405,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Slideshow>> getSimpleWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getSimple(this.client.getHost(), context));
     }
@@ -450,10 +450,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSimpleWithResponseAsync(Slideshow slideshow) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (slideshow == null) {
-            throw new IllegalArgumentException("Parameter slideshow is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter slideshow is required and cannot be null."));
         } else {
             slideshow.validate();
         }
@@ -496,7 +496,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<AppleBarrel>> getWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getWrappedLists(this.client.getHost(), context));
     }
@@ -541,10 +541,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedListsWithResponseAsync(AppleBarrel wrappedLists) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (wrappedLists == null) {
-            throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter wrappedLists is required and cannot be null."));
         } else {
             wrappedLists.validate();
         }
@@ -587,7 +587,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<XmlsGetHeadersResponse> getHeadersWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getHeaders(this.client.getHost(), context));
     }
@@ -624,7 +624,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Slideshow>> getEmptyListWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyList(this.client.getHost(), context));
     }
@@ -669,10 +669,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyListWithResponseAsync(Slideshow slideshow) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (slideshow == null) {
-            throw new IllegalArgumentException("Parameter slideshow is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter slideshow is required and cannot be null."));
         } else {
             slideshow.validate();
         }
@@ -715,7 +715,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyWrappedLists(this.client.getHost(), context));
     }
@@ -760,10 +760,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWrappedListsWithResponseAsync(AppleBarrel appleBarrel) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (appleBarrel == null) {
-            throw new IllegalArgumentException("Parameter appleBarrel is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter appleBarrel is required and cannot be null."));
         } else {
             appleBarrel.validate();
         }
@@ -806,7 +806,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getRootList(this.client.getHost(), context));
     }
@@ -851,10 +851,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRootListWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bananas == null) {
-            throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter bananas is required and cannot be null."));
         } else {
             bananas.forEach(e -> e.validate());
         }
@@ -898,7 +898,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getRootListSingleItemWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getRootListSingleItem(this.client.getHost(), context));
     }
@@ -943,10 +943,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRootListSingleItemWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bananas == null) {
-            throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter bananas is required and cannot be null."));
         } else {
             bananas.forEach(e -> e.validate());
         }
@@ -990,7 +990,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getEmptyRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyRootList(this.client.getHost(), context));
     }
@@ -1035,10 +1035,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyRootListWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bananas == null) {
-            throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter bananas is required and cannot be null."));
         } else {
             bananas.forEach(e -> e.validate());
         }
@@ -1082,7 +1082,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Banana>> getEmptyChildElementWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyChildElement(this.client.getHost(), context));
     }
@@ -1127,10 +1127,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyChildElementWithResponseAsync(Banana banana) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (banana == null) {
-            throw new IllegalArgumentException("Parameter banana is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter banana is required and cannot be null."));
         } else {
             banana.validate();
         }
@@ -1173,7 +1173,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ListContainersResponse>> listContainersWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String comp = "list";
         return FluxUtil.withContext(context -> service.listContainers(this.client.getHost(), comp, context));
@@ -1217,7 +1217,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<StorageServiceProperties>> getServicePropertiesWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String comp = "properties";
         final String restype = "service";
@@ -1264,10 +1264,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putServicePropertiesWithResponseAsync(StorageServiceProperties properties) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (properties == null) {
-            throw new IllegalArgumentException("Parameter properties is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter properties is required and cannot be null."));
         } else {
             properties.validate();
         }
@@ -1312,7 +1312,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<SignedIdentifier>>> getAclsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String comp = "acl";
         final String restype = "container";
@@ -1359,10 +1359,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putAclsWithResponseAsync(List<SignedIdentifier> properties) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (properties == null) {
-            throw new IllegalArgumentException("Parameter properties is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter properties is required and cannot be null."));
         } else {
             properties.forEach(e -> e.validate());
         }
@@ -1408,7 +1408,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ListBlobsResponse>> listBlobsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String comp = "list";
         final String restype = "container";
@@ -1455,10 +1455,10 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonInputWithResponseAsync(JsonInput properties) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (properties == null) {
-            throw new IllegalArgumentException("Parameter properties is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter properties is required and cannot be null."));
         } else {
             properties.validate();
         }
@@ -1501,7 +1501,7 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<JsonOutput>> jsonOutputWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.jsonOutput(this.client.getHost(), context));
     }

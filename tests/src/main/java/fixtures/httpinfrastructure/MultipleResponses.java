@@ -232,7 +232,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model204NoModelDefaultError200Valid(this.client.getHost(), context));
     }
@@ -275,7 +275,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model204NoModelDefaultError204Valid(this.client.getHost(), context));
     }
@@ -318,7 +318,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model204NoModelDefaultError201Invalid(this.client.getHost(), context));
     }
@@ -361,7 +361,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model204NoModelDefaultError202None(this.client.getHost(), context));
     }
@@ -404,7 +404,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model204NoModelDefaultError400Valid(this.client.getHost(), context));
     }
@@ -447,7 +447,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model201ModelDefaultError200Valid(this.client.getHost(), context));
     }
@@ -490,7 +490,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model201ModelDefaultError201Valid(this.client.getHost(), context));
     }
@@ -533,7 +533,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200Model201ModelDefaultError400Valid(this.client.getHost(), context));
     }
@@ -576,7 +576,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA201ModelC404ModelDDefaultError200Valid(this.client.getHost(), context));
     }
@@ -619,7 +619,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA201ModelC404ModelDDefaultError201Valid(this.client.getHost(), context));
     }
@@ -662,7 +662,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA201ModelC404ModelDDefaultError404Valid(this.client.getHost(), context));
     }
@@ -705,7 +705,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA201ModelC404ModelDDefaultError400Valid(this.client.getHost(), context));
     }
@@ -748,7 +748,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultError202None(this.client.getHost(), context));
     }
@@ -785,7 +785,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultError204None(this.client.getHost(), context));
     }
@@ -822,7 +822,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultError400Valid(this.client.getHost(), context));
     }
@@ -859,7 +859,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultNone202Invalid(this.client.getHost(), context));
     }
@@ -896,7 +896,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultNone204None(this.client.getHost(), context));
     }
@@ -933,7 +933,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultNone400None(this.client.getHost(), context));
     }
@@ -970,7 +970,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), context));
     }
@@ -1007,7 +1007,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> getDefaultModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultModelA200Valid(this.client.getHost(), context));
     }
@@ -1050,7 +1050,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> getDefaultModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultModelA200None(this.client.getHost(), context));
     }
@@ -1093,7 +1093,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultModelA400Valid(this.client.getHost(), context));
     }
@@ -1130,7 +1130,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultModelA400None(this.client.getHost(), context));
     }
@@ -1167,7 +1167,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone200Invalid(this.client.getHost(), context));
     }
@@ -1204,7 +1204,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone200None(this.client.getHost(), context));
     }
@@ -1241,7 +1241,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone400Invalid(this.client.getHost(), context));
     }
@@ -1278,7 +1278,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone400None(this.client.getHost(), context));
     }
@@ -1315,7 +1315,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA200None(this.client.getHost(), context));
     }
@@ -1358,7 +1358,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA200Valid(this.client.getHost(), context));
     }
@@ -1401,7 +1401,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA200Invalid(this.client.getHost(), context));
     }
@@ -1444,7 +1444,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA400None(this.client.getHost(), context));
     }
@@ -1487,7 +1487,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA400Valid(this.client.getHost(), context));
     }
@@ -1530,7 +1530,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA400Invalid(this.client.getHost(), context));
     }
@@ -1573,7 +1573,7 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA202ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get200ModelA202Valid(this.client.getHost(), context));
     }

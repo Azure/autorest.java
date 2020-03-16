@@ -65,10 +65,10 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName) {
         if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmpty(accountName, this.client.getHost(), context));
     }

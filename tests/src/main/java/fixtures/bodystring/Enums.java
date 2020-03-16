@@ -93,7 +93,7 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Colors>> getNotExpandableWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNotExpandable(this.client.getHost(), context));
     }
@@ -138,10 +138,10 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putNotExpandable(this.client.getHost(), stringBody, context));
     }
@@ -182,7 +182,7 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Colors>> getReferencedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), context));
     }
@@ -227,10 +227,10 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumStringBody == null) {
-            throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putReferenced(this.client.getHost(), enumStringBody, context));
     }
@@ -271,7 +271,7 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RefColorConstant>> getReferencedConstantWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getReferencedConstant(this.client.getHost(), context));
     }
@@ -316,10 +316,10 @@ public final class Enums {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumStringBody == null) {
-            throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
+            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
         } else {
             enumStringBody.validate();
         }
