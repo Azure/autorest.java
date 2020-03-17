@@ -44,7 +44,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck) {
                 JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
-                        ifBlock.line("throw new IllegalArgumentException(\"Parameter %s is required and cannot be null.\");", expressionToCheck));
+                        ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
+                            + "cannot be null.\"));", expressionToCheck));
                 if (validateExpressions.containsKey(expressionToCheck)) {
                     nullCheck.elseBlock(elseBlock ->
                             elseBlock.line(validateExpressions.get(expressionToCheck) + ";"));
