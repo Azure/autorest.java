@@ -112,11 +112,8 @@ namespace AutoRest.Java.Model
             }
 
             if (includeBuilderImports || includeImplementationImports) {
-                if (!settings.IsFluent && settings.ShouldGenerateXmlSerialization) {
+                if (!settings.IsFluent && settings.GenerateClientInterfaces) {
                     imports.Add($"{settings.GetPackage()}.{InterfaceName}");
-                    foreach (MethodGroupClient methodGroupClient in MethodGroupClients) {
-                        imports.Add($"{settings.GetPackage()}.{methodGroupClient.InterfaceName}");
-                    }
                 }
 
                 imports.Add("com.azure.core.http.HttpPipelineBuilder");
