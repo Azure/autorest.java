@@ -21,10 +21,10 @@ jobs:
       - task: Maven@3
         displayName: 'Build and Package'
         inputs:
-        mavenPomFile: pom.xml
-        goals: 'package'
-        options: '-local'
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: $(JavaVersion)
-        jdkArchitectureOption: 'x64'
-        publishJUnitResults: false
+          mavenPomFile: pom.xml
+          goals: 'package'
+          options: '-local'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
