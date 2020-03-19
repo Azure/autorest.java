@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+    - v4*
+
+pr:
+  branches:
+    include:
+    - v4*
+
+jobs:
+  - job: Build
+
+    variables:
+      JavaVersion: 1.8
+
+    pool:
+      vmImage: ubuntu-16.04
+
+    steps:
+      - task: Maven@3
+        displayName: 'Build and Package'
+        inputs:
+        mavenPomFile: pom.xml
+        goals: 'package'
+        options: '-local'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: $(JavaVersion)
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: false
