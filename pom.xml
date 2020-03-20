@@ -61,7 +61,18 @@
         </property>
       </activation>
       <modules>
-        <module>./tests</module>
+        <module>./vanilla-tests</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>testAzure</id>
+      <activation>
+        <property>
+          <name>testAzure</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./azure-tests</module>
       </modules>
     </profile>
     <profile>
