@@ -52,7 +52,12 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            _itype = new EnumType(enumPackage, enumTypeName, false, enumValues);
+            _itype = new EnumType.Builder()
+                    .packageName(enumPackage)
+                    .name(enumTypeName)
+                    .expandable(false)
+                    .values(enumValues)
+                    .build();
             parsed.put(enumType, _itype);
         }
 

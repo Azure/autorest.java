@@ -52,7 +52,12 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            _itype = new EnumType(enumPackage, enumTypeName, true, enumValues);
+            _itype = new EnumType.Builder()
+                    .packageName(enumPackage)
+                    .name(enumTypeName)
+                    .expandable(true)
+                    .values(enumValues)
+                    .build();
             parsed.put(enumType, _itype);
         }
 
