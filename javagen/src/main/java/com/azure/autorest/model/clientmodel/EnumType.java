@@ -28,17 +28,20 @@ public class EnumType implements IType {
      */
     private List<ClientEnumValue> values;
 
+    private IType elementType;
+
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
      * @param expandable Whether or not this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values) {
+    private EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
         this.name = name;
         packageName = package_Keyword;
         this.expandable = expandable;
         this.values = values;
+        this.elementType = elementType;
     }
 
     public final String getName() {
@@ -55,6 +58,10 @@ public class EnumType implements IType {
 
     public final List<ClientEnumValue> getValues() {
         return values;
+    }
+
+    public final IType getElementType() {
+        return elementType;
     }
 
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
@@ -102,6 +109,7 @@ public class EnumType implements IType {
         private String packageName;
         private boolean expandable;
         private List<ClientEnumValue> values;
+        private IType elementType = ClassType.String;
 
         /**
          * Sets the name of the Enum.
@@ -144,6 +152,16 @@ public class EnumType implements IType {
         }
 
         /**
+         * Sets the type of elements of the Enum.
+         * @param elementType the type of elements of the Enum
+         * @return the Builder
+         */
+        public Builder elementType(IType elementType) {
+            this.elementType = elementType;
+            return this;
+        }
+
+        /**
          * @return an immutable EnumType instance with the configurations on this builder.
          */
         public EnumType build() {
@@ -151,7 +169,8 @@ public class EnumType implements IType {
                     packageName,
                     name,
                     expandable,
-                    values
+                    values,
+                    elementType
             );
         }
     }

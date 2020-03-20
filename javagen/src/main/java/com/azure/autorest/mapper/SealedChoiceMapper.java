@@ -57,6 +57,7 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
                     .name(enumTypeName)
                     .expandable(false)
                     .values(enumValues)
+                    .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
                     .build();
             parsed.put(enumType, _itype);
         }

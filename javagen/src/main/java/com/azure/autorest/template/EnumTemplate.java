@@ -3,6 +3,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.util.CodeNamer;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -66,13 +67,16 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             javaFile.publicEnum(enumType.getName(), enumBlock ->
             {
                 for (ClientEnumValue value : enumType.getValues()) {
-                    enumBlock.value(value.getName(), value.getValue());
+                    enumBlock.value(value.getName(), value.getValue(), enumType.getElementType());
                 }
 
-                enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
-                enumBlock.privateFinalMemberVariable("String", "value");
+                String typeName = enumType.getElementType().getClientType().asNullable().toString();
+                String converterName = CodeNamer.toPascalCase(typeName);
 
-                enumBlock.constructor(String.format("%1$s(String value)", enumType.getName()), (constructor) ->
+                enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
+                enumBlock.privateFinalMemberVariable(typeName, "value");
+
+                enumBlock.constructor(String.format("%1$s(%2$s value)", enumType.getName(), typeName), (constructor) ->
                 {
                     constructor.line("this.value = value;");
                 });
@@ -84,12 +88,12 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     comment.methodReturns(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
                 });
                 enumBlock.annotation("JsonCreator");
-                enumBlock.PublicStaticMethod(String.format("%1$s fromString(String value)", enumType.getName()), (function) ->
+                enumBlock.PublicStaticMethod(String.format("%1$s from%2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
                 {
                     function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
                     function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
                     {
-                        foreachBlock.ifBlock("item.toString().equalsIgnoreCase(value)", (ifBlock) ->
+                        foreachBlock.ifBlock(String.format("item.to%1$s().equalsIgnoreCase(value)", converterName), (ifBlock) ->
                         {
                             ifBlock.methodReturn("item");
                         });
@@ -98,7 +102,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 });
 
                 enumBlock.annotation("JsonValue", "Override");
-                enumBlock.PublicMethod("String toString()", (function) ->
+                enumBlock.PublicMethod(String.format("%1$s to%2$s()", typeName, converterName), (function) ->
                 {
                     function.methodReturn("this.value");
                 });
