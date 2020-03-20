@@ -54,6 +54,17 @@
 
   <profiles>
     <profile>
+      <id>testVanilla</id>
+      <activation>
+        <property>
+          <name>testVanilla</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./tests</module>
+      </modules>
+    </profile>
+    <profile>
       <id>integration</id>
       <activation>
         <property><name>integration</name></property>
