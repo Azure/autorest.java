@@ -6,6 +6,9 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Template to create an asynchronous client.
+ */
 public class ServiceAsyncClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
 
   private static ServiceAsyncClientTemplate _instance = new ServiceAsyncClientTemplate();

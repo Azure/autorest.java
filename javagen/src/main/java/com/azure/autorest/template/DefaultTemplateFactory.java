@@ -77,7 +77,7 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public ServiceAsyncClientTemplate getServiceAsynClientTemplate() {
+    public ServiceAsyncClientTemplate getServiceAsyncClientTemplate() {
         return ServiceAsyncClientTemplate.getInstance();
     }
 

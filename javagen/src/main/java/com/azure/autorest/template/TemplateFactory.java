@@ -32,10 +32,10 @@ public interface TemplateFactory {
 
     PackageInfoTemplate getPackageInfoTemplate();
 
-  ServiceAsyncClientTemplate getServiceAsynClientTemplate();
-
-  WrapperClientMethodTemplate getWrapperClientMethodTemplate();
+    ServiceAsyncClientTemplate getServiceAsyncClientTemplate();
 
     ServiceSyncClientTemplate getServiceSynClientTemplate();
+
+    WrapperClientMethodTemplate getWrapperClientMethodTemplate();
 }
 

@@ -76,7 +76,7 @@ public class Templates {
     }
 
     public static ServiceAsyncClientTemplate getServiceAsyncClientTemplate() {
-        return factory.getServiceAsynClientTemplate();
+        return factory.getServiceAsyncClientTemplate();
     }
 
     public static WrapperClientMethodTemplate getWrapperClientMethodTemplate() {

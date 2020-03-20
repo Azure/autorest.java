@@ -6,6 +6,9 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Template to create a synchronous client.
+ */
 public class ServiceSyncClientTemplate  implements IJavaTemplate<ServiceClient, JavaFile>  {
 
   private static ServiceSyncClientTemplate _instance = new ServiceSyncClientTemplate();
