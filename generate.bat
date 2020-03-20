@@ -1,5 +1,6 @@
 set COMMON_ARGUMENTS=--version=3.0.6257 --java --use:.\ --output-folder=tests --sync-methods=all --client-side-validations=true --add-context-parameter=true
 
+call autorest-beta %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
 call autorest-beta %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.json --namespace=fixtures.bodyboolean
 call autorest-beta %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
 call autorest-beta %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
