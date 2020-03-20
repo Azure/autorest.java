@@ -13,18 +13,54 @@ jobs:
 
     variables:
       JavaVersion: 1.8
+      NodeVersion: '12.x'
 
     pool:
       vmImage: ubuntu-16.04
 
     steps:
+      - task: NodeTool@0
+        displayName: 'Install Node.js $(NodeVersion)'
+        inputs:
+          versionSpec: '$(NodeVersion)'
+
       - task: Maven@3
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
           goals: 'package'
-          options: '-local'
+          options: '-Dlocal'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
+
+# Cannot turn on yet, due to GoblinSharkColor enum
+#      - script: |
+#          npm install -g autorest
+#          npm install
+#        displayName: 'Prepare Environment for Generation'
+#
+#      - script: |
+#          ./generate
+#        displayName: 'Generate code'
+#
+#      - script: |
+#          [[ `git status --porcelain` ]]
+#        displayName: 'Check no diff in generated files'
+
+      - task: Maven@3
+        displayName: 'Run vanilla tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'test'
+          options: '-DtestVanilla -pl tests'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+          
+      - script: |
+          npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
+        workingDirectory: node_modules/@microsoft.azure/autorest.testserver
+        displayName: 'Publish coverage report to stroage account'
