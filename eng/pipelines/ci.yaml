@@ -25,8 +25,9 @@ jobs:
           versionSpec: '$(NodeVersion)'
 
       - script: |
-          npm ci
-        displayName: "Install packages"
+          npm install -g autorest
+          npm install
+        displayName: 'Install npm packages'
 
       - task: Maven@3
         displayName: 'Build and Package'
