@@ -69,6 +69,15 @@ public class Javagen extends NewPlugin {
             javaPackage
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                javaPackage.addAsyncServiceClient(client.getServiceClient().getPackage(),
+                    client.getServiceClient().getClassName() + "Async", client.getServiceClient());
+
+                javaPackage.addSyncServiceClient(client.getServiceClient().getPackage(),
+                    client.getServiceClient().getClassName() + "Sync", client.getServiceClient());
+            }
+
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
                     .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());

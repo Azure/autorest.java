@@ -159,7 +159,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new "
+                                + "RetryPolicy(), new CookiePolicy()).build());");
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
                                 constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));

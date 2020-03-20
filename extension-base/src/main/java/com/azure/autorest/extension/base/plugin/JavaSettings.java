@@ -84,6 +84,7 @@ public class JavaSettings
                     host.getStringValue("custom-types-subpackage", ""),
                     host.getBooleanValue("required-parameter-client-methods", true),
                     host.getBooleanValue("add-context-parameter", false),
+                    host.getBooleanValue("generate-sync-async-clients", false),
                     host.getStringValue("sync-methods", "essential"));
         }
         return _instance;
@@ -125,6 +126,7 @@ public class JavaSettings
                          String customTypesSubpackage,
                          boolean requiredParameterClientMethods,
                          boolean addContextParameter,
+                         boolean generateSyncAsyncClients,
                          String syncMethods)
     {
         this.azure = azure;
@@ -146,6 +148,7 @@ public class JavaSettings
         this.customTypesSubpackage = customTypesSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
         this.addContextParameter = addContextParameter;
+        this.generateSyncAsyncClients = generateSyncAsyncClients;
         this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
     }
 
@@ -289,9 +292,13 @@ public class JavaSettings
      Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
      */
     private boolean addContextParameter;
-    public final boolean getAddContextParameter()
-    {
+    public final boolean getAddContextParameter() {
         return addContextParameter;
+    }
+
+    private boolean generateSyncAsyncClients;
+    public final boolean shouldGenerateSyncAsyncClients() {
+        return generateSyncAsyncClients;
     }
 
     private SyncMethodsGeneration syncMethods = SyncMethodsGeneration.values()[0];

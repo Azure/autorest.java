@@ -115,6 +115,19 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
                 function.line("return client;");
             });
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                classBlock.publicMethod(String.format("%1$s buildAsyncClient()", serviceClient.getClassName() + "Async"),
+                    function -> {
+                        if (serviceClient.getProxy() != null) {
+                            function.line("return new %1$s(build());", serviceClient.getClassName() + "Async");
+                        } else {
+                            function.line("return new %1$s(build().%2$s());", serviceClient.getClassName() + "Async",
+                                CodeNamer.toCamelCase(serviceClient.getMethodGroupClients().get(0).getClassName()));
+                        }
+                    });
+            }
         });
+
     }
 }
