@@ -4,7 +4,9 @@ trigger:
     - v4
 
 pr:
-  - v4
+  branches:
+    include:
+    - v4
 
 jobs:
   - job: Build
