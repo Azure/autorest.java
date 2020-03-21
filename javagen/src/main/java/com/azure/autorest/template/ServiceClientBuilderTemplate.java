@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
+import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -117,6 +118,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                classBlock.javadocComment(comment ->
+                {
+                    comment.description(String
+                        .format("Builds an instance of %1$s async client", serviceClient.getClassName() + "Async"));
+                    comment.methodReturns(String.format("an instance of %1$s", serviceClient.getClassName() + "Async"));
+                });
                 classBlock.publicMethod(String.format("%1$s buildAsyncClient()", serviceClient.getClassName() + "Async"),
                     function -> {
                         if (serviceClient.getProxy() != null) {
@@ -126,6 +133,26 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                 CodeNamer.toCamelCase(serviceClient.getMethodGroupClients().get(0).getClassName()));
                         }
                     });
+
+                if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
+                    classBlock.javadocComment(comment ->
+                    {
+                        comment.description(String
+                            .format("Builds an instance of %1$s sync client", serviceClient.getClassName() + "Sync"));
+                        comment.methodReturns(String.format("an instance of %1$s", serviceClient.getClassName() +
+                            "Sync"));
+                    });
+                    classBlock.publicMethod(String.format("%1$s buildSyncClient()", serviceClient.getClassName() +
+                            "Sync"),
+                        function -> {
+                            if (serviceClient.getProxy() != null) {
+                                function.line("return new %1$s(build());", serviceClient.getClassName() + "Sync");
+                            } else {
+                                function.line("return new %1$s(build().%2$s());", serviceClient.getClassName() + "Sync",
+                                    CodeNamer.toCamelCase(serviceClient.getMethodGroupClients().get(0).getClassName()));
+                            }
+                        });
+                }
             }
         });
 
