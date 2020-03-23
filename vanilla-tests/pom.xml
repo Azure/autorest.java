@@ -11,7 +11,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure</groupId>
-  <artifactId>autorest-java-tests</artifactId>
+  <artifactId>autorest-vanilla-tests</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
