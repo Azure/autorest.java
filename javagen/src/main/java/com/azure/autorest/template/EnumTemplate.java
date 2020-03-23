@@ -1,9 +1,14 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.HashSet;
+import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -59,7 +64,12 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 });
             });
         } else {
-            javaFile.declareImport("com.fasterxml.jackson.annotation.JsonCreator", "com.fasterxml.jackson.annotation.JsonValue");
+            Set<String> imports = new HashSet<>();
+            imports.add("com.fasterxml.jackson.annotation.JsonCreator");
+            imports.add("com.fasterxml.jackson.annotation.JsonValue");
+            enumType.getElementType().getClientType().addImportsTo(imports, false);
+
+            javaFile.declareImport(imports);
             javaFile.javadocComment(comment ->
             {
                 comment.description(enumTypeComment);
@@ -70,7 +80,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     enumBlock.value(value.getName(), value.getValue(), enumType.getElementType());
                 }
 
-                String typeName = enumType.getElementType().getClientType().asNullable().toString();
+                String typeName = enumType.getElementType().getClientType().toString();
                 String converterName = CodeNamer.toPascalCase(typeName);
 
                 enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
@@ -93,7 +103,27 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
                     function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
                     {
-                        foreachBlock.ifBlock(String.format("item.to%1$s().equalsIgnoreCase(value)", converterName), (ifBlock) ->
+                        String valueEqualsTest;
+                        if (enumType.getElementType() instanceof PrimitiveType) {
+                            PrimitiveType type = (PrimitiveType) enumType.getElementType();
+                            if (type == PrimitiveType.Float) {
+                                valueEqualsTest = String.format("Float.floatToIntBits(item.to%1$s()) == Float.floatToIntBits(value)", converterName);
+                            } else if (type == PrimitiveType.Double) {
+                                valueEqualsTest = String.format("Double.doubleToIntBits(item.to%1$s()) == Double.doubleToIntBits(value)", converterName);
+                            } else {
+                                valueEqualsTest = String.format("item.to%1$s() == value", converterName);
+                            }
+                        } else if (enumType.getElementType() instanceof ClassType) {
+                            ClassType type = (ClassType) enumType.getElementType();
+                            if (type == ClassType.String) {
+                                valueEqualsTest = String.format("item.to%1$s().equalsIgnoreCase(value)", converterName);
+                            } else {
+                                valueEqualsTest = String.format("item.to%1$s().equals(value)", converterName);
+                            }
+                        } else {
+                            valueEqualsTest = String.format("item.to%1$s().equals(value)", converterName);
+                        }
+                        foreachBlock.ifBlock(valueEqualsTest, (ifBlock) ->
                         {
                             ifBlock.methodReturn("item");
                         });
@@ -101,7 +131,11 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     function.methodReturn("null");
                 });
 
-                enumBlock.annotation("JsonValue", "Override");
+                if (enumType.getElementType() == ClassType.String) {
+                    enumBlock.annotation("JsonValue", "Override");
+                } else {
+                    enumBlock.annotation("JsonValue");
+                }
                 enumBlock.PublicMethod(String.format("%1$s to%2$s()", typeName, converterName), (function) ->
                 {
                     function.methodReturn("this.value");

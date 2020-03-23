@@ -1,6 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.util.Set;
+import java.util.function.Function;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -12,8 +13,8 @@ import java.util.Set;
 public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase);
-    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
-    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer);
+    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity());
+    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity());
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L');
     public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> defaultValueExpression + "f");
     public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)));
