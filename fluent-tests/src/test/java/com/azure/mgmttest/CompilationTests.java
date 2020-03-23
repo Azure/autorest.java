@@ -10,6 +10,8 @@ import com.azure.core.management.Resource;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
+import com.azure.mgmttest.conainterservice.ContainerServiceMasterProfile;
+import com.azure.mgmttest.conainterservice.Count;
 import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.network.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.models.NetworkInterfacesInner;
@@ -76,5 +78,11 @@ public class CompilationTests {
         SqlDatabaseGetPropertiesResource sqlDatabaseGetPropertiesResource = new SqlDatabaseGetPropertiesResource();
         sqlDatabaseGetPropertiesResource.rid();
         sqlDatabaseGetPropertiesResource.colls();
+    }
+
+    public void testIntEnum() {
+        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
+        containerServiceMasterProfile.withCount(Count.THREE);
+        int countInt = containerServiceMasterProfile.count().toInt();
     }
 }
