@@ -13,6 +13,8 @@ pipeline:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
     flatten-models: true
     flatten-payloads: true
+    naming:
+      preserve-uppercase-max-length: 4
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
