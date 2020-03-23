@@ -4,7 +4,7 @@ This is the next gen (v4) of AutoRest Java generator. It's built on AutoRest v3,
 # Prerequisites
 You need to have the following installed on your machine:
 
-- Node.JS v10.x
+- Node.JS v12.x/v13.x
 - Java 8+
 - Maven 3.x
 
