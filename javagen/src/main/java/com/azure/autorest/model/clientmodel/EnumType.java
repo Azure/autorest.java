@@ -157,7 +157,9 @@ public class EnumType implements IType {
          * @return the Builder
          */
         public Builder elementType(IType elementType) {
-            this.elementType = elementType;
+            if (elementType != null) {
+                this.elementType = elementType;
+            }
             return this;
         }
 
