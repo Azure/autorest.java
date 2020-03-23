@@ -168,39 +168,44 @@ public final class Strings {
     /**
      * Set string value null.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNullWithResponseAsync() {
+    public Mono<Response<Void>> putNullWithResponseAsync(String stringBody) {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final String stringBody = null;
         return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, context));
     }
 
     /**
      * Set string value null.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync() {
-        return putNullWithResponseAsync()
+    public Mono<Void> putNullAsync(String stringBody) {
+        return putNullWithResponseAsync(stringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set string value null.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull() {
-        putNullAsync().block();
+    public void putNull(String stringBody) {
+        putNullAsync(stringBody).block();
     }
 
     /**
@@ -249,39 +254,47 @@ public final class Strings {
     /**
      * Set string value empty ''.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync() {
+    public Mono<Response<Void>> putEmptyWithResponseAsync(String stringBody) {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final String stringBody = "";
+        if (stringBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
         return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), stringBody, context));
     }
 
     /**
      * Set string value empty ''.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync() {
-        return putEmptyWithResponseAsync()
+    public Mono<Void> putEmptyAsync(String stringBody) {
+        return putEmptyWithResponseAsync(stringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set string value empty ''.
      * 
+     * @param stringBody 
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty() {
-        putEmptyAsync().block();
+    public void putEmpty(String stringBody) {
+        putEmptyAsync(stringBody).block();
     }
 
     /**
