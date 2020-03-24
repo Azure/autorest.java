@@ -76,9 +76,11 @@
       </modules>
     </profile>
     <profile>
-      <id>integration</id>
+      <id>testFluent</id>
       <activation>
-        <property><name>integration</name></property>
+        <property>
+          <name>testFluent</name>
+        </property>
       </activation>
       <modules>
         <module>./fluent-tests</module>

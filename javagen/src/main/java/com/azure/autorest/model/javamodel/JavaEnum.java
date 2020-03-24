@@ -1,5 +1,7 @@
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.model.clientmodel.IType;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -50,6 +52,14 @@ public class JavaEnum {
         addExpectedCommaAndNewLine();
         contents.javadocComment(String.format("Enum value %1$s.", value));
         contents.text(String.format("%1$s(\"%2$s\")", name, value));
+        previouslyAddedValue = true;
+        addNewLine = true;
+    }
+
+    public final void value(String name, String value, IType type) {
+        addExpectedCommaAndNewLine();
+        contents.javadocComment(String.format("Enum value %1$s.", value));
+        contents.text(String.format("%1$s(%2$s)", name, type.defaultValueExpression(value)));
         previouslyAddedValue = true;
         addNewLine = true;
     }

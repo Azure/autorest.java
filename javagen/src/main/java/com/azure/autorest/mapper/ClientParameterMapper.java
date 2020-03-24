@@ -52,7 +52,13 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         builder.isConstant(isConstant).defaultValue(defaultValue);
 
         if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-            builder.description(parameter.getSchema().getLanguage().getDefault().getDescription());
+            String description = parameter.getSchema().getLanguage().getDefault().getDescription();
+            if (description == null || description.isEmpty()) {
+                if (parameter.getLanguage() != null) {
+                    description = parameter.getLanguage().getDefault().getDescription();
+                }
+            }
+            builder.description(description);
         }
         return builder.build();
     }

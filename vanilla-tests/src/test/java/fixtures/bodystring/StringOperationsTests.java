@@ -28,7 +28,7 @@ public class StringOperationsTests {
     @Test
     public void putNull() throws Exception {
         try {
-            client.strings().putNullWithResponseAsync().block();
+            client.strings().putNullWithResponseAsync(null).block();
         } catch (Exception ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
             assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
@@ -43,7 +43,7 @@ public class StringOperationsTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.strings().putEmptyWithResponseAsync().subscribe(v -> {}, t -> fail(t.getMessage()),
+        client.strings().putEmptyWithResponseAsync("").subscribe(v -> {}, t -> fail(t.getMessage()),
             () -> lock.countDown());
         assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }

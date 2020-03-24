@@ -31,4 +31,4 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       goals: 'package'
-      options: '-P local,integration'
+      options: '-P local,testFluent'
