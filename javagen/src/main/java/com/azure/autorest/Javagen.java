@@ -72,13 +72,21 @@ public class Javagen extends NewPlugin {
                     client.getServiceClient());
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                javaPackage.addAsyncServiceClient(client.getServiceClient().getPackage(),
-                    client.getServiceClient().getClassName() + "Async", client.getServiceClient());
+                String asyncClassName =
+                    client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
+                        .getClientBaseName().replace("Client", "AsyncClient")
+                        : client.getServiceClient().getClientBaseName() + "AsyncClient";
+
+                javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(),
+                    asyncClassName, client.getServiceClient());
 
                 // generate sync client only if the sync method generation param is set to ALL.
                 if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
-                    javaPackage.addSyncServiceClient(client.getServiceClient().getPackage(),
-                        client.getServiceClient().getClassName() + "Sync", client.getServiceClient());
+                    String syncClassName =
+                        client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
+                            .getClientBaseName() : client.getServiceClient().getClientBaseName() + "Client";
+                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(),
+                        syncClassName, client.getServiceClient());
                 }
             }
 

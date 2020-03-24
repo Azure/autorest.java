@@ -53,6 +53,8 @@ public class MethodGroupClient {
      */
     private List<IType> supportedInterfaces;
 
+    private String classBaseName;
+
     /**
      * Create a new MethodGroupClient with the provided properties.
      * @param className The name of the client's class.
@@ -76,6 +78,7 @@ public class MethodGroupClient {
         this.variableType = variableType;
         this.variableName = variableName;
         this.clientMethods = clientMethods;
+        this.classBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
     }
 
     public final String getPackage() {
@@ -116,6 +119,10 @@ public class MethodGroupClient {
 
     public final List<ClientMethod> getClientMethods() {
         return clientMethods;
+    }
+
+    public final String getClassBaseName() {
+        return classBaseName;
     }
 
     /**

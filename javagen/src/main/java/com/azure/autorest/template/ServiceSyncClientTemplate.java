@@ -22,22 +22,29 @@ public class ServiceSyncClientTemplate  implements IJavaTemplate<ServiceClient, 
   @Override
   public final void write(ServiceClient serviceClient, JavaFile javaFile) {
     JavaSettings settings = JavaSettings.getInstance();
-    String serviceClientClassDeclaration = String.format("%1$sSync", serviceClient.getClassName());
+    String syncClassName = serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
+        : serviceClient.getClientBaseName() + "Client";
+
     Set<String> imports = new HashSet<>();
     if (serviceClient.getProxy() != null) {
       serviceClient.addImportsTo(imports, true, false, settings);
+      imports.add(serviceClient.getPackage() + "." + serviceClient.getClassName());
     } else {
-      serviceClient.getMethodGroupClients().forEach(methodGroupClient -> methodGroupClient.addImportsTo(imports, true,
-          settings));
+      serviceClient.getMethodGroupClients().forEach(methodGroupClient -> {
+        methodGroupClient.addImportsTo(imports, true,
+            settings);
+        imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
+      });
     }
     imports.add("com.azure.core.annotation.ServiceClient");
+
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
             serviceClient.getInterfaceName())));
 
-    javaFile.annotation(String.format("ServiceClient(builder = %sBuilder.class)", serviceClient.getClassName()));
-    javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
+    javaFile.annotation(String.format("ServiceClient(builder = %sBuilder.class)", serviceClient.getClientBaseName()));
+    javaFile.publicFinalClass(syncClassName, classBlock ->
     {
       // Add service client member variable
       if (serviceClient.getProxy() != null) {
@@ -53,12 +60,12 @@ public class ServiceSyncClientTemplate  implements IJavaTemplate<ServiceClient, 
       );
 
       if (serviceClient.getProxy() != null) {
-        classBlock.packagePrivateConstructor(String.format("%1$sSync(%2$s %3$s)", serviceClient.getClassName(),
+        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
             serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });
       } else {
-        classBlock.packagePrivateConstructor(String.format("%1$sSync(%2$s %3$s)", serviceClient.getClassName(),
+        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
             serviceClient.getMethodGroupClients().get(0).getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });

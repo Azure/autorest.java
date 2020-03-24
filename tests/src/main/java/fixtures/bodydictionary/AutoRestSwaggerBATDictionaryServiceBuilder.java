@@ -6,11 +6,12 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import fixtures.bodydictionary.implementation.AutoRestSwaggerBATDictionaryServiceImpl;
 
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATDictionaryService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATDictionaryService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATDictionaryServiceAsyncClient.class, AutoRestSwaggerBATDictionaryServiceClient.class})
 public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * server parameter
@@ -45,19 +46,37 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBATDictionaryService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATDictionaryServiceImpl with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBATDictionaryService.
+     * @return an instance of AutoRestSwaggerBATDictionaryServiceImpl.
      */
-    public AutoRestSwaggerBATDictionaryService build() {
+    public AutoRestSwaggerBATDictionaryServiceImpl build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBATDictionaryService client = new AutoRestSwaggerBATDictionaryService(pipeline);
+        AutoRestSwaggerBATDictionaryServiceImpl client = new AutoRestSwaggerBATDictionaryServiceImpl(pipeline);
         client.setHost(this.host);
         return client;
+    }
+
+    /**
+     * Builds an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient async client.
+     * 
+     * @return an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient.
+     */
+    public AutoRestSwaggerBATDictionaryServiceAsyncClient buildAsyncClient() {
+        return new AutoRestSwaggerBATDictionaryServiceAsyncClient(build().dictionarys());
+    }
+
+    /**
+     * Builds an instance of AutoRestSwaggerBATDictionaryServiceClient sync client.
+     * 
+     * @return an instance of AutoRestSwaggerBATDictionaryServiceClient.
+     */
+    public AutoRestSwaggerBATDictionaryServiceClient buildClient() {
+        return new AutoRestSwaggerBATDictionaryServiceClient(build().dictionarys());
     }
 }

@@ -1,4 +1,4 @@
-package fixtures.bodydictionary;
+package fixtures.bodydictionary.implementation;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATDictionaryService type.
  */
-public final class AutoRestSwaggerBATDictionaryService {
+public final class AutoRestSwaggerBATDictionaryServiceImpl {
     /**
      * server parameter.
      */
@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATDictionaryService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATDictionaryService setHost(String host) {
+    public AutoRestSwaggerBATDictionaryServiceImpl setHost(String host) {
         this.host = host;
         return this;
     }
@@ -50,24 +50,24 @@ public final class AutoRestSwaggerBATDictionaryService {
     }
 
     /**
-     * The Dictionarys object to access its operations.
+     * The DictionarysImpl object to access its operations.
      */
-    private Dictionarys dictionarys;
+    private DictionarysImpl dictionarys;
 
     /**
-     * Gets the Dictionarys object to access its operations.
+     * Gets the DictionarysImpl object to access its operations.
      * 
-     * @return the Dictionarys object.
+     * @return the DictionarysImpl object.
      */
-    public Dictionarys dictionarys() {
+    public DictionarysImpl dictionarys() {
         return this.dictionarys;
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
      */
-    public AutoRestSwaggerBATDictionaryService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+    public AutoRestSwaggerBATDictionaryServiceImpl() {
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
@@ -75,8 +75,8 @@ public final class AutoRestSwaggerBATDictionaryService {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATDictionaryService(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATDictionaryServiceImpl(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.dictionarys = new Dictionarys(this);
+        this.dictionarys = new DictionarysImpl(this);
     }
 }

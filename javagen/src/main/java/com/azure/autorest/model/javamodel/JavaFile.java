@@ -84,7 +84,7 @@ public class JavaFile implements JavaContext {
             // Only import paths that don't start with this file's package, or if they do start
             // with this file's package, then they must exist within a subpackage.
             imports = imports.stream()
-                    .filter(import_Keyword -> !import_Keyword.startsWith(package_Keyword)
+                    .filter(import_Keyword -> !import_Keyword.equals(package_Keyword)
                             || import_Keyword.indexOf('.', packageWithPeriodLength) != -1)
                     .collect(Collectors.toList());
         }
