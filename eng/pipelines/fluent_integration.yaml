@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+    - v4*
+
+pr:
+  branches:
+    include:
+    - v4*
+
+jobs:
+- job: 'Build'
+  timeoutInMinutes: 20
+  pool:
+    vmImage: 'vs2017-win2016'
+
+  steps:
+  - task: UseNode@1
+    inputs:
+      versionSpec: '12.x'
+
+  - script: npm install autorest -g
+
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*.xml'
+      goals: 'package'
+      options: '-P local,testFluent'

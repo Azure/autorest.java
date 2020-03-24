@@ -54,9 +54,33 @@
 
   <profiles>
     <profile>
-      <id>integration</id>
+      <id>testVanilla</id>
       <activation>
-        <property><name>integration</name></property>
+        <property>
+          <name>testVanilla</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./vanilla-tests</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>testAzure</id>
+      <activation>
+        <property>
+          <name>testAzure</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./azure-tests</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>testFluent</id>
+      <activation>
+        <property>
+          <name>testFluent</name>
+        </property>
       </activation>
       <modules>
         <module>./fluent-tests</module>

@@ -2,7 +2,7 @@
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.10.242"
+  "@autorest/modelerfour": "4.10.258"
 
 pipeline:
 
@@ -13,6 +13,8 @@ pipeline:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
     flatten-models: true
     flatten-payloads: true
+    naming:
+      preserve-uppercase-max-length: 4
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:

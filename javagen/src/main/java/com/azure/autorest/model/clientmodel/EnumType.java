@@ -28,17 +28,20 @@ public class EnumType implements IType {
      */
     private List<ClientEnumValue> values;
 
+    private IType elementType;
+
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
      * @param expandable Whether or not this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    public EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values) {
+    private EnumType(String package_Keyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
         this.name = name;
         packageName = package_Keyword;
         this.expandable = expandable;
         this.values = values;
+        this.elementType = elementType;
     }
 
     public final String getName() {
@@ -55,6 +58,10 @@ public class EnumType implements IType {
 
     public final List<ClientEnumValue> getValues() {
         return values;
+    }
+
+    public final IType getElementType() {
+        return elementType;
     }
 
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
@@ -95,5 +102,78 @@ public class EnumType implements IType {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public static class Builder {
+        private String name;
+        private String packageName;
+        private boolean expandable;
+        private List<ClientEnumValue> values;
+        private IType elementType = ClassType.String;
+
+        /**
+         * Sets the name of the Enum.
+         * @param name the name of the Enum
+         * @return the Builder
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the package name of the Enum.
+         * @param packageName the package name of the Enum
+         * @return the Builder
+         */
+        public Builder packageName(String packageName) {
+            this.packageName = packageName;
+            return this;
+        }
+
+        /**
+         * Sets whether the Enum is expandable.
+         * @param expandable whether the Enum is expandable
+         * @return the Builder
+         */
+        public Builder expandable(boolean expandable) {
+            this.expandable = expandable;
+            return this;
+        }
+
+        /**
+         * Sets the values of the Enum.
+         * @param values the values of the Enum
+         * @return the Builder
+         */
+        public Builder values(List<ClientEnumValue> values) {
+            this.values = values;
+            return this;
+        }
+
+        /**
+         * Sets the type of elements of the Enum.
+         * @param elementType the type of elements of the Enum
+         * @return the Builder
+         */
+        public Builder elementType(IType elementType) {
+            if (elementType != null) {
+                this.elementType = elementType;
+            }
+            return this;
+        }
+
+        /**
+         * @return an immutable EnumType instance with the configurations on this builder.
+         */
+        public EnumType build() {
+            return new EnumType(
+                    packageName,
+                    name,
+                    expandable,
+                    values,
+                    elementType
+            );
+        }
     }
 }
