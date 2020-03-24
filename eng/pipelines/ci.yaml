@@ -59,7 +59,18 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'test'
-          options: '-DtestVanilla -pl tests'
+          options: '-DtestVanilla -pl vanilla-tests'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: Maven@3
+        displayName: 'Run azure tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'test'
+          options: '-DtestAzure -pl azure-tests'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
