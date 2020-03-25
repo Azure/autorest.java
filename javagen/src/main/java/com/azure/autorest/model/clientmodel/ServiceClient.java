@@ -57,6 +57,8 @@ public class ServiceClient {
      */
     private ClientMethodParameter httpPipelineParameter;
 
+    private String clientBaseName;
+
     /**
      * Create a new ServiceClient with the provided properties.
      * @param packageName The package that this service client belongs to.
@@ -83,6 +85,7 @@ public class ServiceClient {
         this.azureEnvironmentParameter = azureEnvironmentParameter;
         this.tokenCredentialParameter = tokenCredentialParameter;
         this.httpPipelineParameter = httpPipelineParameter;
+        this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
     }
 
     public final String getPackage() {
@@ -127,6 +130,10 @@ public class ServiceClient {
 
     public final ClientMethodParameter getHttpPipelineParameter() {
         return httpPipelineParameter;
+    }
+
+    public final String getClientBaseName() {
+        return clientBaseName;
     }
 
     /**

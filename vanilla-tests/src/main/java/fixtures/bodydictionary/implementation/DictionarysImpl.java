@@ -1,4 +1,4 @@
-package fixtures.bodydictionary;
+package fixtures.bodydictionary.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
@@ -31,7 +31,7 @@ import reactor.core.publisher.Mono;
  * An instance of this class provides access to all the operations defined in
  * Dictionarys.
  */
-public final class Dictionarys {
+public final class DictionarysImpl {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -40,14 +40,14 @@ public final class Dictionarys {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATDictionaryService client;
+    private AutoRestSwaggerBATDictionaryServiceImpl client;
 
     /**
-     * Initializes an instance of Dictionarys.
+     * Initializes an instance of DictionarysImpl.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    Dictionarys(AutoRestSwaggerBATDictionaryService client) {
+    DictionarysImpl(AutoRestSwaggerBATDictionaryServiceImpl client) {
         this.service = RestProxy.create(DictionarysService.class, client.getHttpPipeline());
         this.client = client;
     }

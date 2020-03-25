@@ -75,4 +75,19 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public PackageInfoTemplate getPackageInfoTemplate() {
         return PackageInfoTemplate.getInstance();
     }
+
+    @Override
+    public ServiceAsyncClientTemplate getServiceAsyncClientTemplate() {
+        return ServiceAsyncClientTemplate.getInstance();
+    }
+
+    @Override
+    public ServiceSyncClientTemplate getServiceSynClientTemplate() {
+        return ServiceSyncClientTemplate.getInstance();
+    }
+
+    @Override
+    public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
+        return WrapperClientMethodTemplate.getInstance();
+    }
 }

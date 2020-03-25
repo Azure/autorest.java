@@ -74,4 +74,16 @@ public class Templates {
     public static PackageInfoTemplate getPackageInfoTemplate() {
         return factory.getPackageInfoTemplate();
     }
+
+    public static ServiceAsyncClientTemplate getServiceAsyncClientTemplate() {
+        return factory.getServiceAsyncClientTemplate();
+    }
+
+    public static WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
+        return factory.getWrapperClientMethodTemplate();
+    }
+
+    public static <ContextT, ModelT> ServiceSyncClientTemplate getServiceSyncClientTemplate() {
+        return factory.getServiceSynClientTemplate();
+    }
 }

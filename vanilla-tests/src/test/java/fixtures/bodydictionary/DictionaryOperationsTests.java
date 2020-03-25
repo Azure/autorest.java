@@ -14,22 +14,24 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class DictionaryOperationsTests {
-  private static AutoRestSwaggerBATDictionaryService client;
+  private static AutoRestSwaggerBATDictionaryServiceClient client;
+  private static AutoRestSwaggerBATDictionaryServiceAsyncClient asyncClient;
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestSwaggerBATDictionaryServiceBuilder().build();
+    client = new AutoRestSwaggerBATDictionaryServiceBuilder().buildClient();
+    asyncClient = new AutoRestSwaggerBATDictionaryServiceBuilder().buildAsyncClient();
   }
 
   @Test
   public void getNull() {
-    assertNull(client.dictionarys().getNull());
+    assertNull(client.getNull());
   }
 
   @Test
   public void getInvalid() {
     try {
-      client.dictionarys().getInvalid();
+      client.getInvalid();
       fail();
     } catch (RuntimeException exception) {
       assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
@@ -38,25 +40,25 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getEmpty() {
-    Map<String, Integer> result = client.dictionarys().getEmpty();
+    Map<String, Integer> result = client.getEmpty();
     assertEquals(0, result.keySet().size());
   }
 
   @Test
   public void putEmpty() {
-    client.dictionarys().putEmpty(new HashMap<>());
+    client.putEmpty(new HashMap<>());
   }
 
   @Test
   public void getNullValue() {
-    Map<String, String> result = client.dictionarys().getNullValue();
+    Map<String, String> result = client.getNullValue();
     assertNull(result.get("key1"));
   }
 
   @Test
   public void getNullKey() {
     try {
-      client.dictionarys().getNullKey();
+      client.getNullKey();
       fail();
     } catch (RuntimeException exception) {
       assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
@@ -65,13 +67,13 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getEmptyStringKey() {
-    Map<String, String> result = client.dictionarys().getEmptyStringKey();
+    Map<String, String> result = client.getEmptyStringKey();
     assertEquals("val1", result.get(""));
   }
 
   @Test
   public void getBooleanTfft() {
-    Map<String, Boolean>  result = client.dictionarys().getBooleanTfft();
+    Map<String, Boolean>  result = client.getBooleanTfft();
     Map<String, Boolean> expected = new HashMap<>();
     expected.put("0", true);
     expected.put("1", false);
@@ -87,19 +89,19 @@ public class DictionaryOperationsTests {
     testData.put("1", false);
     testData.put("2", false);
     testData.put("3", true);
-    client.dictionarys().putBooleanTfft(testData);
+    client.putBooleanTfft(testData);
   }
 
   @Test
   public void getBooleanInvalidNull() {
-    Map<String, Boolean> result = client.dictionarys().getBooleanInvalidNull();
+    Map<String, Boolean> result = client.getBooleanInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getBooleanInvalidString() {
     try {
-      client.dictionarys().getBooleanInvalidString();
+      client.getBooleanInvalidString();
     } catch (RuntimeException ex) {
       // expected
       assertTrue(ex.getCause().getMessage().contains("only \"true\" or \"false\" recognized"));
@@ -108,7 +110,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getIntegerValid() {
-    Map<String, Integer> result = client.dictionarys().getIntegerValid();
+    Map<String, Integer> result = client.getIntegerValid();
     Map<String, Integer> expected = new HashMap<>();
     expected.put("0", 1);
     expected.put("1", -1);
@@ -124,19 +126,19 @@ public class DictionaryOperationsTests {
     testdata.put("1", -1);
     testdata.put("2", 3);
     testdata.put("3", 300);
-    client.dictionarys().putIntegerValid(testdata);
+    client.putIntegerValid(testdata);
   }
 
   @Test
   public void getIntInvalidNull() {
-    Map<String, Integer> result = client.dictionarys().getIntInvalidNull();
+    Map<String, Integer> result = client.getIntInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getIntInvalidString() {
     try {
-      client.dictionarys().getIntInvalidString();
+      client.getIntInvalidString();
       fail();
     } catch (RuntimeException ex) {
       // expected
@@ -146,7 +148,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getLongValid() {
-    Map<String, Long> result = client.dictionarys().getLongValid();
+    Map<String, Long> result = client.getLongValid();
     HashMap<String, Long> expected = new HashMap<>();
     expected.put("0", 1L);
     expected.put("1", -1L);
@@ -162,19 +164,19 @@ public class DictionaryOperationsTests {
     expected.put("1", -1L);
     expected.put("2", 3L);
     expected.put("3", 300L);
-    client.dictionarys().putLongValid(expected);
+    client.putLongValid(expected);
   }
 
   @Test
   public void getLongInvalidNull() {
-    Map<String, Long> result = client.dictionarys().getLongInvalidNull();
+    Map<String, Long> result = client.getLongInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getLongInvalidString() {
     try {
-      client.dictionarys().getLongInvalidString();
+      client.getLongInvalidString();
       fail();
     } catch (RuntimeException ex) {
       // expected
@@ -184,7 +186,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getFloatValid() {
-    Map<String, Float> result = client.dictionarys().getFloatValid();
+    Map<String, Float> result = client.getFloatValid();
     Map<String, Float> expected = new HashMap<>();
     expected.put("0", 0f);
     expected.put("1", -0.01f);
@@ -198,19 +200,19 @@ public class DictionaryOperationsTests {
     testdata.put("0", 0f);
     testdata.put("1", -0.01f);
     testdata.put("2", -1.2e20f);
-    client.dictionarys().putFloatValid(testdata);
+    client.putFloatValid(testdata);
   }
 
   @Test
   public void getFloatInvalidNull() {
-    Map<String, Float> result = client.dictionarys().getFloatInvalidNull();
+    Map<String, Float> result = client.getFloatInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getFloatInvalidString() {
     try {
-      client.dictionarys().getFloatInvalidString();
+      client.getFloatInvalidString();
       fail();
     } catch (RuntimeException ex) {
       // expected
@@ -220,7 +222,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getDoubleValid() {
-    Map<String, Double> result = client.dictionarys().getDoubleValid();
+    Map<String, Double> result = client.getDoubleValid();
     Map<String, Double> expected = new HashMap<>();
     expected.put("0", 0d);
     expected.put("1", -0.01d);
@@ -235,19 +237,19 @@ public class DictionaryOperationsTests {
     testdata.put("0", 0d);
     testdata.put("1", -0.01d);
     testdata.put("2", -1.2e20d);
-    client.dictionarys().putDoubleValid(testdata);
+    client.putDoubleValid(testdata);
   }
 
   @Test
   public void getDoubleInvalidNull() {
-    Map<String, Double> result = client.dictionarys().getDoubleInvalidNull();
+    Map<String, Double> result = client.getDoubleInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getDoubleInvalidString() {
     try {
-      client.dictionarys().getDoubleInvalidString();
+      client.getDoubleInvalidString();
       fail();
     } catch (RuntimeException ex) {
       // expected
@@ -257,7 +259,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getStringValid() {
-    Map<String, String> result = client.dictionarys().getStringValid();
+    Map<String, String> result = client.getStringValid();
     Map<String, String> expected = new HashMap<>();
     expected.put("0", "foo1");
     expected.put("1", "foo2");
@@ -271,24 +273,24 @@ public class DictionaryOperationsTests {
     testdata.put("0", "foo1");
     testdata.put("1", "foo2");
     testdata.put("2", "foo3");
-    client.dictionarys().putStringValid(testdata);
+    client.putStringValid(testdata);
   }
 
   @Test
   public void getStringWithNull() {
-    Map<String, String> result = client.dictionarys().getStringWithNull();
+    Map<String, String> result = client.getStringWithNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getStringWithInvalid() {
-    Map<String, String> result = client.dictionarys().getStringWithInvalid();
+    Map<String, String> result = client.getStringWithInvalid();
     assertEquals("123", result.get("1"));
   }
 
   @Test
   public void getDateValid() {
-    Map<String, LocalDate> result = client.dictionarys().getDateValid();
+    Map<String, LocalDate> result = client.getDateValid();
     Map<String, LocalDate> expected = new HashMap<>();
     expected.put("0", LocalDate.of(2000, 12, 1));
     expected.put("1", LocalDate.of(1980, 1, 2));
@@ -302,19 +304,19 @@ public class DictionaryOperationsTests {
     testdata.put("0", LocalDate.of(2000, 12, 1));
     testdata.put("1", LocalDate.of(1980, 1, 2));
     testdata.put("2", LocalDate.of(1492, 10, 12));
-    client.dictionarys().putDateValid(testdata);
+    client.putDateValid(testdata);
   }
 
   @Test
   public void getDateInvalidNull() {
-    Map<String, LocalDate> result = client.dictionarys().getDateInvalidNull();
+    Map<String, LocalDate> result = client.getDateInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getDateInvalidString() {
     try {
-      client.dictionarys().getDateInvalidChars();
+      client.getDateInvalidChars();
       fail();
     } catch (RuntimeException ex) {
       assertEquals(InvalidFormatException.class, ex.getCause().getClass());
@@ -323,7 +325,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getDateTimeValid() {
-    Map<String, OffsetDateTime> result = client.dictionarys().getDateTimeValid();
+    Map<String, OffsetDateTime> result = client.getDateTimeValid();
     Map<String, OffsetDateTime> expected = new HashMap<>();
     expected.put("0", OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC));
     expected.put("1", OffsetDateTime.of(1980, 1, 1, 23, 11, 35, 0, ZoneOffset.UTC));
@@ -337,19 +339,19 @@ public class DictionaryOperationsTests {
     testdata.put("0", OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC));
     testdata.put("1", OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.ofHours(1)));
     testdata.put("2", OffsetDateTime.of(1492, 10, 12, 10, 15, 1, 0, ZoneOffset.ofHours(-8)));
-    client.dictionarys().putDateTimeValid(testdata);
+    client.putDateTimeValid(testdata);
   }
 
   @Test
   public void getDateTimeInvalidNull() {
-    Map<String, OffsetDateTime> result = client.dictionarys().getDateTimeInvalidNull();
+    Map<String, OffsetDateTime> result = client.getDateTimeInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getDateTimeInvalidString() {
     try {
-      client.dictionarys().getDateTimeInvalidChars();
+      client.getDateTimeInvalidChars();
       fail();
     } catch (RuntimeException ex) {
       assertEquals(InvalidFormatException.class, ex.getCause().getClass());
@@ -358,7 +360,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getDateTimeRfc1123Valid() {
-    Map<String, OffsetDateTime> result = client.dictionarys().getDateTimeRfc1123Valid();
+    Map<String, OffsetDateTime> result = client.getDateTimeRfc1123Valid();
     Map<String, OffsetDateTime> expected = new HashMap<>();
     expected.put("0", OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC));
     expected.put("1", OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.UTC));
@@ -372,12 +374,12 @@ public class DictionaryOperationsTests {
     testdata.put("0", OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC));
     testdata.put("1", OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.UTC));
     testdata.put("2", OffsetDateTime.of(1492, 10, 12, 10, 15, 1, 0, ZoneOffset.UTC));
-    client.dictionarys().putDateTimeRfc1123Valid(testdata);
+    client.putDateTimeRfc1123Valid(testdata);
   }
 
   @Test
   public void getDurationValid() {
-    Map<String, Duration> result = client.dictionarys().getDurationValid();
+    Map<String, Duration> result = client.getDurationValid();
     Map<String, Duration> expected = new HashMap<>();
     expected.put("0", Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11));
     expected.put("1", Duration.ofDays(5).plusHours(1));
@@ -389,12 +391,12 @@ public class DictionaryOperationsTests {
     Map<String, Duration> testdata = new HashMap<>();
     testdata.put("0", Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11));
     testdata.put("1", Duration.ofDays(5).plusHours(1));
-    client.dictionarys().putDurationValid(testdata);
+    client.putDurationValid(testdata);
   }
 
   @Test
   public void getByteValid() {
-    Map<String, byte[]> result = client.dictionarys().getByteValid();
+    Map<String, byte[]> result = client.getByteValid();
     Map<String, byte[]> expected = new HashMap<>();
     expected.put("0", new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA});
     expected.put("1", new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03});
@@ -410,18 +412,18 @@ public class DictionaryOperationsTests {
     testdata.put("0", new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA});
     testdata.put("1", new byte[]{(byte) 0x01, (byte) 0x02, (byte) 0x03});
     testdata.put("2", new byte[]{(byte) 0x25, (byte) 0x29, (byte) 0x43});
-    client.dictionarys().putByteValid(testdata);
+    client.putByteValid(testdata);
   }
 
   @Test
   public void getByteInvalidNull() {
-    Map<String, byte[]> result = client.dictionarys().getByteInvalidNull();
+    Map<String, byte[]> result = client.getByteInvalidNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getBase64Url() {
-    Map<String, byte[]> result = client.dictionarys().getBase64Url();
+    Map<String, byte[]> result = client.getBase64Url();
     assertEquals("a string that gets encoded with base64url", new String(result.get("0")));
     assertEquals("test string", new String(result.get("1")));
     assertEquals("Lorem ipsum", new String(result.get("2")));
@@ -429,26 +431,26 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getComplexNull() {
-    Map<String, Widget> result = client.dictionarys().getComplexNull();
+    Map<String, Widget> result = client.getComplexNull();
     assertNull(result);
   }
 
   @Test
   public void getComplexEmpty() {
-    Map<String, Widget> result = client.dictionarys().getComplexEmpty();
+    Map<String, Widget> result = client.getComplexEmpty();
     assertEquals(0, result.size());
   }
 
   @Test
   public void getComplexItemNull() {
-    Map<String, Widget> result = client.dictionarys().getComplexItemNull();
+    Map<String, Widget> result = client.getComplexItemNull();
     assertEquals(3, result.size());
     assertNull(result.get("1"));
   }
 
   @Test
   public void getComplexItemEmpty() {
-    Map<String, Widget> result = client.dictionarys().getComplexItemEmpty();
+    Map<String, Widget> result = client.getComplexItemEmpty();
     assertEquals(3, result.size());
     assertNull(result.get("1").getInteger());
     assertNull(result.get("1").getString());
@@ -456,7 +458,7 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getComplexValid() {
-    Map<String, Widget> result = client.dictionarys().getComplexValid();
+    Map<String, Widget> result = client.getComplexValid();
     assertEquals(3, result.size());
     assertEquals(1, result.get("0").getInteger().intValue());
     assertEquals("4", result.get("1").getString());
@@ -477,36 +479,36 @@ public class DictionaryOperationsTests {
     w3.setInteger(5);
     w3.setString("6");
     body.put("2", w3);
-    client.dictionarys().putComplexValid(body);
+    client.putComplexValid(body);
   }
 
   @Test
   public void getArrayNull() {
-    Map<String, List<String>> result = client.dictionarys().getArrayNull();
+    Map<String, List<String>> result = client.getArrayNull();
     assertNull(result);
   }
 
   @Test
   public void getArrayEmpty() {
-    Map<String, List<String>> result = client.dictionarys().getArrayEmpty();
+    Map<String, List<String>> result = client.getArrayEmpty();
     assertEquals(0, result.size());
   }
 
   @Test
   public void getArrayItemNull() {
-    Map<String, List<String>> result = client.dictionarys().getArrayItemNull();
+    Map<String, List<String>> result = client.getArrayItemNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getArrayItemEmpty() {
-    Map<String, List<String>> result = client.dictionarys().getArrayItemEmpty();
+    Map<String, List<String>> result = client.getArrayItemEmpty();
     assertEquals(0, result.get("1").size());
   }
 
   @Test
   public void getArrayValid() {
-    Map<String, List<String>> result = client.dictionarys().getArrayValid();
+    Map<String, List<String>> result = client.getArrayValid();
     assertArrayEquals(new String[] {"1", "2", "3" }, result.get("0").toArray());
     assertArrayEquals(new String[] {"4", "5", "6" }, result.get("1").toArray());
     assertArrayEquals(new String[] {"7", "8", "9" }, result.get("2").toArray());
@@ -518,36 +520,36 @@ public class DictionaryOperationsTests {
     body.put("0", Arrays.asList("1", "2", "3"));
     body.put("1", Arrays.asList("4", "5", "6"));
     body.put("2", Arrays.asList("7", "8", "9"));
-    client.dictionarys().putArrayValid(body);
+    client.putArrayValid(body);
   }
 
   @Test
   public void getDictionaryNull() {
-    assertNull(client.dictionarys().getDictionaryNull());
+    assertNull(client.getDictionaryNull());
   }
 
   @Test
   public void getDictionaryEmpty() {
-    Map<String, Object> result = client.dictionarys().getDictionaryEmpty();
+    Map<String, Object> result = client.getDictionaryEmpty();
     assertEquals(0, result.size());
   }
 
   @Test
   public void getDictionaryItemNull() {
-    Map<String, Object> result = client.dictionarys().getDictionaryItemNull();
+    Map<String, Object> result = client.getDictionaryItemNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getDictionaryItemEmpty() {
-    Map<String, Object> result = client.dictionarys().getDictionaryItemEmpty();
+    Map<String, Object> result = client.getDictionaryItemEmpty();
     Map<String, String> value = (Map<String, String>) result.get("1");
     assertEquals(0, value.size());
   }
 
   @Test
   public void getDictionaryValid() {
-    Map<String, Object> result = client.dictionarys().getDictionaryValid();
+    Map<String, Object> result = client.getDictionaryValid();
     Map<String, String> map1 = new HashMap<>();
     map1.put("1", "one");
     map1.put("2", "two");
@@ -585,6 +587,6 @@ public class DictionaryOperationsTests {
     body.put("0", map1);
     body.put("1", map2);
     body.put("2", map3);
-    client.dictionarys().putDictionaryValid(body);
+    client.putDictionaryValid(body);
   }
 }
