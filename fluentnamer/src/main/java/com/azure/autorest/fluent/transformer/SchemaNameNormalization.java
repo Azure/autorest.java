@@ -27,9 +27,9 @@ import java.util.stream.Stream;
 /**
  * Normalize the names of some unnamed schemas.
  */
-public class NormalizeSchemaName {
+public class SchemaNameNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(NormalizeSchemaName.class);
+    private static final Logger logger = LoggerFactory.getLogger(SchemaNameNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
