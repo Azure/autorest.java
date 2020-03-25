@@ -6,7 +6,9 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.mapper.ObjectMapper;
+import com.azure.autorest.model.clientmodel.ClassType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,6 +28,24 @@ public class FluentObjectMapper extends ObjectMapper {
     @Override
     protected boolean isInnerModel(ObjectSchema compositeType) {
         return innerModels.contains(compositeType);
+    }
+
+    @Override
+    protected boolean isImplementedModel(ClassType modelType) {
+        return !FluentType.nonResourceType(modelType) || !FluentType.nonCloudError(modelType);
+    }
+
+    @Override
+    protected ClassType mapImplementedModel(ObjectSchema compositeType) {
+        ClassType result = null;
+        if (compositeType.getLanguage().getJava().getName().equals(FluentType.Resource.getName())) {
+            result = FluentType.Resource;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ProxyResource.getName())) {
+            result = FluentType.ProxyResource;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SubResource.getName())) {
+            result = FluentType.SubResource;
+        }
+        return result;
     }
 
     /**

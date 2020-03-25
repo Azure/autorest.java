@@ -38,7 +38,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || ObjectMapper.nonResourceType(modelType))) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !Mappers.getObjectMapper().isImplementedModel(modelType))) {
             ClientModel.Builder builder = new ClientModel.Builder()
                     .name(modelName)
                     .packageName(modelType.getPackage());

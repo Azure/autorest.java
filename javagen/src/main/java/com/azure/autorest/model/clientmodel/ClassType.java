@@ -49,9 +49,6 @@ public class ClassType implements IType {
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
     public static final ClassType CloudException = new ClassType.Builder().packageName("com.azure.core.management").name("CloudException").build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
-    public static final ClassType Resource = new ClassType.Builder().packageName("com.azure.core.management").name("Resource").build();
-    public static final ClassType ProxyResource = new ClassType.Builder().packageName("com.azure.core.management").name("ProxyResource").build();
-    public static final ClassType SubResource = new ClassType.Builder().packageName("com.azure.core.management").name("SubResource").build();
 
     private final String packageName;
     private final String name;
