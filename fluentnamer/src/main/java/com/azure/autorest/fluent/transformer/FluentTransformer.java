@@ -9,10 +9,8 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Request;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
@@ -34,7 +32,7 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
-        codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
+        codeModel = new NormalizeSchemaName().process(codeModel);
         codeModel = normalizeApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
@@ -70,30 +68,6 @@ public class FluentTransformer {
                         p.setClientDefaultValue(((ConstantSchema) p.getSchema()).getValue().getValue().toString());
                     }
                 });
-        return codeModel;
-    }
-
-    /**
-     * Provides better naming for unnamed additionalProperties type.
-     *
-     * @param codeModel Code model.
-     * @return Processed code model.
-     */
-    protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
-        final String prefix = "Components";
-        final String postfix = "Additionalproperties";
-
-        codeModel.getSchemas().getDictionaries().stream()
-                .filter(s -> s.getElementType() instanceof ObjectSchema)
-                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
-                .forEach(dict -> {
-                    Schema schema = dict.getElementType();
-                    String name = Utils.getDefaultName(schema);
-                    String newName = Utils.getDefaultName(dict);
-                    schema.getLanguage().getDefault().setName(newName);
-                    logger.info("Rename schema default name, from {} to {}", name, newName);
-                });
-
         return codeModel;
     }
 
