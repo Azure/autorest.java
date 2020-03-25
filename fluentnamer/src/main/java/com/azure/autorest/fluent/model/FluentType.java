@@ -13,11 +13,13 @@ import com.azure.autorest.model.clientmodel.IType;
 
 public class FluentType {
 
-    public static final ClassType Resource = new ClassType.Builder().packageName("com.azure.core.management").name("Resource").build();
-    public static final ClassType ProxyResource = new ClassType.Builder().packageName("com.azure.core.management").name("ProxyResource").build();
-    public static final ClassType SubResource = new ClassType.Builder().packageName("com.azure.core.management").name("SubResource").build();
+    public static final String AZURE_CORE_MANAGEMENT_PACKAGE_NAME = "com.azure.core.management";
 
-    public static final ClassType CloudError = new ClassType.Builder().packageName("com.azure.core.management").name("CloudError").build();
+    public static final ClassType Resource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.RESOURCE).build();
+    public static final ClassType ProxyResource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.PROXY_RESOURCE).build();
+    public static final ClassType SubResource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.SUB_RESOURCE).build();
+
+    public static final ClassType CloudError = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name("CloudError").build();
 
     private FluentType() {
     }
