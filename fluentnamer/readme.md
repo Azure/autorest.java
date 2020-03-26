@@ -1,6 +1,10 @@
 #### Fluentnamer
 
 ``` yaml
+pass-thru:
+  - model-deduplicator
+  - subset-reducer
+
 use-extension:
   "@autorest/modelerfour": "4.10.258"
 
