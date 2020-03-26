@@ -31,5 +31,11 @@ public interface TemplateFactory {
     XmlSequenceWrapperTemplate getXmlSequenceWrapperTemplate();
 
     PackageInfoTemplate getPackageInfoTemplate();
+
+    ServiceAsyncClientTemplate getServiceAsyncClientTemplate();
+
+    ServiceSyncClientTemplate getServiceSynClientTemplate();
+
+    WrapperClientMethodTemplate getWrapperClientMethodTemplate();
 }
 

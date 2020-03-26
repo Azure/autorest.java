@@ -40,6 +40,18 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
+    public final void addAsyncServiceClient(String packageKeyWord, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, name);
+        Templates.getServiceAsyncClientTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
+    public void addSyncServiceClient(String packageKeyWord, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, name);
+        Templates.getServiceSyncClientTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
     public final void addServiceClientInterface(String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
         Templates.getServiceClientInterfaceTemplate().write(model, javaFile);

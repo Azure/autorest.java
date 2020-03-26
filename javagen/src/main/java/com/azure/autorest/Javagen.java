@@ -3,6 +3,7 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
@@ -69,6 +70,26 @@ public class Javagen extends NewPlugin {
             javaPackage
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                String asyncClassName =
+                    client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
+                        .getClientBaseName().replace("Client", "AsyncClient")
+                        : client.getServiceClient().getClientBaseName() + "AsyncClient";
+
+                javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(),
+                    asyncClassName, client.getServiceClient());
+
+                // generate sync client only if the sync method generation param is set to ALL.
+                if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
+                    String syncClassName =
+                        client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
+                            .getClientBaseName() : client.getServiceClient().getClientBaseName() + "Client";
+                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(),
+                        syncClassName, client.getServiceClient());
+                }
+            }
+
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
                     .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());

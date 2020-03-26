@@ -8,6 +8,7 @@
 package com.azure.autorest.template;
 
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -15,14 +16,14 @@ import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -90,11 +91,22 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         comment.param(serviceClientProperty.getName(), String.format("the %1$s value.", serviceClientProperty.getName()));
                         comment.methodReturns("the service client itself");
                     });
-                    classBlock.packagePrivateMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getClassName(), CodeNamer.toPascalCase(serviceClientProperty.getName()), serviceClientProperty.getType(), serviceClientProperty.getName()), function ->
+
+                    String methodSignature = String.format("%1$s set%2$s(%3$s %4$s)",
+                        serviceClient.getClassName(), CodeNamer.toPascalCase(serviceClientProperty.getName()),
+                        serviceClientProperty.getType(), serviceClientProperty.getName());
+
+                    Consumer<JavaBlock> methodBody = function ->
                     {
-                        function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getName()));
+                        function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(),
+                            serviceClientProperty.getName()));
                         function.methodReturn("this");
-                    });
+                    };
+                    if (serviceClient.getPackage() != settings.getPackage()) {
+                        classBlock.publicMethod(methodSignature, methodBody);
+                    } else {
+                        classBlock.packagePrivateMethod(methodSignature, methodBody);
+                    }
                 }
             }
 
@@ -159,7 +171,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new "
+                                + "RetryPolicy(), new CookiePolicy()).build());");
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
                                 constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
