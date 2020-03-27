@@ -131,6 +131,16 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
             builder.imports(new ArrayList<>(modelImports));
+            if (hasAdditionalProperties) {
+                for (Property property : compositeTypeProperties) {
+                    if (property.getLanguage().getJava().getName().equals("additionalProperties")) {
+                        property.getLanguage().getJava().setName("AdditionalPropertiesProperty");
+                    }
+                    if (property.getSerializedName().equals("additionalProperties")) {
+                        property.setSerializedName("additionalProperties-original");
+                    }
+                }
+            }
 
             if ((compositeType.getSummary() == null || compositeType.getSummary().isEmpty()) && (compositeType.getDescription() == null || compositeType.getDescription().isEmpty())) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
