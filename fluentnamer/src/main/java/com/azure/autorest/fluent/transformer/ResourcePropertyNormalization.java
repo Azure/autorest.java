@@ -10,13 +10,12 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
-import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
-import com.azure.autorest.mapper.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +53,7 @@ public class ResourcePropertyNormalization {
         );
 
         codeModel.getSchemas().getObjects().stream()
-                .filter(ObjectMapper::nonResourceType)
+                .filter(FluentType::nonResourceType)
                 .filter(typesUsedInRequestParameters::contains)
                 .forEach(compositeType -> {
                     List<Property> candidateProperties = compositeType.getProperties().stream()
@@ -94,7 +93,7 @@ public class ResourcePropertyNormalization {
         boolean convert = false;
         if (candidateType != null && candidateType.getParents() != null) {
             Schema parentType = candidateType.getParents().getImmediate().get(0);
-            if (parentType instanceof ObjectSchema && !ObjectMapper.nonResourceType((ObjectSchema) parentType)) {
+            if (parentType instanceof ObjectSchema && !FluentType.nonResourceType((ObjectSchema) parentType)) {
                 convert = true;
             }
         }
@@ -103,7 +102,7 @@ public class ResourcePropertyNormalization {
 
     private static boolean checkConvertToSubResource(ObjectSchema candidateType) {
         boolean convert = false;
-        if (candidateType != null && !ObjectMapper.nonResourceType(candidateType) && !ResourceTypeName.SUB_RESOURCE.equals(Utils.getJavaName(candidateType))) {
+        if (candidateType != null && !FluentType.nonResourceType(candidateType) && !ResourceTypeName.SUB_RESOURCE.equals(Utils.getJavaName(candidateType))) {
             convert = true;
         }
         return convert;

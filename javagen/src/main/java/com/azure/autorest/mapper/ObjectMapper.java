@@ -31,13 +31,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
         ClassType result = null;
         if (settings.isFluent()) {
-            if (compositeType.getLanguage().getJava().getName().equals(ClassType.Resource.getName())) {
-                result = ClassType.Resource;
-            } else if (compositeType.getLanguage().getJava().getName().equals(ClassType.ProxyResource.getName())) {
-                result = ClassType.ProxyResource;
-            } else if (compositeType.getLanguage().getJava().getName().equals(ClassType.SubResource.getName())) {
-                result = ClassType.SubResource;
-            }
+            result = mapImplementedModel(compositeType);
         }
         if (result == null) {
             if (isPlainObject(compositeType)) {
@@ -78,21 +72,23 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     }
 
     /**
-     * Extension for Fluent resource type.
+     * Extension for Fluent implemented type.
      *
      * @param compositeType object type
-     * @return Whether the type should be treated as resource.
+     * @return Whether the type is already implemented.
      */
-    public static boolean nonResourceType(ObjectSchema compositeType) {
-        return !(ClassType.Resource.getName().equals(compositeType.getLanguage().getJava().getName())
-                || ClassType.ProxyResource.getName().equals(compositeType.getLanguage().getJava().getName())
-                || ClassType.SubResource.getName().equals(compositeType.getLanguage().getJava().getName()));
+    protected boolean isImplementedModel(ClassType compositeType) {
+        return false;
     }
 
-    public static boolean nonResourceType(ClassType modelType) {
-        return !(ClassType.Resource.equals(modelType)
-                || ClassType.ProxyResource.equals(modelType)
-                || ClassType.SubResource.equals(modelType));
+    /**
+     * Extension for Fluent implemented type.
+     *
+     * @param compositeType object type
+     * @return The implemented type.
+     */
+    protected ClassType mapImplementedModel(ObjectSchema compositeType) {
+        return null;
     }
 
     /**

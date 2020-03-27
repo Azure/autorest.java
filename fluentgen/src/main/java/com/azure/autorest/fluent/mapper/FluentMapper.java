@@ -12,11 +12,10 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
-import com.azure.autorest.fluent.model.WellKnownMethodName;
+import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
-import com.azure.autorest.mapper.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +75,7 @@ public class FluentMapper {
                         .map(s -> ((DictionarySchema) s).getElementType()))
                 .filter(s -> s instanceof ObjectSchema)
                 .map(s -> (ObjectSchema) s)
-                .filter(ObjectMapper::nonResourceType)
+                .filter(FluentType::nonResourceType)
                 .collect(Collectors.toSet());
 
         compositeTypes = objectMapper.addInnerModels(compositeTypes);

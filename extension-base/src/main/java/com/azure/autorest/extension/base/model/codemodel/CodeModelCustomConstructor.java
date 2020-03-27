@@ -142,6 +142,12 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "uris": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(UriSchema.class);
+                        break;
+                    }
+                    case "any": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(AnySchema.class);
+                        break;
                     }
                     case "requests": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
