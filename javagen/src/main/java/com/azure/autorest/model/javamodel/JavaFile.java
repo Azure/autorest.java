@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class JavaFile implements JavaContext {
-    private String package_Keyword;
+    private String packageKeyword;
     private int packageWithPeriodLength;
     private String FilePath;
     private JavaFileContents Contents;
@@ -58,17 +58,17 @@ public class JavaFile implements JavaContext {
         getContents().classBlock(visibility, modifiers, classDeclaration, classAction);
     }
 
-    public final void declarePackage(String package_Keyword) {
-        this.package_Keyword = package_Keyword;
-        if (package_Keyword == null || package_Keyword.isEmpty()) {
+    public final void declarePackage(String packageKeyword) {
+        this.packageKeyword = packageKeyword;
+        if (packageKeyword == null || packageKeyword.isEmpty()) {
             packageWithPeriodLength = 0;
         } else {
-            packageWithPeriodLength = package_Keyword.length();
-            if (!package_Keyword.endsWith(".")) {
+            packageWithPeriodLength = packageKeyword.length();
+            if (!packageKeyword.endsWith(".")) {
                 ++packageWithPeriodLength;
             }
         }
-        getContents().declarePackage(package_Keyword);
+        getContents().declarePackage(packageKeyword);
     }
 
     public final void declareImport(String... imports) {
@@ -80,15 +80,19 @@ public class JavaFile implements JavaContext {
     }
 
     public final void declareImport(List<String> imports) {
-        if (package_Keyword != null && !package_Keyword.isEmpty()) {
+        if (packageKeyword != null && !packageKeyword.isEmpty()) {
             // Only import paths that don't start with this file's package, or if they do start
             // with this file's package, then they must exist within a subpackage.
             imports = imports.stream()
-                    .filter(import_Keyword -> !import_Keyword.equals(package_Keyword)
-                            || import_Keyword.indexOf('.', packageWithPeriodLength) != -1)
+                    .filter(importKeyword -> !importKeyword.startsWith(packageKeyword)
+                            || importKeyword.indexOf('.', packageWithPeriodLength) != -1)
                     .collect(Collectors.toList());
         }
         getContents().declareImport(imports);
+    }
+
+    private String getPackageName(String importKeyword) {
+        return importKeyword.substring(0, importKeyword.lastIndexOf("."));
     }
 
     public final void javadocComment(Consumer<JavaJavadocComment> commentAction) {
