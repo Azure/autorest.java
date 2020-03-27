@@ -1,8 +1,11 @@
 package fixtures.bodybyte;
 
+import fixtures.httpinfrastructure.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.nio.charset.StandardCharsets;
 
 public class ByteOperationsTests {
     private static AutoRestSwaggerBATByteService client;
@@ -13,9 +16,15 @@ public class ByteOperationsTests {
     }
 
     @Test
-    public void getEmpty() throws Exception {
+    public void getNull() throws Exception {
         byte[] result = client.bytes().getNull();
         Assert.assertEquals(0, result.length);
+    }
+
+    @Test
+    public void getEmpty() throws Exception {
+        byte[] result = client.bytes().getEmpty();
+        Assert.assertArrayEquals("\"\"".getBytes(StandardCharsets.UTF_8), result);
     }
 
     @Test
@@ -36,5 +45,15 @@ public class ByteOperationsTests {
         };
 
         client.bytes().putNonAscii(body);
+    }
+
+    @Test
+    public void getInvalid() throws Exception {
+        try {
+            byte[] result = client.bytes().getInvalid();
+            Assert.assertArrayEquals("\"::::SWAGGER::::\"".getBytes(StandardCharsets.UTF_8), result);
+        } catch (ErrorException e) {
+            e.printStackTrace();
+        }
     }
 }

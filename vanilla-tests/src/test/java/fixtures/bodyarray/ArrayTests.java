@@ -1,6 +1,8 @@
 package fixtures.bodyarray;
 
+import fixtures.bodyarray.models.Enum0;
 import fixtures.bodyarray.models.ErrorException;
+import fixtures.bodyarray.models.FooEnum;
 import fixtures.bodyarray.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -222,6 +224,30 @@ public class ArrayTests {
     @Test
     public void putStringValid() throws Exception {
         client.arrays().putStringValid(Arrays.asList("foo1", "foo2", "foo3"));
+    }
+
+    @Test
+    public void getEnumValid() throws Exception {
+        List<FooEnum> result = client.arrays().getEnumValid();
+        Object[] expected = new FooEnum[] {FooEnum.FOO1, FooEnum.FOO2, FooEnum.FOO3};
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putEnumValid() throws Exception {
+        client.arrays().putEnumValid(Arrays.asList(FooEnum.FOO1, FooEnum.FOO2, FooEnum.FOO3));
+    }
+
+    @Test
+    public void getStringEnumValid() throws Exception {
+        List<Enum0> result = client.arrays().getStringEnumValid();
+        Object[] expected = new Enum0[] {Enum0.FOO1, Enum0.FOO2, Enum0.FOO3};
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putStringEnumValid() throws Exception {
+        client.arrays().putStringEnumValid(Arrays.asList(Enum0.FOO1, Enum0.FOO2, Enum0.FOO3));
     }
 
     @Test
