@@ -480,7 +480,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The empty dictionary value {}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -499,7 +499,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The empty dictionary value {}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -513,7 +513,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The empty dictionary value {}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -916,7 +916,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The null dictionary value.
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -935,7 +935,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The null dictionary value.
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -949,7 +949,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The null dictionary value.
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1616,7 +1616,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1635,7 +1635,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1649,7 +1649,7 @@ public final class DictionarysImpl {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;string&gt;.
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2667,7 +2667,7 @@ public final class DictionarysImpl {
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * 
-     * @param arrayBody Dictionary of complex type with null value.
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2688,7 +2688,7 @@ public final class DictionarysImpl {
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * 
-     * @param arrayBody Dictionary of complex type with null value.
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2702,7 +2702,7 @@ public final class DictionarysImpl {
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * 
-     * @param arrayBody Dictionary of complex type with null value.
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3191,7 +3191,7 @@ public final class DictionarysImpl {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
-     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3210,7 +3210,7 @@ public final class DictionarysImpl {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
-     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3224,7 +3224,7 @@ public final class DictionarysImpl {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
-     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
