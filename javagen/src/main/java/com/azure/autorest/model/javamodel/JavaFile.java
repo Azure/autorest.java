@@ -91,10 +91,6 @@ public class JavaFile implements JavaContext {
         getContents().declareImport(imports);
     }
 
-    private String getPackageName(String importKeyword) {
-        return importKeyword.substring(0, importKeyword.lastIndexOf("."));
-    }
-
     public final void javadocComment(Consumer<JavaJavadocComment> commentAction) {
         getContents().javadocComment(commentAction);
     }
