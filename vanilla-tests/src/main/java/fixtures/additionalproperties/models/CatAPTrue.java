@@ -2,6 +2,7 @@ package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fixtures.additionalproperties.models.PetAPTrue;
 
 /**
  * The CatAPTrue model.

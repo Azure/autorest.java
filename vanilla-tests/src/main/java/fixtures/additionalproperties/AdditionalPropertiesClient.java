@@ -30,7 +30,7 @@ public final class AdditionalPropertiesClient {
      * @param host the host value.
      * @return the service client itself.
      */
-    AdditionalPropertiesClient setHost(String host) {
+    public AdditionalPropertiesClient setHost(String host) {
         this.host = host;
         return this;
     }
@@ -67,7 +67,7 @@ public final class AdditionalPropertiesClient {
      * Initializes an instance of AdditionalPropertiesClient client.
      */
     public AdditionalPropertiesClient() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

@@ -136,9 +136,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     if (property.getLanguage().getJava().getName().equals("additionalProperties")) {
                         property.getLanguage().getJava().setName("AdditionalPropertiesProperty");
                     }
-                    if (property.getSerializedName().equals("additionalProperties")) {
-                        property.setSerializedName("additionalProperties-original");
-                    }
                 }
             }
 

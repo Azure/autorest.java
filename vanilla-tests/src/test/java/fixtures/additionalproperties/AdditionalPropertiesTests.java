@@ -8,7 +8,6 @@ import fixtures.additionalproperties.models.PetAPString;
 import fixtures.additionalproperties.models.PetAPTrue;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
@@ -65,7 +64,7 @@ public class AdditionalPropertiesTests {
         Assert.assertEquals("Red", complexProperty.get("color"));
     }
 
-    @Ignore("Pending https://github.com/Azure/azure-sdk-for-java/pull/9624 to be released")
+    @Test
     public void createAPObject() throws Exception {
         PetAPTrue puppy = new PetAPTrue();
         puppy.setId(1);
@@ -127,7 +126,7 @@ public class AdditionalPropertiesTests {
         Assert.assertEquals(11.5f, petAPObject.getAdditionalProperties().get("footsize"), 0.0f);
     }
 
-    @Ignore("Pending https://github.com/Azure/azure-sdk-for-java/pull/9624 to be released")
+    @Test
     public void createAPInPropertiesWithAPString() throws Exception {
         PetAPInPropertiesWithAPString petAPObject = new PetAPInPropertiesWithAPString();
         petAPObject.setId(5);

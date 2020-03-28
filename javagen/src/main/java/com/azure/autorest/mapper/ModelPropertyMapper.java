@@ -51,6 +51,9 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             serializedName.append(property.getSerializedName());
         }
         builder.serializedName(serializedName.toString());
+        if (serializedName.toString().isEmpty() && "additionalProperties".equals(property.getLanguage().getJava().getName())) {
+            builder.isAdditionalProperties(true);
+        }
 
         XmlSerlializationFormat xmlSerlializationFormat = null;
         if (property.getSchema().getSerialization() != null) {

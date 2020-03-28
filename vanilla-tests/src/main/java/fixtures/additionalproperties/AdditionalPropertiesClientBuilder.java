@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AdditionalPropertiesClient type.
  */
-@ServiceClientBuilder(serviceClients = AdditionalPropertiesClient.class)
+@ServiceClientBuilder(serviceClients = {AdditionalPropertiesClient.class})
 public final class AdditionalPropertiesClientBuilder {
     /*
      * server parameter

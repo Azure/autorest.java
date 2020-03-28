@@ -1,7 +1,11 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -36,13 +40,13 @@ public final class PetAPInPropertiesWithAPString {
     /*
      * Dictionary of <number>
      */
-    @JsonProperty(value = "additionalProperties-original")
+    @JsonProperty(value = "additionalProperties")
     private Map<String, Float> AdditionalPropertiesProperty;
 
     /*
      * Dictionary of <string>
      */
-    @JsonProperty(value = "")
+    @JsonIgnore
     private Map<String, String> additionalProperties;
 
     /**
@@ -142,6 +146,7 @@ public final class PetAPInPropertiesWithAPString {
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, String> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -155,6 +160,14 @@ public final class PetAPInPropertiesWithAPString {
     public PetAPInPropertiesWithAPString setAdditionalProperties(Map<String, String> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
+    }
+
+    @JsonAnySetter
+    private void setAdditionalProperties(String key, String value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
     }
 
     public void validate() {

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -120,6 +121,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
                     String localName = settings.shouldGenerateXmlSerialization() ? property.getXmlName() : property.getSerializedName();
                     classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)", localName));
+                } else if (property.isAdditionalProperties()) {
+                    classBlock.annotation(String.format("JsonIgnore"));
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
                     classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
                 } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
@@ -162,6 +165,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
                     comment.methodReturns(String.format("the %1$s value", property.getName()));
                 });
+                if (property.isAdditionalProperties()) {
+                    classBlock.annotation("JsonAnyGetter");
+                }
                 classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, property.getGetterName()), (methodBlock) ->
                 {
                     String sourceTypeName = propertyType.toString();
@@ -225,6 +231,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             }
                         }
                         methodBlock.methodReturn("this");
+                    });
+                }
+
+                if (property.isAdditionalProperties()) {
+                    classBlock.annotation("JsonAnySetter");
+                    MapType mapType = (MapType) property.getClientType();
+                    classBlock.privateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
+                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock -> {
+                           ifBlock.line("%s = new HashMap<>();", property.getName());
+                        });
+                        methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
                     });
                 }
             }
