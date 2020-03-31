@@ -30,7 +30,7 @@ public final class AutoRestBoolTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestBoolTestService setHost(String host) {
+    public AutoRestBoolTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -67,7 +67,7 @@ public final class AutoRestBoolTestService {
      * Initializes an instance of AutoRestBoolTestService client.
      */
     public AutoRestBoolTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
