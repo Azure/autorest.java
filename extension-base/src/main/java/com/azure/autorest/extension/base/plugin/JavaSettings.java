@@ -84,6 +84,7 @@ public class JavaSettings
                     host.getStringValue("custom-types-subpackage", ""),
                     host.getBooleanValue("required-parameter-client-methods", true),
                     host.getBooleanValue("add-context-parameter", false),
+                    host.getBooleanValue("context-client-method-parameter", false),
                     host.getBooleanValue("generate-sync-async-clients", false),
                     host.getStringValue("sync-methods", "essential"));
         }
@@ -126,6 +127,7 @@ public class JavaSettings
                          String customTypesSubpackage,
                          boolean requiredParameterClientMethods,
                          boolean addContextParameter,
+                         boolean contextClientMethodParameter,
                          boolean generateSyncAsyncClients,
                          String syncMethods)
     {
@@ -147,7 +149,8 @@ public class JavaSettings
         this.customTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
         this.customTypesSubpackage = customTypesSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
-        this.addContextParameter = addContextParameter;
+        this.addContextParameter = addContextParameter || contextClientMethodParameter;
+        this.contextClientMethodParameter = contextClientMethodParameter;
         this.generateSyncAsyncClients = generateSyncAsyncClients;
         this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
     }
@@ -294,6 +297,11 @@ public class JavaSettings
     private boolean addContextParameter;
     public final boolean getAddContextParameter() {
         return addContextParameter;
+    }
+
+    private boolean contextClientMethodParameter;
+    public final boolean isContextClientMethodParameter() {
+        return contextClientMethodParameter;
     }
 
     private boolean generateSyncAsyncClients;

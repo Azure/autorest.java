@@ -446,8 +446,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                 if (settings.getAddContextParameter()) {
-                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
+                    if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
+                        .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                        function.line(String.format("return %s", serviceMethodCall));
+                    } else {
+                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
                             serviceMethodCall));
+                    }
                 } else {
                     function.line(String.format("return %s",
                             serviceMethodCall));
@@ -473,8 +478,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 if (settings.getAddContextParameter()) {
-                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
+                    if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
+                        .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                        function.line(String.format("return %s", serviceMethodCall));
+                    } else {
+                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
                             serviceMethodCall));
+                    }
                 } else {
                     function.line(String.format("return %s",
                             serviceMethodCall));
@@ -509,8 +519,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
             if (settings.getAddContextParameter()) {
-                function.methodReturn(String.format("FluxUtil.withContext(context -> %s)",
+                if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
+                    .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                    function.methodReturn(serviceMethodCall);
+                } else {
+                    function.methodReturn(String.format("FluxUtil.withContext(context -> %s)",
                         serviceMethodCall));
+                }
             } else {
                 function.methodReturn(serviceMethodCall);
             }

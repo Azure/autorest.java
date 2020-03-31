@@ -223,6 +223,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
                 // WithResponseAsync, with required and optional parameters
+
+
                 methods.add(builder
                         .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
                         .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
@@ -265,13 +267,43 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             } else {
                 // WithResponseAsync, with required and optional parameters
                 methods.add(builder
+                    .parameters(parameters) // update builder parameters to include context
+                    .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
+                    .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.SimpleAsyncRestResponse)
+                    .isGroupedParameterRequired(false)
+                    .build());
+
+                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                    ClientMethodParameter contextParam = new ClientMethodParameter.Builder()
+                        .description("The context to associate with this operation.")
+                        .wireType(ClassType.Context)
+                        .name("context")
+                        .annotations(new ArrayList<>())
+                        .isConstant(false)
+                        .defaultValue(null)
+                        .fromClient(false)
+                        .isFinal(false)
+                        .isRequired(true)
+                        .build();
+
+                    List<ClientMethodParameter> withContextParameters = new ArrayList<>();
+                    withContextParameters.addAll(parameters);
+                    withContextParameters.add(contextParam);
+
+                    methods.add(builder
+                        .parameters(withContextParameters) // update builder parameters to include context
                         .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
                         .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .isGroupedParameterRequired(false)
                         .build());
-    
+                    // reset the parameters to original params
+                    builder.parameters(parameters);
+                }
+
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(new ReturnValue(null, asyncReturnType))
