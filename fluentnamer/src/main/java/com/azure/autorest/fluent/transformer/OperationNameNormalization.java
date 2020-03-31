@@ -54,16 +54,16 @@ class OperationNameNormalization {
         Optional<Set<String>> conflictNames = checkConflict(operationGroup, renamePlan);
         conflictNames.ifPresent(names -> {
             logger.warn("Conflict operation name found after attempted rename {}, in operation group {}", names, Utils.getJavaName(operationGroup));
-            renamePlan.keySet().removeAll(names);
+            renamePlan.values().removeAll(names);
         });
 
         rename(operationGroup, renamePlan);
     }
 
     private static Optional<Set<String>> checkConflict(OperationGroup operationGroup, Map<String, String> renamePlan) {
-        Set<String> names = operationGroup.getOperations().stream()
+        List<String> names = operationGroup.getOperations().stream()
                 .map(Utils::getJavaName)
-                .map(name -> renamePlan.getOrDefault(name, name)).collect(Collectors.toSet());
+                .map(name -> renamePlan.getOrDefault(name, name)).collect(Collectors.toList());
 
         Set<String> namesWithConflict = names.stream()
                 .collect(Collectors.groupingBy(Function.identity()))
