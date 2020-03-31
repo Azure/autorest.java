@@ -73,7 +73,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             });
         } else {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                ApplyParameterTransformations(function, clientMethod, settings);
+                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                 if (addContextParameter) {
                     function.line(String.format("return FluxUtil.withContext(context -> %s)",
                             serviceMethodCall));
