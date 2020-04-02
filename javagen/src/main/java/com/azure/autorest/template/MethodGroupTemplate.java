@@ -48,10 +48,10 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
         {
             classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
-            classBlock.privateMemberVariable(methodGroupClient.getProxy().getName(), "service");
+            classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
 
             classBlock.javadocComment("The service client containing this operation class.");
-            classBlock.privateMemberVariable(methodGroupClient.getServiceClientName(), "client");
+            classBlock.privateFinalMemberVariable(methodGroupClient.getServiceClientName(), "client");
 
             classBlock.javadocComment(comment ->
             {
