@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.checker.JavaChecker;
+import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
@@ -144,10 +145,16 @@ public class FluentGen extends NewPlugin {
             // Print to files
             logger.info("Write Java");
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                // single file validation
-                boolean parsePass = new JavaChecker(javaFile.getContents().toString(), javaFile.getFilePath()).check();
+                String content = javaFile.getContents().toString();
+                String path = javaFile.getFilePath();
 
-                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+                // single file validation
+                boolean parsePass = new JavaChecker(content, path).check();
+
+                // formatter
+                String formattedContent = new JavaFormatter(content, path).format();
+
+                writeFile(path, formattedContent, null);
             }
             return true;
         } catch (Exception e) {
