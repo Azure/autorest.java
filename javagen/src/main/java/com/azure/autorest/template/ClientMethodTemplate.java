@@ -417,7 +417,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
         typeBlock.javadocComment(comment -> {
-            comment.description(clientMethod.getDescription());
+            comment.description(breakUrlOnLengthLimit(clientMethod.getDescription()));
             List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
                     ? clientMethod.getMethodRequiredParameters()
                     : clientMethod.getMethodParameters();
