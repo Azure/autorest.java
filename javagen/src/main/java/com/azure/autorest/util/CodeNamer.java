@@ -69,7 +69,7 @@ public class CodeNamer {
             "throws", "transient", "true", "try", "void",
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header"
+            "String", "Object", "header", "_"
     );
 
     private static NamerFactory factory = new DefaultNamerFactory();
@@ -234,6 +234,9 @@ public class CodeNamer {
                     result = result.substring(0, i) + "_" + result.substring(i);
                 }
             }
+        }
+        if ("_".equals(result)) {   // "_" is keyword in Java 9
+            result = "ENUM_";
         }
         return result.toUpperCase();
     }
