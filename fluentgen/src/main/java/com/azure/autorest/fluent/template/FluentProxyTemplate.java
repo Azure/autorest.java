@@ -53,6 +53,7 @@ public class FluentProxyTemplate extends ProxyTemplate {
     @Override
     protected String breakUrlOnLengthLimit(String string) {
         final int lengthLimit = 120 - 12 - 4;
+
         if (string.length() <= lengthLimit) {
             return string;
         } else {

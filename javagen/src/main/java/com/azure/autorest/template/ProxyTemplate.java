@@ -40,7 +40,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                 comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
             });
             classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
-            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", restAPI.getClientTypeName()));
+            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName())));
             classBlock.interfaceBlock(JavaVisibility.Private, restAPI.getName(), interfaceBlock ->
             {
                 for (ProxyMethod restAPIMethod : restAPI.getMethods()) {
@@ -116,6 +116,14 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                 }
             });
         }
+    }
+
+    private static String serviceInterfaceWithLengthLimit(String serviceInterfaceName) {
+        final int lengthLimit = 20;
+
+        return serviceInterfaceName.length() > lengthLimit
+                ? serviceInterfaceName.substring(0, lengthLimit)
+                : serviceInterfaceName;
     }
 
     /**
