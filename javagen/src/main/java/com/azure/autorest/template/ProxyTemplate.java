@@ -50,7 +50,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
+                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), breakStringOnLengthLimit(restAPIMethod.getUrlPath())));
 
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
@@ -115,6 +115,42 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
                 }
             });
+        }
+    }
+
+    private static String breakStringOnLengthLimit(String string) {
+        final int lengthLimit = 120 - 12 - 4;
+        if (string.length() <= lengthLimit) {
+            return string;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            boolean first = true;
+            while (!string.isEmpty()) {
+                if (string.length() > lengthLimit) {
+                    int index = string.indexOf("/");
+                    int nextIndex = index;
+                    while (nextIndex != -1 && nextIndex < lengthLimit) {
+                        index = nextIndex;
+                        nextIndex = string.indexOf("/", index + 1);
+                    }
+                    if (index == -1) {
+                        index = string.length();
+                    }
+                    if (!first) {
+                        builder.append("\" + \"");
+                    } else {
+                        first = false;
+                    }
+                    builder.append(string, 0, index);
+                    string = string.substring(index);
+                } else {
+                    // not first
+                    builder.append("\" + \"");
+                    builder.append(string);
+                    string = string.substring(string.length());
+                }
+            }
+            return builder.toString();
         }
     }
 
