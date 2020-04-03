@@ -15,11 +15,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
@@ -179,58 +174,5 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             returnTypeWithoutMono = ((GenericType) returnType).getTypeArguments()[0];
         }
         return returnTypeWithoutMono;
-    }
-
-    @Override
-    protected String breakUrlOnLengthLimit(String line) {
-        if (CoreUtils.isNullOrEmpty(line)) {
-            return line;
-        }
-
-        final int lengthLimit = 120 - 12 - 4;
-
-        String[] words = line.split(" ");
-        Map<String, String> modifyPlan = new HashMap<>();
-
-        Arrays.stream(words)
-                .filter(w -> w.length() > lengthLimit)
-                .forEach(string -> {
-                    String originString = string;
-                    StringBuilder builder = new StringBuilder();
-                    boolean first = true;
-                    while (!string.isEmpty()) {
-                        if (string.length() > lengthLimit) {
-                            int index = string.indexOf("/");
-                            int nextIndex = index;
-                            while (nextIndex != -1 && nextIndex < lengthLimit) {
-                                index = nextIndex;
-                                nextIndex = string.indexOf("/", index + 1);
-                            }
-                            if (index == -1) {
-                                index = string.length();
-                            }
-                            if (!first) {
-                                builder.append(" ");
-                            } else {
-                                first = false;
-                            }
-                            builder.append(string, 0, index);
-                            string = string.substring(index);
-                        } else {
-                            // certainly not first
-                            builder.append(" ");
-                            builder.append(string);
-                            string = string.substring(string.length());
-                        }
-                    }
-                    modifyPlan.put(originString, builder.toString());
-                });
-
-        if (!modifyPlan.isEmpty()) {
-            for (Map.Entry<String, String> entry : modifyPlan.entrySet()) {
-                line = line.replace(entry.getKey(), entry.getValue());
-            }
-        }
-        return line;
     }
 }
