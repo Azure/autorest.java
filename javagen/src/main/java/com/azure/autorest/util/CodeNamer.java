@@ -236,7 +236,7 @@ public class CodeNamer {
             }
         }
         if ("_".equals(result)) {   // "_" is keyword in Java 9
-            result = "ENUM_";
+            result = "ENUM" + result;
         }
         return result.toUpperCase();
     }

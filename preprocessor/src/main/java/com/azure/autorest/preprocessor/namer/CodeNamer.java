@@ -226,7 +226,7 @@ public class CodeNamer {
             }
         }
         if ("_".equals(result)) {
-            result = "ENUM_";
+            result = "ENUM" + result;
         }
         return result.toUpperCase();
     }
