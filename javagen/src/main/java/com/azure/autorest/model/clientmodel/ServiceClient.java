@@ -142,8 +142,10 @@ public class ServiceClient {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, boolean includeBuilderImports, JavaSettings settings) {
-        for (ClientMethod clientMethod : getClientMethods()) {
-            clientMethod.addImportsTo(imports, includeImplementationImports, settings);
+        if (!includeBuilderImports) {
+            for (ClientMethod clientMethod : getClientMethods()) {
+                clientMethod.addImportsTo(imports, includeImplementationImports, settings);
+            }
         }
 
         for (ServiceClientProperty serviceClientProperty : getProperties()) {
