@@ -77,7 +77,7 @@ public class FluentProxyTemplate extends ProxyTemplate {
                     builder.append(string, 0, index);
                     string = string.substring(index);
                 } else {
-                    // not first
+                    // certainly not first
                     builder.append("\" + \"");
                     builder.append(string);
                     string = string.substring(string.length());

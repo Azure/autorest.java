@@ -118,10 +118,6 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
         }
     }
 
-    protected String breakUrlOnLengthLimit(String string) {
-        return string;
-    }
-
     /**
      * Extension to write Headers annotation for proxy method.
      *
@@ -129,5 +125,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
      * @param interfaceBlock interface block
      */
     protected void writeProxyMethodHeaders(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+    }
+
+    protected String breakUrlOnLengthLimit(String string) {
+        return string;
     }
 }

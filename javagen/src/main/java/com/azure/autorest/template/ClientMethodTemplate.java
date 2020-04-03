@@ -422,7 +422,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     ? clientMethod.getMethodRequiredParameters()
                     : clientMethod.getMethodParameters();
             for (ClientMethodParameter parameter : methodParameters) {
-                comment.param(parameter.getName(), parameter.getDescription());
+                comment.param(parameter.getName(), breakUrlOnLengthLimit(parameter.getDescription()));
             }
             if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
@@ -542,5 +542,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      */
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
+    }
+
+    protected String breakUrlOnLengthLimit(String string) {
+        return string;
     }
 }
