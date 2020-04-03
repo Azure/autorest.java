@@ -30,12 +30,12 @@ public final class HttpSuccess {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpSuccessService service;
+    private final HttpSuccessService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpSuccess.
@@ -53,7 +53,7 @@ public final class HttpSuccess {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpSuccess")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpSuccessService {
         @Head("/http/success/200")
         @ExpectedResponses({200})
@@ -151,6 +151,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
@@ -165,6 +166,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
@@ -188,6 +190,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> get200WithResponseAsync() {
@@ -202,6 +205,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> get200Async() {
@@ -220,6 +224,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200() {
@@ -231,6 +236,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync() {
@@ -246,6 +252,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put200Async() {
@@ -269,6 +276,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync() {
@@ -284,6 +292,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch200Async() {
@@ -307,6 +316,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync() {
@@ -322,6 +332,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post200Async() {
@@ -345,6 +356,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync() {
@@ -360,6 +372,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete200Async() {
@@ -383,6 +396,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync() {
@@ -398,6 +412,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put201Async() {
@@ -421,6 +436,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync() {
@@ -436,6 +452,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post201Async() {
@@ -459,6 +476,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync() {
@@ -474,6 +492,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put202Async() {
@@ -497,6 +516,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync() {
@@ -512,6 +532,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch202Async() {
@@ -535,6 +556,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync() {
@@ -550,6 +572,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post202Async() {
@@ -573,6 +596,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync() {
@@ -588,6 +612,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete202Async() {
@@ -611,6 +636,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
@@ -625,6 +651,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
@@ -648,6 +675,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync() {
@@ -663,6 +691,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put204Async() {
@@ -686,6 +715,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync() {
@@ -701,6 +731,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch204Async() {
@@ -724,6 +755,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync() {
@@ -739,6 +771,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post204Async() {
@@ -762,6 +795,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync() {
@@ -777,6 +811,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete204Async() {
@@ -800,6 +835,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> head404WithResponseAsync() {
@@ -814,6 +850,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async() {
@@ -832,6 +869,7 @@ public final class HttpSuccess {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {

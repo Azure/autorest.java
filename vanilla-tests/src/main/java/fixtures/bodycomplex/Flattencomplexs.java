@@ -24,12 +24,12 @@ public final class Flattencomplexs {
     /**
      * The proxy service used to perform REST calls.
      */
-    private FlattencomplexsService service;
+    private final FlattencomplexsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Flattencomplexs.
@@ -47,7 +47,7 @@ public final class Flattencomplexs {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceFlattencomplexs")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface FlattencomplexsService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})

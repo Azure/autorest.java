@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestRequiredOptionalTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestRequiredOptionalTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestRequiredOptionalTestService.class})
 public final class AutoRestRequiredOptionalTestServiceBuilder {
     /*
      * number of items to skip

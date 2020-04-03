@@ -28,12 +28,12 @@ public final class Implicits {
     /**
      * The proxy service used to perform REST calls.
      */
-    private ImplicitsService service;
+    private final ImplicitsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestRequiredOptionalTestService client;
+    private final AutoRestRequiredOptionalTestService client;
 
     /**
      * Initializes an instance of Implicits.
@@ -51,7 +51,7 @@ public final class Implicits {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRequiredOptionalTestServiceImplicits")
+    @ServiceInterface(name = "AutoRestRequiredOpti")
     private interface ImplicitsService {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
         @ExpectedResponses({200})
@@ -96,6 +96,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredPathWithResponseAsync(String pathParameter) {
@@ -115,6 +116,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredPathAsync(String pathParameter) {
@@ -142,6 +144,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalQueryWithResponseAsync(String queryParameter) {
@@ -158,6 +161,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync(String queryParameter) {
@@ -185,6 +189,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalHeaderWithResponseAsync(String queryParameter) {
@@ -201,6 +206,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync(String queryParameter) {
@@ -228,6 +234,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBodyWithResponseAsync(String bodyParameter) {
@@ -244,6 +251,7 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync(String bodyParameter) {
@@ -269,6 +277,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalPathWithResponseAsync() {
@@ -286,6 +295,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalPathAsync() {
@@ -309,6 +319,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalQueryWithResponseAsync() {
@@ -326,6 +337,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalQueryAsync() {
@@ -349,6 +361,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getOptionalGlobalQueryWithResponseAsync() {
@@ -363,6 +376,7 @@ public final class Implicits {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getOptionalGlobalQueryAsync() {

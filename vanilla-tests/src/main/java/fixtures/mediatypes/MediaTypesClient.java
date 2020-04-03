@@ -55,7 +55,7 @@ public final class MediaTypesClient {
      * @param host the host value.
      * @return the service client itself.
      */
-    MediaTypesClient setHost(String host) {
+    public MediaTypesClient setHost(String host) {
         this.host = host;
         return this;
     }
@@ -63,7 +63,7 @@ public final class MediaTypesClient {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -78,7 +78,7 @@ public final class MediaTypesClient {
      * Initializes an instance of MediaTypesClient client.
      */
     public MediaTypesClient() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

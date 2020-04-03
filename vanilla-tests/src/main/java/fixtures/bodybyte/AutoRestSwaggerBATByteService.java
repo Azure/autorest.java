@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATByteService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATByteService setHost(String host) {
+    public AutoRestSwaggerBATByteService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestSwaggerBATByteService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestSwaggerBATByteService {
     /**
      * The Bytes object to access its operations.
      */
-    private Bytes bytes;
+    private final Bytes bytes;
 
     /**
      * Gets the Bytes object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestSwaggerBATByteService {
      * Initializes an instance of AutoRestSwaggerBATByteService client.
      */
     public AutoRestSwaggerBATByteService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

@@ -29,12 +29,12 @@ public final class HttpRetrys {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpRetrysService service;
+    private final HttpRetrysService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpRetrys.
@@ -52,7 +52,7 @@ public final class HttpRetrys {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpRetrys")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpRetrysService {
         @Head("/http/retry/408")
         @ExpectedResponses({200})
@@ -100,6 +100,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync() {
@@ -114,6 +115,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async() {
@@ -137,6 +139,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync() {
@@ -152,6 +155,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async() {
@@ -175,6 +179,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync() {
@@ -190,6 +195,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async() {
@@ -213,6 +219,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync() {
@@ -227,6 +234,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async() {
@@ -250,6 +258,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync() {
@@ -265,6 +274,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async() {
@@ -288,6 +298,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync() {
@@ -303,6 +314,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async() {
@@ -326,6 +338,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync() {
@@ -341,6 +354,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async() {
@@ -364,6 +378,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync() {
@@ -379,6 +394,7 @@ public final class HttpRetrys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async() {

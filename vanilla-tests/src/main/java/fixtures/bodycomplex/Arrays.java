@@ -27,12 +27,12 @@ public final class Arrays {
     /**
      * The proxy service used to perform REST calls.
      */
-    private ArraysService service;
+    private final ArraysService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Arrays.
@@ -50,7 +50,7 @@ public final class Arrays {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceArrays")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface ArraysService {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
@@ -83,6 +83,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getValidWithResponseAsync() {
@@ -97,6 +98,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getValidAsync() {
@@ -115,6 +117,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getValid() {
@@ -124,10 +127,11 @@ public final class Arrays {
     /**
      * Put complex types with array property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
@@ -145,10 +149,11 @@ public final class Arrays {
     /**
      * Put complex types with array property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ArrayWrapper complexBody) {
@@ -159,7 +164,7 @@ public final class Arrays {
     /**
      * Put complex types with array property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -174,6 +179,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getEmptyWithResponseAsync() {
@@ -188,6 +194,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getEmptyAsync() {
@@ -206,6 +213,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getEmpty() {
@@ -215,10 +223,11 @@ public final class Arrays {
     /**
      * Put complex types with array property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
@@ -236,10 +245,11 @@ public final class Arrays {
     /**
      * Put complex types with array property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(ArrayWrapper complexBody) {
@@ -250,7 +260,7 @@ public final class Arrays {
     /**
      * Put complex types with array property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -265,6 +275,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getNotProvidedWithResponseAsync() {
@@ -279,6 +290,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArrayWrapper> getNotProvidedAsync() {
@@ -297,6 +309,7 @@ public final class Arrays {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getNotProvided() {

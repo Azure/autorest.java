@@ -1,21 +1,16 @@
 package fixtures.report;
 
-import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClientBuilder;
-import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.SimpleResponse;
-import java.util.Map;
-import reactor.core.publisher.Mono;
 
 /**
  * A builder for creating a new instance of the AutoRestReportService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestReportService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestReportService.class})
 public final class AutoRestReportServiceBuilder {
     /*
      * server parameter

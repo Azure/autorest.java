@@ -23,12 +23,12 @@ public final class Paths {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PathsService service;
+    private final PathsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestParameterizedHostTestClient client;
+    private final AutoRestParameterizedHostTestClient client;
 
     /**
      * Initializes an instance of Paths.
@@ -46,7 +46,7 @@ public final class Paths {
      * to perform REST calls.
      */
     @Host("http://{accountName}{host}")
-    @ServiceInterface(name = "AutoRestParameterizedHostTestClientPaths")
+    @ServiceInterface(name = "AutoRestParameterize")
     private interface PathsService {
         @Get("/customuri")
         @ExpectedResponses({200})
@@ -61,6 +61,7 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName) {
@@ -80,6 +81,7 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String accountName) {

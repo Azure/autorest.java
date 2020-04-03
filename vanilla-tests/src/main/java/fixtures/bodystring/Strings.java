@@ -28,12 +28,12 @@ public final class Strings {
     /**
      * The proxy service used to perform REST calls.
      */
-    private StringsService service;
+    private final StringsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATService client;
+    private final AutoRestSwaggerBATService client;
 
     /**
      * Initializes an instance of Strings.
@@ -51,7 +51,7 @@ public final class Strings {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATServiceStrings")
+    @ServiceInterface(name = "AutoRestSwaggerBATSe")
     private interface StringsService {
         @Get("/string/null")
         @ExpectedResponses({200})
@@ -127,6 +127,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getNullWithResponseAsync() {
@@ -141,6 +142,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNullAsync() {
@@ -159,6 +161,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNull() {
@@ -172,6 +175,7 @@ public final class Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(String stringBody) {
@@ -188,6 +192,7 @@ public final class Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNullAsync(String stringBody) {
@@ -213,6 +218,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getEmptyWithResponseAsync() {
@@ -227,6 +233,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getEmptyAsync() {
@@ -245,6 +252,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getEmpty() {
@@ -254,47 +262,41 @@ public final class Strings {
     /**
      * Set string value empty ''.
      * 
-     * @param stringBody 
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(String stringBody) {
+    public Mono<Response<Void>> putEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        if (stringBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
-        }
+        final String stringBody = "";
         return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), stringBody, context));
     }
 
     /**
      * Set string value empty ''.
      * 
-     * @param stringBody 
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(String stringBody) {
-        return putEmptyWithResponseAsync(stringBody)
+    public Mono<Void> putEmptyAsync() {
+        return putEmptyWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set string value empty ''.
      * 
-     * @param stringBody 
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(String stringBody) {
-        putEmptyAsync(stringBody).block();
+    public void putEmpty() {
+        putEmptyAsync().block();
     }
 
     /**
@@ -302,6 +304,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getMbcsWithResponseAsync() {
@@ -316,6 +319,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getMbcsAsync() {
@@ -334,6 +338,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getMbcs() {
@@ -345,6 +350,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync() {
@@ -360,6 +366,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMbcsAsync() {
@@ -383,6 +390,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getWhitespaceWithResponseAsync() {
@@ -397,6 +405,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getWhitespaceAsync() {
@@ -415,6 +424,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getWhitespace() {
@@ -426,6 +436,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync() {
@@ -441,6 +452,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWhitespaceAsync() {
@@ -464,6 +476,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getNotProvidedWithResponseAsync() {
@@ -478,6 +491,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotProvidedAsync() {
@@ -496,6 +510,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotProvided() {
@@ -507,6 +522,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getBase64EncodedWithResponseAsync() {
@@ -521,6 +537,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64EncodedAsync() {
@@ -539,6 +556,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64Encoded() {
@@ -550,6 +568,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getBase64UrlEncodedWithResponseAsync() {
@@ -564,6 +583,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getBase64UrlEncodedAsync() {
@@ -582,6 +602,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64UrlEncoded() {
@@ -595,6 +616,7 @@ public final class Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody) {
@@ -615,6 +637,7 @@ public final class Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
@@ -640,6 +663,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
@@ -654,6 +678,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNullBase64UrlEncodedAsync() {
@@ -672,6 +697,7 @@ public final class Strings {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNullBase64UrlEncoded() {

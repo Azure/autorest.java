@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATService.class})
 public final class AutoRestSwaggerBATServiceBuilder {
     /*
      * server parameter

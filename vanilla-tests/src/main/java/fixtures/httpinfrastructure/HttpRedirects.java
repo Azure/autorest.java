@@ -44,12 +44,12 @@ public final class HttpRedirects {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpRedirectsService service;
+    private final HttpRedirectsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpRedirects.
@@ -67,7 +67,7 @@ public final class HttpRedirects {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpRedirects")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpRedirectsService {
         @Head("/http/redirect/300")
         @ExpectedResponses({200, 300})
@@ -150,6 +150,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
@@ -164,6 +165,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async() {
@@ -230,6 +232,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
@@ -244,6 +247,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async() {
@@ -267,6 +271,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
@@ -281,6 +286,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async() {
@@ -304,6 +310,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
@@ -319,6 +326,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async() {
@@ -342,6 +350,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
@@ -356,6 +365,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async() {
@@ -379,6 +389,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
@@ -393,6 +404,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async() {
@@ -416,6 +428,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
@@ -431,6 +444,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async() {
@@ -454,6 +468,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
@@ -469,6 +484,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async() {
@@ -492,6 +508,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
@@ -506,6 +523,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async() {
@@ -529,6 +547,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
@@ -543,6 +562,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async() {
@@ -566,6 +586,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
@@ -581,6 +602,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async() {
@@ -604,6 +626,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
@@ -619,6 +642,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async() {
@@ -642,6 +666,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
@@ -657,6 +682,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async() {
@@ -680,6 +706,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
@@ -695,6 +722,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async() {

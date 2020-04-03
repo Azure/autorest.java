@@ -27,12 +27,12 @@ public final class AvailabilitySets {
     /**
      * The proxy service used to perform REST calls.
      */
-    private AvailabilitySetsService service;
+    private final AvailabilitySetsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestParameterFlattening client;
+    private final AutoRestParameterFlattening client;
 
     /**
      * Initializes an instance of AvailabilitySets.
@@ -50,7 +50,7 @@ public final class AvailabilitySets {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestParameterFlatteningAvailabilitySets")
+    @ServiceInterface(name = "AutoRestParameterFla")
     private interface AvailabilitySetsService {
         @Patch("/parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
@@ -61,12 +61,13 @@ public final class AvailabilitySets {
     /**
      * Updates the tags for an availability set.
      * 
-     * @param resourceGroupName 
-     * @param avset 
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
      * @param availabilitySetUpdateParametersTags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
@@ -90,12 +91,13 @@ public final class AvailabilitySets {
     /**
      * Updates the tags for an availability set.
      * 
-     * @param resourceGroupName 
-     * @param avset 
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
      * @param availabilitySetUpdateParametersTags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
@@ -106,8 +108,8 @@ public final class AvailabilitySets {
     /**
      * Updates the tags for an availability set.
      * 
-     * @param resourceGroupName 
-     * @param avset 
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
      * @param availabilitySetUpdateParametersTags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

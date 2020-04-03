@@ -30,7 +30,7 @@ public final class AutoRestComplexTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestComplexTestService setHost(String host) {
+    public AutoRestComplexTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -55,7 +55,7 @@ public final class AutoRestComplexTestService {
      * @param apiVersion the apiVersion value.
      * @return the service client itself.
      */
-    AutoRestComplexTestService setApiVersion(String apiVersion) {
+    public AutoRestComplexTestService setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
     }
@@ -63,7 +63,7 @@ public final class AutoRestComplexTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -77,7 +77,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Basics object to access its operations.
      */
-    private Basics basics;
+    private final Basics basics;
 
     /**
      * Gets the Basics object to access its operations.
@@ -91,7 +91,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Primitives object to access its operations.
      */
-    private Primitives primitives;
+    private final Primitives primitives;
 
     /**
      * Gets the Primitives object to access its operations.
@@ -105,7 +105,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Arrays object to access its operations.
      */
-    private Arrays arrays;
+    private final Arrays arrays;
 
     /**
      * Gets the Arrays object to access its operations.
@@ -119,7 +119,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Dictionarys object to access its operations.
      */
-    private Dictionarys dictionarys;
+    private final Dictionarys dictionarys;
 
     /**
      * Gets the Dictionarys object to access its operations.
@@ -133,7 +133,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Inheritances object to access its operations.
      */
-    private Inheritances inheritances;
+    private final Inheritances inheritances;
 
     /**
      * Gets the Inheritances object to access its operations.
@@ -147,7 +147,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Polymorphisms object to access its operations.
      */
-    private Polymorphisms polymorphisms;
+    private final Polymorphisms polymorphisms;
 
     /**
      * Gets the Polymorphisms object to access its operations.
@@ -161,7 +161,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Polymorphicrecursives object to access its operations.
      */
-    private Polymorphicrecursives polymorphicrecursives;
+    private final Polymorphicrecursives polymorphicrecursives;
 
     /**
      * Gets the Polymorphicrecursives object to access its operations.
@@ -175,7 +175,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Readonlypropertys object to access its operations.
      */
-    private Readonlypropertys readonlypropertys;
+    private final Readonlypropertys readonlypropertys;
 
     /**
      * Gets the Readonlypropertys object to access its operations.
@@ -189,7 +189,7 @@ public final class AutoRestComplexTestService {
     /**
      * The Flattencomplexs object to access its operations.
      */
-    private Flattencomplexs flattencomplexs;
+    private final Flattencomplexs flattencomplexs;
 
     /**
      * Gets the Flattencomplexs object to access its operations.
@@ -204,7 +204,7 @@ public final class AutoRestComplexTestService {
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

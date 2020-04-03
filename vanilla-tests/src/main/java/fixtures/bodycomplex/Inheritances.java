@@ -27,12 +27,12 @@ public final class Inheritances {
     /**
      * The proxy service used to perform REST calls.
      */
-    private InheritancesService service;
+    private final InheritancesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Inheritances.
@@ -50,7 +50,7 @@ public final class Inheritances {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceInheritances")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface InheritancesService {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
@@ -68,6 +68,7 @@ public final class Inheritances {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
@@ -82,6 +83,7 @@ public final class Inheritances {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Siamese> getValidAsync() {
@@ -100,6 +102,7 @@ public final class Inheritances {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Siamese getValid() {
@@ -109,10 +112,11 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
@@ -130,10 +134,11 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Siamese complexBody) {
@@ -144,7 +149,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

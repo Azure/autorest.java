@@ -24,12 +24,12 @@ public final class HttpFailures {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpFailuresService service;
+    private final HttpFailuresService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpFailures.
@@ -47,7 +47,7 @@ public final class HttpFailures {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpFailures")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({200})
@@ -70,6 +70,7 @@ public final class HttpFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getEmptyErrorWithResponseAsync() {
@@ -84,6 +85,7 @@ public final class HttpFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync() {
@@ -102,6 +104,7 @@ public final class HttpFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError() {
@@ -113,6 +116,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNoModelErrorWithResponseAsync() {
@@ -127,6 +131,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync() {
@@ -145,6 +150,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError() {
@@ -156,6 +162,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNoModelEmptyWithResponseAsync() {
@@ -170,6 +177,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync() {
@@ -188,6 +196,7 @@ public final class HttpFailures {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty() {

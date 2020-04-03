@@ -25,12 +25,12 @@ public final class Paths {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PathsService service;
+    private final PathsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestParameterizedCustomHostTestClient client;
+    private final AutoRestParameterizedCustomHostTestClient client;
 
     /**
      * Initializes an instance of Paths.
@@ -48,7 +48,7 @@ public final class Paths {
      * service to perform REST calls.
      */
     @Host("{vault}{secret}{dnsSuffix}")
-    @ServiceInterface(name = "AutoRestParameterizedCustomHostTestClientPaths")
+    @ServiceInterface(name = "AutoRestParameterize")
     private interface PathsService {
         @Get("/customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
@@ -61,11 +61,12 @@ public final class Paths {
      * 
      * @param vault simple string.
      * @param secret simple string.
-     * @param keyName 
-     * @param keyVersion 
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String keyName, String keyVersion) {
@@ -92,11 +93,12 @@ public final class Paths {
      * 
      * @param vault simple string.
      * @param secret simple string.
-     * @param keyName 
-     * @param keyVersion 
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
@@ -109,8 +111,8 @@ public final class Paths {
      * 
      * @param vault simple string.
      * @param secret simple string.
-     * @param keyName 
-     * @param keyVersion 
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

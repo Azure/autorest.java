@@ -27,12 +27,12 @@ public final class Pets {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PetsService service;
+    private final PetsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private PetStoreInc client;
+    private final PetStoreInc client;
 
     /**
      * Initializes an instance of Pets.
@@ -63,7 +63,7 @@ public final class Pets {
     }
 
     /**
-     * @param petId 
+     * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -80,7 +80,7 @@ public final class Pets {
     }
 
     /**
-     * @param petId 
+     * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -98,7 +98,7 @@ public final class Pets {
     }
 
     /**
-     * @param petId 
+     * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

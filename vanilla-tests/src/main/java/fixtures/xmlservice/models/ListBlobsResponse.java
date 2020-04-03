@@ -220,9 +220,6 @@ public final class ListBlobsResponse {
     }
 
     public void validate() {
-        if (getServiceEndpoint() == null) {
-            throw new IllegalArgumentException("Missing required property serviceEndpoint in model ListBlobsResponse");
-        }
         if (getContainerName() == null) {
             throw new IllegalArgumentException("Missing required property containerName in model ListBlobsResponse");
         }

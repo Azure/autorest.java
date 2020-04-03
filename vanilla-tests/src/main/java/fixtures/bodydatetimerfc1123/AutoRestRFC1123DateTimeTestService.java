@@ -30,7 +30,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestRFC1123DateTimeTestService setHost(String host) {
+    public AutoRestRFC1123DateTimeTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestRFC1123DateTimeTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestRFC1123DateTimeTestService {
     /**
      * The Datetimerfc1123s object to access its operations.
      */
-    private Datetimerfc1123s datetimerfc1123s;
+    private final Datetimerfc1123s datetimerfc1123s;
 
     /**
      * Gets the Datetimerfc1123s object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      */
     public AutoRestRFC1123DateTimeTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

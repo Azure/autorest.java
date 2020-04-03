@@ -40,12 +40,12 @@ public final class Pagings {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PagingsService service;
+    private final PagingsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestPagingTestService client;
+    private final AutoRestPagingTestService client;
 
     /**
      * Initializes an instance of Pagings.
@@ -63,7 +63,7 @@ public final class Pagings {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestPagingTestServicePagings")
+    @ServiceInterface(name = "AutoRestPagingTestSe")
     private interface PagingsService {
         @Get("/paging/noitemname")
         @ExpectedResponses({200})
@@ -756,8 +756,8 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -786,8 +786,8 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -802,8 +802,8 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -941,9 +941,9 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param apiVersion 
-     * @param tenant 
-     * @param nextLink 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -975,7 +975,7 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param nextLink 
+     * @param nextLink Next link for list operation.
      * @param customParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

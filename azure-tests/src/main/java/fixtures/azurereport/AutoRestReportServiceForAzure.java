@@ -51,7 +51,7 @@ public final class AutoRestReportServiceForAzure {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestReportServiceForAzure setHost(String host) {
+    public AutoRestReportServiceForAzure setHost(String host) {
         this.host = host;
         return this;
     }
@@ -59,7 +59,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -74,7 +74,7 @@ public final class AutoRestReportServiceForAzure {
      * Initializes an instance of AutoRestReportServiceForAzure client.
      */
     public AutoRestReportServiceForAzure() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
@@ -93,7 +93,7 @@ public final class AutoRestReportServiceForAzure {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestReportServiceForAzure")
+    @ServiceInterface(name = "AutoRestReportServic")
     private interface AutoRestReportServiceForAzureService {
         @Get("/report/azure")
         @ExpectedResponses({200})
@@ -104,10 +104,11 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier 
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getReportWithResponseAsync(String qualifier) {
@@ -120,10 +121,11 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier 
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getReportAsync(String qualifier) {
@@ -140,10 +142,11 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier 
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport(String qualifier) {

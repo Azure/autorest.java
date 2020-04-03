@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestRFC1123DateTimeTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestRFC1123DateTimeTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestRFC1123DateTimeTestService.class})
 public final class AutoRestRFC1123DateTimeTestServiceBuilder {
     /*
      * server parameter

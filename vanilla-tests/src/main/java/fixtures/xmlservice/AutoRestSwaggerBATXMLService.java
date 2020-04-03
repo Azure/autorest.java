@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATXMLService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATXMLService setHost(String host) {
+    public AutoRestSwaggerBATXMLService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestSwaggerBATXMLService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestSwaggerBATXMLService {
     /**
      * The Xmls object to access its operations.
      */
-    private Xmls xmls;
+    private final Xmls xmls;
 
     /**
      * Gets the Xmls object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestSwaggerBATXMLService {
      * Initializes an instance of AutoRestSwaggerBATXMLService client.
      */
     public AutoRestSwaggerBATXMLService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

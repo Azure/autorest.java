@@ -1,30 +1,16 @@
 package fixtures.modelflattening;
 
-import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClientBuilder;
-import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
-import fixtures.modelflattening.models.FlattenedProduct;
-import fixtures.modelflattening.models.FlattenParameterGroup;
-import fixtures.modelflattening.models.ProductWrapper;
-import fixtures.modelflattening.models.Resource;
-import fixtures.modelflattening.models.ResourceCollection;
-import fixtures.modelflattening.models.SimpleProduct;
-import fixtures.modelflattening.models.WrappedProduct;
-import java.util.List;
-import java.util.Map;
-import reactor.core.publisher.Mono;
 
 /**
  * A builder for creating a new instance of the AutoRestResourceFlatteningTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestResourceFlatteningTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestResourceFlatteningTestService.class})
 public final class AutoRestResourceFlatteningTestServiceBuilder {
     /*
      * server parameter

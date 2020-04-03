@@ -27,12 +27,12 @@ public final class Readonlypropertys {
     /**
      * The proxy service used to perform REST calls.
      */
-    private ReadonlypropertysService service;
+    private final ReadonlypropertysService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Readonlypropertys.
@@ -50,7 +50,7 @@ public final class Readonlypropertys {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceReadonlypropertys")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface ReadonlypropertysService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
@@ -68,6 +68,7 @@ public final class Readonlypropertys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync() {
@@ -82,6 +83,7 @@ public final class Readonlypropertys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ReadonlyObj> getValidAsync() {
@@ -100,6 +102,7 @@ public final class Readonlypropertys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ReadonlyObj getValid() {
@@ -113,6 +116,7 @@ public final class Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
@@ -134,6 +138,7 @@ public final class Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ReadonlyObj complexBody) {

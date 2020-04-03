@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestDateTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestDateTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestDateTestService.class})
 public final class AutoRestDateTestServiceBuilder {
     /*
      * server parameter

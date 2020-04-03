@@ -38,7 +38,7 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
     /**
      * The DictionarysImpl object to access its operations.
      */
-    private DictionarysImpl dictionarys;
+    private final DictionarysImpl dictionarys;
 
     /**
      * Gets the DictionarysImpl object to access its operations.

@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestParameterizedHostTestClient type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestParameterizedHostTestClient.class)
+@ServiceClientBuilder(serviceClients = {AutoRestParameterizedHostTestClient.class})
 public final class AutoRestParameterizedHostTestClientBuilder {
     /*
      * A string value that is used as a global part of the parameterized host
