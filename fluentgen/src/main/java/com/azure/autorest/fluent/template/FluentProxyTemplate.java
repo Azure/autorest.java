@@ -49,4 +49,41 @@ public class FluentProxyTemplate extends ProxyTemplate {
                     headersString));
         }
     }
+
+    @Override
+    protected String breakUrlOnLengthLimit(String string) {
+        final int lengthLimit = 120 - 12 - 4;
+        if (string.length() <= lengthLimit) {
+            return string;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            boolean first = true;
+            while (!string.isEmpty()) {
+                if (string.length() > lengthLimit) {
+                    int index = string.indexOf("/");
+                    int nextIndex = index;
+                    while (nextIndex != -1 && nextIndex < lengthLimit) {
+                        index = nextIndex;
+                        nextIndex = string.indexOf("/", index + 1);
+                    }
+                    if (index == -1) {
+                        index = string.length();
+                    }
+                    if (!first) {
+                        builder.append("\" + \"");
+                    } else {
+                        first = false;
+                    }
+                    builder.append(string, 0, index);
+                    string = string.substring(index);
+                } else {
+                    // not first
+                    builder.append("\" + \"");
+                    builder.append(string);
+                    string = string.substring(string.length());
+                }
+            }
+            return builder.toString();
+        }
+    }
 }
