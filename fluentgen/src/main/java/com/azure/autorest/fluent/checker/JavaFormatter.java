@@ -16,7 +16,7 @@ public class JavaFormatter {
 
     private static final Logger logger = LoggerFactory.getLogger(JavaFormatter.class);
 
-    private static boolean ENABLED;
+    private static final boolean ENABLED;
     static {
         boolean enabled = false;
         String version = System.getProperty("java.version");
