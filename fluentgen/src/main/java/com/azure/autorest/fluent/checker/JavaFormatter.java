@@ -5,10 +5,10 @@
 
 package com.azure.autorest.fluent.checker;
 
-import com.google.googlejavaformat.java.Formatter;
-import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Method;
 
 public class JavaFormatter {
 
@@ -22,10 +22,16 @@ public class JavaFormatter {
         this.path = path;
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public String format() {
         try {
-            return new Formatter().formatSource(content);
-        } catch (FormatterException e) {
+            //return new Formatter().formatSource(content);
+
+            Class formatterClass = this.getClass().getClassLoader().loadClass("com.google.googlejavaformat.java.Formatter");
+            Object formatterInstance = formatterClass.getConstructor().newInstance();
+            Method formatSourceMethod = formatterClass.getMethod("formatSource", String.class);
+            return (String) formatSourceMethod.invoke(formatterInstance, content);
+        } catch (Exception e) {
             logger.warn("Failed to parse Java file {}, message: {}", path, e.getMessage());
             return content;
         }
