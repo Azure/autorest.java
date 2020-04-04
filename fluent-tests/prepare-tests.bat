@@ -1,5 +1,15 @@
+REM add java11 to path on devops
+JAVA11_LOCATION=C:\Program Files\Java\zulu-11-azure-jdk_11.33.15-11.0.4-win_x64
+IF EXIST "%JAVA11_LOCATION%" (
+    SET PATH=%JAVA11_LOCATION%\bin;%PATH%
+    ECHO add java11 to path
+    ECHO %PATH%
+)
+
+REM print java version
 java -version
 
+REM re-generate code
 RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 
 SET AUTOREST_CORE_VERSION=3.0.6262
