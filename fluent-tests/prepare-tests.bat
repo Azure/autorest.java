@@ -1,3 +1,5 @@
+java -version
+
 RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 
 SET AUTOREST_CORE_VERSION=3.0.6262
