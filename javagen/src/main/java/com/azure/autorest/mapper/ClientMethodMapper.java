@@ -394,7 +394,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (description == null) {
                 if (baseType == PrimitiveType.Void) {
                     // Mono<Void>
-                    description = "completion";
+                    description = "the completion";
                 }
                 if (baseType == PrimitiveType.Boolean
                         && operation.getRequests() != null && !operation.getRequests().isEmpty()
@@ -404,6 +404,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     // Mono<Boolean> of HEAD method
                     description = "whether resource exists";
                 }
+            }
+
+            if (description == null) {
+                description = "the response";
             }
         }
         return description;
