@@ -59,7 +59,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         ClientMethod.Builder builder = new ClientMethod.Builder()
                 .description(operation.getLanguage().getJava().getDescription())
-                .clientReference(operation.getOperationGroup() == null ? "this": "this.client");
+                .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
 
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
