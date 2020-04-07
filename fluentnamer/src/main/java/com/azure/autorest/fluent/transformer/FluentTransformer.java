@@ -34,6 +34,7 @@ public class FluentTransformer {
         codeModel = removePagingLRO(codeModel);
         codeModel = new SchemaNameNormalization().process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
+        codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = normalizeApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
