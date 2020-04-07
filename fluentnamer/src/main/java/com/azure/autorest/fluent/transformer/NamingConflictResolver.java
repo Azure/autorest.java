@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +24,8 @@ public class NamingConflictResolver {
                 .collect(Collectors.toSet());
         codeModel.getOperationGroups().forEach(og -> {
             String name = Utils.getDefaultName(og);
-            if (objectNames.contains(name)) {
-                String newName = name + "MethodGroup";
+            if (objectNames.contains(CodeNamer.getMethodGroupName(name))) {
+                String newName = name + "Operations";
                 logger.info("Rename operation group from {} to {}", name, newName);
                 og.getLanguage().getDefault().setName(newName);
             }
