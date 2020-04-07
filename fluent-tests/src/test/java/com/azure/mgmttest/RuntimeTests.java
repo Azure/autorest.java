@@ -26,7 +26,7 @@ public class RuntimeTests {
                 .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build())
                 .host(AzureEnvironment.AZURE.getResourceManagerEndpoint())
                 .subscriptionId(MOCK_SUBSCRIPTION_ID)
-                .build();
+                .buildClient();
         Assertions.assertNotNull(storageManagementClient.getHttpPipeline());
         Assertions.assertEquals(MOCK_SUBSCRIPTION_ID, storageManagementClient.getSubscriptionId());
         Assertions.assertNotNull(storageManagementClient.storageAccounts());

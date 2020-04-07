@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
 
-    private ServiceClientBuilderTemplate() {
+    protected ServiceClientBuilderTemplate() {
     }
 
     public static ServiceClientBuilderTemplate getInstance() {
@@ -49,7 +49,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             buildReturnType = serviceClient.getInterfaceName();
         } else {
             buildReturnType = serviceClient.getClassName();
-            ;
         }
 
         Set<String> imports = new HashSet<String>();
@@ -109,13 +108,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 });
             }
 
+            String buildMethodName = this.primaryBuildMethodName(settings);
+
             // build method
             classBlock.javadocComment(comment ->
             {
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
             });
-            classBlock.publicMethod(String.format("%1$s build()", buildReturnType), function ->
+            classBlock.publicMethod(String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
                 for (ServiceClientProperty serviceClientProperty : Stream.concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
@@ -150,9 +151,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 classBlock.publicMethod(String.format("%1$s buildAsyncClient()", asyncClassName),
                     function -> {
                         if (serviceClient.getProxy() != null) {
-                            function.line("return new %1$s(build());", asyncClassName);
+                            function.line("return new %1$s(%2$s());", asyncClassName, buildMethodName);
                         } else {
-                            function.line("return new %1$s(build().%2$s());", asyncClassName,
+                            function.line("return new %1$s(%2$s().%3$s());", asyncClassName, buildMethodName,
                                 CodeNamer.toCamelCase(serviceClient.getMethodGroupClients().get(0).getClassBaseName()));
                         }
                     });
@@ -171,9 +172,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     classBlock.publicMethod(String.format("%1$s buildClient()", syncClassName),
                         function -> {
                             if (serviceClient.getProxy() != null) {
-                                function.line("return new %1$s(build());", syncClassName);
+                                function.line("return new %1$s(%2$s());", syncClassName, buildMethodName);
                             } else {
-                                function.line("return new %1$s(build().%2$s());", syncClassName,
+                                function.line("return new %1$s(%2$s().%3$s());", syncClassName, buildMethodName,
                                     CodeNamer.toCamelCase(serviceClient.getMethodGroupClients().get(0).getClassBaseName()));
                             }
                         });
@@ -181,5 +182,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
         });
 
+    }
+
+    /**
+     * Extension for the name of build method.
+     *
+     * @return The name of build method.
+     */
+    protected String primaryBuildMethodName(JavaSettings settings) {
+        return "build";
     }
 }
