@@ -147,11 +147,11 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody) {
@@ -164,12 +164,12 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody, Context context) {
@@ -182,11 +182,11 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putTrueAsync(boolean boolBody) {
@@ -197,7 +197,7 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -273,11 +273,11 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody) {
@@ -290,12 +290,12 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody, Context context) {
@@ -308,11 +308,11 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFalseAsync(boolean boolBody) {
@@ -323,7 +323,7 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

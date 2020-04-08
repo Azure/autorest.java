@@ -133,11 +133,11 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody 
+     * @param stringBody The stringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody) {
@@ -153,11 +153,11 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody 
+     * @param stringBody The stringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(Colors stringBody) {
@@ -168,7 +168,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody 
+     * @param stringBody The stringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -227,11 +227,11 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody) {
@@ -247,11 +247,11 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(Colors enumStringBody) {
@@ -262,7 +262,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -321,11 +321,11 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody) {
@@ -343,11 +343,11 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
@@ -358,7 +358,7 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody 
+     * @param enumStringBody The enumStringBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

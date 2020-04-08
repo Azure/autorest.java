@@ -12,7 +12,7 @@ public class PetsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new PetStoreIncBuilder().build();
+        client = new PetStoreIncBuilder().buildClient();
     }
 
     @Test

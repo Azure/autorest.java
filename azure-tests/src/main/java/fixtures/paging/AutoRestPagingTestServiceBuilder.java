@@ -49,7 +49,7 @@ public final class AutoRestPagingTestServiceBuilder {
      * 
      * @return an instance of AutoRestPagingTestService.
      */
-    public AutoRestPagingTestService build() {
+    public AutoRestPagingTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

@@ -190,6 +190,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
      * @return The name of build method.
      */
     protected String primaryBuildMethodName(JavaSettings settings) {
-        return "build";
-    }
+        return settings.shouldGenerateSyncAsyncClients()
+                ? "buildInnerClient"
+                : "buildClient";    }
 }

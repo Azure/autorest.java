@@ -17,7 +17,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRFC1123DateTimeTestServiceBuilder().build();
+        client = new AutoRestRFC1123DateTimeTestServiceBuilder().buildClient();
     }
 
     @Test

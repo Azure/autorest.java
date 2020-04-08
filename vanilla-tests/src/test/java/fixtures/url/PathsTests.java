@@ -13,7 +13,7 @@ public class PathsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceBuilder().build();
+        client = new AutoRestUrlTestServiceBuilder().buildClient();
     }
 
     @Test

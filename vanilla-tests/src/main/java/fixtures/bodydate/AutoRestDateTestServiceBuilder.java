@@ -49,7 +49,7 @@ public final class AutoRestDateTestServiceBuilder {
      * 
      * @return an instance of AutoRestDateTestService.
      */
-    public AutoRestDateTestService build() {
+    public AutoRestDateTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

@@ -67,7 +67,7 @@ public final class AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
@@ -97,7 +97,7 @@ public final class AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {

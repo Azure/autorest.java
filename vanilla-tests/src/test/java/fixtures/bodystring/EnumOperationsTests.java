@@ -13,7 +13,7 @@ public class EnumOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().build();
+        client = new AutoRestSwaggerBATServiceBuilder().buildClient();
     }
 
     @Test

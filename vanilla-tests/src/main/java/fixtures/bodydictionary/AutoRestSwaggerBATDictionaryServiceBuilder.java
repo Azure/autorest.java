@@ -50,7 +50,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATDictionaryServiceImpl.
      */
-    public AutoRestSwaggerBATDictionaryServiceImpl build() {
+    public AutoRestSwaggerBATDictionaryServiceImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
@@ -68,7 +68,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @return an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient.
      */
     public AutoRestSwaggerBATDictionaryServiceAsyncClient buildAsyncClient() {
-        return new AutoRestSwaggerBATDictionaryServiceAsyncClient(build().dictionarys());
+        return new AutoRestSwaggerBATDictionaryServiceAsyncClient(buildInnerClient().dictionarys());
     }
 
     /**
@@ -77,6 +77,6 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @return an instance of AutoRestSwaggerBATDictionaryServiceClient.
      */
     public AutoRestSwaggerBATDictionaryServiceClient buildClient() {
-        return new AutoRestSwaggerBATDictionaryServiceClient(build().dictionarys());
+        return new AutoRestSwaggerBATDictionaryServiceClient(buildInnerClient().dictionarys());
     }
 }

@@ -58,6 +58,7 @@ public final class Flattencomplexs {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
@@ -70,6 +71,7 @@ public final class Flattencomplexs {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyBaseType> getValidAsync() {
@@ -86,6 +88,7 @@ public final class Flattencomplexs {
     /**
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValid() {

@@ -406,11 +406,11 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody) {
@@ -423,11 +423,11 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax32Async(int intBody) {
@@ -438,7 +438,7 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -451,11 +451,11 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody) {
@@ -468,11 +468,11 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax64Async(long intBody) {
@@ -483,7 +483,7 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -496,11 +496,11 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody) {
@@ -513,11 +513,11 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin32Async(int intBody) {
@@ -528,7 +528,7 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -541,11 +541,11 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody) {
@@ -558,11 +558,11 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin64Async(long intBody) {
@@ -573,7 +573,7 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -636,7 +636,7 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody) {
@@ -657,7 +657,7 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUnixTimeDateAsync(OffsetDateTime intBody) {

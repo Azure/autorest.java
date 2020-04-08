@@ -49,7 +49,7 @@ public final class MediaTypesClientBuilder {
      * 
      * @return an instance of MediaTypesClient.
      */
-    public MediaTypesClient build() {
+    public MediaTypesClient buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

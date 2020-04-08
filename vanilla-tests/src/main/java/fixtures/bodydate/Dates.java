@@ -279,11 +279,11 @@ public final class Dates {
     /**
      * Put max date value 9999-12-31.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMaxDateWithResponseAsync(LocalDate dateBody) {
@@ -299,11 +299,11 @@ public final class Dates {
     /**
      * Put max date value 9999-12-31.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMaxDateAsync(LocalDate dateBody) {
@@ -314,7 +314,7 @@ public final class Dates {
     /**
      * Put max date value 9999-12-31.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -373,11 +373,11 @@ public final class Dates {
     /**
      * Put min date value 0000-01-01.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMinDateWithResponseAsync(LocalDate dateBody) {
@@ -393,11 +393,11 @@ public final class Dates {
     /**
      * Put min date value 0000-01-01.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMinDateAsync(LocalDate dateBody) {
@@ -408,7 +408,7 @@ public final class Dates {
     /**
      * Put min date value 0000-01-01.
      * 
-     * @param dateBody 
+     * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

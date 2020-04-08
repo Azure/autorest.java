@@ -49,7 +49,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
      * 
      * @return an instance of AutoRestResourceFlatteningTestService.
      */
-    public AutoRestResourceFlatteningTestService build() {
+    public AutoRestResourceFlatteningTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

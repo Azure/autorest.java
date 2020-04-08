@@ -49,7 +49,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
      * 
      * @return an instance of AutoRestRFC1123DateTimeTestService.
      */
-    public AutoRestRFC1123DateTimeTestService build() {
+    public AutoRestRFC1123DateTimeTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

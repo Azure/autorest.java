@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATByteServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATByteService.
      */
-    public AutoRestSwaggerBATByteService build() {
+    public AutoRestSwaggerBATByteService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

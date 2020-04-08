@@ -49,7 +49,7 @@ public final class AutoRestParameterFlatteningBuilder {
      * 
      * @return an instance of AutoRestParameterFlattening.
      */
-    public AutoRestParameterFlattening build() {
+    public AutoRestParameterFlattening buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

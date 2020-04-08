@@ -8,7 +8,7 @@ public class HttpSuccessTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestHttpInfrastructureTestServiceBuilder().build();
+    client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
   }
 
   @Test

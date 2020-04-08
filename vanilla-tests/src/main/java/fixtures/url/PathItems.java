@@ -81,7 +81,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -110,7 +110,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getAllWithValuesAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -144,7 +144,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -173,7 +173,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getGlobalQueryNullAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -207,7 +207,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -236,7 +236,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getGlobalAndLocalQueryNullAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -270,7 +270,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
@@ -299,7 +299,7 @@ public final class PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getLocalPathItemQueryNullAsync(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {

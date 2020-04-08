@@ -360,11 +360,11 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -380,11 +380,11 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -395,7 +395,7 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -408,11 +408,11 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMaxDateTime7DigitsWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -428,11 +428,11 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTime7DigitsAsync(OffsetDateTime datetimeBody) {
@@ -443,7 +443,7 @@ public final class Datetimes {
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -594,11 +594,11 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLocalPositiveOffsetMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -614,11 +614,11 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalPositiveOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -629,7 +629,7 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -734,11 +734,11 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLocalNegativeOffsetMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -754,11 +754,11 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalNegativeOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -769,7 +769,7 @@ public final class Datetimes {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -874,11 +874,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -894,11 +894,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMinDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -909,7 +909,7 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -968,11 +968,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLocalPositiveOffsetMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -988,11 +988,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalPositiveOffsetMinDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -1003,7 +1003,7 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1062,11 +1062,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLocalNegativeOffsetMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
@@ -1082,11 +1082,11 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalNegativeOffsetMinDateTimeAsync(OffsetDateTime datetimeBody) {
@@ -1097,7 +1097,7 @@ public final class Datetimes {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      * 
-     * @param datetimeBody 
+     * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

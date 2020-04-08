@@ -12,7 +12,7 @@ public class ExplicitTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceBuilder().build();
+        client = new AutoRestRequiredOptionalTestServiceBuilder().buildClient();
     }
 
     @Test

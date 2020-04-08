@@ -97,7 +97,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
      * 
      * @return an instance of AutoRestRequiredOptionalTestService.
      */
-    public AutoRestRequiredOptionalTestService build() {
+    public AutoRestRequiredOptionalTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

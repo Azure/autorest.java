@@ -49,7 +49,7 @@ public final class AutoRestReportServiceBuilder {
      * 
      * @return an instance of AutoRestReportService.
      */
-    public AutoRestReportService build() {
+    public AutoRestReportService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

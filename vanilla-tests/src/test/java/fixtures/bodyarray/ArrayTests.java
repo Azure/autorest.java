@@ -25,7 +25,7 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceBuilder().build();
+        client = new AutoRestSwaggerBATArrayServiceBuilder().buildClient();
     }
 
     @Test

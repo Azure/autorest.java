@@ -16,7 +16,7 @@ public class HttpRetryTests {
   @BeforeClass
   public static void setup() {
     client = new AutoRestHttpInfrastructureTestServiceBuilder()
-        .pipeline(new HttpPipelineBuilder().policies(new RetryPolicy(), new CookiePolicy()).build()).build();
+        .pipeline(new HttpPipelineBuilder().policies(new RetryPolicy(), new CookiePolicy()).build()).buildClient();
   }
 
   @Test

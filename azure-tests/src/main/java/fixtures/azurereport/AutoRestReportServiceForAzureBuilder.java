@@ -49,7 +49,7 @@ public final class AutoRestReportServiceForAzureBuilder {
      * 
      * @return an instance of AutoRestReportServiceForAzure.
      */
-    public AutoRestReportServiceForAzure build() {
+    public AutoRestReportServiceForAzure buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

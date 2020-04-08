@@ -17,7 +17,7 @@ public class StringOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().build();
+        client = new AutoRestSwaggerBATServiceBuilder().buildClient();
     }
 
     @Test

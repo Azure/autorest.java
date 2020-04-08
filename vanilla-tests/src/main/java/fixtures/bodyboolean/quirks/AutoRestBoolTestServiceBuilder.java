@@ -49,7 +49,7 @@ public final class AutoRestBoolTestServiceBuilder {
      * 
      * @return an instance of AutoRestBoolTestService.
      */
-    public AutoRestBoolTestService build() {
+    public AutoRestBoolTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

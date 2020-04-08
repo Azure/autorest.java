@@ -13,7 +13,7 @@ public class DateOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTestServiceBuilder().build();
+        client = new AutoRestDateTestServiceBuilder().buildClient();
     }
 
     @Test

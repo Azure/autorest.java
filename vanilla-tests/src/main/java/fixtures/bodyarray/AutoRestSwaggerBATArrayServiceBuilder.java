@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATArrayServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATArrayService.
      */
-    public AutoRestSwaggerBATArrayService build() {
+    public AutoRestSwaggerBATArrayService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

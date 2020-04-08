@@ -20,7 +20,7 @@ public class ModelFlatteningTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestResourceFlatteningTestServiceBuilder().build();
+    client = new AutoRestResourceFlatteningTestServiceBuilder().buildClient();
   }
 
   @Test

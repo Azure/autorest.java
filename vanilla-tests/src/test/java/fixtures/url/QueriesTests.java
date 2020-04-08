@@ -14,7 +14,7 @@ public class QueriesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceBuilder().build();
+        client = new AutoRestUrlTestServiceBuilder().buildClient();
     }
 
     @Test

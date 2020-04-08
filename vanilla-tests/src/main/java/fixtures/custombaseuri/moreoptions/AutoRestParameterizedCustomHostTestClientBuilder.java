@@ -65,7 +65,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * 
      * @return an instance of AutoRestParameterizedCustomHostTestClient.
      */
-    public AutoRestParameterizedCustomHostTestClient build() {
+    public AutoRestParameterizedCustomHostTestClient buildClient() {
         if (dnsSuffix == null) {
             this.dnsSuffix = "host";
         }

@@ -49,7 +49,7 @@ public final class PetStoreIncBuilder {
      * 
      * @return an instance of PetStoreInc.
      */
-    public PetStoreInc build() {
+    public PetStoreInc buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

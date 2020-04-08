@@ -12,7 +12,7 @@ public class BasicOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceBuilder().apiVersion("2015-05-01").build();
+        client = new AutoRestComplexTestServiceBuilder().apiVersion("2015-05-01").buildClient();
     }
 
     @Test

@@ -49,7 +49,7 @@ public final class AutoRestHeadTestServiceBuilder {
      * 
      * @return an instance of AutoRestHeadTestService.
      */
-    public AutoRestHeadTestService build() {
+    public AutoRestHeadTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

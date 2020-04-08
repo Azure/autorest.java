@@ -112,11 +112,11 @@ public final class Readonlypropertys {
     /**
      * Put complex types that have readonly properties.
      * 
-     * @param complexBody 
+     * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
@@ -134,11 +134,11 @@ public final class Readonlypropertys {
     /**
      * Put complex types that have readonly properties.
      * 
-     * @param complexBody 
+     * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ReadonlyObj complexBody) {
@@ -149,7 +149,7 @@ public final class Readonlypropertys {
     /**
      * Put complex types that have readonly properties.
      * 
-     * @param complexBody 
+     * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

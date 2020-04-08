@@ -18,8 +18,6 @@ public class FluentServiceClientBuilderTemplate extends ServiceClientBuilderTemp
 
     @Override
     protected String primaryBuildMethodName(JavaSettings settings) {
-        return settings.shouldGenerateSyncAsyncClients()
-                ? super.primaryBuildMethodName(settings)
-                : "buildClient";
+        return super.primaryBuildMethodName(settings);
     }
 }

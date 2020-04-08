@@ -65,7 +65,7 @@ public final class AutoRestComplexTestServiceBuilder {
      * 
      * @return an instance of AutoRestComplexTestService.
      */
-    public AutoRestComplexTestService build() {
+    public AutoRestComplexTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

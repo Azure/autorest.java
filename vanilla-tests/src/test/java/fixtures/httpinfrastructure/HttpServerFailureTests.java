@@ -10,7 +10,7 @@ public class HttpServerFailureTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestHttpInfrastructureTestServiceBuilder().build();
+    client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
   }
 
   @Test

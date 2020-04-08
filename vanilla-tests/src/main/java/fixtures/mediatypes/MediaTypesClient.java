@@ -114,10 +114,11 @@ public final class MediaTypesClient {
      * 
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
-     * @param contentLength null
+     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
@@ -132,10 +133,11 @@ public final class MediaTypesClient {
      * 
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
-     * @param contentLength null
+     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
@@ -154,10 +156,11 @@ public final class MediaTypesClient {
      * 
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
-     * @param contentLength null
+     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
@@ -171,6 +174,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(String source) {
@@ -193,6 +197,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(String source) {
@@ -213,6 +218,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(String source) {

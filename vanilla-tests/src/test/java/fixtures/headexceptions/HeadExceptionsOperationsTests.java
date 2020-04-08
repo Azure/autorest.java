@@ -10,7 +10,7 @@ public class HeadExceptionsOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadExceptionTestServiceBuilder().build();
+        client = new AutoRestHeadExceptionTestServiceBuilder().buildClient();
     }
 
     @Test

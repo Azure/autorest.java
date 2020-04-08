@@ -12,7 +12,7 @@ public class ByteOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceBuilder().build();
+        client = new AutoRestSwaggerBATByteServiceBuilder().buildClient();
     }
 
     @Test

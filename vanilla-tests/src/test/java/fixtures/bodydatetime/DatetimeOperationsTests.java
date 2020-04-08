@@ -16,7 +16,7 @@ public class DatetimeOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTimeTestServiceBuilder().build();
+        client = new AutoRestDateTimeTestServiceBuilder().buildClient();
     }
 
     @Test

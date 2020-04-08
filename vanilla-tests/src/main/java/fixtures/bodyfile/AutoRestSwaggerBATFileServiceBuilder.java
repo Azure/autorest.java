@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATFileService.
      */
-    public AutoRestSwaggerBATFileService build() {
+    public AutoRestSwaggerBATFileService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

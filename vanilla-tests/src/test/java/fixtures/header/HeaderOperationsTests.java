@@ -42,7 +42,7 @@ public class HeaderOperationsTests {
                 new RetryPolicy(new FixedDelay(3, Duration.ZERO)))
                 .build();
 
-        client = new AutoRestSwaggerBATHeaderServiceBuilder().pipeline(httpPipeline).build();
+        client = new AutoRestSwaggerBATHeaderServiceBuilder().pipeline(httpPipeline).buildClient();
     }
 
     @Ignore("User agent is being overwritten in UserAgentPolicy")

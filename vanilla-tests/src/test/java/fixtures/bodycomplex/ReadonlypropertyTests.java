@@ -9,7 +9,7 @@ public class ReadonlypropertyTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceBuilder().build();
+        client = new AutoRestComplexTestServiceBuilder().buildClient();
     }
 
     @Test

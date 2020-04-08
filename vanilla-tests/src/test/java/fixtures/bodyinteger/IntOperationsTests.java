@@ -19,7 +19,7 @@ public class IntOperationsTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestIntegerTestServiceBuilder().build();
+    client = new AutoRestIntegerTestServiceBuilder().buildClient();
   }
 
   @Test

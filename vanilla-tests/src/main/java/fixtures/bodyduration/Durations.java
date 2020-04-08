@@ -122,11 +122,11 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
@@ -142,11 +142,11 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return completion.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
@@ -157,7 +157,7 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

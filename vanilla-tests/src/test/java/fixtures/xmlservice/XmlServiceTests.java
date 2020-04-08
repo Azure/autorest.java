@@ -18,7 +18,7 @@ public class XmlServiceTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestSwaggerBATXMLServiceBuilder().build();
+    client = new AutoRestSwaggerBATXMLServiceBuilder().buildClient();
   }
 
   @Test

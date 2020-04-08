@@ -49,7 +49,7 @@ public final class AutoRestParameterizedHostTestClientBuilder {
      * 
      * @return an instance of AutoRestParameterizedHostTestClient.
      */
-    public AutoRestParameterizedHostTestClient build() {
+    public AutoRestParameterizedHostTestClient buildClient() {
         if (host == null) {
             this.host = "host";
         }

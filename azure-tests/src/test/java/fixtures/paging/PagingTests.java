@@ -22,7 +22,7 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceBuilder().build();
+        client = new AutoRestPagingTestServiceBuilder().buildClient();
     }
 
     @Test
