@@ -28,12 +28,12 @@ public final class Ints {
     /**
      * The proxy service used to perform REST calls.
      */
-    private IntsService service;
+    private final IntsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestIntegerTestService client;
+    private final AutoRestIntegerTestService client;
 
     /**
      * Initializes an instance of Ints.
@@ -51,7 +51,7 @@ public final class Ints {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestIntegerTestServiceInts")
+    @ServiceInterface(name = "AutoRestIntegerTestS")
     private interface IntsService {
         @Get("/int/null")
         @ExpectedResponses({200})
@@ -132,6 +132,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getNullWithResponseAsync() {
@@ -146,6 +147,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getNullAsync() {
@@ -164,6 +166,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getNull() {
@@ -175,6 +178,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getInvalidWithResponseAsync() {
@@ -189,6 +193,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getInvalidAsync() {
@@ -207,6 +212,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getInvalid() {
@@ -218,6 +224,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getOverflowInt32WithResponseAsync() {
@@ -232,6 +239,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getOverflowInt32Async() {
@@ -250,6 +258,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getOverflowInt32() {
@@ -261,6 +270,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getUnderflowInt32WithResponseAsync() {
@@ -275,6 +285,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getUnderflowInt32Async() {
@@ -293,6 +304,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getUnderflowInt32() {
@@ -304,6 +316,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Long>> getOverflowInt64WithResponseAsync() {
@@ -318,6 +331,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Long> getOverflowInt64Async() {
@@ -336,6 +350,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getOverflowInt64() {
@@ -347,6 +362,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Long>> getUnderflowInt64WithResponseAsync() {
@@ -361,6 +377,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Long> getUnderflowInt64Async() {
@@ -379,6 +396,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getUnderflowInt64() {
@@ -388,10 +406,11 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody) {
@@ -404,10 +423,11 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax32Async(int intBody) {
@@ -418,7 +438,7 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -431,10 +451,11 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody) {
@@ -447,10 +468,11 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax64Async(long intBody) {
@@ -461,7 +483,7 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -474,10 +496,11 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody) {
@@ -490,10 +513,11 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin32Async(int intBody) {
@@ -504,7 +528,7 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -517,10 +541,11 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody) {
@@ -533,10 +558,11 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin64Async(long intBody) {
@@ -547,7 +573,7 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody 
+     * @param intBody The intBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -562,6 +588,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUnixTimeWithResponseAsync() {
@@ -576,6 +603,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUnixTimeAsync() {
@@ -594,6 +622,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnixTime() {
@@ -607,6 +636,7 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody) {
@@ -627,6 +657,7 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUnixTimeDateAsync(OffsetDateTime intBody) {
@@ -652,6 +683,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
@@ -666,6 +698,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getInvalidUnixTimeAsync() {
@@ -684,6 +717,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalidUnixTime() {
@@ -695,6 +729,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
@@ -709,6 +744,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getNullUnixTimeAsync() {
@@ -727,6 +763,7 @@ public final class Ints {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNullUnixTime() {

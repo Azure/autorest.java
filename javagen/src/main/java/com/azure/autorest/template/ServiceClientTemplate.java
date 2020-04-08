@@ -72,7 +72,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 {
                     comment.description(serviceClientProperty.getDescription());
                 });
-                classBlock.privateMemberVariable(String.format("%1$s %2$s", serviceClientProperty.getType(), serviceClientProperty.getName()));
+                if (serviceClientProperty.isReadOnly()) {
+                    classBlock.privateFinalMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
+                } else {
+                    classBlock.privateMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
+                }
 
                 classBlock.javadocComment(comment ->
                 {
@@ -116,7 +120,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 {
                     comment.description(String.format("The %1$s object to access its operations.", methodGroupClient.getVariableType()));
                 });
-                classBlock.privateMemberVariable(methodGroupClient.getVariableType(), methodGroupClient.getVariableName());
+                classBlock.privateFinalMemberVariable(methodGroupClient.getVariableType(), methodGroupClient.getVariableName());
 
                 classBlock.javadocComment(comment ->
                 {

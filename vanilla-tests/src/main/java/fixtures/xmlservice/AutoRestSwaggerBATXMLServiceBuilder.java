@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATXMLService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATXMLService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATXMLService.class})
 public final class AutoRestSwaggerBATXMLServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATXMLServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATXMLService.
      */
-    public AutoRestSwaggerBATXMLService build() {
+    public AutoRestSwaggerBATXMLService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

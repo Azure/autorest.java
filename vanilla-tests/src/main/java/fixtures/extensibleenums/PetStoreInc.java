@@ -30,7 +30,7 @@ public final class PetStoreInc {
      * @param host the host value.
      * @return the service client itself.
      */
-    PetStoreInc setHost(String host) {
+    public PetStoreInc setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class PetStoreInc {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class PetStoreInc {
     /**
      * The Pets object to access its operations.
      */
-    private Pets pets;
+    private final Pets pets;
 
     /**
      * Gets the Pets object to access its operations.
@@ -67,7 +67,7 @@ public final class PetStoreInc {
      * Initializes an instance of PetStoreInc client.
      */
     public PetStoreInc() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

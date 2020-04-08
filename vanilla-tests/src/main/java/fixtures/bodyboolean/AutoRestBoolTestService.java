@@ -38,7 +38,7 @@ public final class AutoRestBoolTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestBoolTestService {
     /**
      * The Bools object to access its operations.
      */
-    private Bools bools;
+    private final Bools bools;
 
     /**
      * Gets the Bools object to access its operations.

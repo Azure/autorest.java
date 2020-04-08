@@ -30,7 +30,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestHttpInfrastructureTestService setHost(String host) {
+    public AutoRestHttpInfrastructureTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpFailures object to access its operations.
      */
-    private HttpFailures httpFailures;
+    private final HttpFailures httpFailures;
 
     /**
      * Gets the HttpFailures object to access its operations.
@@ -66,7 +66,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpSuccess object to access its operations.
      */
-    private HttpSuccess httpSuccess;
+    private final HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
@@ -80,7 +80,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpRedirects object to access its operations.
      */
-    private HttpRedirects httpRedirects;
+    private final HttpRedirects httpRedirects;
 
     /**
      * Gets the HttpRedirects object to access its operations.
@@ -94,7 +94,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpClientFailures object to access its operations.
      */
-    private HttpClientFailures httpClientFailures;
+    private final HttpClientFailures httpClientFailures;
 
     /**
      * Gets the HttpClientFailures object to access its operations.
@@ -108,7 +108,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpServerFailures object to access its operations.
      */
-    private HttpServerFailures httpServerFailures;
+    private final HttpServerFailures httpServerFailures;
 
     /**
      * Gets the HttpServerFailures object to access its operations.
@@ -122,7 +122,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The HttpRetrys object to access its operations.
      */
-    private HttpRetrys httpRetrys;
+    private final HttpRetrys httpRetrys;
 
     /**
      * Gets the HttpRetrys object to access its operations.
@@ -136,7 +136,7 @@ public final class AutoRestHttpInfrastructureTestService {
     /**
      * The MultipleResponses object to access its operations.
      */
-    private MultipleResponses multipleResponses;
+    private final MultipleResponses multipleResponses;
 
     /**
      * Gets the MultipleResponses object to access its operations.
@@ -151,7 +151,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      */
     public AutoRestHttpInfrastructureTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

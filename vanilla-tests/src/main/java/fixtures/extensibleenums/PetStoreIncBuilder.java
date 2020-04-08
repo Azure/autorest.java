@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the PetStoreInc type.
  */
-@ServiceClientBuilder(serviceClients = PetStoreInc.class)
+@ServiceClientBuilder(serviceClients = {PetStoreInc.class})
 public final class PetStoreIncBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class PetStoreIncBuilder {
      * 
      * @return an instance of PetStoreInc.
      */
-    public PetStoreInc build() {
+    public PetStoreInc buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

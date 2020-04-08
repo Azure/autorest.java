@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestHttpInfrastructureTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestHttpInfrastructureTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestHttpInfrastructureTestService.class})
 public final class AutoRestHttpInfrastructureTestServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder {
      * 
      * @return an instance of AutoRestHttpInfrastructureTestService.
      */
-    public AutoRestHttpInfrastructureTestService build() {
+    public AutoRestHttpInfrastructureTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

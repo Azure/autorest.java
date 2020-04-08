@@ -30,7 +30,7 @@ public final class AutoRestHeadTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestHeadTestService setHost(String host) {
+    public AutoRestHeadTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestHeadTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestHeadTestService {
     /**
      * The HttpSuccess object to access its operations.
      */
-    private HttpSuccess httpSuccess;
+    private final HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestHeadTestService {
      * Initializes an instance of AutoRestHeadTestService client.
      */
     public AutoRestHeadTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

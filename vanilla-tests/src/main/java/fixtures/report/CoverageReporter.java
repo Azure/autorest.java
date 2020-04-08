@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public final class CoverageReporter {
-    private static AutoRestReportService client = new AutoRestReportServiceBuilder().build();
+    private static AutoRestReportService client = new AutoRestReportServiceBuilder().buildClient();
 
     private CoverageReporter() { }
 

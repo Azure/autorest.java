@@ -30,7 +30,7 @@ public final class AutoRestDurationTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestDurationTestService setHost(String host) {
+    public AutoRestDurationTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestDurationTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestDurationTestService {
     /**
      * The Durations object to access its operations.
      */
-    private Durations durations;
+    private final Durations durations;
 
     /**
      * Gets the Durations object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestDurationTestService {
      * Initializes an instance of AutoRestDurationTestService client.
      */
     public AutoRestDurationTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

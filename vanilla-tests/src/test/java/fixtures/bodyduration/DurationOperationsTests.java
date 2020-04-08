@@ -14,7 +14,7 @@ public class DurationOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDurationTestServiceBuilder().build();
+        client = new AutoRestDurationTestServiceBuilder().buildClient();
     }
 
     @Test

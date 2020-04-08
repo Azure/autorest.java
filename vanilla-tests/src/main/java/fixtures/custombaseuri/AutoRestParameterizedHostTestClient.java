@@ -30,7 +30,7 @@ public final class AutoRestParameterizedHostTestClient {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestParameterizedHostTestClient setHost(String host) {
+    public AutoRestParameterizedHostTestClient setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestParameterizedHostTestClient {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestParameterizedHostTestClient {
     /**
      * The Paths object to access its operations.
      */
-    private Paths paths;
+    private final Paths paths;
 
     /**
      * Gets the Paths object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestParameterizedHostTestClient {
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      */
     public AutoRestParameterizedHostTestClient() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

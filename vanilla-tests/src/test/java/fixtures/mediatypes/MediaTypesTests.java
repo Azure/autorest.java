@@ -13,7 +13,7 @@ public class MediaTypesTests {
 
   @BeforeClass
   public static void setup() {
-    client = new MediaTypesClientBuilder().build();
+    client = new MediaTypesClientBuilder().buildClient();
   }
 
   @Test

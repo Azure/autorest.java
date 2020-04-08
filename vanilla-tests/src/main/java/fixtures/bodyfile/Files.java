@@ -29,12 +29,12 @@ public final class Files {
     /**
      * The proxy service used to perform REST calls.
      */
-    private FilesService service;
+    private final FilesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATFileService client;
+    private final AutoRestSwaggerBATFileService client;
 
     /**
      * Initializes an instance of Files.
@@ -52,7 +52,7 @@ public final class Files {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATFileServiceFiles")
+    @ServiceInterface(name = "AutoRestSwaggerBATFi")
     private interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
@@ -75,6 +75,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileWithResponseAsync() {
@@ -89,6 +90,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
@@ -100,6 +102,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFile() {
@@ -115,6 +118,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
@@ -129,6 +133,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
@@ -140,6 +145,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
@@ -155,6 +161,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
@@ -169,6 +176,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
@@ -180,6 +188,7 @@ public final class Files {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getEmptyFile() {

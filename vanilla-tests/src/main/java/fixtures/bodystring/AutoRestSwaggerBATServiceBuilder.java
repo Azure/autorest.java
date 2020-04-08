@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATService.class})
 public final class AutoRestSwaggerBATServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATService.
      */
-    public AutoRestSwaggerBATService build() {
+    public AutoRestSwaggerBATService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

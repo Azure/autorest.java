@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestHeadExceptionTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestHeadExceptionTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestHeadExceptionTestService.class})
 public final class AutoRestHeadExceptionTestServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestHeadExceptionTestServiceBuilder {
      * 
      * @return an instance of AutoRestHeadExceptionTestService.
      */
-    public AutoRestHeadExceptionTestService build() {
+    public AutoRestHeadExceptionTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestPagingTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestPagingTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestPagingTestService.class})
 public final class AutoRestPagingTestServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestPagingTestServiceBuilder {
      * 
      * @return an instance of AutoRestPagingTestService.
      */
-    public AutoRestPagingTestService build() {
+    public AutoRestPagingTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

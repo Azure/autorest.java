@@ -27,12 +27,12 @@ public final class HttpServerFailures {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpServerFailuresService service;
+    private final HttpServerFailuresService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpServerFailures.
@@ -50,7 +50,7 @@ public final class HttpServerFailures {
      * the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpServerFailures")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -74,6 +74,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync() {
@@ -88,6 +89,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head501Async() {
@@ -111,6 +113,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync() {
@@ -125,6 +128,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get501Async() {
@@ -148,6 +152,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync() {
@@ -163,6 +168,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post505Async() {
@@ -186,6 +192,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync() {
@@ -201,6 +208,7 @@ public final class HttpServerFailures {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete505Async() {

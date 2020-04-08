@@ -23,12 +23,12 @@ public final class HeadExceptions {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HeadExceptionsService service;
+    private final HeadExceptionsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHeadExceptionTestService client;
+    private final AutoRestHeadExceptionTestService client;
 
     /**
      * Initializes an instance of HeadExceptions.
@@ -46,7 +46,7 @@ public final class HeadExceptions {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHeadExceptionTestServiceHeadExceptions")
+    @ServiceInterface(name = "AutoRestHeadExceptio")
     private interface HeadExceptionsService {
         @Head("/http/success/200")
         @ExpectedResponses({200})
@@ -69,6 +69,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
@@ -83,6 +84,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
@@ -106,6 +108,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
@@ -120,6 +123,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
@@ -143,6 +147,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head404WithResponseAsync() {
@@ -157,6 +162,7 @@ public final class HeadExceptions {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head404Async() {

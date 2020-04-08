@@ -1,6 +1,7 @@
 package fixtures.bodyarray;
 
 import fixtures.bodyarray.models.Enum0;
+import fixtures.bodyarray.models.Enum1;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.FooEnum;
 import fixtures.bodyarray.models.Product;
@@ -24,7 +25,7 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceBuilder().build();
+        client = new AutoRestSwaggerBATArrayServiceBuilder().buildClient();
     }
 
     @Test
@@ -247,7 +248,7 @@ public class ArrayTests {
 
     @Test
     public void putStringEnumValid() throws Exception {
-        client.arrays().putStringEnumValid(Arrays.asList(Enum0.FOO1, Enum0.FOO2, Enum0.FOO3));
+        client.arrays().putStringEnumValid(Arrays.asList(Enum1.FOO1, Enum1.FOO2, Enum1.FOO3));
     }
 
     @Test

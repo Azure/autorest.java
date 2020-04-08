@@ -27,12 +27,12 @@ public final class Dictionarys {
     /**
      * The proxy service used to perform REST calls.
      */
-    private DictionarysService service;
+    private final DictionarysService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Dictionarys.
@@ -50,7 +50,7 @@ public final class Dictionarys {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceDictionarys")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface DictionarysService {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
@@ -88,6 +88,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getValidWithResponseAsync() {
@@ -102,6 +103,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getValidAsync() {
@@ -120,6 +122,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getValid() {
@@ -129,10 +132,11 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody) {
@@ -150,10 +154,11 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(DictionaryWrapper complexBody) {
@@ -164,7 +169,7 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -179,6 +184,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getEmptyWithResponseAsync() {
@@ -193,6 +199,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getEmptyAsync() {
@@ -211,6 +218,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmpty() {
@@ -220,10 +228,11 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody) {
@@ -241,10 +250,11 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody) {
@@ -255,7 +265,7 @@ public final class Dictionarys {
     /**
      * Put complex types with dictionary property which is empty.
      * 
-     * @param complexBody 
+     * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -270,6 +280,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getNullWithResponseAsync() {
@@ -284,6 +295,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNullAsync() {
@@ -302,6 +314,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNull() {
@@ -313,6 +326,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
@@ -327,6 +341,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
@@ -345,6 +360,7 @@ public final class Dictionarys {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvided() {

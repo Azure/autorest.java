@@ -48,6 +48,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponseAsync() {
@@ -59,6 +60,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getNullAsync() {
@@ -70,6 +72,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponseAsync() {
@@ -81,6 +84,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getEmptyAsync() {
@@ -94,6 +98,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody) {
@@ -107,6 +112,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(Map<String, String> arrayBody) {
@@ -118,6 +124,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponseAsync() {
@@ -129,6 +136,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullValueAsync() {
@@ -140,6 +148,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponseAsync() {
@@ -151,6 +160,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullKeyAsync() {
@@ -162,6 +172,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
@@ -173,6 +184,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getEmptyStringKeyAsync() {
@@ -184,6 +196,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponseAsync() {
@@ -195,6 +208,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getInvalidAsync() {
@@ -206,6 +220,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
@@ -217,6 +232,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
@@ -230,6 +246,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody) {
@@ -243,6 +260,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
@@ -254,6 +272,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
@@ -265,6 +284,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
@@ -276,6 +296,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
@@ -287,6 +308,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
@@ -298,6 +320,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
@@ -309,6 +332,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntegerValidAsync() {
@@ -322,6 +346,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody) {
@@ -335,6 +360,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
@@ -346,6 +372,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
@@ -357,6 +384,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
@@ -368,6 +396,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
@@ -379,6 +408,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
@@ -390,6 +420,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponseAsync() {
@@ -401,6 +432,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongValidAsync() {
@@ -414,6 +446,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody) {
@@ -427,6 +460,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody) {
@@ -438,6 +472,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
@@ -449,6 +484,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidNullAsync() {
@@ -460,6 +496,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
@@ -471,6 +508,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidStringAsync() {
@@ -482,6 +520,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponseAsync() {
@@ -493,6 +532,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatValidAsync() {
@@ -506,6 +546,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody) {
@@ -519,6 +560,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody) {
@@ -530,6 +572,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
@@ -541,6 +584,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
@@ -552,6 +596,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
@@ -563,6 +608,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
@@ -574,6 +620,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponseAsync() {
@@ -585,6 +632,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleValidAsync() {
@@ -598,6 +646,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody) {
@@ -611,6 +660,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
@@ -622,6 +672,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
@@ -633,6 +684,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
@@ -644,6 +696,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
@@ -655,6 +708,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
@@ -666,6 +720,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponseAsync() {
@@ -677,6 +732,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringValidAsync() {
@@ -690,6 +746,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody) {
@@ -703,6 +760,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringValidAsync(Map<String, String> arrayBody) {
@@ -714,6 +772,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponseAsync() {
@@ -725,6 +784,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithNullAsync() {
@@ -736,6 +796,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
@@ -747,6 +808,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithInvalidAsync() {
@@ -758,6 +820,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
@@ -769,6 +832,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateValidAsync() {
@@ -782,6 +846,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody) {
@@ -795,6 +860,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
@@ -806,6 +872,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
@@ -817,6 +884,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
@@ -828,6 +896,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
@@ -839,6 +908,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
@@ -850,6 +920,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
@@ -861,6 +932,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
@@ -874,6 +946,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
@@ -887,6 +960,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody) {
@@ -898,6 +972,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
@@ -909,6 +984,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
@@ -920,6 +996,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
@@ -931,6 +1008,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
@@ -942,6 +1020,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
@@ -953,6 +1032,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
@@ -966,6 +1046,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
@@ -979,6 +1060,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody) {
@@ -990,6 +1072,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponseAsync() {
@@ -1001,6 +1084,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Duration>> getDurationValidAsync() {
@@ -1014,6 +1098,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody) {
@@ -1027,6 +1112,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody) {
@@ -1038,6 +1124,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponseAsync() {
@@ -1049,6 +1136,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteValidAsync() {
@@ -1062,6 +1150,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody) {
@@ -1075,6 +1164,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
@@ -1086,6 +1176,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
@@ -1097,6 +1188,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
@@ -1108,6 +1200,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
@@ -1119,6 +1212,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getBase64UrlAsync() {
@@ -1130,6 +1224,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponseAsync() {
@@ -1141,6 +1236,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexNullAsync() {
@@ -1152,6 +1248,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
@@ -1163,6 +1260,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexEmptyAsync() {
@@ -1174,6 +1272,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
@@ -1185,6 +1284,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemNullAsync() {
@@ -1196,6 +1296,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
@@ -1207,6 +1308,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
@@ -1218,6 +1320,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponseAsync() {
@@ -1229,6 +1332,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexValidAsync() {
@@ -1242,6 +1346,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody) {
@@ -1255,6 +1360,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
@@ -1266,6 +1372,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
@@ -1277,6 +1384,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayNullAsync() {
@@ -1288,6 +1396,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
@@ -1299,6 +1408,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
@@ -1310,6 +1420,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
@@ -1321,6 +1432,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
@@ -1332,6 +1444,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
@@ -1343,6 +1456,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
@@ -1354,6 +1468,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
@@ -1365,6 +1480,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayValidAsync() {
@@ -1378,6 +1494,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody) {
@@ -1391,6 +1508,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
@@ -1402,6 +1520,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
@@ -1413,6 +1532,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryNullAsync() {
@@ -1424,6 +1544,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
@@ -1435,6 +1556,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryEmptyAsync() {
@@ -1446,6 +1568,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
@@ -1457,6 +1580,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryItemNullAsync() {
@@ -1468,6 +1592,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
@@ -1479,6 +1604,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryItemEmptyAsync() {
@@ -1490,6 +1616,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
@@ -1501,6 +1628,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryValidAsync() {
@@ -1514,6 +1642,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
@@ -1527,6 +1656,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryValidAsync(Map<String, Object> arrayBody) {

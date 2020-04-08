@@ -12,7 +12,7 @@ public class BoolTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestBoolTestServiceBuilder().build();
+        client = new AutoRestBoolTestServiceBuilder().buildClient();
     }
 
     @Test

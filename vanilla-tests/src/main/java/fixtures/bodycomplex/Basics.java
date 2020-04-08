@@ -28,12 +28,12 @@ public final class Basics {
     /**
      * The proxy service used to perform REST calls.
      */
-    private BasicsService service;
+    private final BasicsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Basics.
@@ -51,7 +51,7 @@ public final class Basics {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServiceBasics")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface BasicsService {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
@@ -89,6 +89,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getValidWithResponseAsync() {
@@ -103,6 +104,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getValidAsync() {
@@ -121,6 +123,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getValid() {
@@ -130,10 +133,11 @@ public final class Basics {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * 
-     * @param complexBody 
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
@@ -151,10 +155,11 @@ public final class Basics {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * 
-     * @param complexBody 
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Basic complexBody) {
@@ -165,7 +170,7 @@ public final class Basics {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * 
-     * @param complexBody 
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -180,6 +185,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync() {
@@ -194,6 +200,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getInvalidAsync() {
@@ -212,6 +219,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getInvalid() {
@@ -223,6 +231,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync() {
@@ -237,6 +246,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getEmptyAsync() {
@@ -255,6 +265,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getEmpty() {
@@ -266,6 +277,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNullWithResponseAsync() {
@@ -280,6 +292,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNullAsync() {
@@ -298,6 +311,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNull() {
@@ -309,6 +323,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync() {
@@ -323,6 +338,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync() {
@@ -341,6 +357,7 @@ public final class Basics {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNotProvided() {

@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -422,7 +423,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     ? clientMethod.getMethodRequiredParameters()
                     : clientMethod.getMethodParameters();
             for (ClientMethodParameter parameter : methodParameters) {
-                comment.param(parameter.getName(), parameter.getDescription());
+                comment.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
             }
             if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
@@ -433,6 +434,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
+    }
+
+    protected String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
+        String paramJavadoc = parameter.getDescription();
+        if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
+            paramJavadoc = String.format("The %1$s parameter", parameter.getName());
+        }
+        return paramJavadoc;
     }
 
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {

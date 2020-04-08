@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestRFC1123DateTimeTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestRFC1123DateTimeTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestRFC1123DateTimeTestService.class})
 public final class AutoRestRFC1123DateTimeTestServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
      * 
      * @return an instance of AutoRestRFC1123DateTimeTestService.
      */
-    public AutoRestRFC1123DateTimeTestService build() {
+    public AutoRestRFC1123DateTimeTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

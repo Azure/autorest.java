@@ -69,7 +69,7 @@ public class CodeNamer {
             "throws", "transient", "true", "try", "void",
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header"
+            "String", "Object", "header", "_"
     );
 
     private CodeNamer() {
@@ -224,6 +224,9 @@ public class CodeNamer {
                     result = result.substring(0, i) + "_" + result.substring(i);
                 }
             }
+        }
+        if ("_".equals(result)) {
+            result = "ENUM" + result;
         }
         return result.toUpperCase();
     }

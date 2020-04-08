@@ -30,7 +30,7 @@ public final class AutoRestPagingTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestPagingTestService setHost(String host) {
+    public AutoRestPagingTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestPagingTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestPagingTestService {
     /**
      * The Pagings object to access its operations.
      */
-    private Pagings pagings;
+    private final Pagings pagings;
 
     /**
      * Gets the Pagings object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestPagingTestService {
      * Initializes an instance of AutoRestPagingTestService client.
      */
     public AutoRestPagingTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

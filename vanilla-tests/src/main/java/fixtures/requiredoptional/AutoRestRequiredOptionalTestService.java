@@ -30,7 +30,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the service client itself.
      */
-    AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
+    public AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
         return this;
     }
@@ -55,7 +55,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the service client itself.
      */
-    AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
+    public AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
         return this;
     }
@@ -80,7 +80,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself.
      */
-    AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
+    public AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
         return this;
     }
@@ -105,7 +105,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestRequiredOptionalTestService setHost(String host) {
+    public AutoRestRequiredOptionalTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -113,7 +113,7 @@ public final class AutoRestRequiredOptionalTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -127,7 +127,7 @@ public final class AutoRestRequiredOptionalTestService {
     /**
      * The Implicits object to access its operations.
      */
-    private Implicits implicits;
+    private final Implicits implicits;
 
     /**
      * Gets the Implicits object to access its operations.
@@ -141,7 +141,7 @@ public final class AutoRestRequiredOptionalTestService {
     /**
      * The Explicits object to access its operations.
      */
-    private Explicits explicits;
+    private final Explicits explicits;
 
     /**
      * Gets the Explicits object to access its operations.
@@ -156,7 +156,7 @@ public final class AutoRestRequiredOptionalTestService {
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      */
     public AutoRestRequiredOptionalTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

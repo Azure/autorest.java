@@ -27,12 +27,12 @@ public final class Polymorphicrecursives {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PolymorphicrecursivesService service;
+    private final PolymorphicrecursivesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestComplexTestService client;
+    private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Polymorphicrecursives.
@@ -50,7 +50,7 @@ public final class Polymorphicrecursives {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestServicePolymorphicrecursives")
+    @ServiceInterface(name = "AutoRestComplexTestS")
     private interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
@@ -68,6 +68,7 @@ public final class Polymorphicrecursives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
@@ -82,6 +83,7 @@ public final class Polymorphicrecursives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
@@ -100,6 +102,7 @@ public final class Polymorphicrecursives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
@@ -109,10 +112,63 @@ public final class Polymorphicrecursives {
     /**
      * Put complex types that are polymorphic and have recursive references.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
@@ -130,10 +186,63 @@ public final class Polymorphicrecursives {
     /**
      * Put complex types that are polymorphic and have recursive references.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody) {
@@ -144,7 +253,59 @@ public final class Polymorphicrecursives {
     /**
      * Put complex types that are polymorphic and have recursive references.
      * 
-     * @param complexBody 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

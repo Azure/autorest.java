@@ -37,12 +37,12 @@ public final class Explicits {
     /**
      * The proxy service used to perform REST calls.
      */
-    private ExplicitsService service;
+    private final ExplicitsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestRequiredOptionalTestService client;
+    private final AutoRestRequiredOptionalTestService client;
 
     /**
      * Initializes an instance of Explicits.
@@ -60,7 +60,7 @@ public final class Explicits {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRequiredOptionalTestServiceExplicits")
+    @ServiceInterface(name = "AutoRestRequiredOpti")
     private interface ExplicitsService {
         @Post("/reqopt/requied/integer/parameter")
         @ExpectedResponses({200})
@@ -176,10 +176,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredIntegerParameterWithResponseAsync(int bodyParameter) {
@@ -192,10 +193,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerParameterAsync(int bodyParameter) {
@@ -206,7 +208,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -219,10 +221,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalIntegerParameterWithResponseAsync(Integer bodyParameter) {
@@ -235,10 +238,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
@@ -249,7 +253,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -262,10 +266,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredIntegerPropertyWithResponseAsync(IntWrapper bodyParameter) {
@@ -283,10 +288,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
@@ -297,7 +303,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -310,10 +316,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalIntegerPropertyWithResponseAsync(IntOptionalWrapper bodyParameter) {
@@ -329,10 +336,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
@@ -343,7 +351,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -356,10 +364,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredIntegerHeaderWithResponseAsync(int headerParameter) {
@@ -372,10 +381,11 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredIntegerHeaderAsync(int headerParameter) {
@@ -386,7 +396,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -399,10 +409,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalIntegerHeaderWithResponseAsync(Integer headerParameter) {
@@ -415,10 +426,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
@@ -429,7 +441,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -442,10 +454,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredStringParameterWithResponseAsync(String bodyParameter) {
@@ -461,10 +474,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringParameterAsync(String bodyParameter) {
@@ -475,7 +489,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -488,10 +502,11 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalStringParameterWithResponseAsync(String bodyParameter) {
@@ -504,10 +519,11 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringParameterAsync(String bodyParameter) {
@@ -518,7 +534,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -531,10 +547,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredStringPropertyWithResponseAsync(StringWrapper bodyParameter) {
@@ -552,10 +569,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
@@ -566,7 +584,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -579,10 +597,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalStringPropertyWithResponseAsync(StringOptionalWrapper bodyParameter) {
@@ -598,10 +617,11 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
@@ -612,7 +632,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -625,10 +645,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredStringHeaderWithResponseAsync(String headerParameter) {
@@ -644,10 +665,11 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredStringHeaderAsync(String headerParameter) {
@@ -658,7 +680,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter 
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -671,10 +693,11 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalStringHeaderWithResponseAsync(String bodyParameter) {
@@ -687,10 +710,11 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalStringHeaderAsync(String bodyParameter) {
@@ -701,7 +725,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -714,10 +738,11 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredClassParameterWithResponseAsync(Product bodyParameter) {
@@ -735,10 +760,11 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredClassParameterAsync(Product bodyParameter) {
@@ -749,7 +775,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -762,10 +788,11 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalClassParameterWithResponseAsync(Product bodyParameter) {
@@ -781,10 +808,11 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassParameterAsync(Product bodyParameter) {
@@ -795,7 +823,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -808,10 +836,11 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredClassPropertyWithResponseAsync(ClassWrapper bodyParameter) {
@@ -829,10 +858,11 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
@@ -843,7 +873,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -856,10 +886,11 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalClassPropertyWithResponseAsync(ClassOptionalWrapper bodyParameter) {
@@ -875,10 +906,11 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
@@ -889,7 +921,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -906,6 +938,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredArrayParameterWithResponseAsync(List<String> bodyParameter) {
@@ -925,6 +958,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayParameterAsync(List<String> bodyParameter) {
@@ -952,6 +986,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalArrayParameterWithResponseAsync(List<String> bodyParameter) {
@@ -968,6 +1003,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
@@ -991,10 +1027,11 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredArrayPropertyWithResponseAsync(ArrayWrapper bodyParameter) {
@@ -1012,10 +1049,11 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
@@ -1026,7 +1064,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1039,10 +1077,11 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalArrayPropertyWithResponseAsync(ArrayOptionalWrapper bodyParameter) {
@@ -1058,10 +1097,11 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
@@ -1072,7 +1112,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter 
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1089,6 +1129,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postRequiredArrayHeaderWithResponseAsync(List<String> headerParameter) {
@@ -1109,6 +1150,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postRequiredArrayHeaderAsync(List<String> headerParameter) {
@@ -1136,6 +1178,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postOptionalArrayHeaderWithResponseAsync(List<String> headerParameter) {
@@ -1153,6 +1196,7 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {

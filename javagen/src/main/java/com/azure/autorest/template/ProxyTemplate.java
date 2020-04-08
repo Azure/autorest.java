@@ -40,7 +40,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                 comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
             });
             classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
-            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", restAPI.getClientTypeName()));
+            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName())));
             classBlock.interfaceBlock(JavaVisibility.Private, restAPI.getName(), interfaceBlock ->
             {
                 for (ProxyMethod restAPIMethod : restAPI.getMethods()) {
@@ -50,7 +50,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
+                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), breakUrlOnLengthLimit(restAPIMethod.getUrlPath())));
 
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
@@ -118,6 +118,14 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
         }
     }
 
+    private static String serviceInterfaceWithLengthLimit(String serviceInterfaceName) {
+        final int lengthLimit = 20;
+
+        return serviceInterfaceName.length() > lengthLimit
+                ? serviceInterfaceName.substring(0, lengthLimit)
+                : serviceInterfaceName;
+    }
+
     /**
      * Extension to write Headers annotation for proxy method.
      *
@@ -125,5 +133,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
      * @param interfaceBlock interface block
      */
     protected void writeProxyMethodHeaders(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+    }
+
+    protected String breakUrlOnLengthLimit(String string) {
+        return string;
     }
 }

@@ -63,7 +63,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestResourceFlatteningTestService setHost(String host) {
+    public AutoRestResourceFlatteningTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -71,7 +71,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -86,7 +86,7 @@ public final class AutoRestResourceFlatteningTestService {
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      */
     public AutoRestResourceFlatteningTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
@@ -105,7 +105,7 @@ public final class AutoRestResourceFlatteningTestService {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestResourceFlatteningTestService")
+    @ServiceInterface(name = "AutoRestResourceFlat")
     private interface AutoRestResourceFlatteningTestServiceService {
         @Put("/model-flatten/array")
         @ExpectedResponses({200})
@@ -170,6 +170,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayWithResponseAsync(List<Resource> resourceArray) {
@@ -189,6 +190,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayAsync(List<Resource> resourceArray) {
@@ -214,6 +216,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<FlattenedProduct>>> getArrayWithResponseAsync() {
@@ -228,6 +231,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<FlattenedProduct>> getArrayAsync() {
@@ -246,6 +250,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<FlattenedProduct> getArray() {
@@ -259,6 +264,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedArrayWithResponseAsync(List<WrappedProduct> resourceArray) {
@@ -278,6 +284,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
@@ -303,6 +310,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
@@ -317,6 +325,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<ProductWrapper>> getWrappedArrayAsync() {
@@ -335,6 +344,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<ProductWrapper> getWrappedArray() {
@@ -348,6 +358,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryWithResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
@@ -367,6 +378,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
@@ -392,6 +404,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
@@ -406,6 +419,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, FlattenedProduct>> getDictionaryAsync() {
@@ -424,6 +438,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, FlattenedProduct> getDictionary() {
@@ -433,10 +448,11 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      * 
-     * @param resourceComplexObject 
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putResourceCollectionWithResponseAsync(ResourceCollection resourceComplexObject) {
@@ -452,10 +468,11 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      * 
-     * @param resourceComplexObject 
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
@@ -466,7 +483,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      * 
-     * @param resourceComplexObject 
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -481,6 +498,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ResourceCollection>> getResourceCollectionWithResponseAsync() {
@@ -495,6 +513,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResourceCollection> getResourceCollectionAsync() {
@@ -513,6 +532,7 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResourceCollection getResourceCollection() {
@@ -526,6 +546,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
@@ -545,6 +566,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
@@ -565,6 +587,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
@@ -582,6 +605,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
@@ -615,6 +639,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
@@ -639,6 +664,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct postFlattenedSimpleProduct(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
@@ -652,6 +678,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(FlattenParameterGroup flattenParameterGroup) {
@@ -680,6 +707,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
@@ -700,6 +728,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {

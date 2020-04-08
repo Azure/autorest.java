@@ -18,7 +18,7 @@ public class FilesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceBuilder().build();
+        client = new AutoRestSwaggerBATFileServiceBuilder().buildClient();
     }
 
     @Ignore("Flaky! Run by itself works but run all tests with mvn fails")

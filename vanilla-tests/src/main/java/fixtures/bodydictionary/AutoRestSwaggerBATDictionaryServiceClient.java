@@ -48,6 +48,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getNull() {
@@ -59,6 +60,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getEmpty() {
@@ -83,6 +85,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullValue() {
@@ -94,6 +97,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullKey() {
@@ -105,6 +109,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getEmptyStringKey() {
@@ -116,6 +121,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getInvalid() {
@@ -127,6 +133,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanTfft() {
@@ -151,6 +158,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidNull() {
@@ -162,6 +170,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidString() {
@@ -173,6 +182,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntegerValid() {
@@ -197,6 +207,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidNull() {
@@ -208,6 +219,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidString() {
@@ -219,6 +231,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongValid() {
@@ -243,6 +256,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidNull() {
@@ -254,6 +268,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidString() {
@@ -265,6 +280,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
@@ -289,6 +305,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
@@ -300,6 +317,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
@@ -311,6 +329,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
@@ -335,6 +354,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
@@ -346,6 +366,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
@@ -357,6 +378,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringValid() {
@@ -381,6 +403,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithNull() {
@@ -392,6 +415,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithInvalid() {
@@ -403,6 +427,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateValid() {
@@ -427,6 +452,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidNull() {
@@ -438,6 +464,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidChars() {
@@ -449,6 +476,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeValid() {
@@ -473,6 +501,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidNull() {
@@ -484,6 +513,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidChars() {
@@ -495,6 +525,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeRfc1123Valid() {
@@ -519,6 +550,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {
@@ -543,6 +575,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteValid() {
@@ -567,6 +600,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteInvalidNull() {
@@ -578,6 +612,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getBase64Url() {
@@ -589,6 +624,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexNull() {
@@ -600,6 +636,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexEmpty() {
@@ -611,6 +648,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemNull() {
@@ -622,6 +660,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemEmpty() {
@@ -633,6 +672,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexValid() {
@@ -657,6 +697,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayNull() {
@@ -668,6 +709,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayEmpty() {
@@ -679,6 +721,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemNull() {
@@ -690,6 +733,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemEmpty() {
@@ -701,6 +745,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayValid() {
@@ -725,6 +770,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryNull() {
@@ -736,6 +782,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryEmpty() {
@@ -747,6 +794,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryItemNull() {
@@ -758,6 +806,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryItemEmpty() {
@@ -769,6 +818,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryValid() {

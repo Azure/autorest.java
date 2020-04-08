@@ -13,7 +13,7 @@ public class NumberOperationsTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestNumberTestServiceBuilder().build();
+    client = new AutoRestNumberTestServiceBuilder().buildClient();
   }
 
   @Test

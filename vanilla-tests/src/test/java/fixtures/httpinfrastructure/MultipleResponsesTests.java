@@ -26,7 +26,7 @@ public class MultipleResponsesTests {
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestHttpInfrastructureTestServiceBuilder().build();
+    client = new AutoRestHttpInfrastructureTestServiceBuilder().buildClient();
   }
 
   @Test
@@ -145,7 +145,7 @@ public class MultipleResponsesTests {
             })).build();
 
     AutoRestHttpInfrastructureTestService localClient =
-        new AutoRestHttpInfrastructureTestServiceBuilder().pipeline(httpPipeline).build();
+        new AutoRestHttpInfrastructureTestServiceBuilder().pipeline(httpPipeline).buildClient();
     localClient.multipleResponses().get202None204NoneDefaultError202NoneAsync().subscribe();
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
@@ -163,7 +163,7 @@ public class MultipleResponsesTests {
             })).build();
 
     AutoRestHttpInfrastructureTestService localClient =
-        new AutoRestHttpInfrastructureTestServiceBuilder().pipeline(httpPipeline).build();
+        new AutoRestHttpInfrastructureTestServiceBuilder().pipeline(httpPipeline).buildClient();
     localClient.multipleResponses().get202None204NoneDefaultError204NoneAsync().subscribe();
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }

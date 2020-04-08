@@ -27,12 +27,12 @@ public final class MultipleResponses {
     /**
      * The proxy service used to perform REST calls.
      */
-    private MultipleResponsesService service;
+    private final MultipleResponsesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHttpInfrastructureTestService client;
+    private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of MultipleResponses.
@@ -50,7 +50,7 @@ public final class MultipleResponses {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceMultipleResponses")
+    @ServiceInterface(name = "AutoRestHttpInfrastr")
     private interface MultipleResponsesService {
         @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
@@ -228,6 +228,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
@@ -242,6 +243,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync() {
@@ -260,6 +262,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError200Valid() {
@@ -271,6 +274,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
@@ -285,6 +289,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync() {
@@ -303,6 +308,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError204Valid() {
@@ -314,6 +320,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
@@ -328,6 +335,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync() {
@@ -346,6 +354,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError201Invalid() {
@@ -357,6 +366,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
@@ -371,6 +381,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync() {
@@ -389,6 +400,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError202None() {
@@ -400,6 +412,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
@@ -414,6 +427,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync() {
@@ -432,6 +446,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError400Valid() {
@@ -443,6 +458,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
@@ -457,6 +473,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync() {
@@ -475,6 +492,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError200Valid() {
@@ -486,6 +504,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
@@ -500,6 +519,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync() {
@@ -518,6 +538,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError201Valid() {
@@ -529,6 +550,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
@@ -543,6 +565,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync() {
@@ -561,6 +584,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError400Valid() {
@@ -572,6 +596,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
@@ -586,6 +611,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
@@ -604,6 +630,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
@@ -615,6 +642,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
@@ -629,6 +657,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
@@ -647,6 +676,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
@@ -658,6 +688,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
@@ -672,6 +703,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
@@ -690,6 +722,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
@@ -701,6 +734,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
@@ -715,6 +749,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
@@ -733,6 +768,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
@@ -744,6 +780,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync() {
@@ -758,6 +795,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError202NoneAsync() {
@@ -781,6 +819,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync() {
@@ -795,6 +834,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError204NoneAsync() {
@@ -818,6 +858,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync() {
@@ -832,6 +873,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError400ValidAsync() {
@@ -855,6 +897,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync() {
@@ -869,6 +912,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone202InvalidAsync() {
@@ -892,6 +936,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync() {
@@ -906,6 +951,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone204NoneAsync() {
@@ -929,6 +975,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync() {
@@ -943,6 +990,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400NoneAsync() {
@@ -966,6 +1014,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync() {
@@ -980,6 +1029,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400InvalidAsync() {
@@ -1003,6 +1053,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> getDefaultModelA200ValidWithResponseAsync() {
@@ -1017,6 +1068,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200ValidAsync() {
@@ -1035,6 +1087,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200Valid() {
@@ -1046,6 +1099,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> getDefaultModelA200NoneWithResponseAsync() {
@@ -1060,6 +1114,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200NoneAsync() {
@@ -1078,6 +1133,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200None() {
@@ -1089,6 +1145,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync() {
@@ -1103,6 +1160,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400ValidAsync() {
@@ -1126,6 +1184,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync() {
@@ -1140,6 +1199,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400NoneAsync() {
@@ -1163,6 +1223,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync() {
@@ -1177,6 +1238,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200InvalidAsync() {
@@ -1200,6 +1262,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync() {
@@ -1214,6 +1277,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200NoneAsync() {
@@ -1237,6 +1301,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync() {
@@ -1251,6 +1316,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400InvalidAsync() {
@@ -1274,6 +1340,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync() {
@@ -1288,6 +1355,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400NoneAsync() {
@@ -1311,6 +1379,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200NoneWithResponseAsync() {
@@ -1325,6 +1394,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200NoneAsync() {
@@ -1343,6 +1413,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200None() {
@@ -1354,6 +1425,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200ValidWithResponseAsync() {
@@ -1368,6 +1440,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200ValidAsync() {
@@ -1386,6 +1459,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Valid() {
@@ -1397,6 +1471,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA200InvalidWithResponseAsync() {
@@ -1411,6 +1486,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200InvalidAsync() {
@@ -1429,6 +1505,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Invalid() {
@@ -1440,6 +1517,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400NoneWithResponseAsync() {
@@ -1454,6 +1532,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400NoneAsync() {
@@ -1472,6 +1551,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400None() {
@@ -1483,6 +1563,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400ValidWithResponseAsync() {
@@ -1497,6 +1578,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400ValidAsync() {
@@ -1515,6 +1597,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Valid() {
@@ -1526,6 +1609,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA400InvalidWithResponseAsync() {
@@ -1540,6 +1624,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400InvalidAsync() {
@@ -1558,6 +1643,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Invalid() {
@@ -1569,6 +1655,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyException>> get200ModelA202ValidWithResponseAsync() {
@@ -1583,6 +1670,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA202ValidAsync() {
@@ -1601,6 +1689,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA202Valid() {

@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATService setHost(String host) {
+    public AutoRestSwaggerBATService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestSwaggerBATService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestSwaggerBATService {
     /**
      * The Strings object to access its operations.
      */
-    private Strings strings;
+    private final Strings strings;
 
     /**
      * Gets the Strings object to access its operations.
@@ -66,7 +66,7 @@ public final class AutoRestSwaggerBATService {
     /**
      * The Enums object to access its operations.
      */
-    private Enums enums;
+    private final Enums enums;
 
     /**
      * Gets the Enums object to access its operations.
@@ -81,7 +81,7 @@ public final class AutoRestSwaggerBATService {
      * Initializes an instance of AutoRestSwaggerBATService client.
      */
     public AutoRestSwaggerBATService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

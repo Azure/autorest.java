@@ -26,12 +26,12 @@ public final class Bytes {
     /**
      * The proxy service used to perform REST calls.
      */
-    private BytesService service;
+    private final BytesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATByteService client;
+    private final AutoRestSwaggerBATByteService client;
 
     /**
      * Initializes an instance of Bytes.
@@ -49,7 +49,7 @@ public final class Bytes {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATByteServiceBytes")
+    @ServiceInterface(name = "AutoRestSwaggerBATBy")
     private interface BytesService {
         @Get("/byte/null")
         @ExpectedResponses({200})
@@ -82,6 +82,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null byte value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNullWithResponseAsync() {
@@ -96,6 +97,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null byte value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNullAsync() {
@@ -114,6 +116,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null byte value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNull() {
@@ -125,6 +128,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty byte value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getEmptyWithResponseAsync() {
@@ -139,6 +143,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty byte value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getEmptyAsync() {
@@ -157,6 +162,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty byte value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getEmpty() {
@@ -168,6 +174,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNonAsciiWithResponseAsync() {
@@ -182,6 +189,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getNonAsciiAsync() {
@@ -200,6 +208,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNonAscii() {
@@ -209,10 +218,11 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody The null byte value.
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody) {
@@ -228,10 +238,11 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody The null byte value.
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNonAsciiAsync(byte[] byteBody) {
@@ -242,7 +253,7 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody The null byte value.
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -257,6 +268,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid byte value ':::SWAGGER::::'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getInvalidWithResponseAsync() {
@@ -271,6 +283,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid byte value ':::SWAGGER::::'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<byte[]> getInvalidAsync() {
@@ -289,6 +302,7 @@ public final class Bytes {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid byte value ':::SWAGGER::::'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getInvalid() {

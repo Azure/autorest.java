@@ -28,7 +28,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = settings.getAddContextParameter();
         String endOfLine = addContextParameter ? "" : ";";
-        String caller = getClientParameterCaller(restAPIMethod);
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
@@ -67,7 +66,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         }
                     });
                     if (addContextParameter) {
-                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%sgetContext())));", caller));
+                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
                     }
                 });
             });
@@ -105,7 +104,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         }
                     });
                     if (addContextParameter) {
-                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%sgetContext())));", caller));
+                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
                     }
                 });
             });
@@ -114,8 +113,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        String caller = getClientParameterCaller(restAPIMethod);
-
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -128,7 +125,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 function.line(String.format("return FluxUtil.withContext(context -> %s)",
                         serviceMethodCall));
                 function.indent(() -> {
-                    function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%sgetContext())));", caller));
+                    function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
                 });
             } else {
                 function.methodReturn(serviceMethodCall);
@@ -138,8 +135,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        String caller = getClientParameterCaller(restAPIMethod);
-
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[0];
@@ -147,24 +142,15 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             if (classType instanceof GenericType) {
-                function.line("return %s<%s, %s>getLroResultAsync(mono, %sgetHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType())", caller, classType.toString(), classType.toString(), caller, classType.toString(), classType.toString());
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType())", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
             } else {
-                function.line("return %s<%s, %s>getLroResultAsync(mono, %sgetHttpPipeline(), %s.class, %s.class)", caller, classType.toString(), classType.toString(), caller, classType.toString(), classType.toString());
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class)", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
             }
             function.indent(() -> {
                 function.line(".last()");
                 function.line(".flatMap(AsyncPollResponse::getFinalResult);");
             });
         });
-    }
-
-    private static String getClientParameterCaller(ProxyMethod restAPIMethod) {
-        // hack, 'host' is usually there, use it to determine whether the ClientMethod is in operation group or in client.
-        return restAPIMethod.getParameters().stream()
-                .filter(p -> p.getName().equalsIgnoreCase("host"))
-                .findAny()
-                .filter(p -> p.getParameterReference().contains("this.getHost()"))
-                .isPresent() ? "this." : "this.client.";
     }
 
     private static IType returnTypeWithoutMono(IType returnType) {

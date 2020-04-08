@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestParameterFlattening type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestParameterFlattening.class)
+@ServiceClientBuilder(serviceClients = {AutoRestParameterFlattening.class})
 public final class AutoRestParameterFlatteningBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestParameterFlatteningBuilder {
      * 
      * @return an instance of AutoRestParameterFlattening.
      */
-    public AutoRestParameterFlattening build() {
+    public AutoRestParameterFlattening buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

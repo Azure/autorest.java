@@ -1,6 +1,17 @@
+REM add java11 to path on devops
+SET JAVA11_LOCATION=C:\Program Files\Java\zulu-11-azure-jdk_11.33.15-11.0.4-win_x64
+IF EXIST "%JAVA11_LOCATION%" (
+    ECHO "add java11 to path"
+    SET "PATH=%JAVA11_LOCATION%\bin;%PATH%"
+)
+
+REM print java version
+java -version
+
+REM re-generate code
 RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 
-SET AUTOREST_CORE_VERSION=3.0.6262
+SET AUTOREST_CORE_VERSION=3.0.6271
 SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm=true --fluent=true --generate-client-as-impl=true --required-parameter-client-methods=true --track1-naming=true --implementation-subpackage=models
 
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources

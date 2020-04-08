@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public final class CoverageReporter {
-    private static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureBuilder().build();
+    private static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureBuilder().buildClient();
 
     private CoverageReporter() { }
 

@@ -26,12 +26,12 @@ public final class Bools {
     /**
      * The proxy service used to perform REST calls.
      */
-    private BoolsService service;
+    private final BoolsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestBoolTestService client;
+    private final AutoRestBoolTestService client;
 
     /**
      * Initializes an instance of Bools.
@@ -48,7 +48,7 @@ public final class Bools {
      * to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestBoolTestServiceBools")
+    @ServiceInterface(name = "AutoRestBoolTestServ")
     private interface BoolsService {
         @Get("/bool/true")
         @ExpectedResponses({200})
@@ -86,6 +86,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getTrueWithResponseAsync() {
@@ -98,8 +99,26 @@ public final class Bools {
     /**
      * Get true Boolean value.
      * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<Boolean>> getTrueWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.getTrue(this.client.getHost(), context);
+    }
+
+    /**
+     * Get true Boolean value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getTrueAsync() {
@@ -118,6 +137,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getTrue() {
@@ -127,10 +147,11 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody) {
@@ -143,10 +164,29 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putTrue(this.client.getHost(), boolBody, context);
+    }
+
+    /**
+     * Set Boolean value true.
+     * 
+     * @param boolBody The boolBody parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putTrueAsync(boolean boolBody) {
@@ -157,7 +197,7 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -172,6 +212,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getFalseWithResponseAsync() {
@@ -184,8 +225,26 @@ public final class Bools {
     /**
      * Get false Boolean value.
      * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<Boolean>> getFalseWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.getFalse(this.client.getHost(), context);
+    }
+
+    /**
+     * Get false Boolean value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getFalseAsync() {
@@ -204,6 +263,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getFalse() {
@@ -213,10 +273,11 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody) {
@@ -229,10 +290,29 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putFalse(this.client.getHost(), boolBody, context);
+    }
+
+    /**
+     * Set Boolean value false.
+     * 
+     * @param boolBody The boolBody parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFalseAsync(boolean boolBody) {
@@ -243,7 +323,7 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody 
+     * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -258,6 +338,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNullWithResponseAsync() {
@@ -270,8 +351,26 @@ public final class Bools {
     /**
      * Get null Boolean value.
      * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<Boolean>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.getNull(this.client.getHost(), context);
+    }
+
+    /**
+     * Get null Boolean value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNullAsync() {
@@ -290,6 +389,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNull() {
@@ -301,6 +401,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getInvalidWithResponseAsync() {
@@ -313,8 +414,26 @@ public final class Bools {
     /**
      * Get invalid Boolean value.
      * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<Boolean>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.getInvalid(this.client.getHost(), context);
+    }
+
+    /**
+     * Get invalid Boolean value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getInvalidAsync() {
@@ -333,6 +452,7 @@ public final class Bools {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getInvalid() {

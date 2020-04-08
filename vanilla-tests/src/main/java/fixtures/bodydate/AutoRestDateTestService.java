@@ -30,7 +30,7 @@ public final class AutoRestDateTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestDateTestService setHost(String host) {
+    public AutoRestDateTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestDateTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestDateTestService {
     /**
      * The Dates object to access its operations.
      */
-    private Dates dates;
+    private final Dates dates;
 
     /**
      * Gets the Dates object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestDateTestService {
      * Initializes an instance of AutoRestDateTestService client.
      */
     public AutoRestDateTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

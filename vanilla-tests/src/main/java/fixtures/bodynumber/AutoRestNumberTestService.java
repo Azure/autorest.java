@@ -30,7 +30,7 @@ public final class AutoRestNumberTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestNumberTestService setHost(String host) {
+    public AutoRestNumberTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -38,7 +38,7 @@ public final class AutoRestNumberTestService {
     /**
      * The HTTP pipeline to send requests through.
      */
-    private HttpPipeline httpPipeline;
+    private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
@@ -52,7 +52,7 @@ public final class AutoRestNumberTestService {
     /**
      * The Numbers object to access its operations.
      */
-    private Numbers numbers;
+    private final Numbers numbers;
 
     /**
      * Gets the Numbers object to access its operations.
@@ -67,7 +67,7 @@ public final class AutoRestNumberTestService {
      * Initializes an instance of AutoRestNumberTestService client.
      */
     public AutoRestNumberTestService() {
-        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**

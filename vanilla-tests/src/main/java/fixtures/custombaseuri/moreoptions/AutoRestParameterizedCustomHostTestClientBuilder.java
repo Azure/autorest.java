@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestParameterizedCustomHostTestClient type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestParameterizedCustomHostTestClient.class)
+@ServiceClientBuilder(serviceClients = {AutoRestParameterizedCustomHostTestClient.class})
 public final class AutoRestParameterizedCustomHostTestClientBuilder {
     /*
      * The subscription id with value 'test12'.
@@ -65,7 +65,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * 
      * @return an instance of AutoRestParameterizedCustomHostTestClient.
      */
-    public AutoRestParameterizedCustomHostTestClient build() {
+    public AutoRestParameterizedCustomHostTestClient buildClient() {
         if (dnsSuffix == null) {
             this.dnsSuffix = "host";
         }

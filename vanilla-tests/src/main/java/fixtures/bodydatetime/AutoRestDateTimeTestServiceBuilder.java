@@ -10,7 +10,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /**
  * A builder for creating a new instance of the AutoRestDateTimeTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestDateTimeTestService.class)
+@ServiceClientBuilder(serviceClients = {AutoRestDateTimeTestService.class})
 public final class AutoRestDateTimeTestServiceBuilder {
     /*
      * server parameter
@@ -49,7 +49,7 @@ public final class AutoRestDateTimeTestServiceBuilder {
      * 
      * @return an instance of AutoRestDateTimeTestService.
      */
-    public AutoRestDateTimeTestService build() {
+    public AutoRestDateTimeTestService buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }

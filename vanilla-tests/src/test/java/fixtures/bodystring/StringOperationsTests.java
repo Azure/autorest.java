@@ -17,7 +17,7 @@ public class StringOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().build();
+        client = new AutoRestSwaggerBATServiceBuilder().buildClient();
     }
 
     @Test
@@ -43,7 +43,7 @@ public class StringOperationsTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.strings().putEmptyWithResponseAsync("").subscribe(v -> {}, t -> fail(t.getMessage()),
+        client.strings().putEmptyWithResponseAsync().subscribe(v -> {}, t -> fail(t.getMessage()),
             () -> lock.countDown());
         assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }

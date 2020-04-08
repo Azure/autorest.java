@@ -31,12 +31,12 @@ public final class Queries {
     /**
      * The proxy service used to perform REST calls.
      */
-    private QueriesService service;
+    private final QueriesService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestUrlTestService client;
+    private final AutoRestUrlTestService client;
 
     /**
      * Initializes an instance of Queries.
@@ -54,7 +54,7 @@ public final class Queries {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestUrlTestServiceQueries")
+    @ServiceInterface(name = "AutoRestUrlTestServi")
     private interface QueriesService {
         @Get("/queries/bool/true")
         @ExpectedResponses({200})
@@ -74,12 +74,12 @@ public final class Queries {
         @Get("/queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") float intQuery, Context context);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery, Context context);
 
         @Get("/queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") float intQuery, Context context);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery, Context context);
 
         @Get("/queries/int/null")
         @ExpectedResponses({200})
@@ -89,12 +89,12 @@ public final class Queries {
         @Get("/queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") float longQuery, Context context);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery, Context context);
 
         @Get("/queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") float longQuery, Context context);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery, Context context);
 
         @Get("/queries/long/null")
         @ExpectedResponses({200})
@@ -232,6 +232,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
@@ -247,6 +248,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanTrueAsync() {
@@ -270,6 +272,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
@@ -285,6 +288,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on path.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanFalseAsync() {
@@ -306,10 +310,11 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery 
+     * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(Boolean boolQuery) {
@@ -322,10 +327,11 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery 
+     * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on query (query string should be absent).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanNullAsync(Boolean boolQuery) {
@@ -336,7 +342,7 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery 
+     * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -351,13 +357,14 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final float intQuery = 1000000f;
+        final int intQuery = 1000000;
         return FluxUtil.withContext(context -> service.getIntOneMillion(this.client.getHost(), intQuery, context));
     }
 
@@ -366,6 +373,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntOneMillionAsync() {
@@ -389,13 +397,14 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final float intQuery = -1000000f;
+        final int intQuery = -1000000;
         return FluxUtil.withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, context));
     }
 
@@ -404,6 +413,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1000000' integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNegativeOneMillionAsync() {
@@ -425,10 +435,11 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery 
+     * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery) {
@@ -441,10 +452,11 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery 
+     * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null integer value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNullAsync(Integer intQuery) {
@@ -455,7 +467,7 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery 
+     * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -470,13 +482,14 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final float longQuery = 10000000000f;
+        final long longQuery = 10000000000L;
         return FluxUtil.withContext(context -> service.getTenBillion(this.client.getHost(), longQuery, context));
     }
 
@@ -485,6 +498,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getTenBillionAsync() {
@@ -508,13 +522,14 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final float longQuery = -10000000000f;
+        final long longQuery = -10000000000L;
         return FluxUtil.withContext(context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, context));
     }
 
@@ -523,6 +538,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-10000000000' 64 bit integer value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getNegativeTenBillionAsync() {
@@ -544,10 +560,11 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery 
+     * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(Long longQuery) {
@@ -560,10 +577,11 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery 
+     * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'null 64 bit integer value (no query param in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getLongNullAsync(Long longQuery) {
@@ -574,7 +592,7 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery 
+     * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -589,6 +607,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
@@ -604,6 +623,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositiveAsync() {
@@ -627,6 +647,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
@@ -642,6 +663,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegativeAsync() {
@@ -663,10 +685,11 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery 
+     * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery) {
@@ -679,10 +702,11 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery 
+     * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatNullAsync(Float floatQuery) {
@@ -693,7 +717,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery 
+     * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -708,6 +732,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '9999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
@@ -723,6 +748,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '9999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositiveAsync() {
@@ -746,6 +772,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-9999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
@@ -761,6 +788,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-9999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegativeAsync() {
@@ -782,10 +810,11 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery 
+     * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery) {
@@ -798,10 +827,11 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery 
+     * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleNullAsync(Double doubleQuery) {
@@ -812,7 +842,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery 
+     * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -827,6 +857,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
@@ -842,6 +873,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUnicodeAsync() {
@@ -865,6 +897,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
@@ -880,6 +913,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync() {
@@ -903,6 +937,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
@@ -918,6 +953,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringEmptyAsync() {
@@ -939,10 +975,11 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery 
+     * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringQuery) {
@@ -955,10 +992,11 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery 
+     * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringNullAsync(String stringQuery) {
@@ -969,7 +1007,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery 
+     * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -982,10 +1020,11 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery 
+     * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumQuery) {
@@ -998,10 +1037,11 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery 
+     * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with query parameter 'green color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumValidAsync(UriColor enumQuery) {
@@ -1012,7 +1052,7 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery 
+     * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1025,10 +1065,11 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery 
+     * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumQuery) {
@@ -1041,10 +1082,11 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery 
+     * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumQuery) {
@@ -1055,7 +1097,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery 
+     * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1068,10 +1110,11 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery 
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] byteQuery) {
@@ -1085,10 +1128,11 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery 
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync(byte[] byteQuery) {
@@ -1099,7 +1143,7 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery 
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1114,6 +1158,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
@@ -1130,6 +1175,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' as byte array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteEmptyAsync() {
@@ -1151,10 +1197,11 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery 
+     * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] byteQuery) {
@@ -1168,10 +1215,11 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery 
+     * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (no query parameters in uri).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync(byte[] byteQuery) {
@@ -1182,7 +1230,7 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery 
+     * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1197,6 +1245,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
@@ -1212,6 +1261,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01' as date.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateValidAsync() {
@@ -1233,10 +1283,11 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery 
+     * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery) {
@@ -1249,10 +1300,11 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery 
+     * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate dateQuery) {
@@ -1263,7 +1315,7 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery 
+     * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1278,6 +1330,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
@@ -1293,6 +1346,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01T01:01:01Z' as date-time.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeValidAsync() {
@@ -1314,10 +1368,11 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery 
+     * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimeQuery) {
@@ -1330,10 +1385,11 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery 
+     * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should result in no query parameters in uri.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
@@ -1344,7 +1400,7 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery 
+     * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1361,6 +1417,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -1378,6 +1435,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
@@ -1405,6 +1463,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery) {
@@ -1422,6 +1481,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
@@ -1449,6 +1509,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(List<String> arrayQuery) {
@@ -1466,6 +1527,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the csv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
@@ -1493,6 +1555,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -1510,6 +1573,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
@@ -1537,6 +1601,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -1554,6 +1619,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
@@ -1581,6 +1647,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(List<String> arrayQuery) {
@@ -1598,6 +1665,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {

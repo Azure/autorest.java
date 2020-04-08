@@ -27,12 +27,12 @@ public final class Durations {
     /**
      * The proxy service used to perform REST calls.
      */
-    private DurationsService service;
+    private final DurationsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestDurationTestService client;
+    private final AutoRestDurationTestService client;
 
     /**
      * Initializes an instance of Durations.
@@ -50,7 +50,7 @@ public final class Durations {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestDurationTestServiceDurations")
+    @ServiceInterface(name = "AutoRestDurationTest")
     private interface DurationsService {
         @Get("/duration/null")
         @ExpectedResponses({200})
@@ -78,6 +78,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
@@ -92,6 +93,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getNullAsync() {
@@ -110,6 +112,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getNull() {
@@ -119,10 +122,11 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
@@ -138,10 +142,11 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
@@ -152,7 +157,7 @@ public final class Durations {
     /**
      * Put a positive duration value.
      * 
-     * @param durationBody 
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -167,6 +172,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
@@ -181,6 +187,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getPositiveDurationAsync() {
@@ -199,6 +206,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getPositiveDuration() {
@@ -210,6 +218,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
@@ -224,6 +233,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getInvalidAsync() {
@@ -242,6 +252,7 @@ public final class Durations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getInvalid() {
