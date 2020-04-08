@@ -119,7 +119,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
     }
 
     private static String serviceInterfaceWithLengthLimit(String serviceInterfaceName) {
-        final int lengthLimit = 20;
+        final int lengthLimit = -6-4-20;
 
         return serviceInterfaceName.length() > lengthLimit
                 ? serviceInterfaceName.substring(0, lengthLimit)
