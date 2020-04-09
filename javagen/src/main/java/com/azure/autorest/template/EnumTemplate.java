@@ -134,6 +134,11 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 if (enumType.getElementType() == ClassType.String) {
                     enumBlock.annotation("JsonValue", "Override");
                 } else {
+                    enumBlock.javadocComment(comment ->
+                    {
+                        comment.description(String.format("De-serializes the instance to %1$s value.", enumType.getElementType().toString()));
+                        comment.methodReturns(String.format("the %1$s value", enumType.getElementType().toString()));
+                    });
                     enumBlock.annotation("JsonValue");
                 }
                 enumBlock.PublicMethod(String.format("%1$s to%2$s()", typeName, converterName), (function) ->

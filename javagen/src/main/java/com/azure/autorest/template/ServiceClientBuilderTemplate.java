@@ -89,7 +89,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             // Add ServiceClient client property variables, getters, and setters
             for (ServiceClientProperty serviceClientProperty : Stream
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
-                classBlock.blockComment(comment ->
+                classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
                 {
                     comment.line(serviceClientProperty.getDescription());
                 });
