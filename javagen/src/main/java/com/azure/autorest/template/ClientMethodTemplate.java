@@ -105,7 +105,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         if (!parameter.getFromClient()) {
                             parameterName = parameter.getName();
                         } else {
-                            parameterName = m.getInputParameterProperty();
+                            parameterName = m.getInputParameterProperty().getName();
                         }
 
                         return parameterName + " != null";

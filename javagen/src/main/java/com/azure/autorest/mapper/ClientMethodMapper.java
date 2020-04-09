@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -154,7 +155,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     ParameterMapping mapping = new ParameterMapping();
                     if (parameter.getGroupedBy() != null) {
                         mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy()));
-                        mapping.setInputParameterProperty(parameter.getLanguage().getJava().getName());
+                        ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
+                        ClientModelProperty inputProperty = groupModel.getProperties().stream()
+                                .filter(p -> parameter.getLanguage().getJava().getName().equals(p.getName()))
+                                .findFirst().get();
+                        mapping.setInputParameterProperty(inputProperty);
                     } else {
                         mapping.setInputParameter(clientMethodParameter);
                     }

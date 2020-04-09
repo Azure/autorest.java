@@ -3,7 +3,7 @@ package com.azure.autorest.model.clientmodel;
 public class ParameterMapping {
     private ClientMethodParameter inputParameter;
 
-    private String inputParameterProperty;
+    private ClientModelProperty inputParameterProperty;
 
     private String outputParameterProperty;
 
@@ -16,11 +16,11 @@ public class ParameterMapping {
         return this;
     }
 
-    public String getInputParameterProperty() {
+    public ClientModelProperty getInputParameterProperty() {
         return inputParameterProperty;
     }
 
-    public ParameterMapping setInputParameterProperty(String inputParameterProperty) {
+    public ParameterMapping setInputParameterProperty(ClientModelProperty inputParameterProperty) {
         this.inputParameterProperty = inputParameterProperty;
         return this;
     }

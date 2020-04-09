@@ -20,10 +20,9 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PackageInfo;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.SchemaUtil;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -229,14 +228,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.name(classType.getName()).packageName(classType.getPackage());
         builder.description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()));
         builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
-        IType bodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-            method.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)
-                .collect(Collectors.toList())));
-
-        if (bodyType == null) {
-            bodyType = PrimitiveType.Void;
-        }
-        builder.bodyType(bodyType);
+        builder.bodyType(SchemaUtil.operationResponseType(method));
         return builder.build();
     }
 
