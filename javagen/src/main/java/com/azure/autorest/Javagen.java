@@ -96,7 +96,11 @@ public class Javagen extends NewPlugin {
             }
 
             // Service client builder
-            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder",
+            String builderPackage = client.getServiceClient().getPackage();
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                builderPackage = JavaSettings.getInstance().getPackage();
+            }
+            javaPackage.addServiceClientBuilder(builderPackage, client.getServiceClient().getInterfaceName() + "Builder",
                     client.getServiceClient());
 
             // Method group

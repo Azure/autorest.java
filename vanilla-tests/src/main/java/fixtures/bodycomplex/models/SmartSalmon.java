@@ -1,9 +1,13 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +26,7 @@ public final class SmartSalmon extends Salmon {
     /*
      * Dictionary of <any>
      */
-    @JsonProperty(value = "")
+    @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
@@ -50,6 +54,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -63,6 +68,14 @@ public final class SmartSalmon extends Salmon {
     public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
+    }
+
+    @JsonAnySetter
+    private void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
     }
 
     @Override

@@ -49,7 +49,7 @@ public final class AdditionalPropertiesClientBuilder {
      * 
      * @return an instance of AdditionalPropertiesClient.
      */
-    public AdditionalPropertiesClient build() {
+    public AdditionalPropertiesClient buildClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
