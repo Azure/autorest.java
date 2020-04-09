@@ -19,7 +19,12 @@ pipeline:
     flatten-models: true
     flatten-payloads: true
     naming:
-      preserve-uppercase-max-length: 4
+      override:
+        api: Api
+        cpk: Cpk
+        sas: Sas
+        url: Url
+        xml: Xml
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
