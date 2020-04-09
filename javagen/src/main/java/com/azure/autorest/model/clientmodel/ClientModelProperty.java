@@ -72,6 +72,8 @@ public class ClientModelProperty {
      */
     private String headerCollectionPrefix;
 
+    private boolean isAdditionalProperties;
+
     /**
      * Create a new ClientModelProperty with the provided properties.
      * @param name The name of this property.
@@ -88,8 +90,9 @@ public class ClientModelProperty {
      * @param defaultValue The default value expression of this property.
      * @param isReadOnly Whether or not this property's value can be changed by the client library.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
+     * @param isAdditionalProperties Whether or not this property contain the additional properties.
      */
-    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean isRequired, String headerCollectionPrefix) {
+    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -105,6 +108,7 @@ public class ClientModelProperty {
         this.isReadOnly = isReadOnly;
         this.isRequired = isRequired;
         this.headerCollectionPrefix = headerCollectionPrefix;
+        this.isAdditionalProperties = isAdditionalProperties;
     }
 
     public final String getName() {
@@ -179,6 +183,12 @@ public class ClientModelProperty {
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty()) {
             imports.add("com.azure.core.annotation.HeaderCollection");
         }
+        if (isAdditionalProperties) {
+            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
+            imports.add("com.fasterxml.jackson.annotation.JsonAnySetter");
+            imports.add("com.fasterxml.jackson.annotation.JsonAnyGetter");
+            imports.add("java.util.HashMap");
+        }
 
         getWireType().addImportsTo(imports, false);
         getClientType().addImportsTo(imports, false);
@@ -205,6 +215,10 @@ public class ClientModelProperty {
         isRequired = required;
     }
 
+    public boolean isAdditionalProperties() {
+        return isAdditionalProperties;
+    }
+
     public static class Builder {
         private String name;
         private String description;
@@ -221,6 +235,7 @@ public class ClientModelProperty {
         private boolean isReadOnly;
         private boolean isRequired;
         private String headerCollectionPrefix;
+        private boolean isAdditionalProperties = false;
 
         /**
          * Sets the name of this property.
@@ -372,6 +387,16 @@ public class ClientModelProperty {
             return this;
         }
 
+        /**
+         * Sets whether or not this property contain the additional properties.
+         * @param isAdditionalProperties whether or not this property contain the additional properties
+         * @return the Builder itself
+         */
+        public Builder isAdditionalProperties(boolean isAdditionalProperties) {
+            this.isAdditionalProperties = isAdditionalProperties;
+            return this;
+        }
+
         public ClientModelProperty build() {
             return new ClientModelProperty(name,
                     description,
@@ -387,7 +412,8 @@ public class ClientModelProperty {
                     defaultValue,
                     isReadOnly,
                     isRequired,
-                    headerCollectionPrefix);
+                    headerCollectionPrefix,
+                    isAdditionalProperties);
         }
     }
 }
