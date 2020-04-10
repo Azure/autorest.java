@@ -40,18 +40,18 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-     - script: |
-         npm install -g autorest
-         npm install
-       displayName: 'Prepare Environment for Generation'
+      - script: |
+          npm install -g autorest
+          npm install
+        displayName: 'Prepare Environment for Generation'
 
-     - script: |
-         ./generate
-       displayName: 'Generate code'
+      - script: |
+          ./generate
+        displayName: 'Generate code'
 
-     - script: |
-         [[ `git status --porcelain` ]]
-       displayName: 'Check no diff in generated files'
+      - script: |
+          [[ `git status --porcelain` ]]
+        displayName: 'Check no diff in generated files'
 
       - task: Maven@3
         displayName: 'Run vanilla tests'
