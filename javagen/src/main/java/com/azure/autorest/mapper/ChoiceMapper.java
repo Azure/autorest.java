@@ -48,8 +48,13 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
 
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
-                String memberName = CodeNamer.getEnumMemberName(enumValue.getValue());
-                enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
+                final String memberName = CodeNamer.getEnumMemberName(enumValue.getValue());
+                long counter = enumValues.stream().filter(v -> v.getName().equals(memberName)).count();
+                if (counter > 0) {
+                    enumValues.add(new ClientEnumValue(memberName + "_" + counter, enumValue.getValue()));
+                } else {
+                    enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
+                }
             }
 
             _itype = new EnumType.Builder()
