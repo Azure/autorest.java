@@ -50,7 +50,7 @@ jobs:
         displayName: 'Generate code'
 
       - script: |
-          [[ `git status --porcelain` ]]
+          [ -z "`git status --porcelain`" ]
         displayName: 'Check no diff in generated files'
 
       - task: Maven@3
