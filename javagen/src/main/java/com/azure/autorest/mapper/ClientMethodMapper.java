@@ -197,7 +197,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .type(ClientMethodType.PagingAsyncSinglePage)
                         .isGroupedParameterRequired(false)
                         .build());
-                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                if (settings.isContextClientMethodParameter()) {
                     addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                         ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
                         new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
@@ -214,7 +214,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .type(ClientMethodType.PagingAsync)
                                 .isGroupedParameterRequired(false)
                                 .build());
-                        if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                        if (settings.isContextClientMethodParameter()) {
                             addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                 ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                 new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
@@ -301,7 +301,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .isGroupedParameterRequired(false)
                     .build());
 
-                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                if (settings.isContextClientMethodParameter()) {
                     addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
