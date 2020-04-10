@@ -21,7 +21,7 @@ Clone this repo and checkout to v4 branch. Make sure all prerequisites are met, 
 mvn package -Dlocal
 ```
 
-This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module.
+This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer--jar-with-dependencies.jar` under `fluentnamer` module.
 
 And then run AutoRest
 
