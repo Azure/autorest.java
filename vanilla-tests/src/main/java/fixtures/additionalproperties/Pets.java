@@ -30,12 +30,12 @@ public final class Pets {
     /**
      * The proxy service used to perform REST calls.
      */
-    private PetsService service;
+    private final PetsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AdditionalPropertiesClient client;
+    private final AdditionalPropertiesClient client;
 
     /**
      * Initializes an instance of Pets.
@@ -53,7 +53,7 @@ public final class Pets {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AdditionalPropertiesClientPets")
+    @ServiceInterface(name = "AdditionalProperties")
     private interface PetsService {
         @Put("/additionalProperties/true")
         @ExpectedResponses({200})
@@ -89,10 +89,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
@@ -110,10 +111,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters) {
@@ -130,10 +132,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPTrue createAPTrue(PetAPTrue createParameters) {
@@ -143,10 +146,11 @@ public final class Pets {
     /**
      * Create a CatAPTrue which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
@@ -164,10 +168,11 @@ public final class Pets {
     /**
      * Create a CatAPTrue which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters) {
@@ -184,10 +189,11 @@ public final class Pets {
     /**
      * Create a CatAPTrue which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CatAPTrue createCatAPTrue(CatAPTrue createParameters) {
@@ -197,10 +203,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
@@ -218,10 +225,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters) {
@@ -238,10 +246,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPObject createAPObject(PetAPObject createParameters) {
@@ -251,10 +260,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
@@ -272,10 +282,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPString> createAPStringAsync(PetAPString createParameters) {
@@ -292,10 +303,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPString createAPString(PetAPString createParameters) {
@@ -305,10 +317,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters) {
@@ -326,10 +339,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters) {
@@ -346,10 +360,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInProperties createAPInProperties(PetAPInProperties createParameters) {
@@ -359,10 +374,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPStringWithResponseAsync(PetAPInPropertiesWithAPString createParameters) {
@@ -380,10 +396,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInPropertiesWithAPString> createAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters) {
@@ -400,10 +417,11 @@ public final class Pets {
     /**
      * Create a Pet which contains more properties than what is defined.
      * 
-     * @param createParameters 
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInPropertiesWithAPString createAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters) {

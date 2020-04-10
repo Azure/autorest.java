@@ -101,12 +101,12 @@ public final class MediaTypesClient {
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") Long contentLength, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
 
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") long contentLength, Context context);
     }
 
     /**
@@ -121,9 +121,15 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (contentType == null) {
+            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
     }
@@ -140,7 +146,7 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
             .flatMap((SimpleResponse<String> res) -> {
                 if (res.getValue() != null) {
@@ -163,7 +169,7 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
         return analyzeBodyAsync(contentType, input, contentLength).block();
     }
 

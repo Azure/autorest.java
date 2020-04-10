@@ -29,7 +29,8 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     }
 
     /*
-     * A string value that is used as a global part of the parameterized host. Default value 'host'.
+     * A string value that is used as a global part of the parameterized host.
+     * Default value 'host'.
      */
     private String dnsSuffix;
 

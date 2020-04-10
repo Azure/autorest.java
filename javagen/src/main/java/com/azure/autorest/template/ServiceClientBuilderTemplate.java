@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -109,6 +110,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
 
             String buildMethodName = this.primaryBuildMethodName(settings);
+            JavaVisibility visibility = settings.shouldGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
             // build method
             classBlock.javadocComment(comment ->
@@ -116,7 +118,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
             });
-            classBlock.publicMethod(String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
+            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
                 for (ServiceClientProperty serviceClientProperty : Stream.concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {

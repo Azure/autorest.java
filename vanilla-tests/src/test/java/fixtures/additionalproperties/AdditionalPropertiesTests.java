@@ -21,7 +21,7 @@ public class AdditionalPropertiesTests {
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AdditionalPropertiesClientBuilder().build();
+        client = new AdditionalPropertiesClientBuilder().buildClient();
     }
 
     @Test

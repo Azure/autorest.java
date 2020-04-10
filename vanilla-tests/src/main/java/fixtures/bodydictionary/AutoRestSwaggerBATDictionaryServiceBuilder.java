@@ -50,7 +50,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * 
      * @return an instance of AutoRestSwaggerBATDictionaryServiceImpl.
      */
-    public AutoRestSwaggerBATDictionaryServiceImpl buildInnerClient() {
+    private AutoRestSwaggerBATDictionaryServiceImpl buildInnerClient() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
