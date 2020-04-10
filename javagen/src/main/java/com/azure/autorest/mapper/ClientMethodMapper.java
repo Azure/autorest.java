@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethod.Builder;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -196,6 +197,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .type(ClientMethodType.PagingAsyncSinglePage)
                         .isGroupedParameterRequired(false)
                         .build());
+                if (settings.isContextClientMethodParameter()) {
+                    addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                        ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
+                        new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
+                            asyncRestResponseReturnType));
+                }
 
                 if (!isNextMethod) {
                     if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -207,6 +214,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .type(ClientMethodType.PagingAsync)
                                 .isGroupedParameterRequired(false)
                                 .build());
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                                ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
+                                new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
+                                    asyncReturnType));
+                        }
 
                         if (generateClientMethodWithOnlyRequiredParameters) {
                             methods.add(builder
@@ -234,8 +247,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
                 // WithResponseAsync, with required and optional parameters
-
-
                 methods.add(builder
                         .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
                                 proxyMethod.getReturnType().getClientType()))
@@ -290,34 +301,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .isGroupedParameterRequired(false)
                     .build());
 
-                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
-                    ClientMethodParameter contextParam = new ClientMethodParameter.Builder()
-                        .description("The context to associate with this operation.")
-                        .wireType(ClassType.Context)
-                        .name("context")
-                        .annotations(new ArrayList<>())
-                        .isConstant(false)
-                        .defaultValue(null)
-                        .fromClient(false)
-                        .isFinal(false)
-                        .isRequired(true)
-                        .build();
-
-                    List<ClientMethodParameter> withContextParameters = new ArrayList<>();
-                    withContextParameters.addAll(parameters);
-                    withContextParameters.add(contextParam);
-
-                    methods.add(builder
-                        .parameters(withContextParameters) // update builder parameters to include context
-                        .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                                proxyMethod.getReturnType().getClientType()))
-                        .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.SimpleAsyncRestResponse)
-                        .isGroupedParameterRequired(false)
-                        .build());
-                    // reset the parameters to original params
-                    builder.parameters(parameters);
+                if (settings.isContextClientMethodParameter()) {
+                    addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                        ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
+                        new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
+                            syncReturnType), proxyMethod.getReturnType().getClientType()));
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -358,6 +346,37 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         parsed.put(operation, methods);
         return methods;
+    }
+
+    private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
+        List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
+        ReturnValue returnValue) {
+        ClientMethodParameter contextParam = new ClientMethodParameter.Builder()
+            .description("The context to associate with this operation.")
+            .wireType(ClassType.Context)
+            .name("context")
+            .annotations(new ArrayList<>())
+            .isConstant(false)
+            .defaultValue(null)
+            .fromClient(false)
+            .isFinal(false)
+            .isRequired(true)
+            .build();
+
+        List<ClientMethodParameter> withContextParameters = new ArrayList<>();
+        withContextParameters.addAll(parameters);
+        withContextParameters.add(contextParam);
+
+        methods.add(builder
+            .parameters(withContextParameters) // update builder parameters to include context
+            .returnValue(returnValue)
+            .name(proxyMethodName)
+            .onlyRequiredParameters(false)
+            .type(clientMethodType)
+            .isGroupedParameterRequired(false)
+            .build());
+        // reset the parameters to original params
+        builder.parameters(parameters);
     }
 
     private boolean isPageable(Operation operation) {
