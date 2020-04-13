@@ -248,7 +248,7 @@ public class CodeNamer {
         for (String line : lines) {
             String processedLine = line.trim();
 
-            // yield empty lines as they are (probably) intensional
+            // yield empty lines as they are (probably) intentional
             if (processedLine.length() == 0) {
                 ret.add(processedLine);
             }
@@ -266,7 +266,7 @@ public class CodeNamer {
                 int preWidthWrapAt = -1;
                 int postWidthWrapAt = -1;
                 for (int i = 0; i != whitespacePositions.size() - 1; i++) {
-                    if (whitespacePositions.get(i) <= width && whitespacePositions.get(i + 1) > width) {
+                    if (whitespacePositions.get(i + 1) > width) {
                         preWidthWrapAt = whitespacePositions.get(i);
                         postWidthWrapAt = whitespacePositions.get(i + 1);
                         break;
