@@ -4,7 +4,7 @@ This is the next gen (v4) of AutoRest Java generator. It's built on AutoRest v3,
 # Prerequisites
 You need to have the following installed on your machine:
 
-- Node.JS v12.x/v13.x
+- Node.JS v10.x - v13.x
 - Java 8+
 - Maven 3.x
 
@@ -26,7 +26,7 @@ This will build a file `javagen-jar-with-dependencies.jar` under `javagen` modul
 And then run AutoRest
 
 ```bash
-autorest-beta --java
+autorest --java
     --use:where/this/repo/is/cloned/autorest.java
     --input-file:path/to/specs.json
     --output-folder:where/to/generate/java/files
