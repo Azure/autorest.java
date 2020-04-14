@@ -29,7 +29,7 @@ public final class AutoRestReportService {
     /**
      * The proxy service used to perform REST calls.
      */
-    private AutoRestReportServiceService service;
+    private final AutoRestReportServiceService service;
 
     /**
      * server parameter.

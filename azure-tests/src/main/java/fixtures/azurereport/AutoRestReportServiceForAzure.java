@@ -29,7 +29,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * The proxy service used to perform REST calls.
      */
-    private AutoRestReportServiceForAzureService service;
+    private final AutoRestReportServiceForAzureService service;
 
     /**
      * server parameter.

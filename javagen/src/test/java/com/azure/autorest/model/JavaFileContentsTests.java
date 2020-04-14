@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class JavaFileContentsTests {
 
@@ -25,6 +26,17 @@ public class JavaFileContentsTests {
         Assert.assertTrue(
                 Arrays.stream(code.split(System.lineSeparator()))
                         .noneMatch(line -> line.length() > WIDTH)
+        );
+
+        final String commentStringWithLongUrl = "ARM resource ID of the source app. App resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.";
+
+        javaFileContents = new JavaFileContents();
+        javaFileContents.blockComment(WIDTH, comment -> comment.line(commentStringWithLongUrl));
+        code = javaFileContents.toString();
+        Assert.assertTrue(
+                Arrays.stream(code.split(System.lineSeparator()))
+                        .filter(line -> line.length() > WIDTH)
+                        .allMatch(line -> Pattern.matches("^ *\\* *[^ ]+$", line))
         );
     }
 }

@@ -41,7 +41,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * The proxy service used to perform REST calls.
      */
-    private AutoRestResourceFlatteningTestServiceService service;
+    private final AutoRestResourceFlatteningTestServiceService service;
 
     /**
      * server parameter.

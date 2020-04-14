@@ -63,7 +63,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             // Add proxy service member variable
             if (serviceClient.getProxy() != null) {
                 classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
-                classBlock.privateMemberVariable(serviceClient.getProxy().getName(), "service");
+                classBlock.privateFinalMemberVariable(serviceClient.getProxy().getName(), "service");
             }
 
             // Add ServiceClient client property variables, getters, and setters
