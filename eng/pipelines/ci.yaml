@@ -49,7 +49,7 @@ jobs:
           ./generate
         displayName: 'Generate code'
 
-      - script |
+      - script: |
           git diff
         displayName: 'Git Diff'
 
