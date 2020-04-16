@@ -17,7 +17,7 @@ public class ImplicitTests {
     @Test
     public void getRequiredPath() throws Exception {
         try {
-            client.implicits().getRequiredPath(null);
+            client.getImplicits().getRequiredPath(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter pathParameter is required"));
@@ -26,23 +26,23 @@ public class ImplicitTests {
 
     @Test
     public void putOptionalQuery() throws Exception {
-        client.implicits().putOptionalQuery(null);
+        client.getImplicits().putOptionalQuery(null);
     }
 
     @Test
     public void putOptionalHeader() throws Exception {
-        client.implicits().putOptionalHeader(null);
+        client.getImplicits().putOptionalHeader(null);
     }
 
     @Test
     public void putOptionalBody() throws Exception {
-        client.implicits().putOptionalBody(null);
+        client.getImplicits().putOptionalBody(null);
     }
 
     @Test
     public void getRequiredGlobalPath() throws Exception {
         try {
-            client.implicits().getRequiredGlobalPath();
+            client.getImplicits().getRequiredGlobalPath();
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
@@ -52,7 +52,7 @@ public class ImplicitTests {
     @Test
     public void getRequiredGlobalQuery() throws Exception {
         try {
-            client.implicits().getRequiredGlobalQuery();
+            client.getImplicits().getRequiredGlobalQuery();
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalQuery() is required"));
@@ -61,6 +61,6 @@ public class ImplicitTests {
 
     @Test
     public void getOptionalGlobalQuery() throws Exception {
-        client.implicits().getOptionalGlobalQuery();
+        client.getImplicits().getOptionalGlobalQuery();
     }
 }

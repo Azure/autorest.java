@@ -18,12 +18,12 @@ public class EnumOperationsTests {
 
     @Test
     public void getNotExpandable() throws Exception {
-        Colors result = client.enums().getNotExpandable();
+        Colors result = client.getEnums().getNotExpandable();
         Assert.assertEquals(Colors.RED_COLOR, result);
     }
 
     @Test
     public void putNotExpandable() throws Exception {
-        client.enums().putNotExpandableWithResponseAsync(Colors.RED_COLOR).block();
+        client.getEnums().putNotExpandableWithResponseAsync(Colors.RED_COLOR).block();
     }
 }

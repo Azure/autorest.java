@@ -19,7 +19,7 @@ public class NumberOperationsTests {
   @Test
   public void getNull() throws Exception {
     try {
-      double d = client.numbers().getNull();
+      double d = client.getNumbers().getNull();
       fail();
     } catch (NullPointerException e) {
       // expected
@@ -29,7 +29,7 @@ public class NumberOperationsTests {
   @Test
   public void getInvalidFloat() throws Exception {
     try {
-      client.numbers().getInvalidFloat();
+      client.getNumbers().getInvalidFloat();
       Assert.assertTrue(false);
     } catch (Exception exception) {
       // expected
@@ -40,7 +40,7 @@ public class NumberOperationsTests {
   @Test
   public void getInvalidDouble() throws Exception {
     try {
-      client.numbers().getInvalidDouble();
+      client.getNumbers().getInvalidDouble();
       Assert.assertTrue(false);
     } catch (Exception exception) {
       // expected
@@ -50,102 +50,102 @@ public class NumberOperationsTests {
 
   @Test
   public void putBigFloat() throws Exception {
-    client.numbers().putBigFloat(3.402823e+20f);
+    client.getNumbers().putBigFloat(3.402823e+20f);
   }
 
   @Test
   public void putBigDouble() throws Exception {
-    client.numbers().putBigDouble(2.5976931e+101);
+    client.getNumbers().putBigDouble(2.5976931e+101);
   }
 
   @Test
   public void getBigFloat() throws Exception {
-    double result = client.numbers().getBigFloat();
+    double result = client.getNumbers().getBigFloat();
     Assert.assertEquals(3.402823e+20f, result, 0.0f);
   }
 
   @Test
   public void getBigDouble() throws Exception {
-    double result = client.numbers().getBigDouble();
+    double result = client.getNumbers().getBigDouble();
     Assert.assertEquals(2.5976931e+101, result, 0.0f);
   }
 
   @Test
   public void putBigDoublePositiveDecimal() throws Exception {
-    client.numbers().putBigDoublePositiveDecimal();
+    client.getNumbers().putBigDoublePositiveDecimal();
   }
 
   @Test
   public void getBigDoublePositiveDecimal() throws Exception {
-    double result = client.numbers().getBigDoublePositiveDecimal();
+    double result = client.getNumbers().getBigDoublePositiveDecimal();
     Assert.assertEquals(99999999.99, result, 0.0f);
   }
 
   @Test
   public void putBigDoubleNegativeDecimal() throws Exception {
-    client.numbers().putBigDoubleNegativeDecimal();
+    client.getNumbers().putBigDoubleNegativeDecimal();
   }
 
   @Test
   public void getBigDoubleNegativeDecimal() throws Exception {
-    double result = client.numbers().getBigDoubleNegativeDecimal();
+    double result = client.getNumbers().getBigDoubleNegativeDecimal();
     Assert.assertEquals(-99999999.99, result, 0.0f);
   }
 
   @Test
   public void putSmallFloat() throws Exception {
-    client.numbers().putSmallFloat(3.402823e-20f);
+    client.getNumbers().putSmallFloat(3.402823e-20f);
   }
 
   @Test
   public void getSmallFloat() throws Exception {
-    double result = client.numbers().getSmallFloat();
+    double result = client.getNumbers().getSmallFloat();
     Assert.assertEquals(3.402823e-20, result, 0.0f);
   }
 
   @Test
   public void putSmallDouble() throws Exception {
-    client.numbers().putSmallDouble(2.5976931e-101);
+    client.getNumbers().putSmallDouble(2.5976931e-101);
   }
 
   @Test
   public void getSmallDouble() throws Exception {
-    double result = client.numbers().getSmallDouble();
+    double result = client.getNumbers().getSmallDouble();
     Assert.assertEquals(2.5976931e-101, result, 0.0f);
   }
 
   @Test
   public void putBigDecimalPositiveDecimalTest() throws Exception {
-    client.numbers().putBigDecimalPositiveDecimal();
+    client.getNumbers().putBigDecimalPositiveDecimal();
   }
 
   @Test
   public void putBigDecimalNegativeDecimalTest() throws Exception {
-    client.numbers().putBigDecimalNegativeDecimal();
+    client.getNumbers().putBigDecimalNegativeDecimal();
   }
 
   @Test
   public void getBigDecimalTest() throws Exception {
-    BigDecimal result = client.numbers().getBigDecimal();
+    BigDecimal result = client.getNumbers().getBigDecimal();
     Assert.assertEquals(BigDecimal.valueOf(2.5976931E+101), result);
   }
 
   @Test
   public void getBigDecimalPositiveDecimalTest() throws Exception {
-    BigDecimal result = client.numbers().getBigDecimalPositiveDecimal();
+    BigDecimal result = client.getNumbers().getBigDecimalPositiveDecimal();
     Assert.assertEquals(BigDecimal.valueOf(99999999.99), result);
   }
 
   @Test
   public void getBigDecimalNegativeDecimalTest() throws Exception {
-    BigDecimal result = client.numbers().getBigDecimalNegativeDecimal();
+    BigDecimal result = client.getNumbers().getBigDecimalNegativeDecimal();
     Assert.assertEquals(BigDecimal.valueOf(-99999999.99), result);
   }
 
   @Test
   public void putBigDecimalTest() throws Exception {
     BigDecimal request = new BigDecimal("2.5976931e+101");
-    client.numbers().putBigDecimal(request);
+    client.getNumbers().putBigDecimal(request);
   }
 
 }

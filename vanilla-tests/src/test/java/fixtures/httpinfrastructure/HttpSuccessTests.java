@@ -13,91 +13,91 @@ public class HttpSuccessTests {
 
   @Test
   public void head200() throws Exception {
-    client.httpSuccess().head200();
+    client.getHttpSuccess().head200();
   }
 
   @Test
   public void get200() throws Exception {
-    client.httpSuccess().get200();
+    client.getHttpSuccess().get200();
   }
 
   @Test
   public void put200() throws Exception {
-    client.httpSuccess().put200();
+    client.getHttpSuccess().put200();
   }
 
   @Test
   public void patch200() throws Exception {
-    client.httpSuccess().patch200();
+    client.getHttpSuccess().patch200();
   }
 
   @Test
   public void post200() throws Exception {
-    client.httpSuccess().post200();
+    client.getHttpSuccess().post200();
   }
 
   @Test
   public void delete200() throws Exception {
-    client.httpSuccess().delete200();
+    client.getHttpSuccess().delete200();
   }
 
   @Test
   public void put201() throws Exception {
-    client.httpSuccess().put201();
+    client.getHttpSuccess().put201();
   }
 
   @Test
   public void post201() throws Exception {
-    client.httpSuccess().post201();
+    client.getHttpSuccess().post201();
   }
 
   @Test
   public void put202() throws Exception {
-    client.httpSuccess().put202();
+    client.getHttpSuccess().put202();
   }
 
   @Test
   public void patch202() throws Exception {
-    client.httpSuccess().patch202();
+    client.getHttpSuccess().patch202();
   }
 
   @Test
   public void post202() throws Exception {
-    client.httpSuccess().post202();
+    client.getHttpSuccess().post202();
   }
 
   @Test
   public void delete202() throws Exception {
-    client.httpSuccess().delete202();
+    client.getHttpSuccess().delete202();
   }
 
   @Test
   public void head204() throws Exception {
-    client.httpSuccess().head204();
+    client.getHttpSuccess().head204();
   }
 
   @Test
   public void put204() throws Exception {
-    client.httpSuccess().put204();
+    client.getHttpSuccess().put204();
   }
 
   @Test
   public void patch204() throws Exception {
-    client.httpSuccess().patch204();
+    client.getHttpSuccess().patch204();
   }
 
   @Test
   public void post204() throws Exception {
-    client.httpSuccess().post204();
+    client.getHttpSuccess().post204();
   }
 
   @Test
   public void delete204() throws Exception {
-    client.httpSuccess().delete204();
+    client.getHttpSuccess().delete204();
   }
 
   @Test
   public void head404() throws Exception {
-    client.httpSuccess().head404();
+    client.getHttpSuccess().head404();
   }
 }

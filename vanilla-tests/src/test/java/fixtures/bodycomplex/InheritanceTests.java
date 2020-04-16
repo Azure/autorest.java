@@ -18,7 +18,7 @@ public class InheritanceTests {
 
     @Test
     public void getValid() throws Exception {
-        Siamese result = client.inheritances().getValid();
+        Siamese result = client.getInheritances().getValid();
         Assert.assertEquals("persian", result.getBreed());
         Assert.assertEquals("green", result.getColor());
         Assert.assertEquals(2, result.getId().intValue());
@@ -44,6 +44,6 @@ public class InheritanceTests {
         dog2.setId(-1);
         dog2.setName("Tomato");
         body.getHates().add(dog2);
-        client.inheritances().putValidWithResponseAsync(body).block();
+        client.getInheritances().putValidWithResponseAsync(body).block();
     }
 }

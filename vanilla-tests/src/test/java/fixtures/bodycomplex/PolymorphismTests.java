@@ -29,7 +29,7 @@ public class PolymorphismTests {
 
     @Test
     public void getValid() {
-        Fish result = client.polymorphisms().getValid();
+        Fish result = client.getPolymorphisms().getValid();
         Assert.assertEquals(Salmon.class, result.getClass());
         Salmon salmon = (Salmon) result;
         Assert.assertEquals("alaska", salmon.getLocation());
@@ -81,7 +81,7 @@ public class PolymorphismTests {
         sib3.setColor(GoblinSharkColor.fromString("pinkish-gray"));
         body.getSiblings().add(sib3);
 
-        client.polymorphisms().putValidWithResponseAsync(body).block();
+        client.getPolymorphisms().putValidWithResponseAsync(body).block();
     }
 
     @Test
@@ -108,7 +108,7 @@ public class PolymorphismTests {
             sib2.setSpecies("dangerous");
             body.getSiblings().add(sib2);
 
-            client.polymorphisms().putValidMissingRequiredWithResponseAsync(body).block();
+            client.getPolymorphisms().putValidMissingRequiredWithResponseAsync(body).block();
         } catch (IllegalArgumentException ex) {
             //expected
             Assert.assertTrue(ex.getMessage().contains("Missing required property birthday in model Shark"));
@@ -118,7 +118,7 @@ public class PolymorphismTests {
 
     @Test
     public void getComplicated() {
-        Salmon result = client.polymorphisms().getComplicated();
+        Salmon result = client.getPolymorphisms().getComplicated();
         Assert.assertEquals(SmartSalmon.class, result.getClass());
         SmartSalmon salmon = (SmartSalmon) result;
         Assert.assertEquals("alaska", salmon.getLocation());
@@ -195,6 +195,6 @@ public class PolymorphismTests {
         sib3.setColor(GoblinSharkColor.fromString("pinkish-gray"));
         body.getSiblings().add(sib3);
 
-        client.polymorphisms().putComplicated(body);
+        client.getPolymorphisms().putComplicated(body);
     }
 }

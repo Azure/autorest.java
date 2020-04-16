@@ -32,7 +32,7 @@ public class AdditionalPropertiesTests {
         petAPObject.setAdditionalProperties(new HashMap<>());
         petAPObject.getAdditionalProperties().put("birthdate", OffsetDateTime.parse("2017-12-13T02:29:51Z"));
         petAPObject.getAdditionalProperties().put("complexProperty", Collections.singletonMap("color", "Red"));
-        PetAPTrue response = client.pets().createAPTrue(petAPObject);
+        PetAPTrue response = client.getPets().createAPTrue(petAPObject);
         Assert.assertEquals(1, response.getId());
         Assert.assertEquals("Puppy", response.getName());
         Assert.assertEquals(2, petAPObject.getAdditionalProperties().size());
@@ -52,7 +52,7 @@ public class AdditionalPropertiesTests {
         petAPObject.setAdditionalProperties(new HashMap<>());
         petAPObject.getAdditionalProperties().put("birthdate", OffsetDateTime.parse("2017-12-13T02:29:51Z"));
         petAPObject.getAdditionalProperties().put("complexProperty", Collections.singletonMap("color", "Red"));
-        CatAPTrue response = client.pets().createCatAPTrue(petAPObject);
+        CatAPTrue response = client.getPets().createCatAPTrue(petAPObject);
         Assert.assertEquals(1, response.getId());
         Assert.assertEquals("Lisa", response.getName());
         Assert.assertTrue(response.isFriendly());
@@ -79,7 +79,7 @@ public class AdditionalPropertiesTests {
         petAPObject.setAdditionalProperties(new HashMap<>());
         petAPObject.getAdditionalProperties().put("siblings", Collections.singletonList(puppy));
         petAPObject.getAdditionalProperties().put("picture", new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
-        PetAPObject response = client.pets().createAPObject(petAPObject);
+        PetAPObject response = client.getPets().createAPObject(petAPObject);
 
         Assert.assertEquals(2, response.getId());
         Assert.assertEquals("Hira", response.getName());
@@ -99,7 +99,7 @@ public class AdditionalPropertiesTests {
         petAPObject.getAdditionalProperties().put("color", "red");
         petAPObject.getAdditionalProperties().put("weight", "10 kg");
         petAPObject.getAdditionalProperties().put("city", "Bombay");
-        PetAPString response = client.pets().createAPString(petAPObject);
+        PetAPString response = client.getPets().createAPString(petAPObject);
         Assert.assertEquals(3, response.getId());
         Assert.assertEquals("Tommy", response.getName());
         Assert.assertEquals(3, petAPObject.getAdditionalProperties().size());
@@ -117,7 +117,7 @@ public class AdditionalPropertiesTests {
         petAPObject.getAdditionalProperties().put("height", 5.61f);
         petAPObject.getAdditionalProperties().put("weight", 599f);
         petAPObject.getAdditionalProperties().put("footsize", 11.5f);
-        PetAPInProperties response = client.pets().createAPInProperties(petAPObject);
+        PetAPInProperties response = client.getPets().createAPInProperties(petAPObject);
         Assert.assertEquals(4, response.getId());
         Assert.assertEquals("Bunny", response.getName());
         Assert.assertEquals(3, petAPObject.getAdditionalProperties().size());
@@ -140,6 +140,6 @@ public class AdditionalPropertiesTests {
         petAPObject.getAdditionalProperties().put("color", "red");
         petAPObject.getAdditionalProperties().put("city", "Seattle");
         petAPObject.getAdditionalProperties().put("food", "tikka masala");
-        client.pets().createAPInPropertiesWithAPString(petAPObject);
+        client.getPets().createAPInPropertiesWithAPString(petAPObject);
     }
 }

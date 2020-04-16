@@ -21,7 +21,7 @@ public class HttpRetryTests {
 
   @Test
   public void head408() throws Exception {
-    client.httpRetrys().head408WithResponseAsync()
+    client.getHttpRetrys().head408WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -31,7 +31,7 @@ public class HttpRetryTests {
 
   @Test
   public void put500() throws Exception {
-    client.httpRetrys().put500WithResponseAsync()
+    client.getHttpRetrys().put500WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -41,7 +41,7 @@ public class HttpRetryTests {
 
   @Test
   public void patch500() throws Exception {
-    client.httpRetrys().patch500WithResponseAsync()
+    client.getHttpRetrys().patch500WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -51,7 +51,7 @@ public class HttpRetryTests {
 
   @Test
   public void get502() throws Exception {
-    client.httpRetrys().get502WithResponseAsync()
+    client.getHttpRetrys().get502WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -61,7 +61,7 @@ public class HttpRetryTests {
 
   @Test
   public void post503() throws Exception {
-    client.httpRetrys().post503WithResponseAsync()
+    client.getHttpRetrys().post503WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -71,7 +71,7 @@ public class HttpRetryTests {
 
   @Test
   public void delete503() throws Exception {
-    client.httpRetrys().delete503WithResponseAsync()
+    client.getHttpRetrys().delete503WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -81,7 +81,7 @@ public class HttpRetryTests {
 
   @Test
   public void put504() throws Exception {
-    client.httpRetrys().put504WithResponseAsync()
+    client.getHttpRetrys().put504WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();
@@ -91,7 +91,7 @@ public class HttpRetryTests {
 
   @Test
   public void patch504() throws Exception {
-    client.httpRetrys().patch504WithResponseAsync()
+    client.getHttpRetrys().patch504WithResponseAsync()
         .subscribe(response -> {
           Assert.assertEquals(200, response.getStatusCode());
           lock.countDown();

@@ -18,7 +18,7 @@ public class ArrayTests {
 
     @Test
     public void getValid() throws Exception {
-        ArrayWrapper result = client.arrays().getValid();
+        ArrayWrapper result = client.getArrays().getValid();
         Assert.assertEquals(5, result.getArray().size());
         Assert.assertEquals("&S#$(*Y", result.getArray().get(3));
     }
@@ -27,12 +27,12 @@ public class ArrayTests {
     public void putValid() throws Exception {
         ArrayWrapper body = new ArrayWrapper();
         body.setArray(Arrays.asList("1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"));
-        client.arrays().putValidWithResponseAsync(body).block();
+        client.getArrays().putValidWithResponseAsync(body).block();
     }
 
     @Test
     public void getEmpty() throws Exception {
-        ArrayWrapper result = client.arrays().getEmpty();
+        ArrayWrapper result = client.getArrays().getEmpty();
         Assert.assertEquals(0, result.getArray().size());
     }
 
@@ -40,12 +40,12 @@ public class ArrayTests {
     public void putEmpty() throws Exception {
         ArrayWrapper body = new ArrayWrapper();
         body.setArray(new ArrayList<>());
-        client.arrays().putEmptyWithResponseAsync(body).block();
+        client.getArrays().putEmptyWithResponseAsync(body).block();
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        ArrayWrapper result = client.arrays().getNotProvided();
+        ArrayWrapper result = client.getArrays().getNotProvided();
         Assert.assertNull(result.getArray());
     }
 }
