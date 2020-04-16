@@ -49,6 +49,10 @@ jobs:
           ./generate
         displayName: 'Generate code'
 
+      - script |
+          git diff
+        displayName: 'Git Diff'
+
       - script: |
           [ -z "`git status --porcelain`" ]
         displayName: 'Check no diff in generated files'
