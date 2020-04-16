@@ -283,6 +283,7 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "parameter-group": return ParameterGroupSchema.class;
                     case "sealed-choice": return SealedChoiceSchema.class;
                     case "string": return StringSchema.class;
+                    case "time": return TimeSchema.class;
                     case "unixtime": return UnixTimeSchema.class;
                     case "uri": return UriSchema.class;
                     case "uuid": return UuidSchema.class;

@@ -277,6 +277,7 @@ public class Schema extends Metadata {
         PARAMETER_GROUP("parameter-group"),
         SEALED_CHOICE("sealed-choice"),
         STRING("string"),
+        TIME("time"),
         UNIXTIME("unixtime"),
         URI("uri"),
         UUID("uuid"),
