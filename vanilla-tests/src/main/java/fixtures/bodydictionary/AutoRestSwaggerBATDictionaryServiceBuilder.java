@@ -68,7 +68,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @return an instance of AutoRestSwaggerBATDictionaryServiceAsyncClient.
      */
     public AutoRestSwaggerBATDictionaryServiceAsyncClient buildAsyncClient() {
-        return new AutoRestSwaggerBATDictionaryServiceAsyncClient(buildInnerClient().dictionarys());
+        return new AutoRestSwaggerBATDictionaryServiceAsyncClient(buildInnerClient().getDictionarys());
     }
 
     /**
@@ -77,6 +77,6 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
      * @return an instance of AutoRestSwaggerBATDictionaryServiceClient.
      */
     public AutoRestSwaggerBATDictionaryServiceClient buildClient() {
-        return new AutoRestSwaggerBATDictionaryServiceClient(buildInnerClient().dictionarys());
+        return new AutoRestSwaggerBATDictionaryServiceClient(buildInnerClient().getDictionarys());
     }
 }
