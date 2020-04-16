@@ -59,7 +59,7 @@ public final class AutoRestHeadTestService {
      * 
      * @return the HttpSuccess object.
      */
-    public HttpSuccess httpSuccess() {
+    public HttpSuccess getHttpSuccess() {
         return this.httpSuccess;
     }
 

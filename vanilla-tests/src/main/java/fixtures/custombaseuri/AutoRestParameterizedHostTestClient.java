@@ -59,7 +59,7 @@ public final class AutoRestParameterizedHostTestClient {
      * 
      * @return the Paths object.
      */
-    public Paths paths() {
+    public Paths getPaths() {
         return this.paths;
     }
 

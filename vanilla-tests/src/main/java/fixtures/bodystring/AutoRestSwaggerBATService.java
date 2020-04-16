@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATService {
      * 
      * @return the Strings object.
      */
-    public Strings strings() {
+    public Strings getStrings() {
         return this.strings;
     }
 
@@ -73,7 +73,7 @@ public final class AutoRestSwaggerBATService {
      * 
      * @return the Enums object.
      */
-    public Enums enums() {
+    public Enums getEnums() {
         return this.enums;
     }
 

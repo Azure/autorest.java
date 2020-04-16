@@ -59,7 +59,7 @@ public final class AutoRestBoolTestService {
      * 
      * @return the Bools object.
      */
-    public Bools bools() {
+    public Bools getBools() {
         return this.bools;
     }
 

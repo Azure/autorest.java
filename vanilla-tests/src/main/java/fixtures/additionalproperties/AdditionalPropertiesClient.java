@@ -59,7 +59,7 @@ public final class AdditionalPropertiesClient {
      * 
      * @return the Pets object.
      */
-    public Pets pets() {
+    public Pets getPets() {
         return this.pets;
     }
 

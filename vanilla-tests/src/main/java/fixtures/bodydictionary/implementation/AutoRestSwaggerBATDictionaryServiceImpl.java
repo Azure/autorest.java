@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
      * 
      * @return the DictionarysImpl object.
      */
-    public DictionarysImpl dictionarys() {
+    public DictionarysImpl getDictionarys() {
         return this.dictionarys;
     }
 

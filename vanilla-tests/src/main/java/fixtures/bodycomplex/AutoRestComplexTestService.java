@@ -84,7 +84,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Basics object.
      */
-    public Basics basics() {
+    public Basics getBasics() {
         return this.basics;
     }
 
@@ -98,7 +98,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Primitives object.
      */
-    public Primitives primitives() {
+    public Primitives getPrimitives() {
         return this.primitives;
     }
 
@@ -112,7 +112,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Arrays object.
      */
-    public Arrays arrays() {
+    public Arrays getArrays() {
         return this.arrays;
     }
 
@@ -126,7 +126,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Dictionarys object.
      */
-    public Dictionarys dictionarys() {
+    public Dictionarys getDictionarys() {
         return this.dictionarys;
     }
 
@@ -140,7 +140,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Inheritances object.
      */
-    public Inheritances inheritances() {
+    public Inheritances getInheritances() {
         return this.inheritances;
     }
 
@@ -154,7 +154,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Polymorphisms object.
      */
-    public Polymorphisms polymorphisms() {
+    public Polymorphisms getPolymorphisms() {
         return this.polymorphisms;
     }
 
@@ -168,7 +168,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Polymorphicrecursives object.
      */
-    public Polymorphicrecursives polymorphicrecursives() {
+    public Polymorphicrecursives getPolymorphicrecursives() {
         return this.polymorphicrecursives;
     }
 
@@ -182,7 +182,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Readonlypropertys object.
      */
-    public Readonlypropertys readonlypropertys() {
+    public Readonlypropertys getReadonlypropertys() {
         return this.readonlypropertys;
     }
 
@@ -196,7 +196,7 @@ public final class AutoRestComplexTestService {
      * 
      * @return the Flattencomplexs object.
      */
-    public Flattencomplexs flattencomplexs() {
+    public Flattencomplexs getFlattencomplexs() {
         return this.flattencomplexs;
     }
 

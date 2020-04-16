@@ -59,7 +59,7 @@ public final class AutoRestDateTimeTestService {
      * 
      * @return the Datetimes object.
      */
-    public Datetimes datetimes() {
+    public Datetimes getDatetimes() {
         return this.datetimes;
     }
 

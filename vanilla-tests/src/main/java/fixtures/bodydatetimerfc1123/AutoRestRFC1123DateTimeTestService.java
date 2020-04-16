@@ -59,7 +59,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      * 
      * @return the Datetimerfc1123s object.
      */
-    public Datetimerfc1123s datetimerfc1123s() {
+    public Datetimerfc1123s getDatetimerfc1123s() {
         return this.datetimerfc1123s;
     }
 

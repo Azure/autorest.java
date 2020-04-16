@@ -59,7 +59,7 @@ public final class AutoRestDurationTestService {
      * 
      * @return the Durations object.
      */
-    public Durations durations() {
+    public Durations getDurations() {
         return this.durations;
     }
 

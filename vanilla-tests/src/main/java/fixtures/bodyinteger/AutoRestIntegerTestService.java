@@ -59,7 +59,7 @@ public final class AutoRestIntegerTestService {
      * 
      * @return the Ints object.
      */
-    public Ints ints() {
+    public Ints getInts() {
         return this.ints;
     }
 

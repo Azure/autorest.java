@@ -59,7 +59,7 @@ public final class AutoRestHeadExceptionTestService {
      * 
      * @return the HeadExceptions object.
      */
-    public HeadExceptions headExceptions() {
+    public HeadExceptions getHeadExceptions() {
         return this.headExceptions;
     }
 
