@@ -134,7 +134,7 @@ public final class AutoRestRequiredOptionalTestService {
      * 
      * @return the Implicits object.
      */
-    public Implicits implicits() {
+    public Implicits getImplicits() {
         return this.implicits;
     }
 
@@ -148,7 +148,7 @@ public final class AutoRestRequiredOptionalTestService {
      * 
      * @return the Explicits object.
      */
-    public Explicits explicits() {
+    public Explicits getExplicits() {
         return this.explicits;
     }
 

@@ -27,20 +27,20 @@ public class PagingTests {
 
     @Test
     public void getSinglePages() throws Exception {
-        PagedIterable<Product> response = client.pagings().getSinglePages();
+        PagedIterable<Product> response = client.getPagings().getSinglePages();
         Assert.assertEquals(1, response.stream().count());
     }
 
     @Test
     public void getMultiplePages() throws Exception {
-        List<Product> response = client.pagings().getMultiplePages(null, null)
+        List<Product> response = client.getPagings().getMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getOdataMultiplePages() throws Exception {
-        List<Product> response = client.pagings().getOdataMultiplePages(null, null)
+        List<Product> response = client.getPagings().getOdataMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
@@ -49,7 +49,7 @@ public class PagingTests {
     public void getMultiplePagesWithOffset() throws Exception {
         PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.setOffset(100);
-        List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id")
+        List<Product> response = client.getPagings().getMultiplePagesWithOffset(options, "client-id")
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
         Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
@@ -58,7 +58,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        client.pagings().getMultiplePagesAsync("client-id", null)
+        client.getPagings().getMultiplePagesAsync("client-id", null)
                 .doOnError(throwable -> fail(throwable.getMessage()))
                 .doOnComplete(lock::countDown)
                 .blockLast();
@@ -68,14 +68,14 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
-        List<Product> response = client.pagings().getMultiplePagesRetryFirst()
+        List<Product> response = client.getPagings().getMultiplePagesRetryFirst()
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
-        List<Product> response = client.pagings().getMultiplePagesRetrySecond()
+        List<Product> response = client.getPagings().getMultiplePagesRetrySecond()
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
@@ -83,7 +83,7 @@ public class PagingTests {
     @Test
     public void getSinglePagesFailure() throws Exception {
         try {
-            List<Product> response = client.pagings().getSinglePagesFailure()
+            List<Product> response = client.getPagings().getSinglePagesFailure()
                     .stream().collect(Collectors.toList());
             fail();
         } catch (HttpResponseException ex) {
@@ -94,7 +94,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            List<Product> response = client.pagings().getMultiplePagesFailure()
+            List<Product> response = client.getPagings().getMultiplePagesFailure()
                     .stream().collect(Collectors.toList());
             response.size();
             fail();
@@ -106,7 +106,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailureUri() {
         try {
-            client.pagings().getMultiplePagesFailureUri().stream().collect(Collectors.toList());
+            client.getPagings().getMultiplePagesFailureUri().stream().collect(Collectors.toList());
             fail();
         } catch (Exception e) {
             Assert.assertTrue(e.getCause() instanceof MalformedURLException);
@@ -115,13 +115,13 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFragmentNextLink() throws Exception {
-        PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentNextLink("1.6", "test_user");
+        PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentNextLink("1.6", "test_user");
         Assert.assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
-        PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink(
+        PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentWithGroupingNextLink(
                 new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
         Assert.assertEquals(10, response.stream().count());
     }

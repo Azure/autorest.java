@@ -59,7 +59,7 @@ public final class AutoRestParameterFlattening {
      * 
      * @return the AvailabilitySets object.
      */
-    public AvailabilitySets availabilitySets() {
+    public AvailabilitySets getAvailabilitySets() {
         return this.availabilitySets;
     }
 

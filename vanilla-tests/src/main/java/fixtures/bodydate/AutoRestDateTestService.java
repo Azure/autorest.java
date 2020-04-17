@@ -59,7 +59,7 @@ public final class AutoRestDateTestService {
      * 
      * @return the Dates object.
      */
-    public Dates dates() {
+    public Dates getDates() {
         return this.dates;
     }
 

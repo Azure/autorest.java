@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATArrayService {
      * 
      * @return the Arrays object.
      */
-    public Arrays arrays() {
+    public Arrays getArrays() {
         return this.arrays;
     }
 

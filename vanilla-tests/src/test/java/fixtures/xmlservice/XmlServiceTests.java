@@ -23,7 +23,7 @@ public class XmlServiceTests {
 
   @Test
   public void getSimpleDocument() {
-    Slideshow slideshow = client.xmls().getSimpleAsync().block();
+    Slideshow slideshow = client.getXmls().getSimpleAsync().block();
     assertNotNull(slideshow);
     assertEquals("Yours Truly", slideshow.getAuthor());
     assertEquals("Date of publication", slideshow.getDate());
@@ -46,7 +46,7 @@ public class XmlServiceTests {
 
   @Test
   public void getEmptyList() {
-    Slideshow slideshow = client.xmls().getEmptyListAsync().block();
+    Slideshow slideshow = client.getXmls().getEmptyListAsync().block();
     assertNotNull(slideshow);
     assertNotNull(slideshow.getSlides());
     assertEquals(null, slideshow.getTitle());
@@ -57,7 +57,7 @@ public class XmlServiceTests {
 
   @Test
   public void getEmptyWrappedLists() {
-    AppleBarrel barrel = client.xmls().getEmptyWrappedListsAsync().block();
+    AppleBarrel barrel = client.getXmls().getEmptyWrappedListsAsync().block();
     assertNotNull(barrel);
     assertNotNull(barrel.getBadApples());
     assertEquals(0, barrel.getBadApples().size());
@@ -68,13 +68,13 @@ public class XmlServiceTests {
 
   @Test
   public void putSimpleDocument() {
-    Slideshow slideshow = client.xmls().getSimpleAsync().block();
-    client.xmls().putSimpleAsync(slideshow).block();
+    Slideshow slideshow = client.getXmls().getSimpleAsync().block();
+    client.getXmls().putSimpleAsync(slideshow).block();
   }
 
   @Test
   public void getWrappedLists() {
-    AppleBarrel barrel = client.xmls().getWrappedListsAsync().block();
+    AppleBarrel barrel = client.getXmls().getWrappedListsAsync().block();
     assertNotNull(barrel);
 
     assertNotNull(barrel.getGoodApples());
@@ -87,13 +87,13 @@ public class XmlServiceTests {
 
   @Test
   public void putWrappedLists() {
-    AppleBarrel barrel = client.xmls().getWrappedListsAsync().block();
-    client.xmls().putWrappedListsAsync(barrel).block();
+    AppleBarrel barrel = client.getXmls().getWrappedListsAsync().block();
+    client.getXmls().putWrappedListsAsync(barrel).block();
   }
 
   @Test
   public void getRootList() {
-    List<Banana> bananas = client.xmls().getRootListAsync().block();
+    List<Banana> bananas = client.getXmls().getRootListAsync().block();
     assertNotNull(bananas);
     assertEquals(2, bananas.size());
 
@@ -108,7 +108,7 @@ public class XmlServiceTests {
 
   @Test
   public void getItemWithEmptyChildElement() {
-    Banana banana = client.xmls().getEmptyChildElementAsync().block();
+    Banana banana = client.getXmls().getEmptyChildElementAsync().block();
     assertNotNull(banana);
 
     assertEquals("Unknown Banana", banana.getName());
@@ -118,32 +118,32 @@ public class XmlServiceTests {
 
   @Test
   public void putItemWithEmptyChildElement() {
-    Banana banana = client.xmls().getEmptyChildElementAsync().block();
-    client.xmls().putEmptyChildElementAsync(banana).block();
+    Banana banana = client.getXmls().getEmptyChildElementAsync().block();
+    client.getXmls().putEmptyChildElementAsync(banana).block();
   }
 
   @Test
   public void putRootList() {
-    List<Banana> bananas = client.xmls().getRootListAsync().block();
-    client.xmls().putRootListAsync(bananas).block();
+    List<Banana> bananas = client.getXmls().getRootListAsync().block();
+    client.getXmls().putRootListAsync(bananas).block();
   }
 
   @Test
   public void getEmptyRootList() {
-    List<Banana> bananas = client.xmls().getEmptyRootListAsync().block();
+    List<Banana> bananas = client.getXmls().getEmptyRootListAsync().block();
     assertNotNull(bananas);
     assertEquals(0, bananas.size());
   }
 
   @Test
   public void putEmptyRootList() {
-    List<Banana> bananas = client.xmls().getEmptyRootListAsync().block();
-    client.xmls().putEmptyRootListAsync(bananas).block();
+    List<Banana> bananas = client.getXmls().getEmptyRootListAsync().block();
+    client.getXmls().putEmptyRootListAsync(bananas).block();
   }
 
   @Test
   public void testResponseHeaders() {
-    XmlsGetHeadersHeaders headers = client.xmls().getHeadersWithResponseAsync().block().getDeserializedHeaders();
+    XmlsGetHeadersHeaders headers = client.getXmls().getHeadersWithResponseAsync().block().getDeserializedHeaders();
     assertEquals("custom-value", headers.getCustomHeader());
   }
 }

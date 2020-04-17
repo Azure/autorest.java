@@ -109,7 +109,7 @@ public final class AutoRestUrlTestService {
      * 
      * @return the Paths object.
      */
-    public Paths paths() {
+    public Paths getPaths() {
         return this.paths;
     }
 
@@ -123,7 +123,7 @@ public final class AutoRestUrlTestService {
      * 
      * @return the Queries object.
      */
-    public Queries queries() {
+    public Queries getQueries() {
         return this.queries;
     }
 
@@ -137,7 +137,7 @@ public final class AutoRestUrlTestService {
      * 
      * @return the PathItems object.
      */
-    public PathItems pathItems() {
+    public PathItems getPathItems() {
         return this.pathItems;
     }
 

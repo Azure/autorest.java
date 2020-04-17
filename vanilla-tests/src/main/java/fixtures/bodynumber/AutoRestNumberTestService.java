@@ -59,7 +59,7 @@ public final class AutoRestNumberTestService {
      * 
      * @return the Numbers object.
      */
-    public Numbers numbers() {
+    public Numbers getNumbers() {
         return this.numbers;
     }
 

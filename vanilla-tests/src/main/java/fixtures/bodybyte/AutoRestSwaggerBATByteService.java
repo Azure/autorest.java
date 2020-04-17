@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATByteService {
      * 
      * @return the Bytes object.
      */
-    public Bytes bytes() {
+    public Bytes getBytes() {
         return this.bytes;
     }
 

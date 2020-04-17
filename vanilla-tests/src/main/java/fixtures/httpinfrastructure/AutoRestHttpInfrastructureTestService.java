@@ -59,7 +59,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpFailures object.
      */
-    public HttpFailures httpFailures() {
+    public HttpFailures getHttpFailures() {
         return this.httpFailures;
     }
 
@@ -73,7 +73,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpSuccess object.
      */
-    public HttpSuccess httpSuccess() {
+    public HttpSuccess getHttpSuccess() {
         return this.httpSuccess;
     }
 
@@ -87,7 +87,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpRedirects object.
      */
-    public HttpRedirects httpRedirects() {
+    public HttpRedirects getHttpRedirects() {
         return this.httpRedirects;
     }
 
@@ -101,7 +101,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpClientFailures object.
      */
-    public HttpClientFailures httpClientFailures() {
+    public HttpClientFailures getHttpClientFailures() {
         return this.httpClientFailures;
     }
 
@@ -115,7 +115,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpServerFailures object.
      */
-    public HttpServerFailures httpServerFailures() {
+    public HttpServerFailures getHttpServerFailures() {
         return this.httpServerFailures;
     }
 
@@ -129,7 +129,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the HttpRetrys object.
      */
-    public HttpRetrys httpRetrys() {
+    public HttpRetrys getHttpRetrys() {
         return this.httpRetrys;
     }
 
@@ -143,7 +143,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * 
      * @return the MultipleResponses object.
      */
-    public MultipleResponses multipleResponses() {
+    public MultipleResponses getMultipleResponses() {
         return this.multipleResponses;
     }
 

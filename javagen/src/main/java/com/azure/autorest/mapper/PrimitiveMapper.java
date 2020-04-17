@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.ByteArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DateTimeSchema;
 import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
+import com.azure.autorest.extension.base.model.codemodel.TimeSchema;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -59,6 +60,10 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 } else {
                     iType = ClassType.DateTime;
                 }
+                break;
+            case TIME:
+                TimeSchema timeSchema = (TimeSchema) primaryType;
+                iType = ClassType.String;
                 break;
 //            case KnownPrimaryType.DateTimeRfc1123:
 //                iType = ClassType.DateTimeRfc1123;

@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATHeaderService {
      * 
      * @return the Headers object.
      */
-    public Headers headers() {
+    public Headers getHeaders() {
         return this.headers;
     }
 

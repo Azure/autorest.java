@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATFileService {
      * 
      * @return the Files object.
      */
-    public Files files() {
+    public Files getFiles() {
         return this.files;
     }
 

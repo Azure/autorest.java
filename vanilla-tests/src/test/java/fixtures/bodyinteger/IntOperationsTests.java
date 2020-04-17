@@ -25,7 +25,7 @@ public class IntOperationsTests {
   @Test
   public void getNull() {
     try {
-      client.ints().getNull();
+      client.getInts().getNull();
       Assert.fail();
     } catch (NullPointerException e) {
       // expected
@@ -34,14 +34,14 @@ public class IntOperationsTests {
 
   @Test
   public void getNullAsync() {
-    Integer i = client.ints().getNullAsync().block();
+    Integer i = client.getInts().getNullAsync().block();
     Assert.assertNull(i);
   }
 
   @Test
   public void getInvalid() {
     try {
-      client.ints().getInvalid();
+      client.getInts().getInvalid();
       Assert.fail();
     } catch (Exception exception) {
       Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
@@ -51,7 +51,7 @@ public class IntOperationsTests {
   @Test
   public void getOverflowInt32() {
     try {
-      client.ints().getOverflowInt32();
+      client.getInts().getOverflowInt32();
       Assert.fail();
     } catch (Exception exception) {
       Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
@@ -61,7 +61,7 @@ public class IntOperationsTests {
   @Test
   public void getUnderflowInt32() {
     try {
-      client.ints().getUnderflowInt32();
+      client.getInts().getUnderflowInt32();
       Assert.fail();
     } catch (Exception exception) {
       Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
@@ -71,7 +71,7 @@ public class IntOperationsTests {
   @Test
   public void getOverflowInt64() {
     try {
-      long value = client.ints().getOverflowInt64();
+      long value = client.getInts().getOverflowInt64();
       Assert.assertEquals(Long.MAX_VALUE, value);
     } catch (Exception exception) {
       Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
@@ -81,7 +81,7 @@ public class IntOperationsTests {
   @Test
   public void getUnderflowInt64() {
     try {
-      long value = client.ints().getUnderflowInt64();
+      long value = client.getInts().getUnderflowInt64();
       Assert.assertEquals(Long.MIN_VALUE, value);
     } catch (Exception exception) {
       Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
@@ -90,43 +90,43 @@ public class IntOperationsTests {
 
   @Test
   public void putMax32() throws Exception {
-    client.ints().putMax32Async(Integer.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
+    client.getInts().putMax32Async(Integer.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
 
   @Test
   public void putMax64() throws Exception {
-    client.ints().putMax64Async(Long.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
+    client.getInts().putMax64Async(Long.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
 
   @Test
   public void putMin32() throws Exception {
-    client.ints().putMin32Async(Integer.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
+    client.getInts().putMin32Async(Integer.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
 
   @Test
   public void putMin64() throws Exception {
-    client.ints().putMin64Async(Long.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
+    client.getInts().putMin64Async(Long.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
 
   @Test
   public void getUnixTime() {
-    OffsetDateTime result = client.ints().getUnixTime();
+    OffsetDateTime result = client.getInts().getUnixTime();
     Assert.assertEquals(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC), result);
   }
 
   @Test
   public void putUnixTimeDate() {
-    client.ints().putUnixTimeDate(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC));
+    client.getInts().putUnixTimeDate(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC));
   }
 
   @Test
   public void getInvalidUnixTime() {
     try {
-      client.ints().getInvalidUnixTime();
+      client.getInts().getInvalidUnixTime();
       Assert.fail();
     } catch (RuntimeException e) {
       Assert.assertTrue(e.getMessage().contains("HTTP response has a malformed body"));
@@ -135,6 +135,6 @@ public class IntOperationsTests {
 
   @Test
   public void getNullUnixTime() {
-    Assert.assertNull(client.ints().getNullUnixTime());
+    Assert.assertNull(client.getInts().getNullUnixTime());
   }
 }

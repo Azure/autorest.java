@@ -29,6 +29,6 @@ public class RuntimeTests {
                 .buildClient();
         Assertions.assertNotNull(storageManagementClient.getHttpPipeline());
         Assertions.assertEquals(MOCK_SUBSCRIPTION_ID, storageManagementClient.getSubscriptionId());
-        Assertions.assertNotNull(storageManagementClient.storageAccounts());
+        Assertions.assertNotNull(storageManagementClient.getStorageAccounts());
     }
 }

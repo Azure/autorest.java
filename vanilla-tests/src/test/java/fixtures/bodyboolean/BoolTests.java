@@ -18,7 +18,7 @@ public class BoolTests {
     @Test
     public void getNull() throws Exception {
         try {
-            boolean b = client.bools().getNull();
+            boolean b = client.getBools().getNull();
             fail();
         } catch (NullPointerException e) {
             // expected
@@ -28,7 +28,7 @@ public class BoolTests {
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.bools().getInvalid();
+            client.getBools().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
@@ -38,23 +38,23 @@ public class BoolTests {
 
     @Test
     public void getTrue() throws Exception {
-        boolean result = client.bools().getTrue();
+        boolean result = client.getBools().getTrue();
         Assert.assertTrue(result);
     }
 
     @Test
     public void getFalse() throws Exception {
-        boolean result = client.bools().getFalse();
+        boolean result = client.getBools().getFalse();
         Assert.assertFalse(result);
     }
 
     @Test
     public void putTrue() throws Exception {
-        client.bools().putTrueWithResponseAsync().block();
+        client.getBools().putTrueWithResponseAsync().block();
     }
 
     @Test
     public void putFalse() throws Exception {
-        client.bools().putFalseWithResponseAsync().block();
+        client.getBools().putFalseWithResponseAsync().block();
     }
 }

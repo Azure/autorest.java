@@ -15,17 +15,17 @@ public class HeadExceptionsOperationsTests {
 
     @Test
     public void head200() {
-        Assert.assertEquals(200, client.headExceptions().head200WithResponseAsync().block().getStatusCode());
+        Assert.assertEquals(200, client.getHeadExceptions().head200WithResponseAsync().block().getStatusCode());
     }
 
     @Test
     public void head204() {
-        Assert.assertEquals(204, client.headExceptions().head204WithResponseAsync().block().getStatusCode());
+        Assert.assertEquals(204, client.getHeadExceptions().head204WithResponseAsync().block().getStatusCode());
     }
 
     @Test(expected = HttpResponseException.class)
     public void head404() {
-        client.headExceptions().head404();  // status code other than 204 is error
+        client.getHeadExceptions().head404();  // status code other than 204 is error
         Assert.fail();
     }
 }

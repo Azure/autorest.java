@@ -18,13 +18,13 @@ public class DateOperationsTests {
 
     @Test
     public void getNull() {
-        assertNull(client.dates().getNull());
+        assertNull(client.getDates().getNull());
     }
 
     @Test
     public void getInvalidDate() {
         try {
-            client.dates().getInvalidDate();
+            client.getDates().getInvalidDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -34,7 +34,7 @@ public class DateOperationsTests {
     @Test
     public void getOverflowDate() {
         try {
-            client.dates().getOverflowDate();
+            client.getDates().getOverflowDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -44,7 +44,7 @@ public class DateOperationsTests {
     @Test
     public void getUnderflowDate() {
         try {
-            client.dates().getUnderflowDate();
+            client.getDates().getUnderflowDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -54,26 +54,26 @@ public class DateOperationsTests {
     @Test
     public void putMaxDate() {
         LocalDate body = LocalDate.of(9999, 12, 31);
-        client.dates().putMaxDate(body);
+        client.getDates().putMaxDate(body);
     }
 
     @Test
     public void getMaxDate() {
         LocalDate expected = LocalDate.of(9999, 12, 31);
-        LocalDate result = client.dates().getMaxDate();
+        LocalDate result = client.getDates().getMaxDate();
         assertEquals(expected, result);
     }
 
     @Test
     public void putMinDate() {
         LocalDate body = LocalDate.of(1, 1, 1);
-        client.dates().putMinDate(body);
+        client.getDates().putMinDate(body);
     }
 
     @Test
     public void getMinDate() {
         LocalDate expected = LocalDate.of(1, 1, 1);
-        LocalDate result = client.dates().getMinDate();
+        LocalDate result = client.getDates().getMinDate();
         assertEquals(expected, result);
     }
 }

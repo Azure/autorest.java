@@ -47,13 +47,13 @@ public class HeaderOperationsTests {
 
     @Ignore("User agent is being overwritten in UserAgentPolicy")
     public void paramExistingKey() {
-        client.headers().paramExistingKeyWithResponseAsync("overwrite").block();
+        client.getHeaders().paramExistingKeyWithResponseAsync("overwrite").block();
     }
 
     @Test
     public void responseExistingKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseExistingKeyWithResponseAsync()
+        client.getHeaders().responseExistingKeyWithResponseAsync()
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("User-Agent") != null) {
@@ -67,7 +67,7 @@ public class HeaderOperationsTests {
     @Test
     public void paramProtectedKey() {
         try {
-            client.headers().paramProtectedKeyWithResponseAsync("text/html").block();
+            client.getHeaders().paramProtectedKeyWithResponseAsync("text/html").block();
         } catch (RuntimeException ex) {
             // OkHttp can actually overwrite header "Content-Type"
         }
@@ -76,7 +76,7 @@ public class HeaderOperationsTests {
     @Test
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseProtectedKeyWithResponseAsync()
+        client.getHeaders().responseProtectedKeyWithResponseAsync()
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("Content-Type") != null) {
@@ -89,14 +89,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramInteger() {
-        client.headers().paramIntegerWithResponseAsync("positive", 1).block();
-        client.headers().paramIntegerWithResponseAsync("negative", -2).block();
+        client.getHeaders().paramIntegerWithResponseAsync("positive", 1).block();
+        client.getHeaders().paramIntegerWithResponseAsync("negative", -2).block();
     }
 
     @Test
     public void responseInteger() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseIntegerWithResponseAsync("positive")
+        client.getHeaders().responseIntegerWithResponseAsync("positive")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -106,7 +106,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseIntegerWithResponseAsync("negative")
+        client.getHeaders().responseIntegerWithResponseAsync("negative")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -119,14 +119,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramLong() {
-        client.headers().paramLongWithResponseAsync("positive", 105).block();
-        client.headers().paramLongWithResponseAsync("negative", -2).block();
+        client.getHeaders().paramLongWithResponseAsync("positive", 105).block();
+        client.getHeaders().paramLongWithResponseAsync("negative", -2).block();
     }
 
     @Test
     public void responseLong() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseLongWithResponseAsync("positive")
+        client.getHeaders().responseLongWithResponseAsync("positive")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -136,7 +136,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseLongWithResponseAsync("negative")
+        client.getHeaders().responseLongWithResponseAsync("negative")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -149,14 +149,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramFloat() {
-        client.headers().paramFloatWithResponseAsync("positive", 0.07f).block();
-        client.headers().paramFloatWithResponseAsync("negative", -3.0f).block();
+        client.getHeaders().paramFloatWithResponseAsync("positive", 0.07f).block();
+        client.getHeaders().paramFloatWithResponseAsync("negative", -3.0f).block();
     }
 
     @Test
     public void responseFloat() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseFloatWithResponseAsync("positive")
+        client.getHeaders().responseFloatWithResponseAsync("positive")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -166,7 +166,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseFloatWithResponseAsync("negative")
+        client.getHeaders().responseFloatWithResponseAsync("negative")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -179,14 +179,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDouble() {
-        client.headers().paramDoubleWithResponseAsync("positive", 7e120).block();
-        client.headers().paramDoubleWithResponseAsync("negative", -3.0).block();
+        client.getHeaders().paramDoubleWithResponseAsync("positive", 7e120).block();
+        client.getHeaders().paramDoubleWithResponseAsync("negative", -3.0).block();
     }
 
     @Test
     public void responseDouble() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDoubleWithResponseAsync("positive")
+        client.getHeaders().responseDoubleWithResponseAsync("positive")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -196,7 +196,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDoubleWithResponseAsync("negative")
+        client.getHeaders().responseDoubleWithResponseAsync("negative")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -209,19 +209,19 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramBool() {
-        client.headers().paramBoolWithResponseAsync("true", true).block();
-        client.headers().paramBoolWithResponseAsync("false", false).block();
+        client.getHeaders().paramBoolWithResponseAsync("true", true).block();
+        client.getHeaders().paramBoolWithResponseAsync("false", false).block();
     }
 
     @Test
     public void responseBool() throws Exception {
-        HeadersResponseBoolResponse response = client.headers().responseBoolWithResponseAsync("true").block();
+        HeadersResponseBoolResponse response = client.getHeaders().responseBoolWithResponseAsync("true").block();
         Map<String, String> headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("true", headers.get("value"));
         }
 
-        response = client.headers().responseBoolWithResponseAsync("false").block();
+        response = client.getHeaders().responseBoolWithResponseAsync("false").block();
         headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("false", headers.get("value"));
@@ -230,15 +230,15 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramString() {
-        client.headers().paramStringWithResponseAsync("valid", "The quick brown fox jumps over the lazy dog").block();
-        client.headers().paramStringWithResponseAsync("null", null).block();
-        client.headers().paramStringWithResponseAsync("empty", "").block();
+        client.getHeaders().paramStringWithResponseAsync("valid", "The quick brown fox jumps over the lazy dog").block();
+        client.getHeaders().paramStringWithResponseAsync("null", null).block();
+        client.getHeaders().paramStringWithResponseAsync("empty", "").block();
     }
 
     @Test
     public void responseString() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseStringWithResponseAsync("valid")
+        client.getHeaders().responseStringWithResponseAsync("valid")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -248,7 +248,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseStringWithResponseAsync("null")
+        client.getHeaders().responseStringWithResponseAsync("null")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -258,7 +258,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseStringWithResponseAsync("empty")
+        client.getHeaders().responseStringWithResponseAsync("empty")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -271,14 +271,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDate() {
-        client.headers().paramDateWithResponseAsync("valid", LocalDate.of(2010, 1, 1)).block();
-        client.headers().paramDateWithResponseAsync("min", LocalDate.of(1, 1, 1)).block();
+        client.getHeaders().paramDateWithResponseAsync("valid", LocalDate.of(2010, 1, 1)).block();
+        client.getHeaders().paramDateWithResponseAsync("min", LocalDate.of(1, 1, 1)).block();
     }
 
     @Test
     public void responseDate() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDateWithResponseAsync("valid")
+        client.getHeaders().responseDateWithResponseAsync("valid")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -288,7 +288,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDateWithResponseAsync("min")
+        client.getHeaders().responseDateWithResponseAsync("min")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -301,13 +301,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDuration() {
-        client.headers().paramDurationWithResponseAsync("valid", Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11)).block();
+        client.getHeaders().paramDurationWithResponseAsync("valid", Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11)).block();
     }
 
     @Test
     public void responseDuration() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDurationWithResponseAsync("valid")
+        client.getHeaders().responseDurationWithResponseAsync("valid")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -320,19 +320,19 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDatetimeRfc1123() {
-        client.headers().paramDatetimeRfc1123WithResponseAsync("valid", OffsetDateTime.of(2010, 1, 1, 12, 34, 56, 0, ZoneOffset.UTC)).block();
-        client.headers().paramDatetimeRfc1123WithResponseAsync("min", OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)).block();
+        client.getHeaders().paramDatetimeRfc1123WithResponseAsync("valid", OffsetDateTime.of(2010, 1, 1, 12, 34, 56, 0, ZoneOffset.UTC)).block();
+        client.getHeaders().paramDatetimeRfc1123WithResponseAsync("min", OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)).block();
     }
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
-        HeadersResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithResponseAsync("valid").block();
+        HeadersResponseDatetimeRfc1123Response response = client.getHeaders().responseDatetimeRfc1123WithResponseAsync("valid").block();
         Map<String, String> headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
         }
 
-        response = client.headers().responseDatetimeRfc1123WithResponseAsync("min").block();
+        response = client.getHeaders().responseDatetimeRfc1123WithResponseAsync("min").block();
         headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
@@ -341,18 +341,18 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDatetime() {
-        client.headers().paramDatetimeWithResponseAsync("valid", OffsetDateTime.of(2010, 1, 1, 12, 34, 56, 0, ZoneOffset.UTC)).block();
-        client.headers().paramDatetimeWithResponseAsync("min", OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)).block();
+        client.getHeaders().paramDatetimeWithResponseAsync("valid", OffsetDateTime.of(2010, 1, 1, 12, 34, 56, 0, ZoneOffset.UTC)).block();
+        client.getHeaders().paramDatetimeWithResponseAsync("min", OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)).block();
     }
 
     @Test
     public void responseDatetime() throws Exception {
-        HeadersResponseDatetimeResponse response = client.headers().responseDatetimeWithResponseAsync("valid").block();
+        HeadersResponseDatetimeResponse response = client.getHeaders().responseDatetimeWithResponseAsync("valid").block();
         Map<String, String> headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
         }
-        response = client.headers().responseDatetimeWithResponseAsync("min").block();
+        response = client.getHeaders().responseDatetimeWithResponseAsync("min").block();
         headers = response.getHeaders().toMap();
         if (headers.get("value") != null) {
             Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
@@ -361,13 +361,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramByte() {
-        client.headers().paramByteWithResponseAsync("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(Charset.forName("UTF-8"))).block();
+        client.getHeaders().paramByteWithResponseAsync("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(Charset.forName("UTF-8"))).block();
     }
 
     @Test
     public void responseByte() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseByteWithResponseAsync("valid")
+        client.getHeaders().responseByteWithResponseAsync("valid")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -382,14 +382,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramEnum() {
-        client.headers().paramEnumWithResponseAsync("valid", GreyscaleColors.GREY).block();
-        client.headers().paramEnumWithResponseAsync("null", null).block();
+        client.getHeaders().paramEnumWithResponseAsync("valid", GreyscaleColors.GREY).block();
+        client.getHeaders().paramEnumWithResponseAsync("null", null).block();
     }
 
     @Test
     public void responseEnum() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseEnumWithResponseAsync("valid")
+        client.getHeaders().responseEnumWithResponseAsync("valid")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -400,7 +400,7 @@ public class HeaderOperationsTests {
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseEnumWithResponseAsync("null")
+        client.getHeaders().responseEnumWithResponseAsync("null")
                 .subscribe(response -> {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
@@ -413,6 +413,6 @@ public class HeaderOperationsTests {
 
     @Test
     public void customRequestId() {
-        client.headers().customRequestId();
+        client.getHeaders().customRequestId();
     }
 }

@@ -28,7 +28,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
-    private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime);
+    private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
+        , ClassType.UnixTimeDateTime);
     private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
     private static ProxyMethodMapper instance = new ProxyMethodMapper();
 

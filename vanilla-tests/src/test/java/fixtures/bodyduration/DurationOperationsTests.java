@@ -19,13 +19,13 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() {
-        assertNull(client.durations().getNull());
+        assertNull(client.getDurations().getNull());
     }
 
     @Test
     public void getInvalid() {
         try {
-            client.durations().getInvalid();
+            client.getDurations().getInvalid();
             fail();
         }
         catch (RuntimeException e) {
@@ -36,12 +36,12 @@ public class DurationOperationsTests {
     @Test
     @Ignore("The duration sent from the test server includes year and month values, which our durations don't support.")
     public void getPositiveDuration() {
-        client.durations().getPositiveDuration();
+        client.getDurations().getPositiveDuration();
     }
 
     @Test
     @Ignore("The test server expects the duration to have a year and month component, which our durations don't support.")
     public void putPositiveDuration() {
-        client.durations().putPositiveDuration(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMinutes(11));
+        client.getDurations().putPositiveDuration(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMinutes(11));
     }
 }

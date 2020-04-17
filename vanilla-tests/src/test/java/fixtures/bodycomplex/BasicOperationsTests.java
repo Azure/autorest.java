@@ -17,7 +17,7 @@ public class BasicOperationsTests {
 
     @Test
     public void getValid() throws Exception {
-        Basic result = client.basics().getValid();
+        Basic result = client.getBasics().getValid();
         Assert.assertEquals(2, result.getId().intValue());
         Assert.assertEquals("abc", result.getName());
         Assert.assertEquals(CMYKColors.YELLOW, result.getColor());
@@ -29,13 +29,13 @@ public class BasicOperationsTests {
         body.setId(2);
         body.setName("abc");
         body.setColor(CMYKColors.MAGENTA);
-        client.basics().putValidWithResponseAsync(body).block();
+        client.getBasics().putValidWithResponseAsync(body).block();
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.basics().getInvalid();
+            client.getBasics().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
@@ -45,18 +45,18 @@ public class BasicOperationsTests {
 
     @Test
     public void getEmpty() throws Exception {
-        Basic result = client.basics().getEmpty();
+        Basic result = client.getBasics().getEmpty();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.basics().getNull();
+        Basic result = client.getBasics().getNull();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.basics().getNotProvided());
+        Assert.assertNull(client.getBasics().getNotProvided());
     }
 }

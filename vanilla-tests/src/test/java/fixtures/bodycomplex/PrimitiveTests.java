@@ -30,7 +30,7 @@ public class PrimitiveTests {
 
     @Test
     public void getInt() throws Exception {
-        IntWrapper result = client.primitives().getInt();
+        IntWrapper result = client.getPrimitives().getInt();
         Assert.assertEquals(-1, result.getField1().intValue());
         Assert.assertEquals(2, result.getField2().intValue());
     }
@@ -40,12 +40,12 @@ public class PrimitiveTests {
         IntWrapper body = new IntWrapper();
         body.setField1(-1);
         body.setField2(2);
-        client.primitives().putIntWithResponseAsync(body).block();
+        client.getPrimitives().putIntWithResponseAsync(body).block();
     }
 
     @Test
     public void getLong() throws Exception {
-        LongWrapper result = client.primitives().getLong();
+        LongWrapper result = client.getPrimitives().getLong();
         Assert.assertEquals(1099511627775L, result.getField1().longValue());
         Assert.assertEquals(-999511627788L, result.getField2().longValue());
     }
@@ -55,12 +55,12 @@ public class PrimitiveTests {
         LongWrapper body = new LongWrapper();
         body.setField1(1099511627775L);
         body.setField2(-999511627788L);
-        client.primitives().putLongWithResponseAsync(body).block();
+        client.getPrimitives().putLongWithResponseAsync(body).block();
     }
 
     @Test
     public void getFloat() throws Exception {
-        FloatWrapper result = client.primitives().getFloat();
+        FloatWrapper result = client.getPrimitives().getFloat();
         Assert.assertEquals(1.05f, result.getField1(), 0f);
         Assert.assertEquals(-0.003f, result.getField2(), 0f);
     }
@@ -70,12 +70,12 @@ public class PrimitiveTests {
         FloatWrapper body = new FloatWrapper();
         body.setField1(1.05f);
         body.setField2(-0.003f);
-        client.primitives().putFloatWithResponseAsync(body).block();
+        client.getPrimitives().putFloatWithResponseAsync(body).block();
     }
 
     @Test
     public void getDouble() throws Exception {
-        DoubleWrapper result = client.primitives().getDouble();
+        DoubleWrapper result = client.getPrimitives().getDouble();
         Assert.assertEquals(3e-100, result.getField1(), 0f);
         Assert.assertEquals(-0.000000000000000000000000000000000000000000000000000000005,
                 result.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(),
@@ -87,12 +87,12 @@ public class PrimitiveTests {
         DoubleWrapper body = new DoubleWrapper();
         body.setField1(3e-100);
         body.setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(-5e-57);
-        client.primitives().putDoubleWithResponseAsync(body).block();
+        client.getPrimitives().putDoubleWithResponseAsync(body).block();
     }
 
     @Test
     public void getBool() throws Exception {
-        BooleanWrapper result = client.primitives().getBool();
+        BooleanWrapper result = client.getPrimitives().getBool();
         Assert.assertEquals(true, result.isFieldTrue());
         Assert.assertEquals(false, result.isFieldFalse());
     }
@@ -102,12 +102,12 @@ public class PrimitiveTests {
         BooleanWrapper body = new BooleanWrapper();
         body.setFieldFalse(false);
         body.setFieldTrue(true);
-        client.primitives().putBoolWithResponseAsync(body).block();
+        client.getPrimitives().putBoolWithResponseAsync(body).block();
     }
 
     @Test
     public void getString() throws Exception {
-        StringWrapper result = client.primitives().getString();
+        StringWrapper result = client.getPrimitives().getString();
         Assert.assertEquals("goodrequest", result.getField());
         Assert.assertEquals("", result.getEmpty());
         Assert.assertEquals(null, result.getNullProperty());
@@ -118,12 +118,12 @@ public class PrimitiveTests {
         StringWrapper body = new StringWrapper();
         body.setField("goodrequest");
         body.setEmpty("");
-        client.primitives().putStringWithResponseAsync(body).block();
+        client.getPrimitives().putStringWithResponseAsync(body).block();
     }
 
     @Test
     public void getDate() throws Exception {
-        DateWrapper result = client.primitives().getDate();
+        DateWrapper result = client.getPrimitives().getDate();
         Assert.assertEquals(LocalDate.of(1, 1, 1), result.getField());
         Assert.assertEquals(LocalDate.of(2016, 2, 29), result.getLeap());
     }
@@ -133,12 +133,12 @@ public class PrimitiveTests {
         DateWrapper body = new DateWrapper();
         body.setField(LocalDate.of(1, 1, 1));
         body.setLeap(LocalDate.of(2016, 2, 29));
-        client.primitives().putDateWithResponseAsync(body).block();
+        client.getPrimitives().putDateWithResponseAsync(body).block();
     }
 
     @Test
     public void getDateTime() throws Exception {
-        DatetimeWrapper result = client.primitives().getDateTime();
+        DatetimeWrapper result = client.getPrimitives().getDateTime();
         Assert.assertEquals(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC), result.getField());
         Assert.assertEquals(OffsetDateTime.of(2015, 5, 18, 18, 38, 0, 0, ZoneOffset.UTC), result.getNow());
     }
@@ -148,12 +148,12 @@ public class PrimitiveTests {
         DatetimeWrapper body = new DatetimeWrapper();
         body.setField(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC));
         body.setNow(OffsetDateTime.of(2015, 5, 18, 18, 38, 0, 0, ZoneOffset.UTC));
-        client.primitives().putDateTimeWithResponseAsync(body).block();
+        client.getPrimitives().putDateTimeWithResponseAsync(body).block();
     }
 
     @Test
     public void getDateTimeRfc1123() throws Exception {
-        Datetimerfc1123Wrapper result = client.primitives().getDateTimeRfc1123();
+        Datetimerfc1123Wrapper result = client.getPrimitives().getDateTimeRfc1123();
         Assert.assertEquals(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC), result.getField());
         Assert.assertEquals(OffsetDateTime.of(2015, 5, 18, 11, 38, 0, 0, ZoneOffset.UTC), result.getNow());
     }
@@ -163,12 +163,12 @@ public class PrimitiveTests {
         Datetimerfc1123Wrapper body = new Datetimerfc1123Wrapper();
         body.setField(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC));
         body.setNow(OffsetDateTime.of(2015, 5, 18, 11, 38, 0, 0, ZoneOffset.UTC));
-        client.primitives().putDateTimeRfc1123WithResponseAsync(body).block();
+        client.getPrimitives().putDateTimeRfc1123WithResponseAsync(body).block();
     }
 
     @Test
     public void getDuration() throws Exception {
-        DurationWrapper result = client.primitives().getDuration();
+        DurationWrapper result = client.getPrimitives().getDuration();
         Assert.assertEquals(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11), result.getField());
     }
 
@@ -176,12 +176,12 @@ public class PrimitiveTests {
     public void putDuration() throws Exception {
         DurationWrapper body = new DurationWrapper();
         body.setField(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11));
-        client.primitives().putDurationWithResponseAsync(body).block();
+        client.getPrimitives().putDurationWithResponseAsync(body).block();
     }
 
     @Test
     public void getByte() throws Exception {
-        ByteWrapper result = client.primitives().getByte();
+        ByteWrapper result = client.getPrimitives().getByte();
         byte[] expected = new byte[] {
                 (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 0,
                 (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
@@ -197,6 +197,6 @@ public class PrimitiveTests {
                 (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
         };
         body.setField(byteArray);
-        client.primitives().putByteWithResponseAsync(body).block();
+        client.getPrimitives().putByteWithResponseAsync(body).block();
     }
 }

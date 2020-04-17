@@ -59,7 +59,7 @@ public final class AutoRestSwaggerBATXMLService {
      * 
      * @return the Xmls object.
      */
-    public Xmls xmls() {
+    public Xmls getXmls() {
         return this.xmls;
     }
 

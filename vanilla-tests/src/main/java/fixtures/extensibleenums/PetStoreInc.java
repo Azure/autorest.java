@@ -59,7 +59,7 @@ public final class PetStoreInc {
      * 
      * @return the Pets object.
      */
-    public Pets pets() {
+    public Pets getPets() {
         return this.pets;
     }
 

@@ -26,7 +26,7 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
         byte[] expected = Files.readAllBytes(resourcePath);
-        InputStream in = client.files().getFile();
+        InputStream in = client.getFiles().getFile();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int length;
@@ -44,7 +44,7 @@ public class FilesTests {
     @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
-        InputStream stream = client.files().getFileLarge();
+        InputStream stream = client.getFiles().getFileLarge();
         byte[] buffer = new byte[4096 * 1024];
         long skipped = 0;
         while (true) {
@@ -61,7 +61,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() throws Exception {
-        InputStream in = client.files().getEmptyFile();
+        InputStream in = client.getFiles().getEmptyFile();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int length;

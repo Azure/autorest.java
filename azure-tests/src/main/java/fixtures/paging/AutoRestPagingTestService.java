@@ -59,7 +59,7 @@ public final class AutoRestPagingTestService {
      * 
      * @return the Pagings object.
      */
-    public Pagings pagings() {
+    public Pagings getPagings() {
         return this.pagings;
     }
 
