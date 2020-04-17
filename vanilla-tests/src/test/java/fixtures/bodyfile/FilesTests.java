@@ -1,7 +1,6 @@
 package fixtures.bodyfile;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -21,7 +20,7 @@ public class FilesTests {
         client = new AutoRestSwaggerBATFileServiceBuilder().buildClient();
     }
 
-    @Ignore("Flaky! Run by itself works but run all tests with mvn fails")
+    @Test
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
@@ -41,7 +40,6 @@ public class FilesTests {
     }
 
     @Test
-    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         InputStream stream = client.getFiles().getFileLarge();
