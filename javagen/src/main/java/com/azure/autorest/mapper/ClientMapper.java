@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -82,10 +83,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
-        builder.models(autoRestModelTypes
-                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+        List<ClientModel> clientModels = autoRestModelTypes
+            .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
+        builder.models(clientModels);
 
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
@@ -122,7 +124,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
         }
         if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
-            && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())) {
+            && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
+            // add package-info models package only if the models package is not empty
+            && !clientModels.isEmpty()) {
             String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
             if (!packageInfos.containsKey(modelsPackage)) {
                 packageInfos.put(modelsPackage, new PackageInfo(
