@@ -143,7 +143,7 @@ public class JavaSettings
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
         this.generateClientInterfaces = generateClientInterfaces;
-        this.generateClientAsImpl = generateClientAsImpl || generateSyncAsyncClients;
+        this.generateClientAsImpl = generateClientAsImpl || generateSyncAsyncClients || generateClientInterfaces;
         this.implementationSubpackage = implementationSubpackage;
         this.modelsSubpackage = modelsSubpackage;
         this.customTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));

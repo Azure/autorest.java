@@ -15,7 +15,17 @@ npm i -g @autorest/autorest
 ```
 
 # Usage
-Clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
+To use the latest released preview(https://github.com/Azure/autorest.java/releases), run
+```bash
+autorest --java
+    --use:@autorest/java@4.0.x
+    --input-file:path/to/specs.json
+    --output-folder:where/to/generate/java/files
+    --namespace:specified.java.package
+```
+The first time running it will take a little longer to download and install all the components.
+
+To build from source code, clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
 
 ```bash
 mvn package -Dlocal
@@ -37,6 +47,26 @@ Java files will be generated under `where/to/generate/java/files/src/main/java/s
 
 To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shutdown the JVM and leave it orphaned. (which can be killed in the Task Manager)**
 
+# Settings
+Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/master/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
+
+|Option                                                                &nbsp;| Description |
+|------------------|-------------|
+|`--enable-xml`|Generates models and clients that can be sent in XML over the wire. Default is false|
+|`--client-side-validations`|Generate validations for required parameters and required model properties. Default is false.|
+|`--generate-client-as-impl`|Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.|
+|`--generate-client-interfaces`|Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.|
+|`--generate-sync-async-clients`|Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.|
+|`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
+|`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
+|`--add-context-parameter`|Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated proxy methods. Default is false.|
+|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the leading com.microsoft.rest.v3.Context parameter should also be included in generated client methods. Default is false.|
+|`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
+|`--required-parameter-client-methods`|Indicates whether client method overloads with only required parameters should be generated. Default is false.|
+|`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
+|`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
+|`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
+
 # Project structure
 ## extension-base
 This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).
@@ -44,7 +74,7 @@ This contains the base classes and utilities for creating an AutoRest extension 
 Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 
 ## javagen
-This contains the actually generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
+This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
 
 ## tests
 This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 
@@ -66,7 +96,7 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ### Autorest plugin configuration
-- Please don't edit this section unless you're re-configuring how the powershell extension plugs in to AutoRest
+- Please don't edit this section unless you're re-configuring how the Java extension plugs in to AutoRest
 AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
 
 #### Javagen
