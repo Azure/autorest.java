@@ -67,6 +67,11 @@ public class HttpRedirectTests {
     }
 
     @Test
+    public void put307() throws Exception {
+        client.getHttpRedirects().put307();
+    }
+
+    @Test
     public void patch307() throws Exception {
         client.getHttpRedirects().patch307();
     }

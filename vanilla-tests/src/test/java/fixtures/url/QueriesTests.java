@@ -93,6 +93,11 @@ public class QueriesTests {
     }
 
     @Test
+    public void stringUnicode() throws Exception {
+        client.getQueries().stringUnicode();
+    }
+
+    @Test
     public void stringUrlEncoded() throws Exception {
         client.getQueries().stringUrlEncoded();
     }
