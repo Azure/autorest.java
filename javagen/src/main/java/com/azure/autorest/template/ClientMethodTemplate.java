@@ -377,8 +377,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         if (returnType instanceof PrimitiveType) {
                             function.line("%s value = %s(%s).block();", returnType.asNullable(),
                                     clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
-                            function.methodReturn(String.format("value == null ? %s : value",
-                                    ((PrimitiveType) returnType).defaultValue()));
+                            function.ifBlock("value != null", ifAction -> {
+                                ifAction.methodReturn("value");
+                            }).elseBlock(elseAction -> {
+                                elseAction.line("throw new NullPointerException();");
+                            });
                         } else {
                             function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
                         }
