@@ -31,7 +31,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
     private static ModelTemplate _instance = new ModelTemplate();
 
-    private ModelTemplate() {
+    protected ModelTemplate() {
     }
 
     public static ModelTemplate getInstance() {
@@ -252,11 +252,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
-            if (model.getParentModelName() != null) {
+            boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
+
+            // javadoc
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
+                comment.description("Validates the instance.");
+
+                comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
+            });
+
+            if (validateOnParent) {
                 classBlock.annotation("Override");
             }
             classBlock.publicMethod("void validate()", methodBlock -> {
-                if (model.getParentModelName() != null) {
+                if (validateOnParent) {
                     methodBlock.line("super.validate();");
                 }
                 for (ClientModelProperty property : model.getProperties()) {
@@ -278,5 +287,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             });
         }
+    }
+
+    /**
+     * Extension for model validation on parent.
+     *
+     * @param parentModelName the parent model name
+     * @return Whether to call validate on parent model.
+     */
+    protected boolean validateOnParentModel(String parentModelName) {
+        return parentModelName != null;
     }
 }
