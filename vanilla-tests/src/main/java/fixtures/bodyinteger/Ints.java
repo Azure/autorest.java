@@ -170,7 +170,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getNull() {
-        return getNullAsync().block();
+        Integer value = getNullAsync().block();
+        return value == null ? 0 : value;
     }
 
     /**
@@ -216,7 +217,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getInvalid() {
-        return getInvalidAsync().block();
+        Integer value = getInvalidAsync().block();
+        return value == null ? 0 : value;
     }
 
     /**
@@ -262,7 +264,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getOverflowInt32() {
-        return getOverflowInt32Async().block();
+        Integer value = getOverflowInt32Async().block();
+        return value == null ? 0 : value;
     }
 
     /**
@@ -308,7 +311,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getUnderflowInt32() {
-        return getUnderflowInt32Async().block();
+        Integer value = getUnderflowInt32Async().block();
+        return value == null ? 0 : value;
     }
 
     /**
@@ -354,7 +358,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getOverflowInt64() {
-        return getOverflowInt64Async().block();
+        Long value = getOverflowInt64Async().block();
+        return value == null ? 0L : value;
     }
 
     /**
@@ -400,7 +405,8 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getUnderflowInt64() {
-        return getUnderflowInt64Async().block();
+        Long value = getUnderflowInt64Async().block();
+        return value == null ? 0L : value;
     }
 
     /**

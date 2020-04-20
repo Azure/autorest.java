@@ -216,7 +216,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getNull() {
-        return getNullAsync().block();
+        Float value = getNullAsync().block();
+        return value == null ? 0.0f : value;
     }
 
     /**
@@ -262,7 +263,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getInvalidFloat() {
-        return getInvalidFloatAsync().block();
+        Float value = getInvalidFloatAsync().block();
+        return value == null ? 0.0f : value;
     }
 
     /**
@@ -308,7 +310,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getInvalidDouble() {
-        return getInvalidDoubleAsync().block();
+        Double value = getInvalidDoubleAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
@@ -445,7 +448,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getBigFloat() {
-        return getBigFloatAsync().block();
+        Float value = getBigFloatAsync().block();
+        return value == null ? 0.0f : value;
     }
 
     /**
@@ -536,7 +540,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDouble() {
-        return getBigDoubleAsync().block();
+        Double value = getBigDoubleAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
@@ -622,7 +627,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalAsync().block();
+        Double value = getBigDoublePositiveDecimalAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
@@ -708,7 +714,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalAsync().block();
+        Double value = getBigDoubleNegativeDecimalAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
@@ -1065,7 +1072,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallFloat() {
-        return getSmallFloatAsync().block();
+        Double value = getSmallFloatAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
@@ -1156,7 +1164,8 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallDouble() {
-        return getSmallDoubleAsync().block();
+        Double value = getSmallDoubleAsync().block();
+        return value == null ? 0.0d : value;
     }
 
     /**
