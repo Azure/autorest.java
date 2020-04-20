@@ -171,7 +171,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getNull() {
         Integer value = getNullAsync().block();
-        return value == null ? 0 : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -218,7 +222,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getInvalid() {
         Integer value = getInvalidAsync().block();
-        return value == null ? 0 : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -265,7 +273,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getOverflowInt32() {
         Integer value = getOverflowInt32Async().block();
-        return value == null ? 0 : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -312,7 +324,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getUnderflowInt32() {
         Integer value = getUnderflowInt32Async().block();
-        return value == null ? 0 : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -359,7 +375,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getOverflowInt64() {
         Long value = getOverflowInt64Async().block();
-        return value == null ? 0L : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -406,7 +426,11 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getUnderflowInt64() {
         Long value = getUnderflowInt64Async().block();
-        return value == null ? 0L : value;
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
