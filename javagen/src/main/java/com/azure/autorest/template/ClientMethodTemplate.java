@@ -373,7 +373,15 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line(".block();");
                         });
                     } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
-                        function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                        IType returnType = clientMethod.getReturnValue().getType();
+                        if (returnType instanceof PrimitiveType) {
+                            function.line("%s value = %s(%s).block();", returnType.asNullable(),
+                                    clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                            function.methodReturn(String.format("value == null ? %s : value",
+                                    ((PrimitiveType) returnType).defaultValue()));
+                        } else {
+                            function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                        }
                     } else {
                         function.line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                     }
