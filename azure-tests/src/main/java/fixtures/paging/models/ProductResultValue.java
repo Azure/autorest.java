@@ -61,6 +61,11 @@ public final class ProductResultValue {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getValue() != null) {
             getValue().forEach(e -> e.validate());

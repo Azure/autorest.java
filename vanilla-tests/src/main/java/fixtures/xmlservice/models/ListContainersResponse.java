@@ -183,6 +183,11 @@ public final class ListContainersResponse {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getServiceEndpoint() == null) {
             throw new IllegalArgumentException("Missing required property serviceEndpoint in model ListContainersResponse");

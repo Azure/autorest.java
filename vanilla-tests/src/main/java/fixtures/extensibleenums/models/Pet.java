@@ -86,6 +86,11 @@ public final class Pet {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getIntEnum() == null) {
             throw new IllegalArgumentException("Missing required property intEnum in model Pet");

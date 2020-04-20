@@ -61,6 +61,11 @@ public final class DateWrapper {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
     }
 }
