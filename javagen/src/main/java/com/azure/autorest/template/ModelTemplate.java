@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -42,6 +43,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         model.addImportsTo(imports, settings);
+
+        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
 
         javaFile.declareImport(imports);
 
@@ -94,6 +99,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
+            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
+            }
+
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
 
             for (ClientModelProperty property : model.getProperties()) {
@@ -272,9 +281,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     String validation = property.getClientType().validate(property.getGetterName() + "()");
                     if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", property.getGetterName()), ifBlock -> {
-                            ifBlock.line(String.format(
-                                    "throw new IllegalArgumentException(\"Missing required property %s in model %s\");",
-                                    property.getName(), model.getName()));
+                            final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
+                            if (settings.shouldClientLogger()) {
+                                ifBlock.line(String.format(
+                                        "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
+                                        errorMessage));
+                            } else {
+                                ifBlock.line(String.format(
+                                        "throw new IllegalArgumentException(%s);",
+                                        errorMessage));
+                            }
                         });
                         if (validation != null) {
                             nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
