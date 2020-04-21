@@ -50,7 +50,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
 
         Set<String> imports = new HashSet<String>();
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+        if (settings.shouldClientLogger()) {
             imports.add(ClassType.ClientLogger.getFullName());
         }
 

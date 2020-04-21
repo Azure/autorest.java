@@ -33,7 +33,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+        if (settings.shouldClientLogger()) {
             imports.add(ClassType.ClientLogger.getFullName());
         }
 
