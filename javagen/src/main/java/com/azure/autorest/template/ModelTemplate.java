@@ -246,7 +246,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
-                    classBlock.privateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
+                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
                         methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock -> {
                            ifBlock.line("%s = new HashMap<>();", property.getName());
                         });

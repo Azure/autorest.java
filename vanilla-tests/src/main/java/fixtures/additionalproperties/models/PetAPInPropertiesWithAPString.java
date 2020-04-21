@@ -163,7 +163,7 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     @JsonAnySetter
-    private void setAdditionalProperties(String key, String value) {
+    void setAdditionalProperties(String key, String value) {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
