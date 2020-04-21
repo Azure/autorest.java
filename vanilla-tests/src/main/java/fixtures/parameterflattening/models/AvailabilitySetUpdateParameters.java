@@ -35,6 +35,11 @@ public final class AvailabilitySetUpdateParameters {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getTags() == null) {
             throw new IllegalArgumentException("Missing required property tags in model AvailabilitySetUpdateParameters");

@@ -34,6 +34,11 @@ public final class Siamese extends Cat {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     @Override
     public void validate() {
         super.validate();

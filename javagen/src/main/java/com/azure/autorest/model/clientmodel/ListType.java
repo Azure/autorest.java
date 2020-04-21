@@ -30,10 +30,19 @@ public class ListType extends GenericType {
         super.addImportsTo(imports, includeImplementationImports);
     }
 
+    @Override
     public String validate(String expression) {
-        String elementValidation = getElementType().validate("e");
+        return validate(expression, 0);
+    }
+
+    @Override
+    public String validate(String expression, int depth) {
+        String var = depth == 0 ? "e" : "e" + depth;
+        String elementValidation = getElementType() instanceof GenericType
+                ? ((GenericType) getElementType()).validate(var, ++depth)
+                : getElementType().validate(var);
         if (elementValidation != null) {
-            return String.format("%s.forEach(e -> %s)", expression, elementValidation);
+            return String.format("%s.forEach(%s -> %s)", expression, var, elementValidation);
         } else {
             return null;
         }

@@ -115,6 +115,11 @@ public final class PetAPObject {
         additionalProperties.put(key, value);
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
     }
 }

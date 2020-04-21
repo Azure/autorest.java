@@ -78,6 +78,11 @@ public final class SmartSalmon extends Salmon {
         additionalProperties.put(key, value);
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     @Override
     public void validate() {
         super.validate();

@@ -96,6 +96,11 @@ public class Fish {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getSiblings() != null) {
             getSiblings().forEach(e -> e.validate());

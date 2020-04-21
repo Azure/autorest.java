@@ -175,6 +175,11 @@ public final class ContainerProperties {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getLastModified() == null) {
             throw new IllegalArgumentException("Missing required property lastModified in model ContainerProperties");

@@ -146,6 +146,11 @@ public final class Logging {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getVersion() == null) {
             throw new IllegalArgumentException("Missing required property version in model Logging");

@@ -211,7 +211,12 @@ public class GenericType implements IType {
         return expression;
     }
 
+    @Override
     public String validate(String expression) {
         return null;
+    }
+
+    public String validate(String expression, int depth) {
+        return validate(expression);
     }
 }
