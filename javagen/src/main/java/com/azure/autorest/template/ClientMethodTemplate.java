@@ -380,7 +380,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.ifBlock("value != null", ifAction -> {
                                 ifAction.methodReturn("value");
                             }).elseBlock(elseAction -> {
-                                elseAction.line("throw new NullPointerException();");
+                                if (settings.shouldClientLogger()) {
+                                    elseAction.line("throw logger.logExceptionAsError(new NullPointerException());");
+                                } else {
+                                    elseAction.line("throw new NullPointerException();");
+                                }
                             });
                         } else {
                             function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));

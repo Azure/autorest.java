@@ -42,11 +42,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     public final void write(ClientModel model, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
-        model.addImportsTo(imports, settings);
-
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
             imports.add(ClassType.ClientLogger.getFullName());
         }
+
+        model.addImportsTo(imports, settings);
 
         javaFile.declareImport(imports);
 
