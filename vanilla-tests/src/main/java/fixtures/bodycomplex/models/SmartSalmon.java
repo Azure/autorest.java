@@ -71,7 +71,7 @@ public final class SmartSalmon extends Salmon {
     }
 
     @JsonAnySetter
-    private void setAdditionalProperties(String key, Object value) {
+    void setAdditionalProperties(String key, Object value) {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }

@@ -33,7 +33,12 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
+        if (settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
+
         methodGroupClient.addImportsTo(imports, true, settings);
+
         javaFile.declareImport(imports);
 
         List<String> interfaces = methodGroupClient.getSupportedInterfaces().stream()
@@ -47,6 +52,10 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         });
         javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
         {
+            if (settings.shouldClientLogger()) {
+                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", methodGroupClient.getClassName()));
+            }
+
             classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
             classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
 

@@ -42,6 +42,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     public final void write(ClientModel model, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
+        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
+
         model.addImportsTo(imports, settings);
 
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
@@ -246,7 +250,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
-                    classBlock.privateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
+                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
                         methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock -> {
                            ifBlock.line("%s = new HashMap<>();", property.getName());
                         });
@@ -306,7 +310,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Extension for model validation on parent.
+     * Extension for validation on parent model.
      *
      * @param parentModelName the parent model name
      * @return Whether to call validate on parent model.

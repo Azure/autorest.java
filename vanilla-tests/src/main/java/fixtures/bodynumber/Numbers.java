@@ -216,7 +216,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getNull() {
-        return getNullAsync().block();
+        Float value = getNullAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -262,7 +267,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getInvalidFloat() {
-        return getInvalidFloatAsync().block();
+        Float value = getInvalidFloatAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -308,7 +318,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getInvalidDouble() {
-        return getInvalidDoubleAsync().block();
+        Double value = getInvalidDoubleAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -445,7 +460,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getBigFloat() {
-        return getBigFloatAsync().block();
+        Float value = getBigFloatAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -536,7 +556,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDouble() {
-        return getBigDoubleAsync().block();
+        Double value = getBigDoubleAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -622,7 +647,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalAsync().block();
+        Double value = getBigDoublePositiveDecimalAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -708,7 +738,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalAsync().block();
+        Double value = getBigDoubleNegativeDecimalAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -1065,7 +1100,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallFloat() {
-        return getSmallFloatAsync().block();
+        Double value = getSmallFloatAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -1156,7 +1196,12 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallDouble() {
-        return getSmallDoubleAsync().block();
+        Double value = getSmallDoubleAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**

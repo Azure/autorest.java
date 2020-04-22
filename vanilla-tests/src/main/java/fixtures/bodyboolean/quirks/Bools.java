@@ -124,7 +124,12 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getTrue() {
-        return getTrueAsync().block();
+        Boolean value = getTrueAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -215,7 +220,12 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getFalse() {
-        return getFalseAsync().block();
+        Boolean value = getFalseAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -306,7 +316,12 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNull() {
-        return getNullAsync().block();
+        Boolean value = getNullAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -352,6 +367,11 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getInvalid() {
-        return getInvalidAsync().block();
+        Boolean value = getInvalidAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 }

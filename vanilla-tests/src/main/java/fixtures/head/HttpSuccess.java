@@ -107,7 +107,12 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head200() {
-        return head200Async().block();
+        Boolean value = head200Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -153,7 +158,12 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head204() {
-        return head204Async().block();
+        Boolean value = head204Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -199,6 +209,11 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {
-        return head404Async().block();
+        Boolean value = head404Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 }
