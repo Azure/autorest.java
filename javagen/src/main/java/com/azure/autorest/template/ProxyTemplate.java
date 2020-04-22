@@ -11,8 +11,11 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.util.CodeNamer;
+import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -59,6 +62,13 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     if (restAPIMethod.getReturnValueWireType() != null) {
                         interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
                             restAPIMethod.getReturnValueWireType()));
+                    }
+
+                    if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                        for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
+                                    exception.getKey(), exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+                        }
                     }
 
                     if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {

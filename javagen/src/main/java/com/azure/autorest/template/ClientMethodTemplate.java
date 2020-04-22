@@ -446,6 +446,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                 comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
             }
+            if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                for (ClassType exception : restAPIMethod.getUnexpectedResponseExceptionTypes().keySet()) {
+                    comment.methodThrows(exception.toString(), "thrown if the request is rejected by server");
+                }
+            }
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });

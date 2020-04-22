@@ -12,6 +12,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,6 +39,8 @@ public class ProxyMethod {
      * Get the status codes that are expected in the response.
      */
     private List<HttpResponseStatus> responseExpectedStatusCodes;
+
+    private Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
     /**
      * Get the exception type to throw if this method receives and unexpected response status code.
      */
@@ -82,13 +85,19 @@ public class ProxyMethod {
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
      */
-    private ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
+    private ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
+                        List<HttpResponseStatus> responseExpectedStatusCodes,
+                        ClassType unexpectedResponseExceptionType,
+                        Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
+                        String name, List<ProxyMethodParameter> parameters, String description,
+                        IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
         this.urlPath = urlPath;
         this.responseExpectedStatusCodes = responseExpectedStatusCodes;
         this.unexpectedResponseExceptionType = unexpectedResponseExceptionType;
+        this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
         this.name = name;
         this.parameters = parameters;
         this.description = description;
@@ -119,6 +128,10 @@ public class ProxyMethod {
 
     public final ClassType getUnexpectedResponseExceptionType() {
         return unexpectedResponseExceptionType;
+    }
+
+    public final Map<ClassType, List<HttpResponseStatus>> getUnexpectedResponseExceptionTypes() {
+        return unexpectedResponseExceptionTypes;
     }
 
     public final String getName() {
@@ -219,6 +232,10 @@ public class ProxyMethod {
                 imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
+            if (getUnexpectedResponseExceptionTypes() != null) {
+                imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
+                getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
+            }
             if (getIsResumable()) {
                 imports.add("com.azure.core.annotation.ResumeOperation");
             }
@@ -250,6 +267,7 @@ public class ProxyMethod {
         private String urlPath;
         private List<HttpResponseStatus> responseExpectedStatusCodes;
         private ClassType unexpectedResponseExceptionType;
+        private Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
         private String name;
         private List<ProxyMethodParameter> parameters;
         private String description;
@@ -308,12 +326,22 @@ public class ProxyMethod {
         }
 
         /**
-         * Sets the exception type to throw if this method receives and unexpected response status code.
-         * @param unexpectedResponseExceptionType the exception type to throw if this method receives and unexpected response status code
+         * Sets the exception type to throw if this method receives any unexpected response status code.
+         * @param unexpectedResponseExceptionType the exception type to throw if this method receives any unexpected response status code
          * @return the Builder itself
          */
         public Builder unexpectedResponseExceptionType(ClassType unexpectedResponseExceptionType) {
             this.unexpectedResponseExceptionType = unexpectedResponseExceptionType;
+            return this;
+        }
+
+        /**
+         * Sets the exception type to throw if this method receives certain unexpected response status code.
+         * @param unexpectedResponseExceptionTypes the exception type to throw if this method receives certain unexpected response status code
+         * @return the Builder itself
+         */
+        public Builder unexpectedResponseExceptionTypes(Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes) {
+            this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
             return this;
         }
 
@@ -369,7 +397,7 @@ public class ProxyMethod {
 
         /**
          * Sets the metia-types in response.
-         * @param isResumableThe the metia-types in response
+         * @param responseContentTypes the metia-types in response
          * @return the Builder itself
          */
         public Builder responseContentTypes(Set<String> responseContentTypes) {
@@ -387,6 +415,7 @@ public class ProxyMethod {
                     urlPath,
                     responseExpectedStatusCodes,
                     unexpectedResponseExceptionType,
+                    unexpectedResponseExceptionTypes,
                     name,
                     parameters,
                     description,

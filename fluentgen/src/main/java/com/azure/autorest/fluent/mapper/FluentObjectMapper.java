@@ -17,10 +17,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FluentObjectMapper extends ObjectMapper {
 
-    private static FluentObjectMapper _instance = new FluentObjectMapper();
+    private static final FluentObjectMapper instance = new FluentObjectMapper();
 
     public static FluentObjectMapper getInstance() {
-        return _instance;
+        return instance;
     }
 
     private Set<ObjectSchema> innerModels = ConcurrentHashMap.newKeySet();
