@@ -48,6 +48,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         model.addImportsTo(imports, settings);
 
+        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
+
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
