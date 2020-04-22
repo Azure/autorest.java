@@ -310,7 +310,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Extension for model validation on parent.
+     * Extension for validation on parent model.
      *
      * @param parentModelName the parent model name
      * @return Whether to call validate on parent model.
