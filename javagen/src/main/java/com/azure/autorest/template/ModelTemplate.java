@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -31,7 +32,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
     private static ModelTemplate _instance = new ModelTemplate();
 
-    private ModelTemplate() {
+    protected ModelTemplate() {
     }
 
     public static ModelTemplate getInstance() {
@@ -42,6 +43,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         model.addImportsTo(imports, settings);
+
+        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
 
         javaFile.declareImport(imports);
 
@@ -94,6 +99,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
+            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
+            }
+
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";
 
             for (ClientModelProperty property : model.getProperties()) {
@@ -252,20 +261,36 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
-            if (model.getParentModelName() != null) {
+            boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
+
+            // javadoc
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
+                comment.description("Validates the instance.");
+
+                comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
+            });
+
+            if (validateOnParent) {
                 classBlock.annotation("Override");
             }
             classBlock.publicMethod("void validate()", methodBlock -> {
-                if (model.getParentModelName() != null) {
+                if (validateOnParent) {
                     methodBlock.line("super.validate();");
                 }
                 for (ClientModelProperty property : model.getProperties()) {
                     String validation = property.getClientType().validate(property.getGetterName() + "()");
                     if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", property.getGetterName()), ifBlock -> {
-                            ifBlock.line(String.format(
-                                    "throw new IllegalArgumentException(\"Missing required property %s in model %s\");",
-                                    property.getName(), model.getName()));
+                            final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
+                            if (settings.shouldClientLogger()) {
+                                ifBlock.line(String.format(
+                                        "throw logger.logExceptionAsError(new IllegalArgumentException(%s));",
+                                        errorMessage));
+                            } else {
+                                ifBlock.line(String.format(
+                                        "throw new IllegalArgumentException(%s);",
+                                        errorMessage));
+                            }
                         });
                         if (validation != null) {
                             nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
@@ -278,5 +303,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             });
         }
+    }
+
+    /**
+     * Extension for model validation on parent.
+     *
+     * @param parentModelName the parent model name
+     * @return Whether to call validate on parent model.
+     */
+    protected boolean validateOnParentModel(String parentModelName) {
+        return parentModelName != null;
     }
 }

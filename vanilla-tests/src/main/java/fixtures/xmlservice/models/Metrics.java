@@ -119,6 +119,11 @@ public final class Metrics {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getRetentionPolicy() != null) {
             getRetentionPolicy().validate();

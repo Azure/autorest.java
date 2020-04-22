@@ -37,15 +37,19 @@ public class FluentType {
     }
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
-        return !(Resource.getName().equals(compositeType.getLanguage().getJava().getName())
-                || ProxyResource.getName().equals(compositeType.getLanguage().getJava().getName())
-                || SubResource.getName().equals(compositeType.getLanguage().getJava().getName()));
+        return nonResourceType(compositeType.getLanguage().getJava().getName());
     }
 
     public static boolean nonResourceType(ClassType modelType) {
         return !(Resource.equals(modelType)
                 || ProxyResource.equals(modelType)
                 || SubResource.equals(modelType));
+    }
+
+    public static boolean nonResourceType(String modelName) {
+        return !(Resource.getName().equals(modelName)
+                || ProxyResource.getName().equals(modelName)
+                || SubResource.getName().equals(modelName));
     }
 
     public static boolean nonCloudError(ClassType modelType) {

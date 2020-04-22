@@ -219,6 +219,11 @@ public final class ListBlobsResponse {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getContainerName() == null) {
             throw new IllegalArgumentException("Missing required property containerName in model ListBlobsResponse");

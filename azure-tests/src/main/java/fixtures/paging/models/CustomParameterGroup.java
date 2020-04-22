@@ -60,6 +60,11 @@ public final class CustomParameterGroup {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getApiVersion() == null) {
             throw new IllegalArgumentException("Missing required property apiVersion in model CustomParameterGroup");

@@ -30,10 +30,19 @@ public class MapType extends GenericType {
         super.addImportsTo(imports, includeImplementationImports);
     }
 
+    @Override
     public String validate(String expression) {
-        String elementValidation = getValueType().validate("e");
+        return validate(expression, 0);
+    }
+
+    @Override
+    public String validate(String expression, int depth) {
+        String var = depth == 0 ? "e" : "e" + depth;
+        String elementValidation = getValueType() instanceof GenericType
+                ? ((GenericType) getValueType()).validate(var, ++depth)
+                : getValueType().validate(var);
         if (elementValidation != null) {
-            return String.format("%s.values().forEach(e -> %s)", expression, elementValidation);
+            return String.format("%s.values().forEach(%s -> %s)", expression, var, elementValidation);
         } else {
             return null;
         }
