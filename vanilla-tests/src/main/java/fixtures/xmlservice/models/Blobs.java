@@ -64,6 +64,11 @@ public final class Blobs {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getBlobPrefix() != null) {
             getBlobPrefix().forEach(e -> e.validate());

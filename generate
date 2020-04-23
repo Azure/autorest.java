@@ -6,13 +6,13 @@ AZURE_ARGUMENTS='--version=3.0.6257 --java --use:./ --output-folder=azure-tests 
 # Vanilla
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
+autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter=true
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-file.json --namespace=fixtures.bodyfile
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/custom-baseUrl.json --namespace=fixtures.custombaseuri
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/custom-baseUrl-more-options.json --namespace=fixtures.custombaseuri.moreoptions
-autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter=true
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/head.json --namespace=fixtures.head
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/head-exceptions.json --namespace=fixtures.headexceptions
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header

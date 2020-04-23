@@ -108,7 +108,12 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError() {
-        return getEmptyErrorAsync().block();
+        Boolean value = getEmptyErrorAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -154,7 +159,12 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError() {
-        return getNoModelErrorAsync().block();
+        Boolean value = getNoModelErrorAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -200,6 +210,11 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyAsync().block();
+        Boolean value = getNoModelEmptyAsync().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 }

@@ -163,13 +163,18 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     @JsonAnySetter
-    private void setAdditionalProperties(String key, String value) {
+    void setAdditionalProperties(String key, String value) {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
         additionalProperties.put(key, value);
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getOdataLocation() == null) {
             throw new IllegalArgumentException("Missing required property odataLocation in model PetAPInPropertiesWithAPString");

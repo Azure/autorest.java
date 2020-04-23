@@ -50,6 +50,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
 
         Set<String> imports = new HashSet<String>();
+        if (settings.shouldClientLogger()) {
+            imports.add(ClassType.ClientLogger.getFullName());
+        }
+
         serviceClient.addImportsTo(imports, true, false, settings);
         javaFile.declareImport(imports);
 
@@ -60,6 +64,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         });
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
         {
+            if (settings.shouldClientLogger()) {
+                classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", serviceClient.getClassName()));
+            }
+
             // Add proxy service member variable
             if (serviceClient.getProxy() != null) {
                 classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
@@ -127,8 +135,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getVariableType()));
                     comment.methodReturns(String.format("the %1$s object.", methodGroupClient.getVariableType()));
                 });
-                classBlock.publicMethod(String.format("%1$s get%2$s()", methodGroupClient.getVariableType(),
-                    CodeNamer.toPascalCase(methodGroupClient.getVariableName())), function ->
+                classBlock.publicMethod(String.format("%1$s %2$s()", methodGroupClient.getVariableType(),
+                    CodeNamer.getModelNamer().modelPropertyGetterName(methodGroupClient.getVariableName())), function ->
                 {
                     function.methodReturn(String.format("this.%1$s", methodGroupClient.getVariableName()));
                 });

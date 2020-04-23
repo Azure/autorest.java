@@ -35,6 +35,11 @@ public final class ArrayWrapper {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getValue() == null) {
             throw new IllegalArgumentException("Missing required property value in model ArrayWrapper");

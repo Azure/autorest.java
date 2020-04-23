@@ -228,7 +228,12 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200() {
-        return get200Async().block();
+        Boolean value = get200Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     /**
@@ -873,6 +878,11 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {
-        return head404Async().block();
+        Boolean value = head404Async().block();
+        if (value != null) {
+            return value;
+        } else {
+            throw new NullPointerException();
+        }
     }
 }

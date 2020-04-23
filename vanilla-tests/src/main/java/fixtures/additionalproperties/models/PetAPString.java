@@ -108,13 +108,18 @@ public final class PetAPString {
     }
 
     @JsonAnySetter
-    private void setAdditionalProperties(String key, String value) {
+    void setAdditionalProperties(String key, String value) {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
         additionalProperties.put(key, value);
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
     }
 }

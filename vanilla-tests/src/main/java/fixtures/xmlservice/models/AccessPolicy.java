@@ -89,6 +89,11 @@ public final class AccessPolicy {
         return this;
     }
 
+    /**
+     * Validates the instance.
+     * 
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
     public void validate() {
         if (getStart() == null) {
             throw new IllegalArgumentException("Missing required property start in model AccessPolicy");
