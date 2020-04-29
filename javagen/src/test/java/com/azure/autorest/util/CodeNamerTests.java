@@ -25,5 +25,7 @@ public class CodeNamerTests {
         Assert.assertEquals("ASTERISK", CodeNamer.getEnumMemberName("*"));
 
         Assert.assertEquals("ALL", CodeNamer.getEnumMemberName("$all"));
+
+        Assert.assertEquals("ALL", CodeNamer.getEnumMemberName("all*"));
     }
 }

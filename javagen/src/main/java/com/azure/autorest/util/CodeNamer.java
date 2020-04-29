@@ -244,7 +244,7 @@ public class CodeNamer {
                 while (sb.length() > 0 && sb.charAt(0) == '_') {
                     sb.deleteCharAt(0);
                 }
-                while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '-') {
+                while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '_') {
                     sb.setLength(sb.length() - 1);
                 }
                 result = sb.toString();
