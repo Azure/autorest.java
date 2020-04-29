@@ -51,7 +51,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
         Set<String> imports = new HashSet<String>();
         if (settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
+            ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
         serviceClient.addImportsTo(imports, true, false, settings);

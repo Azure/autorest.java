@@ -85,6 +85,16 @@ public final class Pagings {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<ProductResult>> getMultiplePages(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, Context context);
 
+        @Get("/paging/multiple/getWithQueryParams")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResult>> getWithQueryParams(@HostParam("$host") String host, @QueryParam("requiredQueryParameter") int requiredQueryParameter, @QueryParam("queryConstant") boolean queryConstant, Context context);
+
+        @Get("/paging/multiple/nextOperationWithQueryParams")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResult>> nextOperationWithQueryParams(@HostParam("$host") String host, @QueryParam("queryConstant") boolean queryConstant, Context context);
+
         @Get("/paging/multiple/odata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -159,6 +169,11 @@ public final class Pagings {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<ProductResult>> getMultiplePagesNext(@PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResult>> nextOperationWithQueryParamsNext(@PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
@@ -409,6 +424,110 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter) {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final boolean queryConstant = true;
+        return FluxUtil.withContext(context -> service.getWithQueryParams(this.client.getHost(), requiredQueryParameter, queryConstant, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getWithQueryParamsAsync(int requiredQueryParameter) {
+        return new PagedFlux<>(
+            () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter),
+            nextLink -> nextOperationWithQueryParamsSinglePageAsync());
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter));
+    }
+
+    /**
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final boolean queryConstant = true;
+        return FluxUtil.withContext(context -> service.nextOperationWithQueryParams(this.client.getHost(), queryConstant, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
+    }
+
+    /**
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> nextOperationWithQueryParamsAsync() {
+        return new PagedFlux<>(
+            () -> nextOperationWithQueryParamsSinglePageAsync(),
+            nextLink -> nextOperationWithQueryParamsNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextOperationWithQueryParams() {
+        return new PagedIterable<>(nextOperationWithQueryParamsAsync());
     }
 
     /**
@@ -1113,6 +1232,30 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextOperationWithQueryParamsNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.nextOperationWithQueryParamsNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
                 res.getRequest(),
                 res.getStatusCode(),

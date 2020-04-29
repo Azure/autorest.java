@@ -43,14 +43,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
+            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
+            ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
         model.addImportsTo(imports, settings);
-
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
-        }
 
         javaFile.declareImport(imports);
 
@@ -104,6 +101,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
             if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                classBlock.annotation("JsonIgnore");
                 classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
             }
 

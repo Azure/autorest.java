@@ -34,7 +34,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         if (settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
+            ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
         methodGroupClient.addImportsTo(imports, true, settings);

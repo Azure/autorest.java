@@ -32,7 +32,7 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
-        codeModel = new SchemaNameNormalization().process(codeModel);
+        codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = normalizeApiVersionParameter(codeModel);
