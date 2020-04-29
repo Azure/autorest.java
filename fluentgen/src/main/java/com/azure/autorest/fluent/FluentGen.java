@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.fluent.checker.JavaChecker;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -147,9 +146,6 @@ public class FluentGen extends NewPlugin {
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String content = javaFile.getContents().toString();
                 String path = javaFile.getFilePath();
-
-                // single file validation
-                boolean parsePass = new JavaChecker(content, path).check();
 
                 // formatter
                 String formattedContent = new JavaFormatter(content, path).format();
