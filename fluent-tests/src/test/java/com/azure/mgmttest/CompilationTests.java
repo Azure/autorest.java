@@ -68,6 +68,7 @@ public class CompilationTests {
         // hence it get pulled out from Resource.
         NetworkSecurityGroupInner networkSecurityGroup = mock(NetworkSecurityGroupInner.class);
         networkSecurityGroup.withId(anyString());
+        networkSecurityGroup.id();
     }
 
     public void testAdditionalPropertyName() {
