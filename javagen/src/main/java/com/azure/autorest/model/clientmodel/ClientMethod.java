@@ -272,6 +272,7 @@ public class ClientMethod {
             }
 
             if (settings.getAddContextParameter()
+                    && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter())
                     && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
                     || this.getType() == ClientMethodType.PagingAsyncSinglePage
                     || this.getType() == ClientMethodType.LongRunningAsync)) {
