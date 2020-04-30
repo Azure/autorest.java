@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
@@ -19,7 +20,9 @@ import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,7 +34,25 @@ public class SchemaNameNormalization {
 
     private static final Logger logger = LoggerFactory.getLogger(SchemaNameNormalization.class);
 
+    private final Map<String, String> nameOverridePlan = new HashMap<>();
+
+    public SchemaNameNormalization(Map<String, String> nameOverridePlan) {
+        nameOverridePlan.forEach((k, v) -> {
+            char[] kCharArray = k.toCharArray();
+            char[] vCharArray = v.toCharArray();
+
+            kCharArray[0] = Character.toLowerCase(kCharArray[0]);
+            vCharArray[0] = Character.toLowerCase(vCharArray[0]);
+            this.nameOverridePlan.put(new String(kCharArray), new String(vCharArray));
+
+            kCharArray[0] = Character.toUpperCase(kCharArray[0]);
+            vCharArray[0] = Character.toUpperCase(vCharArray[0]);
+            this.nameOverridePlan.put(new String(kCharArray), new String(vCharArray));
+        });
+    }
+
     public CodeModel process(CodeModel codeModel) {
+        codeModel = namingOverride(codeModel);
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
         codeModel = normalizeUnnamedChoiceSchema(codeModel);
         return codeModel;
@@ -120,5 +141,90 @@ public class SchemaNameNormalization {
                 });
 
         return codeModel;
+    }
+
+    protected CodeModel namingOverride(CodeModel codeModel) {
+        if (!nameOverridePlan.isEmpty()) {
+            overrideName(codeModel);
+
+            codeModel.getSchemas().getObjects().forEach(this::overrideName);
+            codeModel.getSchemas().getObjects().stream()
+                    .flatMap(o -> o.getProperties().stream())
+                    .forEach(this::overrideName);
+
+            codeModel.getSchemas().getAnds().forEach(this::overrideName);
+            codeModel.getSchemas().getChoices().forEach(this::overrideName);
+            codeModel.getSchemas().getSealedChoices().forEach(this::overrideName);
+            codeModel.getSchemas().getDictionaries().forEach(this::overrideName);
+
+            codeModel.getOperationGroups().forEach(this::overrideName);
+            codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .forEach(this::overrideName);
+            codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getParameters().stream())
+                    .forEach(this::overrideName);
+            codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getRequests().stream())
+                    .flatMap(r -> r.getParameters().stream())
+                    .forEach(this::overrideName);
+
+            // hack, http header is case insensitive
+            codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getResponses().stream())
+                    .filter(r -> r.getProtocol().getHttp().getHeaders() != null)
+                    .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream())
+                    .forEach(h -> {
+                        String name = h.getHeader();
+                        String newName = overrideName(name);
+                        if (!name.equals(newName)) {
+                            if (name.equalsIgnoreCase(newName)) {
+                                logger.info("Override response header, from {} to {}", name, newName);
+                                h.setHeader(newName);
+                            } else {
+                                logger.info("Abort override response header, from {} to {}", name, newName);
+                            }
+                        }
+                    });
+        }
+        return codeModel;
+    }
+
+    private void overrideName(Metadata m) {
+        String name = Utils.getDefaultName(m);
+        String newName = overrideName(name);
+        if (!name.equals(newName)) {
+            m.getLanguage().getDefault().setName(newName);
+            logger.info("Override default name, from {} to {}", name, newName);
+        }
+    }
+
+    private String overrideName(String name) {
+        String newName = name;
+        for (Map.Entry<String, String> entry : nameOverridePlan.entrySet()) {
+            int index = newName.indexOf(entry.getKey());
+            if (index >= 0) {
+                int endIndex = index + entry.getKey().length();
+                boolean replace = true;
+                if (index > 0 && isSameCase(newName.charAt(index - 1), newName.charAt(index))) {
+                    replace = false;
+                } else if (endIndex < newName.length() && isSameCase(newName.charAt(endIndex - 1), newName.charAt(endIndex))) {
+                    replace = false;
+                }
+
+                if (replace) {
+                    newName = newName.replace(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        return newName;
+    }
+
+    private static boolean isSameCase(char c1, char c2) {
+        return (Character.isUpperCase(c1) && Character.isUpperCase(c2))
+                || (Character.isLowerCase(c1) && Character.isLowerCase(c2));
     }
 }
