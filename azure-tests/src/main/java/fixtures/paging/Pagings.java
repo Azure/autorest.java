@@ -173,11 +173,6 @@ public final class Pagings {
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> nextOperationWithQueryParamsNext(@PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
-
-        @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<OdataProductResult>> getOdataMultiplePagesNext(@PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
 
         @Get("{nextLink}")
@@ -490,9 +485,6 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
-        if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
         final boolean queryConstant = true;
         return FluxUtil.withContext(context -> service.nextOperationWithQueryParams(this.client.getHost(), queryConstant, context))
             .map(res -> new PagedResponseBase<>(
@@ -500,34 +492,8 @@ public final class Pagings {
                 res.getStatusCode(),
                 res.getHeaders(),
                 res.getValue().getValues(),
-                res.getValue().getNextLink(),
+                null,
                 null));
-    }
-
-    /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     * 
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> nextOperationWithQueryParamsAsync() {
-        return new PagedFlux<>(
-            () -> nextOperationWithQueryParamsSinglePageAsync(),
-            nextLink -> nextOperationWithQueryParamsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     * 
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> nextOperationWithQueryParams() {
-        return new PagedIterable<>(nextOperationWithQueryParamsAsync());
     }
 
     /**
@@ -1232,30 +1198,6 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesNext(nextLink, context))
-            .map(res -> new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValues(),
-                res.getValue().getNextLink(),
-                null));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> nextOperationWithQueryParamsNextSinglePageAsync(String nextLink) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.nextOperationWithQueryParamsNext(nextLink, context))
             .map(res -> new PagedResponseBase<>(
                 res.getRequest(),
                 res.getStatusCode(),
