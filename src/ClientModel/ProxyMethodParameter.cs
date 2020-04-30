@@ -59,7 +59,7 @@ namespace AutoRest.Java.Model
             FromClient = fromClient;
             HeaderCollectionPrefix = headerCollectionPrefix;
             ParameterReference = parameterReference;
-            CollectionFormat = collectionFormat;
+            this.collectionFormat = collectionFormat;
             DefaultValue = defaultValue;
         }
 
@@ -130,7 +130,21 @@ namespace AutoRest.Java.Model
 
         public string ParameterReferenceConverted => $"{ParameterReference.ToCamelCase()}Converted";
 
-        public CollectionFormat CollectionFormat { get; }
+        private CollectionFormat collectionFormat;
+        public CollectionFormat CollectionFormat
+        {
+            get
+            {
+                if (collectionFormat == CollectionFormat.None)
+                {
+                    return CollectionFormat.Csv;
+                }
+                else
+                {
+                    return collectionFormat;
+                }
+            }
+        }
 
         public string ConvertFromClientType(string source, string target, bool alwaysNull = false, bool alwaysNonNull = false)
         {
