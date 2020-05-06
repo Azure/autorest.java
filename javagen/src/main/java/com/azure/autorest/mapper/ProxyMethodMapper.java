@@ -19,6 +19,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
     @Override
     public Map<Request, ProxyMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
-        Map<Request, ProxyMethod> result = new HashMap<>();
+        Map<Request, ProxyMethod> result = new LinkedHashMap<>();
 
         ProxyMethod.Builder builder = new ProxyMethod.Builder()
                 .description(operation.getDescription())

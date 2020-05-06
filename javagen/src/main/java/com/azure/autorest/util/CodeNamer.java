@@ -235,9 +235,31 @@ public class CodeNamer {
                 }
             }
         }
-        if ("_".equals(result)) {   // "_" is keyword in Java 9
-            result = "ENUM" + result;
+
+        if (result.startsWith("_") || result.endsWith("_")) {
+            if (!result.chars().allMatch(c -> c == (int) '_')) {
+                // some char is not _
+
+                StringBuilder sb = new StringBuilder(result);
+                while (sb.length() > 0 && sb.charAt(0) == '_') {
+                    sb.deleteCharAt(0);
+                }
+                while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '_') {
+                    sb.setLength(sb.length() - 1);
+                }
+                result = sb.toString();
+            } else {
+                // all char is _
+
+                if (result.startsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(0))) {
+                    result = BASIC_LATIC_CHARACTERS.get(name.charAt(0)) + result.substring(1);
+                    if (result.endsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(name.length() - 1))) {
+                        result = result.substring(0, result.length() - 1) + BASIC_LATIC_CHARACTERS.get(name.charAt(name.length() - 1));
+                    }
+                }
+            }
         }
+
         return result.toUpperCase();
     }
 
@@ -287,8 +309,8 @@ public class CodeNamer {
     }
 
     protected static String getEscapedReservedName(String name, String appendValue) {
-        Objects.nonNull(name);
-        Objects.nonNull(appendValue);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(appendValue);
 
         if (RESERVED_WORDS.contains(name)) {
             name += appendValue;

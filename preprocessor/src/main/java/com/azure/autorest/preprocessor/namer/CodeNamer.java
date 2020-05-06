@@ -210,75 +210,9 @@ public class CodeNamer {
         return getEscapedReservedName(name, "Method");
     }
 
-    public static String getEnumMemberName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-
-        String result = removeInvalidCharacters(name.replaceAll("[\\\\/.+ -]+", "_"));
-        Function<Character, Boolean> isUpper = c -> c >= 'A' && c <= 'Z';
-        Function<Character, Boolean> isLower = c -> c >= 'a' && c <= 'z';
-        for (int i = 1; i < result.length() - 1; i++) {
-            if (isUpper.apply(result.charAt(i))) {
-                if (result.charAt(i - 1) != '_' && isLower.apply(result.charAt(i - 1))) {
-                    result = result.substring(0, i) + "_" + result.substring(i);
-                }
-            }
-        }
-        if ("_".equals(result)) {
-            result = "ENUM" + result;
-        }
-        return result.toUpperCase();
-    }
-
-    public static List<String> wordWrap(String text, int width) {
-        Objects.requireNonNull(text);
-        List<String> ret = new ArrayList<>();
-        String[] lines = text.split("\r?\n", -1);
-        for (String line : lines) {
-            String processedLine = line.trim();
-
-            // yield empty lines as they are (probably) intensional
-            if (processedLine.length() == 0) {
-                ret.add(processedLine);
-            }
-
-            // feast on the line until it's gone
-            while (processedLine.length() > 0) {
-                // determine potential wrapping points
-                List<Integer> whitespacePositions = new ArrayList<>();
-                for (int i = 0; i != processedLine.length(); i++) {
-                    if (Character.isWhitespace(processedLine.charAt(i))) {
-                        whitespacePositions.add(i);
-                    }
-                }
-                whitespacePositions.add(processedLine.length());
-                int preWidthWrapAt = -1;
-                int postWidthWrapAt = -1;
-                for (int i = 0; i != whitespacePositions.size() - 1; i++) {
-                    if (whitespacePositions.get(i) <= width && whitespacePositions.get(i + 1) > width) {
-                        preWidthWrapAt = whitespacePositions.get(i);
-                        postWidthWrapAt = whitespacePositions.get(i + 1);
-                        break;
-                    }
-                }
-                int wrapAt = processedLine.length();
-                if (preWidthWrapAt > 0) {
-                    wrapAt = preWidthWrapAt;
-                } else if (postWidthWrapAt > 0) {
-                    wrapAt = postWidthWrapAt;
-                }
-                // wrap
-                ret.add(processedLine.substring(0, wrapAt));
-                processedLine = processedLine.substring(wrapAt).trim();
-            }
-        }
-        return ret;
-    }
-
     protected static String getEscapedReservedName(String name, String appendValue) {
-        Objects.nonNull(name);
-        Objects.nonNull(appendValue);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(appendValue);
 
         if (RESERVED_WORDS.contains(name)) {
             name += appendValue;

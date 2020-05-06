@@ -20,10 +20,6 @@ public class FluentModelNamer extends ModelNamer {
 
     @Override
     public String modelPropertyGetterName(String propertyName) {
-        if (propertyName.equalsIgnoreCase("id")) {
-            // temporary fix for ProxyResource.getId
-            return "get" + CodeNamer.toPascalCase(propertyName);
-        }
         return CodeNamer.toCamelCase(propertyName);
     }
 

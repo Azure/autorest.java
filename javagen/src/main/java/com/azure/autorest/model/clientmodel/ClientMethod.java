@@ -9,6 +9,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.util.CodeNamer;
 import java.util.List;
 import java.util.Map;
@@ -272,9 +273,11 @@ public class ClientMethod {
             }
 
             if (settings.getAddContextParameter()
-                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+                && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
+                && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
+                || this.getType() == ClientMethodType.PagingAsyncSinglePage
+                || this.getType() == ClientMethodType.LongRunningAsync)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
         }
