@@ -10,37 +10,47 @@ public class ClientException {
     private String name;
     private String errorName;
     private String package_Keyword;
+    private IType parentType;
 
     /**
      * Create a new ServiceException with the provided properties.
      * @param package_Keyword The package that this Exception will appear in.
      * @param name The name of the ServiceException type.
      * @param errorName The name of the error type contained by the ServiceException.
+     * @param parentType The type of parent exception.
      */
-    public ClientException(String package_Keyword, String name, String errorName) {
+    public ClientException(String package_Keyword, String name, String errorName, IType parentType) {
         this.package_Keyword = package_Keyword;
         this.name = name;
         this.errorName = errorName;
+        this.parentType = parentType;
     }
 
     /**
-     * The name of the ServiceException type.
+     * @return The name of the ServiceException type.
      */
     public final String getName() {
         return name;
     }
 
     /**
-     * The name of the error type contained by the ServiceException.
+     * @return The name of the error type contained by the ServiceException.
      */
     public final String getErrorName() {
         return errorName;
     }
 
     /**
-     * The package that this Enum will appear in.
+     * @return type of parent exception.The package that this Enum will appear in.
      */
     public final String getPackage() {
         return package_Keyword;
+    }
+
+    /**
+     * @return The type of parent exception.
+     */
+    public IType getParentType() {
+        return parentType;
     }
 }

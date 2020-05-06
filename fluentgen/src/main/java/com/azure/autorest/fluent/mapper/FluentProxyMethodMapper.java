@@ -6,20 +6,15 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Operation;
-import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
@@ -30,9 +25,20 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     }
 
     @Override
-    protected void configureUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
-                                                             Operation operation, List<HttpResponseStatus> expectedStatusCodes,
-                                                             JavaSettings settings) {
+    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
+                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
+                                                         JavaSettings settings) {
+        ClassType errorType = null;
+        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
+            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+        }
+        if (errorType != null && errorType.equals(FluentType.ManagementError)) {
+            builder.unexpectedResponseExceptionType(FluentType.ManagementException);
+        } else {
+            super.buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
+        }
+
+        /*
         final HttpMethod httpMethod = HttpMethod.valueOf(operation.getRequests().get(0).getProtocol().getHttp().getMethod().toUpperCase());
         final boolean isResourceModify = httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PATCH || httpMethod == HttpMethod.DELETE;
         final boolean hasETagHeader = operation.getRequests().stream().flatMap(r -> r.getParameters().stream())
@@ -60,5 +66,6 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
             unexpectedResponseExceptionTypes.put(ClassType.ResourceExistsException, Collections.singletonList(HttpResponseStatus.PRECONDITION_FAILED));
         }
         builder.unexpectedResponseExceptionTypes(unexpectedResponseExceptionTypes);
+        */
     }
 }

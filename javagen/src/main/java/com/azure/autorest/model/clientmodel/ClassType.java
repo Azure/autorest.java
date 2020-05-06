@@ -35,11 +35,6 @@ public class ClassType implements IType {
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
     public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
-    public static final ClassType ClientAuthenticationException = new ClassType.Builder().knownClass(com.azure.core.exception.ClientAuthenticationException.class).build();
-    public static final ClassType ResourceExistsException = new ClassType.Builder().knownClass(com.azure.core.exception.ResourceExistsException.class).build();
-    public static final ClassType ResourceModifiedException = new ClassType.Builder().knownClass(com.azure.core.exception.ResourceModifiedException.class).build();
-    public static final ClassType ResourceNotFoundException = new ClassType.Builder().knownClass(com.azure.core.exception.ResourceNotFoundException.class).build();
-    public static final ClassType TooManyRedirectsException = new ClassType.Builder().knownClass(com.azure.core.exception.TooManyRedirectsException.class).build();
     public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();

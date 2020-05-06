@@ -91,7 +91,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.returnType(GenericType.Mono(singleValueType));
         }
 
-        configureUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
+        buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
         builder.returnValueWireType(returnValueWireTypeOptions
@@ -168,9 +168,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      * @param expectedStatusCodes the expected status codes
      * @param settings the settings
      */
-    protected void configureUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
-                                                             Operation operation, List<HttpResponseStatus> expectedStatusCodes,
-                                                             JavaSettings settings) {
+    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
+                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
+                                                         JavaSettings settings) {
         ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
