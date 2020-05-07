@@ -10,7 +10,7 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
     private static ExceptionMapper instance = new ExceptionMapper();
     Map<ObjectSchema, ClientException> parsed = new HashMap<>();
 
-    private ExceptionMapper() {
+    protected ExceptionMapper() {
     }
 
     public static ExceptionMapper getInstance() {
@@ -29,6 +29,12 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
             return parsed.get(compositeType);
         }
 
+        ClientException exception = buildException(compositeType, settings);
+        parsed.put(compositeType, exception);
+        return exception;
+    }
+
+    protected ClientException buildException(ObjectSchema compositeType, JavaSettings settings) {
         String errorName = compositeType.getLanguage().getJava().getName();
         String methodOperationExceptionTypeName = errorName + "Exception";
 
@@ -36,27 +42,17 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
             methodOperationExceptionTypeName = compositeType.getExtensions().getXmsClientName();
         }
 
-        if (!settings.isFluent()) {
-            String exceptionSubPackage;
-            boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
-            if (isCustomType) {
-                exceptionSubPackage = settings.getCustomTypesSubpackage();
-            } else if (settings.isFluent()) {
-                exceptionSubPackage = "";
-            } else {
-                exceptionSubPackage = settings.getModelsSubpackage();
-            }
-            String packageName = settings.getPackage(exceptionSubPackage);
+        boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
+        String exceptionSubPackage = isCustomType
+                ? settings.getCustomTypesSubpackage()
+                : settings.getModelsSubpackage();
+        String packageName = settings.getPackage(exceptionSubPackage);
 
-            ClientException exception = new ClientException.Builder()
-                    .packageName(packageName)
-                    .name(methodOperationExceptionTypeName)
-                    .errorName(errorName)
-                    .build();
-            parsed.put(compositeType, exception);
-            return exception;
-        }
-
-        return null;
+        ClientException exception = new ClientException.Builder()
+                .packageName(packageName)
+                .name(methodOperationExceptionTypeName)
+                .errorName(errorName)
+                .build();
+        return exception;
     }
 }

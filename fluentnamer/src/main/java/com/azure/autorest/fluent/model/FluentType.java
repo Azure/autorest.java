@@ -54,8 +54,11 @@ public class FluentType {
                 || SubResource.getName().equals(modelName));
     }
 
-    public static boolean nonCloudError(ClassType modelType) {
-        return !(ManagementError.getName().equals(modelType.getName())
-                || "CloudErrorBody".equals(modelType.getName()));
+    public static boolean nonManagementError(ClassType modelType) {
+        return nonManagementError(modelType.getName());
+    }
+
+    public static boolean nonManagementError(String modelName) {
+        return !ManagementError.getName().equals(modelName);
     }
 }
