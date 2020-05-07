@@ -2,7 +2,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientException;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +48,11 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
             }
             String packageName = settings.getPackage(exceptionSubPackage);
 
-            ClientException exception = new ClientException(packageName, methodOperationExceptionTypeName, errorName, ClassType.HttpResponseException);
+            ClientException exception = new ClientException.Builder()
+                    .packageName(packageName)
+                    .name(methodOperationExceptionTypeName)
+                    .errorName(errorName)
+                    .build();
             parsed.put(compositeType, exception);
             return exception;
         }
