@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,6 +37,7 @@ public class ManagementErrorTypeNormalization {
                 .flatMap(og -> og.getOperations().stream())
                 .flatMap(o -> o.getExceptions().stream())
                 .map(Response::getSchema)
+                .filter(Objects::nonNull)
                 .distinct()
                 .forEach(s -> process((ObjectSchema) s));
 
@@ -74,6 +77,8 @@ public class ManagementErrorTypeNormalization {
                 break;
 
             case SUBCLASS_MANAGEMENT_ERROR:
+                error.getLanguage().getJava().setName(Utils.getJavaName(errorSchema));
+
                 Relations parents = new Relations();
                 parents.setAll(Collections.singletonList(DUMMY_ERROR));
                 parents.setImmediate(Collections.singletonList(DUMMY_ERROR));
