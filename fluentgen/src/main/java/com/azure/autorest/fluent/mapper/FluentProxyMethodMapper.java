@@ -32,7 +32,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
         }
-        if (errorType != null && errorType.equals(FluentType.ManagementError)) {
+        if (errorType != null && !FluentType.nonManagementError(errorType)) {
             builder.unexpectedResponseExceptionType(FluentType.ManagementException);
         } else {
             super.buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);

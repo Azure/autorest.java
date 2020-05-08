@@ -28,9 +28,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ManagementErrorTypeNormalization {
+public class ErrorTypeNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(ManagementErrorTypeNormalization.class);
+    private static final Logger logger = LoggerFactory.getLogger(ErrorTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().stream()
@@ -54,6 +54,11 @@ public class ManagementErrorTypeNormalization {
         schema.setLanguage(new Languages());
         schema.getLanguage().setJava(new Language());
         schema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+        schema.setProperties(new ArrayList<>());
+        schema.getProperties().add(new Property());
+        schema.getProperties().get(0).setSerializedName("code");
+        schema.getProperties().add(new Property());
+        schema.getProperties().get(1).setSerializedName("message");
         return schema;
     }
 
@@ -85,10 +90,12 @@ public class ManagementErrorTypeNormalization {
                 error.setParents(parents);
 
                 List<Property> properties = new ArrayList<>();
-                errorSchema.getProperties().stream().forEach(p -> {
+                errorSchema.getProperties().forEach(p -> {
                     if (!MANAGEMENT_ERROR_FIELDS.contains(p.getSerializedName())) {
+                        p.setReadOnly(true);
                         properties.add(p);
                     } else if (p.getSerializedName().equals("details")) {
+                        p.setReadOnly(true);
                         properties.add(p);
                     }
                 });

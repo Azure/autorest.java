@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.mapper.ObjectMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.core.util.FluxUtil;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,6 +45,8 @@ public class FluentObjectMapper extends ObjectMapper {
             result = FluentType.ProxyResource;
         } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SubResource.getName())) {
             result = FluentType.SubResource;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ManagementError.getName())) {
+            result = FluentType.ManagementError;
         }
         return result;
     }
