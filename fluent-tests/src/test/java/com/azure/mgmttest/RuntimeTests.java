@@ -11,10 +11,16 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.management.exception.ManagementError;
+import com.azure.core.management.serializer.AzureJacksonAdapter;
+import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.mgmttest.appservice.DefaultErrorResponseError;
 import com.azure.mgmttest.storage.models.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.models.StorageManagementClientImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 public class RuntimeTests {
 
@@ -30,5 +36,17 @@ public class RuntimeTests {
         Assertions.assertNotNull(storageManagementClient.getHttpPipeline());
         Assertions.assertEquals(MOCK_SUBSCRIPTION_ID, storageManagementClient.getSubscriptionId());
         Assertions.assertNotNull(storageManagementClient.storageAccounts());
+    }
+
+    @Test
+    public void testWebException() throws IOException {
+        final String errorBody = "{\"error\":{\"code\":\"WepAppError\",\"message\":\"Web app error.\",\"innererror\":\"Deployment error.\",\"details\":[{\"code\":\"InnerError\"}]}}";
+
+        AzureJacksonAdapter serializerAdapter = new AzureJacksonAdapter();
+        DefaultErrorResponseError webError = serializerAdapter.deserialize(errorBody, DefaultErrorResponseError.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("WepAppError", webError.getCode());
+        Assertions.assertNotNull(webError.details());
+        Assertions.assertEquals(1, webError.details().size());
+        Assertions.assertEquals("InnerError", webError.details().get(0).code());
     }
 }

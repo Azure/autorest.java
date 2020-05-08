@@ -7,8 +7,12 @@
 package com.azure.mgmttest;
 
 import com.azure.core.management.Resource;
+import com.azure.core.management.exception.ManagementError;
+import com.azure.core.management.exception.ManagementException;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
+import com.azure.mgmttest.appservice.DefaultErrorResponseError;
+import com.azure.mgmttest.appservice.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
 import com.azure.mgmttest.conainterservice.ContainerServiceMasterProfile;
 import com.azure.mgmttest.conainterservice.Count;
@@ -85,5 +89,10 @@ public class CompilationTests {
         ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
         containerServiceMasterProfile.withCount(Count.THREE);
         int countInt = containerServiceMasterProfile.count().toInt();
+    }
+
+    public void testException() {
+        ManagementException exception = new DefaultErrorResponseErrorException(anyString(), null);
+        ManagementError error = new ManagementError();
     }
 }
