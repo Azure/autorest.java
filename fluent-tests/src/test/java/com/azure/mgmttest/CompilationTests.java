@@ -62,7 +62,7 @@ public class CompilationTests {
     public void testResourceType() {
         // ResourceGroup is regarded as subclass of Resource.
         Resource resourceGroup = mock(ResourceGroupInner.class);
-        resourceGroup.getId();
+        resourceGroup.id();
 
         // NetworkSecurityGroup is subclass of Resource, but the id property from spec is not readonly,
         // hence it get pulled out from Resource.
