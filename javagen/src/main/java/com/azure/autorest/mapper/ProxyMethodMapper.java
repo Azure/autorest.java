@@ -19,6 +19,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
     @Override
     public Map<Request, ProxyMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
-        Map<Request, ProxyMethod> result = new HashMap<>();
+        Map<Request, ProxyMethod> result = new LinkedHashMap<>();
 
         ProxyMethod.Builder builder = new ProxyMethod.Builder()
                 .description(operation.getDescription())
@@ -90,7 +91,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.returnType(GenericType.Mono(singleValueType));
         }
 
-        configureUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
+        buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
         builder.returnValueWireType(returnValueWireTypeOptions
@@ -167,9 +168,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
      * @param expectedStatusCodes the expected status codes
      * @param settings the settings
      */
-    protected void configureUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
-                                                             Operation operation, List<HttpResponseStatus> expectedStatusCodes,
-                                                             JavaSettings settings) {
+    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
+                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
+                                                         JavaSettings settings) {
         ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());

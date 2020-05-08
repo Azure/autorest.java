@@ -32,7 +32,7 @@ public class FluentObjectMapper extends ObjectMapper {
 
     @Override
     protected boolean isImplementedModel(ClassType modelType) {
-        return !FluentType.nonResourceType(modelType) || !FluentType.nonCloudError(modelType);
+        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType);
     }
 
     @Override
