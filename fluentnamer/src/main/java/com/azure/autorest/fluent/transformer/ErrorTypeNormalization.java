@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.transformer;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -12,6 +13,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
@@ -76,6 +78,10 @@ public class ErrorTypeNormalization {
             errorSchema = errorSchemaOpt.get();
         }
 
+        normalizeErrorType(error, errorSchema);
+    }
+
+    private void normalizeErrorType(ObjectSchema error, ObjectSchema errorSchema) {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
@@ -84,10 +90,15 @@ public class ErrorTypeNormalization {
             case SUBCLASS_MANAGEMENT_ERROR:
                 error.getLanguage().getJava().setName(Utils.getJavaName(errorSchema));
 
+                // make it a subclass of ManagementError
                 Relations parents = new Relations();
                 parents.setAll(Collections.singletonList(DUMMY_ERROR));
                 parents.setImmediate(Collections.singletonList(DUMMY_ERROR));
                 error.setParents(parents);
+
+                if (errorSchema != error) {
+                    errorSchema.setParents(parents);
+                }
 
                 List<Property> properties = new ArrayList<>();
                 errorSchema.getProperties().forEach(p -> {
@@ -95,6 +106,7 @@ public class ErrorTypeNormalization {
                         p.setReadOnly(true);
                         properties.add(p);
                     } else if (p.getSerializedName().equals("details")) {
+                        normalizeErrorDetailType(p);
                         p.setReadOnly(true);
                         properties.add(p);
                     }
@@ -104,6 +116,52 @@ public class ErrorTypeNormalization {
 
             case GENERIC:
                 break;
+        }
+    }
+
+    private void normalizeErrorDetailType(Property details) {
+        Schema detailsSchema = details.getSchema();
+        if (detailsSchema instanceof ArraySchema && ((ArraySchema) detailsSchema).getElementType() instanceof ObjectSchema ) {
+            ObjectSchema error = (ObjectSchema) ((ArraySchema) detailsSchema).getElementType();
+            if (error.getParents() == null || !FluentType.ManagementError.getName().equals(Utils.getJavaName(error.getParents().getImmediate().get(0)))) {
+                // if not subclass of ManagementError, normalize it
+
+                switch (getErrorType(error)) {
+                    case MANAGEMENT_ERROR:
+                        error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                        break;
+
+                    case SUBCLASS_MANAGEMENT_ERROR:
+                    case GENERIC:
+                        Relations parents = new Relations();
+                        parents.setAll(Collections.singletonList(DUMMY_ERROR));
+                        parents.setImmediate(Collections.singletonList(DUMMY_ERROR));
+                        error.setParents(parents);
+
+                        List<Property> properties = new ArrayList<>();
+                        error.getProperties().forEach(p -> {
+                            if (!MANAGEMENT_ERROR_FIELDS.contains(p.getSerializedName())) {
+                                p.setReadOnly(true);
+                                properties.add(p);
+                            } else if (p.getSerializedName().equals("details")) {
+                                normalizeErrorDetailType(p);
+                                p.setReadOnly(true);
+                                properties.add(p);
+                            }
+                        });
+                        error.setProperties(properties);
+                        break;
+                }
+            }
+        } else {
+            ArraySchema arraySchema = new ArraySchema();
+            arraySchema.setLanguage(new Languages());
+            arraySchema.getLanguage().setJava(new Language());
+            arraySchema.getLanguage().getJava().setName("ManagementErrorDetails");
+
+            arraySchema.setElementType(DUMMY_ERROR);
+
+            details.setSchema(arraySchema);
         }
     }
 
@@ -123,7 +181,7 @@ public class ErrorTypeNormalization {
         return type;
     }
 
-    private static enum ErrorType {
+    private enum ErrorType {
         MANAGEMENT_ERROR, SUBCLASS_MANAGEMENT_ERROR, GENERIC
     }
 }

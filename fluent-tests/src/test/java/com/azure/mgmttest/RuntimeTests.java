@@ -11,7 +11,6 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
-import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.mgmttest.appservice.DefaultErrorResponseError;
@@ -47,6 +46,6 @@ public class RuntimeTests {
         Assertions.assertEquals("WepAppError", webError.getCode());
         Assertions.assertNotNull(webError.details());
         Assertions.assertEquals(1, webError.details().size());
-        Assertions.assertEquals("InnerError", webError.details().get(0).code());
+        Assertions.assertEquals("InnerError", webError.details().get(0).getCode());
     }
 }
