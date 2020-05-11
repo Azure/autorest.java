@@ -14,6 +14,8 @@ import com.azure.management.resources.fluentcore.collection.InnerSupportsListing
 import com.azure.mgmttest.appservice.DefaultErrorResponseError;
 import com.azure.mgmttest.appservice.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
+import com.azure.mgmttest.authorization.GraphError;
+import com.azure.mgmttest.authorization.GraphErrorException;
 import com.azure.mgmttest.conainterservice.ContainerServiceMasterProfile;
 import com.azure.mgmttest.conainterservice.Count;
 import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
@@ -93,6 +95,8 @@ public class CompilationTests {
 
     public void testException() {
         ManagementException exception = new DefaultErrorResponseErrorException(anyString(), null);
-        ManagementError error = new ManagementError();
+        ManagementError error = exception.getValue();
+
+        GraphErrorException graphException = new GraphErrorException(anyString(), null);
     }
 }

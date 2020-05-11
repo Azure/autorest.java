@@ -179,7 +179,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
-                classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, property.getGetterName()), (methodBlock) ->
+                classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
                 {
                     String sourceTypeName = propertyType.toString();
                     String targetTypeName = propertyClientType.toString();
@@ -315,5 +315,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected boolean validateOnParentModel(String parentModelName) {
         return parentModelName != null;
+    }
+
+    /**
+     * Extension for property getter method name.
+     *
+     * @param model the model
+     * @param property the property
+     * @return The property getter method name.
+     */
+    protected String getGetterName(ClientModel model, ClientModelProperty property) {
+        return property.getGetterName();
     }
 }
