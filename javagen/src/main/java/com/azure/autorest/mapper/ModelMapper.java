@@ -149,14 +149,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (compositeType.getDiscriminator() != null) {
                 String discriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
                 discriminatorNeedEscape = discriminator.contains(".");
-                discriminator = discriminator.replace(".", "\\\\.");
+                discriminator = discriminatorNeedEscape ? discriminator.replace(".", "\\\\.") : discriminator;
                 builder.polymorphicDiscriminator(discriminator);
             } else if (isPolymorphic) {
                 for (ComplexSchema parent : compositeType.getParents().getAll()) {
                     if (((ObjectSchema) parent).getDiscriminator() != null) {
                         String discriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
                         discriminatorNeedEscape = discriminator.contains(".");
-                        discriminator = discriminator.replace(".", "\\\\.");
+                        discriminator = discriminatorNeedEscape ? discriminator.replace(".", "\\\\.") : discriminator;
                         builder.polymorphicDiscriminator(discriminator);
                         break;
                     }
