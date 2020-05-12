@@ -60,7 +60,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList()));
 
-        IType responseBodyType = SchemaUtil.operationResponseType(operation);
+        IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {

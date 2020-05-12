@@ -14,6 +14,8 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -146,21 +148,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             boolean discriminatorNeedEscape = false;
-            if (compositeType.getDiscriminator() != null) {
-                String discriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
-                discriminatorNeedEscape = discriminator.contains(".");
-                discriminator = discriminatorNeedEscape ? discriminator.replace(".", "\\\\.") : discriminator;
-                builder.polymorphicDiscriminator(discriminator);
-            } else if (isPolymorphic) {
-                for (ComplexSchema parent : compositeType.getParents().getAll()) {
-                    if (((ObjectSchema) parent).getDiscriminator() != null) {
-                        String discriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
-                        discriminatorNeedEscape = discriminator.contains(".");
-                        discriminator = discriminatorNeedEscape ? discriminator.replace(".", "\\\\.") : discriminator;
-                        builder.polymorphicDiscriminator(discriminator);
-                        break;
-                    }
-                }
+            if (isPolymorphic) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                discriminatorNeedEscape = discriminatorSerializedName.contains(".");
+                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
+                builder.polymorphicDiscriminator(discriminatorSerializedName);
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();

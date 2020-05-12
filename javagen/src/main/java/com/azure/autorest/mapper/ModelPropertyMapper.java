@@ -7,6 +7,8 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.getParentSchema() != null) {
             flattened = property.getParentSchema().getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
-            flattened = flattened || (property.getParentSchema().getDiscriminator() != null && property.getParentSchema().getDiscriminator().getProperty().getSerializedName().contains("."));
+            if (!flattened) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
+                flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+            }
         }
 
         StringBuilder serializedName = new StringBuilder();
