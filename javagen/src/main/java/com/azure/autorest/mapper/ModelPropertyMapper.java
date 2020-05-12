@@ -37,6 +37,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.getParentSchema() != null) {
             flattened = property.getParentSchema().getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+            flattened = flattened || (property.getParentSchema().getDiscriminator() != null && property.getParentSchema().getDiscriminator().getProperty().getSerializedName().contains("."));
         }
 
         StringBuilder serializedName = new StringBuilder();

@@ -145,12 +145,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.description(String.format("%s%s", compositeType.getSummary(), compositeType.getDescription()));
             }
 
+            boolean discriminatorNeedEscape = false;
             if (compositeType.getDiscriminator() != null) {
-                builder.polymorphicDiscriminator(compositeType.getDiscriminator().getProperty().getSerializedName());
+                String discriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
+                discriminatorNeedEscape = discriminator.contains(".");
+                discriminator = discriminator.replace(".", "\\\\.");
+                builder.polymorphicDiscriminator(discriminator);
             } else if (isPolymorphic) {
                 for (ComplexSchema parent : compositeType.getParents().getAll()) {
                     if (((ObjectSchema) parent).getDiscriminator() != null) {
-                        builder.polymorphicDiscriminator(((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName());
+                        String discriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
+                        discriminatorNeedEscape = discriminator.contains(".");
+                        discriminator = discriminator.replace(".", "\\\\.");
+                        builder.polymorphicDiscriminator(discriminator);
                         break;
                     }
                 }
@@ -182,7 +189,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(compositeType.getProperties().stream()
+            builder.needsFlatten(discriminatorNeedEscape || compositeType.getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty()));
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
