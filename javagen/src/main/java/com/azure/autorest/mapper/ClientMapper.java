@@ -232,7 +232,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.name(classType.getName()).packageName(classType.getPackage());
         builder.description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()));
         builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
-        builder.bodyType(SchemaUtil.operationResponseType(method));
+        builder.bodyType(SchemaUtil.getOperationResponseType(method));
         return builder.build();
     }
 

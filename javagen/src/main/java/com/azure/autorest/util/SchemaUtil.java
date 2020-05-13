@@ -1,6 +1,7 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
+import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -66,7 +67,7 @@ public class SchemaUtil {
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
     }
 
-    public static IType operationResponseType(Operation operation) {
+    public static IType getOperationResponseType(Operation operation) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
@@ -82,5 +83,20 @@ public class SchemaUtil {
         }
 
         return responseBodyType;
+    }
+
+    public static String getDiscriminatorSerializedName(ObjectSchema compositeType) {
+        String discriminator = null;
+        if (compositeType.getDiscriminator() != null) {
+            discriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
+        } else if (compositeType.getDiscriminatorValue() != null) {
+            for (ComplexSchema parent : compositeType.getParents().getAll()) {
+                if (((ObjectSchema) parent).getDiscriminator() != null) {
+                    discriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
+                    break;
+                }
+            }
+        }
+        return discriminator;
     }
 }

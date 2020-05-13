@@ -107,6 +107,11 @@ public final class MediaTypesClient {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+
+        @Post("/mediatypes/contentTypeWithEncoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<String>> contentTypeWithEncoding(@HostParam("$host") String host, @BodyParam("text/plain") String input, Context context);
     }
 
     /**
@@ -229,5 +234,60 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(String source) {
         return analyzeBodyAsync(source).block();
+    }
+
+    /**
+     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * 
+     * @param input simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<String>> contentTypeWithEncodingWithResponseAsync(String input) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.contentTypeWithEncoding(this.getHost(), input, context));
+    }
+
+    /**
+     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * 
+     * @param input simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> contentTypeWithEncodingAsync(String input) {
+        return contentTypeWithEncodingWithResponseAsync(input)
+            .flatMap((SimpleResponse<String> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    /**
+     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     * 
+     * @param input simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String contentTypeWithEncoding(String input) {
+        return contentTypeWithEncodingAsync(input).block();
     }
 }
