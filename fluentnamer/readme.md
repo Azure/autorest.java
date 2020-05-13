@@ -16,6 +16,7 @@ pipeline:
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
     additional-checks: false
+    lenient-model-deduplication: true
     flatten-models: true
     flatten-payloads: true
     naming:

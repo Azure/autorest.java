@@ -85,6 +85,10 @@ public class ErrorTypeNormalization {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+
+                if (errorSchema != error) {
+                    errorSchema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                }
                 break;
 
             case SUBCLASS_MANAGEMENT_ERROR:
