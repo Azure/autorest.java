@@ -14,6 +14,8 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -145,15 +147,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.description(String.format("%s%s", compositeType.getSummary(), compositeType.getDescription()));
             }
 
-            if (compositeType.getDiscriminator() != null) {
-                builder.polymorphicDiscriminator(compositeType.getDiscriminator().getProperty().getSerializedName());
-            } else if (isPolymorphic) {
-                for (ComplexSchema parent : compositeType.getParents().getAll()) {
-                    if (((ObjectSchema) parent).getDiscriminator() != null) {
-                        builder.polymorphicDiscriminator(((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName());
-                        break;
-                    }
-                }
+            boolean discriminatorNeedEscape = false;
+            if (isPolymorphic) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                discriminatorNeedEscape = discriminatorSerializedName.contains(".");
+                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
+                builder.polymorphicDiscriminator(discriminatorSerializedName);
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();
@@ -182,7 +181,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(compositeType.getProperties().stream()
+            builder.needsFlatten(discriminatorNeedEscape || compositeType.getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty()));
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();

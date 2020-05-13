@@ -82,7 +82,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             syncReturnType = GenericType.PagedIterable(elementType);
         } else {
             asyncRestResponseReturnType = null;
-            IType responseBodyType = SchemaUtil.operationResponseType(operation);
+            IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
                 asyncReturnType = GenericType.Flux(ClassType.ByteBuffer);
