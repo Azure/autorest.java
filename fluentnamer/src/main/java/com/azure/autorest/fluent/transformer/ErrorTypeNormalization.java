@@ -111,11 +111,18 @@ public class ErrorTypeNormalization {
                         properties.add(p);
                     } else if (p.getSerializedName().equals("details")) {
                         normalizeErrorDetailType(p);
-                        p.setReadOnly(true);
-                        properties.add(p);
+                        if (FluentType.nonManagementError(Utils.getJavaName(((ArraySchema) p.getSchema()).getElementType()))) {
+                            p.setReadOnly(true);
+                            properties.add(p);
+                        }
                     }
                 });
                 error.setProperties(properties);
+
+                if (errorSchema != error) {
+                    errorSchema.setProperties(properties);
+                }
+
                 break;
 
             case GENERIC:
@@ -127,7 +134,7 @@ public class ErrorTypeNormalization {
         Schema detailsSchema = details.getSchema();
         if (detailsSchema instanceof ArraySchema && ((ArraySchema) detailsSchema).getElementType() instanceof ObjectSchema ) {
             ObjectSchema error = (ObjectSchema) ((ArraySchema) detailsSchema).getElementType();
-            if (error.getParents() == null || !FluentType.ManagementError.getName().equals(Utils.getJavaName(error.getParents().getImmediate().get(0)))) {
+            if (error.getParents() == null || FluentType.nonManagementError(Utils.getJavaName(error.getParents().getImmediate().get(0)))) {
                 // if not subclass of ManagementError, normalize it
 
                 switch (getErrorType(error)) {
