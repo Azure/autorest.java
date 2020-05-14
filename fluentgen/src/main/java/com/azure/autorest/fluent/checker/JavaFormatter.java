@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class JavaFormatter {
@@ -53,15 +56,69 @@ public class JavaFormatter {
         }
 
         try {
-            //return new Formatter().formatSource(content);
+            //return new Formatter().formatSourceAndFixImports(content);
 
             Class formatterClass = this.getClass().getClassLoader().loadClass("com.google.googlejavaformat.java.Formatter");
             Object formatterInstance = formatterClass.getConstructor().newInstance();
-            Method formatSourceMethod = formatterClass.getMethod("formatSource", String.class);
-            return (String) formatSourceMethod.invoke(formatterInstance, content);
+            Method formatSourceMethod = formatterClass.getMethod("formatSourceAndFixImports", String.class);
+            String formattedCode = (String) formatSourceMethod.invoke(formatterInstance, content);
+            return fixOverlongStringLiteral(formattedCode);
         } catch (Exception e) {
             logger.warn("Failed to parse Java file {}, message: {}", path, e.getMessage());
             return content;
         }
+    }
+
+    private static String fixOverlongStringLiteral(String content) {
+        final int limit = 120;
+        final String quote = "\"";
+
+        List<String> formattedLines = new ArrayList<>();
+        String[] lines = content.split("\r?\n", -1);
+        for (String line : lines) {
+            if (line.length() > limit) {
+                int firstQuote = line.indexOf(quote);
+                int lastQuote = line.lastIndexOf(quote);
+                if (firstQuote < lastQuote) {
+                    String stringLiteral = line.substring(firstQuote + 1, lastQuote);
+                    char breakChar = 0;
+                    if (stringLiteral.contains("/")) {
+                        breakChar = '/';
+                    } else if (stringLiteral.contains(".")) {
+                        breakChar = '.';
+                    } else if (stringLiteral.contains(",")) {
+                        breakChar = ',';
+                    } else if (stringLiteral.contains(" ")) {
+                        breakChar = ' ';
+                    }
+                    for (int i = Math.min(lastQuote, limit) - 2; i >= 0; --i) {
+                        char c = line.charAt(i + 1);
+                        if (breakChar == 0 || breakChar == c) {
+                            String line1 = line.substring(0, i + 1) + quote;
+
+                            int line1Indent = 0;
+                            for (int j = 0; j < line1.length(); ++j) {
+                                if (line1.charAt(j) != ' ') {
+                                    line1Indent = j;
+                                    break;
+                                }
+                            }
+
+                            String line2 = String.join("", Collections.nCopies(line1Indent + 4, " "))
+                                    + "+ " + quote + line.substring(i + 1);
+
+                            formattedLines.add(line1);
+                            formattedLines.add(line2);
+                            break;
+                        }
+                    }
+                } else {
+                    formattedLines.add(line);
+                }
+            } else {
+                formattedLines.add(line);
+            }
+        }
+        return String.join(System.lineSeparator(), formattedLines);
     }
 }
