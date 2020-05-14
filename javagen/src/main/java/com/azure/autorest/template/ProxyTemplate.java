@@ -53,7 +53,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), breakUrlOnLengthLimit(restAPIMethod.getUrlPath())));
+                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
@@ -143,9 +143,5 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
      * @param interfaceBlock interface block
      */
     protected void writeProxyMethodHeaders(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
-    }
-
-    protected String breakUrlOnLengthLimit(String string) {
-        return string;
     }
 }
