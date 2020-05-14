@@ -80,6 +80,16 @@ public class JavaFormatter {
                 int firstQuote = line.indexOf(quote);
                 int lastQuote = line.lastIndexOf(quote);
                 if (firstQuote < lastQuote) {
+                    int lineIndent = 0;
+                    for (int j = 0; j < line.length(); ++j) {
+                        if (line.charAt(j) != ' ') {
+                            lineIndent = j;
+                            break;
+                        }
+                    }
+                    lineIndent += 4;
+                    String lineIndentStr = String.join("", Collections.nCopies(lineIndent, " "));
+
                     String stringLiteral = line.substring(firstQuote + 1, lastQuote);
                     char breakChar = 0;
                     if (stringLiteral.contains("/")) {
@@ -91,24 +101,30 @@ public class JavaFormatter {
                     } else if (stringLiteral.contains(" ")) {
                         breakChar = ' ';
                     }
+
                     for (int i = Math.min(lastQuote, limit) - 2; i >= 0; --i) {
                         char c = line.charAt(i + 1);
                         if (breakChar == 0 || breakChar == c) {
-                            String line1 = line.substring(0, i + 1) + quote;
+                            String firstLine = line.substring(0, i + 1) + quote;
+                            formattedLines.add(firstLine);
 
-                            int line1Indent = 0;
-                            for (int j = 0; j < line1.length(); ++j) {
-                                if (line1.charAt(j) != ' ') {
-                                    line1Indent = j;
-                                    break;
+                            String breakedLine = lineIndentStr + "+ " + quote + line.substring(i + 1);
+                            while (breakedLine.length() > limit) {
+                                lastQuote = breakedLine.lastIndexOf(quote);
+
+                                for (int j = Math.min(lastQuote, limit) - 2; j >= 0; --j) {
+                                    c = breakedLine.charAt(j + 1);
+                                    if (breakChar == 0 || breakChar == c) {
+                                        String nextBreakedLine = lineIndentStr + "+ " + quote + breakedLine.substring(j + 1);
+                                        breakedLine = breakedLine.substring(0, j + 1) + quote;
+
+                                        formattedLines.add(breakedLine);
+                                        breakedLine = nextBreakedLine;
+                                        break;
+                                    }
                                 }
                             }
-
-                            String line2 = String.join("", Collections.nCopies(line1Indent + 4, " "))
-                                    + "+ " + quote + line.substring(i + 1);
-
-                            formattedLines.add(line1);
-                            formattedLines.add(line2);
+                            formattedLines.add(breakedLine);
                             break;
                         }
                     }
