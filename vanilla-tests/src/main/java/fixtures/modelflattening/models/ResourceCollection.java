@@ -103,7 +103,7 @@ public final class ResourceCollection {
             getArrayofresources().forEach(e -> e.validate());
         }
         if (getDictionaryofresources() != null) {
-            getDictionaryofresources().values().forEach(e -> {if (e != null) {e.validate();}});
+            getDictionaryofresources().values().forEach(e -> { if (e != null) { e.validate(); } });
         }
     }
 }
