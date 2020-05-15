@@ -171,6 +171,12 @@ public final class Datetimes {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTime(@HostParam("$host") String host, Context context);
+
+        @Get("/datetime/min/localnooffset")
+        @ExpectedResponses({200})
+        @ReturnValueWireType(OffsetDateTime.class)
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<SimpleResponse<OffsetDateTime>> getLocalNoOffsetMinDateTime(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -1151,5 +1157,51 @@ public final class Datetimes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetMinDateTime() {
         return getLocalNegativeOffsetMinDateTimeAsync().block();
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.getLocalNoOffsetMinDateTime(this.client.getHost(), context));
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalNoOffsetMinDateTimeAsync() {
+        return getLocalNoOffsetMinDateTimeWithResponseAsync()
+            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public OffsetDateTime getLocalNoOffsetMinDateTime() {
+        return getLocalNoOffsetMinDateTimeAsync().block();
     }
 }

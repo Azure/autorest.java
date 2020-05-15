@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -445,6 +446,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                 comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
+            }
+            if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                    comment.methodThrows(exception.getKey().toString(),
+                            String.format("thrown if the request is rejected by server on status code %s",
+                                    exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+                }
             }
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());

@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.mapper.ObjectMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.core.util.FluxUtil;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,10 +18,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FluentObjectMapper extends ObjectMapper {
 
-    private static FluentObjectMapper _instance = new FluentObjectMapper();
+    private static final FluentObjectMapper instance = new FluentObjectMapper();
 
     public static FluentObjectMapper getInstance() {
-        return _instance;
+        return instance;
     }
 
     private Set<ObjectSchema> innerModels = ConcurrentHashMap.newKeySet();
@@ -32,7 +33,7 @@ public class FluentObjectMapper extends ObjectMapper {
 
     @Override
     protected boolean isImplementedModel(ClassType modelType) {
-        return !FluentType.nonResourceType(modelType) || !FluentType.nonCloudError(modelType);
+        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType);
     }
 
     @Override
@@ -44,6 +45,8 @@ public class FluentObjectMapper extends ObjectMapper {
             result = FluentType.ProxyResource;
         } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SubResource.getName())) {
             result = FluentType.SubResource;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ManagementError.getName())) {
+            result = FluentType.ManagementError;
         }
         return result;
     }

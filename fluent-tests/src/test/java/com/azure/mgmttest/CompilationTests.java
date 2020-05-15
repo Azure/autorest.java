@@ -7,9 +7,15 @@
 package com.azure.mgmttest;
 
 import com.azure.core.management.Resource;
+import com.azure.core.management.exception.ManagementError;
+import com.azure.core.management.exception.ManagementException;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
+import com.azure.mgmttest.appservice.DefaultErrorResponseError;
+import com.azure.mgmttest.appservice.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
+import com.azure.mgmttest.authorization.GraphError;
+import com.azure.mgmttest.authorization.GraphErrorException;
 import com.azure.mgmttest.conainterservice.ContainerServiceMasterProfile;
 import com.azure.mgmttest.conainterservice.Count;
 import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
@@ -62,7 +68,7 @@ public class CompilationTests {
     public void testResourceType() {
         // ResourceGroup is regarded as subclass of Resource.
         Resource resourceGroup = mock(ResourceGroupInner.class);
-        resourceGroup.getId();
+        resourceGroup.id();
 
         // NetworkSecurityGroup is subclass of Resource, but the id property from spec is not readonly,
         // hence it get pulled out from Resource.
@@ -85,5 +91,12 @@ public class CompilationTests {
         ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
         containerServiceMasterProfile.withCount(Count.THREE);
         int countInt = containerServiceMasterProfile.count().toInt();
+    }
+
+    public void testException() {
+        ManagementException exception = new DefaultErrorResponseErrorException(anyString(), null);
+        ManagementError error = exception.getValue();
+
+        GraphErrorException graphException = new GraphErrorException(anyString(), null);
     }
 }

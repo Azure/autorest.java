@@ -48,7 +48,6 @@ public class ClassType implements IType {
     public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
-    public static final ClassType CloudException = new ClassType.Builder().packageName("com.azure.core.management").name("CloudException").build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
 
     private final String packageName;
