@@ -41,7 +41,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
             _itype = ClassType.String;
         } else {
-            String enumSubpackage = (settings.isFluent() ? "" : settings.getModelsSubpackage());
+            String enumSubpackage = settings.getModelsSubpackage();
             String enumPackage = settings.getPackage(enumSubpackage);
 
             enumTypeName = CodeNamer.getTypeName(enumTypeName);

@@ -37,7 +37,7 @@ public class FluentExceptionMapper extends ExceptionMapper {
                 && !FluentType.nonManagementError(Utils.getJavaName(compositeType.getParents().getImmediate().get(0)));
 
         ClientException exception = new ClientException.Builder()
-                .packageName(settings.getPackage())
+                .packageName(settings.getModelsSubpackage())
                 .name(methodOperationExceptionTypeName)
                 .errorName(errorName)
                 .parentType(isManagementException ? FluentType.ManagementException : ClassType.HttpResponseException)

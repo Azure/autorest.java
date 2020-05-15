@@ -42,7 +42,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.interfaceName(interfaceName);
         String className = interfaceName;
         if (settings.isFluent()) {
-            className += "Inner";
+            className += "Client";
         } else if (settings.shouldGenerateClientAsImpl()) {
             className += "Impl";
         }

@@ -41,13 +41,11 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                 String className = compositeType.getLanguage().getJava().getName();
                 if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                     classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-                } else if (!settings.isFluent()) {
-                    classPackage = settings.getPackage(settings.getModelsSubpackage());
                 } else if (isInnerModel(compositeType)) {
                     className += "Inner";
                     classPackage = settings.getPackage(settings.getImplementationSubpackage());
                 } else {
-                    classPackage = settings.getPackage();
+                    classPackage = settings.getPackage(settings.getModelsSubpackage());
                 }
                 result = new ClassType.Builder()
                         .packageName(classPackage)
