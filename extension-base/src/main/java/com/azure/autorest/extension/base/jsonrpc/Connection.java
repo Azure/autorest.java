@@ -282,7 +282,12 @@ public class Connection {
                                     f = tasks.get(id);
                                     tasks.remove(id);
                                 }
-                                f.complete(mapper.convertValue(jobject.get("result"), f.type));
+                                if (f.type.getRawClass().equals(Boolean.class)
+                                        && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                    f.complete(Boolean.TRUE);
+                                } else {
+                                    f.complete(mapper.convertValue(jobject.get("result"), f.type));
+                                }
                             }
                         }
                     }
