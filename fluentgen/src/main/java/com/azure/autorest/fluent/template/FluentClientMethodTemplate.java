@@ -155,6 +155,21 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
+    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
+
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            if (classType instanceof GenericType) {
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType());", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+            } else {
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+            }
+        });
+    }
+
     private static IType returnTypeWithoutMono(IType returnType) {
         // need e.g. PagedResponse<T>
         IType returnTypeWithoutMono = returnType;
