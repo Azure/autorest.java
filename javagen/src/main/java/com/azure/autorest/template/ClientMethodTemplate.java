@@ -351,6 +351,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
+            case LongRunningBegin:
+                generateLongRunningBegin(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
+
             case Resumable:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -574,6 +578,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param settings java settings
      */
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
     }
 }
