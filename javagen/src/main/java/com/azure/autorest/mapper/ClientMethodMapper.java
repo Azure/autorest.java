@@ -244,6 +244,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .isGroupedParameterRequired(false)
                                 .build());
 
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods, builder, parameters);
+                        }
+
                         if (generateClientMethodWithOnlyRequiredParameters) {
                             methods.add(builder
                                     .onlyRequiredParameters(true)
@@ -262,6 +266,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .isGroupedParameterRequired(false)
                         .build());
 
+                if (settings.isContextClientMethodParameter()) {
+                    addClientMethodWithContext(methods, builder, parameters);
+                }
+
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
@@ -271,6 +279,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .type(ClientMethodType.LongRunningAsync)
                             .isGroupedParameterRequired(false)
                             .build());
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
@@ -288,6 +300,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .type(ClientMethodType.LongRunningSync)
                             .isGroupedParameterRequired(false)
                             .build());
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
