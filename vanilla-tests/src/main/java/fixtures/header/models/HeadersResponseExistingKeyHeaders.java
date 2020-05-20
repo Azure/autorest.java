@@ -3,9 +3,7 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HeadersResponseExistingKeyHeaders model.
- */
+/** The HeadersResponseExistingKeyHeaders model. */
 @Fluent
 public final class HeadersResponseExistingKeyHeaders {
     /*
@@ -16,7 +14,7 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Get the userAgent property: The User-Agent property.
-     * 
+     *
      * @return the userAgent value.
      */
     public String getUserAgent() {
@@ -25,7 +23,7 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Set the userAgent property: The User-Agent property.
-     * 
+     *
      * @param userAgent the userAgent value to set.
      * @return the HeadersResponseExistingKeyHeaders object itself.
      */
@@ -36,9 +34,8 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

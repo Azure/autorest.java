@@ -3,9 +3,7 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HeadersResponseIntegerHeaders model.
- */
+/** The HeadersResponseIntegerHeaders model. */
 @Fluent
 public final class HeadersResponseIntegerHeaders {
     /*
@@ -16,7 +14,7 @@ public final class HeadersResponseIntegerHeaders {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public Integer getValue() {
@@ -25,7 +23,7 @@ public final class HeadersResponseIntegerHeaders {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the HeadersResponseIntegerHeaders object itself.
      */
@@ -36,9 +34,8 @@ public final class HeadersResponseIntegerHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

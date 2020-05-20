@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/**
- * The Banana model.
- */
+/** The Banana model. */
 @JacksonXmlRootElement(localName = "banana")
 @Fluent
 public final class Banana {
@@ -31,7 +29,7 @@ public final class Banana {
 
     /**
      * Get the name property: The name property.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -40,7 +38,7 @@ public final class Banana {
 
     /**
      * Set the name property: The name property.
-     * 
+     *
      * @param name the name value to set.
      * @return the Banana object itself.
      */
@@ -51,7 +49,7 @@ public final class Banana {
 
     /**
      * Get the flavor property: The flavor property.
-     * 
+     *
      * @return the flavor value.
      */
     public String getFlavor() {
@@ -60,7 +58,7 @@ public final class Banana {
 
     /**
      * Set the flavor property: The flavor property.
-     * 
+     *
      * @param flavor the flavor value to set.
      * @return the Banana object itself.
      */
@@ -70,9 +68,8 @@ public final class Banana {
     }
 
     /**
-     * Get the expiration property: The time at which you should reconsider
-     * eating this banana.
-     * 
+     * Get the expiration property: The time at which you should reconsider eating this banana.
+     *
      * @return the expiration value.
      */
     public OffsetDateTime getExpiration() {
@@ -80,9 +77,8 @@ public final class Banana {
     }
 
     /**
-     * Set the expiration property: The time at which you should reconsider
-     * eating this banana.
-     * 
+     * Set the expiration property: The time at which you should reconsider eating this banana.
+     *
      * @param expiration the expiration value to set.
      * @return the Banana object itself.
      */
@@ -93,9 +89,8 @@ public final class Banana {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

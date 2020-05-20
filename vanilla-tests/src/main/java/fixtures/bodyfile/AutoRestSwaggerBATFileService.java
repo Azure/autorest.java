@@ -6,18 +6,14 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestSwaggerBATFileService type.
- */
+/** Initializes a new instance of the AutoRestSwaggerBATFileService type. */
 public final class AutoRestSwaggerBATFileService {
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
@@ -26,7 +22,7 @@ public final class AutoRestSwaggerBATFileService {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the service client itself.
      */
@@ -35,44 +31,38 @@ public final class AutoRestSwaggerBATFileService {
         return this;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The Files object to access its operations.
-     */
+    /** The Files object to access its operations. */
     private final Files files;
 
     /**
      * Gets the Files object to access its operations.
-     * 
+     *
      * @return the Files object.
      */
     public Files getFiles() {
         return this.files;
     }
 
-    /**
-     * Initializes an instance of AutoRestSwaggerBATFileService client.
-     */
+    /** Initializes an instance of AutoRestSwaggerBATFileService client. */
     public AutoRestSwaggerBATFileService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATFileService(HttpPipeline httpPipeline) {

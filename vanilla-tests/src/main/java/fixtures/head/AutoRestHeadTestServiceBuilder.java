@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestHeadTestService type.
- */
+/** A builder for creating a new instance of the AutoRestHeadTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestHeadTestService.class})
 public final class AutoRestHeadTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestHeadTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestHeadTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestHeadTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestHeadTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestHeadTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestHeadTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestHeadTestService.
      */
     public AutoRestHeadTestService buildClient() {
@@ -54,7 +52,10 @@ public final class AutoRestHeadTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestHeadTestService client = new AutoRestHeadTestService(pipeline);
         client.setHost(this.host);

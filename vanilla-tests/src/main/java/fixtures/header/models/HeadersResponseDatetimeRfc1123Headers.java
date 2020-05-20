@@ -5,9 +5,7 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/**
- * The HeadersResponseDatetimeRfc1123Headers model.
- */
+/** The HeadersResponseDatetimeRfc1123Headers model. */
 @Fluent
 public final class HeadersResponseDatetimeRfc1123Headers {
     /*
@@ -18,7 +16,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public OffsetDateTime getValue() {
@@ -30,7 +28,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the HeadersResponseDatetimeRfc1123Headers object itself.
      */
@@ -45,9 +43,8 @@ public final class HeadersResponseDatetimeRfc1123Headers {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

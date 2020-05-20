@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/**
- * The DictionaryWrapper model.
- */
+/** The DictionaryWrapper model. */
 @Fluent
 public final class DictionaryWrapper {
     /*
@@ -17,7 +15,7 @@ public final class DictionaryWrapper {
 
     /**
      * Get the defaultProgram property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @return the defaultProgram value.
      */
     public Map<String, String> getDefaultProgram() {
@@ -26,7 +24,7 @@ public final class DictionaryWrapper {
 
     /**
      * Set the defaultProgram property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @param defaultProgram the defaultProgram value to set.
      * @return the DictionaryWrapper object itself.
      */
@@ -37,9 +35,8 @@ public final class DictionaryWrapper {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

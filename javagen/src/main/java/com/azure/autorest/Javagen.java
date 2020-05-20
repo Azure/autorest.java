@@ -17,6 +17,10 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
+import com.google.googlejavaformat.java.Formatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -24,10 +28,6 @@ import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
     private static final Logger LOGGER = LoggerFactory.getLogger(Javagen.class);
@@ -84,7 +84,7 @@ public class Javagen extends NewPlugin {
                 builderPackage = JavaSettings.getInstance().getPackage();
             }
             javaPackage.addServiceClientBuilder(builderPackage, client.getServiceClient().getInterfaceName() + "Builder",
-                    client.getServiceClient());
+                client.getServiceClient());
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -141,10 +141,11 @@ public class Javagen extends NewPlugin {
             }
 
             // TODO: POM, Manager
-
             //Step 4: Print to files
+            Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+                String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
+                writeFile(javaFile.getFilePath(), formattedSource, null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);

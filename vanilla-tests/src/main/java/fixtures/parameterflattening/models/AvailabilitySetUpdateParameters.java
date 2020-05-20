@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/**
- * The AvailabilitySetUpdateParameters model.
- */
+/** The AvailabilitySetUpdateParameters model. */
 @Fluent
 public final class AvailabilitySetUpdateParameters {
     /*
@@ -17,7 +15,7 @@ public final class AvailabilitySetUpdateParameters {
 
     /**
      * Get the tags property: A description about the set of tags.
-     * 
+     *
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -26,7 +24,7 @@ public final class AvailabilitySetUpdateParameters {
 
     /**
      * Set the tags property: A description about the set of tags.
-     * 
+     *
      * @param tags the tags value to set.
      * @return the AvailabilitySetUpdateParameters object itself.
      */
@@ -37,12 +35,13 @@ public final class AvailabilitySetUpdateParameters {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getTags() == null) {
-            throw new IllegalArgumentException("Missing required property tags in model AvailabilitySetUpdateParameters");
+            throw new IllegalArgumentException(
+                    "Missing required property tags in model AvailabilitySetUpdateParameters");
         }
     }
 }

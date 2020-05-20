@@ -3,9 +3,7 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The Dog model.
- */
+/** The Dog model. */
 @Fluent
 public final class Dog extends Pet {
     /*
@@ -16,7 +14,7 @@ public final class Dog extends Pet {
 
     /**
      * Get the food property: The food property.
-     * 
+     *
      * @return the food value.
      */
     public String getFood() {
@@ -25,7 +23,7 @@ public final class Dog extends Pet {
 
     /**
      * Set the food property: The food property.
-     * 
+     *
      * @param food the food value to set.
      * @return the Dog object itself.
      */
@@ -36,7 +34,7 @@ public final class Dog extends Pet {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
