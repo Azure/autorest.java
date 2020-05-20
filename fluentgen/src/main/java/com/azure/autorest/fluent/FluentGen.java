@@ -101,23 +101,23 @@ public class FluentGen extends NewPlugin {
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
+            // Service client builder
+            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder",
+                    client.getServiceClient());
+
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
                 List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(), asyncClient);
+                    javaPackage.addAsyncServiceClient(client.getServiceClient().getPackage(), asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(), syncClient);
+                    javaPackage.addSyncServiceClient(client.getServiceClient().getPackage(), syncClient);
                 }
             }
-
-            // Service client builder
-            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder",
-                    client.getServiceClient());
 
             // Method group
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {

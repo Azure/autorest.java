@@ -73,20 +73,6 @@ public class Javagen extends NewPlugin {
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                List<AsyncSyncClient> asyncClients = new ArrayList<>();
-                List<AsyncSyncClient> syncClients = new ArrayList<>();
-                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(), asyncClient);
-                }
-
-                for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(), syncClient);
-                }
-            }
-
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
                     .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
@@ -99,6 +85,20 @@ public class Javagen extends NewPlugin {
             }
             javaPackage.addServiceClientBuilder(builderPackage, client.getServiceClient().getInterfaceName() + "Builder",
                     client.getServiceClient());
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+                List<AsyncSyncClient> syncClients = new ArrayList<>();
+                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                }
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                }
+            }
 
             // Method group
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
