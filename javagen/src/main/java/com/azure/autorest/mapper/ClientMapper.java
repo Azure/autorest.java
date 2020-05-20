@@ -190,8 +190,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
-        String name = operation.getOperationGroup().getLanguage().getJava().getName() + CodeNamer
-            .toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
+        String name = CodeNamer.getPlural(operation.getOperationGroup().getLanguage().getJava().getName())
+                + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
         for (Response response : operation.getResponses()) {
             if (response.getProtocol().getHttp().getHeaders() != null) {
@@ -237,8 +237,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
-        String name = method.getOperationGroup().getLanguage().getJava().getName() + CodeNamer
-            .toPascalCase(method.getLanguage().getJava().getName()) + "Response";
+        String name = CodeNamer.getPlural(method.getOperationGroup().getLanguage().getJava().getName())
+                + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         if (settings.isCustomType(name)) {
             packageName = settings.getPackage(settings.getCustomTypesSubpackage());

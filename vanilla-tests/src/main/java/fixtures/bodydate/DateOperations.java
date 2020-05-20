@@ -21,13 +21,13 @@ import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
- * Dates.
+ * DateOperations.
  */
-public final class Dates {
+public final class DateOperations {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final DatesService service;
+    private final DateOperationsService service;
 
     /**
      * The service client containing this operation class.
@@ -35,22 +35,23 @@ public final class Dates {
     private final AutoRestDateTestService client;
 
     /**
-     * Initializes an instance of Dates.
+     * Initializes an instance of DateOperations.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    Dates(AutoRestDateTestService client) {
-        this.service = RestProxy.create(DatesService.class, client.getHttpPipeline());
+    DateOperations(AutoRestDateTestService client) {
+        this.service = RestProxy.create(DateOperationsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestDateTestServiceDates
-     * to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for
+     * AutoRestDateTestServiceDateOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTestServ")
-    private interface DatesService {
+    private interface DateOperationsService {
         @Get("/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
