@@ -165,7 +165,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                     function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
                                 } else {
                                     function.line("return new %1$s(%2$s().%3$s());", asyncClient.getClassName(), buildMethodName,
-                                            CodeNamer.getModelNamer().modelPropertyGetterName(asyncClient.getMethodGroupClient().getClassBaseName()));
+                                            CodeNamer.getModelNamer().modelPropertyGetterName(asyncClient.getMethodGroupClient().getVariableName()));
                                 }
                             });
                 }
@@ -185,7 +185,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                     function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
                                 } else {
                                     function.line("return new %1$s(%2$s().%3$s());", syncClient.getClassName(), buildMethodName,
-                                            CodeNamer.getModelNamer().modelPropertyGetterName(syncClient.getMethodGroupClient().getClassBaseName()));
+                                            CodeNamer.getModelNamer().modelPropertyGetterName(syncClient.getMethodGroupClient().getVariableName()));
                                 }
                             });
                 }
