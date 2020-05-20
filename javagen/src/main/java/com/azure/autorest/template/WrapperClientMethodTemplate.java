@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaType;
@@ -38,16 +39,17 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
       case PagingAsyncSinglePage:
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         break;
-      case LongRunningAsync:
-      case SimpleSync:
-      case LongRunningSync:
-      case SimpleAsyncRestResponse:
-      case Resumable:
-      case SimpleAsync:
+      default:
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         break;
     }
-    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+
+    String methodName = clientMethod.getName();
+    if (clientMethod.getType().name().contains("Async") && methodName.endsWith("Async")) {
+      methodName = methodName.substring(0, methodName.length() - "Async".length());
+    }
+    String declaration = String.format("%1$s %2$s(%3$s)", clientMethod.getReturnValue().getType(), methodName, clientMethod.getParametersDeclaration());
+    typeBlock.publicMethod(declaration, function -> {
 
       boolean shouldReturn = true;
       if (clientMethod.getReturnValue() != null && clientMethod.getReturnValue().getType() instanceof PrimitiveType) {
