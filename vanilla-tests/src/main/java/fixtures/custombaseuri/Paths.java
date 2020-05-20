@@ -15,24 +15,17 @@ import com.azure.core.util.FluxUtil;
 import fixtures.custombaseuri.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Paths.
- */
+/** An instance of this class provides access to all the operations defined in Paths. */
 public final class Paths {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final PathsService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestParameterizedHostTestClient client;
 
     /**
      * Initializes an instance of Paths.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Paths(AutoRestParameterizedHostTestClient client) {
@@ -41,9 +34,8 @@ public final class Paths {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestParameterizedHostTestClientPaths to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for AutoRestParameterizedHostTestClientPaths to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterize")
@@ -51,12 +43,13 @@ public final class Paths {
         @Get("/customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, Context context);
+        Mono<Response<Void>> getEmpty(
+                @HostParam("accountName") String accountName, @HostParam("host") String host, Context context);
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     * 
+     *
      * @param accountName simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -69,14 +62,15 @@ public final class Paths {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmpty(accountName, this.client.getHost(), context));
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     * 
+     *
      * @param accountName simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -85,13 +79,12 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getEmptyAsync(String accountName) {
-        return getEmptyWithResponseAsync(accountName)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return getEmptyWithResponseAsync(accountName).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     * 
+     *
      * @param accountName simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

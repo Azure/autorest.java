@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestDurationTestService type.
- */
+/** A builder for creating a new instance of the AutoRestDurationTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestDurationTestService.class})
 public final class AutoRestDurationTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestDurationTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestDurationTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestDurationTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestDurationTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestDurationTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestDurationTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestDurationTestService.
      */
     public AutoRestDurationTestService buildClient() {
@@ -54,7 +52,10 @@ public final class AutoRestDurationTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestDurationTestService client = new AutoRestDurationTestService(pipeline);
         client.setHost(this.host);

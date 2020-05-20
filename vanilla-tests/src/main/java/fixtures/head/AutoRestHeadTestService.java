@@ -6,18 +6,14 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestHeadTestService type.
- */
+/** Initializes a new instance of the AutoRestHeadTestService type. */
 public final class AutoRestHeadTestService {
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
@@ -26,7 +22,7 @@ public final class AutoRestHeadTestService {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the service client itself.
      */
@@ -35,44 +31,38 @@ public final class AutoRestHeadTestService {
         return this;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The HttpSuccess object to access its operations.
-     */
+    /** The HttpSuccess object to access its operations. */
     private final HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
-     * 
+     *
      * @return the HttpSuccess object.
      */
     public HttpSuccess getHttpSuccess() {
         return this.httpSuccess;
     }
 
-    /**
-     * Initializes an instance of AutoRestHeadTestService client.
-     */
+    /** Initializes an instance of AutoRestHeadTestService client. */
     public AutoRestHeadTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
      * Initializes an instance of AutoRestHeadTestService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestHeadTestService(HttpPipeline httpPipeline) {

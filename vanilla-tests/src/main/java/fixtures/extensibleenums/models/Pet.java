@@ -3,9 +3,7 @@ package fixtures.extensibleenums.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The Pet model.
- */
+/** The Pet model. */
 @Fluent
 public final class Pet {
     /*
@@ -28,7 +26,7 @@ public final class Pet {
 
     /**
      * Get the name property: The name property.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -37,7 +35,7 @@ public final class Pet {
 
     /**
      * Set the name property: The name property.
-     * 
+     *
      * @param name the name value to set.
      * @return the Pet object itself.
      */
@@ -48,7 +46,7 @@ public final class Pet {
 
     /**
      * Get the daysOfWeek property: Type of Pet.
-     * 
+     *
      * @return the daysOfWeek value.
      */
     public DaysOfWeekExtensibleEnum getDaysOfWeek() {
@@ -57,7 +55,7 @@ public final class Pet {
 
     /**
      * Set the daysOfWeek property: Type of Pet.
-     * 
+     *
      * @param daysOfWeek the daysOfWeek value to set.
      * @return the Pet object itself.
      */
@@ -68,7 +66,7 @@ public final class Pet {
 
     /**
      * Get the intEnum property: The IntEnum property.
-     * 
+     *
      * @return the intEnum value.
      */
     public IntEnum getIntEnum() {
@@ -77,7 +75,7 @@ public final class Pet {
 
     /**
      * Set the intEnum property: The IntEnum property.
-     * 
+     *
      * @param intEnum the intEnum value to set.
      * @return the Pet object itself.
      */
@@ -88,7 +86,7 @@ public final class Pet {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

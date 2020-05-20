@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/**
- * The Goblinshark model.
- */
+/** The Goblinshark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("goblin")
 @Fluent
@@ -26,7 +24,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Get the jawsize property: The jawsize property.
-     * 
+     *
      * @return the jawsize value.
      */
     public Integer getJawsize() {
@@ -35,7 +33,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the jawsize property: The jawsize property.
-     * 
+     *
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
@@ -46,7 +44,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Get the color property: Colors possible.
-     * 
+     *
      * @return the color value.
      */
     public GoblinSharkColor getColor() {
@@ -55,7 +53,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the color property: Colors possible.
-     * 
+     *
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
@@ -66,7 +64,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

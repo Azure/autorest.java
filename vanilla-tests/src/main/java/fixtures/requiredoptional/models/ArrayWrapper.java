@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/**
- * The ArrayWrapper model.
- */
+/** The ArrayWrapper model. */
 @Fluent
 public final class ArrayWrapper {
     /*
@@ -17,7 +15,7 @@ public final class ArrayWrapper {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public List<String> getValue() {
@@ -26,7 +24,7 @@ public final class ArrayWrapper {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the ArrayWrapper object itself.
      */
@@ -37,7 +35,7 @@ public final class ArrayWrapper {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

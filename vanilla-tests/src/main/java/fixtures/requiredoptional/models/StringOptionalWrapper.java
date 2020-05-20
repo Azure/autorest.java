@@ -3,9 +3,7 @@ package fixtures.requiredoptional.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The StringOptionalWrapper model.
- */
+/** The StringOptionalWrapper model. */
 @Fluent
 public final class StringOptionalWrapper {
     /*
@@ -16,7 +14,7 @@ public final class StringOptionalWrapper {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public String getValue() {
@@ -25,7 +23,7 @@ public final class StringOptionalWrapper {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the StringOptionalWrapper object itself.
      */
@@ -36,9 +34,8 @@ public final class StringOptionalWrapper {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

@@ -3,9 +3,7 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The Siamese model.
- */
+/** The Siamese model. */
 @Fluent
 public final class Siamese extends Cat {
     /*
@@ -16,7 +14,7 @@ public final class Siamese extends Cat {
 
     /**
      * Get the breed property: The breed property.
-     * 
+     *
      * @return the breed value.
      */
     public String getBreed() {
@@ -25,7 +23,7 @@ public final class Siamese extends Cat {
 
     /**
      * Set the breed property: The breed property.
-     * 
+     *
      * @param breed the breed value to set.
      * @return the Siamese object itself.
      */
@@ -36,7 +34,7 @@ public final class Siamese extends Cat {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

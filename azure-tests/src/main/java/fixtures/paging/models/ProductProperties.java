@@ -3,9 +3,7 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The ProductProperties model.
- */
+/** The ProductProperties model. */
 @Fluent
 public final class ProductProperties {
     /*
@@ -22,7 +20,7 @@ public final class ProductProperties {
 
     /**
      * Get the id property: The id property.
-     * 
+     *
      * @return the id value.
      */
     public Integer getId() {
@@ -31,7 +29,7 @@ public final class ProductProperties {
 
     /**
      * Set the id property: The id property.
-     * 
+     *
      * @param id the id value to set.
      * @return the ProductProperties object itself.
      */
@@ -42,7 +40,7 @@ public final class ProductProperties {
 
     /**
      * Get the name property: The name property.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -51,7 +49,7 @@ public final class ProductProperties {
 
     /**
      * Set the name property: The name property.
-     * 
+     *
      * @param name the name value to set.
      * @return the ProductProperties object itself.
      */
@@ -62,9 +60,8 @@ public final class ProductProperties {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

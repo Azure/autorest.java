@@ -7,9 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import fixtures.xmlservice.models.Banana;
 import java.util.List;
 
-/**
- * A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization.
- */
+/** A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization. */
 @JacksonXmlRootElement(localName = "bananas")
 public final class BananasWrapper {
     @JacksonXmlProperty(localName = "banana")
@@ -17,7 +15,7 @@ public final class BananasWrapper {
 
     /**
      * Creates an instance of BananasWrapper.
-     * 
+     *
      * @param bananas the list.
      */
     @JsonCreator
@@ -27,7 +25,7 @@ public final class BananasWrapper {
 
     /**
      * Get the List&lt;Banana&gt; contained in this wrapper.
-     * 
+     *
      * @return the List&lt;Banana&gt;.
      */
     public List<Banana> items() {

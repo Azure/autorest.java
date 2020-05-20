@@ -18,24 +18,17 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodyboolean.quirks.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Bools.
- */
+/** An instance of this class provides access to all the operations defined in Bools. */
 public final class Bools {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final BoolsService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestBoolTestService client;
 
     /**
      * Initializes an instance of Bools.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Bools(AutoRestBoolTestService client) {
@@ -44,8 +37,8 @@ public final class Bools {
     }
 
     /**
-     * The interface defining all the services for AutoRestBoolTestServiceBools
-     * to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestBoolTestServiceBools to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestBoolTestServ")
@@ -58,7 +51,8 @@ public final class Bools {
         @Put("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
+        Mono<Response<Void>> putTrue(
+                @HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
@@ -68,7 +62,8 @@ public final class Bools {
         @Put("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
+        Mono<Response<Void>> putFalse(
+                @HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
@@ -83,7 +78,7 @@ public final class Bools {
 
     /**
      * Get true Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value.
@@ -91,14 +86,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getTrueWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getTrue(this.client.getHost(), context));
     }
 
     /**
      * Get true Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value.
@@ -106,18 +102,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getTrueAsync() {
         return getTrueWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get true Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value.
@@ -134,7 +131,7 @@ public final class Bools {
 
     /**
      * Set Boolean value true.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -144,14 +141,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putTrue(this.client.getHost(), boolBody, context));
     }
 
     /**
      * Set Boolean value true.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -160,13 +158,12 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putTrueAsync(boolean boolBody) {
-        return putTrueWithResponseAsync(boolBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putTrueWithResponseAsync(boolBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set Boolean value true.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -179,7 +176,7 @@ public final class Bools {
 
     /**
      * Get false Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value.
@@ -187,14 +184,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getFalseWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFalse(this.client.getHost(), context));
     }
 
     /**
      * Get false Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value.
@@ -202,18 +200,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getFalseAsync() {
         return getFalseWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get false Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value.
@@ -230,7 +229,7 @@ public final class Bools {
 
     /**
      * Set Boolean value false.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -240,14 +239,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.putFalse(this.client.getHost(), boolBody, context));
     }
 
     /**
      * Set Boolean value false.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -256,13 +256,12 @@ public final class Bools {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFalseAsync(boolean boolBody) {
-        return putFalseWithResponseAsync(boolBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putFalseWithResponseAsync(boolBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set Boolean value false.
-     * 
+     *
      * @param boolBody The boolBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -275,7 +274,7 @@ public final class Bools {
 
     /**
      * Get null Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value.
@@ -283,14 +282,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
      * Get null Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value.
@@ -298,18 +298,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNullAsync() {
         return getNullWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get null Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value.
@@ -326,7 +327,7 @@ public final class Bools {
 
     /**
      * Get invalid Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Boolean value.
@@ -334,14 +335,15 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**
      * Get invalid Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Boolean value.
@@ -349,18 +351,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getInvalidAsync() {
         return getInvalidWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get invalid Boolean value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Boolean value.

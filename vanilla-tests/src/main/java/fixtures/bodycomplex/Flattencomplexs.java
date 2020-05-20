@@ -16,24 +16,17 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Flattencomplexs.
- */
+/** An instance of this class provides access to all the operations defined in Flattencomplexs. */
 public final class Flattencomplexs {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final FlattencomplexsService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Flattencomplexs.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Flattencomplexs(AutoRestComplexTestService client) {
@@ -42,8 +35,7 @@ public final class Flattencomplexs {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestComplexTestServiceFlattencomplexs to be used by the proxy
+     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexs to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
@@ -63,7 +55,8 @@ public final class Flattencomplexs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
@@ -76,13 +69,14 @@ public final class Flattencomplexs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyBaseType> getValidAsync() {
         return getValidWithResponseAsync()
-            .flatMap((SimpleResponse<MyBaseType> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<MyBaseType> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**

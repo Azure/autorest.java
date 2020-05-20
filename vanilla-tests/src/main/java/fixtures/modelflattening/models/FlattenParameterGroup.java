@@ -3,9 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The FlattenParameterGroup model.
- */
+/** The FlattenParameterGroup model. */
 @Fluent
 public final class FlattenParameterGroup {
     /*
@@ -54,7 +52,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the name property: Product name with value 'groupproduct'.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -63,7 +61,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the name property: Product name with value 'groupproduct'.
-     * 
+     *
      * @param name the name value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -74,7 +72,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the simpleBodyProduct property: Simple body product to put.
-     * 
+     *
      * @return the simpleBodyProduct value.
      */
     public SimpleProduct getSimpleBodyProduct() {
@@ -83,7 +81,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the simpleBodyProduct property: Simple body product to put.
-     * 
+     *
      * @param simpleBodyProduct the simpleBodyProduct value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -93,10 +91,9 @@ public final class FlattenParameterGroup {
     }
 
     /**
-     * Get the productId property: Unique identifier representing a specific
-     * product for a given latitude &amp; longitude. For example, uberX in San
-     * Francisco will have a different product_id than uberX in Los Angeles.
-     * 
+     * Get the productId property: Unique identifier representing a specific product for a given latitude &amp;
+     * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     *
      * @return the productId value.
      */
     public String getProductId() {
@@ -104,10 +101,9 @@ public final class FlattenParameterGroup {
     }
 
     /**
-     * Set the productId property: Unique identifier representing a specific
-     * product for a given latitude &amp; longitude. For example, uberX in San
-     * Francisco will have a different product_id than uberX in Los Angeles.
-     * 
+     * Set the productId property: Unique identifier representing a specific product for a given latitude &amp;
+     * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     *
      * @param productId the productId value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -118,7 +114,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the description property: Description of product.
-     * 
+     *
      * @return the description value.
      */
     public String getDescription() {
@@ -127,7 +123,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the description property: Description of product.
-     * 
+     *
      * @param description the description value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -138,7 +134,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the maxProductDisplayName property: Display name of product.
-     * 
+     *
      * @return the maxProductDisplayName value.
      */
     public String getMaxProductDisplayName() {
@@ -147,7 +143,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the maxProductDisplayName property: Display name of product.
-     * 
+     *
      * @param maxProductDisplayName the maxProductDisplayName value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -158,7 +154,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the genericValue property: Generic URL value.
-     * 
+     *
      * @return the genericValue value.
      */
     public String getGenericValue() {
@@ -167,7 +163,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the genericValue property: Generic URL value.
-     * 
+     *
      * @param genericValue the genericValue value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -178,7 +174,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Get the odataValue property: URL value.
-     * 
+     *
      * @return the odataValue value.
      */
     public String getOdataValue() {
@@ -187,7 +183,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Set the odataValue property: URL value.
-     * 
+     *
      * @param odataValue the odataValue value to set.
      * @return the FlattenParameterGroup object itself.
      */
@@ -198,7 +194,7 @@ public final class FlattenParameterGroup {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

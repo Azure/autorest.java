@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/**
- * The HeadersResponseDurationHeaders model.
- */
+/** The HeadersResponseDurationHeaders model. */
 @Fluent
 public final class HeadersResponseDurationHeaders {
     /*
@@ -17,7 +15,7 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public Duration getValue() {
@@ -26,7 +24,7 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the HeadersResponseDurationHeaders object itself.
      */
@@ -37,9 +35,8 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestParameterFlattening type.
- */
+/** A builder for creating a new instance of the AutoRestParameterFlattening type. */
 @ServiceClientBuilder(serviceClients = {AutoRestParameterFlattening.class})
 public final class AutoRestParameterFlatteningBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestParameterFlatteningBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestParameterFlatteningBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestParameterFlatteningBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestParameterFlatteningBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestParameterFlatteningBuilder {
 
     /**
      * Builds an instance of AutoRestParameterFlattening with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestParameterFlattening.
      */
     public AutoRestParameterFlattening buildClient() {
@@ -54,7 +52,10 @@ public final class AutoRestParameterFlatteningBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestParameterFlattening client = new AutoRestParameterFlattening(pipeline);
         client.setHost(this.host);

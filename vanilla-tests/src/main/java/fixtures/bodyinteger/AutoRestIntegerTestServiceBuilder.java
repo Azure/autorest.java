@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestIntegerTestService type.
- */
+/** A builder for creating a new instance of the AutoRestIntegerTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestIntegerTestService.class})
 public final class AutoRestIntegerTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestIntegerTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestIntegerTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestIntegerTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestIntegerTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestIntegerTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestIntegerTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestIntegerTestService.
      */
     public AutoRestIntegerTestService buildClient() {
@@ -54,7 +52,10 @@ public final class AutoRestIntegerTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestIntegerTestService client = new AutoRestIntegerTestService(pipeline);
         client.setHost(this.host);

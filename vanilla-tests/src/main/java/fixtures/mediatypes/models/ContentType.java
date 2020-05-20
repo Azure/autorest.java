@@ -3,33 +3,21 @@ package fixtures.mediatypes.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for ContentType.
- */
+/** Defines values for ContentType. */
 public enum ContentType {
-    /**
-     * Enum value application/pdf.
-     */
+    /** Enum value application/pdf. */
     APPLICATION_PDF("application/pdf"),
 
-    /**
-     * Enum value image/jpeg.
-     */
+    /** Enum value image/jpeg. */
     IMAGE_JPEG("image/jpeg"),
 
-    /**
-     * Enum value image/png.
-     */
+    /** Enum value image/png. */
     IMAGE_PNG("image/png"),
 
-    /**
-     * Enum value image/tiff.
-     */
+    /** Enum value image/tiff. */
     IMAGE_TIFF("image/tiff");
 
-    /**
-     * The actual serialized value for a ContentType instance.
-     */
+    /** The actual serialized value for a ContentType instance. */
     private final String value;
 
     ContentType(String value) {
@@ -38,7 +26,7 @@ public enum ContentType {
 
     /**
      * Parses a serialized value to a ContentType instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed ContentType object, or null if unable to parse.
      */

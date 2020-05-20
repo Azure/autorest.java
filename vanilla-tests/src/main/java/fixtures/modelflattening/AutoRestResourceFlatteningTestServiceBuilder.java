@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestResourceFlatteningTestService type.
- */
+/** A builder for creating a new instance of the AutoRestResourceFlatteningTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestResourceFlatteningTestService.class})
 public final class AutoRestResourceFlatteningTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestResourceFlatteningTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestResourceFlatteningTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestResourceFlatteningTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestResourceFlatteningTestService.
      */
     public AutoRestResourceFlatteningTestService buildClient() {
@@ -54,7 +52,10 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestResourceFlatteningTestService client = new AutoRestResourceFlatteningTestService(pipeline);
         client.setHost(this.host);

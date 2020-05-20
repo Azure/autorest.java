@@ -22,23 +22,17 @@ import fixtures.report.models.ErrorException;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/**
- * Initializes a new instance of the AutoRestReportService type.
- */
+/** Initializes a new instance of the AutoRestReportService type. */
 public final class AutoRestReportService {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final AutoRestReportServiceService service;
 
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
@@ -47,7 +41,7 @@ public final class AutoRestReportService {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the service client itself.
      */
@@ -56,30 +50,26 @@ public final class AutoRestReportService {
         return this;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * Initializes an instance of AutoRestReportService client.
-     */
+    /** Initializes an instance of AutoRestReportService client. */
     public AutoRestReportService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
      * Initializes an instance of AutoRestReportService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestReportService(HttpPipeline httpPipeline) {
@@ -88,8 +78,8 @@ public final class AutoRestReportService {
     }
 
     /**
-     * The interface defining all the services for AutoRestReportService to be
-     * used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestReportService to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestReportServic")
@@ -97,18 +87,21 @@ public final class AutoRestReportService {
         @Get("/report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getReport(@HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
+        Mono<SimpleResponse<Map<String, Integer>>> getReport(
+                @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
 
         @Get("/report/optional")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getOptionalReport(@HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
+        Mono<SimpleResponse<Map<String, Integer>>> getOptionalReport(
+                @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
     }
 
     /**
      * Get test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -124,8 +117,9 @@ public final class AutoRestReportService {
 
     /**
      * Get test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -134,19 +128,21 @@ public final class AutoRestReportService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithResponseAsync(qualifier)
-            .flatMap((SimpleResponse<Map<String, Integer>> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Map<String, Integer>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -159,8 +155,9 @@ public final class AutoRestReportService {
 
     /**
      * Get optional test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -176,8 +173,9 @@ public final class AutoRestReportService {
 
     /**
      * Get optional test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -186,19 +184,21 @@ public final class AutoRestReportService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getOptionalReportAsync(String qualifier) {
         return getOptionalReportWithResponseAsync(qualifier)
-            .flatMap((SimpleResponse<Map<String, Integer>> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Map<String, Integer>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get optional test coverage report.
-     * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

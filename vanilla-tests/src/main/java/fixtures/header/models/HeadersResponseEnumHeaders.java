@@ -3,9 +3,7 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HeadersResponseEnumHeaders model.
- */
+/** The HeadersResponseEnumHeaders model. */
 @Fluent
 public final class HeadersResponseEnumHeaders {
     /*
@@ -16,7 +14,7 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public GreyscaleColors getValue() {
@@ -25,7 +23,7 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the HeadersResponseEnumHeaders object itself.
      */
@@ -36,9 +34,8 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

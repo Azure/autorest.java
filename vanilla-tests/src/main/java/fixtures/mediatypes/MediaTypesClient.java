@@ -26,23 +26,17 @@ import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * Initializes a new instance of the MediaTypesClient type.
- */
+/** Initializes a new instance of the MediaTypesClient type. */
 public final class MediaTypesClient {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final MediaTypesClientService service;
 
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
@@ -51,7 +45,7 @@ public final class MediaTypesClient {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the service client itself.
      */
@@ -60,30 +54,26 @@ public final class MediaTypesClient {
         return this;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * Initializes an instance of MediaTypesClient client.
-     */
+    /** Initializes an instance of MediaTypesClient client. */
     public MediaTypesClient() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
      * Initializes an instance of MediaTypesClient client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public MediaTypesClient(HttpPipeline httpPipeline) {
@@ -92,8 +82,8 @@ public final class MediaTypesClient {
     }
 
     /**
-     * The interface defining all the services for MediaTypesClient to be used
-     * by the proxy service to perform REST calls.
+     * The interface defining all the services for MediaTypesClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "MediaTypesClient")
@@ -101,22 +91,29 @@ public final class MediaTypesClient {
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") long contentLength, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") ContentType contentType,
+                @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
+                @HeaderParam("Content-Length") long contentLength,
+                Context context);
 
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(
+                @HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
 
         @Post("/mediatypes/contentTypeWithEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> contentTypeWithEncoding(@HostParam("$host") String host, @BodyParam("text/plain") String input, Context context);
+        Mono<SimpleResponse<String>> contentTypeWithEncoding(
+                @HostParam("$host") String host, @BodyParam("text/plain") String input, Context context);
     }
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
      * @param contentLength The contentLength parameter.
@@ -126,7 +123,8 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
+    public Mono<SimpleResponse<String>> analyzeBodyWithResponseAsync(
+            ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -136,12 +134,13 @@ public final class MediaTypesClient {
         if (input == null) {
             return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
+        return FluxUtil.withContext(
+                context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
     }
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
      * @param contentLength The contentLength parameter.
@@ -153,18 +152,19 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-            .flatMap((SimpleResponse<String> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param contentType Content type for upload.
      * @param input Uri or local path to source data.
      * @param contentLength The contentLength parameter.
@@ -180,7 +180,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -203,7 +203,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -213,18 +213,19 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(String source) {
         return analyzeBodyWithResponseAsync(source)
-            .flatMap((SimpleResponse<String> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Analyze body, that could be different media types.
-     * 
+     *
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -238,7 +239,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
-     * 
+     *
      * @param input simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -258,7 +259,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
-     * 
+     *
      * @param input simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -268,18 +269,19 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync(String input) {
         return contentTypeWithEncodingWithResponseAsync(input)
-            .flatMap((SimpleResponse<String> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
-     * 
+     *
      * @param input simple string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
