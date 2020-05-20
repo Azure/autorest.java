@@ -43,16 +43,16 @@ public final class AutoRestSwaggerBATByteService {
         return this.httpPipeline;
     }
 
-    /** The Bytes object to access its operations. */
-    private final Bytes bytes;
+    /** The ByteOperations object to access its operations. */
+    private final ByteOperations byteOperations;
 
     /**
-     * Gets the Bytes object to access its operations.
+     * Gets the ByteOperations object to access its operations.
      *
-     * @return the Bytes object.
+     * @return the ByteOperations object.
      */
-    public Bytes getBytes() {
-        return this.bytes;
+    public ByteOperations getByteOperations() {
+        return this.byteOperations;
     }
 
     /** Initializes an instance of AutoRestSwaggerBATByteService client. */
@@ -67,6 +67,6 @@ public final class AutoRestSwaggerBATByteService {
      */
     public AutoRestSwaggerBATByteService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.bytes = new Bytes(this);
+        this.byteOperations = new ByteOperations(this);
     }
 }

@@ -3027,7 +3027,14 @@ public final class DictionarysImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         } else {
-            arrayBody.values().forEach(e -> e.validate());
+            arrayBody
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
         }
         return FluxUtil.withContext(context -> service.putComplexValid(this.client.getHost(), arrayBody, context));
     }

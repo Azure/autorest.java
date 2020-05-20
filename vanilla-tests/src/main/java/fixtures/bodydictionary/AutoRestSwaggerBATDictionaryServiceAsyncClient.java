@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     private DictionarysImpl serviceClient;
 
-    /** Initializes an instance of AutoRestSwaggerBATDictionaryService client. */
+    /** Initializes an instance of Dictionarys client. */
     AutoRestSwaggerBATDictionaryServiceAsyncClient(DictionarysImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
@@ -33,7 +33,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponse() {
         return this.serviceClient.getNullWithResponseAsync();
     }
 
@@ -45,7 +45,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Integer>> getNullAsync() {
+    public Mono<Map<String, Integer>> getNull() {
         return this.serviceClient.getNullAsync();
     }
 
@@ -57,7 +57,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponse() {
         return this.serviceClient.getEmptyWithResponseAsync();
     }
 
@@ -69,7 +69,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Integer>> getEmptyAsync() {
+    public Mono<Map<String, Integer>> getEmpty() {
         return this.serviceClient.getEmptyAsync();
     }
 
@@ -83,7 +83,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody) {
+    public Mono<Response<Void>> putEmptyWithResponse(Map<String, String> arrayBody) {
         return this.serviceClient.putEmptyWithResponseAsync(arrayBody);
     }
 
@@ -97,7 +97,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(Map<String, String> arrayBody) {
+    public Mono<Void> putEmpty(Map<String, String> arrayBody) {
         return this.serviceClient.putEmptyAsync(arrayBody);
     }
 
@@ -109,7 +109,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponse() {
         return this.serviceClient.getNullValueWithResponseAsync();
     }
 
@@ -121,7 +121,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getNullValueAsync() {
+    public Mono<Map<String, String>> getNullValue() {
         return this.serviceClient.getNullValueAsync();
     }
 
@@ -133,7 +133,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponse() {
         return this.serviceClient.getNullKeyWithResponseAsync();
     }
 
@@ -145,7 +145,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getNullKeyAsync() {
+    public Mono<Map<String, String>> getNullKey() {
         return this.serviceClient.getNullKeyAsync();
     }
 
@@ -157,7 +157,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponse() {
         return this.serviceClient.getEmptyStringKeyWithResponseAsync();
     }
 
@@ -169,7 +169,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getEmptyStringKeyAsync() {
+    public Mono<Map<String, String>> getEmptyStringKey() {
         return this.serviceClient.getEmptyStringKeyAsync();
     }
 
@@ -181,7 +181,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponse() {
         return this.serviceClient.getInvalidWithResponseAsync();
     }
 
@@ -193,7 +193,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getInvalidAsync() {
+    public Mono<Map<String, String>> getInvalid() {
         return this.serviceClient.getInvalidAsync();
     }
 
@@ -205,7 +205,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponse() {
         return this.serviceClient.getBooleanTfftWithResponseAsync();
     }
 
@@ -217,7 +217,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
+    public Mono<Map<String, Boolean>> getBooleanTfft() {
         return this.serviceClient.getBooleanTfftAsync();
     }
 
@@ -231,7 +231,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody) {
+    public Mono<Response<Void>> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody) {
         return this.serviceClient.putBooleanTfftWithResponseAsync(arrayBody);
     }
 
@@ -245,7 +245,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
+    public Mono<Void> putBooleanTfft(Map<String, Boolean> arrayBody) {
         return this.serviceClient.putBooleanTfftAsync(arrayBody);
     }
 
@@ -257,7 +257,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponse() {
         return this.serviceClient.getBooleanInvalidNullWithResponseAsync();
     }
 
@@ -269,7 +269,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
+    public Mono<Map<String, Boolean>> getBooleanInvalidNull() {
         return this.serviceClient.getBooleanInvalidNullAsync();
     }
 
@@ -281,7 +281,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponse() {
         return this.serviceClient.getBooleanInvalidStringWithResponseAsync();
     }
 
@@ -293,7 +293,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
+    public Mono<Map<String, Boolean>> getBooleanInvalidString() {
         return this.serviceClient.getBooleanInvalidStringAsync();
     }
 
@@ -305,7 +305,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponse() {
         return this.serviceClient.getIntegerValidWithResponseAsync();
     }
 
@@ -317,7 +317,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Integer>> getIntegerValidAsync() {
+    public Mono<Map<String, Integer>> getIntegerValid() {
         return this.serviceClient.getIntegerValidAsync();
     }
 
@@ -331,7 +331,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody) {
+    public Mono<Response<Void>> putIntegerValidWithResponse(Map<String, Integer> arrayBody) {
         return this.serviceClient.putIntegerValidWithResponseAsync(arrayBody);
     }
 
@@ -345,7 +345,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
+    public Mono<Void> putIntegerValid(Map<String, Integer> arrayBody) {
         return this.serviceClient.putIntegerValidAsync(arrayBody);
     }
 
@@ -357,7 +357,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponse() {
         return this.serviceClient.getIntInvalidNullWithResponseAsync();
     }
 
@@ -369,7 +369,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
+    public Mono<Map<String, Integer>> getIntInvalidNull() {
         return this.serviceClient.getIntInvalidNullAsync();
     }
 
@@ -381,7 +381,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponse() {
         return this.serviceClient.getIntInvalidStringWithResponseAsync();
     }
 
@@ -393,7 +393,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
+    public Mono<Map<String, Integer>> getIntInvalidString() {
         return this.serviceClient.getIntInvalidStringAsync();
     }
 
@@ -405,7 +405,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponse() {
         return this.serviceClient.getLongValidWithResponseAsync();
     }
 
@@ -417,7 +417,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Long>> getLongValidAsync() {
+    public Mono<Map<String, Long>> getLongValid() {
         return this.serviceClient.getLongValidAsync();
     }
 
@@ -431,7 +431,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody) {
+    public Mono<Response<Void>> putLongValidWithResponse(Map<String, Long> arrayBody) {
         return this.serviceClient.putLongValidWithResponseAsync(arrayBody);
     }
 
@@ -445,7 +445,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody) {
+    public Mono<Void> putLongValid(Map<String, Long> arrayBody) {
         return this.serviceClient.putLongValidAsync(arrayBody);
     }
 
@@ -457,7 +457,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponse() {
         return this.serviceClient.getLongInvalidNullWithResponseAsync();
     }
 
@@ -469,7 +469,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Long>> getLongInvalidNullAsync() {
+    public Mono<Map<String, Long>> getLongInvalidNull() {
         return this.serviceClient.getLongInvalidNullAsync();
     }
 
@@ -481,7 +481,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponse() {
         return this.serviceClient.getLongInvalidStringWithResponseAsync();
     }
 
@@ -493,7 +493,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Long>> getLongInvalidStringAsync() {
+    public Mono<Map<String, Long>> getLongInvalidString() {
         return this.serviceClient.getLongInvalidStringAsync();
     }
 
@@ -505,7 +505,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponse() {
         return this.serviceClient.getFloatValidWithResponseAsync();
     }
 
@@ -517,7 +517,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Float>> getFloatValidAsync() {
+    public Mono<Map<String, Float>> getFloatValid() {
         return this.serviceClient.getFloatValidAsync();
     }
 
@@ -531,7 +531,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody) {
+    public Mono<Response<Void>> putFloatValidWithResponse(Map<String, Float> arrayBody) {
         return this.serviceClient.putFloatValidWithResponseAsync(arrayBody);
     }
 
@@ -545,7 +545,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody) {
+    public Mono<Void> putFloatValid(Map<String, Float> arrayBody) {
         return this.serviceClient.putFloatValidAsync(arrayBody);
     }
 
@@ -557,7 +557,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponse() {
         return this.serviceClient.getFloatInvalidNullWithResponseAsync();
     }
 
@@ -569,7 +569,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
+    public Mono<Map<String, Float>> getFloatInvalidNull() {
         return this.serviceClient.getFloatInvalidNullAsync();
     }
 
@@ -581,7 +581,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponse() {
         return this.serviceClient.getFloatInvalidStringWithResponseAsync();
     }
 
@@ -593,7 +593,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
+    public Mono<Map<String, Float>> getFloatInvalidString() {
         return this.serviceClient.getFloatInvalidStringAsync();
     }
 
@@ -605,7 +605,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponse() {
         return this.serviceClient.getDoubleValidWithResponseAsync();
     }
 
@@ -617,7 +617,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Double>> getDoubleValidAsync() {
+    public Mono<Map<String, Double>> getDoubleValid() {
         return this.serviceClient.getDoubleValidAsync();
     }
 
@@ -631,7 +631,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody) {
+    public Mono<Response<Void>> putDoubleValidWithResponse(Map<String, Double> arrayBody) {
         return this.serviceClient.putDoubleValidWithResponseAsync(arrayBody);
     }
 
@@ -645,7 +645,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
+    public Mono<Void> putDoubleValid(Map<String, Double> arrayBody) {
         return this.serviceClient.putDoubleValidAsync(arrayBody);
     }
 
@@ -657,7 +657,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponse() {
         return this.serviceClient.getDoubleInvalidNullWithResponseAsync();
     }
 
@@ -669,7 +669,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
+    public Mono<Map<String, Double>> getDoubleInvalidNull() {
         return this.serviceClient.getDoubleInvalidNullAsync();
     }
 
@@ -681,7 +681,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponse() {
         return this.serviceClient.getDoubleInvalidStringWithResponseAsync();
     }
 
@@ -693,7 +693,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
+    public Mono<Map<String, Double>> getDoubleInvalidString() {
         return this.serviceClient.getDoubleInvalidStringAsync();
     }
 
@@ -705,7 +705,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponse() {
         return this.serviceClient.getStringValidWithResponseAsync();
     }
 
@@ -717,7 +717,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getStringValidAsync() {
+    public Mono<Map<String, String>> getStringValid() {
         return this.serviceClient.getStringValidAsync();
     }
 
@@ -731,7 +731,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody) {
+    public Mono<Response<Void>> putStringValidWithResponse(Map<String, String> arrayBody) {
         return this.serviceClient.putStringValidWithResponseAsync(arrayBody);
     }
 
@@ -745,7 +745,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putStringValidAsync(Map<String, String> arrayBody) {
+    public Mono<Void> putStringValid(Map<String, String> arrayBody) {
         return this.serviceClient.putStringValidAsync(arrayBody);
     }
 
@@ -757,7 +757,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponse() {
         return this.serviceClient.getStringWithNullWithResponseAsync();
     }
 
@@ -769,7 +769,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getStringWithNullAsync() {
+    public Mono<Map<String, String>> getStringWithNull() {
         return this.serviceClient.getStringWithNullAsync();
     }
 
@@ -781,7 +781,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponse() {
         return this.serviceClient.getStringWithInvalidWithResponseAsync();
     }
 
@@ -793,7 +793,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, String>> getStringWithInvalidAsync() {
+    public Mono<Map<String, String>> getStringWithInvalid() {
         return this.serviceClient.getStringWithInvalidAsync();
     }
 
@@ -805,7 +805,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponse() {
         return this.serviceClient.getDateValidWithResponseAsync();
     }
 
@@ -817,7 +817,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, LocalDate>> getDateValidAsync() {
+    public Mono<Map<String, LocalDate>> getDateValid() {
         return this.serviceClient.getDateValidAsync();
     }
 
@@ -831,7 +831,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody) {
+    public Mono<Response<Void>> putDateValidWithResponse(Map<String, LocalDate> arrayBody) {
         return this.serviceClient.putDateValidWithResponseAsync(arrayBody);
     }
 
@@ -845,7 +845,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
+    public Mono<Void> putDateValid(Map<String, LocalDate> arrayBody) {
         return this.serviceClient.putDateValidAsync(arrayBody);
     }
 
@@ -857,7 +857,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponse() {
         return this.serviceClient.getDateInvalidNullWithResponseAsync();
     }
 
@@ -869,7 +869,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
+    public Mono<Map<String, LocalDate>> getDateInvalidNull() {
         return this.serviceClient.getDateInvalidNullAsync();
     }
 
@@ -881,7 +881,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponse() {
         return this.serviceClient.getDateInvalidCharsWithResponseAsync();
     }
 
@@ -893,7 +893,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
+    public Mono<Map<String, LocalDate>> getDateInvalidChars() {
         return this.serviceClient.getDateInvalidCharsAsync();
     }
 
@@ -907,7 +907,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponse() {
         return this.serviceClient.getDateTimeValidWithResponseAsync();
     }
 
@@ -921,7 +921,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeValid() {
         return this.serviceClient.getDateTimeValidAsync();
     }
 
@@ -937,7 +937,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Response<Void>> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
         return this.serviceClient.putDateTimeValidWithResponseAsync(arrayBody);
     }
 
@@ -953,7 +953,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeValid(Map<String, OffsetDateTime> arrayBody) {
         return this.serviceClient.putDateTimeValidAsync(arrayBody);
     }
 
@@ -965,7 +965,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponse() {
         return this.serviceClient.getDateTimeInvalidNullWithResponseAsync();
     }
 
@@ -977,7 +977,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNull() {
         return this.serviceClient.getDateTimeInvalidNullAsync();
     }
 
@@ -989,7 +989,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponse() {
         return this.serviceClient.getDateTimeInvalidCharsWithResponseAsync();
     }
 
@@ -1001,7 +1001,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidChars() {
         return this.serviceClient.getDateTimeInvalidCharsAsync();
     }
 
@@ -1015,7 +1015,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponse() {
         return this.serviceClient.getDateTimeRfc1123ValidWithResponseAsync();
     }
 
@@ -1029,7 +1029,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123Valid() {
         return this.serviceClient.getDateTimeRfc1123ValidAsync();
     }
 
@@ -1045,7 +1045,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
         return this.serviceClient.putDateTimeRfc1123ValidWithResponseAsync(arrayBody);
     }
 
@@ -1061,7 +1061,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeRfc1123Valid(Map<String, OffsetDateTime> arrayBody) {
         return this.serviceClient.putDateTimeRfc1123ValidAsync(arrayBody);
     }
 
@@ -1073,7 +1073,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponse() {
         return this.serviceClient.getDurationValidWithResponseAsync();
     }
 
@@ -1085,7 +1085,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Duration>> getDurationValidAsync() {
+    public Mono<Map<String, Duration>> getDurationValid() {
         return this.serviceClient.getDurationValidAsync();
     }
 
@@ -1099,7 +1099,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody) {
+    public Mono<Response<Void>> putDurationValidWithResponse(Map<String, Duration> arrayBody) {
         return this.serviceClient.putDurationValidWithResponseAsync(arrayBody);
     }
 
@@ -1113,7 +1113,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody) {
+    public Mono<Void> putDurationValid(Map<String, Duration> arrayBody) {
         return this.serviceClient.putDurationValidAsync(arrayBody);
     }
 
@@ -1127,7 +1127,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponse() {
         return this.serviceClient.getByteValidWithResponseAsync();
     }
 
@@ -1141,7 +1141,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, byte[]>> getByteValidAsync() {
+    public Mono<Map<String, byte[]>> getByteValid() {
         return this.serviceClient.getByteValidAsync();
     }
 
@@ -1157,7 +1157,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody) {
+    public Mono<Response<Void>> putByteValidWithResponse(Map<String, byte[]> arrayBody) {
         return this.serviceClient.putByteValidWithResponseAsync(arrayBody);
     }
 
@@ -1173,7 +1173,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
+    public Mono<Void> putByteValid(Map<String, byte[]> arrayBody) {
         return this.serviceClient.putByteValidAsync(arrayBody);
     }
 
@@ -1185,7 +1185,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponse() {
         return this.serviceClient.getByteInvalidNullWithResponseAsync();
     }
 
@@ -1197,7 +1197,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
+    public Mono<Map<String, byte[]>> getByteInvalidNull() {
         return this.serviceClient.getByteInvalidNullAsync();
     }
 
@@ -1211,7 +1211,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponse() {
         return this.serviceClient.getBase64UrlWithResponseAsync();
     }
 
@@ -1225,7 +1225,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, byte[]>> getBase64UrlAsync() {
+    public Mono<Map<String, byte[]>> getBase64Url() {
         return this.serviceClient.getBase64UrlAsync();
     }
 
@@ -1237,7 +1237,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponse() {
         return this.serviceClient.getComplexNullWithResponseAsync();
     }
 
@@ -1249,7 +1249,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Widget>> getComplexNullAsync() {
+    public Mono<Map<String, Widget>> getComplexNull() {
         return this.serviceClient.getComplexNullAsync();
     }
 
@@ -1261,7 +1261,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponse() {
         return this.serviceClient.getComplexEmptyWithResponseAsync();
     }
 
@@ -1273,7 +1273,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Widget>> getComplexEmptyAsync() {
+    public Mono<Map<String, Widget>> getComplexEmpty() {
         return this.serviceClient.getComplexEmptyAsync();
     }
 
@@ -1287,7 +1287,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponse() {
         return this.serviceClient.getComplexItemNullWithResponseAsync();
     }
 
@@ -1301,7 +1301,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Widget>> getComplexItemNullAsync() {
+    public Mono<Map<String, Widget>> getComplexItemNull() {
         return this.serviceClient.getComplexItemNullAsync();
     }
 
@@ -1315,7 +1315,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponse() {
         return this.serviceClient.getComplexItemEmptyWithResponseAsync();
     }
 
@@ -1329,7 +1329,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
+    public Mono<Map<String, Widget>> getComplexItemEmpty() {
         return this.serviceClient.getComplexItemEmptyAsync();
     }
 
@@ -1343,7 +1343,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponse() {
         return this.serviceClient.getComplexValidWithResponseAsync();
     }
 
@@ -1357,7 +1357,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Widget>> getComplexValidAsync() {
+    public Mono<Map<String, Widget>> getComplexValid() {
         return this.serviceClient.getComplexValidAsync();
     }
 
@@ -1373,7 +1373,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody) {
+    public Mono<Response<Void>> putComplexValidWithResponse(Map<String, Widget> arrayBody) {
         return this.serviceClient.putComplexValidWithResponseAsync(arrayBody);
     }
 
@@ -1389,7 +1389,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
+    public Mono<Void> putComplexValid(Map<String, Widget> arrayBody) {
         return this.serviceClient.putComplexValidAsync(arrayBody);
     }
 
@@ -1401,7 +1401,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponse() {
         return this.serviceClient.getArrayNullWithResponseAsync();
     }
 
@@ -1413,7 +1413,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, List<String>>> getArrayNullAsync() {
+    public Mono<Map<String, List<String>>> getArrayNull() {
         return this.serviceClient.getArrayNullAsync();
     }
 
@@ -1425,7 +1425,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponse() {
         return this.serviceClient.getArrayEmptyWithResponseAsync();
     }
 
@@ -1437,7 +1437,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
+    public Mono<Map<String, List<String>>> getArrayEmpty() {
         return this.serviceClient.getArrayEmptyAsync();
     }
 
@@ -1449,7 +1449,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponse() {
         return this.serviceClient.getArrayItemNullWithResponseAsync();
     }
 
@@ -1461,7 +1461,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
+    public Mono<Map<String, List<String>>> getArrayItemNull() {
         return this.serviceClient.getArrayItemNullAsync();
     }
 
@@ -1473,7 +1473,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponse() {
         return this.serviceClient.getArrayItemEmptyWithResponseAsync();
     }
 
@@ -1485,7 +1485,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
+    public Mono<Map<String, List<String>>> getArrayItemEmpty() {
         return this.serviceClient.getArrayItemEmptyAsync();
     }
 
@@ -1497,7 +1497,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponse() {
         return this.serviceClient.getArrayValidWithResponseAsync();
     }
 
@@ -1509,7 +1509,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, List<String>>> getArrayValidAsync() {
+    public Mono<Map<String, List<String>>> getArrayValid() {
         return this.serviceClient.getArrayValidAsync();
     }
 
@@ -1523,7 +1523,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody) {
+    public Mono<Response<Void>> putArrayValidWithResponse(Map<String, List<String>> arrayBody) {
         return this.serviceClient.putArrayValidWithResponseAsync(arrayBody);
     }
 
@@ -1537,7 +1537,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
+    public Mono<Void> putArrayValid(Map<String, List<String>> arrayBody) {
         return this.serviceClient.putArrayValidAsync(arrayBody);
     }
 
@@ -1549,7 +1549,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponse() {
         return this.serviceClient.getDictionaryNullWithResponseAsync();
     }
 
@@ -1561,7 +1561,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryNullAsync() {
+    public Mono<Map<String, Object>> getDictionaryNull() {
         return this.serviceClient.getDictionaryNullAsync();
     }
 
@@ -1573,7 +1573,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponse() {
         return this.serviceClient.getDictionaryEmptyWithResponseAsync();
     }
 
@@ -1585,7 +1585,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryEmptyAsync() {
+    public Mono<Map<String, Object>> getDictionaryEmpty() {
         return this.serviceClient.getDictionaryEmptyAsync();
     }
 
@@ -1599,7 +1599,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponse() {
         return this.serviceClient.getDictionaryItemNullWithResponseAsync();
     }
 
@@ -1613,7 +1613,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryItemNullAsync() {
+    public Mono<Map<String, Object>> getDictionaryItemNull() {
         return this.serviceClient.getDictionaryItemNullAsync();
     }
 
@@ -1627,7 +1627,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponse() {
         return this.serviceClient.getDictionaryItemEmptyWithResponseAsync();
     }
 
@@ -1641,7 +1641,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryItemEmptyAsync() {
+    public Mono<Map<String, Object>> getDictionaryItemEmpty() {
         return this.serviceClient.getDictionaryItemEmptyAsync();
     }
 
@@ -1655,7 +1655,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
+    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponse() {
         return this.serviceClient.getDictionaryValidWithResponseAsync();
     }
 
@@ -1669,7 +1669,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryValidAsync() {
+    public Mono<Map<String, Object>> getDictionaryValid() {
         return this.serviceClient.getDictionaryValidAsync();
     }
 
@@ -1687,7 +1687,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
+    public Mono<Response<Void>> putDictionaryValidWithResponse(Map<String, Object> arrayBody) {
         return this.serviceClient.putDictionaryValidWithResponseAsync(arrayBody);
     }
 
@@ -1705,7 +1705,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDictionaryValidAsync(Map<String, Object> arrayBody) {
+    public Mono<Void> putDictionaryValid(Map<String, Object> arrayBody) {
         return this.serviceClient.putDictionaryValidAsync(arrayBody);
     }
 }

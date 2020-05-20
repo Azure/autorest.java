@@ -385,7 +385,14 @@ public final class AutoRestResourceFlatteningTestService {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceDictionary != null) {
-            resourceDictionary.values().forEach(e -> e.validate());
+            resourceDictionary
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
         }
         return FluxUtil.withContext(context -> service.putDictionary(this.getHost(), resourceDictionary, context));
     }

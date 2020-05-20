@@ -43,16 +43,16 @@ public final class AutoRestDateTestService {
         return this.httpPipeline;
     }
 
-    /** The Dates object to access its operations. */
-    private final Dates dates;
+    /** The DateOperations object to access its operations. */
+    private final DateOperations dateOperations;
 
     /**
-     * Gets the Dates object to access its operations.
+     * Gets the DateOperations object to access its operations.
      *
-     * @return the Dates object.
+     * @return the DateOperations object.
      */
-    public Dates getDates() {
-        return this.dates;
+    public DateOperations getDateOperations() {
+        return this.dateOperations;
     }
 
     /** Initializes an instance of AutoRestDateTestService client. */
@@ -67,6 +67,6 @@ public final class AutoRestDateTestService {
      */
     public AutoRestDateTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.dates = new Dates(this);
+        this.dateOperations = new DateOperations(this);
     }
 }
