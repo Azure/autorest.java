@@ -7,10 +7,18 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.Language;
+import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Request;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FluentTransformer {
 
@@ -28,6 +36,7 @@ public class FluentTransformer {
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = normalizeApiVersionParameter(codeModel);
+        codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
 
