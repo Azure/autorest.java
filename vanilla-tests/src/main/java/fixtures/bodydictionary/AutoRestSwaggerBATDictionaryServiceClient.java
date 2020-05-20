@@ -37,7 +37,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     private DictionarysImpl serviceClient;
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
+     * Initializes an instance of Dictionarys client.
      */
     AutoRestSwaggerBATDictionaryServiceClient(DictionarysImpl serviceClient) {
         this.serviceClient = serviceClient;

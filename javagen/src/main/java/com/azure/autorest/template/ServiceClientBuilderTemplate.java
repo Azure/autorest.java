@@ -5,7 +5,6 @@ package com.azure.autorest.template;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -75,9 +74,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             clients.addAll(syncClients);
             boolean first = true;
             for (AsyncSyncClient client : clients) {
-                imports.add(serviceClient.getPackage() + "."
-                        + (client.getMethodGroupClient() == null ? client.getServiceClient().getClassName() : client.getMethodGroupClient().getClassName()));
-
                 if (first) {
                     first = false;
                 } else {
