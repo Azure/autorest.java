@@ -190,13 +190,6 @@ public class CodeNamer {
         return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
     }
 
-    public static String getParameterName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Parameter")));
-    }
-
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
@@ -204,20 +197,11 @@ public class CodeNamer {
         return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Property")));
     }
 
-    public static String getMethodGroupName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-        name = toPascalCase(name);
-        if (!name.endsWith("s") && !name.endsWith("S")) {
+    public static String getPlural(String name) {
+        if (name != null && !name.endsWith("s") && !name.endsWith("S")) {
             name += "s";
         }
-        return getEscapedReservedName(name, "Operations");
-    }
-
-    public static String getMethodName(String name) {
-        name = toCamelCase(name);
-        return getEscapedReservedName(name, "Method");
+        return name;
     }
 
     public static String getEnumMemberName(String name) {
