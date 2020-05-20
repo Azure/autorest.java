@@ -2,6 +2,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -77,7 +78,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
       if (wrapServiceClient) {
         serviceClient.getClientMethods()
             .stream()
-            .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+            .filter(clientMethod -> clientMethod.getType().name().contains("Async") || clientMethod.getType() == ClientMethodType.LongRunningBegin)
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
@@ -85,7 +86,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
         methodGroupClient
             .getClientMethods()
             .stream()
-            .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+            .filter(clientMethod -> clientMethod.getType().name().contains("Async") || clientMethod.getType() == ClientMethodType.LongRunningBegin)
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });

@@ -270,6 +270,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     addClientMethodWithContext(methods, builder, parameters);
                 }
 
+                // begin method
+                methods.add(builder
+                        .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                                GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
+                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.LongRunningBegin)
+                        .isGroupedParameterRequired(false)
+                        .build());
+
+                if (settings.isContextClientMethodParameter()) {
+                    addClientMethodWithContext(methods, builder, parameters);
+                }
+
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
