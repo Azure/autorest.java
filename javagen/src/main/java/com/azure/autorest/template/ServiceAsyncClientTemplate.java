@@ -69,7 +69,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
         });
       } else {
         classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
-                methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
+            methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });
       }
