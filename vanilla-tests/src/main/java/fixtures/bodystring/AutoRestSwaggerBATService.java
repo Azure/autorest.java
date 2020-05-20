@@ -50,17 +50,17 @@ public final class AutoRestSwaggerBATService {
     }
 
     /**
-     * The Strings object to access its operations.
+     * The StringOperations object to access its operations.
      */
-    private final Strings strings;
+    private final StringOperations stringOperations;
 
     /**
-     * Gets the Strings object to access its operations.
+     * Gets the StringOperations object to access its operations.
      * 
-     * @return the Strings object.
+     * @return the StringOperations object.
      */
-    public Strings getStrings() {
-        return this.strings;
+    public StringOperations getStringOperations() {
+        return this.stringOperations;
     }
 
     /**
@@ -91,7 +91,7 @@ public final class AutoRestSwaggerBATService {
      */
     public AutoRestSwaggerBATService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.strings = new Strings(this);
+        this.stringOperations = new StringOperations(this);
         this.enums = new Enums(this);
     }
 }

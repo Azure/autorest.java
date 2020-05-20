@@ -1,6 +1,7 @@
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -40,15 +41,15 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public final void addAsyncServiceClient(String packageKeyWord, String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, name);
-        Templates.getServiceAsyncClientTemplate().write(model, javaFile);
+    public final void addAsyncServiceClient(String packageKeyWord, AsyncSyncClient asyncClient) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, asyncClient.getClassName());
+        Templates.getServiceAsyncClientTemplate().write(asyncClient, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public void addSyncServiceClient(String packageKeyWord, String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, name);
-        Templates.getServiceSyncClientTemplate().write(model, javaFile);
+    public void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
+        Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
         javaFiles.add(javaFile);
     }
 

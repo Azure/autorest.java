@@ -50,17 +50,17 @@ public final class AutoRestDateTimeTestService {
     }
 
     /**
-     * The Datetimes object to access its operations.
+     * The DatetimeOperations object to access its operations.
      */
-    private final Datetimes datetimes;
+    private final DatetimeOperations datetimeOperations;
 
     /**
-     * Gets the Datetimes object to access its operations.
+     * Gets the DatetimeOperations object to access its operations.
      * 
-     * @return the Datetimes object.
+     * @return the DatetimeOperations object.
      */
-    public Datetimes getDatetimes() {
-        return this.datetimes;
+    public DatetimeOperations getDatetimeOperations() {
+        return this.datetimeOperations;
     }
 
     /**
@@ -77,6 +77,6 @@ public final class AutoRestDateTimeTestService {
      */
     public AutoRestDateTimeTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.datetimes = new Datetimes(this);
+        this.datetimeOperations = new DatetimeOperations(this);
     }
 }

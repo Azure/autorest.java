@@ -22,13 +22,13 @@ import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
- * Datetimes.
+ * DatetimeOperations.
  */
-public final class Datetimes {
+public final class DatetimeOperations {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final DatetimesService service;
+    private final DatetimeOperationsService service;
 
     /**
      * The service client containing this operation class.
@@ -36,23 +36,23 @@ public final class Datetimes {
     private final AutoRestDateTimeTestService client;
 
     /**
-     * Initializes an instance of Datetimes.
+     * Initializes an instance of DatetimeOperations.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    Datetimes(AutoRestDateTimeTestService client) {
-        this.service = RestProxy.create(DatetimesService.class, client.getHttpPipeline());
+    DatetimeOperations(AutoRestDateTimeTestService client) {
+        this.service = RestProxy.create(DatetimeOperationsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestDateTimeTestServiceDatetimes to be used by the proxy service to
-     * perform REST calls.
+     * AutoRestDateTimeTestServiceDatetimeOperations to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTimeTest")
-    private interface DatetimesService {
+    private interface DatetimeOperationsService {
         @Get("/datetime/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
@@ -412,7 +412,7 @@ public final class Datetimes {
     }
 
     /**
-     * Put max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -432,7 +432,7 @@ public final class Datetimes {
     }
 
     /**
-     * Put max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -447,7 +447,7 @@ public final class Datetimes {
     }
 
     /**
-     * Put max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -552,11 +552,11 @@ public final class Datetimes {
     }
 
     /**
-     * Get max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime7DigitsWithResponseAsync() {
@@ -567,11 +567,11 @@ public final class Datetimes {
     }
 
     /**
-     * Get max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsAsync() {
@@ -586,11 +586,11 @@ public final class Datetimes {
     }
 
     /**
-     * Get max datetime value 9999-12-31T23:59:59.9999999Z.
+     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime7Digits() {

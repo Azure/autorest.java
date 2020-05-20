@@ -50,17 +50,17 @@ public final class AutoRestDurationTestService {
     }
 
     /**
-     * The Durations object to access its operations.
+     * The DurationOperations object to access its operations.
      */
-    private final Durations durations;
+    private final DurationOperations durationOperations;
 
     /**
-     * Gets the Durations object to access its operations.
+     * Gets the DurationOperations object to access its operations.
      * 
-     * @return the Durations object.
+     * @return the DurationOperations object.
      */
-    public Durations getDurations() {
-        return this.durations;
+    public DurationOperations getDurationOperations() {
+        return this.durationOperations;
     }
 
     /**
@@ -77,6 +77,6 @@ public final class AutoRestDurationTestService {
      */
     public AutoRestDurationTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.durations = new Durations(this);
+        this.durationOperations = new DurationOperations(this);
     }
 }

@@ -673,11 +673,11 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end.
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@&amp;=+$,end.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync() {
@@ -689,11 +689,11 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end.
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@&amp;=+$,end.
+     * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlNonEncodedAsync() {
@@ -702,7 +702,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end.
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
