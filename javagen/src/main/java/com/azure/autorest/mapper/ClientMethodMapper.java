@@ -244,6 +244,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .isGroupedParameterRequired(false)
                                 .build());
 
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods, builder, parameters);
+                        }
+
                         if (generateClientMethodWithOnlyRequiredParameters) {
                             methods.add(builder
                                     .onlyRequiredParameters(true)
@@ -262,6 +266,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .isGroupedParameterRequired(false)
                         .build());
 
+                if (settings.isContextClientMethodParameter()) {
+                    addClientMethodWithContext(methods, builder, parameters);
+                }
+
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
@@ -271,6 +279,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .type(ClientMethodType.LongRunningAsync)
                             .isGroupedParameterRequired(false)
                             .build());
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
@@ -288,6 +300,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .type(ClientMethodType.LongRunningSync)
                             .isGroupedParameterRequired(false)
                             .build());
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
@@ -330,6 +346,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
+
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
@@ -347,6 +367,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
+
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
@@ -359,10 +383,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return methods;
     }
 
-    private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
-        List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
-        ReturnValue returnValue) {
-        ClientMethodParameter contextParam = new ClientMethodParameter.Builder()
+    private static final ClientMethodParameter CONTEXT_PARAM = new ClientMethodParameter.Builder()
             .description("The context to associate with this operation.")
             .wireType(ClassType.Context)
             .name("context")
@@ -374,9 +395,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isRequired(false)
             .build();
 
-        List<ClientMethodParameter> withContextParameters = new ArrayList<>();
-        withContextParameters.addAll(parameters);
-        withContextParameters.add(contextParam);
+    private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
+        List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
+        ReturnValue returnValue) {
+        List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
+        withContextParameters.add(CONTEXT_PARAM);
 
         methods.add(builder
             .parameters(withContextParameters) // update builder parameters to include context
@@ -386,6 +409,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .type(clientMethodType)
             .isGroupedParameterRequired(false)
             .build());
+        // reset the parameters to original params
+        builder.parameters(parameters);
+    }
+
+    private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
+                                            List<ClientMethodParameter> parameters) {
+        List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
+        withContextParameters.add(CONTEXT_PARAM);
+
+        methods.add(builder
+                .parameters(withContextParameters) // update builder parameters to include context
+                .build());
         // reset the parameters to original params
         builder.parameters(parameters);
     }
