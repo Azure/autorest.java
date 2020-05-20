@@ -26,7 +26,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     ServiceClient serviceClient = asyncClient.getServiceClient();
 
     JavaSettings settings = JavaSettings.getInstance();
-    String asyncClassName = asyncClient.getName();
+    String asyncClassName = asyncClient.getClassName();
     MethodGroupClient methodGroupClient = asyncClient.getMethodGroupClient();
     final boolean wrapServiceClient = methodGroupClient == null;
 

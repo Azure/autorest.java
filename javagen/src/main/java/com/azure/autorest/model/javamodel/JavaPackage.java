@@ -42,13 +42,13 @@ public class JavaPackage {
     }
 
     public final void addAsyncServiceClient(String packageKeyWord, AsyncSyncClient asyncClient) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, asyncClient.getName());
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, asyncClient.getClassName());
         Templates.getServiceAsyncClientTemplate().write(asyncClient, javaFile);
         javaFiles.add(javaFile);
     }
 
     public void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getName());
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
         Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
         javaFiles.add(javaFile);
     }

@@ -7,14 +7,14 @@ package com.azure.autorest.model.clientmodel;
 
 public class AsyncSyncClient {
 
-    private final String name;
+    private final String className;
 
     private final MethodGroupClient methodGroupClient;
 
     private final ServiceClient serviceClient;
 
-    private AsyncSyncClient(String name, MethodGroupClient methodGroupClient, ServiceClient serviceClient) {
-        this.name = name;
+    private AsyncSyncClient(String className, MethodGroupClient methodGroupClient, ServiceClient serviceClient) {
+        this.className = className;
         this.methodGroupClient = methodGroupClient;
         this.serviceClient = serviceClient;
     }
@@ -23,8 +23,8 @@ public class AsyncSyncClient {
      * Get the class name.
      * @return the class name.
      */
-    public String getName() {
-        return name;
+    public String getClassName() {
+        return className;
     }
 
     /**
@@ -45,14 +45,14 @@ public class AsyncSyncClient {
 
     public static class Builder {
 
-        private String name;
+        private String className;
 
         private MethodGroupClient methodGroupClient;
 
         private ServiceClient serviceClient;
 
-        public Builder name(String name) {
-            this.name = name;
+        public Builder className(String className) {
+            this.className = className;
             return this;
         }
 
@@ -67,7 +67,7 @@ public class AsyncSyncClient {
         }
 
         public AsyncSyncClient build() {
-            return new AsyncSyncClient(name, methodGroupClient, serviceClient);
+            return new AsyncSyncClient(className, methodGroupClient, serviceClient);
         }
     }
 }

@@ -30,16 +30,17 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient);
 
             String asyncClassName =
-                    serviceClient.getClientBaseName().endsWith("Client") ? serviceClient
-                            .getClientBaseName().replace("Client", "AsyncClient")
+                    serviceClient.getClientBaseName().endsWith("Client")
+                            ? serviceClient.getClientBaseName().replace("Client", "AsyncClient")
                             : serviceClient.getClientBaseName() + "AsyncClient";
-            asyncClients.add(builder.name(asyncClassName).build());
+            asyncClients.add(builder.className(asyncClassName).build());
 
             if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
                 String syncClassName =
-                        serviceClient.getClientBaseName().endsWith("Client") ? serviceClient
-                                .getClientBaseName() : serviceClient.getClientBaseName() + "Client";
-                syncClients.add(builder.name(syncClassName).build());
+                        serviceClient.getClientBaseName().endsWith("Client")
+                                ? serviceClient.getClientBaseName()
+                                : serviceClient.getClientBaseName() + "Client";
+                syncClients.add(builder.className(syncClassName).build());
             }
         }
 
@@ -53,30 +54,31 @@ public class ClientModelUtil {
                 // if it is the only method group, use service client name as base.
 
                 String asyncClassName =
-                        serviceClient.getClientBaseName().endsWith("Client") ? serviceClient
-                                .getClientBaseName().replace("Client", "AsyncClient")
+                        serviceClient.getClientBaseName().endsWith("Client")
+                                ? serviceClient.getClientBaseName().replace("Client", "AsyncClient")
                                 : serviceClient.getClientBaseName() + "AsyncClient";
-                asyncClients.add(builder.name(asyncClassName).build());
+                asyncClients.add(builder.className(asyncClassName).build());
 
                 if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
                     String syncClassName =
-                            serviceClient.getClientBaseName().endsWith("Client") ? serviceClient
-                                    .getClientBaseName() : serviceClient.getClientBaseName() + "Client";
-                    syncClients.add(builder.name(syncClassName).build());
+                            serviceClient.getClientBaseName().endsWith("Client")
+                                    ? serviceClient.getClientBaseName()
+                                    : serviceClient.getClientBaseName() + "Client";
+                    syncClients.add(builder.className(syncClassName).build());
                 }
             } else {
                 String asyncClassName =
                         methodGroupClient.getClassBaseName().endsWith("Client")
                                 ? methodGroupClient.getClassBaseName().replace("Client", "AsyncClient")
                                 : methodGroupClient.getClassBaseName() + "AsyncClient";
-                asyncClients.add(builder.name(asyncClassName).build());
+                asyncClients.add(builder.className(asyncClassName).build());
 
                 if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
                     String syncClassName =
                             methodGroupClient.getClassBaseName().endsWith("Client")
                                     ? methodGroupClient.getClassBaseName()
                                     : methodGroupClient.getClassBaseName() + "Client";
-                    syncClients.add(builder.name(syncClassName).build());
+                    syncClients.add(builder.className(syncClassName).build());
                 }
             }
         }
