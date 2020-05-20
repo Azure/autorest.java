@@ -22,13 +22,13 @@ import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
- * Strings.
+ * StringOperations.
  */
-public final class Strings {
+public final class StringOperations {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final StringsService service;
+    private final StringOperationsService service;
 
     /**
      * The service client containing this operation class.
@@ -36,23 +36,23 @@ public final class Strings {
     private final AutoRestSwaggerBATService client;
 
     /**
-     * Initializes an instance of Strings.
+     * Initializes an instance of StringOperations.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    Strings(AutoRestSwaggerBATService client) {
-        this.service = RestProxy.create(StringsService.class, client.getHttpPipeline());
+    StringOperations(AutoRestSwaggerBATService client) {
+        this.service = RestProxy.create(StringOperationsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATServiceStrings to be used by the proxy service to
-     * perform REST calls.
+     * AutoRestSwaggerBATServiceStringOperations to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATSe")
-    private interface StringsService {
+    private interface StringOperationsService {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

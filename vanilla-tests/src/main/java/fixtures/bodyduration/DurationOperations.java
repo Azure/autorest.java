@@ -1,4 +1,4 @@
-package fixtures.bodybyte;
+package fixtures.bodyduration;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
@@ -15,77 +15,73 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import fixtures.bodybyte.models.ErrorException;
+import fixtures.bodyduration.models.ErrorException;
+import java.time.Duration;
 import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
- * Bytes.
+ * DurationOperations.
  */
-public final class Bytes {
+public final class DurationOperations {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final BytesService service;
+    private final DurationOperationsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private final AutoRestSwaggerBATByteService client;
+    private final AutoRestDurationTestService client;
 
     /**
-     * Initializes an instance of Bytes.
+     * Initializes an instance of DurationOperations.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    Bytes(AutoRestSwaggerBATByteService client) {
-        this.service = RestProxy.create(BytesService.class, client.getHttpPipeline());
+    DurationOperations(AutoRestDurationTestService client) {
+        this.service = RestProxy.create(DurationOperationsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATByteServiceBytes to be used by the proxy service to
-     * perform REST calls.
+     * AutoRestDurationTestServiceDurationOperations to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATBy")
-    private interface BytesService {
-        @Get("/byte/null")
+    @ServiceInterface(name = "AutoRestDurationTest")
+    private interface DurationOperationsService {
+        @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNull(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String host, Context context);
 
-        @Get("/byte/empty")
+        @Put("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host, @BodyParam("application/json") Duration durationBody, Context context);
 
-        @Get("/byte/nonAscii")
+        @Get("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNonAscii(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String host, Context context);
 
-        @Put("/byte/nonAscii")
+        @Get("/duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNonAscii(@HostParam("$host") String host, @BodyParam("application/json") byte[] byteBody, Context context);
-
-        @Get("/byte/invalid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
-     * Get null byte value.
+     * Get null duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null byte value.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getNullWithResponseAsync() {
+    public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
@@ -93,16 +89,16 @@ public final class Bytes {
     }
 
     /**
-     * Get null byte value.
+     * Get null duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null byte value.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getNullAsync() {
+    public Mono<Duration> getNullAsync() {
         return getNullWithResponseAsync()
-            .flatMap((SimpleResponse<byte[]> res) -> {
+            .flatMap((SimpleResponse<Duration> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
                 } else {
@@ -112,166 +108,120 @@ public final class Bytes {
     }
 
     /**
-     * Get null byte value.
+     * Get null duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null byte value.
+     * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getNull() {
+    public Duration getNull() {
         return getNullAsync().block();
     }
 
     /**
-     * Get empty byte value ''.
+     * Put a positive duration value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty byte value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getEmptyWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
-    }
-
-    /**
-     * Get empty byte value ''.
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty byte value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-            .flatMap((SimpleResponse<byte[]> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
-    }
-
-    /**
-     * Get empty byte value ''.
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty byte value ''.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getEmpty() {
-        return getEmptyAsync().block();
-    }
-
-    /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getNonAsciiWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), context));
-    }
-
-    /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getNonAsciiAsync() {
-        return getNonAsciiWithResponseAsync()
-            .flatMap((SimpleResponse<byte[]> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
-    }
-
-    /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getNonAscii() {
-        return getNonAsciiAsync().block();
-    }
-
-    /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     * 
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody) {
+    public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        if (byteBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
+        if (durationBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putNonAscii(this.client.getHost(), byteBody, context));
+        return FluxUtil.withContext(context -> service.putPositiveDuration(this.client.getHost(), durationBody, context));
     }
 
     /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * Put a positive duration value.
      * 
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNonAsciiAsync(byte[] byteBody) {
-        return putNonAsciiWithResponseAsync(byteBody)
+    public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
+        return putPositiveDurationWithResponseAsync(durationBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * Put a positive duration value.
      * 
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param durationBody The durationBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNonAscii(byte[] byteBody) {
-        putNonAsciiAsync(byteBody).block();
+    public void putPositiveDuration(Duration durationBody) {
+        putPositiveDurationAsync(durationBody).block();
     }
 
     /**
-     * Get invalid byte value ':::SWAGGER::::'.
+     * Get a positive duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::'.
+     * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getInvalidWithResponseAsync() {
+    public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), context));
+    }
+
+    /**
+     * Get a positive duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Duration> getPositiveDurationAsync() {
+        return getPositiveDurationWithResponseAsync()
+            .flatMap((SimpleResponse<Duration> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    /**
+     * Get a positive duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Duration getPositiveDuration() {
+        return getPositiveDurationAsync().block();
+    }
+
+    /**
+     * Get an invalid duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
@@ -279,16 +229,16 @@ public final class Bytes {
     }
 
     /**
-     * Get invalid byte value ':::SWAGGER::::'.
+     * Get an invalid duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::'.
+     * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> getInvalidAsync() {
+    public Mono<Duration> getInvalidAsync() {
         return getInvalidWithResponseAsync()
-            .flatMap((SimpleResponse<byte[]> res) -> {
+            .flatMap((SimpleResponse<Duration> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
                 } else {
@@ -298,14 +248,14 @@ public final class Bytes {
     }
 
     /**
-     * Get invalid byte value ':::SWAGGER::::'.
+     * Get an invalid duration value.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::'.
+     * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getInvalid() {
+    public Duration getInvalid() {
         return getInvalidAsync().block();
     }
 }
