@@ -6,16 +6,19 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -58,19 +61,29 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.remove("com.azure.management.AzureServiceClient");
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
 
+        List<AsyncSyncClient> asyncClients = new ArrayList<>();
+        List<AsyncSyncClient> syncClients = new ArrayList<>();
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
+        }
+        final boolean singleBuilder = asyncClients.size() == 1;
+
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
         if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-            imports.add(serviceClient.getPackage() + "." + serviceClient.getClassName());
-            String asyncClassName =
-                serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
-                    .replace("Client", "AsyncClient") : serviceClient.getClientBaseName() + "AsyncClient";
-            builderTypes.append(asyncClassName).append(".class");
-            if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
-                String syncClassName =
-                    serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
-                        : serviceClient.getClientBaseName() + "Client";
-                builderTypes.append(", ").append(syncClassName).append(".class");
+            List<AsyncSyncClient> clients = new ArrayList<>(asyncClients);
+            clients.addAll(syncClients);
+            boolean first = true;
+            for (AsyncSyncClient client : clients) {
+                imports.add(serviceClient.getPackage() + "."
+                        + (client.getMethodGroupClient() == null ? client.getServiceClient().getClassName() : client.getMethodGroupClient().getClassName()));
+
+                if (first) {
+                    first = false;
+                } else {
+                    builderTypes.append(", ");
+                }
+                builderTypes.append(client.getName()).append(".class");
             }
         } else {
             builderTypes.append(serviceClient.getClassName()).append(".class");
@@ -141,45 +154,44 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                String asyncClassName = serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
-                    .replace("Client", "AsyncClient") : serviceClient.getClientBaseName() + "AsyncClient";
-
-                classBlock.javadocComment(comment ->
-                {
-                    comment.description(String
-                        .format("Builds an instance of %1$s async client", asyncClassName));
-                    comment.methodReturns(String.format("an instance of %1$s", asyncClassName));
-                });
-                classBlock.publicMethod(String.format("%1$s buildAsyncClient()", asyncClassName),
-                    function -> {
-                        if (serviceClient.getProxy() != null) {
-                            function.line("return new %1$s(%2$s());", asyncClassName, buildMethodName);
-                        } else {
-                            function.line("return new %1$s(%2$s().%3$s());", asyncClassName, buildMethodName,
-                                CodeNamer.getModelNamer().modelPropertyGetterName(serviceClient.getMethodGroupClients().get(0).getClassBaseName()));
-                        }
-                    });
-
-                if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
-                    String syncClassName =
-                        serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
-                            : serviceClient.getClientBaseName() + "Client";
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
 
                     classBlock.javadocComment(comment ->
                     {
                         comment.description(String
-                            .format("Builds an instance of %1$s sync client", syncClassName));
-                        comment.methodReturns(String.format("an instance of %1$s", syncClassName));
+                                .format("Builds an instance of %1$s async client", asyncClient.getName()));
+                        comment.methodReturns(String.format("an instance of %1$s", asyncClient.getName()));
                     });
-                    classBlock.publicMethod(String.format("%1$s buildClient()", syncClassName),
-                        function -> {
-                            if (serviceClient.getProxy() != null) {
-                                function.line("return new %1$s(%2$s());", syncClassName, buildMethodName);
-                            } else {
-                                function.line("return new %1$s(%2$s().%3$s());", syncClassName, buildMethodName,
-                                    CodeNamer.getModelNamer().modelPropertyGetterName(serviceClient.getMethodGroupClients().get(0).getClassBaseName()));
-                            }
-                        });
+                    classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getName(), singleBuilder ? "AsyncClient" : asyncClient.getName()),
+                            function -> {
+                                if (wrapServiceClient) {
+                                    function.line("return new %1$s(%2$s());", asyncClient.getName(), buildMethodName);
+                                } else {
+                                    function.line("return new %1$s(%2$s().%3$s());", asyncClient.getName(), buildMethodName,
+                                            CodeNamer.getModelNamer().modelPropertyGetterName(asyncClient.getMethodGroupClient().getClassBaseName()));
+                                }
+                            });
+                }
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    final boolean wrapServiceClient = syncClient.getMethodGroupClient() == null;
+
+                    classBlock.javadocComment(comment ->
+                    {
+                        comment.description(String
+                                .format("Builds an instance of %1$s sync client", syncClient.getName()));
+                        comment.methodReturns(String.format("an instance of %1$s", syncClient.getName()));
+                    });
+                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getName(), singleBuilder ? "Client" : syncClient.getName()),
+                            function -> {
+                                if (wrapServiceClient) {
+                                    function.line("return new %1$s(%2$s());", syncClient.getName(), buildMethodName);
+                                } else {
+                                    function.line("return new %1$s(%2$s().%3$s());", syncClient.getName(), buildMethodName,
+                                            CodeNamer.getModelNamer().modelPropertyGetterName(syncClient.getMethodGroupClient().getClassBaseName()));
+                                }
+                            });
                 }
             }
         });
@@ -194,5 +206,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
     protected String primaryBuildMethodName(JavaSettings settings) {
         return settings.shouldGenerateSyncAsyncClients()
                 ? "buildInnerClient"
-                : "buildClient";    }
+                : "buildClient";
+    }
 }

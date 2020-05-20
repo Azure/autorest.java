@@ -3,9 +3,9 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.util.ClientModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -24,6 +25,7 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,21 +74,16 @@ public class Javagen extends NewPlugin {
                     client.getServiceClient());
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                String asyncClassName =
-                    client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
-                        .getClientBaseName().replace("Client", "AsyncClient")
-                        : client.getServiceClient().getClientBaseName() + "AsyncClient";
+                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+                List<AsyncSyncClient> syncClients = new ArrayList<>();
+                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
-                javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(),
-                    asyncClassName, client.getServiceClient());
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(), asyncClient);
+                }
 
-                // generate sync client only if the sync method generation param is set to ALL.
-                if (SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
-                    String syncClassName =
-                        client.getServiceClient().getClientBaseName().endsWith("Client") ? client.getServiceClient()
-                            .getClientBaseName() : client.getServiceClient().getClientBaseName() + "Client";
-                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(),
-                        syncClassName, client.getServiceClient());
+                for (AsyncSyncClient syncClient : syncClients) {
+                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(), syncClient);
                 }
             }
 

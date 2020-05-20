@@ -16,6 +16,7 @@ import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -27,6 +28,7 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,7 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,6 +99,20 @@ public class FluentGen extends NewPlugin {
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            }
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+                List<AsyncSyncClient> syncClients = new ArrayList<>();
+                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addAsyncServiceClient(JavaSettings.getInstance().getPackage(), asyncClient);
+                }
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    javaPackage.addSyncServiceClient(JavaSettings.getInstance().getPackage(), syncClient);
+                }
             }
 
             // Service client builder
