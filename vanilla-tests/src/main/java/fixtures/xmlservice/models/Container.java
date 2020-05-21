@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
 
-/**
- * The Container model.
- */
+/** The Container model. */
 @JacksonXmlRootElement(localName = "Container")
 @Fluent
 public final class Container {
@@ -31,7 +29,7 @@ public final class Container {
 
     /**
      * Get the name property: The Name property.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -40,7 +38,7 @@ public final class Container {
 
     /**
      * Set the name property: The Name property.
-     * 
+     *
      * @param name the name value to set.
      * @return the Container object itself.
      */
@@ -51,7 +49,7 @@ public final class Container {
 
     /**
      * Get the properties property: Properties of a container.
-     * 
+     *
      * @return the properties value.
      */
     public ContainerProperties getProperties() {
@@ -60,7 +58,7 @@ public final class Container {
 
     /**
      * Set the properties property: Properties of a container.
-     * 
+     *
      * @param properties the properties value to set.
      * @return the Container object itself.
      */
@@ -71,7 +69,7 @@ public final class Container {
 
     /**
      * Get the metadata property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @return the metadata value.
      */
     public Map<String, String> getMetadata() {
@@ -80,7 +78,7 @@ public final class Container {
 
     /**
      * Set the metadata property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @param metadata the metadata value to set.
      * @return the Container object itself.
      */
@@ -91,7 +89,7 @@ public final class Container {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -92,7 +92,7 @@ public class FluentTransformer {
 
                         Language updatedDefault = new Language();
                         Utils.shallowCopy(operation.getLanguage().getDefault(), updatedDefault, Language.class, logger);
-                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName());
+                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName() + "WithoutPolling");
 
                         Languages updatedLanguages = new Languages();
                         Utils.shallowCopy(operation.getLanguage(), updatedLanguages, Languages.class, logger);

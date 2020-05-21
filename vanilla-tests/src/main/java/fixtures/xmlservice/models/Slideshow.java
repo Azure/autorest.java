@@ -7,9 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Slideshow model.
- */
+/** The Slideshow model. */
 @JacksonXmlRootElement(localName = "slideshow")
 @Fluent
 public final class Slideshow {
@@ -39,7 +37,7 @@ public final class Slideshow {
 
     /**
      * Get the title property: The title property.
-     * 
+     *
      * @return the title value.
      */
     public String getTitle() {
@@ -48,7 +46,7 @@ public final class Slideshow {
 
     /**
      * Set the title property: The title property.
-     * 
+     *
      * @param title the title value to set.
      * @return the Slideshow object itself.
      */
@@ -59,7 +57,7 @@ public final class Slideshow {
 
     /**
      * Get the date property: The date property.
-     * 
+     *
      * @return the date value.
      */
     public String getDate() {
@@ -68,7 +66,7 @@ public final class Slideshow {
 
     /**
      * Set the date property: The date property.
-     * 
+     *
      * @param date the date value to set.
      * @return the Slideshow object itself.
      */
@@ -79,7 +77,7 @@ public final class Slideshow {
 
     /**
      * Get the author property: The author property.
-     * 
+     *
      * @return the author value.
      */
     public String getAuthor() {
@@ -88,7 +86,7 @@ public final class Slideshow {
 
     /**
      * Set the author property: The author property.
-     * 
+     *
      * @param author the author value to set.
      * @return the Slideshow object itself.
      */
@@ -99,7 +97,7 @@ public final class Slideshow {
 
     /**
      * Get the slides property: The slides property.
-     * 
+     *
      * @return the slides value.
      */
     public List<Slide> getSlides() {
@@ -108,7 +106,7 @@ public final class Slideshow {
 
     /**
      * Set the slides property: The slides property.
-     * 
+     *
      * @param slides the slides value to set.
      * @return the Slideshow object itself.
      */
@@ -119,7 +117,7 @@ public final class Slideshow {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

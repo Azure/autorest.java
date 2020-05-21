@@ -3,9 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The ProductUrl model.
- */
+/** The ProductUrl model. */
 @Fluent
 public final class ProductUrl extends GenericUrl {
     /*
@@ -16,7 +14,7 @@ public final class ProductUrl extends GenericUrl {
 
     /**
      * Get the odataValue property: URL value.
-     * 
+     *
      * @return the odataValue value.
      */
     public String getOdataValue() {
@@ -25,7 +23,7 @@ public final class ProductUrl extends GenericUrl {
 
     /**
      * Set the odataValue property: URL value.
-     * 
+     *
      * @param odataValue the odataValue value to set.
      * @return the ProductUrl object itself.
      */
@@ -36,7 +34,7 @@ public final class ProductUrl extends GenericUrl {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

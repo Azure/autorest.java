@@ -1,6 +1,9 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import java.util.HashSet;
@@ -9,7 +12,7 @@ import java.util.Set;
 /**
  * Template to create an asynchronous client.
  */
-public class ServiceAsyncClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile> {
 
   private static ServiceAsyncClientTemplate _instance = new ServiceAsyncClientTemplate();
   private ServiceAsyncClientTemplate() {
@@ -20,22 +23,21 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<ServiceClient, 
   }
 
   @Override
-  public final void write(ServiceClient serviceClient, JavaFile javaFile) {
-    JavaSettings settings = JavaSettings.getInstance();
+  public final void write(AsyncSyncClient asyncClient, JavaFile javaFile) {
+    ServiceClient serviceClient = asyncClient.getServiceClient();
 
-    String className = serviceClient.getClientBaseName().endsWith("Client") ? serviceClient.getClientBaseName()
-        .replace("Client", "AsyncClient") : serviceClient.getClientBaseName() + "AsyncClient";
+    JavaSettings settings = JavaSettings.getInstance();
+    String asyncClassName = asyncClient.getClassName();
+    MethodGroupClient methodGroupClient = asyncClient.getMethodGroupClient();
+    final boolean wrapServiceClient = methodGroupClient == null;
 
     Set<String> imports = new HashSet<>();
-    if (serviceClient.getProxy() != null) {
+    if (wrapServiceClient) {
       serviceClient.addImportsTo(imports, true, false, settings);
       imports.add(serviceClient.getPackage() + "." + serviceClient.getClassName());
     } else {
-      serviceClient.getMethodGroupClients().forEach(methodGroupClient -> {
-        methodGroupClient.addImportsTo(imports, true,
-            settings);
-        imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
-      });
+      methodGroupClient.addImportsTo(imports, true, settings);
+      imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
     }
     imports.add("com.azure.core.annotation.ServiceClient");
 
@@ -45,50 +47,50 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<ServiceClient, 
             serviceClient.getInterfaceName())));
 
     javaFile.annotation(String.format("ServiceClient(builder = %sBuilder.class)", serviceClient.getClientBaseName()));
-    javaFile.publicFinalClass(className, classBlock ->
+    javaFile.publicFinalClass(asyncClassName, classBlock ->
     {
       // Add service client member variable
-      if (serviceClient.getProxy() != null) {
+      if (wrapServiceClient) {
         classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
       } else {
-        classBlock.privateMemberVariable(serviceClient.getMethodGroupClients().get(0).getClassName(), "serviceClient");
+        classBlock.privateMemberVariable(methodGroupClient.getClassName(), "serviceClient");
       }
 
       // Service Client Constructor
       classBlock.javadocComment(comment ->
           comment
-              .description(String.format("Initializes an instance of %1$s client.", serviceClient.getInterfaceName()))
+              .description(String.format("Initializes an instance of %1$s client.",
+                  wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
       );
 
-      if (serviceClient.getProxy() != null) {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", className,
+      if (wrapServiceClient) {
+        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
             serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });
       } else {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)",className,
-            serviceClient.getMethodGroupClients().get(0).getClassName(), "serviceClient"), constructorBlock -> {
+        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
+            methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });
       }
 
-      if (serviceClient.getProxy() != null) {
+      if (wrapServiceClient) {
         serviceClient.getClientMethods()
             .stream()
-            .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+            .filter(clientMethod -> clientMethod.getType().name().contains("Async") || clientMethod.getType() == ClientMethodType.LongRunningBegin)
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
       } else {
-        serviceClient.getMethodGroupClients().get(0)
+        methodGroupClient
             .getClientMethods()
             .stream()
-            .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+            .filter(clientMethod -> clientMethod.getType().name().contains("Async") || clientMethod.getType() == ClientMethodType.LongRunningBegin)
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
       }
     });
   }
-
 }

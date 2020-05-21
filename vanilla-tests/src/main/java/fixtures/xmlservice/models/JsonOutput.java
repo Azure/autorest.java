@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/**
- * The JsonOutput model.
- */
+/** The JsonOutput model. */
 @JacksonXmlRootElement(localName = "JsonOutput")
 @Fluent
 public final class JsonOutput {
@@ -18,7 +16,7 @@ public final class JsonOutput {
 
     /**
      * Get the id property: The id property.
-     * 
+     *
      * @return the id value.
      */
     public Integer getId() {
@@ -27,7 +25,7 @@ public final class JsonOutput {
 
     /**
      * Set the id property: The id property.
-     * 
+     *
      * @param id the id value to set.
      * @return the JsonOutput object itself.
      */
@@ -38,9 +36,8 @@ public final class JsonOutput {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

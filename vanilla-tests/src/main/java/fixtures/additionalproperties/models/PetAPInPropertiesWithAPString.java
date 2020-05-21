@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * The PetAPInPropertiesWithAPString model.
- */
+/** The PetAPInPropertiesWithAPString model. */
 @Fluent
 public final class PetAPInPropertiesWithAPString {
     /*
@@ -46,12 +44,11 @@ public final class PetAPInPropertiesWithAPString {
     /*
      * Dictionary of <string>
      */
-    @JsonIgnore
-    private Map<String, String> additionalProperties;
+    @JsonIgnore private Map<String, String> additionalProperties;
 
     /**
      * Get the id property: The id property.
-     * 
+     *
      * @return the id value.
      */
     public int getId() {
@@ -60,7 +57,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Set the id property: The id property.
-     * 
+     *
      * @param id the id value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
@@ -71,7 +68,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Get the name property: The name property.
-     * 
+     *
      * @return the name value.
      */
     public String getName() {
@@ -80,7 +77,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Set the name property: The name property.
-     * 
+     *
      * @param name the name value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
@@ -91,7 +88,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Get the status property: The status property.
-     * 
+     *
      * @return the status value.
      */
     public Boolean isStatus() {
@@ -100,7 +97,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Get the odataLocation property: The @odata.location property.
-     * 
+     *
      * @return the odataLocation value.
      */
     public String getOdataLocation() {
@@ -109,7 +106,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Set the odataLocation property: The @odata.location property.
-     * 
+     *
      * @param odataLocation the odataLocation value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
@@ -119,9 +116,8 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     /**
-     * Get the AdditionalPropertiesProperty property: Dictionary of
-     * &lt;number&gt;.
-     * 
+     * Get the AdditionalPropertiesProperty property: Dictionary of &lt;number&gt;.
+     *
      * @return the AdditionalPropertiesProperty value.
      */
     public Map<String, Float> getAdditionalPropertiesProperty() {
@@ -129,21 +125,20 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     /**
-     * Set the AdditionalPropertiesProperty property: Dictionary of
-     * &lt;number&gt;.
-     * 
-     * @param AdditionalPropertiesProperty the AdditionalPropertiesProperty
-     * value to set.
+     * Set the AdditionalPropertiesProperty property: Dictionary of &lt;number&gt;.
+     *
+     * @param AdditionalPropertiesProperty the AdditionalPropertiesProperty value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
-    public PetAPInPropertiesWithAPString setAdditionalPropertiesProperty(Map<String, Float> AdditionalPropertiesProperty) {
+    public PetAPInPropertiesWithAPString setAdditionalPropertiesProperty(
+            Map<String, Float> AdditionalPropertiesProperty) {
         this.AdditionalPropertiesProperty = AdditionalPropertiesProperty;
         return this;
     }
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
@@ -153,7 +148,7 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;string&gt;.
-     * 
+     *
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
@@ -172,12 +167,13 @@ public final class PetAPInPropertiesWithAPString {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getOdataLocation() == null) {
-            throw new IllegalArgumentException("Missing required property odataLocation in model PetAPInPropertiesWithAPString");
+            throw new IllegalArgumentException(
+                    "Missing required property odataLocation in model PetAPInPropertiesWithAPString");
         }
     }
 }

@@ -24,8 +24,8 @@ public class NamingConflictResolver {
                 .collect(Collectors.toSet());
         codeModel.getOperationGroups().forEach(og -> {
             String name = Utils.getDefaultName(og);
-            if (objectNames.contains(CodeNamer.getMethodGroupName(name))) {
-                String newName = name + "Operations";
+            if (objectNames.contains(CodeNamer.getPlural(CodeNamer.getMethodGroupName(name)))) {
+                String newName = name + "Operation";
                 logger.info("Rename operation group from {} to {}", name, newName);
                 og.getLanguage().getDefault().setName(newName);
             }

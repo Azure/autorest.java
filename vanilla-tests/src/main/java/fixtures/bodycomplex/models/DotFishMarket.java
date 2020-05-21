@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/**
- * The DotFishMarket model.
- */
+/** The DotFishMarket model. */
 @Fluent
 public final class DotFishMarket {
     /*
@@ -35,7 +33,7 @@ public final class DotFishMarket {
 
     /**
      * Get the sampleSalmon property: The sampleSalmon property.
-     * 
+     *
      * @return the sampleSalmon value.
      */
     public DotSalmon getSampleSalmon() {
@@ -44,7 +42,7 @@ public final class DotFishMarket {
 
     /**
      * Set the sampleSalmon property: The sampleSalmon property.
-     * 
+     *
      * @param sampleSalmon the sampleSalmon value to set.
      * @return the DotFishMarket object itself.
      */
@@ -55,7 +53,7 @@ public final class DotFishMarket {
 
     /**
      * Get the salmons property: The salmons property.
-     * 
+     *
      * @return the salmons value.
      */
     public List<DotSalmon> getSalmons() {
@@ -64,7 +62,7 @@ public final class DotFishMarket {
 
     /**
      * Set the salmons property: The salmons property.
-     * 
+     *
      * @param salmons the salmons value to set.
      * @return the DotFishMarket object itself.
      */
@@ -75,7 +73,7 @@ public final class DotFishMarket {
 
     /**
      * Get the sampleFish property: The sampleFish property.
-     * 
+     *
      * @return the sampleFish value.
      */
     public DotFish getSampleFish() {
@@ -84,7 +82,7 @@ public final class DotFishMarket {
 
     /**
      * Set the sampleFish property: The sampleFish property.
-     * 
+     *
      * @param sampleFish the sampleFish value to set.
      * @return the DotFishMarket object itself.
      */
@@ -95,7 +93,7 @@ public final class DotFishMarket {
 
     /**
      * Get the fishes property: The fishes property.
-     * 
+     *
      * @return the fishes value.
      */
     public List<DotFish> getFishes() {
@@ -104,7 +102,7 @@ public final class DotFishMarket {
 
     /**
      * Set the fishes property: The fishes property.
-     * 
+     *
      * @param fishes the fishes value to set.
      * @return the DotFishMarket object itself.
      */
@@ -115,7 +113,7 @@ public final class DotFishMarket {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

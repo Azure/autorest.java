@@ -3,9 +3,7 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HeadersResponseBoolHeaders model.
- */
+/** The HeadersResponseBoolHeaders model. */
 @Fluent
 public final class HeadersResponseBoolHeaders {
     /*
@@ -16,7 +14,7 @@ public final class HeadersResponseBoolHeaders {
 
     /**
      * Get the value property: The value property.
-     * 
+     *
      * @return the value value.
      */
     public Boolean isValue() {
@@ -25,7 +23,7 @@ public final class HeadersResponseBoolHeaders {
 
     /**
      * Set the value property: The value property.
-     * 
+     *
      * @param value the value value to set.
      * @return the HeadersResponseBoolHeaders object itself.
      */
@@ -36,9 +34,8 @@ public final class HeadersResponseBoolHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

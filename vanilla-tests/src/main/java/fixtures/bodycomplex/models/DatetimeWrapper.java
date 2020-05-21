@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/**
- * The DatetimeWrapper model.
- */
+/** The DatetimeWrapper model. */
 @Fluent
 public final class DatetimeWrapper {
     /*
@@ -23,7 +21,7 @@ public final class DatetimeWrapper {
 
     /**
      * Get the field property: The field property.
-     * 
+     *
      * @return the field value.
      */
     public OffsetDateTime getField() {
@@ -32,7 +30,7 @@ public final class DatetimeWrapper {
 
     /**
      * Set the field property: The field property.
-     * 
+     *
      * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
      */
@@ -43,7 +41,7 @@ public final class DatetimeWrapper {
 
     /**
      * Get the now property: The now property.
-     * 
+     *
      * @return the now value.
      */
     public OffsetDateTime getNow() {
@@ -52,7 +50,7 @@ public final class DatetimeWrapper {
 
     /**
      * Set the now property: The now property.
-     * 
+     *
      * @param now the now value to set.
      * @return the DatetimeWrapper object itself.
      */
@@ -63,9 +61,8 @@ public final class DatetimeWrapper {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The ResourceCollection model.
- */
+/** The ResourceCollection model. */
 @Fluent
 public final class ResourceCollection {
     /*
@@ -30,7 +28,7 @@ public final class ResourceCollection {
 
     /**
      * Get the productresource property: Flattened product.
-     * 
+     *
      * @return the productresource value.
      */
     public FlattenedProduct getProductresource() {
@@ -39,7 +37,7 @@ public final class ResourceCollection {
 
     /**
      * Set the productresource property: Flattened product.
-     * 
+     *
      * @param productresource the productresource value to set.
      * @return the ResourceCollection object itself.
      */
@@ -50,7 +48,7 @@ public final class ResourceCollection {
 
     /**
      * Get the arrayofresources property: The arrayofresources property.
-     * 
+     *
      * @return the arrayofresources value.
      */
     public List<FlattenedProduct> getArrayofresources() {
@@ -59,7 +57,7 @@ public final class ResourceCollection {
 
     /**
      * Set the arrayofresources property: The arrayofresources property.
-     * 
+     *
      * @param arrayofresources the arrayofresources value to set.
      * @return the ResourceCollection object itself.
      */
@@ -69,9 +67,8 @@ public final class ResourceCollection {
     }
 
     /**
-     * Get the dictionaryofresources property: Dictionary of
-     * &lt;FlattenedProduct&gt;.
-     * 
+     * Get the dictionaryofresources property: Dictionary of &lt;FlattenedProduct&gt;.
+     *
      * @return the dictionaryofresources value.
      */
     public Map<String, FlattenedProduct> getDictionaryofresources() {
@@ -79,9 +76,8 @@ public final class ResourceCollection {
     }
 
     /**
-     * Set the dictionaryofresources property: Dictionary of
-     * &lt;FlattenedProduct&gt;.
-     * 
+     * Set the dictionaryofresources property: Dictionary of &lt;FlattenedProduct&gt;.
+     *
      * @param dictionaryofresources the dictionaryofresources value to set.
      * @return the ResourceCollection object itself.
      */
@@ -92,7 +88,7 @@ public final class ResourceCollection {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -103,7 +99,14 @@ public final class ResourceCollection {
             getArrayofresources().forEach(e -> e.validate());
         }
         if (getDictionaryofresources() != null) {
-            getDictionaryofresources().values().forEach(e -> { if (e != null) { e.validate(); } });
+            getDictionaryofresources()
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
         }
     }
 }

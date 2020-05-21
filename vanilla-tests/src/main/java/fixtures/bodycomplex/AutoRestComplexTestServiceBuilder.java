@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestComplexTestService type.
- */
+/** A builder for creating a new instance of the AutoRestComplexTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestComplexTestService.class})
 public final class AutoRestComplexTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestComplexTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestComplexTestServiceBuilder {
 
     /**
      * Sets Api Version.
-     * 
+     *
      * @param apiVersion the apiVersion value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -51,7 +49,7 @@ public final class AutoRestComplexTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -62,7 +60,7 @@ public final class AutoRestComplexTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestComplexTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestComplexTestService.
      */
     public AutoRestComplexTestService buildClient() {
@@ -70,7 +68,10 @@ public final class AutoRestComplexTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline);
         client.setHost(this.host);

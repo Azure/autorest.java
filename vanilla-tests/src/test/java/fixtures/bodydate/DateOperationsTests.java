@@ -18,13 +18,13 @@ public class DateOperationsTests {
 
     @Test
     public void getNull() {
-        assertNull(client.getDates().getNull());
+        assertNull(client.getDateOperations().getNull());
     }
 
     @Test
     public void getInvalidDate() {
         try {
-            client.getDates().getInvalidDate();
+            client.getDateOperations().getInvalidDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -34,7 +34,7 @@ public class DateOperationsTests {
     @Test
     public void getOverflowDate() {
         try {
-            client.getDates().getOverflowDate();
+            client.getDateOperations().getOverflowDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -44,7 +44,7 @@ public class DateOperationsTests {
     @Test
     public void getUnderflowDate() {
         try {
-            client.getDates().getUnderflowDate();
+            client.getDateOperations().getUnderflowDate();
             fail();
         } catch (RuntimeException exception) {
             assertEquals(InvalidFormatException.class, exception.getCause().getClass());
@@ -54,26 +54,26 @@ public class DateOperationsTests {
     @Test
     public void putMaxDate() {
         LocalDate body = LocalDate.of(9999, 12, 31);
-        client.getDates().putMaxDate(body);
+        client.getDateOperations().putMaxDate(body);
     }
 
     @Test
     public void getMaxDate() {
         LocalDate expected = LocalDate.of(9999, 12, 31);
-        LocalDate result = client.getDates().getMaxDate();
+        LocalDate result = client.getDateOperations().getMaxDate();
         assertEquals(expected, result);
     }
 
     @Test
     public void putMinDate() {
         LocalDate body = LocalDate.of(1, 1, 1);
-        client.getDates().putMinDate(body);
+        client.getDateOperations().putMinDate(body);
     }
 
     @Test
     public void getMinDate() {
         LocalDate expected = LocalDate.of(1, 1, 1);
-        LocalDate result = client.getDates().getMinDate();
+        LocalDate result = client.getDateOperations().getMinDate();
         assertEquals(expected, result);
     }
 }

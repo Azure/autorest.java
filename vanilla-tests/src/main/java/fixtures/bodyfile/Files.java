@@ -21,24 +21,17 @@ import java.util.Collections;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Files.
- */
+/** An instance of this class provides access to all the operations defined in Files. */
 public final class Files {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final FilesService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestSwaggerBATFileService client;
 
     /**
      * Initializes an instance of Files.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Files(AutoRestSwaggerBATFileService client) {
@@ -47,8 +40,7 @@ public final class Files {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
+     * The interface defining all the services for AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
@@ -72,7 +64,7 @@ public final class Files {
 
     /**
      * Get file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file.
@@ -80,26 +72,27 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), context));
     }
 
     /**
      * Get file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
-        return getFileWithResponseAsync()
-            .flatMapMany(StreamResponse::getValue);}
+        return getFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    }
 
     /**
      * Get file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file.
@@ -107,15 +100,15 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFile() {
         return getFileAsync()
-            .map(ByteBufferBackedInputStream::new)
-            .collectList()
-            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
-            .block();
+                .map(ByteBufferBackedInputStream::new)
+                .collectList()
+                .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+                .block();
     }
 
     /**
      * Get a large file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file.
@@ -123,26 +116,27 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), context));
     }
 
     /**
      * Get a large file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
-        return getFileLargeWithResponseAsync()
-            .flatMapMany(StreamResponse::getValue);}
+        return getFileLargeWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    }
 
     /**
      * Get a large file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file.
@@ -150,15 +144,15 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
         return getFileLargeAsync()
-            .map(ByteBufferBackedInputStream::new)
-            .collectList()
-            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
-            .block();
+                .map(ByteBufferBackedInputStream::new)
+                .collectList()
+                .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+                .block();
     }
 
     /**
      * Get empty file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file.
@@ -166,26 +160,27 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), context));
     }
 
     /**
      * Get empty file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
-        return getEmptyFileWithResponseAsync()
-            .flatMapMany(StreamResponse::getValue);}
+        return getEmptyFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    }
 
     /**
      * Get empty file.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file.
@@ -193,9 +188,9 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getEmptyFile() {
         return getEmptyFileAsync()
-            .map(ByteBufferBackedInputStream::new)
-            .collectList()
-            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
-            .block();
+                .map(ByteBufferBackedInputStream::new)
+                .collectList()
+                .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+                .block();
     }
 }

@@ -3,9 +3,7 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The B model.
- */
+/** The B model. */
 @Fluent
 public final class B extends MyException {
     /*
@@ -16,7 +14,7 @@ public final class B extends MyException {
 
     /**
      * Get the textStatusCode property: The textStatusCode property.
-     * 
+     *
      * @return the textStatusCode value.
      */
     public String getTextStatusCode() {
@@ -25,7 +23,7 @@ public final class B extends MyException {
 
     /**
      * Set the textStatusCode property: The textStatusCode property.
-     * 
+     *
      * @param textStatusCode the textStatusCode value to set.
      * @return the B object itself.
      */
@@ -36,7 +34,7 @@ public final class B extends MyException {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

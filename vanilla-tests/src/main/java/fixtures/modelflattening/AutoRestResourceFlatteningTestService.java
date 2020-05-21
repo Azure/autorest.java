@@ -23,8 +23,8 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.modelflattening.models.ErrorException;
-import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
+import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
@@ -34,23 +34,17 @@ import java.util.List;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/**
- * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
- */
+/** Initializes a new instance of the AutoRestResourceFlatteningTestService type. */
 public final class AutoRestResourceFlatteningTestService {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final AutoRestResourceFlatteningTestServiceService service;
 
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
@@ -59,7 +53,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the service client itself.
      */
@@ -68,30 +62,26 @@ public final class AutoRestResourceFlatteningTestService {
         return this;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     */
+    /** Initializes an instance of AutoRestResourceFlatteningTestService client. */
     public AutoRestResourceFlatteningTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestResourceFlatteningTestService(HttpPipeline httpPipeline) {
@@ -100,9 +90,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestResourceFlatteningTestService to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestResourceFlatteningTestService to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestResourceFlat")
@@ -110,7 +99,10 @@ public final class AutoRestResourceFlatteningTestService {
         @Put("/model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putArray(@HostParam("$host") String host, @BodyParam("application/json") List<Resource> resourceArray, Context context);
+        Mono<Response<Void>> putArray(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<Resource> resourceArray,
+                Context context);
 
         @Get("/model-flatten/array")
         @ExpectedResponses({200})
@@ -120,7 +112,10 @@ public final class AutoRestResourceFlatteningTestService {
         @Put("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putWrappedArray(@HostParam("$host") String host, @BodyParam("application/json") List<WrappedProduct> resourceArray, Context context);
+        Mono<Response<Void>> putWrappedArray(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<WrappedProduct> resourceArray,
+                Context context);
 
         @Get("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
@@ -130,42 +125,60 @@ public final class AutoRestResourceFlatteningTestService {
         @Put("/model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDictionary(@HostParam("$host") String host, @BodyParam("application/json") Map<String, FlattenedProduct> resourceDictionary, Context context);
+        Mono<Response<Void>> putDictionary(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Map<String, FlattenedProduct> resourceDictionary,
+                Context context);
 
         @Get("/model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionary(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionary(
+                @HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putResourceCollection(@HostParam("$host") String host, @BodyParam("application/json") ResourceCollection resourceComplexObject, Context context);
+        Mono<Response<Void>> putResourceCollection(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") ResourceCollection resourceComplexObject,
+                Context context);
 
         @Get("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ResourceCollection>> getResourceCollection(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<ResourceCollection>> getResourceCollection(
+                @HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> putSimpleProduct(@HostParam("$host") String host, @BodyParam("application/json") SimpleProduct simpleBodyProduct, Context context);
+        Mono<SimpleResponse<SimpleProduct>> putSimpleProduct(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                Context context);
 
         @Post("/model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProduct(@HostParam("$host") String host, @BodyParam("application/json") SimpleProduct simpleBodyProduct, Context context);
+        Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProduct(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                Context context);
 
         @Put("/model-flatten/customFlattening/parametergrouping/{name}/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGrouping(@HostParam("$host") String host, @PathParam("name") String name, @BodyParam("application/json") SimpleProduct simpleBodyProduct, Context context);
+        Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGrouping(
+                @HostParam("$host") String host,
+                @PathParam("name") String name,
+                @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                Context context);
     }
 
     /**
      * Put External Resource as an Array.
-     * 
+     *
      * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -185,7 +198,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put External Resource as an Array.
-     * 
+     *
      * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -194,13 +207,12 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayAsync(List<Resource> resourceArray) {
-        return putArrayWithResponseAsync(resourceArray)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put External Resource as an Array.
-     * 
+     *
      * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -213,7 +225,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as an Array.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array.
@@ -228,7 +240,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as an Array.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array.
@@ -236,18 +248,19 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithResponseAsync()
-            .flatMap((SimpleResponse<List<FlattenedProduct>> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<List<FlattenedProduct>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get External Resource as an Array.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array.
@@ -258,8 +271,9 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -278,8 +292,9 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -288,13 +303,13 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
-        return putWrappedArrayWithResponseAsync(resourceArray)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putWrappedArrayWithResponseAsync(resourceArray).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -306,8 +321,9 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper.
@@ -321,8 +337,9 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper.
@@ -330,18 +347,20 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithResponseAsync()
-            .flatMap((SimpleResponse<List<ProductWrapper>> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<List<ProductWrapper>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     * 
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper.
@@ -353,7 +372,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put External Resource as a Dictionary.
-     * 
+     *
      * @param resourceDictionary Dictionary of &lt;FlattenedProduct&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -366,14 +385,21 @@ public final class AutoRestResourceFlatteningTestService {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         if (resourceDictionary != null) {
-            resourceDictionary.values().forEach(e -> { if (e != null) { e.validate(); } });
+            resourceDictionary
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
         }
         return FluxUtil.withContext(context -> service.putDictionary(this.getHost(), resourceDictionary, context));
     }
 
     /**
      * Put External Resource as a Dictionary.
-     * 
+     *
      * @param resourceDictionary Dictionary of &lt;FlattenedProduct&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -382,13 +408,12 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
-        return putDictionaryWithResponseAsync(resourceDictionary)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putDictionaryWithResponseAsync(resourceDictionary).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put External Resource as a Dictionary.
-     * 
+     *
      * @param resourceDictionary Dictionary of &lt;FlattenedProduct&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -401,7 +426,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as a Dictionary.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary.
@@ -416,7 +441,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as a Dictionary.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary.
@@ -424,18 +449,19 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithResponseAsync()
-            .flatMap((SimpleResponse<Map<String, FlattenedProduct>> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<Map<String, FlattenedProduct>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get External Resource as a Dictionary.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary.
@@ -447,7 +473,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put External Resource as a ResourceCollection.
-     * 
+     *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -462,12 +488,13 @@ public final class AutoRestResourceFlatteningTestService {
         if (resourceComplexObject != null) {
             resourceComplexObject.validate();
         }
-        return FluxUtil.withContext(context -> service.putResourceCollection(this.getHost(), resourceComplexObject, context));
+        return FluxUtil.withContext(
+                context -> service.putResourceCollection(this.getHost(), resourceComplexObject, context));
     }
 
     /**
      * Put External Resource as a ResourceCollection.
-     * 
+     *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -477,12 +504,12 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithResponseAsync(resourceComplexObject)
-            .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put External Resource as a ResourceCollection.
-     * 
+     *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -495,7 +522,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as a ResourceCollection.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection.
@@ -510,7 +537,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Get External Resource as a ResourceCollection.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection.
@@ -518,18 +545,19 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithResponseAsync()
-            .flatMap((SimpleResponse<ResourceCollection> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<ResourceCollection> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get External Resource as a ResourceCollection.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection.
@@ -541,7 +569,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param simpleBodyProduct The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -561,7 +589,7 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param simpleBodyProduct The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -571,18 +599,19 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithResponseAsync(simpleBodyProduct)
-            .flatMap((SimpleResponse<SimpleProduct> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<SimpleProduct> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param simpleBodyProduct The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -596,8 +625,9 @@ public final class AutoRestResourceFlatteningTestService {
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
-     * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
@@ -608,7 +638,12 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+    public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            String genericValue,
+            String odataValue) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -625,13 +660,15 @@ public final class AutoRestResourceFlatteningTestService {
             simpleBodyProductInternal.setOdataValue(odataValue);
         }
         SimpleProduct simpleBodyProduct = simpleBodyProductInternal;
-        return FluxUtil.withContext(context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, context));
+        return FluxUtil.withContext(
+                context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, context));
     }
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
-     * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
@@ -642,21 +679,29 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
-        return postFlattenedSimpleProductWithResponseAsync(productId, description, maxProductDisplayName, genericValue, odataValue)
-            .flatMap((SimpleResponse<SimpleProduct> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+    public Mono<SimpleProduct> postFlattenedSimpleProductAsync(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            String genericValue,
+            String odataValue) {
+        return postFlattenedSimpleProductWithResponseAsync(
+                        productId, description, maxProductDisplayName, genericValue, odataValue)
+                .flatMap(
+                        (SimpleResponse<SimpleProduct> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
-     * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
@@ -667,13 +712,19 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SimpleProduct postFlattenedSimpleProduct(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
-        return postFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue).block();
+    public SimpleProduct postFlattenedSimpleProduct(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            String genericValue,
+            String odataValue) {
+        return postFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue)
+                .block();
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -681,12 +732,14 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(FlattenParameterGroup flattenParameterGroup) {
+    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(
+            FlattenParameterGroup flattenParameterGroup) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         if (flattenParameterGroup == null) {
-            return Mono.error(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
         } else {
             flattenParameterGroup.validate();
         }
@@ -697,12 +750,13 @@ public final class AutoRestResourceFlatteningTestService {
         simpleBodyProduct.setMaxProductDisplayName(flattenParameterGroup.getMaxProductDisplayName());
         simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
         simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
-        return FluxUtil.withContext(context -> service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, context));
+        return FluxUtil.withContext(
+                context -> service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, context));
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -712,18 +766,19 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup)
-            .flatMap((SimpleResponse<SimpleProduct> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<SimpleProduct> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
-     * 
+     *
      * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

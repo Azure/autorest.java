@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/**
- * The ListBlobsResponse model.
- */
+/** The ListBlobsResponse model. */
 @JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent
 public final class ListBlobsResponse {
@@ -61,7 +59,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.
-     * 
+     *
      * @return the serviceEndpoint value.
      */
     public String getServiceEndpoint() {
@@ -70,7 +68,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the serviceEndpoint property: The ServiceEndpoint property.
-     * 
+     *
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -81,7 +79,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the containerName property: The ContainerName property.
-     * 
+     *
      * @return the containerName value.
      */
     public String getContainerName() {
@@ -90,7 +88,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the containerName property: The ContainerName property.
-     * 
+     *
      * @param containerName the containerName value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -101,7 +99,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the prefix property: The Prefix property.
-     * 
+     *
      * @return the prefix value.
      */
     public String getPrefix() {
@@ -110,7 +108,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the prefix property: The Prefix property.
-     * 
+     *
      * @param prefix the prefix value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -121,7 +119,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the marker property: The Marker property.
-     * 
+     *
      * @return the marker value.
      */
     public String getMarker() {
@@ -130,7 +128,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the marker property: The Marker property.
-     * 
+     *
      * @param marker the marker value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -141,7 +139,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the maxResults property: The MaxResults property.
-     * 
+     *
      * @return the maxResults value.
      */
     public int getMaxResults() {
@@ -150,7 +148,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the maxResults property: The MaxResults property.
-     * 
+     *
      * @param maxResults the maxResults value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -161,7 +159,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the delimiter property: The Delimiter property.
-     * 
+     *
      * @return the delimiter value.
      */
     public String getDelimiter() {
@@ -170,7 +168,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the delimiter property: The Delimiter property.
-     * 
+     *
      * @param delimiter the delimiter value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -181,7 +179,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the blobs property: The Blobs property.
-     * 
+     *
      * @return the blobs value.
      */
     public Blobs getBlobs() {
@@ -190,7 +188,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the blobs property: The Blobs property.
-     * 
+     *
      * @param blobs the blobs value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -201,7 +199,7 @@ public final class ListBlobsResponse {
 
     /**
      * Get the nextMarker property: The NextMarker property.
-     * 
+     *
      * @return the nextMarker value.
      */
     public String getNextMarker() {
@@ -210,7 +208,7 @@ public final class ListBlobsResponse {
 
     /**
      * Set the nextMarker property: The NextMarker property.
-     * 
+     *
      * @param nextMarker the nextMarker value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -221,7 +219,7 @@ public final class ListBlobsResponse {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

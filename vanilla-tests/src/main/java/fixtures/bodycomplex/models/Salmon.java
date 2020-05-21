@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/**
- * The Salmon model.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Salmon.class)
+/** The Salmon model. */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "fishtype",
+        defaultImpl = Salmon.class)
 @JsonTypeName("salmon")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)
-})
+@JsonSubTypes({@JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)})
 @Fluent
 public class Salmon extends Fish {
     /*
@@ -30,7 +30,7 @@ public class Salmon extends Fish {
 
     /**
      * Get the location property: The location property.
-     * 
+     *
      * @return the location value.
      */
     public String getLocation() {
@@ -39,7 +39,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the location property: The location property.
-     * 
+     *
      * @param location the location value to set.
      * @return the Salmon object itself.
      */
@@ -50,7 +50,7 @@ public class Salmon extends Fish {
 
     /**
      * Get the iswild property: The iswild property.
-     * 
+     *
      * @return the iswild value.
      */
     public Boolean iswild() {
@@ -59,7 +59,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the iswild property: The iswild property.
-     * 
+     *
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
@@ -70,7 +70,7 @@ public class Salmon extends Fish {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
