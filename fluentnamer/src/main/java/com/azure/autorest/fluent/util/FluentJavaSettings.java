@@ -87,9 +87,9 @@ public class FluentJavaSettings {
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
-        String settingValue = host.getStringValue(settingName);
-        if (settingValue != null && !settingValue.isEmpty()) {
-            action.accept(true);
+        Boolean settingValue = host.getBooleanValue(settingName);
+        if (settingValue != null) {
+            action.accept(settingValue);
         }
     }
 }
