@@ -7,9 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Slide model.
- */
+/** The Slide model. */
 @JacksonXmlRootElement(localName = "slide")
 @Fluent
 public final class Slide {
@@ -33,7 +31,7 @@ public final class Slide {
 
     /**
      * Get the type property: The type property.
-     * 
+     *
      * @return the type value.
      */
     public String getType() {
@@ -42,7 +40,7 @@ public final class Slide {
 
     /**
      * Set the type property: The type property.
-     * 
+     *
      * @param type the type value to set.
      * @return the Slide object itself.
      */
@@ -53,7 +51,7 @@ public final class Slide {
 
     /**
      * Get the title property: The title property.
-     * 
+     *
      * @return the title value.
      */
     public String getTitle() {
@@ -62,7 +60,7 @@ public final class Slide {
 
     /**
      * Set the title property: The title property.
-     * 
+     *
      * @param title the title value to set.
      * @return the Slide object itself.
      */
@@ -73,7 +71,7 @@ public final class Slide {
 
     /**
      * Get the items property: The items property.
-     * 
+     *
      * @return the items value.
      */
     public List<String> getItems() {
@@ -82,7 +80,7 @@ public final class Slide {
 
     /**
      * Set the items property: The items property.
-     * 
+     *
      * @param items the items value to set.
      * @return the Slide object itself.
      */
@@ -93,9 +91,8 @@ public final class Slide {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

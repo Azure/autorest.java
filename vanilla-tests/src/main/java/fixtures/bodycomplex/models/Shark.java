@@ -7,10 +7,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 
-/**
- * The Shark model.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Shark.class)
+/** The Shark model. */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "fishtype",
+        defaultImpl = Shark.class)
 @JsonTypeName("shark")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
@@ -33,7 +35,7 @@ public class Shark extends Fish {
 
     /**
      * Get the age property: The age property.
-     * 
+     *
      * @return the age value.
      */
     public Integer getAge() {
@@ -42,7 +44,7 @@ public class Shark extends Fish {
 
     /**
      * Set the age property: The age property.
-     * 
+     *
      * @param age the age value to set.
      * @return the Shark object itself.
      */
@@ -53,7 +55,7 @@ public class Shark extends Fish {
 
     /**
      * Get the birthday property: The birthday property.
-     * 
+     *
      * @return the birthday value.
      */
     public OffsetDateTime getBirthday() {
@@ -62,7 +64,7 @@ public class Shark extends Fish {
 
     /**
      * Set the birthday property: The birthday property.
-     * 
+     *
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
@@ -73,7 +75,7 @@ public class Shark extends Fish {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

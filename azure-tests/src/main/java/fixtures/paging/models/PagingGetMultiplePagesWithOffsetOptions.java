@@ -3,9 +3,7 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The PagingGetMultiplePagesWithOffsetOptions model.
- */
+/** The PagingGetMultiplePagesWithOffsetOptions model. */
 @Fluent
 public final class PagingGetMultiplePagesWithOffsetOptions {
     /*
@@ -28,9 +26,8 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     private Integer timeout;
 
     /**
-     * Get the maxresults property: Sets the maximum number of items to return
-     * in the response.
-     * 
+     * Get the maxresults property: Sets the maximum number of items to return in the response.
+     *
      * @return the maxresults value.
      */
     public Integer getMaxresults() {
@@ -38,9 +35,8 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Set the maxresults property: Sets the maximum number of items to return
-     * in the response.
-     * 
+     * Set the maxresults property: Sets the maximum number of items to return in the response.
+     *
      * @param maxresults the maxresults value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
@@ -51,7 +47,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
 
     /**
      * Get the offset property: Offset of return value.
-     * 
+     *
      * @return the offset value.
      */
     public int getOffset() {
@@ -60,7 +56,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
 
     /**
      * Set the offset property: Offset of return value.
-     * 
+     *
      * @param offset the offset value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
@@ -70,9 +66,9 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can
-     * spend processing the request, in seconds. The default is 30 seconds.
-     * 
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
+     *
      * @return the timeout value.
      */
     public Integer getTimeout() {
@@ -80,9 +76,9 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can
-     * spend processing the request, in seconds. The default is 30 seconds.
-     * 
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
+     *
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
@@ -93,9 +89,8 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

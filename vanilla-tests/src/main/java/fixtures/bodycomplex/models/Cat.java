@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/**
- * The Cat model.
- */
+/** The Cat model. */
 @Fluent
 public class Cat extends Pet {
     /*
@@ -23,7 +21,7 @@ public class Cat extends Pet {
 
     /**
      * Get the color property: The color property.
-     * 
+     *
      * @return the color value.
      */
     public String getColor() {
@@ -32,7 +30,7 @@ public class Cat extends Pet {
 
     /**
      * Set the color property: The color property.
-     * 
+     *
      * @param color the color value to set.
      * @return the Cat object itself.
      */
@@ -43,7 +41,7 @@ public class Cat extends Pet {
 
     /**
      * Get the hates property: The hates property.
-     * 
+     *
      * @return the hates value.
      */
     public List<Dog> getHates() {
@@ -52,7 +50,7 @@ public class Cat extends Pet {
 
     /**
      * Set the hates property: The hates property.
-     * 
+     *
      * @param hates the hates value to set.
      * @return the Cat object itself.
      */
@@ -63,7 +61,7 @@ public class Cat extends Pet {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

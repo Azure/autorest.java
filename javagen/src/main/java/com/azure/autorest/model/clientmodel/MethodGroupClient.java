@@ -67,7 +67,7 @@ public class MethodGroupClient {
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    private MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces) {
+    private MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -78,7 +78,9 @@ public class MethodGroupClient {
         this.variableType = variableType;
         this.variableName = variableName;
         this.clientMethods = clientMethods;
-        this.classBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
+        this.classBaseName = classBaseName != null
+                ? classBaseName
+                : (className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className);
     }
 
     public final String getPackage() {
@@ -163,7 +165,7 @@ public class MethodGroupClient {
         private String variableName;
         private List<ClientMethod> clientMethods;
         private List<IType> supportedInterfaces;
-
+        private String classBaseName;
 
         /**
          * Sets the name of the package.
@@ -265,6 +267,16 @@ public class MethodGroupClient {
             return this;
         }
 
+        /**
+         * Sets the class base name.
+         * @param classBaseName class base name.
+         * @return the Builder itself
+         */
+        public Builder classBaseName(String classBaseName) {
+            this.classBaseName = classBaseName;
+            return this;
+        }
+
         public MethodGroupClient build() {
             return new MethodGroupClient(packageName,
                     className,
@@ -275,7 +287,8 @@ public class MethodGroupClient {
                     variableType,
                     variableName,
                     clientMethods,
-                    supportedInterfaces);
+                    supportedInterfaces,
+                    classBaseName);
         }
     }
 }

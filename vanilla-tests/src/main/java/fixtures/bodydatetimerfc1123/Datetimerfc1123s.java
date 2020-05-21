@@ -21,24 +21,17 @@ import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Datetimerfc1123s.
- */
+/** An instance of this class provides access to all the operations defined in Datetimerfc1123s. */
 public final class Datetimerfc1123s {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final Datetimerfc1123sService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestRFC1123DateTimeTestService client;
 
     /**
      * Initializes an instance of Datetimerfc1123s.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Datetimerfc1123s(AutoRestRFC1123DateTimeTestService client) {
@@ -47,8 +40,7 @@ public final class Datetimerfc1123s {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s to be used by the
+     * The interface defining all the services for AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s to be used by the
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
@@ -81,24 +73,32 @@ public final class Datetimerfc1123s {
         @Put("/datetimerfc1123/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putUtcMaxDateTime(@HostParam("$host") String host, @BodyParam("application/json") DateTimeRfc1123 datetimeBody, Context context);
+        Mono<Response<Void>> putUtcMaxDateTime(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DateTimeRfc1123 datetimeBody,
+                Context context);
 
         @Get("/datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime(
+                @HostParam("$host") String host, Context context);
 
         @Get("/datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime(
+                @HostParam("$host") String host, Context context);
 
         @Put("/datetimerfc1123/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putUtcMinDateTime(@HostParam("$host") String host, @BodyParam("application/json") DateTimeRfc1123 datetimeBody, Context context);
+        Mono<Response<Void>> putUtcMinDateTime(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DateTimeRfc1123 datetimeBody,
+                Context context);
 
         @Get("/datetimerfc1123/min")
         @ExpectedResponses({200})
@@ -109,7 +109,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get null datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value.
@@ -117,14 +117,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
      * Get null datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value.
@@ -132,18 +133,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getNullAsync() {
         return getNullWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get null datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value.
@@ -155,7 +157,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get invalid datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value.
@@ -163,14 +165,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**
      * Get invalid datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value.
@@ -178,18 +181,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get invalid datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value.
@@ -201,7 +205,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get overflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value.
@@ -209,14 +213,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getOverflowWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), context));
     }
 
     /**
      * Get overflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value.
@@ -224,18 +229,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get overflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value.
@@ -247,7 +253,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get underflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value.
@@ -255,14 +261,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUnderflowWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), context));
     }
 
     /**
      * Get underflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value.
@@ -270,18 +277,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get underflow datetime value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value.
@@ -293,7 +301,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -303,18 +311,20 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
-        return FluxUtil.withContext(context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted, context));
+        return FluxUtil.withContext(
+                context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted, context));
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -323,13 +333,12 @@ public final class Datetimerfc1123s {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putUtcMaxDateTimeWithResponseAsync(datetimeBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putUtcMaxDateTimeWithResponseAsync(datetimeBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -342,7 +351,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -350,14 +359,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), context));
     }
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -365,18 +375,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -388,7 +399,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -396,14 +407,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), context));
     }
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -411,18 +423,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -434,7 +447,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -444,18 +457,20 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
-        return FluxUtil.withContext(context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted, context));
+        return FluxUtil.withContext(
+                context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted, context));
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -464,13 +479,12 @@ public final class Datetimerfc1123s {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMinDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putUtcMinDateTimeWithResponseAsync(datetimeBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putUtcMinDateTimeWithResponseAsync(datetimeBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @param datetimeBody The datetimeBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -483,7 +497,7 @@ public final class Datetimerfc1123s {
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -491,14 +505,15 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), context));
     }
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -506,18 +521,19 @@ public final class Datetimerfc1123s {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithResponseAsync()
-            .flatMap((SimpleResponse<OffsetDateTime> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<OffsetDateTime> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT.

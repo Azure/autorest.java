@@ -19,24 +19,17 @@ import fixtures.bodydate.models.ErrorException;
 import java.time.LocalDate;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Dates.
- */
+/** An instance of this class provides access to all the operations defined in Dates. */
 public final class Dates {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final DatesService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestDateTestService client;
 
     /**
      * Initializes an instance of Dates.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Dates(AutoRestDateTestService client) {
@@ -45,8 +38,8 @@ public final class Dates {
     }
 
     /**
-     * The interface defining all the services for AutoRestDateTestServiceDates
-     * to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestDateTestServiceDates to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTestServ")
@@ -74,7 +67,8 @@ public final class Dates {
         @Put("/date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMaxDate(@HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
+        Mono<Response<Void>> putMaxDate(
+                @HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
 
         @Get("/date/max")
         @ExpectedResponses({200})
@@ -84,7 +78,8 @@ public final class Dates {
         @Put("/date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMinDate(@HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
+        Mono<Response<Void>> putMinDate(
+                @HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
 
         @Get("/date/min")
         @ExpectedResponses({200})
@@ -94,7 +89,7 @@ public final class Dates {
 
     /**
      * Get null date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value.
@@ -102,14 +97,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
      * Get null date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value.
@@ -117,18 +113,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getNullAsync() {
         return getNullWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get null date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value.
@@ -140,7 +137,7 @@ public final class Dates {
 
     /**
      * Get invalid date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value.
@@ -148,14 +145,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getInvalidDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getInvalidDate(this.client.getHost(), context));
     }
 
     /**
      * Get invalid date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value.
@@ -163,18 +161,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get invalid date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value.
@@ -186,7 +185,7 @@ public final class Dates {
 
     /**
      * Get overflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value.
@@ -194,14 +193,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getOverflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getOverflowDate(this.client.getHost(), context));
     }
 
     /**
      * Get overflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value.
@@ -209,18 +209,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get overflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value.
@@ -232,7 +233,7 @@ public final class Dates {
 
     /**
      * Get underflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value.
@@ -240,14 +241,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getUnderflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getUnderflowDate(this.client.getHost(), context));
     }
 
     /**
      * Get underflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value.
@@ -255,18 +257,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get underflow date value.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value.
@@ -278,7 +281,7 @@ public final class Dates {
 
     /**
      * Put max date value 9999-12-31.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -288,7 +291,8 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMaxDateWithResponseAsync(LocalDate dateBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (dateBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
@@ -298,7 +302,7 @@ public final class Dates {
 
     /**
      * Put max date value 9999-12-31.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -307,13 +311,12 @@ public final class Dates {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMaxDateAsync(LocalDate dateBody) {
-        return putMaxDateWithResponseAsync(dateBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putMaxDateWithResponseAsync(dateBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put max date value 9999-12-31.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -326,7 +329,7 @@ public final class Dates {
 
     /**
      * Get max date value 9999-12-31.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31.
@@ -334,14 +337,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMaxDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMaxDate(this.client.getHost(), context));
     }
 
     /**
      * Get max date value 9999-12-31.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31.
@@ -349,18 +353,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMaxDateAsync() {
         return getMaxDateWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get max date value 9999-12-31.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31.
@@ -372,7 +377,7 @@ public final class Dates {
 
     /**
      * Put min date value 0000-01-01.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -382,7 +387,8 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMinDateWithResponseAsync(LocalDate dateBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (dateBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
@@ -392,7 +398,7 @@ public final class Dates {
 
     /**
      * Put min date value 0000-01-01.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -401,13 +407,12 @@ public final class Dates {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMinDateAsync(LocalDate dateBody) {
-        return putMinDateWithResponseAsync(dateBody)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return putMinDateWithResponseAsync(dateBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Put min date value 0000-01-01.
-     * 
+     *
      * @param dateBody The dateBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -420,7 +425,7 @@ public final class Dates {
 
     /**
      * Get min date value 0000-01-01.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01.
@@ -428,14 +433,15 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMinDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMinDate(this.client.getHost(), context));
     }
 
     /**
      * Get min date value 0000-01-01.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01.
@@ -443,18 +449,19 @@ public final class Dates {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMinDateAsync() {
         return getMinDateWithResponseAsync()
-            .flatMap((SimpleResponse<LocalDate> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (SimpleResponse<LocalDate> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get min date value 0000-01-01.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01.

@@ -3,9 +3,7 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HeadersResponseProtectedKeyHeaders model.
- */
+/** The HeadersResponseProtectedKeyHeaders model. */
 @Fluent
 public final class HeadersResponseProtectedKeyHeaders {
     /*
@@ -16,7 +14,7 @@ public final class HeadersResponseProtectedKeyHeaders {
 
     /**
      * Get the contentType property: The Content-Type property.
-     * 
+     *
      * @return the contentType value.
      */
     public String getContentType() {
@@ -25,7 +23,7 @@ public final class HeadersResponseProtectedKeyHeaders {
 
     /**
      * Set the contentType property: The Content-Type property.
-     * 
+     *
      * @param contentType the contentType value to set.
      * @return the HeadersResponseProtectedKeyHeaders object itself.
      */
@@ -36,9 +34,8 @@ public final class HeadersResponseProtectedKeyHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

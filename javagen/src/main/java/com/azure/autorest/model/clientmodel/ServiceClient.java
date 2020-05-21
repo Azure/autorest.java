@@ -179,6 +179,10 @@ public class ServiceClient {
             imports.add("com.azure.core.http.policy.UserAgentPolicy");
         }
 
+        if (includeBuilderImports) {
+            imports.add(String.format("%1$s.%2$s", getPackage(), getClassName()));
+        }
+
         Proxy proxy = getProxy();
         if (proxy != null) {
             proxy.addImportsTo(imports, includeImplementationImports, settings);

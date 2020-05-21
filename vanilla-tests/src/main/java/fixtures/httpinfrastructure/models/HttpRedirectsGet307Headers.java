@@ -3,9 +3,7 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The HttpRedirectsGet307Headers model.
- */
+/** The HttpRedirectsGet307Headers model. */
 @Fluent
 public final class HttpRedirectsGet307Headers {
     /*
@@ -14,16 +12,14 @@ public final class HttpRedirectsGet307Headers {
     @JsonProperty(value = "Location")
     private String location;
 
-    /**
-     * Creates an instance of HttpRedirectsGet307Headers class.
-     */
+    /** Creates an instance of HttpRedirectsGet307Headers class. */
     public HttpRedirectsGet307Headers() {
         location = "/http/success/get/200";
     }
 
     /**
      * Get the location property: The Location property.
-     * 
+     *
      * @return the location value.
      */
     public String getLocation() {
@@ -32,7 +28,7 @@ public final class HttpRedirectsGet307Headers {
 
     /**
      * Set the location property: The Location property.
-     * 
+     *
      * @param location the location value to set.
      * @return the HttpRedirectsGet307Headers object itself.
      */
@@ -43,9 +39,8 @@ public final class HttpRedirectsGet307Headers {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

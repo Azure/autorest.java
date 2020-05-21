@@ -85,6 +85,14 @@ public class GenericType implements IType {
         return new GenericType("java.util", "Function", inputType, outputType);
     }
 
+    public static GenericType PollerFlux(IType pollResultType, IType finalResultType) {
+        return new GenericType("com.azure.core.util.polling", "PollerFlux", pollResultType, finalResultType);
+    }
+
+    public static GenericType PollResult(IType pollResultType) {
+        return new GenericType("com.azure.core.management.polling", "PollResult", pollResultType);
+    }
+
     public final String getName() {
         return name;
     }

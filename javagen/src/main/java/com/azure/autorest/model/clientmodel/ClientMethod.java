@@ -288,6 +288,12 @@ public class ClientMethod {
                 imports.add("com.fasterxml.jackson.core.type.TypeReference");
             }
         }
+
+        if (type == ClientMethodType.LongRunningBegin) {
+            if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                imports.add("com.fasterxml.jackson.core.type.TypeReference");
+            }
+        }
     }
 
     public static class Builder {

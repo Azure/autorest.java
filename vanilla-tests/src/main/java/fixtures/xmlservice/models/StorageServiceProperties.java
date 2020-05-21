@@ -8,9 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The StorageServiceProperties model.
- */
+/** The StorageServiceProperties model. */
 @JacksonXmlRootElement(localName = "StorageServiceProperties")
 @Fluent
 public final class StorageServiceProperties {
@@ -66,7 +64,7 @@ public final class StorageServiceProperties {
 
     /**
      * Get the logging property: Azure Analytics Logging settings.
-     * 
+     *
      * @return the logging value.
      */
     public Logging getLogging() {
@@ -75,7 +73,7 @@ public final class StorageServiceProperties {
 
     /**
      * Set the logging property: Azure Analytics Logging settings.
-     * 
+     *
      * @param logging the logging value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -85,9 +83,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the hourMetrics property: A summary of request statistics grouped by
-     * API in hourly aggregates for blobs.
-     * 
+     * Get the hourMetrics property: A summary of request statistics grouped by API in hourly aggregates for blobs.
+     *
      * @return the hourMetrics value.
      */
     public Metrics getHourMetrics() {
@@ -95,9 +92,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the hourMetrics property: A summary of request statistics grouped by
-     * API in hourly aggregates for blobs.
-     * 
+     * Set the hourMetrics property: A summary of request statistics grouped by API in hourly aggregates for blobs.
+     *
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -107,9 +103,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the minuteMetrics property: a summary of request statistics grouped
-     * by API in minute aggregates for blobs.
-     * 
+     * Get the minuteMetrics property: a summary of request statistics grouped by API in minute aggregates for blobs.
+     *
      * @return the minuteMetrics value.
      */
     public Metrics getMinuteMetrics() {
@@ -117,9 +112,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the minuteMetrics property: a summary of request statistics grouped
-     * by API in minute aggregates for blobs.
-     * 
+     * Set the minuteMetrics property: a summary of request statistics grouped by API in minute aggregates for blobs.
+     *
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -130,7 +124,7 @@ public final class StorageServiceProperties {
 
     /**
      * Get the cors property: The set of CORS rules.
-     * 
+     *
      * @return the cors value.
      */
     public List<CorsRule> getCors() {
@@ -142,7 +136,7 @@ public final class StorageServiceProperties {
 
     /**
      * Set the cors property: The set of CORS rules.
-     * 
+     *
      * @param cors the cors value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -152,11 +146,10 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the defaultServiceVersion property: The default version to use for
-     * requests to the Blob service if an incoming request's version is not
-     * specified. Possible values include version 2008-10-27 and all more
-     * recent versions.
-     * 
+     * Get the defaultServiceVersion property: The default version to use for requests to the Blob service if an
+     * incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent
+     * versions.
+     *
      * @return the defaultServiceVersion value.
      */
     public String getDefaultServiceVersion() {
@@ -164,11 +157,10 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the defaultServiceVersion property: The default version to use for
-     * requests to the Blob service if an incoming request's version is not
-     * specified. Possible values include version 2008-10-27 and all more
-     * recent versions.
-     * 
+     * Set the defaultServiceVersion property: The default version to use for requests to the Blob service if an
+     * incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent
+     * versions.
+     *
      * @param defaultServiceVersion the defaultServiceVersion value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -178,9 +170,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the deleteRetentionPolicy property: The Delete Retention Policy for
-     * the service.
-     * 
+     * Get the deleteRetentionPolicy property: The Delete Retention Policy for the service.
+     *
      * @return the deleteRetentionPolicy value.
      */
     public RetentionPolicy getDeleteRetentionPolicy() {
@@ -188,9 +179,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the deleteRetentionPolicy property: The Delete Retention Policy for
-     * the service.
-     * 
+     * Set the deleteRetentionPolicy property: The Delete Retention Policy for the service.
+     *
      * @param deleteRetentionPolicy the deleteRetentionPolicy value to set.
      * @return the StorageServiceProperties object itself.
      */
@@ -201,7 +191,7 @@ public final class StorageServiceProperties {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

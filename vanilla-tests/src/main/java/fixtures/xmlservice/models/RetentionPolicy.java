@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/**
- * The RetentionPolicy model.
- */
+/** The RetentionPolicy model. */
 @JacksonXmlRootElement(localName = "RetentionPolicy")
 @Fluent
 public final class RetentionPolicy {
@@ -24,9 +22,8 @@ public final class RetentionPolicy {
     private Integer days;
 
     /**
-     * Get the enabled property: Indicates whether a retention policy is
-     * enabled for the storage service.
-     * 
+     * Get the enabled property: Indicates whether a retention policy is enabled for the storage service.
+     *
      * @return the enabled value.
      */
     public boolean isEnabled() {
@@ -34,9 +31,8 @@ public final class RetentionPolicy {
     }
 
     /**
-     * Set the enabled property: Indicates whether a retention policy is
-     * enabled for the storage service.
-     * 
+     * Set the enabled property: Indicates whether a retention policy is enabled for the storage service.
+     *
      * @param enabled the enabled value to set.
      * @return the RetentionPolicy object itself.
      */
@@ -46,10 +42,9 @@ public final class RetentionPolicy {
     }
 
     /**
-     * Get the days property: Indicates the number of days that metrics or
-     * logging or soft-deleted data should be retained. All data older than
-     * this value will be deleted.
-     * 
+     * Get the days property: Indicates the number of days that metrics or logging or soft-deleted data should be
+     * retained. All data older than this value will be deleted.
+     *
      * @return the days value.
      */
     public Integer getDays() {
@@ -57,10 +52,9 @@ public final class RetentionPolicy {
     }
 
     /**
-     * Set the days property: Indicates the number of days that metrics or
-     * logging or soft-deleted data should be retained. All data older than
-     * this value will be deleted.
-     * 
+     * Set the days property: Indicates the number of days that metrics or logging or soft-deleted data should be
+     * retained. All data older than this value will be deleted.
+     *
      * @param days the days value to set.
      * @return the RetentionPolicy object itself.
      */
@@ -71,9 +65,8 @@ public final class RetentionPolicy {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

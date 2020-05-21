@@ -199,10 +199,14 @@ public class CodeNamer {
             return name;
         }
         name = toPascalCase(name);
+        return getEscapedReservedName(name, "Operation");
+    }
+
+    public static String getPlural(String name) {
         if (!name.endsWith("s") && !name.endsWith("S")) {
             name += "s";
         }
-        return getEscapedReservedName(name, "Operations");
+        return name;
     }
 
     public static String getMethodName(String name) {

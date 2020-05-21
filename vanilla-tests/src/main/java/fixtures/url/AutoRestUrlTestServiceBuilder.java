@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestUrlTestService type.
- */
+/** A builder for creating a new instance of the AutoRestUrlTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestUrlTestService.class})
 public final class AutoRestUrlTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     /**
      * Sets A string value 'globalItemStringPath' that appears in the path.
-     * 
+     *
      * @param globalStringPath the globalStringPath value.
      * @return the AutoRestUrlTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     /**
      * Sets should contain value null.
-     * 
+     *
      * @param globalStringQuery the globalStringQuery value.
      * @return the AutoRestUrlTestServiceBuilder.
      */
@@ -51,7 +49,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestUrlTestServiceBuilder.
      */
@@ -67,7 +65,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestUrlTestServiceBuilder.
      */
@@ -78,7 +76,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestUrlTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestUrlTestService.
      */
     public AutoRestUrlTestService buildClient() {
@@ -86,7 +84,10 @@ public final class AutoRestUrlTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
         AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline);
         client.setGlobalStringPath(this.globalStringPath);
