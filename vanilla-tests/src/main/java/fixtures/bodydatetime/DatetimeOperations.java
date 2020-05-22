@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodydatetime.models.ErrorException;
@@ -49,25 +48,25 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/datetime/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/datetime/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getOverflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getOverflow(@HostParam("$host") String host, Context context);
 
         @Get("/datetime/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUnderflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUnderflow(@HostParam("$host") String host, Context context);
 
         @Put("/datetime/max/utc")
         @ExpectedResponses({200})
@@ -89,21 +88,19 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host, Context context);
 
         @Get("/datetime/max/utc/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host, Context context);
 
         @Get("/datetime/max/utc7ms/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime7Digits(
+        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7Digits(
                 @HostParam("$host") String host, Context context);
 
         @Put("/datetime/max/localpositiveoffset")
@@ -118,14 +115,14 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime(
+        Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Get("/datetime/max/localpositiveoffset/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime(
+        Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Put("/datetime/max/localnegativeoffset")
@@ -140,14 +137,14 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime(
+        Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Get("/datetime/max/localnegativeoffset/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime(
+        Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Put("/datetime/min/utc")
@@ -162,7 +159,7 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host, Context context);
 
         @Put("/datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
@@ -176,7 +173,7 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTime(
+        Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Put("/datetime/min/localnegativeoffset")
@@ -191,15 +188,14 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTime(
+        Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTime(
                 @HostParam("$host") String host, Context context);
 
         @Get("/datetime/min/localnooffset")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getLocalNoOffsetMinDateTime(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTime(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -210,7 +206,7 @@ public final class DatetimeOperations {
      * @return null datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getNullWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -229,7 +225,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -258,7 +254,7 @@ public final class DatetimeOperations {
      * @return invalid datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getInvalidWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -277,7 +273,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -306,7 +302,7 @@ public final class DatetimeOperations {
      * @return overflow datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getOverflowWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getOverflowWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -325,7 +321,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -354,7 +350,7 @@ public final class DatetimeOperations {
      * @return underflow datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUnderflowWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUnderflowWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -373,7 +369,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -499,7 +495,7 @@ public final class DatetimeOperations {
      * @return max datetime value 9999-12-31t23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -518,7 +514,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -547,7 +543,7 @@ public final class DatetimeOperations {
      * @return max datetime value 9999-12-31T23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -566,7 +562,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -595,7 +591,7 @@ public final class DatetimeOperations {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime7DigitsWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7DigitsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -615,7 +611,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsAsync() {
         return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -694,7 +690,7 @@ public final class DatetimeOperations {
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -714,7 +710,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -743,7 +739,7 @@ public final class DatetimeOperations {
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -763,7 +759,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -842,7 +838,7 @@ public final class DatetimeOperations {
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -862,7 +858,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -891,7 +887,7 @@ public final class DatetimeOperations {
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -911,7 +907,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -988,7 +984,7 @@ public final class DatetimeOperations {
      * @return min datetime value 0001-01-01T00:00:00Z.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1007,7 +1003,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1086,7 +1082,7 @@ public final class DatetimeOperations {
      * @return min datetime value 0001-01-01T00:00:00+14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1106,7 +1102,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1185,7 +1181,7 @@ public final class DatetimeOperations {
      * @return min datetime value 0001-01-01T00:00:00-14:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1205,7 +1201,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1234,7 +1230,7 @@ public final class DatetimeOperations {
      * @return min datetime value 0001-01-01T00:00:00.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1253,7 +1249,7 @@ public final class DatetimeOperations {
     public Mono<OffsetDateTime> getLocalNoOffsetMinDateTimeAsync() {
         return getLocalNoOffsetMinDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

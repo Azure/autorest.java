@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodyinteger.models.ErrorException;
@@ -48,32 +47,32 @@ public final class Ints {
         @Get("/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Integer>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/int/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Integer>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/int/overflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Integer>> getOverflowInt32(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getOverflowInt32(@HostParam("$host") String host, Context context);
 
         @Get("/int/underflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Integer>> getUnderflowInt32(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getUnderflowInt32(@HostParam("$host") String host, Context context);
 
         @Get("/int/overflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Long>> getOverflowInt64(@HostParam("$host") String host, Context context);
+        Mono<Response<Long>> getOverflowInt64(@HostParam("$host") String host, Context context);
 
         @Get("/int/underflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Long>> getUnderflowInt64(@HostParam("$host") String host, Context context);
+        Mono<Response<Long>> getUnderflowInt64(@HostParam("$host") String host, Context context);
 
         @Put("/int/max/32")
         @ExpectedResponses({200})
@@ -103,7 +102,7 @@ public final class Ints {
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUnixTime(@HostParam("$host") String host, Context context);
 
         @Put("/int/unixtime")
         @ExpectedResponses({200})
@@ -115,13 +114,13 @@ public final class Ints {
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getInvalidUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getInvalidUnixTime(@HostParam("$host") String host, Context context);
 
         @Get("/int/nullunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<OffsetDateTime>> getNullUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getNullUnixTime(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -132,7 +131,7 @@ public final class Ints {
      * @return null Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Integer>> getNullWithResponseAsync() {
+    public Mono<Response<Integer>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -151,7 +150,7 @@ public final class Ints {
     public Mono<Integer> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Integer> res) -> {
+                        (Response<Integer> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -185,7 +184,7 @@ public final class Ints {
      * @return invalid Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Integer>> getInvalidWithResponseAsync() {
+    public Mono<Response<Integer>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -204,7 +203,7 @@ public final class Ints {
     public Mono<Integer> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Integer> res) -> {
+                        (Response<Integer> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -238,7 +237,7 @@ public final class Ints {
      * @return overflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Integer>> getOverflowInt32WithResponseAsync() {
+    public Mono<Response<Integer>> getOverflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -257,7 +256,7 @@ public final class Ints {
     public Mono<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Integer> res) -> {
+                        (Response<Integer> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -291,7 +290,7 @@ public final class Ints {
      * @return underflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Integer>> getUnderflowInt32WithResponseAsync() {
+    public Mono<Response<Integer>> getUnderflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -310,7 +309,7 @@ public final class Ints {
     public Mono<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Integer> res) -> {
+                        (Response<Integer> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -344,7 +343,7 @@ public final class Ints {
      * @return overflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Long>> getOverflowInt64WithResponseAsync() {
+    public Mono<Response<Long>> getOverflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -363,7 +362,7 @@ public final class Ints {
     public Mono<Long> getOverflowInt64Async() {
         return getOverflowInt64WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Long> res) -> {
+                        (Response<Long> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -397,7 +396,7 @@ public final class Ints {
      * @return underflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Long>> getUnderflowInt64WithResponseAsync() {
+    public Mono<Response<Long>> getUnderflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -416,7 +415,7 @@ public final class Ints {
     public Mono<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Long> res) -> {
+                        (Response<Long> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -630,7 +629,7 @@ public final class Ints {
      * @return datetime encoded as Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getUnixTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -649,7 +648,7 @@ public final class Ints {
     public Mono<OffsetDateTime> getUnixTimeAsync() {
         return getUnixTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -728,7 +727,7 @@ public final class Ints {
      * @return invalid Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -747,7 +746,7 @@ public final class Ints {
     public Mono<OffsetDateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -776,7 +775,7 @@ public final class Ints {
      * @return null Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
+    public Mono<Response<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -795,7 +794,7 @@ public final class Ints {
     public Mono<OffsetDateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<OffsetDateTime> res) -> {
+                        (Response<OffsetDateTime> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

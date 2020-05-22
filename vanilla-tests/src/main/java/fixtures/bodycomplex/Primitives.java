@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.BooleanWrapper;
@@ -57,7 +56,7 @@ public final class Primitives {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<IntWrapper>> getInt(@HostParam("$host") String host, Context context);
+        Mono<Response<IntWrapper>> getInt(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
@@ -70,7 +69,7 @@ public final class Primitives {
         @Get("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LongWrapper>> getLong(@HostParam("$host") String host, Context context);
+        Mono<Response<LongWrapper>> getLong(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
@@ -83,7 +82,7 @@ public final class Primitives {
         @Get("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<FloatWrapper>> getFloat(@HostParam("$host") String host, Context context);
+        Mono<Response<FloatWrapper>> getFloat(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
@@ -96,7 +95,7 @@ public final class Primitives {
         @Get("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DoubleWrapper>> getDouble(@HostParam("$host") String host, Context context);
+        Mono<Response<DoubleWrapper>> getDouble(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
@@ -109,7 +108,7 @@ public final class Primitives {
         @Get("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BooleanWrapper>> getBool(@HostParam("$host") String host, Context context);
+        Mono<Response<BooleanWrapper>> getBool(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
@@ -122,7 +121,7 @@ public final class Primitives {
         @Get("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<StringWrapper>> getString(@HostParam("$host") String host, Context context);
+        Mono<Response<StringWrapper>> getString(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
@@ -135,7 +134,7 @@ public final class Primitives {
         @Get("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DateWrapper>> getDate(@HostParam("$host") String host, Context context);
+        Mono<Response<DateWrapper>> getDate(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
@@ -148,7 +147,7 @@ public final class Primitives {
         @Get("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DatetimeWrapper>> getDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<DatetimeWrapper>> getDateTime(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
@@ -161,8 +160,7 @@ public final class Primitives {
         @Get("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
@@ -175,7 +173,7 @@ public final class Primitives {
         @Get("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DurationWrapper>> getDuration(@HostParam("$host") String host, Context context);
+        Mono<Response<DurationWrapper>> getDuration(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
@@ -188,7 +186,7 @@ public final class Primitives {
         @Get("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ByteWrapper>> getByte(@HostParam("$host") String host, Context context);
+        Mono<Response<ByteWrapper>> getByte(@HostParam("$host") String host, Context context);
 
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
@@ -207,7 +205,7 @@ public final class Primitives {
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<IntWrapper>> getIntWithResponseAsync() {
+    public Mono<Response<IntWrapper>> getIntWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -226,7 +224,7 @@ public final class Primitives {
     public Mono<IntWrapper> getIntAsync() {
         return getIntWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<IntWrapper> res) -> {
+                        (Response<IntWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -305,7 +303,7 @@ public final class Primitives {
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LongWrapper>> getLongWithResponseAsync() {
+    public Mono<Response<LongWrapper>> getLongWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -324,7 +322,7 @@ public final class Primitives {
     public Mono<LongWrapper> getLongAsync() {
         return getLongWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LongWrapper> res) -> {
+                        (Response<LongWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -403,7 +401,7 @@ public final class Primitives {
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<FloatWrapper>> getFloatWithResponseAsync() {
+    public Mono<Response<FloatWrapper>> getFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -422,7 +420,7 @@ public final class Primitives {
     public Mono<FloatWrapper> getFloatAsync() {
         return getFloatWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<FloatWrapper> res) -> {
+                        (Response<FloatWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -501,7 +499,7 @@ public final class Primitives {
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DoubleWrapper>> getDoubleWithResponseAsync() {
+    public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -520,7 +518,7 @@ public final class Primitives {
     public Mono<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DoubleWrapper> res) -> {
+                        (Response<DoubleWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -599,7 +597,7 @@ public final class Primitives {
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BooleanWrapper>> getBoolWithResponseAsync() {
+    public Mono<Response<BooleanWrapper>> getBoolWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -618,7 +616,7 @@ public final class Primitives {
     public Mono<BooleanWrapper> getBoolAsync() {
         return getBoolWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BooleanWrapper> res) -> {
+                        (Response<BooleanWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -697,7 +695,7 @@ public final class Primitives {
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<StringWrapper>> getStringWithResponseAsync() {
+    public Mono<Response<StringWrapper>> getStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -716,7 +714,7 @@ public final class Primitives {
     public Mono<StringWrapper> getStringAsync() {
         return getStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<StringWrapper> res) -> {
+                        (Response<StringWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -795,7 +793,7 @@ public final class Primitives {
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DateWrapper>> getDateWithResponseAsync() {
+    public Mono<Response<DateWrapper>> getDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -814,7 +812,7 @@ public final class Primitives {
     public Mono<DateWrapper> getDateAsync() {
         return getDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DateWrapper> res) -> {
+                        (Response<DateWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -893,7 +891,7 @@ public final class Primitives {
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DatetimeWrapper>> getDateTimeWithResponseAsync() {
+    public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -912,7 +910,7 @@ public final class Primitives {
     public Mono<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DatetimeWrapper> res) -> {
+                        (Response<DatetimeWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -991,7 +989,7 @@ public final class Primitives {
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
+    public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1010,7 +1008,7 @@ public final class Primitives {
     public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Datetimerfc1123Wrapper> res) -> {
+                        (Response<Datetimerfc1123Wrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1089,7 +1087,7 @@ public final class Primitives {
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DurationWrapper>> getDurationWithResponseAsync() {
+    public Mono<Response<DurationWrapper>> getDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1108,7 +1106,7 @@ public final class Primitives {
     public Mono<DurationWrapper> getDurationAsync() {
         return getDurationWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DurationWrapper> res) -> {
+                        (Response<DurationWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1187,7 +1185,7 @@ public final class Primitives {
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ByteWrapper>> getByteWithResponseAsync() {
+    public Mono<Response<ByteWrapper>> getByteWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1206,7 +1204,7 @@ public final class Primitives {
     public Mono<ByteWrapper> getByteAsync() {
         return getByteWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<ByteWrapper> res) -> {
+                        (Response<ByteWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

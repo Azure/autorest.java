@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodydate.models.ErrorException;
@@ -47,22 +46,22 @@ public final class DateOperations {
         @Get("/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getInvalidDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getInvalidDate(@HostParam("$host") String host, Context context);
 
         @Get("/date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getOverflowDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getOverflowDate(@HostParam("$host") String host, Context context);
 
         @Get("/date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getUnderflowDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getUnderflowDate(@HostParam("$host") String host, Context context);
 
         @Put("/date/max")
         @ExpectedResponses({200})
@@ -73,7 +72,7 @@ public final class DateOperations {
         @Get("/date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getMaxDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getMaxDate(@HostParam("$host") String host, Context context);
 
         @Put("/date/min")
         @ExpectedResponses({200})
@@ -84,7 +83,7 @@ public final class DateOperations {
         @Get("/date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LocalDate>> getMinDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getMinDate(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -95,7 +94,7 @@ public final class DateOperations {
      * @return null date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getNullWithResponseAsync() {
+    public Mono<Response<LocalDate>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -114,7 +113,7 @@ public final class DateOperations {
     public Mono<LocalDate> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -143,7 +142,7 @@ public final class DateOperations {
      * @return invalid date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getInvalidDateWithResponseAsync() {
+    public Mono<Response<LocalDate>> getInvalidDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -162,7 +161,7 @@ public final class DateOperations {
     public Mono<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -191,7 +190,7 @@ public final class DateOperations {
      * @return overflow date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getOverflowDateWithResponseAsync() {
+    public Mono<Response<LocalDate>> getOverflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -210,7 +209,7 @@ public final class DateOperations {
     public Mono<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -239,7 +238,7 @@ public final class DateOperations {
      * @return underflow date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getUnderflowDateWithResponseAsync() {
+    public Mono<Response<LocalDate>> getUnderflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -258,7 +257,7 @@ public final class DateOperations {
     public Mono<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -335,7 +334,7 @@ public final class DateOperations {
      * @return max date value 9999-12-31.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getMaxDateWithResponseAsync() {
+    public Mono<Response<LocalDate>> getMaxDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -354,7 +353,7 @@ public final class DateOperations {
     public Mono<LocalDate> getMaxDateAsync() {
         return getMaxDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -431,7 +430,7 @@ public final class DateOperations {
      * @return min date value 0000-01-01.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LocalDate>> getMinDateWithResponseAsync() {
+    public Mono<Response<LocalDate>> getMinDateWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -450,7 +449,7 @@ public final class DateOperations {
     public Mono<LocalDate> getMinDateAsync() {
         return getMinDateWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<LocalDate> res) -> {
+                        (Response<LocalDate> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

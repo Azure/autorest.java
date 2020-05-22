@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.Basic;
@@ -48,7 +47,7 @@ public final class Basics {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
@@ -62,22 +61,22 @@ public final class Basics {
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getNotProvided(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -88,7 +87,7 @@ public final class Basics {
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getValidWithResponseAsync() {
+    public Mono<Response<Basic>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -107,7 +106,7 @@ public final class Basics {
     public Mono<Basic> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Basic> res) -> {
+                        (Response<Basic> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -187,7 +186,7 @@ public final class Basics {
      * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync() {
+    public Mono<Response<Basic>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -206,7 +205,7 @@ public final class Basics {
     public Mono<Basic> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Basic> res) -> {
+                        (Response<Basic> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -235,7 +234,7 @@ public final class Basics {
      * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync() {
+    public Mono<Response<Basic>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -254,7 +253,7 @@ public final class Basics {
     public Mono<Basic> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Basic> res) -> {
+                        (Response<Basic> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -283,7 +282,7 @@ public final class Basics {
      * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getNullWithResponseAsync() {
+    public Mono<Response<Basic>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -302,7 +301,7 @@ public final class Basics {
     public Mono<Basic> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Basic> res) -> {
+                        (Response<Basic> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -331,7 +330,7 @@ public final class Basics {
      * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync() {
+    public Mono<Response<Basic>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -350,7 +349,7 @@ public final class Basics {
     public Mono<Basic> getNotProvidedAsync() {
         return getNotProvidedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Basic> res) -> {
+                        (Response<Basic> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.ErrorException;
@@ -47,7 +46,7 @@ public final class Polymorphicrecursives {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Fish>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
@@ -64,7 +63,7 @@ public final class Polymorphicrecursives {
      * @return complex types that are polymorphic and have recursive references.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
+    public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -83,7 +82,7 @@ public final class Polymorphicrecursives {
     public Mono<Fish> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Fish> res) -> {
+                        (Response<Fish> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
@@ -59,17 +58,17 @@ public final class Arrays {
         @Get("/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/array/empty")
         @ExpectedResponses({200})
@@ -82,7 +81,7 @@ public final class Arrays {
         @Get("/array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/boolean/tfft")
         @ExpectedResponses({200})
@@ -95,17 +94,17 @@ public final class Arrays {
         @Get("/array/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
@@ -118,17 +117,17 @@ public final class Arrays {
         @Get("/array/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Long>>> getLongValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
@@ -139,17 +138,17 @@ public final class Arrays {
         @Get("/array/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Float>>> getFloatValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -160,17 +159,17 @@ public final class Arrays {
         @Get("/array/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -183,17 +182,17 @@ public final class Arrays {
         @Get("/array/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<String>>> getStringValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -206,7 +205,7 @@ public final class Arrays {
         @Get("/array/prim/enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<FooEnum>>> getEnumValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<FooEnum>>> getEnumValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -219,7 +218,7 @@ public final class Arrays {
         @Get("/array/prim/string-enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Enum0>>> getStringEnumValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Enum0>>> getStringEnumValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/string-enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -230,17 +229,17 @@ public final class Arrays {
         @Get("/array/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<String>>> getStringWithNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringWithNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<UUID>>> getUuidValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<UUID>>> getUuidValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/uuid/valid")
         @ExpectedResponses({200})
@@ -251,12 +250,12 @@ public final class Arrays {
         @Get("/array/prim/uuid/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<UUID>>> getUuidInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<List<UUID>>> getUuidInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/date/valid")
         @ExpectedResponses({200})
@@ -269,18 +268,18 @@ public final class Arrays {
         @Get("/array/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/date-time/valid")
         @ExpectedResponses({200})
@@ -294,22 +293,19 @@ public final class Arrays {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeInvalidNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeInvalidChars(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeRfc1123Valid(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
@@ -322,7 +318,7 @@ public final class Arrays {
         @Get("/array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/duration/valid")
         @ExpectedResponses({200})
@@ -335,7 +331,7 @@ public final class Arrays {
         @Get("/array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/prim/byte/valid")
         @ExpectedResponses({200})
@@ -348,38 +344,38 @@ public final class Arrays {
         @Get("/array/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
 
         @Get("/array/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Product>>> getComplexNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Product>>> getComplexEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/array/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Product>>> getComplexItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Product>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Product>>> getComplexValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/complex/valid")
         @ExpectedResponses({200})
@@ -392,27 +388,27 @@ public final class Arrays {
         @Get("/array/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/array/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/array/valid")
         @ExpectedResponses({200})
@@ -425,32 +421,29 @@ public final class Arrays {
         @Get("/array/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryNull(@HostParam("$host") String host, Context context);
 
         @Get("/array/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryEmpty(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/array/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryItemNull(
+        Mono<Response<List<Map<String, String>>>> getDictionaryItemNull(
                 @HostParam("$host") String host, Context context);
 
         @Get("/array/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryItemEmpty(
+        Mono<Response<List<Map<String, String>>>> getDictionaryItemEmpty(
                 @HostParam("$host") String host, Context context);
 
         @Get("/array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryValid(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryValid(@HostParam("$host") String host, Context context);
 
         @Put("/array/dictionary/valid")
         @ExpectedResponses({200})
@@ -469,7 +462,7 @@ public final class Arrays {
      * @return null array value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getNullWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -488,7 +481,7 @@ public final class Arrays {
     public Mono<List<Integer>> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -517,7 +510,7 @@ public final class Arrays {
      * @return invalid array [1, 2, 3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getInvalidWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -536,7 +529,7 @@ public final class Arrays {
     public Mono<List<Integer>> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -565,7 +558,7 @@ public final class Arrays {
      * @return empty array value [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getEmptyWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -584,7 +577,7 @@ public final class Arrays {
     public Mono<List<Integer>> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -661,7 +654,7 @@ public final class Arrays {
      * @return boolean array value [true, false, false, true].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Boolean>>> getBooleanTfftWithResponseAsync() {
+    public Mono<Response<List<Boolean>>> getBooleanTfftWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -680,7 +673,7 @@ public final class Arrays {
     public Mono<List<Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Boolean>> res) -> {
+                        (Response<List<Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -757,7 +750,7 @@ public final class Arrays {
      * @return boolean array value [true, null, false].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Boolean>>> getBooleanInvalidNullWithResponseAsync() {
+    public Mono<Response<List<Boolean>>> getBooleanInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -776,7 +769,7 @@ public final class Arrays {
     public Mono<List<Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Boolean>> res) -> {
+                        (Response<List<Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -805,7 +798,7 @@ public final class Arrays {
      * @return boolean array value [true, 'boolean', false].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Boolean>>> getBooleanInvalidStringWithResponseAsync() {
+    public Mono<Response<List<Boolean>>> getBooleanInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -824,7 +817,7 @@ public final class Arrays {
     public Mono<List<Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Boolean>> res) -> {
+                        (Response<List<Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -853,7 +846,7 @@ public final class Arrays {
      * @return integer array value [1, -1, 3, 300].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getIntegerValidWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getIntegerValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -872,7 +865,7 @@ public final class Arrays {
     public Mono<List<Integer>> getIntegerValidAsync() {
         return getIntegerValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -949,7 +942,7 @@ public final class Arrays {
      * @return integer array value [1, null, 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getIntInvalidNullWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getIntInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -968,7 +961,7 @@ public final class Arrays {
     public Mono<List<Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -997,7 +990,7 @@ public final class Arrays {
      * @return integer array value [1, 'integer', 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Integer>>> getIntInvalidStringWithResponseAsync() {
+    public Mono<Response<List<Integer>>> getIntInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1016,7 +1009,7 @@ public final class Arrays {
     public Mono<List<Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Integer>> res) -> {
+                        (Response<List<Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1045,7 +1038,7 @@ public final class Arrays {
      * @return integer array value [1, -1, 3, 300].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Long>>> getLongValidWithResponseAsync() {
+    public Mono<Response<List<Long>>> getLongValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1064,7 +1057,7 @@ public final class Arrays {
     public Mono<List<Long>> getLongValidAsync() {
         return getLongValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Long>> res) -> {
+                        (Response<List<Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1141,7 +1134,7 @@ public final class Arrays {
      * @return long array value [1, null, 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Long>>> getLongInvalidNullWithResponseAsync() {
+    public Mono<Response<List<Long>>> getLongInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1160,7 +1153,7 @@ public final class Arrays {
     public Mono<List<Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Long>> res) -> {
+                        (Response<List<Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1189,7 +1182,7 @@ public final class Arrays {
      * @return long array value [1, 'integer', 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Long>>> getLongInvalidStringWithResponseAsync() {
+    public Mono<Response<List<Long>>> getLongInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1208,7 +1201,7 @@ public final class Arrays {
     public Mono<List<Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Long>> res) -> {
+                        (Response<List<Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1237,7 +1230,7 @@ public final class Arrays {
      * @return float array value [0, -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Float>>> getFloatValidWithResponseAsync() {
+    public Mono<Response<List<Float>>> getFloatValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1256,7 +1249,7 @@ public final class Arrays {
     public Mono<List<Float>> getFloatValidAsync() {
         return getFloatValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Float>> res) -> {
+                        (Response<List<Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1333,7 +1326,7 @@ public final class Arrays {
      * @return float array value [0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Float>>> getFloatInvalidNullWithResponseAsync() {
+    public Mono<Response<List<Float>>> getFloatInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1352,7 +1345,7 @@ public final class Arrays {
     public Mono<List<Float>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Float>> res) -> {
+                        (Response<List<Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1381,7 +1374,7 @@ public final class Arrays {
      * @return boolean array value [1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Float>>> getFloatInvalidStringWithResponseAsync() {
+    public Mono<Response<List<Float>>> getFloatInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1400,7 +1393,7 @@ public final class Arrays {
     public Mono<List<Float>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Float>> res) -> {
+                        (Response<List<Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1429,7 +1422,7 @@ public final class Arrays {
      * @return float array value [0, -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Double>>> getDoubleValidWithResponseAsync() {
+    public Mono<Response<List<Double>>> getDoubleValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1448,7 +1441,7 @@ public final class Arrays {
     public Mono<List<Double>> getDoubleValidAsync() {
         return getDoubleValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Double>> res) -> {
+                        (Response<List<Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1525,7 +1518,7 @@ public final class Arrays {
      * @return float array value [0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Double>>> getDoubleInvalidNullWithResponseAsync() {
+    public Mono<Response<List<Double>>> getDoubleInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1544,7 +1537,7 @@ public final class Arrays {
     public Mono<List<Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Double>> res) -> {
+                        (Response<List<Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1573,7 +1566,7 @@ public final class Arrays {
      * @return boolean array value [1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Double>>> getDoubleInvalidStringWithResponseAsync() {
+    public Mono<Response<List<Double>>> getDoubleInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1592,7 +1585,7 @@ public final class Arrays {
     public Mono<List<Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Double>> res) -> {
+                        (Response<List<Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1621,7 +1614,7 @@ public final class Arrays {
      * @return string array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<String>>> getStringValidWithResponseAsync() {
+    public Mono<Response<List<String>>> getStringValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1640,7 +1633,7 @@ public final class Arrays {
     public Mono<List<String>> getStringValidAsync() {
         return getStringValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<String>> res) -> {
+                        (Response<List<String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1717,7 +1710,7 @@ public final class Arrays {
      * @return enum array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<FooEnum>>> getEnumValidWithResponseAsync() {
+    public Mono<Response<List<FooEnum>>> getEnumValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1736,7 +1729,7 @@ public final class Arrays {
     public Mono<List<FooEnum>> getEnumValidAsync() {
         return getEnumValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<FooEnum>> res) -> {
+                        (Response<List<FooEnum>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1813,7 +1806,7 @@ public final class Arrays {
      * @return enum array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Enum0>>> getStringEnumValidWithResponseAsync() {
+    public Mono<Response<List<Enum0>>> getStringEnumValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1832,7 +1825,7 @@ public final class Arrays {
     public Mono<List<Enum0>> getStringEnumValidAsync() {
         return getStringEnumValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Enum0>> res) -> {
+                        (Response<List<Enum0>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1909,7 +1902,7 @@ public final class Arrays {
      * @return string array value ['foo', null, 'foo2'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<String>>> getStringWithNullWithResponseAsync() {
+    public Mono<Response<List<String>>> getStringWithNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1928,7 +1921,7 @@ public final class Arrays {
     public Mono<List<String>> getStringWithNullAsync() {
         return getStringWithNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<String>> res) -> {
+                        (Response<List<String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1957,7 +1950,7 @@ public final class Arrays {
      * @return string array value ['foo', 123, 'foo2'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<String>>> getStringWithInvalidWithResponseAsync() {
+    public Mono<Response<List<String>>> getStringWithInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1976,7 +1969,7 @@ public final class Arrays {
     public Mono<List<String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<String>> res) -> {
+                        (Response<List<String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2007,7 +2000,7 @@ public final class Arrays {
      *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<UUID>>> getUuidValidWithResponseAsync() {
+    public Mono<Response<List<UUID>>> getUuidValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2028,7 +2021,7 @@ public final class Arrays {
     public Mono<List<UUID>> getUuidValidAsync() {
         return getUuidValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<UUID>> res) -> {
+                        (Response<List<UUID>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2113,7 +2106,7 @@ public final class Arrays {
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<UUID>>> getUuidInvalidCharsWithResponseAsync() {
+    public Mono<Response<List<UUID>>> getUuidInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2132,7 +2125,7 @@ public final class Arrays {
     public Mono<List<UUID>> getUuidInvalidCharsAsync() {
         return getUuidInvalidCharsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<UUID>> res) -> {
+                        (Response<List<UUID>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2161,7 +2154,7 @@ public final class Arrays {
      * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<LocalDate>>> getDateValidWithResponseAsync() {
+    public Mono<Response<List<LocalDate>>> getDateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2180,7 +2173,7 @@ public final class Arrays {
     public Mono<List<LocalDate>> getDateValidAsync() {
         return getDateValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<LocalDate>> res) -> {
+                        (Response<List<LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2257,7 +2250,7 @@ public final class Arrays {
      * @return date array value ['2012-01-01', null, '1776-07-04'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<LocalDate>>> getDateInvalidNullWithResponseAsync() {
+    public Mono<Response<List<LocalDate>>> getDateInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2276,7 +2269,7 @@ public final class Arrays {
     public Mono<List<LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<LocalDate>> res) -> {
+                        (Response<List<LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2305,7 +2298,7 @@ public final class Arrays {
      * @return date array value ['2011-03-22', 'date'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<LocalDate>>> getDateInvalidCharsWithResponseAsync() {
+    public Mono<Response<List<LocalDate>>> getDateInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2324,7 +2317,7 @@ public final class Arrays {
     public Mono<List<LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<LocalDate>> res) -> {
+                        (Response<List<LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2353,7 +2346,7 @@ public final class Arrays {
      * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2372,7 +2365,7 @@ public final class Arrays {
     public Mono<List<OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<OffsetDateTime>> res) -> {
+                        (Response<List<OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2452,7 +2445,7 @@ public final class Arrays {
      * @return date array value ['2000-12-01t00:00:01z', null].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2471,7 +2464,7 @@ public final class Arrays {
     public Mono<List<OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<OffsetDateTime>> res) -> {
+                        (Response<List<OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2500,7 +2493,7 @@ public final class Arrays {
      * @return date array value ['2000-12-01t00:00:01z', 'date-time'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2519,7 +2512,7 @@ public final class Arrays {
     public Mono<List<OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<OffsetDateTime>> res) -> {
+                        (Response<List<OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2550,7 +2543,7 @@ public final class Arrays {
      *     1492 10:15:01 GMT'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2571,7 +2564,7 @@ public final class Arrays {
     public Mono<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<OffsetDateTime>> res) -> {
+                        (Response<List<OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2659,7 +2652,7 @@ public final class Arrays {
      * @return duration array value ['P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Duration>>> getDurationValidWithResponseAsync() {
+    public Mono<Response<List<Duration>>> getDurationValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2678,7 +2671,7 @@ public final class Arrays {
     public Mono<List<Duration>> getDurationValidAsync() {
         return getDurationValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Duration>> res) -> {
+                        (Response<List<Duration>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2755,7 +2748,7 @@ public final class Arrays {
      * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<byte[]>>> getByteValidWithResponseAsync() {
+    public Mono<Response<List<byte[]>>> getByteValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2774,7 +2767,7 @@ public final class Arrays {
     public Mono<List<byte[]>> getByteValidAsync() {
         return getByteValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<byte[]>> res) -> {
+                        (Response<List<byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2854,7 +2847,7 @@ public final class Arrays {
      * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<byte[]>>> getByteInvalidNullWithResponseAsync() {
+    public Mono<Response<List<byte[]>>> getByteInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2873,7 +2866,7 @@ public final class Arrays {
     public Mono<List<byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<byte[]>> res) -> {
+                        (Response<List<byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2904,7 +2897,7 @@ public final class Arrays {
      *     base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<byte[]>>> getBase64UrlWithResponseAsync() {
+    public Mono<Response<List<byte[]>>> getBase64UrlWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2925,7 +2918,7 @@ public final class Arrays {
     public Mono<List<byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<byte[]>> res) -> {
+                        (Response<List<byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2956,7 +2949,7 @@ public final class Arrays {
      * @return array of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Product>>> getComplexNullWithResponseAsync() {
+    public Mono<Response<List<Product>>> getComplexNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2975,7 +2968,7 @@ public final class Arrays {
     public Mono<List<Product>> getComplexNullAsync() {
         return getComplexNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Product>> res) -> {
+                        (Response<List<Product>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3004,7 +2997,7 @@ public final class Arrays {
      * @return empty array of complex type [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Product>>> getComplexEmptyWithResponseAsync() {
+    public Mono<Response<List<Product>>> getComplexEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3023,7 +3016,7 @@ public final class Arrays {
     public Mono<List<Product>> getComplexEmptyAsync() {
         return getComplexEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Product>> res) -> {
+                        (Response<List<Product>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3052,7 +3045,7 @@ public final class Arrays {
      * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Product>>> getComplexItemNullWithResponseAsync() {
+    public Mono<Response<List<Product>>> getComplexItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3071,7 +3064,7 @@ public final class Arrays {
     public Mono<List<Product>> getComplexItemNullAsync() {
         return getComplexItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Product>> res) -> {
+                        (Response<List<Product>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3100,7 +3093,7 @@ public final class Arrays {
      * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Product>>> getComplexItemEmptyWithResponseAsync() {
+    public Mono<Response<List<Product>>> getComplexItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3119,7 +3112,7 @@ public final class Arrays {
     public Mono<List<Product>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Product>> res) -> {
+                        (Response<List<Product>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3150,7 +3143,7 @@ public final class Arrays {
      *     'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Product>>> getComplexValidWithResponseAsync() {
+    public Mono<Response<List<Product>>> getComplexValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3171,7 +3164,7 @@ public final class Arrays {
     public Mono<List<Product>> getComplexValidAsync() {
         return getComplexValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Product>> res) -> {
+                        (Response<List<Product>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3258,7 +3251,7 @@ public final class Arrays {
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<List<String>>>> getArrayNullWithResponseAsync() {
+    public Mono<Response<List<List<String>>>> getArrayNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3277,7 +3270,7 @@ public final class Arrays {
     public Mono<List<List<String>>> getArrayNullAsync() {
         return getArrayNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<List<String>>> res) -> {
+                        (Response<List<List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3306,7 +3299,7 @@ public final class Arrays {
      * @return an empty array [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<List<String>>>> getArrayEmptyWithResponseAsync() {
+    public Mono<Response<List<List<String>>>> getArrayEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3325,7 +3318,7 @@ public final class Arrays {
     public Mono<List<List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<List<String>>> res) -> {
+                        (Response<List<List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3354,7 +3347,7 @@ public final class Arrays {
      * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<List<String>>>> getArrayItemNullWithResponseAsync() {
+    public Mono<Response<List<List<String>>>> getArrayItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3373,7 +3366,7 @@ public final class Arrays {
     public Mono<List<List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<List<String>>> res) -> {
+                        (Response<List<List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3402,7 +3395,7 @@ public final class Arrays {
      * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<List<String>>>> getArrayItemEmptyWithResponseAsync() {
+    public Mono<Response<List<List<String>>>> getArrayItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3421,7 +3414,7 @@ public final class Arrays {
     public Mono<List<List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<List<String>>> res) -> {
+                        (Response<List<List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3450,7 +3443,7 @@ public final class Arrays {
      * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<List<String>>>> getArrayValidWithResponseAsync() {
+    public Mono<Response<List<List<String>>>> getArrayValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3469,7 +3462,7 @@ public final class Arrays {
     public Mono<List<List<String>>> getArrayValidAsync() {
         return getArrayValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<List<String>>> res) -> {
+                        (Response<List<List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3546,7 +3539,7 @@ public final class Arrays {
      * @return an array of Dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryNullWithResponseAsync() {
+    public Mono<Response<List<Map<String, String>>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3565,7 +3558,7 @@ public final class Arrays {
     public Mono<List<Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Map<String, String>>> res) -> {
+                        (Response<List<Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3594,7 +3587,7 @@ public final class Arrays {
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryEmptyWithResponseAsync() {
+    public Mono<Response<List<Map<String, String>>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3613,7 +3606,7 @@ public final class Arrays {
     public Mono<List<Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Map<String, String>>> res) -> {
+                        (Response<List<Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3644,7 +3637,7 @@ public final class Arrays {
      *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryItemNullWithResponseAsync() {
+    public Mono<Response<List<Map<String, String>>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3665,7 +3658,7 @@ public final class Arrays {
     public Mono<List<Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Map<String, String>>> res) -> {
+                        (Response<List<Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3698,7 +3691,7 @@ public final class Arrays {
      *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync() {
+    public Mono<Response<List<Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3719,7 +3712,7 @@ public final class Arrays {
     public Mono<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Map<String, String>>> res) -> {
+                        (Response<List<Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3752,7 +3745,7 @@ public final class Arrays {
      *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Map<String, String>>>> getDictionaryValidWithResponseAsync() {
+    public Mono<Response<List<Map<String, String>>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3773,7 +3766,7 @@ public final class Arrays {
     public Mono<List<Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Map<String, String>>> res) -> {
+                        (Response<List<Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

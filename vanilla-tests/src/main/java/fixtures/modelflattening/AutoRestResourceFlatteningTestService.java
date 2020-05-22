@@ -19,7 +19,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.modelflattening.models.ErrorException;
@@ -107,7 +106,7 @@ public final class AutoRestResourceFlatteningTestService {
         @Get("/model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<FlattenedProduct>>> getArray(@HostParam("$host") String host, Context context);
+        Mono<Response<List<FlattenedProduct>>> getArray(@HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
@@ -120,7 +119,7 @@ public final class AutoRestResourceFlatteningTestService {
         @Get("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<List<ProductWrapper>>> getWrappedArray(@HostParam("$host") String host, Context context);
+        Mono<Response<List<ProductWrapper>>> getWrappedArray(@HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/dictionary")
         @ExpectedResponses({200})
@@ -133,8 +132,7 @@ public final class AutoRestResourceFlatteningTestService {
         @Get("/model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionary(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, FlattenedProduct>>> getDictionary(@HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
@@ -147,13 +145,12 @@ public final class AutoRestResourceFlatteningTestService {
         @Get("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ResourceCollection>> getResourceCollection(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<ResourceCollection>> getResourceCollection(@HostParam("$host") String host, Context context);
 
         @Put("/model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> putSimpleProduct(
+        Mono<Response<SimpleProduct>> putSimpleProduct(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
                 Context context);
@@ -161,7 +158,7 @@ public final class AutoRestResourceFlatteningTestService {
         @Post("/model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProduct(
+        Mono<Response<SimpleProduct>> postFlattenedSimpleProduct(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
                 Context context);
@@ -169,7 +166,7 @@ public final class AutoRestResourceFlatteningTestService {
         @Put("/model-flatten/customFlattening/parametergrouping/{name}/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGrouping(
+        Mono<Response<SimpleProduct>> putSimpleProductWithGrouping(
                 @HostParam("$host") String host,
                 @PathParam("name") String name,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
@@ -231,7 +228,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return external Resource as an Array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<FlattenedProduct>>> getArrayWithResponseAsync() {
+    public Mono<Response<List<FlattenedProduct>>> getArrayWithResponseAsync() {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -249,7 +246,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<FlattenedProduct>> res) -> {
+                        (Response<List<FlattenedProduct>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -329,7 +326,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return array of ProductWrapper.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
+    public Mono<Response<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -348,7 +345,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<ProductWrapper>> res) -> {
+                        (Response<List<ProductWrapper>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -432,7 +429,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return external Resource as a Dictionary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
+    public Mono<Response<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -450,7 +447,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, FlattenedProduct>> res) -> {
+                        (Response<Map<String, FlattenedProduct>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -528,7 +525,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return external Resource as a ResourceCollection.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ResourceCollection>> getResourceCollectionWithResponseAsync() {
+    public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync() {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -546,7 +543,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<ResourceCollection> res) -> {
+                        (Response<ResourceCollection> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -577,7 +574,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
+    public Mono<Response<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -600,7 +597,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithResponseAsync(simpleBodyProduct)
                 .flatMap(
-                        (SimpleResponse<SimpleProduct> res) -> {
+                        (Response<SimpleProduct> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -638,7 +635,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(
+    public Mono<Response<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(
             String productId,
             String description,
             String maxProductDisplayName,
@@ -688,7 +685,7 @@ public final class AutoRestResourceFlatteningTestService {
         return postFlattenedSimpleProductWithResponseAsync(
                         productId, description, maxProductDisplayName, genericValue, odataValue)
                 .flatMap(
-                        (SimpleResponse<SimpleProduct> res) -> {
+                        (Response<SimpleProduct> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -732,7 +729,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(
+    public Mono<Response<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(
             FlattenParameterGroup flattenParameterGroup) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
@@ -767,7 +764,7 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup)
                 .flatMap(
-                        (SimpleResponse<SimpleProduct> res) -> {
+                        (Response<SimpleProduct> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

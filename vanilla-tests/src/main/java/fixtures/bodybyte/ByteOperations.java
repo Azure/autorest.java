@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodybyte.models.ErrorException;
@@ -46,17 +45,17 @@ public final class ByteOperations {
         @Get("/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNonAscii(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNonAscii(@HostParam("$host") String host, Context context);
 
         @Put("/byte/nonAscii")
         @ExpectedResponses({200})
@@ -67,7 +66,7 @@ public final class ByteOperations {
         @Get("/byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -78,7 +77,7 @@ public final class ByteOperations {
      * @return null byte value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getNullWithResponseAsync() {
+    public Mono<Response<byte[]>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -97,7 +96,7 @@ public final class ByteOperations {
     public Mono<byte[]> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -126,7 +125,7 @@ public final class ByteOperations {
      * @return empty byte value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getEmptyWithResponseAsync() {
+    public Mono<Response<byte[]>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -145,7 +144,7 @@ public final class ByteOperations {
     public Mono<byte[]> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -174,7 +173,7 @@ public final class ByteOperations {
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getNonAsciiWithResponseAsync() {
+    public Mono<Response<byte[]>> getNonAsciiWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -193,7 +192,7 @@ public final class ByteOperations {
     public Mono<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -270,7 +269,7 @@ public final class ByteOperations {
      * @return invalid byte value ':::SWAGGER::::'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getInvalidWithResponseAsync() {
+    public Mono<Response<byte[]>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -289,7 +288,7 @@ public final class ByteOperations {
     public Mono<byte[]> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

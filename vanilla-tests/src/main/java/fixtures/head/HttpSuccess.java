@@ -9,8 +9,8 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -43,17 +43,17 @@ public final class HttpSuccess {
         @Head("/http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> head200(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> head200(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> head204(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> head204(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> head404(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> head404(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -64,7 +64,7 @@ public final class HttpSuccess {
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> head200WithResponseAsync() {
+    public Mono<Response<Boolean>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -83,7 +83,7 @@ public final class HttpSuccess {
     public Mono<Boolean> head200Async() {
         return head200WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -117,7 +117,7 @@ public final class HttpSuccess {
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> head204WithResponseAsync() {
+    public Mono<Response<Boolean>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -136,7 +136,7 @@ public final class HttpSuccess {
     public Mono<Boolean> head204Async() {
         return head204WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -170,7 +170,7 @@ public final class HttpSuccess {
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> head404WithResponseAsync() {
+    public Mono<Response<Boolean>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -189,7 +189,7 @@ public final class HttpSuccess {
     public Mono<Boolean> head404Async() {
         return head404WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

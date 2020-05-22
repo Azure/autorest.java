@@ -37,7 +37,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        String serviceClientBuilderName = String.format("%1$sBuilder", serviceClient.getInterfaceName());
+        StringBuilder classNameBuilder = new StringBuilder();
+        classNameBuilder.append(serviceClient.getInterfaceName());
+        if (settings.shouldGenerateClientAsImpl()) {
+            classNameBuilder.append("Impl");
+        }
+        classNameBuilder.append("Builder");
+        String serviceClientBuilderName = classNameBuilder.toString();
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {

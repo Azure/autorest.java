@@ -14,8 +14,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.report.models.ErrorException;
@@ -87,13 +87,13 @@ public final class AutoRestReportService {
         @Get("/report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getReport(
+        Mono<Response<Map<String, Integer>>> getReport(
                 @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
 
         @Get("/report/optional")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getOptionalReport(
+        Mono<Response<Map<String, Integer>>> getOptionalReport(
                 @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
     }
 
@@ -108,7 +108,7 @@ public final class AutoRestReportService {
      * @return test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getReportWithResponseAsync(String qualifier) {
+    public Mono<Response<Map<String, Integer>>> getReportWithResponseAsync(String qualifier) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -129,7 +129,7 @@ public final class AutoRestReportService {
     public Mono<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithResponseAsync(qualifier)
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -164,7 +164,7 @@ public final class AutoRestReportService {
      * @return optional test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getOptionalReportWithResponseAsync(String qualifier) {
+    public Mono<Response<Map<String, Integer>>> getOptionalReportWithResponseAsync(String qualifier) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -185,7 +185,7 @@ public final class AutoRestReportService {
     public Mono<Map<String, Integer>> getOptionalReportAsync(String qualifier) {
         return getOptionalReportWithResponseAsync(qualifier)
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

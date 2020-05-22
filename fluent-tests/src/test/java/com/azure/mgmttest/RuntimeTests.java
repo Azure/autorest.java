@@ -17,7 +17,7 @@ import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.mgmttest.appservice.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.GraphErrorException;
-import com.azure.mgmttest.storage.models.StorageManagementClientBuilder;
+import com.azure.mgmttest.storage.models.StorageManagementClientImplBuilder;
 import com.azure.mgmttest.storage.models.StorageManagementClientImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class RuntimeTests {
 
     @Test
     public void testManagementClient() {
-        StorageManagementClientImpl storageManagementClient = new StorageManagementClientBuilder()
+        StorageManagementClientImpl storageManagementClient = new StorageManagementClientImplBuilder()
                 .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build())
                 .host(AzureEnvironment.AZURE.getResourceManagerEndpoint())
                 .subscriptionId(MOCK_SUBSCRIPTION_ID)
