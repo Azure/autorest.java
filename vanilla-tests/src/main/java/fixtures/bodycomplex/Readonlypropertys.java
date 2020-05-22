@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.ErrorException;
@@ -47,7 +46,7 @@ public final class Readonlypropertys {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ReadonlyObj>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<ReadonlyObj>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
@@ -66,7 +65,7 @@ public final class Readonlypropertys {
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync() {
+    public Mono<Response<ReadonlyObj>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -85,7 +84,7 @@ public final class Readonlypropertys {
     public Mono<ReadonlyObj> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<ReadonlyObj> res) -> {
+                        (Response<ReadonlyObj> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

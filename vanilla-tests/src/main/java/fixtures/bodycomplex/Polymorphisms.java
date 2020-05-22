@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.DotFish;
@@ -50,7 +49,7 @@ public final class Polymorphisms {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Fish>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
@@ -61,24 +60,22 @@ public final class Polymorphisms {
         @Get("/complex/polymorphism/dotsyntax")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String host, Context context);
+        Mono<Response<DotFish>> getDotSyntax(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String host, Context context);
+        Mono<Response<Salmon>> getComplicated(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
@@ -89,7 +86,7 @@ public final class Polymorphisms {
         @Put("/complex/polymorphism/missingdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> putMissingDiscriminator(
+        Mono<Response<Salmon>> putMissingDiscriminator(
                 @HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody, Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
@@ -107,7 +104,7 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
+    public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -126,7 +123,7 @@ public final class Polymorphisms {
     public Mono<Fish> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Fish> res) -> {
+                        (Response<Fish> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -220,7 +217,7 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DotFish>> getDotSyntaxWithResponseAsync() {
+    public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -239,7 +236,7 @@ public final class Polymorphisms {
     public Mono<DotFish> getDotSyntaxAsync() {
         return getDotSyntaxWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DotFish> res) -> {
+                        (Response<DotFish> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -270,7 +267,7 @@ public final class Polymorphisms {
      *     with discriminator specified.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
+    public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -291,7 +288,7 @@ public final class Polymorphisms {
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync() {
         return getComposedWithDiscriminatorWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DotFishMarket> res) -> {
+                        (Response<DotFishMarket> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -324,7 +321,7 @@ public final class Polymorphisms {
      *     without discriminator specified on wire.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
+    public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -345,7 +342,7 @@ public final class Polymorphisms {
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync() {
         return getComposedWithoutDiscriminatorWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DotFishMarket> res) -> {
+                        (Response<DotFishMarket> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -377,7 +374,7 @@ public final class Polymorphisms {
      *     properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Salmon>> getComplicatedWithResponseAsync() {
+    public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -397,7 +394,7 @@ public final class Polymorphisms {
     public Mono<Salmon> getComplicatedAsync() {
         return getComplicatedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Salmon> res) -> {
+                        (Response<Salmon> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -479,7 +476,7 @@ public final class Polymorphisms {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
+    public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -506,7 +503,7 @@ public final class Polymorphisms {
     public Mono<Salmon> putMissingDiscriminatorAsync(Salmon complexBody) {
         return putMissingDiscriminatorWithResponseAsync(complexBody)
                 .flatMap(
-                        (SimpleResponse<Salmon> res) -> {
+                        (Response<Salmon> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

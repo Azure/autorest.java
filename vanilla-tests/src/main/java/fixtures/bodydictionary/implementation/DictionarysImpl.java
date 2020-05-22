@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
@@ -55,12 +54,12 @@ public final class DictionarysImpl {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/empty")
         @ExpectedResponses({200})
@@ -73,27 +72,27 @@ public final class DictionarysImpl {
         @Get("/dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullValue(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getNullValue(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullKey(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getNullKey(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
@@ -106,19 +105,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidString(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
@@ -131,18 +128,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidString(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
@@ -155,17 +151,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -178,18 +174,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidString(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -202,19 +197,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidString(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -227,18 +220,17 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringWithNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithInvalid(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
@@ -251,21 +243,18 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidChars(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValid(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
@@ -279,21 +268,21 @@ public final class DictionarysImpl {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(
+        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(
                 @HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(
+        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(
                 @HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(
+        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(
                 @HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date-time-rfc1123/valid")
@@ -307,7 +296,7 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
@@ -320,7 +309,7 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
@@ -333,38 +322,38 @@ public final class DictionarysImpl {
         @Get("/dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/complex/valid")
         @ExpectedResponses({200})
@@ -377,29 +366,27 @@ public final class DictionarysImpl {
         @Get("/dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmpty(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/array/valid")
         @ExpectedResponses({200})
@@ -412,29 +399,27 @@ public final class DictionarysImpl {
         @Get("/dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNull(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmpty(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
@@ -453,7 +438,7 @@ public final class DictionarysImpl {
      * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponseAsync() {
+    public Mono<Response<Map<String, Integer>>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -472,7 +457,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Integer>> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -501,7 +486,7 @@ public final class DictionarysImpl {
      * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Integer>>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -520,7 +505,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -597,7 +582,7 @@ public final class DictionarysImpl {
      * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getNullValueWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -616,7 +601,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getNullValueAsync() {
         return getNullValueWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -645,7 +630,7 @@ public final class DictionarysImpl {
      * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getNullKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -664,7 +649,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -693,7 +678,7 @@ public final class DictionarysImpl {
      * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -712,7 +697,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -741,7 +726,7 @@ public final class DictionarysImpl {
      * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -760,7 +745,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -789,7 +774,7 @@ public final class DictionarysImpl {
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
+    public Mono<Response<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -808,7 +793,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Boolean>> res) -> {
+                        (Response<Map<String, Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -885,7 +870,7 @@ public final class DictionarysImpl {
      * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -904,7 +889,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Boolean>> res) -> {
+                        (Response<Map<String, Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -933,7 +918,7 @@ public final class DictionarysImpl {
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
+    public Mono<Response<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -952,7 +937,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Boolean>> res) -> {
+                        (Response<Map<String, Boolean>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -981,7 +966,7 @@ public final class DictionarysImpl {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
+    public Mono<Response<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1000,7 +985,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1077,7 +1062,7 @@ public final class DictionarysImpl {
      * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1096,7 +1081,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1125,7 +1110,7 @@ public final class DictionarysImpl {
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
+    public Mono<Response<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1144,7 +1129,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Integer>> res) -> {
+                        (Response<Map<String, Integer>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1173,7 +1158,7 @@ public final class DictionarysImpl {
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponseAsync() {
+    public Mono<Response<Map<String, Long>>> getLongValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1192,7 +1177,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Long>> res) -> {
+                        (Response<Map<String, Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1269,7 +1254,7 @@ public final class DictionarysImpl {
      * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1288,7 +1273,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Long>> res) -> {
+                        (Response<Map<String, Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1317,7 +1302,7 @@ public final class DictionarysImpl {
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
+    public Mono<Response<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1336,7 +1321,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Long>> res) -> {
+                        (Response<Map<String, Long>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1365,7 +1350,7 @@ public final class DictionarysImpl {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponseAsync() {
+    public Mono<Response<Map<String, Float>>> getFloatValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1384,7 +1369,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Float>> getFloatValidAsync() {
         return getFloatValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Float>> res) -> {
+                        (Response<Map<String, Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1461,7 +1446,7 @@ public final class DictionarysImpl {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1480,7 +1465,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Float>> res) -> {
+                        (Response<Map<String, Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1509,7 +1494,7 @@ public final class DictionarysImpl {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
+    public Mono<Response<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1528,7 +1513,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Float>> res) -> {
+                        (Response<Map<String, Float>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1557,7 +1542,7 @@ public final class DictionarysImpl {
      * @return float dictionary value {"0": 0, "1": -0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponseAsync() {
+    public Mono<Response<Map<String, Double>>> getDoubleValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1576,7 +1561,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Double>> res) -> {
+                        (Response<Map<String, Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1653,7 +1638,7 @@ public final class DictionarysImpl {
      * @return float dictionary value {"0": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1672,7 +1657,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Double>> res) -> {
+                        (Response<Map<String, Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1701,7 +1686,7 @@ public final class DictionarysImpl {
      * @return boolean dictionary value {"0": 1.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
+    public Mono<Response<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1720,7 +1705,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Double>> res) -> {
+                        (Response<Map<String, Double>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1749,7 +1734,7 @@ public final class DictionarysImpl {
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getStringValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1768,7 +1753,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getStringValidAsync() {
         return getStringValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1845,7 +1830,7 @@ public final class DictionarysImpl {
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getStringWithNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1864,7 +1849,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1893,7 +1878,7 @@ public final class DictionarysImpl {
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
+    public Mono<Response<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1912,7 +1897,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, String>> res) -> {
+                        (Response<Map<String, String>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1941,7 +1926,7 @@ public final class DictionarysImpl {
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
+    public Mono<Response<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1960,7 +1945,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, LocalDate>> res) -> {
+                        (Response<Map<String, LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2037,7 +2022,7 @@ public final class DictionarysImpl {
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2056,7 +2041,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, LocalDate>> res) -> {
+                        (Response<Map<String, LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2085,7 +2070,7 @@ public final class DictionarysImpl {
      * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
+    public Mono<Response<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2104,7 +2089,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, LocalDate>> res) -> {
+                        (Response<Map<String, LocalDate>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2135,7 +2120,7 @@ public final class DictionarysImpl {
      *     "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2156,7 +2141,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, OffsetDateTime>> res) -> {
+                        (Response<Map<String, OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2241,7 +2226,7 @@ public final class DictionarysImpl {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2260,7 +2245,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, OffsetDateTime>> res) -> {
+                        (Response<Map<String, OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2289,7 +2274,7 @@ public final class DictionarysImpl {
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2308,7 +2293,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, OffsetDateTime>> res) -> {
+                        (Response<Map<String, OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2339,7 +2324,7 @@ public final class DictionarysImpl {
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2360,7 +2345,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, OffsetDateTime>> res) -> {
+                        (Response<Map<String, OffsetDateTime>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2451,7 +2436,7 @@ public final class DictionarysImpl {
      * @return duration dictionary value {"0": "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponseAsync() {
+    public Mono<Response<Map<String, Duration>>> getDurationValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2470,7 +2455,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Duration>> getDurationValidAsync() {
         return getDurationValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Duration>> res) -> {
+                        (Response<Map<String, Duration>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2549,7 +2534,7 @@ public final class DictionarysImpl {
      *     encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponseAsync() {
+    public Mono<Response<Map<String, byte[]>>> getByteValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2570,7 +2555,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, byte[]>> res) -> {
+                        (Response<Map<String, byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2655,7 +2640,7 @@ public final class DictionarysImpl {
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
+    public Mono<Response<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2674,7 +2659,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, byte[]>> res) -> {
+                        (Response<Map<String, byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2705,7 +2690,7 @@ public final class DictionarysImpl {
      *     "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
+    public Mono<Response<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2726,7 +2711,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, byte[]>> res) -> {
+                        (Response<Map<String, byte[]>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2757,7 +2742,7 @@ public final class DictionarysImpl {
      * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponseAsync() {
+    public Mono<Response<Map<String, Widget>>> getComplexNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2776,7 +2761,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Widget>> res) -> {
+                        (Response<Map<String, Widget>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2805,7 +2790,7 @@ public final class DictionarysImpl {
      * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2824,7 +2809,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Widget>> res) -> {
+                        (Response<Map<String, Widget>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2855,7 +2840,7 @@ public final class DictionarysImpl {
      *     {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
+    public Mono<Response<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2876,7 +2861,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Widget>> res) -> {
+                        (Response<Map<String, Widget>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2909,7 +2894,7 @@ public final class DictionarysImpl {
      *     5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2930,7 +2915,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Widget>> res) -> {
+                        (Response<Map<String, Widget>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -2963,7 +2948,7 @@ public final class DictionarysImpl {
      *     "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponseAsync() {
+    public Mono<Response<Map<String, Widget>>> getComplexValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2984,7 +2969,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Widget>> res) -> {
+                        (Response<Map<String, Widget>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3078,7 +3063,7 @@ public final class DictionarysImpl {
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
+    public Mono<Response<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3097,7 +3082,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, List<String>>> res) -> {
+                        (Response<Map<String, List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3126,7 +3111,7 @@ public final class DictionarysImpl {
      * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3145,7 +3130,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, List<String>>> res) -> {
+                        (Response<Map<String, List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3174,7 +3159,7 @@ public final class DictionarysImpl {
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
+    public Mono<Response<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3193,7 +3178,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, List<String>>> res) -> {
+                        (Response<Map<String, List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3222,7 +3207,7 @@ public final class DictionarysImpl {
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3241,7 +3226,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, List<String>>> res) -> {
+                        (Response<Map<String, List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3270,7 +3255,7 @@ public final class DictionarysImpl {
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
+    public Mono<Response<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3289,7 +3274,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, List<String>>> res) -> {
+                        (Response<Map<String, List<String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3366,7 +3351,7 @@ public final class DictionarysImpl {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
+    public Mono<Response<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3385,7 +3370,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Object>> getDictionaryNullAsync() {
         return getDictionaryNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Object>> res) -> {
+                        (Response<Map<String, Object>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3414,7 +3399,7 @@ public final class DictionarysImpl {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3433,7 +3418,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Object>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Object>> res) -> {
+                        (Response<Map<String, Object>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3464,7 +3449,7 @@ public final class DictionarysImpl {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
+    public Mono<Response<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3485,7 +3470,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Object>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Object>> res) -> {
+                        (Response<Map<String, Object>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3518,7 +3503,7 @@ public final class DictionarysImpl {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3539,7 +3524,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Object>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Object>> res) -> {
+                        (Response<Map<String, Object>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3572,7 +3557,7 @@ public final class DictionarysImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
+    public Mono<Response<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3593,7 +3578,7 @@ public final class DictionarysImpl {
     public Mono<Map<String, Object>> getDictionaryValidAsync() {
         return getDictionaryValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Map<String, Object>> res) -> {
+                        (Response<Map<String, Object>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

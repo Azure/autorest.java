@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodystring.models.Colors;
@@ -48,7 +47,7 @@ public final class Enums {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String host, Context context);
+        Mono<Response<Colors>> getNotExpandable(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
@@ -59,7 +58,7 @@ public final class Enums {
         @Get("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String host, Context context);
+        Mono<Response<Colors>> getReferenced(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
@@ -70,7 +69,7 @@ public final class Enums {
         @Get("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host, Context context);
+        Mono<Response<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
@@ -89,7 +88,7 @@ public final class Enums {
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Colors>> getNotExpandableWithResponseAsync() {
+    public Mono<Response<Colors>> getNotExpandableWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -108,7 +107,7 @@ public final class Enums {
     public Mono<Colors> getNotExpandableAsync() {
         return getNotExpandableWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Colors> res) -> {
+                        (Response<Colors> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -185,7 +184,7 @@ public final class Enums {
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Colors>> getReferencedWithResponseAsync() {
+    public Mono<Response<Colors>> getReferencedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -204,7 +203,7 @@ public final class Enums {
     public Mono<Colors> getReferencedAsync() {
         return getReferencedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Colors> res) -> {
+                        (Response<Colors> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -281,7 +280,7 @@ public final class Enums {
      * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<RefColorConstant>> getReferencedConstantWithResponseAsync() {
+    public Mono<Response<RefColorConstant>> getReferencedConstantWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -300,7 +299,7 @@ public final class Enums {
     public Mono<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<RefColorConstant> res) -> {
+                        (Response<RefColorConstant> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
