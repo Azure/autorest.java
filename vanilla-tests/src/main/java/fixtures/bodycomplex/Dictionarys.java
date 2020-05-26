@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.DictionaryWrapper;
@@ -47,7 +46,7 @@ public final class Dictionarys {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<DictionaryWrapper>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
@@ -60,7 +59,7 @@ public final class Dictionarys {
         @Get("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<DictionaryWrapper>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
@@ -73,12 +72,12 @@ public final class Dictionarys {
         @Get("/complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<DictionaryWrapper>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -89,7 +88,7 @@ public final class Dictionarys {
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getValidWithResponseAsync() {
+    public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -108,7 +107,7 @@ public final class Dictionarys {
     public Mono<DictionaryWrapper> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DictionaryWrapper> res) -> {
+                        (Response<DictionaryWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -190,7 +189,7 @@ public final class Dictionarys {
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getEmptyWithResponseAsync() {
+    public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -209,7 +208,7 @@ public final class Dictionarys {
     public Mono<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DictionaryWrapper> res) -> {
+                        (Response<DictionaryWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -288,7 +287,7 @@ public final class Dictionarys {
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getNullWithResponseAsync() {
+    public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -307,7 +306,7 @@ public final class Dictionarys {
     public Mono<DictionaryWrapper> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DictionaryWrapper> res) -> {
+                        (Response<DictionaryWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -336,7 +335,7 @@ public final class Dictionarys {
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
+    public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -355,7 +354,7 @@ public final class Dictionarys {
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<DictionaryWrapper> res) -> {
+                        (Response<DictionaryWrapper> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

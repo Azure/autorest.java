@@ -16,7 +16,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
@@ -55,7 +54,7 @@ public final class HttpSuccess {
         @Get("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> get200(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> get200(@HostParam("$host") String host, Context context);
 
         @Put("/http/success/200")
         @ExpectedResponses({200})
@@ -149,7 +148,7 @@ public final class HttpSuccess {
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> head404(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> head404(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -199,7 +198,7 @@ public final class HttpSuccess {
      * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> get200WithResponseAsync() {
+    public Mono<Response<Boolean>> get200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -218,7 +217,7 @@ public final class HttpSuccess {
     public Mono<Boolean> get200Async() {
         return get200WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -851,7 +850,7 @@ public final class HttpSuccess {
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> head404WithResponseAsync() {
+    public Mono<Response<Boolean>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -870,7 +869,7 @@ public final class HttpSuccess {
     public Mono<Boolean> head404Async() {
         return head404WithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

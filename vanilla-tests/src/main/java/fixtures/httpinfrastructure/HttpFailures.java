@@ -9,8 +9,8 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
@@ -44,17 +44,17 @@ public final class HttpFailures {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getEmptyError(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getEmptyError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelError(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getNoModelError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getNoModelEmpty(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class HttpFailures {
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getEmptyErrorWithResponseAsync() {
+    public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -84,7 +84,7 @@ public final class HttpFailures {
     public Mono<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -118,7 +118,7 @@ public final class HttpFailures {
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getNoModelErrorWithResponseAsync() {
+    public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -137,7 +137,7 @@ public final class HttpFailures {
     public Mono<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -171,7 +171,7 @@ public final class HttpFailures {
      * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getNoModelEmptyWithResponseAsync() {
+    public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -190,7 +190,7 @@ public final class HttpFailures {
     public Mono<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Boolean> res) -> {
+                        (Response<Boolean> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

@@ -13,7 +13,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -48,7 +47,7 @@ public final class StringOperations {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getNull(@HostParam("$host") String host, Context context);
 
         @Put("/string/null")
         @ExpectedResponses({200})
@@ -59,7 +58,7 @@ public final class StringOperations {
         @Get("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
@@ -70,7 +69,7 @@ public final class StringOperations {
         @Get("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getMbcs(@HostParam("$host") String host, Context context);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
@@ -81,7 +80,7 @@ public final class StringOperations {
         @Get("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getWhitespace(@HostParam("$host") String host, Context context);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
@@ -92,19 +91,19 @@ public final class StringOperations {
         @Get("/string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getNotProvided(@HostParam("$host") String host, Context context);
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64Encoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getBase64Encoded(@HostParam("$host") String host, Context context);
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host, Context context);
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
@@ -116,7 +115,7 @@ public final class StringOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -127,7 +126,7 @@ public final class StringOperations {
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> getNullWithResponseAsync() {
+    public Mono<Response<String>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -146,7 +145,7 @@ public final class StringOperations {
     public Mono<String> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<String> res) -> {
+                        (Response<String> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -220,7 +219,7 @@ public final class StringOperations {
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> getEmptyWithResponseAsync() {
+    public Mono<Response<String>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -239,7 +238,7 @@ public final class StringOperations {
     public Mono<String> getEmptyAsync() {
         return getEmptyWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<String> res) -> {
+                        (Response<String> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -308,7 +307,7 @@ public final class StringOperations {
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> getMbcsWithResponseAsync() {
+    public Mono<Response<String>> getMbcsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -327,7 +326,7 @@ public final class StringOperations {
     public Mono<String> getMbcsAsync() {
         return getMbcsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<String> res) -> {
+                        (Response<String> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -398,7 +397,7 @@ public final class StringOperations {
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> getWhitespaceWithResponseAsync() {
+    public Mono<Response<String>> getWhitespaceWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -419,7 +418,7 @@ public final class StringOperations {
     public Mono<String> getWhitespaceAsync() {
         return getWhitespaceWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<String> res) -> {
+                        (Response<String> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -493,7 +492,7 @@ public final class StringOperations {
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<String>> getNotProvidedWithResponseAsync() {
+    public Mono<Response<String>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -512,7 +511,7 @@ public final class StringOperations {
     public Mono<String> getNotProvidedAsync() {
         return getNotProvidedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<String> res) -> {
+                        (Response<String> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -541,7 +540,7 @@ public final class StringOperations {
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getBase64EncodedWithResponseAsync() {
+    public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -560,7 +559,7 @@ public final class StringOperations {
     public Mono<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -589,7 +588,7 @@ public final class StringOperations {
      * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getBase64UrlEncodedWithResponseAsync() {
+    public Mono<Response<byte[]>> getBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -608,7 +607,7 @@ public final class StringOperations {
     public Mono<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -687,7 +686,7 @@ public final class StringOperations {
      * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
+    public Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -706,7 +705,7 @@ public final class StringOperations {
     public Mono<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<byte[]> res) -> {
+                        (Response<byte[]> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

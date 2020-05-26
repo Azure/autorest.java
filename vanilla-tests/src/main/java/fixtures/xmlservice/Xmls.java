@@ -14,7 +14,6 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.xmlservice.implementation.BananasWrapper;
@@ -63,8 +62,7 @@ public final class Xmls {
         @Get("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMeta(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<RootWithRefAndNoMeta>> getComplexTypeRefNoMeta(@HostParam("$host") String host, Context context);
 
         @Put("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({201})
@@ -77,8 +75,7 @@ public final class Xmls {
         @Get("/xml/complex-type-ref-with-meta")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMeta(
-                @HostParam("$host") String host, Context context);
+        Mono<Response<RootWithRefAndMeta>> getComplexTypeRefWithMeta(@HostParam("$host") String host, Context context);
 
         @Put("/xml/complex-type-ref-with-meta")
         @ExpectedResponses({201})
@@ -91,7 +88,7 @@ public final class Xmls {
         @Get("/xml/simple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Slideshow>> getSimple(@HostParam("$host") String host, Context context);
+        Mono<Response<Slideshow>> getSimple(@HostParam("$host") String host, Context context);
 
         @Put("/xml/simple")
         @ExpectedResponses({201})
@@ -102,7 +99,7 @@ public final class Xmls {
         @Get("/xml/wrapped-lists")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<AppleBarrel>> getWrappedLists(@HostParam("$host") String host, Context context);
+        Mono<Response<AppleBarrel>> getWrappedLists(@HostParam("$host") String host, Context context);
 
         @Put("/xml/wrapped-lists")
         @ExpectedResponses({201})
@@ -120,7 +117,7 @@ public final class Xmls {
         @Get("/xml/empty-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Slideshow>> getEmptyList(@HostParam("$host") String host, Context context);
+        Mono<Response<Slideshow>> getEmptyList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-list")
         @ExpectedResponses({201})
@@ -131,7 +128,7 @@ public final class Xmls {
         @Get("/xml/empty-wrapped-lists")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedLists(@HostParam("$host") String host, Context context);
+        Mono<Response<AppleBarrel>> getEmptyWrappedLists(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-wrapped-lists")
         @ExpectedResponses({201})
@@ -144,7 +141,7 @@ public final class Xmls {
         @Get("/xml/root-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getRootList(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Banana>>> getRootList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/root-list")
         @ExpectedResponses({201})
@@ -155,7 +152,7 @@ public final class Xmls {
         @Get("/xml/root-list-single-item")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getRootListSingleItem(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Banana>>> getRootListSingleItem(@HostParam("$host") String host, Context context);
 
         @Put("/xml/root-list-single-item")
         @ExpectedResponses({201})
@@ -166,7 +163,7 @@ public final class Xmls {
         @Get("/xml/empty-root-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getEmptyRootList(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Banana>>> getEmptyRootList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-root-list")
         @ExpectedResponses({201})
@@ -177,7 +174,7 @@ public final class Xmls {
         @Get("/xml/empty-child-element")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Banana>> getEmptyChildElement(@HostParam("$host") String host, Context context);
+        Mono<Response<Banana>> getEmptyChildElement(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-child-element")
         @ExpectedResponses({201})
@@ -188,13 +185,13 @@ public final class Xmls {
         @Get("/xml/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ListContainersResponse>> listContainers(
+        Mono<Response<ListContainersResponse>> listContainers(
                 @HostParam("$host") String host, @QueryParam("comp") String comp, Context context);
 
         @Get("/xml/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<StorageServiceProperties>> getServiceProperties(
+        Mono<Response<StorageServiceProperties>> getServiceProperties(
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
@@ -213,7 +210,7 @@ public final class Xmls {
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<SignedIdentifier>>> getAcls(
+        Mono<Response<List<SignedIdentifier>>> getAcls(
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
@@ -232,7 +229,7 @@ public final class Xmls {
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ListBlobsResponse>> listBlobs(
+        Mono<Response<ListBlobsResponse>> listBlobs(
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
@@ -247,7 +244,7 @@ public final class Xmls {
         @Get("/xml/jsonoutput")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<JsonOutput>> jsonOutput(@HostParam("$host") String host, Context context);
+        Mono<Response<JsonOutput>> jsonOutput(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -258,7 +255,7 @@ public final class Xmls {
      * @return a complex type that has a ref to a complex type with no XML node.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync() {
+    public Mono<Response<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -277,7 +274,7 @@ public final class Xmls {
     public Mono<RootWithRefAndNoMeta> getComplexTypeRefNoMetaAsync() {
         return getComplexTypeRefNoMetaWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<RootWithRefAndNoMeta> res) -> {
+                        (Response<RootWithRefAndNoMeta> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -356,7 +353,7 @@ public final class Xmls {
      * @return a complex type that has a ref to a complex type with XML node.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync() {
+    public Mono<Response<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -375,7 +372,7 @@ public final class Xmls {
     public Mono<RootWithRefAndMeta> getComplexTypeRefWithMetaAsync() {
         return getComplexTypeRefWithMetaWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<RootWithRefAndMeta> res) -> {
+                        (Response<RootWithRefAndMeta> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -455,7 +452,7 @@ public final class Xmls {
      * @return a simple XML document.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Slideshow>> getSimpleWithResponseAsync() {
+    public Mono<Response<Slideshow>> getSimpleWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -474,7 +471,7 @@ public final class Xmls {
     public Mono<Slideshow> getSimpleAsync() {
         return getSimpleWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Slideshow> res) -> {
+                        (Response<Slideshow> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -553,7 +550,7 @@ public final class Xmls {
      * @return an XML document with multiple wrapped lists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<AppleBarrel>> getWrappedListsWithResponseAsync() {
+    public Mono<Response<AppleBarrel>> getWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -572,7 +569,7 @@ public final class Xmls {
     public Mono<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<AppleBarrel> res) -> {
+                        (Response<AppleBarrel> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -690,7 +687,7 @@ public final class Xmls {
      * @return an empty list.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Slideshow>> getEmptyListWithResponseAsync() {
+    public Mono<Response<Slideshow>> getEmptyListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -709,7 +706,7 @@ public final class Xmls {
     public Mono<Slideshow> getEmptyListAsync() {
         return getEmptyListWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Slideshow> res) -> {
+                        (Response<Slideshow> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -788,7 +785,7 @@ public final class Xmls {
      * @return some empty wrapped lists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedListsWithResponseAsync() {
+    public Mono<Response<AppleBarrel>> getEmptyWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -807,7 +804,7 @@ public final class Xmls {
     public Mono<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<AppleBarrel> res) -> {
+                        (Response<AppleBarrel> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -887,7 +884,7 @@ public final class Xmls {
      * @return a list as the root element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Banana>>> getRootListWithResponseAsync() {
+    public Mono<Response<List<Banana>>> getRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -906,7 +903,7 @@ public final class Xmls {
     public Mono<List<Banana>> getRootListAsync() {
         return getRootListWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Banana>> res) -> {
+                        (Response<List<Banana>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -986,7 +983,7 @@ public final class Xmls {
      * @return a list with a single item.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Banana>>> getRootListSingleItemWithResponseAsync() {
+    public Mono<Response<List<Banana>>> getRootListSingleItemWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1005,7 +1002,7 @@ public final class Xmls {
     public Mono<List<Banana>> getRootListSingleItemAsync() {
         return getRootListSingleItemWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Banana>> res) -> {
+                        (Response<List<Banana>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1086,7 +1083,7 @@ public final class Xmls {
      * @return an empty list as the root element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<Banana>>> getEmptyRootListWithResponseAsync() {
+    public Mono<Response<List<Banana>>> getEmptyRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1105,7 +1102,7 @@ public final class Xmls {
     public Mono<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<Banana>> res) -> {
+                        (Response<List<Banana>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1186,7 +1183,7 @@ public final class Xmls {
      * @return an XML document with an empty child element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Banana>> getEmptyChildElementWithResponseAsync() {
+    public Mono<Response<Banana>> getEmptyChildElementWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1205,7 +1202,7 @@ public final class Xmls {
     public Mono<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Banana> res) -> {
+                        (Response<Banana> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1284,7 +1281,7 @@ public final class Xmls {
      * @return an enumeration of containers.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ListContainersResponse>> listContainersWithResponseAsync() {
+    public Mono<Response<ListContainersResponse>> listContainersWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1304,7 +1301,7 @@ public final class Xmls {
     public Mono<ListContainersResponse> listContainersAsync() {
         return listContainersWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<ListContainersResponse> res) -> {
+                        (Response<ListContainersResponse> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1333,7 +1330,7 @@ public final class Xmls {
      * @return storage service properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<StorageServiceProperties>> getServicePropertiesWithResponseAsync() {
+    public Mono<Response<StorageServiceProperties>> getServicePropertiesWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1355,7 +1352,7 @@ public final class Xmls {
     public Mono<StorageServiceProperties> getServicePropertiesAsync() {
         return getServicePropertiesWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<StorageServiceProperties> res) -> {
+                        (Response<StorageServiceProperties> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1437,7 +1434,7 @@ public final class Xmls {
      * @return storage ACLs for a container.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<List<SignedIdentifier>>> getAclsWithResponseAsync() {
+    public Mono<Response<List<SignedIdentifier>>> getAclsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1458,7 +1455,7 @@ public final class Xmls {
     public Mono<List<SignedIdentifier>> getAclsAsync() {
         return getAclsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<List<SignedIdentifier>> res) -> {
+                        (Response<List<SignedIdentifier>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1541,7 +1538,7 @@ public final class Xmls {
      * @return an enumeration of blobs.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ListBlobsResponse>> listBlobsWithResponseAsync() {
+    public Mono<Response<ListBlobsResponse>> listBlobsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1562,7 +1559,7 @@ public final class Xmls {
     public Mono<ListBlobsResponse> listBlobsAsync() {
         return listBlobsWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<ListBlobsResponse> res) -> {
+                        (Response<ListBlobsResponse> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1641,7 +1638,7 @@ public final class Xmls {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<JsonOutput>> jsonOutputWithResponseAsync() {
+    public Mono<Response<JsonOutput>> jsonOutputWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1660,7 +1657,7 @@ public final class Xmls {
     public Mono<JsonOutput> jsonOutputAsync() {
         return jsonOutputWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<JsonOutput> res) -> {
+                        (Response<JsonOutput> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

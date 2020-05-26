@@ -198,7 +198,7 @@ public class CodeNamer {
     }
 
     public static String getPlural(String name) {
-        if (name != null && !name.endsWith("s") && !name.endsWith("S")) {
+        if (name != null && !name.isEmpty() && !name.endsWith("s") && !name.endsWith("S")) {
             name += "s";
         }
         return name;

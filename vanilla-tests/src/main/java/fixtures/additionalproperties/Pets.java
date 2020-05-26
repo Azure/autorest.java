@@ -9,8 +9,8 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.additionalproperties.models.CatAPTrue;
@@ -50,7 +50,7 @@ public final class Pets {
         @Put("/additionalProperties/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<PetAPTrue>> createAPTrue(
+        Mono<Response<PetAPTrue>> createAPTrue(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPTrue createParameters,
                 Context context);
@@ -58,7 +58,7 @@ public final class Pets {
         @Put("/additionalProperties/true-subclass")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<CatAPTrue>> createCatAPTrue(
+        Mono<Response<CatAPTrue>> createCatAPTrue(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") CatAPTrue createParameters,
                 Context context);
@@ -66,7 +66,7 @@ public final class Pets {
         @Put("/additionalProperties/type/object")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<PetAPObject>> createAPObject(
+        Mono<Response<PetAPObject>> createAPObject(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPObject createParameters,
                 Context context);
@@ -74,7 +74,7 @@ public final class Pets {
         @Put("/additionalProperties/type/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<PetAPString>> createAPString(
+        Mono<Response<PetAPString>> createAPString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPString createParameters,
                 Context context);
@@ -82,7 +82,7 @@ public final class Pets {
         @Put("/additionalProperties/in/properties")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<PetAPInProperties>> createAPInProperties(
+        Mono<Response<PetAPInProperties>> createAPInProperties(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPInProperties createParameters,
                 Context context);
@@ -90,7 +90,7 @@ public final class Pets {
         @Put("/additionalProperties/in/properties/with/additionalProperties/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPString(
+        Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPInPropertiesWithAPString createParameters,
                 Context context);
@@ -106,7 +106,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
+    public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -133,7 +133,7 @@ public final class Pets {
     public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters) {
         return createAPTrueWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<PetAPTrue> res) -> {
+                        (Response<PetAPTrue> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -166,7 +166,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
+    public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -194,7 +194,7 @@ public final class Pets {
     public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters) {
         return createCatAPTrueWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<CatAPTrue> res) -> {
+                        (Response<CatAPTrue> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -227,7 +227,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
+    public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -255,7 +255,7 @@ public final class Pets {
     public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters) {
         return createAPObjectWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<PetAPObject> res) -> {
+                        (Response<PetAPObject> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -288,7 +288,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
+    public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -316,7 +316,7 @@ public final class Pets {
     public Mono<PetAPString> createAPStringAsync(PetAPString createParameters) {
         return createAPStringWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<PetAPString> res) -> {
+                        (Response<PetAPString> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -349,8 +349,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<PetAPInProperties>> createAPInPropertiesWithResponseAsync(
-            PetAPInProperties createParameters) {
+    public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -378,7 +377,7 @@ public final class Pets {
     public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters) {
         return createAPInPropertiesWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<PetAPInProperties> res) -> {
+                        (Response<PetAPInProperties> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -411,7 +410,7 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPStringWithResponseAsync(
+    public Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPStringWithResponseAsync(
             PetAPInPropertiesWithAPString createParameters) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -441,7 +440,7 @@ public final class Pets {
             PetAPInPropertiesWithAPString createParameters) {
         return createAPInPropertiesWithAPStringWithResponseAsync(createParameters)
                 .flatMap(
-                        (SimpleResponse<PetAPInPropertiesWithAPString> res) -> {
+                        (Response<PetAPInPropertiesWithAPString> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
