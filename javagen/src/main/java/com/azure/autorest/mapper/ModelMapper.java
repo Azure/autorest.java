@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -176,7 +177,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.derivedModels(derivedTypes);
 
             if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
-                 builder.xmlName(compositeType.getSerialization().getXml().getName());
+                final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
+                 builder.xmlName(xml.getName());
+                 builder.xmlNamespace(xml.getNamespace());
             } else if (compositeType.getLanguage().getDefault() != null) {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }

@@ -77,7 +77,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (settings.shouldGenerateXmlSerialization()) {
-            javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+            if (model.getXmlNamespace() != null && !model.getXmlNamespace().isEmpty()) {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
+                        model.getXmlName(), model.getXmlNamespace()));
+            } else {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+            }
         }
 
         if (model.getNeedsFlatten()) {
