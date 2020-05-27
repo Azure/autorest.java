@@ -113,8 +113,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         modelImports.add("java.util.ArrayList");
                     }
 
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
-                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isAttribute())) {
+                    if (compositeTypeProperties.stream().anyMatch(p -> {
+                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                            return false;
+                        }
+
+                        XmlSerlializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
+                        return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
+                    })) {
                         modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
 
