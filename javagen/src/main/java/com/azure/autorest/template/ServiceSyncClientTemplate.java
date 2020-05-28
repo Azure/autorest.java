@@ -5,6 +5,8 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.util.ClientModelUtil;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,7 +47,8 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
             serviceClient.getInterfaceName())));
 
-    javaFile.annotation(String.format("ServiceClient(builder = %sBuilder.class)", serviceClient.getClientBaseName()));
+    javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
+            serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
     javaFile.publicFinalClass(syncClassName, classBlock ->
     {
       // Add service client member variable

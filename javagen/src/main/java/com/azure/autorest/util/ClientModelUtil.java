@@ -83,4 +83,14 @@ public class ClientModelUtil {
             }
         }
     }
+
+    public static String getBuilderSuffix() {
+        StringBuilder builderSuffix = new StringBuilder();
+        if (JavaSettings.getInstance().shouldGenerateClientAsImpl()
+                && !JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            builderSuffix.append("Impl");
+        }
+        builderSuffix.append("Builder");
+        return builderSuffix.toString();
+    }
 }
