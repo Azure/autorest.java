@@ -39,7 +39,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder classNameBuilder = new StringBuilder();
         classNameBuilder.append(serviceClient.getInterfaceName());
-        if (settings.shouldGenerateClientAsImpl()) {
+        if (settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
             classNameBuilder.append("Impl");
         }
         classNameBuilder.append("Builder");
