@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.ErrorException;
@@ -47,7 +46,7 @@ public final class Inheritances {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Siamese>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Siamese>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/inheritance/valid")
         @ExpectedResponses({200})
@@ -64,7 +63,7 @@ public final class Inheritances {
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
+    public Mono<Response<Siamese>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -83,7 +82,7 @@ public final class Inheritances {
     public Mono<Siamese> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Siamese> res) -> {
+                        (Response<Siamese> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

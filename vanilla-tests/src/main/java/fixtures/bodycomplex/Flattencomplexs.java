@@ -9,8 +9,8 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.MyBaseType;
@@ -44,7 +44,7 @@ public final class Flattencomplexs {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -53,7 +53,7 @@ public final class Flattencomplexs {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
+    public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -70,7 +70,7 @@ public final class Flattencomplexs {
     public Mono<MyBaseType> getValidAsync() {
         return getValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyBaseType> res) -> {
+                        (Response<MyBaseType> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

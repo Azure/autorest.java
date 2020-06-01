@@ -11,7 +11,6 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
@@ -47,73 +46,73 @@ public final class MultipleResponses {
         @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError200Valid(
+        Mono<Response<MyException>> get200Model204NoModelDefaultError200Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/204/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError204Valid(
+        Mono<Response<MyException>> get200Model204NoModelDefaultError204Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/201/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError201Invalid(
+        Mono<Response<MyException>> get200Model204NoModelDefaultError201Invalid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/202/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError202None(
+        Mono<Response<MyException>> get200Model204NoModelDefaultError202None(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/400/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError400Valid(
+        Mono<Response<MyException>> get200Model204NoModelDefaultError400Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/200/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError200Valid(
+        Mono<Response<MyException>> get200Model201ModelDefaultError200Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/201/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError201Valid(
+        Mono<Response<MyException>> get200Model201ModelDefaultError201Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/400/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError400Valid(
+        Mono<Response<MyException>> get200Model201ModelDefaultError400Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid(
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid(
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid(
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid(
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid(
                 @HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/Error/response/202/none")
@@ -154,12 +153,12 @@ public final class MultipleResponses {
         @Get("/http/payloads/default/A/response/200/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> getDefaultModelA200Valid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> getDefaultModelA200Valid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/A/response/200/none")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> getDefaultModelA200None(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> getDefaultModelA200None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/A/response/400/valid")
         @ExpectedResponses({200})
@@ -194,37 +193,37 @@ public final class MultipleResponses {
         @Get("/http/payloads/200/A/response/200/none")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA200None(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA200None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/200/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA200Valid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA200Valid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/200/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA200Invalid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA200Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/400/none")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA400None(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA400None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/400/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA400Valid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA400Valid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/400/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA400Invalid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA400Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyException>> get200ModelA202Valid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyException>> get200ModelA202Valid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -235,7 +234,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -255,7 +254,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -284,7 +283,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -304,7 +303,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -333,7 +332,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -353,7 +352,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -382,7 +381,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -402,7 +401,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -431,7 +430,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -451,7 +450,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -480,7 +479,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -500,7 +499,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -529,7 +528,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -549,7 +548,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -578,7 +577,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -598,7 +597,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -627,7 +626,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -647,7 +646,7 @@ public final class MultipleResponses {
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Object> res) -> {
+                        (Response<Object> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -676,7 +675,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -696,7 +695,7 @@ public final class MultipleResponses {
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Object> res) -> {
+                        (Response<Object> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -725,7 +724,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -745,7 +744,7 @@ public final class MultipleResponses {
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Object> res) -> {
+                        (Response<Object> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -774,7 +773,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -794,7 +793,7 @@ public final class MultipleResponses {
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Object> res) -> {
+                        (Response<Object> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1103,7 +1102,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> getDefaultModelA200ValidWithResponseAsync() {
+    public Mono<Response<MyException>> getDefaultModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1122,7 +1121,7 @@ public final class MultipleResponses {
     public Mono<MyException> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1151,7 +1150,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> getDefaultModelA200NoneWithResponseAsync() {
+    public Mono<Response<MyException>> getDefaultModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1170,7 +1169,7 @@ public final class MultipleResponses {
     public Mono<MyException> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1434,7 +1433,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA200NoneWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1454,7 +1453,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1484,7 +1483,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA200ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1503,7 +1502,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1532,7 +1531,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA200InvalidWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA200InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1551,7 +1550,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1580,7 +1579,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA400NoneWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1599,7 +1598,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1628,7 +1627,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA400ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1647,7 +1646,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1676,7 +1675,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA400InvalidWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1695,7 +1694,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1724,7 +1723,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyException>> get200ModelA202ValidWithResponseAsync() {
+    public Mono<Response<MyException>> get200ModelA202ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1743,7 +1742,7 @@ public final class MultipleResponses {
     public Mono<MyException> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<MyException> res) -> {
+                        (Response<MyException> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

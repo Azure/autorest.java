@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodyduration.models.ErrorException;
@@ -47,7 +46,7 @@ public final class DurationOperations {
         @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getNull(@HostParam("$host") String host, Context context);
 
         @Put("/duration/positiveduration")
         @ExpectedResponses({200})
@@ -58,12 +57,12 @@ public final class DurationOperations {
         @Get("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getPositiveDuration(@HostParam("$host") String host, Context context);
 
         @Get("/duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -74,7 +73,7 @@ public final class DurationOperations {
      * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
+    public Mono<Response<Duration>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -93,7 +92,7 @@ public final class DurationOperations {
     public Mono<Duration> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Duration> res) -> {
+                        (Response<Duration> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -171,7 +170,7 @@ public final class DurationOperations {
      * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
+    public Mono<Response<Duration>> getPositiveDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -190,7 +189,7 @@ public final class DurationOperations {
     public Mono<Duration> getPositiveDurationAsync() {
         return getPositiveDurationWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Duration> res) -> {
+                        (Response<Duration> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -219,7 +218,7 @@ public final class DurationOperations {
      * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
+    public Mono<Response<Duration>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -238,7 +237,7 @@ public final class DurationOperations {
     public Mono<Duration> getInvalidAsync() {
         return getInvalidWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Duration> res) -> {
+                        (Response<Duration> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

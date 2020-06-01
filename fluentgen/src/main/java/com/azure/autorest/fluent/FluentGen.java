@@ -102,8 +102,14 @@ public class FluentGen extends NewPlugin {
             }
 
             // Service client builder
-            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder",
-                    client.getServiceClient());
+            String builderPackage = client.getServiceClient().getPackage();
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                builderPackage = JavaSettings.getInstance().getPackage();
+            }
+
+            String builderSuffix = ClientModelUtil.getBuilderSuffix();
+            javaPackage.addServiceClientBuilder(builderPackage,
+                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -111,11 +117,11 @@ public class FluentGen extends NewPlugin {
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(client.getServiceClient().getPackage(), asyncClient);
+                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(client.getServiceClient().getPackage(), syncClient);
+                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
                 }
             }
 

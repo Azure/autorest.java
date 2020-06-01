@@ -12,7 +12,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodynumber.models.ErrorException;
@@ -47,22 +46,22 @@ public final class Numbers {
         @Get("/number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Float>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/number/invalidfloat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getInvalidFloat(@HostParam("$host") String host, Context context);
+        Mono<Response<Float>> getInvalidFloat(@HostParam("$host") String host, Context context);
 
         @Get("/number/invaliddouble")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getInvalidDouble(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getInvalidDouble(@HostParam("$host") String host, Context context);
 
         @Get("/number/invaliddecimal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getInvalidDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<BigDecimal>> getInvalidDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/float/3.402823e+20")
         @ExpectedResponses({200})
@@ -73,7 +72,7 @@ public final class Numbers {
         @Get("/number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getBigFloat(@HostParam("$host") String host, Context context);
+        Mono<Response<Float>> getBigFloat(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
@@ -84,7 +83,7 @@ public final class Numbers {
         @Get("/number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDouble(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getBigDouble(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/99999999.99")
         @ExpectedResponses({200})
@@ -95,7 +94,7 @@ public final class Numbers {
         @Get("/number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDoublePositiveDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getBigDoublePositiveDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/-99999999.99")
         @ExpectedResponses({200})
@@ -106,7 +105,7 @@ public final class Numbers {
         @Get("/number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getBigDoubleNegativeDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
@@ -117,7 +116,7 @@ public final class Numbers {
         @Get("/number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<BigDecimal>> getBigDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/99999999.99")
         @ExpectedResponses({200})
@@ -128,7 +127,7 @@ public final class Numbers {
         @Get("/number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<BigDecimal>> getBigDecimalPositiveDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
@@ -139,7 +138,7 @@ public final class Numbers {
         @Get("/number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<BigDecimal>> getBigDecimalNegativeDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/float/3.402823e-20")
         @ExpectedResponses({200})
@@ -150,7 +149,7 @@ public final class Numbers {
         @Get("/number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getSmallFloat(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getSmallFloat(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
@@ -161,7 +160,7 @@ public final class Numbers {
         @Get("/number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getSmallDouble(@HostParam("$host") String host, Context context);
+        Mono<Response<Double>> getSmallDouble(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
@@ -172,7 +171,7 @@ public final class Numbers {
         @Get("/number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getSmallDecimal(@HostParam("$host") String host, Context context);
+        Mono<Response<BigDecimal>> getSmallDecimal(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -183,7 +182,7 @@ public final class Numbers {
      * @return null Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Float>> getNullWithResponseAsync() {
+    public Mono<Response<Float>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -202,7 +201,7 @@ public final class Numbers {
     public Mono<Float> getNullAsync() {
         return getNullWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Float> res) -> {
+                        (Response<Float> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -236,7 +235,7 @@ public final class Numbers {
      * @return invalid float Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Float>> getInvalidFloatWithResponseAsync() {
+    public Mono<Response<Float>> getInvalidFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -255,7 +254,7 @@ public final class Numbers {
     public Mono<Float> getInvalidFloatAsync() {
         return getInvalidFloatWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Float> res) -> {
+                        (Response<Float> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -289,7 +288,7 @@ public final class Numbers {
      * @return invalid double Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getInvalidDoubleWithResponseAsync() {
+    public Mono<Response<Double>> getInvalidDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -308,7 +307,7 @@ public final class Numbers {
     public Mono<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -342,7 +341,7 @@ public final class Numbers {
      * @return invalid decimal Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BigDecimal>> getInvalidDecimalWithResponseAsync() {
+    public Mono<Response<BigDecimal>> getInvalidDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -361,7 +360,7 @@ public final class Numbers {
     public Mono<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BigDecimal> res) -> {
+                        (Response<BigDecimal> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -435,7 +434,7 @@ public final class Numbers {
      * @return big float value 3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Float>> getBigFloatWithResponseAsync() {
+    public Mono<Response<Float>> getBigFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -454,7 +453,7 @@ public final class Numbers {
     public Mono<Float> getBigFloatAsync() {
         return getBigFloatWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Float> res) -> {
+                        (Response<Float> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -533,7 +532,7 @@ public final class Numbers {
      * @return big double value 2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getBigDoubleWithResponseAsync() {
+    public Mono<Response<Double>> getBigDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -552,7 +551,7 @@ public final class Numbers {
     public Mono<Double> getBigDoubleAsync() {
         return getBigDoubleWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -627,7 +626,7 @@ public final class Numbers {
      * @return big double value 99999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getBigDoublePositiveDecimalWithResponseAsync() {
+    public Mono<Response<Double>> getBigDoublePositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -646,7 +645,7 @@ public final class Numbers {
     public Mono<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -721,7 +720,7 @@ public final class Numbers {
      * @return big double value -99999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimalWithResponseAsync() {
+    public Mono<Response<Double>> getBigDoubleNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -740,7 +739,7 @@ public final class Numbers {
     public Mono<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -822,7 +821,7 @@ public final class Numbers {
      * @return big decimal value 2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BigDecimal>> getBigDecimalWithResponseAsync() {
+    public Mono<Response<BigDecimal>> getBigDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -841,7 +840,7 @@ public final class Numbers {
     public Mono<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BigDecimal> res) -> {
+                        (Response<BigDecimal> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -911,7 +910,7 @@ public final class Numbers {
      * @return big decimal value 99999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync() {
+    public Mono<Response<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -930,7 +929,7 @@ public final class Numbers {
     public Mono<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BigDecimal> res) -> {
+                        (Response<BigDecimal> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1000,7 +999,7 @@ public final class Numbers {
      * @return big decimal value -99999999.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync() {
+    public Mono<Response<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1019,7 +1018,7 @@ public final class Numbers {
     public Mono<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BigDecimal> res) -> {
+                        (Response<BigDecimal> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1093,7 +1092,7 @@ public final class Numbers {
      * @return big double value 3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getSmallFloatWithResponseAsync() {
+    public Mono<Response<Double>> getSmallFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1112,7 +1111,7 @@ public final class Numbers {
     public Mono<Double> getSmallFloatAsync() {
         return getSmallFloatWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1191,7 +1190,7 @@ public final class Numbers {
      * @return big double value 2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Double>> getSmallDoubleWithResponseAsync() {
+    public Mono<Response<Double>> getSmallDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1210,7 +1209,7 @@ public final class Numbers {
     public Mono<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<Double> res) -> {
+                        (Response<Double> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -1292,7 +1291,7 @@ public final class Numbers {
      * @return small decimal value 2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BigDecimal>> getSmallDecimalWithResponseAsync() {
+    public Mono<Response<BigDecimal>> getSmallDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1311,7 +1310,7 @@ public final class Numbers {
     public Mono<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithResponseAsync()
                 .flatMap(
-                        (SimpleResponse<BigDecimal> res) -> {
+                        (Response<BigDecimal> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {

@@ -56,6 +56,12 @@ public class ClientModel {
      * Get the name that will be used for this model's XML element representation.
      */
     private String xmlName;
+
+    /**
+     * The xml namesapce for a model.
+     */
+    private final String xmlNamespace;
+
     /**
      * Get the properties for this model.
      */
@@ -75,7 +81,10 @@ public class ClientModel {
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
      */
-    private ClientModel(String package_Keyword, String name, List<String> imports, String description, boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName, List<ClientModelProperty> properties) {
+    private ClientModel(String package_Keyword, String name, List<String> imports, String description,
+            boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
+            String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
+            List<ClientModelProperty> properties) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -87,6 +96,7 @@ public class ClientModel {
         this.parentModelName = parentModelName;
         this.derivedModels = derivedModels;
         this.xmlName = xmlName;
+        this.xmlNamespace = xmlNamespace;
         this.properties = properties;
     }
 
@@ -141,6 +151,10 @@ public class ClientModel {
         return xmlName;
     }
 
+    public String getXmlNamespace() {
+        return xmlNamespace;
+    }
+
     public final List<ClientModelProperty> getProperties() {
         return properties;
     }
@@ -192,6 +206,7 @@ public class ClientModel {
         private List<ClientModel> derivedModels;
         private String xmlName;
         private List<ClientModelProperty> properties;
+        private String xmlNamespace;
 
         /**
          * Sets the package that this model class belongs to.
@@ -304,6 +319,16 @@ public class ClientModel {
         }
 
         /**
+         * Sets the XML namespace that will be used for this model's XML element representation.
+         * @param xmlNamespace the XML namespace that will be used for this model's XML element representation
+         * @return the Builder itself
+         */
+        public Builder xmlNamespace(String xmlNamespace) {
+            this.xmlNamespace = xmlNamespace;
+            return this;
+        }
+
+        /**
          * Sets the properties for this model.
          * @param properties the properties for this model
          * @return the Builder itself
@@ -325,6 +350,7 @@ public class ClientModel {
                     parentModelName,
                     derivedModels,
                     xmlName,
+                    xmlNamespace,
                     properties);
         }
     }
