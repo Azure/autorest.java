@@ -30,6 +30,7 @@ import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductResult;
 import fixtures.paging.models.ProductResultValue;
+import fixtures.paging.models.ProductResultValueWithXMSClientName;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Pagings. */
@@ -191,6 +192,12 @@ public final class Pagings {
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 Context context);
 
+        @Get("/paging/itemNameWithXMSClientName")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientName(
+                @HostParam("$host") String host, Context context);
+
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -255,6 +262,12 @@ public final class Pagings {
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesLRONext(
+                @PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
     }
 
@@ -1291,6 +1304,58 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return FluxUtil.withContext(
+                        context -> service.getPagingModelWithItemNameWithXMSClientName(this.client.getHost(), context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getPagingModelWithItemNameWithXMSClientNameAsync() {
+        return new PagedFlux<>(
+                () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(),
+                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagingModelWithItemNameWithXMSClientName() {
+        return new PagedIterable<>(getPagingModelWithItemNameWithXMSClientNameAsync());
+    }
+
+    /**
      * Get the next page of items.
      *
      * @param nextLink The nextLink parameter.
@@ -1565,6 +1630,34 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getMultiplePagesLRONext(nextLink, context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
+            String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return FluxUtil.withContext(
+                        context -> service.getPagingModelWithItemNameWithXMSClientNameNext(nextLink, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
