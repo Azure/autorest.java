@@ -31,6 +31,7 @@ public class ClientModelProperty {
      * Get this property's name when serialized to XML.
      */
     private String xmlName;
+    private final String xmlNamespace;
     /**
      * Get this property's name when it is serialized.
      */
@@ -92,12 +93,16 @@ public class ClientModelProperty {
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      * @param isAdditionalProperties Whether or not this property contain the additional properties.
      */
-    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties) {
+    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
+            String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
+            IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly,
+            boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
         this.isXmlAttribute = isXmlAttribute;
         this.xmlName = xmlName;
+        this.xmlNamespace = xmlNamespace;
         this.serializedName = serializedName;
         this.isXmlWrapper = isXmlWrapper;
         this.xmlListElementName = xmlListElementName;
@@ -137,6 +142,10 @@ public class ClientModelProperty {
 
     public final String getXmlName() {
         return xmlName;
+    }
+
+    public String getXmlNamespace() {
+        return xmlNamespace;
     }
 
     public final String getSerializedName() {
@@ -236,6 +245,7 @@ public class ClientModelProperty {
         private boolean isRequired;
         private String headerCollectionPrefix;
         private boolean isAdditionalProperties = false;
+        private String xmlNamespace;
 
         /**
          * Sets the name of this property.
@@ -284,6 +294,16 @@ public class ClientModelProperty {
          */
         public Builder xmlName(String xmlName) {
             this.xmlName = xmlName;
+            return this;
+        }
+
+        /**
+         * Sets this property's namespace when serialized to XML.
+         * @param xmlNamespace this property's namespace when serialized to XML
+         * @return the Builder itself
+         */
+        public Builder xmlNamespace(String xmlNamespace) {
+            this.xmlNamespace = xmlNamespace;
             return this;
         }
 
@@ -403,6 +423,7 @@ public class ClientModelProperty {
                     annotationArguments,
                     isXmlAttribute,
                     xmlName,
+                    xmlNamespace,
                     serializedName,
                     isXmlWrapper,
                     xmlListElementName,
