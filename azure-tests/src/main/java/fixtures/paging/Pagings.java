@@ -1324,7 +1324,7 @@ public final class Pagings {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        res.getValue().getValues(),
+                                        res.getValue().getIndexes(),
                                         res.getValue().getNextLink(),
                                         null));
     }
@@ -1664,7 +1664,7 @@ public final class Pagings {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        res.getValue().getValues(),
+                                        res.getValue().getIndexes(),
                                         res.getValue().getNextLink(),
                                         null));
     }
