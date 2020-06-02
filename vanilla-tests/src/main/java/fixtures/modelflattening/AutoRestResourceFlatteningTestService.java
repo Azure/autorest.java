@@ -56,7 +56,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestResourceFlatteningTestService setHost(String host) {
+    AutoRestResourceFlatteningTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -74,7 +74,7 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /** Initializes an instance of AutoRestResourceFlatteningTestService client. */
-    public AutoRestResourceFlatteningTestService() {
+    AutoRestResourceFlatteningTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -83,7 +83,7 @@ public final class AutoRestResourceFlatteningTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestResourceFlatteningTestService(HttpPipeline httpPipeline) {
+    AutoRestResourceFlatteningTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, this.httpPipeline);
     }

@@ -15,10 +15,10 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
-import com.azure.mgmttest.appservice.DefaultErrorResponseError;
-import com.azure.mgmttest.authorization.GraphErrorException;
-import com.azure.mgmttest.storage.models.StorageManagementClientImplBuilder;
-import com.azure.mgmttest.storage.models.StorageManagementClientImpl;
+import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
+import com.azure.mgmttest.authorization.models.GraphErrorException;
+import com.azure.mgmttest.storage.StorageManagementClientBuilder;
+import com.azure.mgmttest.storage.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -30,14 +30,14 @@ public class RuntimeTests {
 
     @Test
     public void testManagementClient() {
-        StorageManagementClientImpl storageManagementClient = new StorageManagementClientImplBuilder()
+        StorageManagementClient storageManagementClient = new StorageManagementClientBuilder()
                 .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build())
                 .host(AzureEnvironment.AZURE.getResourceManagerEndpoint())
                 .subscriptionId(MOCK_SUBSCRIPTION_ID)
                 .buildClient();
         Assertions.assertNotNull(storageManagementClient.getHttpPipeline());
         Assertions.assertEquals(MOCK_SUBSCRIPTION_ID, storageManagementClient.getSubscriptionId());
-        Assertions.assertNotNull(storageManagementClient.storageAccounts());
+        Assertions.assertNotNull(storageManagementClient.getStorageAccounts());
     }
 
     @Test

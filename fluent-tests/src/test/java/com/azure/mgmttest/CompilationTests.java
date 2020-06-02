@@ -11,23 +11,22 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
-import com.azure.mgmttest.appservice.DefaultErrorResponseError;
-import com.azure.mgmttest.appservice.DefaultErrorResponseErrorException;
-import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
-import com.azure.mgmttest.authorization.GraphError;
-import com.azure.mgmttest.authorization.GraphErrorException;
-import com.azure.mgmttest.conainterservice.ContainerServiceMasterProfile;
-import com.azure.mgmttest.conainterservice.Count;
-import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
-import com.azure.mgmttest.network.models.NetworkInterfaceInner;
-import com.azure.mgmttest.network.models.NetworkInterfacesInner;
-import com.azure.mgmttest.network.models.NetworkSecurityGroupInner;
-import com.azure.mgmttest.resources.IdentityUserAssignedIdentities;
-import com.azure.mgmttest.resources.models.DeploymentExtendedInner;
-import com.azure.mgmttest.resources.models.DeploymentsInner;
-import com.azure.mgmttest.resources.models.ResourceGroupInner;
-import com.azure.mgmttest.storage.models.StorageAccountInner;
-import com.azure.mgmttest.storage.models.StorageAccountsInner;
+import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
+import com.azure.mgmttest.appservice.WebSiteManagementClient;
+import com.azure.mgmttest.authorization.models.GraphError;
+import com.azure.mgmttest.authorization.models.GraphErrorException;
+import com.azure.mgmttest.conainterservice.models.ContainerServiceMasterProfile;
+import com.azure.mgmttest.conainterservice.models.Count;
+import com.azure.mgmttest.cosmos.models.SqlDatabaseGetPropertiesResource;
+import com.azure.mgmttest.network.fluent.inner.NetworkInterfaceInner;
+import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
+import com.azure.mgmttest.network.fluent.inner.NetworkSecurityGroupInner;
+import com.azure.mgmttest.resources.models.IdentityUserAssignedIdentities;
+import com.azure.mgmttest.resources.fluent.inner.DeploymentExtendedInner;
+import com.azure.mgmttest.resources.fluent.DeploymentsClient;
+import com.azure.mgmttest.resources.fluent.inner.ResourceGroupInner;
+import com.azure.mgmttest.storage.fluent.inner.StorageAccountInner;
+import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 
 import static org.mockito.Mockito.*;
 
@@ -37,13 +36,13 @@ public class CompilationTests {
 
     public void testManagementClient() {
         // Operation group
-        WebSiteManagementClientImpl webSiteManagementClient = mock(WebSiteManagementClientImpl.class);
+        WebSiteManagementClient webSiteManagementClient = mock(WebSiteManagementClient.class);
         webSiteManagementClient.list();
     }
 
     public void testOperationName() {
         // ListAll -> list, List -> listByResourceGroup (spec -> code).
-        NetworkInterfacesInner networkInterfaces = mock(NetworkInterfacesInner.class);
+        NetworkInterfacesClient networkInterfaces = mock(NetworkInterfacesClient.class);
         networkInterfaces.list();
         networkInterfaces.listAsync();
         networkInterfaces.listByResourceGroup(anyString());
@@ -54,14 +53,14 @@ public class CompilationTests {
 
     public void testInnerSupport() {
         // Add InnerSupportsListing to class.
-        InnerSupportsListing<StorageAccountInner> storageAccounts = mock(StorageAccountsInner.class);
+        InnerSupportsListing<StorageAccountInner> storageAccounts = mock(StorageAccountsClient.class);
         storageAccounts.list();
 
         // Add InnerSupportsGet to class.
-        InnerSupportsGet<DeploymentExtendedInner> deployments = mock(DeploymentsInner.class);
+        InnerSupportsGet<DeploymentExtendedInner> deployments = mock(DeploymentsClient.class);
         deployments.getByResourceGroup(anyString(), anyString());
 
-        InnerSupportsGet<NetworkInterfaceInner> networkInterfaces = mock(NetworkInterfacesInner.class);
+        InnerSupportsGet<NetworkInterfaceInner> networkInterfaces = mock(NetworkInterfacesClient.class);
         networkInterfaces.getByResourceGroup(anyString(), anyString());
     }
 
@@ -98,5 +97,6 @@ public class CompilationTests {
         ManagementError error = exception.getValue();
 
         GraphErrorException graphException = new GraphErrorException(anyString(), null);
+        GraphError graphError = graphException.getValue();
     }
 }

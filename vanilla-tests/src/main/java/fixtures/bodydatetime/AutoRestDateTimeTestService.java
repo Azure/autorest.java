@@ -26,7 +26,7 @@ public final class AutoRestDateTimeTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestDateTimeTestService setHost(String host) {
+    AutoRestDateTimeTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestDateTimeTestService {
     }
 
     /** Initializes an instance of AutoRestDateTimeTestService client. */
-    public AutoRestDateTimeTestService() {
+    AutoRestDateTimeTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestDateTimeTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDateTimeTestService(HttpPipeline httpPipeline) {
+    AutoRestDateTimeTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.datetimeOperations = new DatetimeOperations(this);
     }

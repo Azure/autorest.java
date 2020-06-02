@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -84,7 +86,23 @@ public class StringOperationsTests {
     @Test
     public void getBase64Encoded() throws Exception {
         byte[] result = client.getStringOperations().getBase64Encoded();
-        Assert.assertEquals("a string that gets encoded with base64", new String(result));
+        Assert.assertEquals("a string that gets encoded with base64",
+            new String(Base64.getDecoder().decode(unquote(new String(result, StandardCharsets.UTF_8))), StandardCharsets.UTF_8));
+    }
+
+    // copied from azure-core
+    private static String unquote(String string) {
+        if (string != null && !string.isEmpty()) {
+            final char firstCharacter = string.charAt(0);
+            if (firstCharacter == '\"' || firstCharacter == '\'') {
+                final int base64UrlStringLength = string.length();
+                final char lastCharacter = string.charAt(base64UrlStringLength - 1);
+                if (lastCharacter == firstCharacter) {
+                    string = string.substring(1, base64UrlStringLength - 1);
+                }
+            }
+        }
+        return string;
     }
 
     @Test

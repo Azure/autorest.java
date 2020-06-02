@@ -26,7 +26,7 @@ public final class AutoRestIntegerTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestIntegerTestService setHost(String host) {
+    AutoRestIntegerTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestIntegerTestService {
     }
 
     /** Initializes an instance of AutoRestIntegerTestService client. */
-    public AutoRestIntegerTestService() {
+    AutoRestIntegerTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestIntegerTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestIntegerTestService(HttpPipeline httpPipeline) {
+    AutoRestIntegerTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.ints = new Ints(this);
     }

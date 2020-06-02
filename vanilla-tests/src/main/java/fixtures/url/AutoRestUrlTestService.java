@@ -26,7 +26,7 @@ public final class AutoRestUrlTestService {
      * @param globalStringPath the globalStringPath value.
      * @return the service client itself.
      */
-    public AutoRestUrlTestService setGlobalStringPath(String globalStringPath) {
+    AutoRestUrlTestService setGlobalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
         return this;
     }
@@ -49,7 +49,7 @@ public final class AutoRestUrlTestService {
      * @param globalStringQuery the globalStringQuery value.
      * @return the service client itself.
      */
-    public AutoRestUrlTestService setGlobalStringQuery(String globalStringQuery) {
+    AutoRestUrlTestService setGlobalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;
         return this;
     }
@@ -72,7 +72,7 @@ public final class AutoRestUrlTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestUrlTestService setHost(String host) {
+    AutoRestUrlTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -126,7 +126,7 @@ public final class AutoRestUrlTestService {
     }
 
     /** Initializes an instance of AutoRestUrlTestService client. */
-    public AutoRestUrlTestService() {
+    AutoRestUrlTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -135,7 +135,7 @@ public final class AutoRestUrlTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestUrlTestService(HttpPipeline httpPipeline) {
+    AutoRestUrlTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.paths = new Paths(this);
         this.queries = new Queries(this);

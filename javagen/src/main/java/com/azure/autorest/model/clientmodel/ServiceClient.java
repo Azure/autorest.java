@@ -163,6 +163,12 @@ public class ServiceClient {
             for (Constructor constructor : getConstructors()) {
                 constructor.addImportsTo(imports, includeImplementationImports);
             }
+
+            if (!settings.shouldGenerateClientInterfaces()) {
+                for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
+                    imports.add(String.format("%1$s.%2$s", methodGroupClient.getPackage(), methodGroupClient.getClassName()));
+                }
+            }
         }
 
         if (includeBuilderImports || includeImplementationImports) {

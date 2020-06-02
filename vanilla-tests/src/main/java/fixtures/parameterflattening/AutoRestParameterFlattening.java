@@ -26,7 +26,7 @@ public final class AutoRestParameterFlattening {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestParameterFlattening setHost(String host) {
+    AutoRestParameterFlattening setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestParameterFlattening {
     }
 
     /** Initializes an instance of AutoRestParameterFlattening client. */
-    public AutoRestParameterFlattening() {
+    AutoRestParameterFlattening() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestParameterFlattening {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterFlattening(HttpPipeline httpPipeline) {
+    AutoRestParameterFlattening(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.availabilitySets = new AvailabilitySets(this);
     }

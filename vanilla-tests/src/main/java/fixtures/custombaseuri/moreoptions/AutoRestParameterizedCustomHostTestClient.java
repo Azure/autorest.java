@@ -26,7 +26,7 @@ public final class AutoRestParameterizedCustomHostTestClient {
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself.
      */
-    public AutoRestParameterizedCustomHostTestClient setSubscriptionId(String subscriptionId) {
+    AutoRestParameterizedCustomHostTestClient setSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
@@ -49,7 +49,7 @@ public final class AutoRestParameterizedCustomHostTestClient {
      * @param dnsSuffix the dnsSuffix value.
      * @return the service client itself.
      */
-    public AutoRestParameterizedCustomHostTestClient setDnsSuffix(String dnsSuffix) {
+    AutoRestParameterizedCustomHostTestClient setDnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
         return this;
     }
@@ -79,7 +79,7 @@ public final class AutoRestParameterizedCustomHostTestClient {
     }
 
     /** Initializes an instance of AutoRestParameterizedCustomHostTestClient client. */
-    public AutoRestParameterizedCustomHostTestClient() {
+    AutoRestParameterizedCustomHostTestClient() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -88,7 +88,7 @@ public final class AutoRestParameterizedCustomHostTestClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline) {
+    AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.paths = new Paths(this);
     }

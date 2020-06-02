@@ -26,7 +26,7 @@ public final class AutoRestSwaggerBATArrayService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestSwaggerBATArrayService setHost(String host) {
+    AutoRestSwaggerBATArrayService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestSwaggerBATArrayService {
     }
 
     /** Initializes an instance of AutoRestSwaggerBATArrayService client. */
-    public AutoRestSwaggerBATArrayService() {
+    AutoRestSwaggerBATArrayService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestSwaggerBATArrayService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATArrayService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATArrayService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.arrays = new Arrays(this);
     }

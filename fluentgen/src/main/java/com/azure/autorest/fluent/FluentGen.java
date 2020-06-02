@@ -102,11 +102,7 @@ public class FluentGen extends NewPlugin {
             }
 
             // Service client builder
-            String builderPackage = client.getServiceClient().getPackage();
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                builderPackage = JavaSettings.getInstance().getPackage();
-            }
-
+            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
             String builderSuffix = ClientModelUtil.getBuilderSuffix();
             javaPackage.addServiceClientBuilder(builderPackage,
                 client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());

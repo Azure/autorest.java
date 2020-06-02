@@ -95,7 +95,6 @@ public final class StringOperations {
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<byte[]>> getBase64Encoded(@HostParam("$host") String host, Context context);
 

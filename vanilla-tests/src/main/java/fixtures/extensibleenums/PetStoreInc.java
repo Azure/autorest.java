@@ -26,7 +26,7 @@ public final class PetStoreInc {
      * @param host the host value.
      * @return the service client itself.
      */
-    public PetStoreInc setHost(String host) {
+    PetStoreInc setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class PetStoreInc {
     }
 
     /** Initializes an instance of PetStoreInc client. */
-    public PetStoreInc() {
+    PetStoreInc() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class PetStoreInc {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public PetStoreInc(HttpPipeline httpPipeline) {
+    PetStoreInc(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.pets = new Pets(this);
     }

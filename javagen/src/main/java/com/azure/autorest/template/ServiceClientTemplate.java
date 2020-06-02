@@ -19,6 +19,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -54,14 +55,30 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
+        if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients()) {
+            imports.add("com.azure.core.annotation.ServiceClient");
+            imports.add(String.format("%1$s.%2$s",
+                ClientModelUtil.getServiceClientBuilderPackageName(serviceClient),
+                serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+        }
+
         serviceClient.addImportsTo(imports, true, false, settings);
         javaFile.declareImport(imports);
+
+        final JavaVisibility visibility = serviceClient.getPackage()
+            .equals(ClientModelUtil.getServiceClientBuilderPackageName(serviceClient))
+            ? JavaVisibility.PackagePrivate
+            : JavaVisibility.Public;
 
         javaFile.javadocComment(comment ->
         {
             String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
             comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClientTypeName));
         });
+        if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients()) {
+            javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
+                serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+        }
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
         {
             if (settings.shouldClientLogger()) {
@@ -114,11 +131,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             serviceClientProperty.getName()));
                         function.methodReturn("this");
                     };
-                    if (serviceClient.getPackage() != settings.getPackage()) {
-                        classBlock.publicMethod(methodSignature, methodBody);
-                    } else {
-                        classBlock.packagePrivateMethod(methodSignature, methodBody);
-                    }
+                    classBlock.method(visibility, null, methodSignature, methodBody);
                 }
             }
 
@@ -135,15 +148,15 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getVariableType()));
                     comment.methodReturns(String.format("the %1$s object.", methodGroupClient.getVariableType()));
                 });
-                classBlock.publicMethod(String.format("%1$s %2$s()", methodGroupClient.getVariableType(),
-                    CodeNamer.getModelNamer().modelPropertyGetterName(methodGroupClient.getVariableName())), function ->
+                classBlock.publicMethod(String.format("%1$s get%2$s()", methodGroupClient.getVariableType(),
+                    CodeNamer.toPascalCase(methodGroupClient.getVariableName())), function ->
                 {
                     function.methodReturn(String.format("this.%1$s", methodGroupClient.getVariableName()));
                 });
             }
 
             // Service Client Constructors
-            boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getTokenCredentialParameter()));
+            //boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getTokenCredentialParameter()));
             for (Constructor constructor : serviceClient.getConstructors()) {
                 classBlock.javadocComment(comment ->
                 {
@@ -153,10 +166,6 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     }
                 });
 
-                JavaVisibility visibility = JavaVisibility.PackagePrivate;
-                if (serviceClient.getPackage() != settings.getPackage()) {
-                    visibility = JavaVisibility.Public;
-                }
                 classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
                 {
                     if (settings.isFluent()) {

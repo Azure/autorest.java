@@ -26,7 +26,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestHttpInfrastructureTestService setHost(String host) {
+    AutoRestHttpInfrastructureTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -128,7 +128,7 @@ public final class AutoRestHttpInfrastructureTestService {
     }
 
     /** Initializes an instance of AutoRestHttpInfrastructureTestService client. */
-    public AutoRestHttpInfrastructureTestService() {
+    AutoRestHttpInfrastructureTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -137,7 +137,7 @@ public final class AutoRestHttpInfrastructureTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline) {
+    AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.httpFailures = new HttpFailures(this);
         this.httpSuccess = new HttpSuccess(this);

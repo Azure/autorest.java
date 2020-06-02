@@ -26,7 +26,7 @@ public final class AutoRestSwaggerBATHeaderService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestSwaggerBATHeaderService setHost(String host) {
+    AutoRestSwaggerBATHeaderService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestSwaggerBATHeaderService {
     }
 
     /** Initializes an instance of AutoRestSwaggerBATHeaderService client. */
-    public AutoRestSwaggerBATHeaderService() {
+    AutoRestSwaggerBATHeaderService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestSwaggerBATHeaderService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATHeaderService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATHeaderService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.headers = new Headers(this);
     }

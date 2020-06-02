@@ -45,7 +45,7 @@ public final class AutoRestReportService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestReportService setHost(String host) {
+    AutoRestReportService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -63,7 +63,7 @@ public final class AutoRestReportService {
     }
 
     /** Initializes an instance of AutoRestReportService client. */
-    public AutoRestReportService() {
+    AutoRestReportService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -72,7 +72,7 @@ public final class AutoRestReportService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportService(HttpPipeline httpPipeline) {
+    AutoRestReportService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.service = RestProxy.create(AutoRestReportServiceService.class, this.httpPipeline);
     }
