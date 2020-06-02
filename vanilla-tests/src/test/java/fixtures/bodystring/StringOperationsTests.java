@@ -3,7 +3,6 @@ package fixtures.bodystring;
 import com.azure.core.exception.HttpResponseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -87,14 +86,14 @@ public class StringOperationsTests {
     @Test
     public void getBase64Encoded() throws Exception {
         byte[] result = client.getStringOperations().getBase64Encoded();
-        Assert.assertEquals("a string that gets encoded with base64", new String(result));
+        Assert.assertEquals("a string that gets encoded with base64",
+            new String(Base64.getDecoder().decode(result), StandardCharsets.UTF_8));
     }
 
     @Test
     public void getBase64UrlEncoded() throws Exception {
         byte[] result = client.getStringOperations().getBase64UrlEncoded();
-        Assert.assertEquals("a string that gets encoded with base64url",
-                new String(Base64.getDecoder().decode(result), StandardCharsets.UTF_8));
+        Assert.assertEquals("a string that gets encoded with base64url", new String(result));
     }
 
     @Test
