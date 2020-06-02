@@ -3,6 +3,7 @@ package fixtures.bodystring;
 import com.azure.core.exception.HttpResponseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
@@ -88,6 +89,7 @@ public class StringOperationsTests {
     }
 
     @Test
+    @Ignore("issue with https://github.com/Azure/autorest.testserver/pull/185")
     public void getBase64UrlEncoded() throws Exception {
         byte[] result = client.getStringOperations().getBase64UrlEncoded();
         Assert.assertEquals("a string that gets encoded with base64url", new String(result));
