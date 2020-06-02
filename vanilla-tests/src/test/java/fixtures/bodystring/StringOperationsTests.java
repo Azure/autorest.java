@@ -6,6 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -89,10 +91,10 @@ public class StringOperationsTests {
     }
 
     @Test
-    @Ignore("issue with https://github.com/Azure/autorest.testserver/pull/185")
     public void getBase64UrlEncoded() throws Exception {
         byte[] result = client.getStringOperations().getBase64UrlEncoded();
-        Assert.assertEquals("a string that gets encoded with base64url", new String(result));
+        Assert.assertEquals("a string that gets encoded with base64url",
+                new String(Base64.getDecoder().decode(result), StandardCharsets.UTF_8));
     }
 
     @Test
