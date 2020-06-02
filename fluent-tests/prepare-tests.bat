@@ -12,7 +12,7 @@ REM re-generate code
 RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 
 SET AUTOREST_CORE_VERSION=3.0.6282
-SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent --generate-client-as-impl --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=models --client-side-validations --client-logger
+SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
 
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources
 
