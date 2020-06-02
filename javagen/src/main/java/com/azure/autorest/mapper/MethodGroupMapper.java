@@ -90,8 +90,13 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
-        boolean isCustomType = settings.isCustomType(className);
-        String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+        String packageName;
+        if (settings.isFluent()) {
+            packageName = settings.getPackage(settings.getImplementationSubpackage());
+        } else {
+            boolean isCustomType = settings.isCustomType(className);
+            packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+        }
         builder.packageName(packageName);
 
         List<ClientMethod> clientMethods = new ArrayList<>();

@@ -11,6 +11,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,12 +41,20 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
         methodGroupClient.addImportsTo(imports, true, settings);
 
+        String serviceClientPackageName =
+            ClientModelUtil.getServiceClientPackageName(methodGroupClient.getServiceClientName());
+        imports.add(String.format("%1$s.%2$s", serviceClientPackageName, methodGroupClient.getServiceClientName()));
+
         javaFile.declareImport(imports);
 
         List<String> interfaces = methodGroupClient.getSupportedInterfaces().stream()
                 .map(IType::toString).collect(Collectors.toList());
         interfaces.addAll(methodGroupClient.getImplementedInterfaces());
         String parentDeclaration = !interfaces.isEmpty() ? String.format(" implements %1$s", String.join(", ", interfaces)) : "";
+
+        final JavaVisibility visibility = methodGroupClient.getPackage().equals(serviceClientPackageName)
+            ? JavaVisibility.PackagePrivate
+            : JavaVisibility.Public;
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
         {
@@ -67,7 +77,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 comment.description(String.format("Initializes an instance of %1$s.", methodGroupClient.getClassName()));
                 comment.param("client", "the instance of the service client containing this operation class.");
             });
-            classBlock.packagePrivateConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
+            classBlock.constructor(visibility, String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
             {
                 if (methodGroupClient.getProxy() != null) {
                     ClassType proxyType = ClassType.RestProxy;

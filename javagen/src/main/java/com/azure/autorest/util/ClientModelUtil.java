@@ -19,6 +19,7 @@ public class ClientModelUtil {
 
     /**
      * Prepare async/sync clients for service client.
+     *
      * @param serviceClient the service client.
      * @param asyncClients output, the async clients.
      * @param syncClients output, the sync client.
@@ -85,12 +86,29 @@ public class ClientModelUtil {
     }
 
     public static String getBuilderSuffix() {
+        JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
-        if (JavaSettings.getInstance().shouldGenerateClientAsImpl()
-                && !JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
         return builderSuffix.toString();
+    }
+
+    public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
+        String builderPackage = serviceClient.getPackage();
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            builderPackage = JavaSettings.getInstance().getPackage();
+        }
+        return builderPackage;
+    }
+
+    public static String getServiceClientPackageName(String serviceClientClassName) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
+        if (settings.isCustomType(serviceClientClassName)) {
+            subpackage = settings.getCustomTypesSubpackage();
+        }
+        return settings.getPackage(subpackage);
     }
 }
