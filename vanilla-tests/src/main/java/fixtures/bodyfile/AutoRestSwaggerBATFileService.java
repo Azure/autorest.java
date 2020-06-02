@@ -26,7 +26,7 @@ public final class AutoRestSwaggerBATFileService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestSwaggerBATFileService setHost(String host) {
+    AutoRestSwaggerBATFileService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestSwaggerBATFileService {
     }
 
     /** Initializes an instance of AutoRestSwaggerBATFileService client. */
-    public AutoRestSwaggerBATFileService() {
+    AutoRestSwaggerBATFileService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestSwaggerBATFileService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFileService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATFileService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.files = new Files(this);
     }

@@ -26,7 +26,7 @@ public final class AutoRestBoolTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestBoolTestService setHost(String host) {
+    AutoRestBoolTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -56,7 +56,7 @@ public final class AutoRestBoolTestService {
     }
 
     /** Initializes an instance of AutoRestBoolTestService client. */
-    public AutoRestBoolTestService() {
+    AutoRestBoolTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -65,7 +65,7 @@ public final class AutoRestBoolTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestBoolTestService(HttpPipeline httpPipeline) {
+    AutoRestBoolTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.bools = new Bools(this);
     }

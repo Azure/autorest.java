@@ -26,7 +26,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the service client itself.
      */
-    public AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
+    AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
         return this;
     }
@@ -49,7 +49,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the service client itself.
      */
-    public AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
+    AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
         return this;
     }
@@ -72,7 +72,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself.
      */
-    public AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
+    AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
         return this;
     }
@@ -95,7 +95,7 @@ public final class AutoRestRequiredOptionalTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestRequiredOptionalTestService setHost(String host) {
+    AutoRestRequiredOptionalTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -137,7 +137,7 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /** Initializes an instance of AutoRestRequiredOptionalTestService client. */
-    public AutoRestRequiredOptionalTestService() {
+    AutoRestRequiredOptionalTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -146,7 +146,7 @@ public final class AutoRestRequiredOptionalTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRequiredOptionalTestService(HttpPipeline httpPipeline) {
+    AutoRestRequiredOptionalTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.implicits = new Implicits(this);
         this.explicits = new Explicits(this);

@@ -26,7 +26,7 @@ public final class AutoRestComplexTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    public AutoRestComplexTestService setHost(String host) {
+    AutoRestComplexTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -49,7 +49,7 @@ public final class AutoRestComplexTestService {
      * @param apiVersion the apiVersion value.
      * @return the service client itself.
      */
-    public AutoRestComplexTestService setApiVersion(String apiVersion) {
+    AutoRestComplexTestService setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
     }
@@ -175,7 +175,7 @@ public final class AutoRestComplexTestService {
     }
 
     /** Initializes an instance of AutoRestComplexTestService client. */
-    public AutoRestComplexTestService() {
+    AutoRestComplexTestService() {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
     }
 
@@ -184,7 +184,7 @@ public final class AutoRestComplexTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestComplexTestService(HttpPipeline httpPipeline) {
+    AutoRestComplexTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
