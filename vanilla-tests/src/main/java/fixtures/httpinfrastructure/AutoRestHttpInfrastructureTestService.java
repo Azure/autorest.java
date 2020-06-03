@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestHttpInfrastructureTestService type. */
 public final class AutoRestHttpInfrastructureTestService {
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -18,17 +18,6 @@ public final class AutoRestHttpInfrastructureTestService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestHttpInfrastructureTestService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -128,8 +117,12 @@ public final class AutoRestHttpInfrastructureTestService {
     }
 
     /** Initializes an instance of AutoRestHttpInfrastructureTestService client. */
-    AutoRestHttpInfrastructureTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestHttpInfrastructureTestService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -137,8 +130,9 @@ public final class AutoRestHttpInfrastructureTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline) {
+    AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.httpFailures = new HttpFailures(this);
         this.httpSuccess = new HttpSuccess(this);
         this.httpRedirects = new HttpRedirects(this);

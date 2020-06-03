@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestSwaggerBATFileService type. */
 public final class AutoRestSwaggerBATFileService {
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -18,17 +18,6 @@ public final class AutoRestSwaggerBATFileService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestSwaggerBATFileService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -56,8 +45,12 @@ public final class AutoRestSwaggerBATFileService {
     }
 
     /** Initializes an instance of AutoRestSwaggerBATFileService client. */
-    AutoRestSwaggerBATFileService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestSwaggerBATFileService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -65,8 +58,9 @@ public final class AutoRestSwaggerBATFileService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestSwaggerBATFileService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATFileService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.files = new Files(this);
     }
 }

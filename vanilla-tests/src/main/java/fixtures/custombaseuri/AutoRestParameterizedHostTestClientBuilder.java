@@ -57,8 +57,7 @@ public final class AutoRestParameterizedHostTestClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline);
-        client.setHost(this.host);
+        AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline, host);
         return client;
     }
 }

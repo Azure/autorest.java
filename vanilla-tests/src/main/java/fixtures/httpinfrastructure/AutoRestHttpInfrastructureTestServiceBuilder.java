@@ -57,8 +57,7 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestHttpInfrastructureTestService client = new AutoRestHttpInfrastructureTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestHttpInfrastructureTestService client = new AutoRestHttpInfrastructureTestService(pipeline, host);
         return client;
     }
 }

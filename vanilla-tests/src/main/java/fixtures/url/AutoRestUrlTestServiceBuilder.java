@@ -89,10 +89,7 @@ public final class AutoRestUrlTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline);
-        client.setGlobalStringPath(this.globalStringPath);
-        client.setGlobalStringQuery(this.globalStringQuery);
-        client.setHost(this.host);
+        AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline, globalStringPath, globalStringQuery, host);
         return client;
     }
 }

@@ -32,7 +32,7 @@ public final class MediaTypesClient {
     private final MediaTypesClientService service;
 
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -41,17 +41,6 @@ public final class MediaTypesClient {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    MediaTypesClient setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -67,8 +56,12 @@ public final class MediaTypesClient {
     }
 
     /** Initializes an instance of MediaTypesClient client. */
-    MediaTypesClient() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    MediaTypesClient(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -76,8 +69,9 @@ public final class MediaTypesClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    MediaTypesClient(HttpPipeline httpPipeline) {
+    MediaTypesClient(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.service = RestProxy.create(MediaTypesClientService.class, this.httpPipeline);
     }
 

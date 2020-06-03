@@ -57,8 +57,7 @@ public final class AutoRestReportServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestReportService client = new AutoRestReportService(pipeline);
-        client.setHost(this.host);
+        AutoRestReportService client = new AutoRestReportService(pipeline, host);
         return client;
     }
 }

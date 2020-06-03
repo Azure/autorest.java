@@ -28,7 +28,7 @@ public final class AutoRestReportServiceForAzure {
     private final AutoRestReportServiceForAzureService service;
 
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -37,17 +37,6 @@ public final class AutoRestReportServiceForAzure {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestReportServiceForAzure setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -63,8 +52,12 @@ public final class AutoRestReportServiceForAzure {
     }
 
     /** Initializes an instance of AutoRestReportServiceForAzure client. */
-    AutoRestReportServiceForAzure() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestReportServiceForAzure(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -72,8 +65,9 @@ public final class AutoRestReportServiceForAzure {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestReportServiceForAzure(HttpPipeline httpPipeline) {
+    AutoRestReportServiceForAzure(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.service = RestProxy.create(AutoRestReportServiceForAzureService.class, this.httpPipeline);
     }
 

@@ -74,9 +74,8 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestParameterizedCustomHostTestClient client = new AutoRestParameterizedCustomHostTestClient(pipeline);
-        client.setSubscriptionId(this.subscriptionId);
-        client.setDnsSuffix(this.dnsSuffix);
+        AutoRestParameterizedCustomHostTestClient client =
+                new AutoRestParameterizedCustomHostTestClient(pipeline, subscriptionId, dnsSuffix);
         return client;
     }
 }

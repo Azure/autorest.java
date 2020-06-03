@@ -57,8 +57,7 @@ public final class AutoRestNumberTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestNumberTestService client = new AutoRestNumberTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestNumberTestService client = new AutoRestNumberTestService(pipeline, host);
         return client;
     }
 }

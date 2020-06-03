@@ -57,8 +57,7 @@ public final class PetStoreIncBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        PetStoreInc client = new PetStoreInc(pipeline);
-        client.setHost(this.host);
+        PetStoreInc client = new PetStoreInc(pipeline, host);
         return client;
     }
 }

@@ -57,8 +57,7 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestSwaggerBATFileService client = new AutoRestSwaggerBATFileService(pipeline);
-        client.setHost(this.host);
+        AutoRestSwaggerBATFileService client = new AutoRestSwaggerBATFileService(pipeline, host);
         return client;
     }
 }

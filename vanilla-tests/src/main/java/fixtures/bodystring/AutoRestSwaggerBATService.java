@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestSwaggerBATService type. */
 public final class AutoRestSwaggerBATService {
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -18,17 +18,6 @@ public final class AutoRestSwaggerBATService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestSwaggerBATService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -68,8 +57,12 @@ public final class AutoRestSwaggerBATService {
     }
 
     /** Initializes an instance of AutoRestSwaggerBATService client. */
-    AutoRestSwaggerBATService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestSwaggerBATService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -77,8 +70,9 @@ public final class AutoRestSwaggerBATService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestSwaggerBATService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.stringOperations = new StringOperations(this);
         this.enums = new Enums(this);
     }

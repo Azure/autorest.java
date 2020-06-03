@@ -57,8 +57,7 @@ public final class AdditionalPropertiesClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AdditionalPropertiesClient client = new AdditionalPropertiesClient(pipeline);
-        client.setHost(this.host);
+        AdditionalPropertiesClient client = new AdditionalPropertiesClient(pipeline, host);
         return client;
     }
 }

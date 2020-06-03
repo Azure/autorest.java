@@ -105,11 +105,9 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestRequiredOptionalTestService client = new AutoRestRequiredOptionalTestService(pipeline);
-        client.setRequiredGlobalPath(this.requiredGlobalPath);
-        client.setRequiredGlobalQuery(this.requiredGlobalQuery);
-        client.setOptionalGlobalQuery(this.optionalGlobalQuery);
-        client.setHost(this.host);
+        AutoRestRequiredOptionalTestService client =
+                new AutoRestRequiredOptionalTestService(
+                        pipeline, requiredGlobalPath, requiredGlobalQuery, optionalGlobalQuery, host);
         return client;
     }
 }

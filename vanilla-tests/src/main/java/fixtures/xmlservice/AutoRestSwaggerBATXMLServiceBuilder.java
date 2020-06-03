@@ -57,8 +57,7 @@ public final class AutoRestSwaggerBATXMLServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestSwaggerBATXMLService client = new AutoRestSwaggerBATXMLService(pipeline);
-        client.setHost(this.host);
+        AutoRestSwaggerBATXMLService client = new AutoRestSwaggerBATXMLService(pipeline, host);
         return client;
     }
 }

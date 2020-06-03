@@ -57,8 +57,7 @@ public final class AutoRestDateTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestDateTestService client = new AutoRestDateTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestDateTestService client = new AutoRestDateTestService(pipeline, host);
         return client;
     }
 }

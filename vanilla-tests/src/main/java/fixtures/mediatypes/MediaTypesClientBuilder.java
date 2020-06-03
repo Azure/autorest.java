@@ -57,8 +57,7 @@ public final class MediaTypesClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        MediaTypesClient client = new MediaTypesClient(pipeline);
-        client.setHost(this.host);
+        MediaTypesClient client = new MediaTypesClient(pipeline, host);
         return client;
     }
 }

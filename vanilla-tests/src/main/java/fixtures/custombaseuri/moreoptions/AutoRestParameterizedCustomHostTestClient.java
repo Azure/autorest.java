@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type. */
 public final class AutoRestParameterizedCustomHostTestClient {
     /** The subscription id with value 'test12'. */
-    private String subscriptionId;
+    private final String subscriptionId;
 
     /**
      * Gets The subscription id with value 'test12'.
@@ -20,19 +20,8 @@ public final class AutoRestParameterizedCustomHostTestClient {
         return this.subscriptionId;
     }
 
-    /**
-     * Sets The subscription id with value 'test12'.
-     *
-     * @param subscriptionId the subscriptionId value.
-     * @return the service client itself.
-     */
-    AutoRestParameterizedCustomHostTestClient setSubscriptionId(String subscriptionId) {
-        this.subscriptionId = subscriptionId;
-        return this;
-    }
-
     /** A string value that is used as a global part of the parameterized host. Default value 'host'. */
-    private String dnsSuffix;
+    private final String dnsSuffix;
 
     /**
      * Gets A string value that is used as a global part of the parameterized host. Default value 'host'.
@@ -41,17 +30,6 @@ public final class AutoRestParameterizedCustomHostTestClient {
      */
     public String getDnsSuffix() {
         return this.dnsSuffix;
-    }
-
-    /**
-     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
-     *
-     * @param dnsSuffix the dnsSuffix value.
-     * @return the service client itself.
-     */
-    AutoRestParameterizedCustomHostTestClient setDnsSuffix(String dnsSuffix) {
-        this.dnsSuffix = dnsSuffix;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -79,8 +57,13 @@ public final class AutoRestParameterizedCustomHostTestClient {
     }
 
     /** Initializes an instance of AutoRestParameterizedCustomHostTestClient client. */
-    AutoRestParameterizedCustomHostTestClient() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestParameterizedCustomHostTestClient(String subscriptionId, String dnsSuffix) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                subscriptionId,
+                dnsSuffix);
     }
 
     /**
@@ -88,8 +71,10 @@ public final class AutoRestParameterizedCustomHostTestClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline) {
+    AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline, String subscriptionId, String dnsSuffix) {
         this.httpPipeline = httpPipeline;
+        this.subscriptionId = subscriptionId;
+        this.dnsSuffix = dnsSuffix;
         this.paths = new Paths(this);
     }
 }

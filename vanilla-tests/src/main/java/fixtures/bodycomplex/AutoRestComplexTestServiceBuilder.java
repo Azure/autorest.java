@@ -27,22 +27,6 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /*
-     * Api Version
-     */
-    private String apiVersion;
-
-    /**
-     * Sets Api Version.
-     *
-     * @param apiVersion the apiVersion value.
-     * @return the AutoRestComplexTestServiceBuilder.
-     */
-    public AutoRestComplexTestServiceBuilder apiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
-        return this;
-    }
-
-    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -73,9 +57,7 @@ public final class AutoRestComplexTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline);
-        client.setHost(this.host);
-        client.setApiVersion(this.apiVersion);
+        AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline, host);
         return client;
     }
 }
