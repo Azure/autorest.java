@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Writes a ServiceClient to a JavaFile.
@@ -97,11 +98,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 {
                     comment.description(serviceClientProperty.getDescription());
                 });
-                if (serviceClientProperty.isReadOnly()) {
-                    classBlock.privateFinalMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
-                } else {
-                    classBlock.privateMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
-                }
+                classBlock.privateFinalMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
 
                 classBlock.javadocComment(comment ->
                 {
@@ -113,7 +110,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     function.methodReturn(String.format("this.%1$s", serviceClientProperty.getName()));
                 });
 
-                if (!serviceClientProperty.isReadOnly()) {
+                /* if (!serviceClientProperty.isReadOnly()) {
                     classBlock.javadocComment(comment ->
                     {
                         comment.description(String.format("Sets %1$s", serviceClientProperty.getDescription()));
@@ -132,7 +129,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         function.methodReturn("this");
                     };
                     classBlock.method(visibility, null, methodSignature, methodBody);
-                }
+                } */
             }
 
             // AutoRestMethod Group Client declarations and getters
@@ -155,6 +152,21 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 });
             }
 
+            // additional service client properties in constructor arguments
+            String constructorArgs = serviceClient.getProperties().stream()
+                    .filter(p -> !p.isReadOnly())
+                    .map(ServiceClientProperty::getName)
+                    .collect(Collectors.joining(", "));
+            if (!constructorArgs.isEmpty()) {
+                constructorArgs = ", " + constructorArgs;
+            }
+            final String constructorArgsFinal = constructorArgs;
+            // code lines
+            Consumer<JavaBlock> constructorParametersCodes = javaBlock -> {
+                serviceClient.getProperties().stream()
+                        .filter(p -> !p.isReadOnly()).forEach(p -> javaBlock.line(String.format("this.%1$s = %2$s;", p.getName(), p.getName())));
+            };
+
             // Service Client Constructors
             //boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getTokenCredentialParameter()));
             for (Constructor constructor : serviceClient.getConstructors()) {
@@ -166,16 +178,29 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     }
                 });
 
-                classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
+                // service client properties in constructor parameters
+                String constructorParams = Stream.concat(constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration),
+                        serviceClient.getProperties().stream()
+                                .filter(p -> !p.isReadOnly())
+                                .map(p -> String.format("%1$s %2$s", p.getType(), p.getName())))
+                        .collect(Collectors.joining(", "));
+
+                classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructorParams), constructorBlock ->
                 {
                     if (settings.isFluent()) {
                         if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line(String.format("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), %1$s);", serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
+                            constructorBlock.line(String.format("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), %1$s%2$s);",
+                                    serviceClient.getAzureEnvironmentParameter().getDefaultValue(), constructorArgsFinal));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
+                            constructorBlock.line(String.format("this(%1$s, %2$s%3$s);",
+                                    serviceClient.getHttpPipelineParameter().getName(),
+                                    serviceClient.getAzureEnvironmentParameter().getDefaultValue(),
+                                    constructorArgsFinal));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
                             constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
+
+                            constructorParametersCodes.accept(constructorBlock);
 
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
                                 if (serviceClientProperty.getDefaultValueExpression() != null) {
@@ -193,11 +218,12 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new "
-                                + "RetryPolicy(), new CookiePolicy()).build());");
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()%1$s);", constructorArgsFinal);
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
+                            constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
+                            constructorParametersCodes.accept(constructorBlock);
+
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
-                                constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
                                 if (serviceClientProperty.getDefaultValueExpression() != null) {
                                     constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
                                 }
