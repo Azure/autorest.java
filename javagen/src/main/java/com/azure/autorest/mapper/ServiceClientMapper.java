@@ -108,7 +108,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
-            boolean serviceClientPropertyIsReadOnly = serviceClientPropertyClientType instanceof ConstantSchema;
+            boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
 
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 

@@ -35,6 +35,7 @@ public class FluentTransformer {
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
+        codeModel = renameHostParameter(codeModel);
         codeModel = normalizeApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
@@ -54,6 +55,21 @@ public class FluentTransformer {
         codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .filter(o -> hasLongRunningOperationExtension(o) && hasPaging(o))
                 .forEach(o -> o.getExtensions().setXmsPageable(null));
+        return codeModel;
+    }
+
+    /**
+     * Renames $host to endpoint.
+     *
+     * @param codeModel Code model.
+     * @return Processed code model.
+     */
+    protected CodeModel renameHostParameter(CodeModel codeModel) {
+        codeModel.getGlobalParameters().stream()
+                .filter(p -> "$host".equals(p.getLanguage().getDefault().getSerializedName()))
+                .forEach(p -> {
+                    p.getLanguage().getDefault().setName("endpoint");
+                });
         return codeModel;
     }
 
