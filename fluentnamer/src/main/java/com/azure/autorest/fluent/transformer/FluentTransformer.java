@@ -36,7 +36,6 @@ public class FluentTransformer {
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = renameHostParameter(codeModel);
-        codeModel = normalizeApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
@@ -69,23 +68,6 @@ public class FluentTransformer {
                 .filter(p -> "$host".equals(p.getLanguage().getDefault().getSerializedName()))
                 .forEach(p -> {
                     p.getLanguage().getDefault().setName("endpoint");
-                });
-        return codeModel;
-    }
-
-    /**
-     * Sets proper ClientDefaultValue to api-version parameters.
-     *
-     * @param codeModel Code model.
-     * @return Processed code model.
-     */
-    protected CodeModel normalizeApiVersionParameter(CodeModel codeModel) {
-        codeModel.getGlobalParameters().stream()
-                .filter(p -> "api-version".equals(p.getLanguage().getDefault().getSerializedName()))
-                .forEach(p -> {
-                    if (p.getSchema() instanceof ConstantSchema) {
-                        p.setClientDefaultValue(((ConstantSchema) p.getSchema()).getValue().getValue().toString());
-                    }
                 });
         return codeModel;
     }

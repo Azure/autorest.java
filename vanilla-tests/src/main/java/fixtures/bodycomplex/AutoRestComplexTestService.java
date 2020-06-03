@@ -169,6 +169,7 @@ public final class AutoRestComplexTestService {
     AutoRestComplexTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
         this.host = host;
+        this.apiVersion = "2016-02-29";
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
         this.arrays = new Arrays(this);
