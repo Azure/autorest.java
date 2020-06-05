@@ -4,7 +4,7 @@
  *
  */
 
-package com.azure.management.resources.fluentcore.collection;
+package com.azure.resourcemanager.resources.fluentcore.collection;
 
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;

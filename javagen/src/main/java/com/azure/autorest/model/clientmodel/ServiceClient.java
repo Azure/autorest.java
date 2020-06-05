@@ -154,7 +154,7 @@ public class ServiceClient {
 
         if (includeImplementationImports) {
             if (settings.isAzureOrFluent()) {
-                imports.add("com.azure.management.AzureServiceClient");
+                imports.add("com.azure.resourcemanager.AzureServiceClient");
             }
             if (!getClientMethods().isEmpty()) {
                 imports.add("com.azure.core.http.rest.RestProxy");

@@ -27,15 +27,15 @@ public class FluentType {
     }
 
     public static GenericType InnerSupportsGet(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsGet", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsGet", typeArgument);
     }
 
     public static GenericType InnerSupportsList(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsListing", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsListing", typeArgument);
     }
 
     public static GenericType InnerSupportsDelete(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsDelete", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsDelete", typeArgument);
     }
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
