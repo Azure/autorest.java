@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.management;
+package com.azure.resourcemanager;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.management.polling.PollResult;
