@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestDateTimeTestService type. */
 public final class AutoRestDateTimeTestService {
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -18,17 +18,6 @@ public final class AutoRestDateTimeTestService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestDateTimeTestService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -56,8 +45,12 @@ public final class AutoRestDateTimeTestService {
     }
 
     /** Initializes an instance of AutoRestDateTimeTestService client. */
-    AutoRestDateTimeTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestDateTimeTestService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -65,8 +58,9 @@ public final class AutoRestDateTimeTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestDateTimeTestService(HttpPipeline httpPipeline) {
+    AutoRestDateTimeTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.datetimeOperations = new DatetimeOperations(this);
     }
 }

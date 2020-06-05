@@ -57,8 +57,7 @@ public final class AutoRestReportServiceForAzureBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzure(pipeline);
-        client.setHost(this.host);
+        AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzure(pipeline, host);
         return client;
     }
 }

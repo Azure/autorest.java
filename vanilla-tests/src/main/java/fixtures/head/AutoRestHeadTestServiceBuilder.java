@@ -57,8 +57,7 @@ public final class AutoRestHeadTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestHeadTestService client = new AutoRestHeadTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestHeadTestService client = new AutoRestHeadTestService(pipeline, host);
         return client;
     }
 }

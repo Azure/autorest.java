@@ -32,7 +32,7 @@ public class RuntimeTests {
     public void testManagementClient() {
         StorageManagementClient storageManagementClient = new StorageManagementClientBuilder()
                 .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build())
-                .host(AzureEnvironment.AZURE.getResourceManagerEndpoint())
+                .endpoint(AzureEnvironment.AZURE.getResourceManagerEndpoint())
                 .subscriptionId(MOCK_SUBSCRIPTION_ID)
                 .buildClient();
         Assertions.assertNotNull(storageManagementClient.getHttpPipeline());

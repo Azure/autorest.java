@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestRequiredOptionalTestService type. */
 public final class AutoRestRequiredOptionalTestService {
     /** number of items to skip. */
-    private String requiredGlobalPath;
+    private final String requiredGlobalPath;
 
     /**
      * Gets number of items to skip.
@@ -20,19 +20,8 @@ public final class AutoRestRequiredOptionalTestService {
         return this.requiredGlobalPath;
     }
 
-    /**
-     * Sets number of items to skip.
-     *
-     * @param requiredGlobalPath the requiredGlobalPath value.
-     * @return the service client itself.
-     */
-    AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
-        this.requiredGlobalPath = requiredGlobalPath;
-        return this;
-    }
-
     /** number of items to skip. */
-    private String requiredGlobalQuery;
+    private final String requiredGlobalQuery;
 
     /**
      * Gets number of items to skip.
@@ -43,19 +32,8 @@ public final class AutoRestRequiredOptionalTestService {
         return this.requiredGlobalQuery;
     }
 
-    /**
-     * Sets number of items to skip.
-     *
-     * @param requiredGlobalQuery the requiredGlobalQuery value.
-     * @return the service client itself.
-     */
-    AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
-        this.requiredGlobalQuery = requiredGlobalQuery;
-        return this;
-    }
-
     /** number of items to skip. */
-    private int optionalGlobalQuery;
+    private final int optionalGlobalQuery;
 
     /**
      * Gets number of items to skip.
@@ -66,19 +44,8 @@ public final class AutoRestRequiredOptionalTestService {
         return this.optionalGlobalQuery;
     }
 
-    /**
-     * Sets number of items to skip.
-     *
-     * @param optionalGlobalQuery the optionalGlobalQuery value.
-     * @return the service client itself.
-     */
-    AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
-        this.optionalGlobalQuery = optionalGlobalQuery;
-        return this;
-    }
-
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -87,17 +54,6 @@ public final class AutoRestRequiredOptionalTestService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestRequiredOptionalTestService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -137,8 +93,16 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /** Initializes an instance of AutoRestRequiredOptionalTestService client. */
-    AutoRestRequiredOptionalTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestRequiredOptionalTestService(
+            String requiredGlobalPath, String requiredGlobalQuery, int optionalGlobalQuery, String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                requiredGlobalPath,
+                requiredGlobalQuery,
+                optionalGlobalQuery,
+                host);
     }
 
     /**
@@ -146,8 +110,17 @@ public final class AutoRestRequiredOptionalTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestRequiredOptionalTestService(HttpPipeline httpPipeline) {
+    AutoRestRequiredOptionalTestService(
+            HttpPipeline httpPipeline,
+            String requiredGlobalPath,
+            String requiredGlobalQuery,
+            int optionalGlobalQuery,
+            String host) {
         this.httpPipeline = httpPipeline;
+        this.requiredGlobalPath = requiredGlobalPath;
+        this.requiredGlobalQuery = requiredGlobalQuery;
+        this.optionalGlobalQuery = optionalGlobalQuery;
+        this.host = host;
         this.implicits = new Implicits(this);
         this.explicits = new Explicits(this);
     }

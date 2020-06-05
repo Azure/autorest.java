@@ -57,8 +57,7 @@ public final class AutoRestPagingTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline, host);
         return client;
     }
 }

@@ -62,8 +62,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestSwaggerBATDictionaryServiceImpl client = new AutoRestSwaggerBATDictionaryServiceImpl(pipeline);
-        client.setHost(this.host);
+        AutoRestSwaggerBATDictionaryServiceImpl client = new AutoRestSwaggerBATDictionaryServiceImpl(pipeline, host);
         return client;
     }
 

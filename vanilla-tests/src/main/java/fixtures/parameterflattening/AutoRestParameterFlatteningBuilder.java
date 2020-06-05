@@ -57,8 +57,7 @@ public final class AutoRestParameterFlatteningBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestParameterFlattening client = new AutoRestParameterFlattening(pipeline);
-        client.setHost(this.host);
+        AutoRestParameterFlattening client = new AutoRestParameterFlattening(pipeline, host);
         return client;
     }
 }

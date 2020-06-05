@@ -57,8 +57,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestResourceFlatteningTestService client = new AutoRestResourceFlatteningTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestResourceFlatteningTestService client = new AutoRestResourceFlatteningTestService(pipeline, host);
         return client;
     }
 }

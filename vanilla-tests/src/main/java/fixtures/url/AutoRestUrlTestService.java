@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestUrlTestService type. */
 public final class AutoRestUrlTestService {
     /** A string value 'globalItemStringPath' that appears in the path. */
-    private String globalStringPath;
+    private final String globalStringPath;
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
@@ -20,19 +20,8 @@ public final class AutoRestUrlTestService {
         return this.globalStringPath;
     }
 
-    /**
-     * Sets A string value 'globalItemStringPath' that appears in the path.
-     *
-     * @param globalStringPath the globalStringPath value.
-     * @return the service client itself.
-     */
-    AutoRestUrlTestService setGlobalStringPath(String globalStringPath) {
-        this.globalStringPath = globalStringPath;
-        return this;
-    }
-
     /** should contain value null. */
-    private String globalStringQuery;
+    private final String globalStringQuery;
 
     /**
      * Gets should contain value null.
@@ -43,19 +32,8 @@ public final class AutoRestUrlTestService {
         return this.globalStringQuery;
     }
 
-    /**
-     * Sets should contain value null.
-     *
-     * @param globalStringQuery the globalStringQuery value.
-     * @return the service client itself.
-     */
-    AutoRestUrlTestService setGlobalStringQuery(String globalStringQuery) {
-        this.globalStringQuery = globalStringQuery;
-        return this;
-    }
-
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -64,17 +42,6 @@ public final class AutoRestUrlTestService {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestUrlTestService setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -126,8 +93,14 @@ public final class AutoRestUrlTestService {
     }
 
     /** Initializes an instance of AutoRestUrlTestService client. */
-    AutoRestUrlTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestUrlTestService(String globalStringPath, String globalStringQuery, String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                globalStringPath,
+                globalStringQuery,
+                host);
     }
 
     /**
@@ -135,8 +108,11 @@ public final class AutoRestUrlTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestUrlTestService(HttpPipeline httpPipeline) {
+    AutoRestUrlTestService(HttpPipeline httpPipeline, String globalStringPath, String globalStringQuery, String host) {
         this.httpPipeline = httpPipeline;
+        this.globalStringPath = globalStringPath;
+        this.globalStringQuery = globalStringQuery;
+        this.host = host;
         this.paths = new Paths(this);
         this.queries = new Queries(this);
         this.pathItems = new PathItems(this);

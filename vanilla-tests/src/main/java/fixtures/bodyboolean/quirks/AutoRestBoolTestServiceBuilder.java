@@ -57,8 +57,7 @@ public final class AutoRestBoolTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestBoolTestService client = new AutoRestBoolTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestBoolTestService client = new AutoRestBoolTestService(pipeline, host);
         return client;
     }
 }

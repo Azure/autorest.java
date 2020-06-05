@@ -137,14 +137,20 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         });
                     }
                 }
-                if (settings.isAzureOrFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, environment);", serviceClient.getClassName(), serviceClient.getClassName()));
-                } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline);", serviceClient.getClassName(), serviceClient.getClassName()));
+
+                // additional service client properties in constructor arguments
+                String constructorArgs = serviceClient.getProperties().stream()
+                        .filter(p -> !p.isReadOnly())
+                        .map(ServiceClientProperty::getName)
+                        .collect(Collectors.joining(", "));
+                if (!constructorArgs.isEmpty()) {
+                    constructorArgs = ", " + constructorArgs;
                 }
-                for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream()
-                        .filter(p -> !p.isReadOnly()).collect(Collectors.toList())) {
-                    function.line("client.set%1$s(this.%2$s);", CodeNamer.toPascalCase(serviceClientProperty.getName()), serviceClientProperty.getName());
+
+                if (settings.isFluent()) {
+                    function.line(String.format("%1$s client = new %2$s(pipeline, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                } else {
+                    function.line(String.format("%1$s client = new %2$s(pipeline%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 }
                 function.line("return client;");
             });

@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestParameterizedHostTestClient type. */
 public final class AutoRestParameterizedHostTestClient {
     /** A string value that is used as a global part of the parameterized host. */
-    private String host;
+    private final String host;
 
     /**
      * Gets A string value that is used as a global part of the parameterized host.
@@ -18,17 +18,6 @@ public final class AutoRestParameterizedHostTestClient {
      */
     public String getHost() {
         return this.host;
-    }
-
-    /**
-     * Sets A string value that is used as a global part of the parameterized host.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestParameterizedHostTestClient setHost(String host) {
-        this.host = host;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -56,8 +45,12 @@ public final class AutoRestParameterizedHostTestClient {
     }
 
     /** Initializes an instance of AutoRestParameterizedHostTestClient client. */
-    AutoRestParameterizedHostTestClient() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestParameterizedHostTestClient(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -65,8 +58,9 @@ public final class AutoRestParameterizedHostTestClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestParameterizedHostTestClient(HttpPipeline httpPipeline) {
+    AutoRestParameterizedHostTestClient(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.paths = new Paths(this);
     }
 }

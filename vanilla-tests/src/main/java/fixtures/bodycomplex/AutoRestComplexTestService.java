@@ -9,7 +9,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 /** Initializes a new instance of the AutoRestComplexTestService type. */
 public final class AutoRestComplexTestService {
     /** server parameter. */
-    private String host;
+    private final String host;
 
     /**
      * Gets server parameter.
@@ -20,19 +20,8 @@ public final class AutoRestComplexTestService {
         return this.host;
     }
 
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestComplexTestService setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
     /** Api Version. */
-    private String apiVersion;
+    private final String apiVersion;
 
     /**
      * Gets Api Version.
@@ -41,17 +30,6 @@ public final class AutoRestComplexTestService {
      */
     public String getApiVersion() {
         return this.apiVersion;
-    }
-
-    /**
-     * Sets Api Version.
-     *
-     * @param apiVersion the apiVersion value.
-     * @return the service client itself.
-     */
-    AutoRestComplexTestService setApiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
-        return this;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -175,8 +153,12 @@ public final class AutoRestComplexTestService {
     }
 
     /** Initializes an instance of AutoRestComplexTestService client. */
-    AutoRestComplexTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    AutoRestComplexTestService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
@@ -184,8 +166,10 @@ public final class AutoRestComplexTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestComplexTestService(HttpPipeline httpPipeline) {
+    AutoRestComplexTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
+        this.apiVersion = "2016-02-29";
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
         this.arrays = new Arrays(this);

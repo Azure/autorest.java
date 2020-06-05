@@ -108,7 +108,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
-            boolean serviceClientPropertyIsReadOnly = serviceClientPropertyClientType instanceof ConstantSchema;
+            boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
 
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
@@ -170,8 +170,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             : new ArrayList<>())
                     .build();
 
-            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+//            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+//            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)

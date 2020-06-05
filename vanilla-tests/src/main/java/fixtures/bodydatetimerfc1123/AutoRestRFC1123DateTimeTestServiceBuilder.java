@@ -57,8 +57,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestRFC1123DateTimeTestService client = new AutoRestRFC1123DateTimeTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestRFC1123DateTimeTestService client = new AutoRestRFC1123DateTimeTestService(pipeline, host);
         return client;
     }
 }
