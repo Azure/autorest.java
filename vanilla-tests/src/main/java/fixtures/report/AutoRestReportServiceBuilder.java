@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestReportService type.
- */
+/** A builder for creating a new instance of the AutoRestReportService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestReportService.class})
 public final class AutoRestReportServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestReportServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestReportServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestReportServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestReportServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestReportServiceBuilder {
 
     /**
      * Builds an instance of AutoRestReportService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestReportService.
      */
     public AutoRestReportService buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestReportServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestReportService client = new AutoRestReportService(pipeline);
-        client.setHost(this.host);
+        AutoRestReportService client = new AutoRestReportService(pipeline, host);
         return client;
     }
 }

@@ -21,24 +21,17 @@ import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * HttpRetrys.
- */
+/** An instance of this class provides access to all the operations defined in HttpRetrys. */
 public final class HttpRetrys {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final HttpRetrysService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpRetrys.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     HttpRetrys(AutoRestHttpInfrastructureTestService client) {
@@ -47,9 +40,8 @@ public final class HttpRetrys {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestHttpInfrastructureTestServiceHttpRetrys to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpRetrys to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
@@ -62,12 +54,14 @@ public final class HttpRetrys {
         @Put("/http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put500(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> put500(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Patch("/http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch500(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> patch500(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Get("/http/retry/502")
         @ExpectedResponses({200})
@@ -77,27 +71,31 @@ public final class HttpRetrys {
         @Post("/http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post503(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> post503(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Delete("/http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete503(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> delete503(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Put("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put504(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> put504(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Patch("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch504(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+        Mono<Response<Void>> patch504(
+                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
     }
 
     /**
      * Return 408 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -105,27 +103,27 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head408(this.client.getHost(), context));
     }
 
     /**
      * Return 408 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async() {
-        return head408WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return head408WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 408 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -136,7 +134,7 @@ public final class HttpRetrys {
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -144,7 +142,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.put500(this.client.getHost(), booleanValue, context));
@@ -152,20 +151,19 @@ public final class HttpRetrys {
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async() {
-        return put500WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return put500WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -176,7 +174,7 @@ public final class HttpRetrys {
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -184,7 +182,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.patch500(this.client.getHost(), booleanValue, context));
@@ -192,20 +191,19 @@ public final class HttpRetrys {
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async() {
-        return patch500WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return patch500WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 500 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -216,7 +214,7 @@ public final class HttpRetrys {
 
     /**
      * Return 502 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -224,27 +222,27 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.get502(this.client.getHost(), context));
     }
 
     /**
      * Return 502 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async() {
-        return get502WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return get502WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 502 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -255,7 +253,7 @@ public final class HttpRetrys {
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -263,7 +261,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.post503(this.client.getHost(), booleanValue, context));
@@ -271,20 +270,19 @@ public final class HttpRetrys {
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async() {
-        return post503WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return post503WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -295,7 +293,7 @@ public final class HttpRetrys {
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -303,7 +301,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.delete503(this.client.getHost(), booleanValue, context));
@@ -311,20 +310,19 @@ public final class HttpRetrys {
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async() {
-        return delete503WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return delete503WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 503 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -335,7 +333,7 @@ public final class HttpRetrys {
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -343,7 +341,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.put504(this.client.getHost(), booleanValue, context));
@@ -351,20 +350,19 @@ public final class HttpRetrys {
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async() {
-        return put504WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return put504WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -375,7 +373,7 @@ public final class HttpRetrys {
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -383,7 +381,8 @@ public final class HttpRetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         return FluxUtil.withContext(context -> service.patch504(this.client.getHost(), booleanValue, context));
@@ -391,20 +390,19 @@ public final class HttpRetrys {
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async() {
-        return patch504WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return patch504WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 504 status code, then 200 after retry.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

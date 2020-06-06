@@ -3,28 +3,18 @@ package fixtures.url.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for UriColor.
- */
+/** Defines values for UriColor. */
 public enum UriColor {
-    /**
-     * Enum value red color.
-     */
+    /** Enum value red color. */
     RED_COLOR("red color"),
 
-    /**
-     * Enum value green color.
-     */
+    /** Enum value green color. */
     GREEN_COLOR("green color"),
 
-    /**
-     * Enum value blue color.
-     */
+    /** Enum value blue color. */
     BLUE_COLOR("blue color");
 
-    /**
-     * The actual serialized value for a UriColor instance.
-     */
+    /** The actual serialized value for a UriColor instance. */
     private final String value;
 
     UriColor(String value) {
@@ -33,7 +23,7 @@ public enum UriColor {
 
     /**
      * Parses a serialized value to a UriColor instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed UriColor object, or null if unable to parse.
      */

@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestParameterizedHostTestClient type.
- */
+/** A builder for creating a new instance of the AutoRestParameterizedHostTestClient type. */
 @ServiceClientBuilder(serviceClients = {AutoRestParameterizedHostTestClient.class})
 public final class AutoRestParameterizedHostTestClientBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestParameterizedHostTestClientBuilder {
 
     /**
      * Sets A string value that is used as a global part of the parameterized host.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestParameterizedHostTestClientBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestParameterizedHostTestClientBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestParameterizedHostTestClientBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestParameterizedHostTestClientBuilder {
 
     /**
      * Builds an instance of AutoRestParameterizedHostTestClient with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestParameterizedHostTestClient.
      */
     public AutoRestParameterizedHostTestClient buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestParameterizedHostTestClientBuilder {
             this.host = "host";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline);
-        client.setHost(this.host);
+        AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline, host);
         return client;
     }
 }

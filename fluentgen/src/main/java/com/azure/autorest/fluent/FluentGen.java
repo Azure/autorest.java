@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.fluent.checker.JavaChecker;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -17,6 +16,7 @@ import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -28,6 +28,7 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,8 +102,24 @@ public class FluentGen extends NewPlugin {
             }
 
             // Service client builder
-            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder",
-                    client.getServiceClient());
+            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+            String builderSuffix = ClientModelUtil.getBuilderSuffix();
+            javaPackage.addServiceClientBuilder(builderPackage,
+                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+                List<AsyncSyncClient> syncClients = new ArrayList<>();
+                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                }
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                }
+            }
 
             // Method group
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
@@ -147,9 +165,6 @@ public class FluentGen extends NewPlugin {
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String content = javaFile.getContents().toString();
                 String path = javaFile.getFilePath();
-
-                // single file validation
-                boolean parsePass = new JavaChecker(content, path).check();
 
                 // formatter
                 String formattedContent = new JavaFormatter(content, path).format();

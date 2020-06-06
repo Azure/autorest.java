@@ -32,10 +32,10 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
-        codeModel = new SchemaNameNormalization().process(codeModel);
+        codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
-        codeModel = normalizeApiVersionParameter(codeModel);
+        codeModel = renameHostParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
@@ -43,6 +43,7 @@ public class FluentTransformer {
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
+        codeModel = new ErrorTypeNormalization().process(codeModel);
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
@@ -57,18 +58,16 @@ public class FluentTransformer {
     }
 
     /**
-     * Sets proper ClientDefaultValue to api-version parameters.
+     * Renames $host to endpoint.
      *
      * @param codeModel Code model.
      * @return Processed code model.
      */
-    protected CodeModel normalizeApiVersionParameter(CodeModel codeModel) {
+    protected CodeModel renameHostParameter(CodeModel codeModel) {
         codeModel.getGlobalParameters().stream()
-                .filter(p -> "api-version".equals(p.getLanguage().getDefault().getSerializedName()))
+                .filter(p -> "$host".equals(p.getLanguage().getDefault().getSerializedName()))
                 .forEach(p -> {
-                    if (p.getSchema() instanceof ConstantSchema) {
-                        p.setClientDefaultValue(((ConstantSchema) p.getSchema()).getValue().getValue().toString());
-                    }
+                    p.getLanguage().getDefault().setName("endpoint");
                 });
         return codeModel;
     }
@@ -91,7 +90,7 @@ public class FluentTransformer {
 
                         Language updatedDefault = new Language();
                         Utils.shallowCopy(operation.getLanguage().getDefault(), updatedDefault, Language.class, logger);
-                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName());
+                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName() + "WithoutPolling");
 
                         Languages updatedLanguages = new Languages();
                         Utils.shallowCopy(operation.getLanguage(), updatedLanguages, Languages.class, logger);

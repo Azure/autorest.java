@@ -43,14 +43,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
+            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
+            ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
         model.addImportsTo(imports, settings);
-
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            imports.add(ClassType.ClientLogger.getFullName());
-        }
 
         javaFile.declareImport(imports);
 
@@ -80,7 +77,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (settings.shouldGenerateXmlSerialization()) {
-            javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+            if (model.getXmlNamespace() != null && !model.getXmlNamespace().isEmpty()) {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
+                        model.getXmlName(), model.getXmlNamespace()));
+            } else {
+                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+            }
         }
 
         if (model.getNeedsFlatten()) {
@@ -104,6 +106,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
             if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+                classBlock.annotation("JsonIgnore");
                 classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", model.getName()));
             }
 
@@ -116,11 +119,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     {
                         IType propertyClientType = property.getWireType().getClientType();
 
-                        innerClass.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", property.getXmlListElementName()));
+                        String listElementName = property.getXmlListElementName();
+                        innerClass.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName));
                         innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
 
                         innerClass.annotation("JsonCreator");
-                        innerClass.privateConstructor(String.format("%1$s(@JacksonXmlProperty(localName = \"%2$s\") %3$s items)", xmlWrapperClassName, property.getXmlListElementName(), propertyClientType), constructor -> constructor.line("this.items = items;"));
+                        innerClass.privateConstructor(String.format("%1$s(@JacksonXmlProperty(localName = \"%2$s\") %3$s items)", xmlWrapperClassName, listElementName, propertyClientType), constructor -> constructor.line("this.items = items;"));
                     });
                 }
 
@@ -132,10 +136,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
                     classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
-                    String localName = settings.shouldGenerateXmlSerialization() ? property.getXmlName() : property.getSerializedName();
-                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)", localName));
+                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", isAttribute = true)",
+                            property.getXmlName()));
+                } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+                    classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = \"%2$s\")",
+                            property.getXmlName(), property.getXmlNamespace()));
                 } else if (property.isAdditionalProperties()) {
-                    classBlock.annotation(String.format("JsonIgnore"));
+                    classBlock.annotation("JsonIgnore");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
                     classBlock.annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
                 } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
@@ -181,7 +188,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
-                classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, property.getGetterName()), (methodBlock) ->
+                classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), (methodBlock) ->
                 {
                     String sourceTypeName = propertyType.toString();
                     String targetTypeName = propertyClientType.toString();
@@ -317,5 +324,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected boolean validateOnParentModel(String parentModelName) {
         return parentModelName != null;
+    }
+
+    /**
+     * Extension for property getter method name.
+     *
+     * @param model the model
+     * @param property the property
+     * @return The property getter method name.
+     */
+    protected String getGetterName(ClientModel model, ClientModelProperty property) {
+        return property.getGetterName();
     }
 }

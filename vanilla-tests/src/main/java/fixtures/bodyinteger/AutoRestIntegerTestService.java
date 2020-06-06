@@ -6,77 +6,61 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestIntegerTestService type.
- */
+/** Initializes a new instance of the AutoRestIntegerTestService type. */
 public final class AutoRestIntegerTestService {
-    /**
-     * server parameter.
-     */
-    private String host;
+    /** server parameter. */
+    private final String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /**
-     * Sets server parameter.
-     * 
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    public AutoRestIntegerTestService setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The Ints object to access its operations.
-     */
+    /** The Ints object to access its operations. */
     private final Ints ints;
 
     /**
      * Gets the Ints object to access its operations.
-     * 
+     *
      * @return the Ints object.
      */
     public Ints getInts() {
         return this.ints;
     }
 
-    /**
-     * Initializes an instance of AutoRestIntegerTestService client.
-     */
-    public AutoRestIntegerTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    /** Initializes an instance of AutoRestIntegerTestService client. */
+    AutoRestIntegerTestService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
      * Initializes an instance of AutoRestIntegerTestService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestIntegerTestService(HttpPipeline httpPipeline) {
+    AutoRestIntegerTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.ints = new Ints(this);
     }
 }

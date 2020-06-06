@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestSwaggerBATArrayService type.
- */
+/** A builder for creating a new instance of the AutoRestSwaggerBATArrayService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATArrayService.class})
 public final class AutoRestSwaggerBATArrayServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestSwaggerBATArrayServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestSwaggerBATArrayServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestSwaggerBATArrayServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestSwaggerBATArrayServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestSwaggerBATArrayServiceBuilder {
 
     /**
      * Builds an instance of AutoRestSwaggerBATArrayService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestSwaggerBATArrayService.
      */
     public AutoRestSwaggerBATArrayService buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestSwaggerBATArrayServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestSwaggerBATArrayService client = new AutoRestSwaggerBATArrayService(pipeline);
-        client.setHost(this.host);
+        AutoRestSwaggerBATArrayService client = new AutoRestSwaggerBATArrayService(pipeline, host);
         return client;
     }
 }

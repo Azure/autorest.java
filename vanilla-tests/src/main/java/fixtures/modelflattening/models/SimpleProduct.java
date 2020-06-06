@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The SimpleProduct model.
- */
+/** The SimpleProduct model. */
 @JsonFlatten
 @Fluent
 public class SimpleProduct extends BaseProduct {
@@ -34,16 +32,14 @@ public class SimpleProduct extends BaseProduct {
     @JsonProperty(value = "details.max_product_image.@odata\\.value")
     private String odataValue;
 
-    /**
-     * Creates an instance of SimpleProduct class.
-     */
+    /** Creates an instance of SimpleProduct class. */
     public SimpleProduct() {
         capacity = "Large";
     }
 
     /**
      * Get the maxProductDisplayName property: Display name of product.
-     * 
+     *
      * @return the maxProductDisplayName value.
      */
     public String getMaxProductDisplayName() {
@@ -52,7 +48,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Set the maxProductDisplayName property: Display name of product.
-     * 
+     *
      * @param maxProductDisplayName the maxProductDisplayName value to set.
      * @return the SimpleProduct object itself.
      */
@@ -63,7 +59,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Get the capacity property: Capacity of product. For example, 4 people.
-     * 
+     *
      * @return the capacity value.
      */
     public String getCapacity() {
@@ -72,7 +68,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Set the capacity property: Capacity of product. For example, 4 people.
-     * 
+     *
      * @param capacity the capacity value to set.
      * @return the SimpleProduct object itself.
      */
@@ -83,7 +79,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Get the genericValue property: Generic URL value.
-     * 
+     *
      * @return the genericValue value.
      */
     public String getGenericValue() {
@@ -92,7 +88,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Set the genericValue property: Generic URL value.
-     * 
+     *
      * @param genericValue the genericValue value to set.
      * @return the SimpleProduct object itself.
      */
@@ -103,7 +99,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Get the odataValue property: URL value.
-     * 
+     *
      * @return the odataValue value.
      */
     public String getOdataValue() {
@@ -112,7 +108,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Set the odataValue property: URL value.
-     * 
+     *
      * @param odataValue the odataValue value to set.
      * @return the SimpleProduct object itself.
      */
@@ -123,7 +119,7 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

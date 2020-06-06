@@ -65,10 +65,6 @@ public class GenericType implements IType {
         return new GenericType("com.azure.core.http.rest", "ResponseBase", headersType, bodyType);
     }
 
-    public static GenericType BodyResponse(IType bodyType) {
-        return new GenericType("com.azure.core.http.rest", "SimpleResponse", bodyType);
-    }
-
     public static GenericType PagedResponse(IType bodyType) {
         return new GenericType("com.azure.core.http.rest", "PagedResponse", bodyType);
     }
@@ -83,6 +79,14 @@ public class GenericType implements IType {
 
     public static GenericType Function(IType inputType, IType outputType) {
         return new GenericType("java.util", "Function", inputType, outputType);
+    }
+
+    public static GenericType PollerFlux(IType pollResultType, IType finalResultType) {
+        return new GenericType("com.azure.core.util.polling", "PollerFlux", pollResultType, finalResultType);
+    }
+
+    public static GenericType PollResult(IType pollResultType) {
+        return new GenericType("com.azure.core.management.polling", "PollResult", pollResultType);
     }
 
     public final String getName() {

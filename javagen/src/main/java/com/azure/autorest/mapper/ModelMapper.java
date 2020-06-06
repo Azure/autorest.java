@@ -8,12 +8,15 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -110,8 +113,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         modelImports.add("java.util.ArrayList");
                     }
 
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
-                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isAttribute())) {
+                    if (compositeTypeProperties.stream().anyMatch(p -> {
+                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                            return false;
+                        }
+
+                        XmlSerlializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
+                        return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
+                    })) {
                         modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
 
@@ -145,15 +154,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.description(String.format("%s%s", compositeType.getSummary(), compositeType.getDescription()));
             }
 
-            if (compositeType.getDiscriminator() != null) {
-                builder.polymorphicDiscriminator(compositeType.getDiscriminator().getProperty().getSerializedName());
-            } else if (isPolymorphic) {
-                for (ComplexSchema parent : compositeType.getParents().getAll()) {
-                    if (((ObjectSchema) parent).getDiscriminator() != null) {
-                        builder.polymorphicDiscriminator(((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName());
-                        break;
-                    }
-                }
+            boolean discriminatorNeedEscape = false;
+            if (isPolymorphic) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                discriminatorNeedEscape = discriminatorSerializedName.contains(".");
+                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
+                builder.polymorphicDiscriminator(discriminatorSerializedName);
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();
@@ -177,12 +183,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.derivedModels(derivedTypes);
 
             if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
-                 builder.xmlName(compositeType.getSerialization().getXml().getName());
+                final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
+                 builder.xmlName(xml.getName());
+                 builder.xmlNamespace(xml.getNamespace());
             } else if (compositeType.getLanguage().getDefault() != null) {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(compositeType.getProperties().stream()
+            builder.needsFlatten(discriminatorNeedEscape || compositeType.getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty()));
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();

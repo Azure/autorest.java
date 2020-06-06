@@ -4,9 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/**
- * The DurationWrapper model.
- */
+/** The DurationWrapper model. */
 @Fluent
 public final class DurationWrapper {
     /*
@@ -17,7 +15,7 @@ public final class DurationWrapper {
 
     /**
      * Get the field property: The field property.
-     * 
+     *
      * @return the field value.
      */
     public Duration getField() {
@@ -26,7 +24,7 @@ public final class DurationWrapper {
 
     /**
      * Set the field property: The field property.
-     * 
+     *
      * @param field the field value to set.
      * @return the DurationWrapper object itself.
      */
@@ -37,9 +35,8 @@ public final class DurationWrapper {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

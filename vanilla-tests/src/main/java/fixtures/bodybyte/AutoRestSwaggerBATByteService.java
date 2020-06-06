@@ -6,77 +6,61 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestSwaggerBATByteService type.
- */
+/** Initializes a new instance of the AutoRestSwaggerBATByteService type. */
 public final class AutoRestSwaggerBATByteService {
-    /**
-     * server parameter.
-     */
-    private String host;
+    /** server parameter. */
+    private final String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /**
-     * Sets server parameter.
-     * 
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    public AutoRestSwaggerBATByteService setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The Bytes object to access its operations.
-     */
-    private final Bytes bytes;
+    /** The ByteOperations object to access its operations. */
+    private final ByteOperations byteOperations;
 
     /**
-     * Gets the Bytes object to access its operations.
-     * 
-     * @return the Bytes object.
+     * Gets the ByteOperations object to access its operations.
+     *
+     * @return the ByteOperations object.
      */
-    public Bytes getBytes() {
-        return this.bytes;
+    public ByteOperations getByteOperations() {
+        return this.byteOperations;
+    }
+
+    /** Initializes an instance of AutoRestSwaggerBATByteService client. */
+    AutoRestSwaggerBATByteService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
-     */
-    public AutoRestSwaggerBATByteService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATByteService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATByteService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATByteService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
-        this.bytes = new Bytes(this);
+        this.host = host;
+        this.byteOperations = new ByteOperations(this);
     }
 }

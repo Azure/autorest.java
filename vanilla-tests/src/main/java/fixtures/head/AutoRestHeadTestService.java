@@ -6,77 +6,61 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestHeadTestService type.
- */
+/** Initializes a new instance of the AutoRestHeadTestService type. */
 public final class AutoRestHeadTestService {
-    /**
-     * server parameter.
-     */
-    private String host;
+    /** server parameter. */
+    private final String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /**
-     * Sets server parameter.
-     * 
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    public AutoRestHeadTestService setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The HttpSuccess object to access its operations.
-     */
+    /** The HttpSuccess object to access its operations. */
     private final HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
-     * 
+     *
      * @return the HttpSuccess object.
      */
     public HttpSuccess getHttpSuccess() {
         return this.httpSuccess;
     }
 
-    /**
-     * Initializes an instance of AutoRestHeadTestService client.
-     */
-    public AutoRestHeadTestService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    /** Initializes an instance of AutoRestHeadTestService client. */
+    AutoRestHeadTestService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
      * Initializes an instance of AutoRestHeadTestService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHeadTestService(HttpPipeline httpPipeline) {
+    AutoRestHeadTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.httpSuccess = new HttpSuccess(this);
     }
 }

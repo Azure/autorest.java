@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the PetStoreInc type.
- */
+/** A builder for creating a new instance of the PetStoreInc type. */
 @ServiceClientBuilder(serviceClients = {PetStoreInc.class})
 public final class PetStoreIncBuilder {
     /*
@@ -19,7 +17,7 @@ public final class PetStoreIncBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the PetStoreIncBuilder.
      */
@@ -35,7 +33,7 @@ public final class PetStoreIncBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the PetStoreIncBuilder.
      */
@@ -46,7 +44,7 @@ public final class PetStoreIncBuilder {
 
     /**
      * Builds an instance of PetStoreInc with the provided parameters.
-     * 
+     *
      * @return an instance of PetStoreInc.
      */
     public PetStoreInc buildClient() {
@@ -54,10 +52,12 @@ public final class PetStoreIncBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        PetStoreInc client = new PetStoreInc(pipeline);
-        client.setHost(this.host);
+        PetStoreInc client = new PetStoreInc(pipeline, host);
         return client;
     }
 }

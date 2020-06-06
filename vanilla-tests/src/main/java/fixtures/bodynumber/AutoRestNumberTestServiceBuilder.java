@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestNumberTestService type.
- */
+/** A builder for creating a new instance of the AutoRestNumberTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestNumberTestService.class})
 public final class AutoRestNumberTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestNumberTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestNumberTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestNumberTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestNumberTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestNumberTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestNumberTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestNumberTestService.
      */
     public AutoRestNumberTestService buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestNumberTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestNumberTestService client = new AutoRestNumberTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestNumberTestService client = new AutoRestNumberTestService(pipeline, host);
         return client;
     }
 }

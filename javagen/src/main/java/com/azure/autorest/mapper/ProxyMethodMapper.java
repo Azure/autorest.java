@@ -37,7 +37,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 //    private static final jdk.nashorn.internal.runtime.regexp.joni.Regex methodTypeLeading = new Regex("^/+");
 //    private static final Regex methodTypeTrailing = new Regex("/+$");
     private Map<Request, ProxyMethod> parsed = new HashMap<>();
-    private ProxyMethodMapper() {
+    protected ProxyMethodMapper() {
     }
 
     public static ProxyMethodMapper getInstance() {
@@ -54,17 +54,18 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .name(operation.getLanguage().getJava().getName())
                 .isResumable(false);
 
-        builder.responseExpectedStatusCodes(operation.getResponses().stream()
+        List<HttpResponseStatus> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
                 .map(s -> s.replaceAll("'", ""))
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
-                .sorted().collect(Collectors.toList()));
+                .sorted().collect(Collectors.toList());
+        builder.responseExpectedStatusCodes(expectedStatusCodes);
 
-        IType responseBodyType = SchemaUtil.operationResponseType(operation);
+        IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
-            returnType = GenericType.BodyResponse(GenericType.FluxByteBuffer);    // raw response for LRO
+            returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
             builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
@@ -85,41 +86,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
             } else {
-                singleValueType = GenericType.BodyResponse(responseBodyType);
+                singleValueType = GenericType.Response(responseBodyType);
             }
             builder.returnType(GenericType.Mono(singleValueType));
         }
 
-        ClassType errorType = null;
-        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
-        }
-
-        if (settings.isFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
-            builder.unexpectedResponseExceptionType(ClassType.CloudException);
-        } else if (errorType != null) {
-            String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
-            if (exceptionName == null || exceptionName.isEmpty()) {
-                exceptionName = errorType.getName();
-                exceptionName += "Exception";
-            }
-
-            String exceptionPackage;
-            if (settings.isCustomType(exceptionName)) {
-                exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            } else if (settings.isFluent()) {
-                exceptionPackage = settings.getPackage();
-            } else {
-                exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
-            }
-
-            builder.unexpectedResponseExceptionType(new ClassType.Builder()
-                    .packageName(exceptionPackage)
-                    .name(exceptionName)
-                    .build());
-        } else {
-            builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
-        }
+        buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
         builder.returnValueWireType(returnValueWireTypeOptions
@@ -186,5 +158,44 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             parsed.put(request, proxyMethod);
         }
         return result;
+    }
+
+    /**
+     * Extension for configure on unexpected response exception types to builder.
+     *
+     * @param builder the ProxyMethod builder
+     * @param operation the operation
+     * @param expectedStatusCodes the expected status codes
+     * @param settings the settings
+     */
+    protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
+                                                         Operation operation, List<HttpResponseStatus> expectedStatusCodes,
+                                                         JavaSettings settings) {
+        ClassType errorType = null;
+        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
+            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+        }
+
+        if (errorType != null) {
+            String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
+            if (exceptionName == null || exceptionName.isEmpty()) {
+                exceptionName = errorType.getName();
+                exceptionName += "Exception";
+            }
+
+            String exceptionPackage;
+            if (settings.isCustomType(exceptionName)) {
+                exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+            } else {
+                exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
+            }
+
+            builder.unexpectedResponseExceptionType(new ClassType.Builder()
+                    .packageName(exceptionPackage)
+                    .name(exceptionName)
+                    .build());
+        } else {
+            builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
+        }
     }
 }

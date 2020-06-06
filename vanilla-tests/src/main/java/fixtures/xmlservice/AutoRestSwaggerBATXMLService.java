@@ -6,77 +6,61 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * Initializes a new instance of the AutoRestSwaggerBATXMLService type.
- */
+/** Initializes a new instance of the AutoRestSwaggerBATXMLService type. */
 public final class AutoRestSwaggerBATXMLService {
-    /**
-     * server parameter.
-     */
-    private String host;
+    /** server parameter. */
+    private final String host;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /**
-     * Sets server parameter.
-     * 
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    public AutoRestSwaggerBATXMLService setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The Xmls object to access its operations.
-     */
+    /** The Xmls object to access its operations. */
     private final Xmls xmls;
 
     /**
      * Gets the Xmls object to access its operations.
-     * 
+     *
      * @return the Xmls object.
      */
     public Xmls getXmls() {
         return this.xmls;
     }
 
-    /**
-     * Initializes an instance of AutoRestSwaggerBATXMLService client.
-     */
-    public AutoRestSwaggerBATXMLService() {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build());
+    /** Initializes an instance of AutoRestSwaggerBATXMLService client. */
+    AutoRestSwaggerBATXMLService(String host) {
+        this(
+                new HttpPipelineBuilder()
+                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                        .build(),
+                host);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATXMLService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATXMLService(HttpPipeline httpPipeline) {
+    AutoRestSwaggerBATXMLService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
+        this.host = host;
         this.xmls = new Xmls(this);
     }
 }

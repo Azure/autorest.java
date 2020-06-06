@@ -4,7 +4,7 @@
  *
  */
 
-package com.azure.management.resources.fluentcore.collection;
+package com.azure.resourcemanager.resources.fluentcore.collection;
 
 import reactor.core.publisher.Mono;
 

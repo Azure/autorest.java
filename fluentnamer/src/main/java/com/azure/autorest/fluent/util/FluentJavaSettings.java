@@ -7,9 +7,12 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -35,6 +38,11 @@ public class FluentJavaSettings {
      */
     private boolean resourcePropertyAsSubResource = false;
 
+    /**
+     * Naming override.
+     */
+    private final Map<String, String> namingOverride = new HashMap<>();
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -54,6 +62,10 @@ public class FluentJavaSettings {
         return resourcePropertyAsSubResource;
     }
 
+    public Map<String, String> getNamingOverride() {
+        return namingOverride;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -67,12 +79,17 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
+
+        Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
+        if (namingOverride != null) {
+            this.namingOverride.putAll(namingOverride);
+        }
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
-        String settingValue = host.getStringValue(settingName);
-        if (settingValue != null && !settingValue.isEmpty()) {
-            action.accept(true);
+        Boolean settingValue = host.getBooleanValue(settingName);
+        if (settingValue != null) {
+            action.accept(settingValue);
         }
     }
 }

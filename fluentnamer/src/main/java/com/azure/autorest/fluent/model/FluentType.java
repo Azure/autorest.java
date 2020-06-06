@@ -14,26 +14,28 @@ import com.azure.autorest.model.clientmodel.IType;
 public class FluentType {
 
     public static final String AZURE_CORE_MANAGEMENT_PACKAGE_NAME = "com.azure.core.management";
+    public static final String AZURE_CORE_MANAGEMENT_EXCEPTION_PACKAGE_NAME = "com.azure.core.management.exception";
 
     public static final ClassType Resource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.RESOURCE).build();
     public static final ClassType ProxyResource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.PROXY_RESOURCE).build();
     public static final ClassType SubResource = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name(ResourceTypeName.SUB_RESOURCE).build();
 
-    public static final ClassType CloudError = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_PACKAGE_NAME).name("CloudError").build();
+    public static final ClassType ManagementException = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_EXCEPTION_PACKAGE_NAME).name("ManagementException").build();
+    public static final ClassType ManagementError = new ClassType.Builder().packageName(AZURE_CORE_MANAGEMENT_EXCEPTION_PACKAGE_NAME).name("ManagementError").build();
 
     private FluentType() {
     }
 
     public static GenericType InnerSupportsGet(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsGet", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsGet", typeArgument);
     }
 
     public static GenericType InnerSupportsList(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsListing", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsListing", typeArgument);
     }
 
     public static GenericType InnerSupportsDelete(IType typeArgument) {
-        return new GenericType("com.azure.management.resources.fluentcore.collection", "InnerSupportsDelete", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsDelete", typeArgument);
     }
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
@@ -52,8 +54,11 @@ public class FluentType {
                 || SubResource.getName().equals(modelName));
     }
 
-    public static boolean nonCloudError(ClassType modelType) {
-        return !(CloudError.getName().equals(modelType.getName())
-                || "CloudErrorBody".equals(modelType.getName()));
+    public static boolean nonManagementError(ClassType modelType) {
+        return nonManagementError(modelType.getName());
+    }
+
+    public static boolean nonManagementError(String modelName) {
+        return !ManagementError.getName().equals(modelName);
     }
 }

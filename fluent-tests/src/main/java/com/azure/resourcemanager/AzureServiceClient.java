@@ -1,15 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.management;
+package com.azure.resourcemanager;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.management.AzureEnvironment;
-import com.azure.core.management.implementation.polling.PollerFactory;
+import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
+import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Flux;
@@ -47,10 +48,15 @@ public abstract class AzureServiceClient {
 
     private static final String MAC_ADDRESS_HASH;
     private static final String OS;
+    private static final String OS_NAME;
+    private static final String OS_VERSION;
     private static final String JAVA_VERSION;
+    private static final String SDK_VERSION = "2.0.0";
 
     static {
-        OS = System.getProperty("os.name") + "/" + System.getProperty("os.version");
+        OS_NAME = System.getProperty("os.name");
+        OS_VERSION = System.getProperty("os.version");
+        OS = OS_NAME + "/" + OS_VERSION;
         String macAddress = "Unknown";
         try {
             Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces();
@@ -73,11 +79,37 @@ public abstract class AzureServiceClient {
 
     private SerializerAdapter serializerAdapter = new AzureJacksonAdapter();
 
+    private String sdkName;
+
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    public <T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<SimpleResponse<Flux<ByteBuffer>>> lroInit,
+    /**
+     * Gets default client context.
+     *
+     * @return the default client context.
+     */
+    public Context getContext() {
+        Context context = new Context("java.version", JAVA_VERSION);
+        if (!CoreUtils.isNullOrEmpty(OS_NAME)) {
+            context = context.addData("os.name", OS_NAME);
+        }
+        if (!CoreUtils.isNullOrEmpty(OS_VERSION)) {
+            context = context.addData("os.version", OS_VERSION);
+        }
+        if (sdkName == null) {
+            String packageName = this.getClass().getPackage().getName();
+            if (packageName.endsWith(".models")) {
+                sdkName = packageName.substring(0, packageName.length() - ".models".length());
+            }
+        }
+        context = context.addData("Sdk-Name", sdkName);
+        context = context.addData("Sdk-Version", SDK_VERSION);
+        return context;
+    }
+
+    public <T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<Response<Flux<ByteBuffer>>> lroInit,
                                                                  HttpPipeline httpPipeline,
                                                                  Type pollResultType, Type finalResultType) {
         return PollerFactory.create(
@@ -90,7 +122,7 @@ public abstract class AzureServiceClient {
         );
     }
 
-    private Mono<Response<Flux<ByteBuffer>>> activationOperation(Mono<SimpleResponse<Flux<ByteBuffer>>> lroInit) {
+    private Mono<Response<Flux<ByteBuffer>>> activationOperation(Mono<Response<Flux<ByteBuffer>>> lroInit) {
         return lroInit.flatMap(fluxSimpleResponse -> Mono.just(fluxSimpleResponse));
     }
 

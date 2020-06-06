@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.13.309"
+  "@autorest/modelerfour": "4.14.362"
 
 pipeline:
 
@@ -16,15 +16,14 @@ pipeline:
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
     additional-checks: false
+    lenient-model-deduplication: true
     flatten-models: true
     flatten-payloads: true
     naming:
+      preserve-uppercase-max-length: 2
       override:
-        api: Api
-        cpk: Cpk
-        sas: Sas
-        url: Url
-        xml: Xml
+        ip: Ip
+        id: Id
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
@@ -32,4 +31,17 @@ pipeline:
 
   fluentnamer:
     input: modelerfour/identity
+    naming:
+      override:
+        eTag: etag
+        userName: username
+        metaData: metadata
+        timeStamp: timestamp
+        hostName: hostname
+        webHook: webhook
+        coolDown: cooldown
+        resourceregion: resourceRegion
+        sTag: stag
+        tagname: tagName
+        tagvalue: tagValue
 ```

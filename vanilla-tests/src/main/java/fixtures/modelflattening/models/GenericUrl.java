@@ -3,9 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The GenericUrl model.
- */
+/** The GenericUrl model. */
 @Fluent
 public class GenericUrl {
     /*
@@ -16,7 +14,7 @@ public class GenericUrl {
 
     /**
      * Get the genericValue property: Generic URL value.
-     * 
+     *
      * @return the genericValue value.
      */
     public String getGenericValue() {
@@ -25,7 +23,7 @@ public class GenericUrl {
 
     /**
      * Set the genericValue property: Generic URL value.
-     * 
+     *
      * @param genericValue the genericValue value to set.
      * @return the GenericUrl object itself.
      */
@@ -36,9 +34,8 @@ public class GenericUrl {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

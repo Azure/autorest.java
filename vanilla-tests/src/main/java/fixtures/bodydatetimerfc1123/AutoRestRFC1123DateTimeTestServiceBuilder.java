@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestRFC1123DateTimeTestService type.
- */
+/** A builder for creating a new instance of the AutoRestRFC1123DateTimeTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestRFC1123DateTimeTestService.class})
 public final class AutoRestRFC1123DateTimeTestServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestRFC1123DateTimeTestServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestRFC1123DateTimeTestServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestRFC1123DateTimeTestService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestRFC1123DateTimeTestService.
      */
     public AutoRestRFC1123DateTimeTestService buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestRFC1123DateTimeTestService client = new AutoRestRFC1123DateTimeTestService(pipeline);
-        client.setHost(this.host);
+        AutoRestRFC1123DateTimeTestService client = new AutoRestRFC1123DateTimeTestService(pipeline, host);
         return client;
     }
 }

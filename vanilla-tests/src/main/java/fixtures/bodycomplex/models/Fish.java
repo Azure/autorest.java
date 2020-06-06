@@ -7,10 +7,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 
-/**
- * The Fish model.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Fish.class)
+/** The Fish model. */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "fishtype",
+        defaultImpl = Fish.class)
 @JsonTypeName("Fish")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
@@ -38,7 +40,7 @@ public class Fish {
 
     /**
      * Get the species property: The species property.
-     * 
+     *
      * @return the species value.
      */
     public String getSpecies() {
@@ -47,7 +49,7 @@ public class Fish {
 
     /**
      * Set the species property: The species property.
-     * 
+     *
      * @param species the species value to set.
      * @return the Fish object itself.
      */
@@ -58,7 +60,7 @@ public class Fish {
 
     /**
      * Get the length property: The length property.
-     * 
+     *
      * @return the length value.
      */
     public float getLength() {
@@ -67,7 +69,7 @@ public class Fish {
 
     /**
      * Set the length property: The length property.
-     * 
+     *
      * @param length the length value to set.
      * @return the Fish object itself.
      */
@@ -78,7 +80,7 @@ public class Fish {
 
     /**
      * Get the siblings property: The siblings property.
-     * 
+     *
      * @return the siblings value.
      */
     public List<Fish> getSiblings() {
@@ -87,7 +89,7 @@ public class Fish {
 
     /**
      * Set the siblings property: The siblings property.
-     * 
+     *
      * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */
@@ -98,7 +100,7 @@ public class Fish {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -35,14 +35,17 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         MethodGroupClient.Builder builder = new MethodGroupClient.Builder();
 
-        String interfaceName = methodGroup.getLanguage().getJava().getName();
-        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> cm.getName().equals(methodGroup.getLanguage().getJava().getName()))) {
+        String classBaseName = methodGroup.getLanguage().getJava().getName();
+        builder.classBaseName(classBaseName);
+        String interfaceName = CodeNamer.getPlural(classBaseName);
+        final String interfaceNameFinal = interfaceName;
+        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> cm.getName().equals(interfaceNameFinal))) {
             interfaceName += "Operations";
         }
         builder.interfaceName(interfaceName);
         String className = interfaceName;
         if (settings.isFluent()) {
-            className += "Inner";
+            className += "Client";
         } else if (settings.shouldGenerateClientAsImpl()) {
             className += "Impl";
         }
@@ -87,8 +90,13 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
-        boolean isCustomType = settings.isCustomType(className);
-        String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+        String packageName;
+        if (settings.isFluent()) {
+            packageName = settings.getPackage(settings.getImplementationSubpackage());
+        } else {
+            boolean isCustomType = settings.isCustomType(className);
+            packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+        }
         builder.packageName(packageName);
 
         List<ClientMethod> clientMethods = new ArrayList<>();

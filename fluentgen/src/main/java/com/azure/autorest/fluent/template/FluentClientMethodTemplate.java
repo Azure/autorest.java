@@ -26,7 +26,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = settings.getAddContextParameter();
+        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         String endOfLine = addContextParameter ? "" : ";";
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
@@ -113,6 +113,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -121,7 +123,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
-            if (settings.getAddContextParameter()) {
+            if (addContextParameter) {
                 function.line(String.format("return FluxUtil.withContext(context -> %s)",
                         serviceMethodCall));
                 function.indent(() -> {
@@ -150,6 +152,21 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 function.line(".last()");
                 function.line(".flatMap(AsyncPollResponse::getFinalResult);");
             });
+        });
+    }
+
+    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
+
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            if (classType instanceof GenericType) {
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType());", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+            } else {
+                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+            }
         });
     }
 

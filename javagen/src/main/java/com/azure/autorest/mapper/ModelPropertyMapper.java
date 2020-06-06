@@ -7,6 +7,8 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.getParentSchema() != null) {
             flattened = property.getParentSchema().getProperties().stream()
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+            if (!flattened) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
+                flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+            }
         }
 
         StringBuilder serializedName = new StringBuilder();
@@ -61,16 +67,21 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         String xmlName = null;
+        String xmlNamespace = null;
         boolean isXmlWrapper = false;
         boolean isXmlAttribute = false;
         if (xmlSerlializationFormat != null) {
             isXmlWrapper = xmlSerlializationFormat.isWrapped();
             isXmlAttribute = xmlSerlializationFormat.isAttribute();
             xmlName = xmlSerlializationFormat.getName();
+            xmlNamespace = xmlSerlializationFormat.getNamespace();
         }
 
         final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;
-        builder.xmlName(xmlParamName).isXmlWrapper(isXmlWrapper).isXmlAttribute(isXmlAttribute);
+        builder.xmlName(xmlParamName)
+                .isXmlWrapper(isXmlWrapper)
+                .isXmlAttribute(isXmlAttribute)
+                .xmlNamespace(xmlNamespace);
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));

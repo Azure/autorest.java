@@ -3,9 +3,7 @@ package fixtures.additionalproperties.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The CatAPTrue model.
- */
+/** The CatAPTrue model. */
 @Fluent
 public final class CatAPTrue extends PetAPTrue {
     /*
@@ -16,7 +14,7 @@ public final class CatAPTrue extends PetAPTrue {
 
     /**
      * Get the friendly property: The friendly property.
-     * 
+     *
      * @return the friendly value.
      */
     public Boolean isFriendly() {
@@ -25,7 +23,7 @@ public final class CatAPTrue extends PetAPTrue {
 
     /**
      * Set the friendly property: The friendly property.
-     * 
+     *
      * @param friendly the friendly value to set.
      * @return the CatAPTrue object itself.
      */
@@ -36,7 +34,7 @@ public final class CatAPTrue extends PetAPTrue {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

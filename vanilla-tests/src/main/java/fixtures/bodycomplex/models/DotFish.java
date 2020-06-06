@@ -1,19 +1,21 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/**
- * The DotFish model.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish.type", defaultImpl = DotFish.class)
+/** The DotFish model. */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "fish\\.type",
+        defaultImpl = DotFish.class)
 @JsonTypeName("DotFish")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)
-})
+@JsonSubTypes({@JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)})
+@JsonFlatten
 @Fluent
 public class DotFish {
     /*
@@ -24,7 +26,7 @@ public class DotFish {
 
     /**
      * Get the species property: The species property.
-     * 
+     *
      * @return the species value.
      */
     public String getSpecies() {
@@ -33,7 +35,7 @@ public class DotFish {
 
     /**
      * Set the species property: The species property.
-     * 
+     *
      * @param species the species value to set.
      * @return the DotFish object itself.
      */
@@ -44,9 +46,8 @@ public class DotFish {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }

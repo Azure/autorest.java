@@ -15,24 +15,17 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * HeadExceptions.
- */
+/** An instance of this class provides access to all the operations defined in HeadExceptions. */
 public final class HeadExceptions {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final HeadExceptionsService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestHeadExceptionTestService client;
 
     /**
      * Initializes an instance of HeadExceptions.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     HeadExceptions(AutoRestHeadExceptionTestService client) {
@@ -41,9 +34,8 @@ public final class HeadExceptions {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestHeadExceptionTestServiceHeadExceptions to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestHeadExceptionTestServiceHeadExceptions to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHeadExceptio")
@@ -66,7 +58,7 @@ public final class HeadExceptions {
 
     /**
      * Return 200 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -74,27 +66,27 @@ public final class HeadExceptions {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head200(this.client.getHost(), context));
     }
 
     /**
      * Return 200 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
-        return head200WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return head200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 200 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -105,7 +97,7 @@ public final class HeadExceptions {
 
     /**
      * Return 204 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -113,27 +105,27 @@ public final class HeadExceptions {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head204(this.client.getHost(), context));
     }
 
     /**
      * Return 204 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
-        return head204WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return head204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 204 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -144,7 +136,7 @@ public final class HeadExceptions {
 
     /**
      * Return 404 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
@@ -152,27 +144,27 @@ public final class HeadExceptions {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.head404(this.client.getHost(), context));
     }
 
     /**
      * Return 404 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head404Async() {
-        return head404WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return head404WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Return 404 status code if successful.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

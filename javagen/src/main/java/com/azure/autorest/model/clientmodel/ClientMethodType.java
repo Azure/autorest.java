@@ -1,7 +1,7 @@
-package com.azure.autorest.model.clientmodel;
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+
+package com.azure.autorest.model.clientmodel;
 
 /**
  * The different types of ClientMethod overloads that can exist in a client.
@@ -16,12 +16,13 @@ public enum ClientMethodType {
 
     LongRunningSync(5),
     LongRunningAsync(6),
+    LongRunningBegin(7),
 
-    SimpleSync(7),
-    SimpleAsync(8), // will not generate when sync-methods=none, will generate when sync-methods=essential
-    SimpleAsyncRestResponse(9),
+    SimpleSync(8),
+    SimpleAsync(9), // will not generate when sync-methods=none, will generate when sync-methods=essential
+    SimpleAsyncRestResponse(10),
 
-    Resumable(10);
+    Resumable(11);
 
     public static final int SIZE = Integer.SIZE;
     private static java.util.HashMap<Integer, ClientMethodType> mappings;

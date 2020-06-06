@@ -8,6 +8,9 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.javamodel.JavaFile;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Writes a ClientException to a JavaFile.
  */
@@ -22,12 +25,15 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
     }
 
     public final void write(ClientException exception, JavaFile javaFile) {
-        javaFile.declareImport("com.azure.core.exception.HttpResponseException", "com.azure.core.http.HttpResponse");
+        Set<String> imports = new HashSet<>();
+        imports.add("com.azure.core.http.HttpResponse");
+        exception.getParentType().addImportsTo(imports, false);
+        javaFile.declareImport(imports);
         javaFile.javadocComment((comment) ->
         {
             comment.description(String.format("Exception thrown for an invalid response with %1$s information.", exception.getErrorName()));
         });
-        javaFile.publicFinalClass(String.format("%1$s extends HttpResponseException", exception.getName()), (classBlock) ->
+        javaFile.publicFinalClass(String.format("%1$s extends %2$s", exception.getName(), exception.getParentType().toString()), (classBlock) ->
         {
             classBlock.javadocComment((comment) ->
             {

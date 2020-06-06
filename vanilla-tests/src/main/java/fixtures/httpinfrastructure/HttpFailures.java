@@ -9,31 +9,24 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * HttpFailures.
- */
+/** An instance of this class provides access to all the operations defined in HttpFailures. */
 public final class HttpFailures {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final HttpFailuresService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpFailures.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     HttpFailures(AutoRestHttpInfrastructureTestService client) {
@@ -42,8 +35,7 @@ public final class HttpFailures {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
@@ -52,37 +44,38 @@ public final class HttpFailures {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getEmptyError(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getEmptyError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelError(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getNoModelError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getNoModelEmpty(@HostParam("$host") String host, Context context);
     }
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getEmptyErrorWithResponseAsync() {
+    public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getEmptyError(this.client.getHost(), context));
     }
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
@@ -90,18 +83,19 @@ public final class HttpFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (Response<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
@@ -118,22 +112,23 @@ public final class HttpFailures {
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getNoModelErrorWithResponseAsync() {
+    public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNoModelError(this.client.getHost(), context));
     }
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
@@ -141,18 +136,19 @@ public final class HttpFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (Response<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get empty error form server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
@@ -169,22 +165,23 @@ public final class HttpFailures {
 
     /**
      * Get empty response from server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Boolean>> getNoModelEmptyWithResponseAsync() {
+    public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getNoModelEmpty(this.client.getHost(), context));
     }
 
     /**
      * Get empty response from server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty response from server.
@@ -192,18 +189,19 @@ public final class HttpFailures {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithResponseAsync()
-            .flatMap((SimpleResponse<Boolean> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (Response<Boolean> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
      * Get empty response from server.
-     * 
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty response from server.

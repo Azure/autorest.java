@@ -12,31 +12,24 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.extensibleenums.models.Pet;
 import reactor.core.publisher.Mono;
 
-/**
- * An instance of this class provides access to all the operations defined in
- * Pets.
- */
+/** An instance of this class provides access to all the operations defined in Pets. */
 public final class Pets {
-    /**
-     * The proxy service used to perform REST calls.
-     */
+    /** The proxy service used to perform REST calls. */
     private final PetsService service;
 
-    /**
-     * The service client containing this operation class.
-     */
+    /** The service client containing this operation class. */
     private final PetStoreInc client;
 
     /**
      * Initializes an instance of Pets.
-     * 
+     *
      * @param client the instance of the service client containing this operation class.
      */
     Pets(PetStoreInc client) {
@@ -45,8 +38,8 @@ public final class Pets {
     }
 
     /**
-     * The interface defining all the services for PetStoreIncPets to be used
-     * by the proxy service to perform REST calls.
+     * The interface defining all the services for PetStoreIncPets to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "PetStoreIncPets")
@@ -54,12 +47,14 @@ public final class Pets {
         @Get("/extensibleenums/pet/{petId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Pet>> getByPetId(@HostParam("$host") String host, @PathParam("petId") String petId, Context context);
+        Mono<Response<Pet>> getByPetId(
+                @HostParam("$host") String host, @PathParam("petId") String petId, Context context);
 
         @Post("/extensibleenums/pet/addPet")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam, Context context);
+        Mono<Response<Pet>> addPet(
+                @HostParam("$host") String host, @BodyParam("application/json") Pet petParam, Context context);
     }
 
     /**
@@ -70,9 +65,10 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Pet>> getByPetIdWithResponseAsync(String petId) {
+    public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petId == null) {
             return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
@@ -90,13 +86,14 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getByPetIdAsync(String petId) {
         return getByPetIdWithResponseAsync(petId)
-            .flatMap((SimpleResponse<Pet> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (Response<Pet> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**
@@ -119,9 +116,10 @@ public final class Pets {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Pet>> addPetWithResponseAsync(Pet petParam) {
+    public Mono<Response<Pet>> addPetWithResponseAsync(Pet petParam) {
         if (this.client.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petParam != null) {
             petParam.validate();
@@ -139,13 +137,14 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> addPetAsync(Pet petParam) {
         return addPetWithResponseAsync(petParam)
-            .flatMap((SimpleResponse<Pet> res) -> {
-                if (res.getValue() != null) {
-                    return Mono.just(res.getValue());
-                } else {
-                    return Mono.empty();
-                }
-            });
+                .flatMap(
+                        (Response<Pet> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
     }
 
     /**

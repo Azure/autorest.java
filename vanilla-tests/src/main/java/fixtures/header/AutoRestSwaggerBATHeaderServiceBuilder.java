@@ -7,9 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
-/**
- * A builder for creating a new instance of the AutoRestSwaggerBATHeaderService type.
- */
+/** A builder for creating a new instance of the AutoRestSwaggerBATHeaderService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATHeaderService.class})
 public final class AutoRestSwaggerBATHeaderServiceBuilder {
     /*
@@ -19,7 +17,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     /**
      * Sets server parameter.
-     * 
+     *
      * @param host the host value.
      * @return the AutoRestSwaggerBATHeaderServiceBuilder.
      */
@@ -35,7 +33,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     * 
+     *
      * @param pipeline the pipeline value.
      * @return the AutoRestSwaggerBATHeaderServiceBuilder.
      */
@@ -46,7 +44,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     /**
      * Builds an instance of AutoRestSwaggerBATHeaderService with the provided parameters.
-     * 
+     *
      * @return an instance of AutoRestSwaggerBATHeaderService.
      */
     public AutoRestSwaggerBATHeaderService buildClient() {
@@ -54,10 +52,12 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
+            this.pipeline =
+                    new HttpPipelineBuilder()
+                            .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
+                            .build();
         }
-        AutoRestSwaggerBATHeaderService client = new AutoRestSwaggerBATHeaderService(pipeline);
-        client.setHost(this.host);
+        AutoRestSwaggerBATHeaderService client = new AutoRestSwaggerBATHeaderService(pipeline, host);
         return client;
     }
 }

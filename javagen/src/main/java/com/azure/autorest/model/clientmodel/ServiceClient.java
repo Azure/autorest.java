@@ -154,7 +154,7 @@ public class ServiceClient {
 
         if (includeImplementationImports) {
             if (settings.isAzureOrFluent()) {
-                imports.add("com.azure.management.AzureServiceClient");
+                imports.add("com.azure.resourcemanager.AzureServiceClient");
             }
             if (!getClientMethods().isEmpty()) {
                 imports.add("com.azure.core.http.rest.RestProxy");
@@ -162,6 +162,12 @@ public class ServiceClient {
 
             for (Constructor constructor : getConstructors()) {
                 constructor.addImportsTo(imports, includeImplementationImports);
+            }
+
+            if (!settings.shouldGenerateClientInterfaces()) {
+                for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
+                    imports.add(String.format("%1$s.%2$s", methodGroupClient.getPackage(), methodGroupClient.getClassName()));
+                }
             }
         }
 
@@ -177,6 +183,10 @@ public class ServiceClient {
             imports.add("com.azure.core.http.policy.CookiePolicy");
             imports.add("com.azure.core.http.policy.RetryPolicy");
             imports.add("com.azure.core.http.policy.UserAgentPolicy");
+        }
+
+        if (includeBuilderImports) {
+            imports.add(String.format("%1$s.%2$s", getPackage(), getClassName()));
         }
 
         Proxy proxy = getProxy();

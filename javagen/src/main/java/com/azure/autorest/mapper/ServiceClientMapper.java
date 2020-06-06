@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -46,11 +47,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         if (settings.shouldGenerateClientAsImpl()) {
             serviceClientClassName += "Impl";
         }
-        String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
-        if (settings.isCustomType(serviceClientClassName)) {
-            subpackage = settings.getCustomTypesSubpackage();
-        }
-        String packageName = settings.getPackage(subpackage);
+        String packageName = ClientModelUtil.getServiceClientPackageName(serviceClientClassName);
         builder.interfaceName(serviceClientInterfaceName)
                 .className(serviceClientClassName)
                 .packageName(packageName);
@@ -111,7 +108,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
-            boolean serviceClientPropertyIsReadOnly = serviceClientPropertyClientType instanceof ConstantSchema;
+            boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
 
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
@@ -173,8 +170,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             : new ArrayList<>())
                     .build();
 
-            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+//            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+//            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)

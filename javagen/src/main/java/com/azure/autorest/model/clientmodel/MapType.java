@@ -42,7 +42,7 @@ public class MapType extends GenericType {
                 ? ((GenericType) getValueType()).validate(var, ++depth)
                 : getValueType().validate(var);
         if (elementValidation != null) {
-            return String.format("%s.values().forEach(%s -> %s)", expression, var, elementValidation);
+            return String.format("%s.values().forEach(%s -> { if (%s != null) { %s; } })", expression, var, var, elementValidation);
         } else {
             return null;
         }

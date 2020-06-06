@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -350,6 +351,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
+            case LongRunningBegin:
+                generateLongRunningBegin(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
+
             case Resumable:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -446,6 +451,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                 comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
             }
+            if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                    comment.methodThrows(exception.getKey().toString(),
+                            String.format("thrown if the request is rejected by server on status code %s",
+                                    exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+                }
+            }
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
@@ -470,8 +482,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                 if (settings.getAddContextParameter()) {
-                    if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
-                        .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                    if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
                     } else {
                         function.line(String.format("return FluxUtil.withContext(context -> %s)",
@@ -502,8 +513,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 if (settings.getAddContextParameter()) {
-                    if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
-                        .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                    if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
                     } else {
                         function.line(String.format("return FluxUtil.withContext(context -> %s)",
@@ -543,8 +553,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
             if (settings.getAddContextParameter()) {
-                if (settings.isContextClientMethodParameter() && clientMethod.getParameters().stream()
-                    .anyMatch(param -> ClassType.Context.equals(param.getClientType()))) {
+                if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);
                 } else {
                     function.methodReturn(String.format("FluxUtil.withContext(context -> %s)",
@@ -556,6 +565,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         });
     }
 
+    protected boolean contextInParameters(ClientMethod clientMethod) {
+        return clientMethod.getParameters().stream().anyMatch(param -> ClassType.Context.equals(param.getClientType()));
+    }
+
     /**
      * Extension to write LRO async client method.
      *
@@ -565,6 +578,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param settings java settings
      */
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
     }
 }

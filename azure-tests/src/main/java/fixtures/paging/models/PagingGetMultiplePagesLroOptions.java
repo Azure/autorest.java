@@ -3,9 +3,7 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The PagingGetMultiplePagesLroOptions model.
- */
+/** The PagingGetMultiplePagesLroOptions model. */
 @Fluent
 public final class PagingGetMultiplePagesLroOptions {
     /*
@@ -22,9 +20,8 @@ public final class PagingGetMultiplePagesLroOptions {
     private Integer timeout;
 
     /**
-     * Get the maxresults property: Sets the maximum number of items to return
-     * in the response.
-     * 
+     * Get the maxresults property: Sets the maximum number of items to return in the response.
+     *
      * @return the maxresults value.
      */
     public Integer getMaxresults() {
@@ -32,9 +29,8 @@ public final class PagingGetMultiplePagesLroOptions {
     }
 
     /**
-     * Set the maxresults property: Sets the maximum number of items to return
-     * in the response.
-     * 
+     * Set the maxresults property: Sets the maximum number of items to return in the response.
+     *
      * @param maxresults the maxresults value to set.
      * @return the PagingGetMultiplePagesLroOptions object itself.
      */
@@ -44,9 +40,9 @@ public final class PagingGetMultiplePagesLroOptions {
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can
-     * spend processing the request, in seconds. The default is 30 seconds.
-     * 
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
+     *
      * @return the timeout value.
      */
     public Integer getTimeout() {
@@ -54,9 +50,9 @@ public final class PagingGetMultiplePagesLroOptions {
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can
-     * spend processing the request, in seconds. The default is 30 seconds.
-     * 
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
+     *
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesLroOptions object itself.
      */
@@ -67,9 +63,8 @@ public final class PagingGetMultiplePagesLroOptions {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {
-    }
+    public void validate() {}
 }
