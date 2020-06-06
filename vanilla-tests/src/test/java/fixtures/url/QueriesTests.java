@@ -5,6 +5,7 @@ import fixtures.url.models.UriColor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,14 @@ public class QueriesTests {
 
     @Test
     public void stringEmpty() throws Exception {
-        client.getQueries().stringEmpty();
+        Mono.fromRunnable(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).subscribe();
+//        client.getQueries().stringEmpty();
     }
 
     @Test

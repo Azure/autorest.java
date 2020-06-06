@@ -68,7 +68,7 @@ public class PathsTests {
         client.getPaths().doubleDecimalNegative();
     }
 
-    @Ignore("Should pass after 1.5.0-beta.1 azure-core is released")
+    @Test
     public void stringUnicode() throws Exception {
         client.getPaths().stringUnicode();
     }
