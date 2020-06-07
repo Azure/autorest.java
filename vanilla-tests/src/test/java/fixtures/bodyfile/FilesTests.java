@@ -42,9 +42,7 @@ public class FilesTests {
     @Test
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
-        InputStream stream = client.getFiles().getFileLarge();
-        long skipped = stream.skip(streamSize);
-        stream.close();
+        long skipped = client.getFiles().getFileLarge().skip(streamSize);
         assertEquals(streamSize, skipped);
     }
 

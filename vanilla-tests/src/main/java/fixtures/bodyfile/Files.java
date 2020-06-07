@@ -14,12 +14,15 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import fixtures.bodyfile.models.ErrorException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.nio.ByteBuffer;
 import java.util.Collections;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 /** An instance of this class provides access to all the operations defined in Files. */
 public final class Files {
@@ -143,11 +146,20 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
-        return getFileLargeAsync()
-                .map(ByteBufferBackedInputStream::new)
-                .collectList()
-                .map(list -> new SequenceInputStream(Collections.enumeration(list)))
-                .block();
+        Iterator<ByteBufferBackedInputStream> iterator = getFileLargeAsync()
+                .map(ByteBufferBackedInputStream::new).toStream().iterator();
+        Enumeration<InputStream> enumeration = new Enumeration<InputStream>() {
+            @Override
+            public boolean hasMoreElements() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public InputStream nextElement() {
+                return iterator.next();
+            }
+        };
+        return new SequenceInputStream(enumeration);
     }
 
     /**
