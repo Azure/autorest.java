@@ -62,6 +62,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                     .name(enumTypeName)
                     .expandable(true)
                     .values(enumValues)
+                    .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
                     .build();
             parsed.put(enumType, _itype);
         }
