@@ -113,17 +113,36 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
                     serviceClientDescription)));
         }
-        if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
-            .getImplementationSubpackage().isEmpty()) {
-            String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
-            if (!packageInfos.containsKey(implementationPackage)) {
-                packageInfos.put(implementationPackage, new PackageInfo(
-                    implementationPackage,
-                    String.format("Package containing the implementations and inner classes for %s.\n%s",
-                        serviceClientName, serviceClientDescription)));
+        if (settings.isFluent()) {
+            if (settings.getImplementationSubpackage() != null && !settings.getImplementationSubpackage().isEmpty()) {
+                String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
+                if (!packageInfos.containsKey(implementationPackage)) {
+                    packageInfos.put(implementationPackage, new PackageInfo(
+                        implementationPackage,
+                        String.format("Package containing the client classes for %s.\n%s",
+                            serviceClientName, serviceClientDescription)));
+                }
+                String implementationInnerPackage = settings.getPackage(settings.getImplementationSubpackage(), "inner");
+                if (!packageInfos.containsKey(implementationInnerPackage)) {
+                    packageInfos.put(implementationInnerPackage, new PackageInfo(
+                        implementationInnerPackage,
+                        String.format("Package containing the inner classes for %s.\n%s",
+                            serviceClientName, serviceClientDescription)));
+                }
+            }
+        } else {
+            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
+                .getImplementationSubpackage().isEmpty()) {
+                String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
+                if (!packageInfos.containsKey(implementationPackage)) {
+                    packageInfos.put(implementationPackage, new PackageInfo(
+                        implementationPackage,
+                        String.format("Package containing the implementations and inner classes for %s.\n%s",
+                            serviceClientName, serviceClientDescription)));
+                }
             }
         }
-        if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
+        if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
             && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
             // add package-info models package only if the models package is not empty
             && !clientModels.isEmpty()) {
