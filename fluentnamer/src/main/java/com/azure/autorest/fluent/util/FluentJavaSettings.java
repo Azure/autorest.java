@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -39,6 +40,11 @@ public class FluentJavaSettings {
     private boolean resourcePropertyAsSubResource = false;
 
     /**
+     * Operation group name for ungrouped operations.
+     */
+    private Optional<String> nameForUngroupedOperations = Optional.empty();
+
+    /**
      * Naming override.
      */
     private final Map<String, String> namingOverride = new HashMap<>();
@@ -62,6 +68,10 @@ public class FluentJavaSettings {
         return resourcePropertyAsSubResource;
     }
 
+    public Optional<String> getNameForUngroupedOperations() {
+        return nameForUngroupedOperations;
+    }
+
     public Map<String, String> getNamingOverride() {
         return namingOverride;
     }
@@ -80,6 +90,8 @@ public class FluentJavaSettings {
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
+        loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s) );
+
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
@@ -88,6 +100,13 @@ public class FluentJavaSettings {
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
         Boolean settingValue = host.getBooleanValue(settingName);
+        if (settingValue != null) {
+            action.accept(settingValue);
+        }
+    }
+
+    private void loadStringSetting(String settingName, Consumer<String> action) {
+        String settingValue = host.getStringValue(settingName);
         if (settingValue != null) {
             action.accept(settingValue);
         }
