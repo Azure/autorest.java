@@ -6,7 +6,6 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -32,6 +31,9 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
+        if (fluentJavaSettings.getNameForUngroupedOperations().isPresent()) {
+            codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings.getNameForUngroupedOperations().get());
+        }
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
@@ -54,6 +56,17 @@ public class FluentTransformer {
         codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .filter(o -> hasLongRunningOperationExtension(o) && hasPaging(o))
                 .forEach(o -> o.getExtensions().setXmsPageable(null));
+        return codeModel;
+    }
+
+    public CodeModel renameUngroupedOperationGroup(CodeModel codeModel, String nameForUngroupOperations) {
+        codeModel.getOperationGroups().stream()
+                .filter(og -> Utils.getDefaultName(og) == null || Utils.getDefaultName(og).isEmpty())
+                .forEach(og -> {
+                    logger.info("Rename ungrouped operation group to {}", nameForUngroupOperations);
+                    og.set$key(nameForUngroupOperations);
+                    og.getLanguage().getDefault().setName(nameForUngroupOperations);
+                });
         return codeModel;
     }
 
