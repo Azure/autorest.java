@@ -1,3 +1,11 @@
+# Settings
+
+| Option      | Description |
+| ----------- | ----------- |
+| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter) |
+| `--add-inner` | CSV. Treat as inner class (append `Inner` to class name) |
+| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource` |
+
 #### Fluentnamer
 
 ``` yaml
