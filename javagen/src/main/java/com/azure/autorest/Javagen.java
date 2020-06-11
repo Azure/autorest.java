@@ -142,7 +142,6 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                LOGGER.error("Writing java file \n" + javaFile.getContents());
                 String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
                 writeFile(javaFile.getFilePath(), formattedSource, null);
             }
