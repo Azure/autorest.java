@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -24,7 +25,10 @@ public final class Goblinshark extends Shark {
     private GoblinSharkColor color;
 
     /** Creates an instance of Goblinshark class. */
-    public Goblinshark(float length, OffsetDateTime birthday) {
+    @JsonCreator
+    public Goblinshark(
+            @JsonProperty(value = "length", required = true) float length,
+            @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
     }
 

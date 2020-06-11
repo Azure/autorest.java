@@ -2,6 +2,7 @@ package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,7 +20,10 @@ public final class Sawshark extends Shark {
     private byte[] picture;
 
     /** Creates an instance of Sawshark class. */
-    public Sawshark(float length, OffsetDateTime birthday) {
+    @JsonCreator
+    public Sawshark(
+            @JsonProperty(value = "length", required = true) float length,
+            @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
     }
 

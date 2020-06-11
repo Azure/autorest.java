@@ -3,6 +3,7 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -27,7 +28,8 @@ public final class SmartSalmon extends Salmon {
     @JsonIgnore private Map<String, Object> additionalProperties;
 
     /** Creates an instance of SmartSalmon class. */
-    public SmartSalmon(float length) {
+    @JsonCreator
+    public SmartSalmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
     }
 

@@ -48,6 +48,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
+        imports.add("com.fasterxml.jackson.annotation.JsonCreator");
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         while (parentModel != null) {
             imports.addAll(parentModel.getImports());
@@ -295,13 +296,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
             });
 
-            String requiredCtorArgs = requiredProperties.stream().map(property -> String.format("%1$s %2$s",
-                property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
+            String requiredCtorArgs = requiredProperties.stream()
+                .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
+                    property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
+
             String requiredParentCtorArgs = "";
 
             if (!requiredParentProperties.isEmpty()) {
                 Collections.reverse(requiredParentProperties);
-                requiredParentCtorArgs = requiredParentProperties.stream().map(property -> String.format("%1$s %2$s",
+                requiredParentCtorArgs = requiredParentProperties.stream().map(property -> String.format(
+                    "@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
                     property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
             }
 
@@ -312,6 +316,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
             ctorArgs.append(requiredCtorArgs);
 
+            classBlock.annotation("JsonCreator");
             classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), ctorArgs.toString()), (constructor) ->
             {
                 if (!requiredParentProperties.isEmpty()) {

@@ -1,6 +1,8 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
@@ -11,7 +13,10 @@ import java.time.OffsetDateTime;
 @Immutable
 public final class Cookiecuttershark extends Shark {
     /** Creates an instance of Cookiecuttershark class. */
-    public Cookiecuttershark(float length, OffsetDateTime birthday) {
+    @JsonCreator
+    public Cookiecuttershark(
+            @JsonProperty(value = "length", required = true) float length,
+            @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
     }
 
