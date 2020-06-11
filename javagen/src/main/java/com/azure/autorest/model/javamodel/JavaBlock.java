@@ -57,6 +57,10 @@ public class JavaBlock implements JavaContext {
         contents.returnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
     }
 
+    public final void anonymousClass(String anonymousClassDeclaration, String instanceName, Consumer<JavaClass> anonymousClassBlock) {
+        contents.anonymousClass(anonymousClassDeclaration, instanceName, anonymousClassBlock);
+    }
+
     public final JavaIfBlock ifBlock(String condition, Consumer<JavaBlock> ifAction) {
         contents.ifBlock(condition, ifAction);
         return new JavaIfBlock(contents);

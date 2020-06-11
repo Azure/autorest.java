@@ -289,6 +289,15 @@ public class JavaFileContents {
         line("};");
     }
 
+    public void anonymousClass(String anonymousClassDeclaration, String instanceName, Consumer<JavaClass> anonymousClassBlock) {
+        line("%1$s %2$s = new %1$s() {", anonymousClassDeclaration, instanceName);
+        indent(() -> {
+            JavaClass javaClass = new JavaClass(this);
+            anonymousClassBlock.accept(javaClass);
+        });
+        line("};");
+    }
+
     public void annotation(String... annotations) {
         annotation(Arrays.asList(annotations));
     }

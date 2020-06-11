@@ -7,6 +7,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PathsTests {
     private static AutoRestUrlTestService client;
@@ -67,8 +69,18 @@ public class PathsTests {
     }
 
     @Test
+    public void stringUnicode() throws Exception {
+        client.getPaths().stringUnicode();
+    }
+
+    @Test
     public void stringUrlEncoded() throws Exception {
         client.getPaths().stringUrlEncoded();
+    }
+
+    @Test
+    public void stringUrlNonEncoded() throws Exception {
+        client.getPaths().stringUrlNonEncoded();
     }
 
     @Test
@@ -151,7 +163,6 @@ public class PathsTests {
         client.getPaths().base64Url("lorem".getBytes());
     }
 
-    /*
     @Test
     public void arrayCsvInPath() throws Exception {
         List<String> arrayPath = new ArrayList<>();
@@ -159,9 +170,8 @@ public class PathsTests {
         arrayPath.add("begin!*'();:@ &=+$,/?#[]end");
         arrayPath.add(null);
         arrayPath.add("");
-        client.getPathsOperations().arrayCsvInPath(arrayPath);
+        client.getPaths().arrayCsvInPath(arrayPath);
     }
-    */
 
     @Test
     public void unixTimeUrl() throws Exception {

@@ -13,7 +13,7 @@ public final class Blobs {
     /*
      * The BlobPrefix property.
      */
-    @JsonProperty("null")
+    @JsonProperty("BlobPrefix")
     private List<BlobPrefix> blobPrefix = new ArrayList<>();
 
     /*

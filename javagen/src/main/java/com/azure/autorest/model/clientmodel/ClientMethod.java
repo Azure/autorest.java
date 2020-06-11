@@ -269,7 +269,8 @@ public class ClientMethod {
             if (getReturnValue().getType() == ClassType.InputStream) {
                 imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
                 imports.add("java.io.SequenceInputStream");
-                imports.add("java.util.Collections");
+                imports.add("java.util.Enumeration");
+                imports.add("java.util.Iterator");
             }
 
             if (settings.getAddContextParameter()

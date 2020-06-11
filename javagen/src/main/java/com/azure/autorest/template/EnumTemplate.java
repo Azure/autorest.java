@@ -37,9 +37,11 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             });
             javaFile.publicFinalClass(String.format("%1$s extends ExpandableStringEnum<%2$s>", enumType.getName(), enumType.getName()), (classBlock) ->
             {
+                String typeName = enumType.getElementType().getClientType().toString();
                 for (ClientEnumValue enumValue : enumType.getValues()) {
                     classBlock.javadocComment(String.format("Static value %1$s for %2$s.", enumValue.getValue(), enumType.getName()));
-                    classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = fromString(\"%3$s\")", enumType.getName(), enumValue.getName(), enumValue.getValue()));
+                    classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)",enumType.getName(), enumValue.getName(),
+                            CodeNamer.toPascalCase(typeName), enumType.getElementType().defaultValueExpression(enumValue.getValue())));
                 }
 
                 classBlock.javadocComment((comment) ->
@@ -49,9 +51,15 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     comment.methodReturns(String.format("the corresponding %1$s", enumType.getName()));
                 });
                 classBlock.annotation("JsonCreator");
-                classBlock.publicStaticMethod(String.format("%1$s fromString(String name)", enumType.getName()), (function) ->
+                classBlock.publicStaticMethod(String.format("%1$s from%2$s(%3$s name)", enumType.getName(), CodeNamer.toPascalCase(typeName), typeName), (function) ->
                 {
-                    function.methodReturn(String.format("fromString(name, %1$s.class)", enumType.getName()));
+                    String stringValue;
+                    if (ClassType.String.equals(enumType.getElementType())) {
+                        stringValue = "name";
+                    } else {
+                        stringValue = "String.valueOf(name)";
+                    }
+                    function.methodReturn(String.format("fromString(%1$s, %2$s.class)", stringValue, enumType.getName()));
                 });
 
                 classBlock.javadocComment((comment) ->

@@ -37,11 +37,11 @@ public final class ListContainersResponse {
     private int maxResults;
 
     private static final class ContainersWrapper {
-        @JacksonXmlProperty(localName = "null")
+        @JacksonXmlProperty(localName = "Container")
         private final List<Container> items;
 
         @JsonCreator
-        private ContainersWrapper(@JacksonXmlProperty(localName = "null") List<Container> items) {
+        private ContainersWrapper(@JacksonXmlProperty(localName = "Container") List<Container> items) {
             this.items = items;
         }
     }

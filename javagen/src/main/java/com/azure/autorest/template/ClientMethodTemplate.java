@@ -5,20 +5,20 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.ParameterMapping;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
@@ -370,13 +370,15 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
-                        function.line("return %s(%s)", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
-                        function.indent(() -> {
-                            function.line(".map(ByteBufferBackedInputStream::new)");
-                            function.line(".collectList()");
-                            function.line(".map(list -> new SequenceInputStream(Collections.enumeration(list)))");
-                            function.line(".block();");
+                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%S).map(ByteBufferBackedInputStream::new).toStream().iterator()",
+                                clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
+                            javaBlock.annotation("Override");
+                            javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
+                            javaBlock.annotation("Override");
+                            javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
                         });
+                        function.methodReturn("new SequenceInputStream(enumeration)");
                     } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
                         IType returnType = clientMethod.getReturnValue().getType();
                         if (returnType instanceof PrimitiveType) {
