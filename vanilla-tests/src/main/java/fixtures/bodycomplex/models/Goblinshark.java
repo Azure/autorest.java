@@ -4,6 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.time.OffsetDateTime;
 
 /** The Goblinshark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
@@ -21,6 +22,11 @@ public final class Goblinshark extends Shark {
      */
     @JsonProperty(value = "color")
     private GoblinSharkColor color;
+
+    /** Creates an instance of Goblinshark class. */
+    public Goblinshark(float length, OffsetDateTime birthday) {
+        super(length, birthday);
+    }
 
     /**
      * Get the jawsize property: The jawsize property.

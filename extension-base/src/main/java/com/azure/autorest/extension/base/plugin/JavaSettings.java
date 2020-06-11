@@ -19,7 +19,6 @@ public class JavaSettings
     private static NewPlugin host;
 
     private static String _header;
-
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value))
         {
@@ -87,7 +86,8 @@ public class JavaSettings
                     host.getBooleanValue("context-client-method-parameter", false),
                     host.getBooleanValue("generate-sync-async-clients", false),
                     host.getStringValue("sync-methods", "essential"),
-                    host.getBooleanValue("client-logger", false));
+                    host.getBooleanValue("client-logger", false),
+                    host.getBooleanValue("required-fields-as-ctor-args"));
         }
         return _instance;
     }
@@ -131,7 +131,8 @@ public class JavaSettings
                          boolean contextClientMethodParameter,
                          boolean generateSyncAsyncClients,
                          String syncMethods,
-                         boolean clientLogger)
+                         boolean clientLogger,
+                         boolean requiredFieldsAsConstructorArgs)
     {
         this.azure = azure;
         this.fluent = fluent;
@@ -156,6 +157,7 @@ public class JavaSettings
         this.generateSyncAsyncClients = generateSyncAsyncClients;
         this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
         this.clientLogger = clientLogger;
+        this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
     }
 
     private boolean azure;
@@ -169,7 +171,6 @@ public class JavaSettings
     {
         return fluent;
     }
-
     public final boolean isAzureOrFluent()
     {
         return isAzure() || isFluent();
@@ -204,7 +205,6 @@ public class JavaSettings
     {
         return packageName;
     }
-
     public final String getPackage(String... packageSuffixes) {
         StringBuilder packageBuilder = new StringBuilder(packageName);
         if (packageSuffixes != null) {
@@ -317,7 +317,12 @@ public class JavaSettings
         return syncMethods;
     }
 
-    public enum SyncMethodsGeneration {
+    private boolean requiredFieldsAsConstructorArgs;
+    public boolean isRequiredFieldsAsConstructorArgs() {
+        return requiredFieldsAsConstructorArgs;
+    }
+
+  public enum SyncMethodsGeneration {
         ALL,
         ESSENTIAL,
         NONE;

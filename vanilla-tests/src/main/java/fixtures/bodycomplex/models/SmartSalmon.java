@@ -26,6 +26,11 @@ public final class SmartSalmon extends Salmon {
      */
     @JsonIgnore private Map<String, Object> additionalProperties;
 
+    /** Creates an instance of SmartSalmon class. */
+    public SmartSalmon(float length) {
+        super(length);
+    }
+
     /**
      * Get the collegeDegree property: The college_degree property.
      *

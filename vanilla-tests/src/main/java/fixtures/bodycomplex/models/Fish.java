@@ -38,6 +38,11 @@ public class Fish {
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
+    /** Creates an instance of Fish class. */
+    public Fish(float length) {
+        this.length = length;
+    }
+
     /**
      * Get the species property: The species property.
      *
@@ -73,11 +78,6 @@ public class Fish {
      * @param length the length value to set.
      * @return the Fish object itself.
      */
-    public Fish setLength(float length) {
-        this.length = length;
-        return this;
-    }
-
     /**
      * Get the siblings property: The siblings property.
      *

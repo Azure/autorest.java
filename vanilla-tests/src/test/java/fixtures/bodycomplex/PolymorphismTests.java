@@ -50,32 +50,25 @@ public class PolymorphismTests {
 
     @Test
     public void putValid() {
-        Salmon body = new Salmon();
+        Salmon body = new Salmon(1.0f);
         body.setLocation("alaska");
         body.setIswild(true);
         body.setSpecies("king");
-        body.setLength(1.0f);
         body.setSiblings(new ArrayList<>());
 
-        Shark sib1 = new Shark();
+        Shark sib1 = new Shark(20.0f, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib1.setAge(6);
-        sib1.setBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib1.setLength(20.0f);
         sib1.setSpecies("predator");
         body.getSiblings().add(sib1);
 
-        Sawshark sib2 = new Sawshark();
+        Sawshark sib2 = new Sawshark(10.0f, OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib2.setAge(105);
-        sib2.setBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib2.setLength(10.0f);
         sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.setSpecies("dangerous");
         body.getSiblings().add(sib2);
 
-        Goblinshark sib3 = new Goblinshark();
+        Goblinshark sib3 = new Goblinshark(30.0f, OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
         sib3.setAge(1);
-        sib3.setBirthday(OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
-        sib3.setLength(30.0f);
         sib3.setSpecies("scary");
         sib3.setJawsize(5);
         sib3.setColor(GoblinSharkColor.fromString("pinkish-gray"));
@@ -87,23 +80,19 @@ public class PolymorphismTests {
     @Test
     public void putValidMissingRequired() {
         try {
-            Salmon body = new Salmon();
+            Salmon body = new Salmon(1.0f);
             body.setLocation("alaska");
             body.setIswild(true);
             body.setSpecies("king");
-            body.setLength(1.0f);
             body.setSiblings(new ArrayList<>());
 
-            Shark sib1 = new Shark();
+            Shark sib1 = new Shark(20.0f, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
             sib1.setAge(6);
-            sib1.setBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-            sib1.setLength(20.0f);
             sib1.setSpecies("predator");
             body.getSiblings().add(sib1);
 
-            Sawshark sib2 = new Sawshark();
+            Sawshark sib2 = new Sawshark(10.0f, null);
             sib2.setAge(105);
-            sib2.setLength(10.0f);
             sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
             sib2.setSpecies("dangerous");
             body.getSiblings().add(sib2);
@@ -155,11 +144,10 @@ public class PolymorphismTests {
 
     @Test
     public void putComplicated() {
-        SmartSalmon body = new SmartSalmon();
+        SmartSalmon body = new SmartSalmon(1.0f);
         body.setLocation("alaska");
         body.setIswild(true);
         body.setSpecies("king");
-        body.setLength(1.0f);
         body.setSiblings(new ArrayList<>());
         body.setAdditionalProperties(new HashMap<>());
         body.getAdditionalProperties().put("additionalProperty1", 1);
@@ -171,25 +159,19 @@ public class PolymorphismTests {
         body.getAdditionalProperties().put("additionalProperty4", additionalProperty4);
         body.getAdditionalProperties().put("additionalProperty5", Arrays.asList(1, 3));
 
-        Shark sib1 = new Shark();
+        Shark sib1 = new Shark(20.0f, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib1.setAge(6);
-        sib1.setBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib1.setLength(20.0f);
         sib1.setSpecies("predator");
         body.getSiblings().add(sib1);
 
-        Sawshark sib2 = new Sawshark();
+        Sawshark sib2 = new Sawshark(10.0f, OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib2.setAge(105);
-        sib2.setBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib2.setLength(10.0f);
         sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.setSpecies("dangerous");
         body.getSiblings().add(sib2);
 
-        Goblinshark sib3 = new Goblinshark();
+        Goblinshark sib3 = new Goblinshark(30.0f, OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
         sib3.setAge(1);
-        sib3.setBirthday(OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
-        sib3.setLength(30.0f);
         sib3.setSpecies("scary");
         sib3.setJawsize(5);
         sib3.setColor(GoblinSharkColor.fromString("pinkish-gray"));

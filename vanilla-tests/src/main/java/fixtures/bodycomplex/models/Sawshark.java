@@ -5,6 +5,7 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.time.OffsetDateTime;
 
 /** The Sawshark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
@@ -16,6 +17,11 @@ public final class Sawshark extends Shark {
      */
     @JsonProperty(value = "picture")
     private byte[] picture;
+
+    /** Creates an instance of Sawshark class. */
+    public Sawshark(float length, OffsetDateTime birthday) {
+        super(length, birthday);
+    }
 
     /**
      * Get the picture property: The picture property.
