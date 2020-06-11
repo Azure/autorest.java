@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -27,6 +28,12 @@ public class Salmon extends Fish {
      */
     @JsonProperty(value = "iswild")
     private Boolean iswild;
+
+    /** Creates an instance of Salmon class. */
+    @JsonCreator
+    public Salmon(@JsonProperty(value = "length", required = true) float length) {
+        super(length);
+    }
 
     /**
      * Get the location property: The location property.

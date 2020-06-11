@@ -51,7 +51,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             HashSet<String> modelImports = new HashSet<>();
 
-            String parentModel = null;
+            String parentModelName = null;
             boolean hasAdditionalProperties = false;
             List<ObjectSchema> parentsNeedFlatten = new ArrayList<>();
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
@@ -71,11 +71,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 if (firstParentComplexSchema != null) {
                     ClassType parentType = objectMapper.map(firstParentComplexSchema);
-                    parentModel = parentType.getName();
-                    modelImports.add(parentType.getPackage() + "." + parentModel);
+                    parentModelName = parentType.getName();
+                    modelImports.add(parentType.getPackage() + "." + parentModelName);
                 }
             }
-            builder.parentModelName(parentModel);
+            builder.parentModelName(parentModelName);
 
             List<Property> compositeTypeProperties = compositeType.getProperties()
                     .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());

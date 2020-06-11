@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -32,6 +33,15 @@ public class Shark extends Fish {
      */
     @JsonProperty(value = "birthday", required = true)
     private OffsetDateTime birthday;
+
+    /** Creates an instance of Shark class. */
+    @JsonCreator
+    public Shark(
+            @JsonProperty(value = "length", required = true) float length,
+            @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
+        super(length);
+        this.birthday = birthday;
+    }
 
     /**
      * Get the age property: The age property.
@@ -68,11 +78,6 @@ public class Shark extends Fish {
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
-    public Shark setBirthday(OffsetDateTime birthday) {
-        this.birthday = birthday;
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

@@ -3,21 +3,22 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
-
+import com.azure.autorest.model.javamodel.JavaModifier;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +46,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
             imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
             ClassType.ClientLogger.addImportsTo(imports, false);
+        }
+
+        imports.add("com.fasterxml.jackson.annotation.JsonCreator");
+        ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
+        while (parentModel != null) {
+            imports.addAll(parentModel.getImports());
+            parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
         }
 
         model.addImportsTo(imports, settings);
@@ -163,18 +171,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             List<ClientModelProperty> constantProperties = model.getProperties().stream().filter(ClientModelProperty::getIsConstant).collect(Collectors.toList());
-            if (!constantProperties.isEmpty()) {
-                classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-                {
-                    comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
-                });
-                classBlock.publicConstructor(String.format("%1$s()", model.getName()), (constructor) ->
-                {
-                    for (ClientModelProperty constantProperty : constantProperties) {
-                        constructor.line(String.format("%1$s = %2$s;", constantProperty.getName(), constantProperty.getDefaultValue()));
-                    }
-                });
-            }
+            List<ClientModelProperty> requiredProperties =
+                model.getProperties().stream().filter(ClientModelProperty::isRequired).collect(Collectors.toList());
+
+            addModelConstructor(model, settings, classBlock, constantProperties, requiredProperties);
 
             for (ClientModelProperty property : model.getProperties()) {
                 IType propertyType = property.getWireType();
@@ -227,31 +227,37 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         comment.param(property.getName(), String.format("the %s value to set", property.getName()));
                         comment.methodReturns(String.format("the %s object itself.", model.getName()));
                     });
-                    classBlock.publicMethod(String.format("%s %s(%s %s)",
-                            model.getName(), property.getSetterName(), propertyClientType, property.getName()), (methodBlock) -> {
-                        String expression;
-                        if (propertyClientType.equals(ArrayType.ByteArray)) {
-                            expression = String.format("CoreUtils.clone(%s)", property.getName());
-                        } else {
-                            expression = property.getName();
-                        }
-                        if (propertyClientType != propertyType) {
-                            methodBlock.ifBlock(String.format("%s == null", property.getName()), (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
-                                    .elseBlock((elseBlock) -> {
-                                        String sourceTypeName = propertyClientType.toString();
-                                        String targetTypeName = propertyType.toString();
-                                        String propertyConversion = propertyType.convertFromClientType(expression);
-                                        elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
-                                    });
-                        } else {
-                            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-                                methodBlock.line("this.%s = new %s(%s);", property.getName(), propertyXmlWrapperClassName.apply(property), expression);
-                            } else {
-                                methodBlock.line("this.%s = %s;", property.getName(), expression);
-                            }
-                        }
-                        methodBlock.methodReturn("this");
-                    });
+
+                    if(!(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())) {
+                        classBlock.publicMethod(String.format("%s %s(%s %s)",
+                            model.getName(), property.getSetterName(), propertyClientType, property.getName()),
+                            (methodBlock) -> {
+                                String expression;
+                                if (propertyClientType.equals(ArrayType.ByteArray)) {
+                                    expression = String.format("CoreUtils.clone(%s)", property.getName());
+                                } else {
+                                    expression = property.getName();
+                                }
+                                if (propertyClientType != propertyType) {
+                                    methodBlock.ifBlock(String.format("%s == null", property.getName()),
+                                        (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
+                                        .elseBlock((elseBlock) -> {
+                                            String sourceTypeName = propertyClientType.toString();
+                                            String targetTypeName = propertyType.toString();
+                                            String propertyConversion = propertyType.convertFromClientType(expression);
+                                            elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
+                                        });
+                                } else {
+                                    if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                                        methodBlock.line("this.%s = new %s(%s);", property.getName(),
+                                            propertyXmlWrapperClassName.apply(property), expression);
+                                    } else {
+                                        methodBlock.line("this.%s = %s;", property.getName(), expression);
+                                    }
+                                }
+                                methodBlock.methodReturn("this");
+                            });
+                    }
                 }
 
                 if (property.isAdditionalProperties()) {
@@ -268,6 +274,82 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
         });
+    }
+
+    private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,
+        List<ClientModelProperty> constantProperties, List<ClientModelProperty> requiredProperties) {
+
+        ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
+        List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
+        while (parentModel != null) {
+            requiredParentProperties.addAll(
+                parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
+                    .collect(Collectors.toList()));
+            parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
+        }
+
+        if (settings.isRequiredFieldsAsConstructorArgs() && (!requiredProperties.isEmpty() || !requiredParentProperties
+            .isEmpty())) {
+
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            {
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
+            });
+
+            String requiredCtorArgs = requiredProperties.stream()
+                .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
+                    property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
+
+            String requiredParentCtorArgs = "";
+
+            if (!requiredParentProperties.isEmpty()) {
+                Collections.reverse(requiredParentProperties);
+                requiredParentCtorArgs = requiredParentProperties.stream().map(property -> String.format(
+                    "@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
+                    property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
+            }
+
+            StringBuilder ctorArgs = new StringBuilder();
+            ctorArgs.append(requiredParentCtorArgs);
+            if (!(requiredParentProperties.isEmpty() || requiredProperties.isEmpty())) {
+                ctorArgs.append(", ");
+            }
+            ctorArgs.append(requiredCtorArgs);
+
+            classBlock.annotation("JsonCreator");
+            classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), ctorArgs.toString()), (constructor) ->
+            {
+                if (!requiredParentProperties.isEmpty()) {
+                    constructor.line(String.format("super(%1$s);",
+                        requiredParentProperties.stream().map(ClientModelProperty::getName)
+                            .collect(Collectors.joining(", "))));
+                }
+
+                if (!constantProperties.isEmpty()) {
+                    for (ClientModelProperty constantProperty : constantProperties) {
+                        constructor.line(String
+                            .format("%1$s = %2$s;", constantProperty.getName(), constantProperty.getDefaultValue()));
+                    }
+                }
+                for (ClientModelProperty requiredProperty : requiredProperties) {
+                    constructor.line(String
+                        .format("this.%1$s = %2$s;", requiredProperty.getName(), requiredProperty.getName()));
+                }
+            });
+
+        } else if (!constantProperties.isEmpty()) {
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            {
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
+            });
+            classBlock.publicConstructor(String.format("%1$s()", model.getName()), (constructor) ->
+            {
+                for (ClientModelProperty constantProperty : constantProperties) {
+                    constructor.line(
+                        String.format("%1$s = %2$s;", constantProperty.getName(), constantProperty.getDefaultValue()));
+                }
+            });
+        }
     }
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {

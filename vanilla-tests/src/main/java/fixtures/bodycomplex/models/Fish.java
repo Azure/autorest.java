@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -38,6 +39,12 @@ public class Fish {
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
+    /** Creates an instance of Fish class. */
+    @JsonCreator
+    public Fish(@JsonProperty(value = "length", required = true) float length) {
+        this.length = length;
+    }
+
     /**
      * Get the species property: The species property.
      *
@@ -73,11 +80,6 @@ public class Fish {
      * @param length the length value to set.
      * @return the Fish object itself.
      */
-    public Fish setLength(float length) {
-        this.length = length;
-        return this;
-    }
-
     /**
      * Get the siblings property: The siblings property.
      *

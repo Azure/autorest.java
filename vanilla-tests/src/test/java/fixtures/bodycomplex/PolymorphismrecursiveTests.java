@@ -34,50 +34,40 @@ public class PolymorphismrecursiveTests {
 
     @Test
     public void putValid() throws Exception {
-        Salmon body = new Salmon();
+        Salmon body = new Salmon(1.0f);
         body.setLocation("alaska");
         body.setIswild(true);
         body.setSpecies("king");
-        body.setLength(1.0f);
         body.setSiblings(new ArrayList<Fish>());
 
-        Shark sib1 = new Shark();
+        Shark sib1 = new Shark(20.0f, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib1.setAge(6);
-        sib1.setBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib1.setLength(20.0f);
         sib1.setSpecies("predator");
         sib1.setSiblings(new ArrayList<Fish>());
         body.getSiblings().add(sib1);
 
-        Sawshark sib2 = new Sawshark();
+        Sawshark sib2 = new Sawshark(10.0f, OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib2.setAge(105);
-        sib2.setBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib2.setLength(10.0f);
         sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.setSpecies("dangerous");
         sib2.setSiblings(new ArrayList<Fish>());
         body.getSiblings().add(sib2);
 
-        Salmon sib11 = new Salmon();
+        Salmon sib11 = new Salmon(2);
         sib11.setIswild(true);
         sib11.setLocation("atlantic");
         sib11.setSpecies("coho");
-        sib11.setLength(2);
         sib11.setSiblings(new ArrayList<Fish>());
         sib1.getSiblings().add(sib11);
         sib1.getSiblings().add(sib2);
 
-        Shark sib111 = new Shark();
+        Shark sib111 = new Shark(20, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib111.setAge(6);
-        sib111.setBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib111.setSpecies("predator");
-        sib111.setLength(20);
         sib11.getSiblings().add(sib111);
 
-        Sawshark sib112 = new Sawshark();
+        Sawshark sib112 = new Sawshark(10.0f, OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib112.setAge(105);
-        sib112.setBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib112.setLength(10.0f);
         sib112.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib112.setSpecies("dangerous");
         sib11.getSiblings().add(sib112);
