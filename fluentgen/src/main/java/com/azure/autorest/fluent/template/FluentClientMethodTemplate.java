@@ -155,7 +155,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
-    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+    protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
@@ -167,6 +167,17 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             } else {
                 function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
             }
+        });
+    }
+
+    protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
+            function.indent((() -> {
+                function.text(".getSyncPoller();");
+            }));
         });
     }
 

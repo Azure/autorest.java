@@ -16,13 +16,14 @@ public enum ClientMethodType {
 
     LongRunningSync(5),
     LongRunningAsync(6),
-    LongRunningBegin(7),
+    LongRunningBeginSync(7),
+    LongRunningBeginAsync(8),
 
-    SimpleSync(8),
-    SimpleAsync(9), // will not generate when sync-methods=none, will generate when sync-methods=essential
-    SimpleAsyncRestResponse(10),
+    SimpleSync(9),
+    SimpleAsync(10), // will not generate when sync-methods=none, will generate when sync-methods=essential
+    SimpleAsyncRestResponse(11),
 
-    Resumable(11);
+    Resumable(12);
 
     public static final int SIZE = Integer.SIZE;
     private static java.util.HashMap<Integer, ClientMethodType> mappings;

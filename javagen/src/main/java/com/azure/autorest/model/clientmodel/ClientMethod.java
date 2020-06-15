@@ -290,7 +290,7 @@ public class ClientMethod {
             }
         }
 
-        if (type == ClientMethodType.LongRunningBegin) {
+        if (type == ClientMethodType.LongRunningBeginAsync) {
             if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
                 imports.add("com.fasterxml.jackson.core.type.TypeReference");
             }

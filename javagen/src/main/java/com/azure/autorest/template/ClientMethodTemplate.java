@@ -351,8 +351,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
-            case LongRunningBegin:
-                generateLongRunningBegin(clientMethod, typeBlock, restAPIMethod, settings);
+            case LongRunningBeginAsync:
+                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
+
+            case LongRunningBeginSync:
+                generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
@@ -583,7 +587,27 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     }
 
-    protected void generateLongRunningBegin(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+    /**
+     * Extension to write LRO begin async client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
+    protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    /**
+     * Extension to write LRO begin sync client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
+    protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
     }
 }
