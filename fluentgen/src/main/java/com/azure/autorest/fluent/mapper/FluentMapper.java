@@ -98,6 +98,11 @@ public class FluentMapper {
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
         }
+
+        final Set<String> javaNamesForRemoveInner = fluentJavaSettings.getJavaNamesForRemoveInner();
+        if (!javaNamesForRemoveInner.isEmpty()) {
+            objectMapper.removeInnerModels(javaNamesForRemoveInner);
+        }
     }
 
     private static boolean isPossiblePagedList(Operation operation) {

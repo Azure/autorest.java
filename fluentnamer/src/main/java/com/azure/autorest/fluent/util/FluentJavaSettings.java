@@ -30,6 +30,11 @@ public class FluentJavaSettings {
     private Set<String> javaNamesForAddInner;
 
     /**
+     * Java class names for excluded Inner classes.
+     */
+    private Set<String> javaNamesForRemoveInner;
+
+    /**
      * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
      */
     private boolean track1Naming = false;
@@ -60,6 +65,10 @@ public class FluentJavaSettings {
         return javaNamesForAddInner;
     }
 
+    public Set<String> getJavaNamesForRemoveInner() {
+        return javaNamesForRemoveInner;
+    }
+
     public boolean isTrack1Naming() {
         return track1Naming;
     }
@@ -85,6 +94,16 @@ public class FluentJavaSettings {
                     .collect(Collectors.toSet());
         } else {
             javaNamesForAddInner = Collections.emptySet();
+        }
+
+        String removeInnerSetting = host.getStringValue("remove-inner");
+        if (removeInnerSetting != null && !removeInnerSetting.isEmpty()) {
+            javaNamesForRemoveInner = Arrays.stream(removeInnerSetting.split(Pattern.quote(",")))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .collect(Collectors.toSet());
+        } else {
+            javaNamesForRemoveInner = Collections.emptySet();
         }
 
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
