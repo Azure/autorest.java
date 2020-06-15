@@ -85,6 +85,10 @@ public class GenericType implements IType {
         return new GenericType("com.azure.core.util.polling", "PollerFlux", pollResultType, finalResultType);
     }
 
+    public static GenericType SyncPoller(IType pollResultType, IType finalResultType) {
+        return new GenericType("com.azure.core.util.polling", "SyncPoller", pollResultType, finalResultType);
+    }
+
     public static GenericType PollResult(IType pollResultType) {
         return new GenericType("com.azure.core.management.polling", "PollResult", pollResultType);
     }

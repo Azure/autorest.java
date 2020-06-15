@@ -273,18 +273,36 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     addClientMethodWithContext(methods, builder, parameters);
                 }
 
-                // begin method
-                methods.add(builder
-                        .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                                GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
-                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningBegin)
-                        .isGroupedParameterRequired(false)
-                        .build());
+                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                    // begin method async
+                    methods.add(builder
+                            .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                                    GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
+                            .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.LongRunningBeginAsync)
+                            .isGroupedParameterRequired(false)
+                            .build());
 
-                if (settings.isContextClientMethodParameter()) {
-                    addClientMethodWithContext(methods, builder, parameters);
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
+                }
+
+                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    // begin method sync
+                    methods.add(builder
+                            .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                                    GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
+                            .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.LongRunningBeginSync)
+                            .isGroupedParameterRequired(false)
+                            .build());
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
