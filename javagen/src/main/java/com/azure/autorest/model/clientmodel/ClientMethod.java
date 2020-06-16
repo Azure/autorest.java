@@ -285,9 +285,6 @@ public class ClientMethod {
 
         if (type == ClientMethodType.LongRunningAsync) {
             imports.add("com.azure.core.util.polling.AsyncPollResponse");
-            if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                imports.add("com.fasterxml.jackson.core.type.TypeReference");
-            }
         }
 
         if (type == ClientMethodType.LongRunningBeginAsync) {
