@@ -15,7 +15,7 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATDictionaryService type. */
-@ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class)
+@ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     private DictionarysImpl serviceClient;
 
