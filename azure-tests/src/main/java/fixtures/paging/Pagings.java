@@ -330,6 +330,10 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
         return FluxUtil.withContext(context -> service.getNullNextLinkNamePages(this.client.getHost(), context))
                 .map(
                         res ->
@@ -568,6 +572,10 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
         final boolean queryConstant = true;
         return FluxUtil.withContext(
                         context -> service.nextOperationWithQueryParams(this.client.getHost(), queryConstant, context))
