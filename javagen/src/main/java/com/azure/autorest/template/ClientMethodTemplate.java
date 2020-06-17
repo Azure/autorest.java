@@ -479,14 +479,15 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-        String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
+                String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
                 if (settings.getAddContextParameter()) {
                     if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
@@ -517,7 +518,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             });
         } else {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                ApplyParameterTransformations(function, clientMethod, settings);
+                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
+                String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
                 if (settings.getAddContextParameter()) {
                     if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
