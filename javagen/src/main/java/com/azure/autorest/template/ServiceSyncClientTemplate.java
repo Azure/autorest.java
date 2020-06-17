@@ -53,9 +53,9 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     {
       // Add service client member variable
       if (wrapServiceClient) {
-        classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
+        classBlock.privateFinalMemberVariable(serviceClient.getClassName(), "serviceClient");
       } else {
-        classBlock.privateMemberVariable(methodGroupClient.getClassName(), "serviceClient");
+        classBlock.privateFinalMemberVariable(methodGroupClient.getClassName(), "serviceClient");
       }
 
       // Service Client Constructor
