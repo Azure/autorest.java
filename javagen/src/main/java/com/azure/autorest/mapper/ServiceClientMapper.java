@@ -1,7 +1,6 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
@@ -17,7 +16,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,14 +106,14 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
-            boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
-
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
             if (serviceClientPropertyClientType == ClassType.TokenCredential) {
                 usesCredentials = true;
             } else {
-                ServiceClientProperty serviceClientProperty = new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression);
+                ServiceClientProperty serviceClientProperty =
+                    new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType,
+                        serviceClientPropertyName, false, serviceClientPropertyDefaultValueExpression);
                 if (!serviceClientProperties.contains(serviceClientProperty)) {
                     // Ignore duplicate client property.
                     serviceClientProperties.add(serviceClientProperty);

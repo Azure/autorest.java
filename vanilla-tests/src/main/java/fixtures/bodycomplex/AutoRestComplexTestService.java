@@ -153,12 +153,13 @@ public final class AutoRestComplexTestService {
     }
 
     /** Initializes an instance of AutoRestComplexTestService client. */
-    AutoRestComplexTestService(String host) {
+    AutoRestComplexTestService(String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -166,10 +167,10 @@ public final class AutoRestComplexTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestComplexTestService(HttpPipeline httpPipeline, String host) {
+    AutoRestComplexTestService(HttpPipeline httpPipeline, String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.host = host;
-        this.apiVersion = "2016-02-29";
+        this.apiVersion = apiVersion;
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
         this.arrays = new Arrays(this);

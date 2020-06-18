@@ -81,13 +81,14 @@ public final class AutoRestValidationTest {
     }
 
     /** Initializes an instance of AutoRestValidationTest client. */
-    AutoRestValidationTest(String subscriptionId, String host) {
+    AutoRestValidationTest(String subscriptionId, String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 subscriptionId,
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -95,11 +96,11 @@ public final class AutoRestValidationTest {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host) {
+    AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.subscriptionId = subscriptionId;
         this.host = host;
-        this.apiVersion = "1.0.0";
+        this.apiVersion = apiVersion;
         this.service = RestProxy.create(AutoRestValidationTestService.class, this.httpPipeline);
     }
 
