@@ -64,16 +64,27 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
-            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false);
+            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false, false);
         }
     }
 
     protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
-        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true);
+        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true, true);
     }
 
+    /**
+     * Add optional and constant variables.
+     *
+     * @param function
+     * @param clientMethod
+     * @param proxyMethodAndConstantParameters
+     * @param settings
+     * @param addOptional Whether add optional variables, init to default or null
+     * @param addConstant Whether add constant variables, init to default
+     * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
+     */
     protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
-                                                        boolean addOptional, boolean addConstant) {
+                                                        boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
@@ -87,10 +98,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
-            // "addConstant" clause is a hack here.
-            // For SimpleAsyncRestResponse and PagingAsyncSinglePage, "alwaysNull" is set to true, to let "ConvertClientTypesToWireTypes" method set the optional parameter.
-            // For other ClientMethodType (which would have addConstant=false), optional parameter need to be initialized for calling method with full parameters.
-            boolean alwaysNull = addConstant && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
             if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
