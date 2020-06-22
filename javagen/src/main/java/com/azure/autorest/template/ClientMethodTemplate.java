@@ -87,7 +87,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
-            boolean alwaysNull = parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            // "addConstant" clause is a hack here.
+            // For SimpleAsyncRestResponse and PagingAsyncSinglePage, "alwaysNull" is set to true, to let "ConvertClientTypesToWireTypes" method set the optional parameter.
+            // For other ClientMethodType (which would have addConstant=false), optional parameter need to be initialized for calling method with full parameters.
+            boolean alwaysNull = addConstant && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
             if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
@@ -181,7 +184,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     protected static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
-            ;
+
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
