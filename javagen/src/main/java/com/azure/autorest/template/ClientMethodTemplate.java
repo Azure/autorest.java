@@ -64,16 +64,27 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
-            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false);
+            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false, false);
         }
     }
 
     protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
-        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true);
+        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true, true);
     }
 
+    /**
+     * Add optional and constant variables.
+     *
+     * @param function
+     * @param clientMethod
+     * @param proxyMethodAndConstantParameters
+     * @param settings
+     * @param addOptional Whether add optional variables, init to default or null
+     * @param addConstant Whether add constant variables, init to default
+     * @param ignoreParameterNeedConvert When adding optional/constant variable, ignore those which need conversion from client type to wire type. Let "ConvertClientTypesToWireTypes" handle them.
+     */
     protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
-                                                        boolean addOptional, boolean addConstant) {
+                                                        boolean addOptional, boolean addConstant, boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
@@ -87,7 +98,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
-            boolean alwaysNull = parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
             if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
@@ -181,7 +192,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     protected static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
-            ;
+
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
@@ -374,7 +385,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
-                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%S).map(ByteBufferBackedInputStream::new).toStream().iterator()",
+                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%S).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                                 clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                         function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                             javaBlock.annotation("Override");
