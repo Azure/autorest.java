@@ -282,9 +282,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null) {
-            requiredParentProperties.addAll(
+            List<ClientModelProperty> ctorArgs =
                 parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList());
+            // this will be reversed again, so, it will be in the right order if a
+            // super class has multiple ctor args
+            Collections.reverse(ctorArgs);
+            requiredParentProperties.addAll(ctorArgs);
             parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
         }
 
