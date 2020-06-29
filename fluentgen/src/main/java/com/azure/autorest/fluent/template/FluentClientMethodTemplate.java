@@ -143,7 +143,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
             function.indent(() -> {
                 function.line(".last()");
-                function.line(".flatMap(AsyncPollResponse::getFinalResult);");
+                function.line(".flatMap(client::getLroFinalResultOrError);");
             });
         });
     }

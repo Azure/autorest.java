@@ -6,11 +6,15 @@ package com.azure.resourcemanager;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.management.exception.ManagementError;
+import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.polling.AsyncPollResponse;
+import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Flux;
@@ -109,6 +113,17 @@ public abstract class AzureServiceClient {
         return context;
     }
 
+    /**
+     * Gets long running operation result.
+     *
+     * @param lroInit the raw response of init operation.
+     * @param httpPipeline the http pipeline.
+     * @param pollResultType type of poll result.
+     * @param finalResultType type of final result.
+     * @param <T> type of poll result.
+     * @param <U> type of final result.
+     * @return poller flux for poll result and final result.
+     */
     public <T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<Response<Flux<ByteBuffer>>> lroInit,
                                                                  HttpPipeline httpPipeline,
                                                                  Type pollResultType, Type finalResultType) {
@@ -124,6 +139,26 @@ public abstract class AzureServiceClient {
 
     private Mono<Response<Flux<ByteBuffer>>> activationOperation(Mono<Response<Flux<ByteBuffer>>> lroInit) {
         return lroInit.flatMap(fluxSimpleResponse -> Mono.just(fluxSimpleResponse));
+    }
+
+    /**
+     * Gets the final result, or an error, based on last async poll response.
+     *
+     * @param response the last async poll response.
+     * @param <T> type of poll result.
+     * @param <U> type of final result.
+     * @return the final result, or an error.
+     */
+    public <T, U> Mono<U> getLroFinalResultOrError(AsyncPollResponse<PollResult<T>, U> response) {
+        if (response.getStatus() != LongRunningOperationStatus.SUCCESSFULLY_COMPLETED) {
+            String errorMessage = response.getValue().getError() != null
+                    ? response.getValue().getError().getMessage()
+                    : "Unknown error";
+            return Mono.error(new ManagementException(errorMessage, null,
+                    new ManagementError(response.getStatus().toString(), errorMessage)));
+        } else {
+            return response.getFinalResult();
+        }
     }
 
     private static String getSha256(byte[] bytes) {
