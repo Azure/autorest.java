@@ -38,7 +38,7 @@ public class FluentTransformer {
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = renameHostParameter(codeModel);
-        codeModel = addStartOperationForLROs(codeModel);
+        //codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
 
