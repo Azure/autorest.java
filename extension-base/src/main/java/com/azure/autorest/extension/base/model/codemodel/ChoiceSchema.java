@@ -3,6 +3,7 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -85,6 +86,7 @@ public class ChoiceSchema extends ValueSchema {
         int result = 1;
         result = ((result* 31)+((this.choiceType == null)? 0 :this.choiceType.hashCode()));
         result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
+        result = ((result* 31)+((this.getLanguage().getJava().getName() == null)? 0 :this.getLanguage().getJava().getName().hashCode()));
         return result;
     }
 
@@ -97,7 +99,8 @@ public class ChoiceSchema extends ValueSchema {
             return false;
         }
         ChoiceSchema rhs = ((ChoiceSchema) other);
-        return (((this.choiceType == rhs.choiceType)||((this.choiceType!= null)&&this.choiceType.equals(rhs.choiceType)))&&((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices))));
+        return Objects.equals(this.choiceType, rhs.choiceType) && Objects.equals(this.choices, rhs.choices)
+                && Objects.equals(this.getLanguage().getJava().getName(), rhs.getLanguage().getJava().getName());
     }
 
 }
