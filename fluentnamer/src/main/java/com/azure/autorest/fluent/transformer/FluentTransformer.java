@@ -35,7 +35,7 @@ public class FluentTransformer {
             codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings.getNameForUngroupedOperations().get());
         }
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
-        codeModel = new ConstantSchemaOptimization().process(codeModel);
+        //codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = renameHostParameter(codeModel);
         //codeModel = addStartOperationForLROs(codeModel);
