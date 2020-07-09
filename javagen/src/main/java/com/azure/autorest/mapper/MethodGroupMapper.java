@@ -48,7 +48,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
             if (settings.shouldGenerateSyncAsyncClients()) {
                 className += "Impl";
             } else {
-                className += "Client";
+                className += "ClientImpl";
             }
         } else if (settings.shouldGenerateClientAsImpl()) {
             className += "Impl";
