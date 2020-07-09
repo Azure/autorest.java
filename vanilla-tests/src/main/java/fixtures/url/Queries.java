@@ -238,6 +238,12 @@ public final class Queries {
         Mono<Response<Void>> arrayStringCsvEmpty(
                 @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
 
+        @Get("/queries/array/none/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
+                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+
         @Get("/queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -1591,6 +1597,60 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
         arrayStringCsvEmptyAsync(arrayQuery).block();
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @param arrayQuery Array of String.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        String arrayQueryConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        return FluxUtil.withContext(
+                context ->
+                        service.arrayStringNoCollectionFormatEmpty(
+                                this.client.getHost(), arrayQueryConverted, context));
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @param arrayQuery Array of String.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringNoCollectionFormatEmptyAsync(List<String> arrayQuery) {
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @param arrayQuery Array of String.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringNoCollectionFormatEmpty(List<String> arrayQuery) {
+        arrayStringNoCollectionFormatEmptyAsync(arrayQuery).block();
     }
 
     /**
