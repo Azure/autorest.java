@@ -116,10 +116,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             }
 
             String requestContentType = "application/json";
-            if (request.getProtocol().getHttp().getKnownMediaType() != null) {
-                requestContentType = request.getProtocol().getHttp().getKnownMediaType().getContentType();
-            } else if (request.getProtocol().getHttp().getMediaTypes() != null && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
+
+            // check for mediaTypes first as that is more specific than the knownMediaType
+            if (request.getProtocol().getHttp().getMediaTypes() != null && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
                 requestContentType = request.getProtocol().getHttp().getMediaTypes().get(0);
+            } else if (request.getProtocol().getHttp().getKnownMediaType() != null) {
+                 requestContentType = request.getProtocol().getHttp().getKnownMediaType().getContentType();
             }
             builder.requestContentType(requestContentType);
 
