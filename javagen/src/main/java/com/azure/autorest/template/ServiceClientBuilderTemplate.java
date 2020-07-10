@@ -170,8 +170,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                 if (wrapServiceClient) {
                                     function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
                                 } else {
-                                    function.line("return new %1$s(%2$s().%3$s());", asyncClient.getClassName(), buildMethodName,
-                                            CodeNamer.getModelNamer().modelPropertyGetterName(asyncClient.getMethodGroupClient().getVariableName()));
+                                    function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
+                                            CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
                                 }
                             });
                 }
@@ -190,8 +190,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                 if (wrapServiceClient) {
                                     function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
                                 } else {
-                                    function.line("return new %1$s(%2$s().%3$s());", syncClient.getClassName(), buildMethodName,
-                                            CodeNamer.getModelNamer().modelPropertyGetterName(syncClient.getMethodGroupClient().getVariableName()));
+                                    function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
+                                            CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
                                 }
                             });
                 }

@@ -27,6 +27,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         String endOfLine = addContextParameter ? "" : ";";
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
@@ -38,6 +39,9 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                if (mergeContextParameter) {
+                    function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
+                }
                 if (addContextParameter) {
                     function.line(String.format("return FluxUtil.withContext(context -> %s)",
                             serviceMethodCall));
@@ -76,6 +80,9 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                if (mergeContextParameter) {
+                    function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
+                }
                 if (addContextParameter) {
                     function.line(String.format("return FluxUtil.withContext(context -> %s)",
                             serviceMethodCall));
@@ -114,6 +121,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -123,6 +131,9 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+            if (mergeContextParameter) {
+                function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
+            }
             if (addContextParameter) {
                 function.line(String.format("return FluxUtil.withContext(context -> %s)",
                         serviceMethodCall));

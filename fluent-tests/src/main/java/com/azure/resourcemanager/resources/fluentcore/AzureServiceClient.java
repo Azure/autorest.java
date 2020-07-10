@@ -25,6 +25,7 @@ import reactor.core.publisher.Mono;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.time.Duration;
+import java.util.Map;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
@@ -78,6 +79,19 @@ public abstract class AzureServiceClient {
         }
         context = context.addData("Sdk-Name", sdkName);
         context = context.addData("Sdk-Version", SDK_VERSION);
+        return context;
+    }
+
+    /**
+     * Merges default client context with provided context.
+     *
+     * @param context the context to be merged with default client context.
+     * @return the merged context.
+     */
+    public Context mergeContext(Context context) {
+        for (Map.Entry<Object, Object> entry : this.getContext().getValues().entrySet()) {
+            context = context.addData(entry.getKey(), entry.getValue());
+        }
         return context;
     }
 
