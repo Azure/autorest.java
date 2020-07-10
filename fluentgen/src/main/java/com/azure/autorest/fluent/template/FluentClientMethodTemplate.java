@@ -28,6 +28,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
@@ -43,11 +44,35 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
                 if (addContextParameter) {
-                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                            serviceMethodCall));
+                    if (!isLroPagination) {
+                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
+                                serviceMethodCall));
+                    } else {
+                        function.line("return FluxUtil.withContext(context -> {");
+                        function.indent(() -> {
+                            function.line(String.format("%s mono = %s.cache();",
+                                    clientMethod.getProxyMethod().getReturnType().toString(),
+                                    serviceMethodCall));
+
+                            IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
+                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError));",
+                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                        });
+                        function.line("})");
+                    }
                 } else {
-                    function.line(String.format("return %s",
-                            serviceMethodCall));
+                    if (!isLroPagination) {
+                        function.line(String.format("return %s",
+                                serviceMethodCall));
+                    } else {
+                        function.line(String.format("%s mono = %s.cache();",
+                                clientMethod.getProxyMethod().getReturnType().toString(),
+                                serviceMethodCall));
+
+                        IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
+                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError))",
+                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                    }
                 }
                 function.indent(() -> {
                     if (addContextParameter) {
@@ -57,16 +82,30 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         function.line(".map(res -> new PagedResponseBase<>(");
                     }
                     function.indent(() -> {
-                        function.line("res.getRequest(),");
-                        function.line("res.getStatusCode(),");
-                        function.line("res.getHeaders(),");
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
-                        IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                        if (responseType instanceof ClassType) {
-                            function.line(String.format("res.getDeserializedHeaders()))%s", endOfLine));
+                        if (!isLroPagination) {
+                            function.line("res.getRequest(),");
+                            function.line("res.getStatusCode(),");
+                            function.line("res.getHeaders(),");
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line(String.format("res.getDeserializedHeaders()))%s", endOfLine));
+                            } else {
+                                function.line(String.format("null))%s", endOfLine));
+                            }
                         } else {
-                            function.line(String.format("null))%s", endOfLine));
+                            function.line("res.getT1().getRequest(),");
+                            function.line("res.getT1().getStatusCode(),");
+                            function.line("res.getT1().getHeaders(),");
+                            function.line("res.getT2().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getT2().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line(String.format("res.getT2().getDeserializedHeaders()))%s", endOfLine));
+                            } else {
+                                function.line(String.format("null))%s", endOfLine));
+                            }
                         }
                     });
                     if (addContextParameter) {
@@ -84,11 +123,35 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
                 if (addContextParameter) {
-                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                            serviceMethodCall));
+                    if (!isLroPagination) {
+                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
+                                serviceMethodCall));
+                    } else {
+                        function.line("return FluxUtil.withContext(context -> {");
+                        function.indent(() -> {
+                            function.line(String.format("%s mono = %s.cache();",
+                                    clientMethod.getProxyMethod().getReturnType().toString(),
+                                    serviceMethodCall));
+
+                            IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
+                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError));",
+                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                        });
+                        function.line("})");
+                    }
                 } else {
-                    function.line(String.format("return %s",
-                            serviceMethodCall));
+                    if (!isLroPagination) {
+                        function.line(String.format("return %s",
+                                serviceMethodCall));
+                    } else {
+                        function.line(String.format("%s mono = %s.cache();",
+                                clientMethod.getProxyMethod().getReturnType().toString(),
+                                serviceMethodCall));
+
+                        IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
+                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError))",
+                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                    }
                 }
                 function.indent(() -> {
                     if (addContextParameter) {
@@ -98,16 +161,30 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         function.line(".map(res -> new PagedResponseBase<>(");
                     }
                     function.indent(() -> {
-                        function.line("res.getRequest(),");
-                        function.line("res.getStatusCode(),");
-                        function.line("res.getHeaders(),");
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
-                        function.line("null,");
-                        IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                        if (responseType instanceof ClassType) {
-                            function.line(String.format("res.getDeserializedHeaders()))%s", endOfLine));
+                        if (!isLroPagination) {
+                            function.line("res.getRequest(),");
+                            function.line("res.getStatusCode(),");
+                            function.line("res.getHeaders(),");
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("null,");
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line(String.format("res.getDeserializedHeaders()))%s", endOfLine));
+                            } else {
+                                function.line(String.format("null))%s", endOfLine));
+                            }
                         } else {
-                            function.line(String.format("null))%s", endOfLine));
+                            function.line("res.getT1().getRequest(),");
+                            function.line("res.getT1().getStatusCode(),");
+                            function.line("res.getT1().getHeaders(),");
+                            function.line("res.getT2().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("null,");
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line(String.format("res.getT2().getDeserializedHeaders()))%s", endOfLine));
+                            } else {
+                                function.line(String.format("null))%s", endOfLine));
+                            }
                         }
                     });
                     if (addContextParameter) {

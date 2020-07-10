@@ -30,7 +30,6 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
-        codeModel = removePagingLRO(codeModel);
         if (fluentJavaSettings.getNameForUngroupedOperations().isPresent()) {
             codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings.getNameForUngroupedOperations().get());
         }
@@ -49,13 +48,6 @@ public class FluentTransformer {
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
-        return codeModel;
-    }
-
-    public CodeModel removePagingLRO(CodeModel codeModel) {
-        codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
-                .filter(o -> hasLongRunningOperationExtension(o) && hasPaging(o))
-                .forEach(o -> o.getExtensions().setXmsPageable(null));
         return codeModel;
     }
 
