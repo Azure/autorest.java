@@ -1,6 +1,6 @@
 REM add java11 to path on devops
 DIR "C:\Program Files\Java"
-SET JAVA11_LOCATION=C:\Program Files\Java\zulu-11-azure-jdk_11.33.15-11.0.4-win_x64
+SET JAVA11_LOCATION=C:\Program Files\Java\jdk-11.0.7+10
 IF EXIST "%JAVA11_LOCATION%" (
     ECHO "add java11 to path"
     SET "PATH=%JAVA11_LOCATION%\bin;%PATH%"
