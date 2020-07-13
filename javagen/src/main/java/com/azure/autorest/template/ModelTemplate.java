@@ -375,9 +375,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock.line("super.validate();");
                 }
                 for (ClientModelProperty property : model.getProperties()) {
-                    String validation = property.getClientType().validate(property.getGetterName() + "()");
+                    String validation = property.getClientType().validate(getGetterName(model, property) + "()");
                     if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
-                        JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", property.getGetterName()), ifBlock -> {
+                        JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.shouldClientLogger()) {
                                 ifBlock.line(String.format(
@@ -393,7 +393,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
                         }
                     } else if (validation != null) {
-                        methodBlock.ifBlock(String.format("%s() != null", property.getGetterName()), ifBlock -> {
+                        methodBlock.ifBlock(String.format("%s() != null", getGetterName(model, property)), ifBlock -> {
                             ifBlock.line(validation + ";");
                         });
                     }
