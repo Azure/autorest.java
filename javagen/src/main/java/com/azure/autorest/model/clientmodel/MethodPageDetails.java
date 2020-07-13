@@ -15,10 +15,15 @@ public class MethodPageDetails {
     private String itemName;
     private ClientMethod nextMethod;
 
-    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod) {
+    // Proxy method return type is Flux<ByteBuffer>. Client method return type is PagedResponse<>.
+    // This intermediate type is the type of pagination response (the type with values and nextLink).
+    private IType lroIntermediateType;
+
+    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType) {
         this.nextLinkName = nextLinkName;
         this.itemName = itemName;
         this.nextMethod = nextMethod;
+        this.lroIntermediateType = lroIntermediateType;
     }
 
     public String getNextLinkName() {
@@ -29,8 +34,12 @@ public class MethodPageDetails {
         return itemName;
     }
 
-    public final ClientMethod getNextMethod() {
+    public ClientMethod getNextMethod() {
         return nextMethod;
+    }
+
+    public IType getLroIntermediateType() {
+        return lroIntermediateType;
     }
 
     public boolean nonNullNextLink() {

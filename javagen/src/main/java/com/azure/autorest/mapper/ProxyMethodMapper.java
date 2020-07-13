@@ -64,7 +64,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
 
         IType returnType;
-        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
             returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
             builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {

@@ -385,7 +385,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
-                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%S).map(ByteBufferBackedInputStream::new).toStream().iterator();",
+                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                                 clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                         function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                             javaBlock.annotation("Override");

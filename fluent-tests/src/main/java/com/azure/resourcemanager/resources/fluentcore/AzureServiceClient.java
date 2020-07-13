@@ -114,7 +114,7 @@ public abstract class AzureServiceClient {
                 httpPipeline,
                 pollResultType,
                 finalResultType,
-                Duration.ofSeconds(30),
+                Duration.ofSeconds(3),
                 lroInit);
     }
 

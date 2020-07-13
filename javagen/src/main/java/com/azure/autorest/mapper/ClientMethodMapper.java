@@ -185,11 +185,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 if (pageableItemName != null) {
                     boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
 
+                    IType lroIntermediateType = null;
+                    if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
+                        lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
+                    }
+
                     MethodPageDetails details = new MethodPageDetails(
                             CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                             pageableItemName,
                             (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
-                                    .stream().findFirst().get());
+                                    .stream().findFirst().get(),
+                            lroIntermediateType);
                     builder.methodPageDetails(details);
 
                     if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
