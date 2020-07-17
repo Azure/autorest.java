@@ -32,8 +32,8 @@ import java.util.Map;
  */
 public abstract class AzureServiceClient {
 
-    protected AzureServiceClient(HttpPipeline httpPipeline, AzureEnvironment environment) {
-
+    protected AzureServiceClient(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, AzureEnvironment environment) {
+        this.serializerAdapter = serializerAdapter;
     }
 
     private static final String OS;

@@ -42,10 +42,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        } else {
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
         }
+        commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
+        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", false, settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
 
         String buildReturnType;
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
@@ -59,6 +58,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         commonProperties.stream().forEach(p -> p.addImportsTo(imports, false));
         imports.remove("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
+        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.AzureJacksonAdapter" : "com.azure.core.util.serializer.JacksonAdapter");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -148,9 +148,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
 
                 if (settings.isFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                    function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                    function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 }
                 function.line("return client;");
             });

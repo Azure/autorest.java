@@ -123,6 +123,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
+        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", true, null));
         builder.properties(serviceClientProperties);
 
         ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()
@@ -153,6 +154,20 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         : new ArrayList<>())
                 .build();
 
+        ClientMethodParameter serializerAdapterParameter = new ClientMethodParameter.Builder()
+                .description("The serializer to serialize an object into a string")
+                .isFinal(false)
+                .wireType(ClassType.SerializerAdapter)
+                .name("serializerAdapter")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                        ? Arrays.asList(ClassType.NonNull)
+                        : new ArrayList<>())
+                .build();
+
         List<Constructor> serviceClientConstructors = new ArrayList<>();
 
         if (settings.isFluent()) {
@@ -170,18 +185,19 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             : new ArrayList<>())
                     .build();
 
-//            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-//            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter, azureEnvironmentParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)
+                    .serializerAdapterParameter(serializerAdapterParameter)
                     .azureEnvironmentParameter(azureEnvironmentParameter)
                     .constructors(serviceClientConstructors);
         } else {
             serviceClientConstructors.add(new Constructor(new ArrayList<>()));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)
+                    .serializerAdapterParameter(serializerAdapterParameter)
                     .constructors(serviceClientConstructors);
         }
 
