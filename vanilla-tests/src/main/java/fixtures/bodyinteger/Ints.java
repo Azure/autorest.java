@@ -33,7 +33,7 @@ public final class Ints {
      * @param client the instance of the service client containing this operation class.
      */
     Ints(AutoRestIntegerTestService client) {
-        this.service = RestProxy.create(IntsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(IntsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

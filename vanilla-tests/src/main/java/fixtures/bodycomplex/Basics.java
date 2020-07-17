@@ -33,7 +33,7 @@ public final class Basics {
      * @param client the instance of the service client containing this operation class.
      */
     Basics(AutoRestComplexTestService client) {
-        this.service = RestProxy.create(BasicsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(BasicsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

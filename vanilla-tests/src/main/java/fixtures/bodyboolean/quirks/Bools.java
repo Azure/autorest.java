@@ -31,7 +31,7 @@ public final class Bools {
      * @param client the instance of the service client containing this operation class.
      */
     Bools(AutoRestBoolTestService client) {
-        this.service = RestProxy.create(BoolsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(BoolsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

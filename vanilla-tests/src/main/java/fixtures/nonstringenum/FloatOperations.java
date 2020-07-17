@@ -32,7 +32,8 @@ public final class FloatOperations {
      * @param client the instance of the service client containing this operation class.
      */
     FloatOperations(NonStringEnumsClient client) {
-        this.service = RestProxy.create(FloatOperationsService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(FloatOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

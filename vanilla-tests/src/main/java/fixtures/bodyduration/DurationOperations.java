@@ -32,7 +32,9 @@ public final class DurationOperations {
      * @param client the instance of the service client containing this operation class.
      */
     DurationOperations(AutoRestDurationTestService client) {
-        this.service = RestProxy.create(DurationOperationsService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(
+                        DurationOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

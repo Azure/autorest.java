@@ -5,6 +5,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the AutoRestHttpInfrastructureTestService type. */
 public final class AutoRestHttpInfrastructureTestService {
@@ -30,6 +32,18 @@ public final class AutoRestHttpInfrastructureTestService {
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
+    }
+
+    /** The serializer to serialize an object into a string. */
+    private final SerializerAdapter serializerAdapter;
+
+    /**
+     * Gets The serializer to serialize an object into a string.
+     *
+     * @return the serializerAdapter value.
+     */
+    public SerializerAdapter getSerializerAdapter() {
+        return this.serializerAdapter;
     }
 
     /** The HttpFailures object to access its operations. */
@@ -122,6 +136,7 @@ public final class AutoRestHttpInfrastructureTestService {
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
+                JacksonAdapter.createDefaultSerializerAdapter(),
                 host);
     }
 
@@ -131,7 +146,18 @@ public final class AutoRestHttpInfrastructureTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, String host) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param serializerAdapter The serializer to serialize an object into a string.
+     */
+    AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
+        this.serializerAdapter = serializerAdapter;
         this.host = host;
         this.httpFailures = new HttpFailures(this);
         this.httpSuccess = new HttpSuccess(this);

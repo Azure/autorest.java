@@ -29,7 +29,8 @@ public final class HttpSuccess {
      * @param client the instance of the service client containing this operation class.
      */
     HttpSuccess(AutoRestHeadTestService client) {
-        this.service = RestProxy.create(HttpSuccessService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(HttpSuccessService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

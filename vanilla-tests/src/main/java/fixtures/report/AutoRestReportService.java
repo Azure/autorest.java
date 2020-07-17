@@ -18,6 +18,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.report.models.ErrorException;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -51,12 +53,25 @@ public final class AutoRestReportService {
         return this.httpPipeline;
     }
 
+    /** The serializer to serialize an object into a string. */
+    private final SerializerAdapter serializerAdapter;
+
+    /**
+     * Gets The serializer to serialize an object into a string.
+     *
+     * @return the serializerAdapter value.
+     */
+    public SerializerAdapter getSerializerAdapter() {
+        return this.serializerAdapter;
+    }
+
     /** Initializes an instance of AutoRestReportService client. */
     AutoRestReportService(String host) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
+                JacksonAdapter.createDefaultSerializerAdapter(),
                 host);
     }
 
@@ -66,9 +81,21 @@ public final class AutoRestReportService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestReportService(HttpPipeline httpPipeline, String host) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param serializerAdapter The serializer to serialize an object into a string.
+     */
+    AutoRestReportService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
+        this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.service = RestProxy.create(AutoRestReportServiceService.class, this.httpPipeline);
+        this.service =
+                RestProxy.create(AutoRestReportServiceService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**

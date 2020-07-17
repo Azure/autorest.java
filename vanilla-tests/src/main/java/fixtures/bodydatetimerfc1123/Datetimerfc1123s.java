@@ -34,7 +34,9 @@ public final class Datetimerfc1123s {
      * @param client the instance of the service client containing this operation class.
      */
     Datetimerfc1123s(AutoRestRFC1123DateTimeTestService client) {
-        this.service = RestProxy.create(Datetimerfc1123sService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(
+                        Datetimerfc1123sService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

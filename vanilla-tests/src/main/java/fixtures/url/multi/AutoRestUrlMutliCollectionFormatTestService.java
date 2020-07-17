@@ -5,6 +5,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the AutoRestUrlMutliCollectionFormatTestService type. */
 public final class AutoRestUrlMutliCollectionFormatTestService {
@@ -32,6 +34,18 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
         return this.httpPipeline;
     }
 
+    /** The serializer to serialize an object into a string. */
+    private final SerializerAdapter serializerAdapter;
+
+    /**
+     * Gets The serializer to serialize an object into a string.
+     *
+     * @return the serializerAdapter value.
+     */
+    public SerializerAdapter getSerializerAdapter() {
+        return this.serializerAdapter;
+    }
+
     /** The Queries object to access its operations. */
     private final Queries queries;
 
@@ -50,6 +64,7 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
+                JacksonAdapter.createDefaultSerializerAdapter(),
                 host);
     }
 
@@ -59,7 +74,19 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestUrlMutliCollectionFormatTestService(HttpPipeline httpPipeline, String host) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    }
+
+    /**
+     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param serializerAdapter The serializer to serialize an object into a string.
+     */
+    AutoRestUrlMutliCollectionFormatTestService(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
+        this.serializerAdapter = serializerAdapter;
         this.host = host;
         this.queries = new Queries(this);
     }
