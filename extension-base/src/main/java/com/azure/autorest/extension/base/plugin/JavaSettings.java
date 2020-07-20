@@ -87,7 +87,8 @@ public class JavaSettings
                     host.getBooleanValue("generate-sync-async-clients", false),
                     host.getStringValue("sync-methods", "essential"),
                     host.getBooleanValue("client-logger", false),
-                    host.getBooleanValue("required-fields-as-ctor-args"));
+                    host.getBooleanValue("required-fields-as-ctor-args", false),
+                    host.getBooleanValue("service-interface-as-public", false));
         }
         return _instance;
     }
@@ -108,6 +109,7 @@ public class JavaSettings
      @param implementationSubpackage The sub-package that the Service and Method Group client implementation classes will be put into.
      @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
+     @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
      */
     private JavaSettings(boolean azure,
                          boolean fluent,
@@ -132,7 +134,8 @@ public class JavaSettings
                          boolean generateSyncAsyncClients,
                          String syncMethods,
                          boolean clientLogger,
-                         boolean requiredFieldsAsConstructorArgs)
+                         boolean requiredFieldsAsConstructorArgs,
+                         boolean serviceInterfaceAsPublic)
     {
         this.azure = azure;
         this.fluent = fluent;
@@ -158,7 +161,9 @@ public class JavaSettings
         this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
         this.clientLogger = clientLogger;
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
+        this.serviceInterfaceAsPublic = serviceInterfaceAsPublic;
     }
+
 
     private boolean azure;
     public final boolean isAzure()
@@ -322,7 +327,11 @@ public class JavaSettings
         return requiredFieldsAsConstructorArgs;
     }
 
-  public enum SyncMethodsGeneration {
+    private boolean serviceInterfaceAsPublic;
+    public boolean isServiceInterfaceAsPublic() {
+        return serviceInterfaceAsPublic;
+    }
+    public enum SyncMethodsGeneration {
         ALL,
         ESSENTIAL,
         NONE;
