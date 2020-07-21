@@ -11,7 +11,10 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -53,9 +56,9 @@ public class MethodTemplate {
     }
 
     public static final class Builder {
-        private Set<String> imports = Collections.emptySet();
+        private final Set<String> imports = new HashSet<>();
         private JavaVisibility visibility = JavaVisibility.Public;
-        private List<JavaModifier> modifiers = Collections.emptyList();
+        private final List<JavaModifier> modifiers = new ArrayList<>();
         private String methodSignature;
         private Consumer<JavaJavadocComment> comment = c -> {};
         private Consumer<JavaBlock> method = m -> {};
@@ -63,8 +66,8 @@ public class MethodTemplate {
         private Builder() {
         }
 
-        public Builder imports(Set<String> imports) {
-            this.imports = imports;
+        public Builder imports(Collection<String> imports) {
+            this.imports.addAll(imports);
             return this;
         }
 
@@ -73,8 +76,8 @@ public class MethodTemplate {
             return this;
         }
 
-        public Builder modifiers(List<JavaModifier> modifiers) {
-            this.modifiers = modifiers;
+        public Builder modifiers(Collection<JavaModifier> modifiers) {
+            this.modifiers.addAll(modifiers);
             return this;
         }
 
