@@ -19,10 +19,14 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -34,7 +38,9 @@ import java.util.stream.Stream;
 public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientTemplate _instance = new ServiceClientTemplate();
 
-    private ServiceClientTemplate() {
+    protected List<MethodTemplate> additionalMethods = new ArrayList<>();
+
+    protected ServiceClientTemplate() {
     }
 
     public static ServiceClientTemplate getInstance() {
@@ -47,7 +53,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
-        if (settings.isFluent()) {
+        if (settings.isFluentPremium()) {
             serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
         }
 
@@ -64,6 +70,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
 
         serviceClient.addImportsTo(imports, true, false, settings);
+        additionalMethods.forEach(method -> method.addImportsTo(imports));
         javaFile.declareImport(imports);
 
         final JavaVisibility visibility = serviceClient.getPackage()
@@ -197,7 +204,9 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                                     serviceClient.getAzureEnvironmentParameter().getDefaultValue(),
                                     constructorArgsFinal));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
-                            constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                            if (settings.isFluentPremium()) {
+                                constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                            }
                             constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
 
                             constructorParametersCodes.accept(constructorBlock);
@@ -246,6 +255,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
+
+            additionalMethods.forEach(method -> method.writeMethod(classBlock));
         });
     }
 }

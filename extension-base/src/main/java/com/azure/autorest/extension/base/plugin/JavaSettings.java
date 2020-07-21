@@ -184,6 +184,10 @@ public class JavaSettings
     {
         return fluent == Fluent.LITE;
     }
+    public final boolean isFluentPremium()
+    {
+        return fluent == Fluent.PREMIUM;
+    }
     public final boolean isAzureOrFluent()
     {
         return isAzure() || isFluent();

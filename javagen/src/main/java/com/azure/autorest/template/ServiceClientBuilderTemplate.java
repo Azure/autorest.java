@@ -56,8 +56,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, false, true, settings);
-        commonProperties.stream().forEach(p -> p.addImportsTo(imports, false));
-        imports.remove("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
+        commonProperties.forEach(p -> p.addImportsTo(imports, false));
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();

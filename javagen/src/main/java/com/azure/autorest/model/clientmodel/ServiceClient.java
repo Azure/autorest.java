@@ -153,7 +153,7 @@ public class ServiceClient {
         }
 
         if (includeImplementationImports) {
-            if (settings.isAzureOrFluent()) {
+            if (settings.isFluentPremium()) {
                 imports.add("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
             }
             if (!getClientMethods().isEmpty()) {
