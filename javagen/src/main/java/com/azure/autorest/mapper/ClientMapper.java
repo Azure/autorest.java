@@ -107,7 +107,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
-            || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()) {
+                || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
+                || settings.isFluent()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -122,7 +123,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                         String.format("Package containing the client classes for %s.\n%s",
                             serviceClientName, serviceClientDescription)));
                 }
-                String implementationInnerPackage = settings.getPackage(settings.getImplementationSubpackage(), "inner");
+                String implementationInnerPackage = settings.isFluentLite()
+                        ? settings.getPackage(settings.getModelsSubpackage(), "inner")
+                        : settings.getPackage(settings.getImplementationSubpackage(), "inner");
                 if (!packageInfos.containsKey(implementationInnerPackage)) {
                     packageInfos.put(implementationInnerPackage, new PackageInfo(
                         implementationInnerPackage,
