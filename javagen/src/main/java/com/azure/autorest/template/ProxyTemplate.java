@@ -44,7 +44,13 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
             });
             classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
             classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName())));
-            classBlock.interfaceBlock(JavaVisibility.Private, restAPI.getName(), interfaceBlock ->
+
+            JavaVisibility visibility = JavaVisibility.Private;
+            if (settings.isServiceInterfaceAsPublic()) {
+                visibility = JavaVisibility.Public;
+            }
+
+            classBlock.interfaceBlock(visibility, restAPI.getName(), interfaceBlock ->
             {
                 for (ProxyMethod restAPIMethod : restAPI.getMethods()) {
                     if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {

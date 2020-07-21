@@ -35,21 +35,22 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
 
     @Override
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {
-        Optional<IType> classTypeForGet = supportGetMethod(clientMethods);
-        Optional<IType> classTypeForList = supportListMethod(clientMethods);
-        Optional<IType> classTypeForDelete = supportDeleteMethod(clientMethods);
-
         List<IType> interfaces = new ArrayList<>();
-        classTypeForGet.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsGet(iType)));
-        classTypeForList.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsList(iType)));
-        classTypeForDelete.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsDelete(iType)));
+        if (!JavaSettings.getInstance().isFluentLite()) {
+            Optional<IType> classTypeForGet = supportGetMethod(clientMethods);
+            Optional<IType> classTypeForList = supportListMethod(clientMethods);
+            Optional<IType> classTypeForDelete = supportDeleteMethod(clientMethods);
 
-        if (!interfaces.isEmpty()) {
-            logger.info("Method group {} support interfaces {}",
-                    Utils.getJavaName(operationGroup),
-                    interfaces.stream().map(IType::toString).collect(Collectors.toList()));
+            classTypeForGet.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsGet(iType)));
+            classTypeForList.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsList(iType)));
+            classTypeForDelete.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsDelete(iType)));
+
+            if (!interfaces.isEmpty()) {
+                logger.info("Method group {} support interfaces {}",
+                        Utils.getJavaName(operationGroup),
+                        interfaces.stream().map(IType::toString).collect(Collectors.toList()));
+            }
         }
-
         return interfaces;
     }
 

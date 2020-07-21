@@ -70,8 +70,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
         if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-            List<AsyncSyncClient> clients = new ArrayList<>(asyncClients);
-            clients.addAll(syncClients);
+            List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
+            if (!settings.isFluentLite()) {
+                clients.addAll(asyncClients);
+            }
             boolean first = true;
             for (AsyncSyncClient client : clients) {
                 if (first) {
@@ -156,24 +158,26 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
+                if (!settings.isFluentLite()) {
+                    for (AsyncSyncClient asyncClient : asyncClients) {
+                        final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
 
-                    classBlock.javadocComment(comment ->
-                    {
-                        comment.description(String
-                                .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
-                        comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
-                    });
-                    classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
-                            function -> {
-                                if (wrapServiceClient) {
-                                    function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
-                                } else {
-                                    function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
-                                            CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
-                                }
-                            });
+                        classBlock.javadocComment(comment ->
+                        {
+                            comment.description(String
+                                    .format("Builds an instance of %1$s async client", asyncClient.getClassName()));
+                            comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
+                        });
+                        classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
+                                function -> {
+                                    if (wrapServiceClient) {
+                                        function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
+                                    } else {
+                                        function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
+                                                CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
+                                    }
+                                });
+                    }
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {

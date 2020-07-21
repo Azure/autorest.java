@@ -13,8 +13,8 @@ import fixtures.bodydictionary.implementation.AutoRestSwaggerBATDictionaryServic
 /** A builder for creating a new instance of the AutoRestSwaggerBATDictionaryService type. */
 @ServiceClientBuilder(
         serviceClients = {
-            AutoRestSwaggerBATDictionaryServiceAsyncClient.class,
-            AutoRestSwaggerBATDictionaryServiceClient.class
+            AutoRestSwaggerBATDictionaryServiceClient.class,
+            AutoRestSwaggerBATDictionaryServiceAsyncClient.class
         })
 public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
