@@ -57,6 +57,8 @@ public class ServiceClient {
      */
     private ClientMethodParameter httpPipelineParameter;
 
+    private ClientMethodParameter serializerAdapterParameter;
+
     private String clientBaseName;
 
     /**
@@ -72,8 +74,9 @@ public class ServiceClient {
      * @param azureEnvironmentParameter The AzureEnvironment parameter.
      * @param tokenCredentialParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
+     * @param serializerAdapterParameter The SerializerAdapter parameter.
      */
-    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter) {
+    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -85,6 +88,7 @@ public class ServiceClient {
         this.azureEnvironmentParameter = azureEnvironmentParameter;
         this.tokenCredentialParameter = tokenCredentialParameter;
         this.httpPipelineParameter = httpPipelineParameter;
+        this.serializerAdapterParameter = serializerAdapterParameter;
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
     }
 
@@ -130,6 +134,10 @@ public class ServiceClient {
 
     public final ClientMethodParameter getHttpPipelineParameter() {
         return httpPipelineParameter;
+    }
+
+    public final ClientMethodParameter getSerializerAdapterParameter() {
+        return serializerAdapterParameter;
     }
 
     public final String getClientBaseName() {
@@ -207,6 +215,7 @@ public class ServiceClient {
         private ClientMethodParameter azureEnvironmentParameter;
         private ClientMethodParameter tokenCredentialParameter;
         private ClientMethodParameter httpPipelineParameter;
+        private ClientMethodParameter serializerAdapterParameter;
 
         /**
          * Sets the package that this service client belongs to.
@@ -299,6 +308,16 @@ public class ServiceClient {
         }
 
         /**
+         * Sets the serializer adapter parameter.
+         * @param serializerAdapterParameter the serializer adapter
+         * @return the Builder itself
+         */
+        public Builder serializerAdapterParameter(ClientMethodParameter serializerAdapterParameter) {
+            this.serializerAdapterParameter = serializerAdapterParameter;
+            return this;
+        }
+
+        /**
          * Sets the credentials parameter.
          * @param tokenCredentialParameter the credentials parameter
          * @return the Builder itself
@@ -329,7 +348,8 @@ public class ServiceClient {
                     clientMethods,
                     azureEnvironmentParameter,
                     tokenCredentialParameter,
-                    httpPipelineParameter);
+                    httpPipelineParameter,
+                    serializerAdapterParameter);
         }
     }
 }
