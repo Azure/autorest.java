@@ -61,6 +61,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             imports.add(String.format("%1$s.%2$s",
                 ClientModelUtil.getServiceClientBuilderPackageName(serviceClient),
                 serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+        } else {
+            imports.add("com.azure.core.util.serializer.JacksonAdapter");
         }
 
         serviceClient.addImportsTo(imports, true, false, settings);
@@ -188,17 +190,12 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructorParams), constructorBlock ->
                 {
                     if (settings.isFluent()) {
-                        if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line(String.format("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), %1$s%2$s);",
-                                    serviceClient.getAzureEnvironmentParameter().getDefaultValue(), constructorArgsFinal));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s, %2$s%3$s);",
-                                    serviceClient.getHttpPipelineParameter().getName(),
-                                    serviceClient.getAzureEnvironmentParameter().getDefaultValue(),
-                                    constructorArgsFinal));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
-                            constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
-                            constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
+                        if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter(), serviceClient.getAzureEnvironmentParameter()))) {
+                            constructorBlock.line(String.format("super(%1$s, %2$s, %3$s);", serviceClient.getHttpPipelineParameter().getName(),
+                                    serviceClient.getSerializerAdapterParameter().getName(),
+                                    serviceClient.getAzureEnvironmentParameter().getName()));
+                            constructorBlock.line("this.httpPipeline = httpPipeline;");
+                            constructorBlock.line("this.serializerAdapter = serializerAdapter;");
 
                             constructorParametersCodes.accept(constructorBlock);
 
@@ -218,9 +215,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
+                            //constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter()%1$s);", constructorArgsFinal);
                             constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()%1$s);", constructorArgsFinal);
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
+                            //constructorBlock.line("this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter()%1$s);", constructorArgsFinal);
+                            constructorBlock.line("this.httpPipeline = httpPipeline;");
                             constructorParametersCodes.accept(constructorBlock);
 
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
@@ -234,7 +233,29 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
+                                if (settings.isFluent()) {
+                                    constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
+                                } else {
+                                    constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
+                                }
+                            }
+                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter()))) {
+                            constructorBlock.line("this.httpPipeline = httpPipeline;");
+                            constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+                            constructorParametersCodes.accept(constructorBlock);
+
+                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
+                                if (serviceClientProperty.getDefaultValueExpression() != null) {
+                                    constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
+                                }
+                            }
+
+                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+                                constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
+                            }
+
+                            if (serviceClient.getProxy() != null) {
+                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
                             }
                         }
                     }
