@@ -112,8 +112,11 @@ public class FluentGen extends NewPlugin {
                 List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                if (!JavaSettings.getInstance().isFluentLite()) {
+                    // fluent lite only expose sync client
+                    for (AsyncSyncClient asyncClient : asyncClients) {
+                        javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                    }
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {

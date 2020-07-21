@@ -6,6 +6,7 @@ package com.azure.autorest.extension.base.plugin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  Settings that are used by the Java AutoRest Generator.
@@ -65,7 +66,7 @@ public class JavaSettings
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
                     host.getBooleanValue("azure-arm"),
-                    host.getBooleanValue("fluent"),
+                    host.getStringValue("fluent"),
                     host.getBooleanValue("regenerate-pom"),
                     _header,
                     80,
@@ -112,7 +113,7 @@ public class JavaSettings
      @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
      */
     private JavaSettings(boolean azure,
-                         boolean fluent,
+                         String fluent,
                          boolean regeneratePom,
                          String fileHeaderText,
                          int maximumJavadocCommentWidth,
@@ -138,7 +139,7 @@ public class JavaSettings
                          boolean serviceInterfaceAsPublic)
     {
         this.azure = azure;
-        this.fluent = fluent;
+        this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
         this.regeneratePom = regeneratePom;
         this.fileHeaderText = fileHeaderText;
         this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
@@ -171,10 +172,17 @@ public class JavaSettings
         return azure;
     }
 
-    private boolean fluent;
+    public enum Fluent {
+        NONE, LITE, PREMIUM
+    }
+    private Fluent fluent;
     public final boolean isFluent()
     {
-        return fluent;
+        return fluent != Fluent.NONE;
+    }
+    public final boolean isFluentLite()
+    {
+        return fluent == Fluent.LITE;
     }
     public final boolean isAzureOrFluent()
     {

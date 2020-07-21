@@ -285,6 +285,9 @@ public class Connection {
                                 if (f.type.getRawClass().equals(Boolean.class)
                                         && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
                                     f.complete(Boolean.TRUE);
+                                } else if (f.type.getRawClass().equals(String.class)
+                                    && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                    f.complete("");
                                 } else {
                                     f.complete(mapper.convertValue(jobject.get("result"), f.type));
                                 }
