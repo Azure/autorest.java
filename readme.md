@@ -108,3 +108,7 @@ use: $(this-folder)/javagen
 ``` yaml $(java) && $(fluent)
 use: $(this-folder)/fluentgen
 ```
+
+``` yaml $(android)
+use: $(this-folder)/androidgen
+```
