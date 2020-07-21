@@ -79,11 +79,7 @@ public final class AutoRestResourceFlatteningTestService {
     AutoRestResourceFlatteningTestService(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
         this.host = host;
-        this.service =
-                RestProxy.create(
-                        AutoRestResourceFlatteningTestServiceService.class,
-                        this.httpPipeline,
-                        this.getSerializerAdapter());
+        this.service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, this.httpPipeline);
     }
 
     /**

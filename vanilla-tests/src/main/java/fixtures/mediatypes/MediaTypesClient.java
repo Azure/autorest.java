@@ -72,7 +72,7 @@ public final class MediaTypesClient {
     MediaTypesClient(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
         this.host = host;
-        this.service = RestProxy.create(MediaTypesClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(MediaTypesClientService.class, this.httpPipeline);
     }
 
     /**

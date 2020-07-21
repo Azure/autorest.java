@@ -74,9 +74,7 @@ public final class MultipleInheritanceServiceClient {
     MultipleInheritanceServiceClient(HttpPipeline httpPipeline, String host) {
         this.httpPipeline = httpPipeline;
         this.host = host;
-        this.service =
-                RestProxy.create(
-                        MultipleInheritanceServiceClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(MultipleInheritanceServiceClientService.class, this.httpPipeline);
     }
 
     /**

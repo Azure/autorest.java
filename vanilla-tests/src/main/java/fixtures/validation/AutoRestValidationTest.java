@@ -100,8 +100,7 @@ public final class AutoRestValidationTest {
         this.subscriptionId = subscriptionId;
         this.host = host;
         this.apiVersion = "1.0.0";
-        this.service =
-                RestProxy.create(AutoRestValidationTestService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(AutoRestValidationTestService.class, this.httpPipeline);
     }
 
     /**
