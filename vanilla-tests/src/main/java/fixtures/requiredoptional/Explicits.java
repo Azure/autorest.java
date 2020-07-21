@@ -43,8 +43,7 @@ public final class Explicits {
      * @param client the instance of the service client containing this operation class.
      */
     Explicits(AutoRestRequiredOptionalTestService client) {
-        this.service =
-                RestProxy.create(ExplicitsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(ExplicitsService.class, client.getHttpPipeline());
         this.client = client;
     }
 

@@ -5,8 +5,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type. */
 public final class AutoRestParameterizedCustomHostTestClient {
@@ -46,18 +44,6 @@ public final class AutoRestParameterizedCustomHostTestClient {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     *
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
     /** The Paths object to access its operations. */
     private final Paths paths;
 
@@ -76,7 +62,6 @@ public final class AutoRestParameterizedCustomHostTestClient {
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
                 dnsSuffix);
     }
@@ -87,19 +72,7 @@ public final class AutoRestParameterizedCustomHostTestClient {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline, String subscriptionId, String dnsSuffix) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, dnsSuffix);
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     */
-    AutoRestParameterizedCustomHostTestClient(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String dnsSuffix) {
         this.httpPipeline = httpPipeline;
-        this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;
         this.dnsSuffix = dnsSuffix;
         this.paths = new Paths(this);

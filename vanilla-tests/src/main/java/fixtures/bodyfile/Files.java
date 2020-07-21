@@ -36,7 +36,7 @@ public final class Files {
      * @param client the instance of the service client containing this operation class.
      */
     Files(AutoRestSwaggerBATFileService client) {
-        this.service = RestProxy.create(FilesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(FilesService.class, client.getHttpPipeline());
         this.client = client;
     }
 

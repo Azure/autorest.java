@@ -38,7 +38,7 @@ public final class Paths {
      * @param client the instance of the service client containing this operation class.
      */
     Paths(AutoRestUrlTestService client) {
-        this.service = RestProxy.create(PathsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(PathsService.class, client.getHttpPipeline());
         this.client = client;
     }
 

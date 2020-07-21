@@ -23,8 +23,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import reactor.core.publisher.Mono;
@@ -82,25 +80,12 @@ public final class AutoRestValidationTest {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     *
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
     /** Initializes an instance of AutoRestValidationTest client. */
     AutoRestValidationTest(String subscriptionId, String host) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
                 host);
     }
@@ -111,19 +96,7 @@ public final class AutoRestValidationTest {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host);
-    }
-
-    /**
-     * Initializes an instance of AutoRestValidationTest client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     */
-    AutoRestValidationTest(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String host) {
         this.httpPipeline = httpPipeline;
-        this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;
         this.host = host;
         this.apiVersion = "1.0.0";

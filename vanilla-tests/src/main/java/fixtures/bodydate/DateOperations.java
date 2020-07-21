@@ -32,8 +32,7 @@ public final class DateOperations {
      * @param client the instance of the service client containing this operation class.
      */
     DateOperations(AutoRestDateTestService client) {
-        this.service =
-                RestProxy.create(DateOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(DateOperationsService.class, client.getHttpPipeline());
         this.client = client;
     }
 

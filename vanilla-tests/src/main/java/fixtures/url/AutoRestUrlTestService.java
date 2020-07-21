@@ -5,8 +5,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the AutoRestUrlTestService type. */
 public final class AutoRestUrlTestService {
@@ -58,18 +56,6 @@ public final class AutoRestUrlTestService {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     *
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
     /** The Paths object to access its operations. */
     private final Paths paths;
 
@@ -112,7 +98,6 @@ public final class AutoRestUrlTestService {
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
                 globalStringPath,
                 globalStringQuery,
                 host);
@@ -124,23 +109,7 @@ public final class AutoRestUrlTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     AutoRestUrlTestService(HttpPipeline httpPipeline, String globalStringPath, String globalStringQuery, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host);
-    }
-
-    /**
-     * Initializes an instance of AutoRestUrlTestService client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     */
-    AutoRestUrlTestService(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String globalStringPath,
-            String globalStringQuery,
-            String host) {
         this.httpPipeline = httpPipeline;
-        this.serializerAdapter = serializerAdapter;
         this.globalStringPath = globalStringPath;
         this.globalStringQuery = globalStringQuery;
         this.host = host;

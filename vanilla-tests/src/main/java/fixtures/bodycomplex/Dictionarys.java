@@ -32,8 +32,7 @@ public final class Dictionarys {
      * @param client the instance of the service client containing this operation class.
      */
     Dictionarys(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(DictionarysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(DictionarysService.class, client.getHttpPipeline());
         this.client = client;
     }
 

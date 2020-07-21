@@ -29,8 +29,7 @@ public final class HeadExceptions {
      * @param client the instance of the service client containing this operation class.
      */
     HeadExceptions(AutoRestHeadExceptionTestService client) {
-        this.service =
-                RestProxy.create(HeadExceptionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(HeadExceptionsService.class, client.getHttpPipeline());
         this.client = client;
     }
 

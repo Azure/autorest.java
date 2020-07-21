@@ -6,8 +6,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the MultipleInheritanceServiceClient type. */
 @ServiceClientBuilder(serviceClients = {MultipleInheritanceServiceClient.class})
@@ -44,22 +42,6 @@ public final class MultipleInheritanceServiceClientBuilder {
         return this;
     }
 
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the MultipleInheritanceServiceClientBuilder.
-     */
-    public MultipleInheritanceServiceClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
-        return this;
-    }
-
     /**
      * Builds an instance of MultipleInheritanceServiceClient with the provided parameters.
      *
@@ -75,11 +57,7 @@ public final class MultipleInheritanceServiceClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        MultipleInheritanceServiceClient client =
-                new MultipleInheritanceServiceClient(pipeline, serializerAdapter, host);
+        MultipleInheritanceServiceClient client = new MultipleInheritanceServiceClient(pipeline, host);
         return client;
     }
 }

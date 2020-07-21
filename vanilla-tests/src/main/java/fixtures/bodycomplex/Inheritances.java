@@ -32,8 +32,7 @@ public final class Inheritances {
      * @param client the instance of the service client containing this operation class.
      */
     Inheritances(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(InheritancesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(InheritancesService.class, client.getHttpPipeline());
         this.client = client;
     }
 

@@ -6,8 +6,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the AutoRestBoolTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestBoolTestService.class})
@@ -44,22 +42,6 @@ public final class AutoRestBoolTestServiceBuilder {
         return this;
     }
 
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestBoolTestServiceBuilder.
-     */
-    public AutoRestBoolTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
-        return this;
-    }
-
     /**
      * Builds an instance of AutoRestBoolTestService with the provided parameters.
      *
@@ -75,10 +57,7 @@ public final class AutoRestBoolTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestBoolTestService client = new AutoRestBoolTestService(pipeline, serializerAdapter, host);
+        AutoRestBoolTestService client = new AutoRestBoolTestService(pipeline, host);
         return client;
     }
 }

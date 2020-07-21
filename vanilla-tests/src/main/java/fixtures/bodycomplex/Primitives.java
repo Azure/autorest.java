@@ -42,8 +42,7 @@ public final class Primitives {
      * @param client the instance of the service client containing this operation class.
      */
     Primitives(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(PrimitivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(PrimitivesService.class, client.getHttpPipeline());
         this.client = client;
     }
 

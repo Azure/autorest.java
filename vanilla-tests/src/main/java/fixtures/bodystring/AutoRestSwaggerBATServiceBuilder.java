@@ -6,8 +6,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the AutoRestSwaggerBATService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATService.class})
@@ -44,22 +42,6 @@ public final class AutoRestSwaggerBATServiceBuilder {
         return this;
     }
 
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
-     */
-    public AutoRestSwaggerBATServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
-        return this;
-    }
-
     /**
      * Builds an instance of AutoRestSwaggerBATService with the provided parameters.
      *
@@ -75,10 +57,7 @@ public final class AutoRestSwaggerBATServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestSwaggerBATService client = new AutoRestSwaggerBATService(pipeline, serializerAdapter, host);
+        AutoRestSwaggerBATService client = new AutoRestSwaggerBATService(pipeline, host);
         return client;
     }
 }

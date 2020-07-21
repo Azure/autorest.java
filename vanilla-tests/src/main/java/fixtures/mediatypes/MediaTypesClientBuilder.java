@@ -6,8 +6,6 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the MediaTypesClient type. */
 @ServiceClientBuilder(serviceClients = {MediaTypesClient.class})
@@ -44,22 +42,6 @@ public final class MediaTypesClientBuilder {
         return this;
     }
 
-    /*
-     * The serializer to serialize an object into a string
-     */
-    private SerializerAdapter serializerAdapter;
-
-    /**
-     * Sets The serializer to serialize an object into a string.
-     *
-     * @param serializerAdapter the serializerAdapter value.
-     * @return the MediaTypesClientBuilder.
-     */
-    public MediaTypesClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
-        this.serializerAdapter = serializerAdapter;
-        return this;
-    }
-
     /**
      * Builds an instance of MediaTypesClient with the provided parameters.
      *
@@ -75,10 +57,7 @@ public final class MediaTypesClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        MediaTypesClient client = new MediaTypesClient(pipeline, serializerAdapter, host);
+        MediaTypesClient client = new MediaTypesClient(pipeline, host);
         return client;
     }
 }
