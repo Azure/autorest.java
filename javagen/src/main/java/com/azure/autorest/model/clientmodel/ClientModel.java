@@ -14,57 +14,57 @@ public class ClientModel {
     /**
      * The package that this model class belongs to.
      */
-    protected String packageName;
+    private String packageName;
     /**
      * Get the name of this model.
      */
-    protected String name;
+    private String name;
     /**
      * Get the imports for this model.
      */
-    protected List<String> imports;
+    private List<String> imports;
     /**
      * Get the description of this model.
      */
-    protected String description;
+    private String description;
     /**
      * Get whether or not this model has model types that derive from it.
      */
-    protected boolean isPolymorphic;
+    private boolean isPolymorphic;
     /**
      * Get the name of the property that determines which polymorphic model type to create.
      */
-    protected String polymorphicDiscriminator;
+    private String polymorphicDiscriminator;
     /**
      * Get the name that is used for this model when it is serialized.
      */
-    protected String serializedName;
+    private String serializedName;
     /**
      * Get whether or not this model needs serialization flattening.
      */
-    protected boolean needsFlatten;
+    private boolean needsFlatten;
     /**
      * Get the parent model of this model.
      */
-    protected String parentModelName;
+    private String parentModelName;
     /**
      * Get the models that derive from this model.
      */
-    protected List<ClientModel> derivedModels;
+    private List<ClientModel> derivedModels;
     /**
      * Get the name that will be used for this model's XML element representation.
      */
-    protected String xmlName;
+    private String xmlName;
 
     /**
      * The xml namesapce for a model.
      */
-    protected final String xmlNamespace;
+    private final String xmlNamespace;
 
     /**
      * Get the properties for this model.
      */
-    protected List<ClientModelProperty> properties;
+    private List<ClientModelProperty> properties;
 
     /**
      * Create a new ServiceModel with the provided properties.
