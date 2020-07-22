@@ -66,6 +66,16 @@ public class JavaBlock implements JavaContext {
         return new JavaIfBlock(contents);
     }
 
+    public final JavaTryBlock tryBlock(Consumer<JavaBlock> ifAction) {
+        contents.tryBlock(ifAction);
+        return new JavaTryBlock(contents);
+    }
+
+    public final JavaTryBlock tryBlock(String resource, Consumer<JavaBlock> ifAction) {
+        contents.tryBlock(resource, ifAction);
+        return new JavaTryBlock(contents);
+    }
+
     public final void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body) {
         contents.lambda(parameterType, parameterName, body);
     }
