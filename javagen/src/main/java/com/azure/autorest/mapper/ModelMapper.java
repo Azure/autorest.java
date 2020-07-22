@@ -26,11 +26,15 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static ModelMapper instance = new ModelMapper();
     private ClientModels serviceModels = ClientModels.Instance;
 
-    private ModelMapper() {
+    protected ModelMapper() {
     }
 
     public static ModelMapper getInstance() {
         return instance;
+    }
+
+    protected ClientModel.Builder createClientModelBuilder() {
+        return new ClientModel.Builder();
     }
 
     @Override
@@ -42,7 +46,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
         if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !Mappers.getObjectMapper().isImplementedModel(modelType))) {
-            ClientModel.Builder builder = new ClientModel.Builder()
+            ClientModel.Builder builder = createClientModelBuilder()
                     .name(modelName)
                     .packageName(modelType.getPackage());
 
