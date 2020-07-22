@@ -86,7 +86,7 @@
                 <configuration>
                   <archive>
                     <manifest>
-                      <mainClass>com.azure.autorest.Main</mainClass>
+                      <mainClass>com.azure.autorest.android.Main</mainClass>
                     </manifest>
                   </archive>
                   <descriptorRefs>

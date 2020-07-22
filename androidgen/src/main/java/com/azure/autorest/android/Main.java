@@ -1,5 +1,6 @@
-package com.azure.autorest;
+package com.azure.autorest.android;
 
+import com.azure.autorest.android.Androidgen;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import java.util.Arrays;
 

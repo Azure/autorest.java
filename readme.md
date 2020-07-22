@@ -101,14 +101,14 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 #### Javagen
 
-``` yaml $(java) && !$(fluent)
+``` yaml $(java) && !$(fluent) && !$(android)
 use: $(this-folder)/javagen
 ```
 
-``` yaml $(java) && $(fluent)
+``` yaml $(java) && $(fluent) && && !$(android)
 use: $(this-folder)/fluentgen
 ```
 
-``` yaml $(android)
+``` yaml $(java) && $(android)
 use: $(this-folder)/androidgen
 ```

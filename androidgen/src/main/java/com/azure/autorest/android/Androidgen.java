@@ -1,4 +1,4 @@
-package com.azure.autorest;
+package com.azure.autorest.android;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
