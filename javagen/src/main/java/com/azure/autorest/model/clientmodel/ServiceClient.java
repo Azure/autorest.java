@@ -49,6 +49,10 @@ public class ServiceClient {
      */
     private ClientMethodParameter azureEnvironmentParameter;
     /**
+     * The default poll interval parameter.
+     */
+    private ClientMethodParameter defaultPollIntervalParameter;
+    /**
      * The credentials parameter.
      */
     private ClientMethodParameter tokenCredentialParameter;
@@ -75,8 +79,10 @@ public class ServiceClient {
      * @param tokenCredentialParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
      * @param serializerAdapterParameter The SerializerAdapter parameter.
+     * @param defaultPollIntervalParameter The default poll interval parameter.
      */
-    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter) {
+    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
+                          ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -89,6 +95,7 @@ public class ServiceClient {
         this.tokenCredentialParameter = tokenCredentialParameter;
         this.httpPipelineParameter = httpPipelineParameter;
         this.serializerAdapterParameter = serializerAdapterParameter;
+        this.defaultPollIntervalParameter = defaultPollIntervalParameter;
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
     }
 
@@ -126,6 +133,10 @@ public class ServiceClient {
 
     public final ClientMethodParameter getAzureEnvironmentParameter() {
         return azureEnvironmentParameter;
+    }
+
+    public final ClientMethodParameter getDefaultPollIntervalParameter() {
+        return defaultPollIntervalParameter;
     }
 
     public final ClientMethodParameter getTokenCredentialParameter() {
@@ -216,6 +227,7 @@ public class ServiceClient {
         private ClientMethodParameter tokenCredentialParameter;
         private ClientMethodParameter httpPipelineParameter;
         private ClientMethodParameter serializerAdapterParameter;
+        private ClientMethodParameter defaultPollIntervalParameter;
 
         /**
          * Sets the package that this service client belongs to.
@@ -318,6 +330,16 @@ public class ServiceClient {
         }
 
         /**
+         * Sets the default poll interval parameter.
+         * @param defaultPollIntervalParameter the poll interval
+         * @return the Builder itself
+         */
+        public Builder defaultPollIntervalParameter(ClientMethodParameter defaultPollIntervalParameter) {
+            this.defaultPollIntervalParameter = defaultPollIntervalParameter;
+            return this;
+        }
+
+        /**
          * Sets the credentials parameter.
          * @param tokenCredentialParameter the credentials parameter
          * @return the Builder itself
@@ -349,7 +371,8 @@ public class ServiceClient {
                     azureEnvironmentParameter,
                     tokenCredentialParameter,
                     httpPipelineParameter,
-                    serializerAdapterParameter);
+                    serializerAdapterParameter,
+                    defaultPollIntervalParameter);
         }
     }
 }

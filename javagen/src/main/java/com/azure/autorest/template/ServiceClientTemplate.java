@@ -197,7 +197,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructorParams), constructorBlock ->
                 {
                     if (settings.isFluent()) {
-                        if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter(), serviceClient.getAzureEnvironmentParameter()))) {
+                        if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter(), serviceClient.getDefaultPollIntervalParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             if (settings.isFluentPremium()) {
                                 constructorBlock.line(String.format("super(%1$s, %2$s, %3$s);", serviceClient.getHttpPipelineParameter().getName(),
                                         serviceClient.getSerializerAdapterParameter().getName(),
@@ -205,6 +205,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
                             constructorBlock.line("this.httpPipeline = httpPipeline;");
                             constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+                            constructorBlock.line("this.defaultPollInterval = defaultPollInterval;");
 
                             constructorParametersCodes.accept(constructorBlock);
 

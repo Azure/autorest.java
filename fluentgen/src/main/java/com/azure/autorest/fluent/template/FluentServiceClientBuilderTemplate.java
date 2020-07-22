@@ -5,19 +5,13 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
 public class FluentServiceClientBuilderTemplate extends ServiceClientBuilderTemplate {
 
-    private static FluentServiceClientBuilderTemplate _instance = new FluentServiceClientBuilderTemplate();
+    private static final FluentServiceClientBuilderTemplate instance = new FluentServiceClientBuilderTemplate();
 
     public static FluentServiceClientBuilderTemplate getInstance() {
-        return _instance;
-    }
-
-    @Override
-    protected String primaryBuildMethodName(JavaSettings settings) {
-        return super.primaryBuildMethodName(settings);
+        return instance;
     }
 }

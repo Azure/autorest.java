@@ -13,7 +13,7 @@ import com.azure.autorest.util.ModelNamer;
 
 public class FluentModelTemplate extends ModelTemplate {
 
-    private static FluentModelTemplate _instance = new FluentModelTemplate();
+    private static final FluentModelTemplate instance = new FluentModelTemplate();
 
     private static ModelNamer modelNamer;
 
@@ -21,7 +21,7 @@ public class FluentModelTemplate extends ModelTemplate {
     }
 
     public static FluentModelTemplate getInstance() {
-        return _instance;
+        return instance;
     }
 
     @Override
