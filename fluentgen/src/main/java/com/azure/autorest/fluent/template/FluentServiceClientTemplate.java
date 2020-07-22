@@ -32,7 +32,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
     private static final FluentServiceClientTemplate instance = new FluentServiceClientTemplate();
     static {
-        if (JavaSettings.getInstance().isFluent()) {
+        if (JavaSettings.getInstance().isFluentLite()) {
             MethodTemplate getContextMethod = MethodTemplate.builder()
                     .imports(Collections.singleton(Context.class.getName()))
                     .methodSignature("Context getContext()")
