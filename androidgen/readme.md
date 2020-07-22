@@ -6,12 +6,12 @@ use: $(this-folder)/../preprocessor
 pipeline:
 
 # --- extension remodeler ---
-  javagen:
-    scope: java
+  androidgen:
+    scope: android
     input: preprocessor
     output-artifact: java-files
   
-  javagen/emitter:
+  androidgen/emitter:
     input: androidgen
     scope: scope-androidgen/emitter
 

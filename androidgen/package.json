@@ -1,5 +1,5 @@
 {
-  "name": "@autorest/java.vanilla",
+  "name": "@autorest/java.android",
   "version": "4.0.0",
   "description": "The Android extension for classic generators in AutoRest.",
   "scripts": {
