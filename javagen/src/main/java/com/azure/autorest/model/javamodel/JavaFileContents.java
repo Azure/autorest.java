@@ -361,6 +361,39 @@ public class JavaFileContents {
         line("}");
     }
 
+    public void tryBlock(Consumer<JavaBlock> tryAction) {
+        line("try {");
+        indent(() ->
+        {
+            tryAction.accept(new JavaBlock(this));
+        });
+        text("}");
+        currentLineType = CurrentLineType.AfterIf;
+    }
+
+    public void tryBlock(String resource, Consumer<JavaBlock> tryAction) {
+        line("try (%s) {", resource);
+        indent(() ->
+        {
+            tryAction.accept(new JavaBlock(this));
+        });
+        text("}");
+        currentLineType = CurrentLineType.AfterIf;
+    }
+
+    public void catchBlock(String exception, Consumer<JavaBlock> catchAction) {
+        line(String.format(" catch (%s) {", exception), false);
+        indent(() -> catchAction.accept(new JavaBlock(this)));
+        line("}");
+        currentLineType = CurrentLineType.AfterIf;
+    }
+
+    public void finallyBlock(Consumer<JavaBlock> finallyAction) {
+        line(" finally {", false);
+        indent(() -> finallyAction.accept(new JavaBlock(this)));
+        line("}");
+    }
+
     public void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body) {
         text(String.format("(%s %s) -> ", parameterType, parameterName));
         try (JavaLambda lambda = new JavaLambda(this)) {
