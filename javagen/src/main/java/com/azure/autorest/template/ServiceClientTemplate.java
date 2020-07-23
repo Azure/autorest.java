@@ -38,6 +38,7 @@ import java.util.stream.Stream;
 public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientTemplate _instance = new ServiceClientTemplate();
 
+    // Extension for additional class methods
     protected List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     protected ServiceClientTemplate() {
