@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 
 public class FluentProxyTemplate extends ProxyTemplate {
 
-    private static FluentProxyTemplate _instance = new FluentProxyTemplate();
+    private static final FluentProxyTemplate instance = new FluentProxyTemplate();
 
     public static FluentProxyTemplate getInstance() {
-        return _instance;
+        return instance;
     }
 
     @Override
