@@ -13,9 +13,11 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +38,11 @@ public class FluentMapper {
 
     public void preModelMap(CodeModel codeModel) {
         processInnerModel(codeModel);
+    }
+
+    public FluentClient map(CodeModel codeModel, Client client) {
+        FluentClient fluentClient = new FluentClient(client);
+        return fluentClient;
     }
 
     private void processInnerModel(CodeModel codeModel) {

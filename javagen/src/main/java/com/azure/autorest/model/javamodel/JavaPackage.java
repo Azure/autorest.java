@@ -14,18 +14,24 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.template.Templates;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JavaPackage {
-    private JavaSettings settings;
-    private ArrayList<JavaFile> javaFiles;
-    private JavaFileFactory javaFileFactory;
+    private final JavaSettings settings;
+    private final List<JavaFile> javaFiles;
+    private final JavaFileFactory javaFileFactory;
+
     public JavaPackage() {
         this.settings = JavaSettings.getInstance();
-        this.javaFiles = new ArrayList<JavaFile>();
+        this.javaFiles = new ArrayList<>();
         this.javaFileFactory = new JavaFileFactory(settings);
     }
 
-    public ArrayList<JavaFile> getJavaFiles() {
+    protected JavaFileFactory getJavaFileFactory() {
+        return javaFileFactory;
+    }
+
+    public List<JavaFile> getJavaFiles() {
         return javaFiles;
     }
 
@@ -47,7 +53,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
+    public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
         Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
         javaFiles.add(javaFile);
