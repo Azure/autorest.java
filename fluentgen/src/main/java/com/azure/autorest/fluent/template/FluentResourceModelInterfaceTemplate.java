@@ -6,13 +6,51 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
+import com.azure.core.annotation.Immutable;
 
-public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<FluentResourceModel, JavaClass> {
+import java.util.HashSet;
+import java.util.Set;
+
+public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<FluentResourceModel, JavaFile> {
+
+    private static final FluentResourceModelInterfaceTemplate INSTANCE = new FluentResourceModelInterfaceTemplate();
+
+    public static FluentResourceModelInterfaceTemplate getInstance() {
+        return INSTANCE;
+    }
 
     @Override
-    public void write(FluentResourceModel model, JavaClass context) {
+    public void write(FluentResourceModel model, JavaFile javaFile) {
+        Set<String> imports = new HashSet<>();
+        imports.add(Immutable.class.getName());
+        imports.add(model.getInnerModel().getFullName());
+        model.getProperties().forEach(p -> p.getClientType().addImportsTo(imports, false));
+        javaFile.declareImport(imports);
 
+        javaFile.javadocComment(comment ->
+        {
+            comment.description(model.getDescription());
+        });
+
+        javaFile.annotation("Immutable");
+        javaFile.publicInterface(model.getResourceInterfaceClassType().getName(), interfaceBlock -> {
+            model.getProperties().forEach(property -> {
+                interfaceBlock.javadocComment(comment -> {
+                    comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
+                    comment.methodReturns(String.format("the %1$s value", property.getName()));
+                });
+                interfaceBlock.publicMethod(String.format("%1$s %2$s()", property.getClientType(), property.getGetterName()));
+            });
+
+            interfaceBlock.javadocComment(comment -> {
+                comment.description(String.format("Get the inner %s object", model.getInnerModel().getFullName()));
+                comment.methodReturns("the inner object");
+            });
+            interfaceBlock.publicMethod(String.format("%1$s %2$s()", model.getInnerModel().getName(), FluentUtils.getGetterName("inner")));
+        });
     }
+
 }

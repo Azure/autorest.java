@@ -5,13 +5,13 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.util.CodeNamer;
 
 public class FluentModelProperty {
 
@@ -34,6 +34,10 @@ public class FluentModelProperty {
 
     public final IType getClientType() {
         return clientType;
+    }
+
+    public final String getGetterName() {
+        return CodeNamer.getModelNamer().modelPropertyGetterName(clientModelProperty);
     }
 
     private static IType getWrapperType(IType clientType) {

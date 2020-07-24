@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.util.CodeNamer;
 
 public class FluentUtils {
 
@@ -33,5 +34,9 @@ public class FluentUtils {
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
                 .name(name.substring(0, name.length() - "Inner".length()))
                 .build();
+    }
+
+    public static String getGetterName(String propertyName) {
+        return CodeNamer.getModelNamer().modelPropertyGetterName(propertyName);
     }
 }

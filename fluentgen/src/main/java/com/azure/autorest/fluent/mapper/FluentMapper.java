@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -42,6 +43,12 @@ public class FluentMapper {
 
     public FluentClient map(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
+
+        fluentClient.getResourceModels().addAll(codeModel.getSchemas().getObjects().stream()
+                .map(o -> FluentResourceModelMapper.getInstance().map(o))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+
         return fluentClient;
     }
 

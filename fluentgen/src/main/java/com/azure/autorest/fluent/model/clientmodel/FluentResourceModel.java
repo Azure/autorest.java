@@ -37,6 +37,10 @@ public class FluentResourceModel {
         return modelType;
     }
 
+    public ClientModel getInnerModel() {
+        return model;
+    }
+
     public ClassType getResourceInterfaceClassType() {
         return resourceInterfaceClassType;
     }
