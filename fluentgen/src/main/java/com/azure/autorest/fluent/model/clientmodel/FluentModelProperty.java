@@ -11,7 +11,11 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class FluentModelProperty {
 
@@ -19,9 +23,13 @@ public class FluentModelProperty {
 
     private final IType clientType;
 
-    public FluentModelProperty(ClientModelProperty clientModelProperty) {
-        this.clientModelProperty = clientModelProperty;
-        this.clientType = getWrapperType(clientModelProperty.getClientType());
+    private final WrapperTypeConversionMethod wrapperTypeConversionMethod;
+
+    public FluentModelProperty(ClientModelProperty property) {
+        this.clientModelProperty = property;
+        this.clientType = getWrapperType(property.getClientType());
+        this.wrapperTypeConversionMethod = this.clientType == property.getClientType()
+                ? null : new WrapperTypeConversionMethod(this, this.clientModelProperty);
     }
 
     public String getName() {
@@ -32,11 +40,32 @@ public class FluentModelProperty {
         return clientModelProperty.getDescription();
     }
 
-    public final IType getClientType() {
+    public IType getClientType() {
         return clientType;
     }
 
-    public final String getGetterName() {
+    public String getMethodSignature() {
+        return String.format("%1$s %2$s()", this.getClientType(), this.getGetterName());
+    }
+
+    public MethodTemplate getImplementationMethodTemplate() {
+        if (wrapperTypeConversionMethod != null) {
+            return wrapperTypeConversionMethod.getConversionMethodTemplate();
+        } else {
+            Set<String> imports = new HashSet<>();
+            this.getClientType().addImportsTo(imports, false);
+
+            return MethodTemplate.builder()
+                    .imports(imports)
+                    .methodSignature(this.getMethodSignature())
+                    .method(block -> {
+                        block.methodReturn(String.format("this.inner().%1$s()", this.getGetterName()));
+                    })
+                    .build();
+        }
+    }
+
+    private String getGetterName() {
         return CodeNamer.getModelNamer().modelPropertyGetterName(clientModelProperty);
     }
 
@@ -58,5 +87,4 @@ public class FluentModelProperty {
         }
         return wrapperType;
     }
-
 }

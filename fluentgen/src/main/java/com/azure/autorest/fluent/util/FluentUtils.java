@@ -14,8 +14,8 @@ public class FluentUtils {
     private FluentUtils() {
     }
 
-    public static boolean isInnerClassType(ClassType type) {
-        return isInnerClassType(type.getPackage(), type.getName());
+    public static boolean isInnerClassType(ClassType classType) {
+        return isInnerClassType(classType.getPackage(), classType.getName());
     }
 
     public static boolean isInnerClassType(String packageName, String name) {
@@ -24,15 +24,15 @@ public class FluentUtils {
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 
-    public static ClassType resourceModelInterfaceClassType(ClassType clientType) {
-        return resourceModelInterfaceClassType(clientType.getName());
+    public static ClassType resourceModelInterfaceClassType(ClassType innerModelClassType) {
+        return resourceModelInterfaceClassType(innerModelClassType.getName());
     }
 
-    public static ClassType resourceModelInterfaceClassType(String name) {
+    public static ClassType resourceModelInterfaceClassType(String innerModelClassName) {
         JavaSettings settings = JavaSettings.getInstance();
         return new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(name.substring(0, name.length() - "Inner".length()))
+                .name(innerModelClassName.substring(0, innerModelClassName.length() - "Inner".length()))
                 .build();
     }
 

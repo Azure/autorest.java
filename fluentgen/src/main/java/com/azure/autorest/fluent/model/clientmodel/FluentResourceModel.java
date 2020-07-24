@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -16,26 +17,32 @@ public class FluentResourceModel {
 
     private final ClientModel model;
 
-    private ModelType modelType = ModelType.WRAPPER;
+    private final ModelType modelType = ModelType.WRAPPER;
 
-    private ClassType resourceInterfaceClassType;
-    private ClassType resourceImplementationClassType;
+    private final ClassType resourceInterfaceClassType;
+    private final ClassType resourceImplementationClassType;
 
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     public FluentResourceModel(ClientModel model) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         this.model = model;
 
         resourceInterfaceClassType = FluentUtils.resourceModelInterfaceClassType(model.getName());
+        resourceImplementationClassType = new ClassType.Builder()
+                .packageName(settings.getPackage(settings.getImplementationSubpackage()))
+                .name(resourceInterfaceClassType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
+                .build();
 
         this.model.getProperties().forEach(p -> {
             properties.add(new FluentModelProperty(p));
         });
     }
 
-    public ModelType getModelType() {
-        return modelType;
-    }
+//    public ModelType getModelType() {
+//        return modelType;
+//    }
 
     public ClientModel getInnerModel() {
         return model;
@@ -53,7 +60,11 @@ public class FluentResourceModel {
         return properties;
     }
 
-    public final String getDescription() {
-        return this.model.getDescription();
+    public String getDescription() {
+        return String.format("An immutable client-side representation of %s.", resourceInterfaceClassType.getName());
+    }
+
+    public String getInnerMethodSignature() {
+        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
     }
 }
