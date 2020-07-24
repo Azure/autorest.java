@@ -393,7 +393,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -414,7 +414,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -428,7 +428,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -441,7 +441,7 @@ public final class DatetimeOperations {
     /**
      * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -463,7 +463,7 @@ public final class DatetimeOperations {
     /**
      * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -477,7 +477,7 @@ public final class DatetimeOperations {
     /**
      * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -635,7 +635,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -657,7 +657,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -672,7 +672,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -783,7 +783,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -805,7 +805,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -820,7 +820,7 @@ public final class DatetimeOperations {
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -931,7 +931,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -952,7 +952,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -966,7 +966,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1027,7 +1027,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1049,7 +1049,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1064,7 +1064,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1126,7 +1126,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1148,7 +1148,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1163,7 +1163,7 @@ public final class DatetimeOperations {
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @param datetimeBody The datetimeBody parameter.
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
