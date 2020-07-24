@@ -12,6 +12,9 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -85,13 +88,16 @@ public class FluentGen extends NewPlugin {
 
             // Step 3: Map
             logger.info("Map code model to client model");
-            new FluentMapper(fluentJavaSettings).preModelMap(codeModel);
+            FluentMapper fluentMapper = new FluentMapper(fluentJavaSettings);
+            fluentMapper.preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
 
+            FluentClient fluentClient = fluentMapper.map(codeModel, client);
+
             // Step 4: Write to templates
             logger.info("Java template for client model");
-            JavaPackage javaPackage = new JavaPackage();
+            FluentJavaPackage javaPackage = new FluentJavaPackage();
             // Service client
             javaPackage
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
@@ -161,6 +167,11 @@ public class FluentGen extends NewPlugin {
             // Package-info
             for (PackageInfo packageInfo : client.getPackageInfos()) {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+            }
+
+            // Fluent resource model
+            for (FluentResourceModel model : fluentClient.getResourceModels()) {
+                javaPackage.addFluentResourceModel(model);
             }
 
             // Print to files

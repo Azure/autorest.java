@@ -47,7 +47,9 @@ public class MethodTemplate {
     }
 
     public final void writeMethod(JavaClass javaClass) {
-        javaClass.javadocComment(comment);
+        if (comment != null) {
+            javaClass.javadocComment(comment);
+        }
         javaClass.method(visibility, modifiers, methodSignature, method);
     }
 
@@ -60,7 +62,7 @@ public class MethodTemplate {
         private JavaVisibility visibility = JavaVisibility.Public;
         private final List<JavaModifier> modifiers = new ArrayList<>();
         private String methodSignature;
-        private Consumer<JavaJavadocComment> comment = c -> {};
+        private Consumer<JavaJavadocComment> comment = null;
         private Consumer<JavaBlock> method = m -> {};
 
         private Builder() {

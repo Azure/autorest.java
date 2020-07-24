@@ -11,7 +11,7 @@ You need to have the following installed on your machine:
 You need to have [autorest-beta](https://www.npmjs.com/package/@autorest/autorest) installed through NPM:
 
 ```bash
-npm i -g @autorest/autorest
+npm i -g autorest
 ```
 
 # Usage

@@ -13,13 +13,16 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,6 +39,17 @@ public class FluentMapper {
 
     public void preModelMap(CodeModel codeModel) {
         processInnerModel(codeModel);
+    }
+
+    public FluentClient map(CodeModel codeModel, Client client) {
+        FluentClient fluentClient = new FluentClient(client);
+
+        fluentClient.getResourceModels().addAll(codeModel.getSchemas().getObjects().stream()
+                .map(o -> FluentResourceModelMapper.getInstance().map(o))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+
+        return fluentClient;
     }
 
     private void processInnerModel(CodeModel codeModel) {
