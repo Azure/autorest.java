@@ -281,7 +281,7 @@ public final class DateOperations {
     /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -302,7 +302,7 @@ public final class DateOperations {
     /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -316,7 +316,7 @@ public final class DateOperations {
     /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -377,7 +377,7 @@ public final class DateOperations {
     /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -398,7 +398,7 @@ public final class DateOperations {
     /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -412,7 +412,7 @@ public final class DateOperations {
     /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody The dateBody parameter.
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

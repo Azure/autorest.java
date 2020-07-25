@@ -88,7 +88,7 @@ public final class MediaTypesClient {
         Mono<Response<String>> analyzeBody(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/pdf") Flux<ByteBuffer> input,
+                @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
                 @HeaderParam("Content-Length") long contentLength,
                 Context context);
 
