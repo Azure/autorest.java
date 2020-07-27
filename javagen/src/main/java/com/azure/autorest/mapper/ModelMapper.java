@@ -33,6 +33,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         return instance;
     }
 
+    /**
+     * Extension point when a different ClientModel should be built. ClientModel writes "imports".
+     * Applicable case includes targeting a different platform, e.g. Android.
+     */
     protected ClientModel.Builder createClientModelBuilder() {
         return new ClientModel.Builder();
     }
