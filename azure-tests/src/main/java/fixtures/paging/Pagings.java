@@ -47,7 +47,7 @@ public final class Pagings {
      * @param client the instance of the service client containing this operation class.
      */
     Pagings(AutoRestPagingTestService client) {
-        this.service = RestProxy.create(PagingsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(PagingsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

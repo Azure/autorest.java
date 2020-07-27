@@ -32,7 +32,9 @@ public final class Polymorphicrecursives {
      * @param client the instance of the service client containing this operation class.
      */
     Polymorphicrecursives(AutoRestComplexTestService client) {
-        this.service = RestProxy.create(PolymorphicrecursivesService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(
+                        PolymorphicrecursivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

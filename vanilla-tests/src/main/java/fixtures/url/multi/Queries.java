@@ -33,7 +33,7 @@ public final class Queries {
      * @param client the instance of the service client containing this operation class.
      */
     Queries(AutoRestUrlMutliCollectionFormatTestService client) {
-        this.service = RestProxy.create(QueriesService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(QueriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

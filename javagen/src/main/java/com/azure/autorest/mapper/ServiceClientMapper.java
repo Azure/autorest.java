@@ -123,8 +123,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
+        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", true, null));
         if (settings.isFluent()) {
-            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", true, null));
             serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", true, null));
         }
         builder.properties(serviceClientProperties);
@@ -212,7 +212,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         } else {
             serviceClientConstructors.add(new Constructor(new ArrayList<>()));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
-            //serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter)));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter)));
             builder.tokenCredentialParameter(tokenCredentialParameter)
                     .httpPipelineParameter(httpPipelineParameter)
                     .serializerAdapterParameter(serializerAdapterParameter)

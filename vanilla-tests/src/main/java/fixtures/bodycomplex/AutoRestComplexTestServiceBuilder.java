@@ -6,6 +6,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the AutoRestComplexTestService type. */
 @ServiceClientBuilder(serviceClients = {AutoRestComplexTestService.class})
@@ -42,6 +44,22 @@ public final class AutoRestComplexTestServiceBuilder {
         return this;
     }
 
+    /*
+     * The serializer to serialize an object into a string
+     */
+    private SerializerAdapter serializerAdapter;
+
+    /**
+     * Sets The serializer to serialize an object into a string.
+     *
+     * @param serializerAdapter the serializerAdapter value.
+     * @return the AutoRestComplexTestServiceBuilder.
+     */
+    public AutoRestComplexTestServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
+        this.serializerAdapter = serializerAdapter;
+        return this;
+    }
+
     /**
      * Builds an instance of AutoRestComplexTestService with the provided parameters.
      *
@@ -57,7 +75,10 @@ public final class AutoRestComplexTestServiceBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline, host);
+        if (serializerAdapter == null) {
+            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
+        }
+        AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline, serializerAdapter, host);
         return client;
     }
 }

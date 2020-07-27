@@ -36,7 +36,7 @@ public final class Pets {
      * @param client the instance of the service client containing this operation class.
      */
     Pets(AdditionalPropertiesClient client) {
-        this.service = RestProxy.create(PetsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(PetsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
