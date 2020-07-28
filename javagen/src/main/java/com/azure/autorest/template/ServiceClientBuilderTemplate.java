@@ -44,9 +44,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
         }
         commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
+        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+          ClassType.SerializerAdapter, "serializerAdapter", false,
+          settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+
         if (settings.isFluent()) {
-            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", false, settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
-            commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
+          commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
         }
 
         String buildReturnType;
@@ -154,7 +157,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 if (settings.isFluent()) {
                     function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter, defaultPollInterval, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                    function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter%3$s);",
+                        serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 }
                 function.line("return client;");
             });

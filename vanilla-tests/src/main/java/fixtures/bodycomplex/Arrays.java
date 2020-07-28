@@ -32,7 +32,7 @@ public final class Arrays {
      * @param client the instance of the service client containing this operation class.
      */
     Arrays(AutoRestComplexTestService client) {
-        this.service = RestProxy.create(ArraysService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(ArraysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

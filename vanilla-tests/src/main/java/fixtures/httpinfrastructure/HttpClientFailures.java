@@ -34,7 +34,9 @@ public final class HttpClientFailures {
      * @param client the instance of the service client containing this operation class.
      */
     HttpClientFailures(AutoRestHttpInfrastructureTestService client) {
-        this.service = RestProxy.create(HttpClientFailuresService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(
+                        HttpClientFailuresService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

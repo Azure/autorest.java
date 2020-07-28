@@ -35,7 +35,8 @@ public final class Polymorphisms {
      * @param client the instance of the service client containing this operation class.
      */
     Polymorphisms(AutoRestComplexTestService client) {
-        this.service = RestProxy.create(PolymorphismsService.class, client.getHttpPipeline());
+        this.service =
+                RestProxy.create(PolymorphismsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 

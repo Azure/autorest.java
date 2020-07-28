@@ -6,6 +6,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 
 /** A builder for creating a new instance of the AutoRestParameterizedHostTestClient type. */
 @ServiceClientBuilder(serviceClients = {AutoRestParameterizedHostTestClient.class})
@@ -42,6 +44,22 @@ public final class AutoRestParameterizedHostTestClientBuilder {
         return this;
     }
 
+    /*
+     * The serializer to serialize an object into a string
+     */
+    private SerializerAdapter serializerAdapter;
+
+    /**
+     * Sets The serializer to serialize an object into a string.
+     *
+     * @param serializerAdapter the serializerAdapter value.
+     * @return the AutoRestParameterizedHostTestClientBuilder.
+     */
+    public AutoRestParameterizedHostTestClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
+        this.serializerAdapter = serializerAdapter;
+        return this;
+    }
+
     /**
      * Builds an instance of AutoRestParameterizedHostTestClient with the provided parameters.
      *
@@ -57,7 +75,11 @@ public final class AutoRestParameterizedHostTestClientBuilder {
                             .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                             .build();
         }
-        AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline, host);
+        if (serializerAdapter == null) {
+            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
+        }
+        AutoRestParameterizedHostTestClient client =
+                new AutoRestParameterizedHostTestClient(pipeline, serializerAdapter, host);
         return client;
     }
 }
