@@ -35,7 +35,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
         return _instance;
     }
 
-    public final void write(Proxy restAPI, JavaClass classBlock) {
+    public void write(Proxy restAPI, JavaClass classBlock) {
         JavaSettings settings = JavaSettings.getInstance();
         if (restAPI != null) {
             classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->

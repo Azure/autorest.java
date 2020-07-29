@@ -42,11 +42,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
-    private ClientMethodMapper() {
+    protected ClientMethodMapper() {
     }
 
     public static ClientMethodMapper getInstance() {
         return instance;
+    }
+
+    protected ClientMethod.Builder createClientMethodBuilder() {
+        return new ClientMethod.Builder();
     }
 
     @Override
@@ -60,7 +64,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-        ClientMethod.Builder builder = new ClientMethod.Builder()
+        ClientMethod.Builder builder = createClientMethodBuilder()
                 .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
 

@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,13 +28,17 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         return instance;
     }
 
+    protected MethodGroupClient.Builder createClientMethodBuilder() {
+        return new MethodGroupClient.Builder();
+    }
+
     @Override
     public MethodGroupClient map(OperationGroup methodGroup) {
         JavaSettings settings = JavaSettings.getInstance();
         if (parsed.containsKey(methodGroup)) {
             return parsed.get(methodGroup);
         }
-        MethodGroupClient.Builder builder = new MethodGroupClient.Builder();
+        MethodGroupClient.Builder builder = createClientMethodBuilder();
 
         String classBaseName = methodGroup.getLanguage().getJava().getName();
         builder.classBaseName(classBaseName);

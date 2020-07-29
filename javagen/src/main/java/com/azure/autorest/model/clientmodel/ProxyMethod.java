@@ -85,7 +85,7 @@ public class ProxyMethod {
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
      */
-    private ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
+    protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
                         List<HttpResponseStatus> responseExpectedStatusCodes,
                         ClassType unexpectedResponseExceptionType,
                         Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
@@ -225,7 +225,7 @@ public class ProxyMethod {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
@@ -261,19 +261,19 @@ public class ProxyMethod {
     }
 
     public static class Builder {
-        private String requestContentType;
-        private IType returnType;
-        private HttpMethod httpMethod;
-        private String urlPath;
-        private List<HttpResponseStatus> responseExpectedStatusCodes;
-        private ClassType unexpectedResponseExceptionType;
-        private Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
-        private String name;
-        private List<ProxyMethodParameter> parameters;
-        private String description;
-        private IType returnValueWireType;
-        private boolean isResumable;
-        private Set<String> responseContentTypes;
+        protected String requestContentType;
+        protected IType returnType;
+        protected HttpMethod httpMethod;
+        protected String urlPath;
+        protected List<HttpResponseStatus> responseExpectedStatusCodes;
+        protected ClassType unexpectedResponseExceptionType;
+        protected Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
+        protected String name;
+        protected List<ProxyMethodParameter> parameters;
+        protected String description;
+        protected IType returnValueWireType;
+        protected boolean isResumable;
+        protected Set<String> responseContentTypes;
 
         /*
          * Sets the Content-Type of the request.

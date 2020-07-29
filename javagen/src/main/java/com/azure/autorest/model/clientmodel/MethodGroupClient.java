@@ -67,7 +67,7 @@ public class MethodGroupClient {
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    private MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
+    protected MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -132,7 +132,7 @@ public class MethodGroupClient {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
         }
@@ -155,17 +155,17 @@ public class MethodGroupClient {
     }
 
     public static class Builder {
-        private String packageName;
-        private String className;
-        private String interfaceName;
-        private List<String> implementedInterfaces;
-        private Proxy proxy;
-        private String serviceClientName;
-        private String variableType;
-        private String variableName;
-        private List<ClientMethod> clientMethods;
-        private List<IType> supportedInterfaces;
-        private String classBaseName;
+        protected String packageName;
+        protected String className;
+        protected String interfaceName;
+        protected List<String> implementedInterfaces;
+        protected Proxy proxy;
+        protected String serviceClientName;
+        protected String variableType;
+        protected String variableName;
+        protected List<ClientMethod> clientMethods;
+        protected List<IType> supportedInterfaces;
+        protected String classBaseName;
 
         /**
          * Sets the name of the package.

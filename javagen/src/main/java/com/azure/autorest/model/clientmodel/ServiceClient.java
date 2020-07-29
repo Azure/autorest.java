@@ -73,7 +73,7 @@ public class ServiceClient {
      * @param tokenCredentialParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
      */
-    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter) {
+    protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -141,7 +141,7 @@ public class ServiceClient {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, boolean includeBuilderImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, boolean includeBuilderImports, JavaSettings settings) {
         if (!includeBuilderImports) {
             for (ClientMethod clientMethod : getClientMethods()) {
                 clientMethod.addImportsTo(imports, includeImplementationImports, settings);
@@ -196,17 +196,17 @@ public class ServiceClient {
     }
 
     public static class Builder {
-        private String packageName;
-        private String className;
-        private String interfaceName;
-        private Proxy proxy;
-        private List<MethodGroupClient> methodGroupClients;
-        private List<ServiceClientProperty> properties;
-        private List<Constructor> constructors;
-        private List<ClientMethod> clientMethods;
-        private ClientMethodParameter azureEnvironmentParameter;
-        private ClientMethodParameter tokenCredentialParameter;
-        private ClientMethodParameter httpPipelineParameter;
+        protected String packageName;
+        protected String className;
+        protected String interfaceName;
+        protected Proxy proxy;
+        protected List<MethodGroupClient> methodGroupClients;
+        protected List<ServiceClientProperty> properties;
+        protected List<Constructor> constructors;
+        protected List<ClientMethod> clientMethods;
+        protected ClientMethodParameter azureEnvironmentParameter;
+        protected ClientMethodParameter tokenCredentialParameter;
+        protected ClientMethodParameter httpPipelineParameter;
 
         /**
          * Sets the package that this service client belongs to.

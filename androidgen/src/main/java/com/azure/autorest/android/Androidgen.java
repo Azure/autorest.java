@@ -1,5 +1,7 @@
 package com.azure.autorest.android;
 
+import com.azure.autorest.android.mapper.AndroidMapperFactory;
+import com.azure.autorest.android.template.AndroidTemplateFactory;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -16,6 +18,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import java.util.ArrayList;
@@ -63,8 +66,11 @@ public class Androidgen extends NewPlugin {
             Yaml newYaml  = new Yaml(representer);
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
+            Mappers.setFactory(new AndroidMapperFactory());
             // Step 2: Map
             Client client = Mappers.getClientMapper().map(codeModel);
+
+            Templates.setFactory(new AndroidTemplateFactory());
 
             // Step 3: Write to templates
             JavaPackage javaPackage = new JavaPackage();

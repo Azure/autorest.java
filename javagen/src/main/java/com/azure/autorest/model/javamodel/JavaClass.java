@@ -23,7 +23,7 @@ public class JavaClass implements JavaType {
         privateMemberVariable(String.format("%1$s %2$s", variableType, variableName));
     }
 
-    public final void privateMemberVariable(String variableDeclaration) {
+    public final void   privateMemberVariable(String variableDeclaration) {
         addExpectedNewLine();
         contents.line(String.format("private %1$s;", variableDeclaration));
         addNewLine = true;
@@ -39,6 +39,22 @@ public class JavaClass implements JavaType {
         addExpectedNewLine();
         contents.line(String.format("public static final %1$s;", variableDeclaration));
         addNewLine = true;
+    }
+
+    public final void privateStaticFinalVariable(String variableDeclaration) {
+        addExpectedNewLine();
+        contents.line(String.format("private static final %1$s;", variableDeclaration));
+        addNewLine = true;
+    }
+
+    public final void packagePrivateFinalVariable(String variableDeclaration) {
+        addExpectedNewLine();
+        contents.line(String.format("final %1$s;", variableDeclaration));
+        addNewLine = true;
+    }
+
+    public final void staticBlock(Consumer<JavaBlock> staticBlockAction) {
+        contents.staticBlock(staticBlockAction);
     }
 
     public final void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
@@ -57,6 +73,10 @@ public class JavaClass implements JavaType {
 
     public final void packagePrivateConstructor(String constructorSignature, Consumer<JavaBlock> constructor) {
         constructor(JavaVisibility.PackagePrivate, constructorSignature, constructor);
+    }
+
+    public final void staticConstructor(String className, Consumer<JavaBlock> constructor) {
+        constructor(JavaVisibility.Private, String.format("static %s()", className), constructor);
     }
 
     public final void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method) {
