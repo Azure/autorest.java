@@ -8,6 +8,9 @@ package com.azure.autorest.fluent.util;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
+
+import java.util.Locale;
 
 public class FluentUtils {
 
@@ -38,5 +41,33 @@ public class FluentUtils {
 
     public static String getGetterName(String propertyName) {
         return CodeNamer.getModelNamer().modelPropertyGetterName(propertyName);
+    }
+
+    public static String getServiceName(String clientName) {
+        JavaSettings settings = JavaSettings.getInstance();
+        String serviceName = settings.getServiceName();
+        if (CoreUtils.isNullOrEmpty(serviceName)) {
+            String packageLastName = settings.getPackage();
+            int pos = packageLastName.lastIndexOf(".");
+            if (pos != -1 && pos != packageLastName.length() - 1) {
+                packageLastName = packageLastName.substring(pos + 1);
+            }
+
+            if (clientName != null) {
+                if (clientName.toLowerCase(Locale.ROOT).startsWith(packageLastName.toLowerCase(Locale.ROOT))) {
+                    serviceName = clientName.substring(0, packageLastName.length());
+                } else {
+                    final String keywordManagementClient = "ManagementClient";
+                    if (clientName.endsWith(keywordManagementClient)) {
+                        serviceName = clientName.substring(0, clientName.length() - keywordManagementClient.length());
+                    }
+                }
+            }
+
+            if (CoreUtils.isNullOrEmpty(serviceName)) {
+                serviceName = packageLastName;
+            }
+        }
+        return serviceName;
     }
 }

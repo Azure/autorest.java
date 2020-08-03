@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -43,6 +44,8 @@ public class FluentMapper {
 
     public FluentClient map(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
+
+        fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
 
         fluentClient.getResourceModels().addAll(codeModel.getSchemas().getObjects().stream()
                 .map(o -> FluentResourceModelMapper.getInstance().map(o))
