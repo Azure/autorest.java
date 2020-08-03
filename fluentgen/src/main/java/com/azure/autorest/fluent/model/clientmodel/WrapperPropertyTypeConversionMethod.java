@@ -18,14 +18,14 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WrapperTypeConversionMethod {
+public class WrapperPropertyTypeConversionMethod extends WrapperPropertyImplementationMethod {
 
-    private final MethodTemplate conversionMethodTemplate;
-
-    public WrapperTypeConversionMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
+    public WrapperPropertyTypeConversionMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
         fluentProperty.getClientType().addImportsTo(imports, false);
+        // Type inner = ...
         property.getClientType().addImportsTo(imports, false);
+        // Collectors.toList
         if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {
             imports.add(Collectors.class.getName());
         }
@@ -42,10 +42,6 @@ public class WrapperTypeConversionMethod {
                     });
                 })
                 .build();
-    }
-
-    public MethodTemplate getConversionMethodTemplate() {
-        return conversionMethodTemplate;
     }
 
     private String conversionExpression(IType clientType, String propertyName) {
