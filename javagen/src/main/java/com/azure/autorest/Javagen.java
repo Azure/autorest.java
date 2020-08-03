@@ -18,9 +18,18 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
+
+import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -139,11 +148,35 @@ public class Javagen extends NewPlugin {
             }
 
             // TODO: POM, Manager
-            //Step 4: Print to files
+            //Step 4: format files
             Formatter formatter = new Formatter();
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                writeFile(javaFile.getFilePath(), formattedSource, null);
+            Map<String, String> formattedFiles = javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, f -> {
+                try {
+                    return formatter.formatSourceAndFixImports(f.getContents().toString());
+                } catch (FormatterException e) {
+                    throw new RuntimeException(e);
+                }
+            }));
+            //Step 5: post processing
+            String jarPath = JavaSettings.getInstance().getPostProcessorJarPath();
+            String className = JavaSettings.getInstance().getPostProcessorClass();
+            if (jarPath != null && className != null) {
+                URL jarUrl;
+                if (!jarPath.startsWith("http")) {
+                    jarUrl = new File(jarPath).toURI().toURL();
+                } else {
+                    jarUrl = new URI(jarPath).toURL();
+                }
+                URLClassLoader loader = URLClassLoader.newInstance(new URL[]{ jarUrl }, ClassLoader.getSystemClassLoader());
+                Class<?> postProcessorClass = Class.forName(className, true, loader);
+                Object postProcessor = postProcessorClass.getConstructor().newInstance();
+                Method process = postProcessorClass.getDeclaredMethod("process", Map.class);
+                process.setAccessible(true);
+                formattedFiles = (Map<String, String>) postProcessorClass.getDeclaredMethod("process", Map.class).invoke(postProcessor, formattedFiles);
+            }
+            //Step 6: Print to files
+            for (Map.Entry<String, String> formattedFile : formattedFiles.entrySet()) {
+                writeFile(formattedFile.getKey(), formattedFile.getValue(), null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
