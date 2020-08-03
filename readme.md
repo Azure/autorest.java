@@ -66,6 +66,8 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
+|`--postprocessor-jar-path=STRING`|The path or URL of the post processor jar file.|
+|`--postprocessor-class=STRING`|The fully qualified name of the post processor class. The class must have a `Map<String, String> process(Map<String, String>)` method that modifies the map from output file paths to file contents. The keys in the map are the full file paths, in the format of `src/main/java/your/package/namespace/implementation/models/MyModel.java`.|
 
 # Project structure
 ## extension-base
