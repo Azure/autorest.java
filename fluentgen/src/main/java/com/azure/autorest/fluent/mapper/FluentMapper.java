@@ -52,6 +52,11 @@ public class FluentMapper {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
 
+        fluentClient.getResourceCollections().addAll(codeModel.getOperationGroups().stream()
+                .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+
         return fluentClient;
     }
 

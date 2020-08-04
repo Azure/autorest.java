@@ -7,6 +7,9 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
@@ -48,6 +51,9 @@ public class FluentUtils {
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
             String packageLastName = settings.getPackage();
+            if (packageLastName.endsWith(".generated")) {
+                packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
+            }
             int pos = packageLastName.lastIndexOf(".");
             if (pos != -1 && pos != packageLastName.length() - 1) {
                 packageLastName = packageLastName.substring(pos + 1);
@@ -69,5 +75,24 @@ public class FluentUtils {
             }
         }
         return serviceName;
+    }
+
+    public static IType getFluentWrapperType(IType clientType) {
+        IType wrapperType = clientType;
+        if (clientType instanceof ClassType) {
+            ClassType type = (ClassType) clientType;
+            if (FluentUtils.isInnerClassType(type)) {
+                wrapperType = FluentUtils.resourceModelInterfaceClassType(type);
+            }
+        } else if (clientType instanceof ListType) {
+            ListType type = (ListType) clientType;
+            IType wrapperElementType = getFluentWrapperType(type.getElementType());
+            wrapperType = wrapperElementType == type.getElementType() ? type : new ListType(wrapperElementType);
+        } else if (clientType instanceof MapType) {
+            MapType type = (MapType) clientType;
+            IType wrapperElementType = getFluentWrapperType(type.getValueType());
+            wrapperType = wrapperElementType == type.getValueType() ? type : new MapType(wrapperElementType);
+        }
+        return wrapperType;
     }
 }

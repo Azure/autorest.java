@@ -12,6 +12,8 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FluentResourceModel {
 
@@ -35,9 +37,9 @@ public class FluentResourceModel {
                 .name(resourceInterfaceClassType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        this.model.getProperties().forEach(p -> {
-            properties.add(new FluentModelProperty(p));
-        });
+        properties.addAll(this.model.getProperties().stream()
+                .map(FluentModelProperty::new)
+                .collect(Collectors.toList()));
     }
 
 //    public ModelType getModelType() {
@@ -66,5 +68,15 @@ public class FluentResourceModel {
 
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        imports.add(this.getInnerModel().getFullName());
+
+        this.getProperties().forEach(p -> p.addImportsTo(imports, includeImplementationImports));
+
+        if (includeImplementationImports) {
+            resourceInterfaceClassType.addImportsTo(imports, false);
+        }
     }
 }

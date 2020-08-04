@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
@@ -29,7 +30,6 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -175,6 +175,10 @@ public class FluentGen extends NewPlugin {
             // Fluent resource model
             for (FluentResourceModel model : fluentClient.getResourceModels()) {
                 javaPackage.addFluentResourceModel(model);
+            }
+
+            for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
+                javaPackage.addFluentResourceCollection(collection);
             }
 
             // Print to files

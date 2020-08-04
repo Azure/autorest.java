@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -14,36 +15,46 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.CodeNamer;
 
+import java.util.Set;
+
 public class FluentModelProperty {
 
-    private final ClientModelProperty clientModelProperty;
+    private final ClientModelProperty modelProperty;
 
-    private final IType clientType;
+    private final IType fluentType;
 
     private final WrapperPropertyImplementationMethod wrapperImplementationMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
-        this.clientModelProperty = property;
-        this.clientType = getWrapperType(property.getClientType());
-        this.wrapperImplementationMethod = this.clientType == property.getClientType()
-                ? new WrapperPropertyImplementationMethod(this, this.clientModelProperty)
-                : new WrapperPropertyTypeConversionMethod(this, this.clientModelProperty);
+        this.modelProperty = property;
+        this.fluentType = getWrapperType(property.getClientType());
+        this.wrapperImplementationMethod = this.fluentType == property.getClientType()
+                ? new WrapperPropertyImplementationMethod(this, this.modelProperty)
+                : new WrapperPropertyTypeConversionMethod(this, this.modelProperty);
     }
 
     public String getName() {
-        return clientModelProperty.getName();
+        return modelProperty.getName();
     }
 
     public String getDescription() {
-        return clientModelProperty.getDescription();
+        return modelProperty.getDescription();
     }
 
-    public IType getClientType() {
-        return clientType;
+    public IType getFluentType() {
+        return fluentType;
     }
 
     public String getMethodSignature() {
-        return String.format("%1$s %2$s()", this.getClientType(), this.getGetterName());
+        return String.format("%1$s %2$s()", this.getFluentType(), this.getGetterName());
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        this.fluentType.addImportsTo(imports, false);
+
+        if (includeImplementationImports) {
+            this.wrapperImplementationMethod.getMethodTemplate().addImportsTo(imports);
+        }
     }
 
     public MethodTemplate getImplementationMethodTemplate() {
@@ -51,7 +62,7 @@ public class FluentModelProperty {
     }
 
     private String getGetterName() {
-        return CodeNamer.getModelNamer().modelPropertyGetterName(clientModelProperty);
+        return CodeNamer.getModelNamer().modelPropertyGetterName(modelProperty);
     }
 
     private static IType getWrapperType(IType clientType) {
