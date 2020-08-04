@@ -25,14 +25,11 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
     @Override
     public void write(FluentResourceModel model, JavaFile javaFile) {
-
         List<MethodTemplate> methodTemplates = new ArrayList<>();
         model.getProperties().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
 
         Set<String> imports = new HashSet<>();
-        model.getResourceInterfaceClassType().addImportsTo(imports, false);
-        imports.add(model.getInnerModel().getFullName());
-        methodTemplates.forEach(m -> m.addImportsTo(imports));
+        model.addImportsTo(imports, true);
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", model.getResourceImplementationClassType().getName(), model.getResourceInterfaceClassType().getName()), classBlock -> {

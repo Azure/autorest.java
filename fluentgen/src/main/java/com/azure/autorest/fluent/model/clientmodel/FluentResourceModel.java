@@ -12,22 +12,32 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+// Fluent resource instance. E.g. StorageAccount.
+// Also include some simple wrapper class.
 public class FluentResourceModel {
 
+    // inner model. E.g. StorageAccountInner.
     private final ClientModel model;
+    // all parent models of the inner model (property of which need to be put to resource class as well)
+    private final List<ClientModel> parentModels;
 
     private final ModelType modelType = ModelType.WRAPPER;
 
+    // class type for interface and implementation
     private final ClassType resourceInterfaceClassType;
     private final ClassType resourceImplementationClassType;
 
+    // resource properties
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
-    public FluentResourceModel(ClientModel model) {
+    public FluentResourceModel(ClientModel model, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
 
         this.model = model;
+        this.parentModels = parentModels;
 
         resourceInterfaceClassType = FluentUtils.resourceModelInterfaceClassType(model.getName());
         resourceImplementationClassType = new ClassType.Builder()
@@ -35,9 +45,20 @@ public class FluentResourceModel {
                 .name(resourceInterfaceClassType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        this.model.getProperties().forEach(p -> {
-            properties.add(new FluentModelProperty(p));
-        });
+        properties.addAll(this.model.getProperties().stream()
+                .map(FluentModelProperty::new)
+                .collect(Collectors.toList()));
+
+        Set<String> propertyNames = properties.stream().map(FluentModelProperty::getName).collect(Collectors.toSet());
+        for (ClientModel parent : parentModels) {
+            List<FluentModelProperty> parentProperties = parent.getProperties().stream()
+                    .filter(p -> !propertyNames.contains(p.getName()))
+                    .map(FluentModelProperty::new)
+                    .collect(Collectors.toList());
+            properties.addAll(parentProperties);
+
+            propertyNames.addAll(parentProperties.stream().map(FluentModelProperty::getName).collect(Collectors.toSet()));
+        }
     }
 
 //    public ModelType getModelType() {
@@ -64,7 +85,18 @@ public class FluentResourceModel {
         return String.format("An immutable client-side representation of %s.", resourceInterfaceClassType.getName());
     }
 
+    // method signature for inner model
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        imports.add(this.getInnerModel().getFullName());
+
+        this.getProperties().forEach(p -> p.addImportsTo(imports, includeImplementationImports));
+
+        if (includeImplementationImports) {
+            resourceInterfaceClassType.addImportsTo(imports, false);
+        }
     }
 }

@@ -18,11 +18,19 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Implementation method template for property requires conversion.
+// E.g.
+//    BlobRestoreStatusInner inner = this.inner().blobRestoreStatus();
+//    if (inner != null) {
+//        return new BlobRestoreStatusImpl(inner);
+//    } else {
+//        return null;
+//    }
 public class WrapperPropertyTypeConversionMethod extends WrapperPropertyImplementationMethod {
 
     public WrapperPropertyTypeConversionMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
-        fluentProperty.getClientType().addImportsTo(imports, false);
+        fluentProperty.getFluentType().addImportsTo(imports, false);
         // Type inner = ...
         property.getClientType().addImportsTo(imports, false);
         // Collectors.toList

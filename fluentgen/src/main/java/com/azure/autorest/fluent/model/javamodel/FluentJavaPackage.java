@@ -6,8 +6,11 @@
 package com.azure.autorest.fluent.model.javamodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
+import com.azure.autorest.fluent.template.FluentResourceCollectionImplementationTemplate;
+import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -27,6 +30,20 @@ public class FluentJavaPackage extends JavaPackage {
                 model.getResourceImplementationClassType().getName());
         FluentResourceModelImplementationTemplate.getInstance().write(model, javaFile);
         getJavaFiles().add(javaFile);
+    }
+
+    public final void addFluentResourceCollection(FluentResourceCollection collection) {
+        JavaFile javaFile = getJavaFileFactory().createSourceFile(
+                collection.getCollectionInterfaceClassType().getPackage(),
+                collection.getCollectionInterfaceClassType().getName());
+        FluentResourceCollectionInterfaceTemplate.getInstance().write(collection, javaFile);
+        getJavaFiles().add(javaFile);
+
+//        javaFile = getJavaFileFactory().createSourceFile(
+//                collection.getCollectionImplementationClassType().getPackage(),
+//                collection.getCollectionImplementationClassType().getName());
+//        FluentResourceCollectionImplementationTemplate.getInstance().write(collection, javaFile);
+//        getJavaFiles().add(javaFile);
     }
 
     public final void addFluentManager(FluentManager model) {

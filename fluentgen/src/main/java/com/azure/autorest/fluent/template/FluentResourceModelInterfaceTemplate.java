@@ -25,12 +25,10 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
     public void write(FluentResourceModel model, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         imports.add(Immutable.class.getName());
-        imports.add(model.getInnerModel().getFullName());
-        model.getProperties().forEach(p -> p.getClientType().addImportsTo(imports, false));
+        model.addImportsTo(imports, false);
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(comment ->
-        {
+        javaFile.javadocComment(comment -> {
             comment.description(model.getDescription());
         });
 
@@ -39,7 +37,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
             // method for properties
             model.getProperties().forEach(property -> {
                 interfaceBlock.javadocComment(comment -> {
-                    comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
+                    comment.description(String.format("Gets the %1$s property: %2$s", property.getName(), property.getDescription()));
                     comment.methodReturns(String.format("the %1$s value", property.getName()));
                 });
                 interfaceBlock.publicMethod(property.getMethodSignature());
@@ -47,11 +45,10 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
 
             // method for inner model
             interfaceBlock.javadocComment(comment -> {
-                comment.description(String.format("Get the inner %s object", model.getInnerModel().getFullName()));
+                comment.description(String.format("Gets the inner %s object", model.getInnerModel().getFullName()));
                 comment.methodReturns("the inner object");
             });
             interfaceBlock.publicMethod(model.getInnerMethodSignature());
         });
     }
-
 }

@@ -278,7 +278,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         //MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
         //boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod, false);
 
         switch (clientMethod.getType()) {
             case PagingSync:
@@ -453,7 +453,15 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
+    /**
+     * Generate javadoc for client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock code block
+     * @param restAPIMethod proxy method
+     * @param useFullName whether to use fully-qualified name in javadoc
+     */
+    public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullName) {
         typeBlock.javadocComment(comment -> {
             comment.description(clientMethod.getDescription());
             List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
@@ -466,7 +474,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
             }
             if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
+                comment.methodThrows(useFullName
+                        ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
+                        : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
+                        "thrown if the request is rejected by server");
             }
             if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
                 for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
@@ -480,7 +491,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         });
     }
 
-    protected String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
+    protected static String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
         String paramJavadoc = parameter.getDescription();
         if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());

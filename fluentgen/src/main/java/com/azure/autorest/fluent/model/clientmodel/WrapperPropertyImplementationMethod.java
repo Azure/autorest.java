@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+// Implementation method template for simple property
+// E.g. "return this.inner().sku()"
 public class WrapperPropertyImplementationMethod {
 
     protected MethodTemplate conversionMethodTemplate;
@@ -24,7 +26,7 @@ public class WrapperPropertyImplementationMethod {
 
     public WrapperPropertyImplementationMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
-        fluentProperty.getClientType().addImportsTo(imports, false);
+        fluentProperty.getFluentType().addImportsTo(imports, false);
         if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {
             // Type inner = ...
             property.getClientType().addImportsTo(imports, false);
