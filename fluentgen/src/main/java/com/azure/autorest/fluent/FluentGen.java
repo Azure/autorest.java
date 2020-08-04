@@ -169,6 +169,9 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
+            // Fluent manager
+            javaPackage.addFluentManager(fluentClient.getManager());
+
             // Fluent resource model
             for (FluentResourceModel model : fluentClient.getResourceModels()) {
                 javaPackage.addFluentResourceModel(model);

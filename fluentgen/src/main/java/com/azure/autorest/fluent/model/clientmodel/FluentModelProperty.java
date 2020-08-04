@@ -14,22 +14,20 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.CodeNamer;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class FluentModelProperty {
 
     private final ClientModelProperty clientModelProperty;
 
     private final IType clientType;
 
-    private final WrapperTypeConversionMethod wrapperTypeConversionMethod;
+    private final WrapperPropertyImplementationMethod wrapperImplementationMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
         this.clientModelProperty = property;
         this.clientType = getWrapperType(property.getClientType());
-        this.wrapperTypeConversionMethod = this.clientType == property.getClientType()
-                ? null : new WrapperTypeConversionMethod(this, this.clientModelProperty);
+        this.wrapperImplementationMethod = this.clientType == property.getClientType()
+                ? new WrapperPropertyImplementationMethod(this, this.clientModelProperty)
+                : new WrapperPropertyTypeConversionMethod(this, this.clientModelProperty);
     }
 
     public String getName() {
@@ -49,20 +47,7 @@ public class FluentModelProperty {
     }
 
     public MethodTemplate getImplementationMethodTemplate() {
-        if (wrapperTypeConversionMethod != null) {
-            return wrapperTypeConversionMethod.getConversionMethodTemplate();
-        } else {
-            Set<String> imports = new HashSet<>();
-            this.getClientType().addImportsTo(imports, false);
-
-            return MethodTemplate.builder()
-                    .imports(imports)
-                    .methodSignature(this.getMethodSignature())
-                    .method(block -> {
-                        block.methodReturn(String.format("this.inner().%1$s()", this.getGetterName()));
-                    })
-                    .build();
-        }
+        return wrapperImplementationMethod.getMethodTemplate();
     }
 
     private String getGetterName() {
