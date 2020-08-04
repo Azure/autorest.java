@@ -49,6 +49,7 @@ public class FluentTransformer {
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
+        codeModel = new SchemaCleanup().process(codeModel);
         return codeModel;
     }
 

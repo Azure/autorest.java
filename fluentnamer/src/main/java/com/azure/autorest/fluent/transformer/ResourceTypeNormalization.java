@@ -7,6 +7,7 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -36,12 +38,14 @@ class ResourceTypeNormalization {
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getSchemas().getObjects().forEach(compositeType -> {
-            if (compositeType.getParents() == null) {
+            Optional<ObjectSchema> parentType = getObjectParent(compositeType);
+            if (parentType.isPresent()) {
+                getSchemaResourceType(parentType.get())
+                        .ifPresent(type -> adaptForParentSchema(compositeType, type));
+            } else {
                 if (compositeType.getExtensions() != null && compositeType.getExtensions().isXmsAzureResource()) {
                     tryAdaptAsResource(compositeType);
                 }
-            } else {
-                getParentSchemaResourceType(compositeType).ifPresent(type -> adaptForParentSchema(compositeType, type));
             }
         });
 
@@ -72,21 +76,28 @@ class ResourceTypeNormalization {
         return schema;
     }
 
+    private static Optional<ObjectSchema> getObjectParent(ObjectSchema compositeType) {
+        if (compositeType.getParents() == null || compositeType.getParents().getImmediate() == null) {
+            return Optional.empty();
+        } else {
+            return compositeType.getParents().getImmediate().stream()
+                    .filter(s -> s instanceof ObjectSchema)
+                    .map(s -> (ObjectSchema) s)
+                    .findFirst();
+        }
+    }
+
     private static void tryAdaptAsResource(ObjectSchema compositeType) {
         if (!getSchemaResourceType(compositeType).isPresent()) {
             if (hasProperties(compositeType, RESOURCE_FIELDS)) {
-                compositeType.setParents(new Relations());
-                compositeType.getParents().setImmediate(new ArrayList<>());
-                compositeType.getParents().getImmediate().add(DUMMY_RESOURCE);
+                addDummyParentType(compositeType, DUMMY_RESOURCE);
 
                 compositeType.getProperties().removeIf(p -> (PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly())
                         || RESOURCE_EXTRA_FIELDS.contains(p.getSerializedName()));
 
                 logger.info("Add parent Resource, for {}", Utils.getJavaName(compositeType));
             } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
-                compositeType.setParents(new Relations());
-                compositeType.getParents().setImmediate(new ArrayList<>());
-                compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
+                addDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
 
                 compositeType.getProperties().removeIf(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly());
 
@@ -95,15 +106,9 @@ class ResourceTypeNormalization {
         }
     }
 
-    private static Optional<ResourceType> getParentSchemaResourceType(ObjectSchema compositeType) {
-        if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null
-                && compositeType.getParents().getImmediate().get(0) instanceof ObjectSchema) {
-            ObjectSchema parentType = (ObjectSchema) compositeType.getParents().getImmediate().get(0);
-            return getSchemaResourceType(parentType);
-        } else {
-            return Optional.empty();
-        }
-    }
+//    private static Optional<ResourceType> getParentSchemaResourceType(ObjectSchema compositeType, ObjectSchema parantType) {
+//        return getSchemaResourceType(parantType);
+//    }
 
     private static Optional<ResourceType> getSchemaResourceType(ObjectSchema compositeType) {
         ResourceType type = null;
@@ -180,29 +185,86 @@ class ResourceTypeNormalization {
             switch (type) {
                 case RESOURCE:
                 {
-                    compositeType.setParents(new Relations());
-                    compositeType.getParents().setImmediate(new ArrayList<>());
-                    compositeType.getParents().getImmediate().add(DUMMY_RESOURCE);
+                    replaceDummyParentType(compositeType, DUMMY_RESOURCE);
                     break;
                 }
                case PROXY_RESOURCE:
                {
-                   compositeType.setParents(new Relations());
-                   compositeType.getParents().setImmediate(new ArrayList<>());
-                   compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
+                   replaceDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
                    break;
                }
                 case SUB_RESOURCE:
                 {
-                    compositeType.setParents(new Relations());
-                    compositeType.getParents().setImmediate(new ArrayList<>());
-                    compositeType.getParents().getImmediate().add(DUMMY_SUB_RESOURCE);
+                    replaceDummyParentType(compositeType, DUMMY_SUB_RESOURCE);
                     break;
                 }
             }
 
             logger.info("Change parent from {} to {}, for {}", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
         }
+    }
+
+    private static void addDummyParentType(ObjectSchema compositeType, ObjectSchema parentType) {
+        if (compositeType.getParents() == null) {
+            compositeType.setParents(new Relations());
+        }
+        if (compositeType.getParents().getImmediate() == null) {
+            compositeType.getParents().setImmediate(new ArrayList<>());
+        }
+        if (compositeType.getParents().getAll() == null) {
+            compositeType.getParents().setAll(new ArrayList<>());
+        }
+        compositeType.getParents().getImmediate().add(parentType);
+        compositeType.getParents().getAll().add(parentType);
+    }
+
+    private static void replaceDummyParentType(ObjectSchema compositeType, ObjectSchema parentType) {
+        ObjectSchema currentParentType = getObjectParent(compositeType).get();
+
+        // remove parent from type
+        Iterator<ComplexSchema> itor = compositeType.getParents().getImmediate().iterator();
+        while (itor.hasNext()) {
+            ComplexSchema type = itor.next();
+            if (type == currentParentType) {
+                itor.remove();
+                break;
+            }
+        }
+        itor = compositeType.getParents().getAll().iterator();
+        while (itor.hasNext()) {
+            ComplexSchema type = itor.next();
+            if (type == currentParentType) {
+                itor.remove();
+                break;
+            }
+        }
+
+        // remove type from parent
+        if (currentParentType.getChildren() != null) {
+            if (currentParentType.getChildren().getImmediate() != null) {
+                itor = currentParentType.getChildren().getImmediate().iterator();
+                while (itor.hasNext()) {
+                    ComplexSchema type = itor.next();
+                    if (type == compositeType) {
+                        itor.remove();
+                        break;
+                    }
+                }
+            }
+            if (currentParentType.getChildren().getAll() != null) {
+                itor = currentParentType.getChildren().getAll().iterator();
+                while (itor.hasNext()) {
+                    ComplexSchema type = itor.next();
+                    if (type == compositeType) {
+                        itor.remove();
+                        break;
+                    }
+                }
+            }
+        }
+
+        // add parent type
+        addDummyParentType(compositeType, parentType);
     }
 
     private static boolean hasProperties(ObjectSchema compositeType, Set<String> fieldNames) {
