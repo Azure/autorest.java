@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Pet {
     /*
-     * The name property.
+     * name
      */
     @JsonProperty(value = "name")
     private String name;
@@ -25,7 +25,7 @@ public final class Pet {
     private IntEnum intEnum;
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: name.
      *
      * @return the name value.
      */
@@ -34,7 +34,7 @@ public final class Pet {
     }
 
     /**
-     * Set the name property: The name property.
+     * Set the name property: name.
      *
      * @param name the name value to set.
      * @return the Pet object itself.
