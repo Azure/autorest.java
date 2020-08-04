@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.IType;
@@ -78,11 +79,15 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
             proxyBuilder.methods(restAPIMethods);
             builder.proxy(proxyBuilder.build());
-            ClientMethodMapper clientMethodMapper = Mappers.getClientMethodMapper();
             builder.clientMethods(codeModelRestAPIMethods.stream()
-                    .flatMap(m -> clientMethodMapper.map(m).stream())
+                    .flatMap(m -> {
+                        ClientMethodMapper clientMethodMapper = Mappers.getClientMethodMapper();
+                        List<ClientMethod> clientMethods = clientMethodMapper.map(m);
+                        clientMethodMapper.addModelsTo(additionalModels);
+                        return clientMethods.stream();
+                    })
                     .collect(Collectors.toList()));
-            clientMethodMapper.addModelsTo(additionalModels);
+
         } else {
             builder.clientMethods(new ArrayList<>());
         }

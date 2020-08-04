@@ -12,14 +12,16 @@ import java.util.List;
 
 public class AndroidClientMethodMapper extends ClientMethodMapper {
 
-    private List<ClientModel> optionalParametersModels = new ArrayList<>();
+    private ClientModel optionalParametersModel;
 
     public static AndroidClientMethodMapper getInstance() {
         return new AndroidClientMethodMapper();
     }
 
     public void addModelsTo(List<ClientModel> clientModels) {
-        clientModels.addAll(optionalParametersModels);
+        if (optionalParametersModel != null) {
+            clientModels.add(optionalParametersModel);
+        }
     }
 
     @Override
@@ -32,10 +34,9 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
         JavaSettings settings = JavaSettings.getInstance();
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         AndroidOptionalParameterMapper optionalParameterMapper = new AndroidOptionalParameterMapper();
-        ClientModel optionsModel = optionalParameterMapper.packageName(packageName).methodName(methodName).parameters(optionalParameters).build();
-        optionalParametersModels.add(optionsModel);
+        optionalParametersModel = optionalParameterMapper.packageName(packageName).methodName(methodName).parameters(optionalParameters).build();
 
-        String typeName = optionsModel.getName();
+        String typeName = optionalParametersModel.getName();
         ClientMethodParameter.Builder optionalParameterBuilder = new ClientMethodParameter.Builder();
         optionalParameterBuilder.name(CodeNamer.toCamelCase(typeName))
                 .annotations(new ArrayList<>())
