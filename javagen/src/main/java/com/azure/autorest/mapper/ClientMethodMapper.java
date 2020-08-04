@@ -9,44 +9,35 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.clientmodel.ClientMethod.Builder;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MethodPageDetails;
-import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
-import com.azure.autorest.model.clientmodel.ParameterMapping;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
-    private ClientMethodMapper() {
+    protected ClientMethodMapper() {
     }
 
     public static ClientMethodMapper getInstance() {
         return instance;
+    }
+
+    public void addModelsTo(List<ClientModel> clientModels) {
+    }
+
+    protected boolean shouldCollapseOptionalParameters() {
+        return false;
+    }
+
+    protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
     }
 
     @Override
@@ -103,11 +94,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.proxyMethod(proxyMethod);
 
             List<ClientMethodParameter> parameters = new ArrayList<>();
+            List<Parameter> optionalParameters = new ArrayList<>();
             List<String> requiredParameterExpressions = new ArrayList<>();
             Map<String, String> validateExpressions = new HashMap<>();
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
+                if (!parameter.isRequired()
+                    && shouldCollapseOptionalParameters()) {
+                    optionalParameters.add(parameter);
+                    continue;
+                }
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
@@ -170,6 +167,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                     detail.getParameterMappings().add(mapping);
                 }
+            }
+
+            if (shouldCollapseOptionalParameters()
+                && optionalParameters.size() > 0) {
+                collapseOptionalParameters(proxyMethod.getName(), optionalParameters, parameters);
             }
 
             final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);

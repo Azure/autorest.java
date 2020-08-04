@@ -87,7 +87,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
-        builder.models(clientModels);
+
 
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
@@ -98,9 +98,13 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
 
+        ServiceClientMapper serviceClientMapper = Mappers.getServiceClientMapper();
         builder.clientName(serviceClientName)
                 .clientDescription(serviceClientDescription)
-                .serviceClient(Mappers.getServiceClientMapper().map(codeModel));
+                .serviceClient(serviceClientMapper.map(codeModel));
+
+        serviceClientMapper.addModelsTo(clientModels);
+        builder.models(clientModels);
 
         // TODO: Manager
 //        Manager manager = Mappers.ManagerMapper.Map(codeModel);

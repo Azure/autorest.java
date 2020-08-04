@@ -68,9 +68,9 @@ public class Androidgen extends NewPlugin {
 
             // Step 2: Map
             Mappers.setFactory(new AndroidMapperFactory());
-            Client client = Mappers.getClientMapper().map(codeModel);
-
             Templates.setFactory(new AndroidTemplateFactory());
+
+            Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
             JavaPackage javaPackage = new JavaPackage();
@@ -148,8 +148,8 @@ public class Androidgen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                writeFile(javaFile.getFilePath(), formattedSource, null);
+                //String formattedSource = formatter.formatSource(javaFile.getContents().toString());
+                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
