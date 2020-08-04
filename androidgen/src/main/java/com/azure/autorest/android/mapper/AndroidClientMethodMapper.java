@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AndroidClientMethodMapper extends ClientMethodMapper {
+    private static AndroidClientMethodMapper instance = new AndroidClientMethodMapper();
 
     private ClientModel optionalParametersModel;
 
@@ -21,6 +22,11 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
     public void addModelsTo(List<ClientModel> clientModels) {
         if (optionalParametersModel != null) {
+        return instance;
+    }
+
+    public void addModelsTo(List<ClientModel> clientModels) {
+        if (optionalParametersModel != null){
             clientModels.add(optionalParametersModel);
         }
     }
