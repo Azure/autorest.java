@@ -5,12 +5,11 @@
 
 package com.azure.autorest.fluent.model.arm;
 
-import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,7 +74,7 @@ public class ResourceClientModel {
                             .description("Resource tags.")
                             .isRequired(false)
                             .isReadOnly(false)
-                            .clientType(new ListType(ClassType.String))
+                            .clientType(new MapType(ClassType.String))
                             .build()
             ))
             .build();
