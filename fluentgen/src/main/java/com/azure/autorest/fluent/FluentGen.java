@@ -169,16 +169,18 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
-            // Fluent manager
-            javaPackage.addFluentManager(fluentClient.getManager());
+            if (JavaSettings.getInstance().isFluentLite()) {
+                // Fluent manager
+                javaPackage.addFluentManager(fluentClient.getManager());
 
-            // Fluent resource model
-            for (FluentResourceModel model : fluentClient.getResourceModels()) {
-                javaPackage.addFluentResourceModel(model);
-            }
+                // Fluent resource model
+                for (FluentResourceModel model : fluentClient.getResourceModels()) {
+                    javaPackage.addFluentResourceModel(model);
+                }
 
-            for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
-                javaPackage.addFluentResourceCollection(collection);
+                for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
+                    javaPackage.addFluentResourceCollection(collection);
+                }
             }
 
             // Print to files
