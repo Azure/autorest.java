@@ -86,6 +86,16 @@ public class SchemaCleanup {
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
         }
+        if (!schemasNotInUse.isEmpty()) {
+            // operation exception
+            schemasInUse = codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getExceptions().stream())
+                    .map(Response::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(schemasInUse);
+        }
 
         codeModel.getSchemas().getObjects().removeIf(s -> {
             boolean unused = schemasNotInUse.contains(s);
