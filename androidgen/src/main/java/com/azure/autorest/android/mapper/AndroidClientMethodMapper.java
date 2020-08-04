@@ -20,7 +20,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     public void addModelsTo(List<ClientModel> clientModels) {
-        if (optionalParametersModel != null){
+        if (optionalParametersModel != null) {
             clientModels.add(optionalParametersModel);
         }
     }
