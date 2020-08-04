@@ -80,7 +80,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
             proxyBuilder.methods(restAPIMethods);
             builder.proxy(proxyBuilder.build());
-            ClientMethodMapper clientMethodMapper = Mappers.getClientMethodMapper();
             builder.clientMethods(codeModelRestAPIMethods.stream()
                     .flatMap(m -> {
                         ClientMethodMapper clientMethodMapper = Mappers.getClientMethodMapper();
@@ -92,7 +91,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
                     .flatMap(m -> clientMethodMapper.map(m).stream())
                     .collect(Collectors.toList()));
-            clientMethodMapper.addModelsTo(additionalModels);
+
         } else {
             builder.clientMethods(new ArrayList<>());
         }
