@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+// Implementation method template for simple property
+// E.g. "return this.inner().sku()"
 public class WrapperPropertyImplementationMethod {
 
     protected MethodTemplate conversionMethodTemplate;

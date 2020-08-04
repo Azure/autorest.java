@@ -16,14 +16,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Fluent resource collection API. E.g. StorageAccounts.
 public class FluentResourceCollection {
 
+    // implementation client. E.g. StorageAccountsClientImpl.
     private final MethodGroupClient groupClient;
 
+    // class type for inner client. E.g. StorageAccountsClient (which is a layer over StorageAccountsClientImpl).
     private final ClassType innerClassType;
+
+    // class type for interface and implementation
     private final ClassType collectionInterfaceClassType;
     private final ClassType collectionImplementationClassType;
 
+    // API methods
     private final List<FluentCollectionMethod> methods = new ArrayList<>();;
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
@@ -73,6 +79,7 @@ public class FluentResourceCollection {
         return innerClassType;
     }
 
+    // method signature for inner client
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerClassType().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
     }

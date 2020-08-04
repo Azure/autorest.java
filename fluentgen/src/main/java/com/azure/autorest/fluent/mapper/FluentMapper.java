@@ -32,6 +32,8 @@ public class FluentMapper {
 
     private static final Logger logger = LoggerFactory.getLogger(FluentMapper.class);
 
+    private static Client client;
+
     private final FluentJavaSettings fluentJavaSettings;
 
     public FluentMapper(FluentJavaSettings fluentJavaSettings) {
@@ -43,6 +45,8 @@ public class FluentMapper {
     }
 
     public FluentClient map(CodeModel codeModel, Client client) {
+        FluentMapper.client = client;
+
         FluentClient fluentClient = new FluentClient(client);
 
         fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
@@ -58,6 +62,10 @@ public class FluentMapper {
                 .collect(Collectors.toList()));
 
         return fluentClient;
+    }
+
+    public static Client getClient() {
+        return client;
     }
 
     private void processInnerModel(CodeModel codeModel) {
