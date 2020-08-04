@@ -39,6 +39,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
         String typeName = optionalParametersModel.getName();
         ClientMethodParameter.Builder optionalParameterBuilder = new ClientMethodParameter.Builder();
         optionalParameterBuilder.name(CodeNamer.toCamelCase(typeName))
+                .description(String.format("Options for %1$s", methodName))
                 .annotations(new ArrayList<>())
                 .wireType(optionalParameterMapper.getModelType());
 
