@@ -33,7 +33,6 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     @Override
     protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
         if (optionalParameters.size() == 1) {
-            ClientMethodParameter.Builder parameterBuilder = new ClientMethodParameter.Builder();
             Parameter parameterModel = optionalParameters.get(0);
             ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameterModel);
             parameters.add(clientMethodParameter);

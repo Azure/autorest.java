@@ -49,13 +49,29 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return instance;
     }
 
+    /**
+     * Method mapping doesn't have to take the same parameter list. In some cases, e.g. Android client, optional parameters
+     * may be collapsed into a single structure captured in a new model class. This is the function to add these
+     * additional models to the model list for generation.
+     * @param clientModels global list of models to be created. Check duplicates before adding
+     */
     public void addModelsTo(List<ClientModel> clientModels) {
     }
 
+    /**
+     * Extension point to allow derived class to override how optional parameters are handled
+     * @return whether optional parameters should be collapsed into a new model
+     */
     protected boolean shouldCollapseOptionalParameters() {
         return false;
     }
 
+    /**
+     * Extension point to map optional parameters into a collapsed model
+     * @param methodName name of the method for which the optional parameters are for
+     * @param optionalParameters request parameters that are optional for this method
+     * @param parameters other parameters created for the same method
+     */
     protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
     }
 
