@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -92,6 +93,12 @@ public class FluentUtils {
             MapType type = (MapType) clientType;
             IType wrapperElementType = getFluentWrapperType(type.getValueType());
             wrapperType = wrapperElementType == type.getValueType() ? type : new MapType(wrapperElementType);
+        } else if (clientType instanceof GenericType) {
+            GenericType type = (GenericType) clientType;
+            if ("PagedIterable".equals(type.getName())) {
+                IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
+                wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.PagedIterable(wrapperItemType);
+            }
         }
         return wrapperType;
     }
