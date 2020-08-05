@@ -24,7 +24,7 @@ public class FluentResourceCollectionMapper implements IMapper<OperationGroup, F
         FluentResourceCollection fluentResourceCollection = null;
 
         MethodGroupClient groupClient = Mappers.getMethodGroupMapper().map(operationGroup);
-        if (groupClient != null) {
+        if (groupClient != null && !groupClient.getClassBaseName().isEmpty()) {
             fluentResourceCollection = new FluentResourceCollection(groupClient);
         }
 

@@ -26,7 +26,9 @@ import java.util.stream.Collectors;
 //    } else {
 //        return null;
 //    }
-public class WrapperPropertyTypeConversionMethod extends WrapperPropertyImplementationMethod {
+public class WrapperPropertyTypeConversionMethod implements WrapperPropertyMethod {
+
+    private final MethodTemplate conversionMethodTemplate;
 
     public WrapperPropertyTypeConversionMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
@@ -50,6 +52,10 @@ public class WrapperPropertyTypeConversionMethod extends WrapperPropertyImplemen
                     });
                 })
                 .build();
+    }
+
+    public MethodTemplate getMethodTemplate() {
+        return conversionMethodTemplate;
     }
 
     private String conversionExpression(IType clientType, String propertyName) {

@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -92,6 +93,7 @@ public class FluentGen extends NewPlugin {
             fluentMapper.preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
+            FluentStatic.setClient(client);
 
             FluentClient fluentClient = fluentMapper.map(codeModel, client);
             

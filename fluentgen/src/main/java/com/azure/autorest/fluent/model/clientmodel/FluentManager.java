@@ -11,11 +11,16 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.util.CodeNamer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluentManager {
 
     private final Client client;
 
     private final ClassType classType;
+
+    private final List<FluentManagerProperty> properties = new ArrayList<>();
 
     public FluentManager(Client client, String clientName) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -34,5 +39,9 @@ public class FluentManager {
 
     public String getDescription() {
         return String.format("Entry point to %1$s.\n%2$s", this.getClassType().getName(), client.getClientDescription());
+    }
+
+    public List<FluentManagerProperty> getProperties() {
+        return properties;
     }
 }

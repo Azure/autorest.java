@@ -16,13 +16,9 @@ import java.util.Set;
 
 // Implementation method template for simple property
 // E.g. "return this.inner().sku()"
-public class WrapperPropertyImplementationMethod {
+public class WrapperPropertyImplementationMethod implements WrapperPropertyMethod {
 
-    protected MethodTemplate conversionMethodTemplate;
-
-    protected WrapperPropertyImplementationMethod() {
-
-    }
+    private final MethodTemplate conversionMethodTemplate;
 
     public WrapperPropertyImplementationMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();

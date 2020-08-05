@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ public class FluentResourceCollection {
                 .build();
         this.collectionImplementationClassType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(groupClient.getInterfaceName() + "Impl")
+                .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
 
         this.innerClassType = new ClassType.Builder()
@@ -67,7 +68,7 @@ public class FluentResourceCollection {
         return collectionImplementationClassType;
     }
 
-    public List<FluentCollectionMethod> getMethods() {
+    public Collection<FluentCollectionMethod> getMethods() {
         return methods;
     }
 
@@ -81,7 +82,7 @@ public class FluentResourceCollection {
 
     // method signature for inner client
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerClassType().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
+        return String.format("%1$s %2$s()", this.getInnerClassType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {

@@ -5,7 +5,6 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -23,7 +22,7 @@ public class FluentModelProperty {
 
     private final IType fluentType;
 
-    private final WrapperPropertyImplementationMethod wrapperImplementationMethod;
+    private final WrapperPropertyMethod wrapperImplementationMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
         this.modelProperty = property;

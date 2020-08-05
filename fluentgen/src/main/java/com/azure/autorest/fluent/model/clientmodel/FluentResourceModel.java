@@ -10,9 +10,12 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 // Fluent resource instance. E.g. StorageAccount.
@@ -31,7 +34,7 @@ public class FluentResourceModel {
     private final ClassType resourceImplementationClassType;
 
     // resource properties
-    private final List<FluentModelProperty> properties = new ArrayList<>();
+    private final Map<String, FluentModelProperty> properties = new HashMap<>();
 
     public FluentResourceModel(ClientModel model, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -45,19 +48,14 @@ public class FluentResourceModel {
                 .name(resourceInterfaceClassType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        properties.addAll(this.model.getProperties().stream()
+        properties.putAll(this.model.getProperties().stream()
                 .map(FluentModelProperty::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toMap(FluentModelProperty::getName, Function.identity())));
 
-        Set<String> propertyNames = properties.stream().map(FluentModelProperty::getName).collect(Collectors.toSet());
         for (ClientModel parent : parentModels) {
-            List<FluentModelProperty> parentProperties = parent.getProperties().stream()
-                    .filter(p -> !propertyNames.contains(p.getName()))
+            parent.getProperties().stream()
                     .map(FluentModelProperty::new)
-                    .collect(Collectors.toList());
-            properties.addAll(parentProperties);
-
-            propertyNames.addAll(parentProperties.stream().map(FluentModelProperty::getName).collect(Collectors.toSet()));
+                    .forEach(p -> properties.putIfAbsent(p.getName(), p));
         }
     }
 
@@ -77,8 +75,8 @@ public class FluentResourceModel {
         return resourceImplementationClassType;
     }
 
-    public List<FluentModelProperty> getProperties() {
-        return properties;
+    public Collection<FluentModelProperty> getProperties() {
+        return properties.values();
     }
 
     public String getDescription() {
@@ -87,7 +85,7 @@ public class FluentResourceModel {
 
     // method signature for inner model
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.PROPERTY_INNER));
+        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
