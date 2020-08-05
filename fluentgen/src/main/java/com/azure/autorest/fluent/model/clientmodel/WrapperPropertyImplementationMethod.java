@@ -16,9 +16,9 @@ import java.util.Set;
 
 // Implementation method template for simple property
 // E.g. "return this.inner().sku()"
-public class WrapperPropertyImplementationMethod implements WrapperPropertyMethod {
+public class WrapperPropertyImplementationMethod implements WrapperImplementationMethod {
 
-    private final MethodTemplate conversionMethodTemplate;
+    private final MethodTemplate implementationMethodTemplate;
 
     public WrapperPropertyImplementationMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
@@ -31,7 +31,7 @@ public class WrapperPropertyImplementationMethod implements WrapperPropertyMetho
             imports.add(Collections.class.getName());
         }
 
-        conversionMethodTemplate = MethodTemplate.builder()
+        implementationMethodTemplate = MethodTemplate.builder()
                 .imports(imports)
                 .methodSignature(fluentProperty.getMethodSignature())
                 .method(block -> {
@@ -52,7 +52,8 @@ public class WrapperPropertyImplementationMethod implements WrapperPropertyMetho
                 .build();
     }
 
+    @Override
     public MethodTemplate getMethodTemplate() {
-        return conversionMethodTemplate;
+        return implementationMethodTemplate;
     }
 }

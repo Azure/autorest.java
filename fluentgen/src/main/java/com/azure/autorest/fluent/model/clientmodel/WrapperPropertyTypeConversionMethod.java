@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 //    } else {
 //        return null;
 //    }
-public class WrapperPropertyTypeConversionMethod implements WrapperPropertyMethod {
+public class WrapperPropertyTypeConversionMethod implements WrapperImplementationMethod {
 
     private final MethodTemplate conversionMethodTemplate;
 
@@ -54,6 +54,7 @@ public class WrapperPropertyTypeConversionMethod implements WrapperPropertyMetho
                 .build();
     }
 
+    @Override
     public MethodTemplate getMethodTemplate() {
         return conversionMethodTemplate;
     }

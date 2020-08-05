@@ -22,7 +22,7 @@ public class FluentModelProperty {
 
     private final IType fluentType;
 
-    private final WrapperPropertyMethod wrapperImplementationMethod;
+    private final WrapperImplementationMethod wrapperImplementationMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
         this.modelProperty = property;

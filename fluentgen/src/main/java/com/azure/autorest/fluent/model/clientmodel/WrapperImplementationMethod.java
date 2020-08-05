@@ -7,7 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.template.prototype.MethodTemplate;
 
-public interface WrapperPropertyMethod {
+public interface WrapperImplementationMethod {
 
     MethodTemplate getMethodTemplate();
 }
