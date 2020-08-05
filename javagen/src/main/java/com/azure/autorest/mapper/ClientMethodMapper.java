@@ -65,6 +65,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     public void addModelsTo(List<ClientModel> clientModels) {
     }
 
+    /**
+     * Extension point to allow derived class to override how optional parameters are handled
+     * @return whether optional parameters should be collapsed into a new model
+     */
     protected boolean shouldCollapseOptionalParameters() {
         return false;
     }
