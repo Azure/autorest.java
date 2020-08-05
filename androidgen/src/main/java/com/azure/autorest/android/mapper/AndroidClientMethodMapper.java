@@ -3,6 +3,7 @@ package com.azure.autorest.android.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapper;
+import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.util.CodeNamer;
@@ -31,6 +32,14 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
     @Override
     protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
+        if (optionalParameters.size() == 1) {
+            ClientMethodParameter.Builder parameterBuilder = new ClientMethodParameter.Builder();
+            Parameter parameterModel = optionalParameters.get(0);
+            ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameterModel);
+            parameters.add(clientMethodParameter);
+            return;
+        }
+
         JavaSettings settings = JavaSettings.getInstance();
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         AndroidOptionalParameterMapper optionalParameterMapper = new AndroidOptionalParameterMapper();
