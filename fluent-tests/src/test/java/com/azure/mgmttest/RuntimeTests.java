@@ -65,7 +65,11 @@ public class RuntimeTests {
 
     @Test
     public void testStorageManager() {
-        StorageManager storageManager = StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, Configuration.getGlobalConfiguration().get("AZURE_SUBSCRIPTION_ID"));
+        String subscriptionId = Configuration.getGlobalConfiguration().get("AZURE_SUBSCRIPTION_ID");
+        if (subscriptionId == null) {
+            subscriptionId = "";
+        }
+        StorageManager storageManager = StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
         PagedIterable<StorageAccount> storageAccounts = storageManager.storageAccounts().list();
         //List<StorageAccount> storageAccountList = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
     }

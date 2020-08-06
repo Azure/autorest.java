@@ -14,8 +14,8 @@ RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 RMDIR /S /Q "src/main/java/com/azure/mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.0.6282
-SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
-SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=implementation --client-side-validations --client-logger --generate-sync-async-clients
+SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
+SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=implementation --client-side-validations --client-logger --generate-sync-async-clients
 
 REM fluent premium
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources
