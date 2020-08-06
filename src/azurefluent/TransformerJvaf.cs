@@ -129,11 +129,10 @@ namespace AutoRest.Java.Azure
                 {
                     AppendInnerToTopLevelType(model, serviceClient);
                 }
-                // Getting rid of this to be consistent with fluent model in fluent gen
-                //if (model.BaseModelType != null && model.BaseModelType.IsResource())
-                //{
-                //    AppendInnerToTopLevelType(model, serviceClient);
-                //}
+                if (model.BaseModelType != null && model.BaseModelType.IsResource())
+                {
+                    AppendInnerToTopLevelType(model, serviceClient);
+                }
                 else if (serviceClient.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name) || o.Name.EqualsIgnoreCase(pluralizer.Pluralize(model.Name)))) // Naive plural check
                 {
                     AppendInnerToTopLevelType(model, serviceClient);
@@ -153,9 +152,9 @@ namespace AutoRest.Java.Azure
             if (compositeType != null && !compositeType.IsResource)
             {
                 compositeType.IsInnerModel = true;
-                foreach (var t in serviceClient.ModelTypes)
+                foreach (var t in serviceClient.ModelTypes.Where(mt => !(mt as CompositeTypeJvaf).IsInnerModel))
                 {
-                    foreach (var p in t.Properties.Where(p => p.ModelType is CompositeTypeJvaf && !((CompositeTypeJvaf)p.ModelType).IsInnerModel))
+                    foreach (var p in t.Properties.Where(p => p.ModelType is CompositeTypeJvaf))
                     {
                         if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
                             || (p.ModelType is SequenceType && ((SequenceType)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
