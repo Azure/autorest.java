@@ -34,12 +34,6 @@ public class AndroidEmbeddedBuilderTemplate implements IJavaTemplate<ServiceClie
         return _instance;
     }
 
-    public void addImportsTo(HashSet<String> imports) {
-        imports.add("com.azure.android.core.http.interceptor.AddDateInterceptor");
-        imports.add("com.azure.android.core.internal.util.serializer.SerializerFormat");
-        imports.add("com.azure.android.core.http.ServiceClient.Builder");
-    }
-
     @Override
     public void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
