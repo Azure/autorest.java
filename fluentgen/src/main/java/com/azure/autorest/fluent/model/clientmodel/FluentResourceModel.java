@@ -30,8 +30,8 @@ public class FluentResourceModel {
     private final ModelType modelType = ModelType.WRAPPER;
 
     // class type for interface and implementation
-    private final ClassType resourceInterfaceClassType;
-    private final ClassType resourceImplementationClassType;
+    private final ClassType interfaceType;
+    private final ClassType implementationType;
 
     // resource properties
     private final Map<String, FluentModelProperty> properties = new HashMap<>();
@@ -42,10 +42,10 @@ public class FluentResourceModel {
         this.model = model;
         this.parentModels = parentModels;
 
-        resourceInterfaceClassType = FluentUtils.resourceModelInterfaceClassType(model.getName());
-        resourceImplementationClassType = new ClassType.Builder()
+        interfaceType = FluentUtils.resourceModelInterfaceClassType(model.getName());
+        implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(resourceInterfaceClassType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
+                .name(interfaceType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
         properties.putAll(this.model.getProperties().stream()
@@ -67,12 +67,12 @@ public class FluentResourceModel {
         return model;
     }
 
-    public ClassType getResourceInterfaceClassType() {
-        return resourceInterfaceClassType;
+    public ClassType getInterfaceType() {
+        return interfaceType;
     }
 
-    public ClassType getResourceImplementationClassType() {
-        return resourceImplementationClassType;
+    public ClassType getImplementationType() {
+        return implementationType;
     }
 
     public Collection<FluentModelProperty> getProperties() {
@@ -80,7 +80,7 @@ public class FluentResourceModel {
     }
 
     public String getDescription() {
-        return String.format("An immutable client-side representation of %s.", resourceInterfaceClassType.getName());
+        return String.format("An immutable client-side representation of %s.", interfaceType.getName());
     }
 
     // method signature for inner model
@@ -94,7 +94,7 @@ public class FluentResourceModel {
         this.getProperties().forEach(p -> p.addImportsTo(imports, includeImplementationImports));
 
         if (includeImplementationImports) {
-            resourceInterfaceClassType.addImportsTo(imports, false);
+            interfaceType.addImportsTo(imports, false);
         }
     }
 }

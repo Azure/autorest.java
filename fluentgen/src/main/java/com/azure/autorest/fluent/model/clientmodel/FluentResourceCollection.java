@@ -27,8 +27,8 @@ public class FluentResourceCollection {
     private final ClassType innerClassType;
 
     // class type for interface and implementation
-    private final ClassType collectionInterfaceClassType;
-    private final ClassType collectionImplementationClassType;
+    private final ClassType interfaceType;
+    private final ClassType implementationType;
 
     // API methods
     private final List<FluentCollectionMethod> methods = new ArrayList<>();;
@@ -38,11 +38,11 @@ public class FluentResourceCollection {
 
         this.groupClient = groupClient;
 
-        this.collectionInterfaceClassType = new ClassType.Builder()
+        this.interfaceType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
                 .name(groupClient.getInterfaceName())
                 .build();
-        this.collectionImplementationClassType = new ClassType.Builder()
+        this.implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
                 .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
@@ -60,12 +60,16 @@ public class FluentResourceCollection {
                 .collect(Collectors.toList()));
     }
 
-    public ClassType getCollectionInterfaceClassType() {
-        return collectionInterfaceClassType;
+    public MethodGroupClient getInnerGroupClient() {
+        return groupClient;
     }
 
-    public ClassType getCollectionImplementationClassType() {
-        return collectionImplementationClassType;
+    public ClassType getInterfaceType() {
+        return interfaceType;
+    }
+
+    public ClassType getImplementationType() {
+        return implementationType;
     }
 
     public Collection<FluentCollectionMethod> getMethods() {
@@ -73,7 +77,7 @@ public class FluentResourceCollection {
     }
 
     public String getDescription() {
-        return String.format("Resource collection API of %s.", collectionInterfaceClassType.getName());
+        return String.format("Resource collection API of %s.", interfaceType.getName());
     }
 
     public ClassType getInnerClassType() {
@@ -91,7 +95,7 @@ public class FluentResourceCollection {
         this.getMethods().forEach(m -> m.addImportsTo(imports, includeImplementationImports));
 
         if (includeImplementationImports) {
-            collectionInterfaceClassType.addImportsTo(imports, false);
+            interfaceType.addImportsTo(imports, false);
         }
     }
 }

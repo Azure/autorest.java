@@ -46,7 +46,9 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     .build();
 
             MethodTemplate mergeContextMethod = MethodTemplate.builder()
-                    .imports(Arrays.asList(Context.class.getName(), Map.class.getName()))
+                    .imports(Arrays.asList(
+                            Context.class.getName(),
+                            Map.class.getName()))
                     .methodSignature("Context mergeContext(Context context)")
                     .comment(comment -> {
                         comment.description("Merges default client context with provided context.");
@@ -62,9 +64,14 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     .build();
 
             MethodTemplate getLroResultMethod = MethodTemplate.builder()
-                    .imports(Arrays.asList(PollerFlux.class.getName(), PollResult.class.getName(),
-                            Mono.class.getName(), Flux.class.getName(), Response.class.getName(),
-                            ByteBuffer.class.getName(), Type.class.getName(),
+                    .imports(Arrays.asList(
+                            PollerFlux.class.getName(),
+                            PollResult.class.getName(),
+                            Mono.class.getName(),
+                            Flux.class.getName(),
+                            Response.class.getName(),
+                            ByteBuffer.class.getName(),
+                            Type.class.getName(),
                             PollerFactory.class.getName()))
                     .methodSignature("<T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<Response<Flux<ByteBuffer>>> activationResponse, HttpPipeline httpPipeline, Type pollResultType, Type finalResultType)")
                     .comment(comment -> {
@@ -83,10 +90,16 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     .build();
 
             MethodTemplate getLroFinalResultOrErrorMethod = MethodTemplate.builder()
-                    .imports(Arrays.asList(PollerFlux.class.getName(), PollResult.class.getName(),
-                            Mono.class.getName(), AsyncPollResponse.class.getName(),
-                            ManagementError.class.getName(), ManagementException.class.getName(),
-                            LongRunningOperationStatus.class.getName(), SerializerEncoding.class.getName(), IOException.class.getName()))
+                    .imports(Arrays.asList(
+                            PollerFlux.class.getName(),
+                            PollResult.class.getName(),
+                            Mono.class.getName(),
+                            AsyncPollResponse.class.getName(),
+                            ManagementError.class.getName(),
+                            ManagementException.class.getName(),
+                            LongRunningOperationStatus.class.getName(),
+                            SerializerEncoding.class.getName(),
+                            IOException.class.getName()))
                     .methodSignature("<T, U> Mono<U> getLroFinalResultOrError(AsyncPollResponse<PollResult<T>, U> response)")
                     .comment(comment -> {
                         comment.description("Gets the final result, or an error, based on last async poll response.");

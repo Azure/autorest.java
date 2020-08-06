@@ -33,7 +33,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
         });
 
         javaFile.annotation("Immutable");
-        javaFile.publicInterface(model.getResourceInterfaceClassType().getName(), interfaceBlock -> {
+        javaFile.publicInterface(model.getInterfaceType().getName(), interfaceBlock -> {
             // method for properties
             model.getProperties().forEach(property -> {
                 interfaceBlock.javadocComment(comment -> {

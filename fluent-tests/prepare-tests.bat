@@ -1,10 +1,7 @@
 REM add java11 to path on devops
-DIR "C:\Program Files\Java"
-SET JAVA11_LOCATION=C:\Program Files\Java\jdk-11.0.7+10
-IF EXIST "%JAVA11_LOCATION%" (
-    ECHO "add java11 to path"
-    SET "PATH=%JAVA11_LOCATION%\bin;%PATH%"
-)
+ECHO "java11 home dir: %JAVA_HOME_11_X64%"
+ECHO "add java11 to path"
+SET "PATH=%JAVA_HOME_11_X64%\bin;%PATH%"
 
 REM print java version
 java -version
@@ -14,8 +11,8 @@ RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 RMDIR /S /Q "src/main/java/com/azure/mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.0.6282
-SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
-SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=implementation --client-side-validations --client-logger --generate-sync-async-clients
+SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
+SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=implementation --client-side-validations --client-logger --generate-sync-async-clients
 
 REM fluent premium
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources

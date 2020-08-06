@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FindBugsFilter>
+  <Match>
+    <Package name="~com\.azure\.mgmtlitetest\.(.+)\.implementation"/>
+    <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON,SKIPPED_CLASS_TOO_BIG,UPM_UNCALLED_PRIVATE_METHOD"/>
+  </Match>
+
+  <Match>
+    <Package name="~com\.azure\.mgmttest\.(.+)\.fluent"/>
+    <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON,SKIPPED_CLASS_TOO_BIG"/>
+  </Match>
+
+  <Match>
+    <Class name="com.azure.mgmttest.appservice.WebSiteManagementClient"/>
+    <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON"/>
+  </Match>
+</FindBugsFilter>
