@@ -24,7 +24,7 @@ public class FluentResourceCollection {
     private final MethodGroupClient groupClient;
 
     // class type for inner client. E.g. StorageAccountsClient (which is a layer over StorageAccountsClientImpl).
-    private final ClassType innerClassType;
+    private final ClassType innerClientType;
 
     // class type for interface and implementation
     private final ClassType interfaceType;
@@ -47,7 +47,7 @@ public class FluentResourceCollection {
                 .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
 
-        this.innerClassType = new ClassType.Builder()
+        this.innerClientType = new ClassType.Builder()
                 .packageName(settings.getPackage())
                 .name(groupClient.getClassBaseName() + "Client")
                 .build();
@@ -80,17 +80,17 @@ public class FluentResourceCollection {
         return String.format("Resource collection API of %s.", interfaceType.getName());
     }
 
-    public ClassType getInnerClassType() {
-        return innerClassType;
+    public ClassType getInnerClientType() {
+        return innerClientType;
     }
 
     // method signature for inner client
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerClassType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+        return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        innerClassType.addImportsTo(imports, false);
+        innerClientType.addImportsTo(imports, false);
 
         this.getMethods().forEach(m -> m.addImportsTo(imports, includeImplementationImports));
 

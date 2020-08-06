@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class FluentResourceModel {
 
     // inner model. E.g. StorageAccountInner.
-    private final ClientModel model;
+    private final ClientModel innerModel;
     // all parent models of the inner model (property of which need to be put to resource class as well)
     private final List<ClientModel> parentModels;
 
@@ -36,19 +36,19 @@ public class FluentResourceModel {
     // resource properties
     private final Map<String, FluentModelProperty> properties = new HashMap<>();
 
-    public FluentResourceModel(ClientModel model, List<ClientModel> parentModels) {
+    public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        this.model = model;
+        this.innerModel = innerModel;
         this.parentModels = parentModels;
 
-        interfaceType = FluentUtils.resourceModelInterfaceClassType(model.getName());
+        interfaceType = FluentUtils.resourceModelInterfaceClassType(innerModel.getName());
         implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
                 .name(interfaceType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        properties.putAll(this.model.getProperties().stream()
+        properties.putAll(this.innerModel.getProperties().stream()
                 .map(FluentModelProperty::new)
                 .collect(Collectors.toMap(FluentModelProperty::getName, Function.identity())));
 
@@ -64,7 +64,7 @@ public class FluentResourceModel {
 //    }
 
     public ClientModel getInnerModel() {
-        return model;
+        return innerModel;
     }
 
     public ClassType getInterfaceType() {
