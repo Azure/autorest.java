@@ -3,8 +3,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel;
+package com.azure.autorest.fluent.model.clientmodel.modelimpl;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -16,7 +18,7 @@ import java.util.Set;
 
 // Implementation method template for simple property
 // E.g. "return this.inner().sku()"
-public class WrapperPropertyImplementationMethod implements WrapperImplementationMethod {
+public class WrapperPropertyImplementationMethod implements WrapperMethod {
 
     private final MethodTemplate implementationMethodTemplate;
 
@@ -39,7 +41,7 @@ public class WrapperPropertyImplementationMethod implements WrapperImplementatio
                         String unmodifiableMethodName = property.getClientType() instanceof ListType
                                 ? "unmodifiableList" : "unmodifiableMap";
 
-                        block.line(String.format("%1$s inner = this.inner().%2$s();", property.getClientType().toString(), property.getGetterName()));
+                        block.line(String.format("%1$s inner = this.%2$s().%3$s();", property.getClientType().toString(), ModelNaming.METHOD_INNER, property.getGetterName()));
                         block.ifBlock("inner != null", ifBlock -> {
                             block.methodReturn(String.format("Collections.%1$s(inner)", unmodifiableMethodName));
                         }).elseBlock(elseBlock -> {

@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.CoreUtils;
 
 import java.util.Locale;
@@ -95,7 +96,7 @@ public class FluentUtils {
             wrapperType = wrapperElementType == type.getValueType() ? type : new MapType(wrapperElementType);
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
-            if ("PagedIterable".equals(type.getName())) {
+            if (PagedIterable.class.getSimpleName().equals(type.getName())) {
                 IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
                 wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.PagedIterable(wrapperItemType);
             }

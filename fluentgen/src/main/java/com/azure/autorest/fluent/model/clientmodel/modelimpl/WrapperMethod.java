@@ -3,11 +3,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel;
+package com.azure.autorest.fluent.model.clientmodel.modelimpl;
 
 import com.azure.autorest.template.prototype.MethodTemplate;
 
-public interface WrapperImplementationMethod {
+public interface WrapperMethod {
 
     MethodTemplate getMethodTemplate();
 }

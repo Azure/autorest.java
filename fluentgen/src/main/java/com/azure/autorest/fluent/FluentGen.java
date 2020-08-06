@@ -93,10 +93,7 @@ public class FluentGen extends NewPlugin {
             fluentMapper.preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
-            FluentStatic.setClient(client);
 
-            FluentClient fluentClient = fluentMapper.map(codeModel, client);
-            
             JavaSettings javaSettings = JavaSettings.getInstance();
 
             // Step 4: Write to templates
@@ -173,7 +170,12 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
+            // Fluent Lite
             if (javaSettings.isFluentLite()) {
+                FluentStatic.setClient(client);
+
+                FluentClient fluentClient = fluentMapper.map(codeModel, client);
+
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager());
 
