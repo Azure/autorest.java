@@ -7,7 +7,6 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +28,7 @@ public class FluentManagerTemplate {
             comment.description(manager.getDescription());
         });
 
-        javaFile.publicFinalClass(manager.getClassType().getName(), classBlock -> {
+        javaFile.publicFinalClass(manager.getType().getName(), classBlock -> {
             manager.getProperties().forEach(property -> {
                 classBlock.privateMemberVariable(property.getFluentType().getName(), property.getName());
 

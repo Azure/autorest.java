@@ -20,36 +20,36 @@ public class FluentJavaPackage extends JavaPackage {
 
     public final void addFluentResourceModel(FluentResourceModel model) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(
-                model.getResourceInterfaceClassType().getPackage(),
-                model.getResourceInterfaceClassType().getName());
+                model.getInterfaceType().getPackage(),
+                model.getInterfaceType().getName());
         FluentResourceModelInterfaceTemplate.getInstance().write(model, javaFile);
         getJavaFiles().add(javaFile);
 
         javaFile = getJavaFileFactory().createSourceFile(
-                model.getResourceImplementationClassType().getPackage(),
-                model.getResourceImplementationClassType().getName());
+                model.getImplementationType().getPackage(),
+                model.getImplementationType().getName());
         FluentResourceModelImplementationTemplate.getInstance().write(model, javaFile);
         getJavaFiles().add(javaFile);
     }
 
     public final void addFluentResourceCollection(FluentResourceCollection collection) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(
-                collection.getCollectionInterfaceClassType().getPackage(),
-                collection.getCollectionInterfaceClassType().getName());
+                collection.getInterfaceType().getPackage(),
+                collection.getInterfaceType().getName());
         FluentResourceCollectionInterfaceTemplate.getInstance().write(collection, javaFile);
         getJavaFiles().add(javaFile);
 
         javaFile = getJavaFileFactory().createSourceFile(
-                collection.getCollectionImplementationClassType().getPackage(),
-                collection.getCollectionImplementationClassType().getName());
+                collection.getImplementationType().getPackage(),
+                collection.getImplementationType().getName());
         FluentResourceCollectionImplementationTemplate.getInstance().write(collection, javaFile);
         getJavaFiles().add(javaFile);
     }
 
     public final void addFluentManager(FluentManager model) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(
-                model.getClassType().getPackage(),
-                model.getClassType().getName());
+                model.getType().getPackage(),
+                model.getType().getName());
         FluentManagerTemplate.getInstance().write(model, javaFile);
         getJavaFiles().add(javaFile);
     }

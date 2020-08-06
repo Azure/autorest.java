@@ -41,10 +41,12 @@ public class FluentCollectionMethod {
         return fluentReturnType;
     }
 
+    // method signature
     public String getMethodSignature() {
         return String.format("%1$s %2$s(%3$s)", this.getFluentReturnType(), method.getName(), method.getParametersDeclaration());
     }
 
+    // method invocation
     public String getMethodInvocation() {
         List<ClientMethodParameter> methodParameters = method.getOnlyRequiredParameters() ? method.getMethodRequiredParameters() : method.getMethodParameters();
         String argumentsLine = methodParameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));

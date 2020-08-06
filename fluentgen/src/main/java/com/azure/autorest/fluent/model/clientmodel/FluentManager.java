@@ -18,7 +18,7 @@ public class FluentManager {
 
     private final Client client;
 
-    private final ClassType classType;
+    private final ClassType type;
 
     private final List<FluentManagerProperty> properties = new ArrayList<>();
 
@@ -27,18 +27,18 @@ public class FluentManager {
 
         this.client = client;
 
-        this.classType = new ClassType.Builder()
+        this.type = new ClassType.Builder()
                 .packageName(settings.getPackage())
                 .name(CodeNamer.toPascalCase(FluentUtils.getServiceName(clientName)) + "Manager")
                 .build();
     }
 
-    public ClassType getClassType() {
-        return classType;
+    public ClassType getType() {
+        return type;
     }
 
     public String getDescription() {
-        return String.format("Entry point to %1$s.\n%2$s", this.getClassType().getName(), client.getClientDescription());
+        return String.format("Entry point to %1$s.\n%2$s", this.getType().getName(), client.getClientDescription());
     }
 
     public List<FluentManagerProperty> getProperties() {

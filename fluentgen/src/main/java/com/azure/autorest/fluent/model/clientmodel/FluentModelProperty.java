@@ -47,6 +47,7 @@ public class FluentModelProperty {
         return fluentType;
     }
 
+    // method signature for model property
     public String getMethodSignature() {
         return String.format("%1$s %2$s()", this.getFluentType(), this.getGetterName());
     }

@@ -6,7 +6,10 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -26,20 +29,27 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
     @Override
     public void write(FluentResourceCollection collection, JavaFile javaFile) {
+        ClassType managerType = FluentStatic.getFluentManager().getType();
+
         List<MethodTemplate> methodTemplates = new ArrayList<>();
         collection.getMethods().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
 
         Set<String> imports = new HashSet<>();
+        imports.add(managerType.getFullName());
         collection.addImportsTo(imports, true);
         javaFile.declareImport(imports);
 
-        javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getCollectionImplementationClassType().getName(), collection.getCollectionInterfaceClassType().getName()), classBlock -> {
+        javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
             // variable for inner model
             classBlock.privateFinalMemberVariable(collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
 
+            // variable for manager
+            classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
+
             // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s)", collection.getCollectionImplementationClassType().getName(), collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER), methodBlock -> {
+            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_INNER, ModelNaming.COLLECTION_PROPERTY_INNER));
+                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
             });
 
             // method for properties
@@ -48,6 +58,11 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             // method for inner model
             classBlock.publicMethod(collection.getInnerMethodSignature(), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.COLLECTION_PROPERTY_INNER));
+            });
+
+            // method for manager
+            classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
+                methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
         });
     }

@@ -14,7 +14,7 @@ public class FluentManagerProperty {
     private final ClassType fluentType;
 
     public FluentManagerProperty(FluentResourceCollection collection) {
-        this.fluentType = collection.getCollectionInterfaceClassType();
+        this.fluentType = collection.getInterfaceType();
         String interfaceName = fluentType.getName();
         name = CodeNamer.toCamelCase(interfaceName);
     }

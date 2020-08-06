@@ -26,7 +26,7 @@ public class TypeConversionUtils {
         if (clientType instanceof ClassType) {
             ClassType type = (ClassType) clientType;
             if (FluentUtils.isInnerClassType(type)) {
-                expression = String.format("new %1$s(%2$s)", getModelImplName(type), propertyName);
+                expression = String.format("new %1$s(%2$s, this.%3$s())", getModelImplName(type), propertyName, ModelNaming.METHOD_MANAGER);
             }
         } else if (clientType instanceof ListType) {
             ListType type = (ListType) clientType;
@@ -42,7 +42,7 @@ public class TypeConversionUtils {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType) {
                     String nestedPropertyName = nextPropertyName(propertyName);
-                    expression = String.format("%1$s.mapPage(%2$s -> new %3$s(%4$s))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName);
+                    expression = String.format("%1$s.mapPage(%2$s -> new %3$s(%4$s, this.%5$s()))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
                 }
             }
         }
