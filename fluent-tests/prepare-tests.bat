@@ -1,10 +1,7 @@
 REM add java11 to path on devops
-DIR "C:\Program Files\Java"
-SET JAVA11_LOCATION=C:\Program Files\Java\jdk-11.0.7+10
-IF EXIST "%JAVA11_LOCATION%" (
-    ECHO "add java11 to path"
-    SET "PATH=%JAVA11_LOCATION%\bin;%PATH%"
-)
+ECHO "java11 home dir: %JAVA_HOME_11_X64%"
+ECHO "add java11 to path"
+SET "PATH=%JAVA_HOME_11_X64%\bin;%PATH%"
 
 REM print java version
 java -version
