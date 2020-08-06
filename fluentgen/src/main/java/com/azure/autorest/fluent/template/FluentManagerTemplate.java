@@ -7,7 +7,7 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.core.annotation.Immutable;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,18 +20,23 @@ public class FluentManagerTemplate {
         return INSTANCE;
     }
 
-    public void write(FluentManager model, JavaFile javaFile) {
+    public void write(FluentManager manager, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
-        imports.add(Immutable.class.getName());
+        manager.getProperties().forEach(property -> imports.add(property.getFluentType().getFullName()));
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
-            comment.description(model.getDescription());
+            comment.description(manager.getDescription());
         });
 
-        javaFile.annotation("Immutable");
-        javaFile.publicFinalClass(model.getClassType().getName(), classBlock -> {
+        javaFile.publicFinalClass(manager.getClassType().getName(), classBlock -> {
+            manager.getProperties().forEach(property -> {
+                classBlock.privateMemberVariable(property.getFluentType().getName(), property.getName());
 
+                classBlock.publicMethod(String.format("%1$s %2$s()", property.getFluentType().getName(), property.getMethodName()), methodBlock -> {
+                    methodBlock.methodReturn(property.getName());
+                });
+            });
         });
     }
 }

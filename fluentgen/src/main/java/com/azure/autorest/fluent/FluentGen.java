@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -93,8 +94,6 @@ public class FluentGen extends NewPlugin {
 
             Client client = Mappers.getClientMapper().map(codeModel);
 
-            FluentClient fluentClient = fluentMapper.map(codeModel, client);
-            
             JavaSettings javaSettings = JavaSettings.getInstance();
 
             // Step 4: Write to templates
@@ -171,7 +170,12 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
+            // Fluent Lite
             if (javaSettings.isFluentLite()) {
+                FluentStatic.setClient(client);
+
+                FluentClient fluentClient = fluentMapper.map(codeModel, client);
+
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager());
 

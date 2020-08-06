@@ -15,6 +15,8 @@ import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
+import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -32,8 +34,6 @@ public class FluentMapper {
 
     private static final Logger logger = LoggerFactory.getLogger(FluentMapper.class);
 
-    private static Client client;
-
     private final FluentJavaSettings fluentJavaSettings;
 
     public FluentMapper(FluentJavaSettings fluentJavaSettings) {
@@ -45,27 +45,30 @@ public class FluentMapper {
     }
 
     public FluentClient map(CodeModel codeModel, Client client) {
-        FluentMapper.client = client;
-
         FluentClient fluentClient = new FluentClient(client);
+
+        FluentStatic.setFluentClient(fluentClient);
 
         fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
 
-        fluentClient.getResourceModels().addAll(codeModel.getSchemas().getObjects().stream()
-                .map(o -> FluentResourceModelMapper.getInstance().map(o))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+        fluentClient.getResourceModels().addAll(
+                codeModel.getSchemas().getObjects().stream()
+                        .map(o -> FluentResourceModelMapper.getInstance().map(o))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList()));
 
-        fluentClient.getResourceCollections().addAll(codeModel.getOperationGroups().stream()
-                .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+        fluentClient.getResourceCollections().addAll(
+                codeModel.getOperationGroups().stream()
+                        .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList()));
+
+        fluentClient.getManager().getProperties().addAll(
+                fluentClient.getResourceCollections().stream()
+                        .map(FluentManagerProperty::new)
+                        .collect(Collectors.toList()));
 
         return fluentClient;
-    }
-
-    public static Client getClient() {
-        return client;
     }
 
     private void processInnerModel(CodeModel codeModel) {

@@ -5,7 +5,9 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperMethod;
+import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyImplementationMethod;
+import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyTypeConversionMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -23,12 +25,12 @@ public class FluentModelProperty {
 
     private final IType fluentType;
 
-    private final WrapperPropertyImplementationMethod wrapperImplementationMethod;
+    private final WrapperMethod wrapperMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
         this.modelProperty = property;
         this.fluentType = getWrapperType(property.getClientType());
-        this.wrapperImplementationMethod = this.fluentType == property.getClientType()
+        this.wrapperMethod = this.fluentType == property.getClientType()
                 ? new WrapperPropertyImplementationMethod(this, this.modelProperty)
                 : new WrapperPropertyTypeConversionMethod(this, this.modelProperty);
     }
@@ -53,12 +55,12 @@ public class FluentModelProperty {
         this.fluentType.addImportsTo(imports, false);
 
         if (includeImplementationImports) {
-            this.wrapperImplementationMethod.getMethodTemplate().addImportsTo(imports);
+            this.wrapperMethod.getMethodTemplate().addImportsTo(imports);
         }
     }
 
     public MethodTemplate getImplementationMethodTemplate() {
-        return wrapperImplementationMethod.getMethodTemplate();
+        return wrapperMethod.getMethodTemplate();
     }
 
     private String getGetterName() {

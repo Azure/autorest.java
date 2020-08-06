@@ -39,11 +39,11 @@ public class FluentJavaPackage extends JavaPackage {
         FluentResourceCollectionInterfaceTemplate.getInstance().write(collection, javaFile);
         getJavaFiles().add(javaFile);
 
-//        javaFile = getJavaFileFactory().createSourceFile(
-//                collection.getCollectionImplementationClassType().getPackage(),
-//                collection.getCollectionImplementationClassType().getName());
-//        FluentResourceCollectionImplementationTemplate.getInstance().write(collection, javaFile);
-//        getJavaFiles().add(javaFile);
+        javaFile = getJavaFileFactory().createSourceFile(
+                collection.getCollectionImplementationClassType().getPackage(),
+                collection.getCollectionImplementationClassType().getName());
+        FluentResourceCollectionImplementationTemplate.getInstance().write(collection, javaFile);
+        getJavaFiles().add(javaFile);
     }
 
     public final void addFluentManager(FluentManager model) {

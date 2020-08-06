@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -34,11 +35,11 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", model.getResourceImplementationClassType().getName(), model.getResourceInterfaceClassType().getName()), classBlock -> {
             // variable for inner model
-            classBlock.privateFinalMemberVariable(model.getInnerModel().getName(), "innerObject");
+            classBlock.privateFinalMemberVariable(model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER);
 
             // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s innerObject)", model.getResourceImplementationClassType().getName(), model.getInnerModel().getName()), methodBlock -> {
-                methodBlock.line("this.innerObject = innerObject;");
+            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s)", model.getResourceImplementationClassType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER), methodBlock -> {
+                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
             });
 
             // method for properties
@@ -46,7 +47,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // method for inner model
             classBlock.publicMethod(model.getInnerMethodSignature(), methodBlock -> {
-                methodBlock.methodReturn("this.innerObject");
+                methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_INNER));
             });
         });
     }
