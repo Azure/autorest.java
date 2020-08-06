@@ -48,6 +48,69 @@
               </includes>
             </configuration>
           </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.1.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.puppycrawl.tools</groupId>
+                <artifactId>checkstyle</artifactId>
+                <version>8.29</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <configLocation>checkstyle.xml</configLocation>
+              <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+              <propertyExpansion>samedir=</propertyExpansion>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <linkXRef>true</linkXRef>
+              <failsOnError>true</failsOnError>
+              <failOnViolation>true</failOnViolation>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>3.1.12.2</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs</artifactId>
+                <version>4.0.0-beta3</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <effort>max</effort>
+              <threshold>Low</threshold>
+              <xmlOutput>true</xmlOutput>
+              <spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
+              <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
+              <failOnError>true</failOnError>
+              <includeTests>false</includeTests>
+              <fork>true</fork>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
