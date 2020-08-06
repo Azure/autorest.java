@@ -148,7 +148,7 @@ public class Androidgen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                //String formattedSource = formatter.formatSource(javaFile.getContents().toString());
+                String formattedSource = formatter.formatSource(javaFile.getContents().toString());
                 writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
             }
         } catch (Exception ex) {

@@ -31,7 +31,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static ServiceClientMapper instance = new ServiceClientMapper();
     private List<ClientModel> additionalModels = new ArrayList<ClientModel>();
 
-    private ServiceClientMapper() {
+    protected ServiceClientMapper() {
     }
 
     public static ServiceClientMapper getInstance() {
@@ -42,11 +42,19 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         clientModels.addAll(additionalModels);
     }
 
+    /**
+     * Extension point to allow override of this class
+     * @return builder to create instance of this class or its derived class
+     */
+    protected ServiceClient.Builder createClientBuilder(){
+        return new ServiceClient.Builder();
+    }
+
     @Override
     public ServiceClient map(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        ServiceClient.Builder builder = new ServiceClient.Builder();
+        ServiceClient.Builder builder = createClientBuilder();
 
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();

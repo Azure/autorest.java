@@ -1,8 +1,6 @@
 package com.azure.autorest.android.mapper;
 
-import com.azure.autorest.mapper.ClientMethodMapper;
-import com.azure.autorest.mapper.DefaultMapperFactory;
-import com.azure.autorest.mapper.ModelMapper;
+import com.azure.autorest.mapper.*;
 
 public class AndroidMapperFactory extends DefaultMapperFactory {
 
@@ -12,5 +10,17 @@ public class AndroidMapperFactory extends DefaultMapperFactory {
     }
 
     @Override
-    public ClientMethodMapper getClientMethodMapper() { return AndroidClientMethodMapper.getInstance();}
+    public ClientMethodMapper getClientMethodMapper() {
+        return AndroidClientMethodMapper.getInstance();
+    }
+
+    @Override
+    public ServiceClientMapper getServiceClientMapper() {
+        return AndroidServiceClientMapper.getInstance();
+    }
+
+    @Override
+    public ProxyMethodMapper getProxyMethodMapper() {
+        return AndroidProxyMethodMapper.getInstance();
+    }
 }

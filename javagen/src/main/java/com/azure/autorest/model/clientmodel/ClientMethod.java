@@ -94,7 +94,7 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    private ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -291,20 +291,20 @@ public class ClientMethod {
     }
 
     public static class Builder {
-        private String description;
-        private ReturnValue returnValue;
-        private String name;
-        private List<ClientMethodParameter> parameters;
-        private boolean onlyRequiredParameters;
-        private ClientMethodType type = ClientMethodType.values()[0];
-        private ProxyMethod proxyMethod;
-        private Map<String, String> validateExpressions;
-        private String clientReference;
-        private List<String> requiredNullableParameterExpressions;
-        private boolean isGroupedParameterRequired;
-        private String groupedParameterTypeName;
-        private MethodPageDetails methodPageDetails;
-        private List<MethodTransformationDetail> methodTransformationDetails;
+        protected String description;
+        protected ReturnValue returnValue;
+        protected String name;
+        protected List<ClientMethodParameter> parameters;
+        protected boolean onlyRequiredParameters;
+        protected ClientMethodType type = ClientMethodType.values()[0];
+        protected ProxyMethod proxyMethod;
+        protected Map<String, String> validateExpressions;
+        protected String clientReference;
+        protected List<String> requiredNullableParameterExpressions;
+        protected boolean isGroupedParameterRequired;
+        protected String groupedParameterTypeName;
+        protected MethodPageDetails methodPageDetails;
+        protected List<MethodTransformationDetail> methodTransformationDetails;
 
         /**
          * Sets the description of this ClientMethod.

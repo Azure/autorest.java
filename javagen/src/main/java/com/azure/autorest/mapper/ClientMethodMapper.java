@@ -82,6 +82,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
     }
 
+    protected ClientMethod.Builder createClientMethodBuilder() {
+        return new ClientMethod.Builder();
+    }
+
     @Override
     public List<ClientMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -93,7 +97,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-        ClientMethod.Builder builder = new ClientMethod.Builder()
+        ClientMethod.Builder builder = createClientMethodBuilder()
                 .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
 

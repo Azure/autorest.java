@@ -1,9 +1,11 @@
 package com.azure.autorest.android.mapper;
 
+import com.azure.autorest.android.model.clientmodel.AndroidClientMethod;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.util.CodeNamer;
@@ -57,5 +59,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 .wireType(optionalParameterMapper.getModelType());
 
         parameters.add(optionalParameterBuilder.build());
+    }
+
+    @Override
+    protected ClientMethod.Builder createClientMethodBuilder() {
+        return new AndroidClientMethod.Builder();
     }
 }

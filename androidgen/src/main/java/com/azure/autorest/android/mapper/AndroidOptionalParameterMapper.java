@@ -41,10 +41,13 @@ public class AndroidOptionalParameterMapper {
     }
 
     class AdHocType implements IType  {
+        private String packageName;
         private String typeName;
-        AdHocType(String typeName) {
+        AdHocType(String packageName, String typeName) {
+            this.packageName = packageName;
             this.typeName = typeName;
         }
+
         @Override
         public IType getClientType() {
             return this;
@@ -72,6 +75,7 @@ public class AndroidOptionalParameterMapper {
 
         @Override
         public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+            imports.add(String.format("%1$s.%2$s", packageName, typeName));
         }
 
         @Override
@@ -90,7 +94,7 @@ public class AndroidOptionalParameterMapper {
     }
 
     public IType getModelType() {
-        return new AdHocType(getModelTypeName());
+        return new AdHocType(packageName, getModelTypeName());
     }
 
     public ClientModel build() {

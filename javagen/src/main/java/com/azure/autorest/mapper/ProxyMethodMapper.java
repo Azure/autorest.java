@@ -44,12 +44,20 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         return instance;
     }
 
+    protected ProxyMethod.Builder createProxyMethodBuilder() {
+        return new ProxyMethod.Builder();
+    }
+
+    protected GenericType createResponseType(IType nestedType ) {
+        return GenericType.Response(nestedType);
+    }
+
     @Override
     public Map<Request, ProxyMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
         Map<Request, ProxyMethod> result = new LinkedHashMap<>();
 
-        ProxyMethod.Builder builder = new ProxyMethod.Builder()
+        ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
                 .name(operation.getLanguage().getJava().getName())
                 .isResumable(false);
@@ -66,7 +74,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
-            returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
+            returnType = createResponseType(GenericType.FluxByteBuffer);    // raw response for LRO
             builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
@@ -85,9 +93,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
                 singleValueType = ClassType.StreamResponse;
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
+                singleValueType = createResponseType(ClassType.Void);
             } else {
-                singleValueType = GenericType.Response(responseBodyType);
+                singleValueType = createResponseType(responseBodyType);
             }
             builder.returnType(GenericType.Mono(singleValueType));
         }

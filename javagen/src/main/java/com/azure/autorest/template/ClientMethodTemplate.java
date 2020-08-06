@@ -6,18 +6,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ArrayType;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
-import com.azure.autorest.model.clientmodel.ParameterMapping;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
@@ -269,6 +258,22 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
+    protected void addMethodReturnAnnotation(JavaType typeBlock, ClientMethodType methodType) {
+        switch (methodType) {
+            case PagingSync:
+            case PagingAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                break;
+            case Resumable:
+            case SimpleAsync:
+            case LongRunningSync:
+            case PagingAsyncSinglePage:
+            case SimpleAsyncRestResponse:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                break;
+        }
+    }
+
     public final void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
@@ -280,9 +285,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         //boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
         generateJavadoc(clientMethod, typeBlock, restAPIMethod);
 
-        switch (clientMethod.getType()) {
+        ClientMethodType clientMethodType = clientMethod.getType();
+        switch (clientMethodType) {
             case PagingSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                addMethodReturnAnnotation(typeBlock, clientMethodType);
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
@@ -291,7 +297,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case PagingAsync:
 //                typeBlock.javadocComment(comment ->
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                addMethodReturnAnnotation(typeBlock, clientMethodType);
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
@@ -371,7 +377,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case Resumable:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                addMethodReturnAnnotation(typeBlock, clientMethodType);
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
                     AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -381,7 +387,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleSync:
             case LongRunningSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                addMethodReturnAnnotation(typeBlock, clientMethodType);
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
@@ -422,7 +428,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case SimpleAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                addMethodReturnAnnotation(typeBlock, clientMethodType);
                 typeBlock.publicMethod(clientMethod.getDeclaration(), (function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -489,7 +495,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addMethodReturnAnnotation(typeBlock, clientMethod.getType());
 
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -567,7 +573,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addMethodReturnAnnotation(typeBlock, clientMethod.getType());
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);

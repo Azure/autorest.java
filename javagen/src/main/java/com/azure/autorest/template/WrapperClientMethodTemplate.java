@@ -1,11 +1,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaType;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,11 +14,28 @@ import java.util.stream.Collectors;
 public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
 
   private static final WrapperClientMethodTemplate instance = new WrapperClientMethodTemplate();
-  private WrapperClientMethodTemplate() {
+  protected WrapperClientMethodTemplate() {
   }
 
   public static WrapperClientMethodTemplate getInstance() {
     return instance;
+  }
+
+  protected void addMethodReturnAnnotation(JavaType typeBlock, ClientMethodType methodType) {
+    switch (methodType) {
+      case PagingSync:
+      case PagingAsync:
+      case PagingAsyncSinglePage:
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        break;
+      case Resumable:
+      case SimpleAsync:
+      case LongRunningSync:
+      case SimpleAsyncRestResponse:
+      default:
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        break;
+    }
   }
 
   @Override
@@ -32,17 +45,7 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
     ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
     generateJavadoc(clientMethod, typeBlock, restAPIMethod);
 
-    switch (clientMethod.getType()) {
-      case PagingSync:
-      case PagingAsync:
-      case PagingAsyncSinglePage:
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-        break;
-      default:
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        break;
-    }
-
+    addMethodReturnAnnotation(typeBlock, clientMethod.getType());
     String methodName = clientMethod.getName();
     if (clientMethod.getType().name().contains("Async") && methodName.endsWith("Async")) {
       methodName = methodName.substring(0, methodName.length() - "Async".length());
