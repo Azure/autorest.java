@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 // Implementation method template for return type requires conversion.
 // E.g.
 //    PagedIterable<StorageAccountInner> inner = this.inner().list();
-//    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1));
+//    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1, this.manager()));
 public class WrapperCollectionMethodTypeConversionMethod implements WrapperMethod {
 
     private final MethodTemplate conversionMethodTemplate;

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 // E.g.
 //    BlobRestoreStatusInner inner = this.inner().blobRestoreStatus();
 //    if (inner != null) {
-//        return new BlobRestoreStatusImpl(inner);
+//        return new BlobRestoreStatusImpl(inner, this.manager());
 //    } else {
 //        return null;
 //    }
