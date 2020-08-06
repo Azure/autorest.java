@@ -44,12 +44,12 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             classBlock.privateFinalMemberVariable(collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
 
             // variable for manager
-            classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
+            classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.COLLECTION_PROPERTY_MANAGER);
 
             // constructor
             classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_INNER, ModelNaming.COLLECTION_PROPERTY_INNER));
-                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
+                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_MANAGER, ModelNaming.COLLECTION_PROPERTY_MANAGER));
             });
 
             // method for properties

@@ -33,6 +33,10 @@ public class FluentManager {
                 .build();
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public ClassType getType() {
         return type;
     }

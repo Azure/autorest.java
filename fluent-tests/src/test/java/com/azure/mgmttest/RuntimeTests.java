@@ -10,11 +10,16 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.storage.StorageManager;
+import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.storage.StorageManagementClientBuilder;
@@ -23,6 +28,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RuntimeTests {
 
@@ -54,5 +61,12 @@ public class RuntimeTests {
         GraphErrorException graphException = new GraphErrorException("mock graph error", null);
         Assertions.assertFalse((Object) graphException instanceof ManagementException);
         Assertions.assertFalse((Object) graphException.getValue() instanceof ManagementError);
+    }
+
+    @Test
+    public void testStorageManager() {
+        StorageManager storageManager = StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, Configuration.getGlobalConfiguration().get("AZURE_SUBSCRIPTION_ID"));
+        PagedIterable<StorageAccount> storageAccounts = storageManager.storageAccounts().list();
+        //List<StorageAccount> storageAccountList = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
     }
 }

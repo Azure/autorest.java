@@ -20,6 +20,8 @@ public class ModelNaming {
     public static final String COLLECTION_PROPERTY_INNER = "innerClient";
     public static final String COLLECTION_PROPERTY_MANAGER = "serviceManager";
 
+    public static final String MANAGER_PROPERTY_BUILDER = "clientBuilder";
+
     private ModelNaming() {
     }
 }

@@ -60,6 +60,10 @@ public class FluentResourceCollection {
                 .collect(Collectors.toList()));
     }
 
+    public MethodGroupClient getInnerGroupClient() {
+        return groupClient;
+    }
+
     public ClassType getInterfaceType() {
         return interfaceType;
     }
