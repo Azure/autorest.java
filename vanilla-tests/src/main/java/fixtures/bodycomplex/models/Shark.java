@@ -73,12 +73,6 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the birthday property: The birthday property.
-     *
-     * @param birthday the birthday value to set.
-     * @return the Shark object itself.
-     */
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.

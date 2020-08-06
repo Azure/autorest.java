@@ -58,11 +58,13 @@ public final class Pets {
     }
 
     /**
+     * get pet by id.
+     *
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return pet by id.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId) {
@@ -77,11 +79,13 @@ public final class Pets {
     }
 
     /**
+     * get pet by id.
+     *
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return pet by id.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getByPetIdAsync(String petId) {
@@ -97,11 +101,13 @@ public final class Pets {
     }
 
     /**
+     * get pet by id.
+     *
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return pet by id.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getByPetId(String petId) {
@@ -109,7 +115,9 @@ public final class Pets {
     }
 
     /**
-     * @param petParam The petParam parameter.
+     * add pet.
+     *
+     * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -128,7 +136,9 @@ public final class Pets {
     }
 
     /**
-     * @param petParam The petParam parameter.
+     * add pet.
+     *
+     * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -148,7 +158,9 @@ public final class Pets {
     }
 
     /**
-     * @param petParam The petParam parameter.
+     * add pet.
+     *
+     * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

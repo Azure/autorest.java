@@ -170,7 +170,7 @@ public final class StringOperations {
     /**
      * Set string value null.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -188,7 +188,7 @@ public final class StringOperations {
     /**
      * Set string value null.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -202,7 +202,7 @@ public final class StringOperations {
     /**
      * Set string value null.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -632,7 +632,7 @@ public final class StringOperations {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -655,7 +655,7 @@ public final class StringOperations {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -669,7 +669,7 @@ public final class StringOperations {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody The stringBody parameter.
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

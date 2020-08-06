@@ -384,7 +384,7 @@ public final class Numbers {
     /**
      * Put big float value 3.402823e+20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -402,7 +402,7 @@ public final class Numbers {
     /**
      * Put big float value 3.402823e+20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -416,7 +416,7 @@ public final class Numbers {
     /**
      * Put big float value 3.402823e+20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -482,7 +482,7 @@ public final class Numbers {
     /**
      * Put big double value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -500,7 +500,7 @@ public final class Numbers {
     /**
      * Put big double value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -514,7 +514,7 @@ public final class Numbers {
     /**
      * Put big double value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -768,7 +768,7 @@ public final class Numbers {
     /**
      * Put big decimal value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -789,7 +789,7 @@ public final class Numbers {
     /**
      * Put big decimal value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -803,7 +803,7 @@ public final class Numbers {
     /**
      * Put big decimal value 2.5976931e+101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1042,7 +1042,7 @@ public final class Numbers {
     /**
      * Put small float value 3.402823e-20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1060,7 +1060,7 @@ public final class Numbers {
     /**
      * Put small float value 3.402823e-20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1074,7 +1074,7 @@ public final class Numbers {
     /**
      * Put small float value 3.402823e-20.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1140,7 +1140,7 @@ public final class Numbers {
     /**
      * Put small double value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1158,7 +1158,7 @@ public final class Numbers {
     /**
      * Put small double value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1172,7 +1172,7 @@ public final class Numbers {
     /**
      * Put small double value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1238,7 +1238,7 @@ public final class Numbers {
     /**
      * Put small decimal value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1259,7 +1259,7 @@ public final class Numbers {
     /**
      * Put small decimal value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1273,7 +1273,7 @@ public final class Numbers {
     /**
      * Put small decimal value 2.5976931e-101.
      *
-     * @param numberBody The numberBody parameter.
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

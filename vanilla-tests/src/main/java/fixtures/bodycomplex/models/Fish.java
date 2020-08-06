@@ -75,12 +75,6 @@ public class Fish {
     }
 
     /**
-     * Set the length property: The length property.
-     *
-     * @param length the length value to set.
-     * @return the Fish object itself.
-     */
-    /**
      * Get the siblings property: The siblings property.
      *
      * @return the siblings value.
