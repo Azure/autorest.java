@@ -5,9 +5,9 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyImplementationMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyTypeConversionMethod;
+import com.azure.autorest.fluent.model.clientmodel.implmethod.WrapperMethod;
+import com.azure.autorest.fluent.model.clientmodel.implmethod.WrapperPropertyImplementationMethod;
+import com.azure.autorest.fluent.model.clientmodel.implmethod.WrapperPropertyTypeConversionMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;

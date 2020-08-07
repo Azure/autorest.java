@@ -76,6 +76,10 @@ public class FluentResourceModel {
         return implementationType;
     }
 
+    public boolean hasProperty(String name) {
+        return properties.containsKey(name);
+    }
+
     public Collection<FluentModelProperty> getProperties() {
         return properties.values();
     }
