@@ -42,11 +42,37 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
-    private ClientMethodMapper() {
+    protected ClientMethodMapper() {
     }
 
     public static ClientMethodMapper getInstance() {
         return instance;
+    }
+
+    /**
+     * Method mapping doesn't have to take the same parameter list. In some cases, e.g. Android client, optional parameters
+     * may be collapsed into a single structure captured in a new model class. This is the function to add these
+     * additional models to the model list for generation.
+     * @param clientModels global list of models to be created. Check duplicates before adding
+     */
+    public void addModelsTo(List<ClientModel> clientModels) {
+    }
+
+    /**
+     * Extension point to allow derived class to override how optional parameters are handled
+     * @return whether optional parameters should be collapsed into a new model
+     */
+    protected boolean shouldCollapseOptionalParameters() {
+        return false;
+    }
+
+    /**
+     * Extension point to map optional parameters into a collapsed model
+     * @param methodName name of the method for which the optional parameters are for
+     * @param optionalParameters request parameters that are optional for this method
+     * @param parameters other parameters created for the same method
+     */
+    protected void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
     }
 
     @Override
@@ -103,11 +129,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.proxyMethod(proxyMethod);
 
             List<ClientMethodParameter> parameters = new ArrayList<>();
+            List<Parameter> optionalParameters = new ArrayList<>();
             List<String> requiredParameterExpressions = new ArrayList<>();
             Map<String, String> validateExpressions = new HashMap<>();
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
+                if (!parameter.isRequired()
+                    && shouldCollapseOptionalParameters()) {
+                    optionalParameters.add(parameter);
+                    continue;
+                }
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
@@ -170,6 +202,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                     detail.getParameterMappings().add(mapping);
                 }
+            }
+
+            if (shouldCollapseOptionalParameters()
+                && optionalParameters.size() > 0) {
+                collapseOptionalParameters(proxyMethod.getName(), optionalParameters, parameters);
             }
 
             final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);

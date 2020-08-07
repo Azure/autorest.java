@@ -8,6 +8,8 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -26,12 +28,17 @@ import java.util.stream.Stream;
 
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static ServiceClientMapper instance = new ServiceClientMapper();
+    private List<ClientModel> additionalModels = new ArrayList<ClientModel>();
 
     private ServiceClientMapper() {
     }
 
     public static ServiceClientMapper getInstance() {
         return instance;
+    }
+
+    public void addModelsTo(List<ClientModel> clientModels) {
+        clientModels.addAll(additionalModels);
     }
 
     @Override
@@ -73,8 +80,14 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             proxyBuilder.methods(restAPIMethods);
             builder.proxy(proxyBuilder.build());
             builder.clientMethods(codeModelRestAPIMethods.stream()
-                    .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
+                    .flatMap(m -> {
+                        ClientMethodMapper clientMethodMapper = Mappers.getClientMethodMapper();
+                        List<ClientMethod> clientMethods = clientMethodMapper.map(m);
+                        clientMethodMapper.addModelsTo(additionalModels);
+                        return clientMethods.stream();
+                    })
                     .collect(Collectors.toList()));
+
         } else {
             builder.clientMethods(new ArrayList<>());
         }
