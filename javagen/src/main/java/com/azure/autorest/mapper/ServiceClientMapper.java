@@ -96,10 +96,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         return clientMethods.stream();
                     })
                     .collect(Collectors.toList()));
-
-                    .flatMap(m -> clientMethodMapper.map(m).stream())
-                    .collect(Collectors.toList()));
-
         } else {
             builder.clientMethods(new ArrayList<>());
         }

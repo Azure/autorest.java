@@ -1,5 +1,6 @@
 package com.azure.autorest.android.mapper;
 
+import com.azure.autorest.android.model.clientmodel.AndroidClientModel;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -30,10 +31,6 @@ public class AndroidOptionalParameterMapper {
     public AndroidOptionalParameterMapper parameters(List<Parameter> parameters) {
         this.parameters = parameters;
         return this;
-    }
-
-    public boolean hasOptionalParameters() {
-        return parameters.size() > 0;
     }
 
     public String getModelTypeName() {
@@ -98,7 +95,7 @@ public class AndroidOptionalParameterMapper {
     }
 
     public ClientModel build() {
-        ClientModel.Builder builder = new ClientModel.Builder();
+        ClientModel.Builder builder = new AndroidClientModel.Builder();
         builder.description(String.format("Options for %1$s", methodName))
                 .packageName(packageName)
                 .name(getModelTypeName())
