@@ -15,16 +15,16 @@ public class AndroidServiceClient extends ServiceClient {
                                 ClientMethodParameter tokenCredentialParameter,
                                 ClientMethodParameter httpPipelineParameter) {
         super(packageName,
-                className,
-                interfaceName,
-                proxy,
-                methodGroupClients,
-                properties,
-                constructors,
-                clientMethods,
-                azureEnvironmentParameter,
-                tokenCredentialParameter,
-                httpPipelineParameter);
+            className,
+            interfaceName,
+            proxy,
+            methodGroupClients,
+            properties,
+            constructors,
+            clientMethods,
+            azureEnvironmentParameter,
+            tokenCredentialParameter,
+            httpPipelineParameter);
     }
 
     @Override

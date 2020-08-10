@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.ClientModelUtil;
 
@@ -42,13 +43,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     final boolean wrapServiceClient = methodGroupClient == null;
 
     Set<String> imports = new HashSet<>();
-    if (wrapServiceClient) {
-      serviceClient.addImportsTo(imports, true, false, settings);
-      imports.add(serviceClient.getPackage() + "." + serviceClient.getClassName());
-    } else {
-      methodGroupClient.addImportsTo(imports, true, settings);
-      imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
-    }
+    addServiceClientImports(serviceClient, settings, methodGroupClient, imports);
     addAnnotationImports(imports);
 
     javaFile.declareImport(imports);
@@ -59,31 +54,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     addClassAnnotation(javaFile, serviceClient);
     javaFile.publicFinalClass(syncClassName, classBlock ->
     {
-      // Add service client member variable
-      if (wrapServiceClient) {
-        classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
-      } else {
-        classBlock.privateMemberVariable(methodGroupClient.getClassName(), "serviceClient");
-      }
-
-      // Service Client Constructor
-      classBlock.javadocComment(comment ->
-          comment
-              .description(String.format("Initializes an instance of %1$s client.",
-                  wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
-      );
-
-      if (wrapServiceClient) {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
-            serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
-          constructorBlock.line("this.serviceClient = serviceClient;");
-        });
-      } else {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
-            methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
-          constructorBlock.line("this.serviceClient = serviceClient;");
-        });
-      }
+      writeMemberVariablesAndConstructors(serviceClient, syncClassName, methodGroupClient, wrapServiceClient, classBlock);
 
       if (wrapServiceClient) {
         serviceClient.getClientMethods()
@@ -101,6 +72,63 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
       }
+
+      if (shouldEmbedClientBuilder()) {
+        embedClientBuilder(syncClient, classBlock);
+      }
     });
   }
+
+  protected void addServiceClientImports(ServiceClient serviceClient,
+                                       JavaSettings settings,
+                                       MethodGroupClient methodGroupClient,
+                                       Set<String> imports) {
+    if (methodGroupClient == null) {
+      serviceClient.addImportsTo(imports, true, false, settings);
+      imports.add(serviceClient.getPackage() + "." + serviceClient.getClassName());
+    } else {
+      methodGroupClient.addImportsTo(imports, true, settings);
+      imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
+    }
+  }
+
+  protected void writeMemberVariablesAndConstructors(ServiceClient serviceClient,
+                                                     String syncClassName,
+                                                     MethodGroupClient methodGroupClient,
+                                                     boolean wrapServiceClient,
+                                                     JavaClass classBlock) {
+    // Add service client member variable
+    if (wrapServiceClient) {
+      classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
+    } else {
+      classBlock.privateMemberVariable(methodGroupClient.getClassName(), "serviceClient");
+    }
+
+    // Service Client Constructor
+    classBlock.javadocComment(comment ->
+            comment
+                    .description(String.format("Initializes an instance of %1$s client.",
+                            wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
+    );
+
+    if (wrapServiceClient) {
+      classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
+              serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
+        constructorBlock.line("this.serviceClient = serviceClient;");
+      });
+    } else {
+      classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
+              methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
+        constructorBlock.line("this.serviceClient = serviceClient;");
+      });
+    }
+  }
+
+  protected void embedClientBuilder(AsyncSyncClient serviceClient, JavaClass classBlock) {
+  }
+
+  protected boolean shouldEmbedClientBuilder() {
+    return false;
+  }
+
 }

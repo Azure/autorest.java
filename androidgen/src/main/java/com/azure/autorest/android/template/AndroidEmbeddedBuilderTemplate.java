@@ -4,12 +4,12 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
-import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AndroidEmbeddedBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
+public class AndroidEmbeddedBuilderTemplate {
     private static final AndroidEmbeddedBuilderTemplate _instance = new AndroidEmbeddedBuilderTemplate();
 
     private final ClassType androidServiceClientBuilder = new ClassType.Builder()
@@ -34,24 +34,23 @@ public class AndroidEmbeddedBuilderTemplate implements IJavaTemplate<ServiceClie
         return _instance;
     }
 
-    @Override
-    public void write(ServiceClient serviceClient, JavaFile javaFile) {
+    public void write(AsyncSyncClient asyncSyncClient, JavaClass parentClassBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         commonProperties.add(serviceClientBuilderProperty);
 
-        javaFile.javadocComment(comment ->
+        String serviceClientTypeName = settings.isFluent() ? asyncSyncClient.getClassName() : asyncSyncClient.getClassName();
+        parentClassBlock.javadocComment(comment ->
         {
-            String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
             comment.description(String.format("A builder for creating a new instance of the %1$s type.", serviceClientTypeName));
         });
 
         String serviceClientBuilderName = ClientModelUtil.getBuilderSuffix();
-        javaFile.publicFinalClass(serviceClientBuilderName, classBlock -> {
+        parentClassBlock.privateStaticFinalClass(serviceClientBuilderName, classBlock -> {
             // Add ServiceClient client property variables, getters, and setters
             for (ServiceClientProperty serviceClientProperty : Stream
-                    .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
+                    .concat(asyncSyncClient.getServiceClient().getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
                 {
                     comment.line(serviceClientProperty.getDescription());
@@ -72,29 +71,28 @@ public class AndroidEmbeddedBuilderTemplate implements IJavaTemplate<ServiceClie
             }
 
             String buildMethodName = "build";
-            JavaVisibility visibility = JavaVisibility.Public;
-            String buildReturnType = serviceClient.getClassName();
-
             // build method
             classBlock.javadocComment(comment ->
             {
-                comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
-                comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
+                comment.description(String.format("Builds an instance of %1$s with the provided parameters", serviceClientTypeName));
+                comment.methodReturns(String.format("an instance of %1$s", serviceClientTypeName));
             });
-            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function -> {
+            classBlock.method(JavaVisibility.Public, null, String.format("%1$s %2$s()", serviceClientTypeName, buildMethodName), function -> {
                 for (ServiceClientProperty serviceClientProperty : commonProperties.stream().collect(Collectors.toList())) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
-                        function.ifBlock(String.format("this.%1$s == null", serviceClientProperty.getName()), ifBlock ->
+                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
                         {
-                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
+                            function.line(String.format("%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
                         });
                     }
                 }
 
-                function.line(String.format("this.%1$s.addInterceptor(new AddDateInterceptor())", serviceClientBuilderProperty.getName()));
-                function.line(".setBaseUrl(this.endpoint)");
+                function.line(String.format("%1$s.addInterceptor(new AddDateInterceptor())", serviceClientBuilderProperty.getName()));
+                function.increaseIndent();
+                function.line(".setBaseUrl(endpoint)");
                 function.line(".setSerializationFormat(SerializerFormat.JSON);");
-                function.line(String.format("%1$s client = new %1$s(this.%2$s.build());", serviceClient.getClassName(), serviceClientBuilderProperty.getName()));
+                function.decreaseIndent();
+                function.line(String.format("%1$s client = new %1$s(%2$s.build());", serviceClientTypeName, serviceClientBuilderProperty.getName()));
                 function.line("return client;");
             });
         });

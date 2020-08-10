@@ -143,7 +143,9 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 }
             }
         }
-        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
+        ClientMethodParameter httpPipelineParameter = createConstructorParameterForHttp();
+
+        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", httpPipelineParameter.getClientType(), "httpPipeline", true, null));
         builder.properties(serviceClientProperties);
 
         ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()
@@ -151,20 +153,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .isFinal(false)
                 .wireType(ClassType.TokenCredential)
                 .name("credential")
-                .isRequired(true)
-                .isConstant(false)
-                .fromClient(true)
-                .defaultValue(null)
-                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>())
-                .build();
-
-        ClientMethodParameter httpPipelineParameter = new ClientMethodParameter.Builder()
-                .description("The HTTP pipeline to send requests through")
-                .isFinal(false)
-                .wireType(ClassType.HttpPipeline)
-                .name("httpPipeline")
                 .isRequired(true)
                 .isConstant(false)
                 .fromClient(true)
@@ -207,5 +195,21 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
 
         return builder.build();
+    }
+
+    protected ClientMethodParameter createConstructorParameterForHttp() {
+        return new ClientMethodParameter.Builder()
+                .description("The HTTP pipeline to send requests through")
+                .isFinal(false)
+                .wireType(ClassType.HttpPipeline)
+                .name("httpPipeline")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                        ? Arrays.asList(ClassType.NonNull)
+                        : new ArrayList<>())
+                .build();
     }
 }

@@ -11,7 +11,6 @@ import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AndroidOptionalParameterMapper {
@@ -35,59 +34,6 @@ public class AndroidOptionalParameterMapper {
 
     public String getModelTypeName() {
         return CodeNamer.toPascalCase(String.format("%1$sOptions", methodName));
-    }
-
-    class AdHocType implements IType  {
-        private String packageName;
-        private String typeName;
-        AdHocType(String packageName, String typeName) {
-            this.packageName = packageName;
-            this.typeName = typeName;
-        }
-
-        @Override
-        public IType getClientType() {
-            return this;
-        }
-
-        @Override
-        public String convertToClientType(String expression) {
-            return typeName;
-        }
-
-        @Override
-        public String convertFromClientType(String expression) {
-            return expression;
-        }
-
-        @Override
-        public IType asNullable() {
-            return this;
-        }
-
-        @Override
-        public boolean contains(IType type) {
-            return false;
-        }
-
-        @Override
-        public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-            imports.add(String.format("%1$s.%2$s", packageName, typeName));
-        }
-
-        @Override
-        public String defaultValueExpression(String sourceExpression) {
-            return null;
-        }
-
-        @Override
-        public String validate(String expression) {
-            return expression;
-        }
-
-        public String toString() {
-            return typeName;
-        }
     }
 
     public IType getModelType() {

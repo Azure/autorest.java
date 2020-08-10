@@ -149,7 +149,7 @@ public class Androidgen extends NewPlugin {
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String formattedSource = formatter.formatSource(javaFile.getContents().toString());
-                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+                writeFile(javaFile.getFilePath(), formattedSource, null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
