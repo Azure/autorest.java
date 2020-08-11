@@ -246,6 +246,9 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            if (mergeContextParameter) {
+                function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
+            }
             function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             if (classType instanceof GenericType) {
                 function.line("return %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType(), %s);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam);

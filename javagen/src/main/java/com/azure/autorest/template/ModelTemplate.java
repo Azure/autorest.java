@@ -99,7 +99,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         ArrayList<JavaModifier> classModifiers = new ArrayList<JavaModifier>();
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
-            classModifiers.add(JavaModifier.Final);
+            if (!settings.isFluent() || model.getName().endsWith("Identity")) {
+                classModifiers.add(JavaModifier.Final);
+            }
         }
 
         String classNameWithBaseType = model.getName();
