@@ -1,7 +1,13 @@
 package com.azure.autorest.android.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.MethodPageDetails;
+import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ReturnValue;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,10 @@
 package com.azure.autorest.android.mapper;
 
-import com.azure.autorest.mapper.*;
+import com.azure.autorest.mapper.ClientMethodMapper;
+import com.azure.autorest.mapper.DefaultMapperFactory;
+import com.azure.autorest.mapper.ModelMapper;
+import com.azure.autorest.mapper.ProxyMethodMapper;
+import com.azure.autorest.mapper.ServiceClientMapper;
 
 public class AndroidMapperFactory extends DefaultMapperFactory {
 

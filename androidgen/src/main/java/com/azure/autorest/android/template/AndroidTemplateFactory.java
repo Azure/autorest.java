@@ -3,8 +3,12 @@
 
 package com.azure.autorest.android.template;
 
-import com.azure.autorest.template.*;
-import com.azure.autorest.android.template.AndroidEnumTemplate;
+import com.azure.autorest.template.ClientMethodTemplate;
+import com.azure.autorest.template.DefaultTemplateFactory;
+import com.azure.autorest.template.EnumTemplate;
+import com.azure.autorest.template.ServiceAsyncClientTemplate;
+import com.azure.autorest.template.ServiceSyncClientTemplate;
+import com.azure.autorest.template.WrapperClientMethodTemplate;
 
 public class AndroidTemplateFactory extends DefaultTemplateFactory {
 
