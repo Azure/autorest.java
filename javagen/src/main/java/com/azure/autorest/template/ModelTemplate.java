@@ -99,7 +99,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         ArrayList<JavaModifier> classModifiers = new ArrayList<JavaModifier>();
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
-            if (!settings.isFluent() || !model.getName().endsWith("Identity")) {
+            if (!settings.isFluent() || !model.getName().endsWith("Identity")) {    // bug https://github.com/Azure/azure-sdk-for-java/issues/8372
                 classModifiers.add(JavaModifier.Final);
             }
         }
