@@ -73,19 +73,20 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                             ByteBuffer.class.getName(),
                             Type.class.getName(),
                             PollerFactory.class.getName()))
-                    .methodSignature("<T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<Response<Flux<ByteBuffer>>> activationResponse, HttpPipeline httpPipeline, Type pollResultType, Type finalResultType)")
+                    .methodSignature("<T, U> PollerFlux<PollResult<T>, U> getLroResult(Mono<Response<Flux<ByteBuffer>>> activationResponse, HttpPipeline httpPipeline, Type pollResultType, Type finalResultType, Context context)")
                     .comment(comment -> {
                         comment.description("Gets long running operation result.");
                         comment.param("activationResponse", "the response of activation operation.");
                         comment.param("httpPipeline", "the http pipeline.");
                         comment.param("pollResultType", "type of poll result.");
                         comment.param("finalResultType", "type of final result.");
+                        comment.param("context", "the context shared by all requests.");
                         comment.param("<T>", "type of poll result.");
                         comment.param("<U>", "type of final result.");
                         comment.methodReturns("poller flux for poll result and final result.");
                     })
                     .method(method -> {
-                        method.methodReturn("PollerFactory.create(serializerAdapter, httpPipeline, pollResultType, finalResultType, defaultPollInterval, activationResponse)");
+                        method.methodReturn("PollerFactory.create(serializerAdapter, httpPipeline, pollResultType, finalResultType, defaultPollInterval, activationResponse, context)");
                     })
                     .build();
 
