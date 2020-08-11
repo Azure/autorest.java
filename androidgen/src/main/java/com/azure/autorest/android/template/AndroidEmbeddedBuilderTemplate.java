@@ -47,7 +47,7 @@ public class AndroidEmbeddedBuilderTemplate {
         });
 
         String serviceClientBuilderName = ClientModelUtil.getBuilderSuffix();
-        parentClassBlock.privateStaticFinalClass(serviceClientBuilderName, classBlock -> {
+        parentClassBlock.publicFinalClass(serviceClientBuilderName, classBlock -> {
             // Add ServiceClient client property variables, getters, and setters
             for (ServiceClientProperty serviceClientProperty : Stream
                     .concat(asyncSyncClient.getServiceClient().getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
