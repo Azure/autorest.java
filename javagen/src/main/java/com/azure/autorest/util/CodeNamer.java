@@ -1,7 +1,6 @@
 package com.azure.autorest.util;
 
-import org.jibx.schema.codegen.extend.DefaultNameConverter;
-import org.jibx.schema.codegen.extend.NameConverter;
+import org.atteo.evo.inflector.English;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -200,11 +199,9 @@ public class CodeNamer {
         return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Property")));
     }
 
-    private static final NameConverter JIBX_NAME_CONVERTER = new DefaultNameConverter();
-
     public static String getPlural(String name) {
         if (name != null && !name.isEmpty() && !name.endsWith("s") && !name.endsWith("S")) {
-            name = JIBX_NAME_CONVERTER.pluralize(name);
+            name = English.plural(name);
         }
         return name;
     }
