@@ -1,6 +1,7 @@
 package fixtures.url.multi;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,11 +21,13 @@ public class QueriesTests {
     }
 
     @Test
+    @Ignore("azure-core issue https://github.com/Azure/azure-sdk-for-java/issues/13124")
     public void arrayStringMultiEmpty() {
         client.getQueries().arrayStringMultiEmpty(new ArrayList<>());
     }
 
     @Test
+    @Ignore("azure-core issue https://github.com/Azure/azure-sdk-for-java/issues/13124")
     public void arrayStringMultiValid() {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");

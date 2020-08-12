@@ -106,20 +106,23 @@ public abstract class AzureServiceClient {
      * @param httpPipeline the http pipeline.
      * @param pollResultType type of poll result.
      * @param finalResultType type of final result.
+     * @param context the context shared by all requests.
      * @param <T> type of poll result.
      * @param <U> type of final result.
      * @return poller flux for poll result and final result.
      */
-    public <T, U> PollerFlux<PollResult<T>, U> getLroResultAsync(Mono<Response<Flux<ByteBuffer>>> lroInit,
-                                                                 HttpPipeline httpPipeline,
-                                                                 Type pollResultType, Type finalResultType) {
+    public <T, U> PollerFlux<PollResult<T>, U> getLroResult(Mono<Response<Flux<ByteBuffer>>> lroInit,
+                                                            HttpPipeline httpPipeline,
+                                                            Type pollResultType, Type finalResultType,
+                                                            Context context) {
         return PollerFactory.create(
                 getSerializerAdapter(),
                 httpPipeline,
                 pollResultType,
                 finalResultType,
                 Duration.ofSeconds(3),
-                lroInit);
+                lroInit,
+                context);
     }
 
     /**

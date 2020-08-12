@@ -190,11 +190,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
                     }
 
+                    List<ClientMethod> nextMethods = (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation());
+
                     MethodPageDetails details = new MethodPageDetails(
                             CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                             pageableItemName,
-                            (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
-                                    .stream().findFirst().get(),
+                            (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
                             lroIntermediateType);
                     builder.methodPageDetails(details);
 
@@ -214,7 +215,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                 ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
                                 new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
-                                        asyncRestResponseReturnType));
+                                        asyncRestResponseReturnType),
+                                details);
                     }
 
                     if (!isNextMethod) {
@@ -229,10 +231,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .isGroupedParameterRequired(false)
                                     .build());
                             if (settings.isContextClientMethodParameter()) {
+                                MethodPageDetails detailsWithContext = details;
+                                if (nextMethods != null) {
+                                    detailsWithContext = new MethodPageDetails(
+                                            CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                                            pageableItemName,
+                                            nextMethods.stream()
+                                                    .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
+                                                    .filter(m -> m.getMethodParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()))).findFirst().get(),
+                                            lroIntermediateType);
+                                }
+
                                 addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-                                                asyncReturnType));
+                                                asyncReturnType),
+                                        detailsWithContext);
                             }
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -374,7 +388,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
-                            syncReturnType), proxyMethod.getReturnType().getClientType()));
+                            syncReturnType), proxyMethod.getReturnType().getClientType()),
+                        null);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -438,7 +453,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
         List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
-        ReturnValue returnValue) {
+        ReturnValue returnValue, MethodPageDetails details) {
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
         withContextParameters.add(CONTEXT_PARAM);
 
@@ -449,6 +464,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .onlyRequiredParameters(false)
             .type(clientMethodType)
             .isGroupedParameterRequired(false)
+            .methodPageDetails(details)
             .build());
         // reset the parameters to original params
         builder.parameters(parameters);
