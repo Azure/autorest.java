@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 /** An instance of this class provides access to all the operations defined in Readonlyproperties. */
 public final class Readonlyproperties {
     /** The proxy service used to perform REST calls. */
-    private final ReadonlypropertysService service;
+    private final ReadonlypropertiesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestComplexTestService client;
@@ -34,7 +34,7 @@ public final class Readonlyproperties {
     Readonlyproperties(AutoRestComplexTestService client) {
         this.service =
                 RestProxy.create(
-                        ReadonlypropertysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                        ReadonlypropertiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -44,7 +44,7 @@ public final class Readonlyproperties {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface ReadonlypropertysService {
+    private interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

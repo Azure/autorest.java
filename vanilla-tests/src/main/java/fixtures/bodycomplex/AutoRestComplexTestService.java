@@ -154,16 +154,16 @@ public final class AutoRestComplexTestService {
         return this.readonlyproperties;
     }
 
-    /** The Flattencomplexs object to access its operations. */
-    private final Flattencomplexs flattencomplexs;
+    /** The Flattencomplexes object to access its operations. */
+    private final Flattencomplexes flattencomplexes;
 
     /**
-     * Gets the Flattencomplexs object to access its operations.
+     * Gets the Flattencomplexes object to access its operations.
      *
-     * @return the Flattencomplexs object.
+     * @return the Flattencomplexes object.
      */
-    public Flattencomplexs getFlattencomplexs() {
-        return this.flattencomplexs;
+    public Flattencomplexes getFlattencomplexes() {
+        return this.flattencomplexes;
     }
 
     /** Initializes an instance of AutoRestComplexTestService client. */
@@ -204,6 +204,6 @@ public final class AutoRestComplexTestService {
         this.polymorphisms = new Polymorphisms(this);
         this.polymorphicrecursives = new Polymorphicrecursives(this);
         this.readonlyproperties = new Readonlyproperties(this);
-        this.flattencomplexs = new Flattencomplexs(this);
+        this.flattencomplexes = new Flattencomplexes(this);
     }
 }

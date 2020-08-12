@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /** An instance of this class provides access to all the operations defined in HttpRetries. */
 public final class HttpRetries {
     /** The proxy service used to perform REST calls. */
-    private final HttpRetrysService service;
+    private final HttpRetriesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestHttpInfrastructureTestService client;
@@ -36,7 +36,7 @@ public final class HttpRetries {
      */
     HttpRetries(AutoRestHttpInfrastructureTestService client) {
         this.service =
-                RestProxy.create(HttpRetrysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(HttpRetriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -46,7 +46,7 @@ public final class HttpRetries {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpRetrysService {
+    private interface HttpRetriesService {
         @Head("/http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

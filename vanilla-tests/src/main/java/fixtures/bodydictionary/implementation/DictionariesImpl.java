@@ -29,7 +29,7 @@ import reactor.core.publisher.Mono;
 /** An instance of this class provides access to all the operations defined in Dictionaries. */
 public final class DictionariesImpl {
     /** The proxy service used to perform REST calls. */
-    private final DictionarysService service;
+    private final DictionariesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestSwaggerBATDictionaryServiceImpl client;
@@ -41,7 +41,7 @@ public final class DictionariesImpl {
      */
     DictionariesImpl(AutoRestSwaggerBATDictionaryServiceImpl client) {
         this.service =
-                RestProxy.create(DictionarysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(DictionariesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -51,7 +51,7 @@ public final class DictionariesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATDi")
-    private interface DictionarysService {
+    private interface DictionariesService {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

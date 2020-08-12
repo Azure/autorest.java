@@ -57,10 +57,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         Proxy.Builder proxyBuilder = new Proxy.Builder();
 
-        String restAPIName = CodeNamer.toPascalCase(methodGroup.getLanguage().getJava().getName());
-        if (!restAPIName.endsWith("s")) {
-            restAPIName += 's';
-        }
+        String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
         restAPIName += "Service";
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
         // TODO: Assume all operations share the same base url

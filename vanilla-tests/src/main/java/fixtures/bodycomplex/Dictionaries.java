@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 /** An instance of this class provides access to all the operations defined in Dictionaries. */
 public final class Dictionaries {
     /** The proxy service used to perform REST calls. */
-    private final DictionarysService service;
+    private final DictionariesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestComplexTestService client;
@@ -33,7 +33,7 @@ public final class Dictionaries {
      */
     Dictionaries(AutoRestComplexTestService client) {
         this.service =
-                RestProxy.create(DictionarysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(DictionariesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -43,7 +43,7 @@ public final class Dictionaries {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface DictionarysService {
+    private interface DictionariesService {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
