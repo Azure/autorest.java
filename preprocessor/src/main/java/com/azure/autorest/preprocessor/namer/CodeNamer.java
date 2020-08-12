@@ -1,5 +1,8 @@
 package com.azure.autorest.preprocessor.namer;
 
+import org.jibx.schema.codegen.extend.DefaultNameConverter;
+import org.jibx.schema.codegen.extend.NameConverter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -202,9 +205,11 @@ public class CodeNamer {
         return getEscapedReservedName(name, "Operation");
     }
 
+    private static final NameConverter JIBX_NAME_CONVERTER = new DefaultNameConverter();
+
     public static String getPlural(String name) {
         if (!name.endsWith("s") && !name.endsWith("S")) {
-            name += "s";
+            name = JIBX_NAME_CONVERTER.pluralize(name);
         }
         return name;
     }
