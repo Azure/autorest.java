@@ -1,5 +1,6 @@
 package com.azure.autorest.android.mapper;
 
+import com.azure.autorest.android.model.AndroidProxy;
 import com.azure.autorest.android.model.AndroidServiceClient;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
@@ -62,7 +63,7 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 .collect(Collectors.toList());
         if (!codeModelRestAPIMethods.isEmpty()) {
             // TODO: Assume all operations share the same base url
-            Proxy.Builder proxyBuilder = new Proxy.Builder()
+            Proxy.Builder proxyBuilder = new AndroidProxy.Builder()
                     .name(serviceClientInterfaceName + "Service")
                     .clientTypeName(serviceClientInterfaceName)
                     .baseURL(codeModel.getOperationGroups().stream()

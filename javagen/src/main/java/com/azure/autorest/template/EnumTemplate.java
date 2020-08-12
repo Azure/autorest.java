@@ -20,17 +20,21 @@ import java.util.Set;
 public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     private static EnumTemplate _instance = new EnumTemplate();
 
-    private EnumTemplate() {
+    protected EnumTemplate() {
     }
 
     public static EnumTemplate getInstance() {
         return _instance;
     }
 
+    protected void addDeclareImports(JavaFile javaFile) {
+        javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", "com.azure.core.util.ExpandableStringEnum");
+    }
+
     public final void write(EnumType enumType, JavaFile javaFile) {
         String enumTypeComment = String.format("Defines values for %1$s.", enumType.getName());
         if (enumType.getExpandable()) {
-            javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", "com.azure.core.util.ExpandableStringEnum");
+            addDeclareImports(javaFile);
             javaFile.javadocComment(comment ->
             {
                 comment.description(enumTypeComment);

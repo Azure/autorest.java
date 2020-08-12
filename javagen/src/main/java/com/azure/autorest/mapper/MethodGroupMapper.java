@@ -32,6 +32,10 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         return new MethodGroupClient.Builder();
     }
 
+    protected Proxy.Builder createProxyBuilder() {
+        return new Proxy.Builder();
+    }
+
     @Override
     public MethodGroupClient map(OperationGroup methodGroup) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -60,7 +64,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         builder.className(className);
 
-        Proxy.Builder proxyBuilder = new Proxy.Builder();
+        Proxy.Builder proxyBuilder = createProxyBuilder();
 
         String restAPIName = CodeNamer.toPascalCase(methodGroup.getLanguage().getJava().getName());
         if (!restAPIName.endsWith("s")) {

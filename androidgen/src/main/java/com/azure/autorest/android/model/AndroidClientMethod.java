@@ -12,11 +12,13 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AndroidClientMethod extends ClientMethod {
@@ -34,6 +36,22 @@ public class AndroidClientMethod extends ClientMethod {
                 clientReference, requiredNullableParameterExpressions,
                 isGroupedParameterRequired, groupedParameterTypeName,
                 methodPageDetails, methodTransformationDetails);
+    }
+
+    @Override
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+        getReturnValue().addImportsTo(imports, includeImplementationImports);
+
+        for (ClientMethodParameter parameter : getParameters()) {
+            parameter.addImportsTo(imports, includeImplementationImports);
+        }
+        ProxyMethod proxyMethod = super.getProxyMethod();
+        if (includeImplementationImports) {
+            proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+            for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                parameter.getClientType().addImportsTo(imports, true);
+            }
+        }
     }
 
     @Override

@@ -42,6 +42,8 @@ import java.util.stream.Collectors;
 public class AndroidClientMethodMapper extends ClientMethodMapper {
     private static AndroidClientMethodMapper instance = new AndroidClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
+    private ClientModel optionalParametersModel;
+    private final boolean shouldCollapseOptionalParameters = false;
 
     protected AndroidClientMethodMapper() {
     }
@@ -96,11 +98,17 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             builder.proxyMethod(proxyMethod);
 
             List<ClientMethodParameter> parameters = new ArrayList<>();
+            List<Parameter> optionalParameters = new ArrayList<>();
             List<String> requiredParameterExpressions = new ArrayList<>();
             Map<String, String> validateExpressions = new HashMap<>();
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
+                if (this.shouldCollapseOptionalParameters && !parameter.isRequired()) {
+                    optionalParameters.add(parameter);
+                    continue;
+                }
+
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
@@ -176,6 +184,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     }
                     detail.getParameterMappings().add(mapping);
                 }
+            }
+
+            if (shouldCollapseOptionalParameters && !optionalParameters.isEmpty()) {
+                collapseOptionalParameters(proxyMethod.getName(), optionalParameters, parameters);
             }
 
             final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);
@@ -394,5 +406,28 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             description = description.substring(0, 1).toLowerCase() + description.substring(1);
         }
         return description;
+    }
+
+    private void collapseOptionalParameters(String methodName, List<Parameter> optionalParameters, List<ClientMethodParameter> parameters) {
+        if (optionalParameters.size() == 1) {
+            Parameter parameterModel = optionalParameters.get(0);
+            ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameterModel);
+            parameters.add(clientMethodParameter);
+            return;
+        }
+
+        JavaSettings settings = JavaSettings.getInstance();
+        String packageName = settings.getPackage(settings.getModelsSubpackage());
+        AndroidOptionalParameterMapper optionalParameterMapper = new AndroidOptionalParameterMapper();
+        optionalParametersModel = optionalParameterMapper.packageName(packageName).methodName(methodName).parameters(optionalParameters).build();
+
+        String typeName = optionalParametersModel.getName();
+        ClientMethodParameter.Builder optionalParameterBuilder = new ClientMethodParameter.Builder();
+        optionalParameterBuilder.name(CodeNamer.toCamelCase(typeName))
+                .description(String.format("Options for %1$s", methodName))
+                .annotations(new ArrayList<>())
+                .wireType(optionalParameterMapper.getModelType());
+
+        parameters.add(optionalParameterBuilder.build());
     }
 }
