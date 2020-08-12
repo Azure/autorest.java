@@ -4,7 +4,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
-import fixtures.bodydictionary.implementation.DictionarysImpl;
+import fixtures.bodydictionary.implementation.DictionariesImpl;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import java.time.Duration;
@@ -17,10 +17,10 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATDictionaryService type. */
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
-    private DictionarysImpl serviceClient;
+    private DictionariesImpl serviceClient;
 
-    /** Initializes an instance of Dictionarys client. */
-    AutoRestSwaggerBATDictionaryServiceAsyncClient(DictionarysImpl serviceClient) {
+    /** Initializes an instance of Dictionaries client. */
+    AutoRestSwaggerBATDictionaryServiceAsyncClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

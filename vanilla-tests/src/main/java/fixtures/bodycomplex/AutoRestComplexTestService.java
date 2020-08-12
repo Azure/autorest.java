@@ -94,16 +94,16 @@ public final class AutoRestComplexTestService {
         return this.arrays;
     }
 
-    /** The Dictionarys object to access its operations. */
-    private final Dictionarys dictionarys;
+    /** The Dictionaries object to access its operations. */
+    private final Dictionaries dictionaries;
 
     /**
-     * Gets the Dictionarys object to access its operations.
+     * Gets the Dictionaries object to access its operations.
      *
-     * @return the Dictionarys object.
+     * @return the Dictionaries object.
      */
-    public Dictionarys getDictionarys() {
-        return this.dictionarys;
+    public Dictionaries getDictionaries() {
+        return this.dictionaries;
     }
 
     /** The Inheritances object to access its operations. */
@@ -142,16 +142,16 @@ public final class AutoRestComplexTestService {
         return this.polymorphicrecursives;
     }
 
-    /** The Readonlypropertys object to access its operations. */
-    private final Readonlypropertys readonlypropertys;
+    /** The Readonlyproperties object to access its operations. */
+    private final Readonlyproperties readonlyproperties;
 
     /**
-     * Gets the Readonlypropertys object to access its operations.
+     * Gets the Readonlyproperties object to access its operations.
      *
-     * @return the Readonlypropertys object.
+     * @return the Readonlyproperties object.
      */
-    public Readonlypropertys getReadonlypropertys() {
-        return this.readonlypropertys;
+    public Readonlyproperties getReadonlyproperties() {
+        return this.readonlyproperties;
     }
 
     /** The Flattencomplexs object to access its operations. */
@@ -199,11 +199,11 @@ public final class AutoRestComplexTestService {
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
         this.arrays = new Arrays(this);
-        this.dictionarys = new Dictionarys(this);
+        this.dictionaries = new Dictionaries(this);
         this.inheritances = new Inheritances(this);
         this.polymorphisms = new Polymorphisms(this);
         this.polymorphicrecursives = new Polymorphicrecursives(this);
-        this.readonlypropertys = new Readonlypropertys(this);
+        this.readonlyproperties = new Readonlyproperties(this);
         this.flattencomplexs = new Flattencomplexs(this);
     }
 }

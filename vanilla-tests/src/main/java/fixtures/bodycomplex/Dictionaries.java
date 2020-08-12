@@ -18,8 +18,8 @@ import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Dictionarys. */
-public final class Dictionarys {
+/** An instance of this class provides access to all the operations defined in Dictionaries. */
+public final class Dictionaries {
     /** The proxy service used to perform REST calls. */
     private final DictionarysService service;
 
@@ -27,19 +27,19 @@ public final class Dictionarys {
     private final AutoRestComplexTestService client;
 
     /**
-     * Initializes an instance of Dictionarys.
+     * Initializes an instance of Dictionaries.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Dictionarys(AutoRestComplexTestService client) {
+    Dictionaries(AutoRestComplexTestService client) {
         this.service =
                 RestProxy.create(DictionarysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceDictionarys to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceDictionaries to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
