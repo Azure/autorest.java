@@ -68,14 +68,11 @@ public class Androidgen extends NewPlugin {
             Yaml newYaml  = new Yaml(representer);
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
-            Mappers.setFactory(new AndroidMapperFactory());
             // Step 2: Map
             Mappers.setFactory(new AndroidMapperFactory());
             Templates.setFactory(new AndroidTemplateFactory());
 
             Client client = Mappers.getClientMapper().map(codeModel);
-
-            Templates.setFactory(new AndroidTemplateFactory());
 
             // Step 3: Write to templates
             JavaPackage javaPackage = new JavaPackage();

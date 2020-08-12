@@ -1,17 +1,13 @@
-package com.azure.autorest.template;
+package com.azure.autorest.android.template;
 
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
-
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
@@ -22,33 +18,31 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Writes a ServiceClient to a JavaFile.
- */
-public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
-    private static ServiceClientBuilderTemplate _instance = new ServiceClientBuilderTemplate();
+public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTemplate {
+    private static AndroidServiceClientBuilderTemplate _instance = new AndroidServiceClientBuilderTemplate();
 
-    protected ServiceClientBuilderTemplate() {
+    protected AndroidServiceClientBuilderTemplate() {
     }
 
     public static ServiceClientBuilderTemplate getInstance() {
         return _instance;
     }
 
+    @Override
     public void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
-        if (settings.isAzureOrFluent()) {
-            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        } else {
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        }
+        commonProperties
+                .add(new ServiceClientProperty("The Service client to use for REST call",
+                        ClassType.AndroidServiceClient,
+                        "serviceClient",
+                        false,
+                        "new ServiceClient.Builder().build()"));
 
         String buildReturnType;
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (settings.shouldGenerateClientInterfaces()) {
             buildReturnType = serviceClient.getInterfaceName();
         } else {
             buildReturnType = serviceClient.getClassName();
@@ -57,8 +51,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, false, true, settings);
         commonProperties.stream().forEach(p -> p.addImportsTo(imports, false));
-        imports.remove("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
-        imports.add("com.azure.core.annotation.ServiceClientBuilder");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -93,7 +85,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             comment.description(String.format("A builder for creating a new instance of the %1$s type.", serviceClientTypeName));
         });
 
-        javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
             // Add ServiceClient client property variables, getters, and setters
@@ -147,11 +138,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     constructorArgs = ", " + constructorArgs;
                 }
 
-                if (settings.isFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
-                } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
-                }
+                function.line(String.format("%1$s client = new %2$s(serviceClient%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
                 function.line("return client;");
             });
 

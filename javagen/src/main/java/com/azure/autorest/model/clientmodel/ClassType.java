@@ -51,6 +51,8 @@ public class ClassType implements IType {
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
     public static final ClassType OkHttp3ResponseBody = new Builder().packageName("okhttp3").name("ResponseBody").build();
     public static final ClassType AndroidServiceClient = new Builder().packageName("com.azure.android.core.http").name("ServiceClient").build();
+    public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
+
 
     private final String packageName;
     private final String name;
