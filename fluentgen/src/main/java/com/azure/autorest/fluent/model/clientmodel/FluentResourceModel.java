@@ -6,7 +6,6 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.model.arm.FluentModelType;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -27,8 +26,6 @@ public class FluentResourceModel {
     private final ClientModel innerModel;
     // all parent models of the inner model (property of which need to be put to resource class as well)
     private final List<ClientModel> parentModels;
-
-    private final FluentModelType fluentModelType = FluentModelType.WRAPPER;
 
     // class type for interface and implementation
     private final ClassType interfaceType;
@@ -59,10 +56,6 @@ public class FluentResourceModel {
                     .forEach(p -> properties.putIfAbsent(p.getName(), p));
         }
     }
-
-//    public ModelType getModelType() {
-//        return modelType;
-//    }
 
     public ClientModel getInnerModel() {
         return innerModel;

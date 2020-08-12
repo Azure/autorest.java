@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -18,6 +19,8 @@ public class ResourceCreate {
     private FluentResourceCollection resourceCollection;
 
     private FluentCollectionMethod methodReference;
+
+    private UrlPathSegments urlPathSegments;
 
     private boolean hasResourceGroup;
     private boolean hasLocation;

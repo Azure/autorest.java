@@ -66,6 +66,10 @@ public class FluentMapper {
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        fluentClient.getResourceCollections().forEach(c -> {
+            ResourceParser.resolveResourceCreate(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels());
+        });
+
         // set resource collection APIs to service API
         fluentClient.getManager().getProperties().addAll(
                 fluentClient.getResourceCollections().stream()
