@@ -30,6 +30,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
+        String contextParam = mergeContextParameter ? "context" : "Context.NONE";
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
@@ -55,8 +56,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                     serviceMethodCall));
 
                             IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError));",
-                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError));",
+                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
                         });
                         function.line("})");
                     }
@@ -70,8 +71,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                 serviceMethodCall));
 
                         IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError))",
-                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError))",
+                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
                     }
                 }
                 function.indent(() -> {
@@ -134,8 +135,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                     serviceMethodCall));
 
                             IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError));",
-                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError));",
+                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
                         });
                         function.line("})");
                     }
@@ -149,8 +150,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                 serviceMethodCall));
 
                         IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class).last().flatMap(%s::getLroFinalResultOrError))",
-                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference()));
+                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError))",
+                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
                     }
                 }
                 function.indent(() -> {
@@ -237,16 +238,22 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     }
 
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        String contextParam = mergeContextParameter ? "context" : "Context.NONE";
+
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            if (mergeContextParameter) {
+                function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
+            }
             function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             if (classType instanceof GenericType) {
-                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType());", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+                function.line("return %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType(), %s);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam);
             } else {
-                function.line("return %s.<%s, %s>getLroResultAsync(mono, %s.getHttpPipeline(), %s.class, %s.class);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString());
+                function.line("return %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam);
             }
         });
     }

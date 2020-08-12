@@ -139,7 +139,7 @@ public class JavaSettings
                          boolean serviceInterfaceAsPublic)
     {
         this.azure = azure;
-        this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
+        this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
         this.regeneratePom = regeneratePom;
         this.fileHeaderText = fileHeaderText;
         this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
