@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -681,7 +682,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 break;
 
             case PagingSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
@@ -689,7 +689,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 break;
 
             case PagingAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                         addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
@@ -740,7 +739,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 break;
 
             case SimpleAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), (function -> {
                     addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -807,7 +805,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     }
 
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -888,7 +885,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                                    JavaType typeBlock,
                                                    ProxyMethod restAPIMethod,
                                                    JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(),
                 function -> {
                     AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
