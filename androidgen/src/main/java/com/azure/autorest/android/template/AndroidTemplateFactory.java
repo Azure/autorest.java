@@ -11,6 +11,7 @@ import com.azure.autorest.template.MethodGroupTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
+import com.azure.autorest.template.WrapperClientMethodTemplate;
 
 public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override
@@ -46,5 +47,10 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
         return AndroidServiceClientBuilderTemplate.getInstance();
+    }
+
+    @Override
+    public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
+        return AndroidWrapperClientMethodTemplate.getInstance();
     }
 }
