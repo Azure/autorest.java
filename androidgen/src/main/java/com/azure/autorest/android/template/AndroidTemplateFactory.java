@@ -9,8 +9,10 @@ import com.azure.autorest.template.EnumTemplate;
 import com.azure.autorest.template.ExceptionTemplate;
 import com.azure.autorest.template.MethodGroupTemplate;
 import com.azure.autorest.template.ProxyTemplate;
+import com.azure.autorest.template.ServiceAsyncClientTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
+import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.WrapperClientMethodTemplate;
 
 public class AndroidTemplateFactory extends DefaultTemplateFactory {
@@ -52,5 +54,15 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return AndroidWrapperClientMethodTemplate.getInstance();
+    }
+
+    @Override
+    public ServiceAsyncClientTemplate getServiceAsyncClientTemplate() {
+        return AndroidServiceAsyncClientTemplate.getInstance();
+    }
+
+    @Override
+    public ServiceSyncClientTemplate getServiceSynClientTemplate() {
+        return AndroidServiceSyncClientTemplate.getInstance();
     }
 }
