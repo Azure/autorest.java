@@ -34,6 +34,10 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
         return exception;
     }
 
+    protected ClientException.Builder createExceptionBuilder() {
+        return new ClientException.Builder();
+    }
+
     protected ClientException buildException(ObjectSchema compositeType, JavaSettings settings) {
         String errorName = compositeType.getLanguage().getJava().getName();
         String methodOperationExceptionTypeName = errorName + "Exception";
@@ -48,7 +52,7 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
                 : settings.getModelsSubpackage();
         String packageName = settings.getPackage(exceptionSubPackage);
 
-        ClientException exception = new ClientException.Builder()
+        ClientException exception = createExceptionBuilder()
                 .packageName(packageName)
                 .name(methodOperationExceptionTypeName)
                 .errorName(errorName)

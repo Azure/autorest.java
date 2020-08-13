@@ -13,6 +13,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGenerati
 import com.azure.autorest.util.CodeNamer;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -94,7 +95,7 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    private ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -151,8 +152,13 @@ public class ClientMethod {
      * Get the comma-separated list of parameter declarations for this ClientMethod.
      */
     public final String getParametersDeclaration() {
-        List<ClientMethodParameter> methodParameters = onlyRequiredParameters ? getMethodRequiredParameters() : getMethodParameters();
-        return methodParameters.stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "));
+        List<ClientMethodParameter> methodParameters
+                = onlyRequiredParameters ?
+                getMethodRequiredParameters() :
+                getMethodParameters();
+        return methodParameters
+                .stream()
+                .map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "));
     }
 
     /**
@@ -178,10 +184,25 @@ public class ClientMethod {
     }
 
     public final List<ClientMethodParameter> getMethodParameters() {
-        return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
+        List<ClientMethodParameter> methodParameters
+                = getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
                 .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
                 .collect(Collectors.toList());
+
+        Optional<ClientMethodParameter> callbackParameterOpt = methodParameters
+                .stream()
+                .filter(parameter -> parameter.getName().equalsIgnoreCase("callback"))
+                .findFirst();
+
+        if (callbackParameterOpt.isPresent()) {
+            ClientMethodParameter callbackParameter = callbackParameterOpt.get();
+            // We want callback to be the last parameter (even after all optional args)
+            // so remove it and add to end.
+            methodParameters.remove(callbackParameter);
+            methodParameters.add(callbackParameter);
+        }
+        return methodParameters;
     }
 
     public final List<ClientMethodParameter> getMethodNonConstantParameters() {
@@ -214,9 +235,10 @@ public class ClientMethod {
         return methodTransformationDetails;
     }
 
-    public final List<String> getProxyMethodArguments(JavaSettings settings) {
+    public List<String> getProxyMethodArguments(JavaSettings settings) {
         List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter -> {
             String parameterName = parameter.getParameterReference();
+
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
@@ -291,20 +313,20 @@ public class ClientMethod {
     }
 
     public static class Builder {
-        private String description;
-        private ReturnValue returnValue;
-        private String name;
-        private List<ClientMethodParameter> parameters;
-        private boolean onlyRequiredParameters;
-        private ClientMethodType type = ClientMethodType.values()[0];
-        private ProxyMethod proxyMethod;
-        private Map<String, String> validateExpressions;
-        private String clientReference;
-        private List<String> requiredNullableParameterExpressions;
-        private boolean isGroupedParameterRequired;
-        private String groupedParameterTypeName;
-        private MethodPageDetails methodPageDetails;
-        private List<MethodTransformationDetail> methodTransformationDetails;
+        protected String description;
+        protected ReturnValue returnValue;
+        protected String name;
+        protected List<ClientMethodParameter> parameters;
+        protected boolean onlyRequiredParameters;
+        protected ClientMethodType type = ClientMethodType.values()[0];
+        protected ProxyMethod proxyMethod;
+        protected Map<String, String> validateExpressions;
+        protected String clientReference;
+        protected List<String> requiredNullableParameterExpressions;
+        protected boolean isGroupedParameterRequired;
+        protected String groupedParameterTypeName;
+        protected MethodPageDetails methodPageDetails;
+        protected List<MethodTransformationDetail> methodTransformationDetails;
 
         /**
          * Sets the description of this ClientMethod.

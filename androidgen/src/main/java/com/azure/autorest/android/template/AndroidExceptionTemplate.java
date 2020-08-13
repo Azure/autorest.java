@@ -1,23 +1,16 @@
-package com.azure.autorest.template;
-
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
+package com.azure.autorest.android.template;
 
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.ExceptionTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Writes a ClientException to a JavaFile.
- */
-public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFile> {
-    private static ExceptionTemplate _instance = new ExceptionTemplate();
+public class AndroidExceptionTemplate extends ExceptionTemplate {
+    private static AndroidExceptionTemplate _instance = new AndroidExceptionTemplate();
 
-    protected ExceptionTemplate() {
+    protected AndroidExceptionTemplate() {
     }
 
     public static ExceptionTemplate getInstance() {
@@ -26,7 +19,7 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
 
     public void write(ClientException exception, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
-        imports.add("com.azure.core.http.HttpResponse");
+        imports.add("okhttp3.Response");
         exception.getParentType().addImportsTo(imports, false);
         javaFile.declareImport(imports);
         javaFile.javadocComment((comment) ->
@@ -41,7 +34,7 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
                 comment.param("message", "the exception message or the response content if a message is not available");
                 comment.param("response", "the HTTP response");
             });
-            classBlock.publicConstructor(String.format("%1$s(String message, HttpResponse response)", exception.getName()), (constructorBlock) ->
+            classBlock.publicConstructor(String.format("%1$s(String message, Response response)", exception.getName()), (constructorBlock) ->
             {
                 constructorBlock.line("super(message, response);");
             });
@@ -53,7 +46,7 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
                 comment.param("response", "the HTTP response");
                 comment.param("value", "the deserialized response value");
             });
-            classBlock.publicConstructor(String.format("%1$s(String message, HttpResponse response, %2$s value)", exception.getName(), exception.getErrorName()), (constructorBlock) ->
+            classBlock.publicConstructor(String.format("%1$s(String message, Response response, %2$s value)", exception.getName(), exception.getErrorName()), (constructorBlock) ->
             {
                 constructorBlock.line("super(message, response, value);");
             });

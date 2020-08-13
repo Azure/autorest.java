@@ -1,17 +1,14 @@
-package com.azure.autorest.template;
+package com.azure.autorest.android.template;
 
-
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
-
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.MethodGroupTemplate;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.HashSet;
@@ -19,19 +16,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Writes a MethodGroupClient to a JavaFile.
- */
-public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
-    private static MethodGroupTemplate _instance = new MethodGroupTemplate();
+public class AndroidMethodGroupTemplate extends MethodGroupTemplate {
+    private static AndroidMethodGroupTemplate _instance = new AndroidMethodGroupTemplate();
 
-    protected MethodGroupTemplate() {
+    protected AndroidMethodGroupTemplate() {
     }
 
-    public static MethodGroupTemplate getInstance() {
+    public static AndroidMethodGroupTemplate getInstance() {
         return _instance;
     }
 
+    @Override
     public void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
@@ -42,8 +37,9 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         methodGroupClient.addImportsTo(imports, true, settings);
 
         String serviceClientPackageName =
-            ClientModelUtil.getServiceClientPackageName(methodGroupClient.getServiceClientName());
+                ClientModelUtil.getServiceClientPackageName(methodGroupClient.getServiceClientName());
         imports.add(String.format("%1$s.%2$s", serviceClientPackageName, methodGroupClient.getServiceClientName()));
+        imports.add("com.azure.android.core.internal.util.serializer.SerializerFormat");
 
         javaFile.declareImport(imports);
 
@@ -53,8 +49,8 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         String parentDeclaration = !interfaces.isEmpty() ? String.format(" implements %1$s", String.join(", ", interfaces)) : "";
 
         final JavaVisibility visibility = methodGroupClient.getPackage().equals(serviceClientPackageName)
-            ? JavaVisibility.PackagePrivate
-            : JavaVisibility.Public;
+                ? JavaVisibility.PackagePrivate
+                : JavaVisibility.Public;
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
         {
@@ -79,15 +75,11 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             });
             classBlock.constructor(visibility, String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
             {
-                if (methodGroupClient.getProxy() != null) {
-                    ClassType proxyType = ClassType.RestProxy;
-                    if (settings.isFluent()) {
-                        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());", proxyType.getName(), methodGroupClient.getProxy().getName()));
-                    } else {
-                        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline());", proxyType.getName(), methodGroupClient.getProxy().getName()));
-                    }
-                }
                 constructor.line("this.client = client;");
+                if (methodGroupClient.getProxy() != null) {
+                    constructor.line(String.format("this.service = this.client.getServiceClient().getRetrofit().create(%s.class);",
+                            methodGroupClient.getProxy().getName()));
+                }
             });
 
             Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);

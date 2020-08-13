@@ -1,5 +1,6 @@
 package com.azure.autorest.model.javamodel;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class JavaBlock implements JavaContext {
@@ -72,5 +73,13 @@ public class JavaBlock implements JavaContext {
 
     public final void lambda(String parameterType, String parameterName, String returnExpression) {
         contents.lambda(parameterType, parameterName, returnExpression);
+    }
+
+    public void tryCatch(Consumer<JavaBlock> tryBody,
+                         List<String> exceptions,
+                         String exceptionVar,
+                         Consumer<JavaBlock> catchBody,
+                         Consumer<JavaBlock> finallyBody) {
+        contents.tryCatch(tryBody, exceptions, exceptionVar, catchBody, finallyBody);
     }
 }

@@ -329,6 +329,10 @@ public class JavaFileContents {
         block(String.format("%s%s", toString(visibility), constructorSignature), constructor);
     }
 
+    public void staticBlock(Consumer<JavaBlock> staticAction) {
+        block("static", staticAction);
+    }
+
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction) {
         block(String.format("%senum %s", toString(visibility), enumName), block -> {
             if (enumAction != null) {
@@ -370,6 +374,34 @@ public class JavaFileContents {
 
     public void lambda(String parameterType, String parameterName, String returnExpression) {
         lambda(parameterType, parameterName, lambda -> lambda.lambdaReturn(returnExpression));
+    }
+
+    public void tryCatch(Consumer<JavaBlock> tryBody,
+                         List<String> exceptions,
+                         String exceptionVar,
+                         Consumer<JavaBlock> catchBody,
+                         Consumer<JavaBlock> finallyBody) {
+        line("try {");
+        indent(() -> {
+            tryBody.accept(new JavaBlock(this));
+        });
+        String exceptionsStr = exceptions.stream()
+                .collect(Collectors.joining(" | "))
+                .concat(" " + exceptionVar);
+
+        line(String.format("} catch(%s) {", exceptionsStr));
+        indent(() -> {
+            catchBody.accept(new JavaBlock(this));
+        });
+        if (finallyBody != null) {
+            line("} finally {");
+            indent(() -> {
+                finallyBody.accept(new JavaBlock(this));
+            });
+            line("}");
+        } else {
+            line("}");
+        }
     }
 
     private enum CurrentLineType {

@@ -1,5 +1,7 @@
 package com.azure.autorest.android;
 
+import com.azure.autorest.android.mapper.AndroidMapperFactory;
+import com.azure.autorest.android.template.AndroidTemplateFactory;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;

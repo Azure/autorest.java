@@ -196,7 +196,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
-            IType parameterClientType = parameter.getClientType();
+            final IType parameterClientType = parameter.getClientType();
 
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
@@ -269,7 +269,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    public final void write(ClientMethod clientMethod, JavaType typeBlock) {
+    public void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();

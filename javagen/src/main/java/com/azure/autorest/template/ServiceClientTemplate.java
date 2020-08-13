@@ -34,14 +34,14 @@ import java.util.stream.Stream;
 public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaFile> {
     private static ServiceClientTemplate _instance = new ServiceClientTemplate();
 
-    private ServiceClientTemplate() {
+    protected ServiceClientTemplate() {
     }
 
     public static ServiceClientTemplate getInstance() {
         return _instance;
     }
 
-    public final void write(ServiceClient serviceClient, JavaFile javaFile) {
+    public void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientClassDeclaration = String.format("%1$s", serviceClient.getClassName());
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {

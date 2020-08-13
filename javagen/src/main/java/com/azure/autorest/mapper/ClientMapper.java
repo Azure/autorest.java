@@ -103,7 +103,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .clientDescription(serviceClientDescription)
                 .serviceClient(serviceClientMapper.map(codeModel));
 
-        serviceClientMapper.addModelsTo(clientModels);
         builder.models(clientModels);
 
         // TODO: Manager
