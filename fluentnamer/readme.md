@@ -1,4 +1,4 @@
-# Settings
+### Settings
 
 | Option      | Description |
 | ----------- | ----------- |
@@ -8,10 +8,6 @@
 | `--add-inner` | CSV. Exclude from inner classes. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
 | `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. |
-
-### Java Code Formatter
-
-Formatter depends on a customized [google-java-format](https://github.com/weidongxu-microsoft/google-java-format?organization=weidongxu-microsoft&organization=weidongxu-microsoft), which requires JRE 11.
 
 #### Fluentnamer
 
