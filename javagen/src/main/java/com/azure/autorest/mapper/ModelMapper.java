@@ -18,9 +18,11 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static ModelMapper instance = new ModelMapper();
@@ -190,8 +192,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(discriminatorNeedEscape || compositeType.getProperties().stream()
-                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty()));
+            builder.needsFlatten(discriminatorNeedEscape || hasFlattenedProperty(compositeType, parentsNeedFlatten));
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
@@ -221,5 +222,21 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         }
 
         return result;
+    }
+
+    private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {
+        boolean ret = compositeType.getProperties().stream()
+                .filter(p -> !p.isIsDiscriminator())
+                .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+        if (!ret && !parentsNeedFlatten.isEmpty()) {
+            // Check properties from base class of multiple inheritance as properties of this class.
+            ret = parentsNeedFlatten.stream()
+                    .flatMap(s -> (s.getParents() != null && s.getParents().getAll() != null) ? Stream.concat(Stream.of(s), s.getParents().getAll().stream()) : Stream.of(s))
+                    .filter(s -> s instanceof ObjectSchema)
+                    .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                    .filter(p -> !p.isIsDiscriminator())
+                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+        }
+        return ret;
     }
 }
