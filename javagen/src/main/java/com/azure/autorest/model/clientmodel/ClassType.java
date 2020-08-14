@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.util.DateTimeRfc1123;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,10 +50,16 @@ public class ClassType implements IType {
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
+
     public static final ClassType OkHttp3ResponseBody = new Builder().packageName("okhttp3").name("ResponseBody").build();
     public static final ClassType AndroidServiceClient = new Builder().packageName("com.azure.android.core.http").name("ServiceClient").build();
     public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
-
+    public static final ClassType AndroidBase64Url = new Builder().packageName("com.azure.android.core.util").name("Base64Url").build();
+    public static final ClassType AndroidLocalDate = new ClassType.Builder().packageName("org.threeten.bp").name("LocalDate").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDuration = new ClassType.Builder().packageName("org.threeten.bp").name("Duration").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDateTimeRfc1123 = new Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidUnixTimeDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
 
     private final String packageName;
     private final String name;

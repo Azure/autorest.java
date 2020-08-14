@@ -61,7 +61,12 @@ public class AndroidProxyMethod extends ProxyMethod {
         if (unexpectedExceptionType == ClassType.HttpResponseException) {
             imports.add("com.azure.android.core.http.exception.HttpResponseException");
         } else {
-            unexpectedExceptionType.addImportsTo(imports, false);
+            unexpectedExceptionType.addImportsTo(imports, includeImplementationImports);
+        }
+        if (getUnexpectedResponseExceptionTypes() != null) {
+            getUnexpectedResponseExceptionTypes()
+                    .keySet()
+                    .forEach(e -> e.addImportsTo(imports, includeImplementationImports));
         }
     }
 
