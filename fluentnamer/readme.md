@@ -2,6 +2,7 @@
 
 | Option      | Description |
 | ----------- | ----------- |
+| `--fluent` | Enum. LITE for Fluent Lite; PREMIUM for Fluent Premium. |
 | `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). |
 | `--add-inner` | CSV. Treat as inner class (append `Inner` to class name). |
 | `--add-inner` | CSV. Exclude from inner classes. |
