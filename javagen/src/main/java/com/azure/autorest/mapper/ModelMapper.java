@@ -226,7 +226,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
     private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {
         boolean ret = compositeType.getProperties().stream()
-                .filter(p -> !p.isIsDiscriminator())
                 .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
         if (!ret && !parentsNeedFlatten.isEmpty()) {
             // Check properties from base class of multiple inheritance as properties of this class.
@@ -234,7 +233,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     .flatMap(s -> (s.getParents() != null && s.getParents().getAll() != null) ? Stream.concat(Stream.of(s), s.getParents().getAll().stream()) : Stream.of(s))
                     .filter(s -> s instanceof ObjectSchema)
                     .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
-                    .filter(p -> !p.isIsDiscriminator())
                     .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
         }
         return ret;
