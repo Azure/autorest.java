@@ -106,16 +106,16 @@ public final class AutoRestHttpInfrastructureTestService {
         return this.httpServerFailures;
     }
 
-    /** The HttpRetrys object to access its operations. */
-    private final HttpRetrys httpRetrys;
+    /** The HttpRetries object to access its operations. */
+    private final HttpRetries httpRetries;
 
     /**
-     * Gets the HttpRetrys object to access its operations.
+     * Gets the HttpRetries object to access its operations.
      *
-     * @return the HttpRetrys object.
+     * @return the HttpRetries object.
      */
-    public HttpRetrys getHttpRetrys() {
-        return this.httpRetrys;
+    public HttpRetries getHttpRetries() {
+        return this.httpRetries;
     }
 
     /** The MultipleResponses object to access its operations. */
@@ -164,7 +164,7 @@ public final class AutoRestHttpInfrastructureTestService {
         this.httpRedirects = new HttpRedirects(this);
         this.httpClientFailures = new HttpClientFailures(this);
         this.httpServerFailures = new HttpServerFailures(this);
-        this.httpRetrys = new HttpRetrys(this);
+        this.httpRetries = new HttpRetries(this);
         this.multipleResponses = new MultipleResponses(this);
     }
 }

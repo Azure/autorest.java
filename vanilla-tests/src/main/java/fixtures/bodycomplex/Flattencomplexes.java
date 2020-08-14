@@ -16,32 +16,33 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Flattencomplexs. */
-public final class Flattencomplexs {
+/** An instance of this class provides access to all the operations defined in Flattencomplexes. */
+public final class Flattencomplexes {
     /** The proxy service used to perform REST calls. */
-    private final FlattencomplexsService service;
+    private final FlattencomplexesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestComplexTestService client;
 
     /**
-     * Initializes an instance of Flattencomplexs.
+     * Initializes an instance of Flattencomplexes.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Flattencomplexs(AutoRestComplexTestService client) {
+    Flattencomplexes(AutoRestComplexTestService client) {
         this.service =
-                RestProxy.create(FlattencomplexsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(
+                        FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexs to be used by the proxy
+     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface FlattencomplexsService {
+    private interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

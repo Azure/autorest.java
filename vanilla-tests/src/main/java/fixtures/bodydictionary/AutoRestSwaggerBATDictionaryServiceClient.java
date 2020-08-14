@@ -3,7 +3,7 @@ package fixtures.bodydictionary;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
-import fixtures.bodydictionary.implementation.DictionarysImpl;
+import fixtures.bodydictionary.implementation.DictionariesImpl;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import java.time.Duration;
@@ -15,10 +15,10 @@ import java.util.Map;
 /** Initializes a new instance of the synchronous AutoRestSwaggerBATDictionaryService type. */
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class)
 public final class AutoRestSwaggerBATDictionaryServiceClient {
-    private DictionarysImpl serviceClient;
+    private DictionariesImpl serviceClient;
 
-    /** Initializes an instance of Dictionarys client. */
-    AutoRestSwaggerBATDictionaryServiceClient(DictionarysImpl serviceClient) {
+    /** Initializes an instance of Dictionaries client. */
+    AutoRestSwaggerBATDictionaryServiceClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

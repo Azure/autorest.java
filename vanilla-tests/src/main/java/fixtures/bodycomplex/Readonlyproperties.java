@@ -18,33 +18,33 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Readonlypropertys. */
-public final class Readonlypropertys {
+/** An instance of this class provides access to all the operations defined in Readonlyproperties. */
+public final class Readonlyproperties {
     /** The proxy service used to perform REST calls. */
-    private final ReadonlypropertysService service;
+    private final ReadonlypropertiesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestComplexTestService client;
 
     /**
-     * Initializes an instance of Readonlypropertys.
+     * Initializes an instance of Readonlyproperties.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Readonlypropertys(AutoRestComplexTestService client) {
+    Readonlyproperties(AutoRestComplexTestService client) {
         this.service =
                 RestProxy.create(
-                        ReadonlypropertysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                        ReadonlypropertiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceReadonlypropertys to be used by the proxy
+     * The interface defining all the services for AutoRestComplexTestServiceReadonlyproperties to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface ReadonlypropertysService {
+    private interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

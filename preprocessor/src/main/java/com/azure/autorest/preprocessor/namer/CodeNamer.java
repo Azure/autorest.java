@@ -1,12 +1,13 @@
 package com.azure.autorest.preprocessor.namer;
 
+import org.atteo.evo.inflector.English;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
@@ -203,8 +204,8 @@ public class CodeNamer {
     }
 
     public static String getPlural(String name) {
-        if (!name.endsWith("s") && !name.endsWith("S")) {
-            name += "s";
+        if (name != null && !name.isEmpty() && !name.endsWith("s") && !name.endsWith("S")) {
+            name = English.plural(name);
         }
         return name;
     }
