@@ -1,5 +1,7 @@
 package com.azure.autorest.util;
 
+import org.atteo.evo.inflector.English;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -199,7 +201,7 @@ public class CodeNamer {
 
     public static String getPlural(String name) {
         if (name != null && !name.isEmpty() && !name.endsWith("s") && !name.endsWith("S")) {
-            name += "s";
+            name = English.plural(name);
         }
         return name;
     }

@@ -46,16 +46,16 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
         return this.serializerAdapter;
     }
 
-    /** The DictionarysImpl object to access its operations. */
-    private final DictionarysImpl dictionarys;
+    /** The DictionariesImpl object to access its operations. */
+    private final DictionariesImpl dictionaries;
 
     /**
-     * Gets the DictionarysImpl object to access its operations.
+     * Gets the DictionariesImpl object to access its operations.
      *
-     * @return the DictionarysImpl object.
+     * @return the DictionariesImpl object.
      */
-    public DictionarysImpl getDictionarys() {
-        return this.dictionarys;
+    public DictionariesImpl getDictionaries() {
+        return this.dictionaries;
     }
 
     /** Initializes an instance of AutoRestSwaggerBATDictionaryService client. */
@@ -88,6 +88,6 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.dictionarys = new DictionarysImpl(this);
+        this.dictionaries = new DictionariesImpl(this);
     }
 }

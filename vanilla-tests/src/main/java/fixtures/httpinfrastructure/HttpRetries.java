@@ -21,32 +21,32 @@ import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in HttpRetrys. */
-public final class HttpRetrys {
+/** An instance of this class provides access to all the operations defined in HttpRetries. */
+public final class HttpRetries {
     /** The proxy service used to perform REST calls. */
-    private final HttpRetrysService service;
+    private final HttpRetriesService service;
 
     /** The service client containing this operation class. */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
-     * Initializes an instance of HttpRetrys.
+     * Initializes an instance of HttpRetries.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    HttpRetrys(AutoRestHttpInfrastructureTestService client) {
+    HttpRetries(AutoRestHttpInfrastructureTestService client) {
         this.service =
-                RestProxy.create(HttpRetrysService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(HttpRetriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpRetrys to be used by the
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpRetries to be used by the
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpRetrysService {
+    private interface HttpRetriesService {
         @Head("/http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
