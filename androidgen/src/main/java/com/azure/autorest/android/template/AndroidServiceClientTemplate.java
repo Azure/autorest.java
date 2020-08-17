@@ -7,7 +7,6 @@
 
 package com.azure.autorest.android.template;
 
-import com.azure.autorest.android.model.HostMapping;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -16,7 +15,6 @@ import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
-import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -26,11 +24,9 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -76,34 +72,51 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                 classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", serviceClient.getClassName()));
             }
 
-            // Add proxy service member variable
+            // The Retrofit Proxy member variable.
             if (serviceClient.getProxy() != null) {
                 classBlock.javadocComment("The proxy service used to perform REST calls.");
                 classBlock.privateFinalMemberVariable(serviceClient.getProxy().getName(), "service");
             }
 
-            // Serializer
+            // The Serializer member variable.
             classBlock.javadocComment("The serializer.");
             classBlock.packagePrivateFinalVariable("SerializerAdapter serializerAdapter = SerializerAdapter.createDefault()");
 
-            // Add ServiceClient client property variables, getters, and setters
-            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties()) {
+            final Constructor constructor = serviceClient.getConstructors().get(0);
+            final List<ClientMethodParameter> ctrParamsSet1 = constructor.getParameters();
+            // Declare member variables to hold Ctr params.
+            ctrParamsSet1.forEach(p -> {
                 classBlock.javadocComment(comment ->
                 {
-                    comment.description(serviceClientProperty.getDescription());
+                    comment.description(p.getDescription());
                 });
-                classBlock.privateFinalMemberVariable(serviceClientProperty.getType().toString(), serviceClientProperty.getName());
+                classBlock.privateMemberVariable(p.getDeclaration());
+            });
+
+            List<ServiceClientProperty> ctrParamsSet2 = new ArrayList<>();
+            // The member variables for ServiceClient properties, its getters and setters.
+            serviceClient.getProperties().forEach(property -> {
+                classBlock.javadocComment(comment ->
+                {
+                    comment.description(property.getDescription());
+                });
+                classBlock.privateFinalMemberVariable(property.getType().toString(), property.getName());
 
                 classBlock.javadocComment(comment ->
                 {
-                    comment.description(String.format("Gets %1$s", serviceClientProperty.getDescription()));
-                    comment.methodReturns(String.format("the %1$s value.", serviceClientProperty.getName()));
+                    comment.description(String.format("Gets %1$s", property.getDescription()));
+                    comment.methodReturns(String.format("the %1$s value.", property.getName()));
                 });
-                classBlock.publicMethod(String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
+                classBlock.publicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())), function ->
                 {
-                    function.methodReturn(String.format("this.%1$s", serviceClientProperty.getName()));
+                    function.methodReturn(String.format("this.%1$s", property.getName()));
                 });
-            }
+
+                // Each non-readonly service client property is set via Ctr.
+                if (!property.isReadOnly()) {
+                    ctrParamsSet2.add(property);
+                }
+             });
 
             // AutoRestMethod Group Client declarations and getters
             for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
@@ -125,71 +138,62 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                 });
             }
 
-            // additional service client properties in constructor arguments
-            String constructorArgs = serviceClient.getProperties().stream()
-                    .filter(p -> !p.isReadOnly())
-                    .map(ServiceClientProperty::getName)
-                    .collect(Collectors.joining(", "));
-            if (!constructorArgs.isEmpty()) {
-                constructorArgs = ", " + constructorArgs;
-            }
-            final String constructorArgsFinal = constructorArgs;
-            // code lines
-            Consumer<JavaBlock> constructorParametersCodes = javaBlock -> {
-                serviceClient.getProperties().stream()
-                        .filter(p -> !p.isReadOnly()).forEach(p -> javaBlock.line(String.format("this.%1$s = %2$s;", p.getName(), p.getName())));
-            };
+            // Define the Constructor.
+            classBlock.javadocComment(comment ->
+            {
+                comment.description(String.format("Initializes an instance of %1$s client.", serviceClient.getInterfaceName()));
+                ctrParamsSet1.forEach(parameter -> {
+                    comment.param(parameter.getName(), parameter.getDescription());
+                });
+                ctrParamsSet2.forEach(parameter -> {
+                    comment.param(parameter.getName(), parameter.getDescription());
+                });
+            });
 
-            // Service Client Constructors
-            //boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getTokenCredentialParameter()));
-            for (Constructor constructor : serviceClient.getConstructors()) {
-                classBlock.javadocComment(comment ->
-                {
-                    comment.description(String.format("Initializes an instance of %1$s client.", serviceClient.getInterfaceName()));
-                    for (ClientMethodParameter parameter : constructor.getParameters()) {
-                        comment.param(parameter.getName(), parameter.getDescription());
-                    }
+            final String ctrParamsAsString = Stream
+                    .concat(
+                            ctrParamsSet1.stream().map(ClientMethodParameter::getDeclaration),
+                            ctrParamsSet2.stream().map(p -> String.format("%1$s %2$s", p.getType(), p.getName()))
+                    ).collect(Collectors.joining(", "));
+
+            classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), ctrParamsAsString), constructorBlock ->
+            {
+                ctrParamsSet1.forEach(p -> {
+                    constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
+                });
+                ctrParamsSet2.forEach(p -> {
+                    constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
                 });
 
-                // service client properties in constructor parameters
-                String constructorParams = Stream.concat(constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration),
-                        serviceClient.getProperties().stream()
-                                .filter(p -> !p.isReadOnly())
-                                .map(p -> String.format("%1$s %2$s", p.getType(), p.getName())))
-                        .collect(Collectors.joining(", "));
-
-                classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructorParams), constructorBlock ->
-                {
-//                    HostMapping hostMapping = HostMapping.create(serviceClient);
-//                    constructorBlock.line("String foo = " + hostMapping.getEndpointExpression());
-                    if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                        constructorBlock.line(String.format("this.serviceClient = serviceClient;"));
-                        constructorParametersCodes.accept(constructorBlock);
-
-                        for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
-                            if (serviceClientProperty.getDefaultValueExpression() != null) {
-                                constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
+                serviceClient.getProperties()
+                        .stream()
+                        .filter(ServiceClientProperty::isReadOnly)
+                        .forEach(p -> {
+                            if (p.getDefaultValueExpression() != null) {
+                                constructorBlock.line("this.%1$s = %2$s;",
+                                        p.getName(),
+                                        p.getDefaultValueExpression());
                             }
-                        }
+                        });
 
-                        for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
-                            constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
-                        }
+                for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+                    constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
+                }
 
-                        if (serviceClient.getProxy() != null) {
-                            constructorBlock.line("this.service = serviceClient.getRetrofit().create(%s.class);", serviceClient.getProxy().getName());
-                        }
-                    }
-                });
-            }
+                if (serviceClient.getProxy() != null) {
+                    constructorBlock.line("this.service = serviceClient.getRetrofit().create(%s.class);", serviceClient.getProxy().getName());
+                }
+            });
 
+            // Write Retrofit Proxy interface.
             Templates.getProxyTemplate().write(serviceClient.getProxy(), classBlock);
 
+            // Write client level API methods.
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
-            // Add util methods (will be moved to core-utils)
+            // Write util methods (should be moved to internal.CoreUtils)
             //
             List<JavaModifier> modifiers = new ArrayList<>();
 
