@@ -5,7 +5,6 @@ package com.azure.autorest.android.model;
 
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import java.util.List;
 import java.util.Set;
 
@@ -27,21 +26,6 @@ public class AndroidClientModel extends ClientModel {
             imports.add("com.azure.android.core.annotation.Fluent");
         } else {
             imports.add("com.azure.android.core.annotation.Immutable");
-        }
-    }
-
-    @Override
-    public void addImportsTo(Set<String> imports, JavaSettings settings) {
-        super.addImportsTo(imports, settings);
-        replaceOffsetDateTime(imports);
-    }
-
-    private void replaceOffsetDateTime(Set<String> imports) {
-        final String offsetDateTimeImport = "java.time.OffsetDateTime";
-        final String androidOffsetDateTime = "org.threeten.bp.OffsetDateTime";
-        if (imports.contains(offsetDateTimeImport)) {
-            imports.remove(offsetDateTimeImport);
-            imports.add(androidOffsetDateTime);
         }
     }
 

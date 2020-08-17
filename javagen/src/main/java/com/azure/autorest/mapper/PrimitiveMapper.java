@@ -16,11 +16,35 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
     private static PrimitiveMapper instance = new PrimitiveMapper();
     Map<PrimitiveSchema, IType> parsed = new HashMap<>();
 
-    private PrimitiveMapper() {
+    protected PrimitiveMapper() {
     }
 
     public static PrimitiveMapper getInstance() {
         return instance;
+    }
+
+    protected IType getBase64UrlClassType() {
+        return ClassType.Base64Url;
+    }
+
+    protected IType getLocalDateClassType() {
+        return ClassType.LocalDate;
+    }
+
+    protected IType getDateTimeClassType() {
+        return ClassType.DateTime;
+    }
+
+    protected IType getDurationClassType() {
+        return ClassType.Duration;
+    }
+
+    protected IType getDateTimeRfc1123ClassType() {
+        return ClassType.DateTimeRfc1123;
+    }
+
+    protected IType getUnixTimeDateTime() {
+        return ClassType.UnixTimeDateTime;
     }
 
     @Override
@@ -42,7 +66,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
             case BYTE_ARRAY:
                 ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
                 if (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL) {
-                    iType = ClassType.Base64Url;
+                    iType = this.getBase64UrlClassType();
                 } else {
                     iType = ArrayType.ByteArray;
                 }
@@ -51,14 +75,14 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = PrimitiveType.Char;
                 break;
             case DATE:
-                iType = ClassType.LocalDate;
+                iType = this.getLocalDateClassType();
                 break;
             case DATE_TIME:
                 DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
                 if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
-                    iType = ClassType.DateTimeRfc1123;
+                    iType = this.getDateTimeRfc1123ClassType();
                 } else {
-                    iType = ClassType.DateTime;
+                    iType = this.getDateTimeClassType();
                 }
                 break;
             case TIME:
@@ -99,7 +123,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = ClassType.URL;
                 break;
             case DURATION:
-                iType = ClassType.Duration;
+                iType = this.getDurationClassType();
                 break;
             case UNIXTIME:
                 iType = PrimitiveType.UnixTimeLong;

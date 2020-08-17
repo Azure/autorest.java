@@ -171,7 +171,7 @@ public class ClientModel {
      * @param imports The set of imports to add to.
      * @param settings The settings for this Java generator session.
      */
-    public void addImportsTo(Set<String> imports, JavaSettings settings) {
+    public final void addImportsTo(Set<String> imports, JavaSettings settings) {
         addReadWriteAnnotationImport(properties, imports);        
 
         if (needsFlatten) {
