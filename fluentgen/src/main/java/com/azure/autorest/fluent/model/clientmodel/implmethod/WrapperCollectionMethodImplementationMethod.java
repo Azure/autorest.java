@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.implmethod;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.TypeConversionUtils;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -24,7 +25,8 @@ public class WrapperCollectionMethodImplementationMethod implements WrapperMetho
                     if (innerType == PrimitiveType.Void || innerType == PrimitiveType.Void.asNullable()) {
                         block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
                     } else {
-                        block.methodReturn(String.format("this.%1$s().%2$s", ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
+                        String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation());
+                        block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
                     }
                 })
                 .build();

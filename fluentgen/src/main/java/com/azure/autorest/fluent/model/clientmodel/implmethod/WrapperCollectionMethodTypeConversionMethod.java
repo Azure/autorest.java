@@ -44,7 +44,8 @@ public class WrapperCollectionMethodTypeConversionMethod implements WrapperMetho
                         block.methodReturn(TypeConversionUtils.conversionExpression(innerType, "inner"));
                     } else {
                         block.ifBlock("inner != null", ifBlock -> {
-                            block.methodReturn(TypeConversionUtils.conversionExpression(innerType, "inner"));
+                            String expression = TypeConversionUtils.conversionExpression(innerType, "inner");
+                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn("null");
                         });

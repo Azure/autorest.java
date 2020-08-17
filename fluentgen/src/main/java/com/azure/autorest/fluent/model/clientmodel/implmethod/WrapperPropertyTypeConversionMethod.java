@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,9 +35,12 @@ public class WrapperPropertyTypeConversionMethod implements WrapperMethod {
         fluentProperty.getFluentType().addImportsTo(imports, false);
         // Type inner = ...
         property.getClientType().addImportsTo(imports, false);
-        // Collectors.toList
         if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {
+            // Collectors.toList
             imports.add(Collectors.class.getName());
+
+            // Collections.unmodifiableList
+            imports.add(Collections.class.getName());
         }
 
         conversionMethodTemplate = MethodTemplate.builder()
@@ -45,7 +49,8 @@ public class WrapperPropertyTypeConversionMethod implements WrapperMethod {
                 .method(block -> {
                     block.line(String.format("%1$s inner = this.%2$s().%3$s();", property.getClientType().toString(), ModelNaming.METHOD_INNER, property.getGetterName()));
                     block.ifBlock("inner != null", ifBlock -> {
-                        block.methodReturn(TypeConversionUtils.conversionExpression(property.getClientType(), "inner"));
+                        String expression = TypeConversionUtils.conversionExpression(property.getClientType(), "inner");
+                        block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), expression));
                     }).elseBlock(elseBlock -> {
                         block.methodReturn("null");
                     });

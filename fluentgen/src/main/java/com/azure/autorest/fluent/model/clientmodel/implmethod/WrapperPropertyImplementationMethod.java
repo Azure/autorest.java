@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.implmethod;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.TypeConversionUtils;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -43,7 +44,7 @@ public class WrapperPropertyImplementationMethod implements WrapperMethod {
 
                         block.line(String.format("%1$s inner = this.%2$s().%3$s();", property.getClientType().toString(), ModelNaming.METHOD_INNER, property.getGetterName()));
                         block.ifBlock("inner != null", ifBlock -> {
-                            block.methodReturn(String.format("Collections.%1$s(inner)", unmodifiableMethodName));
+                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), "inner"));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn("null");
                         });

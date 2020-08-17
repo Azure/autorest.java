@@ -50,6 +50,18 @@ public class TypeConversionUtils {
         return expression;
     }
 
+    public static String unmodifiableCollection(IType clientType, String expression) {
+        String unmodifiableMethodName = null;
+        if (clientType instanceof ListType) {
+            unmodifiableMethodName = "unmodifiableList";
+        } else if (clientType instanceof MapType) {
+            unmodifiableMethodName = "unmodifiableMap";
+        }
+        return (unmodifiableMethodName == null)
+                ? expression
+                : String.format("Collections.%1$s(%2$s)", unmodifiableMethodName, expression);
+    }
+
     public static boolean isPagedIterable(IType clientType) {
         boolean ret = false;
         if (clientType instanceof GenericType) {
