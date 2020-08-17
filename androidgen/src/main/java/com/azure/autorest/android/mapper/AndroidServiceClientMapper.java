@@ -45,7 +45,8 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
 
         ServiceClient.Builder builder = createClientMethodBuilder();
 
-        String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
+        String serviceClientInterfaceName
+                = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
 
         String serviceClientClassName = serviceClientInterfaceName;
@@ -58,20 +59,17 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 .packageName(packageName);
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
+                .filter(og -> og.getLanguage().getJava().getName() == null
+                        || og.getLanguage().getJava().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
+
         if (!codeModelRestAPIMethods.isEmpty()) {
-            // TODO: Assume all operations share the same base url
             Proxy.Builder proxyBuilder = new AndroidProxy.Builder()
                     .name(serviceClientInterfaceName + "Service")
                     .clientTypeName(serviceClientInterfaceName)
-                    .baseURL(codeModel.getOperationGroups().stream()
-                            .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
-                            .map(og -> og.getOperations().get(0))
-                            .findFirst().get().getRequests().get(0)
-                            .getProtocol().getHttp().getUri());
-            //
+                    .baseURL(getHostUrl(codeModel));
+
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
@@ -103,7 +101,11 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
                 .collect(Collectors.toList())) {
-            String serviceClientPropertyDescription = p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
+
+            String serviceClientPropertyDescription
+                    = p.getDescription() != null
+                    ? p.getDescription()
+                    : p.getLanguage().getJava().getDescription();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
@@ -130,13 +132,16 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 }
             }
         }
-        serviceClientProperties.add(new ServiceClientProperty("The ServiceClient to use for REST calls", ClassType.AndroidServiceClient, "serviceClient", true, null));
+
+        // The swagger_client_level_properties, will be set through the Client builder
+        // and passed to Client constructor.
         builder.properties(serviceClientProperties);
 
-        ClientMethodParameter serviceClientParameter = new ClientMethodParameter.Builder()
-                .description("The ServiceClient to use for REST calls")
+        // Any other properties not from swagger (for now only core.ServiceClient), hence common for all clients.
+        ClientMethodParameter restClientParameter = new ClientMethodParameter.Builder()
+                .description("The Azure Core generic ServiceClient to setup interceptors and produce retrofit proxy")
                 .isFinal(false)
-                .wireType(ClassType.AndroidServiceClient)
+                .wireType(ClassType.AndroidRestClient)
                 .name("serviceClient")
                 .isRequired(true)
                 .isConstant(false)
@@ -148,27 +153,21 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 .build();
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
-        serviceClientConstructors.add(new Constructor(Arrays.asList(serviceClientParameter)));
-        builder.httpPipelineParameter(serviceClientParameter)
-                .constructors(serviceClientConstructors);
-
+        serviceClientConstructors.add(new Constructor(Arrays.asList(restClientParameter)));
+        // set Ctr 'core.ServiceClient' parameter.
+        builder.constructors(serviceClientConstructors);
         return builder.build();
+    }
 
-//        ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()
-//                .description("the credentials for Azure")
-//                .isFinal(false)
-//                .wireType(ClassType.TokenCredential)
-//                .name("credential")
-//                .isRequired(true)
-//                .isConstant(false)
-//                .fromClient(true)
-//                .defaultValue(null)
-//                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-//                        ? Arrays.asList(ClassType.NonNull)
-//                        : new ArrayList<>())
-//                .build();
-//        builder.tokenCredentialParameter(tokenCredentialParameter)
-//                .httpPipelineParameter(httpPipelineParameter)
-//                .constructors(serviceClientConstructors);
+
+    private static String getHostUrl(CodeModel codeModel) {
+        // HostUrl can be a real baseUrl or template-value
+        // template-value e.g: "{endpoint}" or "{endpoint}/anomalydetector-ee/v1.0/" etc..
+        return codeModel.getOperationGroups().stream()
+                .filter(og -> og.getLanguage().getJava().getName() == null
+                        || og.getLanguage().getJava().getName().isEmpty())
+                .map(og -> og.getOperations().get(0))
+                .findFirst().get().getRequests().get(0)
+                .getProtocol().getHttp().getUri();
     }
 }

@@ -1,4 +1,4 @@
-package com.azure.autorest.android.model;
+package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.Proxy;
@@ -10,28 +10,56 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class HostMapping {
+class HostMapping {
     private final String host;
     private final List<String> hostParams;
 
-    public String getEndpointExpression() {
-        if (this.host == null
-                || this.host.isEmpty()) {
+    public List<String> getHostParams() {
+        return this.hostParams;
+    }
+
+    public String anyHostParamAbsentExpression() {
+        return this.hostParams
+                .stream()
+                .map(h -> String.format("%s == null", h))
+                .collect(Collectors.joining("|| "));
+    }
+
+    public String allHostParamPresentExpression() {
+        return this.hostParams
+                .stream()
+                .map(h -> String.format("%s != null", h))
+                .collect(Collectors.joining("&& "));
+    }
+
+    public String getBaseUrlExpression() {
+        if (this.host == null || this.host.isEmpty()) {
+            // Host is absent.
+            //
             if (this.hostParams.isEmpty()) {
                 return "";
             } else {
                 return this.hostParams.get(0);
             }
-        }
-        if (this.hostParams.isEmpty()) {
-            return this.host;
         } else {
-            StringBuilder endpoint = new StringBuilder();
-            endpoint.append(String.format("\"%s\"", this.host));
-            for (String hostParam : this.hostParams) {
-                endpoint.append(String.format(".replace(\"{%s}\", %s)", hostParam, hostParam));
+            // Host is present.
+            //
+            if (this.hostParams.isEmpty()) {
+                return this.host;
+            } else {
+                if (this.host.equalsIgnoreCase(String.format("{%s}", this.hostParams.get(0)))) {
+                    return this.hostParams.get(0) + ";";
+                } else {
+                    StringBuilder endpoint = new StringBuilder();
+                    endpoint.append(String.format("\"%s\"", this.host));
+                    for (String hostParam : this.hostParams) {
+                        endpoint.append(String.format(".replace(\"{%s}\", %s)", hostParam, hostParam));
+                    }
+                    return endpoint
+                            .append(";")
+                            .toString();
+                }
             }
-            return endpoint.append(";").toString();
         }
     }
 
