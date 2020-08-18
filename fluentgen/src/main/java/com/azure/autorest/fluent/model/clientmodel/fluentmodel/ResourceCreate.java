@@ -6,7 +6,6 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
@@ -16,12 +15,13 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -104,5 +104,24 @@ public class ResourceCreate {
 
     public boolean isBodyParameterSameAsFluentModel() {
         return bodyParameterModel == resourceModel.getInnerModel();
+    }
+
+    public List<ClientModelProperty> getRequiredProperties() {
+        List<ClientModelProperty> properties = new ArrayList<>();
+
+        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
+
+        if (this.isBodyParameterSameAsFluentModel()) {
+            for (String commonPropertyName : commonPropertyNames) {
+                if (resourceModel.hasProperty(commonPropertyName)) {
+                    properties.add(resourceModel.getProperty(commonPropertyName).getInnerProperty());
+                }
+            }
+
+        } else {
+            // TODO
+        }
+
+        return properties;
     }
 }

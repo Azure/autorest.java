@@ -86,4 +86,8 @@ public class FluentModelProperty {
         }
         return wrapperType;
     }
+
+    public ClientModelProperty getInnerProperty() {
+        return modelProperty;
+    }
 }
