@@ -63,23 +63,40 @@ public class ResourceParser {
 
                             if (urlPathSegments.getReverseSegments().iterator().next().isParameterSegment() && urlPathSegments.hasSubscription()) {
                                 foundModels.add(fluentModel);
-                                supportsCreateList.add(new ResourceCreate());
-                                ModelCategory category;
+
+                                String bodyTypeName = m.getInnerClientMethod().getProxyMethod().getParameters()
+                                        .stream()
+                                        .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
+                                        .map(p -> p.getClientType().toString())
+                                        .findAny().orElse(null);
+
+                                ClientModel bodyModel = availableModels.stream()
+                                        .filter(model -> model.getName().equals(bodyTypeName))
+                                        .findAny().orElse(null);
+
+                                supportsCreateList.add(new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel));
+                                ModelCategory category = ModelCategory.SUBSCRIPTION_AS_PARENT;
                                 if (urlPathSegments.isNested()) {
                                     category = ModelCategory.NESTED_CHILD;
                                 } else if (urlPathSegments.hasResourceGroup()) {
                                     category = ModelCategory.RESOURCE_GROUP_AS_PARENT;
-                                } else {
-                                    category = ModelCategory.SUBSCRIPTION_AS_PARENT;
                                 }
-                                logger.info("name " + fluentModel.getInterfaceType().getName());
-                                logger.info("path " + urlPathSegments.getReverseSegments());
-                                logger.info("category " + category);
+                                fluentModel.setCategory(category);
+
+                                logger.info("Fluent model {} as category {}", fluentModel.getInterfaceType().getName(), category);
                             }
                         }
                     }
                 }
             }
+        });
+
+        supportsCreateList.forEach(rc -> {
+            String methodName = rc.getMethodName();
+            rc.getMethodReferences().addAll(
+                    rc.getResourceCollection().getMethods().stream()
+                            .filter(m -> m.getInnerClientMethod().getName().equals(methodName))
+                            .collect(Collectors.toList()));
         });
 
         return supportsCreateList;

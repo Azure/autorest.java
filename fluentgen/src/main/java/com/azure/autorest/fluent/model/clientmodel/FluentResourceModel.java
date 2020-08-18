@@ -6,6 +6,8 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -33,6 +35,10 @@ public class FluentResourceModel {
 
     // resource properties
     private final Map<String, FluentModelProperty> properties = new HashMap<>();
+
+    // category of the resource
+    private ModelCategory category = ModelCategory.WRAPPER;
+    private ResourceCreate resourceCreate;
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -73,6 +79,10 @@ public class FluentResourceModel {
         return properties.containsKey(name);
     }
 
+    public FluentModelProperty getProperty(String name) {
+        return properties.get(name);
+    }
+
     public Collection<FluentModelProperty> getProperties() {
         return properties.values();
     }
@@ -84,6 +94,22 @@ public class FluentResourceModel {
     // method signature for inner model
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+    }
+
+    public ModelCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ModelCategory category) {
+        this.category = category;
+    }
+
+    public ResourceCreate getResourceCreate() {
+        return resourceCreate;
+    }
+
+    public void setResourceCreate(ResourceCreate resourceCreate) {
+        this.resourceCreate = resourceCreate;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
