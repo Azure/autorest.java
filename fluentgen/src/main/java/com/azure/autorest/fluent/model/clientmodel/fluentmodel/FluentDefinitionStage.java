@@ -48,4 +48,11 @@ public class FluentDefinitionStage {
                 this.getProperty().getSetterName(),
                 this.getProperty().getClientType().toString(), this.getProperty().getName());
     }
+
+    public String getDescription(String modelName) {
+        return property == null
+                ? "The stage."
+                : String.format("The stage of the %1$s definition allowing to specify %2$s.",
+                        modelName, property.getName());
+    }
 }
