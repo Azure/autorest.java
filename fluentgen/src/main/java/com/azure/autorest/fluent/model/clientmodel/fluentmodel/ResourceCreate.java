@@ -151,24 +151,24 @@ public class ResourceCreate {
         List<FluentDefinitionStage> fluentDefinitionStages = new ArrayList<>();
 
         // blank
-        FluentDefinitionStage blankStage = new FluentDefinitionStage("Blank", null);
+        FluentDefinitionStage blankStage = new FluentBlankStage();
 
         // parent
         FluentDefinitionStage parentStage = null;
         if (this.hasResourceGroup()) {
             switch (this.getResourceModel().getCategory()) {
                 case RESOURCE_GROUP_AS_PARENT:
-                    parentStage = new FluentDefinitionStage("WithResourceGroup", null);
+                    parentStage = new FluentParentStage("WithResourceGroup");
                     break;
 
                 case NESTED_CHILD:
-                    parentStage = new FluentDefinitionStage("WithParent", null);
+                    parentStage = new FluentParentStage("WithParentResource");
                     break;
             }
         }
 
         // create
-        FluentDefinitionStage createStage = new FluentDefinitionStage("WithCreate", null);
+        FluentDefinitionStage createStage = new FluentCreateStage();
 
         final boolean hasLocation = this.hasLocation();
 
@@ -208,8 +208,10 @@ public class ResourceCreate {
             }
         } else {
             if (parentStage == null) {
+                blankStage.setExtendStages(createStage.getName());
                 lastStage = blankStage;
             } else {
+                blankStage.setExtendStages(parentStage.getName());
                 lastStage = parentStage;
                 fluentDefinitionStages.add(parentStage);
             }

@@ -33,14 +33,14 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                             .filter(s -> s.getProperty() == null || s.getProperty().isRequired())
                             .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
                             .collect(Collectors.joining(", ")));
-            interfaceBlock.publicInterface(definitionInterfaceSignature, block1 -> {
+            interfaceBlock.interfaceBlock(definitionInterfaceSignature, block1 -> {
             });
 
             // DefinitionStages interface
             interfaceBlock.javadocComment(commentBlock -> {
                 commentBlock.description(String.format("The %1$s definition stages.", modelName));
             });
-            interfaceBlock.publicInterface(ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, block1 -> {
+            interfaceBlock.interfaceBlock(ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, block1 -> {
                 for (FluentDefinitionStage stage : fluentDefinitionStages) {
                     block1.javadocComment(commentBlock -> {
                         commentBlock.description(stage.getDescription(modelName));
@@ -49,7 +49,7 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                     if (stage.getExtendStages() != null) {
                         interfaceSignature += " extends " + stage.getExtendStages();
                     }
-                    block1.publicInterface(interfaceSignature, block2 -> {
+                    block1.interfaceBlock(interfaceSignature, block2 -> {
                         if (stage.getProperty() != null) {
                             block2.javadocComment(commentBlock -> {
                                 String propertyName = stage.getProperty().getName();

@@ -43,7 +43,7 @@ public class JavaInterface implements JavaType {
         contents.annotation(annotations);
     }
 
-    public final void publicInterface(String interfaceName, Consumer<JavaInterface> interfaceAction) {
-        contents.interfaceBlock(JavaVisibility.Public, interfaceName, interfaceAction);
+    public final void interfaceBlock(String interfaceName, Consumer<JavaInterface> interfaceAction) {
+        contents.interfaceBlock(JavaVisibility.PackagePrivate, interfaceName, interfaceAction);
     }
 }
