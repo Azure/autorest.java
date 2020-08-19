@@ -65,6 +65,9 @@ public class FluentDefinitionStage {
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        if (property != null) {
+            property.addImportsTo(imports, includeImplementationImports);
+        }
         this.getMethods().stream()
                 .flatMap(m -> m.getParameters().stream())
                 .forEach(p -> p.addImportsTo(imports, includeImplementationImports));
