@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -21,11 +22,13 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,8 @@ public class ResourceCreate {
     private final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
 
     private final ClientModel bodyParameterModel;
+
+    private List<FluentDefinitionStage> fluentDefinitionStages;
 
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection, UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         this.resourceModel = resourceModel;
@@ -148,27 +153,29 @@ public class ResourceCreate {
     }
 
     public List<FluentDefinitionStage> getDefinitionStages() {
-        List<FluentDefinitionStage> fluentDefinitionStages = new ArrayList<>();
+        if (fluentDefinitionStages != null) {
+            return fluentDefinitionStages;
+        }
+
+        fluentDefinitionStages = new ArrayList<>();
 
         // blank
-        FluentDefinitionStage blankStage = new FluentBlankStage();
+        FluentBlankStage blankStage = new FluentBlankStage();
 
         // parent
-        FluentDefinitionStage parentStage = null;
-        if (this.hasResourceGroup()) {
-            switch (this.getResourceModel().getCategory()) {
-                case RESOURCE_GROUP_AS_PARENT:
-                    parentStage = new FluentParentStage("WithResourceGroup");
-                    break;
+        FluentParentStage parentStage = null;
+        switch (this.getResourceModel().getCategory()) {
+            case RESOURCE_GROUP_AS_PARENT:
+                parentStage = new FluentParentStage("WithResourceGroup");
+                break;
 
-                case NESTED_CHILD:
-                    parentStage = new FluentParentStage("WithParentResource");
-                    break;
-            }
+            case NESTED_CHILD:
+                parentStage = new FluentParentStage("WithParentResource");
+                break;
         }
 
         // create
-        FluentDefinitionStage createStage = new FluentCreateStage();
+        FluentCreateStage createStage = new FluentCreateStage();
 
         final boolean hasLocation = this.hasLocation();
 
@@ -220,6 +227,16 @@ public class ResourceCreate {
         lastStage.setNextStage(createStage);
         fluentDefinitionStages.add(createStage);
 
+        // create method
+        createStage.setCreateMethod(this.getCreateMethod(false));
+        ClientMethod createMethodWithContext = this.getCreateMethod(true);
+        if (createMethodWithContext != null) {
+            createStage.setCreateMethodWithContext(createMethodWithContext);
+        }
+
+        // existing parent method after all stages is connected.
+        parentStage.setExistingParentMethod(this.getExistingParentMethod(parentStage));
+
         // non-required properties
         List<FluentDefinitionStage> optionalFluentDefinitionStages = new ArrayList<>();
         List<ClientModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
@@ -241,6 +258,39 @@ public class ResourceCreate {
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
+    }
 
+    private ClientMethod getExistingParentMethod(FluentParentStage stage) {
+        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
+        List<ClientMethodParameter> parameters = this.getPathParameters();
+        parameters.remove(parameters.size() - 1);
+        return new ClientMethod.Builder()
+                .name("withExisting" + parentResourceName)
+                .description(String.format("Specifies %1$s.", parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "))))
+                .returnValue(new ReturnValue("the next definition stage.", new ClassType.Builder().packageName(resourceModel.getInterfaceType().getPackage()).name(stage.getNextStage().getName()).build()))
+                .parameters(parameters)
+                .build();
+    }
+
+    private ClientMethod getCreateMethod(boolean addContextParameter) {
+        List<ClientMethodParameter> parameters = new ArrayList<>();
+        if (addContextParameter) {
+            Optional<ClientMethodParameter> contextParameter = this.getMethodReferences().stream()
+                    .flatMap(m -> m.getInnerClientMethod().getParameters().stream())
+                    .filter(p -> ClassType.Context.getName().equals(p.getClientType().toString()))
+                    .findFirst();
+            if (contextParameter.isPresent()) {
+                parameters.add(contextParameter.get());
+            } else {
+                return null;
+            }
+        }
+        return new ClientMethod.Builder()
+                .name("create")
+                .description("Executes the create request.")
+                .returnValue(new ReturnValue("the created resource.", resourceModel.getInterfaceType()))
+                .parameters(parameters)
+                .build();
     }
 }

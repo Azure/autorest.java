@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.arm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class UrlPathSegments {
 
@@ -145,6 +146,13 @@ public class UrlPathSegments {
 
     public List<Segment> getReverseSegments() {
         return reverseSegments;
+    }
+
+    public List<ParameterSegment> getReverseParameterSegments() {
+        return reverseSegments.stream()
+                .filter(Segment::isParameterSegment)
+                .map(s -> (ParameterSegment) s)
+                .collect(Collectors.toList());
     }
 
     public boolean hasResourceGroup() {

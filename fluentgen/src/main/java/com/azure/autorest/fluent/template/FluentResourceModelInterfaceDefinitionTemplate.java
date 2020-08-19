@@ -8,7 +8,9 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentDefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.javamodel.JavaInterface;
+import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
 
 import java.util.List;
@@ -58,6 +60,14 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                                 commentBlock.methodReturns("the next definition stage.");
                             });
                             block2.publicMethod(stage.getMethodSignature());
+                        }
+
+                        List<ClientMethod> methods = stage.getMethods();
+                        if (!methods.isEmpty()) {
+                            methods.forEach(m -> {
+                                ClientMethodTemplate.generateJavadoc(m, block2, null, false);
+                                block2.publicMethod(m.getDeclaration());
+                            });
                         }
                     });
                 }

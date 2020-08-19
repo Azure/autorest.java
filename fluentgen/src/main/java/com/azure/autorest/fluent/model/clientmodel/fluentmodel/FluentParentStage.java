@@ -5,7 +5,14 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.model.clientmodel.ClientMethod;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class FluentParentStage extends FluentDefinitionStage {
+
+    private ClientMethod existingParentMethod;
 
     public FluentParentStage(String name) {
         super(name, null);
@@ -14,5 +21,14 @@ public class FluentParentStage extends FluentDefinitionStage {
     @Override
     public String getDescription(String modelName) {
         return String.format("The stage of the %1$s definition allowing to specify parent resource.", modelName);
+    }
+
+    @Override
+    public List<ClientMethod> getMethods() {
+        return Arrays.asList(existingParentMethod);
+    }
+
+    public void setExistingParentMethod(ClientMethod existingParentMethod) {
+        this.existingParentMethod = existingParentMethod;
     }
 }
