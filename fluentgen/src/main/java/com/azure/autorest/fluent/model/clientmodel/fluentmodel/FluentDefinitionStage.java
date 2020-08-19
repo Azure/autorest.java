@@ -51,8 +51,7 @@ public class FluentDefinitionStage {
 
     public String getDescription(String modelName) {
         return property == null
-                ? "The stage."
-                : String.format("The stage of the %1$s definition allowing to specify %2$s.",
-                        modelName, property.getName());
+                ? String.format("The stage of the %1$s definition.", modelName)
+                : String.format("The stage of the %1$s definition allowing to specify %2$s.", modelName, property.getName());
     }
 }
