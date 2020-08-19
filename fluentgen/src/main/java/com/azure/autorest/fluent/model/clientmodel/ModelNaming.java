@@ -22,6 +22,9 @@ public class ModelNaming {
 
     public static final String MANAGER_PROPERTY_BUILDER = "clientBuilder";
 
+    public static final String MODEL_FLUENT_INTERFACE_DEFINITION = "Definition";
+    public static final String MODEL_FLUENT_INTERFACE_DEFINITION_STAGES = "DefinitionStages";
+
     private ModelNaming() {
     }
 }

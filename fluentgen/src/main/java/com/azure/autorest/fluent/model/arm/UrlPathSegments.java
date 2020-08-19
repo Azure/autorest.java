@@ -5,15 +5,13 @@
 
 package com.azure.autorest.fluent.model.arm;
 
-import jdk.internal.joptsimple.internal.Strings;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class UrlPathSegments {
 
-    public static final String SEGMENT_NAME_EMPTY = Strings.EMPTY;
+    public static final String SEGMENT_NAME_EMPTY = "";
 
     public enum ParameterSegmentType {
         RESOURCE_GROUP,

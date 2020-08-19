@@ -12,7 +12,9 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +36,8 @@ public class FluentResourceModel {
     private final ClassType implementationType;
 
     // resource properties
-    private final Map<String, FluentModelProperty> properties = new HashMap<>();
+    private final Map<String, FluentModelProperty> propertiesMap = new HashMap<>();
+    private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
     private ModelCategory category = ModelCategory.WRAPPER;
@@ -52,14 +55,30 @@ public class FluentResourceModel {
                 .name(interfaceType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        properties.putAll(this.innerModel.getProperties().stream()
+        List<List<FluentModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+        propertiesFromTypeAndParents.add(new ArrayList<>());
+        this.innerModel.getProperties().stream()
                 .map(FluentModelProperty::new)
-                .collect(Collectors.toMap(FluentModelProperty::getName, Function.identity())));
+                .forEach(p -> {
+                    propertiesMap.putIfAbsent(p.getName(), p);
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                });
 
         for (ClientModel parent : parentModels) {
+            propertiesFromTypeAndParents.add(new ArrayList<>());
+
             parent.getProperties().stream()
                     .map(FluentModelProperty::new)
-                    .forEach(p -> properties.putIfAbsent(p.getName(), p));
+                    .forEach(p -> {
+                        if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
+                            propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                        }
+                    });
+        }
+
+        Collections.reverse(propertiesFromTypeAndParents);
+        for (List<FluentModelProperty> properties1 : propertiesFromTypeAndParents) {
+            properties.addAll(properties1);
         }
     }
 
@@ -76,15 +95,15 @@ public class FluentResourceModel {
     }
 
     public boolean hasProperty(String name) {
-        return properties.containsKey(name);
+        return propertiesMap.containsKey(name);
     }
 
     public FluentModelProperty getProperty(String name) {
-        return properties.get(name);
+        return propertiesMap.get(name);
     }
 
     public Collection<FluentModelProperty> getProperties() {
-        return properties.values();
+        return properties;
     }
 
     public String getDescription() {
@@ -119,6 +138,10 @@ public class FluentResourceModel {
 
         if (includeImplementationImports) {
             interfaceType.addImportsTo(imports, false);
+        }
+
+        if (resourceCreate != null) {
+            resourceCreate.addImportsTo(imports, includeImplementationImports);
         }
     }
 }

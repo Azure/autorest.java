@@ -9,8 +9,10 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
+import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -19,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,16 +69,16 @@ public class ResourceCreate {
         return methodReferences;
     }
 
-    public boolean isHasResourceGroup() {
+    public boolean hasResourceGroup() {
         return urlPathSegments.hasResourceGroup();
     }
 
-    public boolean isHasLocation() {
+    public boolean hasLocation() {
         return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 
-    public boolean isHasTags() {
+    public boolean hasTags() {
         IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
         return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
     }
@@ -106,7 +109,7 @@ public class ResourceCreate {
         return bodyParameterModel == resourceModel.getInnerModel();
     }
 
-    public List<ClientModelProperty> getRequiredProperties() {
+    public List<ClientModelProperty> getProperties() {
         List<ClientModelProperty> properties = new ArrayList<>();
 
         List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
@@ -114,14 +117,128 @@ public class ResourceCreate {
         if (this.isBodyParameterSameAsFluentModel()) {
             for (String commonPropertyName : commonPropertyNames) {
                 if (resourceModel.hasProperty(commonPropertyName)) {
-                    properties.add(resourceModel.getProperty(commonPropertyName).getInnerProperty());
+                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
+                    properties.add(property.getInnerProperty());
                 }
             }
-
+            for (FluentModelProperty property : resourceModel.getProperties()) {
+                if (!commonPropertyNames.contains(property.getName())) {
+                    properties.add(property.getInnerProperty());
+                }
+            }
         } else {
             // TODO
         }
 
-        return properties;
+        return properties.stream()
+                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
+                .collect(Collectors.toList());
+    }
+
+    public List<ClientModelProperty> getRequiredProperties() {
+        return this.getProperties().stream()
+                .filter(p -> p.isRequired())
+                .collect(Collectors.toList());
+    }
+
+    public List<ClientModelProperty> getNonRequiredProperties() {
+        return this.getProperties().stream()
+                .filter(p -> !p.isRequired())
+                .collect(Collectors.toList());
+    }
+
+    public List<FluentDefinitionStage> getDefinitionStages() {
+        List<FluentDefinitionStage> fluentDefinitionStages = new ArrayList<>();
+
+        // blank
+        FluentDefinitionStage blankStage = new FluentDefinitionStage("Blank", null);
+
+        // parent
+        FluentDefinitionStage parentStage = null;
+        if (this.hasResourceGroup()) {
+            switch (this.getResourceModel().getCategory()) {
+                case RESOURCE_GROUP_AS_PARENT:
+                    parentStage = new FluentDefinitionStage("WithResourceGroup", null);
+                    break;
+
+                case NESTED_CHILD:
+                    parentStage = new FluentDefinitionStage("WithParent", null);
+                    break;
+            }
+        }
+
+        // create
+        FluentDefinitionStage createStage = new FluentDefinitionStage("WithCreate", null);
+
+        final boolean hasLocation = this.hasLocation();
+
+        fluentDefinitionStages.add(blankStage);
+
+        // required properties
+        List<ClientModelProperty> requiredProperties = this.getRequiredProperties();
+
+        FluentDefinitionStage lastStage = null;
+        if (!requiredProperties.isEmpty()) {
+            for (ClientModelProperty property : requiredProperties) {
+                FluentDefinitionStage stage = new FluentDefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
+                if (lastStage == null) {
+                    // first property
+                    if (hasLocation && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+                        blankStage.setExtendStages(stage.getName());
+                        fluentDefinitionStages.add(stage);
+
+                        lastStage = stage;
+                        stage = parentStage;
+                    } else if (parentStage != null) {
+                        blankStage.setExtendStages(parentStage.getName());
+
+                        fluentDefinitionStages.add(parentStage);
+                        lastStage = parentStage;
+                    } else {
+                        blankStage.setExtendStages(stage.getName());
+                    }
+                }
+
+                if (lastStage != null) {
+                    lastStage.setNextStage(stage);
+                }
+
+                fluentDefinitionStages.add(stage);
+                lastStage = stage;
+            }
+        } else {
+            if (parentStage == null) {
+                lastStage = blankStage;
+            } else {
+                lastStage = parentStage;
+                fluentDefinitionStages.add(parentStage);
+            }
+        }
+
+        lastStage.setNextStage(createStage);
+        fluentDefinitionStages.add(createStage);
+
+        // non-required properties
+        List<FluentDefinitionStage> optionalFluentDefinitionStages = new ArrayList<>();
+        List<ClientModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
+        for (ClientModelProperty property : nonRequiredProperties) {
+            FluentDefinitionStage stage = new FluentDefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
+            stage.setNextStage(createStage);
+
+            optionalFluentDefinitionStages.add(stage);
+        }
+        if (!optionalFluentDefinitionStages.isEmpty()) {
+            createStage.setExtendStages(optionalFluentDefinitionStages.stream()
+                    .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
+                    .collect(Collectors.joining(", ")));
+        }
+
+        fluentDefinitionStages.addAll(optionalFluentDefinitionStages);
+
+        return fluentDefinitionStages;
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+
     }
 }

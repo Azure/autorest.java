@@ -8,7 +8,6 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.core.annotation.Immutable;
 
@@ -55,7 +54,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
             interfaceBlock.publicMethod(model.getInnerMethodSignature());
 
             if (model.getCategory() != ModelCategory.WRAPPER) {
-                DEFINITION_TEMPLATE.write(model.getResourceCreate(), javaFile.getContents());
+                DEFINITION_TEMPLATE.write(model.getResourceCreate(), interfaceBlock);
             }
         });
     }

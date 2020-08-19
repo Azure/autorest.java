@@ -61,6 +61,7 @@ public class ResourceParser {
                             String url = m.getInnerProxyMethod().getUrlPath();
                             UrlPathSegments urlPathSegments = new UrlPathSegments(url);
 
+                            // has "subscriptions" segment, and last segment should be resource name
                             if (urlPathSegments.getReverseSegments().iterator().next().isParameterSegment() && urlPathSegments.hasSubscription()) {
                                 foundModels.add(fluentModel);
 
@@ -74,7 +75,10 @@ public class ResourceParser {
                                         .filter(model -> model.getName().equals(bodyTypeName))
                                         .findAny().orElse(null);
 
-                                supportsCreateList.add(new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel));
+                                ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel);
+                                supportsCreateList.add(resourceCreate);
+                                fluentModel.setResourceCreate(resourceCreate);
+
                                 ModelCategory category = ModelCategory.SUBSCRIPTION_AS_PARENT;
                                 if (urlPathSegments.isNested()) {
                                     category = ModelCategory.NESTED_CHILD;
