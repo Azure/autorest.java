@@ -24,7 +24,12 @@ public final class Goblinshark extends Shark {
     @JsonProperty(value = "color")
     private GoblinSharkColor color;
 
-    /** Creates an instance of Goblinshark class. */
+    /**
+     * Creates an instance of Goblinshark class.
+     *
+     * @param length the length value to set.
+     * @param birthday the birthday value to set.
+     */
     @JsonCreator
     public Goblinshark(
             @JsonProperty(value = "length", required = true) float length,

@@ -295,10 +295,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.isRequiredFieldsAsConstructorArgs() && (!requiredProperties.isEmpty() || !requiredParentProperties
             .isEmpty())) {
 
-            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-            {
-                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
-            });
 
             String requiredCtorArgs = requiredProperties.stream()
                 .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
@@ -319,6 +315,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 ctorArgs.append(", ");
             }
             ctorArgs.append(requiredCtorArgs);
+
+
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            {
+                comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
+
+                requiredParentProperties.stream().forEach(property -> comment
+                        .param(property.getName(), String.format("the %s value to set", property.getName())));
+                requiredProperties.stream().forEach(property -> comment
+                        .param(property.getName(), String.format("the %s value to set", property.getName())));
+            });
+
 
             classBlock.annotation("JsonCreator");
             classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), ctorArgs.toString()), (constructor) ->

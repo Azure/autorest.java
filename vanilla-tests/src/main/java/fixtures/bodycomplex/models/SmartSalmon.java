@@ -27,7 +27,11 @@ public final class SmartSalmon extends Salmon {
      */
     @JsonIgnore private Map<String, Object> additionalProperties;
 
-    /** Creates an instance of SmartSalmon class. */
+    /**
+     * Creates an instance of SmartSalmon class.
+     *
+     * @param length the length value to set.
+     */
     @JsonCreator
     public SmartSalmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);

@@ -39,7 +39,11 @@ public class Fish {
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
-    /** Creates an instance of Fish class. */
+    /**
+     * Creates an instance of Fish class.
+     *
+     * @param length the length value to set.
+     */
     @JsonCreator
     public Fish(@JsonProperty(value = "length", required = true) float length) {
         this.length = length;
