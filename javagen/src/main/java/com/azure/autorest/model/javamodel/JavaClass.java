@@ -117,6 +117,12 @@ public class JavaClass implements JavaType {
         addNewLine = true;
     }
 
+    public final void publicStaticFinalClass(String classSignature, Consumer<JavaClass> classBlock) {
+        addExpectedNewLine();
+        contents.classBlock(JavaVisibility.Public, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature, classBlock);
+        addNewLine = true;
+    }
+
     public final void blockComment(String description) {
         addExpectedNewLine();
         contents.blockComment(description);

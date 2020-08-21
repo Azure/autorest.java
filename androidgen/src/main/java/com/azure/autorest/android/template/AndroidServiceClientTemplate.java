@@ -56,6 +56,15 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
         imports.add("com.azure.android.core.internal.util.serializer.SerializerAdapter");
         imports.add("com.azure.android.core.internal.util.serializer.SerializerFormat");
 
+        final AndroidEmbeddedBuilderTemplate embeddedBuilderTemplate
+                = settings.shouldGenerateSyncAsyncClients()
+                ? null
+                : new AndroidEmbeddedBuilderTemplate(serviceClient);
+
+        if (embeddedBuilderTemplate != null) {
+            embeddedBuilderTemplate.addImportsTo(imports);
+        }
+
         javaFile.declareImport(imports);
 
         final JavaVisibility visibility = serviceClient.getPackage()
@@ -191,6 +200,12 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
             // Write client level API methods.
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
+            }
+
+            if (embeddedBuilderTemplate != null) {
+                // Write embedded Builder given ServiceClient is for public
+                // consumption not limited to internal.
+                embeddedBuilderTemplate.write(classBlock);
             }
 
             // Write util methods (should be moved to internal.CoreUtils)
