@@ -18,22 +18,22 @@ public class NonStringEnumTests {
     @Test
     public void getInt() {
         IntEnum actual = client.getInts().get();
-        assertEquals(IntEnum.FOUR_TWO_NINE, actual);
+        assertEquals(IntEnum.FOUR_HUNDRED_TWENTY_NINE, actual);
     }
 
     @Test
     public void putInt() {
-        client.getInts().put(IntEnum.TWO_ZERO_ZERO);
+        client.getInts().put(IntEnum.TWO_HUNDRED);
     }
 
     @Test
     public void getFloat() {
         FloatEnum actual = client.getFloatOperations().get();
-        assertEquals(FloatEnum.FOUR_TWO_NINE_ONE, actual);
+        assertEquals(FloatEnum.FOUR_HUNDRED_TWENTY_NINE1, actual);
     }
 
     @Test
     public void putFloat() {
-        client.getFloatOperations().put(FloatEnum.TWO_ZERO_ZERO_FOUR);
+        client.getFloatOperations().put(FloatEnum.TWO_HUNDRED4);
     }
 }
