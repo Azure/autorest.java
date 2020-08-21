@@ -6,11 +6,15 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,48 +27,63 @@ import java.util.stream.Collectors;
 public class FluentResourceModel {
 
     // inner model. E.g. StorageAccountInner.
-    private final ClientModel model;
+    private final ClientModel innerModel;
     // all parent models of the inner model (property of which need to be put to resource class as well)
     private final List<ClientModel> parentModels;
-
-    private final ModelType modelType = ModelType.WRAPPER;
 
     // class type for interface and implementation
     private final ClassType interfaceType;
     private final ClassType implementationType;
 
     // resource properties
-    private final Map<String, FluentModelProperty> properties = new HashMap<>();
+    private final Map<String, FluentModelProperty> propertiesMap = new HashMap<>();
+    private final List<FluentModelProperty> properties = new ArrayList<>();
 
-    public FluentResourceModel(ClientModel model, List<ClientModel> parentModels) {
+    // category of the resource
+    private ModelCategory category = ModelCategory.WRAPPER;
+    private ResourceCreate resourceCreate;
+
+    public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        this.model = model;
+        this.innerModel = innerModel;
         this.parentModels = parentModels;
 
-        interfaceType = FluentUtils.resourceModelInterfaceClassType(model.getName());
+        interfaceType = FluentUtils.resourceModelInterfaceClassType(innerModel.getName());
         implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
                 .name(interfaceType.getName() + ModelNaming.MODEL_IMPL_SUFFIX)
                 .build();
 
-        properties.putAll(this.model.getProperties().stream()
+        List<List<FluentModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+        propertiesFromTypeAndParents.add(new ArrayList<>());
+        this.innerModel.getProperties().stream()
                 .map(FluentModelProperty::new)
-                .collect(Collectors.toMap(FluentModelProperty::getName, Function.identity())));
+                .forEach(p -> {
+                    propertiesMap.putIfAbsent(p.getName(), p);
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                });
 
         for (ClientModel parent : parentModels) {
+            propertiesFromTypeAndParents.add(new ArrayList<>());
+
             parent.getProperties().stream()
                     .map(FluentModelProperty::new)
-                    .forEach(p -> properties.putIfAbsent(p.getName(), p));
+                    .forEach(p -> {
+                        if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
+                            propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                        }
+                    });
+        }
+
+        Collections.reverse(propertiesFromTypeAndParents);
+        for (List<FluentModelProperty> properties1 : propertiesFromTypeAndParents) {
+            properties.addAll(properties1);
         }
     }
 
-//    public ModelType getModelType() {
-//        return modelType;
-//    }
-
     public ClientModel getInnerModel() {
-        return model;
+        return innerModel;
     }
 
     public ClassType getInterfaceType() {
@@ -75,8 +94,16 @@ public class FluentResourceModel {
         return implementationType;
     }
 
+    public boolean hasProperty(String name) {
+        return propertiesMap.containsKey(name);
+    }
+
+    public FluentModelProperty getProperty(String name) {
+        return propertiesMap.get(name);
+    }
+
     public Collection<FluentModelProperty> getProperties() {
-        return properties.values();
+        return properties;
     }
 
     public String getDescription() {
@@ -88,6 +115,22 @@ public class FluentResourceModel {
         return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
     }
 
+    public ModelCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ModelCategory category) {
+        this.category = category;
+    }
+
+    public ResourceCreate getResourceCreate() {
+        return resourceCreate;
+    }
+
+    public void setResourceCreate(ResourceCreate resourceCreate) {
+        this.resourceCreate = resourceCreate;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(this.getInnerModel().getFullName());
 
@@ -95,6 +138,10 @@ public class FluentResourceModel {
 
         if (includeImplementationImports) {
             interfaceType.addImportsTo(imports, false);
+        }
+
+        if (resourceCreate != null) {
+            resourceCreate.addImportsTo(imports, includeImplementationImports);
         }
     }
 }

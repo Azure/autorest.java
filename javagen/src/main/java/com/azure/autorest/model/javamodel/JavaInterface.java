@@ -42,4 +42,8 @@ public class JavaInterface implements JavaType {
         addExpectedNewLine();
         contents.annotation(annotations);
     }
+
+    public final void interfaceBlock(String interfaceName, Consumer<JavaInterface> interfaceAction) {
+        contents.interfaceBlock(JavaVisibility.PackagePrivate, interfaceName, interfaceAction);
+    }
 }

@@ -49,20 +49,28 @@ public class FluentMapper {
 
         FluentStatic.setFluentClient(fluentClient);
 
+        // manager, service API
         fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
 
+        // wrapper for response object, potentially as resource instance
         fluentClient.getResourceModels().addAll(
                 codeModel.getSchemas().getObjects().stream()
                         .map(o -> FluentResourceModelMapper.getInstance().map(o))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        // resource collection API
         fluentClient.getResourceCollections().addAll(
                 codeModel.getOperationGroups().stream()
                         .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        fluentClient.getResourceCollections().forEach(c -> {
+            ResourceParser.resolveResourceCreate(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels());
+        });
+
+        // set resource collection APIs to service API
         fluentClient.getManager().getProperties().addAll(
                 fluentClient.getResourceCollections().stream()
                         .map(FluentManagerProperty::new)

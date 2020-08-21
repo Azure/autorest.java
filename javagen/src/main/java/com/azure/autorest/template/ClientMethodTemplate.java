@@ -277,7 +277,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         //MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
-        //boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
         generateJavadoc(clientMethod, typeBlock, restAPIMethod, false);
 
         switch (clientMethod.getType()) {
@@ -470,16 +469,16 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             for (ClientMethodParameter parameter : methodParameters) {
                 comment.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
             }
-            if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
+            if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
             }
-            if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                 comment.methodThrows(useFullName
                         ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
                         : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
                         "thrown if the request is rejected by server");
             }
-            if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
                 for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
                     comment.methodThrows(exception.getKey().toString(),
                             String.format("thrown if the request is rejected by server on status code %s",

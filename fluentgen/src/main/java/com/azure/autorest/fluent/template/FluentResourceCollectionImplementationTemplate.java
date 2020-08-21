@@ -41,13 +41,13 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
             // variable for inner model
-            classBlock.privateFinalMemberVariable(collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
+            classBlock.privateFinalMemberVariable(collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
 
             // variable for manager
             classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.COLLECTION_PROPERTY_MANAGER);
 
             // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClassType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
+            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_INNER, ModelNaming.COLLECTION_PROPERTY_INNER));
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_MANAGER, ModelNaming.COLLECTION_PROPERTY_MANAGER));
             });

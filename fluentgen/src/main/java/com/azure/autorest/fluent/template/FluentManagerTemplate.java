@@ -165,7 +165,7 @@ public class FluentManagerTemplate {
 
                 classBlock.publicMethod(String.format("%1$s %2$s()", property.getFluentType().getName(), property.getMethodName()), methodBlock -> {
                     methodBlock.ifBlock(String.format("this.%1$s == null", property.getName()), ifBlock -> {
-                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s, this);", property.getName(), property.getFluentImplementType().getName(), ModelNaming.MANAGER_PROPERTY_BUILDER, property.getBuildMethodInvocation()));
+                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s, this);", property.getName(), property.getFluentImplementType().getName(), ModelNaming.MANAGER_PROPERTY_BUILDER, property.getInnerBuildMethodInvocation()));
                     });
                     methodBlock.methodReturn(property.getName());
                 });
