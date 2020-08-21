@@ -29,7 +29,11 @@ public class Salmon extends Fish {
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
-    /** Creates an instance of Salmon class. */
+    /**
+     * Creates an instance of Salmon class.
+     *
+     * @param length the length value to set.
+     */
     @JsonCreator
     public Salmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
