@@ -381,12 +381,17 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleSync:
             case LongRunningSync:
+                String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+                if (clientMethod.getName().contains("WithResponse")) {
+                    asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+                }
+                String effectiveAsyncMethodName = asyncMethodName;
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                         function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                                clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                                effectiveAsyncMethodName, clientMethod.getArgumentList());
                         function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                             javaBlock.annotation("Override");
                             javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -398,7 +403,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         IType returnType = clientMethod.getReturnValue().getType();
                         if (returnType instanceof PrimitiveType) {
                             function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                                    clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                                    effectiveAsyncMethodName, clientMethod.getArgumentList());
                             function.ifBlock("value != null", ifAction -> {
                                 ifAction.methodReturn("value");
                             }).elseBlock(elseAction -> {
@@ -409,10 +414,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                 }
                             });
                         } else {
-                            function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                            function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
                         }
                     } else {
-                        function.line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
                     }
                 });
                 break;
