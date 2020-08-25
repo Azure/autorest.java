@@ -79,11 +79,6 @@ public class Androidgen extends NewPlugin {
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                javaPackage
-                    .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
-            }
-
             // Sync and Async Service Clients.
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 final String serviceClientPackage = JavaSettings.getInstance().getPackage();
@@ -98,6 +93,13 @@ public class Androidgen extends NewPlugin {
                 for (AsyncSyncClient syncClient : syncClients) {
                     javaPackage.addSyncServiceClient(serviceClientPackage, syncClient);
                 }
+
+                PackageInfo exportPackage = new PackageInfo(
+                        serviceClientPackage,
+                        String.format("Package containing the classes for %s.\n%s",
+                                codeModel.getLanguage().getJava().getName(),
+                                codeModel.getInfo().getDescription()));
+                javaPackage.addPackageInfo(exportPackage.getPackage(), "package-info", exportPackage);
             }
 
             // Method group
