@@ -88,6 +88,7 @@ public class FluentMapper {
                 // ObjectSchema
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
+                        .filter(o -> !isPossiblePagedList(o))
                         .flatMap(o -> o.getResponses().stream())
                         .map(Response::getSchema),
                 // Paged list
