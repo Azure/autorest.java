@@ -19,7 +19,12 @@ public final class Sawshark extends Shark {
     @JsonProperty(value = "picture")
     private byte[] picture;
 
-    /** Creates an instance of Sawshark class. */
+    /**
+     * Creates an instance of Sawshark class.
+     *
+     * @param length the length value to set.
+     * @param birthday the birthday value to set.
+     */
     @JsonCreator
     public Sawshark(
             @JsonProperty(value = "length", required = true) float length,

@@ -12,7 +12,12 @@ import java.time.OffsetDateTime;
 @JsonTypeName("cookiecuttershark")
 @Immutable
 public final class Cookiecuttershark extends Shark {
-    /** Creates an instance of Cookiecuttershark class. */
+    /**
+     * Creates an instance of Cookiecuttershark class.
+     *
+     * @param length the length value to set.
+     * @param birthday the birthday value to set.
+     */
     @JsonCreator
     public Cookiecuttershark(
             @JsonProperty(value = "length", required = true) float length,

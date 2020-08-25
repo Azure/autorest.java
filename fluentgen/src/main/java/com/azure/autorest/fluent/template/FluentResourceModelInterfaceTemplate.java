@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
@@ -20,6 +21,8 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
     public static FluentResourceModelInterfaceTemplate getInstance() {
         return INSTANCE;
     }
+
+    private static final FluentResourceModelInterfaceDefinitionTemplate DEFINITION_TEMPLATE = new FluentResourceModelInterfaceDefinitionTemplate();
 
     @Override
     public void write(FluentResourceModel model, JavaFile javaFile) {
@@ -49,6 +52,10 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                 comment.methodReturns("the inner object");
             });
             interfaceBlock.publicMethod(model.getInnerMethodSignature());
+
+            if (model.getCategory() != ModelCategory.WRAPPER) {
+                DEFINITION_TEMPLATE.write(model.getResourceCreate(), interfaceBlock);
+            }
         });
     }
 }

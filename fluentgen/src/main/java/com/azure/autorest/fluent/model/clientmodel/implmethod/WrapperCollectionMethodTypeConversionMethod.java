@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.modelimpl;
+package com.azure.autorest.fluent.model.clientmodel.implmethod;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 // Implementation method template for return type requires conversion.
 // E.g.
 //    PagedIterable<StorageAccountInner> inner = this.inner().list();
-//    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1));
+//    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1, this.manager()));
 public class WrapperCollectionMethodTypeConversionMethod implements WrapperMethod {
 
     private final MethodTemplate conversionMethodTemplate;
@@ -44,7 +44,8 @@ public class WrapperCollectionMethodTypeConversionMethod implements WrapperMetho
                         block.methodReturn(TypeConversionUtils.conversionExpression(innerType, "inner"));
                     } else {
                         block.ifBlock("inner != null", ifBlock -> {
-                            block.methodReturn(TypeConversionUtils.conversionExpression(innerType, "inner"));
+                            String expression = TypeConversionUtils.conversionExpression(innerType, "inner");
+                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn("null");
                         });
