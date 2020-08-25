@@ -6,7 +6,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.android.mapper.AndroidMapperFactory;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
@@ -20,7 +19,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
-import com.azure.autorest.android.template.AndroidTemplateFactory;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ public class Androidgen extends NewPlugin {
 
             // Step 3: Write to templates
             JavaPackage javaPackage = new JavaPackage();
-            // Service client
+            // Service Client (composes both sync and async APIs).
             javaPackage
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
@@ -86,23 +84,19 @@ public class Androidgen extends NewPlugin {
                     .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
-            // Service client builder
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            javaPackage.addServiceClientBuilder(builderPackage,
-                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
-
+            // Sync and Async Service Clients.
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                final String serviceClientPackage = JavaSettings.getInstance().getPackage();
                 List<AsyncSyncClient> asyncClients = new ArrayList<>();
                 List<AsyncSyncClient> syncClients = new ArrayList<>();
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                    javaPackage.addAsyncServiceClient(serviceClientPackage, asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(serviceClientPackage, syncClient);
                 }
             }
 

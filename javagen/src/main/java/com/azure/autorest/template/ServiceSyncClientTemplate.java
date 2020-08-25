@@ -23,17 +23,8 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     return _instance;
   }
 
-  protected void addAnnotationImports(Set<String> imports) {
-    imports.add("com.azure.core.annotation.ServiceClient");
-  }
-
-  protected void addClassAnnotation(JavaFile javaFile, ServiceClient serviceClient) {
-    javaFile.annotation(String.format("ServiceClient(builder = %s.class, isAsync = true)",
-            serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
-  }
-
   @Override
-  public final void write(AsyncSyncClient syncClient, JavaFile javaFile) {
+  public void write(AsyncSyncClient syncClient, JavaFile javaFile) {
     ServiceClient serviceClient = syncClient.getServiceClient();
 
     JavaSettings settings = JavaSettings.getInstance();
@@ -49,14 +40,15 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
       methodGroupClient.addImportsTo(imports, true, settings);
       imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
     }
-    addAnnotationImports(imports);
+    imports.add("com.azure.core.annotation.ServiceClient");
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
             serviceClient.getInterfaceName())));
 
-    addClassAnnotation(javaFile, serviceClient);
+    javaFile.annotation(String.format("ServiceClient(builder = %s.class, isAsync = true)",
+            serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
     javaFile.publicFinalClass(syncClassName, classBlock ->
     {
       // Add service client member variable
