@@ -176,7 +176,7 @@ public class Javagen extends NewPlugin {
             }
             //Step 6: Print to files
             for (Map.Entry<String, String> formattedFile : formattedFiles.entrySet()) {
-                writeFile(formattedFile.getKey(), formattedFile.getValue(), null);
+                writeFile("src/main/java/" + formattedFile.getKey(), formattedFile.getValue(), null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
