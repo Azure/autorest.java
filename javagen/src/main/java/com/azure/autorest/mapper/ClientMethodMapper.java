@@ -432,7 +432,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
 
                     if (settings.isContextClientMethodParameter()) {
-                        builder.onlyRequiredParameters(false)
+                        builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                .onlyRequiredParameters(false)
                                 .name(proxyMethod.getSimpleRestResponseMethodName())
                                 .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
                                         syncReturnWithResponse), syncReturnWithResponse));

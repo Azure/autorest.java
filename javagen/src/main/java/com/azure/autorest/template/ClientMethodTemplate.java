@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -379,9 +380,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case SimpleSync:
+            case SimpleSyncRestResponse:
             case LongRunningSync:
                 String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
-                if (clientMethod.getName().contains("WithResponse")) {
+                if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
                     asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
                 }
                 String effectiveAsyncMethodName = asyncMethodName;
