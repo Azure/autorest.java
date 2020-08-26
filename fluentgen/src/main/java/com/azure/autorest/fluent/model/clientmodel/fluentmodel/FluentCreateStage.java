@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.model.clientmodel.ClientMethod;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +27,12 @@ public class FluentCreateStage extends FluentDefinitionStage {
 
     @Override
     public List<ClientMethod> getMethods() {
-        return Arrays.asList(createMethod, createMethodWithContext);
+        List<ClientMethod> clientMethods = new ArrayList<>();
+        clientMethods.add(createMethod);
+        if (createMethodWithContext != null) {
+            clientMethods.add(createMethodWithContext);
+        }
+        return clientMethods;
     }
 
     public void setCreateMethod(ClientMethod createMethod) {

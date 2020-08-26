@@ -425,17 +425,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
-                    if (settings.isContextClientMethodParameter()) {
-                        builder.name(proxyMethod.getSimpleRestResponseMethodName()).returnValue(new ReturnValue(
-                                returnTypeDescription(operation, syncReturnWithResponse, syncReturnWithResponse),
-                                syncReturnWithResponse));
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
-
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
+                    }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                .onlyRequiredParameters(false)
+                                .name(proxyMethod.getSimpleRestResponseMethodName())
+                                .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
+                                        syncReturnWithResponse), syncReturnWithResponse));
+                        addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
             }

@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestSwaggerBATDictionaryService type. */
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
-    private DictionariesImpl serviceClient;
+    private final DictionariesImpl serviceClient;
 
     /** Initializes an instance of Dictionaries client. */
     AutoRestSwaggerBATDictionaryServiceAsyncClient(DictionariesImpl serviceClient) {
