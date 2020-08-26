@@ -177,6 +177,10 @@ public class ClientMethod {
         return getProxyMethod().getName() + "Async";
     }
 
+    public final String getSimpleWithResponseAsyncMethodName() {
+        return getProxyMethod().getName() + "WithResponseAsync";
+    }
+
     public final List<ClientMethodParameter> getMethodParameters() {
         return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
