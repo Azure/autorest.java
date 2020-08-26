@@ -67,6 +67,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
         IType syncReturnType;
+        IType syncReturnWithResponse;
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             // Mono<SimpleResponse<Page>>
@@ -97,6 +98,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 syncReturnType = responseBodyType.getClientType();
             }
         }
+        syncReturnWithResponse = GenericType.Response(syncReturnType);
 
         for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
@@ -424,6 +426,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
+                        builder.name(proxyMethod.getSimpleRestResponseMethodName()).returnValue(new ReturnValue(
+                                returnTypeDescription(operation, syncReturnWithResponse, syncReturnWithResponse),
+                                syncReturnWithResponse));
                         addClientMethodWithContext(methods, builder, parameters);
                     }
 

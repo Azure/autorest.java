@@ -178,13 +178,8 @@ public final class Bools {
      * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getTrue(Context context) {
-        Boolean value = getTrueAsync(context).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+    public Response<Boolean> getTrueWithResponse(Context context) {
+        return getTrueWithResponseAsync(context).block();
     }
 
     /**
@@ -267,10 +262,11 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putTrue(Context context) {
-        putTrueAsync(context).block();
+    public Response<Void> putTrueWithResponse(Context context) {
+        return putTrueWithResponseAsync(context).block();
     }
 
     /**
@@ -376,13 +372,8 @@ public final class Bools {
      * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getFalse(Context context) {
-        Boolean value = getFalseAsync(context).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+    public Response<Boolean> getFalseWithResponse(Context context) {
+        return getFalseWithResponseAsync(context).block();
     }
 
     /**
@@ -465,10 +456,11 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFalse(Context context) {
-        putFalseAsync(context).block();
+    public Response<Void> putFalseWithResponse(Context context) {
+        return putFalseWithResponseAsync(context).block();
     }
 
     /**
@@ -574,13 +566,8 @@ public final class Bools {
      * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getNull(Context context) {
-        Boolean value = getNullAsync(context).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+    public Response<Boolean> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -686,12 +673,7 @@ public final class Bools {
      * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getInvalid(Context context) {
-        Boolean value = getInvalidAsync(context).block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+    public Response<Boolean> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 }
