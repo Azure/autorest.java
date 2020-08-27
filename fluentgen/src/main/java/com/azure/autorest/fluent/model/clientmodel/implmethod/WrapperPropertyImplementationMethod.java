@@ -42,9 +42,9 @@ public class WrapperPropertyImplementationMethod implements WrapperMethod {
                         String unmodifiableMethodName = property.getClientType() instanceof ListType
                                 ? "unmodifiableList" : "unmodifiableMap";
 
-                        block.line(String.format("%1$s inner = this.%2$s().%3$s();", property.getClientType().toString(), ModelNaming.METHOD_INNER, property.getGetterName()));
-                        block.ifBlock("inner != null", ifBlock -> {
-                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), "inner"));
+                        block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, property.getGetterName()));
+                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
+                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), TypeConversionUtils.tempPropertyName()));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn("null");
                         });

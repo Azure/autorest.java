@@ -47,9 +47,9 @@ public class WrapperPropertyTypeConversionMethod implements WrapperMethod {
                 .imports(imports)
                 .methodSignature(fluentProperty.getMethodSignature())
                 .method(block -> {
-                    block.line(String.format("%1$s inner = this.%2$s().%3$s();", property.getClientType().toString(), ModelNaming.METHOD_INNER, property.getGetterName()));
-                    block.ifBlock("inner != null", ifBlock -> {
-                        String expression = TypeConversionUtils.conversionExpression(property.getClientType(), "inner");
+                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, property.getGetterName()));
+                    block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
+                        String expression = TypeConversionUtils.conversionExpression(property.getClientType(), TypeConversionUtils.tempPropertyName());
                         block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), expression));
                     }).elseBlock(elseBlock -> {
                         block.methodReturn("null");

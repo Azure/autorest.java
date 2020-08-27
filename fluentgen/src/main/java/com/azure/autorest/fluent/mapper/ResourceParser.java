@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.core.http.HttpMethod;
 import org.slf4j.Logger;
@@ -99,7 +100,8 @@ public class ResourceParser {
             String methodName = rc.getMethodName();
             rc.getMethodReferences().addAll(
                     rc.getResourceCollection().getMethods().stream()
-                            .filter(m -> m.getInnerClientMethod().getName().equals(methodName))
+                            .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
+                                    || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + "WithResponse")))
                             .collect(Collectors.toList()));
         });
 

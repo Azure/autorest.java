@@ -55,7 +55,8 @@ public class FluentResourceCollection {
         this.methods.addAll(this.groupClient.getClientMethods().stream()
                 .filter(m -> m.getType() == ClientMethodType.SimpleSync
                         || m.getType() == ClientMethodType.PagingSync
-                        || m.getType() == ClientMethodType.LongRunningSync)
+                        || m.getType() == ClientMethodType.LongRunningSync
+                        || m.getType() == ClientMethodType.SimpleSyncRestResponse)
                 .map(FluentCollectionMethod::new)
                 .collect(Collectors.toList()));
     }

@@ -199,7 +199,9 @@ public class ClientModelProperty {
             imports.add("java.util.HashMap");
         }
 
-        getWireType().addImportsTo(imports, false);
+        if (getWireType() != null) {
+            getWireType().addImportsTo(imports, false);
+        }
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.ByteArray)) {
