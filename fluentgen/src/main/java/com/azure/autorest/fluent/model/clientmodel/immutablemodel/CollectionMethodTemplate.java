@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.implmethod;
+package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
@@ -14,11 +14,11 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 
 // Implementation method template for simple return type
 // E.g. "return this.inner().checkExistence(...)"
-public class WrapperCollectionMethodImplementationMethod implements WrapperMethod {
+public class CollectionMethodTemplate implements ImmutableMethod {
 
     private final MethodTemplate implementationMethodTemplate;
 
-    public WrapperCollectionMethodImplementationMethod(FluentCollectionMethod fluentMethod, IType innerType) {
+    public CollectionMethodTemplate(FluentCollectionMethod fluentMethod, IType innerType) {
         implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {

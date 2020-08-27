@@ -3,18 +3,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
 import com.azure.autorest.model.clientmodel.ClientMethod;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class FluentParentStage extends FluentDefinitionStage {
+public class DefinitionStageParent extends DefinitionStage {
 
     private ClientMethod existingParentMethod;
 
-    public FluentParentStage(String name) {
+    public DefinitionStageParent(String name) {
         super(name, null);
     }
 

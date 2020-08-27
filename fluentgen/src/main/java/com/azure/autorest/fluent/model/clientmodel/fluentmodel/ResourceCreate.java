@@ -13,6 +13,10 @@ import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -44,7 +48,7 @@ public class ResourceCreate {
 
     private final ClientModel bodyParameterModel;
 
-    private List<FluentDefinitionStage> fluentDefinitionStages;
+    private List<DefinitionStage> definitionStages;
 
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection, UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         this.resourceModel = resourceModel;
@@ -152,57 +156,57 @@ public class ResourceCreate {
                 .collect(Collectors.toList());
     }
 
-    public List<FluentDefinitionStage> getDefinitionStages() {
-        if (fluentDefinitionStages != null) {
-            return fluentDefinitionStages;
+    public List<DefinitionStage> getDefinitionStages() {
+        if (definitionStages != null) {
+            return definitionStages;
         }
 
-        fluentDefinitionStages = new ArrayList<>();
+        definitionStages = new ArrayList<>();
 
         // blank
-        FluentBlankStage blankStage = new FluentBlankStage();
+        DefinitionStageBlank definitionStageBlank = new DefinitionStageBlank();
 
         // parent
-        FluentParentStage parentStage = null;
+        DefinitionStageParent definitionStageParent = null;
         switch (this.getResourceModel().getCategory()) {
             case RESOURCE_GROUP_AS_PARENT:
-                parentStage = new FluentParentStage("WithResourceGroup");
+                definitionStageParent = new DefinitionStageParent("WithResourceGroup");
                 break;
 
             case NESTED_CHILD:
-                parentStage = new FluentParentStage("WithParentResource");
+                definitionStageParent = new DefinitionStageParent("WithParentResource");
                 break;
         }
 
         // create
-        FluentCreateStage createStage = new FluentCreateStage();
+        DefinitionStageCreate definitionStageCreate = new DefinitionStageCreate();
 
         final boolean hasLocation = this.hasLocation();
 
-        fluentDefinitionStages.add(blankStage);
+        definitionStages.add(definitionStageBlank);
 
         // required properties
         List<ClientModelProperty> requiredProperties = this.getRequiredProperties();
 
-        FluentDefinitionStage lastStage = null;
+        DefinitionStage lastStage = null;
         if (!requiredProperties.isEmpty()) {
             for (ClientModelProperty property : requiredProperties) {
-                FluentDefinitionStage stage = new FluentDefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
+                DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
                 if (lastStage == null) {
                     // first property
                     if (hasLocation && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
-                        blankStage.setExtendStages(stage.getName());
-                        fluentDefinitionStages.add(stage);
+                        definitionStageBlank.setExtendStages(stage.getName());
+                        definitionStages.add(stage);
 
                         lastStage = stage;
-                        stage = parentStage;
-                    } else if (parentStage != null) {
-                        blankStage.setExtendStages(parentStage.getName());
+                        stage = definitionStageParent;
+                    } else if (definitionStageParent != null) {
+                        definitionStageBlank.setExtendStages(definitionStageParent.getName());
 
-                        fluentDefinitionStages.add(parentStage);
-                        lastStage = parentStage;
+                        definitionStages.add(definitionStageParent);
+                        lastStage = definitionStageParent;
                     } else {
-                        blankStage.setExtendStages(stage.getName());
+                        definitionStageBlank.setExtendStages(stage.getName());
                     }
                 }
 
@@ -210,60 +214,60 @@ public class ResourceCreate {
                     lastStage.setNextStage(stage);
                 }
 
-                fluentDefinitionStages.add(stage);
+                definitionStages.add(stage);
                 lastStage = stage;
             }
         } else {
-            if (parentStage == null) {
-                blankStage.setExtendStages(createStage.getName());
-                lastStage = blankStage;
+            if (definitionStageParent == null) {
+                definitionStageBlank.setExtendStages(definitionStageCreate.getName());
+                lastStage = definitionStageBlank;
             } else {
-                blankStage.setExtendStages(parentStage.getName());
-                lastStage = parentStage;
-                fluentDefinitionStages.add(parentStage);
+                definitionStageBlank.setExtendStages(definitionStageParent.getName());
+                lastStage = definitionStageParent;
+                definitionStages.add(definitionStageParent);
             }
         }
 
-        lastStage.setNextStage(createStage);
-        fluentDefinitionStages.add(createStage);
+        lastStage.setNextStage(definitionStageCreate);
+        definitionStages.add(definitionStageCreate);
 
         // create method
-        createStage.setCreateMethod(this.getCreateMethod(false));
+        definitionStageCreate.setCreateMethod(this.getCreateMethod(false));
         ClientMethod createMethodWithContext = this.getCreateMethod(true);
         if (createMethodWithContext != null) {
-            createStage.setCreateMethodWithContext(createMethodWithContext);
+            definitionStageCreate.setCreateMethodWithContext(createMethodWithContext);
         }
 
-        if (parentStage != null) {
+        if (definitionStageParent != null) {
             // existing parent method after all stages is connected.
-            parentStage.setExistingParentMethod(this.getExistingParentMethod(parentStage));
+            definitionStageParent.setExistingParentMethod(this.getExistingParentMethod(definitionStageParent));
         }
 
         // non-required properties
-        List<FluentDefinitionStage> optionalFluentDefinitionStages = new ArrayList<>();
+        List<DefinitionStage> optionalDefinitionStages = new ArrayList<>();
         List<ClientModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
         for (ClientModelProperty property : nonRequiredProperties) {
-            FluentDefinitionStage stage = new FluentDefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
-            stage.setNextStage(createStage);
+            DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
+            stage.setNextStage(definitionStageCreate);
 
-            optionalFluentDefinitionStages.add(stage);
+            optionalDefinitionStages.add(stage);
         }
-        if (!optionalFluentDefinitionStages.isEmpty()) {
-            createStage.setExtendStages(optionalFluentDefinitionStages.stream()
+        if (!optionalDefinitionStages.isEmpty()) {
+            definitionStageCreate.setExtendStages(optionalDefinitionStages.stream()
                     .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
                     .collect(Collectors.joining(", ")));
         }
 
-        fluentDefinitionStages.addAll(optionalFluentDefinitionStages);
+        definitionStages.addAll(optionalDefinitionStages);
 
-        return fluentDefinitionStages;
+        return definitionStages;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
     }
 
-    private ClientMethod getExistingParentMethod(FluentParentStage stage) {
+    private ClientMethod getExistingParentMethod(DefinitionStageParent stage) {
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
         List<ClientMethodParameter> parameters = this.getPathParameters();
         parameters.remove(parameters.size() - 1);

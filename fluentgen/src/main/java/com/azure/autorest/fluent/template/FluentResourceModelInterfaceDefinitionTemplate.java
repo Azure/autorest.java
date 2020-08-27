@@ -6,7 +6,7 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentDefinitionStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.javamodel.JavaInterface;
@@ -21,7 +21,7 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
     @Override
     public void write(ResourceCreate resourceCreate, JavaInterface interfaceBlock) {
         if (resourceCreate.isBodyParameterSameAsFluentModel()) {
-            List<FluentDefinitionStage> fluentDefinitionStages = resourceCreate.getDefinitionStages();
+            List<DefinitionStage> definitionStages = resourceCreate.getDefinitionStages();
 
             final String modelName = resourceCreate.getResourceModel().getInterfaceType().getName();
 
@@ -31,7 +31,7 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
             });
             String definitionInterfaceSignature = String.format("%1$s extends %2$s",
                     ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION,
-                    fluentDefinitionStages.stream()
+                    definitionStages.stream()
                             .filter(s -> s.getProperty() == null || s.getProperty().isRequired())
                             .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
                             .collect(Collectors.joining(", ")));
@@ -43,7 +43,7 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                 commentBlock.description(String.format("The %1$s definition stages.", modelName));
             });
             interfaceBlock.interfaceBlock(ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, block1 -> {
-                for (FluentDefinitionStage stage : fluentDefinitionStages) {
+                for (DefinitionStage stage : definitionStages) {
                     block1.javadocComment(commentBlock -> {
                         commentBlock.description(stage.getDescription(modelName));
                     });

@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 // Fluent resource instance. E.g. StorageAccount.
 // Also include some simple wrapper class.
@@ -40,7 +38,7 @@ public class FluentResourceModel {
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
-    private ModelCategory category = ModelCategory.WRAPPER;
+    private ModelCategory category = ModelCategory.IMMUTABLE;
     private ResourceCreate resourceCreate;
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {

@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.implmethod;
+package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
@@ -23,11 +23,11 @@ import java.util.stream.Collectors;
 // E.g.
 //    PagedIterable<StorageAccountInner> inner = this.inner().list();
 //    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1, this.manager()));
-public class WrapperCollectionMethodTypeConversionMethod implements WrapperMethod {
+public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
 
     private final MethodTemplate conversionMethodTemplate;
 
-    public WrapperCollectionMethodTypeConversionMethod(FluentCollectionMethod fluentMethod, IType innerType) {
+    public CollectionMethodTypeConversionTemplate(FluentCollectionMethod fluentMethod, IType innerType) {
         Set<String> imports = new HashSet<>();
         fluentMethod.getFluentReturnType().addImportsTo(imports, false);
         // Type inner = ...

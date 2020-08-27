@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -12,13 +12,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class FluentDefinitionStage {
+public class DefinitionStage {
     private final String name;
     private final ClientModelProperty property;
-    private FluentDefinitionStage nextStage;
+    private DefinitionStage nextStage;
     private String extendStages;
 
-    public FluentDefinitionStage(String name, ClientModelProperty property) {
+    public DefinitionStage(String name, ClientModelProperty property) {
         this.name = name;
         this.property = property;
     }
@@ -31,11 +31,11 @@ public class FluentDefinitionStage {
         return property;
     }
 
-    public FluentDefinitionStage getNextStage() {
+    public DefinitionStage getNextStage() {
         return nextStage;
     }
 
-    public void setNextStage(FluentDefinitionStage nextStage) {
+    public void setNextStage(DefinitionStage nextStage) {
         this.nextStage = nextStage;
     }
 
