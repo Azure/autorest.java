@@ -12,7 +12,9 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.core.http.rest.SimpleResponse;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,21 +32,27 @@ public class WrapperCollectionMethodTypeConversionMethod implements WrapperMetho
         fluentMethod.getFluentReturnType().addImportsTo(imports, false);
         // Type inner = ...
         innerType.addImportsTo(imports, false);
-        // Collectors.toList
         if (innerType instanceof ListType || innerType instanceof MapType) {
+            // Collectors.toList
             imports.add(Collectors.class.getName());
+
+            // Collections.unmodifiableList
+            imports.add(Collections.class.getName());
+        }
+        if (TypeConversionUtils.isResponse(innerType)) {
+            imports.add(SimpleResponse.class.getName());
         }
 
         conversionMethodTemplate = MethodTemplate.builder()
                 .imports(imports)
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
-                    block.line(String.format("%1$s inner = this.%2$s().%3$s;", innerType, ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
+                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s;", innerType, TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
                     if (TypeConversionUtils.isPagedIterable(innerType)) {
-                        block.methodReturn(TypeConversionUtils.conversionExpression(innerType, "inner"));
+                        block.methodReturn(TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName()));
                     } else {
-                        block.ifBlock("inner != null", ifBlock -> {
-                            String expression = TypeConversionUtils.conversionExpression(innerType, "inner");
+                        block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
+                            String expression = TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName());
                             block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
                             block.methodReturn("null");

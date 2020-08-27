@@ -234,8 +234,10 @@ public class ResourceCreate {
             createStage.setCreateMethodWithContext(createMethodWithContext);
         }
 
-        // existing parent method after all stages is connected.
-        parentStage.setExistingParentMethod(this.getExistingParentMethod(parentStage));
+        if (parentStage != null) {
+            // existing parent method after all stages is connected.
+            parentStage.setExistingParentMethod(this.getExistingParentMethod(parentStage));
+        }
 
         // non-required properties
         List<FluentDefinitionStage> optionalFluentDefinitionStages = new ArrayList<>();

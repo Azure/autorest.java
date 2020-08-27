@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 
 import java.util.Locale;
@@ -99,6 +100,9 @@ public class FluentUtils {
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
                 IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
                 wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.PagedIterable(wrapperItemType);
+            } else if (Response.class.getSimpleName().equals(type.getName())) {
+                IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
+                wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.Response(wrapperItemType);
             }
         }
         return wrapperType;
