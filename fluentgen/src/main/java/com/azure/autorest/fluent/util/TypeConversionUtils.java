@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 
