@@ -174,6 +174,7 @@ public class Javagen extends NewPlugin {
                 process.setAccessible(true);
                 formattedFiles = (Map<String, String>) postProcessorClass.getDeclaredMethod("process", Map.class).invoke(postProcessor, formattedFiles);
             }
+            //Step 6:
             //Step 6: Print to files
             for (Map.Entry<String, String> formattedFile : formattedFiles.entrySet()) {
                 writeFile("src/main/java/" + formattedFile.getKey(), formattedFile.getValue(), null);
