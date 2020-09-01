@@ -44,6 +44,7 @@ public class AndroidProxyMethod extends ProxyMethod {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         imports.add("retrofit2.Call");
         imports.add("okhttp3.ResponseBody");
+        imports.add("com.azure.android.core.http.exception.HttpResponseException");
         imports.add(String.format("retrofit2.http.%1$s", CodeNamer
                 .toPascalCase(getHttpMethod().toString().toUpperCase())));
         for (ProxyMethodParameter parameter : parameters) {
