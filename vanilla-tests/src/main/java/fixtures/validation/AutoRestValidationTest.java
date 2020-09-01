@@ -317,6 +317,30 @@ public final class AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id) {
+        final Product body = null;
+        return validationOfBodyWithResponseAsync(resourceGroupName, id, body)
+                .flatMap(
+                        (Response<Product> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
      * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -325,6 +349,22 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
+        return validationOfBodyAsync(resourceGroupName, id, body).block();
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Product validationOfBody(String resourceGroupName, int id) {
+        final Product body = null;
         return validationOfBodyAsync(resourceGroupName, id, body).block();
     }
 
@@ -402,6 +442,25 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Product> postWithConstantInBodyAsync() {
+        final Product body = null;
+        return postWithConstantInBodyWithResponseAsync(body)
+                .flatMap(
+                        (Response<Product> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
      * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -410,6 +469,17 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product postWithConstantInBody(Product body) {
+        return postWithConstantInBodyAsync(body).block();
+    }
+
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Product postWithConstantInBody() {
+        final Product body = null;
         return postWithConstantInBodyAsync(body).block();
     }
 }

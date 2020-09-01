@@ -246,6 +246,27 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> analyzeBodyAsync() {
+        final String source = null;
+        return analyzeBodyWithResponseAsync(source)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -254,6 +275,19 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(String source) {
+        return analyzeBodyAsync(source).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String analyzeBody() {
+        final String source = null;
         return analyzeBodyAsync(source).block();
     }
 
