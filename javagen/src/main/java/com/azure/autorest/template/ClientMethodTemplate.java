@@ -65,7 +65,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
-            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false, false);
+            for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
+                if (!parameter.getIsRequired()) {
+                    IType parameterClientType = parameter.getClientType();
+                    String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
+                    function.line("final %s %s = %s;", parameterClientType, parameter.getName(), defaultValue == null ? "null" : defaultValue);
+                }
+            }
         }
     }
 
