@@ -100,6 +100,16 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                     comment.description(p.getDescription());
                 });
                 classBlock.privateMemberVariable(p.getDeclaration());
+
+                classBlock.javadocComment(comment ->
+                {
+                    comment.description(String.format("Gets %1$s", p.getDescription()));
+                    comment.methodReturns(String.format("the %1$s value.", p.getName()));
+                });
+                classBlock.publicMethod(String.format("%1$s get%2$s()", p.getClientType(), CodeNamer.toPascalCase(p.getName())), function ->
+                {
+                    function.methodReturn(String.format("this.%1$s", p.getName()));
+                });
             });
 
             List<ServiceClientProperty> ctrParamsSet2 = new ArrayList<>();
