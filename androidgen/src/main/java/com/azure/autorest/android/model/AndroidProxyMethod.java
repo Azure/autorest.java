@@ -52,6 +52,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                     && parameter.getRequestParameterLocation() != RequestParameterLocation.Uri) {
                 imports.add(String.format("retrofit2.http.%1$s",
                         CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
+                parameter.getWireType().addImportsTo(imports, false);
             }
             if (parameter.getRequestParameterLocation() == RequestParameterLocation.Body) {
                 imports.add("okhttp3.RequestBody");
