@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 /**
  Settings that are used by the Java AutoRest Generator.
@@ -89,7 +92,9 @@ public class JavaSettings
                     host.getStringValue("sync-methods", "essential"),
                     host.getBooleanValue("client-logger", false),
                     host.getBooleanValue("required-fields-as-ctor-args", false),
-                    host.getBooleanValue("service-interface-as-public", false));
+                    host.getBooleanValue("service-interface-as-public", false),
+                    host.getStringValue("artifact-id", ""),
+                    host.getStringValue("credential-types", "none"));
         }
         return _instance;
     }
@@ -136,7 +141,9 @@ public class JavaSettings
                          String syncMethods,
                          boolean clientLogger,
                          boolean requiredFieldsAsConstructorArgs,
-                         boolean serviceInterfaceAsPublic)
+                         boolean serviceInterfaceAsPublic,
+                         String artifactId,
+                         String credentialType)
     {
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -163,13 +170,32 @@ public class JavaSettings
         this.clientLogger = clientLogger;
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
         this.serviceInterfaceAsPublic = serviceInterfaceAsPublic;
+        this.artifactId = artifactId;
+
+        if (credentialType != null) {
+            String[] splits = credentialType.split(",");
+            this.credentialTypes = Arrays.stream(splits)
+                    .map(split -> split.trim())
+                    .map(type -> CredentialType.fromValue(credentialType))
+                    .collect(Collectors.toSet());
+        }
     }
 
+    private Set<CredentialType> credentialTypes;
+    public Set<CredentialType> getCredentialTypes() {
+        return credentialTypes;
+    }
 
     private boolean azure;
     public final boolean isAzure()
     {
         return azure;
+    }
+
+    private String artifactId;
+
+    public String getArtifactId() {
+        return artifactId;
     }
 
     public enum Fluent {
@@ -376,6 +402,25 @@ public class JavaSettings
     public final String getCustomTypesSubpackage()
     {
         return customTypesSubpackage;
+    }
+
+    public enum CredentialType {
+        TOKEN_CREDENTIAL,
+        AZURE_KEY_CREDENTIAL,
+        NONE;
+
+        public static CredentialType fromValue(String value) {
+            if (value == null) {
+                return null;
+            } else if (value.equals("tokencredential")) {
+                return TOKEN_CREDENTIAL;
+            } else if (value.equals("azurekeycredential")) {
+                return AZURE_KEY_CREDENTIAL;
+            } else if (value.equals("none")) {
+                return NONE;
+            }
+            return NONE;
+        }
     }
 
     private boolean clientLogger;
