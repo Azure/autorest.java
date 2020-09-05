@@ -29,6 +29,10 @@ public final class AutoRestValidationTestBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestValidationTestBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * Subscription ID.
      */

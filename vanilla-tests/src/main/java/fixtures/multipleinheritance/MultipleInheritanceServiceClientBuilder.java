@@ -29,6 +29,10 @@ public final class MultipleInheritanceServiceClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public MultipleInheritanceServiceClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

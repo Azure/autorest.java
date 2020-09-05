@@ -29,6 +29,10 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestSwaggerBATHeaderServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

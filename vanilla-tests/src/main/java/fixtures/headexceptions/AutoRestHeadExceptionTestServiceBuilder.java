@@ -29,6 +29,10 @@ public final class AutoRestHeadExceptionTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestHeadExceptionTestServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

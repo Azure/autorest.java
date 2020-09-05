@@ -113,6 +113,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
                             commonProperties.stream()).collect(Collectors.toList());
 
+            if (!settings.isAzureOrFluent()) {
+                classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                    javaBlock.line("this.httpPipelinePolicies = new ArrayList<>();");
+                });
+            }
+
             for (ServiceClientProperty serviceClientProperty : clientProperties) {
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
                 {
@@ -190,7 +196,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 function.line("return client;");
             });
 
-            addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName);
+            if (!settings.isAzureOrFluent()) {
+                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName);
+            }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 if (!settings.isFluentLite()) {

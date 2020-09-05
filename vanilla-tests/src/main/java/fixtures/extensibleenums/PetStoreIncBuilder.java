@@ -29,6 +29,10 @@ public final class PetStoreIncBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public PetStoreIncBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

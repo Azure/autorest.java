@@ -29,6 +29,10 @@ public final class AutoRestPagingTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestPagingTestServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

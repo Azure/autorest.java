@@ -29,6 +29,10 @@ public final class MediaTypesClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public MediaTypesClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

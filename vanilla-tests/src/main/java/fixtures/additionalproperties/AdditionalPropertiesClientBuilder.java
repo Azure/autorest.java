@@ -29,6 +29,10 @@ public final class AdditionalPropertiesClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AdditionalPropertiesClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

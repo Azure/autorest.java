@@ -29,6 +29,10 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestRequiredOptionalTestServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * number of items to skip
      */

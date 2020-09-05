@@ -29,6 +29,10 @@ public final class AutoRestUrlTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestUrlTestServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * A string value 'globalItemStringPath' that appears in the path
      */

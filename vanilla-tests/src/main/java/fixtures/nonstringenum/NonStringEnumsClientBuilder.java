@@ -29,6 +29,10 @@ public final class NonStringEnumsClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public NonStringEnumsClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

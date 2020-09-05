@@ -29,6 +29,10 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestUrlMutliCollectionFormatTestServiceBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * server parameter
      */

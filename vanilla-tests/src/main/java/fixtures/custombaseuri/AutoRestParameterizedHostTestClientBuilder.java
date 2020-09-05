@@ -29,6 +29,10 @@ public final class AutoRestParameterizedHostTestClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestParameterizedHostTestClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * A string value that is used as a global part of the parameterized host
      */

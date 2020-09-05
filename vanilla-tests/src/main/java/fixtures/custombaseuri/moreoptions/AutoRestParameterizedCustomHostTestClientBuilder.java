@@ -29,6 +29,10 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    public AutoRestParameterizedCustomHostTestClientBuilder() {
+        this.httpPipelinePolicies = new ArrayList<>();
+    }
+
     /*
      * The subscription id with value 'test12'.
      */
