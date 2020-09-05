@@ -30,7 +30,7 @@ public final class MultipleInheritanceServiceClientBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public MultipleInheritanceServiceClientBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

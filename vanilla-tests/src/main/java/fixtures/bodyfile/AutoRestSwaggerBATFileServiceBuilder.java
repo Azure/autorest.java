@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestSwaggerBATFileServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

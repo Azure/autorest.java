@@ -30,7 +30,7 @@ public final class AutoRestComplexTestServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestComplexTestServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

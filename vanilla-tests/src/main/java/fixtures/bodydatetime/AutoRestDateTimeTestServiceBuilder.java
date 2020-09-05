@@ -30,7 +30,7 @@ public final class AutoRestDateTimeTestServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestDateTimeTestServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

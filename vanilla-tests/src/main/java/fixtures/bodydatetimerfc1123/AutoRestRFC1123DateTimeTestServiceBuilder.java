@@ -30,7 +30,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestRFC1123DateTimeTestServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

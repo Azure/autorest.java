@@ -30,7 +30,7 @@ public final class AutoRestReportServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestReportServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

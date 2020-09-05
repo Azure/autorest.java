@@ -99,25 +99,22 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
-
-            classBlock.privateStaticFinalVariable("String SDK_NAME = \"name\"");
-            classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
-            String propertiesValue = "new HashMap<>()";
-            if (!settings.getArtifactId().isEmpty()) {
-                propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
+            if (!settings.isAzureOrFluent()) {
+                classBlock.privateStaticFinalVariable("String SDK_NAME = \"name\"");
+                classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
+                String propertiesValue = "new HashMap<>()";
+                if (!settings.getArtifactId().isEmpty()) {
+                    propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
+                }
+                classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                    javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
+                });
             }
-            classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
-
             // Add ServiceClient client property variables, getters, and setters
             List<ServiceClientProperty> clientProperties = Stream
                     .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
                             commonProperties.stream()).collect(Collectors.toList());
-
-            if (!settings.isAzureOrFluent()) {
-                classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
-                    javaBlock.line("this.httpPipelinePolicies = new ArrayList<>();");
-                });
-            }
 
             for (ServiceClientProperty serviceClientProperty : clientProperties) {
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->

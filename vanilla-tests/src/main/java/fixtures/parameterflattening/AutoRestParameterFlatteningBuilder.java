@@ -30,7 +30,7 @@ public final class AutoRestParameterFlatteningBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestParameterFlatteningBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

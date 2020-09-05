@@ -30,7 +30,7 @@ public final class AutoRestHeadExceptionTestServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestHeadExceptionTestServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

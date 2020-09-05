@@ -35,7 +35,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestSwaggerBATDictionaryServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*

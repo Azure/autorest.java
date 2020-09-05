@@ -30,7 +30,7 @@ public final class AutoRestBoolTestServiceBuilder {
     private final Map<String, String> properties = new HashMap<>();
 
     public AutoRestBoolTestServiceBuilder() {
-        this.httpPipelinePolicies = new ArrayList<>();
+        this.pipelinePolicies = new ArrayList<>();
     }
 
     /*
