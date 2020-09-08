@@ -145,6 +145,11 @@ public class Javagen extends NewPlugin {
                 String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
                 writeFile(javaFile.getFilePath(), formattedSource, null);
             }
+            String artifactId = JavaSettings.getInstance().getArtifactId();
+            if (!(artifactId == null || artifactId.isEmpty())) {
+                writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+            }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
             connection.sendError(1, 500, "Failed to generate code: " + ex.getMessage());

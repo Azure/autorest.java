@@ -108,7 +108,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
