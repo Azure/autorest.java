@@ -48,7 +48,7 @@ public class FluentResourceCollection {
                 .build();
 
         this.innerClientType = new ClassType.Builder()
-                .packageName(settings.getPackage())
+                .packageName(settings.getPackage(settings.getFluentSubpackage()))
                 .name(groupClient.getClassBaseName() + "Client")
                 .build();
 

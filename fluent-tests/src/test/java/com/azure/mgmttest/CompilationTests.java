@@ -10,7 +10,7 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
-import com.azure.mgmttest.appservice.WebSiteManagementClient;
+import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.authorization.models.GraphError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.conainterservice.models.ContainerServiceMasterProfile;
@@ -26,7 +26,8 @@ import com.azure.mgmttest.resources.fluent.inner.ResourceGroupInner;
 import com.azure.mgmttest.storage.fluent.inner.StorageAccountInner;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
 
 public class CompilationTests {
 
