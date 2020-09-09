@@ -85,6 +85,7 @@ public class JavaSettings
                     host.getStringValue("models-subpackage", "models"),
                     host.getStringValue("custom-types", ""),
                     host.getStringValue("custom-types-subpackage", ""),
+                    host.getStringValue("fluent-subpackage", "fluent"),
                     host.getBooleanValue("required-parameter-client-methods", true),
                     host.getBooleanValue("add-context-parameter", false),
                     host.getBooleanValue("context-client-method-parameter", false),
@@ -134,6 +135,7 @@ public class JavaSettings
                          String modelsSubpackage,
                          String customTypes,
                          String customTypesSubpackage,
+                         String fluentSubpackage,
                          boolean requiredParameterClientMethods,
                          boolean addContextParameter,
                          boolean contextClientMethodParameter,
@@ -162,6 +164,7 @@ public class JavaSettings
         this.modelsSubpackage = modelsSubpackage;
         this.customTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
         this.customTypesSubpackage = customTypesSubpackage;
+        this.fluentSubpackage = fluentSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
         this.addContextParameter = addContextParameter || contextClientMethodParameter;
         this.contextClientMethodParameter = contextClientMethodParameter;
@@ -326,6 +329,14 @@ public class JavaSettings
     public final String getModelsSubpackage()
     {
         return modelsSubpackage;
+    }
+
+    private String fluentSubpackage;
+    /**
+     * @return The sub-package specific to Fluent SDK.
+     */
+    public final String getFluentSubpackage() {
+        return fluentSubpackage;
     }
 
     /**
