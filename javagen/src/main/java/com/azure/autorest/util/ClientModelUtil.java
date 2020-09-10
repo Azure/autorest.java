@@ -96,8 +96,9 @@ public class ClientModelUtil {
     }
 
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (settings.shouldGenerateSyncAsyncClients() && !settings.isFluent()) {
             builderPackage = JavaSettings.getInstance().getPackage();
         }
         return builderPackage;
@@ -106,6 +107,9 @@ public class ClientModelUtil {
     public static String getServiceClientPackageName(String serviceClientClassName) {
         JavaSettings settings = JavaSettings.getInstance();
         String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
+        if (settings.isFluent()) {
+            subpackage = settings.getFluentSubpackage();
+        }
         if (settings.isCustomType(serviceClientClassName)) {
             subpackage = settings.getCustomTypesSubpackage();
         }
