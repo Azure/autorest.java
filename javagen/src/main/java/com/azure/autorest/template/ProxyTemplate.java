@@ -126,6 +126,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
                         }
 
+                        // avoid name conflict
                         String parameterName = parameter.getName();
                         if (usedParameterNames.contains(parameterName)) {
                             parameterName = parameterName + "Param";
