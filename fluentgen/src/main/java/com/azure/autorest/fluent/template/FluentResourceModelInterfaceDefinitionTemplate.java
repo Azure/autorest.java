@@ -9,9 +9,7 @@ import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
-import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.javamodel.JavaInterface;
-import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
 
 import java.util.List;
@@ -53,19 +51,9 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                         interfaceSignature += " extends " + stage.getExtendStages();
                     }
                     block1.interfaceBlock(interfaceSignature, block2 -> {
-                        for (FluentMethod method : stage.getMethods1()) {
-                            block2.javadocComment(commentBlock -> {
-                                method.writeJavadoc(commentBlock);
-                            });
+                        for (FluentMethod method : stage.getMethods()) {
+                            block2.javadocComment(method::writeJavadoc);
                             block2.publicMethod(method.getInterfaceMethodSignature());
-                        }
-
-                        List<ClientMethod> methods = stage.getMethods();
-                        if (!methods.isEmpty()) {
-                            methods.forEach(m -> {
-                                ClientMethodTemplate.generateJavadoc(m, block2, null, false);
-                                block2.publicMethod(m.getDeclaration());
-                            });
                         }
                     });
                 }

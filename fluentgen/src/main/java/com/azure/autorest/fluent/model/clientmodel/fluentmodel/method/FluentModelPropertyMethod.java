@@ -13,23 +13,23 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 
+import java.util.Set;
+
 public class FluentModelPropertyMethod extends FluentMethod {
 
-    private final FluentInterfaceStage interfaceStage;
     private final ClientModel clientModel;
     private final ClientModelProperty modelProperty;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
-                                     FluentInterfaceStage interfaceStage, ClientModel clientModel, ClientModelProperty modelProperty) {
-        this.fluentResourceModel = model;
-        this.type = type;
-        this.interfaceStage = interfaceStage;
+                                     FluentInterfaceStage stage, ClientModel clientModel, ClientModelProperty modelProperty) {
+        super(model, type);
+
         this.clientModel = clientModel;
         this.modelProperty = modelProperty;
 
         this.name = modelProperty.getSetterName();
         this.description = String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription());
-        this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(interfaceStage.getNextStage().getName()).build());
+        this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(stage.getNextStage().getName()).build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
     }
 
@@ -42,9 +42,13 @@ public class FluentModelPropertyMethod extends FluentMethod {
     }
 
     public void writeJavadoc(JavaJavadocComment commentBlock) {
-        String propertyName = modelProperty.getName();
         commentBlock.description(description);
-        commentBlock.param(propertyName, modelProperty.getDescription());
+        commentBlock.param(modelProperty.getName(), modelProperty.getDescription());
         commentBlock.methodReturns(interfaceReturnValue.getDescription());
+    }
+
+    @Override
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        modelProperty.addImportsTo(imports, false);
     }
 }

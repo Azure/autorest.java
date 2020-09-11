@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class FluentInterfaceStage {
 
@@ -49,7 +50,14 @@ public class FluentInterfaceStage {
         this.extendStages = extendStages;
     }
 
-    public List<FluentMethod> getMethods1() {
+    public List<FluentMethod> getMethods() {
         return methods;
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        if (property != null) {
+            property.addImportsTo(imports, false);
+        }
+        this.getMethods().forEach(m -> m.addImportsTo(imports, false));
     }
 }

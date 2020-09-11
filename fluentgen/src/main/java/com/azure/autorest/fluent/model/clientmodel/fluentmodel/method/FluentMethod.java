@@ -12,6 +12,7 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class FluentMethod {
 
@@ -25,7 +26,14 @@ public abstract class FluentMethod {
 
     protected FluentMethodType type;
 
+    public FluentMethod(FluentResourceModel fluentResourceModel, FluentMethodType type) {
+        this.fluentResourceModel = fluentResourceModel;
+        this.type = type;
+    }
+
     public abstract String getInterfaceMethodSignature();
 
     public abstract void writeJavadoc(JavaJavadocComment commentBlock);
+
+    public abstract void addImportsTo(Set<String> imports, boolean includeImplementationImports);
 }

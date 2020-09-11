@@ -5,15 +5,15 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefinitionStageCreate extends DefinitionStage {
 
-    private ClientMethod createMethod;
-    private ClientMethod createMethodWithContext;
+    private FluentMethod createMethod;
+    private FluentMethod createMethodWithContext;
 
     public DefinitionStageCreate() {
         super("WithCreate", null);
@@ -25,8 +25,8 @@ public class DefinitionStageCreate extends DefinitionStage {
     }
 
     @Override
-    public List<ClientMethod> getMethods() {
-        List<ClientMethod> clientMethods = new ArrayList<>();
+    public List<FluentMethod> getMethods() {
+        List<FluentMethod> clientMethods = new ArrayList<>();
         clientMethods.add(createMethod);
         if (createMethodWithContext != null) {
             clientMethods.add(createMethodWithContext);
@@ -34,11 +34,11 @@ public class DefinitionStageCreate extends DefinitionStage {
         return clientMethods;
     }
 
-    public void setCreateMethod(ClientMethod createMethod) {
+    public void setCreateMethod(FluentMethod createMethod) {
         this.createMethod = createMethod;
     }
 
-    public void setCreateMethodWithContext(ClientMethod createMethodWithContext) {
+    public void setCreateMethodWithContext(FluentMethod createMethodWithContext) {
         this.createMethodWithContext = createMethodWithContext;
     }
 }

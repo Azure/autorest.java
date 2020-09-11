@@ -5,14 +5,14 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class DefinitionStageParent extends DefinitionStage {
 
-    private ClientMethod existingParentMethod;
+    private FluentMethod existingParentMethod;
 
     public DefinitionStageParent(String name) {
         super(name, null);
@@ -24,11 +24,11 @@ public class DefinitionStageParent extends DefinitionStage {
     }
 
     @Override
-    public List<ClientMethod> getMethods() {
+    public List<FluentMethod> getMethods() {
         return Arrays.asList(existingParentMethod);
     }
 
-    public void setExistingParentMethod(ClientMethod existingParentMethod) {
+    public void setExistingParentMethod(FluentMethod existingParentMethod) {
         this.existingParentMethod = existingParentMethod;
     }
 }

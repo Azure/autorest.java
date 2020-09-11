@@ -17,9 +17,11 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.Definition
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentParentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -29,7 +31,6 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -236,7 +237,7 @@ public class ResourceCreate {
 
         // create method
         definitionStageCreate.setCreateMethod(this.getCreateMethod(false));
-        ClientMethod createMethodWithContext = this.getCreateMethod(true);
+        FluentMethod createMethodWithContext = this.getCreateMethod(true);
         if (createMethodWithContext != null) {
             definitionStageCreate.setCreateMethodWithContext(createMethodWithContext);
         }
@@ -253,7 +254,7 @@ public class ResourceCreate {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods1().add(this.getPropertyMethod(stage, property));
+            stage.getMethods().add(this.getPropertyMethod(stage, property));
 
             optionalDefinitionStages.add(stage);
         }
@@ -277,19 +278,14 @@ public class ResourceCreate {
                 stage, this.getResourceModel().getInnerModel(), property);
     }
 
-    private ClientMethod getExistingParentMethod(DefinitionStageParent stage) {
+    private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
         List<ClientMethodParameter> parameters = this.getPathParameters();
         parameters.remove(parameters.size() - 1);
-        return new ClientMethod.Builder()
-                .name("withExisting" + parentResourceName)
-                .description(String.format("Specifies %1$s.", parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "))))
-                .returnValue(new ReturnValue("the next definition stage.", new ClassType.Builder().packageName(resourceModel.getInterfaceType().getPackage()).name(stage.getNextStage().getName()).build()))
-                .parameters(parameters)
-                .build();
+        return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_WITH, stage, parentResourceName, parameters);
     }
 
-    private ClientMethod getCreateMethod(boolean addContextParameter) {
+    private FluentMethod getCreateMethod(boolean addContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
         if (addContextParameter) {
             Optional<ClientMethodParameter> contextParameter = this.getMethodReferences().stream()
@@ -302,11 +298,6 @@ public class ResourceCreate {
                 return null;
             }
         }
-        return new ClientMethod.Builder()
-                .name("create")
-                .description("Executes the create request.")
-                .returnValue(new ReturnValue("the created resource.", resourceModel.getInterfaceType()))
-                .parameters(parameters)
-                .build();
+        return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE, parameters);
     }
 }
