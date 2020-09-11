@@ -5,10 +5,20 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
+import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.template.prototype.MethodTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -17,9 +27,11 @@ import java.util.stream.Collectors;
 public class FluentCreateMethod extends FluentMethod {
 
     private List<ClientMethodParameter> parameters;
+    private FluentCollectionMethod collectionMethod;
 
     public FluentCreateMethod(FluentResourceModel model, FluentMethodType type,
-                              List<ClientMethodParameter> parameters) {
+                              List<ClientMethodParameter> parameters,
+                              FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         super(model, type);
 
         this.name = "create";
@@ -28,15 +40,56 @@ public class FluentCreateMethod extends FluentMethod {
         this.implementationReturnValue = interfaceReturnValue;
 
         this.parameters = parameters;
+        this.collectionMethod = collectionMethod;
+
+        collectionMethod.getInnerClientMethod().getParameters().stream()
+                .filter(p -> !FluentUtils.isContextParameter(p))
+                .filter(p -> !p.getClientType().toString().equals(model.getInnerModel().getName()))
+                .forEach(p -> clientProperties.add(
+                        new ClientModelProperty.Builder()
+                                .name(p.getName())
+                                .clientType(p.getClientType())
+                                .build()));
+
+        this.implementationMethodTemplate = MethodTemplate.builder()
+                .methodSignature(this.getImplementationMethodSignature())
+                .method(block -> {
+                    // resource collection from manager
+                    String collectionReferenceMethodName = FluentStatic.getFluentManager().getProperties().stream()
+                            .filter(p -> p.getFluentType().getName().equals(collection.getInterfaceType().getName()))
+                            .map(FluentManagerProperty::getMethodName)
+                            .findFirst().get();
+
+                    // method invocation
+                    List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getOnlyRequiredParameters() ? collectionMethod.getInnerClientMethod().getMethodRequiredParameters() : collectionMethod.getInnerClientMethod().getMethodParameters();
+                    String argumentsLine = methodParameters.stream()
+                            .map(p -> {
+                                if (fluentResourceModel.getInnerModel().getName().equals(p.getClientType().toString())) {
+                                    return ModelNaming.MODEL_PROPERTY_INNER;
+                                } else {
+                                    return p.getName();
+                                }
+                            })
+                            .collect(Collectors.joining(", "));
+                    String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
+
+                    block.line("this.%1$s = %2$s.%3$s().%4$s().%5$s;",
+                            ModelNaming.MODEL_PROPERTY_INNER,
+                            ModelNaming.MODEL_PROPERTY_MANAGER,
+                            collectionReferenceMethodName,
+                            ModelNaming.METHOD_INNER,
+                            methodInvocation);
+                    block.methodReturn("this");
+                })
+                .build();
     }
 
     @Override
-    public String getInterfaceMethodSignature() {
+    protected String getBaseMethodSignature() {
         String parameterText = parameters.stream()
                 .map(p -> String.format("%1$s %2$s", p.getClientType().toString(), p.getName()))
                 .collect(Collectors.joining(", "));
-        return String.format("%1$s %2$s(%3$s)",
-                interfaceReturnValue.getType().toString(),
+        return String.format("%1$s(%2$s)",
                 this.name, parameterText);
     }
 
@@ -47,9 +100,17 @@ public class FluentCreateMethod extends FluentMethod {
         commentBlock.methodReturns(interfaceReturnValue.getDescription());
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(FluentCreateMethod.class);
+
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        logger.info("impl " + includeImplementationImports + ", imports " + imports);
         interfaceReturnValue.addImportsTo(imports, false);
         parameters.forEach(p -> p.addImportsTo(imports, false));
+        logger.info("before imports " + imports);
+        if (includeImplementationImports) {
+            collectionMethod.addImportsTo(imports, false);
+        }
+        logger.info("after imports " + imports);
     }
 }

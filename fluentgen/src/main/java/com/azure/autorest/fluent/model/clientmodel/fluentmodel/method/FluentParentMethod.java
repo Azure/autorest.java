@@ -9,8 +9,10 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.List;
 import java.util.Set;
@@ -20,24 +22,40 @@ public class FluentParentMethod extends FluentMethod {
 
     private List<ClientMethodParameter> parameters;
 
-    public FluentParentMethod(FluentResourceModel fluentResourceModel, FluentMethodType type,
+    public FluentParentMethod(FluentResourceModel model, FluentMethodType type,
                               FluentInterfaceStage stage, String parentResourceName, List<ClientMethodParameter> parameters) {
-        super(fluentResourceModel, type);
+        super(model, type);
 
         this.parameters = parameters;
 
         this.name = "withExisting" + parentResourceName;
         this.description = String.format("Specifies %1$s.", parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", ")));
         this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(stage.getNextStage().getName()).build());
+        this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
+
+        this.parameters = parameters;
+
+        parameters.forEach(p -> clientProperties.add(
+                new ClientModelProperty.Builder()
+                        .name(p.getName())
+                        .clientType(p.getClientType())
+                        .build()));
+
+        this.implementationMethodTemplate = MethodTemplate.builder()
+                .methodSignature(this.getImplementationMethodSignature())
+                .method(block -> {
+                    parameters.forEach(p -> block.line("this.%1$s = %1$s;", p.getName()));
+                    block.methodReturn("this");
+                })
+                .build();
     }
 
     @Override
-    public String getInterfaceMethodSignature() {
+    public String getBaseMethodSignature() {
         String parameterText = parameters.stream()
                 .map(p -> String.format("%1$s %2$s", p.getClientType().toString(), p.getName()))
                 .collect(Collectors.joining(", "));
-        return String.format("%1$s %2$s(%3$s)",
-                interfaceReturnValue.getType().toString(),
+        return String.format("%1$s(%2$s)",
                 this.name, parameterText);
     }
 

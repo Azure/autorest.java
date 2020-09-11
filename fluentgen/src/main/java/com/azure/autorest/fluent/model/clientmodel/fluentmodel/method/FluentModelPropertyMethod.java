@@ -6,12 +6,14 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.Set;
 
@@ -31,16 +33,33 @@ public class FluentModelPropertyMethod extends FluentMethod {
         this.description = String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription());
         this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(stage.getNextStage().getName()).build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
+
+        this.implementationMethodTemplate = MethodTemplate.builder()
+                .methodSignature(this.getImplementationMethodSignature())
+                .method(block -> {
+                    if (fluentResourceModel.getInnerModel() == clientModel) {
+                        block.line("this.%1$s().%2$s(%3$s);", ModelNaming.METHOD_INNER, modelProperty.getSetterName(), modelProperty.getName());
+                        block.methodReturn("this");
+                    } else {
+                        // TODO
+                    }
+                })
+                .build();
     }
 
-    public String getInterfaceMethodSignature() {
-        return String.format("%1$s %2$s(%3$s %4$s)",
-                interfaceReturnValue.getType().toString(),
+    public ClientModel getClientModel() {
+        return clientModel;
+    }
+
+    @Override
+    protected String getBaseMethodSignature() {
+        return String.format("%1$s(%2$s %3$s)",
                 this.name,
                 modelProperty.getClientType().toString(),
                 modelProperty.getName());
     }
 
+    @Override
     public void writeJavadoc(JavaJavadocComment commentBlock) {
         commentBlock.description(description);
         commentBlock.param(modelProperty.getName(), modelProperty.getDescription());

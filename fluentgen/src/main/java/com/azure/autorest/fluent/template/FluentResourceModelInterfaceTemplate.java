@@ -53,8 +53,12 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
             });
             interfaceBlock.publicMethod(model.getInnerMethodSignature());
 
+            // Fluent interfaces and methods
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
-                DEFINITION_TEMPLATE.write(model.getResourceCreate(), interfaceBlock);
+                // create flow
+                if (model.getResourceCreate() != null) {
+                    DEFINITION_TEMPLATE.write(model.getResourceCreate(), interfaceBlock);
+                }
             }
         });
     }

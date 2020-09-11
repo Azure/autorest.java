@@ -254,7 +254,8 @@ public class ResourceCreate {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, property));
+            // TODO, clientModel could be createdParameter
+            stage.getMethods().add(this.getPropertyMethod(stage, this.getResourceModel().getInnerModel(), property));
 
             optionalDefinitionStages.add(stage);
         }
@@ -269,13 +270,20 @@ public class ResourceCreate {
         return definitionStages;
     }
 
+    public List<FluentMethod> getFluentMethods() {
+        List<FluentMethod> methods = this.getDefinitionStages().stream()
+                .flatMap(s -> s.getMethods().stream())
+                .collect(Collectors.toList());
+        return methods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
     }
 
-    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModelProperty property) {
+    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
-                stage, this.getResourceModel().getInnerModel(), property);
+                stage, model, property);
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
@@ -287,17 +295,30 @@ public class ResourceCreate {
 
     private FluentMethod getCreateMethod(boolean addContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
+        FluentCollectionMethod collectionMethod;
         if (addContextParameter) {
-            Optional<ClientMethodParameter> contextParameter = this.getMethodReferences().stream()
-                    .flatMap(m -> m.getInnerClientMethod().getParameters().stream())
-                    .filter(p -> ClassType.Context.getName().equals(p.getClientType().toString()))
+            Optional<FluentCollectionMethod> clientMethodOpt = this.getMethodReferences().stream()
+                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(FluentUtils::isContextParameter))
                     .findFirst();
-            if (contextParameter.isPresent()) {
-                parameters.add(contextParameter.get());
+            if (clientMethodOpt.isPresent()) {
+                collectionMethod = clientMethodOpt.get();
+                ClientMethodParameter contextParameter = collectionMethod.getInnerClientMethod().getParameters().stream()
+                        .filter(FluentUtils::isContextParameter)
+                        .findFirst().get();
+                parameters.add(contextParameter);
             } else {
                 return null;
             }
+        } else {
+            Optional<FluentCollectionMethod> collectionMethodOpt = this.getMethodReferences().stream()
+                    .filter(m -> m.getInnerClientMethod().getParameters().stream().noneMatch(p -> ClassType.Context.getName().equals(p.getClientType().toString())))
+                    .findFirst();
+            if (collectionMethodOpt.isPresent()) {
+                collectionMethod = collectionMethodOpt.get();
+            } else {
+                throw new IllegalStateException("create method not found");
+            }
         }
-        return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE, parameters);
+        return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE, parameters, resourceCollection, collectionMethod);
     }
 }

@@ -55,9 +55,6 @@ public class FluentInterfaceStage {
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        if (property != null) {
-            property.addImportsTo(imports, false);
-        }
-        this.getMethods().forEach(m -> m.addImportsTo(imports, false));
+        this.getMethods().forEach(m -> m.addImportsTo(imports, includeImplementationImports));
     }
 }

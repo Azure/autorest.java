@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -122,5 +123,9 @@ public class FluentUtils {
         } else {
             return name;
         }
+    }
+
+    public static boolean isContextParameter(ClientMethodParameter parameter) {
+        return ClassType.Context.getName().equals(parameter.getClientType().toString());
     }
 }

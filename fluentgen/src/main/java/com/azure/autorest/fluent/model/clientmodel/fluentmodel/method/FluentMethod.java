@@ -7,8 +7,10 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +24,38 @@ public abstract class FluentMethod {
     protected ReturnValue implementationReturnValue;
     protected List<ClientMethodParameter> parameters = new ArrayList<>();
 
+    protected List<ClientModelProperty> clientProperties = new ArrayList<>();
+
     protected FluentResourceModel fluentResourceModel;
 
     protected FluentMethodType type;
+
+    protected MethodTemplate implementationMethodTemplate;
 
     public FluentMethod(FluentResourceModel fluentResourceModel, FluentMethodType type) {
         this.fluentResourceModel = fluentResourceModel;
         this.type = type;
     }
 
-    public abstract String getInterfaceMethodSignature();
+    public String getInterfaceMethodSignature() {
+        return String.format("%1$s %2$s", this.interfaceReturnValue.getType().toString(), this.getBaseMethodSignature());
+    }
+
+    public String getImplementationMethodSignature() {
+        return String.format("%1$s %2$s", this.implementationReturnValue.getType().toString(), this.getBaseMethodSignature());
+    }
+
+    protected abstract String getBaseMethodSignature();
 
     public abstract void writeJavadoc(JavaJavadocComment commentBlock);
 
     public abstract void addImportsTo(Set<String> imports, boolean includeImplementationImports);
+
+    public MethodTemplate getMethodTemplate() {
+        return implementationMethodTemplate;
+    }
+
+    public List<ClientModelProperty> getClientProperties() {
+        return clientProperties;
+    }
 }
