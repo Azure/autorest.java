@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -52,14 +53,11 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
                         interfaceSignature += " extends " + stage.getExtendStages();
                     }
                     block1.interfaceBlock(interfaceSignature, block2 -> {
-                        if (stage.getProperty() != null) {
+                        for (FluentMethod method : stage.getMethods1()) {
                             block2.javadocComment(commentBlock -> {
-                                String propertyName = stage.getProperty().getName();
-                                commentBlock.description(String.format("Specifies the %1$s property: %2$s.", propertyName, stage.getProperty().getDescription()));
-                                commentBlock.param(stage.getProperty().getName(), String.format("the %1$s value to set.", propertyName));
-                                commentBlock.methodReturns("the next definition stage.");
+                                method.writeJavadoc(commentBlock);
                             });
-                            block2.publicMethod(stage.getMethodSignature());
+                            block2.publicMethod(method.getInterfaceMethodSignature());
                         }
 
                         List<ClientMethod> methods = stage.getMethods();

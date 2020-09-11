@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 public enum FluentMethodType {
     CREATE_WITH,

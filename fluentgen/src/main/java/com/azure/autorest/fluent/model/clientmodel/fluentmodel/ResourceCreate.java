@@ -17,6 +17,9 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.Definition
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -250,6 +253,8 @@ public class ResourceCreate {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
+            stage.getMethods1().add(this.getPropertyMethod(stage, property));
+
             optionalDefinitionStages.add(stage);
         }
         if (!optionalDefinitionStages.isEmpty()) {
@@ -265,6 +270,11 @@ public class ResourceCreate {
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
+    }
+
+    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModelProperty property) {
+        return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
+                stage, this.getResourceModel().getInnerModel(), property);
     }
 
     private ClientMethod getExistingParentMethod(DefinitionStageParent stage) {

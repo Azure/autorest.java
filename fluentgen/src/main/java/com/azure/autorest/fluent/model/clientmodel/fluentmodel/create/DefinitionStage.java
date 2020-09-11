@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
@@ -12,46 +14,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class DefinitionStage {
-    private final String name;
-    private final ClientModelProperty property;
-    private DefinitionStage nextStage;
-    private String extendStages;
+public class DefinitionStage extends FluentInterfaceStage {
 
     public DefinitionStage(String name, ClientModelProperty property) {
-        this.name = name;
-        this.property = property;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ClientModelProperty getProperty() {
-        return property;
-    }
-
-    public DefinitionStage getNextStage() {
-        return nextStage;
-    }
-
-    public void setNextStage(DefinitionStage nextStage) {
-        this.nextStage = nextStage;
-    }
-
-    public String getExtendStages() {
-        return extendStages;
-    }
-
-    public void setExtendStages(String extendStages) {
-        this.extendStages = extendStages;
-    }
-
-    public String getMethodSignature() {
-        return String.format("%1$s %2$s(%3$s %4$s)",
-                this.getNextStage().getName(),
-                this.getProperty().getSetterName(),
-                this.getProperty().getClientType().toString(), this.getProperty().getName());
+        super(name, property);
     }
 
     public String getDescription(String modelName) {
