@@ -17,8 +17,6 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -100,17 +98,12 @@ public class FluentCreateMethod extends FluentMethod {
         commentBlock.methodReturns(interfaceReturnValue.getDescription());
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentCreateMethod.class);
-
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        logger.info("impl " + includeImplementationImports + ", imports " + imports);
         interfaceReturnValue.addImportsTo(imports, false);
         parameters.forEach(p -> p.addImportsTo(imports, false));
-        logger.info("before imports " + imports);
         if (includeImplementationImports) {
             collectionMethod.addImportsTo(imports, false);
         }
-        logger.info("after imports " + imports);
     }
 }
