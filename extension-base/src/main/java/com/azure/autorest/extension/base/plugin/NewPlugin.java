@@ -48,6 +48,21 @@ public abstract class NewPlugin {
         }
     }
 
+    public String getStringValue(String[] keys, String defaultValue) {
+        String ret = null;
+        for (String key : keys) {
+            ret = getStringValue(key);
+            if (ret != null) {
+                break;
+            }
+        }
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            return ret;
+        }
+    }
+
     public Boolean getBooleanValue(String key) {
         return getValue(Boolean.class, key);
     }
