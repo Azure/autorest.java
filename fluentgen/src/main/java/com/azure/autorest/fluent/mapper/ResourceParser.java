@@ -79,6 +79,7 @@ public class ResourceParser {
                                 ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel);
                                 supportsCreateList.add(resourceCreate);
                                 fluentModel.setResourceCreate(resourceCreate);
+                                collection.getResourceCreates().add(resourceCreate);
 
                                 ModelCategory category = ModelCategory.SUBSCRIPTION_AS_PARENT;
                                 if (urlPathSegments.isNested()) {

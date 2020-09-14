@@ -96,7 +96,17 @@ public class ResourceCreate {
         return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
     }
 
-    public List<ClientMethodParameter> getPathParameters() {
+    public String getResourceName() {
+        String resourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(0).getSegmentName()));
+        return resourceName;
+    }
+
+    public IType getResourceNameType() {
+        List<ClientMethodParameter> parameters = this.getPathParameters();
+        return parameters.get(parameters.size() - 1).getClientType();
+    }
+
+    private List<ClientMethodParameter> getPathParameters() {
         ClientMethod clientMethod = methodReferences.iterator().next().getInnerClientMethod();
         Set<String> pathParamNames = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
@@ -107,7 +117,7 @@ public class ResourceCreate {
                 .collect(Collectors.toList());
     }
 
-    public ClientMethodParameter getBodyParameter() {
+    private ClientMethodParameter getBodyParameter() {
         ClientMethod clientMethod = methodReferences.iterator().next().getInnerClientMethod();
         String bodyParamName = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
@@ -277,10 +287,6 @@ public class ResourceCreate {
         return methods;
     }
 
-    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
-    }
-
     private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
                 stage, model, property);
@@ -320,5 +326,13 @@ public class ResourceCreate {
             }
         }
         return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE, parameters, resourceCollection, collectionMethod);
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
+    }
+
+    public void addImportsToAsDefine(Set<String> imports) {
+        this.getResourceNameType().addImportsTo(imports, false);
     }
 }

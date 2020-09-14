@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
@@ -25,6 +26,7 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
     public void write(FluentResourceCollection collection, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         collection.addImportsTo(imports, false);
+        collection.getResourceCreates().forEach(rc -> rc.addImportsToAsDefine(imports));
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
@@ -45,6 +47,17 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
                 comment.methodReturns("the inner client");
             });
             interfaceBlock.publicMethod(collection.getInnerMethodSignature());
+
+            // method for define resource
+            int resourceCount = collection.getResourceCreates().size();
+            collection.getResourceCreates().forEach(rc -> {
+                String defineMethodName = "define" + (resourceCount == 1 ? "" : rc.getResourceName());
+                interfaceBlock.publicMethod(String.format("%1$s.%2$s.Blank %3$s(%4$s name)",
+                        rc.getResourceModel().getInterfaceType().getName(),
+                        ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES,
+                        defineMethodName,
+                        rc.getResourceNameType().toString()));
+            });
         });
     }
 }

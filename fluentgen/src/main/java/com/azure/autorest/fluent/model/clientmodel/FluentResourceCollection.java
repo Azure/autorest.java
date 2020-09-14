@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -31,7 +32,10 @@ public class FluentResourceCollection {
     private final ClassType implementationType;
 
     // API methods
-    private final List<FluentCollectionMethod> methods = new ArrayList<>();;
+    private final List<FluentCollectionMethod> methods = new ArrayList<>();
+
+    // resource models
+    private final List<ResourceCreate> resourceCreates = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -88,6 +92,10 @@ public class FluentResourceCollection {
     // method signature for inner client
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+    }
+
+    public List<ResourceCreate> getResourceCreates() {
+        return resourceCreates;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {

@@ -37,6 +37,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         Set<String> imports = new HashSet<>();
         imports.add(managerType.getFullName());
         collection.addImportsTo(imports, true);
+        collection.getResourceCreates().forEach(rc -> rc.addImportsToAsDefine(imports));
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
@@ -64,6 +65,15 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
+
+//            // method for define resource
+//            int resourceCount = collection.getResourceCreates().size();
+//            collection.getResourceCreates().forEach(rc -> {
+//
+//                classBlock.publicMethod(String.format(""), methodBlock -> {
+//                    methodBlock.methodReturn(String.format("this.%s", ModelNaming.COLLECTION_PROPERTY_INNER));
+//                });
+//            });
         });
     }
 }
