@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -19,7 +20,7 @@ public class FluentDefineMethod extends FluentMethod {
     private final IType resourceNameType;
 
     public FluentDefineMethod(FluentResourceModel model, FluentMethodType type,
-                              String resourceName, IType resourceNameType, String propertyNameForResourceName) {
+                              String resourceName, IType resourceNameType) {
         super(model, type);
 
         this.resourceNameType = resourceNameType;
@@ -28,7 +29,10 @@ public class FluentDefineMethod extends FluentMethod {
         String interfaceTypeName = model.getInterfaceType().getName();
         this.description = String.format("Begins definition for a new %1$s resource.", interfaceTypeName);
 
-        this.interfaceReturnValue = new ReturnValue(String.format("the first stage of the new %1$s definition.", interfaceTypeName), model.getInterfaceType());
+        this.interfaceReturnValue = new ReturnValue(String.format("the first stage of the new %1$s definition.", interfaceTypeName),
+                new ClassType.Builder()
+                        .name(String.format("%1$s.%2$s.Blank", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES))
+                        .build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
     }
 
@@ -53,8 +57,7 @@ public class FluentDefineMethod extends FluentMethod {
 
     @Override
     protected String getBaseMethodSignature() {
-        return String.format("%1$s(%2$s name)",
-                this.name, resourceNameType.toString());
+        return String.format("%1$s(%2$s name)", this.name, resourceNameType.toString());
     }
 
     @Override

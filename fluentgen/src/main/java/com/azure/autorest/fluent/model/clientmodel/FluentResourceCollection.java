@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -77,8 +78,15 @@ public class FluentResourceCollection {
         return implementationType;
     }
 
-    public Collection<FluentCollectionMethod> getMethods() {
-        return methods;
+    public List<FluentCollectionMethod> getMethods() {
+        List<FluentCollectionMethod> fluentMethods = new ArrayList<>(methods);
+
+        Set<FluentCollectionMethod> excludeMethods = new HashSet<>();
+        excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
+        // TODO exclude from resourceUpdate
+        fluentMethods.removeAll(excludeMethods);
+
+        return fluentMethods;
     }
 
     public String getDescription() {

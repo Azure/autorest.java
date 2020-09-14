@@ -16,6 +16,8 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.storage.StorageManager;
+import com.azure.mgmtlitetest.storage.models.BlobContainers;
+import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
@@ -25,6 +27,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.mockito.Mockito.mock;
 
 public class RuntimeTests {
 
@@ -60,12 +64,26 @@ public class RuntimeTests {
 
     @Test
     public void testStorageManager() {
-        String subscriptionId = Configuration.getGlobalConfiguration().get("AZURE_SUBSCRIPTION_ID");
+        StorageManager storageManager = authenticateStorageManager();
+        PagedIterable<StorageAccount> storageAccounts = storageManager.storageAccounts().list();
+        //List<StorageAccount> storageAccountList = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
+    }
+
+    @Test
+    public void testBlobContainer() {
+        StorageManager storageManager = authenticateStorageManager();
+        BlobContainers blobContainers = storageManager.blobContainers();
+        blobContainers.defineContainer("container1")
+                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+                .withPublicAccess(PublicAccess.BLOB);
+                //.create();
+    }
+
+    private StorageManager authenticateStorageManager() {
+        String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
         if (subscriptionId == null) {
             subscriptionId = "";
         }
-        StorageManager storageManager = StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
-        PagedIterable<StorageAccount> storageAccounts = storageManager.storageAccounts().list();
-        //List<StorageAccount> storageAccountList = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
+        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
     }
 }

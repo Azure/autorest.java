@@ -60,9 +60,7 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
                             ((FluentDefineMethod) defineMethod).setName("define");
                         }
 
-                        interfaceBlock.javadocComment(javadocComment -> {
-                            defineMethod.writeJavadoc(javadocComment);
-                        });
+                        interfaceBlock.javadocComment(defineMethod::writeJavadoc);
                         interfaceBlock.publicMethod(defineMethod.getInterfaceMethodSignature());
                     });
         });
