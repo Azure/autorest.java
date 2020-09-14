@@ -78,15 +78,17 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // methods for fluent interfaces
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
-                List<FluentMethod> fluentMethods = model.getResourceImplementation().getMethods();
-                Map<String, ClientModelProperty> clientProperties = new HashMap<>();
-                fluentMethods.stream()
-                        .flatMap(m -> m.getClientProperties().stream())
-                        .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
+                if (model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
+                    List<FluentMethod> fluentMethods = model.getResourceImplementation().getMethods();
+                    Map<String, ClientModelProperty> clientProperties = new HashMap<>();
+                    fluentMethods.stream()
+                            .flatMap(m -> m.getClientProperties().stream())
+                            .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
 
-                clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
+                    clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
 
-                fluentMethods.forEach(m -> m.getMethodTemplate().writeMethod(classBlock));
+                    fluentMethods.forEach(m -> m.getMethodTemplate().writeMethod(classBlock));
+                }
             }
         });
     }

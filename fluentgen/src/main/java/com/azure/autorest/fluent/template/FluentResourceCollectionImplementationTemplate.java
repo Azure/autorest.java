@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
@@ -70,7 +71,8 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
             // method for define resource
             int resourceCount = collection.getResourceCreates().size();
-            collection.getResourceCreates()
+            collection.getResourceCreates().stream()
+                    .filter(ResourceCreate::isBodyParameterSameAsFluentModel)
                     .forEach(rc -> {
                         FluentMethod defineMethod = rc.getDefineMethod();
                         if (resourceCount == 1) {
