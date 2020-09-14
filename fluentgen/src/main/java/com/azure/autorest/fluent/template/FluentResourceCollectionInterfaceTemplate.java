@@ -6,8 +6,9 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
-import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
@@ -27,7 +28,7 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
     public void write(FluentResourceCollection collection, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         collection.addImportsTo(imports, false);
-        collection.getResourceCreates().forEach(rc -> rc.addImportsToAsDefine(imports));
+        collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, false));
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
@@ -54,12 +55,15 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
             collection.getResourceCreates().stream()
                     .filter(ResourceCreate::isBodyParameterSameAsFluentModel)
                     .forEach(rc -> {
-                        String defineMethodName = "define" + (resourceCount == 1 ? "" : rc.getResourceName());
-                        interfaceBlock.publicMethod(String.format("%1$s.%2$s.Blank %3$s(%4$s name)",
-                                rc.getResourceModel().getInterfaceType().getName(),
-                                ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES,
-                                defineMethodName,
-                                rc.getResourceNameType().toString()));
+                        FluentMethod defineMethod = rc.getDefineMethod();
+                        if (resourceCount == 1) {
+                            ((FluentDefineMethod) defineMethod).setName("define");
+                        }
+
+                        interfaceBlock.javadocComment(javadocComment -> {
+                            defineMethod.writeJavadoc(javadocComment);
+                        });
+                        interfaceBlock.publicMethod(defineMethod.getInterfaceMethodSignature());
                     });
         });
     }

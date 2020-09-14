@@ -18,6 +18,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.Definition
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyMethod;
@@ -94,16 +95,6 @@ public class ResourceCreate {
     public boolean hasTags() {
         IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
         return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
-    }
-
-    public String getResourceName() {
-        String resourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(0).getSegmentName()));
-        return resourceName;
-    }
-
-    public IType getResourceNameType() {
-        List<ClientMethodParameter> parameters = this.getPathParameters();
-        return parameters.get(parameters.size() - 1).getClientType();
     }
 
     private List<ClientMethodParameter> getPathParameters() {
@@ -287,6 +278,20 @@ public class ResourceCreate {
         return methods;
     }
 
+    private FluentDefineMethod defineMethod;
+
+    public FluentMethod getDefineMethod() {
+        if (defineMethod == null) {
+            String resourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(0).getSegmentName()));
+            List<ClientMethodParameter> parameters = this.getPathParameters();
+            IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
+            String propertyName = parameters.get(parameters.size() - 1).getName();
+            defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
+                    resourceName, resourceNameType, propertyName);
+        }
+        return defineMethod;
+    }
+
     private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
                 stage, model, property);
@@ -330,9 +335,5 @@ public class ResourceCreate {
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
-    }
-
-    public void addImportsToAsDefine(Set<String> imports) {
-        this.getResourceNameType().addImportsTo(imports, false);
     }
 }

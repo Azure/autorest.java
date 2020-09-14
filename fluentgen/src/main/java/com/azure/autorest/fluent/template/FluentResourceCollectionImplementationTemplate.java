@@ -8,6 +8,8 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -37,7 +39,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         Set<String> imports = new HashSet<>();
         imports.add(managerType.getFullName());
         collection.addImportsTo(imports, true);
-        collection.getResourceCreates().forEach(rc -> rc.addImportsToAsDefine(imports));
+        collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, true));
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
@@ -66,14 +68,17 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
 
-//            // method for define resource
-//            int resourceCount = collection.getResourceCreates().size();
-//            collection.getResourceCreates().forEach(rc -> {
-//
-//                classBlock.publicMethod(String.format(""), methodBlock -> {
-//                    methodBlock.methodReturn(String.format("this.%s", ModelNaming.COLLECTION_PROPERTY_INNER));
-//                });
-//            });
+            // method for define resource
+            int resourceCount = collection.getResourceCreates().size();
+            collection.getResourceCreates()
+                    .forEach(rc -> {
+                        FluentMethod defineMethod = rc.getDefineMethod();
+                        if (resourceCount == 1) {
+                            ((FluentDefineMethod) defineMethod).setName("define");
+                        }
+
+                        defineMethod.getMethodTemplate().writeMethod(classBlock);
+                    });
         });
     }
 }

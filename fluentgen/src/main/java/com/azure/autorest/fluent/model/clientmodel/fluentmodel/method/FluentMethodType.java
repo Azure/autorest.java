@@ -13,6 +13,7 @@ public enum FluentMethodType {
 
     CONSTRUCTOR,
     CREATE,
+    DEFINE,
 
     UPDATE,
     APPLY,

@@ -127,9 +127,7 @@ public class FluentResourceModel {
     public ResourceImplementation getResourceImplementation() {
         List<FluentMethod> methods = new ArrayList<>();
         if (resourceCreate != null) {
-            methods.addAll(resourceCreate.getDefinitionStages().stream()
-                    .flatMap(s -> s.getMethods().stream())
-                    .collect(Collectors.toList()));
+            methods.addAll(resourceCreate.getFluentMethods());
         }
         return new ResourceImplementation(methods);
     }
