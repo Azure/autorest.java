@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
@@ -50,14 +51,16 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
 
             // method for define resource
             int resourceCount = collection.getResourceCreates().size();
-            collection.getResourceCreates().forEach(rc -> {
-                String defineMethodName = "define" + (resourceCount == 1 ? "" : rc.getResourceName());
-                interfaceBlock.publicMethod(String.format("%1$s.%2$s.Blank %3$s(%4$s name)",
-                        rc.getResourceModel().getInterfaceType().getName(),
-                        ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES,
-                        defineMethodName,
-                        rc.getResourceNameType().toString()));
-            });
+            collection.getResourceCreates().stream()
+                    .filter(ResourceCreate::isBodyParameterSameAsFluentModel)
+                    .forEach(rc -> {
+                        String defineMethodName = "define" + (resourceCount == 1 ? "" : rc.getResourceName());
+                        interfaceBlock.publicMethod(String.format("%1$s.%2$s.Blank %3$s(%4$s name)",
+                                rc.getResourceModel().getInterfaceType().getName(),
+                                ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES,
+                                defineMethodName,
+                                rc.getResourceNameType().toString()));
+                    });
         });
     }
 }
