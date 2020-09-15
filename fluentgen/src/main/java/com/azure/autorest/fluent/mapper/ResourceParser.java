@@ -11,7 +11,7 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.core.http.HttpMethod;
@@ -79,6 +79,7 @@ public class ResourceParser {
                                 ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel);
                                 supportsCreateList.add(resourceCreate);
                                 fluentModel.setResourceCreate(resourceCreate);
+                                collection.getResourceCreates().add(resourceCreate);
 
                                 ModelCategory category = ModelCategory.SUBSCRIPTION_AS_PARENT;
                                 if (urlPathSegments.isNested()) {

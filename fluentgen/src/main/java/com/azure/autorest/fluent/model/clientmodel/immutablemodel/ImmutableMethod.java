@@ -3,11 +3,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.implmethod;
+package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.template.prototype.MethodTemplate;
 
-public interface WrapperMethod {
+public interface ImmutableMethod {
 
     MethodTemplate getMethodTemplate();
 }

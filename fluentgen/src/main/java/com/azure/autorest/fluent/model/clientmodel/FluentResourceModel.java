@@ -7,7 +7,9 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -19,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 // Fluent resource instance. E.g. StorageAccount.
 // Also include some simple wrapper class.
@@ -40,7 +40,7 @@ public class FluentResourceModel {
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
-    private ModelCategory category = ModelCategory.WRAPPER;
+    private ModelCategory category = ModelCategory.IMMUTABLE;
     private ResourceCreate resourceCreate;
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
@@ -121,6 +121,14 @@ public class FluentResourceModel {
 
     public void setCategory(ModelCategory category) {
         this.category = category;
+    }
+
+    public ResourceImplementation getResourceImplementation() {
+        List<FluentMethod> methods = new ArrayList<>();
+        if (resourceCreate != null) {
+            methods.addAll(resourceCreate.getFluentMethods());
+        }
+        return new ResourceImplementation(methods);
     }
 
     public ResourceCreate getResourceCreate() {

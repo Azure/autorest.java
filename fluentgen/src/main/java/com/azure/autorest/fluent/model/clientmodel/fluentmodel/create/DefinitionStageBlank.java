@@ -3,12 +3,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-public class FluentBlankStage extends FluentDefinitionStage {
+public class DefinitionStageBlank extends DefinitionStage {
 
-    public FluentBlankStage() {
-        super("Blank", null);
+    public DefinitionStageBlank() {
+        super("Blank");
     }
 
     @Override

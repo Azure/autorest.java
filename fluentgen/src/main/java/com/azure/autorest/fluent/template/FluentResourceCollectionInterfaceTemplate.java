@@ -6,6 +6,9 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.IJavaTemplate;
@@ -25,6 +28,7 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
     public void write(FluentResourceCollection collection, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         collection.addImportsTo(imports, false);
+        collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, false));
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> {
@@ -45,6 +49,20 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
                 comment.methodReturns("the inner client");
             });
             interfaceBlock.publicMethod(collection.getInnerMethodSignature());
+
+            // method for define resource
+            int resourceCount = collection.getResourceCreates().size();
+            collection.getResourceCreates().stream()
+                    .filter(ResourceCreate::isBodyParameterSameAsFluentModel)
+                    .forEach(rc -> {
+                        FluentMethod defineMethod = rc.getDefineMethod();
+                        if (resourceCount == 1) {
+                            ((FluentDefineMethod) defineMethod).setName("define");
+                        }
+
+                        interfaceBlock.javadocComment(defineMethod::writeJavadoc);
+                        interfaceBlock.publicMethod(defineMethod.getInterfaceMethodSignature());
+                    });
         });
     }
 }
