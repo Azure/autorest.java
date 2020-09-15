@@ -9,9 +9,11 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
+import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.core.http.HttpMethod;
@@ -23,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -66,17 +69,8 @@ public class ResourceParser {
                             if (urlPathSegments.getReverseSegments().iterator().next().isParameterSegment() && urlPathSegments.hasSubscription()) {
                                 foundModels.add(fluentModel);
 
-                                String bodyTypeName = m.getInnerClientMethod().getProxyMethod().getParameters()
-                                        .stream()
-                                        .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
-                                        .map(p -> p.getClientType().toString())
-                                        .findAny().orElse(null);
-
-                                ClientModel bodyModel = availableModels.stream()
-                                        .filter(model -> model.getName().equals(bodyTypeName))
-                                        .findAny().orElse(null);
-
-                                ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments, m.getInnerClientMethod().getName(), bodyModel);
+                                ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
+                                        m.getInnerClientMethod().getName(), getBodyClientModel(m, availableModels));
                                 supportsCreateList.add(resourceCreate);
                                 fluentModel.setResourceCreate(resourceCreate);
                                 collection.getResourceCreates().add(resourceCreate);
@@ -98,14 +92,94 @@ public class ResourceParser {
         });
 
         supportsCreateList.forEach(rc -> {
-            String methodName = rc.getMethodName();
-            rc.getMethodReferences().addAll(
-                    rc.getResourceCollection().getMethods().stream()
-                            .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
-                                    || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + "WithResponse")))
-                            .collect(Collectors.toList()));
+            rc.getMethodReferences().addAll(collectMethodReferences(collection,  rc.getMethodName()));
         });
 
         return supportsCreateList;
+    }
+
+    public static Optional<ResourceUpdate> resolveResourceUpdate(
+            FluentResourceCollection collection,
+            ResourceCreate resourceCreate,
+            List<ClientModel> availableModels) {
+
+        ResourceUpdate resourceUpdate = null;
+
+        for (FluentCollectionMethod m : collection.getMethods()) {
+            HttpMethod method = m.getInnerProxyMethod().getHttpMethod();
+
+            // PATCH
+            if (method == HttpMethod.PATCH) {
+                if (isValidResourceUpdate(m, resourceCreate)) {
+                    resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
+                            resourceCreate.getUrlPathSegments(), m.getInnerClientMethod().getName(),
+                            getBodyClientModel(m, availableModels));
+                    break;
+                }
+            }
+        }
+        if (resourceUpdate == null) {
+            for (FluentCollectionMethod m : collection.getMethods()) {
+                HttpMethod method = m.getInnerProxyMethod().getHttpMethod();
+
+                // PUT
+                if (method == HttpMethod.PUT) {
+                    if (isValidResourceUpdate(m, resourceCreate)) {
+                        resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
+                                resourceCreate.getUrlPathSegments(), m.getInnerClientMethod().getName(),
+                                getBodyClientModel(m, availableModels));
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (resourceUpdate != null) {
+            resourceCreate.getResourceModel().setResourceUpdate(resourceUpdate);
+            collection.getResourceUpdates().add(resourceUpdate);
+
+            resourceUpdate.getMethodReferences().addAll(collectMethodReferences(collection, resourceUpdate.getMethodName()));
+        }
+
+        return Optional.ofNullable(resourceUpdate);
+    }
+
+    private static ClientModel getBodyClientModel(FluentCollectionMethod method, List<ClientModel> availableModels) {
+        String bodyTypeName = method.getInnerClientMethod().getProxyMethod().getParameters()
+                .stream()
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
+                .map(p -> p.getClientType().toString())
+                .findAny().orElse(null);
+
+        return availableModels.stream()
+                .filter(model -> model.getName().equals(bodyTypeName))
+                .findAny().orElse(null);
+    }
+
+    private static boolean isValidResourceUpdate(FluentCollectionMethod method, ResourceCreate resourceCreate) {
+        boolean valid = false;
+        String methodNameLowerCase = method.getInnerClientMethod().getName().toLowerCase(Locale.ROOT);
+        if (!(methodNameLowerCase.contains("create") && !methodNameLowerCase.contains("update"))) {
+            // body in request
+            if (method.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
+                String returnTypeName = method.getFluentReturnType().toString();
+                // same model as create
+                if (returnTypeName.equals(resourceCreate.getResourceModel().getInnerModel().getName())) {
+                    String url = method.getInnerProxyMethod().getUrlPath();
+                    // same url
+                    if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
+                        valid = true;
+                    }
+                }
+            }
+        }
+        return valid;
+    }
+
+    private static List<FluentCollectionMethod> collectMethodReferences(FluentResourceCollection collection, String methodName) {
+        return collection.getMethods().stream()
+                .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
+                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + "WithResponse")))
+                .collect(Collectors.toList());
     }
 }

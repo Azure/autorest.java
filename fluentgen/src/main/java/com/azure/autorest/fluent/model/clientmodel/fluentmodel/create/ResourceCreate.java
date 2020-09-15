@@ -14,6 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructor;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
@@ -44,48 +45,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceCreate {
+public class ResourceCreate extends ResourceOperation  {
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceCreate.class);
 
-    private final FluentResourceModel resourceModel;
-    private final FluentResourceCollection resourceCollection;
-
-    private final UrlPathSegments urlPathSegments;
-
-    private final String methodName;
-    private final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
-
-    private final ClientModel bodyParameterModel;
-
     private List<DefinitionStage> definitionStages;
 
-    public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection, UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
-        this.resourceModel = resourceModel;
-        this.resourceCollection = resourceCollection;
-        this.urlPathSegments = urlPathSegments;
-        this.methodName = methodName;
-        this.bodyParameterModel = bodyParameterModel;
-    }
+    private FluentDefineMethod defineMethod;
 
-    public FluentResourceModel getResourceModel() {
-        return resourceModel;
-    }
-
-    public FluentResourceCollection getResourceCollection() {
-        return resourceCollection;
-    }
-
-    public UrlPathSegments getUrlPathSegments() {
-        return urlPathSegments;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public List<FluentCollectionMethod> getMethodReferences() {
-        return methodReferences;
+    public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
+                          UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
+        super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
     }
 
     public boolean hasResourceGroup() {
@@ -100,10 +70,6 @@ public class ResourceCreate {
     public boolean hasTags() {
         IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
         return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
-    }
-
-    public boolean isBodyParameterSameAsFluentModel() {
-        return bodyParameterModel == resourceModel.getInnerModel();
     }
 
     public List<DefinitionStage> getDefinitionStages() {
@@ -262,32 +228,6 @@ public class ResourceCreate {
                 .collect(Collectors.toList());
     }
 
-    private List<ClientModelProperty> getProperties() {
-        List<ClientModelProperty> properties = new ArrayList<>();
-
-        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
-
-        if (this.isBodyParameterSameAsFluentModel()) {
-            for (String commonPropertyName : commonPropertyNames) {
-                if (resourceModel.hasProperty(commonPropertyName)) {
-                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
-                    properties.add(property.getInnerProperty());
-                }
-            }
-            for (FluentModelProperty property : resourceModel.getProperties()) {
-                if (!commonPropertyNames.contains(property.getName())) {
-                    properties.add(property.getInnerProperty());
-                }
-            }
-        } else {
-            // TODO
-        }
-
-        return properties.stream()
-                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
-                .collect(Collectors.toList());
-    }
-
     private List<ClientModelProperty> getRequiredProperties() {
         return this.getProperties().stream()
                 .filter(p -> p.isRequired())
@@ -312,8 +252,6 @@ public class ResourceCreate {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
                 stage, parameter);
     }
-
-    private FluentDefineMethod defineMethod;
 
     public FluentMethod getDefineMethod() {
         if (defineMethod == null) {
