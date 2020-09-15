@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.model.ResourceTypeName;
@@ -14,14 +14,11 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructor;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentParentMethod;
@@ -35,15 +32,21 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResourceCreate {
+
+    private static final Logger logger = LoggerFactory.getLogger(ResourceCreate.class);
 
     private final FluentResourceModel resourceModel;
     private final FluentResourceCollection resourceCollection;
@@ -99,68 +102,8 @@ public class ResourceCreate {
         return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
     }
 
-    private List<ClientMethodParameter> getPathParameters() {
-        ClientMethod clientMethod = methodReferences.iterator().next().getInnerClientMethod();
-        Set<String> pathParamNames = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
-                .map(ProxyMethodParameter::getName)
-                .collect(Collectors.toSet());
-        return clientMethod.getMethodRequiredParameters().stream()
-                .filter(p -> pathParamNames.contains(p.getName()))
-                .collect(Collectors.toList());
-    }
-
-    private ClientMethodParameter getBodyParameter() {
-        ClientMethod clientMethod = methodReferences.iterator().next().getInnerClientMethod();
-        String bodyParamName = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
-                .map(ProxyMethodParameter::getName)
-                .findAny().orElse(null);
-        return clientMethod.getMethodRequiredParameters().stream()
-                .filter(p -> p.getName().equals(bodyParamName))
-                .findAny().orElse(null);
-    }
-
     public boolean isBodyParameterSameAsFluentModel() {
         return bodyParameterModel == resourceModel.getInnerModel();
-    }
-
-    public List<ClientModelProperty> getProperties() {
-        List<ClientModelProperty> properties = new ArrayList<>();
-
-        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
-
-        if (this.isBodyParameterSameAsFluentModel()) {
-            for (String commonPropertyName : commonPropertyNames) {
-                if (resourceModel.hasProperty(commonPropertyName)) {
-                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
-                    properties.add(property.getInnerProperty());
-                }
-            }
-            for (FluentModelProperty property : resourceModel.getProperties()) {
-                if (!commonPropertyNames.contains(property.getName())) {
-                    properties.add(property.getInnerProperty());
-                }
-            }
-        } else {
-            // TODO
-        }
-
-        return properties.stream()
-                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
-                .collect(Collectors.toList());
-    }
-
-    public List<ClientModelProperty> getRequiredProperties() {
-        return this.getProperties().stream()
-                .filter(p -> p.isRequired())
-                .collect(Collectors.toList());
-    }
-
-    public List<ClientModelProperty> getNonRequiredProperties() {
-        return this.getProperties().stream()
-                .filter(p -> !p.isRequired())
-                .collect(Collectors.toList());
     }
 
     public List<DefinitionStage> getDefinitionStages() {
@@ -250,8 +193,8 @@ public class ResourceCreate {
             definitionStageParent.setExistingParentMethod(this.getExistingParentMethod(definitionStageParent));
         }
 
-        // non-required properties
         List<DefinitionStage> optionalDefinitionStages = new ArrayList<>();
+        // non-required properties
         List<ClientModelProperty> nonRequiredProperties = this.getNonRequiredProperties();
         for (ClientModelProperty property : nonRequiredProperties) {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
@@ -262,6 +205,17 @@ public class ResourceCreate {
 
             optionalDefinitionStages.add(stage);
         }
+        // header and query parameters
+        List<ClientMethodParameter> miscParameters = this.getMiscParameters();
+        for (ClientMethodParameter parameter : miscParameters) {
+            DefinitionStage stage = new DefinitionStageMisc("With" + CodeNamer.toPascalCase(parameter.getName()), parameter);
+            stage.setNextStage(definitionStageCreate);
+
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter));
+
+            optionalDefinitionStages.add(stage);
+        }
+
         if (!optionalDefinitionStages.isEmpty()) {
             definitionStageCreate.setExtendStages(optionalDefinitionStages.stream()
                     .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
@@ -273,12 +227,90 @@ public class ResourceCreate {
         return definitionStages;
     }
 
+    private List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
+        return this.getMethodReferences().stream()
+                .filter(m -> !m.getInnerClientMethod().getOnlyRequiredParameters())
+                .collect(Collectors.toList());
+    }
+
+    private List<ClientMethodParameter> getPathParameters() {
+        return getParametersByLocation(RequestParameterLocation.Path);
+    }
+
+    private ClientMethodParameter getBodyParameter() {
+        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
+        return parameters.isEmpty() ? null : parameters.iterator().next();
+    }
+
+    private List<ClientMethodParameter> getMiscParameters() {
+        // header or query
+        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
+    }
+
+    private List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
+        return getParametersByLocation(new HashSet<>(Collections.singletonList(parameterLocation)));
+    }
+
+    private List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
+        ClientMethod clientMethod = getMethodReferencesOfFullParameters().iterator().next().getInnerClientMethod();
+        Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
+                .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
+                .map(ProxyMethodParameter::getName)
+                .collect(Collectors.toSet());
+        return clientMethod.getParameters().stream()
+                .filter(p -> paramNames.contains(p.getName()))
+                .collect(Collectors.toList());
+    }
+
+    private List<ClientModelProperty> getProperties() {
+        List<ClientModelProperty> properties = new ArrayList<>();
+
+        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
+
+        if (this.isBodyParameterSameAsFluentModel()) {
+            for (String commonPropertyName : commonPropertyNames) {
+                if (resourceModel.hasProperty(commonPropertyName)) {
+                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
+                    properties.add(property.getInnerProperty());
+                }
+            }
+            for (FluentModelProperty property : resourceModel.getProperties()) {
+                if (!commonPropertyNames.contains(property.getName())) {
+                    properties.add(property.getInnerProperty());
+                }
+            }
+        } else {
+            // TODO
+        }
+
+        return properties.stream()
+                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
+                .collect(Collectors.toList());
+    }
+
+    private List<ClientModelProperty> getRequiredProperties() {
+        return this.getProperties().stream()
+                .filter(p -> p.isRequired())
+                .collect(Collectors.toList());
+    }
+
+    private List<ClientModelProperty> getNonRequiredProperties() {
+        return this.getProperties().stream()
+                .filter(p -> !p.isRequired())
+                .collect(Collectors.toList());
+    }
+
     public List<FluentMethod> getFluentMethods() {
         List<FluentMethod> methods = this.getDefinitionStages().stream()
                 .flatMap(s -> s.getMethods().stream())
                 .collect(Collectors.toList());
         methods.add(this.getConstructor());
         return methods;
+    }
+
+    public FluentMethod getParameterSetterMethod(DefinitionStage stage, ClientMethodParameter parameter) {
+        return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
+                stage, parameter);
     }
 
     private FluentDefineMethod defineMethod;
@@ -318,7 +350,7 @@ public class ResourceCreate {
         List<ClientMethodParameter> parameters = new ArrayList<>();
         FluentCollectionMethod collectionMethod;
         if (addContextParameter) {
-            Optional<FluentCollectionMethod> clientMethodOpt = this.getMethodReferences().stream()
+            Optional<FluentCollectionMethod> clientMethodOpt = this.getMethodReferencesOfFullParameters().stream()
                     .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(FluentUtils::isContextParameter))
                     .findFirst();
             if (clientMethodOpt.isPresent()) {
@@ -331,7 +363,7 @@ public class ResourceCreate {
                 return null;
             }
         } else {
-            Optional<FluentCollectionMethod> collectionMethodOpt = this.getMethodReferences().stream()
+            Optional<FluentCollectionMethod> collectionMethodOpt = this.getMethodReferencesOfFullParameters().stream()
                     .filter(m -> m.getInnerClientMethod().getParameters().stream().noneMatch(p -> ClassType.Context.getName().equals(p.getClientType().toString())))
                     .findFirst();
             if (collectionMethodOpt.isPresent()) {

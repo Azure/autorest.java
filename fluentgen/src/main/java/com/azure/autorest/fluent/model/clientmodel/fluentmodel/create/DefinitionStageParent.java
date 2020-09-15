@@ -15,7 +15,7 @@ public class DefinitionStageParent extends DefinitionStage {
     private FluentMethod existingParentMethod;
 
     public DefinitionStageParent(String name) {
-        super(name, null);
+        super(name);
     }
 
     @Override

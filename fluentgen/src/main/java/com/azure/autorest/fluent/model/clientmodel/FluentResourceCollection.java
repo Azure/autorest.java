@@ -6,14 +6,13 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

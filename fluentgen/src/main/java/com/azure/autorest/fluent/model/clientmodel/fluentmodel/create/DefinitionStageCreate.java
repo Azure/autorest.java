@@ -16,7 +16,7 @@ public class DefinitionStageCreate extends DefinitionStage {
     private FluentMethod createMethodWithContext;
 
     public DefinitionStageCreate() {
-        super("WithCreate", null);
+        super("WithCreate");
     }
 
     @Override

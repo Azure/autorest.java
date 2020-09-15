@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
 import java.util.ArrayList;
@@ -15,23 +16,33 @@ import java.util.Set;
 public class FluentInterfaceStage {
 
     protected final String name;
-    protected final ClientModelProperty property;
     protected FluentInterfaceStage nextStage;
     protected String extendStages;
+    protected ClientModelProperty property;
+    protected ClientMethodParameter parameter;
 
     protected final List<FluentMethod> methods = new ArrayList<>();
 
-    public FluentInterfaceStage(String name, ClientModelProperty property) {
+    protected FluentInterfaceStage(String name) {
+        this.name = name;
+    }
+
+    protected FluentInterfaceStage(String name, ClientModelProperty property) {
         this.name = name;
         this.property = property;
+    }
+
+    protected FluentInterfaceStage(String name, ClientMethodParameter parameter) {
+        this.name = name;
+        this.parameter = parameter;
     }
 
     public String getName() {
         return name;
     }
 
-    public ClientModelProperty getProperty() {
-        return property;
+    public boolean isMandatoryStage() {
+        return (parameter == null) && (property == null || property.isRequired());
     }
 
     public FluentInterfaceStage getNextStage() {

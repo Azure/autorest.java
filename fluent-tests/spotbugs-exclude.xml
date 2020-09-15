@@ -6,11 +6,6 @@
     <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON,SKIPPED_CLASS_TOO_BIG,UPM_UNCALLED_PRIVATE_METHOD"/>
   </Match>
 
-  <!-- temporary disable, for CI pass in stage of implementation -->
-  <Match>
-    <Bug pattern="UWF_UNWRITTEN_FIELD"/>
-  </Match>
-
   <Match>
     <Package name="~com\.azure\.mgmttest\.(.+)\.fluent"/>
     <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON,SKIPPED_CLASS_TOO_BIG"/>

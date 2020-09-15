@@ -8,7 +8,7 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.template.IJavaTemplate;
 
@@ -31,7 +31,7 @@ public class FluentResourceModelInterfaceDefinitionTemplate implements IJavaTemp
             String definitionInterfaceSignature = String.format("%1$s extends %2$s",
                     ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION,
                     definitionStages.stream()
-                            .filter(s -> s.getProperty() == null || s.getProperty().isRequired())
+                            .filter(DefinitionStage::isMandatoryStage)
                             .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES, s.getName()))
                             .collect(Collectors.joining(", ")));
             interfaceBlock.interfaceBlock(definitionInterfaceSignature, block1 -> {

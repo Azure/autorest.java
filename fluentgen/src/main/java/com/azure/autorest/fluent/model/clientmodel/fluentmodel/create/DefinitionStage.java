@@ -10,6 +10,10 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 
 public class DefinitionStage extends FluentInterfaceStage {
 
+    public DefinitionStage(String name) {
+        super(name);
+    }
+
     public DefinitionStage(String name, ClientModelProperty property) {
         super(name, property);
     }

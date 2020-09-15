@@ -8,7 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 public class DefinitionStageBlank extends DefinitionStage {
 
     public DefinitionStageBlank() {
-        super("Blank", null);
+        super("Blank");
     }
 
     @Override
