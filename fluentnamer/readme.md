@@ -31,6 +31,7 @@ pipeline:
     flatten-models: true
     flatten-payloads: true
     naming:
+      choiceValue: upper
       preserve-uppercase-max-length: 2
       override:
         ip: Ip
