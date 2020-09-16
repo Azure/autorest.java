@@ -6,8 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
@@ -22,7 +21,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
     private final ClientMethodParameter methodParameter;
 
     public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,
-                                       DefinitionStage stage, ClientMethodParameter methodParameter) {
+                                       FluentInterfaceStage stage, ClientMethodParameter methodParameter) {
         super(model, type);
 
         this.methodParameter = methodParameter;
@@ -58,5 +57,15 @@ public class FluentMethodParameterMethod extends FluentMethod {
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         methodParameter.addImportsTo(imports, false);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FluentMethodParameterMethod) {
+            FluentMethodParameterMethod other = (FluentMethodParameterMethod) obj;
+            return this.methodParameter == other.methodParameter;
+        } else {
+            return false;
+        }
     }
 }

@@ -130,6 +130,9 @@ public class FluentResourceModel {
         if (resourceCreate != null) {
             methods.addAll(resourceCreate.getFluentMethods());
         }
+        if (resourceUpdate != null) {
+            methods.addAll(resourceUpdate.getFluentMethods());
+        }
         return new ResourceImplementation(methods);
     }
 

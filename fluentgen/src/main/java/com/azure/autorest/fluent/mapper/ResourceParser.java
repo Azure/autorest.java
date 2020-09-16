@@ -164,7 +164,7 @@ public class ResourceParser {
             if (method.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
                 String returnTypeName = method.getFluentReturnType().toString();
                 // same model as create
-                if (returnTypeName.equals(resourceCreate.getResourceModel().getInnerModel().getName())) {
+                if (returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
                     String url = method.getInnerProxyMethod().getUrlPath();
                     // same url
                     if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {

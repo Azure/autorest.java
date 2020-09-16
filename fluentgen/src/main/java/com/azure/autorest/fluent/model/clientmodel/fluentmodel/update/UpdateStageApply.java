@@ -8,6 +8,6 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.update;
 public class UpdateStageApply extends UpdateStage {
 
     public UpdateStageApply() {
-        super("apply");
+        super("Update");
     }
 }

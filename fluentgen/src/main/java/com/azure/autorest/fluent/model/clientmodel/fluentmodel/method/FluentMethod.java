@@ -58,4 +58,16 @@ public abstract class FluentMethod {
     public List<ClientModelProperty> getClientProperties() {
         return clientProperties;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public FluentMethodType getType() {
+        return type;
+    }
+
+    public FluentResourceModel getFluentResourceModel() {
+        return fluentResourceModel;
+    }
 }
