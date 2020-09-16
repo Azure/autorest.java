@@ -1,6 +1,6 @@
 package com.azure.autorest.postprocessor.ls.models;
 
-public class Capabilities
+public class ServerCapabilities
 {
     private TextDocumentSync textDocumentSync;
 

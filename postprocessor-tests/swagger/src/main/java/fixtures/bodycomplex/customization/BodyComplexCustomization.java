@@ -11,6 +11,6 @@ public class BodyComplexCustomization extends Customization {
 
     @Override
     public void customize() {
-        refactor().renameType("fixtures.bodycomplex.implementation.models.Goblinshark", "fixtures.bodycomplex.implementation.models.GoblinShark");
+        renameClass("Goblinshark", "GoblinShark");
     }
 }

@@ -249,7 +249,7 @@ public class Connection {
         {
             executorService.submit(() -> {
                 ObjectNode jobject = (ObjectNode) content;
-                System.out.println("response: " + jobject.toPrettyString());
+                System.err.println("receive: " + jobject.toPrettyString());
                 try
                 {
                     Iterator<Map.Entry<String, JsonNode>> fieldIterator = jobject.fields();
@@ -404,11 +404,8 @@ public class Connection {
         JsonNode node = new ObjectNode(mapper.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName);
-        if (parameter == null || parameter instanceof String || ProtocolUtils.isPrimitive(parameter)) {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory()));
-        } else {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory(),
-                    Collections.singletonList(mapper.convertValue(parameter, JsonNode.class))));
+        if (parameter != null) {
+            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
     }
@@ -434,7 +431,7 @@ public class Connection {
         }
     }
 
-    public <T> T requestWithObject(JavaType type, String methodName, String parameterName, Object parameter)
+    public <T> T requestWithObject(JavaType type, String methodName, Object parameter)
     {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
@@ -444,8 +441,7 @@ public class Connection {
                 .put("method", methodName)
                 .put("id", id);
         if (parameter != null) {
-            node = ((ObjectNode) node).set("params", new ObjectNode(mapper.getNodeFactory(),
-                    Collections.singletonMap(parameterName, mapper.convertValue(parameter, JsonNode.class))));
+            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
         try {

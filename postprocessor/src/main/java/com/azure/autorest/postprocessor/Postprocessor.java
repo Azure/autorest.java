@@ -42,8 +42,7 @@ public class Postprocessor extends NewPlugin {
         URLClassLoader loader = URLClassLoader.newInstance(new URL[]{ jarUrl }, ClassLoader.getSystemClassLoader());
         Class<? extends Customization> customizationClass = (Class<? extends Customization>) Class.forName(className, true, loader);
         Customization customization = customizationClass.getConstructor(Map.class).newInstance(fileContents);
-        customization.customize();
-        fileContents = customization.getUpdatedFiles();
+        fileContents = customization.run();
       }
 
       //Step 2: Print to files

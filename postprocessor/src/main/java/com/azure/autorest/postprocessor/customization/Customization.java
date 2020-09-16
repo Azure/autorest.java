@@ -1,25 +1,32 @@
 package com.azure.autorest.postprocessor.customization;
 
-import org.openrewrite.java.JavaParser;
-import org.openrewrite.java.tree.J;
+import com.azure.autorest.postprocessor.ls.models.Location;
+import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
+import com.azure.autorest.postprocessor.ls.models.SymbolKind;
+import com.azure.autorest.postprocessor.ls.models.TextEdit;
+import com.azure.autorest.postprocessor.ls.models.WorkspaceEdit;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class Customization {
-    private List<J.CompilationUnit> compilationUnits;
+    private final Path tempDirWithPrefix;
+    private final Map<String, String> files;
+    private JDTLanguageClient languageClient;
 
     public Customization(Map<String, String> files) {
-        List<Path> sourcePaths = new ArrayList<>();
-        Path tempDirWithPrefix = null;
+        this.files = files;
         try {
             tempDirWithPrefix = Files.createTempDirectory("temp");
 
@@ -32,27 +39,58 @@ public abstract class Customization {
                 FileOutputStream stream = new FileOutputStream(filePath.toFile());
                 stream.write(file.getValue().getBytes(StandardCharsets.UTF_8));
                 stream.close();
-                sourcePaths.add(filePath);
             }
+
+            InputStream pomStream = Customization.class.getResourceAsStream("/pom.xml");
+            byte[] buffer = new byte[pomStream.available()];
+            pomStream.read(buffer);
+            File pomFile = Paths.get(tempDirWithPrefix.toString(), "pom.xml").toFile();
+            pomFile.createNewFile();
+            FileOutputStream stream = new FileOutputStream(pomFile);
+            stream.write(buffer);
+            stream.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        compilationUnits = JavaParser.fromJavaVersion().classpath(System.getProperty("java.class.path")).build().parse(sourcePaths, null);
     }
 
-    public Map<String, String> getUpdatedFiles() {
-        Map<String, String> updatedFiles = new HashMap<>();
-        for (J.CompilationUnit compilationUnit : compilationUnits) {
-            updatedFiles.put(compilationUnit.getSourcePath().replaceFirst(".*[\\\\/]src[\\\\/]main[\\\\/]java", "src/main/java"), compilationUnit.print());
+    public Map<String, String> run() {
+        try {
+            languageClient = new JDTLanguageClient(tempDirWithPrefix.toString());
+            languageClient.initialize();
+            customize();
+            Files.deleteIfExists(tempDirWithPrefix);
+            return files;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            languageClient.exit();
         }
-        return updatedFiles;
     }
 
     public abstract void customize();
 
-    public Refactor refactor() {
-        return new Refactor(compilationUnits);
-    }
+    public void renameClass(String packageName, String className, String newName) {
+        String packagePath = packageName.replace(".", "/");
+        Optional<SymbolInformation> symbolInformation = languageClient.findWorkspaceSymbol(className)
+                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+                .findFirst();
 
+        if (symbolInformation.isPresent()) {
+            WorkspaceEdit workspaceEdit = languageClient.renameSymbol(symbolInformation.get().getLocation().getUri(),
+                    symbolInformation.get().getLocation().getRange().getStart(), newName);
+            for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
+                int i = edit.getKey().toString().indexOf("src/main/java/");
+                String oldEntry = edit.getKey().toString().substring(i);
+                if (files.containsKey(oldEntry)) {
+                    String content = files.get(oldEntry);
+                    StringBuilder newContent = new StringBuilder();
+                    for (TextEdit textEdit : edit.getValue()) {
+                        newContent.append(content.substring(0, textEdit.getRange().getStart()))
+                        content = content.substring(0, edit.getValue().)
+                    }
+                }
+            }
+        }
+    }
 }

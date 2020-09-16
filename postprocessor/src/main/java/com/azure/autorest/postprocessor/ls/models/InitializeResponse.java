@@ -1,12 +1,12 @@
 package com.azure.autorest.postprocessor.ls.models;
 
 public class InitializeResponse {
-    private Capabilities capabilities;
+    private ServerCapabilities capabilities;
 
-    public void setCapabilities(Capabilities capabilities){
+    public void setCapabilities(ServerCapabilities capabilities){
         this.capabilities = capabilities;
     }
-    public Capabilities getCapabilities(){
+    public ServerCapabilities getCapabilities(){
         return this.capabilities;
     }
 }
