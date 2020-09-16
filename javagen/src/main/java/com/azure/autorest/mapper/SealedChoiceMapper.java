@@ -51,12 +51,14 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
                 String enumName = enumValue.getValue();
-                if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
-                        && enumValue.getLanguage().getJava().getName() != null) {
-                    enumName = enumValue.getLanguage().getJava().getName();
-                } else if(enumValue.getLanguage() != null && enumValue.getLanguage().getDefault() != null
-                        && enumValue.getLanguage().getDefault().getName() != null) {
-                    enumName = enumValue.getLanguage().getDefault().getName();
+                if (!settings.isFluent()) {
+                    if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
+                            && enumValue.getLanguage().getJava().getName() != null) {
+                        enumName = enumValue.getLanguage().getJava().getName();
+                    } else if (enumValue.getLanguage() != null && enumValue.getLanguage().getDefault() != null
+                            && enumValue.getLanguage().getDefault().getName() != null) {
+                        enumName = enumValue.getLanguage().getDefault().getName();
+                    }
                 }
                 String memberName = CodeNamer.getEnumMemberName(enumName);
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
