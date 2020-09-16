@@ -212,6 +212,7 @@ public class CodeNamer {
         }
 
         String result = removeInvalidCharacters(name.replaceAll("[\\\\/.+ -]+", "_"));
+        result = result.replaceAll("_+", "_");  // merge multiple underlines
         Function<Character, Boolean> isUpper = c -> c >= 'A' && c <= 'Z';
         Function<Character, Boolean> isLower = c -> c >= 'a' && c <= 'z';
         for (int i = 1; i < result.length() - 1; i++) {
