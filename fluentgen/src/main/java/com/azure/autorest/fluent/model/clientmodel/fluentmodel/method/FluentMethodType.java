@@ -18,5 +18,7 @@ public enum FluentMethodType {
     UPDATE,
     APPLY,
 
-    REFRESH
+    REFRESH,
+
+    OTHER
 }

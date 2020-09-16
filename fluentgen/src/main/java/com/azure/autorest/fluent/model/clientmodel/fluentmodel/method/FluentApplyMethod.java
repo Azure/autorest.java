@@ -22,19 +22,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FluentCreateMethod extends FluentMethod {
+public class FluentApplyMethod extends FluentMethod {
 
     private final List<ClientMethodParameter> parameters;
     private final FluentCollectionMethod collectionMethod;
 
-    public FluentCreateMethod(FluentResourceModel model, FluentMethodType type,
-                              List<ClientMethodParameter> parameters,
-                              FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+    public FluentApplyMethod(FluentResourceModel model, FluentMethodType type,
+                             List<ClientMethodParameter> parameters,
+                             FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         super(model, type);
 
-        this.name = "create";
-        this.description = "Executes the create request.";
-        this.interfaceReturnValue = new ReturnValue("the created resource.", model.getInterfaceType());
+        this.name = "apply";
+        this.description = "Executes the update request.";
+        this.interfaceReturnValue = new ReturnValue("the update resource.", model.getInterfaceType());
         this.implementationReturnValue = interfaceReturnValue;
 
         this.parameters = parameters;

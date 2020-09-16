@@ -49,6 +49,9 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
         if (model.getResourceCreate() != null && model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
             implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION));
         }
+        if (model.getResourceUpdate() != null && model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+            implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE));
+        }
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", model.getImplementationType().getName(), String.join(", ", implementInterfaces)), classBlock -> {
             // variable for inner model
@@ -79,7 +82,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             // methods for fluent interfaces
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
                 if (model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
-                    List<FluentMethod> fluentMethods = model.getResourceImplementation().getMethods();
+                    List<FluentMethod> fluentMethods = model.getResourceImplementation().getFluentMethods();
                     Map<String, ClientModelProperty> clientProperties = new HashMap<>();
                     fluentMethods.stream()
                             .flatMap(m -> m.getClientProperties().stream())
