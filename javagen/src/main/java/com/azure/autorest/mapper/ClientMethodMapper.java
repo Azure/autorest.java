@@ -232,6 +232,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .type(ClientMethodType.PagingAsync)
                                     .isGroupedParameterRequired(false)
                                     .build());
+
+                            if (generateClientMethodWithOnlyRequiredParameters) {
+                                methods.add(builder
+                                        .onlyRequiredParameters(true)
+                                        .build());
+                            }
+
                             if (settings.isContextClientMethodParameter()) {
                                 MethodPageDetails detailsWithContext = details;
                                 if (nextMethods != null) {
@@ -249,12 +256,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
                                                 asyncReturnType),
                                         detailsWithContext);
-                            }
-
-                            if (generateClientMethodWithOnlyRequiredParameters) {
-                                methods.add(builder
-                                        .onlyRequiredParameters(true)
-                                        .build());
                             }
                         }
 
