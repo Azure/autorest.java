@@ -4,8 +4,10 @@
 package com.azure.mgmttest;
 
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.util.Context;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
+import com.azure.mgmtlitetest.storage.models.BlobContainer;
 import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
@@ -30,10 +32,15 @@ public class LiteCompilationTests {
 
     public void testFluentInterface() {
         StorageManager storageManager = mock(StorageManager.class);
+
         BlobContainers blobContainers = storageManager.blobContainers();
-        blobContainers.defineContainer("container1")
+        BlobContainer blobContainer = blobContainers.defineContainer("container1")
                 .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
                 .withPublicAccess(PublicAccess.BLOB)
                 .create();
+
+        blobContainer.update()
+                .withPublicAccess(PublicAccess.NONE)
+                .apply(new Context("key", "value"));
     }
 }

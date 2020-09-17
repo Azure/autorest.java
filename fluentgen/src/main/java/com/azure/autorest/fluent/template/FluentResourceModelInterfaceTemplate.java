@@ -23,6 +23,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
     }
 
     private static final FluentResourceModelInterfaceDefinitionTemplate DEFINITION_TEMPLATE = new FluentResourceModelInterfaceDefinitionTemplate();
+    private static final FluentResourceModelInterfaceUpdateTemplate UPDATE_TEMPLATE = new FluentResourceModelInterfaceUpdateTemplate();
 
     @Override
     public void write(FluentResourceModel model, JavaFile javaFile) {
@@ -58,6 +59,10 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                 // create flow
                 if (model.getResourceCreate() != null) {
                     DEFINITION_TEMPLATE.write(model.getResourceCreate(), interfaceBlock);
+                }
+                // update flow
+                if (model.getResourceUpdate() != null) {
+                    UPDATE_TEMPLATE.write(model.getResourceUpdate(), interfaceBlock);
                 }
             }
         });

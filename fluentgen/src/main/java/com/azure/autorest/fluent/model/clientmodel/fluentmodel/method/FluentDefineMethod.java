@@ -31,7 +31,7 @@ public class FluentDefineMethod extends FluentMethod {
 
         this.interfaceReturnValue = new ReturnValue(String.format("the first stage of the new %1$s definition.", interfaceTypeName),
                 new ClassType.Builder()
-                        .name(String.format("%1$s.%2$s.Blank", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES))
+                        .name(String.format("%1$s.%2$s.Blank", interfaceTypeName, ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION_STAGES))
                         .build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
     }

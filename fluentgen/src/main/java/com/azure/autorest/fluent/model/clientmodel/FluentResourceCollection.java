@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -36,6 +37,7 @@ public class FluentResourceCollection {
 
     // resource models
     private final List<ResourceCreate> resourceCreates = new ArrayList<>();
+    private final List<ResourceUpdate> resourceUpdates = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -103,6 +105,10 @@ public class FluentResourceCollection {
 
     public List<ResourceCreate> getResourceCreates() {
         return resourceCreates;
+    }
+
+    public List<ResourceUpdate> getResourceUpdates() {
+        return resourceUpdates;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {

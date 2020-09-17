@@ -70,4 +70,14 @@ public class FluentModelPropertyMethod extends FluentMethod {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         modelProperty.addImportsTo(imports, false);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FluentModelPropertyMethod) {
+            FluentModelPropertyMethod other = (FluentModelPropertyMethod) obj;
+            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty;
+        } else {
+            return false;
+        }
+    }
 }

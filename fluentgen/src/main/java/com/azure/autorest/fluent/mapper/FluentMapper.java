@@ -17,6 +17,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -25,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -67,7 +69,14 @@ public class FluentMapper {
                         .collect(Collectors.toList()));
 
         fluentClient.getResourceCollections().forEach(c -> {
-            ResourceParser.resolveResourceCreate(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels());
+            // resource create
+            List<ResourceCreate> resourceCreates = ResourceParser.resolveResourceCreate(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels());
+
+            // resource update
+            resourceCreates.forEach(rc -> ResourceParser.resolveResourceUpdate(c, rc, FluentStatic.getClient().getModels()));
+
+            // resource refresh
+            // TODO
         });
 
         // set resource collection APIs to service API

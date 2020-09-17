@@ -23,22 +23,4 @@ public class DefinitionStageCreate extends DefinitionStage {
     public String getDescription(String modelName) {
         return String.format("The stage of the %1$s definition which contains all the minimum required properties for the resource to be created, but also allows for any other optional properties to be specified.", modelName);
     }
-
-    @Override
-    public List<FluentMethod> getMethods() {
-        List<FluentMethod> clientMethods = new ArrayList<>();
-        clientMethods.add(createMethod);
-        if (createMethodWithContext != null) {
-            clientMethods.add(createMethodWithContext);
-        }
-        return clientMethods;
-    }
-
-    public void setCreateMethod(FluentMethod createMethod) {
-        this.createMethod = createMethod;
-    }
-
-    public void setCreateMethodWithContext(FluentMethod createMethodWithContext) {
-        this.createMethodWithContext = createMethodWithContext;
-    }
 }
