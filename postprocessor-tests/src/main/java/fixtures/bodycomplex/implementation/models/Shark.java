@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 @JsonTypeName("shark")
 @JsonSubTypes({
   @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
-  @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
+  @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class),
   @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
 })
 @Fluent

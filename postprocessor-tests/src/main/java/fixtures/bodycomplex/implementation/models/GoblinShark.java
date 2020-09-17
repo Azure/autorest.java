@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("goblin")
 @Fluent
-public final class Goblinshark extends Shark {
+public final class GoblinShark extends Shark {
   /*
    * The jawsize property.
    */
@@ -41,7 +41,7 @@ public final class Goblinshark extends Shark {
    * @param jawsize the jawsize value to set.
    * @return the Goblinshark object itself.
    */
-  public Goblinshark setJawsize(Integer jawsize) {
+  public GoblinShark setJawsize(Integer jawsize) {
     this.jawsize = jawsize;
     return this;
   }
@@ -61,7 +61,7 @@ public final class Goblinshark extends Shark {
    * @param color the color value to set.
    * @return the Goblinshark object itself.
    */
-  public Goblinshark setColor(GoblinSharkColor color) {
+  public GoblinShark setColor(GoblinSharkColor color) {
     this.color = color;
     return this;
   }

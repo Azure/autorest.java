@@ -1,6 +1,6 @@
 package fixtures.bodycomplex.customization;
 
-import com.azure.autorest.postprocessor.customization.Customization;
+import com.azure.autorest.postprocessor.Customization;
 
 import java.util.Map;
 
@@ -11,6 +11,6 @@ public class BodyComplexCustomization extends Customization {
 
     @Override
     public void customize() {
-        renameClass("Goblinshark", "GoblinShark");
+        renameClass("fixtures.bodycomplex.implementation.models", "Goblinshark", "GoblinShark");
     }
 }

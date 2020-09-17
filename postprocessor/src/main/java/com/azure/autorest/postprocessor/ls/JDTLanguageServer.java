@@ -1,4 +1,4 @@
-package com.azure.autorest.postprocessor.customization;
+package com.azure.autorest.postprocessor.ls;
 
 import com.sun.jna.Platform;
 

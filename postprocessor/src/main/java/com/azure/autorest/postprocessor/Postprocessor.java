@@ -3,7 +3,6 @@ package com.azure.autorest.postprocessor;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.postprocessor.customization.Customization;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

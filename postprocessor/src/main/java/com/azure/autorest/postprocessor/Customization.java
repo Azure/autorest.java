@@ -1,8 +1,7 @@
-package com.azure.autorest.postprocessor.customization;
+package com.azure.autorest.postprocessor;
 
-import com.azure.autorest.postprocessor.ls.models.Location;
+import com.azure.autorest.postprocessor.ls.JDTLanguageClient;
 import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
-import com.azure.autorest.postprocessor.ls.models.SymbolKind;
 import com.azure.autorest.postprocessor.ls.models.TextEdit;
 import com.azure.autorest.postprocessor.ls.models.WorkspaceEdit;
 
@@ -18,12 +17,12 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public abstract class Customization {
     private final Path tempDirWithPrefix;
     private final Map<String, String> files;
     private JDTLanguageClient languageClient;
+    private Editor editor;
 
     public Customization(Map<String, String> files) {
         this.files = files;
@@ -56,11 +55,12 @@ public abstract class Customization {
 
     public Map<String, String> run() {
         try {
+            editor = new Editor(files);
             languageClient = new JDTLanguageClient(tempDirWithPrefix.toString());
             languageClient.initialize();
             customize();
-            Files.deleteIfExists(tempDirWithPrefix);
-            return files;
+            deleteDirectory(tempDirWithPrefix.toFile());
+            return editor.getContents();
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -83,14 +83,23 @@ public abstract class Customization {
                 int i = edit.getKey().toString().indexOf("src/main/java/");
                 String oldEntry = edit.getKey().toString().substring(i);
                 if (files.containsKey(oldEntry)) {
-                    String content = files.get(oldEntry);
-                    StringBuilder newContent = new StringBuilder();
                     for (TextEdit textEdit : edit.getValue()) {
-                        newContent.append(content.substring(0, textEdit.getRange().getStart()))
-                        content = content.substring(0, edit.getValue().)
+                        editor.replace(oldEntry, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
                     }
                 }
+                editor.renameFile(oldEntry, oldEntry.replace(className + ".java", newName + ".java"));
             }
         }
     }
+
+    private void deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        directoryToBeDeleted.delete();
+    }
+
 }

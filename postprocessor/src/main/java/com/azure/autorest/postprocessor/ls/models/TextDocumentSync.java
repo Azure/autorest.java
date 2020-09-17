@@ -8,10 +8,12 @@ public class TextDocumentSync
 
     private Save save;
 
+    private boolean willSave;
+
     public void setOpenClose(boolean openClose){
         this.openClose = openClose;
     }
-    public boolean getOpenClose(){
+    public boolean isOpenClose(){
         return this.openClose;
     }
     public void setChange(int change){
@@ -25,5 +27,11 @@ public class TextDocumentSync
     }
     public Save getSave(){
         return this.save;
+    }
+    public boolean isWillSave() {
+        return willSave;
+    }
+    public void setWillSave(boolean willSave) {
+        this.willSave = willSave;
     }
 }

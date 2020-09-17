@@ -7,7 +7,7 @@ public class Save
     public void setIncludeText(boolean includeText){
         this.includeText = includeText;
     }
-    public boolean getIncludeText(){
+    public boolean isIncludeText(){
         return this.includeText;
     }
 }
