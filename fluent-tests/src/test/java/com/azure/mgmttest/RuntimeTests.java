@@ -77,8 +77,8 @@ public class RuntimeTests {
     }
 
     @Test
-//    @Disabled("live test")
-    public void testBlobContainer() {
+    @Disabled("live test")
+    public void testStorage() {
         StorageManager storageManager = authenticateStorageManager();
 
         StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
