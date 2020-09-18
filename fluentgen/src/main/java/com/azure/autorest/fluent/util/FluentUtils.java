@@ -6,8 +6,11 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -18,6 +21,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 
 import java.util.Locale;
+import java.util.Optional;
 
 public class FluentUtils {
 
@@ -127,5 +131,22 @@ public class FluentUtils {
 
     public static boolean isContextParameter(ClientMethodParameter parameter) {
         return ClassType.Context.getName().equals(parameter.getClientType().toString());
+    }
+
+    public static ClientModel getClientModel(String name) {
+        ClientModel clientModel = null;
+        for (ClientModel model : FluentStatic.getClient().getModels()) {
+            if (name.equals(model.getName())) {
+                clientModel = model;
+                break;
+            }
+        }
+        if (clientModel == null) {
+            Optional<ClientModel> modelOpt = ResourceClientModel.getResourceClientModel(name);
+            if (modelOpt.isPresent()) {
+                clientModel = modelOpt.get();
+            }
+        }
+        return clientModel;
     }
 }

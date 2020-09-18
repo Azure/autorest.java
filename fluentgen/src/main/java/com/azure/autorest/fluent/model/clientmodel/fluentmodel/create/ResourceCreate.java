@@ -28,7 +28,6 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,19 +54,19 @@ public class ResourceCreate extends ResourceOperation  {
                 resourceModel.getInterfaceType().getName(), methodName, bodyParameterModel.getName());
     }
 
-    public boolean hasResourceGroup() {
-        return urlPathSegments.hasResourceGroup();
-    }
+//    public boolean hasResourceGroup() {
+//        return urlPathSegments.hasResourceGroup();
+//    }
 
-    public boolean hasLocation() {
+    private boolean hasLocation() {
         return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 
-    public boolean hasTags() {
-        IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
-        return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
-    }
+//    public boolean hasTags() {
+//        IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
+//        return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
+//    }
 
     public List<DefinitionStage> getDefinitionStages() {
         if (definitionStages != null) {
@@ -163,8 +162,7 @@ public class ResourceCreate extends ResourceOperation  {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            // TODO, clientModel could be createdParameter
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getResourceModel().getInnerModel(), property));
+            stage.getMethods().add(this.getPropertyMethod(stage, this.getBodyClientModel(), property, this.getBodyParameter()));
 
             optionalDefinitionStages.add(stage);
         }
@@ -188,11 +186,6 @@ public class ResourceCreate extends ResourceOperation  {
         definitionStages.addAll(optionalDefinitionStages);
 
         return definitionStages;
-    }
-
-    private ClientMethodParameter getBodyParameter() {
-        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
-        return parameters.isEmpty() ? null : parameters.iterator().next();
     }
 
     private List<ClientModelProperty> getRequiredProperties() {
@@ -239,9 +232,9 @@ public class ResourceCreate extends ResourceOperation  {
                 resourceNameType, propertyName, FluentStatic.getFluentManager().getType());
     }
 
-    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
+    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property, ClientMethodParameter bodyParameter) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
-                stage, model, property);
+                stage, model, property, bodyParameter);
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {

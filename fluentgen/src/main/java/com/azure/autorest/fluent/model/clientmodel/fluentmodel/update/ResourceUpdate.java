@@ -63,8 +63,7 @@ public class ResourceUpdate extends ResourceOperation {
             UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(updateStageApply);
 
-            // TODO, clientModel could be updatedParameter
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getResourceModel().getInnerModel(), property));
+            stage.getMethods().add(this.getPropertyMethod(stage, this.getBodyClientModel(), property, this.getBodyParameter()));
 
             updateStages.add(stage);
         }
@@ -97,9 +96,9 @@ public class ResourceUpdate extends ResourceOperation {
                 stage, parameter);
     }
 
-    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property) {
+    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property, ClientMethodParameter bodyParameter) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
-                stage, model, property);
+                stage, model, property, bodyParameter);
     }
 
     public FluentMethod getUpdateMethod() {

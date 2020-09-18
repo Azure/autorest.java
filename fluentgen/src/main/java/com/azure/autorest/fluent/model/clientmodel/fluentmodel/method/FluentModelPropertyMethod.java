@@ -9,6 +9,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
@@ -23,7 +24,8 @@ public class FluentModelPropertyMethod extends FluentMethod {
     private final ClientModelProperty modelProperty;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
-                                     FluentInterfaceStage stage, ClientModel clientModel, ClientModelProperty modelProperty) {
+                                     FluentInterfaceStage stage, ClientModel clientModel, ClientModelProperty modelProperty,
+                                     ClientMethodParameter bodyParameter) {
         super(model, type);
 
         this.clientModel = clientModel;
@@ -39,10 +41,10 @@ public class FluentModelPropertyMethod extends FluentMethod {
                 .method(block -> {
                     if (fluentResourceModel.getInnerModel() == clientModel) {
                         block.line("this.%1$s().%2$s(%3$s);", ModelNaming.METHOD_INNER, modelProperty.getSetterName(), modelProperty.getName());
-                        block.methodReturn("this");
                     } else {
-                        // TODO
+                        block.line("this.%1$s.%2$s(%3$s);", bodyParameter.getName(), modelProperty.getSetterName(), modelProperty.getName());
                     }
+                    block.methodReturn("this");
                 })
                 .build();
     }

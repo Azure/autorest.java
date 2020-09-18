@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,12 +60,22 @@ public class ResourceImplementation {
         public MergedFluentMethod(GroupedMethods groupedMethods) {
             super(groupedMethods.methodCreateWith.getFluentResourceModel(), FluentMethodType.OTHER);
 
+            this.name = groupedMethods.methodCreateWith.getName();
             this.groupedMethods = groupedMethods;
 
             if (groupedMethods.methodCreateWith.equals(groupedMethods.methodUpdateWith)) {
                 this.implementationMethodTemplate = groupedMethods.methodCreateWith.getMethodTemplate();
             } else {
-                // TODO
+                this.implementationMethodTemplate = MethodTemplate.builder()
+                        .methodSignature(this.getImplementationMethodSignature())
+                        .method(block -> {
+                            block.ifBlock("isInCreateMode()", ifBlock -> {
+                                groupedMethods.methodCreateWith.getMethodTemplate().writeMethodContent(ifBlock);
+                            }).elseBlock(elseBlock -> {
+                                groupedMethods.methodCreateWith.getMethodTemplate().writeMethodContent(elseBlock);
+                            });
+                        })
+                        .build();
             }
         }
 
