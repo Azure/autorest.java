@@ -83,12 +83,8 @@ public class FluentResourceCollection {
         List<FluentCollectionMethod> fluentMethods = new ArrayList<>(methods);
 
         Set<FluentCollectionMethod> excludeMethods = new HashSet<>();
-        if (this.getResourceCreates() != null) {
-            excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
-        }
-        if (this.getResourceUpdates() != null) {
-            excludeMethods.addAll(this.getResourceUpdates().stream().flatMap(ru -> ru.getMethodReferences().stream()).collect(Collectors.toSet()));
-        }
+        excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
+        excludeMethods.addAll(this.getResourceUpdates().stream().flatMap(ru -> ru.getMethodReferences().stream()).collect(Collectors.toSet()));
         fluentMethods.removeAll(excludeMethods);
 
         return fluentMethods;
