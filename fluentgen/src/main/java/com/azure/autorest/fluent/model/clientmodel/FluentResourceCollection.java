@@ -79,15 +79,23 @@ public class FluentResourceCollection {
         return implementationType;
     }
 
-    public List<FluentCollectionMethod> getMethods() {
+    public List<FluentCollectionMethod> getMethodsForTemplate() {
         List<FluentCollectionMethod> fluentMethods = new ArrayList<>(methods);
 
         Set<FluentCollectionMethod> excludeMethods = new HashSet<>();
-        excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
-        // TODO exclude from resourceUpdate
+        if (this.getResourceCreates() != null) {
+            excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
+        }
+        if (this.getResourceUpdates() != null) {
+            excludeMethods.addAll(this.getResourceUpdates().stream().flatMap(ru -> ru.getMethodReferences().stream()).collect(Collectors.toSet()));
+        }
         fluentMethods.removeAll(excludeMethods);
 
         return fluentMethods;
+    }
+
+    public List<FluentCollectionMethod> getMethods() {
+        return this.methods;
     }
 
     public String getDescription() {

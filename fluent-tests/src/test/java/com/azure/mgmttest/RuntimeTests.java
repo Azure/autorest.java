@@ -73,10 +73,15 @@ public class RuntimeTests {
     public void testBlobContainer() {
         StorageManager storageManager = authenticateStorageManager();
         BlobContainers blobContainers = storageManager.blobContainers();
-        blobContainers.defineContainer("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-                .withPublicAccess(PublicAccess.BLOB);
-                //.create();
+//        blobContainers.defineContainer("container1")
+//                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+//                .withPublicAccess(PublicAccess.BLOB);
+//                //.create();
+
+        blobContainers.get("rg-weidxu", "sa1weidxu", "container1")
+                .update()
+                .withPublicAccess(PublicAccess.NONE)
+                .apply();
     }
 
     private StorageManager authenticateStorageManager() {

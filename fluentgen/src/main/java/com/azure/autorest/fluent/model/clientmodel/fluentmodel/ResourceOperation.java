@@ -100,6 +100,10 @@ public class ResourceOperation {
                 .collect(Collectors.toList());
     }
 
+    protected List<ClientMethodParameter> getPathParameters() {
+        return getParametersByLocation(RequestParameterLocation.Path);
+    }
+
     protected List<ClientMethodParameter> getMiscParameters() {
         // header or query
         return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));

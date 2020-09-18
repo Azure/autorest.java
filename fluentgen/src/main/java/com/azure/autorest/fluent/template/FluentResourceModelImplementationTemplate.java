@@ -60,11 +60,14 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             // variable for manager
             classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
 
-            // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
-                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
-                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
-            });
+            // if resource is updatable, use the constructor from resourceUpdate
+            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null || !model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+                // constructor
+                classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
+                    methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
+                    methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
+                });
+            }
 
             // method for properties
             methodTemplates.forEach(m -> m.writeMethod(classBlock));

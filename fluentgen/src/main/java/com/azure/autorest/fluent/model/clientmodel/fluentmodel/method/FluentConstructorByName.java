@@ -14,13 +14,13 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.Set;
 
-public class FluentConstructor extends FluentMethod {
+public class FluentConstructorByName extends FluentMethod {
 
     private final IType resourceNameType;
     private final IType managerType;
 
-    public FluentConstructor(FluentResourceModel model, FluentMethodType type,
-                             IType resourceNameType, String propertyNameForResourceName, IType managerType) {
+    public FluentConstructorByName(FluentResourceModel model, FluentMethodType type,
+                                   IType resourceNameType, String propertyNameForResourceName, IType managerType) {
         super(model, type);
 
         this.resourceNameType = resourceNameType;
@@ -48,8 +48,7 @@ public class FluentConstructor extends FluentMethod {
 
     @Override
     protected String getBaseMethodSignature() {
-        // NOOP
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

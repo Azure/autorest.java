@@ -9,8 +9,10 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
@@ -82,6 +84,7 @@ public class ResourceUpdate extends ResourceOperation {
                 .collect(Collectors.toList());
         methods.add(this.getUpdateMethod());
         methods.addAll(this.getApplyMethods());
+        methods.add(this.getConstructor());
         return methods;
     }
 
@@ -113,6 +116,12 @@ public class ResourceUpdate extends ResourceOperation {
             }
         }
         return applyMethods;
+    }
+
+    private FluentMethod getConstructor() {
+        List<ClientMethodParameter> pathParameters = this.getPathParameters();
+        return new FluentConstructorByInner(resourceModel, FluentMethodType.CONSTRUCTOR,
+                pathParameters, FluentStatic.getFluentManager().getType(), urlPathSegments);
     }
 
     private FluentMethod getApplyMethod(boolean hasContextParameter) {

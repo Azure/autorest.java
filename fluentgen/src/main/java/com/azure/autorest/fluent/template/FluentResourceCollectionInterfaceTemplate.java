@@ -37,7 +37,7 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
 
         javaFile.publicInterface(collection.getInterfaceType().getName(), interfaceBlock -> {
             // methods
-            collection.getMethods().forEach(method -> {
+            collection.getMethodsForTemplate().forEach(method -> {
                 ClientMethodTemplate.generateJavadoc(method.getInnerClientMethod(), interfaceBlock, method.getInnerProxyMethod(), true);
 
                 interfaceBlock.publicMethod(method.getMethodSignature());
