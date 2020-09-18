@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
@@ -26,7 +27,14 @@ public class ResourceImplementation {
     private final List<ImmutableMethod> methods = new ArrayList<>();
     private final Map<String, ClientModelProperty> clientProperties = new HashMap<>();
 
-    public ResourceImplementation(Collection<FluentMethod> fluentMethods) {
+    public ResourceImplementation(FluentResourceModel fluentModel) {
+        List<FluentMethod> fluentMethods = new ArrayList<>();
+        if (fluentModel.getResourceCreate() != null) {
+            fluentMethods.addAll(fluentModel.getResourceCreate().getFluentMethods());
+        }
+        if (fluentModel.getResourceUpdate() != null) {
+            fluentMethods.addAll(fluentModel.getResourceUpdate().getFluentMethods());
+        }
         this.groupMethods(fluentMethods);
     }
 
