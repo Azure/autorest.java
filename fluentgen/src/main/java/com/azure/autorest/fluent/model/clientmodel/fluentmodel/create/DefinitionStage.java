@@ -23,4 +23,8 @@ public class DefinitionStage extends FluentInterfaceStage {
                 ? String.format("The stage of the %1$s definition.", modelName)
                 : String.format("The stage of the %1$s definition allowing to specify %2$s.", modelName, property.getName());
     }
+
+    public ClientModelProperty getModelProperty() {
+        return this.property;
+    }
 }

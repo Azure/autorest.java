@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -21,13 +22,17 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     private final ClientModel clientModel;
     private final ClientModelProperty modelProperty;
+    private final LocalVariable localVariable;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
-                                     FluentInterfaceStage stage, ClientModel clientModel, ClientModelProperty modelProperty) {
+                                     FluentInterfaceStage stage, ClientModel clientModel,
+                                     ClientModelProperty modelProperty,
+                                     LocalVariable localVariable) {
         super(model, type);
 
         this.clientModel = clientModel;
         this.modelProperty = modelProperty;
+        this.localVariable = localVariable;
 
         this.name = modelProperty.getSetterName();
         this.description = String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription());
@@ -39,10 +44,10 @@ public class FluentModelPropertyMethod extends FluentMethod {
                 .method(block -> {
                     if (fluentResourceModel.getInnerModel() == clientModel) {
                         block.line("this.%1$s().%2$s(%3$s);", ModelNaming.METHOD_INNER, modelProperty.getSetterName(), modelProperty.getName());
-                        block.methodReturn("this");
                     } else {
-                        // TODO
+                        block.line("this.%1$s.%2$s(%3$s);", localVariable.getName(), modelProperty.getSetterName(), modelProperty.getName());
                     }
+                    block.methodReturn("this");
                 })
                 .build();
     }
@@ -75,7 +80,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
     public boolean equals(Object obj) {
         if (obj instanceof FluentModelPropertyMethod) {
             FluentModelPropertyMethod other = (FluentModelPropertyMethod) obj;
-            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty;
+            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty && this.localVariable == other.localVariable;
         } else {
             return false;
         }

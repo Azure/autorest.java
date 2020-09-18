@@ -18,17 +18,25 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.core.util.CoreUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceOperation {
+public abstract class ResourceOperation {
+
+    private static final Logger logger = LoggerFactory.getLogger(ResourceOperation.class);
 
     protected final FluentResourceModel resourceModel;
     protected final FluentResourceCollection resourceCollection;
@@ -37,17 +45,17 @@ public class ResourceOperation {
 
     protected final String methodName;
 
-    protected final ClientModel bodyParameterModel;
+    protected final ClientModel requestBodyParameterModel;
 
     protected final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
 
     public ResourceOperation(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
-                             UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
+                             UrlPathSegments urlPathSegments, String methodName, ClientModel requestBodyParameterModel) {
         this.resourceModel = resourceModel;
         this.resourceCollection = resourceCollection;
         this.urlPathSegments = urlPathSegments;
         this.methodName = methodName;
-        this.bodyParameterModel = bodyParameterModel;
+        this.requestBodyParameterModel = requestBodyParameterModel;
     }
 
     public FluentResourceModel getResourceModel() {
@@ -70,10 +78,7 @@ public class ResourceOperation {
         return methodReferences;
     }
 
-    public boolean isBodyParameterSameAsFluentModel() {
-        return bodyParameterModel == resourceModel.getInnerModel();
-    }
-
+    // properties on model inner object, or request body model
     protected List<ClientModelProperty> getProperties() {
         List<ClientModelProperty> properties = new ArrayList<>();
 
@@ -92,7 +97,18 @@ public class ResourceOperation {
                 }
             }
         } else {
-            // TODO
+            Map<String, ClientModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
+            for (String commonPropertyName : commonPropertyNames) {
+                if (propertyMap.containsKey(commonPropertyName)) {
+                    ClientModelProperty property = propertyMap.get(commonPropertyName);
+                    properties.add(property);
+                }
+            }
+            for (ClientModelProperty property : this.getRequestBodyModelProperties()) {
+                if (!commonPropertyNames.contains(property.getName())) {
+                    properties.add(property);
+                }
+            }
         }
 
         return properties.stream()
@@ -100,20 +116,12 @@ public class ResourceOperation {
                 .collect(Collectors.toList());
     }
 
-    protected List<ClientMethodParameter> getPathParameters() {
-        return getParametersByLocation(RequestParameterLocation.Path);
-    }
-
-    protected List<ClientMethodParameter> getMiscParameters() {
-        // header or query
-        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
-    }
-
-    protected List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
+    // method parameters
+    private List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
         return getParametersByLocation(new HashSet<>(Collections.singletonList(parameterLocation)));
     }
 
-    protected List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
+    private List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
         ClientMethod clientMethod = getMethodReferencesOfFullParameters().iterator().next().getInnerClientMethod();
         Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
@@ -124,7 +132,26 @@ public class ResourceOperation {
                 .collect(Collectors.toList());
     }
 
-    protected List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
+    public ClientMethodParameter getBodyParameter() {
+        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
+        return parameters.isEmpty() ? null : parameters.iterator().next();
+    }
+
+    public List<ClientMethodParameter> getPathParameters() {
+        return getParametersByLocation(RequestParameterLocation.Path);
+    }
+
+    public List<ClientMethodParameter> getMiscParameters() {
+        // header or query
+        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
+    }
+
+    public Collection<LocalVariable> getLocalVariables() {
+        return this.getResourceLocalVariables().getLocalVariablesMap().values();
+    }
+
+    // method reference
+    private List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
         return this.getMethodReferences().stream()
                 .filter(m -> !m.getInnerClientMethod().getOnlyRequiredParameters())
                 .collect(Collectors.toList());
@@ -144,5 +171,79 @@ public class ResourceOperation {
             parameters.add(contextParameter);
         }
         return methodOpt;
+    }
+
+    // local variables
+    private ResourceLocalVariables resourceLocalVariables;
+
+    protected ResourceLocalVariables getResourceLocalVariables() {
+        if (resourceLocalVariables == null) {
+            resourceLocalVariables = new ResourceLocalVariables(this);
+        }
+        return resourceLocalVariables;
+    }
+
+    protected LocalVariable getLocalVariableByMethodParameter(ClientMethodParameter methodParameter) {
+        return this.getResourceLocalVariables().getLocalVariablesMap().get(methodParameter);
+    }
+
+    // request body model and properties, used when request body is not fluent model inner object
+    private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
+    private List<ClientModelProperty> requestBodyModelProperties;
+
+    protected boolean isBodyParameterSameAsFluentModel() {
+        return requestBodyParameterModel == resourceModel.getInnerModel();
+    }
+
+    private void initRequestBodyClientModel() {
+        if (requestBodyModelPropertiesMap == null) {
+            requestBodyModelPropertiesMap = new HashMap<>();
+            requestBodyModelProperties = new ArrayList<>();
+
+            List<ClientModel> parentModels = new ArrayList<>();
+            String parentModelName = requestBodyParameterModel.getParentModelName();
+            while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+                ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
+                if (parentModel != null) {
+                    parentModels.add(parentModel);
+                }
+                parentModelName = parentModel == null ? null :parentModel.getParentModelName();
+            }
+
+            List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+            propertiesFromTypeAndParents.add(new ArrayList<>());
+            requestBodyParameterModel.getProperties().forEach(p -> {
+                if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                }
+            });
+
+
+            for (ClientModel parent : parentModels) {
+                propertiesFromTypeAndParents.add(new ArrayList<>());
+
+                parent.getProperties().stream()
+                        .forEach(p -> {
+                            if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
+                                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                            }
+                        });
+            }
+
+            Collections.reverse(propertiesFromTypeAndParents);
+            for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
+                requestBodyModelProperties.addAll(properties1);
+            }
+        }
+    }
+
+    private List<ClientModelProperty> getRequestBodyModelProperties() {
+        initRequestBodyClientModel();
+        return this.requestBodyModelProperties;
+    }
+
+    private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
+        initRequestBodyClientModel();
+        return this.requestBodyModelPropertiesMap;
     }
 }

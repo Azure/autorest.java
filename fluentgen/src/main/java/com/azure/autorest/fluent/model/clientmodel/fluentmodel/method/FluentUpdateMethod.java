@@ -7,6 +7,8 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -15,7 +17,8 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 import java.util.Set;
 
 public class FluentUpdateMethod extends FluentMethod {
-    public FluentUpdateMethod(FluentResourceModel model, FluentMethodType type) {
+    public FluentUpdateMethod(FluentResourceModel model, FluentMethodType type,
+                              ResourceLocalVariables resourceLocalVariables) {
         super(model, type);
 
         this.name = "update";
@@ -31,6 +34,13 @@ public class FluentUpdateMethod extends FluentMethod {
         this.implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
+                    // init
+                    resourceLocalVariables.getLocalVariablesMap().values().stream()
+                            .filter(LocalVariable::isInitializeRequired)
+                            .forEach(var -> {
+                                block.line(String.format("this.%1$s = %2$s;", var.getName(), var.getInitializeExpression()));
+                            });
+
                     block.methodReturn("this");
                 })
                 .build();
@@ -49,10 +59,5 @@ public class FluentUpdateMethod extends FluentMethod {
 
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        if (includeImplementationImports) {
-            fluentResourceModel.getInterfaceType().addImportsTo(imports, false);
-        } else {
-            fluentResourceModel.getImplementationType().addImportsTo(imports, false);
-        }
     }
 }

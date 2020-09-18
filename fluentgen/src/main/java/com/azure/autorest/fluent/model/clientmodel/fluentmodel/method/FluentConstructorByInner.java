@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
@@ -26,7 +27,8 @@ public class FluentConstructorByInner extends FluentMethod {
     private final IType managerType;
 
     public FluentConstructorByInner(FluentResourceModel model, FluentMethodType type,
-                                    List<ClientMethodParameter> pathParameters, IType managerType, UrlPathSegments urlPathSegments) {
+                                    List<ClientMethodParameter> pathParameters, ResourceLocalVariables resourceLocalVariables,
+                                    IType managerType, UrlPathSegments urlPathSegments) {
         super(model, type);
 
         this.pathParameters = pathParameters;
@@ -44,6 +46,7 @@ public class FluentConstructorByInner extends FluentMethod {
                     Collections.reverse(segments);
                     Iterator<UrlPathSegments.ParameterSegment> iterator = segments.iterator();
 
+                    // init from resource id
                     pathParameters.forEach(p -> {
                         UrlPathSegments.ParameterSegment segment = iterator.next();
                         // skip subscription parameter, which is usually from client
@@ -55,7 +58,7 @@ public class FluentConstructorByInner extends FluentMethod {
                         if (p.getClientType() != ClassType.String) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientType().toString(), valueFromIdText);
                         }
-                        block.line(String.format("this.%1$s = %2$s;", p.getName(), valueFromIdText));
+                        block.line(String.format("this.%1$s = %2$s;", resourceLocalVariables.getLocalVariableByMethodParameter(p).getName(), valueFromIdText));
                     });
                 })
                 .build();

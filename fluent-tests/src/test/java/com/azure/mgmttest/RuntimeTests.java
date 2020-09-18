@@ -13,12 +13,17 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.Configuration;
+import com.azure.core.util.Context;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.storage.StorageManager;
+import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
 import com.azure.mgmtlitetest.storage.models.BlobContainers;
+import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
+import com.azure.mgmtlitetest.storage.models.Sku;
+import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
@@ -73,18 +78,31 @@ public class RuntimeTests {
 
     @Test
     @Disabled("live test")
-    public void testBlobContainer() {
+    public void testStorage() {
         StorageManager storageManager = authenticateStorageManager();
-        BlobContainers blobContainers = storageManager.blobContainers();
-        BlobContainer blobContainer = blobContainers.defineContainer("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-                .withPublicAccess(PublicAccess.BLOB)
+
+        StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
+                .withLocation("westus")
+                .withExistingResourceGroup("rg-weidxu")
+                .withSku(new Sku().withName(SkuName.STANDARD_LRS))
+                .withKind(Kind.STORAGE_V2)
+                .withEnableHttpsTrafficOnly(true)
                 .create();
 
-        blobContainers.get("rg-weidxu", "sa1weidxu", "container1")
-                .update()
-                .withPublicAccess(PublicAccess.NONE)
+        storageAccount = storageManager.storageAccounts().getByResourceGroup("rg-weidxu", "sa1weidxu");
+        storageAccount.update()
+                .withAccessTier(AccessTier.COOL)
                 .apply();
+
+        BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
+                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+                .withPublicAccess(PublicAccess.BLOB)
+                .create(new Context("key", "value"));
+
+        blobContainer = storageManager.blobContainers().get("rg-weidxu", "sa1weidxu", "container1");
+        blobContainer.update()
+                .withPublicAccess(PublicAccess.NONE)
+                .apply(new Context("key", "value"));
     }
 
     private StorageManager authenticateStorageManager() {

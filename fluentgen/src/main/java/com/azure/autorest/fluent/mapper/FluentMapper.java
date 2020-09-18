@@ -54,20 +54,21 @@ public class FluentMapper {
         // manager, service API
         fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
 
-        // wrapper for response object, potentially as resource instance
+        // wrapper for response objects, potentially as resource instance
         fluentClient.getResourceModels().addAll(
                 codeModel.getSchemas().getObjects().stream()
                         .map(o -> FluentResourceModelMapper.getInstance().map(o))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
-        // resource collection API
+        // resource collection APIs
         fluentClient.getResourceCollections().addAll(
                 codeModel.getOperationGroups().stream()
                         .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        // parse resource collections to identify create/update/refresh flow on resource instance
         fluentClient.getResourceCollections().forEach(c -> {
             // resource create
             List<ResourceCreate> resourceCreates = ResourceParser.resolveResourceCreate(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels());

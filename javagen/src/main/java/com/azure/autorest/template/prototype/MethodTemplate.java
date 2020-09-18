@@ -53,6 +53,10 @@ public class MethodTemplate {
         javaClass.method(visibility, modifiers, methodSignature, method);
     }
 
+    public final void writeMethodContent(JavaBlock block) {
+        method.accept(block);
+    }
+
     public static Builder builder() {
         return new Builder();
     }

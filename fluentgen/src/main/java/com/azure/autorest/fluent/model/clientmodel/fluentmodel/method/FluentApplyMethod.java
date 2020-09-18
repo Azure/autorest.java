@@ -11,13 +11,13 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class FluentApplyMethod extends FluentMethod {
     private final FluentCollectionMethod collectionMethod;
 
     public FluentApplyMethod(FluentResourceModel model, FluentMethodType type,
-                             List<ClientMethodParameter> parameters,
+                             List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
                              FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         super(model, type);
 
@@ -40,15 +40,6 @@ public class FluentApplyMethod extends FluentMethod {
         this.parameters = parameters;
         this.collectionMethod = collectionMethod;
 
-        collectionMethod.getInnerClientMethod().getParameters().stream()
-                .filter(p -> !FluentUtils.isContextParameter(p))
-                .filter(p -> !p.getClientType().toString().equals(model.getInnerModel().getName()))
-                .forEach(p -> clientProperties.add(
-                        new ClientModelProperty.Builder()
-                                .name(p.getName())
-                                .clientType(p.getClientType())
-                                .build()));
-
         this.implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
@@ -59,13 +50,16 @@ public class FluentApplyMethod extends FluentMethod {
                             .findFirst().get();
 
                     // method invocation
-                    List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getOnlyRequiredParameters() ? collectionMethod.getInnerClientMethod().getMethodRequiredParameters() : collectionMethod.getInnerClientMethod().getMethodParameters();
+                    Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
+                    List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodParameters();
                     String argumentsLine = methodParameters.stream()
                             .map(p -> {
-                                if (fluentResourceModel.getInnerModel().getName().equals(p.getClientType().toString())) {
+                                if (parametersSet.contains(p)) {
+                                    return p.getName();
+                                } else if (fluentResourceModel.getInnerModel().getName().equals(p.getClientType().toString())) {
                                     return ModelNaming.MODEL_PROPERTY_INNER;
                                 } else {
-                                    return p.getName();
+                                    return resourceLocalVariables.getLocalVariableByMethodParameter(p).getName();
                                 }
                             })
                             .collect(Collectors.joining(", "));

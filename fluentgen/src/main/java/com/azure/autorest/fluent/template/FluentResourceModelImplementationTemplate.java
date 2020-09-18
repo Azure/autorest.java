@@ -9,19 +9,18 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class FluentResourceModelImplementationTemplate implements IJavaTemplate<FluentResourceModel, JavaFile> {
@@ -46,10 +45,10 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
         List<String> implementInterfaces = new ArrayList<>();
         implementInterfaces.add(model.getInterfaceType().getName());
-        if (model.getResourceCreate() != null && model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
+        if (model.getResourceCreate() != null) {
             implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION));
         }
-        if (model.getResourceUpdate() != null && model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+        if (model.getResourceUpdate() != null) {
             implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE));
         }
 
@@ -61,7 +60,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
 
             // if resource is updatable, use the constructor from resourceUpdate
-            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null || !model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null) {
                 // constructor
                 classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                     methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
@@ -84,19 +83,15 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // methods for fluent interfaces
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
-                if (model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
-                    List<FluentMethod> fluentMethods = model.getResourceImplementation().getFluentMethods();
-                    Map<String, ClientModelProperty> clientProperties = new HashMap<>();
-                    fluentMethods.stream()
-                            .flatMap(m -> m.getClientProperties().stream())
-                            .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
+                ResourceImplementation resourceImplementation = model.getResourceImplementation();
+                List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();
+                List<LocalVariable> localVariables = resourceImplementation.getLocalVariables();
 
-                    clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
+                localVariables.forEach(p -> classBlock.privateMemberVariable(p.getVariableType().toString(), p.getName()));
 
-                    fluentMethods.forEach(m -> {
-                        m.getMethodTemplate().writeMethod(classBlock);
-                    });
-                }
+                fluentMethods.forEach(m -> {
+                    m.getMethodTemplate().writeMethod(classBlock);
+                });
             }
         });
     }

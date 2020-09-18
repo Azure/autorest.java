@@ -83,7 +83,7 @@ public class ResourceParser {
                                 }
                                 fluentModel.setCategory(category);
 
-                                logger.info("Fluent model {} as category {}", fluentModel.getInterfaceType().getName(), category);
+                                logger.info("Fluent model {} as category {}", fluentModel.getName(), category);
                             }
                         }
                     }

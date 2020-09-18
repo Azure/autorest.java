@@ -73,8 +73,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
             // method for define resource
             int resourceCount = collection.getResourceCreates().size();
-            collection.getResourceCreates().stream()
-                    .filter(ResourceCreate::isBodyParameterSameAsFluentModel)
+            collection.getResourceCreates()
                     .forEach(rc -> {
                         FluentMethod defineMethod = rc.getDefineMethod();
                         if (resourceCount == 1) {

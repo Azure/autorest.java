@@ -5,92 +5,142 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
-import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
+import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ResourceImplementation {
 
-    private List<FluentMethod> fluentMethods = new ArrayList<>();
+    private final List<ImmutableMethod> methods = new ArrayList<>();
+    private final List<LocalVariable> localVariables = new ArrayList<>();
 
-    public ResourceImplementation(Collection<FluentMethod> fluentMethods) {
+    public ResourceImplementation(FluentResourceModel fluentModel) {
+        List<FluentMethod> fluentMethods = new ArrayList<>();
+        List<LocalVariable> localVariables = new ArrayList<>();
+        if (fluentModel.getResourceCreate() != null) {
+            fluentMethods.addAll(fluentModel.getResourceCreate().getFluentMethods());
+            localVariables.addAll(fluentModel.getResourceCreate().getLocalVariables());
+        }
+        if (fluentModel.getResourceUpdate() != null) {
+            fluentMethods.addAll(fluentModel.getResourceUpdate().getFluentMethods());
+            localVariables.addAll(fluentModel.getResourceUpdate().getLocalVariables());
+        }
         this.groupMethods(fluentMethods);
+        this.groupLocalVariables(localVariables);
     }
 
-    private void groupMethods(Collection<FluentMethod> methods) {
-        Map<String, GroupedMethods> groupedMethodsMap = new HashMap<>();
-        for (FluentMethod method : methods) {
+    private void groupLocalVariables(Collection<LocalVariable> localVariables) {
+        Map<String, LocalVariable> localVariablesMap = new HashMap<>();
+        localVariables.forEach(var -> localVariablesMap.putIfAbsent(var.getName(), var));
+        this.localVariables.addAll(localVariablesMap.values());
+    }
+
+    private void groupMethods(Collection<FluentMethod> fluentMethods) {
+        Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
+        for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
-                GroupedMethods groupedMethods = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethods());
+                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethod());
                 if (method.getType() == FluentMethodType.CREATE_WITH) {
-                    groupedMethods.methodCreateWith = method;
+                    groupedMethod.methodCreateWith = method;
                 } else {
-                    groupedMethods.methodUpdateWith = method;
+                    groupedMethod.methodUpdateWith = method;
                 }
             } else {
-                this.fluentMethods.add(method);
+                this.methods.add(method);
             }
         }
 
-        for (GroupedMethods groupedMethods : groupedMethodsMap.values()) {
-            if (groupedMethods.size() == 1) {
-                this.fluentMethods.add(groupedMethods.single());
+        boolean branchMethodNeeded = false;
+
+        for (GroupedMethod groupedMethod : groupedMethodsMap.values()) {
+            if (groupedMethod.size() == 1) {
+                this.methods.add(groupedMethod.single());
             } else {
-                this.fluentMethods.add(new MergedFluentMethod(groupedMethods));
+                MergedFluentMethod method = new MergedFluentMethod(groupedMethod);
+                this.methods.add(method);
+
+                branchMethodNeeded = branchMethodNeeded || method.isBranchMethodNeeded();
             }
+        }
+
+        if (branchMethodNeeded) {
+            this.methods.add(new FluentMethodCreateMode());
         }
     }
 
-    public List<FluentMethod> getFluentMethods() {
-        return this.fluentMethods;
+    public List<ImmutableMethod> getMethods() {
+        return this.methods;
     }
 
-    private static class MergedFluentMethod extends FluentMethod {
+    public List<LocalVariable> getLocalVariables() {
+        return this.localVariables;
+    }
 
-        private final GroupedMethods groupedMethods;
+    private static class MergedFluentMethod implements ImmutableMethod {
 
-        public MergedFluentMethod(GroupedMethods groupedMethods) {
-            super(groupedMethods.methodCreateWith.getFluentResourceModel(), FluentMethodType.OTHER);
+        private final MethodTemplate implementationMethodTemplate;
+        private final boolean branchMethodNeeded;
 
-            this.groupedMethods = groupedMethods;
-
-            if (groupedMethods.methodCreateWith.equals(groupedMethods.methodUpdateWith)) {
-                this.implementationMethodTemplate = groupedMethods.methodCreateWith.getMethodTemplate();
+        public MergedFluentMethod(GroupedMethod groupedMethod) {
+            if (groupedMethod.methodCreateWith.equals(groupedMethod.methodUpdateWith)) {
+                this.implementationMethodTemplate = groupedMethod.methodCreateWith.getMethodTemplate();
+                branchMethodNeeded = false;
             } else {
-                // TODO
+                this.implementationMethodTemplate = MethodTemplate.builder()
+                        .methodSignature(groupedMethod.methodCreateWith.getImplementationMethodSignature())
+                        .method(block -> {
+                            block.ifBlock("isInCreateMode()", ifBlock -> {
+                                groupedMethod.methodCreateWith.getMethodTemplate().writeMethodContent(ifBlock);
+                            }).elseBlock(elseBlock -> {
+                                groupedMethod.methodUpdateWith.getMethodTemplate().writeMethodContent(elseBlock);
+                            });
+                        })
+                        .build();
+                branchMethodNeeded = true;
             }
         }
 
-        @Override
-        protected String getBaseMethodSignature() {
-            throw new UnsupportedOperationException();
+        public boolean isBranchMethodNeeded() {
+            return branchMethodNeeded;
         }
 
         @Override
-        public String getImplementationMethodSignature() {
-            return groupedMethods.methodCreateWith.getImplementationMethodSignature();
-        }
-
-        @Override
-        public void writeJavadoc(JavaJavadocComment commentBlock) {
-            // NOOP
-        }
-
-        @Override
-        public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-            groupedMethods.methodCreateWith.addImportsTo(imports, includeImplementationImports);
-            groupedMethods.methodUpdateWith.addImportsTo(imports, includeImplementationImports);
+        public MethodTemplate getMethodTemplate() {
+            return implementationMethodTemplate;
         }
     }
 
-    private static class GroupedMethods {
+    private static class FluentMethodCreateMode implements ImmutableMethod {
+
+        private final MethodTemplate implementationMethodTemplate;
+
+        public FluentMethodCreateMode() {
+            this.implementationMethodTemplate = MethodTemplate.builder()
+                    .visibility(JavaVisibility.Private)
+                    .methodSignature("boolean isInCreateMode()")
+                    .method(block -> {
+                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER));
+                    })
+                    .build();
+        }
+
+        @Override
+        public MethodTemplate getMethodTemplate() {
+            return implementationMethodTemplate;
+        }
+    }
+
+    private static class GroupedMethod {
         private FluentMethod methodCreateWith;
         private FluentMethod methodUpdateWith;
 

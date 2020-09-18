@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -23,7 +24,8 @@ public class FluentParentMethod extends FluentMethod {
     private List<ClientMethodParameter> parameters;
 
     public FluentParentMethod(FluentResourceModel model, FluentMethodType type,
-                              FluentInterfaceStage stage, String parentResourceName, List<ClientMethodParameter> parameters) {
+                              FluentInterfaceStage stage, String parentResourceName,
+                              List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables) {
         super(model, type);
 
         this.parameters = parameters;
@@ -35,16 +37,10 @@ public class FluentParentMethod extends FluentMethod {
 
         this.parameters = parameters;
 
-        parameters.forEach(p -> clientProperties.add(
-                new ClientModelProperty.Builder()
-                        .name(p.getName())
-                        .clientType(p.getClientType())
-                        .build()));
-
         this.implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
-                    parameters.forEach(p -> block.line("this.%1$s = %1$s;", p.getName()));
+                    parameters.forEach(p -> block.line("this.%1$s = %2$s;", resourceLocalVariables.getLocalVariableByMethodParameter(p).getName(), p.getName()));
                     block.methodReturn("this");
                 })
                 .build();

@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -84,6 +83,10 @@ public class FluentResourceModel {
         }
     }
 
+    public String getName() {
+        return interfaceType.getName();
+    }
+
     public ClientModel getInnerModel() {
         return innerModel;
     }
@@ -126,14 +129,7 @@ public class FluentResourceModel {
     }
 
     public ResourceImplementation getResourceImplementation() {
-        List<FluentMethod> methods = new ArrayList<>();
-        if (resourceCreate != null) {
-            methods.addAll(resourceCreate.getFluentMethods());
-        }
-        if (resourceUpdate != null) {
-            methods.addAll(resourceUpdate.getFluentMethods());
-        }
-        return new ResourceImplementation(methods);
+        return new ResourceImplementation(this);
     }
 
     public ResourceCreate getResourceCreate() {

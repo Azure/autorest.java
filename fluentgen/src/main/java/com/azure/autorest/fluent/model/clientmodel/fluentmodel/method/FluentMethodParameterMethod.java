@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
@@ -19,12 +20,15 @@ import java.util.Set;
 public class FluentMethodParameterMethod extends FluentMethod {
 
     private final ClientMethodParameter methodParameter;
+    private final LocalVariable localVariable;
 
     public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,
-                                       FluentInterfaceStage stage, ClientMethodParameter methodParameter) {
+                                       FluentInterfaceStage stage,
+                                       ClientMethodParameter methodParameter, LocalVariable localVariable) {
         super(model, type);
 
         this.methodParameter = methodParameter;
+        this.localVariable = localVariable;
 
         this.name = CodeNamer.getModelNamer().modelPropertySetterName(methodParameter.getName());
         this.description = String.format("Specifies the %1$s property: %2$s.", methodParameter.getName(), methodParameter.getDescription());
@@ -34,7 +38,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
         this.implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
-                    block.line("this.%1$s = %2$s;", methodParameter.getName(), methodParameter.getName());
+                    block.line("this.%1$s = %2$s;", localVariable.getName(), methodParameter.getName());
                     block.methodReturn("this");
                 })
                 .build();
@@ -63,7 +67,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
     public boolean equals(Object obj) {
         if (obj instanceof FluentMethodParameterMethod) {
             FluentMethodParameterMethod other = (FluentMethodParameterMethod) obj;
-            return this.methodParameter == other.methodParameter;
+            return this.methodParameter == other.methodParameter && this.localVariable == other.localVariable;
         } else {
             return false;
         }
