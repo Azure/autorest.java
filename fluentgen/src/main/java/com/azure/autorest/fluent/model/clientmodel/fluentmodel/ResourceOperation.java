@@ -48,10 +48,6 @@ public abstract class ResourceOperation {
 
     protected final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
 
-    private ClientModel requestBodyClientModel;
-    private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
-    private List<ClientModelProperty> requestBodyModelProperties;
-
     public ResourceOperation(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                              UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         this.resourceModel = resourceModel;
@@ -80,6 +76,102 @@ public abstract class ResourceOperation {
     public List<FluentCollectionMethod> getMethodReferences() {
         return methodReferences;
     }
+
+    // properties on model inner object, or request body model
+    protected List<ClientModelProperty> getProperties() {
+        List<ClientModelProperty> properties = new ArrayList<>();
+
+        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
+
+        if (this.isBodyParameterSameAsFluentModel()) {
+            for (String commonPropertyName : commonPropertyNames) {
+                if (resourceModel.hasProperty(commonPropertyName)) {
+                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
+                    properties.add(property.getInnerProperty());
+                }
+            }
+            for (FluentModelProperty property : resourceModel.getProperties()) {
+                if (!commonPropertyNames.contains(property.getName())) {
+                    properties.add(property.getInnerProperty());
+                }
+            }
+        } else {
+            Map<String, ClientModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
+            for (String commonPropertyName : commonPropertyNames) {
+                if (propertyMap.containsKey(commonPropertyName)) {
+                    ClientModelProperty property = propertyMap.get(commonPropertyName);
+                    properties.add(property);
+                }
+            }
+            for (ClientModelProperty property : this.getRequestBodyModelProperties()) {
+                if (!commonPropertyNames.contains(property.getName())) {
+                    properties.add(property);
+                }
+            }
+        }
+
+        return properties.stream()
+                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
+                .collect(Collectors.toList());
+    }
+
+    // method parameters
+    private List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
+        return getParametersByLocation(new HashSet<>(Collections.singletonList(parameterLocation)));
+    }
+
+    private List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
+        ClientMethod clientMethod = getMethodReferencesOfFullParameters().iterator().next().getInnerClientMethod();
+        Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
+                .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
+                .map(ProxyMethodParameter::getName)
+                .collect(Collectors.toSet());
+        return clientMethod.getParameters().stream()
+                .filter(p -> paramNames.contains(p.getName()))
+                .collect(Collectors.toList());
+    }
+
+    protected ClientMethodParameter getBodyParameter() {
+        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
+        return parameters.isEmpty() ? null : parameters.iterator().next();
+    }
+
+    protected List<ClientMethodParameter> getPathParameters() {
+        return getParametersByLocation(RequestParameterLocation.Path);
+    }
+
+    protected List<ClientMethodParameter> getMiscParameters() {
+        // header or query
+        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
+    }
+
+    // method reference
+    private List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
+        return this.getMethodReferences().stream()
+                .filter(m -> !m.getInnerClientMethod().getOnlyRequiredParameters())
+                .collect(Collectors.toList());
+    }
+
+    protected Optional<FluentCollectionMethod> findMethod(boolean hasContextParameter, List<ClientMethodParameter> parameters) {
+        Optional<FluentCollectionMethod> methodOpt = this.getMethodReferencesOfFullParameters().stream()
+                .filter(m -> hasContextParameter
+                        ? m.getInnerClientMethod().getParameters().stream().anyMatch(FluentUtils::isContextParameter)
+                        : m.getInnerClientMethod().getParameters().stream().noneMatch(FluentUtils::isContextParameter))
+                .findFirst();
+        if (methodOpt.isPresent() && hasContextParameter) {
+            ClientMethodParameter contextParameter = methodOpt.get()
+                    .getInnerClientMethod().getParameters().stream()
+                    .filter(FluentUtils::isContextParameter)
+                    .findFirst().get();
+            parameters.add(contextParameter);
+        }
+        return methodOpt;
+    }
+
+    // request body model and properties, used when request body is not fluent model inner object
+    private ClientModel requestBodyClientModel;
+    private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
+    private List<ClientModelProperty> requestBodyModelProperties;
 
     private boolean isBodyParameterSameAsFluentModel() {
         return bodyParameterModel == resourceModel.getInnerModel();
@@ -132,8 +224,12 @@ public abstract class ResourceOperation {
     }
 
     protected ClientModel getRequestBodyClientModel() {
-        initRequestBodyClientModel();
-        return this.requestBodyClientModel;
+        if (this.isBodyParameterSameAsFluentModel()) {
+            return resourceModel.getInnerModel();
+        } else {
+            initRequestBodyClientModel();
+            return this.requestBodyClientModel;
+        }
     }
 
     private List<ClientModelProperty> getRequestBodyModelProperties() {
@@ -144,93 +240,5 @@ public abstract class ResourceOperation {
     private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
         initRequestBodyClientModel();
         return this.requestBodyModelPropertiesMap;
-    }
-
-    protected List<ClientModelProperty> getProperties() {
-        List<ClientModelProperty> properties = new ArrayList<>();
-
-        List<String> commonPropertyNames = Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS);
-
-        if (this.isBodyParameterSameAsFluentModel()) {
-            for (String commonPropertyName : commonPropertyNames) {
-                if (resourceModel.hasProperty(commonPropertyName)) {
-                    FluentModelProperty property = resourceModel.getProperty(commonPropertyName);
-                    properties.add(property.getInnerProperty());
-                }
-            }
-            for (FluentModelProperty property : resourceModel.getProperties()) {
-                if (!commonPropertyNames.contains(property.getName())) {
-                    properties.add(property.getInnerProperty());
-                }
-            }
-        } else {
-            Map<String, ClientModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
-            for (String commonPropertyName : commonPropertyNames) {
-                if (propertyMap.containsKey(commonPropertyName)) {
-                    ClientModelProperty property = propertyMap.get(commonPropertyName);
-                    properties.add(property);
-                }
-            }
-            for (ClientModelProperty property : this.getRequestBodyModelProperties()) {
-                if (!commonPropertyNames.contains(property.getName())) {
-                    properties.add(property);
-                }
-            }
-        }
-
-        return properties.stream()
-                .filter(p -> !p.getIsReadOnly() && !p.getIsConstant())
-                .collect(Collectors.toList());
-    }
-
-    protected ClientMethodParameter getBodyParameter() {
-        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
-        return parameters.isEmpty() ? null : parameters.iterator().next();
-    }
-
-    protected List<ClientMethodParameter> getPathParameters() {
-        return getParametersByLocation(RequestParameterLocation.Path);
-    }
-
-    protected List<ClientMethodParameter> getMiscParameters() {
-        // header or query
-        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
-    }
-
-    protected List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
-        return getParametersByLocation(new HashSet<>(Collections.singletonList(parameterLocation)));
-    }
-
-    protected List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
-        ClientMethod clientMethod = getMethodReferencesOfFullParameters().iterator().next().getInnerClientMethod();
-        Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
-                .map(ProxyMethodParameter::getName)
-                .collect(Collectors.toSet());
-        return clientMethod.getParameters().stream()
-                .filter(p -> paramNames.contains(p.getName()))
-                .collect(Collectors.toList());
-    }
-
-    protected List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
-        return this.getMethodReferences().stream()
-                .filter(m -> !m.getInnerClientMethod().getOnlyRequiredParameters())
-                .collect(Collectors.toList());
-    }
-
-    protected Optional<FluentCollectionMethod> findMethod(boolean hasContextParameter, List<ClientMethodParameter> parameters) {
-        Optional<FluentCollectionMethod> methodOpt = this.getMethodReferencesOfFullParameters().stream()
-                .filter(m -> hasContextParameter
-                        ? m.getInnerClientMethod().getParameters().stream().anyMatch(FluentUtils::isContextParameter)
-                        : m.getInnerClientMethod().getParameters().stream().noneMatch(FluentUtils::isContextParameter))
-                .findFirst();
-        if (methodOpt.isPresent() && hasContextParameter) {
-            ClientMethodParameter contextParameter = methodOpt.get()
-                    .getInnerClientMethod().getParameters().stream()
-                    .filter(FluentUtils::isContextParameter)
-                    .findFirst().get();
-            parameters.add(contextParameter);
-        }
-        return methodOpt;
     }
 }

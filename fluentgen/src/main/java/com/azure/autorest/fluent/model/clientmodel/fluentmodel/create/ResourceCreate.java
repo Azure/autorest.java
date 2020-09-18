@@ -53,7 +53,7 @@ public class ResourceCreate extends ResourceOperation  {
                 resourceModel.getName(), methodName, bodyParameterModel.getName());
     }
 
-//    public boolean hasResourceGroup() {
+//    private boolean hasResourceGroup() {
 //        return urlPathSegments.hasResourceGroup();
 //    }
 
@@ -62,7 +62,7 @@ public class ResourceCreate extends ResourceOperation  {
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 
-//    public boolean hasTags() {
+//    private boolean hasTags() {
 //        IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
 //        return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
 //    }
