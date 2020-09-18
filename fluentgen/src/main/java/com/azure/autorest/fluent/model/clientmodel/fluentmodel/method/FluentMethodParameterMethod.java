@@ -20,6 +20,7 @@ import java.util.Set;
 public class FluentMethodParameterMethod extends FluentMethod {
 
     private final ClientMethodParameter methodParameter;
+    private final LocalVariable localVariable;
 
     public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,
                                        FluentInterfaceStage stage,
@@ -27,6 +28,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
         super(model, type);
 
         this.methodParameter = methodParameter;
+        this.localVariable = localVariable;
 
         this.name = CodeNamer.getModelNamer().modelPropertySetterName(methodParameter.getName());
         this.description = String.format("Specifies the %1$s property: %2$s.", methodParameter.getName(), methodParameter.getDescription());
@@ -65,7 +67,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
     public boolean equals(Object obj) {
         if (obj instanceof FluentMethodParameterMethod) {
             FluentMethodParameterMethod other = (FluentMethodParameterMethod) obj;
-            return this.methodParameter == other.methodParameter;
+            return this.methodParameter == other.methodParameter && this.localVariable == other.localVariable;
         } else {
             return false;
         }

@@ -22,14 +22,17 @@ public class FluentModelPropertyMethod extends FluentMethod {
 
     private final ClientModel clientModel;
     private final ClientModelProperty modelProperty;
+    private final LocalVariable localVariable;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
-                                     FluentInterfaceStage stage, ClientModel clientModel, ClientModelProperty modelProperty,
+                                     FluentInterfaceStage stage, ClientModel clientModel,
+                                     ClientModelProperty modelProperty,
                                      LocalVariable localVariable) {
         super(model, type);
 
         this.clientModel = clientModel;
         this.modelProperty = modelProperty;
+        this.localVariable = localVariable;
 
         this.name = modelProperty.getSetterName();
         this.description = String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription());
@@ -77,7 +80,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
     public boolean equals(Object obj) {
         if (obj instanceof FluentModelPropertyMethod) {
             FluentModelPropertyMethod other = (FluentModelPropertyMethod) obj;
-            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty;
+            return this.clientModel == other.clientModel && this.modelProperty == other.modelProperty && this.localVariable == other.localVariable;
         } else {
             return false;
         }
