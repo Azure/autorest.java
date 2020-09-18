@@ -5,7 +5,6 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
@@ -162,7 +161,7 @@ public class ResourceCreate extends ResourceOperation  {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getBodyClientModel(), property, this.getBodyParameter()));
+            stage.getMethods().add(this.getPropertyMethod(stage, this.getRequestBodyClientModel(), property, this.getBodyParameter()));
 
             optionalDefinitionStages.add(stage);
         }

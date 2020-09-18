@@ -63,7 +63,7 @@ public class ResourceUpdate extends ResourceOperation {
             UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(updateStageApply);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getBodyClientModel(), property, this.getBodyParameter()));
+            stage.getMethods().add(this.getPropertyMethod(stage, this.getRequestBodyClientModel(), property, this.getBodyParameter()));
 
             updateStages.add(stage);
         }

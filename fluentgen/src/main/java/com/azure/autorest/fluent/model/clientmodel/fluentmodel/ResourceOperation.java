@@ -33,7 +33,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceOperation {
+public abstract class ResourceOperation {
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceOperation.class);
 
@@ -48,9 +48,9 @@ public class ResourceOperation {
 
     protected final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
 
-    private ClientModel bodyClientModel;
-    private Map<String, ClientModelProperty> bodyModelPropertiesMap;
-    private List<ClientModelProperty> bodyModelProperties;
+    private ClientModel requestBodyClientModel;
+    private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
+    private List<ClientModelProperty> requestBodyModelProperties;
 
     public ResourceOperation(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                              UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
@@ -81,20 +81,20 @@ public class ResourceOperation {
         return methodReferences;
     }
 
-    public boolean isBodyParameterSameAsFluentModel() {
+    private boolean isBodyParameterSameAsFluentModel() {
         return bodyParameterModel == resourceModel.getInnerModel();
     }
 
-    private void initBodyClientModel() {
-        if (bodyClientModel == null) {
-            bodyModelPropertiesMap = new HashMap<>();
-            bodyModelProperties = new ArrayList<>();
+    private void initRequestBodyClientModel() {
+        if (requestBodyClientModel == null) {
+            requestBodyModelPropertiesMap = new HashMap<>();
+            requestBodyModelProperties = new ArrayList<>();
 
             ClientMethodParameter bodyParameter = this.getBodyParameter();
-            bodyClientModel = FluentUtils.getClientModel(bodyParameter.getClientType().toString());
+            requestBodyClientModel = FluentUtils.getClientModel(bodyParameter.getClientType().toString());
             List<ClientModel> parentModels = new ArrayList<>();
-            if (bodyClientModel != null) {
-                String parentModelName = bodyClientModel.getParentModelName();
+            if (requestBodyClientModel != null) {
+                String parentModelName = requestBodyClientModel.getParentModelName();
                 while (!CoreUtils.isNullOrEmpty(parentModelName)) {
                     ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
                     if (parentModel != null) {
@@ -106,8 +106,8 @@ public class ResourceOperation {
 
             List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
             propertiesFromTypeAndParents.add(new ArrayList<>());
-            bodyClientModel.getProperties().forEach(p -> {
-                if (bodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
+            requestBodyClientModel.getProperties().forEach(p -> {
+                if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
                 }
             });
@@ -118,7 +118,7 @@ public class ResourceOperation {
 
                 parent.getProperties().stream()
                         .forEach(p -> {
-                            if (bodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
+                            if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
                                 propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
                             }
                         });
@@ -126,24 +126,24 @@ public class ResourceOperation {
 
             Collections.reverse(propertiesFromTypeAndParents);
             for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
-                bodyModelProperties.addAll(properties1);
+                requestBodyModelProperties.addAll(properties1);
             }
         }
     }
 
-    protected ClientModel getBodyClientModel() {
-        initBodyClientModel();
-        return this.bodyClientModel;
+    protected ClientModel getRequestBodyClientModel() {
+        initRequestBodyClientModel();
+        return this.requestBodyClientModel;
     }
 
-    private List<ClientModelProperty> getBodyModelProperties() {
-        initBodyClientModel();
-        return this.bodyModelProperties;
+    private List<ClientModelProperty> getRequestBodyModelProperties() {
+        initRequestBodyClientModel();
+        return this.requestBodyModelProperties;
     }
 
-    private Map<String, ClientModelProperty> getBodyModelPropertiesMap() {
-        initBodyClientModel();
-        return this.bodyModelPropertiesMap;
+    private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
+        initRequestBodyClientModel();
+        return this.requestBodyModelPropertiesMap;
     }
 
     protected List<ClientModelProperty> getProperties() {
@@ -164,14 +164,14 @@ public class ResourceOperation {
                 }
             }
         } else {
-            Map<String, ClientModelProperty> propertyMap = this.getBodyModelPropertiesMap();
+            Map<String, ClientModelProperty> propertyMap = this.getRequestBodyModelPropertiesMap();
             for (String commonPropertyName : commonPropertyNames) {
                 if (propertyMap.containsKey(commonPropertyName)) {
                     ClientModelProperty property = propertyMap.get(commonPropertyName);
                     properties.add(property);
                 }
             }
-            for (ClientModelProperty property : this.getBodyModelProperties()) {
+            for (ClientModelProperty property : this.getRequestBodyModelProperties()) {
                 if (!commonPropertyNames.contains(property.getName())) {
                     properties.add(property);
                 }

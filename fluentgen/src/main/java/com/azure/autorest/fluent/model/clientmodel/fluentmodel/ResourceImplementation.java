@@ -11,7 +11,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMeth
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
@@ -20,7 +19,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ResourceImplementation {
 
@@ -43,14 +41,14 @@ public class ResourceImplementation {
                 .flatMap(m -> m.getClientProperties().stream())
                 .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
 
-        Map<String, GroupedMethods> groupedMethodsMap = new HashMap<>();
+        Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
         for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
-                GroupedMethods groupedMethods = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethods());
+                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethod());
                 if (method.getType() == FluentMethodType.CREATE_WITH) {
-                    groupedMethods.methodCreateWith = method;
+                    groupedMethod.methodCreateWith = method;
                 } else {
-                    groupedMethods.methodUpdateWith = method;
+                    groupedMethod.methodUpdateWith = method;
                 }
             } else {
                 this.methods.add(method);
@@ -59,11 +57,11 @@ public class ResourceImplementation {
 
         boolean branchMethodNeeded = false;
 
-        for (GroupedMethods groupedMethods : groupedMethodsMap.values()) {
-            if (groupedMethods.size() == 1) {
-                this.methods.add(groupedMethods.single());
+        for (GroupedMethod groupedMethod : groupedMethodsMap.values()) {
+            if (groupedMethod.size() == 1) {
+                this.methods.add(groupedMethod.single());
             } else {
-                MergedFluentMethod method = new MergedFluentMethod(groupedMethods);
+                MergedFluentMethod method = new MergedFluentMethod(groupedMethod);
                 this.methods.add(method);
 
                 branchMethodNeeded = branchMethodNeeded || method.isBranchMethodNeeded();
@@ -83,65 +81,23 @@ public class ResourceImplementation {
         return this.clientProperties;
     }
 
-    private static class FluentMethodCreateMode extends FluentMethod {
+    private static class MergedFluentMethod implements ImmutableMethod {
 
-        public FluentMethodCreateMode() {
-            super(null, FluentMethodType.OTHER);
-
-            this.name = "isInCreateMode";
-
-            this.implementationMethodTemplate = MethodTemplate.builder()
-                    .visibility(JavaVisibility.Private)
-                    .methodSignature(this.getImplementationMethodSignature())
-                    .method(block -> {
-                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER));
-                    })
-                    .build();
-        }
-
-        @Override
-        public String getImplementationMethodSignature() {
-            return "boolean isInCreateMode()";
-        }
-
-        @Override
-        protected String getBaseMethodSignature() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void writeJavadoc(JavaJavadocComment commentBlock) {
-            // NOOP
-        }
-
-        @Override
-        public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-
-        }
-    }
-
-    private static class MergedFluentMethod extends FluentMethod {
-
-        private final GroupedMethods groupedMethods;
+        private final MethodTemplate implementationMethodTemplate;
         private final boolean branchMethodNeeded;
 
-        public MergedFluentMethod(GroupedMethods groupedMethods) {
-            super(groupedMethods.methodCreateWith.getFluentResourceModel(), FluentMethodType.OTHER);
-
-            this.name = groupedMethods.methodCreateWith.getName();
-            this.groupedMethods = groupedMethods;
-
-            if (groupedMethods.methodCreateWith.equals(groupedMethods.methodUpdateWith)) {
-                this.implementationMethodTemplate = groupedMethods.methodCreateWith.getMethodTemplate();
+        public MergedFluentMethod(GroupedMethod groupedMethod) {
+            if (groupedMethod.methodCreateWith.equals(groupedMethod.methodUpdateWith)) {
+                this.implementationMethodTemplate = groupedMethod.methodCreateWith.getMethodTemplate();
                 branchMethodNeeded = false;
             } else {
                 this.implementationMethodTemplate = MethodTemplate.builder()
-                        .methodSignature(this.getImplementationMethodSignature())
+                        .methodSignature(groupedMethod.methodCreateWith.getImplementationMethodSignature())
                         .method(block -> {
                             block.ifBlock("isInCreateMode()", ifBlock -> {
-                                groupedMethods.methodCreateWith.getMethodTemplate().writeMethodContent(ifBlock);
+                                groupedMethod.methodCreateWith.getMethodTemplate().writeMethodContent(ifBlock);
                             }).elseBlock(elseBlock -> {
-                                groupedMethods.methodCreateWith.getMethodTemplate().writeMethodContent(elseBlock);
+                                groupedMethod.methodCreateWith.getMethodTemplate().writeMethodContent(elseBlock);
                             });
                         })
                         .build();
@@ -149,33 +105,37 @@ public class ResourceImplementation {
             }
         }
 
-        @Override
-        protected String getBaseMethodSignature() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public String getImplementationMethodSignature() {
-            return groupedMethods.methodCreateWith.getImplementationMethodSignature();
-        }
-
-        @Override
-        public void writeJavadoc(JavaJavadocComment commentBlock) {
-            // NOOP
-        }
-
-        @Override
-        public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-            groupedMethods.methodCreateWith.addImportsTo(imports, includeImplementationImports);
-            groupedMethods.methodUpdateWith.addImportsTo(imports, includeImplementationImports);
-        }
-
         public boolean isBranchMethodNeeded() {
             return branchMethodNeeded;
         }
+
+        @Override
+        public MethodTemplate getMethodTemplate() {
+            return implementationMethodTemplate;
+        }
     }
 
-    private static class GroupedMethods {
+    private static class FluentMethodCreateMode implements ImmutableMethod {
+
+        private final MethodTemplate implementationMethodTemplate;
+
+        public FluentMethodCreateMode() {
+            this.implementationMethodTemplate = MethodTemplate.builder()
+                    .visibility(JavaVisibility.Private)
+                    .methodSignature("boolean isInCreateMode()")
+                    .method(block -> {
+                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER));
+                    })
+                    .build();
+        }
+
+        @Override
+        public MethodTemplate getMethodTemplate() {
+            return implementationMethodTemplate;
+        }
+    }
+
+    private static class GroupedMethod {
         private FluentMethod methodCreateWith;
         private FluentMethod methodUpdateWith;
 
