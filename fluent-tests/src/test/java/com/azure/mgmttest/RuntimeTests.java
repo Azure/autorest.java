@@ -16,6 +16,7 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.storage.StorageManager;
+import com.azure.mgmtlitetest.storage.models.BlobContainer;
 import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
@@ -24,6 +25,7 @@ import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.storage.fluent.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -70,13 +72,14 @@ public class RuntimeTests {
     }
 
     @Test
+    @Disabled("live test")
     public void testBlobContainer() {
         StorageManager storageManager = authenticateStorageManager();
         BlobContainers blobContainers = storageManager.blobContainers();
-//        blobContainers.defineContainer("container1")
-//                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-//                .withPublicAccess(PublicAccess.BLOB);
-//                //.create();
+        BlobContainer blobContainer = blobContainers.defineContainer("container1")
+                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+                .withPublicAccess(PublicAccess.BLOB)
+                .create();
 
         blobContainers.get("rg-weidxu", "sa1weidxu", "container1")
                 .update()
