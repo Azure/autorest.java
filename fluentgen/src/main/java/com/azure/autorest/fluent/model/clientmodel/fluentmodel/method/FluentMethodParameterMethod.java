@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.FluentInterfaceStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
@@ -21,7 +22,8 @@ public class FluentMethodParameterMethod extends FluentMethod {
     private final ClientMethodParameter methodParameter;
 
     public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,
-                                       FluentInterfaceStage stage, ClientMethodParameter methodParameter) {
+                                       FluentInterfaceStage stage,
+                                       ClientMethodParameter methodParameter, LocalVariable localVariable) {
         super(model, type);
 
         this.methodParameter = methodParameter;
@@ -34,7 +36,7 @@ public class FluentMethodParameterMethod extends FluentMethod {
         this.implementationMethodTemplate = MethodTemplate.builder()
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
-                    block.line("this.%1$s = %2$s;", methodParameter.getName(), methodParameter.getName());
+                    block.line("this.%1$s = %2$s;", localVariable.getName(), methodParameter.getName());
                     block.methodReturn("this");
                 })
                 .build();

@@ -9,11 +9,11 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -21,7 +21,6 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class FluentResourceModelImplementationTemplate implements IJavaTemplate<FluentResourceModel, JavaFile> {
@@ -86,9 +85,9 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
                 ResourceImplementation resourceImplementation = model.getResourceImplementation();
                 List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();
-                Map<String, ClientModelProperty> clientProperties = resourceImplementation.getClientProperties();
+                List<LocalVariable> localVariables = resourceImplementation.getLocalVariables();
 
-                clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
+                localVariables.forEach(p -> classBlock.privateMemberVariable(p.getVariableType().toString(), p.getName()));
 
                 fluentMethods.forEach(m -> {
                     m.getMethodTemplate().writeMethod(classBlock);

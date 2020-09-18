@@ -63,7 +63,7 @@ public class ResourceUpdate extends ResourceOperation {
             UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(updateStageApply);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getRequestBodyClientModel(), property, this.getBodyParameter()));
+            stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, property));
 
             updateStages.add(stage);
         }
@@ -93,17 +93,18 @@ public class ResourceUpdate extends ResourceOperation {
 
     private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
-                stage, parameter);
+                stage, parameter, this.getLocalVariableByMethodParameter(parameter));
     }
 
-    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property, ClientMethodParameter bodyParameter) {
+    private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
-                stage, model, property, bodyParameter);
+                stage, model, property,
+                this.getLocalVariableByMethodParameter(this.getBodyParameter()));
     }
 
     public FluentMethod getUpdateMethod() {
         if (updateMethod == null) {
-            updateMethod = new FluentUpdateMethod(resourceModel, FluentMethodType.UPDATE);
+            updateMethod = new FluentUpdateMethod(resourceModel, FluentMethodType.UPDATE, this.getResourceLocalVariables());
         }
         return updateMethod;
     }
@@ -124,14 +125,17 @@ public class ResourceUpdate extends ResourceOperation {
     private FluentMethod getConstructor() {
         List<ClientMethodParameter> pathParameters = this.getPathParameters();
         return new FluentConstructorByInner(resourceModel, FluentMethodType.CONSTRUCTOR,
-                pathParameters, FluentStatic.getFluentManager().getType(), urlPathSegments);
+                pathParameters, this.getResourceLocalVariables(),
+                FluentStatic.getFluentManager().getType(), urlPathSegments);
     }
 
     private FluentMethod getApplyMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
         Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
         if (methodOpt.isPresent()) {
-            return new FluentApplyMethod(resourceModel, FluentMethodType.APPLY, parameters, resourceCollection, methodOpt.get());
+            return new FluentApplyMethod(resourceModel, FluentMethodType.APPLY,
+                    parameters, this.getResourceLocalVariables(),
+                    resourceCollection, methodOpt.get());
         } else {
             if (hasContextParameter) {
                 return null;

@@ -10,7 +10,6 @@ import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
@@ -23,24 +22,30 @@ import java.util.Map;
 public class ResourceImplementation {
 
     private final List<ImmutableMethod> methods = new ArrayList<>();
-    private final Map<String, ClientModelProperty> clientProperties = new HashMap<>();
+    private final List<LocalVariable> localVariables = new ArrayList<>();
 
     public ResourceImplementation(FluentResourceModel fluentModel) {
         List<FluentMethod> fluentMethods = new ArrayList<>();
+        List<LocalVariable> localVariables = new ArrayList<>();
         if (fluentModel.getResourceCreate() != null) {
             fluentMethods.addAll(fluentModel.getResourceCreate().getFluentMethods());
+            localVariables.addAll(fluentModel.getResourceCreate().getLocalVariables());
         }
         if (fluentModel.getResourceUpdate() != null) {
             fluentMethods.addAll(fluentModel.getResourceUpdate().getFluentMethods());
+            localVariables.addAll(fluentModel.getResourceUpdate().getLocalVariables());
         }
         this.groupMethods(fluentMethods);
+        this.groupLocalVariables(localVariables);
+    }
+
+    private void groupLocalVariables(Collection<LocalVariable> localVariables) {
+        Map<String, LocalVariable> localVariablesMap = new HashMap<>();
+        localVariables.forEach(var -> localVariablesMap.putIfAbsent(var.getName(), var));
+        this.localVariables.addAll(localVariablesMap.values());
     }
 
     private void groupMethods(Collection<FluentMethod> fluentMethods) {
-        fluentMethods.stream()
-                .flatMap(m -> m.getClientProperties().stream())
-                .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
-
         Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
         for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
@@ -77,8 +82,8 @@ public class ResourceImplementation {
         return this.methods;
     }
 
-    public Map<String, ClientModelProperty> getClientProperties() {
-        return this.clientProperties;
+    public List<LocalVariable> getLocalVariables() {
+        return this.localVariables;
     }
 
     private static class MergedFluentMethod implements ImmutableMethod {
@@ -97,7 +102,7 @@ public class ResourceImplementation {
                             block.ifBlock("isInCreateMode()", ifBlock -> {
                                 groupedMethod.methodCreateWith.getMethodTemplate().writeMethodContent(ifBlock);
                             }).elseBlock(elseBlock -> {
-                                groupedMethod.methodCreateWith.getMethodTemplate().writeMethodContent(elseBlock);
+                                groupedMethod.methodUpdateWith.getMethodTemplate().writeMethodContent(elseBlock);
                             });
                         })
                         .build();

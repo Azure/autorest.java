@@ -142,6 +142,12 @@ public class ResourceCreate extends ResourceOperation  {
         lastStage.setNextStage(definitionStageCreate);
         definitionStages.add(definitionStageCreate);
 
+        for (DefinitionStage stage : definitionStages) {
+            if (stage.getModelProperty() != null) {
+                stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, stage.getModelProperty()));
+            }
+        }
+
         // create method
         definitionStageCreate.getMethods().add(this.getCreateMethod(false));
         FluentMethod createMethodWithContext = this.getCreateMethod(true);
@@ -161,7 +167,7 @@ public class ResourceCreate extends ResourceOperation  {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, this.getRequestBodyClientModel(), property, this.getBodyParameter()));
+            stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, property));
 
             optionalDefinitionStages.add(stage);
         }
@@ -209,7 +215,7 @@ public class ResourceCreate extends ResourceOperation  {
 
     private FluentMethod getParameterSetterMethod(DefinitionStage stage, ClientMethodParameter parameter) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
-                stage, parameter);
+                stage, parameter, this.getLocalVariableByMethodParameter(parameter));
     }
 
     public FluentMethod getDefineMethod() {
@@ -228,26 +234,32 @@ public class ResourceCreate extends ResourceOperation  {
         IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
         String propertyName = parameters.get(parameters.size() - 1).getName();
         return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
-                resourceNameType, propertyName, FluentStatic.getFluentManager().getType());
+                resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
+                this.getResourceLocalVariables());
     }
 
-    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property, ClientMethodParameter bodyParameter) {
+    private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
         return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
-                stage, model, property, bodyParameter);
+                stage, model, property,
+                this.getLocalVariableByMethodParameter(this.getBodyParameter()));
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
         List<ClientMethodParameter> parameters = this.getPathParameters();
         parameters.remove(parameters.size() - 1);
-        return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT, stage, parentResourceName, parameters);
+        return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT,
+                stage, parentResourceName,
+                parameters, this.getResourceLocalVariables());
     }
 
     private FluentMethod getCreateMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
         Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
         if (methodOpt.isPresent()) {
-            return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE, parameters, resourceCollection, methodOpt.get());
+            return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE,
+                    parameters, this.getResourceLocalVariables(),
+                    resourceCollection, methodOpt.get());
         } else {
             if (hasContextParameter) {
                 return null;

@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,17 +45,17 @@ public abstract class ResourceOperation {
 
     protected final String methodName;
 
-    protected final ClientModel bodyParameterModel;
+    protected final ClientModel requestBodyParameterModel;
 
     protected final List<FluentCollectionMethod> methodReferences = new ArrayList<>();
 
     public ResourceOperation(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
-                             UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
+                             UrlPathSegments urlPathSegments, String methodName, ClientModel requestBodyParameterModel) {
         this.resourceModel = resourceModel;
         this.resourceCollection = resourceCollection;
         this.urlPathSegments = urlPathSegments;
         this.methodName = methodName;
-        this.bodyParameterModel = bodyParameterModel;
+        this.requestBodyParameterModel = requestBodyParameterModel;
     }
 
     public FluentResourceModel getResourceModel() {
@@ -131,18 +132,22 @@ public abstract class ResourceOperation {
                 .collect(Collectors.toList());
     }
 
-    protected ClientMethodParameter getBodyParameter() {
+    public ClientMethodParameter getBodyParameter() {
         List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
         return parameters.isEmpty() ? null : parameters.iterator().next();
     }
 
-    protected List<ClientMethodParameter> getPathParameters() {
+    public List<ClientMethodParameter> getPathParameters() {
         return getParametersByLocation(RequestParameterLocation.Path);
     }
 
-    protected List<ClientMethodParameter> getMiscParameters() {
+    public List<ClientMethodParameter> getMiscParameters() {
         // header or query
         return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
+    }
+
+    public Collection<LocalVariable> getLocalVariables() {
+        return this.getResourceLocalVariables().getLocalVariablesMap().values();
     }
 
     // method reference
@@ -168,37 +173,46 @@ public abstract class ResourceOperation {
         return methodOpt;
     }
 
+    // local variables
+    private ResourceLocalVariables resourceLocalVariables;
+
+    protected ResourceLocalVariables getResourceLocalVariables() {
+        if (resourceLocalVariables == null) {
+            resourceLocalVariables = new ResourceLocalVariables(this);
+        }
+        return resourceLocalVariables;
+    }
+
+    protected LocalVariable getLocalVariableByMethodParameter(ClientMethodParameter methodParameter) {
+        return this.getResourceLocalVariables().getLocalVariablesMap().get(methodParameter);
+    }
+
     // request body model and properties, used when request body is not fluent model inner object
-    private ClientModel requestBodyClientModel;
     private Map<String, ClientModelProperty> requestBodyModelPropertiesMap;
     private List<ClientModelProperty> requestBodyModelProperties;
 
-    private boolean isBodyParameterSameAsFluentModel() {
-        return bodyParameterModel == resourceModel.getInnerModel();
+    protected boolean isBodyParameterSameAsFluentModel() {
+        return requestBodyParameterModel == resourceModel.getInnerModel();
     }
 
     private void initRequestBodyClientModel() {
-        if (requestBodyClientModel == null) {
+        if (requestBodyModelPropertiesMap == null) {
             requestBodyModelPropertiesMap = new HashMap<>();
             requestBodyModelProperties = new ArrayList<>();
 
-            ClientMethodParameter bodyParameter = this.getBodyParameter();
-            requestBodyClientModel = FluentUtils.getClientModel(bodyParameter.getClientType().toString());
             List<ClientModel> parentModels = new ArrayList<>();
-            if (requestBodyClientModel != null) {
-                String parentModelName = requestBodyClientModel.getParentModelName();
-                while (!CoreUtils.isNullOrEmpty(parentModelName)) {
-                    ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
-                    if (parentModel != null) {
-                        parentModels.add(parentModel);
-                    }
-                    parentModelName = parentModel == null ? null :parentModel.getParentModelName();
+            String parentModelName = requestBodyParameterModel.getParentModelName();
+            while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+                ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
+                if (parentModel != null) {
+                    parentModels.add(parentModel);
                 }
+                parentModelName = parentModel == null ? null :parentModel.getParentModelName();
             }
 
             List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
             propertiesFromTypeAndParents.add(new ArrayList<>());
-            requestBodyClientModel.getProperties().forEach(p -> {
+            requestBodyParameterModel.getProperties().forEach(p -> {
                 if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
                     propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
                 }
@@ -220,15 +234,6 @@ public abstract class ResourceOperation {
             for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
                 requestBodyModelProperties.addAll(properties1);
             }
-        }
-    }
-
-    protected ClientModel getRequestBodyClientModel() {
-        if (this.isBodyParameterSameAsFluentModel()) {
-            return resourceModel.getInnerModel();
-        } else {
-            initRequestBodyClientModel();
-            return this.requestBodyClientModel;
         }
     }
 

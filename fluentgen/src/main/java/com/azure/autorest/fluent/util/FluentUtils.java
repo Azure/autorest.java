@@ -20,6 +20,8 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +34,17 @@ import java.util.stream.Collectors;
 
 public class FluentUtils {
 
+    private static final Logger logger = LoggerFactory.getLogger(FluentUtils.class);
+
     private FluentUtils() {
+    }
+
+    public static void log(String format) {
+        logger.info(format);
+    }
+
+    public static void log(String format, Object... arguments) {
+        logger.info(format, arguments);
     }
 
     public static boolean isInnerClassType(ClassType classType) {

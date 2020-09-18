@@ -8,7 +8,6 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -24,8 +23,6 @@ public abstract class FluentMethod implements ImmutableMethod {
     protected ReturnValue interfaceReturnValue;
     protected ReturnValue implementationReturnValue;
     protected List<ClientMethodParameter> parameters = new ArrayList<>();
-
-    protected List<ClientModelProperty> clientProperties = new ArrayList<>();
 
     protected FluentResourceModel fluentResourceModel;
 
@@ -54,10 +51,6 @@ public abstract class FluentMethod implements ImmutableMethod {
 
     public MethodTemplate getMethodTemplate() {
         return implementationMethodTemplate;
-    }
-
-    public List<ClientModelProperty> getClientProperties() {
-        return clientProperties;
     }
 
     public String getName() {

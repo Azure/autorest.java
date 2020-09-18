@@ -7,9 +7,13 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
+import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
 import com.azure.mgmtlitetest.storage.models.BlobContainers;
+import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
+import com.azure.mgmtlitetest.storage.models.Sku;
+import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 
@@ -33,12 +37,25 @@ public class LiteCompilationTests {
     public void testFluentInterface() {
         StorageManager storageManager = mock(StorageManager.class);
 
-        BlobContainers blobContainers = storageManager.blobContainers();
-        BlobContainer blobContainer = blobContainers.defineContainer("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-                .withPublicAccess(PublicAccess.BLOB)
+        StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
+                .withLocation("westus")
+                .withExistingResourceGroup("rg-weidxu")
+                .withSku(new Sku().withName(SkuName.STANDARD_LRS))
+                .withKind(Kind.STORAGE_V2)
+                .withEnableHttpsTrafficOnly(true)
                 .create();
 
+        storageAccount = storageManager.storageAccounts().getByResourceGroup("rg-weidxu", "sa1weidxu");
+        storageAccount.update()
+                .withAccessTier(AccessTier.COOL)
+                .apply();
+
+        BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
+                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+                .withPublicAccess(PublicAccess.BLOB)
+                .create(new Context("key", "value"));
+
+        blobContainer = storageManager.blobContainers().get("rg-weidxu", "sa1weidxu", "container1");
         blobContainer.update()
                 .withPublicAccess(PublicAccess.NONE)
                 .apply(new Context("key", "value"));
