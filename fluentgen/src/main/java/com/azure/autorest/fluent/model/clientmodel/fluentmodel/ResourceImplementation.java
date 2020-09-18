@@ -8,6 +8,8 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -21,15 +23,20 @@ import java.util.Set;
 
 public class ResourceImplementation {
 
-    private List<FluentMethod> fluentMethods = new ArrayList<>();
+    private final List<ImmutableMethod> methods = new ArrayList<>();
+    private final Map<String, ClientModelProperty> clientProperties = new HashMap<>();
 
     public ResourceImplementation(Collection<FluentMethod> fluentMethods) {
         this.groupMethods(fluentMethods);
     }
 
-    private void groupMethods(Collection<FluentMethod> methods) {
+    private void groupMethods(Collection<FluentMethod> fluentMethods) {
+        fluentMethods.stream()
+                .flatMap(m -> m.getClientProperties().stream())
+                .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
+
         Map<String, GroupedMethods> groupedMethodsMap = new HashMap<>();
-        for (FluentMethod method : methods) {
+        for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
                 GroupedMethods groupedMethods = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethods());
                 if (method.getType() == FluentMethodType.CREATE_WITH) {
@@ -38,7 +45,7 @@ public class ResourceImplementation {
                     groupedMethods.methodUpdateWith = method;
                 }
             } else {
-                this.fluentMethods.add(method);
+                this.methods.add(method);
             }
         }
 
@@ -46,22 +53,26 @@ public class ResourceImplementation {
 
         for (GroupedMethods groupedMethods : groupedMethodsMap.values()) {
             if (groupedMethods.size() == 1) {
-                this.fluentMethods.add(groupedMethods.single());
+                this.methods.add(groupedMethods.single());
             } else {
                 MergedFluentMethod method = new MergedFluentMethod(groupedMethods);
-                this.fluentMethods.add(method);
+                this.methods.add(method);
 
                 branchMethodNeeded = branchMethodNeeded || method.isBranchMethodNeeded();
             }
         }
 
         if (branchMethodNeeded) {
-            this.fluentMethods.add(new FluentMethodCreateMode());
+            this.methods.add(new FluentMethodCreateMode());
         }
     }
 
-    public List<FluentMethod> getFluentMethods() {
-        return this.fluentMethods;
+    public List<ImmutableMethod> getMethods() {
+        return this.methods;
+    }
+
+    public Map<String, ClientModelProperty> getClientProperties() {
+        return this.clientProperties;
     }
 
     private static class FluentMethodCreateMode extends FluentMethod {

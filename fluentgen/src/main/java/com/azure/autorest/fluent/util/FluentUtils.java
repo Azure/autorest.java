@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.util;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -20,8 +21,14 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FluentUtils {
 
@@ -148,5 +155,18 @@ public class FluentUtils {
             }
         }
         return clientModel;
+    }
+
+    public static String loadTextFromResource(String filename) {
+        String text = null;
+        try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
+            if (inputStream != null) {
+                text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                        .lines()
+                        .collect(Collectors.joining("\n"));
+            }
+        } catch (IOException e) {
+        }
+        return text;
     }
 }

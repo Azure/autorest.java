@@ -9,7 +9,8 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -18,7 +19,6 @@ import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -84,11 +84,9 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // methods for fluent interfaces
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
-                List<FluentMethod> fluentMethods = model.getResourceImplementation().getFluentMethods();
-                Map<String, ClientModelProperty> clientProperties = new HashMap<>();
-                fluentMethods.stream()
-                        .flatMap(m -> m.getClientProperties().stream())
-                        .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
+                ResourceImplementation resourceImplementation = model.getResourceImplementation();
+                List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();
+                Map<String, ClientModelProperty> clientProperties = resourceImplementation.getClientProperties();
 
                 clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
 
