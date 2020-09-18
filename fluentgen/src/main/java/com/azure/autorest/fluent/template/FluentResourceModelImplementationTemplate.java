@@ -46,10 +46,10 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
         List<String> implementInterfaces = new ArrayList<>();
         implementInterfaces.add(model.getInterfaceType().getName());
-        if (model.getResourceCreate() != null && model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
+        if (model.getResourceCreate() != null) {
             implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION));
         }
-        if (model.getResourceUpdate() != null && model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+        if (model.getResourceUpdate() != null) {
             implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE));
         }
 
@@ -61,7 +61,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
 
             // if resource is updatable, use the constructor from resourceUpdate
-            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null || !model.getResourceUpdate().isBodyParameterSameAsFluentModel()) {
+            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null) {
                 // constructor
                 classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                     methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
@@ -84,19 +84,17 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // methods for fluent interfaces
             if (model.getCategory() != ModelCategory.IMMUTABLE) {
-                if (model.getResourceCreate().isBodyParameterSameAsFluentModel()) {
-                    List<FluentMethod> fluentMethods = model.getResourceImplementation().getFluentMethods();
-                    Map<String, ClientModelProperty> clientProperties = new HashMap<>();
-                    fluentMethods.stream()
-                            .flatMap(m -> m.getClientProperties().stream())
-                            .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
+                List<FluentMethod> fluentMethods = model.getResourceImplementation().getFluentMethods();
+                Map<String, ClientModelProperty> clientProperties = new HashMap<>();
+                fluentMethods.stream()
+                        .flatMap(m -> m.getClientProperties().stream())
+                        .forEach(p -> clientProperties.putIfAbsent(p.getName(), p));
 
-                    clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
+                clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
 
-                    fluentMethods.forEach(m -> {
-                        m.getMethodTemplate().writeMethod(classBlock);
-                    });
-                }
+                fluentMethods.forEach(m -> {
+                    m.getMethodTemplate().writeMethod(classBlock);
+                });
             }
         });
     }

@@ -19,53 +19,49 @@ public class FluentResourceModelInterfaceUpdateTemplate implements IJavaTemplate
 
     @Override
     public void write(ResourceUpdate resourceUpdate, JavaInterface interfaceBlock) {
-        if (resourceUpdate.isBodyParameterSameAsFluentModel()) {
-            FluentMethod updateMethod = resourceUpdate.getUpdateMethod();
+        FluentMethod updateMethod = resourceUpdate.getUpdateMethod();
 
-            interfaceBlock.javadocComment(updateMethod::writeJavadoc);
-            interfaceBlock.publicMethod(updateMethod.getInterfaceMethodSignature());
+        interfaceBlock.javadocComment(updateMethod::writeJavadoc);
+        interfaceBlock.publicMethod(updateMethod.getInterfaceMethodSignature());
 
-            List<UpdateStage> updateStages = resourceUpdate.getUpdateStages();
+        List<UpdateStage> updateStages = resourceUpdate.getUpdateStages();
 
-            final String modelName = resourceUpdate.getResourceModel().getInterfaceType().getName();
+        final String modelName = resourceUpdate.getResourceModel().getInterfaceType().getName();
 
-            // Update interface
-            interfaceBlock.javadocComment(commentBlock -> {
-                commentBlock.description(String.format("The template for %1$s update.", modelName));
+        // Update interface
+        interfaceBlock.javadocComment(commentBlock -> {
+            commentBlock.description(String.format("The template for %1$s update.", modelName));
+        });
+        String definitionInterfaceSignature = String.format("%1$s extends %2$s",
+                ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE,
+                updateStages.stream()
+                        .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, s.getName()))
+                        .collect(Collectors.joining(", ")));
+        interfaceBlock.interfaceBlock(definitionInterfaceSignature, block1 -> {
+            List<FluentMethod> applyMethods = resourceUpdate.getApplyMethods();
+            applyMethods.forEach(method -> {
+                block1.javadocComment(method::writeJavadoc);
+                block1.publicMethod(method.getInterfaceMethodSignature());
             });
-            String definitionInterfaceSignature = String.format("%1$s extends %2$s",
-                    ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE,
-                    updateStages.stream()
-                            .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, s.getName()))
-                            .collect(Collectors.joining(", ")));
-            interfaceBlock.interfaceBlock(definitionInterfaceSignature, block1 -> {
-                List<FluentMethod> applyMethods = resourceUpdate.getApplyMethods();
-                applyMethods.forEach(method -> {
-                    block1.javadocComment(method::writeJavadoc);
-                    block1.publicMethod(method.getInterfaceMethodSignature());
+        });
+
+        // UpdateStages interface
+        interfaceBlock.javadocComment(commentBlock -> {
+            commentBlock.description(String.format("The %1$s update stages.", modelName));
+        });
+        interfaceBlock.interfaceBlock(ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, block1 -> {
+            for (UpdateStage stage : updateStages) {
+                block1.javadocComment(commentBlock -> {
+                    commentBlock.description(stage.getDescription(modelName));
                 });
-            });
-
-            // UpdateStages interface
-            interfaceBlock.javadocComment(commentBlock -> {
-                commentBlock.description(String.format("The %1$s update stages.", modelName));
-            });
-            interfaceBlock.interfaceBlock(ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, block1 -> {
-                for (UpdateStage stage : updateStages) {
-                    block1.javadocComment(commentBlock -> {
-                        commentBlock.description(stage.getDescription(modelName));
-                    });
-                    String interfaceSignature = stage.getName();
-                    block1.interfaceBlock(interfaceSignature, block2 -> {
-                        for (FluentMethod method : stage.getMethods()) {
-                            block2.javadocComment(method::writeJavadoc);
-                            block2.publicMethod(method.getInterfaceMethodSignature());
-                        }
-                    });
-                }
-            });
-        } else {
-            // TODO
-        }
+                String interfaceSignature = stage.getName();
+                block1.interfaceBlock(interfaceSignature, block2 -> {
+                    for (FluentMethod method : stage.getMethods()) {
+                        block2.javadocComment(method::writeJavadoc);
+                        block2.publicMethod(method.getInterfaceMethodSignature());
+                    }
+                });
+            }
+        });
     }
 }
