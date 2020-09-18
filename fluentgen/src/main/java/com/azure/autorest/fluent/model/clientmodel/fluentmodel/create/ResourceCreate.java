@@ -14,7 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructor;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentCreateMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
@@ -50,6 +50,9 @@ public class ResourceCreate extends ResourceOperation  {
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+
+        logger.info("ResourceCreate: Fluent model {}, method reference {}, body parameter {}",
+                resourceModel.getInterfaceType().getName(), methodName, bodyParameterModel.getName());
     }
 
     public boolean hasResourceGroup() {
@@ -187,10 +190,6 @@ public class ResourceCreate extends ResourceOperation  {
         return definitionStages;
     }
 
-    private List<ClientMethodParameter> getPathParameters() {
-        return getParametersByLocation(RequestParameterLocation.Path);
-    }
-
     private ClientMethodParameter getBodyParameter() {
         List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
         return parameters.isEmpty() ? null : parameters.iterator().next();
@@ -236,7 +235,7 @@ public class ResourceCreate extends ResourceOperation  {
         List<ClientMethodParameter> parameters = this.getPathParameters();
         IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
         String propertyName = parameters.get(parameters.size() - 1).getName();
-        return new FluentConstructor(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
+        return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
                 resourceNameType, propertyName, FluentStatic.getFluentManager().getType());
     }
 

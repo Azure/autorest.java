@@ -9,8 +9,10 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
@@ -26,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResourceUpdate extends ResourceOperation {
@@ -40,6 +43,9 @@ public class ResourceUpdate extends ResourceOperation {
     public ResourceUpdate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+
+        logger.info("ResourceUpdate: Fluent model {}, method reference {}, body parameter {}",
+                resourceModel.getInterfaceType().getName(), methodName, bodyParameterModel.getName());
     }
 
     public List<UpdateStage> getUpdateStages() {
@@ -82,6 +88,7 @@ public class ResourceUpdate extends ResourceOperation {
                 .collect(Collectors.toList());
         methods.add(this.getUpdateMethod());
         methods.addAll(this.getApplyMethods());
+        methods.add(this.getConstructor());
         return methods;
     }
 
@@ -115,6 +122,12 @@ public class ResourceUpdate extends ResourceOperation {
         return applyMethods;
     }
 
+    private FluentMethod getConstructor() {
+        List<ClientMethodParameter> pathParameters = this.getPathParameters();
+        return new FluentConstructorByInner(resourceModel, FluentMethodType.CONSTRUCTOR,
+                pathParameters, FluentStatic.getFluentManager().getType(), urlPathSegments);
+    }
+
     private FluentMethod getApplyMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
         Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
@@ -126,6 +139,15 @@ public class ResourceUpdate extends ResourceOperation {
             } else {
                 throw new IllegalStateException("update method not found");
             }
+        }
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        getUpdateStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
+        if (includeImplementationImports) {
+            getConstructor().addImportsTo(imports, true);
+            getUpdateMethod().addImportsTo(imports, true);
+            getApplyMethods().forEach(m -> m.addImportsTo(imports, true));
         }
     }
 }

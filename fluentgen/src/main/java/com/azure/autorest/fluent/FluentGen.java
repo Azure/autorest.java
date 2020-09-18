@@ -187,6 +187,9 @@ public class FluentGen extends NewPlugin {
                 for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
                     javaPackage.addFluentResourceCollection(collection);
                 }
+
+                // Utils
+                javaPackage.addUtils();
             }
 
             // Print to files
