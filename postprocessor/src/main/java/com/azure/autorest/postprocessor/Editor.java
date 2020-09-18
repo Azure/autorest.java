@@ -2,8 +2,16 @@ package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.postprocessor.ls.models.Position;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +19,20 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Editor {
+    private Path rootDir;
     private Map<String, String> contents;
     private Map<String, List<String>> lines;
+    private Map<String, Path> paths;
 
-    public Editor(Map<String, String> contents) {
+    public Editor(Map<String, String> contents, Path rootDir) {
         this.contents = contents;
         this.lines = new HashMap<>();
+        this.paths = new HashMap<>();
+        this.rootDir = rootDir;
         for (Map.Entry<String, String> content : contents.entrySet()) {
-            lines.put(content.getKey(), splitContentIntoLines(content.getValue()));
+            addFile(content.getKey(), content.getValue());
         }
+
     }
 
     public Map<String, String> getContents() {
@@ -27,17 +40,42 @@ public class Editor {
     }
 
     public void addFile(String name, String content) {
-        contents.put(name, content);
-        lines.put(name, splitContentIntoLines(content));
+        Path newFilePath = Paths.get(rootDir.toString(), name);
+        File newFile = newFilePath.toFile();
+        if (!newFile.getParentFile().exists()) {
+            newFile.getParentFile().mkdirs();
+        }
+        boolean fileCreated;
+        try {
+            fileCreated = newFile.createNewFile();
+            FileOutputStream stream = new FileOutputStream(newFile);
+            stream.write(content.getBytes(StandardCharsets.UTF_8));
+            stream.close();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+        if (fileCreated) {
+            contents.put(name, content);
+            lines.put(name, splitContentIntoLines(content));
+            paths.put(name, newFilePath);
+        }
     }
 
     public void removeFile(String name) {
         contents.remove(name);
         lines.remove(name);
+        paths.get(name).toFile().delete();
+        paths.remove(name);
     }
 
     public String getFileContent(String name) {
         return contents.get(name);
+    }
+
+    public List<String> getFileLines(String name) {
+        return lines.get(name);
+
     }
 
     public List<String> getFileLine(String name) {
@@ -63,11 +101,19 @@ public class Editor {
         }
         contents.put(fileName, stringWriter.toString());
         lines.put(fileName, splitContentIntoLines(contents.get(fileName)));
+        try (PrintWriter fileWriter = new PrintWriter(paths.get(fileName).toFile())) {
+            fileWriter.print(contents.get(fileName));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void renameFile(String fileName, String newName) {
         contents.put(newName, contents.remove(fileName));
         lines.put(newName, lines.remove(fileName));
+        Path path = paths.remove(fileName);
+        Path newPath = Paths.get(rootDir.toString(), newName);
+        path.toFile().renameTo(newPath.toFile());
     }
 
     private static List<String> splitContentIntoLines(String content) {

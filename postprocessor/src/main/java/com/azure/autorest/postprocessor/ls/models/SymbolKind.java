@@ -1,5 +1,8 @@
 package com.azure.autorest.postprocessor.ls.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum SymbolKind {
     FILE(1),
     MODULE(2),
@@ -34,6 +37,18 @@ public enum SymbolKind {
         this.value = value;
     }
 
+    @JsonCreator
+    public static SymbolKind fromInt(int value) {
+        SymbolKind[] items = SymbolKind.values();
+        for (SymbolKind item : items) {
+            if (item.value == value) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @JsonValue
     @Override
     public String toString() {
         return Integer.toString(value);

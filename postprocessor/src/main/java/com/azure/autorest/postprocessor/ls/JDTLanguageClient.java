@@ -3,9 +3,12 @@ package com.azure.autorest.postprocessor.ls;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.postprocessor.ls.models.ClientCapabilities;
 import com.azure.autorest.postprocessor.ls.models.DidChangeTextDocumentParams;
+import com.azure.autorest.postprocessor.ls.models.DidChangeWatchedFilesParams;
 import com.azure.autorest.postprocessor.ls.models.DidCloseTextDocumentParams;
 import com.azure.autorest.postprocessor.ls.models.DidOpenTextDocumentParams;
 import com.azure.autorest.postprocessor.ls.models.DidSaveTextDocumentParams;
+import com.azure.autorest.postprocessor.ls.models.DocumentSymbolParams;
+import com.azure.autorest.postprocessor.ls.models.FileEvent;
 import com.azure.autorest.postprocessor.ls.models.InitializeParams;
 import com.azure.autorest.postprocessor.ls.models.InitializeResponse;
 import com.azure.autorest.postprocessor.ls.models.Position;
@@ -146,10 +149,17 @@ public class JDTLanguageClient {
                     changeEvent.setRange(textEdit.getRange());
                     changeEvent.setText(textEdit.getNewText());
                 }
+                changeEvents.add(changeEvent);
             }
             params.setContentChanges(changeEvents);
             connection.notifyWithObject("textDocument/didChange", params);
         }
+    }
+
+    public void notifyWatchedFilesChanged(List<FileEvent> changes) {
+        DidChangeWatchedFilesParams params = new DidChangeWatchedFilesParams();
+        params.setChanges(changes);
+        connection.notifyWithObject("workspace/didChangeWatchedFiles", params);
     }
 
     public void notifyFileToSave(URI fileUri) {
@@ -181,6 +191,13 @@ public class JDTLanguageClient {
         Map<String, Object> workspaceSymbolParams = new HashMap<>();
         workspaceSymbolParams.put("query", query);
         return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "workspace/symbol", workspaceSymbolParams);
+    }
+
+    public List<SymbolInformation> listDocumentSymbols(URI fileUri) {
+        DocumentSymbolParams documentSymbolParams = new DocumentSymbolParams();
+        documentSymbolParams.setTextDocument(new TextDocumentIdentifier());
+        documentSymbolParams.getTextDocument().setUri(fileUri);
+        return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "textDocument/documentSymbol", documentSymbolParams);
     }
 
     public WorkspaceEdit renameSymbol(URI fileUri, Position symbolPosition, String newName) {
