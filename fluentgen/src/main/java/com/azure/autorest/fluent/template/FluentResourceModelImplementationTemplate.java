@@ -93,7 +93,9 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
                     clientProperties.values().forEach(p -> classBlock.privateMemberVariable(p.getClientType().toString(), p.getName()));
 
-                    fluentMethods.forEach(m -> m.getMethodTemplate().writeMethod(classBlock));
+                    fluentMethods.forEach(m -> {
+                        m.getMethodTemplate().writeMethod(classBlock);
+                    });
                 }
             }
         });

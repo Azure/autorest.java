@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResourceUpdate extends ResourceOperation {
@@ -42,6 +43,9 @@ public class ResourceUpdate extends ResourceOperation {
     public ResourceUpdate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+
+        logger.info("ResourceUpdate: Fluent model {}, method reference {}, body parameter {}",
+                resourceModel.getInterfaceType().getName(), methodName, bodyParameterModel.getName());
     }
 
     public List<UpdateStage> getUpdateStages() {
@@ -135,6 +139,15 @@ public class ResourceUpdate extends ResourceOperation {
             } else {
                 throw new IllegalStateException("update method not found");
             }
+        }
+    }
+
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        getUpdateStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
+        if (includeImplementationImports) {
+            getConstructor().addImportsTo(imports, true);
+            getUpdateMethod().addImportsTo(imports, true);
+            getApplyMethods().forEach(m -> m.addImportsTo(imports, true));
         }
     }
 }

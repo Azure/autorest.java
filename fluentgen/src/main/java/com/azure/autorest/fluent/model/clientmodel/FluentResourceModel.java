@@ -164,5 +164,8 @@ public class FluentResourceModel {
         if (resourceCreate != null) {
             resourceCreate.addImportsTo(imports, includeImplementationImports);
         }
+        if (resourceUpdate != null) {
+            resourceUpdate.addImportsTo(imports, includeImplementationImports);
+        }
     }
 }

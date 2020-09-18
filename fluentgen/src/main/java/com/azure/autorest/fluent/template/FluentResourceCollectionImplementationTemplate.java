@@ -37,7 +37,9 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         Set<String> imports = new HashSet<>();
         imports.add(managerType.getFullName());
         collection.addImportsTo(imports, true);
-        collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, true));
+        if (collection.getResourceCreates() != null) {
+            collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, true));
+        }
         javaFile.declareImport(imports);
 
         List<MethodTemplate> methodTemplates = new ArrayList<>();

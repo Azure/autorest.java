@@ -50,6 +50,9 @@ public class ResourceCreate extends ResourceOperation  {
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+
+        logger.info("ResourceCreate: Fluent model {}, method reference {}, body parameter {}",
+                resourceModel.getInterfaceType().getName(), methodName, bodyParameterModel.getName());
     }
 
     public boolean hasResourceGroup() {
