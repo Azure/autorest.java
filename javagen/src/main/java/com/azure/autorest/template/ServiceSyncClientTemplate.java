@@ -64,11 +64,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
       }
 
       // Service Client Constructor
-      classBlock.javadocComment(comment ->
-          comment
-              .description(String.format("Initializes an instance of %1$s client.",
-                  wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
-      );
+      classBlock.javadocComment(comment -> {
+        comment.description(String.format("Initializes an instance of %1$s client.", wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()));
+        comment.param("serviceClient", "the service client implementation.");
+      });
 
       if (wrapServiceClient) {
         classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClassName,
