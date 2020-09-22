@@ -273,14 +273,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
 
                         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                            methods.add(builder
+                            builder
                                     .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                             syncReturnType))
                                     .name(proxyMethod.getName())
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingSync)
                                     .isGroupedParameterRequired(false)
-                                    .build());
+                                    .build();
+
+                            if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                                // if context parameter is required, that method will do the overload with max parameters
+                                methods.add(builder.build());
+                            }
 
                             if (settings.isContextClientMethodParameter()) {
                                 addClientMethodWithContext(methods, builder, parameters);
@@ -443,14 +448,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    methods.add(builder
+                    builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                     syncReturnType))
                             .name(proxyMethod.getName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleSync)
                             .isGroupedParameterRequired(false)
-                            .build());
+                            .build();
+
+                    if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                        // if context parameter is required, that method will do the overload with max parameters
+                        methods.add(builder.build());
+                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
