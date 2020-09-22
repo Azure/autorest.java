@@ -454,17 +454,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
 
                     if (settings.isContextClientMethodParameter()) {
-                        if (settings.isFluent()) {
-                            // temporary disable SimpleSyncRestResponse, for the bug when response type is Mono<StreamResponse>
-                            addClientMethodWithContext(methods, builder.onlyRequiredParameters(false), parameters);
-                        } else {
-                            builder.type(ClientMethodType.SimpleSyncRestResponse)
-                                    .onlyRequiredParameters(false)
-                                    .name(proxyMethod.getSimpleRestResponseMethodName())
-                                    .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
-                                            syncReturnWithResponse), syncReturnWithResponse));
-                            addClientMethodWithContext(methods, builder, parameters);
-                        }
+                        builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                .onlyRequiredParameters(false)
+                                .name(proxyMethod.getSimpleRestResponseMethodName())
+                                .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
+                                        syncReturnWithResponse), syncReturnWithResponse));
+                        addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
             }
