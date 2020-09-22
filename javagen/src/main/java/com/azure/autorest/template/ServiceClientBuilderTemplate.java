@@ -83,6 +83,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     builderTypes.append(", ");
                 }
                 builderTypes.append(client.getClassName()).append(".class");
+
+                client.addImportsTo(imports, false);
             }
         } else {
             builderTypes.append(serviceClient.getClassName()).append(".class");
