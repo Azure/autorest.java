@@ -58,7 +58,11 @@ public final class AutoRestRFC1123DateTimeTestService {
         return this.datetimerfc1123s;
     }
 
-    /** Initializes an instance of AutoRestRFC1123DateTimeTestService client. */
+    /**
+     * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestRFC1123DateTimeTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestRFC1123DateTimeTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestRFC1123DateTimeTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

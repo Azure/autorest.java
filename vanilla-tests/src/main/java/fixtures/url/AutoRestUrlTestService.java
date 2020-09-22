@@ -106,7 +106,13 @@ public final class AutoRestUrlTestService {
         return this.pathItems;
     }
 
-    /** Initializes an instance of AutoRestUrlTestService client. */
+    /**
+     * Initializes an instance of AutoRestUrlTestService client.
+     *
+     * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
+     * @param globalStringQuery should contain value null.
+     * @param host server parameter.
+     */
     AutoRestUrlTestService(String globalStringPath, String globalStringQuery, String host) {
         this(
                 new HttpPipelineBuilder()
@@ -122,6 +128,9 @@ public final class AutoRestUrlTestService {
      * Initializes an instance of AutoRestUrlTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
+     * @param globalStringQuery should contain value null.
+     * @param host server parameter.
      */
     AutoRestUrlTestService(HttpPipeline httpPipeline, String globalStringPath, String globalStringQuery, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host);
@@ -132,6 +141,9 @@ public final class AutoRestUrlTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
+     * @param globalStringQuery should contain value null.
+     * @param host server parameter.
      */
     AutoRestUrlTestService(
             HttpPipeline httpPipeline,

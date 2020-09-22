@@ -58,7 +58,11 @@ public final class AutoRestParameterizedHostTestClient {
         return this.paths;
     }
 
-    /** Initializes an instance of AutoRestParameterizedHostTestClient client. */
+    /**
+     * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param host A string value that is used as a global part of the parameterized host.
+     */
     AutoRestParameterizedHostTestClient(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestParameterizedHostTestClient {
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host A string value that is used as a global part of the parameterized host.
      */
     AutoRestParameterizedHostTestClient(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestParameterizedHostTestClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host A string value that is used as a global part of the parameterized host.
      */
     AutoRestParameterizedHostTestClient(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
