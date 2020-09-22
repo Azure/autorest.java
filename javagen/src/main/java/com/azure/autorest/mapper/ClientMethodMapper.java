@@ -102,7 +102,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 syncReturnType = responseBodyType.getClientType();
             }
         }
-        syncReturnWithResponse = GenericType.Response(syncReturnType);
+
+        if (syncReturnType == ClassType.InputStream) {
+            syncReturnWithResponse = ClassType.StreamResponse;
+        } else {
+            syncReturnWithResponse = GenericType.Response(syncReturnType);
+        }
 
         for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
