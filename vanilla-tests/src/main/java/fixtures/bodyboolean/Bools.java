@@ -101,7 +101,7 @@ public final class Bools {
      * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getTrueWithResponseAsync(Context context) {
+    private Mono<Response<Boolean>> getTrueWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -209,7 +209,7 @@ public final class Bools {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putTrueWithResponseAsync(Context context) {
+    private Mono<Response<Void>> putTrueWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -295,7 +295,7 @@ public final class Bools {
      * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getFalseWithResponseAsync(Context context) {
+    private Mono<Response<Boolean>> getFalseWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -403,7 +403,7 @@ public final class Bools {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFalseWithResponseAsync(Context context) {
+    private Mono<Response<Void>> putFalseWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -489,7 +489,7 @@ public final class Bools {
      * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getNullWithResponseAsync(Context context) {
+    private Mono<Response<Boolean>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -596,7 +596,7 @@ public final class Bools {
      * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getInvalidWithResponseAsync(Context context) {
+    private Mono<Response<Boolean>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
