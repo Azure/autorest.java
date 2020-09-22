@@ -20,14 +20,19 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -266,6 +271,18 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired(),
                             parameter.getIsConstant() || alwaysNull));
                 }
+            }
+        }
+    }
+
+    protected static void writeMethod(JavaType typeBlock,
+                          JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
+        if (visibility == JavaVisibility.Public) {
+            typeBlock.publicMethod(methodSignature, method);
+        } else {
+            if (typeBlock instanceof JavaClass) {
+                JavaClass classBlock = (JavaClass) typeBlock;
+                classBlock.method(visibility, null, methodSignature, method);
             }
         }
     }
@@ -509,7 +526,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -545,7 +562,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 });
             });
         } else {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -585,7 +602,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             ApplyParameterTransformations(function, clientMethod, settings);

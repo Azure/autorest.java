@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
@@ -41,6 +42,9 @@ import java.util.stream.Collectors;
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
+
+    private static JavaVisibility NOT_VISIBLE = JavaVisibility.Private;
+    private static JavaVisibility VISIBLE = JavaVisibility.Public;
 
     private ClientMethodMapper() {
     }
@@ -211,6 +215,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.PagingAsyncSinglePage)
                                 .isGroupedParameterRequired(false)
+                                .methodVisibility(NOT_VISIBLE)
                                 .build());
                     }
                     if (settings.isContextClientMethodParameter()) {
@@ -231,6 +236,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingAsync)
                                     .isGroupedParameterRequired(false)
+                                    .methodVisibility(VISIBLE)
                                     .build());
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -251,11 +257,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             lroIntermediateType);
                                 }
 
+                                builder.methodVisibility(NOT_VISIBLE);
                                 addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
                                                 asyncReturnType),
                                         detailsWithContext);
+                                builder.methodVisibility(VISIBLE);
                             }
                         }
 
@@ -293,7 +301,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .build());
 
                 if (settings.isContextClientMethodParameter()) {
+                    builder.methodVisibility(NOT_VISIBLE);
                     addClientMethodWithContext(methods, builder, parameters);
+                    builder.methodVisibility(VISIBLE);
+
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -308,7 +319,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
+                        builder.methodVisibility(VISIBLE);
                     }
                 }
 
@@ -324,7 +337,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
+                        builder.methodVisibility(VISIBLE);
                     }
                 }
 
@@ -339,7 +354,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
+                        builder.methodVisibility(VISIBLE);
                     }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
@@ -388,11 +405,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (settings.isContextClientMethodParameter()) {
+                    builder.methodVisibility(NOT_VISIBLE);
                     addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
                             syncReturnType), proxyMethod.getReturnType().getClientType()),
                         null);
+                    builder.methodVisibility(VISIBLE);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -406,7 +425,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
+                        builder.methodVisibility(VISIBLE);
                     }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
