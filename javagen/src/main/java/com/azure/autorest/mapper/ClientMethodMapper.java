@@ -102,7 +102,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 syncReturnType = responseBodyType.getClientType();
             }
         }
-        syncReturnWithResponse = GenericType.Response(syncReturnType);
+
+        if (syncReturnType == ClassType.InputStream) {
+            syncReturnWithResponse = ClassType.StreamResponse;
+        } else {
+            syncReturnWithResponse = GenericType.Response(syncReturnType);
+        }
 
         for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
@@ -454,17 +459,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
 
                     if (settings.isContextClientMethodParameter()) {
-                        if (settings.isFluent()) {
-                            // temporary disable SimpleSyncRestResponse, for the bug when response type is Mono<StreamResponse>
-                            addClientMethodWithContext(methods, builder.onlyRequiredParameters(false), parameters);
-                        } else {
-                            builder.type(ClientMethodType.SimpleSyncRestResponse)
-                                    .onlyRequiredParameters(false)
-                                    .name(proxyMethod.getSimpleRestResponseMethodName())
-                                    .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
-                                            syncReturnWithResponse), syncReturnWithResponse));
-                            addClientMethodWithContext(methods, builder, parameters);
-                        }
+                        builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                .onlyRequiredParameters(false)
+                                .name(proxyMethod.getSimpleRestResponseMethodName())
+                                .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
+                                        syncReturnWithResponse), syncReturnWithResponse));
+                        addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
             }
