@@ -26,8 +26,11 @@ public class ClientModelUtil {
      */
     public static void getAsyncSyncClients(ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
+        String packageName = getAsyncSyncClientPackageName(serviceClient);
+
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
                     .serviceClient(serviceClient);
 
             String asyncClassName =
@@ -48,6 +51,7 @@ public class ClientModelUtil {
         final int count = serviceClient.getMethodGroupClients().size() + asyncClients.size();
         for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
                     .serviceClient(serviceClient)
                     .methodGroupClient(methodGroupClient);
 
@@ -99,7 +103,9 @@ public class ClientModelUtil {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
         if (settings.shouldGenerateSyncAsyncClients() && !settings.isFluent()) {
-            builderPackage = JavaSettings.getInstance().getPackage();
+            builderPackage = settings.getPackage();
+        } else if (settings.isFluent()) {
+            builderPackage = settings.getPackage(settings.getImplementationSubpackage());
         }
         return builderPackage;
     }
@@ -114,5 +120,14 @@ public class ClientModelUtil {
             subpackage = settings.getCustomTypesSubpackage();
         }
         return settings.getPackage(subpackage);
+    }
+
+    public static String getAsyncSyncClientPackageName(ServiceClient serviceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isFluent()) {
+            return settings.getPackage(settings.getFluentSubpackage());
+        } else {
+            return getServiceClientBuilderPackageName(serviceClient);
+        }
     }
 }

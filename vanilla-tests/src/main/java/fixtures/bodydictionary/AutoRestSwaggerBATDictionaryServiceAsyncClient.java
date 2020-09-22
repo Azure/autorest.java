@@ -19,7 +19,11 @@ import reactor.core.publisher.Mono;
 public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     private final DictionariesImpl serviceClient;
 
-    /** Initializes an instance of Dictionaries client. */
+    /**
+     * Initializes an instance of Dictionaries client.
+     *
+     * @param serviceClient the service client implementation.
+     */
     AutoRestSwaggerBATDictionaryServiceAsyncClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }

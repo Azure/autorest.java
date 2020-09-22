@@ -58,7 +58,11 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
         return this.dictionaries;
     }
 
-    /** Initializes an instance of AutoRestSwaggerBATDictionaryService client. */
+    /**
+     * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
+     *
+     * @param host server parameter.
+     */
     public AutoRestSwaggerBATDictionaryServiceImpl(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
      * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     public AutoRestSwaggerBATDictionaryServiceImpl(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestSwaggerBATDictionaryServiceImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     public AutoRestSwaggerBATDictionaryServiceImpl(
             HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {

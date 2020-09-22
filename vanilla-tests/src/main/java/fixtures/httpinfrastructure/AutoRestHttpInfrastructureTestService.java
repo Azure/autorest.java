@@ -130,7 +130,11 @@ public final class AutoRestHttpInfrastructureTestService {
         return this.multipleResponses;
     }
 
-    /** Initializes an instance of AutoRestHttpInfrastructureTestService client. */
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestHttpInfrastructureTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -144,6 +148,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -154,6 +159,7 @@ public final class AutoRestHttpInfrastructureTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

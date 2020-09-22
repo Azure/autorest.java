@@ -9,7 +9,6 @@ import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
-import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;

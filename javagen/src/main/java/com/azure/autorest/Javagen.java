@@ -90,11 +90,11 @@ public class Javagen extends NewPlugin {
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
                 }
             }
 

@@ -58,7 +58,11 @@ public final class AutoRestDateTimeTestService {
         return this.datetimeOperations;
     }
 
-    /** Initializes an instance of AutoRestDateTimeTestService client. */
+    /**
+     * Initializes an instance of AutoRestDateTimeTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestDateTimeTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestDateTimeTestService {
      * Initializes an instance of AutoRestDateTimeTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestDateTimeTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestDateTimeTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestDateTimeTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

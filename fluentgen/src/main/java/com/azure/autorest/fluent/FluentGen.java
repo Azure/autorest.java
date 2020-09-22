@@ -122,12 +122,12 @@ public class FluentGen extends NewPlugin {
                 if (!javaSettings.isFluentLite()) {
                     // fluent lite only expose sync client
                     for (AsyncSyncClient asyncClient : asyncClients) {
-                        javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                        javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                     }
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
                 }
             }
 

@@ -166,7 +166,11 @@ public final class AutoRestComplexTestService {
         return this.flattencomplexes;
     }
 
-    /** Initializes an instance of AutoRestComplexTestService client. */
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestComplexTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -180,6 +184,7 @@ public final class AutoRestComplexTestService {
      * Initializes an instance of AutoRestComplexTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestComplexTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -190,6 +195,7 @@ public final class AutoRestComplexTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestComplexTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

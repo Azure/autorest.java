@@ -17,7 +17,11 @@ import java.util.Map;
 public final class AutoRestSwaggerBATDictionaryServiceClient {
     private final DictionariesImpl serviceClient;
 
-    /** Initializes an instance of Dictionaries client. */
+    /**
+     * Initializes an instance of Dictionaries client.
+     *
+     * @param serviceClient the service client implementation.
+     */
     AutoRestSwaggerBATDictionaryServiceClient(DictionariesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }

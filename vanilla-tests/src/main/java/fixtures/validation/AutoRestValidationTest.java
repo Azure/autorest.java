@@ -94,7 +94,12 @@ public final class AutoRestValidationTest {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of AutoRestValidationTest client. */
+    /**
+     * Initializes an instance of AutoRestValidationTest client.
+     *
+     * @param subscriptionId Subscription ID.
+     * @param host server parameter.
+     */
     AutoRestValidationTest(String subscriptionId, String host) {
         this(
                 new HttpPipelineBuilder()
@@ -109,6 +114,8 @@ public final class AutoRestValidationTest {
      * Initializes an instance of AutoRestValidationTest client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param subscriptionId Subscription ID.
+     * @param host server parameter.
      */
     AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host);
@@ -119,6 +126,8 @@ public final class AutoRestValidationTest {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param subscriptionId Subscription ID.
+     * @param host server parameter.
      */
     AutoRestValidationTest(
             HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String host) {

@@ -53,7 +53,7 @@ public class FluentUtils {
 
     public static boolean isInnerClassType(String packageName, String name) {
         JavaSettings settings = JavaSettings.getInstance();
-        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), "inner");
+        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), "models");
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 

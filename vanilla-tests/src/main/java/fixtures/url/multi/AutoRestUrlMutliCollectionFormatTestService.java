@@ -58,7 +58,11 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
         return this.queries;
     }
 
-    /** Initializes an instance of AutoRestUrlMutliCollectionFormatTestService client. */
+    /**
+     * Initializes an instance of AutoRestUrlMutliCollectionFormatTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestUrlMutliCollectionFormatTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
      * Initializes an instance of AutoRestUrlMutliCollectionFormatTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestUrlMutliCollectionFormatTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestUrlMutliCollectionFormatTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestUrlMutliCollectionFormatTestService(
             HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {

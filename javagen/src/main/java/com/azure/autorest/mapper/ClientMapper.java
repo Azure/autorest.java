@@ -130,14 +130,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 if (!packageInfos.containsKey(fluentPackage)) {
                     packageInfos.put(fluentPackage, new PackageInfo(
                             fluentPackage,
-                            String.format("Package containing the client classes for %s.\n%s",
+                            String.format("Package containing the service clients for %s.\n%s",
                                     serviceClientName, serviceClientDescription)));
                 }
-                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), "inner");
+                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), "models");
                 if (!packageInfos.containsKey(fluentInnerPackage)) {
                     packageInfos.put(fluentInnerPackage, new PackageInfo(
                         fluentInnerPackage,
-                        String.format("Package containing the inner classes for %s.\n%s",
+                        String.format("Package containing the inner data models for %s.\n%s",
                             serviceClientName, serviceClientDescription)));
                 }
             }
