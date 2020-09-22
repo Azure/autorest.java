@@ -282,8 +282,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .isGroupedParameterRequired(false)
                                     .build();
 
-                            if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                            //if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                                 // if context parameter is required, that method will do the overload with max parameters
+                            {
                                 methods.add(builder.build());
                             }
 
@@ -457,8 +458,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build();
 
-                    if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                    //if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                         // if context parameter is required, that method will do the overload with max parameters
+                    {
                         methods.add(builder.build());
                     }
 

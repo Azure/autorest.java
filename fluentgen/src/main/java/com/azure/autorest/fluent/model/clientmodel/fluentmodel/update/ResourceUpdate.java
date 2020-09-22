@@ -140,7 +140,7 @@ public class ResourceUpdate extends ResourceOperation {
             if (hasContextParameter) {
                 return null;
             } else {
-                throw new IllegalStateException("update method not found");
+                throw new IllegalStateException("update method not found on model " + resourceModel.getName());
             }
         }
     }

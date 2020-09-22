@@ -264,7 +264,7 @@ public class ResourceCreate extends ResourceOperation  {
             if (hasContextParameter) {
                 return null;
             } else {
-                throw new IllegalStateException("create method not found");
+                throw new IllegalStateException("create method not found on model " + resourceModel.getName());
             }
         }
     }
