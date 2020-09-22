@@ -26,7 +26,7 @@ import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
-import com.azure.mgmttest.storage.fluent.StorageManagementClientBuilder;
+import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
