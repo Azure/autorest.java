@@ -435,11 +435,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
+                    // by guideline, do not provide Context for async method
+                    /*
                     if (settings.isContextClientMethodParameter()) {
                         builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
                         builder.methodVisibility(VISIBLE);
                     }
+                     */
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
