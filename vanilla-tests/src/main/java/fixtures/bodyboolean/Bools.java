@@ -139,7 +139,7 @@ public final class Bools {
      * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getTrueAsync(Context context) {
+    private Mono<Boolean> getTrueAsync(Context context) {
         return getTrueWithResponseAsync(context)
                 .flatMap(
                         (Response<Boolean> res) -> {
@@ -240,7 +240,7 @@ public final class Bools {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putTrueAsync(Context context) {
+    private Mono<Void> putTrueAsync(Context context) {
         return putTrueWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
@@ -333,7 +333,7 @@ public final class Bools {
      * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getFalseAsync(Context context) {
+    private Mono<Boolean> getFalseAsync(Context context) {
         return getFalseWithResponseAsync(context)
                 .flatMap(
                         (Response<Boolean> res) -> {
@@ -434,7 +434,7 @@ public final class Bools {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFalseAsync(Context context) {
+    private Mono<Void> putFalseAsync(Context context) {
         return putFalseWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
     }
 
@@ -527,7 +527,7 @@ public final class Bools {
      * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getNullAsync(Context context) {
+    private Mono<Boolean> getNullAsync(Context context) {
         return getNullWithResponseAsync(context)
                 .flatMap(
                         (Response<Boolean> res) -> {
@@ -634,7 +634,7 @@ public final class Bools {
      * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> getInvalidAsync(Context context) {
+    private Mono<Boolean> getInvalidAsync(Context context) {
         return getInvalidWithResponseAsync(context)
                 .flatMap(
                         (Response<Boolean> res) -> {

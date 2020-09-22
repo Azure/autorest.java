@@ -119,7 +119,7 @@ public final class Files {
      * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileAsync(Context context) {
+    private Flux<ByteBuffer> getFileAsync(Context context) {
         return getFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
     }
 
@@ -219,7 +219,7 @@ public final class Files {
      * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileLargeAsync(Context context) {
+    private Flux<ByteBuffer> getFileLargeAsync(Context context) {
         return getFileLargeWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
     }
 
@@ -319,7 +319,7 @@ public final class Files {
      * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
+    private Flux<ByteBuffer> getEmptyFileAsync(Context context) {
         return getEmptyFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
     }
 
