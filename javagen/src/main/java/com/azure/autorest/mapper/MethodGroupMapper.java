@@ -93,7 +93,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         String packageName;
         if (settings.isFluent()) {
-            packageName = settings.getPackage(settings.getImplementationSubpackage());
+            packageName = settings.getPackage(settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : settings.getFluentSubpackage());
         } else {
             boolean isCustomType = settings.isCustomType(className);
             packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));

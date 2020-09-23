@@ -5,14 +5,17 @@
 
 package com.azure.autorest.fluent.model.javamodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate;
+import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 
@@ -51,6 +54,15 @@ public class FluentJavaPackage extends JavaPackage {
                 model.getType().getPackage(),
                 model.getType().getName());
         FluentManagerTemplate.getInstance().write(model, javaFile);
+        getJavaFiles().add(javaFile);
+    }
+
+    public final void addUtils() {
+        JavaSettings settings = JavaSettings.getInstance();
+        JavaFile javaFile = getJavaFileFactory().createSourceFile(
+                settings.getPackage(settings.getImplementationSubpackage()),
+                ModelNaming.CLASS_UTILS);
+        UtilsTemplate.getInstance().write(javaFile);
         getJavaFiles().add(javaFile);
     }
 }

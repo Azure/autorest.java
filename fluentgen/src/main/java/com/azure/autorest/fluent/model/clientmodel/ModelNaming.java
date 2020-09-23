@@ -25,6 +25,11 @@ public class ModelNaming {
     public static final String MODEL_FLUENT_INTERFACE_DEFINITION = "Definition";
     public static final String MODEL_FLUENT_INTERFACE_DEFINITION_STAGES = "DefinitionStages";
 
+    public static final String MODEL_FLUENT_INTERFACE_UPDATE = "Update";
+    public static final String MODEL_FLUENT_INTERFACE_UPDATE_STAGES = "UpdateStages";
+
+    public static final String CLASS_UTILS = "Utils";
+
     private ModelNaming() {
     }
 }

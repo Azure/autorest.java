@@ -122,11 +122,15 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 }
             }
         }
-        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
-        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string", ClassType.SerializerAdapter, "serializerAdapter", true, null));
+        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
+                ClassType.HttpPipeline, "httpPipeline", true, null));
+        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a "
+                + "string.", ClassType.SerializerAdapter, "serializerAdapter", true, null));
         if (settings.isFluent()) {
-            serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", true, null));
+            serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running "
+                    + "operation.", ClassType.Duration, "defaultPollInterval", true, null));
         }
+
         builder.properties(serviceClientProperties);
 
         ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()

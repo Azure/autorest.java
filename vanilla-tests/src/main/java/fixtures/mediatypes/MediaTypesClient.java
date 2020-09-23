@@ -69,7 +69,11 @@ public final class MediaTypesClient {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of MediaTypesClient client. */
+    /**
+     * Initializes an instance of MediaTypesClient client.
+     *
+     * @param host server parameter.
+     */
     MediaTypesClient(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -83,6 +87,7 @@ public final class MediaTypesClient {
      * Initializes an instance of MediaTypesClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     MediaTypesClient(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -93,6 +98,7 @@ public final class MediaTypesClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     MediaTypesClient(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

@@ -36,7 +36,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
         String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -115,7 +115,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 });
             });
         } else {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -202,7 +202,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             ApplyParameterTransformations(function, clientMethod, settings);
@@ -227,7 +227,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
             function.indent(() -> {
@@ -242,7 +242,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         String contextParam = mergeContextParameter ? "context" : "Context.NONE";
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
             AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);

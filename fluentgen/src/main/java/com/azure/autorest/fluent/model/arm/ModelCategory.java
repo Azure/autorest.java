@@ -15,6 +15,6 @@ public enum ModelCategory {
     // e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
     NESTED_CHILD,
 
-    // not an Azure resource, merely a wrapper
-    WRAPPER
+    // not an Azure resource, merely an immutable
+    IMMUTABLE
 }

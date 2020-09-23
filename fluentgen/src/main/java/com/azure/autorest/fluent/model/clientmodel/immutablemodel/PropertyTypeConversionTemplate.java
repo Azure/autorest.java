@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.implmethod;
+package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 //    } else {
 //        return null;
 //    }
-public class WrapperPropertyTypeConversionMethod implements WrapperMethod {
+public class PropertyTypeConversionTemplate implements ImmutableMethod {
 
     private final MethodTemplate conversionMethodTemplate;
 
-    public WrapperPropertyTypeConversionMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
+    public PropertyTypeConversionTemplate(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
         fluentProperty.getFluentType().addImportsTo(imports, false);
         // Type inner = ...

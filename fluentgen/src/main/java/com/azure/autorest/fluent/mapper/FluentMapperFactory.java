@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.mapper;
 
+import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.mapper.DefaultMapperFactory;
 import com.azure.autorest.mapper.ExceptionMapper;
 import com.azure.autorest.mapper.MethodGroupMapper;
@@ -31,5 +32,10 @@ public class FluentMapperFactory extends DefaultMapperFactory {
     @Override
     public ExceptionMapper getExceptionMapper() {
         return FluentExceptionMapper.getInstance();
+    }
+
+    @Override
+    public ClientMethodMapper getClientMethodMapper() {
+        return FluentClientMethodMapper.getInstance();
     }
 }

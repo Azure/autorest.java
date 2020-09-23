@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.implmethod;
+package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
@@ -19,11 +19,11 @@ import java.util.Set;
 
 // Implementation method template for simple property
 // E.g. "return this.inner().sku()"
-public class WrapperPropertyImplementationMethod implements WrapperMethod {
+public class PropertyTemplate implements ImmutableMethod {
 
     private final MethodTemplate implementationMethodTemplate;
 
-    public WrapperPropertyImplementationMethod(FluentModelProperty fluentProperty, ClientModelProperty property) {
+    public PropertyTemplate(FluentModelProperty fluentProperty, ClientModelProperty property) {
         Set<String> imports = new HashSet<>();
         fluentProperty.getFluentType().addImportsTo(imports, false);
         if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {

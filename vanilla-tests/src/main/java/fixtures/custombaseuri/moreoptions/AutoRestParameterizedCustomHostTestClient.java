@@ -70,7 +70,12 @@ public final class AutoRestParameterizedCustomHostTestClient {
         return this.paths;
     }
 
-    /** Initializes an instance of AutoRestParameterizedCustomHostTestClient client. */
+    /**
+     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
+     *
+     * @param subscriptionId The subscription id with value 'test12'.
+     * @param dnsSuffix A string value that is used as a global part of the parameterized host. Default value 'host'.
+     */
     AutoRestParameterizedCustomHostTestClient(String subscriptionId, String dnsSuffix) {
         this(
                 new HttpPipelineBuilder()
@@ -85,6 +90,8 @@ public final class AutoRestParameterizedCustomHostTestClient {
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param subscriptionId The subscription id with value 'test12'.
+     * @param dnsSuffix A string value that is used as a global part of the parameterized host. Default value 'host'.
      */
     AutoRestParameterizedCustomHostTestClient(HttpPipeline httpPipeline, String subscriptionId, String dnsSuffix) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, dnsSuffix);
@@ -95,6 +102,8 @@ public final class AutoRestParameterizedCustomHostTestClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param subscriptionId The subscription id with value 'test12'.
+     * @param dnsSuffix A string value that is used as a global part of the parameterized host. Default value 'host'.
      */
     AutoRestParameterizedCustomHostTestClient(
             HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String dnsSuffix) {

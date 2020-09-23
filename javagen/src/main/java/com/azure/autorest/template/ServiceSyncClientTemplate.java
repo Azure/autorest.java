@@ -5,6 +5,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.HashSet;
@@ -31,6 +32,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     String syncClassName = syncClient.getClassName();
     MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
     final boolean wrapServiceClient = methodGroupClient == null;
+    final String builderPackageName = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
+    final String builderClassName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+    final boolean samePackageAsBuilder = builderPackageName.equals(syncClient.getPackageName());
+    final JavaVisibility constructorVisibility = samePackageAsBuilder ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
 
     Set<String> imports = new HashSet<>();
     if (wrapServiceClient) {
@@ -40,6 +45,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
       methodGroupClient.addImportsTo(imports, true, settings);
       imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
     }
+    imports.add(builderPackageName + "." + builderClassName);
     imports.add("com.azure.core.annotation.ServiceClient");
 
     javaFile.declareImport(imports);
@@ -47,8 +53,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
             serviceClient.getInterfaceName())));
 
-    javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
-            serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
+    javaFile.annotation(String.format("ServiceClient(builder = %s.class)", builderClassName));
     javaFile.publicFinalClass(syncClassName, classBlock ->
     {
       // Add service client member variable
@@ -59,19 +64,18 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
       }
 
       // Service Client Constructor
-      classBlock.javadocComment(comment ->
-          comment
-              .description(String.format("Initializes an instance of %1$s client.",
-                  wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
-      );
+      classBlock.javadocComment(comment -> {
+        comment.description(String.format("Initializes an instance of %1$s client.", wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()));
+        comment.param("serviceClient", "the service client implementation.");
+      });
 
       if (wrapServiceClient) {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
+        classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClassName,
             serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });
       } else {
-        classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
+        classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClassName,
             methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
           constructorBlock.line("this.serviceClient = serviceClient;");
         });

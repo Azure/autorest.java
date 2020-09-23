@@ -50,7 +50,17 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
 
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
-                final String memberName = CodeNamer.getEnumMemberName(enumValue.getValue());
+                String enumName = enumValue.getValue();
+                if (!settings.isFluent()) {
+                    if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
+                            && enumValue.getLanguage().getJava().getName() != null) {
+                        enumName = enumValue.getLanguage().getJava().getName();
+                    } else if (enumValue.getLanguage() != null && enumValue.getLanguage().getDefault() != null
+                            && enumValue.getLanguage().getDefault().getName() != null) {
+                        enumName = enumValue.getLanguage().getDefault().getName();
+                    }
+                }
+                final String memberName = CodeNamer.getEnumMemberName(enumName);
                 long counter = enumValues.stream().filter(v -> v.getName().equals(memberName)).count();
                 if (counter > 0) {
                     enumValues.add(new ClientEnumValue(memberName + "_" + counter, enumValue.getValue()));

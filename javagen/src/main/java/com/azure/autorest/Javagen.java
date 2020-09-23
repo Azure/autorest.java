@@ -90,11 +90,11 @@ public class Javagen extends NewPlugin {
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
                 }
             }
 
@@ -144,6 +144,11 @@ public class Javagen extends NewPlugin {
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
                 writeFile(javaFile.getFilePath(), formattedSource, null);
+            }
+            String artifactId = JavaSettings.getInstance().getArtifactId();
+            if (!(artifactId == null || artifactId.isEmpty())) {
+                writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
             LOGGER.error("Failed to generate code " + ex.getMessage(), ex);

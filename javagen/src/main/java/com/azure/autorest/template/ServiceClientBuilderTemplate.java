@@ -4,12 +4,10 @@ package com.azure.autorest.template;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
+import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
@@ -39,18 +37,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientBuilderName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
 
-        ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
-        if (settings.isAzureOrFluent()) {
-            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
-        }
-        commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-          ClassType.SerializerAdapter, "serializerAdapter", false,
-          settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
-
-        if (settings.isFluent()) {
-          commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
-        }
+        ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings);
 
         String buildReturnType;
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
@@ -62,7 +49,16 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, false, true, settings);
         commonProperties.forEach(p -> p.addImportsTo(imports, false));
+        imports.add("java.util.List");
+        imports.add("java.util.Map");
+        imports.add("java.util.HashMap");
+        imports.add("java.util.ArrayList");
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
+        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
+        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
+        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
+        imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
+        imports.add("com.azure.core.util.CoreUtils");
         imports.add(settings.isFluent() ? "com.azure.core.management.serializer.AzureJacksonAdapter" : "com.azure.core.util.serializer.JacksonAdapter");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -87,6 +83,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     builderTypes.append(", ");
                 }
                 builderTypes.append(client.getClassName()).append(".class");
+
+                client.addImportsTo(imports, false);
             }
         } else {
             builderTypes.append(serviceClient.getClassName()).append(".class");
@@ -103,24 +101,58 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
+            if (!settings.isAzureOrFluent()) {
+                classBlock.privateStaticFinalVariable("String SDK_NAME = \"name\"");
+                classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
+                String propertiesValue = "new HashMap<>()";
+                if (!settings.getArtifactId().isEmpty()) {
+                    propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
+                }
+                classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                    javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
+                });
+            }
             // Add ServiceClient client property variables, getters, and setters
-            for (ServiceClientProperty serviceClientProperty : Stream
-                    .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
+            List<ServiceClientProperty> clientProperties = Stream
+                    .concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()),
+                            commonProperties.stream()).collect(Collectors.toList());
+
+            for (ServiceClientProperty serviceClientProperty : clientProperties) {
                 classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
                 {
                     comment.line(serviceClientProperty.getDescription());
                 });
                 classBlock.privateMemberVariable(String.format("%1$s %2$s", serviceClientProperty.getType(), serviceClientProperty.getName()));
 
+                if (!serviceClientProperty.isReadOnly()) {
+                    classBlock.javadocComment(comment ->
+                    {
+                        comment.description(String.format("Sets %1$s", serviceClientProperty.getDescription()));
+                        comment.param(serviceClientProperty.getName(), String.format("the %1$s value.", serviceClientProperty.getName()));
+                        comment.methodReturns(String.format("the %1$s", serviceClientBuilderName));
+                    });
+
+                    classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
+                            CodeNamer.toCamelCase(serviceClientProperty.getAccessorMethodSuffix()), serviceClientProperty.getType(),
+                            serviceClientProperty.getName()), function ->
+                    {
+                        function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getName()));
+                        function.methodReturn("this");
+                    });
+                }
+            }
+
+            if (!settings.isAzureOrFluent()) {
                 classBlock.javadocComment(comment ->
                 {
-                    comment.description(String.format("Sets %1$s", serviceClientProperty.getDescription()));
-                    comment.param(serviceClientProperty.getName(), String.format("the %1$s value.", serviceClientProperty.getName()));
+                    comment.description("Adds a custom Http pipeline policy.");
+                    comment.param("customPolicy", "The custom Http pipeline policy to add.");
                     comment.methodReturns(String.format("the %1$s", serviceClientBuilderName));
                 });
-                classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName, CodeNamer.toCamelCase(serviceClientProperty.getName()), serviceClientProperty.getType(), serviceClientProperty.getName()), function ->
-                {
-                    function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getName()));
+                classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
+                        "addPolicy", "HttpPipelinePolicy", "customPolicy"), function -> {
+                    function.line("pipelinePolicies.add(customPolicy);");
                     function.methodReturn("this");
                 });
             }
@@ -136,7 +168,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
-                for (ServiceClientProperty serviceClientProperty : Stream.concat(serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()), commonProperties.stream()).collect(Collectors.toList())) {
+                for (ServiceClientProperty serviceClientProperty : clientProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null) {
                         function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
                         {
@@ -162,6 +194,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
                 function.line("return client;");
             });
+
+            if (!settings.isAzureOrFluent()) {
+                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName);
+            }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
                 if (!settings.isFluentLite()) {
@@ -208,6 +244,97 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
         });
 
+    }
+
+    private void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName) {
+        classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
+                buildMethodName), function -> {
+            function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
+                    + ".getGlobalConfiguration() : configuration;");
+
+            function.ifBlock("httpLogOptions == null", action -> {
+                function.line("httpLogOptions = new HttpLogOptions();");
+            });
+
+            function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
+
+            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
+                function.ifBlock("azureKeyCredential != null", action -> {
+                    function.line("policies.add(new AzureKeyCredentialPolicy(\"api-key\", azureKeyCredential));");
+                });
+            }
+            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL) && clientProperties.stream()
+                    .anyMatch(clientProperty -> clientProperty.getName().equals("endpoint"))) {
+                function.ifBlock("tokenCredential != null", action -> {
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, String"
+                            + ".format(\"%s/.default\", endpoint)));");
+                });
+            }
+
+            function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
+            function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
+
+            function.line("policies.add(new UserAgentPolicy(httpLogOptions.getApplicationId(), clientName, "
+                    + "clientVersion, buildConfiguration));");
+
+            function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
+            function.line("policies.add(retryPolicy == null ? new RetryPolicy() : retryPolicy);");
+            function.line("policies.add(new CookiePolicy());");
+            function.line("policies.addAll(this.pipelinePolicies);");
+            function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
+
+            function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
+
+            function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new "
+                    + "HttpPipelinePolicy[0])).httpClient(httpClient).build();");
+            function.methodReturn("httpPipeline");
+        });
+    }
+
+    private ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings) {
+        ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
+        if (settings.isAzureOrFluent()) {
+            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
+        }
+        if (settings.isFluent()) {
+            commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
+        }
+
+        commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
+                settings.isAzureOrFluent() ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()" : "createHttpPipeline()"));
+
+        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+          ClassType.SerializerAdapter, "serializerAdapter", false,
+          settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+
+        if (!settings.isAzureOrFluent()) {
+
+            commonProperties.add(new ServiceClientProperty("The HTTP client used to send the request.",
+                    ClassType.HttpClient, "httpClient", false, null));
+            commonProperties.add(new ServiceClientProperty("The configuration store that is used during "
+                    + "construction of the service client.", ClassType.Configuration, "configuration", false, null));
+
+            if (settings.getCredentialTypes().contains(CredentialType.AZURE_KEY_CREDENTIAL)) {
+                commonProperties.add(new ServiceClientProperty("The Azure Key Credential used for authentication.",
+                        ClassType.AzureKeyCredential, "azureKeyCredential", "credential", false, null));
+            }
+            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
+                commonProperties.add(new ServiceClientProperty("The TokenCredential used for authentication.",
+                        ClassType.TokenCredential, "tokenCredential", "credential", false, null));
+            }
+
+            commonProperties.add(new ServiceClientProperty("The logging configuration for HTTP requests and "
+                    + "responses.", ClassType.HttpLogOptions, "httpLogOptions", false, null));
+            commonProperties.add(new ServiceClientProperty("The service API version that is used when making "
+                    + "API requests.", ClassType.ServiceVersion, "serviceVersion", false, null));
+            commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
+                    + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
+
+            commonProperties.add(new ServiceClientProperty("The list of Http pipeline policies to add.",
+                    new ListType(ClassType.HttpPipelinePolicy), "pipelinePolicies", true, null));
+        }
+
+        return commonProperties;
     }
 
     /**

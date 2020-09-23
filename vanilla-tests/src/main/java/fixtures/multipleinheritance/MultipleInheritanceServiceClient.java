@@ -71,7 +71,11 @@ public final class MultipleInheritanceServiceClient {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of MultipleInheritanceServiceClient client. */
+    /**
+     * Initializes an instance of MultipleInheritanceServiceClient client.
+     *
+     * @param host server parameter.
+     */
     MultipleInheritanceServiceClient(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -85,6 +89,7 @@ public final class MultipleInheritanceServiceClient {
      * Initializes an instance of MultipleInheritanceServiceClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     MultipleInheritanceServiceClient(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -95,6 +100,7 @@ public final class MultipleInheritanceServiceClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     MultipleInheritanceServiceClient(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

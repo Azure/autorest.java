@@ -8,6 +8,9 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -31,13 +34,16 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
     public void write(FluentResourceCollection collection, JavaFile javaFile) {
         ClassType managerType = FluentStatic.getFluentManager().getType();
 
-        List<MethodTemplate> methodTemplates = new ArrayList<>();
-        collection.getMethods().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
-
         Set<String> imports = new HashSet<>();
         imports.add(managerType.getFullName());
         collection.addImportsTo(imports, true);
+        if (collection.getResourceCreates() != null) {
+            collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, true));
+        }
         javaFile.declareImport(imports);
+
+        List<MethodTemplate> methodTemplates = new ArrayList<>();
+        collection.getMethodsForTemplate().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
             // variable for inner model
@@ -64,6 +70,18 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
+
+            // method for define resource
+            int resourceCount = collection.getResourceCreates().size();
+            collection.getResourceCreates()
+                    .forEach(rc -> {
+                        FluentMethod defineMethod = rc.getDefineMethod();
+                        if (resourceCount == 1) {
+                            ((FluentDefineMethod) defineMethod).setName("define");
+                        }
+
+                        defineMethod.getMethodTemplate().writeMethod(classBlock);
+                    });
         });
     }
 }

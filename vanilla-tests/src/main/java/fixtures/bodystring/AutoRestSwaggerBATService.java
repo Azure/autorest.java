@@ -70,7 +70,11 @@ public final class AutoRestSwaggerBATService {
         return this.enums;
     }
 
-    /** Initializes an instance of AutoRestSwaggerBATService client. */
+    /**
+     * Initializes an instance of AutoRestSwaggerBATService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestSwaggerBATService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -84,6 +88,7 @@ public final class AutoRestSwaggerBATService {
      * Initializes an instance of AutoRestSwaggerBATService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestSwaggerBATService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -94,6 +99,7 @@ public final class AutoRestSwaggerBATService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestSwaggerBATService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

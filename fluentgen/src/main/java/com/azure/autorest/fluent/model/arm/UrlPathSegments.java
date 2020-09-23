@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.arm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -106,7 +107,7 @@ public class UrlPathSegments {
     private final List<Segment> reverseSegments = new ArrayList<>();
 
     public UrlPathSegments(String path) {
-        this.path = path;
+        this.path = Objects.requireNonNull(path);
 
         String[] segmentArray = path.split(Pattern.quote("/"));
 
@@ -191,5 +192,22 @@ public class UrlPathSegments {
     @Override
     public String toString() {
         return reverseSegments.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UrlPathSegments that = (UrlPathSegments) o;
+        return path.equals(that.path);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(path);
     }
 }
