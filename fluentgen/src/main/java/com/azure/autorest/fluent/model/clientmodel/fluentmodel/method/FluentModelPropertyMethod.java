@@ -43,7 +43,7 @@ public class FluentModelPropertyMethod extends FluentMethod {
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
                     if (fluentResourceModel.getInnerModel() == clientModel) {
-                        block.line("this.%1$s().%2$s(%3$s);", ModelNaming.METHOD_INNER, modelProperty.getSetterName(), modelProperty.getName());
+                        block.line("this.%1$s().%2$s(%3$s);", ModelNaming.METHOD_INNER_MODEL, modelProperty.getSetterName(), modelProperty.getName());
                     } else {
                         block.line("this.%1$s.%2$s(%3$s);", localVariable.getName(), modelProperty.getSetterName(), modelProperty.getName());
                     }

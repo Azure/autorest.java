@@ -129,7 +129,7 @@ public class ResourceImplementation {
                     .visibility(JavaVisibility.Private)
                     .methodSignature("boolean isInCreateMode()")
                     .method(block -> {
-                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER));
+                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER_MODEL));
                     })
                     .build();
         }

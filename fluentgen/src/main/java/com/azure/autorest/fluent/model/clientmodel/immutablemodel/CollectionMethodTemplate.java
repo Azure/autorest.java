@@ -23,9 +23,9 @@ public class CollectionMethodTemplate implements ImmutableMethod {
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
                     if (innerType == PrimitiveType.Void || innerType == PrimitiveType.Void.asNullable()) {
-                        block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
+                        block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     } else {
-                        String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation());
+                        String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation());
                         block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
                     }
                 })

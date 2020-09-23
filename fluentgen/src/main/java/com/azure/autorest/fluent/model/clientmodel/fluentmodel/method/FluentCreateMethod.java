@@ -80,7 +80,7 @@ public class FluentCreateMethod extends FluentMethod {
                             ModelNaming.MODEL_PROPERTY_INNER,
                             ModelNaming.MODEL_PROPERTY_MANAGER,
                             collectionReferenceMethodName,
-                            ModelNaming.METHOD_INNER,
+                            ModelNaming.METHOD_SERVICE_CLIENT,
                             methodInvocation,
                             afterInvocationCode);
                     block.methodReturn("this");

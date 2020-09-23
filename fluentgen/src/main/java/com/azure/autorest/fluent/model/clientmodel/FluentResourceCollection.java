@@ -104,7 +104,7 @@ public class FluentResourceCollection {
 
     // method signature for inner client
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+        return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_SERVICE_CLIENT));
     }
 
     public List<ResourceCreate> getResourceCreates() {

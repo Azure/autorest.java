@@ -47,7 +47,7 @@ public class PropertyTypeConversionTemplate implements ImmutableMethod {
                 .imports(imports)
                 .methodSignature(fluentProperty.getMethodSignature())
                 .method(block -> {
-                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, property.getGetterName()));
+                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER_MODEL, property.getGetterName()));
                     block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
                         String expression = TypeConversionUtils.conversionExpression(property.getClientType(), TypeConversionUtils.tempPropertyName());
                         block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), expression));

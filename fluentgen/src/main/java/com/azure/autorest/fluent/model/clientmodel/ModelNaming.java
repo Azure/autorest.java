@@ -7,7 +7,8 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 public class ModelNaming {
 
-    public static final String METHOD_INNER = "inner";
+    public static final String METHOD_SERVICE_CLIENT = "serviceClient";
+    public static final String METHOD_INNER_MODEL = "innerModel";
     public static final String METHOD_MANAGER = "manager";
 
     public static final String MODEL_IMPL_SUFFIX = "Impl";
