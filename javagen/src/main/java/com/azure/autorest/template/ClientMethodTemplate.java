@@ -316,7 +316,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //                typeBlock.javadocComment(comment ->
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
@@ -329,7 +329,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         });
                     });
                 } else {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
