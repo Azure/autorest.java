@@ -150,10 +150,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
-            if ((compositeType.getSummary() == null || compositeType.getSummary().isEmpty()) && (compositeType.getDescription() == null || compositeType.getDescription().isEmpty())) {
+            if (compositeType.getLanguage().getDefault() == null
+                    || compositeType.getLanguage().getDefault().getDescription() == null
+                    || compositeType.getLanguage().getDefault().getDescription().isEmpty()) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
-                builder.description(String.format("%s%s", compositeType.getSummary(), compositeType.getDescription()));
+                builder.description(compositeType.getLanguage().getDefault().getDescription());
             }
 
             boolean discriminatorNeedEscape = false;

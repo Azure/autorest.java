@@ -3,7 +3,7 @@ package fixtures.validation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ChildProduct model. */
+/** The product documentation. */
 @Fluent
 public final class ChildProduct {
     /*

@@ -3,7 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ProductUrl model. */
+/** The product URL. */
 @Fluent
 public final class ProductUrl extends GenericUrl {
     /*
