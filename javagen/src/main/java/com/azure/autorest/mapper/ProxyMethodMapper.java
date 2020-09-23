@@ -67,34 +67,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
 
-        IType returnType;
-        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
-                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
-            returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
-            builder.returnType(GenericType.Mono(returnType));
-        } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-            // BinaryResponse
-            IType singleValueType = ClassType.StreamResponse;
-            builder.returnType(GenericType.Mono(singleValueType));
-        } else if (operation.getResponses().stream()
-                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
-                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
-                .anyMatch(Objects::nonNull)) {
-            // SchemaResponse
-            // method with schema in headers would require a ClientResponse
-            ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-            builder.returnType(GenericType.Mono(clientResponseClassType));
-        } else {
-            IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
-                singleValueType = ClassType.StreamResponse;
-            } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
-            } else {
-                singleValueType = GenericType.Response(responseBodyType);
-            }
-            builder.returnType(GenericType.Mono(singleValueType));
-        }
+        addOperationReturnType(operation, settings, builder, responseBodyType);
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
@@ -165,6 +138,37 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             parsed.put(request, proxyMethod);
         }
         return result;
+    }
+
+    protected void addOperationReturnType(Operation operation, JavaSettings settings, ProxyMethod.Builder builder, IType responseBodyType) {
+        IType returnType;
+        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
+            returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
+            builder.returnType(GenericType.Mono(returnType));
+        } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+            // BinaryResponse
+            IType singleValueType = ClassType.StreamResponse;
+            builder.returnType(GenericType.Mono(singleValueType));
+        } else if (operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
+                .anyMatch(Objects::nonNull)) {
+            // SchemaResponse
+            // method with schema in headers would require a ClientResponse
+            ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+            builder.returnType(GenericType.Mono(clientResponseClassType));
+        } else {
+            IType singleValueType;
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+                singleValueType = ClassType.StreamResponse;
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.Response(responseBodyType);
+            }
+            builder.returnType(GenericType.Mono(singleValueType));
+        }
     }
 
     /**

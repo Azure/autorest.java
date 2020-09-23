@@ -56,6 +56,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
         return new AndroidClientMethod.Builder();
     }
 
+    /**
+     * RestAPI mapper will map API request to an Operation. For paging case, the paging request is mapped to
+     * two operations, one for get first page and one for get next page.
+     */
     @Override
     public List<ClientMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -63,40 +67,26 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             return parsed.get(operation);
         }
 
+        // For each operation, proxy method mapper will map the operation to one Proxy method
+        // since get first page and get next page each has its own operation
+        // there is only one ProxyMethod for each
         Map<Request, ProxyMethod> proxyMethods = Mappers.getProxyMethodMapper().map(operation);
 
         List<ClientMethod> methods = new ArrayList<>();
 
-        ClientMethod.Builder builder = createClientMethodBuilder()
-                .description(operation.getLanguage().getJava().getDescription())
-                .clientReference((operation.getOperationGroup() == null
-                        || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ?
+        for (Request request : operation.getRequests()) {
+            // create service client method builder
+            ClientMethod.Builder builder = createClientMethodBuilder()
+                    .description(operation.getLanguage().getJava().getDescription())
+                    .clientReference((operation.getOperationGroup() == null
+                            || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ?
                             "this" :
                             "this.client");
 
-        final IType returnType;
-        if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
-            Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-            ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
-            IType listType = responseBodyModel.getProperties().stream()
-                    .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                    .findFirst().get().getWireType();
-            IType elementType = ((ListType) listType).getElementType();
-            returnType = GenericType.PagedIterable(elementType);
-        } else {
-            IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
-            if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-                returnType = ClassType.OkHttp3ResponseBody;
-            } else {
-                returnType = responseBodyType.getClientType();
-            }
-        }
-
-        for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
             builder.proxyMethod(proxyMethod);
 
+            // determine common input parameters for all methods
             List<ClientMethodParameter> parameters = new ArrayList<>();
             List<Parameter> optionalParameters = new ArrayList<>();
             List<String> requiredParameterExpressions = new ArrayList<>();
@@ -198,152 +188,106 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .methodTransformationDetails(methodTransformationDetails)
                     .methodPageDetails(null);
 
+            // by default, client method returns whatever the proxy method returns
+            IType returnType = proxyMethod.getReturnType();
+            boolean isPaging = false;
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
-                // TODO: anuchan (enable it once Pagable types are in)
-//                String pageableItemName = getPageableItemName(operation);
-//                if (pageableItemName != null) {
-//                    boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
-//                    IType lroIntermediateType = null;
-//                    if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
-//                        lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
-//                    }
-//
-//                    MethodPageDetails details = new MethodPageDetails(
-//                            CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-//                            pageableItemName,
-//                            (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
-//                                    .stream().findFirst().get(),
-//                            lroIntermediateType);
-//                    builder.methodPageDetails(details);
-//
-//                    if (!(!settings.getRequiredParameterClientMethods()
-//                            && settings.isContextClientMethodParameter()
-//                            && JavaSettings.SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
-//                        methods.add(builder
-//                                .returnValue(new ReturnValue(
-//                                        returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
-//                                        asyncRestResponseReturnType))
-//                                .name(proxyMethod.getPagingAsyncSinglePageMethodName())
-//                                .onlyRequiredParameters(false)
-//                                .type(ClientMethodType.PagingAsyncSinglePage)
-//                                .isGroupedParameterRequired(false)
-//                                .build());
-//                    }
-//
-//                    if (!isNextMethod) {
-//                        if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-//                            methods.add(builder
-//                                    .returnValue(
-//                                            new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-//                                                    asyncReturnType))
-//                                    .name(proxyMethod.getSimpleAsyncMethodName())
-//                                    .onlyRequiredParameters(false)
-//                                    .type(ClientMethodType.PagingAsync)
-//                                    .isGroupedParameterRequired(false)
-//                                    .build());
-//
-//                            if (generateClientMethodWithOnlyRequiredParameters) {
-//                                methods.add(builder
-//                                        .onlyRequiredParameters(true)
-//                                        .build());
-//                            }
-//                        }
-//
-//                        if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-//                            methods.add(builder
-//                                    .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
-//                                            syncReturnType))
-//                                    .name(proxyMethod.getName())
-//                                    .onlyRequiredParameters(false)
-//                                    .type(ClientMethodType.PagingSync)
-//                                    .isGroupedParameterRequired(false)
-//                                    .build());
-//
-//                            if (generateClientMethodWithOnlyRequiredParameters) {
-//                                methods.add(builder
-//                                        .onlyRequiredParameters(true)
-//                                        .build());
-//                            }
-//                        }
-//                    }
-//                }
-            } else {
-                List<ClientMethodParameter> withCallbackParameters = new ArrayList<>(parameters);
-                final ClientMethodParameter callbackParam = new ClientMethodParameter.Builder()
-                        .description("the Callback that receives the response.")
-                        .wireType(GenericType.AndroidSimpleCallback(returnType))
-                        .name("callback")
-                        .annotations(new ArrayList<>())
-                        .isConstant(false)
-                        .defaultValue(null)
-                        .fromClient(false)
-                        .isFinal(true)
-                        .isRequired(true)
-                        .build();
-                withCallbackParameters.add(callbackParam);
+                if (operation.getExtensions().isXmsLongRunningOperation()) {
+                    throw new UnsupportedOperationException();
+                }
+                // In paging case, we should return Page<elementType> and require client method template to do conversion
+                // between proxy return type and paged type
+                isPaging = true;
+                Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
+                        operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
 
-                // Async method with Optional parameters (always generated).
-                //
+                IType listType = responseBodyModel.getProperties().stream()
+                        .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+                        .findFirst().get().getWireType();
+                IType elementType = ((ListType) listType).getElementType();
+                returnType = GenericType.AndroidPage(elementType);
+
+                final Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
+                boolean isNextMethod = nextOperation == operation;
+                MethodPageDetails details = new MethodPageDetails(
+                        CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                        getPageableItemName(operation),
+                        (isNextMethod || nextOperation == null)
+                                ? null
+                                : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
+                        null);
+                builder.methodPageDetails(details);
+            }
+            List<ClientMethodParameter> withCallbackParameters = new ArrayList<>(parameters);
+            final ClientMethodParameter callbackParam = new ClientMethodParameter.Builder()
+                    .description("the Callback that receives the response.")
+                    .wireType(GenericType.AndroidSimpleCallback(returnType))
+                    .name("callback")
+                    .annotations(new ArrayList<>())
+                    .isConstant(false)
+                    .defaultValue(null)
+                    .fromClient(false)
+                    .isFinal(true)
+                    .isRequired(true)
+                    .build();
+            withCallbackParameters.add(callbackParam);
+
+            ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync : ClientMethodType.SimpleAsyncRestResponse;
+            // Async method with Optional parameters (always generated).
+            //
+            methods.add(builder
+                    .parameters(withCallbackParameters)
+                    .returnValue(new ReturnValue(
+                            returnTypeDescription(operation,
+                                    PrimitiveType.Void,
+                                    PrimitiveType.Void),
+                            PrimitiveType.Void))
+                    .name(proxyMethod.getName())
+                    .type(methodType)
+                    .onlyRequiredParameters(false)
+                    .isGroupedParameterRequired(false)
+                    .build());
+
+            // Async method with Required parameters.
+            //
+            if (generateClientMethodWithOnlyRequiredParameters) {
+                // generate only if the settings 'required-parameter-client-methods: true' exists.
                 methods.add(builder
-                        .parameters(withCallbackParameters)
-                        .returnValue(new ReturnValue(
-                                returnTypeDescription(operation,
-                                        PrimitiveType.Void,
-                                        PrimitiveType.Void),
-                                PrimitiveType.Void))
-                        .name(proxyMethod.getName())
+                        .onlyRequiredParameters(true)
+                        .build());
+            }
+
+            if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                // Sync method with Optional parameters.
+                //
+                methodType = isPaging ? ClientMethodType.PagingSync : ClientMethodType.SimpleSync;
+                GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType);
+                methods.add(builder
+                        .parameters(parameters)
+                        .returnValue(new ReturnValue(returnTypeDescription(operation, responseWithResultType, returnType),
+                                responseWithResultType))
+                        .name(proxyMethod.getName() + "WithRestResponse")
                         .onlyRequiredParameters(false)
-                        .type(ClientMethodType.SimpleAsyncRestResponse)
+                        .type(methodType)
                         .isGroupedParameterRequired(false)
                         .build());
 
-                // Async method with Required parameters.
-                //
                 if (generateClientMethodWithOnlyRequiredParameters) {
-                    // generate only if the settings 'required-parameter-client-methods: true' exists.
+                    // Sync method with Required parameters.
+                    //
                     methods.add(builder
+                            .returnValue(new ReturnValue(returnTypeDescription(operation, returnType, returnType),
+                                    returnType))
+                            .name(proxyMethod.getName())
                             .onlyRequiredParameters(true)
                             .build());
                 }
-
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    // Sync method with Optional parameters.
-                    //
-                    GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType);
-                    methods.add(builder
-                            .parameters(parameters)
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, responseWithResultType, returnType),
-                                    responseWithResultType))
-                            .name(proxyMethod.getName() + "WithRestResponse")
-                            .onlyRequiredParameters(false)
-                            .type(ClientMethodType.SimpleSync)
-                            .isGroupedParameterRequired(false)
-                            .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
-                        // Sync method with Required parameters.
-                        //
-                        methods.add(builder
-                                .returnValue(new ReturnValue(returnTypeDescription(operation, returnType, returnType),
-                                        returnType))
-                                .name(proxyMethod.getName())
-                                .onlyRequiredParameters(true)
-                                .build());
-                    }
-                }
             }
         }
+
         parsed.put(operation, methods);
         return methods;
-    }
-
-    private String getPageableItemName(Operation operation) {
-        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-        ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
-        return responseBodyModel.getProperties().stream()
-                .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                .map(ClientModelProperty::getName).findAny().orElse(null);
     }
 
     private static boolean hasNonRequiredParameters(Request request) {
