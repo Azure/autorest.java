@@ -1,6 +1,7 @@
 package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.postprocessor.ls.models.Position;
+import com.azure.autorest.postprocessor.ls.models.Range;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,8 +79,8 @@ public class Editor {
 
     }
 
-    public List<String> getFileLine(String name) {
-        return lines.get(name);
+    public String getFileLine(String name, int line) {
+        return lines.get(name).get(line);
     }
 
     public void replace(String fileName, Position start, Position end, String newContent) {
@@ -114,6 +115,40 @@ public class Editor {
         Path path = paths.remove(fileName);
         Path newPath = Paths.get(rootDir.toString(), newName);
         path.toFile().renameTo(newPath.toFile());
+    }
+
+    public List<Range> searchText(String fileName, String text) {
+        if (!lines.containsKey(fileName)) {
+            return null;
+        } else {
+            List<Range> occurrences = new ArrayList<>();
+            for (int i = 0; i != lines.get(fileName).size(); i++) {
+                String line = lines.get(fileName).get(i);
+                if (line.contains(text)) {
+                    int start = line.indexOf(text);
+                    while (start != -1) {
+                        int end = start + text.length();
+                        occurrences.add(new Range(new Position(i, start), new Position(i, end)));
+                        start = line.indexOf(text, end);
+                    }
+                }
+            }
+            return occurrences;
+        }
+    }
+
+    public Range searchTextFirstOccurrence(String fileName, String text) {
+        if (lines.containsKey(fileName)) {
+            for (int i = 0; i != lines.get(fileName).size(); i++) {
+                String line = lines.get(fileName).get(i);
+                if (line.contains(text)) {
+                    int start = line.indexOf(text);
+                    int end = start + text.length();
+                    return new Range(new Position(i, start), new Position(i, end));
+                }
+            }
+        }
+        return null;
     }
 
     private static List<String> splitContentIntoLines(String content) {

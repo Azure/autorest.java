@@ -5,10 +5,10 @@ import com.sun.jna.Platform;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
-public class JDTLanguageServer {
+public class EclipseLanguageServerFacade {
     private Process server;
 
-    public JDTLanguageServer(String workspaceDir, int port) {
+    public EclipseLanguageServerFacade(String workspaceDir, int port) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             if (server != null && server.isAlive()) {
                 server.destroy();

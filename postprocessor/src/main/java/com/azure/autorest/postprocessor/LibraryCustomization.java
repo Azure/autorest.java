@@ -1,24 +1,15 @@
 package com.azure.autorest.postprocessor;
 
-import com.azure.autorest.postprocessor.ls.JDTLanguageClient;
-import com.azure.autorest.postprocessor.ls.models.FileChangeType;
-import com.azure.autorest.postprocessor.ls.models.FileEvent;
-import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
-import com.azure.autorest.postprocessor.ls.models.TextEdit;
-import com.azure.autorest.postprocessor.ls.models.WorkspaceEdit;
+import com.azure.autorest.postprocessor.ls.EclipseLanguageClient;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class LibraryCustomization {
     private Map<String, String> files;
-    private JDTLanguageClient languageClient;
+    private EclipseLanguageClient languageClient;
     private Editor editor;
 
-    LibraryCustomization(Editor editor, JDTLanguageClient languageClient) {
+    LibraryCustomization(Editor editor, EclipseLanguageClient languageClient) {
         this.editor = editor;
         this.languageClient = languageClient;
         this.files = editor.getContents();

@@ -2,6 +2,10 @@ package com.azure.autorest.postprocessor.ls;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.postprocessor.ls.models.ClientCapabilities;
+import com.azure.autorest.postprocessor.ls.models.CodeActionClientCapabilities;
+import com.azure.autorest.postprocessor.ls.models.CodeActionKind;
+import com.azure.autorest.postprocessor.ls.models.CodeActionKindValueSet;
+import com.azure.autorest.postprocessor.ls.models.CodeActionLiteralSupport;
 import com.azure.autorest.postprocessor.ls.models.DidChangeTextDocumentParams;
 import com.azure.autorest.postprocessor.ls.models.DidChangeWatchedFilesParams;
 import com.azure.autorest.postprocessor.ls.models.DidCloseTextDocumentParams;
@@ -11,12 +15,14 @@ import com.azure.autorest.postprocessor.ls.models.DocumentSymbolParams;
 import com.azure.autorest.postprocessor.ls.models.FileEvent;
 import com.azure.autorest.postprocessor.ls.models.InitializeParams;
 import com.azure.autorest.postprocessor.ls.models.InitializeResponse;
+import com.azure.autorest.postprocessor.ls.models.JavaCodeActionKind;
 import com.azure.autorest.postprocessor.ls.models.Position;
 import com.azure.autorest.postprocessor.ls.models.RenameParams;
 import com.azure.autorest.postprocessor.ls.models.ServerCapabilities;
 import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
 import com.azure.autorest.postprocessor.ls.models.SymbolKind;
 import com.azure.autorest.postprocessor.ls.models.SymbolKindCapabilities;
+import com.azure.autorest.postprocessor.ls.models.TextDocumentClientCapabilities;
 import com.azure.autorest.postprocessor.ls.models.TextDocumentContentChangeEvent;
 import com.azure.autorest.postprocessor.ls.models.TextDocumentIdentifier;
 import com.azure.autorest.postprocessor.ls.models.TextDocumentItem;
@@ -45,15 +51,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class JDTLanguageClient {
-    private final JDTLanguageServer server;
+public class EclipseLanguageClient {
+    private final EclipseLanguageServerFacade server;
     private final Connection connection;
     private final ServerSocket serverSocket;
     private final AtomicReference<Socket> clientSocket = new AtomicReference<>();
     private final URI workspaceDir;
     private ServerCapabilities serverCapabilities;
 
-    public JDTLanguageClient(String workspaceDir) {
+    public EclipseLanguageClient(String workspaceDir) {
         this.workspaceDir = new File(workspaceDir).toURI();
         try {
             serverSocket = new ServerSocket(0);
@@ -67,7 +73,7 @@ public class JDTLanguageClient {
             });
             thread.start();
             Thread.sleep(1000);
-            this.server = new JDTLanguageServer(workspaceDir, port);
+            this.server = new EclipseLanguageServerFacade(workspaceDir, port);
             thread.join();
             connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
         } catch (Exception e) {
@@ -98,6 +104,17 @@ public class JDTLanguageClient {
         initializeParams.getCapabilities().getWorkspace().getSymbol().getSymbolKind().setValueSet(Arrays.asList(SymbolKind.values()));
         initializeParams.getCapabilities().getWorkspace().getSymbol().setDynamicRegistration(false);
         initializeParams.getCapabilities().getWorkspace().setWorkspaceFolders(true);
+        initializeParams.getCapabilities().setTextDocument(new TextDocumentClientCapabilities());
+        initializeParams.getCapabilities().getTextDocument().setCodeAction(new CodeActionClientCapabilities());
+        initializeParams.getCapabilities().getTextDocument().getCodeAction().setCodeActionLiteralSupport(new CodeActionLiteralSupport());
+        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().setCodeActionKind(new CodeActionKindValueSet());
+        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().setValueSet(new ArrayList<>());
+        for (CodeActionKind kind : CodeActionKind.values()) {
+            initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(kind.toString());
+        }
+        for (JavaCodeActionKind kind : JavaCodeActionKind.values()) {
+            initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(kind.toString());
+        }
         InitializeResponse response = connection.requestWithObject(new ObjectMapper().constructType(InitializeResponse.class), "initialize", initializeParams);
         serverCapabilities = response.getCapabilities();
         connection.notifyWithObject("initialized", null);

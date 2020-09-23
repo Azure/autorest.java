@@ -1,6 +1,6 @@
 package com.azure.autorest.postprocessor;
 
-import com.azure.autorest.postprocessor.ls.JDTLanguageClient;
+import com.azure.autorest.postprocessor.ls.EclipseLanguageClient;
 import com.azure.autorest.postprocessor.ls.models.FileChangeType;
 import com.azure.autorest.postprocessor.ls.models.FileEvent;
 import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
@@ -15,11 +15,11 @@ import java.util.Optional;
 
 public class PackageCustomization {
     private final Map<String, String> files;
-    private final JDTLanguageClient languageClient;
+    private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final String packageName;
 
-    PackageCustomization(Editor editor, JDTLanguageClient languageClient, String packageName) {
+    PackageCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName) {
         this.editor = editor;
         this.languageClient = languageClient;
         this.files = editor.getContents();

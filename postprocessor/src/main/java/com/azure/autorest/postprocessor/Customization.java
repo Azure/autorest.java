@@ -1,6 +1,6 @@
 package com.azure.autorest.postprocessor;
 
-import com.azure.autorest.postprocessor.ls.JDTLanguageClient;
+import com.azure.autorest.postprocessor.ls.EclipseLanguageClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +28,9 @@ public abstract class Customization {
         }
 
         // Start language client
-        JDTLanguageClient languageClient = null;
+        EclipseLanguageClient languageClient = null;
         try {
-            languageClient = new JDTLanguageClient(tempDirWithPrefix.toString());
+            languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString());
             languageClient.initialize();
             customize(new LibraryCustomization(editor, languageClient));
             editor.removeFile("pom.xml");

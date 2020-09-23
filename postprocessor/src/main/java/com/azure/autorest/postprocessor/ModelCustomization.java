@@ -1,6 +1,6 @@
 package com.azure.autorest.postprocessor;
 
-import com.azure.autorest.postprocessor.ls.JDTLanguageClient;
+import com.azure.autorest.postprocessor.ls.EclipseLanguageClient;
 import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
 import com.azure.autorest.postprocessor.ls.models.SymbolKind;
 import com.azure.autorest.postprocessor.ls.models.WorkspaceEdit;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ModelCustomization extends ClassCustomization{
 
-    ModelCustomization(Editor editor, JDTLanguageClient languageClient, String packageName, String className) {
+    ModelCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className) {
         super(editor, languageClient, packageName, className);
     }
 

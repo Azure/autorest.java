@@ -68,4 +68,4 @@ fluent-tests/src/main/java/com/azure/mgmttest/**
 fluent-tests/src/main/java/com/azure/mgmtlitetest/**
 
 # language server
-postprocessor\jdt-language-server
+postprocessor/jdt-language-server
