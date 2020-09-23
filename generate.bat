@@ -35,5 +35,5 @@ call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/multiple-inheritance.json --namespace=fixtures.multipleinheritance
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/report.json --namespace=fixtures.report --payload-flattening-threshold=1
 
-call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
-call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1 --required-parameter-client-methods
+call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1 --required-parameter-client-methods

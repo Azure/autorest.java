@@ -249,6 +249,7 @@ public class Connection {
         {
             executorService.submit(() -> {
                 ObjectNode jobject = (ObjectNode) content;
+                System.err.println("receive: " + jobject.toPrettyString());
                 try
                 {
                     Iterator<Map.Entry<String, JsonNode>> fieldIterator = jobject.fields();
@@ -256,7 +257,10 @@ public class Connection {
                         Map.Entry<String, JsonNode> field = fieldIterator.next();
                         if (field.getKey().equals("method")) {
                             String method = field.getValue().asText();
-                            int id = jobject.get("id").asInt(-1);
+                            int id = -1;
+                            if (jobject.has("id")) {
+                                id = jobject.get("id").asInt(-1);
+                            }
                             // this is a method call.
                             // pass it to the service that is listening...
                             if (_dispatch.containsKey(method))
@@ -330,7 +334,7 @@ public class Connection {
     private final Semaphore streamReady = new Semaphore(1);
 
     private void send(String text) {
-//        System.err.println("JSON RPC send: " + text);
+        System.err.println("JSON RPC send: " + text);
         try {
             synchronized (streamReady) {
                 streamReady.acquire();
@@ -400,11 +404,8 @@ public class Connection {
         JsonNode node = new ObjectNode(mapper.getNodeFactory())
                 .put("jsonrpc", "2.0")
                 .put("method", methodName);
-        if (parameter == null || parameter instanceof String || ProtocolUtils.isPrimitive(parameter)) {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory()));
-        } else {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory(),
-                    Collections.singletonList(mapper.convertValue(parameter, JsonNode.class))));
+        if (parameter != null) {
+            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
     }
@@ -430,7 +431,7 @@ public class Connection {
         }
     }
 
-    public <T> T RequestWithObject(JavaType type, String methodName, Object parameter)
+    public <T> T requestWithObject(JavaType type, String methodName, Object parameter)
     {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
@@ -439,11 +440,8 @@ public class Connection {
                 .put("jsonrpc", "2.0")
                 .put("method", methodName)
                 .put("id", id);
-        if (parameter == null || parameter instanceof String || ProtocolUtils.isPrimitive(parameter)) {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory()));
-        } else {
-            node = ((ObjectNode) node).set("params", new ArrayNode(mapper.getNodeFactory(),
-                    Collections.singletonList(mapper.convertValue(parameter, JsonNode.class))));
+        if (parameter != null) {
+            node = ((ObjectNode) node).set("params", mapper.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
         try {
