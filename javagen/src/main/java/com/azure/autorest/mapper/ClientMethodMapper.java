@@ -490,6 +490,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     /**
      * Extension for configuration on method visibility.
+     * <p>
+     * ClientMethodTemplate.writeMethod (and whether it is called) would also decide the visibility in generated code.
+     *
      * @param methodType the type of the client method.
      * @param hasContextParameter whether the method has Context parameter.
      * @return method visibility, null if do not generate.
