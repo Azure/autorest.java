@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -64,6 +65,8 @@ public class FluentCreateMethod extends FluentMethod {
                                     return p.getName();
                                 } else if (fluentResourceModel.getInnerModel().getName().equals(p.getClientType().toString())) {
                                     return ModelNaming.MODEL_PROPERTY_INNER;
+                                } else if (ClassType.Context == p.getClientType()) {
+                                    return "Context.NONE";
                                 } else {
                                     return resourceLocalVariables.getLocalVariableByMethodParameter(p).getName();
                                 }
@@ -77,7 +80,7 @@ public class FluentCreateMethod extends FluentMethod {
                             ModelNaming.MODEL_PROPERTY_INNER,
                             ModelNaming.MODEL_PROPERTY_MANAGER,
                             collectionReferenceMethodName,
-                            ModelNaming.METHOD_INNER,
+                            ModelNaming.METHOD_SERVICE_CLIENT,
                             methodInvocation,
                             afterInvocationCode);
                     block.methodReturn("this");

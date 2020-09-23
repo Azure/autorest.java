@@ -114,7 +114,11 @@ public class ClientModelUtil {
         JavaSettings settings = JavaSettings.getInstance();
         String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
         if (settings.isFluent()) {
-            subpackage = settings.getFluentSubpackage();
+            if (settings.shouldGenerateSyncAsyncClients()) {
+                subpackage = settings.getImplementationSubpackage();
+            } else {
+                subpackage = settings.getFluentSubpackage();
+            }
         }
         if (settings.isCustomType(serviceClientClassName)) {
             subpackage = settings.getCustomTypesSubpackage();
