@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -151,8 +152,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             if (compositeType.getLanguage().getDefault() == null
-                    || compositeType.getLanguage().getDefault().getDescription() == null
-                    || compositeType.getLanguage().getDefault().getDescription().isEmpty()) {
+                    || CoreUtils.isNullOrEmpty(compositeType.getLanguage().getDefault().getDescription())) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
                 builder.description(compositeType.getLanguage().getDefault().getDescription());
