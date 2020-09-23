@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The Product model. */
+/** The product documentation. */
 @Fluent
 public final class Product {
     /*

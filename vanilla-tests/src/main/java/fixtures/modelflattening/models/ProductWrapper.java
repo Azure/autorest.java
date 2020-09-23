@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ProductWrapper model. */
+/** The wrapped produc. */
 @JsonFlatten
 @Fluent
 public class ProductWrapper {
