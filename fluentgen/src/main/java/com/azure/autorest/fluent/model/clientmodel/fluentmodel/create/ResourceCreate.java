@@ -150,10 +150,7 @@ public class ResourceCreate extends ResourceOperation  {
 
         // create method
         definitionStageCreate.getMethods().add(this.getCreateMethod(false));
-        FluentMethod createMethodWithContext = this.getCreateMethod(true);
-        if (createMethodWithContext != null) {
-            definitionStageCreate.getMethods().add(createMethodWithContext);
-        }
+        definitionStageCreate.getMethods().add(this.getCreateMethod(true));
 
         if (definitionStageParent != null) {
             // existing parent method after all stages is connected.
@@ -255,17 +252,16 @@ public class ResourceCreate extends ResourceOperation  {
 
     private FluentMethod getCreateMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
-        Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
+        Optional<FluentCollectionMethod> methodOpt = this.findMethod(true, parameters);
         if (methodOpt.isPresent()) {
+            if (!hasContextParameter) {
+                parameters.clear();
+            }
             return new FluentCreateMethod(resourceModel, FluentMethodType.CREATE,
                     parameters, this.getResourceLocalVariables(),
                     resourceCollection, methodOpt.get());
         } else {
-            if (hasContextParameter) {
-                return null;
-            } else {
-                throw new IllegalStateException("create method not found on model " + resourceModel.getName());
-            }
+            throw new IllegalStateException("create method not found on model " + resourceModel.getName());
         }
     }
 

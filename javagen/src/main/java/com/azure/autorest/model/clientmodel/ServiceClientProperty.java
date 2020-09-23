@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.model.javamodel.JavaVisibility;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -37,6 +39,8 @@ public class ServiceClientProperty {
      */
     private String defaultValueExpression;
 
+    private JavaVisibility methodVisibility = JavaVisibility.Public;
+
     /**
      * Create a new ServiceClientProperty with the provided properties.
      * @param description The description of this property.
@@ -47,6 +51,11 @@ public class ServiceClientProperty {
      */
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression) {
         this(description, type, name, name, readOnly, defaultValueExpression);
+    }
+
+    public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression, JavaVisibility methodVisibility) {
+        this(description, type, name, name, readOnly, defaultValueExpression);
+        this.methodVisibility = methodVisibility;
     }
 
     public ServiceClientProperty(String description, IType type, String name, String accessorMethodSuffix, boolean readOnly,
@@ -81,6 +90,10 @@ public class ServiceClientProperty {
 
     public final String getDefaultValueExpression() {
         return defaultValueExpression;
+    }
+
+    public JavaVisibility getMethodVisibility() {
+        return methodVisibility;
     }
 
     /**

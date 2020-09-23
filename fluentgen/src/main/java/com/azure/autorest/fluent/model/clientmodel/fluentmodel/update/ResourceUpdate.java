@@ -114,10 +114,7 @@ public class ResourceUpdate extends ResourceOperation {
             applyMethods = new ArrayList<>();
 
             applyMethods.add(this.getApplyMethod(false));
-            FluentMethod updateMethodWithContext = this.getApplyMethod(true);
-            if (updateMethodWithContext != null) {
-                applyMethods.add(updateMethodWithContext);
-            }
+            applyMethods.add(this.getApplyMethod(true));
         }
         return applyMethods;
     }
@@ -131,17 +128,16 @@ public class ResourceUpdate extends ResourceOperation {
 
     private FluentMethod getApplyMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
-        Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
+        Optional<FluentCollectionMethod> methodOpt = this.findMethod(true, parameters);
         if (methodOpt.isPresent()) {
+            if (!hasContextParameter) {
+                parameters.clear();
+            }
             return new FluentApplyMethod(resourceModel, FluentMethodType.APPLY,
                     parameters, this.getResourceLocalVariables(),
                     resourceCollection, methodOpt.get());
         } else {
-            if (hasContextParameter) {
-                return null;
-            } else {
-                throw new IllegalStateException("update method not found on model " + resourceModel.getName());
-            }
+            throw new IllegalStateException("update method not found on model " + resourceModel.getName());
         }
     }
 
