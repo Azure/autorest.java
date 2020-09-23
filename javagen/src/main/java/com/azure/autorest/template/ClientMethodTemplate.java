@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -19,14 +20,19 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -269,6 +275,18 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
+    protected static void writeMethod(JavaType typeBlock,
+                          JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
+        if (visibility == JavaVisibility.Public) {
+            typeBlock.publicMethod(methodSignature, method);
+        } else {
+            if (typeBlock instanceof JavaClass) {
+                JavaClass classBlock = (JavaClass) typeBlock;
+                classBlock.method(visibility, null, methodSignature, method);
+            }
+        }
+    }
+
     public final void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
@@ -379,13 +397,19 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case SimpleSync:
+            case SimpleSyncRestResponse:
             case LongRunningSync:
+                String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+                if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
+                    asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+                }
+                String effectiveAsyncMethodName = asyncMethodName;
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                         function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                                clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                                effectiveAsyncMethodName, clientMethod.getArgumentList());
                         function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                             javaBlock.annotation("Override");
                             javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -397,7 +421,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         IType returnType = clientMethod.getReturnValue().getType();
                         if (returnType instanceof PrimitiveType) {
                             function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                                    clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                                    effectiveAsyncMethodName, clientMethod.getArgumentList());
                             function.ifBlock("value != null", ifAction -> {
                                 ifAction.methodReturn("value");
                             }).elseBlock(elseAction -> {
@@ -408,10 +432,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                 }
                             });
                         } else {
-                            function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                            function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
                         }
                     } else {
-                        function.line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
                     }
                 });
                 break;
@@ -422,7 +446,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), (function -> {
+                writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
                     function.indent((() -> {
@@ -502,7 +526,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -538,7 +562,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 });
             });
         } else {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
@@ -578,7 +602,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             ApplyParameterTransformations(function, clientMethod, settings);

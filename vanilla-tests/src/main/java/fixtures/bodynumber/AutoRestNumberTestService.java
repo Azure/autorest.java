@@ -58,7 +58,11 @@ public final class AutoRestNumberTestService {
         return this.numbers;
     }
 
-    /** Initializes an instance of AutoRestNumberTestService client. */
+    /**
+     * Initializes an instance of AutoRestNumberTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestNumberTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestNumberTestService {
      * Initializes an instance of AutoRestNumberTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestNumberTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestNumberTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestNumberTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

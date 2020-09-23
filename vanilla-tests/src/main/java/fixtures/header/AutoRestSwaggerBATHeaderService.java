@@ -58,7 +58,11 @@ public final class AutoRestSwaggerBATHeaderService {
         return this.headers;
     }
 
-    /** Initializes an instance of AutoRestSwaggerBATHeaderService client. */
+    /**
+     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestSwaggerBATHeaderService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestSwaggerBATHeaderService {
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestSwaggerBATHeaderService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestSwaggerBATHeaderService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestSwaggerBATHeaderService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

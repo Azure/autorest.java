@@ -11,8 +11,9 @@ RMDIR /S /Q "src/main/java/com/azure/mgmttest"
 RMDIR /S /Q "src/main/java/com/azure/mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.0.6282
-SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=fluent --client-side-validations --client-logger
-SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --implementation-subpackage=implementation --client-side-validations --client-logger --generate-sync-async-clients
+SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
+SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ %MODELERFOUR_ARGUMENTS% --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --client-side-validations --client-logger
+SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ %MODELERFOUR_ARGUMENTS% --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --client-side-validations --client-logger --generate-sync-async-clients
 
 REM fluent premium
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources
@@ -30,4 +31,6 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --payload-fla
 CALL autorest --version=%AUTOREST_CORE_VERSION% %COMMON_ARGUMENTS% --payload-flattening-threshold=1 --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization
 
 REM fluent lite
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --payload-flattening-threshold=1 https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/readme.md --java.namespace=com.azure.mgmtlitetest.storage
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --payload-flattening-threshold=0 https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/readme.md --tag=package-resources-2020-06 --java.namespace=com.azure.mgmtlitetest.resources
+
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --payload-flattening-threshold=0 https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/readme.md --tag=package-2019-06 --java.namespace=com.azure.mgmtlitetest.storage

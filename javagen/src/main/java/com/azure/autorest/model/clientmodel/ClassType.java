@@ -50,6 +50,14 @@ public class ClassType implements IType {
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
+    public static final ClassType HttpClient = new ClassType.Builder().knownClass(com.azure.core.http.HttpClient.class).build();
+    public static final ClassType HttpPipelinePolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpPipelinePolicy.class).build();
+    public static final ClassType HttpLogOptions = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpLogOptions.class).build();
+    public static final ClassType Configuration = new ClassType.Builder().knownClass(com.azure.core.util.Configuration.class).build();
+    public static final ClassType ServiceVersion = new ClassType.Builder().knownClass(com.azure.core.util.ServiceVersion.class).build();
+    public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
+    public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
+
 
     private final String packageName;
     private final String name;

@@ -5,9 +5,13 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -39,18 +43,30 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
         model.addImportsTo(imports, true);
         javaFile.declareImport(imports);
 
-        javaFile.publicFinalClass(String.format("%1$s implements %2$s", model.getImplementationType().getName(), model.getInterfaceType().getName()), classBlock -> {
+        List<String> implementInterfaces = new ArrayList<>();
+        implementInterfaces.add(model.getInterfaceType().getName());
+        if (model.getResourceCreate() != null) {
+            implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_DEFINITION));
+        }
+        if (model.getResourceUpdate() != null) {
+            implementInterfaces.add(String.format("%1$s.%2$s", model.getInterfaceType().getName(), ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE));
+        }
+
+        javaFile.publicFinalClass(String.format("%1$s implements %2$s", model.getImplementationType().getName(), String.join(", ", implementInterfaces)), classBlock -> {
             // variable for inner model
-            classBlock.privateFinalMemberVariable(model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER);
+            classBlock.privateMemberVariable(model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER);
 
             // variable for manager
             classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
 
-            // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
-                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
-                methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
-            });
+            // if resource is updatable, use the constructor from resourceUpdate
+            if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null) {
+                // constructor
+                classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
+                    methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
+                    methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
+                });
+            }
 
             // method for properties
             methodTemplates.forEach(m -> m.writeMethod(classBlock));
@@ -64,6 +80,19 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
+
+            // methods for fluent interfaces
+            if (model.getCategory() != ModelCategory.IMMUTABLE) {
+                ResourceImplementation resourceImplementation = model.getResourceImplementation();
+                List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();
+                List<LocalVariable> localVariables = resourceImplementation.getLocalVariables();
+
+                localVariables.forEach(p -> classBlock.privateMemberVariable(p.getVariableType().toString(), p.getName()));
+
+                fluentMethods.forEach(m -> {
+                    m.getMethodTemplate().writeMethod(classBlock);
+                });
+            }
         });
     }
 }

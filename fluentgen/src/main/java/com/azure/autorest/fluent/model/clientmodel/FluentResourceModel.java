@@ -7,7 +7,9 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -19,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 // Fluent resource instance. E.g. StorageAccount.
 // Also include some simple wrapper class.
@@ -40,8 +40,9 @@ public class FluentResourceModel {
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
-    private ModelCategory category = ModelCategory.WRAPPER;
+    private ModelCategory category = ModelCategory.IMMUTABLE;
     private ResourceCreate resourceCreate;
+    private ResourceUpdate resourceUpdate;
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -80,6 +81,10 @@ public class FluentResourceModel {
         for (List<FluentModelProperty> properties1 : propertiesFromTypeAndParents) {
             properties.addAll(properties1);
         }
+    }
+
+    public String getName() {
+        return interfaceType.getName();
     }
 
     public ClientModel getInnerModel() {
@@ -123,12 +128,24 @@ public class FluentResourceModel {
         this.category = category;
     }
 
+    public ResourceImplementation getResourceImplementation() {
+        return new ResourceImplementation(this);
+    }
+
     public ResourceCreate getResourceCreate() {
         return resourceCreate;
     }
 
     public void setResourceCreate(ResourceCreate resourceCreate) {
         this.resourceCreate = resourceCreate;
+    }
+
+    public ResourceUpdate getResourceUpdate() {
+        return resourceUpdate;
+    }
+
+    public void setResourceUpdate(ResourceUpdate resourceUpdate) {
+        this.resourceUpdate = resourceUpdate;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
@@ -142,6 +159,9 @@ public class FluentResourceModel {
 
         if (resourceCreate != null) {
             resourceCreate.addImportsTo(imports, includeImplementationImports);
+        }
+        if (resourceUpdate != null) {
+            resourceUpdate.addImportsTo(imports, includeImplementationImports);
         }
     }
 }

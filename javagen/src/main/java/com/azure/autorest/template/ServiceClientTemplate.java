@@ -186,6 +186,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     for (ClientMethodParameter parameter : constructor.getParameters()) {
                         comment.param(parameter.getName(), parameter.getDescription());
                     }
+                    for (ServiceClientProperty property : serviceClient.getProperties().stream()
+                            .filter(p -> !p.isReadOnly())
+                            .collect(Collectors.toList())) {
+                        comment.param(property.getName(), property.getDescription());
+                    }
                 });
 
                 // service client properties in constructor parameters

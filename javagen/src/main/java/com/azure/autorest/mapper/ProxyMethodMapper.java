@@ -121,7 +121,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // check for mediaTypes first as that is more specific than the knownMediaType
             // if there are multiple, we'll use the generic type
             if (request.getProtocol().getHttp().getMediaTypes() != null
-                && !request.getProtocol().getHttp().getMediaTypes().isEmpty()
                 && request.getProtocol().getHttp().getMediaTypes().size() == 1) {
                 requestContentType = request.getProtocol().getHttp().getMediaTypes().get(0);
             } else if (request.getProtocol().getHttp().getKnownMediaType() != null) {

@@ -106,7 +106,14 @@ public final class AutoRestRequiredOptionalTestService {
         return this.explicits;
     }
 
-    /** Initializes an instance of AutoRestRequiredOptionalTestService client. */
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     *
+     * @param requiredGlobalPath number of items to skip.
+     * @param requiredGlobalQuery number of items to skip.
+     * @param optionalGlobalQuery number of items to skip.
+     * @param host server parameter.
+     */
     AutoRestRequiredOptionalTestService(
             String requiredGlobalPath, String requiredGlobalQuery, int optionalGlobalQuery, String host) {
         this(
@@ -124,6 +131,10 @@ public final class AutoRestRequiredOptionalTestService {
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param requiredGlobalPath number of items to skip.
+     * @param requiredGlobalQuery number of items to skip.
+     * @param optionalGlobalQuery number of items to skip.
+     * @param host server parameter.
      */
     AutoRestRequiredOptionalTestService(
             HttpPipeline httpPipeline,
@@ -145,6 +156,10 @@ public final class AutoRestRequiredOptionalTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param requiredGlobalPath number of items to skip.
+     * @param requiredGlobalQuery number of items to skip.
+     * @param optionalGlobalQuery number of items to skip.
+     * @param host server parameter.
      */
     AutoRestRequiredOptionalTestService(
             HttpPipeline httpPipeline,

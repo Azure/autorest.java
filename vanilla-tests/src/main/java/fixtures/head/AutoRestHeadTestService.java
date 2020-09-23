@@ -58,7 +58,11 @@ public final class AutoRestHeadTestService {
         return this.httpSuccess;
     }
 
-    /** Initializes an instance of AutoRestHeadTestService client. */
+    /**
+     * Initializes an instance of AutoRestHeadTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestHeadTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestHeadTestService {
      * Initializes an instance of AutoRestHeadTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestHeadTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestHeadTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestHeadTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;

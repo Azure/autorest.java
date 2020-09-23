@@ -6,13 +6,15 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,7 +33,11 @@ public class FluentResourceCollection {
     private final ClassType implementationType;
 
     // API methods
-    private final List<FluentCollectionMethod> methods = new ArrayList<>();;
+    private final List<FluentCollectionMethod> methods = new ArrayList<>();
+
+    // resource models
+    private final List<ResourceCreate> resourceCreates = new ArrayList<>();
+    private final List<ResourceUpdate> resourceUpdates = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -48,14 +54,15 @@ public class FluentResourceCollection {
                 .build();
 
         this.innerClientType = new ClassType.Builder()
-                .packageName(settings.getPackage())
+                .packageName(settings.getPackage(settings.getFluentSubpackage()))
                 .name(groupClient.getClassBaseName() + "Client")
                 .build();
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()
                 .filter(m -> m.getType() == ClientMethodType.SimpleSync
                         || m.getType() == ClientMethodType.PagingSync
-                        || m.getType() == ClientMethodType.LongRunningSync)
+                        || m.getType() == ClientMethodType.LongRunningSync
+                        || m.getType() == ClientMethodType.SimpleSyncRestResponse)
                 .map(FluentCollectionMethod::new)
                 .collect(Collectors.toList()));
     }
@@ -72,8 +79,19 @@ public class FluentResourceCollection {
         return implementationType;
     }
 
-    public Collection<FluentCollectionMethod> getMethods() {
-        return methods;
+    public List<FluentCollectionMethod> getMethodsForTemplate() {
+        List<FluentCollectionMethod> fluentMethods = new ArrayList<>(methods);
+
+        Set<FluentCollectionMethod> excludeMethods = new HashSet<>();
+        excludeMethods.addAll(this.getResourceCreates().stream().flatMap(rc -> rc.getMethodReferences().stream()).collect(Collectors.toSet()));
+        excludeMethods.addAll(this.getResourceUpdates().stream().flatMap(ru -> ru.getMethodReferences().stream()).collect(Collectors.toSet()));
+        fluentMethods.removeAll(excludeMethods);
+
+        return fluentMethods;
+    }
+
+    public List<FluentCollectionMethod> getMethods() {
+        return this.methods;
     }
 
     public String getDescription() {
@@ -87,6 +105,14 @@ public class FluentResourceCollection {
     // method signature for inner client
     public String getInnerMethodSignature() {
         return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+    }
+
+    public List<ResourceCreate> getResourceCreates() {
+        return resourceCreates;
+    }
+
+    public List<ResourceUpdate> getResourceUpdates() {
+        return resourceUpdates;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {

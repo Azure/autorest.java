@@ -6,20 +6,45 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FluentUtils {
 
+    private static final Logger logger = LoggerFactory.getLogger(FluentUtils.class);
+
     private FluentUtils() {
+    }
+
+    public static void log(String format) {
+        logger.info(format);
+    }
+
+    public static void log(String format, Object... arguments) {
+        logger.info(format, arguments);
     }
 
     public static boolean isInnerClassType(ClassType classType) {
@@ -28,7 +53,7 @@ public class FluentUtils {
 
     public static boolean isInnerClassType(String packageName, String name) {
         JavaSettings settings = JavaSettings.getInstance();
-        String innerPackageName = settings.getPackage(settings.getModelsSubpackage(), "inner");
+        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), "models");
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 
@@ -99,6 +124,9 @@ public class FluentUtils {
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
                 IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
                 wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.PagedIterable(wrapperItemType);
+            } else if (Response.class.getSimpleName().equals(type.getName())) {
+                IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
+                wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.Response(wrapperItemType);
             }
         }
         return wrapperType;
@@ -118,5 +146,39 @@ public class FluentUtils {
         } else {
             return name;
         }
+    }
+
+    public static boolean isContextParameter(ClientMethodParameter parameter) {
+        return ClassType.Context.getName().equals(parameter.getClientType().toString());
+    }
+
+    public static ClientModel getClientModel(String name) {
+        ClientModel clientModel = null;
+        for (ClientModel model : FluentStatic.getClient().getModels()) {
+            if (name.equals(model.getName())) {
+                clientModel = model;
+                break;
+            }
+        }
+        if (clientModel == null) {
+            Optional<ClientModel> modelOpt = ResourceClientModel.getResourceClientModel(name);
+            if (modelOpt.isPresent()) {
+                clientModel = modelOpt.get();
+            }
+        }
+        return clientModel;
+    }
+
+    public static String loadTextFromResource(String filename) {
+        String text = null;
+        try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
+            if (inputStream != null) {
+                text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                        .lines()
+                        .collect(Collectors.joining("\n"));
+            }
+        } catch (IOException e) {
+        }
+        return text;
     }
 }

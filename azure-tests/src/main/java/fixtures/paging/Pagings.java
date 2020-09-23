@@ -279,7 +279,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -329,7 +329,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -378,7 +378,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -431,7 +431,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(
+    private Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(
             String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -510,7 +510,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter) {
+    private Mono<PagedResponse<Product>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -571,7 +571,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
+    private Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -601,7 +601,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(
+    private Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(
             String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -680,7 +680,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(
+    private Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(
             PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -757,7 +757,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -811,7 +811,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -864,7 +864,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -915,7 +915,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -966,7 +966,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1020,7 +1020,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(
+    private Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(
             String apiVersion, String tenant) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -1089,7 +1089,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
+    private Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
             CustomParameterGroup customParameterGroup) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -1161,7 +1161,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(
+    private Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(
             String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -1241,7 +1241,8 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
+    private Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(
+            String apiVersion, String tenant, String nextLink) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1279,7 +1280,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(
+    private Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(
             String nextLink, CustomParameterGroup customParameterGroup) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -1319,7 +1320,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync() {
+    private Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1373,7 +1374,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1399,7 +1400,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1425,7 +1426,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1451,7 +1452,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1477,7 +1478,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1503,7 +1504,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1529,7 +1530,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1555,7 +1556,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1581,7 +1582,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1607,7 +1608,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1633,7 +1634,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1659,7 +1660,7 @@ public final class Pagings {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
+    private Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
             String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
