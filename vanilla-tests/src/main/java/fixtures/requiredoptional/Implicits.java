@@ -179,6 +179,19 @@ public final class Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalQueryAsync() {
+        final String queryParameter = null;
+        return putOptionalQueryWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -186,6 +199,18 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalQuery(String queryParameter) {
+        putOptionalQueryAsync(queryParameter).block();
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalQuery() {
+        final String queryParameter = null;
         putOptionalQueryAsync(queryParameter).block();
     }
 
@@ -225,6 +250,19 @@ public final class Implicits {
     /**
      * Test implicitly optional header parameter.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalHeaderAsync() {
+        final String queryParameter = null;
+        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test implicitly optional header parameter.
+     *
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -232,6 +270,18 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalHeader(String queryParameter) {
+        putOptionalHeaderAsync(queryParameter).block();
+    }
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalHeader() {
+        final String queryParameter = null;
         putOptionalHeaderAsync(queryParameter).block();
     }
 
@@ -270,6 +320,19 @@ public final class Implicits {
     /**
      * Test implicitly optional body parameter.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBodyAsync() {
+        final String bodyParameter = null;
+        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -277,6 +340,18 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBody(String bodyParameter) {
+        putOptionalBodyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalBody() {
+        final String bodyParameter = null;
         putOptionalBodyAsync(bodyParameter).block();
     }
 

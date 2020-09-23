@@ -3,7 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The FlattenParameterGroup model. */
+/** Parameter group. */
 @Fluent
 public final class FlattenParameterGroup {
     /*

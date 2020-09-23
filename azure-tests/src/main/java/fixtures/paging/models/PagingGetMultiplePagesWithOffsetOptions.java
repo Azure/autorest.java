@@ -3,7 +3,7 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The PagingGetMultiplePagesWithOffsetOptions model. */
+/** Parameter group. */
 @Fluent
 public final class PagingGetMultiplePagesWithOffsetOptions {
     /*

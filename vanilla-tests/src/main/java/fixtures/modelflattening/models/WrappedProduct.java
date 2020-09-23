@@ -3,7 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The WrappedProduct model. */
+/** The wrapped produc. */
 @Fluent
 public final class WrappedProduct {
     /*

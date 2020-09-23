@@ -378,6 +378,19 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on query (query string should be absent).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getBooleanNullAsync() {
+        final Boolean boolQuery = null;
+        return getBooleanNullWithResponseAsync(boolQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -385,6 +398,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanNull(Boolean boolQuery) {
+        getBooleanNullAsync(boolQuery).block();
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getBooleanNull() {
+        final Boolean boolQuery = null;
         getBooleanNullAsync(boolQuery).block();
     }
 
@@ -504,6 +529,19 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null integer value (no query parameter).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getIntNullAsync() {
+        final Integer intQuery = null;
+        return getIntNullWithResponseAsync(intQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -511,6 +549,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNull(Integer intQuery) {
+        getIntNullAsync(intQuery).block();
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getIntNull() {
+        final Integer intQuery = null;
         getIntNullAsync(intQuery).block();
     }
 
@@ -630,6 +680,19 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'null 64 bit integer value (no query param in uri).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getLongNullAsync() {
+        final Long longQuery = null;
+        return getLongNullWithResponseAsync(longQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -637,6 +700,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getLongNull(Long longQuery) {
+        getLongNullAsync(longQuery).block();
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getLongNull() {
+        final Long longQuery = null;
         getLongNullAsync(longQuery).block();
     }
 
@@ -757,6 +832,19 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> floatNullAsync() {
+        final Float floatQuery = null;
+        return floatNullWithResponseAsync(floatQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -764,6 +852,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatNull(Float floatQuery) {
+        floatNullAsync(floatQuery).block();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void floatNull() {
+        final Float floatQuery = null;
         floatNullAsync(floatQuery).block();
     }
 
@@ -884,6 +984,19 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> doubleNullAsync() {
+        final Double doubleQuery = null;
+        return doubleNullWithResponseAsync(doubleQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -891,6 +1004,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleNull(Double doubleQuery) {
+        doubleNullAsync(doubleQuery).block();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void doubleNull() {
+        final Double doubleQuery = null;
         doubleNullAsync(doubleQuery).block();
     }
 
@@ -1049,6 +1174,19 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringNullAsync() {
+        final String stringQuery = null;
+        return stringNullWithResponseAsync(stringQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1056,6 +1194,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringNull(String stringQuery) {
+        stringNullAsync(stringQuery).block();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringNull() {
+        final String stringQuery = null;
         stringNullAsync(stringQuery).block();
     }
 
@@ -1094,6 +1244,19 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with query parameter 'green color'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> enumValidAsync() {
+        final UriColor enumQuery = null;
+        return enumValidWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
      * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1101,6 +1264,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumValid(UriColor enumQuery) {
+        enumValidAsync(enumQuery).block();
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void enumValid() {
+        final UriColor enumQuery = null;
         enumValidAsync(enumQuery).block();
     }
 
@@ -1139,6 +1314,19 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> enumNullAsync() {
+        final UriColor enumQuery = null;
+        return enumNullWithResponseAsync(enumQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1146,6 +1334,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumNull(UriColor enumQuery) {
+        enumNullAsync(enumQuery).block();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void enumNull() {
+        final UriColor enumQuery = null;
         enumNullAsync(enumQuery).block();
     }
 
@@ -1186,6 +1386,19 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> byteMultiByteAsync() {
+        final byte[] byteQuery = new byte[0];
+        return byteMultiByteWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1193,6 +1406,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte(byte[] byteQuery) {
+        byteMultiByteAsync(byteQuery).block();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void byteMultiByte() {
+        final byte[] byteQuery = new byte[0];
         byteMultiByteAsync(byteQuery).block();
     }
 
@@ -1273,6 +1498,19 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (no query parameters in uri).
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> byteNullAsync() {
+        final byte[] byteQuery = new byte[0];
+        return byteNullWithResponseAsync(byteQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1280,6 +1518,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull(byte[] byteQuery) {
+        byteNullAsync(byteQuery).block();
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void byteNull() {
+        final byte[] byteQuery = new byte[0];
         byteNullAsync(byteQuery).block();
     }
 
@@ -1358,6 +1608,19 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should result in no query parameters in uri.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateNullAsync() {
+        final LocalDate dateQuery = null;
+        return dateNullWithResponseAsync(dateQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1365,6 +1628,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateNull(LocalDate dateQuery) {
+        dateNullAsync(dateQuery).block();
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateNull() {
+        final LocalDate dateQuery = null;
         dateNullAsync(dateQuery).block();
     }
 
@@ -1443,6 +1718,19 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should result in no query parameters in uri.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateTimeNullAsync() {
+        final OffsetDateTime dateTimeQuery = null;
+        return dateTimeNullWithResponseAsync(dateTimeQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1450,6 +1738,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeNull(OffsetDateTime dateTimeQuery) {
+        dateTimeNullAsync(dateTimeQuery).block();
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateTimeNull() {
+        final OffsetDateTime dateTimeQuery = null;
         dateTimeNullAsync(dateTimeQuery).block();
     }
 
@@ -1493,6 +1793,20 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     *     format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvValidAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringCsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1500,6 +1814,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvValid(List<String> arrayQuery) {
+        arrayStringCsvValidAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringCsvValid() {
+        final List<String> arrayQuery = null;
         arrayStringCsvValidAsync(arrayQuery).block();
     }
 
@@ -1541,6 +1867,19 @@ public final class Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the csv-array format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvNullAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringCsvNullWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1548,6 +1887,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvNull(List<String> arrayQuery) {
+        arrayStringCsvNullAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringCsvNull() {
+        final List<String> arrayQuery = null;
         arrayStringCsvNullAsync(arrayQuery).block();
     }
 
@@ -1589,6 +1940,19 @@ public final class Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the csv-array format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvEmptyAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1596,6 +1960,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
+        arrayStringCsvEmptyAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringCsvEmpty() {
+        final List<String> arrayQuery = null;
         arrayStringCsvEmptyAsync(arrayQuery).block();
     }
 
@@ -1643,6 +2019,21 @@ public final class Queries {
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringNoCollectionFormatEmptyAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1650,6 +2041,19 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringNoCollectionFormatEmpty(List<String> arrayQuery) {
+        arrayStringNoCollectionFormatEmptyAsync(arrayQuery).block();
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringNoCollectionFormatEmpty() {
+        final List<String> arrayQuery = null;
         arrayStringNoCollectionFormatEmptyAsync(arrayQuery).block();
     }
 
@@ -1693,6 +2097,20 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     *     format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringSsvValidAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringSsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1700,6 +2118,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringSsvValid(List<String> arrayQuery) {
+        arrayStringSsvValidAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringSsvValid() {
+        final List<String> arrayQuery = null;
         arrayStringSsvValidAsync(arrayQuery).block();
     }
 
@@ -1743,6 +2173,20 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     *     format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringTsvValidAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringTsvValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1750,6 +2194,18 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringTsvValid(List<String> arrayQuery) {
+        arrayStringTsvValidAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringTsvValid() {
+        final List<String> arrayQuery = null;
         arrayStringTsvValidAsync(arrayQuery).block();
     }
 
@@ -1796,6 +2252,21 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     *     format.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringPipesValidAsync() {
+        final List<String> arrayQuery = null;
+        return arrayStringPipesValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format.
+     *
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1803,6 +2274,19 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringPipesValid(List<String> arrayQuery) {
+        arrayStringPipesValidAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringPipesValid() {
+        final List<String> arrayQuery = null;
         arrayStringPipesValidAsync(arrayQuery).block();
     }
 }

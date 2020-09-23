@@ -115,7 +115,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Gets %1$s", serviceClientProperty.getDescription()));
                     comment.methodReturns(String.format("the %1$s value.", serviceClientProperty.getName()));
                 });
-                classBlock.publicMethod(String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
+                classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
                 {
                     function.methodReturn(String.format("this.%1$s", serviceClientProperty.getName()));
                 });

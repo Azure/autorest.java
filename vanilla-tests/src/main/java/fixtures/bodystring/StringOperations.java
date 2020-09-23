@@ -202,6 +202,19 @@ public final class StringOperations {
     /**
      * Set string value null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNullAsync() {
+        final String stringBody = null;
+        return putNullWithResponseAsync(stringBody).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Set string value null.
+     *
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -209,6 +222,18 @@ public final class StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNull(String stringBody) {
+        putNullAsync(stringBody).block();
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putNull() {
+        final String stringBody = null;
         putNullAsync(stringBody).block();
     }
 

@@ -117,7 +117,7 @@ public class FluentResourceModel {
 
     // method signature for inner model
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER_MODEL));
     }
 
     public ModelCategory getCategory() {

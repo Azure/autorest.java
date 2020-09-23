@@ -70,7 +70,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
-            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false, false);
+            for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
+                if (!parameter.getIsRequired()) {
+                    IType parameterClientType = parameter.getClientType();
+                    String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
+                    function.line("final %s %s = %s;", parameterClientType, parameter.getName(), defaultValue == null ? "null" : defaultValue);
+                }
+            }
         }
     }
 
@@ -310,7 +316,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //                typeBlock.javadocComment(comment ->
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
@@ -323,7 +329,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         });
                     });
                 } else {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
@@ -446,7 +452,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), (function -> {
+                writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
                     function.indent((() -> {

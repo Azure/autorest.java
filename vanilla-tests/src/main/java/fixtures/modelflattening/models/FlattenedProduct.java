@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The FlattenedProduct model. */
+/** Flattened product. */
 @JsonFlatten
 @Fluent
 public class FlattenedProduct extends Resource {
