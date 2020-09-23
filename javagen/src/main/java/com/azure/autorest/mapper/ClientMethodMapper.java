@@ -180,7 +180,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);
+            final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
 
             builder.parameters(parameters)
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
@@ -553,9 +553,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .map(ClientModelProperty::getName).findAny().orElse(null);
     }
 
-    private static boolean hasNonRequiredParameters(Request request) {
-        return request.getParameters().stream().anyMatch(p -> p.getImplementation() == Parameter.ImplementationLocation.METHOD && !p.isRequired() && !(p.getSchema() instanceof ConstantSchema))
-                && request.getParameters().stream().noneMatch(Parameter::isFlattened);   // for now, ignore operation with flattened parameters
+    private static boolean hasNonRequiredParameters(List<ClientMethodParameter> parameters) {
+        return parameters.stream().anyMatch(p -> !p.getIsRequired());
     }
 
     private static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {

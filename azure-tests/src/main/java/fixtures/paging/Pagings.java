@@ -486,6 +486,22 @@ public final class Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getMultiplePagesAsync() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
+        return new PagedFlux<>(
+                () -> getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
      * @param clientRequestId The clientRequestId parameter.
      * @param pagingGetMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -496,6 +512,20 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePages(
             String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
+        return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePages() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
     }
 
@@ -656,6 +686,22 @@ public final class Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getOdataMultiplePagesAsync() {
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
+        return new PagedFlux<>(
+                () -> getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
      * @param clientRequestId The clientRequestId parameter.
      * @param pagingGetOdataMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -666,6 +712,20 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getOdataMultiplePages(
             String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
+        return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions));
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getOdataMultiplePages() {
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
         return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions));
     }
 
@@ -735,6 +795,26 @@ public final class Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
+            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
+        final String clientRequestId = null;
+        return new PagedFlux<>(
+                () ->
+                        getMultiplePagesWithOffsetSinglePageAsync(
+                                pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
      * @param clientRequestId The clientRequestId parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -744,6 +824,23 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesWithOffset(
             PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
+        return new PagedIterable<>(
+                getMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesWithOffset(
+            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
+        final String clientRequestId = null;
         return new PagedIterable<>(
                 getMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
     }
@@ -1216,6 +1313,22 @@ public final class Pagings {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getMultiplePagesLROAsync() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null;
+        return new PagedFlux<>(
+                () -> getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLroOptions),
+                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
      * @param clientRequestId The clientRequestId parameter.
      * @param pagingGetMultiplePagesLroOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1226,6 +1339,20 @@ public final class Pagings {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesLRO(
             String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
+        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions));
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesLRO() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null;
         return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions));
     }
 

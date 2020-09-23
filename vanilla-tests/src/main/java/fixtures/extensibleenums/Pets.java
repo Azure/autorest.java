@@ -160,6 +160,27 @@ public final class Pets {
     /**
      * add pet.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Pet> addPetAsync() {
+        final Pet petParam = null;
+        return addPetWithResponseAsync(petParam)
+                .flatMap(
+                        (Response<Pet> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * add pet.
+     *
      * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -168,6 +189,19 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet(Pet petParam) {
+        return addPetAsync(petParam).block();
+    }
+
+    /**
+     * add pet.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Pet addPet() {
+        final Pet petParam = null;
         return addPetAsync(petParam).block();
     }
 }

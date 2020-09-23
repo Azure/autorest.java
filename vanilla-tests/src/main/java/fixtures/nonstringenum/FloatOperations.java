@@ -99,6 +99,27 @@ public final class FloatOperations {
     /**
      * Put a float enum.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putAsync() {
+        final FloatEnum input = null;
+        return putWithResponseAsync(input)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Put a float enum.
+     *
      * @param input List of float enums.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -107,6 +128,19 @@ public final class FloatOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put(FloatEnum input) {
+        return putAsync(input).block();
+    }
+
+    /**
+     * Put a float enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String put() {
+        final FloatEnum input = null;
         return putAsync(input).block();
     }
 
