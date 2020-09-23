@@ -43,10 +43,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
-    private static JavaVisibility NOT_VISIBLE = JavaVisibility.Private;
-    private static JavaVisibility VISIBLE = JavaVisibility.Public;
-
-    private ClientMethodMapper() {
+    protected ClientMethodMapper() {
     }
 
     public static ClientMethodMapper getInstance() {
@@ -220,16 +217,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.PagingAsyncSinglePage)
                                 .isGroupedParameterRequired(false)
-                                .methodVisibility(NOT_VISIBLE)
+                                .methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, false))
                                 .build());
                     }
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, true));
                         addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                 ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
                                 new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
                                         asyncRestResponseReturnType),
                                 details);
                     }
+                    builder.methodVisibility(VISIBLE);
 
                     if (!isNextMethod) {
                         if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -241,7 +240,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingAsync)
                                     .isGroupedParameterRequired(false)
-                                    .methodVisibility(VISIBLE)
                                     .build());
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -262,7 +260,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             lroIntermediateType);
                                 }
 
-                                builder.methodVisibility(NOT_VISIBLE);
+                                builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true));
                                 addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
@@ -312,7 +310,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .build());
 
                 if (settings.isContextClientMethodParameter()) {
-                    builder.methodVisibility(NOT_VISIBLE);
+                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true));
                     addClientMethodWithContext(methods, builder, parameters);
                     builder.methodVisibility(VISIBLE);
 
@@ -330,7 +328,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(NOT_VISIBLE);
+                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true));
                         addClientMethodWithContext(methods, builder, parameters);
                         builder.methodVisibility(VISIBLE);
                     }
@@ -348,9 +346,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(NOT_VISIBLE);
                         addClientMethodWithContext(methods, builder, parameters);
-                        builder.methodVisibility(VISIBLE);
                     }
                 }
 
@@ -365,7 +361,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(NOT_VISIBLE);
+                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true));
                         addClientMethodWithContext(methods, builder, parameters);
                         builder.methodVisibility(VISIBLE);
                     }
@@ -416,7 +412,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 if (settings.isContextClientMethodParameter()) {
-                    builder.methodVisibility(NOT_VISIBLE);
+                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true));
                     addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
@@ -435,14 +431,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
-                    // by guideline, do not provide Context for async method
-                    /*
                     if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(NOT_VISIBLE);
-                        addClientMethodWithContext(methods, builder, parameters);
-                        builder.methodVisibility(VISIBLE);
+                        JavaVisibility visibility = methodVisibility(ClientMethodType.SimpleAsync, true);
+                        if (visibility != NOT_GENERATE) {
+                            builder.methodVisibility(visibility);
+                            addClientMethodWithContext(methods, builder, parameters);
+                            builder.methodVisibility(VISIBLE);
+                        }
                     }
-                     */
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
@@ -486,6 +482,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
         parsed.put(operation, methods);
         return methods;
+    }
+
+    protected static final JavaVisibility NOT_VISIBLE = JavaVisibility.Private;
+    protected static final JavaVisibility VISIBLE = JavaVisibility.Public;
+    protected static final JavaVisibility NOT_GENERATE = null;
+
+    /**
+     * Extension for configuration on method visibility.
+     * <p>
+     * ClientMethodTemplate.writeMethod (and whether it is called) would also decide the visibility in generated code.
+     *
+     * @param methodType the type of the client method.
+     * @param hasContextParameter whether the method has Context parameter.
+     * @return method visibility, null if do not generate.
+     */
+    protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
+        return VISIBLE;
     }
 
     private static final ClientMethodParameter CONTEXT_PARAM = new ClientMethodParameter.Builder()
