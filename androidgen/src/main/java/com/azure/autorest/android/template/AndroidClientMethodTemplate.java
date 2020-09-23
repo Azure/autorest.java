@@ -6,19 +6,7 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ArrayType;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
-import com.azure.autorest.model.clientmodel.ParameterMapping;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
@@ -627,11 +615,21 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             catchBlock.line(String.format("throw %s;", exceptionCreateExpression));
                         },
                         null);
-                succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
-                                "                        response.code(),\n" +
-                                "                        response.headers(),\n" +
-                                "                        new Page<%s>(response.raw().request().url().encodedPath(), decodedResult.getValue(), decodedResult.getNextLink()))",
-                        elementType));
+                MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
+                if (pageDetails.getNextMethod() == null) {
+                    succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
+                                    "                        response.code(),\n" +
+                                    "                        response.headers(),\n" +
+                                    "                        new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()))",
+                            elementType));
+                }
+                else {
+                    succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
+                                    "                        response.code(),\n" +
+                                    "                        response.headers(),\n" +
+                                    "                        new Page<%s>(response.raw().request().url().toString(), decodedResult.getValue(), decodedResult.getNextLink()))",
+                            elementType));
+                }
             }
             else {
                 succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
@@ -806,9 +804,17 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final GenericType callbackParameter = (GenericType) lastParam.getWireType();
                 final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
                 final IType elementType = pageType.getTypeArguments()[0];
-                succeededCodeBlock
-                        .line(String.format("%s.onSuccess(new Page<%s>(response.raw().request().url().encodedPath(), decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                                callbackParameterName, elementType));
+                MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
+                if (pageDetails.getNextMethod() == null) {
+                    succeededCodeBlock
+                            .line(String.format("%s.onSuccess(new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
+                                    callbackParameterName, elementType));
+                }
+                else {
+                    succeededCodeBlock
+                            .line(String.format("%s.onSuccess(new Page<%s>(response.raw().request().url().toString(), decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
+                                    callbackParameterName, elementType));
+                }
             }
             else {
                 succeededCodeBlock
