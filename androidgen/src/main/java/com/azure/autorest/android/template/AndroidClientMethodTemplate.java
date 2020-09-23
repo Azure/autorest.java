@@ -630,7 +630,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
                                 "                        response.code(),\n" +
                                 "                        response.headers(),\n" +
-                                "                        new Page<%s>(decodedResult.getValue(), decodedResult.getNextLink()))",
+                                "                        new Page<%s>(response.raw().request().url().encodedPath(), decodedResult.getValue(), decodedResult.getNextLink()))",
                         elementType));
             }
             else {
@@ -807,7 +807,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
                 final IType elementType = pageType.getTypeArguments()[0];
                 succeededCodeBlock
-                        .line(String.format("%s.onSuccess(new Page<%s>(decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
+                        .line(String.format("%s.onSuccess(new Page<%s>(response.raw().request().url().encodedPath(), decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
                                 callbackParameterName, elementType));
             }
             else {
