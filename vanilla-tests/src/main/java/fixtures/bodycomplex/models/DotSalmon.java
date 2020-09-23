@@ -1,17 +1,15 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /** The DotSalmon model. */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish.type")
 @JsonTypeName("DotSalmon")
-@JsonFlatten
 @Fluent
-public class DotSalmon extends DotFish {
+public final class DotSalmon extends DotFish {
     /*
      * The location property.
      */

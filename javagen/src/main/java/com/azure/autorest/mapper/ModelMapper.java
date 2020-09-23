@@ -158,14 +158,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.description(compositeType.getLanguage().getDefault().getDescription());
             }
 
-            boolean discriminatorNeedEscape = false;
-            if (isPolymorphic) {
-                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
-                discriminatorNeedEscape = discriminatorSerializedName.contains(".");
-                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
-                builder.polymorphicDiscriminator(discriminatorSerializedName);
-            }
-
             String modelSerializedName = compositeType.getDiscriminatorValue();
             if (modelSerializedName == null && compositeType.getLanguage().getDefault() != null) {
                 modelSerializedName = compositeType.getLanguage().getDefault().getName();
@@ -194,7 +186,15 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(discriminatorNeedEscape || hasFlattenedProperty(compositeType, parentsNeedFlatten));
+            boolean needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
+            builder.needsFlatten(needsFlatten);
+
+            if (isPolymorphic) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                boolean discriminatorNeedEscape = needsFlatten && discriminatorSerializedName.contains(".");
+                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
+                builder.polymorphicDiscriminator(discriminatorSerializedName);
+            }
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
