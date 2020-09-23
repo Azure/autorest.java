@@ -58,7 +58,7 @@ public abstract class AzureServiceClient {
     /**
      * @return the serializer
      */
-    public SerializerAdapter getSerializerAdapter() {
+    private SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
