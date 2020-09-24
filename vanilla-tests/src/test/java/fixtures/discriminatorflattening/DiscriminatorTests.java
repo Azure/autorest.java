@@ -24,13 +24,13 @@ public class DiscriminatorTests {
         MetricAlertResource metricAlert = new MetricAlertResource();
         metricAlert.setCriteria(new MetricAlertSingleResourceMultipleMetricCriteria());
         String metricAlertJson = adapter.serialize(metricAlert, SerializerEncoding.JSON);
-        checkOdatatypeJson(metricAlertJson);
+        verifyODataTypeInJson(metricAlertJson);
 
         MetricAlertResource metricAlert2 = adapter.deserialize(metricAlertJson, MetricAlertResource.class, SerializerEncoding.JSON);
         Assert.assertTrue(metricAlert2.getCriteria() instanceof MetricAlertSingleResourceMultipleMetricCriteria);
     }
 
-    private void checkOdatatypeJson(String json) {
+    private void verifyODataTypeInJson(String json) {
         final String odataTypeDiscriminatorSignature = "\"odata.type\":";
         final String incorrectOdataTypeDiscriminatorSignature = "\"odata\":";
         Assert.assertTrue(json.contains(odataTypeDiscriminatorSignature));
