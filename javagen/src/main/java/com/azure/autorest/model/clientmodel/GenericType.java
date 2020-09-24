@@ -93,8 +93,8 @@ public class GenericType implements IType {
         return new GenericType("com.azure.core.management.polling", "PollResult", pollResultType);
     }
 
-    public static GenericType AndroidSimpleCallback(IType typeArgument) {
-        return new GenericType("com.azure.android.core.http", "SimpleCallback", typeArgument);
+    public static GenericType AndroidCallback(IType typeArgument) {
+        return new GenericType("com.azure.android.core.http", "Callback", typeArgument);
     }
 
     public static GenericType AndroidHttpResponse(IType typeArgument) {

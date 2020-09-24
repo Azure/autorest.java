@@ -11,7 +11,6 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.mapper.Mappers;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -222,7 +221,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             List<ClientMethodParameter> withCallbackParameters = new ArrayList<>(parameters);
             final ClientMethodParameter callbackParam = new ClientMethodParameter.Builder()
                     .description("the Callback that receives the response.")
-                    .wireType(GenericType.AndroidSimpleCallback(returnType))
+                    .wireType(GenericType.AndroidCallback(returnType))
                     .name("callback")
                     .annotations(new ArrayList<>())
                     .isConstant(false)
