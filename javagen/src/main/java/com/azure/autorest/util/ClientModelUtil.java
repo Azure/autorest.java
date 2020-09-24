@@ -92,7 +92,7 @@ public class ClientModelUtil {
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
-        if (! settings.isFluent() && settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
+        if (!settings.isFluent() && settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
