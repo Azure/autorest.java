@@ -1,5 +1,6 @@
 package fixtures.bodystring;
 
+import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImplBuilder;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.RefColorConstant;
 import org.junit.Assert;
@@ -14,7 +15,7 @@ public class EnumOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().buildClient();
+        client = new AutoRestSwaggerBATServiceImplBuilder().buildClient();
     }
 
     @Test
