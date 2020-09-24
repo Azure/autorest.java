@@ -100,12 +100,13 @@ public class FluentGen extends NewPlugin {
             logger.info("Java template for client model");
             FluentJavaPackage javaPackage = new FluentJavaPackage();
             // Service client
+            String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
             javaPackage
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
             if (javaSettings.shouldGenerateClientInterfaces()) {
                 javaPackage
-                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+                        .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
             // Service client builder
@@ -135,7 +136,7 @@ public class FluentGen extends NewPlugin {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
                 if (javaSettings.shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                    javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
 

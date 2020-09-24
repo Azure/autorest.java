@@ -65,6 +65,12 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
+    public final void addServiceClientInterface(String package_Keyword, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getServiceClientInterfaceTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
     public final void addServiceClientBuilder(String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
@@ -85,6 +91,12 @@ public class JavaPackage {
 
     public final void addMethodGroupInterface(String name, MethodGroupClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
+        Templates.getMethodGroupInterfaceTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
+    public final void addMethodGroupInterface(String package_Keyword, String name, MethodGroupClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getMethodGroupInterfaceTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
