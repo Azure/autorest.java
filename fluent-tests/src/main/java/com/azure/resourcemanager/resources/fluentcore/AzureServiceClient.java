@@ -11,7 +11,6 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.management.polling.PollResult;
-import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.polling.AsyncPollResponse;
@@ -34,6 +33,7 @@ public abstract class AzureServiceClient {
     protected AzureServiceClient(HttpPipeline httpPipeline,
                                  SerializerAdapter serializerAdapter,
                                  AzureEnvironment environment) {
+        this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
     }
 
@@ -51,16 +51,35 @@ public abstract class AzureServiceClient {
         JAVA_VERSION = version != null ? version : "Unknown";
     }
 
-    private SerializerAdapter serializerAdapter = new AzureJacksonAdapter();
+    private final SerializerAdapter serializerAdapter;
+    private final HttpPipeline httpPipeline;
 
     private String sdkName;
 
     /**
-     * @return the serializer
+     * Gets serializer adapter for JSON serialization/de-serialization.
+     *
+     * @return the serializer adapter.
      */
     private SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
+
+    /**
+     * Gets The HTTP pipeline to send requests through.
+     *
+     * @return the httpPipeline value.
+     */
+    public HttpPipeline getHttpPipeline() {
+        return this.httpPipeline;
+    }
+
+    /**
+     * Gets The default poll interval for long-running operation.
+     *
+     * @return the defaultPollInterval value.
+     */
+    public abstract Duration getDefaultPollInterval();
 
     /**
      * Gets default client context.

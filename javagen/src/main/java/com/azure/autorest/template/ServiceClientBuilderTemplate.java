@@ -59,7 +59,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
         imports.add("com.azure.core.util.CoreUtils");
-        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.AzureJacksonAdapter" : "com.azure.core.util.serializer.JacksonAdapter");
+        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.SerializerFactory" : "com.azure.core.util.serializer.JacksonAdapter");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -305,7 +305,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
           ClassType.SerializerAdapter, "serializerAdapter", false,
-          settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+          settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
 
         if (!settings.isAzureOrFluent()) {
 

@@ -11,9 +11,10 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.serializer.AzureJacksonAdapter;
+import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -56,7 +57,7 @@ public class RuntimeTests {
     public void testWebException() throws IOException {
         final String errorBody = "{\"error\":{\"code\":\"WepAppError\",\"message\":\"Web app error.\",\"innererror\":\"Deployment error.\",\"details\":[{\"code\":\"InnerError\"}]}}";
 
-        AzureJacksonAdapter serializerAdapter = new AzureJacksonAdapter();
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
         DefaultErrorResponseError webError = serializerAdapter.deserialize(errorBody, DefaultErrorResponseError.class, SerializerEncoding.JSON);
         Assertions.assertEquals("WepAppError", webError.getCode());
         Assertions.assertNotNull(webError.getDetails());
