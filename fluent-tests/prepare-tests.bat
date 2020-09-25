@@ -12,7 +12,7 @@ RMDIR /S /Q "src/main/java/com/azure/mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.0.6282
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
-SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ %MODELERFOUR_ARGUMENTS% --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --client-side-validations --client-logger
+SET COMMON_ARGUMENTS=--java --use:../ --output-folder=./ %MODELERFOUR_ARGUMENTS% --license-header=MICROSOFT_MIT_SMALL --generate-client-interfaces --sync-methods=all --azure-arm --fluent --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --client-side-validations --client-logger
 SET FLUENTLITE_ARGUMENTS=--java --use:../ --output-folder=./ %MODELERFOUR_ARGUMENTS% --license-header=MICROSOFT_MIT_SMALL --sync-methods=all --azure-arm --fluent=lite --required-parameter-client-methods --add-context-parameter --context-client-method-parameter --track1-naming --client-side-validations --client-logger --generate-sync-async-clients
 
 REM fluent premium

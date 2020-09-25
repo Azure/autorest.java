@@ -1,6 +1,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.ClientModelUtil;
+
 import java.util.List;
 import java.util.Set;
 
@@ -145,6 +147,11 @@ public class MethodGroupClient {
             //ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
             ClassType proxyType = ClassType.RestProxy;
             imports.add(proxyType.getFullName());
+
+            if (settings.shouldGenerateClientInterfaces()) {
+                String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
+                imports.add(String.format("%1$s.%2$s", interfacePackage, this.getInterfaceName()));
+            }
         }
 
         getProxy().addImportsTo(imports, includeImplementationImports, settings);

@@ -1,6 +1,7 @@
 package fixtures.bodystring;
 
 import com.azure.core.exception.HttpResponseException;
+import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImplBuilder;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class StringOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().buildClient();
+        client = new AutoRestSwaggerBATServiceImplBuilder().buildClient();
     }
 
     @Test

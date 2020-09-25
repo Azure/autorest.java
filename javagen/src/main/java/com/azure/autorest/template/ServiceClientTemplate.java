@@ -51,11 +51,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientClassDeclaration = String.format("%1$s", serviceClient.getClassName());
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
-            serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
-        }
         if (settings.isFluentPremium()) {
             serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
+        }
+        if (settings.shouldGenerateClientInterfaces()) {
+            serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
 
         Set<String> imports = new HashSet<String>();
