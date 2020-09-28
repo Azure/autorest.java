@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.arm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -36,8 +37,8 @@ public class UrlPathSegments {
             this.segmentName = segmentName;
             this.parameterName = parameterName;
 
-            switch (segmentName) {
-                case "resourceGroups":
+            switch (segmentName.toLowerCase(Locale.ROOT)) {
+                case "resourcegroups":
                     this.type = ParameterSegmentType.RESOURCE_GROUP;
                     break;
                 case "subscriptions":
