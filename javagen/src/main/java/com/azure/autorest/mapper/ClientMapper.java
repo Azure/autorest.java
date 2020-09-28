@@ -133,7 +133,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             String.format("Package containing the service clients for %s.\n%s",
                                     serviceClientName, serviceClientDescription)));
                 }
-                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), "models");
+                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(fluentInnerPackage)) {
                     packageInfos.put(fluentInnerPackage, new PackageInfo(
                         fluentInnerPackage,
