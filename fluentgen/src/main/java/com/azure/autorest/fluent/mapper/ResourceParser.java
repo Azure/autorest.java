@@ -160,6 +160,14 @@ public class ResourceParser {
                             if (!urlPathSegments.getReverseSegments().isEmpty()
                                     && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
                                     && urlPathSegments.hasSubscription()) {
+
+                                /*
+                                logger.debug("Candidate fluent model {}, hasResourceGroup {}, isNested {}, method name {}",
+                                        fluentModel.getName(),
+                                        urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(),
+                                        m.getInnerClientMethod().getName());
+                                 */
+
                                 boolean categoryMatch = false;
                                 switch (category) {
                                     case RESOURCE_GROUP_AS_PARENT:
