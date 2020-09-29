@@ -8,13 +8,7 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.Constructor;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -23,10 +17,7 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -210,6 +201,18 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
             // Write client level API methods.
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
+
+                ClientMethodType clientMethodType = clientMethod.getType();
+                if (clientMethodType == ClientMethodType.PagingAsync
+                    || clientMethodType == ClientMethodType.PagingSync
+                    || clientMethodType == ClientMethodType.PagingAsyncSinglePage) {
+                    if (clientMethodType == ClientMethodType.PagingAsync
+                        && clientMethod.getMethodPageDetails().getNextMethod() != null) {
+                        AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                        asyncPageRetrieverTemplate.write(classBlock);
+                    }
+                }
             }
 
             if (embeddedBuilderTemplate != null) {

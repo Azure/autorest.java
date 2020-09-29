@@ -1,15 +1,15 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ServiceAsyncClientTemplate;
 import com.azure.autorest.template.Templates;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.azure.autorest.model.clientmodel.ClientMethodType.PagingAsync;
 
 public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplate {
     private static final AndroidServiceAsyncClientTemplate instance = new AndroidServiceAsyncClientTemplate();

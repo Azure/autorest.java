@@ -189,7 +189,9 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
             // by default, client method returns whatever the proxy method returns
             IType returnType = proxyMethod.getReturnType();
+            IType elementType = null;
             boolean isPaging = false;
+            boolean isNextMethod = false;
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
                 if (operation.getExtensions().isXmsLongRunningOperation()) {
                     throw new UnsupportedOperationException();
@@ -204,11 +206,11 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 IType listType = responseBodyModel.getProperties().stream()
                         .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
                         .findFirst().get().getWireType();
-                IType elementType = ((ListType) listType).getElementType();
+                elementType = ((ListType) listType).getElementType();
                 returnType = GenericType.AndroidPage(elementType);
 
                 final Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
-                boolean isNextMethod = nextOperation == operation;
+                isNextMethod = nextOperation == operation;
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                         getPageableItemName(operation),
@@ -232,6 +234,20 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .build();
             withCallbackParameters.add(callbackParam);
 
+            final ClientMethodParameter callbackCollectionParam = new ClientMethodParameter.Builder()
+                    .description("the Callback that receives the response collection.")
+                    .wireType(GenericType.AndroidAsyncPagedDataCollection(GenericType.AndroidPage(elementType)))
+                    .name("collectionCallback")
+                    .annotations(new ArrayList<>())
+                    .isConstant(false)
+                    .defaultValue(null)
+                    .fromClient(false)
+                    .isFinal(true)
+                    .isRequired(true)
+                    .build();
+            List<ClientMethodParameter> withCollectionCallbackParameters = new ArrayList<>(parameters);
+            withCollectionCallbackParameters.add(callbackCollectionParam);
+
             ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync : ClientMethodType.SimpleAsyncRestResponse;
             // Async method with Optional parameters (always generated).
             //
@@ -247,6 +263,24 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .onlyRequiredParameters(false)
                     .isGroupedParameterRequired(false)
                     .build());
+            if (isPaging && !isNextMethod) {
+                MethodPageDetails details = new MethodPageDetails(
+                        CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                        getPageableItemName(operation),null,null);
+                methods.add(builder
+                        .parameters(withCollectionCallbackParameters)
+                        .returnValue(new ReturnValue(
+                                returnTypeDescription(operation,
+                                        PrimitiveType.Void,
+                                        PrimitiveType.Void),
+                                PrimitiveType.Void))
+                        .name(proxyMethod.getName())
+                        .type(methodType)
+                        .methodPageDetails(details)
+                        .onlyRequiredParameters(false)
+                        .isGroupedParameterRequired(false)
+                        .build());
+            }
 
             // Async method with Required parameters.
             //

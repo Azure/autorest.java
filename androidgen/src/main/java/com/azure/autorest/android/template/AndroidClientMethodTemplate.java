@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
@@ -18,6 +19,8 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
+
+import static com.azure.autorest.model.clientmodel.ClientMethodType.PagingAsync;
 
 /**
  * Writes a ClientMethod to a JavaType block.
@@ -725,7 +728,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
 
                                         responseSuccessBlock.ifBlock(successCodeExpression, succeededCodeBlock -> {
-                                            writeAsyncSuccessBlock(clientMethod, callbackParameterName, clientReferenceDot, succeededCodeBlock, isPaging);
+                                            writeAsyncSuccessBlock(clientMethod, callbackParameterName, clientReferenceDot, succeededCodeBlock, (JavaClass) typeBlock, isPaging);
                                         }).elseBlock(errorCodeBlock -> {
                                             errorCodeBlock.line("final String strContent = %sreadAsString(response.body());", clientReferenceDot);
                                             ClassType exceptionType = clientMethod.getProxyMethod().getUnexpectedResponseExceptionType();
@@ -756,6 +759,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                         String callbackParameterName,
                                         String clientReferenceDot,
                                         JavaBlock succeededCodeBlock,
+                                        JavaClass classBlock,
                                         boolean isPaging) {
         IType bodyType = clientMethod.getProxyMethod().getReturnType(); // callbackParameter.getTypeArguments()[0];
         if (bodyType == PrimitiveType.Void) {
@@ -806,9 +810,30 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final IType elementType = pageType.getTypeArguments()[0];
                 MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
                 if (pageDetails.getNextMethod() == null) {
-                    succeededCodeBlock
-                            .line(String.format("%s.onSuccess(new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                                    callbackParameterName, elementType));
+                    if (callbackParameter.getClientType().equals(GenericType.AndroidAsyncPagedDataCollection(pageType))) {
+                        String retrieverClassName = elementType.toString() + "PageAsyncRetriever";
+                        StringBuilder retrieverConstructionBuilder = new StringBuilder();
+                        retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
+                        boolean hasPreviousParam = false;
+                        for(ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
+                            if (clientMethodParameter.getName().contains("collectionCallback")) {
+                                continue;
+                            }
+                            if (hasPreviousParam) {
+                                retrieverConstructionBuilder.append(", ");
+                            }
+                            retrieverConstructionBuilder.append(clientMethodParameter.getName());
+                            hasPreviousParam = true;
+                        }
+                        retrieverConstructionBuilder.append(");");
+                        succeededCodeBlock.line(retrieverConstructionBuilder.toString());
+                        succeededCodeBlock.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever));", callbackParameterName, elementType));
+                    }
+                    else {
+                        succeededCodeBlock
+                                .line(String.format("%s.onSuccess(new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
+                                        callbackParameterName, elementType));
+                    }
                 }
                 else {
                     succeededCodeBlock
