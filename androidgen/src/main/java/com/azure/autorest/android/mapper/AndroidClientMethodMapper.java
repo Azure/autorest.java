@@ -305,6 +305,18 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                         .type(methodType)
                         .isGroupedParameterRequired(false)
                         .build());
+                if (isPaging && !isNextMethod) {
+                    IType pageWithResponse = GenericType.AndroidPageResponseCollection(GenericType.AndroidPage(elementType));
+                    methods.add(builder
+                            .parameters(parameters)
+                            .returnValue(new ReturnValue(returnTypeDescription(operation, pageWithResponse, GenericType.AndroidPage(elementType)),
+                                    pageWithResponse))
+                            .name(proxyMethod.getName() + "WithPageResponse")
+                            .onlyRequiredParameters(false)
+                            .type(methodType)
+                            .isGroupedParameterRequired(false)
+                            .build());
+                }
 
                 if (generateClientMethodWithOnlyRequiredParameters) {
                     // Sync method with Required parameters.

@@ -6,13 +6,13 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 import java.util.Optional;
 
-public class AsyncPageRetrieverTemplate {
+public class PageResponseRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
     private final ServiceClient serviceClient;
     private final ClientMethod getNextPageMethod;
     private String retrieverClassName;
 
-    public AsyncPageRetrieverTemplate(ClientMethod getFirstPageMethod,
+    public PageResponseRetrieverTemplate(ClientMethod getFirstPageMethod,
                                       ClientMethod getNextPageMethod,
                                       ServiceClient serviceClient) {
         this.getFirstPageMethod = getFirstPageMethod;
@@ -32,17 +32,14 @@ public class AsyncPageRetrieverTemplate {
         final GenericType callbackParameter = (GenericType) lastParam.getWireType();
         final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
-        retrieverClassName = elementType.toString() + "PageAsyncRetriever";
-        String classSignature = retrieverClassName + String.format(" extends AsyncPagedDataRetriever<<%1$s>, Page<%1$s>>", elementType);
+        retrieverClassName = elementType.toString() + "PageResponseRetriever";
+        String classSignature = retrieverClassName + String.format(" extends PagedDataResponseRetriever<<%1$s>, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
             StringBuilder ctorSignatureBuilder = new StringBuilder();
             ctorSignatureBuilder.append(retrieverClassName).append("(");
             boolean hasPrevious = false;
             for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
-                if (clientMethodParameter.getName().contains("callback")) {
-                    continue;
-                }
                 if (hasPrevious) {
                     ctorSignatureBuilder.append(", ");
                 }
@@ -59,18 +56,16 @@ public class AsyncPageRetrieverTemplate {
 
             javaClass.constructor(JavaVisibility.Public, ctorSignatureBuilder.toString(), constructor -> {
                 getFirstPageMethod.getMethodParameters().stream().forEach(parameter -> {
-                    if (!parameter.getName().contains("callback")) {
-                        constructor.line(String.format("this.%1$s = %1$s;", parameter.getName()));
-                    }
+                    constructor.line(String.format("this.%1$s = %1$s;", parameter.getName()));
                 });
                 constructor.line("this.serviceClient = serviceClient;");
             });
 
-            javaClass.publicMethod(String.format("void getFirstPage(Callback<Page<%s>> callback)", elementType), getPageMethod -> {
+            javaClass.publicMethod(String.format("%s getFirstPage()", pageType), getPageMethod -> {
                 StringBuilder getPageBuilder = new StringBuilder();
-                getPageBuilder.append(String.format("serviceClient.%s(", getFirstPageMethod.getName()));
+                getPageBuilder.append(String.format(" return serviceClient.%s(", getFirstPageMethod.getName()));
                 boolean hasPreviousParam = false;
-                for(ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
+                for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
                     if (clientMethodParameter.getName().contains("callback")) {
                         continue;
                     }
@@ -80,17 +75,14 @@ public class AsyncPageRetrieverTemplate {
                     getPageBuilder.append(clientMethodParameter.getName());
                     hasPreviousParam = true;
                 }
-
-                if (hasPreviousParam) {
-                    getPageBuilder.append(", ");
-                }
-                getPageBuilder.append("callback);");
+                getPageBuilder.append(");");
                 getPageMethod.line(getPageBuilder.toString());
             });
 
-            javaClass.publicMethod(String.format("void getPage(String pageId, Callback<Page<%s>> callback)", elementType), getPageMethod -> {
-                getPageMethod.line(String.format("serviceClient.%s(pageId, callback);", getNextPageMethod.getName()));
-            });
+            javaClass.publicMethod(String.format("%1$s getPage(String pageId, Callback<Page<%2$s>> callback)", pageType, elementType),
+                    getPageMethod -> {
+                        getPageMethod.line(String.format("return serviceClient.%s(pageId, callback);", getNextPageMethod.getName()));
+                    });
         });
     }
 }

@@ -212,6 +212,12 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                                 clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
                         asyncPageRetrieverTemplate.write(classBlock);
                     }
+                    if (clientMethodType == ClientMethodType.PagingSync
+                            && clientMethod.getMethodPageDetails().getNextMethod() != null) {
+                        PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                        pageResponseRetrieverTemplate.write(classBlock);
+                    }
                 }
             }
 

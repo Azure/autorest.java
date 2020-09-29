@@ -504,8 +504,30 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         } else {
             // ***WithRestResponse method.
             //
-
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                if (isPaging && clientMethod.getName().contains("WithPageResponse")) {
+                    IType pageType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
+                    IType elementType = ((GenericType) pageType).getTypeArguments()[0];
+
+                    String retrieverClassName = elementType.toString() + "PageResponseRetriever";
+                    StringBuilder retrieverConstructionBuilder = new StringBuilder();
+                    retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
+                    boolean hasPreviousParam = false;
+                    for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
+                        if (hasPreviousParam) {
+                            retrieverConstructionBuilder.append(", ");
+                        }
+                        retrieverConstructionBuilder.append(clientMethodParameter.getName());
+                        hasPreviousParam = true;
+                    }
+                    if (hasPreviousParam) {
+                        retrieverConstructionBuilder.append(", ");
+                    }
+                    retrieverConstructionBuilder.append("this);");
+                    function.line(retrieverConstructionBuilder.toString());
+                    function.line(String.format("return new PagedDataResponseCollection<%1$s, Page<%1$s>>(retriever)));", elementType));
+                    return;
+                }
 
                 final String clientReferenceDot
                         = clientMethod.getClientReference() != null

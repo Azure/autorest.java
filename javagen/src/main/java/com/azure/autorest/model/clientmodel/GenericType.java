@@ -109,6 +109,10 @@ public class GenericType implements IType {
         return new GenericType("com.azure.android.core.http.responsepaging", "AsyncPagedDataCollection", typeArgument);
     }
 
+    public static GenericType AndroidPageResponseCollection(IType typeArgument) {
+        return new GenericType("com.azure.android.core.http.responsepaging", "PagedDataResponseCollection", typeArgument);
+    }
+
     public final String getName() {
         return name;
     }
