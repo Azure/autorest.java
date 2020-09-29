@@ -204,19 +204,19 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
 
                 ClientMethodType clientMethodType = clientMethod.getType();
                 if (clientMethodType == ClientMethodType.PagingAsync
-                    || clientMethodType == ClientMethodType.PagingSync
-                    || clientMethodType == ClientMethodType.PagingAsyncSinglePage) {
-                    if (clientMethodType == ClientMethodType.PagingAsync
                         && clientMethod.getMethodPageDetails().getNextMethod() != null) {
-                        AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
-                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
-                        asyncPageRetrieverTemplate.write(classBlock);
-                    }
-                    if (clientMethodType == ClientMethodType.PagingSync
-                            && clientMethod.getMethodPageDetails().getNextMethod() != null) {
+                    AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                    asyncPageRetrieverTemplate.write(classBlock);
+
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
                         PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
                                 clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
                         pageResponseRetrieverTemplate.write(classBlock);
+
+                        PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                        pageRetrieverTemplate.write(classBlock);
                     }
                 }
             }

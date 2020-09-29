@@ -6,15 +6,15 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 import java.util.Optional;
 
-public class PageResponseRetrieverTemplate {
+public class PageRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
     private final ServiceClient serviceClient;
     private final ClientMethod getNextPageMethod;
     private String retrieverClassName;
 
-    public PageResponseRetrieverTemplate(ClientMethod getFirstPageMethod,
-                                      ClientMethod getNextPageMethod,
-                                      ServiceClient serviceClient) {
+    public PageRetrieverTemplate(ClientMethod getFirstPageMethod,
+                                         ClientMethod getNextPageMethod,
+                                         ServiceClient serviceClient) {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
         this.serviceClient = serviceClient;
@@ -32,8 +32,8 @@ public class PageResponseRetrieverTemplate {
         final GenericType callbackParameter = (GenericType) lastParam.getWireType();
         final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
-        retrieverClassName = elementType.toString() + "PageResponseRetriever";
-        String classSignature = retrieverClassName + String.format(" extends PagedDataResponseRetriever<<%1$s>, Page<%1$s>>", elementType);
+        retrieverClassName = elementType.toString() + "PageRetriever";
+        String classSignature = retrieverClassName + String.format(" extends PagedDataRetriever<<%1$s>, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
             StringBuilder ctorSignatureBuilder = new StringBuilder();
@@ -66,7 +66,7 @@ public class PageResponseRetrieverTemplate {
                 constructor.line("this.serviceClient = serviceClient;");
             });
 
-            javaClass.publicMethod(String.format("%s getFirstPage()", GenericType.AndroidHttpResponse(pageType)),  getPageMethod -> {
+            javaClass.publicMethod(String.format("%s getFirstPage()", pageType), getPageMethod -> {
                 StringBuilder getPageBuilder = new StringBuilder();
                 getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(", getFirstPageMethod.getName()));
                 boolean hasPreviousParam = false;
@@ -80,12 +80,13 @@ public class PageResponseRetrieverTemplate {
                     getPageBuilder.append(clientMethodParameter.getName());
                     hasPreviousParam = true;
                 }
-                getPageBuilder.append(");");
+                getPageBuilder.append(").getValue();");
                 getPageMethod.line(getPageBuilder.toString());
             });
 
-            javaClass.publicMethod(String.format("%1$s getPage(String pageId)", GenericType.AndroidHttpResponse(pageType)), getPageMethod -> {
-                        getPageMethod.line(String.format("return serviceClient.%sWithRestResponse(pageId);", getNextPageMethod.getName()));
+            javaClass.publicMethod(String.format("%1$s getPage(String pageId)", pageType, elementType),
+                    getPageMethod -> {
+                        getPageMethod.line(String.format("return serviceClient.%sWithRestResponse(pageId).getValue();", getNextPageMethod.getName()));
                     });
         });
     }

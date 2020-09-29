@@ -316,6 +316,17 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                             .type(methodType)
                             .isGroupedParameterRequired(false)
                             .build());
+
+                    IType pageCollection = GenericType.AndroidPageRCollection(GenericType.AndroidPage(elementType));
+                    methods.add(builder
+                            .parameters(parameters)
+                            .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, GenericType.AndroidPage(elementType)),
+                                    pageCollection))
+                            .name(proxyMethod.getName() + "WithPage")
+                            .onlyRequiredParameters(false)
+                            .type(methodType)
+                            .isGroupedParameterRequired(false)
+                            .build());
                 }
 
                 if (generateClientMethodWithOnlyRequiredParameters) {
