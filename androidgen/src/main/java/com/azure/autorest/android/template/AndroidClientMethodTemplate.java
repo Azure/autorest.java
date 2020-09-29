@@ -664,13 +664,40 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         } else {
             typeBlock.publicMethod(clientMethod.getDeclaration(),
                     function -> {
-
                         final Optional<ClientMethodParameter> lastParamOpt = clientMethod.getMethodRequiredParameters()
                                 .stream()
                                 .reduce((current, next) -> next);
                         final ClientMethodParameter lastParam = lastParamOpt.get();
                         final GenericType callbackParameter = (GenericType) lastParam.getWireType();
                         final String callbackParameterName = lastParam.getName();
+                        if (isPaging) {
+                            final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
+                            final IType elementType = pageType.getTypeArguments()[0];
+
+                            if (callbackParameter.getClientType().equals(GenericType.AndroidAsyncPagedDataCollection(pageType))) {
+                                String retrieverClassName = elementType.toString() + "PageAsyncRetriever";
+                                StringBuilder retrieverConstructionBuilder = new StringBuilder();
+                                retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
+                                boolean hasPreviousParam = false;
+                                for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
+                                    if (clientMethodParameter.getName().contains("collectionCallback")) {
+                                        continue;
+                                    }
+                                    if (hasPreviousParam) {
+                                        retrieverConstructionBuilder.append(", ");
+                                    }
+                                    retrieverConstructionBuilder.append(clientMethodParameter.getName());
+                                    hasPreviousParam = true;
+                                }
+                                if (hasPreviousParam) {
+                                    retrieverConstructionBuilder.append(", ");
+                                }
+                                retrieverConstructionBuilder.append("this);");
+                                function.line(retrieverConstructionBuilder.toString());
+                                function.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever)));", callbackParameterName, elementType));
+                                return;
+                            }
+                        }
 
                         final String clientReferenceDot;
                         if (clientMethod.getClientReference().equals("this")) {
@@ -810,30 +837,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final IType elementType = pageType.getTypeArguments()[0];
                 MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
                 if (pageDetails.getNextMethod() == null) {
-                    if (callbackParameter.getClientType().equals(GenericType.AndroidAsyncPagedDataCollection(pageType))) {
-                        String retrieverClassName = elementType.toString() + "PageAsyncRetriever";
-                        StringBuilder retrieverConstructionBuilder = new StringBuilder();
-                        retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
-                        boolean hasPreviousParam = false;
-                        for(ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
-                            if (clientMethodParameter.getName().contains("collectionCallback")) {
-                                continue;
-                            }
-                            if (hasPreviousParam) {
-                                retrieverConstructionBuilder.append(", ");
-                            }
-                            retrieverConstructionBuilder.append(clientMethodParameter.getName());
-                            hasPreviousParam = true;
-                        }
-                        retrieverConstructionBuilder.append(");");
-                        succeededCodeBlock.line(retrieverConstructionBuilder.toString());
-                        succeededCodeBlock.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever));", callbackParameterName, elementType));
-                    }
-                    else {
                         succeededCodeBlock
                                 .line(String.format("%s.onSuccess(new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
                                         callbackParameterName, elementType));
-                    }
                 }
                 else {
                     succeededCodeBlock

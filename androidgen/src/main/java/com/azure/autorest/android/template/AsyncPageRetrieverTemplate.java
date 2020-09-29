@@ -46,13 +46,14 @@ public class AsyncPageRetrieverTemplate {
                 if (hasPrevious) {
                     ctorSignatureBuilder.append(", ");
                 }
-                javaClass.privateMemberVariable(String.format("%1$s %2$s", clientMethodParameter.getClientType(), clientMethodParameter.getName()));
+                javaClass.privateFinalMemberVariable(clientMethodParameter.getClientType().toString(), clientMethodParameter.getName());
                 ctorSignatureBuilder.append(String.format("%1$s %2$s", clientMethodParameter.getClientType(), clientMethodParameter.getName()));
                 hasPrevious = true;
             }
             if (hasPrevious) {
                 ctorSignatureBuilder.append(", ");
             }
+            javaClass.privateFinalMemberVariable(serviceClient.getClassName(), "serviceClient");
             ctorSignatureBuilder.append(String.format("%s serviceClient", serviceClient.getClassName()));
             ctorSignatureBuilder.append(")");
 
