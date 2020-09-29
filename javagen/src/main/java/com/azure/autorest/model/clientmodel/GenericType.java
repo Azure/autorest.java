@@ -105,16 +105,31 @@ public class GenericType implements IType {
         return new GenericType("com.azure.android.core.util.paging", "Page", typeArgument);
     }
 
-    public static GenericType AndroidAsyncPagedDataCollection(IType typeArgument) {
-        return new GenericType("com.azure.android.core.http.responsepaging", "AsyncPagedDataCollection", typeArgument);
+    public static GenericType AndroidAsyncPagedDataCollection(IType elementType) {
+        return new GenericType("com.azure.android.core.http.responsepaging", "AsyncPagedDataCollection", elementType) {
+            @Override
+            public String toString() {
+                return String.format("AsyncPagedDataCollection<%1$s, Page<%1$s>>", elementType);
+            }
+        };
     }
 
-    public static GenericType AndroidPageResponseCollection(IType typeArgument) {
-        return new GenericType("com.azure.android.core.http.responsepaging", "PagedDataResponseCollection", typeArgument);
+    public static GenericType AndroidPageResponseCollection(IType elementType) {
+        return new GenericType("com.azure.android.core.http.responsepaging", "PagedDataResponseCollection", elementType) {
+            @Override
+            public String toString() {
+                return String.format("PagedDataResponseCollection<%1$s, Page<%1$s>>", elementType);
+            }
+        };
     }
 
-    public static IType AndroidPageRCollection(IType typeArgument) {
-        return new GenericType("com.azure.android.core.util.paging", "PagedDataCollection", typeArgument);
+    public static IType AndroidPageRCollection(IType elementType) {
+        return new GenericType("com.azure.android.core.util.paging", "PagedDataCollection", elementType) {
+            @Override
+            public String toString() {
+                return String.format("PagedDataCollection<%1$s, Page<%1$s>>", elementType);
+            }
+        };
     }
 
     public final String getName() {

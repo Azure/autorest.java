@@ -33,7 +33,7 @@ public class AsyncPageRetrieverTemplate {
         final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
         retrieverClassName = elementType.toString() + "PageAsyncRetriever";
-        String classSignature = retrieverClassName + String.format(" extends AsyncPagedDataRetriever<<%1$s>, Page<%1$s>>", elementType);
+        String classSignature = retrieverClassName + String.format(" extends AsyncPagedDataRetriever<%1$s, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
             StringBuilder ctorSignatureBuilder = new StringBuilder();

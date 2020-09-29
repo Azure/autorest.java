@@ -506,8 +506,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             //
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 if (isPaging && clientMethod.getName().contains("WithPageResponse")) {
-                    IType pageType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
-                    IType elementType = ((GenericType) pageType).getTypeArguments()[0];
+                    IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
 
                     String retrieverClassName = elementType.toString() + "PageResponseRetriever";
                     StringBuilder retrieverConstructionBuilder = new StringBuilder();
@@ -525,13 +524,12 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     }
                     retrieverConstructionBuilder.append("this);");
                     function.line(retrieverConstructionBuilder.toString());
-                    function.line(String.format("return new PagedDataResponseCollection<%1$s, Page<%1$s>>(retriever)));", elementType));
+                    function.line(String.format("return new PagedDataResponseCollection<%1$s, Page<%1$s>>(retriever);", elementType));
                     return;
                 }
 
                 if (isPaging && clientMethod.getName().contains("WithPage")) {
-                    IType pageType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
-                    IType elementType = ((GenericType) pageType).getTypeArguments()[0];
+                    IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
 
                     String retrieverClassName = elementType.toString() + "PageRetriever";
                     StringBuilder retrieverConstructionBuilder = new StringBuilder();
@@ -549,7 +547,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     }
                     retrieverConstructionBuilder.append("this);");
                     function.line(retrieverConstructionBuilder.toString());
-                    function.line(String.format("return new PagedDataCollection<%1$s, Page<%1$s>>(retriever)));", elementType));
+                    function.line(String.format("return new PagedDataCollection<%1$s, Page<%1$s>>(retriever);", elementType));
                     return;
                 }
 
@@ -717,10 +715,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                         final GenericType callbackParameter = (GenericType) lastParam.getWireType();
                         final String callbackParameterName = lastParam.getName();
                         if (isPaging) {
-                            final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
-                            final IType elementType = pageType.getTypeArguments()[0];
+                            final IType elementType = callbackParameter.getTypeArguments()[0];
 
-                            if (callbackParameter.getClientType().equals(GenericType.AndroidAsyncPagedDataCollection(pageType))) {
+                            if (callbackParameter.getClientType().equals(GenericType.AndroidAsyncPagedDataCollection(elementType))) {
                                 String retrieverClassName = elementType.toString() + "PageAsyncRetriever";
                                 StringBuilder retrieverConstructionBuilder = new StringBuilder();
                                 retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
@@ -740,7 +737,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 }
                                 retrieverConstructionBuilder.append("this);");
                                 function.line(retrieverConstructionBuilder.toString());
-                                function.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever)));", callbackParameterName, elementType));
+                                function.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever));", callbackParameterName, elementType));
                                 return;
                             }
                         }

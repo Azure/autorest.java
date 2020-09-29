@@ -33,7 +33,7 @@ public class PageRetrieverTemplate {
         final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
         retrieverClassName = elementType.toString() + "PageRetriever";
-        String classSignature = retrieverClassName + String.format(" extends PagedDataRetriever<<%1$s>, Page<%1$s>>", elementType);
+        String classSignature = retrieverClassName + String.format(" extends PagedDataRetriever<%1$s, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
             StringBuilder ctorSignatureBuilder = new StringBuilder();
