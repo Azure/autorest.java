@@ -234,20 +234,6 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .build();
             withCallbackParameters.add(callbackParam);
 
-            final ClientMethodParameter callbackCollectionParam = new ClientMethodParameter.Builder()
-                    .description("the Callback that receives the response collection.")
-                    .wireType(GenericType.AndroidCallback(GenericType.AndroidAsyncPagedDataCollection(elementType)))
-                    .name("collectionCallback")
-                    .annotations(new ArrayList<>())
-                    .isConstant(false)
-                    .defaultValue(null)
-                    .fromClient(false)
-                    .isFinal(true)
-                    .isRequired(true)
-                    .build();
-            List<ClientMethodParameter> withCollectionCallbackParameters = new ArrayList<>(parameters);
-            withCollectionCallbackParameters.add(callbackCollectionParam);
-
             ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync : ClientMethodType.SimpleAsyncRestResponse;
             // Async method with Optional parameters (always generated).
             //
@@ -264,6 +250,20 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .isGroupedParameterRequired(false)
                     .build());
             if (isPaging && !isNextMethod) {
+                final ClientMethodParameter callbackCollectionParam = new ClientMethodParameter.Builder()
+                        .description("the Callback that receives the response collection.")
+                        .wireType(GenericType.AndroidCallback(GenericType.AndroidAsyncPagedDataCollection(elementType)))
+                        .name("collectionCallback")
+                        .annotations(new ArrayList<>())
+                        .isConstant(false)
+                        .defaultValue(null)
+                        .fromClient(false)
+                        .isFinal(true)
+                        .isRequired(true)
+                        .build();
+                List<ClientMethodParameter> withCollectionCallbackParameters = new ArrayList<>(parameters);
+                withCollectionCallbackParameters.add(callbackCollectionParam);
+
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                         getPageableItemName(operation),null,null);
@@ -274,7 +274,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                                         PrimitiveType.Void,
                                         PrimitiveType.Void),
                                 PrimitiveType.Void))
-                        .name(proxyMethod.getName()+"Async")
+                        .name(proxyMethod.getName()+"PagesAsync")
                         .type(methodType)
                         .methodPageDetails(details)
                         .onlyRequiredParameters(false)
