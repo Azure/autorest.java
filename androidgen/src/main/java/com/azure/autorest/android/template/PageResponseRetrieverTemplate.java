@@ -15,7 +15,6 @@ public class PageResponseRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
     private final ServiceClient serviceClient;
     private final ClientMethod getNextPageMethod;
-    private String retrieverClassName;
 
     public PageResponseRetrieverTemplate(ClientMethod getFirstPageMethod,
                                       ClientMethod getNextPageMethod,
@@ -25,19 +24,16 @@ public class PageResponseRetrieverTemplate {
         this.serviceClient = serviceClient;
     }
 
-    public String getClassName() {
-        return retrieverClassName;
+    public static String getClassName(IType elementType) {
+        return elementType.toString() + "PageResponseRetriever";
     }
 
     public void write(JavaClass clientClass) {
-        final Optional<ClientMethodParameter> lastParamOpt = getFirstPageMethod.getMethodRequiredParameters()
-                .stream()
-                .reduce((current, next) -> next);
-        final ClientMethodParameter lastParam = lastParamOpt.get();
-        final GenericType callbackParameter = (GenericType) lastParam.getWireType();
-        final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
+        final ClientMethodParameter callbackParameter = AndroidClientMethodTemplate.getCallbackParameter(getFirstPageMethod);
+        final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
+        final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
-        retrieverClassName = elementType.toString() + "PageResponseRetriever";
+        final String retrieverClassName = getClassName(elementType);
         String classSignature = retrieverClassName + String.format(" extends PagedDataResponseRetriever<%1$s, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
@@ -45,7 +41,7 @@ public class PageResponseRetrieverTemplate {
             ctorSignatureBuilder.append(retrieverClassName).append("(");
             boolean hasPrevious = false;
             for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
-                if (clientMethodParameter.getName().contains("callback")) {
+                if (clientMethodParameter.equals(callbackParameter)) {
                     continue;
                 }
                 if (hasPrevious) {
@@ -64,7 +60,7 @@ public class PageResponseRetrieverTemplate {
 
             javaClass.constructor(JavaVisibility.Public, ctorSignatureBuilder.toString(), constructor -> {
                 getFirstPageMethod.getMethodParameters().stream().forEach(parameter -> {
-                    if (!parameter.getName().contains("callback")) {
+                    if (!parameter.equals(callbackParameter)) {
                         constructor.line(String.format("this.%1$s = %1$s;", parameter.getName()));
                     }
                 });
@@ -76,7 +72,7 @@ public class PageResponseRetrieverTemplate {
                 getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(", getFirstPageMethod.getName()));
                 boolean hasPreviousParam = false;
                 for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
-                    if (clientMethodParameter.getName().contains("callback")) {
+                    if (clientMethodParameter.equals(callbackParameter)) {
                         continue;
                     }
                     if (hasPreviousParam) {

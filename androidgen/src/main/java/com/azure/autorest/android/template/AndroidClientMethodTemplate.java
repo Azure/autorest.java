@@ -487,23 +487,20 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
     private void writePagingAsyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
         if (clientMethod.getName().contains("Async")) {
-            final Optional<ClientMethodParameter> lastParamOpt = clientMethod.getMethodRequiredParameters()
-                    .stream()
-                    .reduce((current, next) -> next);
-            final ClientMethodParameter lastParam = lastParamOpt.get();
-            final GenericType callbackParameterType = (GenericType) lastParam.getWireType();
+            final ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
+            final GenericType callbackParameterType = (GenericType) callbackParameter.getClientType();
 
             typeBlock.publicMethod(clientMethod.getDeclaration(),
                 function -> {
                     final IType collectionType = callbackParameterType.getTypeArguments()[0];
                     final IType elementType = ((GenericType) collectionType).getTypeArguments()[0];
 
-                    String retrieverClassName = elementType.toString() + "PageAsyncRetriever";
+                    String retrieverClassName = AsyncPageRetrieverTemplate.getClassName(elementType);
                     StringBuilder retrieverConstructionBuilder = new StringBuilder();
                     retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
                     boolean hasPreviousParam = false;
                     for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
-                        if (clientMethodParameter.getName().contains("collectionCallback")) {
+                        if (clientMethodParameter.equals(callbackParameter)) {
                             continue;
                         }
                         if (hasPreviousParam) {
@@ -517,7 +514,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     }
                     retrieverConstructionBuilder.append("this);");
                     function.line(retrieverConstructionBuilder.toString());
-                    function.line(String.format("%1$s.onSuccess(new AsyncPagedDataCollection<%2$s, Page<%2$s>>(retriever), null);", lastParam.getName(), elementType));
+                    function.line(String.format("%1$s.onSuccess(new %2$s(retriever), null);", callbackParameter.getName(), GenericType.AndroidAsyncPagedDataCollection(elementType)));
                 });
             return;
         }
@@ -530,8 +527,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
 
-                String retrieverClassName = elementType.toString() +
-                        (clientMethod.getName().contains("WithPageResponse") ? "PageResponseRetriever" : "PageRetriever");
+                String retrieverClassName = clientMethod.getName().contains("WithPageResponse")
+                        ? PageResponseRetrieverTemplate.getClassName(elementType)
+                        : PageRetrieverTemplate.getClassName(elementType);
                 StringBuilder retrieverConstructionBuilder = new StringBuilder();
                 retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
                 boolean hasPreviousParam = false;
@@ -695,7 +693,10 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             catchBlock.line(String.format("throw %s;", exceptionCreateExpression));
                         },
                         null);
-                String pageId = clientMethod.getName().contains("Next") ? "nextLink" : "response.raw().request().url().toString()";
+                ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
+                String pageId = (nextMethod == null || nextMethod == clientMethod)
+                        ? clientMethod.getMethodPageDetails().getNextLinkName()
+                        : "response.raw().request().url().toString()";
                 succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
                                 "                        response.code(),\n" +
                                 "                        response.headers(),\n" +
@@ -868,24 +869,16 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     null);
 
             if (isPaging) {
-                final Optional<ClientMethodParameter> lastParamOpt = clientMethod.getMethodRequiredParameters()
-                        .stream()
-                        .reduce((current, next) -> next);
-                final ClientMethodParameter lastParam = lastParamOpt.get();
-                final GenericType callbackParameter = (GenericType) lastParam.getWireType();
-                final GenericType pageType = (GenericType) callbackParameter.getTypeArguments()[0];
+                ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
+                final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
+                final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
                 final IType elementType = pageType.getTypeArguments()[0];
                 MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
-                if (pageDetails.getNextMethod() == null) {
-                        succeededCodeBlock
-                                .line(String.format("%s.onSuccess(new Page<%s>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                                        callbackParameterName, elementType));
-                }
-                else {
-                    succeededCodeBlock
-                            .line(String.format("%s.onSuccess(new Page<%s>(response.raw().request().url().toString(), decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                                    callbackParameterName, elementType));
-                }
+                final String pageId = (pageDetails.getNextMethod() == null) ? pageDetails.getNextLinkName() : "response.raw().request().url().toString()";
+                succeededCodeBlock
+                        .line(String.format("%1$s.onSuccess(new Page<%2$s>(%3$s, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
+                                callbackParameterName, elementType, pageId));
+
             }
             else {
                 succeededCodeBlock
@@ -893,6 +886,13 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 callbackParameterName));
             }
         }
+    }
+
+    public static ClientMethodParameter getCallbackParameter(ClientMethod clientMethod) {
+        final Optional<ClientMethodParameter> lastParamOpt = clientMethod.getMethodRequiredParameters()
+                .stream()
+                .reduce((current, next) -> next);
+        return lastParamOpt.get();
     }
 
     protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
