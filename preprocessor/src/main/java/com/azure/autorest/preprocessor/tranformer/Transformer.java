@@ -26,7 +26,6 @@ import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -196,8 +195,12 @@ public class Transformer {
       nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.Path);
       nextLink.setExtensions(new XmsExtensions());
       nextLink.getExtensions().setXmsSkipUrlEncoding(true);
-      nextOperation.getRequests().get(0).setParameters(Collections.singletonList(nextLink));
-      nextOperation.getRequests().get(0).setSignatureParameters(Collections.singletonList(nextLink));
+      List<Parameter> requestParams = new ArrayList<>();
+      requestParams.add(nextLink);
+      nextOperation.getRequests().get(0).setParameters(requestParams);
+      List<Parameter> signatureParams = new ArrayList<>();
+      signatureParams.add(nextLink);
+      nextOperation.getRequests().get(0).setSignatureParameters(signatureParams);
       nextOperation.setApiVersions(operation.getApiVersions());
       nextOperation.setDeprecated(operation.getDeprecated());
       nextOperation.setDescription(operation.getDescription());
@@ -208,6 +211,33 @@ public class Transformer {
       nextOperation.setResponses(operation.getResponses());
       nextOperation.setSummary(operation.getSummary());
       nextOperation.setUid(operation.getUid());
+
+      if (operation.getExtensions().getXmsPageable().getOperationName() == null) {
+        operation.getRequests().stream().flatMap(r -> r.getParameters().stream())
+                .filter(parameter -> {
+                  return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
+                          || (parameter.getProtocol().getHttp().getIn() != null
+                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Header)
+                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Uri)));
+                })
+                .forEach(param -> {
+                  nextOperation.getRequests().get(0).getParameters().add(param);
+                });
+
+        operation.getRequests().stream().flatMap(r -> r.getSignatureParameters().stream())
+                .filter(parameter -> {
+                  return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
+                          || (parameter.getProtocol().getHttp().getIn() != null
+                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Header)
+                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.Uri)));
+                })
+                .forEach(param -> {
+                  nextOperation.getRequests().get(0).getSignatureParameters().add(param);
+                });
+
+
+      }
+
 
       operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
