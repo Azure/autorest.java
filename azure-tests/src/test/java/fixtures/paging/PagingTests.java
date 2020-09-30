@@ -9,12 +9,13 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PagingTests {
@@ -28,21 +29,21 @@ public class PagingTests {
     @Test
     public void getSinglePages() throws Exception {
         PagedIterable<Product> response = client.getPagings().getSinglePages();
-        Assert.assertEquals(1, response.stream().count());
+        assertEquals(1, response.stream().count());
     }
 
     @Test
     public void getMultiplePages() throws Exception {
         List<Product> response = client.getPagings().getMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
-        Assert.assertEquals(10, response.size());
+        assertEquals(10, response.size());
     }
 
     @Test
     public void getOdataMultiplePages() throws Exception {
         List<Product> response = client.getPagings().getOdataMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
-        Assert.assertEquals(10, response.size());
+        assertEquals(10, response.size());
     }
 
     @Test
@@ -51,8 +52,8 @@ public class PagingTests {
         options.setOffset(100);
         List<Product> response = client.getPagings().getMultiplePagesWithOffset(options, "client-id")
                 .stream().collect(Collectors.toList());
-        Assert.assertEquals(10, response.size());
-        Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
+        assertEquals(10, response.size());
+        assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
     }
 
     @Test
@@ -63,21 +64,21 @@ public class PagingTests {
                 .doOnComplete(lock::countDown)
                 .blockLast();
 
-        Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
+        assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
         List<Product> response = client.getPagings().getMultiplePagesRetryFirst()
                 .stream().collect(Collectors.toList());
-        Assert.assertEquals(10, response.size());
+        assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
         List<Product> response = client.getPagings().getMultiplePagesRetrySecond()
                 .stream().collect(Collectors.toList());
-        Assert.assertEquals(10, response.size());
+        assertEquals(10, response.size());
     }
 
     @Test
@@ -109,20 +110,22 @@ public class PagingTests {
             client.getPagings().getMultiplePagesFailureUri().stream().collect(Collectors.toList());
             fail();
         } catch (Exception e) {
-            Assert.assertTrue(e.getCause() instanceof MalformedURLException);
+            assertTrue(e instanceof HttpResponseException);
+            HttpResponseException httpResponseException = (HttpResponseException) e;
+            assertEquals(404, httpResponseException.getResponse().getStatusCode());
         }
     }
 
     @Test
     public void getMultiplePagesFragmentNextLink() throws Exception {
         PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentNextLink("1.6", "test_user");
-        Assert.assertEquals(10, response.stream().count());
+        assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
         PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentWithGroupingNextLink(
                 new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
-        Assert.assertEquals(10, response.stream().count());
+        assertEquals(10, response.stream().count());
     }
 }
