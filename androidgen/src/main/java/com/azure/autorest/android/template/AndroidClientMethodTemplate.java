@@ -523,7 +523,8 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     private void writePagingSyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
         GenericType methodReturnType = (GenericType) clientMethod.getReturnValue().getType();
         IType elementType = methodReturnType.getTypeArguments()[0];
-        if (methodReturnType.equals(GenericType.AndroidHttpResponse(elementType))) {
+        if (methodReturnType.equals(GenericType.AndroidHttpResponse(elementType))
+            || methodReturnType.equals(GenericType.AndroidPage(elementType))) {
             writeSyncWithResponseMethod(clientMethod, typeBlock, settings, restAPIMethod, true);
             return;
         }

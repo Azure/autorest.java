@@ -214,7 +214,8 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
 
                 ClientMethodType clientMethodType = clientMethod.getType();
                 if (clientMethodType == ClientMethodType.PagingAsync
-                        && clientMethod.getMethodPageDetails().getNextMethod() != null) {
+                        && clientMethod.getMethodPageDetails().getNextMethod() != null
+                        && !clientMethod.getOnlyRequiredParameters()) {
                     AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
                             clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
                     asyncPageRetrieverTemplate.write(classBlock);
