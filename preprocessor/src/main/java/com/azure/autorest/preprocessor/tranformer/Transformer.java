@@ -234,11 +234,7 @@ public class Transformer {
                 .forEach(param -> {
                   nextOperation.getRequests().get(0).getSignatureParameters().add(param);
                 });
-
-
       }
-
-
       operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       operationGroup.getOperations().add(nextOperation);
