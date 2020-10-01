@@ -486,54 +486,25 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     }
 
     private void writePagingAsyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
-        if (clientMethod.getName().contains("Async")) {
-            final ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
-            final GenericType callbackParameterType = (GenericType) callbackParameter.getClientType();
-
-            typeBlock.publicMethod(clientMethod.getDeclaration(),
-                function -> {
-                    final IType collectionType = callbackParameterType.getTypeArguments()[0];
-                    final IType elementType = ((GenericType) collectionType).getTypeArguments()[0];
-
-                    String retrieverClassName = AsyncPageRetrieverTemplate.getClassName(elementType);
-                    StringBuilder retrieverConstructionBuilder = new StringBuilder();
-                    retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
-                    boolean hasPreviousParam = false;
-                    for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
-                        if (clientMethodParameter.equals(callbackParameter)) {
-                            continue;
-                        }
-                        if (hasPreviousParam) {
-                            retrieverConstructionBuilder.append(", ");
-                        }
-                        retrieverConstructionBuilder.append(clientMethodParameter.getName());
-                        hasPreviousParam = true;
-                    }
-                    if (hasPreviousParam) {
-                        retrieverConstructionBuilder.append(", ");
-                    }
-                    retrieverConstructionBuilder.append("this);");
-                    function.line(retrieverConstructionBuilder.toString());
-                    function.line(String.format("%1$s.onSuccess(new %2$s(retriever), null);", callbackParameter.getName(), GenericType.AndroidAsyncPagedDataCollection(elementType)));
-                });
+        final ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
+        final GenericType callbackParameterType = (GenericType) callbackParameter.getClientType();
+        final GenericType callbackDataType = (GenericType) callbackParameterType.getTypeArguments()[0];
+        final IType elementType = callbackDataType.getTypeArguments()[0];
+        if (callbackDataType.equals(GenericType.AndroidPage(elementType))) {
+            writeAsyncWithRestResponseMethod(clientMethod, typeBlock, settings, restAPIMethod, true);
             return;
         }
-        writeAsyncWithRestResponseMethod(clientMethod, typeBlock, settings, restAPIMethod, true);
-    }
 
-    private void writePagingSyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
-        if (clientMethod.getName().contains("WithPageResponse")
-                        ||  clientMethod.getName().contains("WithPage")) {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
-
-                String retrieverClassName = clientMethod.getName().contains("WithPageResponse")
-                        ? PageResponseRetrieverTemplate.getClassName(elementType)
-                        : PageRetrieverTemplate.getClassName(elementType);
+        typeBlock.publicMethod(clientMethod.getDeclaration(),
+            function -> {
+                String retrieverClassName = AsyncPageRetrieverTemplate.getRetrieverClassName(elementType);
                 StringBuilder retrieverConstructionBuilder = new StringBuilder();
                 retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
                 boolean hasPreviousParam = false;
                 for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
+                    if (clientMethodParameter.equals(callbackParameter)) {
+                        continue;
+                    }
                     if (hasPreviousParam) {
                         retrieverConstructionBuilder.append(", ");
                     }
@@ -545,14 +516,39 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 }
                 retrieverConstructionBuilder.append("this);");
                 function.line(retrieverConstructionBuilder.toString());
-                String collectionName = clientMethod.getName().contains("WithPageResponse")
-                        ? "PagedDataResponseCollection"
-                        : "PagedDataCollection";
-                function.line(String.format("return new %1$s<%2$s, Page<%2$s>>(retriever);", collectionName, elementType));
+                function.line(String.format("%1$s.onSuccess(new %2$s(retriever), null);", callbackParameter.getName(), callbackDataType));
             });
+    }
+
+    private void writePagingSyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
+        GenericType methodReturnType = (GenericType) clientMethod.getReturnValue().getType();
+        IType elementType = methodReturnType.getTypeArguments()[0];
+        if (methodReturnType.equals(GenericType.AndroidHttpResponse(elementType))) {
+            writeSyncWithResponseMethod(clientMethod, typeBlock, settings, restAPIMethod, true);
             return;
         }
-        writeSyncWithResponseMethod(clientMethod, typeBlock, settings, restAPIMethod, true);
+
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            String retrieverClassName = methodReturnType.equals(GenericType.AndroidPageResponseCollection(elementType))
+                    ? PageResponseRetrieverTemplate.getRetrieverClassName(elementType)
+                    : PageRetrieverTemplate.getRetrieverClassName(elementType);
+            StringBuilder retrieverConstructionBuilder = new StringBuilder();
+            retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
+            boolean hasPreviousParam = false;
+            for (ClientMethodParameter clientMethodParameter : clientMethod.getMethodParameters()) {
+                if (hasPreviousParam) {
+                    retrieverConstructionBuilder.append(", ");
+                }
+                retrieverConstructionBuilder.append(clientMethodParameter.getName());
+                hasPreviousParam = true;
+            }
+            if (hasPreviousParam) {
+                retrieverConstructionBuilder.append(", ");
+            }
+            retrieverConstructionBuilder.append("this);");
+            function.line(retrieverConstructionBuilder.toString());
+            function.line(String.format("return new %s(retriever);", methodReturnType));
+        });
     }
 
     private void writeSyncWithResponseMethod(ClientMethod clientMethod,

@@ -9,8 +9,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 
-import java.util.Optional;
-
 public class PageResponseRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
     private final ServiceClient serviceClient;
@@ -24,7 +22,7 @@ public class PageResponseRetrieverTemplate {
         this.serviceClient = serviceClient;
     }
 
-    public static String getClassName(IType elementType) {
+    public static String getRetrieverClassName(IType elementType) {
         return elementType.toString() + "PageResponseRetriever";
     }
 
@@ -33,7 +31,7 @@ public class PageResponseRetrieverTemplate {
         final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
         final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
         final IType elementType = pageType.getTypeArguments()[0];
-        final String retrieverClassName = getClassName(elementType);
+        final String retrieverClassName = getRetrieverClassName(elementType);
         String classSignature = retrieverClassName + String.format(" extends PagedDataResponseRetriever<%1$s, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
