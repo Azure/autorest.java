@@ -325,8 +325,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             commonProperties.add(new ServiceClientProperty("The logging configuration for HTTP requests and "
                     + "responses.", ClassType.HttpLogOptions, "httpLogOptions", false, null));
-            commonProperties.add(new ServiceClientProperty("The service API version that is used when making "
-                    + "API requests.", ClassType.ServiceVersion, "serviceVersion", false, null));
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
                     + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
 
