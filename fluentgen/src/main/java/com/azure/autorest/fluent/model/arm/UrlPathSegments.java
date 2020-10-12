@@ -138,8 +138,6 @@ public class UrlPathSegments {
                 }
             }
         }
-
-        //Collections.reverse(segments);
     }
 
     public String getPath() {
@@ -165,7 +163,9 @@ public class UrlPathSegments {
     }
 
     public boolean hasSubscription() {
-        return getNestLevel() >= 1 && reverseSegments.stream()
+        return (getNestLevel() >= 1
+                || (getNestLevel() == 0 && !getReverseParameterSegments().isEmpty() && getReverseParameterSegments().iterator().next().getType() == ParameterSegmentType.RESOURCE_GROUP))   // the special case for ResourceGroup
+                && reverseSegments.stream()
                 .filter(Segment::isParameterSegment)
                 .map(s -> (ParameterSegment) s)
                 .anyMatch(s -> s.getType() == ParameterSegmentType.SUBSCRIPTION);

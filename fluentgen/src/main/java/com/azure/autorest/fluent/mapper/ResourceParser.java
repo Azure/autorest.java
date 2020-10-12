@@ -173,17 +173,12 @@ public class ResourceParser {
                             String url = m.getInnerProxyMethod().getUrlPath();
                             UrlPathSegments urlPathSegments = new UrlPathSegments(url);
 
+                            //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
+
                             // has "subscriptions" segment, and last segment should be resource name
                             if (!urlPathSegments.getReverseSegments().isEmpty()
                                     && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
                                     && urlPathSegments.hasSubscription()) {
-
-                                /*
-                                logger.debug("Candidate fluent model {}, hasResourceGroup {}, isNested {}, method name {}",
-                                        fluentModel.getName(),
-                                        urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(),
-                                        m.getInnerClientMethod().getName());
-                                 */
 
                                 boolean categoryMatch = false;
                                 switch (category) {

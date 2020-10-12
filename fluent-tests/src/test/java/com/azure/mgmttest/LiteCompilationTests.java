@@ -67,6 +67,9 @@ public class LiteCompilationTests {
 
         ResourceManager resourceManager = mock(ResourceManager.class);
 
-        //resourceManager.resourceGroups()
+        ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
+                .create();
+
+        resourceGroup.refresh();
     }
 }
