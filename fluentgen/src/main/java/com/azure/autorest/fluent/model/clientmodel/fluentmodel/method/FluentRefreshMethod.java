@@ -13,13 +13,13 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 
 import java.util.List;
 
-public class FluentApplyMethod extends FluentBaseMethod {
+public class FluentRefreshMethod extends FluentBaseMethod {
 
-    public FluentApplyMethod(FluentResourceModel model, FluentMethodType type,
-                             List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
-                             FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+    public FluentRefreshMethod(FluentResourceModel model, FluentMethodType type,
+                               List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
+                               FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
 
-        super(model, type, "apply", "Executes the update request.", "the updated resource.",
+        super(model, type, "refresh", "Refreshes the resource to sync with Azure.", "the refreshed resource.",
                 parameters, resourceLocalVariables, collection, collectionMethod);
     }
 }

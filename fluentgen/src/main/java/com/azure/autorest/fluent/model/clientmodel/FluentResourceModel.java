@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -43,6 +44,7 @@ public class FluentResourceModel {
     private ModelCategory category = ModelCategory.IMMUTABLE;
     private ResourceCreate resourceCreate;
     private ResourceUpdate resourceUpdate;
+    private ResourceRefresh resourceRefresh;
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -148,6 +150,14 @@ public class FluentResourceModel {
         this.resourceUpdate = resourceUpdate;
     }
 
+    public ResourceRefresh getResourceRefresh() {
+        return resourceRefresh;
+    }
+
+    public void setResourceRefresh(ResourceRefresh resourceRefresh) {
+        this.resourceRefresh = resourceRefresh;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(this.getInnerModel().getFullName());
 
@@ -162,6 +172,9 @@ public class FluentResourceModel {
         }
         if (resourceUpdate != null) {
             resourceUpdate.addImportsTo(imports, includeImplementationImports);
+        }
+        if (resourceRefresh != null) {
+            resourceRefresh.addImportsTo(imports, includeImplementationImports);
         }
     }
 }

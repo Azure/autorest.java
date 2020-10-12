@@ -81,6 +81,7 @@ public class ResourceUpdate extends ResourceOperation {
         return updateStages;
     }
 
+    @Override
     public List<FluentMethod> getFluentMethods() {
         List<FluentMethod> methods = this.getUpdateStages().stream()
                 .flatMap(s -> s.getMethods().stream())
@@ -89,6 +90,11 @@ public class ResourceUpdate extends ResourceOperation {
         methods.addAll(this.getApplyMethods());
         methods.add(this.getConstructor());
         return methods;
+    }
+
+    @Override
+    public String getLocalVariablePrefix() {
+        return "update";
     }
 
     private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter) {

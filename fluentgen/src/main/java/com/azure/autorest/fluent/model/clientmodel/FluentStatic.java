@@ -17,6 +17,9 @@ public class FluentStatic {
 
     }
 
+    /**
+     * @return the client on service client and method groups.
+     */
     public static Client getClient() {
         return client;
     }
@@ -25,6 +28,9 @@ public class FluentStatic {
         FluentStatic.client = client;
     }
 
+    /**
+     * @return the client on Fluent manager, resource collections and instances (models)
+     */
     public static FluentManager getFluentManager() {
         return fluentClient.getManager();
     }

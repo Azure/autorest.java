@@ -5,6 +5,8 @@ package com.azure.mgmttest;
 
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
+import com.azure.mgmtlitetest.resources.ResourceManager;
+import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
@@ -49,6 +51,8 @@ public class LiteCompilationTests {
                 .withAccessTier(AccessTier.COOL)
                 .apply();
 
+        storageAccount.refresh();
+
         BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
                 .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
                 .withPublicAccess(PublicAccess.BLOB)
@@ -58,5 +62,11 @@ public class LiteCompilationTests {
         blobContainer.update()
                 .withPublicAccess(PublicAccess.NONE)
                 .apply(new Context("key", "value"));
+
+        blobContainer.refresh();
+
+        ResourceManager resourceManager = mock(ResourceManager.class);
+
+        //resourceManager.resourceGroups()
     }
 }
