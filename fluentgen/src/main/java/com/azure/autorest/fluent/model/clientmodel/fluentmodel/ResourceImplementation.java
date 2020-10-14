@@ -53,7 +53,7 @@ public class ResourceImplementation {
         Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
         for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
-                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethod());
+                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getImplementationMethodSignature(), key -> new GroupedMethod());
                 if (method.getType() == FluentMethodType.CREATE_WITH) {
                     groupedMethod.methodCreateWith = method;
                 } else {
