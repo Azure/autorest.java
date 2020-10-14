@@ -35,7 +35,7 @@ public class LiteCompilationTests {
         storageAccountsClient.list();
     }
 
-    public void testFluentInterface() {
+    public void testStorage() {
         StorageManager storageManager = mock(StorageManager.class);
 
         StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
@@ -64,11 +64,18 @@ public class LiteCompilationTests {
                 .apply(new Context("key", "value"));
 
         blobContainer.refresh();
+    }
 
+    public void testResources() {
         ResourceManager resourceManager = mock(ResourceManager.class);
 
         ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
+                .withLocation("westus")
                 .create();
+
+        resourceGroup.update()
+                .withManagedBy("javasdk")
+                .apply();
 
         resourceGroup.refresh();
     }
