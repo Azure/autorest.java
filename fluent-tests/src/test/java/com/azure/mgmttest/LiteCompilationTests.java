@@ -5,6 +5,8 @@ package com.azure.mgmttest;
 
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
+import com.azure.mgmtlitetest.compute.ComputeManager;
+import com.azure.mgmtlitetest.compute.models.VirtualMachine;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -35,7 +37,7 @@ public class LiteCompilationTests {
         storageAccountsClient.list();
     }
 
-    public void testFluentInterface() {
+    public void testStorage() {
         StorageManager storageManager = mock(StorageManager.class);
 
         StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
@@ -64,12 +66,26 @@ public class LiteCompilationTests {
                 .apply(new Context("key", "value"));
 
         blobContainer.refresh();
+    }
 
+    public void testResources() {
         ResourceManager resourceManager = mock(ResourceManager.class);
 
         ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
                 .create();
 
+        resourceGroup.update()
+                .withManagedBy("javasdk")
+                .apply();
+
         resourceGroup.refresh();
+    }
+
+    public void testCompute() {
+        ComputeManager computeManager = mock(ComputeManager.class);
+
+//        VirtualMachine virtualMachine = computeManager.virtualMachines().define("vm1")
+//                .withExistingResourceGroup("rg-weidxu")
+//                .create();
     }
 }

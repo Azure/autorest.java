@@ -176,8 +176,13 @@ public class ResourceParser {
 
                             //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
 
+                            // requires named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
+                            boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
+                                    .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
+
                             // has "subscriptions" segment, and last segment should be resource name
                             if (!urlPathSegments.getReverseSegments().isEmpty()
+                                    && urlParameterSegmentsNamed
                                     && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
                                     && urlPathSegments.hasSubscription()) {
 
@@ -251,12 +256,10 @@ public class ResourceParser {
                             boolean hasBodyParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
-                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsRequired());
-                            boolean urlParameterSegmentsNamed = resourceCreate.getUrlPathSegments().getReverseParameterSegments().stream()
-                                    .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
-                            // if for update, need a body parameter, also need named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsRequired() && !p.getFromClient());
+                            // if for update, need a body parameter
                             // if for refresh, do not allow required query parameter, since it cannot be deduced from resource id
-                            if ((isRefreshMethod && !hasRequiredQueryParam) || (!isRefreshMethod && hasBodyParam && urlParameterSegmentsNamed)) {
+                            if ((isRefreshMethod && !hasRequiredQueryParam) || (!isRefreshMethod && hasBodyParam)) {
                                 return method;
                             }
                         }
