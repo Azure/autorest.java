@@ -66,7 +66,7 @@ public class ResourceClientModel {
                             .name(ResourceTypeName.FIELD_LOCATION)
                             .description("Resource location.")
                             .isRequired(true)
-                            .isReadOnly(true)
+                            .isReadOnly(false)
                             .clientType(ClassType.String)
                             .build(),
                     new ClientModelProperty.Builder()

@@ -107,11 +107,16 @@ public class ResourceCreate extends ResourceOperation  {
                     // first property
                     if (hasLocation && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
                         definitionStageBlank.setExtendStages(stage.getName());
-                        definitionStages.add(stage);
 
-                        lastStage = stage;
-                        stage = definitionStageParent;
+                        if (definitionStageParent != null) {
+                            // insert parent stage as 2nd stage
+                            definitionStages.add(stage);
+
+                            lastStage = stage;
+                            stage = definitionStageParent;
+                        }
                     } else if (definitionStageParent != null) {
+                        // insert parent stage as 1st stage
                         definitionStageBlank.setExtendStages(definitionStageParent.getName());
 
                         definitionStages.add(definitionStageParent);

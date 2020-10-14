@@ -5,8 +5,6 @@ package com.azure.mgmttest;
 
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
-import com.azure.mgmtlitetest.compute.ComputeManager;
-import com.azure.mgmtlitetest.compute.models.VirtualMachine;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -72,6 +70,7 @@ public class LiteCompilationTests {
         ResourceManager resourceManager = mock(ResourceManager.class);
 
         ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
+                .withLocation("westus")
                 .create();
 
         resourceGroup.update()
@@ -79,13 +78,5 @@ public class LiteCompilationTests {
                 .apply();
 
         resourceGroup.refresh();
-    }
-
-    public void testCompute() {
-        ComputeManager computeManager = mock(ComputeManager.class);
-
-//        VirtualMachine virtualMachine = computeManager.virtualMachines().define("vm1")
-//                .withExistingResourceGroup("rg-weidxu")
-//                .create();
     }
 }
