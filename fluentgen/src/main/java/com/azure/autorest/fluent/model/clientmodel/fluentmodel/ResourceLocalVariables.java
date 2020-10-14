@@ -5,7 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 
@@ -18,21 +18,21 @@ public class ResourceLocalVariables {
     private final Map<ClientMethodParameter, LocalVariable> localVariablesMap = new HashMap<>();
 
     public ResourceLocalVariables(ResourceOperation resourceOperation) {
-        String prefix = resourceOperation instanceof ResourceCreate ? "create" : "update";
+        String prefix = resourceOperation.getLocalVariablePrefix();
 
         List<ClientMethodParameter> pathParameters = resourceOperation.getPathParameters();
-        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), p)));
+        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.Path, p)));
 
         List<ClientMethodParameter> miscParameters = resourceOperation.getMiscParameters();
         miscParameters.forEach(p -> {
-            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(p.getName()), p.getClientType(), p);
+            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(p.getName()), p.getClientType(), RequestParameterLocation.Query, p);
             var.setInitializeExpression("null");
             localVariablesMap.put(p, var);
         });
 
         ClientMethodParameter bodyParameter = resourceOperation.getBodyParameter();
-        if (!bodyParameter.getClientType().toString().equals(resourceOperation.getResourceModel().getInnerModel().getName())) {
-            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(bodyParameter.getName()), bodyParameter.getClientType(), bodyParameter);
+        if (bodyParameter != null && !bodyParameter.getClientType().toString().equals(resourceOperation.getResourceModel().getInnerModel().getName())) {
+            LocalVariable var = new LocalVariable(prefix + CodeNamer.toPascalCase(bodyParameter.getName()), bodyParameter.getClientType(), RequestParameterLocation.Body, bodyParameter);
             var.setInitializeExpression(String.format("new %1$s()", bodyParameter.getClientType().toString()));
             localVariablesMap.put(bodyParameter, var);
         }

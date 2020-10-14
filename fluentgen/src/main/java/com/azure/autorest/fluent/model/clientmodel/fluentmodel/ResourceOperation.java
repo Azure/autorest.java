@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -77,6 +78,10 @@ public abstract class ResourceOperation {
     public List<FluentCollectionMethod> getMethodReferences() {
         return methodReferences;
     }
+
+    abstract public List<FluentMethod> getFluentMethods();
+
+    abstract public String getLocalVariablePrefix();
 
     // properties on model inner object, or request body model
     protected List<ClientModelProperty> getProperties() {

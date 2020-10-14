@@ -202,12 +202,18 @@ public class ResourceCreate extends ResourceOperation  {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<FluentMethod> getFluentMethods() {
         List<FluentMethod> methods = this.getDefinitionStages().stream()
                 .flatMap(s -> s.getMethods().stream())
                 .collect(Collectors.toList());
         methods.add(this.getConstructor());
         return methods;
+    }
+
+    @Override
+    public String getLocalVariablePrefix() {
+        return "create";
     }
 
     private FluentMethod getParameterSetterMethod(DefinitionStage stage, ClientMethodParameter parameter) {
