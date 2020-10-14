@@ -18,6 +18,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUp
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.core.http.HttpMethod;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -232,6 +233,8 @@ public class ResourceParser {
     private static FluentCollectionMethod findCollectionMethod(FluentResourceCollection collection,
                                                                ResourceCreate resourceCreate,
                                                                HttpMethod matchingMethod, Predicate<String> nameMatcher) {
+        boolean isRefreshMethod = matchingMethod == HttpMethod.GET;
+
         for (FluentCollectionMethod method : collection.getMethods()) {
             HttpMethod httpMethod = method.getInnerProxyMethod().getHttpMethod();
             // match http method
@@ -239,16 +242,21 @@ public class ResourceParser {
                 String methodNameLowerCase = method.getInnerClientMethod().getName().toLowerCase(Locale.ROOT);
                 // match name
                 if (nameMatcher.test(methodNameLowerCase)) {
-                    // body in request if not GET
-                    if (matchingMethod == HttpMethod.GET
-                            || method.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
-
-                        String returnTypeName = method.getFluentReturnType().toString();
-                        // same model as create
-                        if (returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
-                            String url = method.getInnerProxyMethod().getUrlPath();
-                            // same url
-                            if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
+                    String returnTypeName = method.getFluentReturnType().toString();
+                    // same model as create
+                    if (returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
+                        String url = method.getInnerProxyMethod().getUrlPath();
+                        // same url as create
+                        if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
+                            boolean hasBodyParam = method.getInnerProxyMethod().getParameters().stream()
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
+                            boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsRequired());
+                            boolean urlParameterSegmentsNamed = resourceCreate.getUrlPathSegments().getReverseParameterSegments().stream()
+                                    .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
+                            // if for update, need a body parameter, also need named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
+                            // if for refresh, do not allow required query parameter, since it cannot be deduced from resource id
+                            if ((isRefreshMethod && !hasRequiredQueryParam) || (!isRefreshMethod && hasBodyParam && urlParameterSegmentsNamed)) {
                                 return method;
                             }
                         }
