@@ -87,7 +87,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
                 List<ImmutableMethod> fluentMethods = resourceImplementation.getMethods();
                 List<LocalVariable> localVariables = resourceImplementation.getLocalVariables();
 
-                localVariables.forEach(p -> classBlock.privateMemberVariable(p.getVariableType().toString(), p.getName()));
+                localVariables.forEach(p -> classBlock.privateMemberVariable(String.format("%1$s %2$s = null", p.getVariableType().toString(), p.getName())));
 
                 fluentMethods.forEach(m -> {
                     m.getMethodTemplate().writeMethod(classBlock);
