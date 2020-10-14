@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 
@@ -12,12 +13,14 @@ public class LocalVariable {
     private final String name;
     private final IType variableType;
     private final ClientMethodParameter methodParameterReference;
+    private final RequestParameterLocation parameterLocation;
     private boolean initializeRequired = false;
     private String initializeExpression;
 
-    public LocalVariable(String name, IType variableType, ClientMethodParameter methodParameterReference) {
+    public LocalVariable(String name, IType variableType, RequestParameterLocation parameterLocation, ClientMethodParameter methodParameterReference) {
         this.name = name;
         this.variableType = variableType;
+        this.parameterLocation = parameterLocation;
         this.methodParameterReference = methodParameterReference;
     }
 
@@ -27,6 +30,10 @@ public class LocalVariable {
 
     public IType getVariableType() {
         return variableType;
+    }
+
+    public RequestParameterLocation getParameterLocation() {
+        return parameterLocation;
     }
 
     public ClientMethodParameter getMethodParameterReference() {

@@ -5,12 +5,14 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -33,7 +35,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
 
     public FluentBaseMethod(FluentResourceModel model, FluentMethodType type, String name, String description, String returnValueDescription,
                             List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
-                            FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+                            FluentResourceCollection collection, FluentCollectionMethod collectionMethod, boolean initLocalVariables) {
         super(model, type);
 
         this.name = name;
@@ -75,6 +77,14 @@ abstract public class FluentBaseMethod extends FluentMethod {
                     String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
 
                     String afterInvocationCode = returnIsResponseType ? ".getValue()" : "";
+
+                    if (initLocalVariables) {
+                        for (LocalVariable var : resourceLocalVariables.getLocalVariablesMap().values()) {
+                            if (var.getParameterLocation() == RequestParameterLocation.Query) {
+                                block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), var.getInitializeExpression()));
+                            }
+                        }
+                    }
 
                     block.line("this.%1$s = %2$s.%3$s().%4$s().%5$s%6$s;",
                             ModelNaming.MODEL_PROPERTY_INNER,

@@ -20,6 +20,6 @@ public class FluentApplyMethod extends FluentBaseMethod {
                              FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
 
         super(model, type, "apply", "Executes the update request.", "the updated resource.",
-                parameters, resourceLocalVariables, collection, collectionMethod);
+                parameters, resourceLocalVariables, collection, collectionMethod, false);
     }
 }

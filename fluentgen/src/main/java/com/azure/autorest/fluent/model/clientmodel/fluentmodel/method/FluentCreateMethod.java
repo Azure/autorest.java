@@ -20,6 +20,6 @@ public class FluentCreateMethod extends FluentBaseMethod {
                               FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
 
         super(model, type, "create", "Executes the create request.", "the created resource.",
-                parameters, resourceLocalVariables, collection, collectionMethod);
+                parameters, resourceLocalVariables, collection, collectionMethod, false);
     }
 }
