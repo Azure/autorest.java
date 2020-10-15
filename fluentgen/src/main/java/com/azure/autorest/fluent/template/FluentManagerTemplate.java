@@ -94,7 +94,7 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                 })
                 .method(method -> {
                     method.line(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
-                    method.methodReturn(String.format("return new %1$s(httpPipeline, profile)", manager.getType().getName()));
+                    method.methodReturn(String.format("new %1$s(httpPipeline, profile)", manager.getType().getName()));
                 })
                 .build();
 
