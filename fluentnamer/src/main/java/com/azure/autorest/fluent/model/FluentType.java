@@ -20,6 +20,8 @@ public class FluentType {
     public static final ClassType ManagementException = new ClassType.Builder().knownClass(com.azure.core.management.exception.ManagementException.class).build();
     public static final ClassType ManagementError = new ClassType.Builder().knownClass(com.azure.core.management.exception.ManagementError.class).build();
 
+    public static final ClassType AzureProfile = new ClassType.Builder().knownClass(com.azure.core.management.profile.AzureProfile.class).build();
+
     private FluentType() {
     }
 

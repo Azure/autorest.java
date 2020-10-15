@@ -11,6 +11,7 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
@@ -124,7 +125,7 @@ public class RuntimeTests {
 
     private ResourceManager authenticateResourceManager() {
         String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
-        return ResourceManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
+        return ResourceManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
     }
 
     private StorageManager authenticateStorageManager() {
@@ -132,6 +133,6 @@ public class RuntimeTests {
         if (subscriptionId == null) {
             subscriptionId = "";
         }
-        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
+        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
     }
 }
