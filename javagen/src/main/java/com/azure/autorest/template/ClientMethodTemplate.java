@@ -282,8 +282,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    protected static void writeMethod(JavaType typeBlock,
-                          JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
+    protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
         if (visibility == JavaVisibility.Public) {
             typeBlock.publicMethod(methodSignature, method);
         } else {
