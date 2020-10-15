@@ -197,7 +197,7 @@ public class FluentGen extends NewPlugin {
 
                 // POM
                 Pom pom = new PomMapper().map(codeModel, fluentClient);
-                javaPackage.addPom(pom);
+                javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 
             // Print to files

@@ -66,3 +66,4 @@ package-lock.json
 # Generated code for tests #
 fluent-tests/src/main/java/com/azure/mgmttest/**
 fluent-tests/src/main/java/com/azure/mgmtlitetest/**
+fluent-tests/pom_generated_*.xml

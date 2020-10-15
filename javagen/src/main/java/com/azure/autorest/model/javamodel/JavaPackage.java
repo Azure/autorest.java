@@ -14,7 +14,6 @@ import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.xmlmodel.XmlFile;
-import com.azure.autorest.template.PomTemplate;
 import com.azure.autorest.template.Templates;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,8 +151,8 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public final void addPom(Pom pom) {
-        XmlFile xmlFile = new XmlFile("pom.xml");
+    public final void addPom(String name, Pom pom) {
+        XmlFile xmlFile = new XmlFile(name);
         Templates.getPomTemplate().write(pom, xmlFile);
         xmlFiles.add(xmlFile);
     }

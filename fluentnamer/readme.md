@@ -2,7 +2,8 @@
 
 | Option      | Description |
 | ----------- | ----------- |
-| `--fluent` | Enum. LITE for Fluent Lite; PREMIUM for Fluent Premium. Case insensitive. Default to PREMIUM if provided as other values. |
+| `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default to `PREMIUM` if provided as other values. |
+| `--pom-file` | String. Name for Maven POM file. Default to `pom.xml` |
 | `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). |
 | `--add-inner` | CSV. Treat as inner class (append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
