@@ -9,9 +9,9 @@ import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
 public class FluentServiceClientBuilderTemplate extends ServiceClientBuilderTemplate {
 
-    private static final FluentServiceClientBuilderTemplate instance = new FluentServiceClientBuilderTemplate();
+    private static final FluentServiceClientBuilderTemplate INSTANCE = new FluentServiceClientBuilderTemplate();
 
     public static FluentServiceClientBuilderTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }

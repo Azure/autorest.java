@@ -86,4 +86,8 @@ public class Templates {
     public static <ContextT, ModelT> ServiceSyncClientTemplate getServiceSyncClientTemplate() {
         return factory.getServiceSynClientTemplate();
     }
+
+    public static PomTemplate getPomTemplate() {
+        return factory.getPomTemplate();
+    }
 }

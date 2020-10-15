@@ -18,10 +18,10 @@ import com.azure.autorest.util.CodeNamer;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
-    private static final FluentClientMethodTemplate instance = new FluentClientMethodTemplate();
+    private static final FluentClientMethodTemplate INSTANCE = new FluentClientMethodTemplate();
 
     public static FluentClientMethodTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

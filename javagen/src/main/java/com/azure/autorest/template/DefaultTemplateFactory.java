@@ -90,4 +90,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return WrapperClientMethodTemplate.getInstance();
     }
+
+    @Override
+    public PomTemplate getPomTemplate() {
+        return PomTemplate.getInstance();
+    }
 }

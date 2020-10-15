@@ -10,8 +10,11 @@ import com.azure.autorest.model.clientmodel.Manager;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.PageDetails;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.template.PomTemplate;
 import com.azure.autorest.template.Templates;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +22,13 @@ import java.util.List;
 public class JavaPackage {
     private final JavaSettings settings;
     private final List<JavaFile> javaFiles;
+    private final List<XmlFile> xmlFiles;
     private final JavaFileFactory javaFileFactory;
 
     public JavaPackage() {
         this.settings = JavaSettings.getInstance();
         this.javaFiles = new ArrayList<>();
+        this.xmlFiles = new ArrayList<>();
         this.javaFileFactory = new JavaFileFactory(settings);
     }
 
@@ -33,6 +38,10 @@ public class JavaPackage {
 
     public List<JavaFile> getJavaFiles() {
         return javaFiles;
+    }
+
+    public List<XmlFile> getXmlFiles() {
+        return xmlFiles;
     }
 
     public final void addManager(String package_Keyword, String name, Manager model) {
@@ -143,14 +152,9 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    // TODO: POM?
-//    public final void AddPom(PomTemplate pomTemplate)
-//    {
-//        StringBuilder pomContentsBuilder = new StringBuilder();
-//        try (pomTemplate.TextWriter = new StringWriter(pomContentsBuilder))
-//        {
-//            pomTemplate.ExecuteAsync().GetAwaiter().GetResult();
-//        }
-//        javaFiles.add(new JavaFile("pom.xml", pomContentsBuilder.toString()));
-//    }
+    public final void addPom(Pom pom) {
+        XmlFile xmlFile = new XmlFile("pom.xml");
+        Templates.getPomTemplate().write(pom, xmlFile);
+        xmlFiles.add(xmlFile);
+    }
 }

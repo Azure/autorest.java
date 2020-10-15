@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
+import com.azure.autorest.fluent.mapper.PomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -29,8 +30,10 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -191,6 +194,10 @@ public class FluentGen extends NewPlugin {
 
                 // Utils
                 javaPackage.addUtils();
+
+                // POM
+                Pom pom = new PomMapper().map(codeModel, fluentClient);
+                javaPackage.addPom(pom);
             }
 
             // Print to files
@@ -203,6 +210,10 @@ public class FluentGen extends NewPlugin {
                 String formattedContent = new JavaFormatter(content, path).format();
 
                 writeFile(path, formattedContent, null);
+            }
+            logger.info("Write Xml");
+            for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
+                writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
             }
             return true;
         } catch (Exception e) {
