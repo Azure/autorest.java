@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,18 +45,20 @@ public class FluentResourceCollection {
 
         this.groupClient = groupClient;
 
+        String baseClassName = CodeNamer.getPlural(groupClient.getClassBaseName());
+
         this.interfaceType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(groupClient.getInterfaceName())
+                .name(baseClassName)
                 .build();
         this.implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
+                .name(baseClassName + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
 
         this.innerClientType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getFluentSubpackage()))
-                .name(groupClient.getClassBaseName() + "Client")
+                .name(groupClient.getInterfaceName())
                 .build();
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()

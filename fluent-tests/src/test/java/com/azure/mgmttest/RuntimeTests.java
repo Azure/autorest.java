@@ -11,12 +11,14 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
@@ -34,8 +36,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
-import static org.mockito.Mockito.mock;
 
 public class RuntimeTests {
 
@@ -79,30 +79,53 @@ public class RuntimeTests {
     @Test
     @Disabled("live test")
     public void testStorage() {
+        ResourceManager resourceManager = authenticateResourceManager();
         StorageManager storageManager = authenticateStorageManager();
 
-        StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
-                .withLocation("westus")
-                .withExistingResourceGroup("rg-weidxu")
-                .withSku(new Sku().withName(SkuName.STANDARD_LRS))
-                .withKind(Kind.STORAGE_V2)
-                .withEnableHttpsTrafficOnly(true)
+        String rgName = "rg1-weidxu-fluentlite";
+        String saName = "sa1weidxulite";
+        String blobContainerName = "container1";
+        String location = "westus";
+
+        resourceManager.resourceGroups().define(rgName)
+                .withLocation(location)
                 .create();
 
-        storageAccount = storageManager.storageAccounts().getByResourceGroup("rg-weidxu", "sa1weidxu");
-        storageAccount.update()
-                .withAccessTier(AccessTier.COOL)
-                .apply();
+        try {
+            StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
+                    .withLocation(location)
+                    .withExistingResourceGroup(rgName)
+                    .withSku(new Sku().withName(SkuName.STANDARD_LRS))
+                    .withKind(Kind.STORAGE_V2)
+                    .withEnableHttpsTrafficOnly(true)
+                    .create();
 
-        BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-                .withPublicAccess(PublicAccess.BLOB)
-                .create(new Context("key", "value"));
+            storageAccount.refresh();
 
-        blobContainer = storageManager.blobContainers().get("rg-weidxu", "sa1weidxu", "container1");
-        blobContainer.update()
-                .withPublicAccess(PublicAccess.NONE)
-                .apply(new Context("key", "value"));
+            StorageAccount storageAccount2 = storageManager.storageAccounts().getByResourceGroup(rgName, saName);
+            storageAccount2.update()
+                    .withAccessTier(AccessTier.COOL)
+                    .apply();
+
+            BlobContainer blobContainer = storageManager.blobContainers().defineContainer(blobContainerName)
+                    .withExistingStorageAccount(rgName, saName)
+                    .withPublicAccess(PublicAccess.BLOB)
+                    .create(new Context("key", "value"));
+
+            blobContainer.refresh();
+
+            BlobContainer blobContainer2 = storageManager.blobContainers().get(rgName, saName, blobContainerName);
+            blobContainer2.update()
+                    .withPublicAccess(PublicAccess.NONE)
+                    .apply(new Context("key", "value"));
+        } finally {
+            resourceManager.resourceGroups().delete(rgName);
+        }
+    }
+
+    private ResourceManager authenticateResourceManager() {
+        String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
+        return ResourceManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
     }
 
     private StorageManager authenticateStorageManager() {
@@ -110,6 +133,6 @@ public class RuntimeTests {
         if (subscriptionId == null) {
             subscriptionId = "";
         }
-        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
+        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
     }
 }

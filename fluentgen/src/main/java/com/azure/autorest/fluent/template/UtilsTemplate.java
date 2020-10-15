@@ -36,9 +36,7 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
                 .visibility(JavaVisibility.PackagePrivate)
                 .modifiers(Collections.singletonList(JavaModifier.Static))
                 .methodSignature("String getValueFromIdByName(String id, String name)")
-                .method(block -> {
-                    block.text(FluentUtils.loadTextFromResource("Utils_getValueFromIdByName.txt"));
-                })
+                .method(block -> block.line(FluentUtils.loadTextFromResource("Utils_getValueFromIdByName.txt")))
                 .build();
         METHOD_TEMPLATES.add(getValueFromIdByNameMethod);
     }

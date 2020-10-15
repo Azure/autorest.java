@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -26,6 +27,7 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.management.profile.AzureProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,11 +62,13 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
 
         String builderPackageName = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
         String builderTypeName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+        String serviceClientPackageName = ClientModelUtil.getServiceClientInterfacePackageName();
+        String serviceClientTypeName = serviceClient.getInterfaceName();
 
         MethodTemplate authenticateMethod = MethodTemplate.builder()
                 .imports(Arrays.asList(
                         TokenCredential.class.getName(),
-                        AzureEnvironment.class.getName(),
+                        AzureProfile.class.getName(),
                         Objects.class.getName(),
                         // http pipeline
                         HttpPipeline.class.getName(),
@@ -81,47 +85,22 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                         HttpPipelineBuilder.class.getName()
                 ))
                 .modifiers(Collections.singleton(JavaModifier.Static))
-                .methodSignature(requiresSubscriptionIdParameter
-                        ? String.format("%1$s authenticate(TokenCredential credential, AzureEnvironment environment, String subscriptionId)", manager.getType().getName())
-                        : String.format("%1$s authenticate(TokenCredential credential, AzureEnvironment environment)", manager.getType().getName()))
+                .methodSignature(String.format("%1$s authenticate(TokenCredential credential, AzureProfile profile)", manager.getType().getName()))
                 .comment(comment -> {
                     comment.description(String.format("Creates an instance of %1$s service API entry point.", manager.getType().getName()));
                     comment.param("credential", "the credential to use");
-                    comment.param("environment", "the Azure cloud");
-                    if (requiresSubscriptionIdParameter) {
-                        comment.param("subscriptionId", "the Azure subscription ID");
-                    }
+                    comment.param("profile", "the Azure profile for client");
                     comment.methodReturns(String.format("the %1$s service API instance", manager.getType().getName()));
                 })
                 .method(method -> {
-                    method.line("Objects.requireNonNull(credential, \"'credential' cannot be null.\");");
-                    method.line("Objects.requireNonNull(environment, \"'environment' cannot be null.\");");
-                    if (requiresSubscriptionIdParameter) {
-                        method.line("Objects.requireNonNull(subscriptionId, \"'subscriptionId' cannot be null.\");");
-                    }
-
-                    method.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
-                    method.line("policies.add(new RequestIdPolicy());");
-                    method.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
-                    method.line("policies.add(new RetryPolicy());");
-                    method.line("policies.add(new AddDatePolicy());");
-                    method.line("policies.add(new BearerTokenAuthenticationPolicy(credential, environment.getManagementEndpoint() + \"/.default\"));");
-                    method.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
-                    method.line("policies.add(new HttpLoggingPolicy(new HttpLogOptions()));");
-                    method.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()");
-                    method.indent(() -> {
-                        method.line(".policies(policies.toArray(new HttpPipelinePolicy[0]))");
-                        method.line(".build();");
-                    });
-
-                    method.methodReturn(requiresSubscriptionIdParameter
-                            ? String.format("new %1$s(httpPipeline, environment, subscriptionId)", manager.getType().getName())
-                            : String.format("new %1$s(httpPipeline, environment)", manager.getType().getName()));
+                    method.line(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
+                    method.methodReturn(String.format("new %1$s(httpPipeline, profile)", manager.getType().getName()));
                 })
                 .build();
 
         Set<String> imports = new HashSet<>();
         imports.add(String.format("%1$s.%2$s", builderPackageName, builderTypeName));
+        imports.add(String.format("%1$s.%2$s", serviceClientPackageName, serviceClientTypeName));
         authenticateMethod.addImportsTo(imports);
         manager.getProperties().forEach(property -> {
             imports.add(property.getFluentType().getFullName());
@@ -138,23 +117,19 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                 classBlock.privateMemberVariable(property.getFluentType().getName(), property.getName());
             });
 
-            classBlock.privateFinalMemberVariable(builderTypeName, ModelNaming.MANAGER_PROPERTY_BUILDER);
+            classBlock.privateFinalMemberVariable(serviceClientTypeName, ModelNaming.MANAGER_PROPERTY_CLIENT);
 
-            classBlock.privateConstructor(requiresSubscriptionIdParameter
-                    ? String.format("%1$s(HttpPipeline httpPipeline, AzureEnvironment environment, String subscriptionId)", manager.getType().getName())
-                    : String.format("%1$s(HttpPipeline httpPipeline, AzureEnvironment environment)", manager.getType().getName()) , method -> {
+            classBlock.privateConstructor(String.format("%1$s(HttpPipeline httpPipeline, AzureProfile profile)", manager.getType().getName()) , method -> {
                 method.line("Objects.requireNonNull(httpPipeline, \"'httpPipeline' cannot be null.\");");
-                method.line("Objects.requireNonNull(environment, \"'environment' cannot be null.\");");
-                if (requiresSubscriptionIdParameter) {
-                    method.line("Objects.requireNonNull(subscriptionId, \"'subscriptionId' cannot be null.\");");
-                }
-                method.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_BUILDER, builderTypeName));
+                method.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
+                method.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
                 method.indent(() -> {
                     method.line(".pipeline(httpPipeline)");
-                    method.line(".endpoint(environment.getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
+                    method.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
                     if (requiresSubscriptionIdParameter) {
-                        method.line(".subscriptionId(subscriptionId);");
+                        method.line(".subscriptionId(profile.getSubscriptionId())");
                     }
+                    method.line(".buildClient();");
                 });
             });
 
@@ -167,10 +142,20 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
 
                 classBlock.publicMethod(String.format("%1$s %2$s()", property.getFluentType().getName(), property.getMethodName()), methodBlock -> {
                     methodBlock.ifBlock(String.format("this.%1$s == null", property.getName()), ifBlock -> {
-                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s, this);", property.getName(), property.getFluentImplementType().getName(), ModelNaming.MANAGER_PROPERTY_BUILDER, property.getInnerBuildMethodInvocation()));
+                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s(), this);",
+                                property.getName(),
+                                property.getFluentImplementType().getName(),
+                                ModelNaming.MANAGER_PROPERTY_CLIENT, property.getInnerClientGetMethod()));
                     });
                     methodBlock.methodReturn(property.getName());
                 });
+            });
+
+            classBlock.javadocComment(comment -> {
+                comment.methodReturns(String.format("Wrapped service client %1$s providing direct access to the underlying auto-generated API implementation, based on Azure REST API.", serviceClientTypeName));
+            });
+            classBlock.publicMethod(String.format("%1$s %2$s()", serviceClientTypeName, ModelNaming.METHOD_SERVICE_CLIENT), methodBlock -> {
+                methodBlock.methodReturn(String.format("this.%1$s", ModelNaming.MANAGER_PROPERTY_CLIENT));
             });
         });
     }

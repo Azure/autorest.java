@@ -1,0 +1,11 @@
+Objects.requireNonNull(credential, "'credential' cannot be null.");
+Objects.requireNonNull(profile, "'profile' cannot be null.");
+List<HttpPipelinePolicy> policies = new ArrayList<>();
+policies.add(new RequestIdPolicy());
+HttpPolicyProviders.addBeforeRetryPolicies(policies);
+policies.add(new RetryPolicy());
+policies.add(new AddDatePolicy());
+policies.add(new BearerTokenAuthenticationPolicy(credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+HttpPolicyProviders.addAfterRetryPolicies(policies);
+policies.add(new HttpLoggingPolicy(new HttpLogOptions()));
+HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).build();
