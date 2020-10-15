@@ -92,7 +92,10 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                     comment.param("profile", "the Azure profile for client");
                     comment.methodReturns(String.format("the %1$s service API instance", manager.getType().getName()));
                 })
-                .method(method -> method.text(FluentUtils.loadTextFromResource("Manager_authenticate.txt")))
+                .method(method -> {
+                    method.line(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
+                    method.methodReturn(String.format("return new %1$s(httpPipeline, profile)", manager.getType().getName()));
+                })
                 .build();
 
         Set<String> imports = new HashSet<>();

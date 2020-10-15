@@ -9,4 +9,3 @@ policies.add(new BearerTokenAuthenticationPolicy(credential, profile.getEnvironm
 HttpPolicyProviders.addAfterRetryPolicies(policies);
 policies.add(new HttpLoggingPolicy(new HttpLogOptions()));
 HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).build();
-return new StorageManager(httpPipeline, profile);

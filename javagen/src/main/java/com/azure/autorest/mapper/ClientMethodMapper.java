@@ -287,14 +287,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 methods.add(builder.build());
                             }
 
-                            if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder, parameters);
-                            }
-
                             if (generateClientMethodWithOnlyRequiredParameters) {
                                 methods.add(builder
                                         .onlyRequiredParameters(true)
                                         .build());
+                            }
+
+                            if (settings.isContextClientMethodParameter()) {
+                                addClientMethodWithContext(methods, builder, parameters);
                             }
                         }
                     }
@@ -549,6 +549,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         methods.add(builder
                 .parameters(withContextParameters) // update builder parameters to include context
+                .onlyRequiredParameters(false)
                 .build());
         // reset the parameters to original params
         builder.parameters(parameters);
