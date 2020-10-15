@@ -60,6 +60,8 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
 
         String builderPackageName = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
         String builderTypeName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
+        String serviceClientPackageName = ClientModelUtil.getServiceClientInterfacePackageName();
+        String serviceClientTypeName = serviceClient.getInterfaceName();
 
         MethodTemplate authenticateMethod = MethodTemplate.builder()
                 .imports(Arrays.asList(
@@ -122,6 +124,7 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
 
         Set<String> imports = new HashSet<>();
         imports.add(String.format("%1$s.%2$s", builderPackageName, builderTypeName));
+        imports.add(String.format("%1$s.%2$s", serviceClientPackageName, serviceClientTypeName));
         authenticateMethod.addImportsTo(imports);
         manager.getProperties().forEach(property -> {
             imports.add(property.getFluentType().getFullName());
@@ -138,7 +141,7 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                 classBlock.privateMemberVariable(property.getFluentType().getName(), property.getName());
             });
 
-            classBlock.privateFinalMemberVariable(builderTypeName, ModelNaming.MANAGER_PROPERTY_BUILDER);
+            classBlock.privateFinalMemberVariable(serviceClientTypeName, ModelNaming.MANAGER_PROPERTY_CLIENT);
 
             classBlock.privateConstructor(requiresSubscriptionIdParameter
                     ? String.format("%1$s(HttpPipeline httpPipeline, AzureEnvironment environment, String subscriptionId)", manager.getType().getName())
@@ -148,13 +151,14 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
                 if (requiresSubscriptionIdParameter) {
                     method.line("Objects.requireNonNull(subscriptionId, \"'subscriptionId' cannot be null.\");");
                 }
-                method.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_BUILDER, builderTypeName));
+                method.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
                 method.indent(() -> {
                     method.line(".pipeline(httpPipeline)");
                     method.line(".endpoint(environment.getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
                     if (requiresSubscriptionIdParameter) {
-                        method.line(".subscriptionId(subscriptionId);");
+                        method.line(".subscriptionId(subscriptionId)");
                     }
+                    method.line(".buildClient();");
                 });
             });
 
@@ -167,10 +171,20 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
 
                 classBlock.publicMethod(String.format("%1$s %2$s()", property.getFluentType().getName(), property.getMethodName()), methodBlock -> {
                     methodBlock.ifBlock(String.format("this.%1$s == null", property.getName()), ifBlock -> {
-                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s, this);", property.getName(), property.getFluentImplementType().getName(), ModelNaming.MANAGER_PROPERTY_BUILDER, property.getInnerBuildMethodInvocation()));
+                        methodBlock.line(String.format("this.%1$s = new %2$s(%3$s.%4$s(), this);",
+                                property.getName(),
+                                property.getFluentImplementType().getName(),
+                                ModelNaming.MANAGER_PROPERTY_CLIENT, property.getInnerClientGetMethod()));
                     });
                     methodBlock.methodReturn(property.getName());
                 });
+            });
+
+            classBlock.javadocComment(comment -> {
+                comment.methodReturns(String.format("Wrapped service client %1$s providing direct access to the underlying auto-generated API implementation, based on Azure REST API.", serviceClientTypeName));
+            });
+            classBlock.publicMethod(String.format("%1$s %2$s()", serviceClientTypeName, ModelNaming.METHOD_SERVICE_CLIENT), methodBlock -> {
+                methodBlock.methodReturn(String.format("this.%1$s", ModelNaming.MANAGER_PROPERTY_CLIENT));
             });
         });
     }

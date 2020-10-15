@@ -62,7 +62,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             methodTemplates.forEach(m -> m.writeMethod(classBlock));
 
             // method for inner model
-            classBlock.publicMethod(collection.getInnerMethodSignature(), methodBlock -> {
+            classBlock.privateMethod(collection.getInnerMethodSignature(), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.COLLECTION_PROPERTY_INNER));
             });
 

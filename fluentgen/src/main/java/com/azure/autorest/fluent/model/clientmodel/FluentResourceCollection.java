@@ -46,16 +46,16 @@ public class FluentResourceCollection {
 
         this.interfaceType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(groupClient.getInterfaceName())
+                .name(groupClient.getClassBaseName())
                 .build();
         this.implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
+                .name(groupClient.getClassBaseName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
 
         this.innerClientType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getFluentSubpackage()))
-                .name(groupClient.getClassBaseName() + "Client")
+                .name(groupClient.getInterfaceName())
                 .build();
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()

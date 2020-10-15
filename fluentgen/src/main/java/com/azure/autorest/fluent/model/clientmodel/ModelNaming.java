@@ -21,7 +21,7 @@ public class ModelNaming {
     public static final String COLLECTION_PROPERTY_INNER = "innerClient";
     public static final String COLLECTION_PROPERTY_MANAGER = "serviceManager";
 
-    public static final String MANAGER_PROPERTY_BUILDER = "clientBuilder";
+    public static final String MANAGER_PROPERTY_CLIENT = "clientObject";
 
     public static final String MODEL_FLUENT_INTERFACE_DEFINITION = "Definition";
     public static final String MODEL_FLUENT_INTERFACE_DEFINITION_STAGES = "DefinitionStages";

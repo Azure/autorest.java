@@ -53,9 +53,9 @@ abstract public class FluentBaseMethod extends FluentMethod {
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
                     // resource collection from manager
-                    String collectionReferenceMethodName = FluentStatic.getFluentManager().getProperties().stream()
+                    String innerClientGetMethod = FluentStatic.getFluentManager().getProperties().stream()
                             .filter(p -> p.getFluentType().getName().equals(collection.getInterfaceType().getName()))
-                            .map(FluentManagerProperty::getMethodName)
+                            .map(FluentManagerProperty::getInnerClientGetMethod)
                             .findFirst().get();
 
                     // method invocation
@@ -89,8 +89,8 @@ abstract public class FluentBaseMethod extends FluentMethod {
                     block.line("this.%1$s = %2$s.%3$s().%4$s().%5$s%6$s;",
                             ModelNaming.MODEL_PROPERTY_INNER,
                             ModelNaming.MODEL_PROPERTY_MANAGER,
-                            collectionReferenceMethodName,
                             ModelNaming.METHOD_SERVICE_CLIENT,
+                            innerClientGetMethod,
                             methodInvocation,
                             afterInvocationCode);
                     block.methodReturn("this");
