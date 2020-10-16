@@ -29,7 +29,7 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
 
     public CollectionMethodTypeConversionTemplate(FluentCollectionMethod fluentMethod, IType innerType) {
         Set<String> imports = new HashSet<>();
-        fluentMethod.getFluentReturnType().addImportsTo(imports, false);
+        fluentMethod.addImportsTo(imports, false);
         // Type inner = ...
         innerType.addImportsTo(imports, false);
         if (innerType instanceof ListType || innerType instanceof MapType) {
