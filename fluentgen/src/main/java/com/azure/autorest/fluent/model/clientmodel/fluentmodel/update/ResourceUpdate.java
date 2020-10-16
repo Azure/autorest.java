@@ -97,6 +97,13 @@ public class ResourceUpdate extends ResourceOperation {
         return "update";
     }
 
+    @Override
+    protected List<ClientModelProperty> getProperties() {
+        return super.getProperties().stream()
+                .filter(p -> !p.getIsReadOnlyForUpdate())
+                .collect(Collectors.toList());
+    }
+
     private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
                 stage, parameter, this.getLocalVariableByMethodParameter(parameter));

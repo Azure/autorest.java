@@ -208,6 +208,13 @@ public class ResourceCreate extends ResourceOperation  {
     }
 
     @Override
+    protected List<ClientModelProperty> getProperties() {
+        return super.getProperties().stream()
+                .filter(p -> !p.getIsReadOnlyForCreate())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<FluentMethod> getFluentMethods() {
         List<FluentMethod> methods = this.getDefinitionStages().stream()
                 .flatMap(s -> s.getMethods().stream())
