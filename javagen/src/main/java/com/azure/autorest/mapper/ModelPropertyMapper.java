@@ -11,6 +11,8 @@ import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty> {
     private static ModelPropertyMapper instance = new ModelPropertyMapper();
@@ -125,6 +127,17 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             Object objValue = ((ConstantSchema) property.getSchema()).getValue().getValue();
             builder.isConstant(true);
             builder.defaultValue(objValue == null ? null : propertyClientType.defaultValueExpression(String.valueOf(objValue)));
+        }
+
+        // x-ms-mutability
+        if (property.getExtensions() != null) {
+            List<String> xmsMutability = property.getExtensions().getXmsMutability();
+            if (xmsMutability != null) {
+                List<ClientModelProperty.Mutability> mutabilities = xmsMutability.stream()
+                        .map(m -> ClientModelProperty.Mutability.valueOf(m.toUpperCase(Locale.ROOT)))
+                        .collect(Collectors.toList());
+                builder.mutabilities(mutabilities);
+            }
         }
 
         return builder.build();
