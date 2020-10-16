@@ -39,4 +39,8 @@ public class FluentClient {
     public void setManager(FluentManager manager) {
         this.manager = manager;
     }
+
+    public Client getInnerClient() {
+        return this.client;
+    }
 }

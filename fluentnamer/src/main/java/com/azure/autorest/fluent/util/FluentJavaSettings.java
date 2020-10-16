@@ -54,6 +54,8 @@ public class FluentJavaSettings {
      */
     private final Map<String, String> namingOverride = new HashMap<>();
 
+    private String pomFilename = "pom.xml";
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -85,6 +87,10 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
+    public String getPomFilename() {
+        return pomFilename;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -110,6 +116,8 @@ public class FluentJavaSettings {
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
         loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s) );
+
+        loadStringSetting("pom-file", s -> pomFilename = s );
 
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {

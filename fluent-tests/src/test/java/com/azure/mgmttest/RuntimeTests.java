@@ -34,8 +34,20 @@ import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RuntimeTests {
 
@@ -74,6 +86,31 @@ public class RuntimeTests {
         StorageManager storageManager = authenticateStorageManager();
         PagedIterable<StorageAccount> storageAccounts = storageManager.storageAccounts().list();
         //List<StorageAccount> storageAccountList = storageManager.storageAccounts().list().stream().collect(Collectors.toList());
+    }
+
+    @Test
+    public void testPom() throws ParserConfigurationException, IOException, SAXException {
+        File pomFile = new File("pom_generated_resources.xml");
+
+        Map<String, String> rootTags = new HashMap<>();
+
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(pomFile);
+        NodeList nodeList = doc.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); ++i) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element elementNode = (Element) node;
+                if (elementNode.getChildNodes().getLength() == 1 && elementNode.getChildNodes().item(0).getNodeType() == Node.TEXT_NODE) {
+                    Text textNode = (Text) elementNode.getChildNodes().item(0);
+                    rootTags.put(elementNode.getTagName(), textNode.getWholeText());
+                }
+            }
+        }
+
+        Assertions.assertTrue(rootTags.containsKey("name"));
+        Assertions.assertTrue(rootTags.get("name").contains("Azure SDK"));
     }
 
     @Test

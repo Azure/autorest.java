@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
-    private static final FluentServiceClientTemplate instance = new FluentServiceClientTemplate();
+    private static final FluentServiceClientTemplate INSTANCE = new FluentServiceClientTemplate();
     static {
         if (JavaSettings.getInstance().isFluentLite()) {
             MethodTemplate getContextMethod = MethodTemplate.builder()
@@ -139,14 +139,14 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     })
                     .build();
 
-            instance.additionalMethods.add(getContextMethod);
-            instance.additionalMethods.add(mergeContextMethod);
-            instance.additionalMethods.add(getLroResultMethod);
-            instance.additionalMethods.add(getLroFinalResultOrErrorMethod);
+            INSTANCE.additionalMethods.add(getContextMethod);
+            INSTANCE.additionalMethods.add(mergeContextMethod);
+            INSTANCE.additionalMethods.add(getLroResultMethod);
+            INSTANCE.additionalMethods.add(getLroFinalResultOrErrorMethod);
         }
     }
 
     public static FluentServiceClientTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }
