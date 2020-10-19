@@ -14,11 +14,16 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model for Manager.
+ */
 public class FluentManager {
 
     private final Client client;
 
     private final ClassType type;
+
+    private final String serviceName;
 
     private final List<FluentManagerProperty> properties = new ArrayList<>();
 
@@ -27,9 +32,11 @@ public class FluentManager {
 
         this.client = client;
 
+        this.serviceName = CodeNamer.toPascalCase(FluentUtils.getServiceName(clientName));
+
         this.type = new ClassType.Builder()
                 .packageName(settings.getPackage())
-                .name(CodeNamer.toPascalCase(FluentUtils.getServiceName(clientName)) + "Manager")
+                .name(this.serviceName + "Manager")
                 .build();
     }
 
@@ -43,6 +50,10 @@ public class FluentManager {
 
     public String getDescription() {
         return String.format("Entry point to %1$s.\n%2$s", this.getType().getName(), client.getClientDescription());
+    }
+
+    public String getServiceName() {
+        return serviceName;
     }
 
     public List<FluentManagerProperty> getProperties() {

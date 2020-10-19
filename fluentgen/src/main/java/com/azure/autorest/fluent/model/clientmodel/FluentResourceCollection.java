@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Model for Azure resource collection.
+ */
 // Fluent resource collection API. E.g. StorageAccounts.
 public class FluentResourceCollection {
 

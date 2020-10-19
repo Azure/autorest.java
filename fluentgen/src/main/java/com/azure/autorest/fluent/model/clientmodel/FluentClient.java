@@ -10,6 +10,9 @@ import com.azure.autorest.model.clientmodel.Client;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model for all Fluent lite related models.
+ */
 public class FluentClient {
 
     private final Client client;

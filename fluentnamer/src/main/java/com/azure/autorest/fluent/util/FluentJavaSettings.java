@@ -56,6 +56,10 @@ public class FluentJavaSettings {
 
     private String pomFilename = "pom.xml";
 
+    private Optional<String> artifactVersion = Optional.empty();
+
+    private boolean sdkIntegration = false;
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -91,6 +95,14 @@ public class FluentJavaSettings {
         return pomFilename;
     }
 
+    public Optional<String> getArtifactVersion() {
+        return artifactVersion;
+    }
+
+    public boolean isSdkIntegration() {
+        return sdkIntegration;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -118,6 +130,9 @@ public class FluentJavaSettings {
         loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s) );
 
         loadStringSetting("pom-file", s -> pomFilename = s );
+        loadStringSetting("artifact-version", s -> artifactVersion = Optional.of(s) );
+
+        loadBooleanSetting("sdk-integration", b -> sdkIntegration = b );
 
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {

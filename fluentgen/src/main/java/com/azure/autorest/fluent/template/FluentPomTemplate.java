@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.template.PomTemplate;
@@ -24,14 +25,27 @@ public class FluentPomTemplate extends PomTemplate {
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
         projectBlock.block("build", buildBlock -> {
             buildBlock.block("plugins", pluginsBlock -> {
-                pluginsBlock.block("plugin", pluginBlock -> {
-                    pluginBlock.tag("groupId", "org.apache.maven.plugins");
-                    pluginBlock.tag("artifactId", "maven-compiler-plugin");
-                    pluginBlock.tag("version", "3.8.1");
-                    pluginBlock.block("configuration", configurationBlock -> {
-                        configurationBlock.tag("release", "11");
+                if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
+                    // jacoco-maven-plugin
+                    pluginsBlock.block("plugin", pluginBlock -> {
+                        pluginBlock.tag("groupId", "org.jacoco");
+                        pluginBlock.tag("artifactId", "jacoco-maven-plugin");
+                        pluginBlock.tag("version", "0.8.5");
+                        pluginBlock.block("configuration", configurationBlock -> {
+                            configurationBlock.tag("skip", "true");
+                        });
                     });
-                });
+                } else {
+                    // maven-compiler-plugin
+                    pluginsBlock.block("plugin", pluginBlock -> {
+                        pluginBlock.tag("groupId", "org.apache.maven.plugins");
+                        pluginBlock.tag("artifactId", "maven-compiler-plugin");
+                        pluginBlock.tag("version", "3.8.1");
+                        pluginBlock.block("configuration", configurationBlock -> {
+                            configurationBlock.tag("release", "11");
+                        });
+                    });
+                }
             });
         });
     }
