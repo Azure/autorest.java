@@ -186,7 +186,7 @@ public class FluentGen extends NewPlugin {
                 Project project = new Project(fluentClient);
 
                 // Fluent manager
-                javaPackage.addFluentManager(fluentClient.getManager());
+                javaPackage.addFluentManager(fluentClient.getManager(), project);
 
                 // Fluent resource model
                 for (FluentResourceModel model : fluentClient.getResourceModels()) {
