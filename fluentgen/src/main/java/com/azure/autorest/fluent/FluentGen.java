@@ -177,10 +177,11 @@ public class FluentGen extends NewPlugin {
 
             // Fluent Lite
             if (javaSettings.isFluentLite()) {
-                FluentStatic.setClient(client);
                 FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+                FluentStatic.setClient(client);
 
                 FluentClient fluentClient = fluentMapper.map(codeModel, client);
+                // project
                 fluentClient.setProject(new Project(fluentClient));
 
                 // Fluent manager
