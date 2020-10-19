@@ -13,7 +13,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
-import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.credential.TokenCredential;
@@ -27,7 +26,6 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaFile> {
+public class FluentManagerTemplate {
 
     private static final FluentManagerTemplate INSTANCE = new FluentManagerTemplate();
 
@@ -47,7 +45,6 @@ public class FluentManagerTemplate implements IJavaTemplate<FluentManager, JavaF
         return INSTANCE;
     }
 
-    @Override
     public void write(FluentManager manager, Project project, JavaFile javaFile) {
         ServiceClient serviceClient = manager.getClient().getServiceClient();
 
