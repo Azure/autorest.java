@@ -136,45 +136,47 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
     @Override
     protected void writeAdditionalClassBlock(JavaClass classBlock) {
-        classBlock.privateStaticFinalClass("HttpResponseImpl extends HttpResponse", block -> {
-            block.privateFinalMemberVariable("int", "statusCode");
-            block.privateFinalMemberVariable("byte[]", "responseBody");
-            block.privateFinalMemberVariable("HttpHeaders", "httpHeaders");
+        if (JavaSettings.getInstance().isFluentLite()) {
+            classBlock.privateStaticFinalClass("HttpResponseImpl extends HttpResponse", block -> {
+                block.privateFinalMemberVariable("int", "statusCode");
+                block.privateFinalMemberVariable("byte[]", "responseBody");
+                block.privateFinalMemberVariable("HttpHeaders", "httpHeaders");
 
-            block.packagePrivateConstructor("HttpResponseImpl(int statusCode, HttpHeaders httpHeaders, String responseBody)", code -> {
-                code.line("super(null);");
-                code.line("this.statusCode = statusCode;");
-                code.line("this.httpHeaders = httpHeaders;");
-                code.line("this.responseBody = responseBody.getBytes(StandardCharsets.UTF_8);");
-            });
+                block.packagePrivateConstructor("HttpResponseImpl(int statusCode, HttpHeaders httpHeaders, String responseBody)", code -> {
+                    code.line("super(null);");
+                    code.line("this.statusCode = statusCode;");
+                    code.line("this.httpHeaders = httpHeaders;");
+                    code.line("this.responseBody = responseBody.getBytes(StandardCharsets.UTF_8);");
+                });
 
-            block.publicMethod("int getStatusCode()", code -> {
-                code.methodReturn("statusCode");
-            });
+                block.publicMethod("int getStatusCode()", code -> {
+                    code.methodReturn("statusCode");
+                });
 
-            block.publicMethod("String getHeaderValue(String s)", code -> {
-                code.methodReturn("httpHeaders.getValue(s)");
-            });
+                block.publicMethod("String getHeaderValue(String s)", code -> {
+                    code.methodReturn("httpHeaders.getValue(s)");
+                });
 
-            block.publicMethod("HttpHeaders getHeaders()", code -> {
-                code.methodReturn("httpHeaders");
-            });
+                block.publicMethod("HttpHeaders getHeaders()", code -> {
+                    code.methodReturn("httpHeaders");
+                });
 
-            block.publicMethod("Flux<ByteBuffer> getBody()", code -> {
-                code.methodReturn("Flux.just(ByteBuffer.wrap(responseBody))");
-            });
+                block.publicMethod("Flux<ByteBuffer> getBody()", code -> {
+                    code.methodReturn("Flux.just(ByteBuffer.wrap(responseBody))");
+                });
 
-            block.publicMethod("Mono<byte[]> getBodyAsByteArray()", code -> {
-                code.methodReturn("Mono.just(responseBody)");
-            });
+                block.publicMethod("Mono<byte[]> getBodyAsByteArray()", code -> {
+                    code.methodReturn("Mono.just(responseBody)");
+                });
 
-            block.publicMethod("Mono<String> getBodyAsString()", code -> {
-                code.methodReturn("Mono.just(new String(responseBody, StandardCharsets.UTF_8))");
-            });
+                block.publicMethod("Mono<String> getBodyAsString()", code -> {
+                    code.methodReturn("Mono.just(new String(responseBody, StandardCharsets.UTF_8))");
+                });
 
-            block.publicMethod("Mono<String> getBodyAsString(Charset charset)", code -> {
-                code.methodReturn("Mono.just(new String(responseBody, charset))");
+                block.publicMethod("Mono<String> getBodyAsString(Charset charset)", code -> {
+                    code.methodReturn("Mono.just(new String(responseBody, charset))");
+                });
             });
-        });
+        }
     }
 }
