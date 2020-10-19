@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -280,6 +281,15 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             }
 
             additionalMethods.forEach(method -> method.writeMethod(classBlock));
+
+            this.writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    /**
+     * Extention for additional code in class.
+     * @param classBlock the class block.
+     */
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
     }
 }
