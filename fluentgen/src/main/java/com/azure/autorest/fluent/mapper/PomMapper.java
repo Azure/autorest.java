@@ -5,7 +5,7 @@
 
 package com.azure.autorest.fluent.mapper;
 
-import com.azure.autorest.fluent.model.Project;
+import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.Pom;
 
