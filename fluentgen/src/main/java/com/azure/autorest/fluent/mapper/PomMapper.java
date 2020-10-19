@@ -5,7 +5,7 @@
 
 package com.azure.autorest.fluent.mapper;
 
-import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.Pom;
 
@@ -13,16 +13,14 @@ import java.util.Arrays;
 
 public class PomMapper {
 
-    public Pom map(FluentClient fluentClient) {
-        String serviceName = fluentClient.getProject().getServiceName();
-
+    public Pom map(Project project) {
         Pom pom = new Pom();
-        pom.setGroupId(fluentClient.getProject().getGroupId());
-        pom.setArtifactId(fluentClient.getProject().getArtifactId());
-        pom.setVersion(fluentClient.getProject().getVersion());
+        pom.setGroupId(project.getGroupId());
+        pom.setArtifactId(project.getArtifactId());
+        pom.setVersion(project.getVersion());
 
-        pom.setServiceName(serviceName);
-        pom.setServiceDescription(fluentClient.getInnerClient().getClientDescription());
+        pom.setServiceName(project.getServiceName());
+        pom.setServiceDescription(project.getServiceDescription());
 
         pom.setDependencyIdentifiers(Arrays.asList(
                 "com.azure:azure-core-management:1.0.0"

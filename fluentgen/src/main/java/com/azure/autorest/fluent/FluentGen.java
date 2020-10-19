@@ -181,8 +181,9 @@ public class FluentGen extends NewPlugin {
                 FluentStatic.setClient(client);
 
                 FluentClient fluentClient = fluentMapper.map(codeModel, client);
+
                 // project
-                fluentClient.setProject(new Project(fluentClient));
+                Project project = new Project(fluentClient);
 
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager());
@@ -200,7 +201,7 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addUtils();
 
                 // POM
-                Pom pom = new PomMapper().map(fluentClient);
+                Pom pom = new PomMapper().map(project);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 

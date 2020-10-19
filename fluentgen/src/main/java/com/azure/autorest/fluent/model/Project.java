@@ -14,6 +14,7 @@ import java.util.Locale;
 public class Project {
 
     private final String serviceName;
+    private final String serviceDescription;
 
     private final String namespace;
     private final String groupId = "com.azure.resourcemanager";
@@ -26,10 +27,16 @@ public class Project {
         this.artifactId = String.format("azure-resourcemanager-%1$s-generated", serviceName.toLowerCase(Locale.ROOT));
 
         FluentStatic.getFluentJavaSettings().getArtifactVersion().ifPresent(version -> this.version = version);
+
+        this.serviceDescription = fluentClient.getInnerClient().getClientDescription();
     }
 
     public String getServiceName() {
         return serviceName;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
     }
 
     public String getNamespace() {
