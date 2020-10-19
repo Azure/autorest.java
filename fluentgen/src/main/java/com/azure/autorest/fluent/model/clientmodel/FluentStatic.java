@@ -8,6 +8,11 @@ package com.azure.autorest.fluent.model.clientmodel;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 
+/**
+ * Convenient class for global variables.
+ *
+ * Avoid using it unless no better solution.
+ */
 public class FluentStatic {
 
     private static Client client;
@@ -17,7 +22,6 @@ public class FluentStatic {
     private static FluentJavaSettings fluentJavaSettings;
 
     private FluentStatic() {
-
     }
 
     /**

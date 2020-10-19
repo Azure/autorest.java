@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Model for Azure resource instance.
+ */
 // Fluent resource instance. E.g. StorageAccount.
 // Also include some simple wrapper class.
 public class FluentResourceModel {

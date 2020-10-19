@@ -14,6 +14,9 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model for Manager.
+ */
 public class FluentManager {
 
     private final Client client;
