@@ -14,6 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -250,5 +251,14 @@ public abstract class ResourceOperation {
     private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
         initRequestBodyClientModel();
         return this.requestBodyModelPropertiesMap;
+    }
+
+    protected boolean hasLocation() {
+        return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
+                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
+    }
+
+    protected boolean isLocationProperty(ClientModelProperty property) {
+        return this.hasLocation() && property.getName().equals(ResourceTypeName.FIELD_LOCATION);
     }
 }

@@ -23,7 +23,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMode
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyRegion;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentParentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -54,20 +53,6 @@ public class ResourceCreate extends ResourceOperation  {
                 resourceModel.getName(), methodName, bodyParameterModel.getName());
     }
 
-//    private boolean hasResourceGroup() {
-//        return urlPathSegments.hasResourceGroup();
-//    }
-
-    private boolean hasLocation() {
-        return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
-                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
-    }
-
-//    private boolean hasTags() {
-//        IType type = resourceModel.getProperty(ResourceTypeName.FIELD_TAGS).getFluentType();
-//        return type instanceof ListType && ((ListType) type).getElementType() == ClassType.String;
-//    }
-
     public List<DefinitionStage> getDefinitionStages() {
         if (definitionStages != null) {
             return definitionStages;
@@ -93,8 +78,6 @@ public class ResourceCreate extends ResourceOperation  {
         // create
         DefinitionStageCreate definitionStageCreate = new DefinitionStageCreate();
 
-        final boolean hasLocation = this.hasLocation();
-
         definitionStages.add(definitionStageBlank);
 
         // required properties
@@ -106,7 +89,7 @@ public class ResourceCreate extends ResourceOperation  {
                 DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
                 if (lastStage == null) {
                     // first property
-                    if (hasLocation && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+                    if (isLocationProperty(property)) {
                         definitionStageBlank.setExtendStages(stage.getName());
 
                         if (definitionStageParent != null) {
