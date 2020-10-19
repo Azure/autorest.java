@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTemplate;
@@ -49,11 +50,11 @@ public class FluentJavaPackage extends JavaPackage {
         getJavaFiles().add(javaFile);
     }
 
-    public final void addFluentManager(FluentManager model) {
+    public final void addFluentManager(FluentManager model, Project project) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(
                 model.getType().getPackage(),
                 model.getType().getName());
-        FluentManagerTemplate.getInstance().write(model, javaFile);
+        FluentManagerTemplate.getInstance().write(model, project, javaFile);
         getJavaFiles().add(javaFile);
     }
 
