@@ -9,6 +9,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.management.Region;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.profile.AzureProfile;
@@ -19,6 +20,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.resources.ResourceManager;
+import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
@@ -122,15 +124,15 @@ public class RuntimeTests {
         String rgName = "rg1-weidxu-fluentlite";
         String saName = "sa1weidxulite";
         String blobContainerName = "container1";
-        String location = "westus";
+        Region region = Region.US_WEST;
 
-        resourceManager.resourceGroups().define(rgName)
-                .withLocation(location)
+        ResourceGroup rg = resourceManager.resourceGroups().define(rgName)
+                .withRegion(region)
                 .create();
 
         try {
             StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
-                    .withLocation(location)
+                    .withRegion(region)
                     .withExistingResourceGroup(rgName)
                     .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                     .withKind(Kind.STORAGE_V2)

@@ -4,6 +4,7 @@
 package com.azure.mgmttest;
 
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
@@ -39,7 +40,7 @@ public class LiteCompilationTests {
         StorageManager storageManager = mock(StorageManager.class);
 
         StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
-                .withLocation("westus")
+                .withRegion(Region.US_WEST)
                 .withExistingResourceGroup("rg-weidxu")
                 .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                 .withKind(Kind.STORAGE_V2)
@@ -70,7 +71,7 @@ public class LiteCompilationTests {
         ResourceManager resourceManager = mock(ResourceManager.class);
 
         ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
-                .withLocation("westus")
+                .withRegion(Region.US_WEST)
                 .create();
 
         resourceGroup.update()
