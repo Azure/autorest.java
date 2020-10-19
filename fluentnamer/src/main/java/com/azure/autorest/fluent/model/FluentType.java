@@ -22,6 +22,8 @@ public class FluentType {
 
     public static final ClassType AzureProfile = new ClassType.Builder().knownClass(com.azure.core.management.profile.AzureProfile.class).build();
 
+    public static final ClassType Region = new ClassType.Builder().knownClass(com.azure.core.management.Region.class).build();
+
     private FluentType() {
     }
 

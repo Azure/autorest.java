@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMeth
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentModelPropertyRegion;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentParentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -149,7 +150,7 @@ public class ResourceCreate extends ResourceOperation  {
 
         for (DefinitionStage stage : definitionStages) {
             if (stage.getModelProperty() != null) {
-                stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, stage.getModelProperty()));
+                this.generatePropertyMethods(stage, requestBodyParameterModel, stage.getModelProperty());
             }
         }
 
@@ -169,7 +170,7 @@ public class ResourceCreate extends ResourceOperation  {
             DefinitionStage stage = new DefinitionStage("With" + CodeNamer.toPascalCase(property.getName()), property);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, property));
+            this.generatePropertyMethods(stage, requestBodyParameterModel, property);
 
             optionalDefinitionStages.add(stage);
         }
@@ -251,6 +252,22 @@ public class ResourceCreate extends ResourceOperation  {
         return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
                 resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
                 this.getResourceLocalVariables());
+    }
+
+    private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
+        if (this.hasLocation() && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+            // location -> region
+            stage.getMethods().add(new FluentModelPropertyRegion.FluentModelPropertyRegionMethod(
+                    this.getResourceModel(), FluentMethodType.CREATE_WITH,
+                    stage, model, property,
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter())));
+            stage.getMethods().add(new FluentModelPropertyRegion.FluentModelPropertyRegionNameMethod(
+                    this.getResourceModel(), FluentMethodType.CREATE_WITH,
+                    stage, model, property,
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter())));
+        } else {
+            stage.getMethods().add(getPropertyMethod(stage, model, property));
+        }
     }
 
     private FluentMethod getPropertyMethod(DefinitionStage stage, ClientModel model, ClientModelProperty property) {

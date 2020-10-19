@@ -21,21 +21,31 @@ import java.util.Set;
 public class FluentModelPropertyMethod extends FluentMethod {
 
     private final ClientModel clientModel;
-    private final ClientModelProperty modelProperty;
+    protected final ClientModelProperty modelProperty;
     private final LocalVariable localVariable;
 
     public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
                                      FluentInterfaceStage stage, ClientModel clientModel,
                                      ClientModelProperty modelProperty,
                                      LocalVariable localVariable) {
+        this(model, type, stage, clientModel, modelProperty, localVariable,
+                modelProperty.getSetterName(),
+                String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription()));
+    }
+
+    public FluentModelPropertyMethod(FluentResourceModel model, FluentMethodType type,
+                                     FluentInterfaceStage stage, ClientModel clientModel,
+                                     ClientModelProperty modelProperty,
+                                     LocalVariable localVariable,
+                                     String name, String description) {
         super(model, type);
 
         this.clientModel = clientModel;
         this.modelProperty = modelProperty;
         this.localVariable = localVariable;
 
-        this.name = modelProperty.getSetterName();
-        this.description = String.format("Specifies the %1$s property: %2$s.", modelProperty.getName(), modelProperty.getDescription());
+        this.name = name;
+        this.description = description;
         this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(stage.getNextStage().getName()).build());
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
 
