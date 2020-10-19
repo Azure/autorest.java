@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 
 public class FluentStatic {
@@ -12,6 +13,8 @@ public class FluentStatic {
     private static Client client;
 
     private static FluentClient fluentClient;
+
+    private static FluentJavaSettings fluentJavaSettings;
 
     private FluentStatic() {
 
@@ -37,5 +40,16 @@ public class FluentStatic {
 
     public static void setFluentClient(FluentClient fluentClient) {
         FluentStatic.fluentClient = fluentClient;
+    }
+
+    /**
+     * @return settings for Fluent.
+     */
+    public static FluentJavaSettings getFluentJavaSettings() {
+        return fluentJavaSettings;
+    }
+
+    public static void setFluentJavaSettings(FluentJavaSettings fluentJavaSettings) {
+        FluentStatic.fluentJavaSettings = fluentJavaSettings;
     }
 }

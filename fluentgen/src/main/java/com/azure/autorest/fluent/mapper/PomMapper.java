@@ -5,25 +5,21 @@
 
 package com.azure.autorest.fluent.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
-import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.Pom;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class PomMapper {
 
-    public Pom map(CodeModel codeModel, FluentClient fluentClient) {
-        String clientName = Utils.getJavaName(codeModel);
-        String serviceName = FluentUtils.getServiceName(clientName);
+    public Pom map(FluentClient fluentClient) {
+        String serviceName = fluentClient.getProject().getServiceName();
 
         Pom pom = new Pom();
-        pom.setGroupId("com.azure.resourcemanager");
-        pom.setArtifactId(String.format("azure-resourcemanager-%1$s-generated", serviceName.toLowerCase(Locale.ROOT)));
-        pom.setVersion("1.0.0-beta");
+        pom.setGroupId(fluentClient.getProject().getGroupId());
+        pom.setArtifactId(fluentClient.getProject().getArtifactId());
+        pom.setVersion(fluentClient.getProject().getVersion());
 
         pom.setServiceName(serviceName);
         pom.setServiceDescription(fluentClient.getInnerClient().getClientDescription());
@@ -31,6 +27,11 @@ public class PomMapper {
         pom.setDependencyIdentifiers(Arrays.asList(
                 "com.azure:azure-core-management:1.0.0"
         ));
+
+        if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
+            pom.setParentIdentifier("com.azure:azure-client-sdk-parent:1.7.0");
+            pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
+        }
 
         return pom;
     }

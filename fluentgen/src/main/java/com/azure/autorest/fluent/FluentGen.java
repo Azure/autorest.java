@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
+import com.azure.autorest.fluent.model.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -177,8 +178,10 @@ public class FluentGen extends NewPlugin {
             // Fluent Lite
             if (javaSettings.isFluentLite()) {
                 FluentStatic.setClient(client);
+                FluentStatic.setFluentJavaSettings(fluentJavaSettings);
 
                 FluentClient fluentClient = fluentMapper.map(codeModel, client);
+                fluentClient.setProject(new Project(fluentClient));
 
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager());
@@ -196,7 +199,7 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addUtils();
 
                 // POM
-                Pom pom = new PomMapper().map(codeModel, fluentClient);
+                Pom pom = new PomMapper().map(fluentClient);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 

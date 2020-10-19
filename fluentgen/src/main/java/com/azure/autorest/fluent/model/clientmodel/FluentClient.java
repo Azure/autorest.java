@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.fluent.model.Project;
 import com.azure.autorest.model.clientmodel.Client;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class FluentClient {
     private final List<FluentResourceModel> resourceModels = new ArrayList<>();
 
     private final List<FluentResourceCollection> resourceCollections = new ArrayList<>();
+
+    private Project project;
 
     public FluentClient(Client client) {
         this.client = client;
@@ -38,6 +41,14 @@ public class FluentClient {
 
     public void setManager(FluentManager manager) {
         this.manager = manager;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Client getInnerClient() {

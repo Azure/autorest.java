@@ -47,7 +47,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                     String parentVersion = parts[2];
                     parentBlock.tag("groupId", parentGroupId);
                     parentBlock.tag("artifactId", parentArtifactId);
-                    parentBlock.tag("parentVersion", parentVersion);
+                    parentBlock.tag("version", parentVersion);
                     parentBlock.tag("relativePath", pom.getParentRelativePath());
                 });
             }
