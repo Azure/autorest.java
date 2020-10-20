@@ -90,7 +90,7 @@ public class FluentMapper {
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
-        requireModules.add(new ModuleInfo.RequireModule("com.azure.resourcemanager.resources", true));
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.management", true));
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));

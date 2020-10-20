@@ -5,6 +5,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.javamodel.JavaFile;
 
@@ -20,24 +21,32 @@ public class ModuleInfoTemplate implements IJavaTemplate<ModuleInfo, JavaFile> {
     }
 
     @Override
-    public void write(ModuleInfo model, JavaFile context) {
-        context.line(String.format("module %1$s {", model.getModuleName()));
-        context.indent(() -> {
+    public void write(ModuleInfo model, JavaFile javaFile) {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.getFileHeaderText() != null && !settings.getFileHeaderText().isEmpty()) {
+            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), comment -> {
+                comment.line(settings.getFileHeaderText());
+            });
+            javaFile.line();
+        }
+
+        javaFile.line(String.format("module %1$s {", model.getModuleName()));
+        javaFile.indent(() -> {
             for (ModuleInfo.RequireModule module : model.getRequireModules()) {
-                context.line(String.format("requires %1$s%2$s;",
+                javaFile.line(String.format("requires %1$s%2$s;",
                         module.isTransitive() ? "transitive " : "",
                         module.getModuleName()));
             }
             for (ModuleInfo.ExportModule module : model.getExportModules()) {
-                context.line(String.format("exports %1$s;",
+                javaFile.line(String.format("exports %1$s;",
                         module.getModuleName()));
             }
             for (ModuleInfo.OpenModule module : model.getOpenModules()) {
-                context.line(String.format("opens %1$s%2$s;",
+                javaFile.line(String.format("opens %1$s%2$s;",
                         module.getModuleName(),
                         module.isOpenTo() ? (" to " + String.join(", ", module.getOpenToModules())) : ""));
             }
         });
-        context.line("}");
+        javaFile.line("}");
     }
 }
