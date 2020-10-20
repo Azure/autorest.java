@@ -23,11 +23,11 @@ public class PomMapper {
         pom.setServiceDescription(project.getServiceDescription());
 
         pom.setDependencyIdentifiers(Arrays.asList(
-                "com.azure:azure-core-management:1.0.0"
+                "com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion()
         ));
 
         if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
-            pom.setParentIdentifier("com.azure:azure-client-sdk-parent:1.7.0");
+            pom.setParentIdentifier("com.azure:azure-client-sdk-parent:" + project.getPackageVersions().getAzureClientSdkParentVersion());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
 

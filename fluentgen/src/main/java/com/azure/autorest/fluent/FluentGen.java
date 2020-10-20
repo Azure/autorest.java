@@ -184,6 +184,9 @@ public class FluentGen extends NewPlugin {
 
                 // project
                 Project project = new Project(fluentClient);
+                if (fluentJavaSettings.isSdkIntegration()) {
+                    project.integrateWithSdk();
+                }
 
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager(), project);

@@ -9,10 +9,14 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 
 public class Project {
+
+    private static final Logger logger = LoggerFactory.getLogger(Project.class);
 
     private final String serviceName;
     private final String serviceDescription;
@@ -21,6 +25,25 @@ public class Project {
     private final String groupId = "com.azure.resourcemanager";
     private final String artifactId;
     private String version = "1.0.0-beta.1";
+    private final PackageVersions packageVersions = new PackageVersions();
+
+    public static class PackageVersions {
+        private String azureClientSdkParentVersion = "1.7.0";
+        private String azureCoreManagementVersion = "1.0.0";
+        private String jacocoMavenPlugin = "0.8.5";
+
+        public String getAzureClientSdkParentVersion() {
+            return azureClientSdkParentVersion;
+        }
+
+        public String getAzureCoreManagementVersion() {
+            return azureCoreManagementVersion;
+        }
+
+        public String getJacocoMavenPlugin() {
+            return jacocoMavenPlugin;
+        }
+    }
 
     public Project(FluentClient fluentClient) {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
@@ -45,6 +68,15 @@ public class Project {
         this.serviceDescription = serviceDescription;
     }
 
+    public void integrateWithSdk() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        if (outputFolder == null) {
+            logger.warn("outputFolder configure not available");
+            return;
+        }
+    }
+
     public String getServiceName() {
         return serviceName;
     }
@@ -67,5 +99,9 @@ public class Project {
 
     public String getVersion() {
         return version;
+    }
+
+    public PackageVersions getPackageVersions() {
+        return packageVersions;
     }
 }
