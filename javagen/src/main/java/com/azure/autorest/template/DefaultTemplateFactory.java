@@ -95,4 +95,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public PomTemplate getPomTemplate() {
         return PomTemplate.getInstance();
     }
+
+    @Override
+    public ModuleInfoTemplate getModuleInfoTemplate() {
+        return ModuleInfoTemplate.getInstance();
+    }
 }

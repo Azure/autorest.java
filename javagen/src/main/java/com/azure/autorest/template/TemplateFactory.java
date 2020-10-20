@@ -39,5 +39,7 @@ public interface TemplateFactory {
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
 
     PomTemplate getPomTemplate();
+
+    ModuleInfoTemplate getModuleInfoTemplate();
 }
 
