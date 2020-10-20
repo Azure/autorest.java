@@ -91,7 +91,7 @@ public class FluentManagerTemplate {
                     comment.methodReturns(String.format("the %1$s service API instance", manager.getType().getName()));
                 })
                 .method(method -> {
-                    method.line(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
+                    method.text(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
                     method.methodReturn(String.format("new %1$s(httpPipeline, profile)", manager.getType().getName()));
                 })
                 .build();

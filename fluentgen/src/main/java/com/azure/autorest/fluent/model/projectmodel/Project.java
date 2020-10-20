@@ -109,14 +109,11 @@ public class Project {
 
     private void findPackageVersions(Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-            String line = reader.readLine();
-            while (line != null) {
+            reader.lines().forEach(line -> {
                 checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
-
-                line = reader.readLine();
-            }
+            });
         }
     }
 

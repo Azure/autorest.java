@@ -175,9 +175,13 @@ public class FluentUtils {
             if (inputStream != null) {
                 text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                         .lines()
-                        .collect(Collectors.joining("\n"));
+                        .collect(Collectors.joining(System.lineSeparator()));
+                if (!text.isEmpty()) {
+                    text += System.lineSeparator();
+                }
             }
         } catch (IOException e) {
+            logger.warn("Failed to read file {}" + filename);
         }
         return text;
     }

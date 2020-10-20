@@ -19,6 +19,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
+import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -177,6 +178,7 @@ public class FluentGen extends NewPlugin {
 
             // Fluent Lite
             if (javaSettings.isFluentLite()) {
+                final boolean isSdkIntegration = fluentJavaSettings.isSdkIntegration();
                 FluentStatic.setFluentJavaSettings(fluentJavaSettings);
                 FluentStatic.setClient(client);
 
@@ -184,7 +186,7 @@ public class FluentGen extends NewPlugin {
 
                 // project
                 Project project = new Project(fluentClient);
-                if (fluentJavaSettings.isSdkIntegration()) {
+                if (isSdkIntegration) {
                     project.integrateWithSdk();
                 }
 
@@ -206,6 +208,11 @@ public class FluentGen extends NewPlugin {
                 // POM
                 Pom pom = new PomMapper().map(project);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+
+                if (isSdkIntegration) {
+                    javaPackage.addReadme(project);
+                    javaPackage.addChangelog(project);
+                }
             }
 
             // Print to files
@@ -222,6 +229,10 @@ public class FluentGen extends NewPlugin {
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
+            }
+            logger.info("Write Text");
+            for (TextFile textFile : javaPackage.getTextFiles()) {
+                writeFile(textFile.getFilePath(), textFile.getContents(), null);
             }
             return true;
         } catch (Exception e) {
