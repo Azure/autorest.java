@@ -63,7 +63,7 @@ public class Project {
         settings.getArtifactVersion().ifPresent(version -> this.version = version);
 
         String clientDescription = fluentClient.getInnerClient().getClientDescription().trim();
-        if (!clientDescription.endsWith(".")) {
+        if (!clientDescription.isEmpty() && !clientDescription.endsWith(".")) {
             clientDescription += ".";
         }
 
@@ -89,6 +89,7 @@ public class Project {
             }
         }
 
+        // find dependency version from versioning txt
         Path sdkPath = Paths.get(sdkFolderOpt.get());
         Path versionClientPath = sdkPath.resolve(Paths.get("eng", "versioning", "version_client.txt"));
         Path versionExternalPath = sdkPath.resolve(Paths.get("eng", "versioning", "external_dependencies.txt"));
