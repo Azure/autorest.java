@@ -60,6 +60,26 @@ public class FluentJavaSettings {
 
     private boolean sdkIntegration = false;
 
+    private final AutorestSettings autorestSettings = new AutorestSettings();
+
+    public static class AutorestSettings {
+        private String tag;
+        private String outputFolder;
+        private Optional<String> azureLibrariesForJavaFolder = Optional.empty();
+
+        public String getTag() {
+            return tag;
+        }
+
+        public String getOutputFolder() {
+            return outputFolder;
+        }
+
+        public Optional<String> getAzureLibrariesForJavaFolder() {
+            return azureLibrariesForJavaFolder;
+        }
+    }
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -103,6 +123,10 @@ public class FluentJavaSettings {
         return sdkIntegration;
     }
 
+    public AutorestSettings getAutorestSettings() {
+        return autorestSettings;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -138,6 +162,10 @@ public class FluentJavaSettings {
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
+
+        loadStringSetting("tag", s -> autorestSettings.tag = s );
+        loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s );
+        loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = Optional.of(s) );
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
