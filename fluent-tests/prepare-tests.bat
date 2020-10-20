@@ -7,8 +7,8 @@ REM print java version
 java -version
 
 REM re-generate code
-RMDIR /S /Q "src/main/java/com/azure/mgmttest"
-RMDIR /S /Q "src/main/java/com/azure/mgmtlitetest"
+RMDIR /S /Q "src\main\java\com\azure\mgmttest"
+RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.0.6324
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
@@ -39,4 +39,4 @@ REM CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --pay
 REM CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --payload-flattening-threshold=0 https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute --pom-file=pom_generated_compute.xml
 
 REM delete module-info as fluent-test is on java8
-DEL "src/main/java/module-info.java"
+DEL "src\main\java\module-info.java"
