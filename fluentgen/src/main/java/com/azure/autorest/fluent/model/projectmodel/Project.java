@@ -12,7 +12,15 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class Project {
 
@@ -64,17 +72,63 @@ public class Project {
                 serviceName,
                 clientDescription,
                 settings.getAutorestSettings().getTag());
-        // TODO aka to Lite guidance page
+        // TODO aka link to Lite guidance page
         this.serviceDescription = serviceDescription;
     }
 
     public void integrateWithSdk() {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        String outputFolder = settings.getAutorestSettings().getOutputFolder();
-        if (outputFolder == null) {
-            logger.warn("outputFolder configure not available");
+        Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
+        if (!sdkFolderOpt.isPresent()) {
+            logger.warn("azure-libraries-for-java-folder parameter not available");
             return;
+        } else {
+            if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
+                logger.warn("azure-libraries-for-java-folder parameter is not an absolute path");
+                return;
+            }
         }
+
+        Path sdkPath = Paths.get(sdkFolderOpt.get());
+        Path versionClientPath = sdkPath.resolve(Paths.get("eng", "versioning", "version_client.txt"));
+        Path versionExternalPath = sdkPath.resolve(Paths.get("eng", "versioning", "external_dependencies.txt"));
+        if (Files.isReadable(versionClientPath) && Files.isReadable(versionExternalPath)) {
+            try {
+                findPackageVersions(versionClientPath);
+            } catch (IOException e) {
+                logger.warn("Failed to parse version_client.txt", e);
+            }
+            try {
+                findPackageVersions(versionExternalPath);
+            } catch (IOException e) {
+                logger.warn("Failed to parse external_dependencies.txt", e);
+            }
+        }
+    }
+
+    private void findPackageVersions(Path path) throws IOException {
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            String line = reader.readLine();
+            while (line != null) {
+                checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
+                checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
+                checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
+
+                line = reader.readLine();
+            }
+        }
+    }
+
+    private Optional<String> checkArtifact(String line, String artifact) {
+        if (line.startsWith(artifact)) {
+            String[] segments = line.split(Pattern.quote(";"));
+            if (segments.length >= 2) {
+                String version = segments[1];
+                logger.info("Found version {} for artifact {}", version, artifact);
+                return Optional.of(version);
+            }
+        }
+        return Optional.empty();
     }
 
     public String getServiceName() {
