@@ -30,7 +30,8 @@ public class FluentPomTemplate extends PomTemplate {
                     pluginsBlock.block("plugin", pluginBlock -> {
                         pluginBlock.tag("groupId", "org.jacoco");
                         pluginBlock.tag("artifactId", "jacoco-maven-plugin");
-                        pluginBlock.tag("version", "0.8.5");
+                        pluginBlock.tagWithInlineComment("version", "0.8.5",
+                                "{x-version-update;org.jacoco:jacoco-maven-plugin;external_dependency}");
                         pluginBlock.block("configuration", configurationBlock -> {
                             configurationBlock.tag("skip", "true");
                         });

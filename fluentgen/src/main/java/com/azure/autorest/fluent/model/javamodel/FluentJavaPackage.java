@@ -11,16 +11,36 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.TextFile;
+import com.azure.autorest.fluent.template.ChangelogTemplate;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate;
+import com.azure.autorest.fluent.template.ReadmeTemplate;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluentJavaPackage extends JavaPackage {
+
+    private final List<TextFile> textFiles = new ArrayList<>();
+
+    public final List<TextFile> getTextFiles() {
+        return textFiles;
+    }
+
+    public final void addReadme(Project project) {
+        textFiles.add(new TextFile("README.md", new ReadmeTemplate().write(project)));
+    }
+
+    public final void addChangelog(Project project) {
+        textFiles.add(new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project)));
+    }
 
     public final void addFluentResourceModel(FluentResourceModel model) {
         JavaFile javaFile = getJavaFileFactory().createSourceFile(

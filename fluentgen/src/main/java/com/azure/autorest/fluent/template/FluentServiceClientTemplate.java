@@ -120,7 +120,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                         comment.param("<U>", "type of final result.");
                         comment.methodReturns("the final result, or an error.");
                     })
-                    .method(method -> method.line(FluentUtils.loadTextFromResource("Client_getLroFinalResultOrError.txt")))
+                    .method(method -> method.text(FluentUtils.loadTextFromResource("Client_getLroFinalResultOrError.txt")))
                     .build();
 
             INSTANCE.additionalMethods.add(getContextMethod);

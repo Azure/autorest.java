@@ -47,7 +47,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                     String parentVersion = parts[2];
                     parentBlock.tag("groupId", parentGroupId);
                     parentBlock.tag("artifactId", parentArtifactId);
-                    parentBlock.tag("version", parentVersion);
+                    parentBlock.tagWithInlineComment("version", parentVersion,
+                            "{x-version-update;com.azure:azure-client-sdk-parent;current}");
                     parentBlock.tag("relativePath", pom.getParentRelativePath());
                 });
             }
@@ -56,12 +57,13 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.tag("groupId", pom.getGroupId());
             projectBlock.tag("artifactId", pom.getArtifactId());
-            projectBlock.tag("version", pom.getVersion());
+            projectBlock.tagWithInlineComment("version", pom.getVersion(),
+                    String.format("{x-version-update;%1$s:%2$s;current}", pom.getGroupId(), pom.getArtifactId()));
             projectBlock.tag("packaging", "jar");
 
             projectBlock.line();
 
-            projectBlock.tag("name", "Microsoft Azure SDK for " + pom.getServiceName());
+            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s Management", pom.getServiceName()));
             projectBlock.tag("description", pom.getServiceDescription());
             projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 
@@ -112,7 +114,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                             dependenciesBlock.tag("groupId", groupId);
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
-                                dependencyBlock.tag("version", version);
+                                dependencyBlock.tagWithInlineComment("version", version,
+                                        String.format("{x-version-update;%1$s:%2$s;dependency}", groupId, artifactId));
                             }
                         });
                     }
