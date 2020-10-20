@@ -120,7 +120,7 @@ public class Project {
         }
     }
 
-    private Optional<String> checkArtifact(String line, String artifact) {
+    private static Optional<String> checkArtifact(String line, String artifact) {
         if (line.startsWith(artifact)) {
             String[] segments = line.split(Pattern.quote(";"));
             if (segments.length >= 2) {
