@@ -14,7 +14,6 @@ import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.management.serializer.SerializerFactory;
-import com.azure.core.util.Configuration;
 import com.azure.core.util.Context;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
@@ -163,15 +162,10 @@ public class RuntimeTests {
     }
 
     private ResourceManager authenticateResourceManager() {
-        String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
-        return ResourceManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
+        return ResourceManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 
     private StorageManager authenticateStorageManager() {
-        String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
-        if (subscriptionId == null) {
-            subscriptionId = "";
-        }
-        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(null, subscriptionId, AzureEnvironment.AZURE));
+        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 }
