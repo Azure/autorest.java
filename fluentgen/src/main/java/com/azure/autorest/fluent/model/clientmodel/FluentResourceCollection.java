@@ -135,6 +135,7 @@ public class FluentResourceCollection {
         if (includeImplementationImports) {
             interfaceType.addImportsTo(imports, false);
         }
+
         additionalMethods.forEach(m -> m.addImportsTo(imports));
     }
 }
