@@ -6,7 +6,9 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -184,5 +186,10 @@ public class FluentUtils {
             logger.warn("Failed to read file {}" + filename);
         }
         return text;
+    }
+
+    public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
+        return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
+                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 }

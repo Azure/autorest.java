@@ -70,6 +70,16 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
             // method for properties
             methodTemplates.forEach(m -> m.writeMethod(classBlock));
+            if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
+                // location -> region
+                classBlock.publicMethod("Region region()", methodBlock -> {
+                    methodBlock.methodReturn("Region.fromName(this.regionName())");
+                });
+
+                classBlock.publicMethod("String regionName()", methodBlock -> {
+                    methodBlock.methodReturn("this.location()");
+                });
+            }
 
             // method for inner model
             classBlock.publicMethod(model.getInnerMethodSignature(), methodBlock -> {
