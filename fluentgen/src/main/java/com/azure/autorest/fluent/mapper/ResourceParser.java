@@ -9,21 +9,26 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.core.http.HttpMethod;
+import com.azure.core.management.Region;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +55,36 @@ public class ResourceParser {
 
         // resource refresh
         resourceCreates.forEach(rc -> ResourceParser.resolveResourceRefresh(collection, rc, availableModels));
+    }
+
+    public static void processAdditionalMethods(FluentClient fluentClient) {
+        fluentClient.getResourceModels().forEach(model -> {
+            // if resource instance has location property, add region() method
+            if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
+                List<MethodTemplate> methods = model.getAdditionalMethods();
+                methods.add(MethodTemplate.builder()
+                        .imports(Collections.singletonList(Region.class.getName()))
+                        .comment(commentBlock -> {
+                            commentBlock.description("Gets the region of the resource.");
+                            commentBlock.methodReturns("the region of the resource.");
+                        })
+                        .methodSignature("Region region()")
+                        .method(methodBlock -> {
+                            methodBlock.methodReturn("Region.fromName(this.regionName())");
+                        })
+                        .build());
+                methods.add(MethodTemplate.builder()
+                        .comment(commentBlock -> {
+                            commentBlock.description("Gets the name of the resource region.");
+                            commentBlock.methodReturns("the name of the resource region.");
+                        })
+                        .methodSignature("String regionName()")
+                        .method(methodBlock -> {
+                            methodBlock.methodReturn("this.location()");
+                        })
+                        .build());
+            }
+        });
     }
 
     private static List<ResourceCreate> resolveResourceCreate(

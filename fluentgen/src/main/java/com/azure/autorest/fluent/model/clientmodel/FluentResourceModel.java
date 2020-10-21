@@ -14,6 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUp
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,6 +49,7 @@ public class FluentResourceModel {
     private ResourceCreate resourceCreate;
     private ResourceUpdate resourceUpdate;
     private ResourceRefresh resourceRefresh;
+    private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -161,6 +163,10 @@ public class FluentResourceModel {
         this.resourceRefresh = resourceRefresh;
     }
 
+    public List<MethodTemplate> getAdditionalMethods() {
+        return additionalMethods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(this.getInnerModel().getFullName());
 
@@ -179,5 +185,6 @@ public class FluentResourceModel {
         if (resourceRefresh != null) {
             resourceRefresh.addImportsTo(imports, includeImplementationImports);
         }
+        additionalMethods.forEach(m -> m.addImportsTo(imports));
     }
 }

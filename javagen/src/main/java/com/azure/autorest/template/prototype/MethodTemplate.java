@@ -7,6 +7,7 @@ package com.azure.autorest.template.prototype;
 
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -50,7 +51,20 @@ public class MethodTemplate {
         if (comment != null) {
             javaClass.javadocComment(comment);
         }
+        writeMethodWithoutJavadoc(javaClass);
+    }
+
+    public final void writeMethodWithoutJavadoc(JavaClass javaClass) {
         javaClass.method(visibility, modifiers, methodSignature, method);
+    }
+
+    public final void writeMethodInterface(JavaInterface javaInterface) {
+        if (visibility == JavaVisibility.Public) {
+            if (comment != null) {
+                javaInterface.javadocComment(comment);
+            }
+            javaInterface.publicMethod(methodSignature);
+        }
     }
 
     public final void writeMethodContent(JavaBlock block) {

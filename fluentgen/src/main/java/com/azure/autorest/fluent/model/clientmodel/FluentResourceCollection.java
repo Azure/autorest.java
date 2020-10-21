@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class FluentResourceCollection {
     // resource models
     private final List<ResourceCreate> resourceCreates = new ArrayList<>();
     private final List<ResourceUpdate> resourceUpdates = new ArrayList<>();
+    private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -121,6 +123,10 @@ public class FluentResourceCollection {
         return resourceUpdates;
     }
 
+    public List<MethodTemplate> getAdditionalMethods() {
+        return additionalMethods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         innerClientType.addImportsTo(imports, false);
 
@@ -129,5 +135,6 @@ public class FluentResourceCollection {
         if (includeImplementationImports) {
             interfaceType.addImportsTo(imports, false);
         }
+        additionalMethods.forEach(m -> m.addImportsTo(imports));
     }
 }

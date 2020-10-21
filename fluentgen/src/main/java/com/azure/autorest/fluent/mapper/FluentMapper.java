@@ -75,6 +75,7 @@ public class FluentMapper {
         // parse resource collections to identify create/update/refresh flow on resource instance
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
+        ResourceParser.processAdditionalMethods(fluentClient);
 
         // set resource collection APIs to service API
         fluentClient.getManager().getProperties().addAll(
