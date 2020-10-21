@@ -193,17 +193,21 @@ public class FluentGen extends NewPlugin {
                 // Fluent manager
                 javaPackage.addFluentManager(fluentClient.getManager(), project);
 
-                // Fluent resource model
+                // Fluent resource models
                 for (FluentResourceModel model : fluentClient.getResourceModels()) {
                     javaPackage.addFluentResourceModel(model);
                 }
 
+                // Fluent resource collections
                 for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
                     javaPackage.addFluentResourceCollection(collection);
                 }
 
                 // Utils
                 javaPackage.addUtils();
+
+                // module-info
+                javaPackage.addModuleInfo(fluentClient.getModuleInfo());
 
                 // POM
                 Pom pom = new PomMapper().map(project);

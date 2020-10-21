@@ -8,6 +8,7 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.Manager;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.PageDetails;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -148,6 +149,12 @@ public class JavaPackage {
     public final void addPackageInfo(String package_Keyword, String name, PackageInfo model) {
         JavaFile javaFile = javaFileFactory.createEmptySourceFile(package_Keyword, name);
         Templates.getPackageInfoTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
+    public final void addModuleInfo(ModuleInfo moduleInfo) {
+        JavaFile javaFile = javaFileFactory.createEmptySourceFile("", "module-info");
+        Templates.getModuleInfoTemplate().write(moduleInfo, javaFile);
         javaFiles.add(javaFile);
     }
 

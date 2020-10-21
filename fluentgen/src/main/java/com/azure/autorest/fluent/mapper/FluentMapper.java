@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
@@ -21,10 +22,13 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,6 +50,8 @@ public class FluentMapper {
 
     public FluentClient map(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
+
+        fluentClient.setModuleInfo(moduleInfo());
 
         FluentStatic.setFluentClient(fluentClient);
 
@@ -77,6 +83,27 @@ public class FluentMapper {
                         .collect(Collectors.toList()));
 
         return fluentClient;
+    }
+
+    private static ModuleInfo moduleInfo() {
+        JavaSettings settings = JavaSettings.getInstance();
+        ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
+
+        List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.management", true));
+
+        List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage())));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage())));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
+
+        List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
+        List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
+        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage()), openToModules));
+        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+
+        return moduleInfo;
     }
 
     private void processInnerModel(CodeModel codeModel) {

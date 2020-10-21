@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ public class FluentClient {
     private final Client client;
 
     private FluentManager manager;
+
+    private ModuleInfo moduleInfo;
 
     private final List<FluentResourceModel> resourceModels = new ArrayList<>();
 
@@ -45,5 +48,13 @@ public class FluentClient {
 
     public Client getInnerClient() {
         return this.client;
+    }
+
+    public ModuleInfo getModuleInfo() {
+        return moduleInfo;
+    }
+
+    public void setModuleInfo(ModuleInfo moduleInfo) {
+        this.moduleInfo = moduleInfo;
     }
 }
