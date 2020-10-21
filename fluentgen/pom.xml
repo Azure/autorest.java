@@ -17,7 +17,7 @@
   <repositories>
     <repository>
       <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2</url>
+      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
     </repository>
   </repositories>
 
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
       <artifactId>google-java-format</artifactId>
-      <version>1.8_customized-SNAPSHOT</version>
+      <version>1.8.0-beta.1</version>
     </dependency>
 
     <dependency>

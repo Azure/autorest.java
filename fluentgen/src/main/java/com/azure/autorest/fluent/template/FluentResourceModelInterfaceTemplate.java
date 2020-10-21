@@ -7,7 +7,6 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.core.annotation.Immutable;
@@ -47,20 +46,9 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                 });
                 interfaceBlock.publicMethod(property.getMethodSignature());
             });
-            if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
-                // location -> region
-                interfaceBlock.javadocComment(comment -> {
-                    comment.description("Gets the region of the resource.");
-                    comment.methodReturns("the region of the resource.");
-                });
-                interfaceBlock.publicMethod("Region region()");
 
-                interfaceBlock.javadocComment(comment -> {
-                    comment.description("Gets the name of the resource region.");
-                    comment.methodReturns("the name of the resource region.");
-                });
-                interfaceBlock.publicMethod("String regionName()");
-            }
+            // additional methods
+            model.getAdditionalMethods().forEach(m -> m.writeMethodInterface(interfaceBlock));
 
             // method for inner model
             interfaceBlock.javadocComment(comment -> {
