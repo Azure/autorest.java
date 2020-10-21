@@ -238,7 +238,7 @@ public class ResourceCreate extends ResourceOperation  {
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
-        if (this.hasLocation() && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+        if (FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
             // location -> region
             stage.getMethods().add(new FluentModelPropertyRegion.FluentModelPropertyRegionMethod(
                     this.getResourceModel(), FluentMethodType.CREATE_WITH,
