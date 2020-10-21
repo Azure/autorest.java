@@ -131,7 +131,7 @@ public class RuntimeTests {
 
         try {
             StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
-                    .withRegion(region)
+                    .withRegion(rg.region())
                     .withExistingResourceGroup(rgName)
                     .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                     .withKind(Kind.STORAGE_V2)
