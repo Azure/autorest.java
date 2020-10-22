@@ -3,9 +3,15 @@
 
 package com.azure.mgmttest;
 
+import com.azure.core.http.HttpClient;
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
+import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Context;
+import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -18,6 +24,8 @@ import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+
+import java.time.Duration;
 
 import static org.mockito.Mockito.mock;
 
@@ -79,5 +87,13 @@ public class LiteCompilationTests {
                 .apply();
 
         resourceGroup.refresh();
+    }
+
+    public void testConfigurable() {
+        ResourceManager resourceManager = ResourceManager.configure()
+                .withHttpClient(HttpClient.createDefault())
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .withDefaultPollInterval(Duration.ofSeconds(10))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 }
