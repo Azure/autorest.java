@@ -123,11 +123,11 @@ public class FluentManagerTemplate {
                 methodBlock.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
                 methodBlock.indent(() -> {
                     methodBlock.line(".pipeline(httpPipeline)");
-                    methodBlock.line(".defaultPollInterval(defaultPollInterval)");
-                    methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
+                    methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())");
                     if (requiresSubscriptionIdParameter) {
                         methodBlock.line(".subscriptionId(profile.getSubscriptionId())");
                     }
+                    methodBlock.line(".defaultPollInterval(defaultPollInterval)");
                     methodBlock.line(".buildClient();");
                 });
             });
