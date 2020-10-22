@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentUtils {
@@ -79,14 +80,7 @@ public class FluentUtils {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
-            String packageLastName = settings.getPackage();
-            if (packageLastName.endsWith(".generated")) {
-                packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
-            }
-            int pos = packageLastName.lastIndexOf(".");
-            if (pos != -1 && pos != packageLastName.length() - 1) {
-                packageLastName = packageLastName.substring(pos + 1);
-            }
+            String packageLastName = getPackageLastName();
 
             if (clientName != null) {
                 if (clientName.toLowerCase(Locale.ROOT).startsWith(packageLastName.toLowerCase(Locale.ROOT))) {
@@ -104,6 +98,35 @@ public class FluentUtils {
             }
         }
         return serviceName;
+    }
+
+    public static String getArtifactId() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String artifactId = settings.getArtifactId();
+        if (CoreUtils.isNullOrEmpty(artifactId)) {
+            String packageName = settings.getPackage().toLowerCase(Locale.ROOT);
+            if (packageName.startsWith("com.azure.resourcemanager")) {
+                // if namespace looks good, convert it to artifactId directly
+                artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
+            } else {
+                String packageLastName = getPackageLastName().toLowerCase(Locale.ROOT);
+                artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
+            }
+        }
+        return artifactId;
+    }
+
+    private static String getPackageLastName() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String packageLastName = settings.getPackage();
+        if (packageLastName.endsWith(".generated")) {
+            packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
+        }
+        int pos = packageLastName.lastIndexOf(".");
+        if (pos != -1 && pos != packageLastName.length() - 1) {
+            packageLastName = packageLastName.substring(pos + 1);
+        }
+        return packageLastName;
     }
 
     public static IType getFluentWrapperType(IType clientType) {
