@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.model.projectmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.template.FluentPomTemplate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import org.slf4j.Logger;
@@ -77,6 +78,8 @@ public class Project {
     }
 
     public void integrateWithSdk() {
+        FluentPomTemplate.setProject(this);
+
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
         if (!sdkFolderOpt.isPresent()) {
