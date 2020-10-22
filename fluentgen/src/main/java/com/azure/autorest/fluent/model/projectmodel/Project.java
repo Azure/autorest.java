@@ -8,7 +8,9 @@ package com.azure.autorest.fluent.model.projectmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.template.FluentPomTemplate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -58,7 +59,7 @@ public class Project {
 
         this.serviceName = fluentClient.getManager().getServiceName();
         this.namespace = JavaSettings.getInstance().getPackage();
-        this.artifactId = String.format("azure-resourcemanager-%1$s-generated", serviceName.toLowerCase(Locale.ROOT));
+        this.artifactId = FluentUtils.getArtifactId();
 
         settings.getArtifactVersion().ifPresent(version -> this.version = version);
 
@@ -77,6 +78,8 @@ public class Project {
     }
 
     public void integrateWithSdk() {
+        FluentPomTemplate.setProject(this);
+
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
         if (!sdkFolderOpt.isPresent()) {
