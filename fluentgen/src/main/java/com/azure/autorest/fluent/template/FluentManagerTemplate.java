@@ -12,10 +12,9 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaModifier;
-import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.credential.TokenCredential;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
@@ -26,15 +25,20 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.profile.AzureProfile;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.logging.ClientLogger;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
@@ -63,43 +67,38 @@ public class FluentManagerTemplate {
         String serviceClientPackageName = ClientModelUtil.getServiceClientInterfacePackageName();
         String serviceClientTypeName = serviceClient.getInterfaceName();
 
-        MethodTemplate authenticateMethod = MethodTemplate.builder()
-                .imports(Arrays.asList(
-                        TokenCredential.class.getName(),
-                        AzureProfile.class.getName(),
-                        Objects.class.getName(),
-                        // http pipeline
-                        HttpPipeline.class.getName(),
-                        HttpPipelinePolicy.class.getName(),
-                        List.class.getName(),
-                        ArrayList.class.getName(),
-                        HttpPolicyProviders.class.getName(),
-                        RequestIdPolicy.class.getName(),
-                        RetryPolicy.class.getName(),
-                        AddDatePolicy.class.getName(),
-                        HttpLoggingPolicy.class.getName(),
-                        HttpLogOptions.class.getName(),
-                        BearerTokenAuthenticationPolicy.class.getName(),
-                        HttpPipelineBuilder.class.getName()
-                ))
-                .modifiers(Collections.singleton(JavaModifier.Static))
-                .methodSignature(String.format("%1$s authenticate(TokenCredential credential, AzureProfile profile)", manager.getType().getName()))
-                .comment(comment -> {
-                    comment.description(String.format("Creates an instance of %1$s service API entry point.", manager.getType().getName()));
-                    comment.param("credential", "the credential to use");
-                    comment.param("profile", "the Azure profile for client");
-                    comment.methodReturns(String.format("the %1$s service API instance", manager.getType().getName()));
-                })
-                .method(method -> {
-                    method.text(FluentUtils.loadTextFromResource("Manager_authenticate.txt"));
-                    method.methodReturn(String.format("new %1$s(httpPipeline, profile)", manager.getType().getName()));
-                })
-                .build();
+        String managerName = manager.getType().getName();
 
-        Set<String> imports = new HashSet<>();
+        Set<String> imports = new HashSet<>(Arrays.asList(
+                // java
+                Objects.class.getName(),
+                Duration.class.getName(),
+                ChronoUnit.class.getName(),
+                List.class.getName(),
+                ArrayList.class.getName(),
+                // azure-core
+                TokenCredential.class.getName(),
+                ClientLogger.class.getName(),
+                Configuration.class.getName(),
+                HttpClient.class.getName(),
+                HttpPipeline.class.getName(),
+                HttpPipelineBuilder.class.getName(),
+                HttpPipelinePolicy.class.getName(),
+                HttpPolicyProviders.class.getName(),
+                RequestIdPolicy.class.getName(),
+                RetryPolicy.class.getName(),
+                AddDatePolicy.class.getName(),
+                HttpLoggingPolicy.class.getName(),
+                HttpLogOptions.class.getName(),
+                BearerTokenAuthenticationPolicy.class.getName(),
+                UserAgentPolicy.class.getName(),
+                // azure-core-management
+                AzureProfile.class.getName()
+        ));
+
         imports.add(String.format("%1$s.%2$s", builderPackageName, builderTypeName));
         imports.add(String.format("%1$s.%2$s", serviceClientPackageName, serviceClientTypeName));
-        authenticateMethod.addImportsTo(imports);
+
         manager.getProperties().forEach(property -> {
             imports.add(property.getFluentType().getFullName());
             imports.add(property.getFluentImplementType().getFullName());
@@ -110,28 +109,60 @@ public class FluentManagerTemplate {
             comment.description(manager.getDescription());
         });
 
-        javaFile.publicFinalClass(manager.getType().getName(), classBlock -> {
+        javaFile.publicFinalClass(managerName, classBlock -> {
             manager.getProperties().forEach(property -> {
                 classBlock.privateMemberVariable(property.getFluentType().getName(), property.getName());
             });
 
             classBlock.privateFinalMemberVariable(serviceClientTypeName, ModelNaming.MANAGER_PROPERTY_CLIENT);
 
-            classBlock.privateConstructor(String.format("%1$s(HttpPipeline httpPipeline, AzureProfile profile)", manager.getType().getName()) , method -> {
-                method.line("Objects.requireNonNull(httpPipeline, \"'httpPipeline' cannot be null.\");");
-                method.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
-                method.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
-                method.indent(() -> {
-                    method.line(".pipeline(httpPipeline)");
-                    method.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
+            // Constructor
+            classBlock.privateConstructor(String.format("%1$s(HttpPipeline httpPipeline, AzureProfile profile, Duration defaultPollInterval)", managerName) , methodBlock -> {
+                methodBlock.line("Objects.requireNonNull(httpPipeline, \"'httpPipeline' cannot be null.\");");
+                methodBlock.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
+                methodBlock.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
+                methodBlock.indent(() -> {
+                    methodBlock.line(".pipeline(httpPipeline)");
+                    methodBlock.line(".defaultPollInterval(defaultPollInterval)");
+                    methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())" + (requiresSubscriptionIdParameter ? "" : ";"));
                     if (requiresSubscriptionIdParameter) {
-                        method.line(".subscriptionId(profile.getSubscriptionId())");
+                        methodBlock.line(".subscriptionId(profile.getSubscriptionId())");
                     }
-                    method.line(".buildClient();");
+                    methodBlock.line(".buildClient();");
                 });
             });
 
-            authenticateMethod.writeMethod(classBlock);
+            // authenticate()
+            classBlock.javadocComment(comment -> {
+                comment.description(String.format("Creates an instance of %1$s service API entry point.", manager.getServiceName()));
+                comment.param("credential", "the credential to use");
+                comment.param("profile", "the Azure profile for client");
+                comment.methodReturns(String.format("the %1$s service API instance", manager.getServiceName()));
+            });
+            classBlock.publicStaticMethod(String.format("%1$s authenticate(TokenCredential credential, AzureProfile profile)", managerName), methodBlock -> {
+                methodBlock.line("Objects.requireNonNull(credential, \"'credential' cannot be null.\");");
+                methodBlock.line("Objects.requireNonNull(profile, \"'profile' cannot be null.\");");
+                methodBlock.methodReturn("configure().authenticate(credential, profile)");
+            });
+
+            // configure()
+            classBlock.javadocComment(comment -> {
+                comment.description(String.format("Gets a Configurable instance that can be used to create %1$s with optional configuration.", managerName));
+                comment.methodReturns("the Configurable instance allowing configurations");
+            });
+            classBlock.publicStaticMethod("Configurable configure()", methodBlock -> {
+                methodBlock.methodReturn(String.format("new %1$s.Configurable()", managerName));
+            });
+
+            // Configurable class
+            javaFile.line();
+            String configurableClassText = FluentUtils.loadTextFromResource("Manager_Configurable.txt");
+            configurableClassText = configurableClassText
+                    .replaceAll(Pattern.quote("{{service-name}}"), manager.getServiceName())
+                    .replaceAll(Pattern.quote("{{manager-class}}"), manager.getType().getName())
+                    .replaceAll(Pattern.quote("{{package-name}}"), project.getNamespace())
+                    .replaceAll(Pattern.quote("{{package-version}}"), project.getVersion());
+            javaFile.text(configurableClassText);
 
             manager.getProperties().forEach(property -> {
                 classBlock.javadocComment(comment -> {
