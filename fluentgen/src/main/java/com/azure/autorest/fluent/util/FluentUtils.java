@@ -21,6 +21,8 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +32,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(FluentUtils.class);
+
+    private static final Set<String> RESERVED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+            Response.class.getSimpleName(),
+            Context.class.getSimpleName()
+    )));
 
     private FluentUtils() {
     }
@@ -48,6 +59,10 @@ public class FluentUtils {
 
     public static void log(String format, Object... arguments) {
         logger.info(format, arguments);
+    }
+
+    public static Set<String> reservedClassNames() {
+        return RESERVED_CLASS_NAMES;
     }
 
     public static boolean isInnerClassType(ClassType classType) {
@@ -66,9 +81,13 @@ public class FluentUtils {
 
     public static ClassType resourceModelInterfaceClassType(String innerModelClassName) {
         JavaSettings settings = JavaSettings.getInstance();
+        String modelName = innerModelClassName.substring(0, innerModelClassName.length() - "Inner".length());
+        if (reservedClassNames().contains(modelName)) {
+            modelName += "Model";
+        }
         return new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(innerModelClassName.substring(0, innerModelClassName.length() - "Inner".length()))
+                .name(modelName)
                 .build();
     }
 
