@@ -21,7 +21,6 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
