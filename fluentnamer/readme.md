@@ -6,7 +6,7 @@
 | `--pom-file` | String. Name for Maven POM file. Default to `pom.xml` |
 | `--package-version` | String. Version number for Maven artifact. Default to `1.0.0-beta.1` |
 | `--sdk-integration` | Boolean. Integrate to `azure-sdk-for-java` |
-| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). |
+| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default to `true` |
 | `--add-inner` | CSV. Treat as inner class (append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |

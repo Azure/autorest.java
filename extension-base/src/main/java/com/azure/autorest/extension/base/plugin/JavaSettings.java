@@ -66,6 +66,21 @@ public class JavaSettings
     {
         if (_instance == null)
         {
+            String syncMethodsDefault = "essential";
+            boolean addContextParameter = false;
+            boolean contextClientMethodParameter = false;
+            boolean clientSideValidations = false;
+            boolean clientLogger = false;
+
+            String fluentSetting = host.getStringValue("fluent");
+            if (fluentSetting != null) {
+                syncMethodsDefault = "all";
+                addContextParameter = true;
+                contextClientMethodParameter = true;
+                clientSideValidations = true;
+                clientLogger = true;
+            }
+
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
                     host.getBooleanValue("azure-arm"),
@@ -77,7 +92,7 @@ public class JavaSettings
                     host.getStringValue("namespace", "").toLowerCase(),
                     host.getBooleanValue("enable-xml", false),
                     host.getBooleanValue("non-null-annotations", false),
-                    host.getBooleanValue("client-side-validations", false),
+                    host.getBooleanValue("client-side-validations", clientSideValidations),
                     host.getStringValue("client-type-prefix"),
                     host.getBooleanValue("generate-client-interfaces", true),
                     host.getBooleanValue("generate-client-as-impl", true),
@@ -87,11 +102,11 @@ public class JavaSettings
                     host.getStringValue("custom-types-subpackage", ""),
                     host.getStringValue("fluent-subpackage", "fluent"),
                     host.getBooleanValue("required-parameter-client-methods", true),
-                    host.getBooleanValue("add-context-parameter", false),
-                    host.getBooleanValue("context-client-method-parameter", false),
+                    host.getBooleanValue("add-context-parameter", addContextParameter),
+                    host.getBooleanValue("context-client-method-parameter", contextClientMethodParameter),
                     host.getBooleanValue("generate-sync-async-clients", false),
-                    host.getStringValue("sync-methods", "essential"),
-                    host.getBooleanValue("client-logger", false),
+                    host.getStringValue("sync-methods", syncMethodsDefault),
+                    host.getBooleanValue("client-logger", clientLogger),
                     host.getBooleanValue("required-fields-as-ctor-args", false),
                     host.getBooleanValue("service-interface-as-public", false),
                     host.getStringValue("artifact-id", ""),
