@@ -71,6 +71,8 @@ public class JavaSettings
             boolean contextClientMethodParameterDefault = false;
             boolean clientSideValidationsDefault = false;
             boolean clientLoggerDefault = false;
+            boolean generateClientInterfacesDefault = false;
+            boolean requiredParameterClientMethodsDefault = false;
 
             String fluentSetting = host.getStringValue("fluent");
             if (fluentSetting != null) {
@@ -79,6 +81,8 @@ public class JavaSettings
                 contextClientMethodParameterDefault = true;
                 clientSideValidationsDefault = true;
                 clientLoggerDefault = true;
+                generateClientInterfacesDefault = true;
+                requiredParameterClientMethodsDefault = true;
             }
 
             setHeader(host.getStringValue("license-header"));
@@ -94,14 +98,14 @@ public class JavaSettings
                     host.getBooleanValue("non-null-annotations", false),
                     host.getBooleanValue("client-side-validations", clientSideValidationsDefault),
                     host.getStringValue("client-type-prefix"),
-                    host.getBooleanValue("generate-client-interfaces", false),
+                    host.getBooleanValue("generate-client-interfaces", generateClientInterfacesDefault),
                     host.getBooleanValue("generate-client-as-impl", false),
                     host.getStringValue("implementation-subpackage", "implementation"),
                     host.getStringValue("models-subpackage", "models"),
                     host.getStringValue("custom-types", ""),
                     host.getStringValue("custom-types-subpackage", ""),
                     host.getStringValue("fluent-subpackage", "fluent"),
-                    host.getBooleanValue("required-parameter-client-methods", false),
+                    host.getBooleanValue("required-parameter-client-methods", requiredParameterClientMethodsDefault),
                     host.getBooleanValue("add-context-parameter", addContextParameterDefault),
                     host.getBooleanValue("context-client-method-parameter", contextClientMethodParameterDefault),
                     host.getBooleanValue("generate-sync-async-clients", false),
