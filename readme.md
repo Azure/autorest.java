@@ -77,7 +77,7 @@ Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
 
 ## fluentgen
-This contains the [generator extension for Azure Resource Manager SDK](fluentnamer/README.md).
+This contains the [generator extension for Azure Resource Manager SDK](fluentnamer/readme.md).
 
 ## tests
 This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 
