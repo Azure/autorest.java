@@ -37,7 +37,7 @@ public class FluentJavaSettings {
     /**
      * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
      */
-    private boolean track1Naming = false;
+    private boolean track1Naming = true;
 
     /**
      * Whether to treat read-only resource property as SubResource type.

@@ -66,32 +66,51 @@ public class JavaSettings
     {
         if (_instance == null)
         {
+            String syncMethodsDefault = "essential";
+            boolean addContextParameterDefault = false;
+            boolean contextClientMethodParameterDefault = false;
+            boolean clientSideValidationsDefault = false;
+            boolean clientLoggerDefault = false;
+            boolean generateClientInterfacesDefault = false;
+            boolean requiredParameterClientMethodsDefault = false;
+
+            String fluentSetting = host.getStringValue("fluent");
+            if (fluentSetting != null) {
+                syncMethodsDefault = "all";
+                addContextParameterDefault = true;
+                contextClientMethodParameterDefault = true;
+                clientSideValidationsDefault = true;
+                clientLoggerDefault = true;
+                generateClientInterfacesDefault = true;
+                requiredParameterClientMethodsDefault = true;
+            }
+
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
-                    host.getBooleanValue("azure-arm"),
-                    host.getStringValue("fluent"),
-                    host.getBooleanValue("regenerate-pom"),
+                    host.getBooleanValue("azure-arm", false),
+                    fluentSetting,
+                    host.getBooleanValue("regenerate-pom", false),
                     _header,
                     80,
                     host.getStringValue("serviceName"),
                     host.getStringValue("namespace", "").toLowerCase(),
                     host.getBooleanValue("enable-xml", false),
                     host.getBooleanValue("non-null-annotations", false),
-                    host.getBooleanValue("client-side-validations", false),
+                    host.getBooleanValue("client-side-validations", clientSideValidationsDefault),
                     host.getStringValue("client-type-prefix"),
-                    host.getBooleanValue("generate-client-interfaces", true),
-                    host.getBooleanValue("generate-client-as-impl", true),
+                    host.getBooleanValue("generate-client-interfaces", generateClientInterfacesDefault),
+                    host.getBooleanValue("generate-client-as-impl", false),
                     host.getStringValue("implementation-subpackage", "implementation"),
                     host.getStringValue("models-subpackage", "models"),
                     host.getStringValue("custom-types", ""),
                     host.getStringValue("custom-types-subpackage", ""),
                     host.getStringValue("fluent-subpackage", "fluent"),
-                    host.getBooleanValue("required-parameter-client-methods", true),
-                    host.getBooleanValue("add-context-parameter", false),
-                    host.getBooleanValue("context-client-method-parameter", false),
+                    host.getBooleanValue("required-parameter-client-methods", requiredParameterClientMethodsDefault),
+                    host.getBooleanValue("add-context-parameter", addContextParameterDefault),
+                    host.getBooleanValue("context-client-method-parameter", contextClientMethodParameterDefault),
                     host.getBooleanValue("generate-sync-async-clients", false),
-                    host.getStringValue("sync-methods", "essential"),
-                    host.getBooleanValue("client-logger", false),
+                    host.getStringValue("sync-methods", syncMethodsDefault),
+                    host.getBooleanValue("client-logger", clientLoggerDefault),
                     host.getBooleanValue("required-fields-as-ctor-args", false),
                     host.getBooleanValue("service-interface-as-public", false),
                     host.getStringValue("artifact-id", ""),
