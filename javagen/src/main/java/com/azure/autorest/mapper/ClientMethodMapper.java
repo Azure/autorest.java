@@ -117,6 +117,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+
+                if (request.getProtocol() != null
+                    && request.getProtocol().getHttp() != null
+                    && request.getProtocol().getHttp().getMediaTypes() != null
+                    && request.getProtocol().getHttp().getMediaTypes().stream().anyMatch(mediaType -> mediaType.equals(
+                        "application/json-patch+json"))) {
+                    clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
+                }
+
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
                 }
