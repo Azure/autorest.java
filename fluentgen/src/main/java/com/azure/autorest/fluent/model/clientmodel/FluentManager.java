@@ -50,11 +50,11 @@ public class FluentManager {
     }
 
     public String getDescription() {
-        if (CoreUtils.isNullOrEmpty(client.getClientDescription())) {
-            return String.format("Entry point to %1$s.", this.getType().getName());
-        } else {
-            return String.format("Entry point to %1$s.\n%2$s", this.getType().getName(), client.getClientDescription());
+        String description = String.format("Entry point to %1$s.", this.getType().getName());
+        if (!CoreUtils.isNullOrEmpty(client.getClientDescription())) {
+            description += "\n" + client.getClientDescription();
         }
+        return description;
     }
 
     public String getServiceName() {

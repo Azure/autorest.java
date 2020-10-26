@@ -184,6 +184,7 @@ public class ClientModel {
 
             if (getDerivedModels() != null && getDerivedModels().size() > 0) {
                 imports.add("com.fasterxml.jackson.annotation.JsonSubTypes");
+                getDerivedModels().forEach(m -> imports.add(m.getFullName()));
             }
         }
 

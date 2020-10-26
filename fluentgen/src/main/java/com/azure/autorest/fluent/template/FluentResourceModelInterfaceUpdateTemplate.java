@@ -32,11 +32,14 @@ public class FluentResourceModelInterfaceUpdateTemplate implements IJavaTemplate
         interfaceBlock.javadocComment(commentBlock -> {
             commentBlock.description(String.format("The template for %1$s update.", modelName));
         });
-        String definitionInterfaceSignature = String.format("%1$s extends %2$s",
-                ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE,
-                updateStages.stream()
-                        .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, s.getName()))
-                        .collect(Collectors.joining(", ")));
+        String definitionInterfaceSignature = ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE;
+        String updateExtendsStr = updateStages.stream()
+                .map(s -> String.format("%1$s.%2$s", ModelNaming.MODEL_FLUENT_INTERFACE_UPDATE_STAGES, s.getName()))
+                .collect(Collectors.joining(", "));
+        if (!updateExtendsStr.isEmpty()) {
+            definitionInterfaceSignature += String.format(" extends %1$s",
+                    updateExtendsStr);
+        }
         interfaceBlock.interfaceBlock(definitionInterfaceSignature, block1 -> {
             List<FluentMethod> applyMethods = resourceUpdate.getApplyMethods();
             applyMethods.forEach(method -> {
