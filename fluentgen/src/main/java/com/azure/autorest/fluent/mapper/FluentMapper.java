@@ -19,6 +19,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
@@ -147,6 +148,17 @@ public class FluentMapper {
                 .map(s -> (ObjectSchema) s)
                 .filter(FluentType::nonResourceType)
                 .collect(Collectors.toSet());
+
+        Set<ObjectSchema> errorTypes = codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .flatMap(o -> o.getExceptions().stream())
+                .map(Response::getSchema)
+                .filter(s -> s instanceof ObjectSchema)
+                .map(s -> (ObjectSchema) s)
+                .filter(o -> FluentType.nonManagementError(Utils.getJavaName(o)))
+                .collect(Collectors.toSet());
+
+        compositeTypes.removeAll(errorTypes);
 
         compositeTypes = objectMapper.addInnerModels(compositeTypes);
         if (logger.isInfoEnabled()) {
