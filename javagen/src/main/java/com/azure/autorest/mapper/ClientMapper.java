@@ -75,6 +75,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
@@ -97,6 +98,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .distinct()
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         String serviceClientName = codeModel.getLanguage().getJava().getName();
