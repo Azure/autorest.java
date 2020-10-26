@@ -200,53 +200,56 @@ public class ResourceParser {
                     if (m.getInnerProxyMethod().getParameters().stream().anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
                         String returnTypeName = m.getFluentReturnType().toString();
                         FluentResourceModel fluentModel = fluentModelMapByName.get(returnTypeName);
-                        // "id", "name", "type" in resource instance
-                        if (fluentModel != null && fluentModel.getResourceCreate() == null
-                                && !foundModels.containsKey(fluentModel) && !excludeModels.contains(fluentModel)
-                                && fluentModel.hasProperty(ResourceTypeName.FIELD_ID)
-                                && fluentModel.hasProperty(ResourceTypeName.FIELD_NAME)
-                                && fluentModel.hasProperty(ResourceTypeName.FIELD_TYPE)) {
-                            String url = m.getInnerProxyMethod().getUrlPath();
-                            UrlPathSegments urlPathSegments = new UrlPathSegments(url);
+                        // at present, cannot handle derived models
+                        if (fluentModel.getInnerModel().getDerivedModels().isEmpty()) {
+                            // "id", "name", "type" in resource instance
+                            if (fluentModel != null && fluentModel.getResourceCreate() == null
+                                    && !foundModels.containsKey(fluentModel) && !excludeModels.contains(fluentModel)
+                                    && fluentModel.hasProperty(ResourceTypeName.FIELD_ID)
+                                    && fluentModel.hasProperty(ResourceTypeName.FIELD_NAME)
+                                    && fluentModel.hasProperty(ResourceTypeName.FIELD_TYPE)) {
+                                String url = m.getInnerProxyMethod().getUrlPath();
+                                UrlPathSegments urlPathSegments = new UrlPathSegments(url);
 
-                            //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
+                                //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
 
-                            // requires named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
-                            boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
-                                    .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
+                                // requires named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
+                                boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
+                                        .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
 
-                            // has "subscriptions" segment, and last segment should be resource name
-                            if (!urlPathSegments.getReverseSegments().isEmpty()
-                                    && urlParameterSegmentsNamed
-                                    && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
-                                    && urlPathSegments.hasSubscription()) {
+                                // has "subscriptions" segment, and last segment should be resource name
+                                if (!urlPathSegments.getReverseSegments().isEmpty()
+                                        && urlParameterSegmentsNamed
+                                        && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
+                                        && urlPathSegments.hasSubscription()) {
 
-                                boolean categoryMatch = false;
-                                switch (category) {
-                                    case RESOURCE_GROUP_AS_PARENT:
-                                        if (urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
-                                            categoryMatch = true;
-                                        }
-                                        break;
+                                    boolean categoryMatch = false;
+                                    switch (category) {
+                                        case RESOURCE_GROUP_AS_PARENT:
+                                            if (urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
+                                                categoryMatch = true;
+                                            }
+                                            break;
 
-                                    case SUBSCRIPTION_AS_PARENT:
-                                        if (!urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
-                                            categoryMatch = true;
-                                        }
-                                        break;
+                                        case SUBSCRIPTION_AS_PARENT:
+                                            if (!urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
+                                                categoryMatch = true;
+                                            }
+                                            break;
 
-                                    case NESTED_CHILD:
-                                        if (urlPathSegments.isNested()) {
-                                            categoryMatch = true;
-                                        }
-                                        break;
-                                }
+                                        case NESTED_CHILD:
+                                            if (urlPathSegments.isNested()) {
+                                                categoryMatch = true;
+                                            }
+                                            break;
+                                    }
 
-                                if (categoryMatch) {
-                                    ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
-                                            m.getInnerClientMethod().getName(), getBodyClientModel(m, availableModels));
+                                    if (categoryMatch) {
+                                        ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
+                                                m.getInnerClientMethod().getName(), getBodyClientModel(m, availableModels));
 
-                                    foundModels.put(fluentModel, resourceCreate);
+                                        foundModels.put(fluentModel, resourceCreate);
+                                    }
                                 }
                             }
                         }
