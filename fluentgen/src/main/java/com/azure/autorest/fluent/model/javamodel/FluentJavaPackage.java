@@ -35,11 +35,15 @@ public class FluentJavaPackage extends JavaPackage {
     }
 
     public final void addReadme(Project project) {
-        textFiles.add(new TextFile("README.md", new ReadmeTemplate().write(project)));
+        TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
     }
 
     public final void addChangelog(Project project) {
-        textFiles.add(new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project)));
+        TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
     }
 
     public final void addFluentResourceModel(FluentResourceModel model) {
@@ -47,13 +51,13 @@ public class FluentJavaPackage extends JavaPackage {
                 model.getInterfaceType().getPackage(),
                 model.getInterfaceType().getName());
         FluentResourceModelInterfaceTemplate.getInstance().write(model, javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
 
         javaFile = getJavaFileFactory().createSourceFile(
                 model.getImplementationType().getPackage(),
                 model.getImplementationType().getName());
         FluentResourceModelImplementationTemplate.getInstance().write(model, javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
     }
 
     public final void addFluentResourceCollection(FluentResourceCollection collection) {
@@ -61,13 +65,13 @@ public class FluentJavaPackage extends JavaPackage {
                 collection.getInterfaceType().getPackage(),
                 collection.getInterfaceType().getName());
         FluentResourceCollectionInterfaceTemplate.getInstance().write(collection, javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
 
         javaFile = getJavaFileFactory().createSourceFile(
                 collection.getImplementationType().getPackage(),
                 collection.getImplementationType().getName());
         FluentResourceCollectionImplementationTemplate.getInstance().write(collection, javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
     }
 
     public final void addFluentManager(FluentManager model, Project project) {
@@ -75,7 +79,7 @@ public class FluentJavaPackage extends JavaPackage {
                 model.getType().getPackage(),
                 model.getType().getName());
         FluentManagerTemplate.getInstance().write(model, project, javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
     }
 
     public final void addUtils() {
@@ -84,6 +88,6 @@ public class FluentJavaPackage extends JavaPackage {
                 settings.getPackage(settings.getImplementationSubpackage()),
                 ModelNaming.CLASS_UTILS);
         UtilsTemplate.getInstance().write(javaFile);
-        getJavaFiles().add(javaFile);
+        addJavaFile(javaFile);
     }
 }
