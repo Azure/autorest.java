@@ -201,7 +201,7 @@ public class ResourceParser {
                         String returnTypeName = m.getFluentReturnType().toString();
                         FluentResourceModel fluentModel = fluentModelMapByName.get(returnTypeName);
                         // at present, cannot handle derived models
-                        if (fluentModel.getInnerModel().getDerivedModels().isEmpty()) {
+                        if (fluentModel != null && fluentModel.getInnerModel().getDerivedModels().isEmpty()) {
                             // "id", "name", "type" in resource instance
                             if (fluentModel != null && fluentModel.getResourceCreate() == null
                                     && !foundModels.containsKey(fluentModel) && !excludeModels.contains(fluentModel)
