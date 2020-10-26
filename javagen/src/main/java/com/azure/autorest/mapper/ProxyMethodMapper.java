@@ -136,7 +136,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
                 parameter.setOperation(operation);
-                parameters.add(Mappers.getProxyParameterMapper().map(parameter));
+                ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
+                if (requestContentType.startsWith("application/json-patch+json")) {
+                    proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
+                }
+                parameters.add(proxyMethodParameter);
             }
             if (settings.getAddContextParameter()) {
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
