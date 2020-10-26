@@ -85,13 +85,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
         List<ClientModel> clientModels = autoRestModelTypes
-            .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-            .filter(Objects::nonNull)
-            .collect(Collectors.toList());
+                .distinct()
+                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
         builder.models(clientModels);
 
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
+                .distinct()
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));

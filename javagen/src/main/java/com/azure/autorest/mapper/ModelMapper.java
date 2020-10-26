@@ -178,7 +178,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = map((ObjectSchema) childSchema);
                         derivedTypes.add(model);
-                        serviceModels.addModel(model);
+                        //serviceModels.addModel(model);
                     } else {
                         throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
                     }
