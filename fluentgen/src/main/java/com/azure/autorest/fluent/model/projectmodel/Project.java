@@ -63,7 +63,10 @@ public class Project {
 
         settings.getArtifactVersion().ifPresent(version -> this.version = version);
 
-        String clientDescription = fluentClient.getInnerClient().getClientDescription().trim();
+        String clientDescription = fluentClient.getInnerClient().getClientDescription();
+        if (clientDescription == null) {
+            clientDescription = "";
+        }
         if (!clientDescription.isEmpty() && !clientDescription.endsWith(".")) {
             clientDescription += ".";
         }

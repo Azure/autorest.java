@@ -1,5 +1,5 @@
-set VANILLA_ARGUMENTS=--version=3.0.6282 --java --use:. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set AZURE_ARGUMENTS=--version=3.0.6282 --java --use:. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set VANILLA_ARGUMENTS=--version=3.0.6282 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set AZURE_ARGUMENTS=--version=3.0.6282 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
