@@ -7,6 +7,7 @@
 package com.azure.autorest.fluent.model;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -40,7 +41,7 @@ public class FluentType {
     }
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
-        return nonResourceType(compositeType.getLanguage().getJava().getName());
+        return nonResourceType(Utils.getJavaName(compositeType));
     }
 
     public static boolean nonResourceType(ClassType modelType) {
