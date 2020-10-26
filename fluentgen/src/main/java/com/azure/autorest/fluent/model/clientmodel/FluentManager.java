@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,11 @@ public class FluentManager {
     }
 
     public String getDescription() {
-        return String.format("Entry point to %1$s.\n%2$s", this.getType().getName(), client.getClientDescription());
+        if (CoreUtils.isNullOrEmpty(client.getClientDescription())) {
+            return String.format("Entry point to %1$s.", this.getType().getName());
+        } else {
+            return String.format("Entry point to %1$s.\n%2$s", this.getType().getName(), client.getClientDescription());
+        }
     }
 
     public String getServiceName() {
