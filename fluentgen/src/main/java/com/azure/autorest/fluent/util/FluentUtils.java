@@ -212,8 +212,8 @@ public class FluentUtils {
         return clientModel;
     }
 
-    public static String loadTextFromResource(String filename) {
-        String text = null;
+    public static String loadTextFromResource(String filename, String... replacements) {
+        String text = "";
         try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
             if (inputStream != null) {
                 text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -223,10 +223,24 @@ public class FluentUtils {
                     text += System.lineSeparator();
                 }
             }
+
+            if (replacements.length > 0) {
+                if (replacements.length % 2 == 0) {
+                    // replacement in template
+                    for (int i = 0; i < replacements.length; i += 2) {
+                        String key = replacements[i];
+                        String value = replacements[i+1];
+                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
+                    }
+                } else {
+                    logger.warn("Replacements skipped due to incorrect length. {}", Arrays.asList(replacements));
+                }
+            }
+            return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file {}" + filename);
+            logger.warn("Failed to read file {}", filename);
+            throw new IllegalStateException(e);
         }
-        return text;
     }
 
     public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
