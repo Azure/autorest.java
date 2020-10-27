@@ -213,7 +213,7 @@ public class FluentUtils {
     }
 
     public static String loadTextFromResource(String filename, String... replacements) {
-        String text = null;
+        String text = "";
         try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
             if (inputStream != null) {
                 text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
