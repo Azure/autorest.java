@@ -5,9 +5,11 @@ import org.atteo.evo.inflector.English;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -303,6 +305,18 @@ public class CodeNamer {
             name += appendValue;
         }
 
+        return name;
+    }
+
+    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
+            "service",      // the ServiceInterface local variable
+            "client"        // the ManagementClient local variable
+    ));
+
+    public static String getEscapedReservedClientMethodParameterName(String name) {
+        if (RESERVED_CLIENT_METHOD_PARAMETER_NAME.contains(name)) {
+            name += "Param";
+        }
         return name;
     }
 

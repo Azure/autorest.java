@@ -28,9 +28,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
     public ProxyMethodParameter map(Parameter parameter) {
         JavaSettings settings = JavaSettings.getInstance();
 
+        String name = parameter.getLanguage().getJava().getName();
+
         ProxyMethodParameter.Builder builder = new ProxyMethodParameter.Builder()
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
-                .name(parameter.getLanguage().getJava().getName())
+                .name(name)
                 .isRequired(parameter.isRequired())
                 .isNullable(parameter.isNullable());
 
@@ -85,7 +87,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             builder.defaultValue(objValue == null ? null : String.valueOf(objValue));
         }
 
-        String parameterReference = parameter.getLanguage().getJava().getName();
+        // parameterReference is what ClientMethod calls the ProxyMethod
+        String parameterReference = CodeNamer.getEscapedReservedClientMethodParameterName(name);
         if (Parameter.ImplementationLocation.CLIENT.equals(parameter.getImplementation())) {
             String operationGroupName = parameter.getOperation().getOperationGroup().getLanguage().getJava().getName();
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";

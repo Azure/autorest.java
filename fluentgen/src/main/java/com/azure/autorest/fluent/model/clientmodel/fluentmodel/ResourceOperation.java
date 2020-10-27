@@ -19,6 +19,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,6 +132,7 @@ public abstract class ResourceOperation {
         Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
                 .map(ProxyMethodParameter::getName)
+                .map(CodeNamer::getEscapedReservedClientMethodParameterName)
                 .collect(Collectors.toSet());
         return clientMethod.getParameters().stream()
                 .filter(p -> paramNames.contains(p.getName()))
