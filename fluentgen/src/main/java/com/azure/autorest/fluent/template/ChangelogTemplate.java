@@ -12,9 +12,9 @@ public class ChangelogTemplate {
 
     public String write(Project project) {
         return FluentUtils.loadTextFromResource("Changelog.txt",
-                "service-name", project.getServiceName(),
-                "service-description", project.getServiceDescription(),
-                "artifact-version", project.getVersion()
+                TextTemplate.SERVICE_NAME, project.getServiceName(),
+                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescription(),
+                TextTemplate.ARTIFACT_VERSION, project.getVersion()
         );
     }
 }

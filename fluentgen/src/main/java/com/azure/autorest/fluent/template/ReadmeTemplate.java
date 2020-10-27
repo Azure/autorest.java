@@ -12,11 +12,11 @@ public class ReadmeTemplate {
 
     public String write(Project project) {
         return FluentUtils.loadTextFromResource("Readme.txt",
-                "service-name", project.getServiceName(),
-                "service-description", project.getServiceDescription(),
-                "group-id", project.getGroupId(),
-                "artifact-id", project.getArtifactId(),
-                "artifact-version", project.getVersion()
+                TextTemplate.SERVICE_NAME, project.getServiceName(),
+                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescription(),
+                TextTemplate.GROUP_ID, project.getGroupId(),
+                TextTemplate.ARTIFACT_ID, project.getArtifactId(),
+                TextTemplate.ARTIFACT_VERSION, project.getVersion()
         );
     }
 }

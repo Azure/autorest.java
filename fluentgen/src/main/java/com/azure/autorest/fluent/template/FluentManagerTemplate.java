@@ -156,10 +156,10 @@ public class FluentManagerTemplate {
             // Configurable class
             javaFile.line();
             String configurableClassText = FluentUtils.loadTextFromResource("Manager_Configurable.txt",
-                    "service-name", manager.getServiceName(),
-                    "manager-class", manager.getType().getName(),
-                    "package-name", project.getNamespace(),
-                    "package-version", project.getVersion()
+                    TextTemplate.SERVICE_NAME, manager.getServiceName(),
+                    TextTemplate.MANAGER_CLASS, manager.getType().getName(),
+                    TextTemplate.PACKAGE_NAME, project.getNamespace(),
+                    TextTemplate.ARTIFACT_VERSION, project.getVersion()
             );
             javaFile.text(configurableClassText);
 
