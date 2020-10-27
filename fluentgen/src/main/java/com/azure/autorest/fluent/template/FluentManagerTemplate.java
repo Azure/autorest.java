@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
@@ -156,12 +155,12 @@ public class FluentManagerTemplate {
 
             // Configurable class
             javaFile.line();
-            String configurableClassText = FluentUtils.loadTextFromResource("Manager_Configurable.txt");
-            configurableClassText = configurableClassText
-                    .replaceAll(Pattern.quote("{{service-name}}"), manager.getServiceName())
-                    .replaceAll(Pattern.quote("{{manager-class}}"), manager.getType().getName())
-                    .replaceAll(Pattern.quote("{{package-name}}"), project.getNamespace())
-                    .replaceAll(Pattern.quote("{{package-version}}"), project.getVersion());
+            String configurableClassText = FluentUtils.loadTextFromResource("Manager_Configurable.txt",
+                    "service-name", manager.getServiceName(),
+                    "manager-class", manager.getType().getName(),
+                    "package-name", project.getNamespace(),
+                    "package-version", project.getVersion()
+            );
             javaFile.text(configurableClassText);
 
             manager.getProperties().forEach(property -> {
