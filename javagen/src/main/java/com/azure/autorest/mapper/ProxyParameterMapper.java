@@ -88,7 +88,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
 
         // parameterReference is what ClientMethod calls the ProxyMethod
-        String parameterReference = CodeNamer.getEscapedReservedMethodParameterName(name);
+        String parameterReference = CodeNamer.getEscapedReservedClientMethodParameterName(name);
         if (Parameter.ImplementationLocation.CLIENT.equals(parameter.getImplementation())) {
             String operationGroupName = parameter.getOperation().getOperationGroup().getLanguage().getJava().getName();
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";

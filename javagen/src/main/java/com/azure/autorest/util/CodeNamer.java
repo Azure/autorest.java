@@ -308,13 +308,13 @@ public class CodeNamer {
         return name;
     }
 
-    private static final Set<String> RESERVED_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
+    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
             "service",      // the ServiceInterface local variable
             "client"        // the ManagementClient local variable
     ));
 
-    public static String getEscapedReservedMethodParameterName(String name) {
-        if (RESERVED_METHOD_PARAMETER_NAME.contains(name)) {
+    public static String getEscapedReservedClientMethodParameterName(String name) {
+        if (RESERVED_CLIENT_METHOD_PARAMETER_NAME.contains(name)) {
             name += "Param";
         }
         return name;

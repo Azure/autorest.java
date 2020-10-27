@@ -26,7 +26,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         String name = parameter.getOriginalParameter() != null && parameter.getLanguage().getJava().getName().equals(parameter.getOriginalParameter().getLanguage().getJava().getName())
                 ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())
                 : parameter.getLanguage().getJava().getName();
-        name = CodeNamer.getEscapedReservedMethodParameterName(name);
+        name = CodeNamer.getEscapedReservedClientMethodParameterName(name);
 
         JavaSettings settings = JavaSettings.getInstance();
         ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()

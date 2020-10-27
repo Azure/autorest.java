@@ -132,7 +132,7 @@ public abstract class ResourceOperation {
         Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
                 .map(ProxyMethodParameter::getName)
-                .map(CodeNamer::getEscapedReservedMethodParameterName)
+                .map(CodeNamer::getEscapedReservedClientMethodParameterName)
                 .collect(Collectors.toSet());
         return clientMethod.getParameters().stream()
                 .filter(p -> paramNames.contains(p.getName()))
