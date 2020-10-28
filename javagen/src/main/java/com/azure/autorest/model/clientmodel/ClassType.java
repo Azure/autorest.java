@@ -58,7 +58,7 @@ public class ClassType implements IType {
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
     public static final ClassType JsonPatchDocument =
-            new ClassType.Builder().knownClass(com.azure.core.util.JsonPatchDocument.class).build();
+            new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
 
 
     private final String packageName;
