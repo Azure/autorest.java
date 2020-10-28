@@ -46,7 +46,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.10.0-alpha.20201022.0</version>
+      <version>1.10.0-alpha.20201028.0</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
