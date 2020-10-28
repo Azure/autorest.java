@@ -294,9 +294,11 @@ public class ResourceParser {
                             boolean hasBodyParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
-                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsRequired() && !p.getFromClient());
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query
+                                            && p.getIsRequired()
+                                            && !p.getFromClient() && !p.getIsConstant());
                             // if for update, need a body parameter
-                            // if for refresh, do not allow required query parameter, since it cannot be deduced from resource id
+                            // if for refresh, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
                             if ((isRefreshMethod && !hasRequiredQueryParam) || (!isRefreshMethod && hasBodyParam)) {
                                 return method;
                             }
