@@ -92,7 +92,7 @@ public class JavaSettings
                     host.getBooleanValue("regenerate-pom", false),
                     _header,
                     80,
-                    host.getStringValue("serviceName"),
+                    host.getStringValue("service-name"),
                     host.getStringValue("namespace", "").toLowerCase(),
                     host.getBooleanValue("enable-xml", false),
                     host.getBooleanValue("non-null-annotations", false),
