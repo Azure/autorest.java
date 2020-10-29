@@ -10,6 +10,7 @@ import com.azure.autorest.mapper.DefaultMapperFactory;
 import com.azure.autorest.mapper.ExceptionMapper;
 import com.azure.autorest.mapper.MethodGroupMapper;
 import com.azure.autorest.mapper.ObjectMapper;
+import com.azure.autorest.mapper.PrimitiveMapper;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 
 public class FluentMapperFactory extends DefaultMapperFactory {
@@ -37,5 +38,10 @@ public class FluentMapperFactory extends DefaultMapperFactory {
     @Override
     public ClientMethodMapper getClientMethodMapper() {
         return FluentClientMethodMapper.getInstance();
+    }
+
+    @Override
+    public PrimitiveMapper getPrimitiveMapper() {
+        return FluentPrimitiveMapper.getInstance();
     }
 }

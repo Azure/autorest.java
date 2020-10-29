@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 public class FluentObjectMapper extends ObjectMapper {
 
-    private static final FluentObjectMapper instance = new FluentObjectMapper();
+    private static final FluentObjectMapper INSTANCE = new FluentObjectMapper();
 
     public static FluentObjectMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     private final Set<ObjectSchema> innerModels = ConcurrentHashMap.newKeySet();

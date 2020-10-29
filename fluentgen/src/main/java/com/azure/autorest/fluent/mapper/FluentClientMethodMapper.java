@@ -12,10 +12,10 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 public class FluentClientMethodMapper extends ClientMethodMapper {
 
-    private static final FluentClientMethodMapper instance = new FluentClientMethodMapper();
+    private static final FluentClientMethodMapper INSTANCE = new FluentClientMethodMapper();
 
     public static FluentClientMethodMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -15,13 +15,13 @@ import com.azure.autorest.model.clientmodel.ClientException;
 
 public class FluentExceptionMapper extends ExceptionMapper {
 
-    private static final FluentExceptionMapper instance = new FluentExceptionMapper();
+    private static final FluentExceptionMapper INSTANCE = new FluentExceptionMapper();
 
     protected FluentExceptionMapper() {
     }
 
     public static FluentExceptionMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     protected ClientException buildException(ObjectSchema compositeType, JavaSettings settings) {
