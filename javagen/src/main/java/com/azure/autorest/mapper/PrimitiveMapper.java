@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
     private static PrimitiveMapper instance = new PrimitiveMapper();
-    Map<PrimitiveSchema, IType> parsed = new HashMap<>();
+    protected Map<PrimitiveSchema, IType> parsed = new HashMap<>();
 
-    private PrimitiveMapper() {
+    protected PrimitiveMapper() {
     }
 
     public static PrimitiveMapper getInstance() {
