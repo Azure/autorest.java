@@ -219,13 +219,29 @@ public class ResourceCreate extends ResourceOperation  {
 
     public FluentMethod getDefineMethod() {
         if (defineMethod == null) {
-            String resourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(0).getSegmentName()));
+            String resourceName = this.getResourceName();
+            logger.info("ResourceCreate: Fluent model {}, define method {}", resourceModel.getName(), "define" + resourceName);
+
             List<ClientMethodParameter> parameters = this.getPathParameters();
             IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
             defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
                     resourceName, resourceNameType);
         }
         return defineMethod;
+    }
+
+    private String getResourceName() {
+        String strCreateOrUpdate = "createOrUpdate";
+        String strCreate = "create";
+        String resourceName;
+        if (methodName.startsWith(strCreateOrUpdate)) {
+            resourceName = methodName.substring(strCreateOrUpdate.length());
+        } else if (methodName.startsWith(strCreate)) {
+            resourceName = methodName.substring(strCreate.length());
+        } else {
+            resourceName = resourceModel.getName();
+        }
+        return CodeNamer.toPascalCase(resourceName);
     }
 
     private FluentMethod getConstructor() {

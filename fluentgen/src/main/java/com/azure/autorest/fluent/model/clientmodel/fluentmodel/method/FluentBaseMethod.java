@@ -70,7 +70,15 @@ abstract public class FluentBaseMethod extends FluentMethod {
                                 } else if (ClassType.Context == p.getClientType()) {
                                     return "Context.NONE";
                                 } else {
-                                    return resourceLocalVariables.getLocalVariableByMethodParameter(p).getName();
+                                    LocalVariable localVariable = resourceLocalVariables.getLocalVariableByMethodParameter(p);
+                                    if (localVariable == null) {
+                                        throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
+                                                collectionMethod.getInnerClientMethod().getName(),
+                                                model.getName(),
+                                                p.getName(),
+                                                resourceLocalVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
+                                    }
+                                    return localVariable.getName();
                                 }
                             })
                             .collect(Collectors.joining(", "));
