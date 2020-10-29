@@ -18,10 +18,10 @@ import java.util.List;
 
 public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
-    private static final FluentProxyMethodMapper instance = new FluentProxyMethodMapper();
+    private static final FluentProxyMethodMapper INSTANCE = new FluentProxyMethodMapper();
 
     public static FluentProxyMethodMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

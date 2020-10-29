@@ -13,6 +13,12 @@ import com.azure.autorest.model.clientmodel.IType;
 
 public class FluentPrimitiveMapper extends PrimitiveMapper {
 
+    private static FluentPrimitiveMapper INSTANCE = new FluentPrimitiveMapper();
+
+    public static FluentPrimitiveMapper getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public IType map(PrimitiveSchema primaryType) {
         if (primaryType == null) {
