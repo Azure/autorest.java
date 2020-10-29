@@ -5,6 +5,7 @@
 | `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default to `PREMIUM` if provided as other values. |
 | `--pom-file` | String. Name for Maven POM file. Default to `pom.xml`. |
 | `--package-version` | String. Version number for Maven artifact. Default to `1.0.0-beta.1`. |
+| `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 | `--sdk-integration` | Boolean. Integrate to `azure-sdk-for-java`.  Default to `false`. |
 | `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default to `true`. |
 | `--add-inner` | CSV. Treat as inner class (append `Inner` to class name). |
