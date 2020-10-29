@@ -15,7 +15,7 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,13 +44,13 @@ public class ResourceImplementation {
     }
 
     private void groupLocalVariables(Collection<LocalVariable> localVariables) {
-        Map<String, LocalVariable> localVariablesMap = new HashMap<>();
+        Map<String, LocalVariable> localVariablesMap = new LinkedHashMap<>();
         localVariables.forEach(var -> localVariablesMap.putIfAbsent(var.getName(), var));
         this.localVariables.addAll(localVariablesMap.values());
     }
 
     private void groupMethods(Collection<FluentMethod> fluentMethods) {
-        Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
+        Map<String, GroupedMethod> groupedMethodsMap = new LinkedHashMap<>();
         for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
                 GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getImplementationMethodSignature(), key -> new GroupedMethod());

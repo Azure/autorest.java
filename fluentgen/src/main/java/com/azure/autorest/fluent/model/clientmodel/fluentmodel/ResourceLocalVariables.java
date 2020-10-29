@@ -9,13 +9,13 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ResourceLocalVariables {
 
-    private final Map<ClientMethodParameter, LocalVariable> localVariablesMap = new HashMap<>();
+    private final Map<ClientMethodParameter, LocalVariable> localVariablesMap = new LinkedHashMap<>();
 
     public ResourceLocalVariables(ResourceOperation resourceOperation) {
         String prefix = resourceOperation.getLocalVariablePrefix();
