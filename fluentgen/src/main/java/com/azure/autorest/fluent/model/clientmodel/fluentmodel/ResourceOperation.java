@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -204,7 +204,7 @@ public abstract class ResourceOperation {
 
     private void initRequestBodyClientModel() {
         if (requestBodyModelPropertiesMap == null) {
-            requestBodyModelPropertiesMap = new HashMap<>();
+            requestBodyModelPropertiesMap = new LinkedHashMap<>();
             requestBodyModelProperties = new ArrayList<>();
 
             List<ClientModel> parentModels = new ArrayList<>();

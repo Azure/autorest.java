@@ -19,7 +19,7 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,7 +41,7 @@ public class FluentResourceModel {
     private final ClassType implementationType;
 
     // resource properties
-    private final Map<String, FluentModelProperty> propertiesMap = new HashMap<>();
+    private final Map<String, FluentModelProperty> propertiesMap = new LinkedHashMap<>();
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
