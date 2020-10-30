@@ -62,7 +62,7 @@ public class LiteCompilationTests {
 
         storageAccount.refresh();
 
-        BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
+        BlobContainer blobContainer = storageManager.blobContainers().define("container1")
                 .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
                 .withPublicAccess(PublicAccess.BLOB)
                 .create(new Context("key", "value"));

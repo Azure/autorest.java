@@ -148,7 +148,7 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
-            BlobContainer blobContainer = storageManager.blobContainers().defineContainer(blobContainerName)
+            BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
                     .withExistingStorageAccount(rgName, saName)
                     .withPublicAccess(PublicAccess.BLOB)
                     .create(new Context("key", "value"));
