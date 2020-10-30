@@ -16,30 +16,34 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class FlattencomplexAsyncClient {
-  private final FlattencomplexesImpl serviceClient;
+    private final FlattencomplexesImpl serviceClient;
 
-  /** Initializes an instance of Flattencomplexes client. */
-  FlattencomplexAsyncClient(FlattencomplexesImpl serviceClient) {
-    this.serviceClient = serviceClient;
-  }
+    /**
+     * Initializes an instance of Flattencomplexes client.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    FlattencomplexAsyncClient(FlattencomplexesImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<Response<MyBaseType>> getValidWithResponse() {
-    return this.serviceClient.getValidWithResponseAsync();
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<MyBaseType>> getValidWithResponse() {
+        return this.serviceClient.getValidWithResponseAsync();
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<MyBaseType> getValid() {
-    return this.serviceClient.getValidAsync();
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MyBaseType> getValid() {
+        return this.serviceClient.getValidAsync();
+    }
 }

@@ -22,116 +22,116 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Flattencomplexes. */
 public final class FlattencomplexesImpl {
-  /** The proxy service used to perform REST calls. */
-  private final FlattencomplexesService service;
+    /** The proxy service used to perform REST calls. */
+    private final FlattencomplexesService service;
 
-  /** The service client containing this operation class. */
-  private final AutoRestComplexTestServiceImpl client;
+    /** The service client containing this operation class. */
+    private final AutoRestComplexTestServiceImpl client;
 
-  /**
-   * Initializes an instance of FlattencomplexesImpl.
-   *
-   * @param client the instance of the service client containing this operation class.
-   */
-  FlattencomplexesImpl(AutoRestComplexTestServiceImpl client) {
-    this.service =
-        RestProxy.create(
-            FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
-    this.client = client;
-  }
+    /**
+     * Initializes an instance of FlattencomplexesImpl.
+     *
+     * @param client the instance of the service client containing this operation class.
+     */
+    FlattencomplexesImpl(AutoRestComplexTestServiceImpl client) {
+        this.service =
+                RestProxy.create(
+                        FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.client = client;
+    }
 
-  /**
-   * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be
-   * used by the proxy service to perform REST calls.
-   */
-  @Host("{$host}")
-  @ServiceInterface(name = "AutoRestComplexTestS")
-  private interface FlattencomplexesService {
-    @Get("/complex/flatten/valid")
-    @ExpectedResponses({200})
-    @UnexpectedResponseExceptionType(HttpResponseException.class)
-    Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
-  }
+    /**
+     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy
+     * service to perform REST calls.
+     */
+    @Host("{$host}")
+    @ServiceInterface(name = "AutoRestComplexTestS")
+    private interface FlattencomplexesService {
+        @Get("/complex/flatten/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
-    return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+    }
 
-  /**
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
-    return service.getValid(this.client.getHost(), context);
-  }
+    /**
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
+        return service.getValid(this.client.getHost(), context);
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<MyBaseType> getValidAsync() {
-    return getValidWithResponseAsync()
-        .flatMap(
-            (Response<MyBaseType> res) -> {
-              if (res.getValue() != null) {
-                return Mono.just(res.getValue());
-              } else {
-                return Mono.empty();
-              }
-            });
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MyBaseType> getValidAsync() {
+        return getValidWithResponseAsync()
+                .flatMap(
+                        (Response<MyBaseType> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
 
-  /**
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Mono<MyBaseType> getValidAsync(Context context) {
-    return getValidWithResponseAsync(context)
-        .flatMap(
-            (Response<MyBaseType> res) -> {
-              if (res.getValue() != null) {
-                return Mono.just(res.getValue());
-              } else {
-                return Mono.empty();
-              }
-            });
-  }
+    /**
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MyBaseType> getValidAsync(Context context) {
+        return getValidWithResponseAsync(context)
+                .flatMap(
+                        (Response<MyBaseType> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public MyBaseType getValid() {
-    return getValidAsync().block();
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyBaseType getValid() {
+        return getValidAsync().block();
+    }
 
-  /**
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Response<MyBaseType> getValidWithResponse(Context context) {
-    return getValidWithResponseAsync(context).block();
-  }
+    /**
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyBaseType> getValidWithResponse(Context context) {
+        return getValidWithResponseAsync(context).block();
+    }
 }

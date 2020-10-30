@@ -47,7 +47,10 @@ public class Postprocessor extends NewPlugin {
       //Step 2: Print to files
       Formatter formatter = new Formatter();
       for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
-        String formattedSource = formatter.formatSourceAndFixImports(javaFile.getValue());
+        String formattedSource = javaFile.getValue();
+        if (javaFile.getKey().endsWith(".java")) {
+          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+        }
         writeFile(javaFile.getKey(), formattedSource, null);
       }
     } catch (Exception e) {

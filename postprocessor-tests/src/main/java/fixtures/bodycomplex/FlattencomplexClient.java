@@ -16,32 +16,36 @@ import fixtures.bodycomplex.implementation.models.MyBaseType;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class FlattencomplexClient {
-  private final FlattencomplexesImpl serviceClient;
+    private final FlattencomplexesImpl serviceClient;
 
-  /** Initializes an instance of Flattencomplexes client. */
-  FlattencomplexClient(FlattencomplexesImpl serviceClient) {
-    this.serviceClient = serviceClient;
-  }
+    /**
+     * Initializes an instance of Flattencomplexes client.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    FlattencomplexClient(FlattencomplexesImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
 
-  /**
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public MyBaseType getValid() {
-    return this.serviceClient.getValid();
-  }
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyBaseType getValid() {
+        return this.serviceClient.getValid();
+    }
 
-  /**
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws HttpResponseException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Response<MyBaseType> getValidWithResponse(Context context) {
-    return this.serviceClient.getValidWithResponse(context);
-  }
+    /**
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyBaseType> getValidWithResponse(Context context) {
+        return this.serviceClient.getValidWithResponse(context);
+    }
 }

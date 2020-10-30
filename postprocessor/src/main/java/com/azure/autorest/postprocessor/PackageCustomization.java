@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class PackageCustomization {
-    private final Map<String, String> files;
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final String packageName;
@@ -22,7 +21,6 @@ public class PackageCustomization {
     PackageCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName) {
         this.editor = editor;
         this.languageClient = languageClient;
-        this.files = editor.getContents();
         this.packageName = packageName;
     }
 
@@ -39,7 +37,7 @@ public class PackageCustomization {
             for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
                 int i = edit.getKey().toString().indexOf("src/main/java/");
                 String oldEntry = edit.getKey().toString().substring(i);
-                if (files.containsKey(oldEntry)) {
+                if (editor.getContents().containsKey(oldEntry)) {
                     for (TextEdit textEdit : edit.getValue()) {
                         editor.replace(oldEntry, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
                     }
@@ -65,7 +63,7 @@ public class PackageCustomization {
         }
     }
 
-    public ModelCustomization getModel(String modelClassName) {
-        return new ModelCustomization(editor, languageClient, packageName, modelClassName);
+    public ClassCustomization getClass(String className) {
+        return new ClassCustomization(editor, languageClient, packageName, className);
     }
 }

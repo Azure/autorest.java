@@ -2,6 +2,7 @@ package com.azure.autorest.postprocessor.ls;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.postprocessor.ls.models.ClientCapabilities;
+import com.azure.autorest.postprocessor.ls.models.CodeAction;
 import com.azure.autorest.postprocessor.ls.models.CodeActionClientCapabilities;
 import com.azure.autorest.postprocessor.ls.models.CodeActionKind;
 import com.azure.autorest.postprocessor.ls.models.CodeActionKindValueSet;
@@ -17,6 +18,7 @@ import com.azure.autorest.postprocessor.ls.models.InitializeParams;
 import com.azure.autorest.postprocessor.ls.models.InitializeResponse;
 import com.azure.autorest.postprocessor.ls.models.JavaCodeActionKind;
 import com.azure.autorest.postprocessor.ls.models.Position;
+import com.azure.autorest.postprocessor.ls.models.Range;
 import com.azure.autorest.postprocessor.ls.models.RenameParams;
 import com.azure.autorest.postprocessor.ls.models.ServerCapabilities;
 import com.azure.autorest.postprocessor.ls.models.SymbolInformation;
@@ -46,6 +48,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +77,7 @@ public class EclipseLanguageClient {
             thread.start();
             Thread.sleep(1000);
             this.server = new EclipseLanguageServerFacade(workspaceDir, port);
-            thread.join();
+            thread.join(10000);
             connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -142,8 +145,7 @@ public class EclipseLanguageClient {
         if (serverCapabilities.getTextDocumentSync() != null
                 && serverCapabilities.getTextDocumentSync().isOpenClose()) {
             DidCloseTextDocumentParams params = new DidCloseTextDocumentParams();
-            TextDocumentIdentifier item = new TextDocumentIdentifier();
-            item.setUri(fileUri);
+            TextDocumentIdentifier item = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(item);
             connection.notifyWithObject("textDocument/didClose", params);
         }
@@ -153,8 +155,7 @@ public class EclipseLanguageClient {
         if (serverCapabilities.getTextDocumentSync() != null
                 && serverCapabilities.getTextDocumentSync().getChange() != 0) {
             DidChangeTextDocumentParams params = new DidChangeTextDocumentParams();
-            VersionedTextDocumentIdentifier item = new VersionedTextDocumentIdentifier();
-            item.setUri(fileUri);
+            VersionedTextDocumentIdentifier item = new VersionedTextDocumentIdentifier(fileUri);
             item.setVersion(version);
             params.setTextDocument(item);
             List<TextDocumentContentChangeEvent> changeEvents = new ArrayList<>();
@@ -183,8 +184,7 @@ public class EclipseLanguageClient {
         if (serverCapabilities.getTextDocumentSync() != null
                 && serverCapabilities.getTextDocumentSync().isWillSave()) {
             WillSaveTextDocumentParams params = new WillSaveTextDocumentParams();
-            TextDocumentIdentifier identifier = new TextDocumentIdentifier();
-            identifier.setUri(fileUri);
+            TextDocumentIdentifier identifier = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(identifier);
             connection.notifyWithObject("textDocument/willSave", params);
         }
@@ -194,8 +194,7 @@ public class EclipseLanguageClient {
         if (serverCapabilities.getTextDocumentSync() != null
                 && serverCapabilities.getTextDocumentSync().getSave() != null) {
             DidSaveTextDocumentParams params = new DidSaveTextDocumentParams();
-            TextDocumentIdentifier identifier = new TextDocumentIdentifier();
-            identifier.setUri(fileUri);
+            TextDocumentIdentifier identifier = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(identifier);
             if (serverCapabilities.getTextDocumentSync().getSave().isIncludeText()) {
                 params.setText(content);
@@ -212,18 +211,25 @@ public class EclipseLanguageClient {
 
     public List<SymbolInformation> listDocumentSymbols(URI fileUri) {
         DocumentSymbolParams documentSymbolParams = new DocumentSymbolParams();
-        documentSymbolParams.setTextDocument(new TextDocumentIdentifier());
-        documentSymbolParams.getTextDocument().setUri(fileUri);
+        documentSymbolParams.setTextDocument(new TextDocumentIdentifier(fileUri));
         return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "textDocument/documentSymbol", documentSymbolParams);
     }
 
     public WorkspaceEdit renameSymbol(URI fileUri, Position symbolPosition, String newName) {
         RenameParams renameParams = new RenameParams();
-        renameParams.setTextDocument(new TextDocumentIdentifier());
-        renameParams.getTextDocument().setUri(fileUri);
+        renameParams.setTextDocument(new TextDocumentIdentifier(fileUri));
         renameParams.setPosition(symbolPosition);
         renameParams.setNewName(newName);
         return connection.requestWithObject(new ObjectMapper().constructType(WorkspaceEdit.class), "textDocument/rename", renameParams);
+    }
+
+    public List<CodeAction> listCodeActions(URI fileUri, Range range) {
+        Map<String, Object> codeActionParams = new HashMap<>();
+        codeActionParams.put("textDocument", new TextDocumentIdentifier(fileUri));
+        codeActionParams.put("range", range);
+        codeActionParams.put("context", Collections.singletonMap("diagnostics", new ArrayList<Object>()));
+
+        return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction",  codeActionParams);
     }
 
     public void exit() {

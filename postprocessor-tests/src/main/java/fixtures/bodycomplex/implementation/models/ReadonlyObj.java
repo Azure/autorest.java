@@ -6,48 +6,50 @@ package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.UUID;
 
 /** The ReadonlyObj model. */
 @Fluent
 public final class ReadonlyObj {
-  /*
-   * The id property.
-   */
-  @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
-  private String id;
+    /*
+     * The id property.
+     */
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
+    private String id;
 
-  /*
-   * The size property.
-   */
-  @JsonProperty(value = "size")
-  private Integer size;
+    /*
+     * The size property.
+     */
+    @JsonProperty(value = "size")
+    private Integer size;
 
-  /**
-   * Get the id property: The id property.
-   *
-   * @return the id value.
-   */
-  public String getId() {
-    return this.id;
-  }
+    /**
+     * Get the id property: The id property.
+     *
+     * @return the id value.
+     */
+    public UUID getId() {
+        String returnValue = this.id;
+        return UUID.fromString(returnValue);
+    }
 
-  /**
-   * Get the size property: The size property.
-   *
-   * @return the size value.
-   */
-  public Integer getSize() {
-    return this.size;
-  }
+    /**
+     * Get the size property: The size property.
+     *
+     * @return the size value.
+     */
+    public Integer getSize() {
+        return this.size;
+    }
 
-  /**
-   * Set the size property: The size property.
-   *
-   * @param size the size value to set.
-   * @return the ReadonlyObj object itself.
-   */
-  public ReadonlyObj setSize(Integer size) {
-    this.size = size;
-    return this;
-  }
+    /**
+     * Set the size property: The size property.
+     *
+     * @param size the size value to set.
+     * @return the ReadonlyObj object itself.
+     */
+    public ReadonlyObj setSize(Integer size) {
+        this.size = size;
+        return this;
+    }
 }

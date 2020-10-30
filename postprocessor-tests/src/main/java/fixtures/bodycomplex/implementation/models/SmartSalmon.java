@@ -19,63 +19,63 @@ import java.util.Map;
 @JsonTypeName("smart_salmon")
 @Fluent
 public final class SmartSalmon extends Salmon {
-  /*
-   * The college_degree property.
-   */
-  @JsonProperty(value = "college_degree")
-  private String collegeDegree;
+    /*
+     * The college_degree property.
+     */
+    @JsonProperty(value = "college_degree")
+    private String collegeDegree;
 
-  /*
-   * Dictionary of <any>
-   */
-  @JsonIgnore private Map<String, Object> additionalProperties;
+    /*
+     * Dictionary of <any>
+     */
+    @JsonIgnore private Map<String, Object> additionalProperties;
 
-  /**
-   * Get the collegeDegree property: The college_degree property.
-   *
-   * @return the collegeDegree value.
-   */
-  public String getCollegeDegree() {
-    return this.collegeDegree;
-  }
-
-  /**
-   * Set the collegeDegree property: The college_degree property.
-   *
-   * @param collegeDegree the collegeDegree value to set.
-   * @return the SmartSalmon object itself.
-   */
-  public SmartSalmon setCollegeDegree(String collegeDegree) {
-    this.collegeDegree = collegeDegree;
-    return this;
-  }
-
-  /**
-   * Get the additionalProperties property: Dictionary of &lt;any&gt;.
-   *
-   * @return the additionalProperties value.
-   */
-  @JsonAnyGetter
-  public Map<String, Object> getAdditionalProperties() {
-    return this.additionalProperties;
-  }
-
-  /**
-   * Set the additionalProperties property: Dictionary of &lt;any&gt;.
-   *
-   * @param additionalProperties the additionalProperties value to set.
-   * @return the SmartSalmon object itself.
-   */
-  public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
-    this.additionalProperties = additionalProperties;
-    return this;
-  }
-
-  @JsonAnySetter
-  void setAdditionalProperties(String key, Object value) {
-    if (additionalProperties == null) {
-      additionalProperties = new HashMap<>();
+    /**
+     * Get the collegeDegree property: The college_degree property.
+     *
+     * @return the collegeDegree value.
+     */
+    public String getCollegeDegree() {
+        return this.collegeDegree;
     }
-    additionalProperties.put(key, value);
-  }
+
+    /**
+     * Set the collegeDegree property: The college_degree property.
+     *
+     * @param collegeDegree the collegeDegree value to set.
+     * @return the SmartSalmon object itself.
+     */
+    public SmartSalmon setCollegeDegree(String collegeDegree) {
+        this.collegeDegree = collegeDegree;
+        return this;
+    }
+
+    /**
+     * Get the additionalProperties property: Dictionary of &lt;any&gt;.
+     *
+     * @return the additionalProperties value.
+     */
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    /**
+     * Set the additionalProperties property: Dictionary of &lt;any&gt;.
+     *
+     * @param additionalProperties the additionalProperties value to set.
+     * @return the SmartSalmon object itself.
+     */
+    public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
+        return this;
+    }
+
+    @JsonAnySetter
+    void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
+    }
 }

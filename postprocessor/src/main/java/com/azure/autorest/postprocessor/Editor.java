@@ -83,6 +83,18 @@ public class Editor {
         return lines.get(name).get(line);
     }
 
+    public Position insertBlankLine(String fileName, int line, boolean indented) {
+        List<String> lineContent = lines.get(fileName);
+        String nextLine = lineContent.get(line);
+        String indentation = "";
+        if (indented) {
+            indentation = nextLine.replaceFirst("[^ ].*$", "");
+        }
+        lines.get(fileName).add(line, indentation);
+        contents.put(fileName, joinLinesIntoContent(lines.get(fileName)));
+        return new Position(line, indentation.length());
+    }
+
     public void replace(String fileName, Position start, Position end, String newContent) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -92,10 +104,12 @@ public class Editor {
         }
         printWriter.print(lineContent.get(start.getLine()).substring(0, start.getCharacter()));
         List<String> replacementLineContent = splitContentIntoLines(newContent);
-        for (int i = 0; i != replacementLineContent.size() - 1; i++) {
-            printWriter.println(replacementLineContent.get(i));
+        if (replacementLineContent.size() > 0) {
+            for (int i = 0; i != replacementLineContent.size() - 1; i++) {
+                printWriter.println(replacementLineContent.get(i));
+            }
+            printWriter.print(replacementLineContent.get(replacementLineContent.size() - 1));
         }
-        printWriter.print(replacementLineContent.get(replacementLineContent.size() - 1));
         printWriter.println(lineContent.get(end.getLine()).substring(end.getCharacter()));
         for (int i = end.getLine() + 1; i != lineContent.size(); i++) {
             printWriter.println(lineContent.get(i));
@@ -156,6 +170,9 @@ public class Editor {
         Scanner scanner = new Scanner(content);
         while (scanner.hasNextLine()) {
             res.add(scanner.nextLine());
+        }
+        if (content.endsWith("\n")) {
+            res.add("");
         }
         return res;
     }

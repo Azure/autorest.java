@@ -16,64 +16,68 @@ import fixtures.bodycomplex.implementation.models.ReadonlyObj;
 /** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ReadonlypropertyClient {
-  private final ReadonlypropertiesImpl serviceClient;
+    private final ReadonlypropertiesImpl serviceClient;
 
-  /** Initializes an instance of Readonlyproperties client. */
-  ReadonlypropertyClient(ReadonlypropertiesImpl serviceClient) {
-    this.serviceClient = serviceClient;
-  }
+    /**
+     * Initializes an instance of Readonlyproperties client.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    ReadonlypropertyClient(ReadonlypropertiesImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
 
-  /**
-   * Get complex types that have readonly properties.
-   *
-   * @throws ErrorException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return complex types that have readonly properties.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public ReadonlyObj getValid() {
-    return this.serviceClient.getValid();
-  }
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReadonlyObj getValid() {
+        return this.serviceClient.getValid();
+    }
 
-  /**
-   * Get complex types that have readonly properties.
-   *
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws ErrorException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return complex types that have readonly properties.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Response<ReadonlyObj> getValidWithResponse(Context context) {
-    return this.serviceClient.getValidWithResponse(context);
-  }
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ReadonlyObj> getValidWithResponse(Context context) {
+        return this.serviceClient.getValidWithResponse(context);
+    }
 
-  /**
-   * Put complex types that have readonly properties.
-   *
-   * @param complexBody
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws ErrorException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public void putValid(ReadonlyObj complexBody) {
-    this.serviceClient.putValid(complexBody);
-  }
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(ReadonlyObj complexBody) {
+        this.serviceClient.putValid(complexBody);
+    }
 
-  /**
-   * Put complex types that have readonly properties.
-   *
-   * @param complexBody
-   * @param context The context to associate with this operation.
-   * @throws IllegalArgumentException thrown if parameters fail the validation.
-   * @throws ErrorException thrown if the request is rejected by server.
-   * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-   * @return the response.
-   */
-  @ServiceMethod(returns = ReturnType.SINGLE)
-  public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
-    return this.serviceClient.putValidWithResponse(complexBody, context);
-  }
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
+        return this.serviceClient.putValidWithResponse(complexBody, context);
+    }
 }

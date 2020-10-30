@@ -5,6 +5,10 @@ import java.net.URI;
 public class TextDocumentIdentifier {
     private URI uri;
 
+    public TextDocumentIdentifier(URI uri) {
+        this.uri = uri;
+    }
+
     public URI getUri() {
         return uri;
     }
