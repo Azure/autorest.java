@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /** The Cookiecuttershark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
@@ -23,6 +24,27 @@ public final class Cookiecuttershark extends Shark {
             @JsonProperty(value = "length", required = true) float length,
             @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
     }
 
     /**

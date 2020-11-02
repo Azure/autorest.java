@@ -32,6 +32,20 @@ public final class Dog extends Pet {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public Dog setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Dog setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *
