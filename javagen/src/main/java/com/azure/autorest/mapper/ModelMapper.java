@@ -16,7 +16,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -178,6 +176,16 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.serializedName(modelSerializedName);
 
             List<ClientModel> derivedTypes = new ArrayList<>();
+            if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
+                for (ComplexSchema childSchema : compositeType.getChildren().getImmediate()) {
+                    if (childSchema instanceof ObjectSchema) {
+                        ClientModel model = this.map((ObjectSchema) childSchema);
+                        derivedTypes.add(model);
+                    } else {
+                        throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
+                    }
+                }
+            }
             builder.derivedModels(derivedTypes);
 
             if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
@@ -213,44 +221,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             builder.properties(properties);
 
-            if (settings.isOverrideSetterFromSuperclass()) {
-                List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
-                builder.propertyReferences(propertyReferences);
-            }
-
             result = builder.build();
             serviceModels.addModel(result);
-
-            // this section after Model added to ClientModels, to avoid circular invocation on "map" method (subclass in derived types, and superclass in parent type)s
-
-            if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
-                List<ClientModel> derivedModels = result.getDerivedModels();
-                for (ComplexSchema childSchema : compositeType.getChildren().getImmediate()) {
-                    if (childSchema instanceof ObjectSchema) {
-                        ClientModel model = this.map((ObjectSchema) childSchema);
-                        derivedModels.add(model);
-                    } else {
-                        throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
-                    }
-                }
-            }
-
-            if (settings.isOverrideSetterFromSuperclass() && firstParentComplexSchema != null) {
-                List<ClientModelPropertyReference> propertyReferences = result.getPropertyReferences();
-
-                ClientModel parentModel = this.map(firstParentComplexSchema);
-                if (parentModel == null) {
-                    parentModel = getPredefinedModel(parentModelName).orElse(null);
-                }
-                if (parentModel != null) {
-                    if (parentModel.getPropertyReferences() != null) {
-                        propertyReferences.addAll(parentModel.getPropertyReferences());
-                    }
-                    if (parentModel.getProperties() != null) {
-                        propertyReferences.addAll(parentModel.getProperties().stream().map(ClientModelPropertyReference::new).collect(Collectors.toList()));
-                    }
-                }
-            }
         }
 
         return result;
@@ -278,15 +250,5 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      */
     protected boolean isPredefinedModel(ClassType compositeType) {
         return false;
-    }
-
-    /**
-     * Extension for Fluent predefined type.
-     *
-     * @param modelName the name of the type.
-     * @return the predefined model.
-     */
-    protected Optional<ClientModel> getPredefinedModel(String modelName) {
-        return Optional.empty();
     }
 }
