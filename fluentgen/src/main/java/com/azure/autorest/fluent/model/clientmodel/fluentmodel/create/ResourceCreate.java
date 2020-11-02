@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -304,9 +305,19 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
-        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
-
         MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
+        String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
+        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
+        // skip till resource name path parameter
+        Iterator<UrlPathSegments.ParameterSegment> iterator = parameterSegments.iterator();
+        while (iterator.hasNext()) {
+            if (serializedResourceNamePathParameterName.equals(iterator.next().getParameterName())) {
+                break;
+            }
+        }
+        // next path parameter is the parent path parameter
+        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(iterator.next().getSegmentName()));
+
         List<MethodParameter> parameters = this.getPathParameters().stream()
                 .filter(p -> !p.getSerializedName().equals(resourceNamePathParameter.getSerializedName()))
                 .collect(Collectors.toList());
