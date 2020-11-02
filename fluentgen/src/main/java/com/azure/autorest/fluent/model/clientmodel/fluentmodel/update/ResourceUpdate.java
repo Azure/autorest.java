@@ -101,7 +101,7 @@ public class ResourceUpdate extends ResourceOperation {
     protected List<ClientModelProperty> getProperties() {
         return super.getProperties().stream()
                 .filter(p -> !p.getIsReadOnlyForUpdate())
-                .filter(p -> !isLocationProperty(p))        // update should not be able to change location
+                .filter(p -> !isIdProperty(p) && !isLocationProperty(p))    // update should not be able to change id or location
                 .collect(Collectors.toList());
     }
 

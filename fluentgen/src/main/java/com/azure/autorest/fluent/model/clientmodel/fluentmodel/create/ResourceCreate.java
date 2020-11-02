@@ -300,10 +300,6 @@ public class ResourceCreate extends ResourceOperation  {
         }
     }
 
-    private boolean isIdProperty(ClientModelProperty property) {
-        return property.getName().equals(ResourceTypeName.FIELD_ID);
-    }
-
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getDefinitionStages().forEach(s -> s.addImportsTo(imports, includeImplementationImports));
     }
