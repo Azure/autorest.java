@@ -195,6 +195,7 @@ public class ResourceCreate extends ResourceOperation  {
     protected List<ClientModelProperty> getProperties() {
         return super.getProperties().stream()
                 .filter(p -> !p.getIsReadOnlyForCreate())
+                .filter(p -> !isIdProperty(p))           // create should not be able to set id
                 .collect(Collectors.toList());
     }
 
@@ -297,6 +298,10 @@ public class ResourceCreate extends ResourceOperation  {
         } else {
             throw new IllegalStateException("create method not found on model " + resourceModel.getName());
         }
+    }
+
+    private boolean isIdProperty(ClientModelProperty property) {
+        return property.getName().equals(ResourceTypeName.FIELD_ID);
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {

@@ -60,14 +60,12 @@ public class ResourceUpdate extends ResourceOperation {
 
         List<ClientModelProperty> properties = this.getProperties();
         for (ClientModelProperty property : properties) {
-            if (!isLocationProperty(property)) {    // update should not be able to change location
-                UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
-                stage.setNextStage(updateStageApply);
+            UpdateStage stage = new UpdateStage("With" + CodeNamer.toPascalCase(property.getName()), property);
+            stage.setNextStage(updateStageApply);
 
-                stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, property));
+            stage.getMethods().add(this.getPropertyMethod(stage, requestBodyParameterModel, property));
 
-                updateStages.add(stage);
-            }
+            updateStages.add(stage);
         }
         // header and query parameters
         List<ClientMethodParameter> miscParameters = this.getMiscParameters();
@@ -103,6 +101,7 @@ public class ResourceUpdate extends ResourceOperation {
     protected List<ClientModelProperty> getProperties() {
         return super.getProperties().stream()
                 .filter(p -> !p.getIsReadOnlyForUpdate())
+                .filter(p -> !isLocationProperty(p))        // update should not be able to change location
                 .collect(Collectors.toList());
     }
 
