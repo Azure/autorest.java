@@ -254,6 +254,10 @@ public abstract class ResourceOperation {
         return this.requestBodyModelPropertiesMap;
     }
 
+    protected boolean isIdProperty(ClientModelProperty property) {
+        return property.getName().equals(ResourceTypeName.FIELD_ID);
+    }
+
     protected boolean isLocationProperty(ClientModelProperty property) {
         return FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION);
     }

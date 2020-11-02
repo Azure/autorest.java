@@ -59,13 +59,14 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generate-sync-async-clients`|Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.|
 |`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
 |`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
-|`--add-context-parameter`|Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated proxy methods. Default is false.|
-|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the leading com.microsoft.rest.v3.Context parameter should also be included in generated client methods. Default is false.|
+|`--add-context-parameter`|Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.|
+|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Default is false.|
 |`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
 |`--required-parameter-client-methods`|Indicates whether client method overloads with only required parameters should be generated. Default is false.|
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
+|`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model.|
 
 # Project structure
 ## extension-base

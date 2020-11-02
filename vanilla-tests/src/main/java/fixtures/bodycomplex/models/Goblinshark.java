@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /** The Goblinshark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
@@ -74,6 +75,27 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark setColor(GoblinSharkColor color) {
         this.color = color;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Goblinshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Goblinshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Goblinshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 

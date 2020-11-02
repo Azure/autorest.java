@@ -64,6 +64,13 @@ public class DotSalmon extends DotFish {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public DotSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *
