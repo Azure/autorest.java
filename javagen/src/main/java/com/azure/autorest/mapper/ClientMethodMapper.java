@@ -470,7 +470,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         builder.parameters(parameters);
     }
 
-    private String getPageableItemName(Operation operation) {
+    protected String getPageableItemName(Operation operation) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
             operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);

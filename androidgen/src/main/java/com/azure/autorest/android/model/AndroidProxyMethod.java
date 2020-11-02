@@ -69,6 +69,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                     .keySet()
                     .forEach(e -> e.addImportsTo(imports, includeImplementationImports));
         }
+        getReturnType().addImportsTo(imports, true);
     }
 
     public static class Builder extends ProxyMethod.Builder {

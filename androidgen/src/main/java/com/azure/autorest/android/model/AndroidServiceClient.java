@@ -36,6 +36,9 @@ public class AndroidServiceClient extends ServiceClient {
                 clientMethod.addImportsTo(imports, includeImplementationImports, settings);
             }
         }
+        imports.add("com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever");
+        imports.add("com.azure.android.core.http.responsepaging.PagedDataResponseRetriever");
+        imports.add("com.azure.android.core.util.paging.PagedDataRetriever");
 
 //        for (ClientMethod clientMethod : getClientMethods()) {
 //            clientMethod.getProxyMethod()

@@ -258,7 +258,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return builder.build();
     }
 
-    static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
+    static public ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
         String name = CodeNamer.getPlural(method.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
         String packageName = settings.getPackage(settings.getModelsSubpackage());

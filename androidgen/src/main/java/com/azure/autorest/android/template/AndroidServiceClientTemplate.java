@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -210,6 +211,25 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
             // Write client level API methods.
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
+
+                ClientMethodType clientMethodType = clientMethod.getType();
+                if (clientMethodType == ClientMethodType.PagingAsync
+                        && clientMethod.getMethodPageDetails().getNextMethod() != null
+                        && !clientMethod.getOnlyRequiredParameters()) {
+                    AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                    asyncPageRetrieverTemplate.write(classBlock);
+
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                        PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                        pageResponseRetrieverTemplate.write(classBlock);
+
+                        PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                        pageRetrieverTemplate.write(classBlock);
+                    }
+                }
             }
 
             if (embeddedBuilderTemplate != null) {
