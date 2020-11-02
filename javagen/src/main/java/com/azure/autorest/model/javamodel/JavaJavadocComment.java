@@ -1,9 +1,7 @@
-package com.azure.autorest.model.javamodel;
-
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.util.CodeNamer;
 
@@ -57,5 +55,10 @@ public class JavaJavadocComment {
     public final void methodThrows(String exceptionTypeName, String description) {
         addExpectedLineSeparator();
         contents.line(String.format("@throws %1$s %2$s", exceptionTypeName, processText(description)));
+    }
+
+    public final void inheritDoc() {
+        addExpectedLineSeparator();
+        contents.line("{@inheritDoc}");
     }
 }

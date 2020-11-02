@@ -8,6 +8,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -53,6 +54,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         while (parentModel != null) {
             imports.addAll(parentModel.getImports());
             parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
+        }
+        if (settings.isOverrideSetterFromSuperclass() && model.getPropertyReferences() != null) {
+            model.getPropertyReferences().forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
         }
 
         model.addImportsTo(imports, settings);
@@ -269,6 +273,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         });
                         methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
                     });
+                }
+            }
+
+            if (settings.isOverrideSetterFromSuperclass() && model.getPropertyReferences() != null) {
+                for (ClientModelPropertyReference propertyReference : model.getPropertyReferences()) {
+                    if (!propertyReference.getReferenceProperty().getIsReadOnly()) {
+                        ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
+                        classBlock.javadocComment(comment -> {
+                            comment.inheritDoc();
+                        });
+                        classBlock.annotation("Override");
+                        classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), parentProperty.getSetterName(), parentProperty.getClientType(), parentProperty.getName()),
+                                methodBlock -> {
+                                    methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                    methodBlock.methodReturn("this");
+                                });
+                    }
                 }
             }
 

@@ -10,7 +10,6 @@ import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.ObjectMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.core.util.FluxUtil;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,12 +33,7 @@ public class FluentObjectMapper extends ObjectMapper {
     }
 
     @Override
-    protected boolean isImplementedModel(ClassType modelType) {
-        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType);
-    }
-
-    @Override
-    protected ClassType mapImplementedModel(ObjectSchema compositeType) {
+    protected ClassType mapPredefinedModel(ObjectSchema compositeType) {
         ClassType result = null;
         if (compositeType.getLanguage().getJava().getName().equals(FluentType.Resource.getName())) {
             result = FluentType.Resource;
