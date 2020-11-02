@@ -33,9 +33,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResourceCreate extends ResourceOperation {
@@ -255,8 +258,27 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private MethodParameter getResourceNamePathParameter() {
-        String serializedParameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
-        return this.getPathParameters().stream().filter(p -> serializedParameterName.equals(p.getSerializedName())).findFirst().get();
+        // some resource would have last url parameter segment assigned a constant, hence we cannot just take the last url parameter segment as resource name parameter
+
+        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
+        Map<String, Integer> serializedParameterNameLocations = new HashMap<>();
+        for (int i = 0; i < parameterSegments.size(); ++i) {
+            serializedParameterNameLocations.put(parameterSegments.get(i).getParameterName(), i);
+        }
+
+        List<MethodParameter> pathParameters = this.getPathParameters();
+        Map<MethodParameter, Integer> pathParameterLocations = pathParameters.stream()
+                .collect(Collectors.toMap(Function.identity(), p -> serializedParameterNameLocations.get(p.getSerializedName())));
+
+        int minLocation = Integer.MAX_VALUE;
+        MethodParameter resourceNamePathParameter = null;
+        for (Map.Entry<MethodParameter, Integer> e : pathParameterLocations.entrySet()) {
+            if (e.getValue() < minLocation) {
+                minLocation = e.getValue();
+                resourceNamePathParameter = e.getKey();
+            }
+        }
+        return resourceNamePathParameter;
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
@@ -284,9 +306,9 @@ public class ResourceCreate extends ResourceOperation {
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
 
-        String serializedParameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
+        MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
         List<MethodParameter> parameters = this.getPathParameters().stream()
-                .filter(p -> !serializedParameterName.equals(p.getSerializedName()))
+                .filter(p -> !p.getSerializedName().equals(resourceNamePathParameter.getSerializedName()))
                 .collect(Collectors.toList());
         return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT,
                 stage, parentResourceName,
