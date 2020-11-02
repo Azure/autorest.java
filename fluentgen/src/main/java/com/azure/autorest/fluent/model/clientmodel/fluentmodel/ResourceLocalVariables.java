@@ -6,12 +6,14 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResourceLocalVariables {
 
@@ -20,7 +22,7 @@ public class ResourceLocalVariables {
     public ResourceLocalVariables(ResourceOperation resourceOperation) {
         String prefix = resourceOperation.getLocalVariablePrefix();
 
-        List<ClientMethodParameter> pathParameters = resourceOperation.getPathParameters();
+        List<ClientMethodParameter> pathParameters = resourceOperation.getPathParameters().stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList());
         pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.Path, p)));
 
         List<ClientMethodParameter> miscParameters = resourceOperation.getMiscParameters();

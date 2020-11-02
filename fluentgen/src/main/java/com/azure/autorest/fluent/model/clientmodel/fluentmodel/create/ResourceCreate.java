@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
@@ -223,8 +224,7 @@ public class ResourceCreate extends ResourceOperation {
             String resourceName = this.getResourceName();
             logger.info("ResourceCreate: Fluent model {}, define method {}", resourceModel.getName(), "define" + resourceName);
 
-            List<ClientMethodParameter> parameters = this.getPathParameters();
-            IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
+            IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
             defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
                     resourceName, resourceNameType);
         }
@@ -246,12 +246,17 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getConstructor() {
-        List<ClientMethodParameter> parameters = this.getPathParameters();
-        IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
-        String propertyName = parameters.get(parameters.size() - 1).getName();
+        ClientMethodParameter resourceNamePathParameter = this.getResourceNamePathParameter().getClientMethodParameter();
+        IType resourceNameType = resourceNamePathParameter.getClientType();
+        String propertyName = resourceNamePathParameter.getName();
         return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
                 resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
                 this.getResourceLocalVariables());
+    }
+
+    private MethodParameter getResourceNamePathParameter() {
+        String serializedParameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
+        return this.getPathParameters().stream().filter(p -> serializedParameterName.equals(p.getSerializedName())).findFirst().get();
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
@@ -278,11 +283,15 @@ public class ResourceCreate extends ResourceOperation {
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
-        List<ClientMethodParameter> parameters = this.getPathParameters();
-        parameters.remove(parameters.size() - 1);
+
+        String serializedParameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
+        List<MethodParameter> parameters = this.getPathParameters().stream()
+                .filter(p -> !serializedParameterName.equals(p.getSerializedName()))
+                .collect(Collectors.toList());
         return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT,
                 stage, parentResourceName,
-                parameters, this.getResourceLocalVariables());
+                parameters.stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList()),
+                this.getResourceLocalVariables());
     }
 
     private FluentMethod getCreateMethod(boolean hasContextParameter) {
