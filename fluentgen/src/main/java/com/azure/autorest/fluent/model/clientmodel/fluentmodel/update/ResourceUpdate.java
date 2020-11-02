@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
@@ -134,7 +135,7 @@ public class ResourceUpdate extends ResourceOperation {
     }
 
     private FluentMethod getConstructor() {
-        List<ClientMethodParameter> pathParameters = this.getPathParameters();
+        List<MethodParameter> pathParameters = this.getPathParameters();
         return new FluentConstructorByInner(resourceModel, FluentMethodType.CONSTRUCTOR,
                 pathParameters, this.getResourceLocalVariables(),
                 FluentStatic.getFluentManager().getType(), urlPathSegments);

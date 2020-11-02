@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
@@ -32,9 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResourceCreate extends ResourceOperation {
@@ -223,8 +228,7 @@ public class ResourceCreate extends ResourceOperation {
             String resourceName = this.getResourceName();
             logger.info("ResourceCreate: Fluent model {}, define method {}", resourceModel.getName(), "define" + resourceName);
 
-            List<ClientMethodParameter> parameters = this.getPathParameters();
-            IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
+            IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
             defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
                     resourceName, resourceNameType);
         }
@@ -246,12 +250,36 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getConstructor() {
-        List<ClientMethodParameter> parameters = this.getPathParameters();
-        IType resourceNameType = parameters.get(parameters.size() - 1).getClientType();
-        String propertyName = parameters.get(parameters.size() - 1).getName();
+        ClientMethodParameter resourceNamePathParameter = this.getResourceNamePathParameter().getClientMethodParameter();
+        IType resourceNameType = resourceNamePathParameter.getClientType();
+        String propertyName = resourceNamePathParameter.getName();
         return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
                 resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
                 this.getResourceLocalVariables());
+    }
+
+    private MethodParameter getResourceNamePathParameter() {
+        // some resource would have last url parameter segment assigned a constant, hence we cannot just take the last url parameter segment as resource name parameter
+
+        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
+        Map<String, Integer> serializedParameterNameLocations = new HashMap<>();
+        for (int i = 0; i < parameterSegments.size(); ++i) {
+            serializedParameterNameLocations.put(parameterSegments.get(i).getParameterName(), i);
+        }
+
+        List<MethodParameter> pathParameters = this.getPathParameters();
+        Map<MethodParameter, Integer> pathParameterLocations = pathParameters.stream()
+                .collect(Collectors.toMap(Function.identity(), p -> serializedParameterNameLocations.get(p.getSerializedName())));
+
+        int minLocation = Integer.MAX_VALUE;
+        MethodParameter resourceNamePathParameter = null;
+        for (Map.Entry<MethodParameter, Integer> e : pathParameterLocations.entrySet()) {
+            if (e.getValue() < minLocation) {
+                minLocation = e.getValue();
+                resourceNamePathParameter = e.getKey();
+            }
+        }
+        return resourceNamePathParameter;
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
@@ -277,12 +305,26 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
-        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(urlPathSegments.getReverseParameterSegments().get(1).getSegmentName()));
-        List<ClientMethodParameter> parameters = this.getPathParameters();
-        parameters.remove(parameters.size() - 1);
+        MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
+        String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
+        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
+        // skip till resource name path parameter
+        Iterator<UrlPathSegments.ParameterSegment> iterator = parameterSegments.iterator();
+        while (iterator.hasNext()) {
+            if (serializedResourceNamePathParameterName.equals(iterator.next().getParameterName())) {
+                break;
+            }
+        }
+        // next path parameter is the parent path parameter
+        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(iterator.next().getSegmentName()));
+
+        List<MethodParameter> parameters = this.getPathParameters().stream()
+                .filter(p -> !p.getSerializedName().equals(resourceNamePathParameter.getSerializedName()))
+                .collect(Collectors.toList());
         return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT,
                 stage, parentResourceName,
-                parameters, this.getResourceLocalVariables());
+                parameters.stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList()),
+                this.getResourceLocalVariables());
     }
 
     private FluentMethod getCreateMethod(boolean hasContextParameter) {

@@ -13,7 +13,7 @@ public class ChangelogTemplate {
     public String write(Project project) {
         return FluentUtils.loadTextFromResource("Changelog.txt",
                 TextTemplate.SERVICE_NAME, project.getServiceName(),
-                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescription(),
+                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
                 TextTemplate.ARTIFACT_VERSION, project.getVersion()
         );
     }

@@ -13,7 +13,7 @@ public class ReadmeTemplate {
     public String write(Project project) {
         return FluentUtils.loadTextFromResource("Readme.txt",
                 TextTemplate.SERVICE_NAME, project.getServiceName(),
-                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescription(),
+                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
                 TextTemplate.GROUP_ID, project.getGroupId(),
                 TextTemplate.ARTIFACT_ID, project.getArtifactId(),
                 TextTemplate.ARTIFACT_VERSION, project.getVersion()

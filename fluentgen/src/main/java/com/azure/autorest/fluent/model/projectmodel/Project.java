@@ -143,6 +143,14 @@ public class Project {
         return serviceDescription;
     }
 
+    public String getServiceDescriptionForPom() {
+        return this.getServiceDescription() + " For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt";
+    }
+
+    public String getServiceDescriptionForMarkdown() {
+        return this.getServiceDescription() + " For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
+    }
+
     public String getNamespace() {
         return namespace;
     }
