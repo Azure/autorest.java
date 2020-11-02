@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceCreate extends ResourceOperation  {
+public class ResourceCreate extends ResourceOperation {
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceCreate.class);
 
