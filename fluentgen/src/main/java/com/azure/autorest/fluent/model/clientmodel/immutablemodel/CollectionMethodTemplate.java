@@ -43,7 +43,7 @@ public class CollectionMethodTemplate implements ImmutableMethod {
                         block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     } else {
                         if (innerType instanceof ListType || innerType instanceof MapType) {
-                            block.line(String.format("%1$s %2$s = %3$s();", innerType, TypeConversionUtils.tempPropertyName(), expression));
+                            block.line(String.format("%1$s %2$s = %3$s;", innerType, TypeConversionUtils.tempPropertyName(), expression));
                             block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
                                 block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(innerType, TypeConversionUtils.tempPropertyName()));
                             }).elseBlock(elseBlock -> {
