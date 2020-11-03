@@ -59,7 +59,7 @@ public class TypeConversionUtils {
         return expression;
     }
 
-    public static String unmodifiableCollection(IType clientType, String expression) {
+    public static String objectOrUnmodifiableCollection(IType clientType, String expression) {
         String unmodifiableMethodName = null;
         if (clientType instanceof ListType) {
             unmodifiableMethodName = "unmodifiableList";
@@ -69,6 +69,16 @@ public class TypeConversionUtils {
         return (unmodifiableMethodName == null)
                 ? expression
                 : String.format("Collections.%1$s(%2$s)", unmodifiableMethodName, expression);
+    }
+
+    public static String nullOrEmptyCollection(IType clientType) {
+        String emptyExpression = "null";
+        if (clientType instanceof ListType) {
+            emptyExpression = "Collections.emptyList()";
+        } else if (clientType instanceof MapType) {
+            emptyExpression = "Collections.emptyMap()";
+        }
+        return emptyExpression;
     }
 
     public static boolean isPagedIterable(IType clientType) {

@@ -53,9 +53,9 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
                     } else {
                         block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
                             String expression = TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName());
-                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
+                            block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
-                            block.methodReturn("null");
+                            block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(innerType));
                         });
                     }
                 })

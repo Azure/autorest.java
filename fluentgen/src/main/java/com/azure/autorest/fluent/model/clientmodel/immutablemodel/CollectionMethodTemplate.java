@@ -38,11 +38,20 @@ public class CollectionMethodTemplate implements ImmutableMethod {
                 .imports(imports)
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
+                    String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation());
                     if (innerType == PrimitiveType.Void || innerType == PrimitiveType.Void.asNullable()) {
                         block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     } else {
-                        String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation());
-                        block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
+                        if (innerType instanceof ListType || innerType instanceof MapType) {
+                            block.line(String.format("%1$s %2$s = %3$s;", innerType, TypeConversionUtils.tempPropertyName(), expression));
+                            block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
+                                block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(innerType, TypeConversionUtils.tempPropertyName()));
+                            }).elseBlock(elseBlock -> {
+                                block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(innerType));
+                            });
+                        } else {
+                            block.methodReturn(expression);
+                        }
                     }
                 })
                 .build();
