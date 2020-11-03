@@ -2,6 +2,7 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -77,7 +78,10 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             if (wrapServiceClient) {
                 serviceClient.getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleAsyncRestResponse
+                                || clientMethod.getType() == ClientMethodType.SimpleAsync
+                                || (clientMethod.getType() == ClientMethodType.PagingAsync
+                                    && clientMethod.getName().contains("Pages")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });

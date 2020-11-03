@@ -313,7 +313,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 final ClientMethodParameter callbackCollectionParam = new ClientMethodParameter.Builder()
                         .description("the Callback that receives the response collection.")
                         .wireType(GenericType.AndroidCallback(GenericType.AndroidAsyncPagedDataCollection(elementType)))
-                        .name("collectionCallback")
+                        .name("callback")
                         .annotations(new ArrayList<>())
                         .isConstant(false)
                         .defaultValue(null)
