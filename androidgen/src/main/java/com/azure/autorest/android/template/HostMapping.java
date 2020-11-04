@@ -51,9 +51,8 @@ class HostMapping {
                     return this.hostParams.get(0) + ";";
                 } else {
                     StringBuilder endpoint = new StringBuilder();
-                    endpoint.append(String.format("\"%s\"", this.host));
                     for (String hostParam : this.hostParams) {
-                        endpoint.append(String.format(".replace(\"{%s}\", %s)", hostParam, hostParam));
+                        endpoint.append(String.format("this.host.replace(\"{%s}\", %s)", hostParam, hostParam));
                     }
                     return endpoint
                             .append(";")
