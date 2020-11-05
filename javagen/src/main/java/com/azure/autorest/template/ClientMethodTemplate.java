@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
+import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
@@ -281,8 +282,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    protected static void writeMethod(JavaType typeBlock,
-                          JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
+    protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
         if (visibility == JavaVisibility.Public) {
             typeBlock.publicMethod(methodSignature, method);
         } else {
@@ -294,6 +294,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     public final void write(ClientMethod clientMethod, JavaType typeBlock) {
+        final boolean writingInterface = typeBlock instanceof JavaInterface;
+        if (clientMethod.getMethodVisibility() != JavaVisibility.Public && writingInterface) {
+            return;
+        }
+
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
@@ -301,7 +306,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         //MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod, false);
+        // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod, writingInterface);
 
         switch (clientMethod.getType()) {
             case PagingSync:
@@ -316,7 +322,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //                typeBlock.javadocComment(comment ->
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
@@ -329,7 +335,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         });
                     });
                 } else {
-                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                         AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
@@ -488,9 +494,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param clientMethod client method
      * @param typeBlock code block
      * @param restAPIMethod proxy method
-     * @param useFullName whether to use fully-qualified name in javadoc
+     * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
-    public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullName) {
+    public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
         typeBlock.javadocComment(comment -> {
             comment.description(clientMethod.getDescription());
             List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
@@ -503,7 +509,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
             }
             if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                comment.methodThrows(useFullName
+                comment.methodThrows(useFullClassName
                         ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
                         : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
                         "thrown if the request is rejected by server");

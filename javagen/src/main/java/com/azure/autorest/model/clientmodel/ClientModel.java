@@ -66,6 +66,8 @@ public class ClientModel {
      */
     private List<ClientModelProperty> properties;
 
+    private List<ClientModelPropertyReference> propertyReferences;
+
     /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
@@ -83,7 +85,7 @@ public class ClientModel {
     private ClientModel(String package_Keyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
-            List<ClientModelProperty> properties) {
+            List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -97,6 +99,7 @@ public class ClientModel {
         this.xmlName = xmlName;
         this.xmlNamespace = xmlNamespace;
         this.properties = properties;
+        this.propertyReferences = propertyReferences;
     }
 
     public final String getPackage() {
@@ -158,6 +161,10 @@ public class ClientModel {
         return properties;
     }
 
+//    public List<ClientModelPropertyReference> getPropertyReferences() {
+//        return propertyReferences;
+//    }
+
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
@@ -184,6 +191,7 @@ public class ClientModel {
 
             if (getDerivedModels() != null && getDerivedModels().size() > 0) {
                 imports.add("com.fasterxml.jackson.annotation.JsonSubTypes");
+                getDerivedModels().forEach(m -> imports.add(m.getFullName()));
             }
         }
 
@@ -206,6 +214,7 @@ public class ClientModel {
         private String xmlName;
         private List<ClientModelProperty> properties;
         private String xmlNamespace;
+        private List<ClientModelPropertyReference> propertyReferences;
 
         /**
          * Sets the package that this model class belongs to.
@@ -337,6 +346,17 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets the property references for this model.
+         * They are used to call property method from i.e. a parent model.
+         * @param propertyReferences the property references.
+         * @return the Builder itself
+         */
+        public Builder propertyReferences(List<ClientModelPropertyReference> propertyReferences) {
+            this.propertyReferences = propertyReferences;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -350,7 +370,8 @@ public class ClientModel {
                     derivedModels,
                     xmlName,
                     xmlNamespace,
-                    properties);
+                    properties,
+                    propertyReferences);
         }
     }
 }

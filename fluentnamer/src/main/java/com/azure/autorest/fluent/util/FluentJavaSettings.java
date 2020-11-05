@@ -37,7 +37,7 @@ public class FluentJavaSettings {
     /**
      * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
      */
-    private boolean track1Naming = false;
+    private boolean track1Naming = true;
 
     /**
      * Whether to treat read-only resource property as SubResource type.
@@ -53,6 +53,37 @@ public class FluentJavaSettings {
      * Naming override.
      */
     private final Map<String, String> namingOverride = new HashMap<>();
+
+    private String pomFilename = "pom.xml";
+
+    private Optional<String> artifactVersion = Optional.empty();
+
+    private boolean sdkIntegration = false;
+
+    private final AutorestSettings autorestSettings = new AutorestSettings();
+
+    public static class AutorestSettings {
+        private String tag;
+        private String baseFolder;
+        private String outputFolder;
+        private Optional<String> azureLibrariesForJavaFolder = Optional.empty();
+
+        public String getTag() {
+            return tag;
+        }
+
+        public String getBaseFolder() {
+            return baseFolder;
+        }
+
+        public String getOutputFolder() {
+            return outputFolder;
+        }
+
+        public Optional<String> getAzureLibrariesForJavaFolder() {
+            return azureLibrariesForJavaFolder;
+        }
+    }
 
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
@@ -85,6 +116,22 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
+    public String getPomFilename() {
+        return pomFilename;
+    }
+
+    public Optional<String> getArtifactVersion() {
+        return artifactVersion;
+    }
+
+    public boolean isSdkIntegration() {
+        return sdkIntegration;
+    }
+
+    public AutorestSettings getAutorestSettings() {
+        return autorestSettings;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -109,12 +156,22 @@ public class FluentJavaSettings {
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
-        loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s) );
+        loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s));
+
+        loadStringSetting("pom-file", s -> pomFilename = s);
+        loadStringSetting("package-version", s -> artifactVersion = Optional.of(s));
+
+        loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
+
+        loadStringSetting("tag", s -> autorestSettings.tag = s);
+        loadStringSetting("base-folder", s -> autorestSettings.baseFolder = s);
+        loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s);
+        loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = Optional.of(s));
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {

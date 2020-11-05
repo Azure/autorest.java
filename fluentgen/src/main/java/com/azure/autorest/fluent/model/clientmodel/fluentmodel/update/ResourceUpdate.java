@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
@@ -81,6 +82,7 @@ public class ResourceUpdate extends ResourceOperation {
         return updateStages;
     }
 
+    @Override
     public List<FluentMethod> getFluentMethods() {
         List<FluentMethod> methods = this.getUpdateStages().stream()
                 .flatMap(s -> s.getMethods().stream())
@@ -89,6 +91,19 @@ public class ResourceUpdate extends ResourceOperation {
         methods.addAll(this.getApplyMethods());
         methods.add(this.getConstructor());
         return methods;
+    }
+
+    @Override
+    public String getLocalVariablePrefix() {
+        return "update";
+    }
+
+    @Override
+    protected List<ClientModelProperty> getProperties() {
+        return super.getProperties().stream()
+                .filter(p -> !p.getIsReadOnlyForUpdate())
+                .filter(p -> !isIdProperty(p) && !isLocationProperty(p))    // update should not be able to change id or location
+                .collect(Collectors.toList());
     }
 
     private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter) {
@@ -114,16 +129,13 @@ public class ResourceUpdate extends ResourceOperation {
             applyMethods = new ArrayList<>();
 
             applyMethods.add(this.getApplyMethod(false));
-            FluentMethod updateMethodWithContext = this.getApplyMethod(true);
-            if (updateMethodWithContext != null) {
-                applyMethods.add(updateMethodWithContext);
-            }
+            applyMethods.add(this.getApplyMethod(true));
         }
         return applyMethods;
     }
 
     private FluentMethod getConstructor() {
-        List<ClientMethodParameter> pathParameters = this.getPathParameters();
+        List<MethodParameter> pathParameters = this.getPathParameters();
         return new FluentConstructorByInner(resourceModel, FluentMethodType.CONSTRUCTOR,
                 pathParameters, this.getResourceLocalVariables(),
                 FluentStatic.getFluentManager().getType(), urlPathSegments);
@@ -131,17 +143,16 @@ public class ResourceUpdate extends ResourceOperation {
 
     private FluentMethod getApplyMethod(boolean hasContextParameter) {
         List<ClientMethodParameter> parameters = new ArrayList<>();
-        Optional<FluentCollectionMethod> methodOpt = this.findMethod(hasContextParameter, parameters);
+        Optional<FluentCollectionMethod> methodOpt = this.findMethod(true, parameters);
         if (methodOpt.isPresent()) {
+            if (!hasContextParameter) {
+                parameters.clear();
+            }
             return new FluentApplyMethod(resourceModel, FluentMethodType.APPLY,
                     parameters, this.getResourceLocalVariables(),
                     resourceCollection, methodOpt.get());
         } else {
-            if (hasContextParameter) {
-                return null;
-            } else {
-                throw new IllegalStateException("update method not found on model " + resourceModel.getName());
-            }
+            throw new IllegalStateException("update method not found on model " + resourceModel.getName());
         }
     }
 

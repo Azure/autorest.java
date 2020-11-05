@@ -59,7 +59,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
         imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
         imports.add("com.azure.core.util.CoreUtils");
-        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.AzureJacksonAdapter" : "com.azure.core.util.serializer.JacksonAdapter");
+        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.SerializerFactory" : "com.azure.core.util.serializer.JacksonAdapter");
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -305,7 +305,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
           ClassType.SerializerAdapter, "serializerAdapter", false,
-          settings.isFluent() ? "new AzureJacksonAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+          settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
 
         if (!settings.isAzureOrFluent()) {
 
@@ -325,8 +325,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
             commonProperties.add(new ServiceClientProperty("The logging configuration for HTTP requests and "
                     + "responses.", ClassType.HttpLogOptions, "httpLogOptions", false, null));
-            commonProperties.add(new ServiceClientProperty("The service API version that is used when making "
-                    + "API requests.", ClassType.ServiceVersion, "serviceVersion", false, null));
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
                     + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
 

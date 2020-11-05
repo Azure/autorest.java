@@ -6,7 +6,9 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -19,6 +21,7 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +31,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(FluentUtils.class);
+
+    private static final Set<String> RESERVED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+            Response.class.getSimpleName(),
+            Context.class.getSimpleName()
+    )));
 
     private FluentUtils() {
     }
@@ -47,13 +60,17 @@ public class FluentUtils {
         logger.info(format, arguments);
     }
 
+    public static Set<String> reservedClassNames() {
+        return RESERVED_CLASS_NAMES;
+    }
+
     public static boolean isInnerClassType(ClassType classType) {
         return isInnerClassType(classType.getPackage(), classType.getName());
     }
 
     public static boolean isInnerClassType(String packageName, String name) {
         JavaSettings settings = JavaSettings.getInstance();
-        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), "models");
+        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 
@@ -63,9 +80,13 @@ public class FluentUtils {
 
     public static ClassType resourceModelInterfaceClassType(String innerModelClassName) {
         JavaSettings settings = JavaSettings.getInstance();
+        String modelName = innerModelClassName.substring(0, innerModelClassName.length() - "Inner".length());
+        if (reservedClassNames().contains(modelName)) {
+            modelName += "Model";
+        }
         return new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(innerModelClassName.substring(0, innerModelClassName.length() - "Inner".length()))
+                .name(modelName)
                 .build();
     }
 
@@ -77,14 +98,7 @@ public class FluentUtils {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
-            String packageLastName = settings.getPackage();
-            if (packageLastName.endsWith(".generated")) {
-                packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
-            }
-            int pos = packageLastName.lastIndexOf(".");
-            if (pos != -1 && pos != packageLastName.length() - 1) {
-                packageLastName = packageLastName.substring(pos + 1);
-            }
+            String packageLastName = getPackageLastName();
 
             if (clientName != null) {
                 if (clientName.toLowerCase(Locale.ROOT).startsWith(packageLastName.toLowerCase(Locale.ROOT))) {
@@ -102,6 +116,35 @@ public class FluentUtils {
             }
         }
         return serviceName;
+    }
+
+    public static String getArtifactId() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String artifactId = settings.getArtifactId();
+        if (CoreUtils.isNullOrEmpty(artifactId)) {
+            String packageName = settings.getPackage().toLowerCase(Locale.ROOT);
+            if (packageName.startsWith("com.azure.resourcemanager")) {
+                // if namespace looks good, convert it to artifactId directly
+                artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
+            } else {
+                String packageLastName = getPackageLastName().toLowerCase(Locale.ROOT);
+                artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
+            }
+        }
+        return artifactId;
+    }
+
+    private static String getPackageLastName() {
+        JavaSettings settings = JavaSettings.getInstance();
+        String packageLastName = settings.getPackage();
+        if (packageLastName.endsWith(".generated")) {
+            packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
+        }
+        int pos = packageLastName.lastIndexOf(".");
+        if (pos != -1 && pos != packageLastName.length() - 1) {
+            packageLastName = packageLastName.substring(pos + 1);
+        }
+        return packageLastName;
     }
 
     public static IType getFluentWrapperType(IType clientType) {
@@ -169,16 +212,39 @@ public class FluentUtils {
         return clientModel;
     }
 
-    public static String loadTextFromResource(String filename) {
-        String text = null;
+    public static String loadTextFromResource(String filename, String... replacements) {
+        String text = "";
         try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
             if (inputStream != null) {
                 text = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                         .lines()
-                        .collect(Collectors.joining("\n"));
+                        .collect(Collectors.joining(System.lineSeparator()));
+                if (!text.isEmpty()) {
+                    text += System.lineSeparator();
+                }
             }
+
+            if (replacements.length > 0) {
+                if (replacements.length % 2 == 0) {
+                    // replacement in template
+                    for (int i = 0; i < replacements.length; i += 2) {
+                        String key = replacements[i];
+                        String value = replacements[i+1];
+                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
+                    }
+                } else {
+                    logger.warn("Replacements skipped due to incorrect length. {}", Arrays.asList(replacements));
+                }
+            }
+            return text;
         } catch (IOException e) {
+            logger.warn("Failed to read file {}", filename);
+            throw new IllegalStateException(e);
         }
-        return text;
+    }
+
+    public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
+        return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
+                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
     }
 }

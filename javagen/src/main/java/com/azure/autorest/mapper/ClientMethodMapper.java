@@ -117,6 +117,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+
+                if (request.getProtocol() != null
+                    && request.getProtocol().getHttp() != null
+                    && request.getProtocol().getHttp().getMediaTypes() != null
+                    && request.getProtocol().getHttp().getMediaTypes().stream().anyMatch(mediaType -> mediaType.equals(
+                        "application/json-patch+json"))) {
+                    clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
+                }
+
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
                 }
@@ -228,7 +237,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                         asyncRestResponseReturnType),
                                 details);
                     }
-                    builder.methodVisibility(VISIBLE);
 
                     if (!isNextMethod) {
                         if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -240,6 +248,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingAsync)
                                     .isGroupedParameterRequired(false)
+                                    .methodVisibility(methodVisibility(ClientMethodType.PagingAsync, false))
                                     .build());
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -260,17 +269,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             lroIntermediateType);
                                 }
 
-                                builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true));
-                                addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                                addClientMethodWithContext(methods,
+                                        builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true)),
+                                        proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
                                                 asyncReturnType),
                                         detailsWithContext);
-                                builder.methodVisibility(VISIBLE);
                             }
                         }
 
                         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                            builder.methodVisibility(VISIBLE);
+
                             builder
                                     .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                             syncReturnType))
@@ -280,20 +291,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .isGroupedParameterRequired(false)
                                     .build();
 
-                            //if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                            if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                                 // if context parameter is required, that method will do the overload with max parameters
-                            {
                                 methods.add(builder.build());
-                            }
-
-                            if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder, parameters);
                             }
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
                                 methods.add(builder
                                         .onlyRequiredParameters(true)
                                         .build());
+                            }
+
+                            if (settings.isContextClientMethodParameter()) {
+                                addClientMethodWithContext(methods, builder, parameters);
                             }
                         }
                     }
@@ -307,13 +317,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .isGroupedParameterRequired(false)
+                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
                         .build());
 
                 if (settings.isContextClientMethodParameter()) {
-                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true));
-                    addClientMethodWithContext(methods, builder, parameters);
-                    builder.methodVisibility(VISIBLE);
-
+                    addClientMethodWithContext(methods,
+                            builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                            parameters);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -325,16 +335,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true));
-                        addClientMethodWithContext(methods, builder, parameters);
-                        builder.methodVisibility(VISIBLE);
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
+                                parameters);
                     }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    builder.methodVisibility(VISIBLE);
+
                     // begin method sync
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
@@ -358,22 +371,25 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
                             .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true));
-                        addClientMethodWithContext(methods, builder, parameters);
-                        builder.methodVisibility(VISIBLE);
-                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
                     }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
+                                parameters);
+                    }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    builder.methodVisibility(VISIBLE);
+
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                     syncReturnType))
@@ -383,14 +399,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
-
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
+                    }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
             } else {
@@ -408,17 +424,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .isGroupedParameterRequired(false)
+                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
                         .build());
                 }
 
                 if (settings.isContextClientMethodParameter()) {
-                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true));
-                    addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                    addClientMethodWithContext(methods,
+                        builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                        proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
                             syncReturnType), proxyMethod.getReturnType().getClientType()),
                         null);
-                    builder.methodVisibility(VISIBLE);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -429,25 +446,28 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, false))
                             .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        JavaVisibility visibility = methodVisibility(ClientMethodType.SimpleAsync, true);
-                        if (visibility != NOT_GENERATE) {
-                            builder.methodVisibility(visibility);
-                            addClientMethodWithContext(methods, builder, parameters);
-                            builder.methodVisibility(VISIBLE);
-                        }
-                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
                     }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        JavaVisibility visibility = methodVisibility(ClientMethodType.SimpleAsync, true);
+                        if (visibility != NOT_GENERATE) {
+                            addClientMethodWithContext(methods,
+                                    builder.methodVisibility(visibility),
+                                    parameters);
+                        }
+                    }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    builder.methodVisibility(VISIBLE);
+
                     builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                     syncReturnType))
@@ -457,9 +477,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build();
 
-                    //if (!settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                    if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                         // if context parameter is required, that method will do the overload with max parameters
-                    {
                         methods.add(builder.build());
                     }
 
@@ -539,6 +558,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         methods.add(builder
                 .parameters(withContextParameters) // update builder parameters to include context
+                .onlyRequiredParameters(false)
                 .build());
         // reset the parameters to original params
         builder.parameters(parameters);

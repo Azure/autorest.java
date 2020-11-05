@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-03-01",
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "description": "Azure Monitor client to create/update/delete metric based alerts."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Insights/metricAlerts": {
+      "get": {
+        "tags": [
+          "MetricAlerts"
+        ],
+        "description": "Retrieve an alert rule definition.",
+        "operationId": "MetricAlerts_Get",
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of metric alerts",
+            "schema": {
+              "$ref": "#/definitions/MetricAlertResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetricAlertResource": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MetricAlertProperties",
+          "description": "The alert rule properties of the resource."
+        }
+      },
+      "description": "The metric alert resource."
+    },
+    "MetricAlertProperties": {
+      "required": [
+        "criteria"
+      ],
+      "properties": {
+        "criteria": {
+          "$ref": "#/definitions/MetricAlertCriteria",
+          "description": "defines the specific alert criteria information."
+        }
+      },
+      "description": "An alert rule."
+    },
+    "MetricAlertCriteria": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
+          ],
+          "x-ms-enum": {
+            "name": "odatatype",
+            "modelAsString": true
+          },
+          "description": "specifies the type of the alert criteria."
+        }
+      },
+      "required": [
+        "odata.type"
+      ],
+      "description": "The rule criteria that defines the conditions of the alert rule."
+    },
+    "MetricAlertSingleResourceMultipleMetricCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of metric criteria for this 'all of' operation. "
+        }
+      },
+      "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+    }
+  }
+}

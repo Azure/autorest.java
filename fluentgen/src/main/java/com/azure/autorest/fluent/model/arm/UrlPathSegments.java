@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.arm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -36,8 +37,8 @@ public class UrlPathSegments {
             this.segmentName = segmentName;
             this.parameterName = parameterName;
 
-            switch (segmentName) {
-                case "resourceGroups":
+            switch (segmentName.toLowerCase(Locale.ROOT)) {
+                case "resourcegroups":
                     this.type = ParameterSegmentType.RESOURCE_GROUP;
                     break;
                 case "subscriptions":
@@ -137,8 +138,6 @@ public class UrlPathSegments {
                 }
             }
         }
-
-        //Collections.reverse(segments);
     }
 
     public String getPath() {
@@ -164,7 +163,9 @@ public class UrlPathSegments {
     }
 
     public boolean hasSubscription() {
-        return getNestLevel() >= 1 && reverseSegments.stream()
+        return (getNestLevel() >= 1
+                || (getNestLevel() == 0 && !getReverseParameterSegments().isEmpty() && getReverseParameterSegments().iterator().next().getType() == ParameterSegmentType.RESOURCE_GROUP))   // the special case for ResourceGroup
+                && reverseSegments.stream()
                 .filter(Segment::isParameterSegment)
                 .map(s -> (ParameterSegment) s)
                 .anyMatch(s -> s.getType() == ParameterSegmentType.SUBSCRIPTION);

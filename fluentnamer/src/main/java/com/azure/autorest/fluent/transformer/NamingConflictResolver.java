@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ValueSchema;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
@@ -30,6 +31,19 @@ public class NamingConflictResolver {
                 og.getLanguage().getDefault().setName(newName);
             }
         });
+
+        codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNames));
+        codeModel.getSchemas().getSealedChoices().forEach(c -> validateChoiceName(c, objectNames));
         return codeModel;
+    }
+
+    private void validateChoiceName(ValueSchema choice, Set<String> objectNames) {
+        String name = Utils.getDefaultName(choice);
+        if (objectNames.contains(name)) {
+            String newName = name + "Value";
+            logger.warn("Name conflict of choice with object {}", name);
+            logger.info("Rename choice from {} to {}", name, newName);
+            choice.getLanguage().getDefault().setName(newName);
+        }
     }
 }

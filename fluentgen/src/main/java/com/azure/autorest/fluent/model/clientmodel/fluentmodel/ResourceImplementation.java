@@ -15,7 +15,7 @@ import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,21 +35,25 @@ public class ResourceImplementation {
             fluentMethods.addAll(fluentModel.getResourceUpdate().getFluentMethods());
             localVariables.addAll(fluentModel.getResourceUpdate().getLocalVariables());
         }
+        if (fluentModel.getResourceRefresh() != null) {
+            fluentMethods.addAll(fluentModel.getResourceRefresh().getFluentMethods());
+            //localVariables.addAll(fluentModel.getResourceRefresh().getLocalVariables());
+        }
         this.groupMethods(fluentMethods);
         this.groupLocalVariables(localVariables);
     }
 
     private void groupLocalVariables(Collection<LocalVariable> localVariables) {
-        Map<String, LocalVariable> localVariablesMap = new HashMap<>();
+        Map<String, LocalVariable> localVariablesMap = new LinkedHashMap<>();
         localVariables.forEach(var -> localVariablesMap.putIfAbsent(var.getName(), var));
         this.localVariables.addAll(localVariablesMap.values());
     }
 
     private void groupMethods(Collection<FluentMethod> fluentMethods) {
-        Map<String, GroupedMethod> groupedMethodsMap = new HashMap<>();
+        Map<String, GroupedMethod> groupedMethodsMap = new LinkedHashMap<>();
         for (FluentMethod method : fluentMethods) {
             if (method.getType() == FluentMethodType.CREATE_WITH || method.getType() == FluentMethodType.UPDATE_WITH) {
-                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getName(), key -> new GroupedMethod());
+                GroupedMethod groupedMethod = groupedMethodsMap.computeIfAbsent(method.getImplementationMethodSignature(), key -> new GroupedMethod());
                 if (method.getType() == FluentMethodType.CREATE_WITH) {
                     groupedMethod.methodCreateWith = method;
                 } else {
@@ -129,7 +133,7 @@ public class ResourceImplementation {
                     .visibility(JavaVisibility.Private)
                     .methodSignature("boolean isInCreateMode()")
                     .method(block -> {
-                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER));
+                        block.methodReturn(String.format("this.%1$s().id() == null", ModelNaming.METHOD_INNER_MODEL));
                     })
                     .build();
         }

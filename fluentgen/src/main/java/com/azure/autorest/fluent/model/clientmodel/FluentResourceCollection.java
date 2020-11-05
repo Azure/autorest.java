@@ -12,6 +12,8 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,6 +21,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Model for Azure resource collection.
+ */
 // Fluent resource collection API. E.g. StorageAccounts.
 public class FluentResourceCollection {
 
@@ -38,24 +43,27 @@ public class FluentResourceCollection {
     // resource models
     private final List<ResourceCreate> resourceCreates = new ArrayList<>();
     private final List<ResourceUpdate> resourceUpdates = new ArrayList<>();
+    private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
         JavaSettings settings = JavaSettings.getInstance();
 
         this.groupClient = groupClient;
 
+        String baseClassName = CodeNamer.getPlural(groupClient.getClassBaseName());
+
         this.interfaceType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(groupClient.getInterfaceName())
+                .name(baseClassName)
                 .build();
         this.implementationType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(groupClient.getInterfaceName() + ModelNaming.COLLECTION_IMPL_SUFFIX)
+                .name(baseClassName + ModelNaming.COLLECTION_IMPL_SUFFIX)
                 .build();
 
         this.innerClientType = new ClassType.Builder()
                 .packageName(settings.getPackage(settings.getFluentSubpackage()))
-                .name(groupClient.getClassBaseName() + "Client")
+                .name(groupClient.getInterfaceName())
                 .build();
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()
@@ -104,7 +112,7 @@ public class FluentResourceCollection {
 
     // method signature for inner client
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+        return String.format("%1$s %2$s()", this.getInnerClientType().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_SERVICE_CLIENT));
     }
 
     public List<ResourceCreate> getResourceCreates() {
@@ -115,6 +123,10 @@ public class FluentResourceCollection {
         return resourceUpdates;
     }
 
+    public List<MethodTemplate> getAdditionalMethods() {
+        return additionalMethods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         innerClientType.addImportsTo(imports, false);
 
@@ -123,5 +135,7 @@ public class FluentResourceCollection {
         if (includeImplementationImports) {
             interfaceType.addImportsTo(imports, false);
         }
+
+        additionalMethods.forEach(m -> m.addImportsTo(imports));
     }
 }

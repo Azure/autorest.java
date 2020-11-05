@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /** The SmartSalmon model. */
@@ -84,6 +85,34 @@ public final class SmartSalmon extends Salmon {
             additionalProperties = new HashMap<>();
         }
         additionalProperties.put(key, value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SmartSalmon setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SmartSalmon setIswild(Boolean iswild) {
+        super.setIswild(iswild);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
     }
 
     /**

@@ -26,7 +26,7 @@ public class ResourceClientModel {
             .properties(Collections.singletonList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
-                            .description("Resource ID.")
+                            .description("Fully qualified resource Id for the resource.")
                             .clientType(ClassType.String)
                             .build()
             ))
@@ -36,21 +36,21 @@ public class ResourceClientModel {
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
-                            .description("Resource ID.")
+                            .description("Fully qualified resource Id for the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
                             .clientType(ClassType.String)
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_NAME)
-                            .description("Resource name.")
+                            .description("The name of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
                             .clientType(ClassType.String)
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_TYPE)
-                            .description("Resource type.")
+                            .description("The type of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
                             .clientType(ClassType.String)
@@ -64,10 +64,11 @@ public class ResourceClientModel {
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_LOCATION)
-                            .description("Resource location.")
+                            .description("The geo-location where the resource lives.")
                             .isRequired(true)
-                            .isReadOnly(true)
+                            .isReadOnly(false)
                             .clientType(ClassType.String)
+                            .mutabilities(Arrays.asList(ClientModelProperty.Mutability.CREATE, ClientModelProperty.Mutability.READ))
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_TAGS)

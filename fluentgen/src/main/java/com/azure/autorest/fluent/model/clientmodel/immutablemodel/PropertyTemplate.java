@@ -39,17 +39,14 @@ public class PropertyTemplate implements ImmutableMethod {
                 .methodSignature(fluentProperty.getMethodSignature())
                 .method(block -> {
                     if (property.getClientType() instanceof ListType || property.getClientType() instanceof MapType) {
-                        String unmodifiableMethodName = property.getClientType() instanceof ListType
-                                ? "unmodifiableList" : "unmodifiableMap";
-
-                        block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, property.getGetterName()));
+                        block.line(String.format("%1$s %2$s = this.%3$s().%4$s();", property.getClientType().toString(), TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER_MODEL, property.getGetterName()));
                         block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
-                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(property.getClientType(), TypeConversionUtils.tempPropertyName()));
+                            block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(property.getClientType(), TypeConversionUtils.tempPropertyName()));
                         }).elseBlock(elseBlock -> {
-                            block.methodReturn("null");
+                            block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(property.getClientType()));
                         });
                     } else {
-                        block.methodReturn(String.format("this.inner().%1$s()", property.getGetterName()));
+                        block.methodReturn(String.format("this.%1$s().%2$s()", ModelNaming.METHOD_INNER_MODEL, property.getGetterName()));
                     }
                 })
                 .build();

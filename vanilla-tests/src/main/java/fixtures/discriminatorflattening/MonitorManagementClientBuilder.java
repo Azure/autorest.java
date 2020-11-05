@@ -1,4 +1,4 @@
-package fixtures.bodystring;
+package fixtures.discriminatorflattening;
 
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
@@ -12,7 +12,6 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.ServiceVersion;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import java.util.ArrayList;
@@ -20,16 +19,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** A builder for creating a new instance of the AutoRestSwaggerBATService type. */
-@ServiceClientBuilder(serviceClients = {AutoRestSwaggerBATService.class})
-public final class AutoRestSwaggerBATServiceBuilder {
+/** A builder for creating a new instance of the MonitorManagementClient type. */
+@ServiceClientBuilder(serviceClients = {MonitorManagementClient.class})
+public final class MonitorManagementClientBuilder {
     private static final String SDK_NAME = "name";
 
     private static final String SDK_VERSION = "version";
 
     private final Map<String, String> properties = new HashMap<>();
 
-    public AutoRestSwaggerBATServiceBuilder() {
+    public MonitorManagementClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -42,9 +41,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets server parameter.
      *
      * @param host the host value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder host(String host) {
+    public MonitorManagementClientBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -58,9 +57,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder pipeline(HttpPipeline pipeline) {
+    public MonitorManagementClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -74,9 +73,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The serializer to serialize an object into a string.
      *
      * @param serializerAdapter the serializerAdapter value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
+    public MonitorManagementClientBuilder serializerAdapter(SerializerAdapter serializerAdapter) {
         this.serializerAdapter = serializerAdapter;
         return this;
     }
@@ -90,9 +89,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder httpClient(HttpClient httpClient) {
+    public MonitorManagementClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -107,9 +106,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder configuration(Configuration configuration) {
+    public MonitorManagementClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -123,26 +122,10 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public MonitorManagementClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
-        return this;
-    }
-
-    /*
-     * The service API version that is used when making API requests.
-     */
-    private ServiceVersion serviceVersion;
-
-    /**
-     * Sets The service API version that is used when making API requests.
-     *
-     * @param serviceVersion the serviceVersion value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
-     */
-    public AutoRestSwaggerBATServiceBuilder serviceVersion(ServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
         return this;
     }
 
@@ -156,9 +139,9 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public MonitorManagementClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -172,21 +155,21 @@ public final class AutoRestSwaggerBATServiceBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the AutoRestSwaggerBATServiceBuilder.
+     * @return the MonitorManagementClientBuilder.
      */
-    public AutoRestSwaggerBATServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public MonitorManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBATService with the provided parameters.
+     * Builds an instance of MonitorManagementClient with the provided parameters.
      *
-     * @return an instance of AutoRestSwaggerBATService.
+     * @return an instance of MonitorManagementClient.
      */
-    public AutoRestSwaggerBATService buildClient() {
+    public MonitorManagementClient buildClient() {
         if (host == null) {
-            this.host = "http://localhost:3000";
+            this.host = "https://management.azure.com";
         }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
@@ -194,7 +177,7 @@ public final class AutoRestSwaggerBATServiceBuilder {
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestSwaggerBATService client = new AutoRestSwaggerBATService(pipeline, serializerAdapter, host);
+        MonitorManagementClient client = new MonitorManagementClient(pipeline, serializerAdapter, host);
         return client;
     }
 

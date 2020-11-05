@@ -82,14 +82,20 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.proxy(proxyBuilder.build())
                 .serviceClientName(serviceClientName);
 
+        builder.variableName(CodeNamer.toCamelCase(interfaceName));
+
+        if (settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+            interfaceName += "Client";
+            builder.interfaceName(interfaceName);
+        }
+
+        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
+
         List<String> implementedInterfaces = new ArrayList<>();
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (settings.shouldGenerateClientInterfaces()) {
             implementedInterfaces.add(interfaceName);
         }
         builder.implementedInterfaces(implementedInterfaces);
-
-        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
-        builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
         String packageName;
         if (settings.isFluent()) {

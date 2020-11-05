@@ -1,5 +1,7 @@
 package com.azure.autorest.extension.base.model.extensionmodel;
 
+import java.util.List;
+
 public class XmsExtensions {
     private XmsEnum xmsEnum;
 
@@ -16,6 +18,8 @@ public class XmsExtensions {
     private boolean xmsFlattened;
 
     private boolean xmsAzureResource;
+
+    private List<String> xmsMutability;
 
     public XmsEnum getXmsEnum() {
         return xmsEnum;
@@ -79,5 +83,13 @@ public class XmsExtensions {
 
     public void setXmsAzureResource(boolean xmsAzureResource) {
         this.xmsAzureResource = xmsAzureResource;
+    }
+
+    public List<String> getXmsMutability() {
+        return xmsMutability;
+    }
+
+    public void setXmsMutability(List<String> xmsMutability) {
+        this.xmsMutability = xmsMutability;
     }
 }

@@ -83,7 +83,15 @@ public class Templates {
         return factory.getWrapperClientMethodTemplate();
     }
 
-    public static <ContextT, ModelT> ServiceSyncClientTemplate getServiceSyncClientTemplate() {
+    public static ServiceSyncClientTemplate getServiceSyncClientTemplate() {
         return factory.getServiceSynClientTemplate();
+    }
+
+    public static PomTemplate getPomTemplate() {
+        return factory.getPomTemplate();
+    }
+
+    public static ModuleInfoTemplate getModuleInfoTemplate() {
+        return factory.getModuleInfoTemplate();
     }
 }

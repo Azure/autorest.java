@@ -44,6 +44,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
         List<MethodTemplate> methodTemplates = new ArrayList<>();
         collection.getMethodsForTemplate().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
+        methodTemplates.addAll(collection.getAdditionalMethods());
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
             // variable for inner model
@@ -62,7 +63,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             methodTemplates.forEach(m -> m.writeMethod(classBlock));
 
             // method for inner model
-            classBlock.publicMethod(collection.getInnerMethodSignature(), methodBlock -> {
+            classBlock.privateMethod(collection.getInnerMethodSignature(), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.COLLECTION_PROPERTY_INNER));
             });
 

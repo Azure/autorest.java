@@ -43,12 +43,14 @@ public class FluentResourceCollectionInterfaceTemplate implements IJavaTemplate<
                 interfaceBlock.publicMethod(method.getMethodSignature());
             });
 
-            // method for inner client
-            interfaceBlock.javadocComment(comment -> {
-                comment.description(String.format("Gets the inner %s client", collection.getInnerClientType().getFullName()));
-                comment.methodReturns("the inner client");
-            });
-            interfaceBlock.publicMethod(collection.getInnerMethodSignature());
+            collection.getAdditionalMethods().forEach(method -> method.writeMethodInterface(interfaceBlock));
+
+//            // method for inner client
+//            interfaceBlock.javadocComment(comment -> {
+//                comment.description(String.format("Gets the inner %s client", collection.getInnerClientType().getFullName()));
+//                comment.methodReturns("the inner client");
+//            });
+//            interfaceBlock.publicMethod(collection.getInnerMethodSignature());
 
             // method for define resource
             int resourceCount = collection.getResourceCreates().size();

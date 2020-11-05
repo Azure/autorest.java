@@ -1,6 +1,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.List;
 import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -75,6 +77,8 @@ public class ClientModelProperty {
 
     private boolean isAdditionalProperties;
 
+    private List<Mutability> mutabilities;
+
     /**
      * Create a new ClientModelProperty with the provided properties.
      * @param name The name of this property.
@@ -90,12 +94,13 @@ public class ClientModelProperty {
      * @param isConstant Whether or not this property has a constant value.
      * @param defaultValue The default value expression of this property.
      * @param isReadOnly Whether or not this property's value can be changed by the client library.
+     * @param mutabilities List of property mutability.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      * @param isAdditionalProperties Whether or not this property contain the additional properties.
      */
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
             String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
-            IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly,
+            IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities,
             boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties) {
         this.name = name;
         this.description = description;
@@ -111,6 +116,7 @@ public class ClientModelProperty {
         this.isConstant = isConstant;
         this.defaultValue = defaultValue;
         this.isReadOnly = isReadOnly;
+        this.mutabilities = mutabilities;
         this.isRequired = isRequired;
         this.headerCollectionPrefix = headerCollectionPrefix;
         this.isAdditionalProperties = isAdditionalProperties;
@@ -180,8 +186,23 @@ public class ClientModelProperty {
         return isReadOnly;
     }
 
+    public final boolean getIsReadOnlyForCreate() {
+        return isReadOnly || (this.getMutabilities() != null && !this.getMutabilities().contains(Mutability.CREATE));
+    }
+
+    public final boolean getIsReadOnlyForUpdate() {
+        return isReadOnly || (this.getMutabilities() != null && !this.getMutabilities().contains(Mutability.UPDATE));
+    }
+
     public final String getHeaderCollectionPrefix() {
         return headerCollectionPrefix;
+    }
+
+    /**
+     * @return List of property mutability.
+     */
+    public List<Mutability> getMutabilities() {
+        return mutabilities;
     }
 
     /**
@@ -230,6 +251,10 @@ public class ClientModelProperty {
         return isAdditionalProperties;
     }
 
+    public enum Mutability {
+        CREATE, UPDATE, READ
+    }
+
     public static class Builder {
         private String name;
         private String description;
@@ -248,6 +273,7 @@ public class ClientModelProperty {
         private String headerCollectionPrefix;
         private boolean isAdditionalProperties = false;
         private String xmlNamespace;
+        private List<Mutability> mutabilities;
 
         /**
          * Sets the name of this property.
@@ -419,6 +445,16 @@ public class ClientModelProperty {
             return this;
         }
 
+        /**
+         * Sets list of property mutability.
+         * @param mutabilities list of mutability.
+         * @return the Builder itself
+         */
+        public Builder mutabilities(List<Mutability> mutabilities) {
+            this.mutabilities = mutabilities;
+            return this;
+        }
+
         public ClientModelProperty build() {
             return new ClientModelProperty(name,
                     description,
@@ -434,6 +470,7 @@ public class ClientModelProperty {
                     isConstant,
                     defaultValue,
                     isReadOnly,
+                    mutabilities,
                     isRequired,
                     headerCollectionPrefix,
                     isAdditionalProperties);

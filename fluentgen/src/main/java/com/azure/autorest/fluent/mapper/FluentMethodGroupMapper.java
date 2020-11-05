@@ -27,10 +27,10 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
 
     private static final Logger logger = LoggerFactory.getLogger(FluentMethodGroupMapper.class);
 
-    private static final FluentMethodGroupMapper instance = new FluentMethodGroupMapper();
+    private static final FluentMethodGroupMapper INSTANCE = new FluentMethodGroupMapper();
 
     public static FluentMethodGroupMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

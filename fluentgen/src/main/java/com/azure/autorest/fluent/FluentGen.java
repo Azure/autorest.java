@@ -12,11 +12,14 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
+import com.azure.autorest.fluent.mapper.PomMapper;
+import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
+import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -29,8 +32,10 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -100,12 +105,13 @@ public class FluentGen extends NewPlugin {
             logger.info("Java template for client model");
             FluentJavaPackage javaPackage = new FluentJavaPackage();
             // Service client
+            String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
             javaPackage
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
             if (javaSettings.shouldGenerateClientInterfaces()) {
                 javaPackage
-                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+                        .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
             // Service client builder
@@ -135,7 +141,7 @@ public class FluentGen extends NewPlugin {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
                 if (javaSettings.shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                    javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
 
@@ -172,24 +178,45 @@ public class FluentGen extends NewPlugin {
 
             // Fluent Lite
             if (javaSettings.isFluentLite()) {
+                final boolean isSdkIntegration = fluentJavaSettings.isSdkIntegration();
+                FluentStatic.setFluentJavaSettings(fluentJavaSettings);
                 FluentStatic.setClient(client);
 
                 FluentClient fluentClient = fluentMapper.map(codeModel, client);
 
-                // Fluent manager
-                javaPackage.addFluentManager(fluentClient.getManager());
+                // project
+                Project project = new Project(fluentClient);
+                if (isSdkIntegration) {
+                    project.integrateWithSdk();
+                }
 
-                // Fluent resource model
+                // Fluent manager
+                javaPackage.addFluentManager(fluentClient.getManager(), project);
+
+                // Fluent resource models
                 for (FluentResourceModel model : fluentClient.getResourceModels()) {
                     javaPackage.addFluentResourceModel(model);
                 }
 
+                // Fluent resource collections
                 for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
                     javaPackage.addFluentResourceCollection(collection);
                 }
 
                 // Utils
                 javaPackage.addUtils();
+
+                // module-info
+                javaPackage.addModuleInfo(fluentClient.getModuleInfo());
+
+                // POM
+                Pom pom = new PomMapper().map(project);
+                javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+
+                if (isSdkIntegration) {
+                    javaPackage.addReadme(project);
+                    javaPackage.addChangelog(project);
+                }
             }
 
             // Print to files
@@ -202,6 +229,14 @@ public class FluentGen extends NewPlugin {
                 String formattedContent = new JavaFormatter(content, path).format();
 
                 writeFile(path, formattedContent, null);
+            }
+            logger.info("Write Xml");
+            for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
+                writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
+            }
+            logger.info("Write Text");
+            for (TextFile textFile : javaPackage.getTextFiles()) {
+                writeFile(textFile.getFilePath(), textFile.getContents(), null);
             }
             return true;
         } catch (Exception e) {

@@ -18,10 +18,10 @@ import com.azure.autorest.util.CodeNamer;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
-    private static final FluentClientMethodTemplate instance = new FluentClientMethodTemplate();
+    private static final FluentClientMethodTemplate INSTANCE = new FluentClientMethodTemplate();
 
     public static FluentClientMethodTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -237,6 +237,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
+    @Override
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
         String contextParam = mergeContextParameter ? "context" : "Context.NONE";
@@ -258,6 +259,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
+    @Override
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {

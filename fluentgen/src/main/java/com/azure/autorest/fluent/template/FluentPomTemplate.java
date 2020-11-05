@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+package com.azure.autorest.fluent.template;
+
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.xmlmodel.XmlBlock;
+import com.azure.autorest.template.PomTemplate;
+
+public class FluentPomTemplate extends PomTemplate {
+
+    private static final FluentPomTemplate INSTANCE = new FluentPomTemplate();
+
+    private static Project project;
+
+    protected FluentPomTemplate() {
+    }
+
+    public static FluentPomTemplate getInstance() {
+        return INSTANCE;
+    }
+
+    public static void setProject(Project project) {
+        FluentPomTemplate.project = project;
+    }
+
+    @Override
+    protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
+        projectBlock.block("build", buildBlock -> {
+            buildBlock.block("plugins", pluginsBlock -> {
+                if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
+                    // jacoco-maven-plugin
+                    pluginsBlock.block("plugin", pluginBlock -> {
+                        pluginBlock.tag("groupId", "org.jacoco");
+                        pluginBlock.tag("artifactId", "jacoco-maven-plugin");
+                        pluginBlock.tagWithInlineComment("version", project.getPackageVersions().getJacocoMavenPlugin(),
+                                "{x-version-update;org.jacoco:jacoco-maven-plugin;external_dependency}");
+                        pluginBlock.block("configuration", configurationBlock -> {
+                            configurationBlock.tag("skip", "true");
+                        });
+                    });
+                } else {
+                    // maven-compiler-plugin
+                    pluginsBlock.block("plugin", pluginBlock -> {
+                        pluginBlock.tag("groupId", "org.apache.maven.plugins");
+                        pluginBlock.tag("artifactId", "maven-compiler-plugin");
+                        pluginBlock.tag("version", "3.8.1");
+                        pluginBlock.block("configuration", configurationBlock -> {
+                            configurationBlock.tag("release", "11");
+                        });
+                    });
+                }
+            });
+        });
+    }
+}

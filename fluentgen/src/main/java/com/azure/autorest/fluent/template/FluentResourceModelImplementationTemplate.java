@@ -37,6 +37,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
 
         List<MethodTemplate> methodTemplates = new ArrayList<>();
         model.getProperties().forEach(p -> methodTemplates.add(p.getImplementationMethodTemplate()));
+        methodTemplates.addAll(model.getAdditionalMethods());
 
         Set<String> imports = new HashSet<>();
         imports.add(managerType.getFullName());
@@ -69,7 +70,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             }
 
             // method for properties
-            methodTemplates.forEach(m -> m.writeMethod(classBlock));
+            methodTemplates.forEach(m -> m.writeMethodWithoutJavadoc(classBlock));
 
             // method for inner model
             classBlock.publicMethod(model.getInnerMethodSignature(), methodBlock -> {

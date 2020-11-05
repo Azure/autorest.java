@@ -29,7 +29,7 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
 
     public CollectionMethodTypeConversionTemplate(FluentCollectionMethod fluentMethod, IType innerType) {
         Set<String> imports = new HashSet<>();
-        fluentMethod.getFluentReturnType().addImportsTo(imports, false);
+        fluentMethod.addImportsTo(imports, false);
         // Type inner = ...
         innerType.addImportsTo(imports, false);
         if (innerType instanceof ListType || innerType instanceof MapType) {
@@ -47,15 +47,15 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
                 .imports(imports)
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
-                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s;", innerType, TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_INNER, fluentMethod.getMethodInvocation()));
+                    block.line(String.format("%1$s %2$s = this.%3$s().%4$s;", innerType, TypeConversionUtils.tempPropertyName(), ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     if (TypeConversionUtils.isPagedIterable(innerType)) {
                         block.methodReturn(TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName()));
                     } else {
                         block.ifBlock(String.format("%1$s != null", TypeConversionUtils.tempPropertyName()), ifBlock -> {
                             String expression = TypeConversionUtils.conversionExpression(innerType, TypeConversionUtils.tempPropertyName());
-                            block.methodReturn(TypeConversionUtils.unmodifiableCollection(innerType, expression));
+                            block.methodReturn(TypeConversionUtils.objectOrUnmodifiableCollection(innerType, expression));
                         }).elseBlock(elseBlock -> {
-                            block.methodReturn("null");
+                            block.methodReturn(TypeConversionUtils.nullOrEmptyCollection(innerType));
                         });
                     }
                 })

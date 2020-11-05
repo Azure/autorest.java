@@ -6,8 +6,12 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ServiceClientTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.core.http.HttpHeaders;
+import com.azure.core.http.HttpResponse;
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
@@ -24,13 +28,15 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
 public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
-    private static final FluentServiceClientTemplate instance = new FluentServiceClientTemplate();
+    private static final FluentServiceClientTemplate INSTANCE = new FluentServiceClientTemplate();
     static {
         if (JavaSettings.getInstance().isFluentLite()) {
             MethodTemplate getContextMethod = MethodTemplate.builder()
@@ -98,9 +104,14 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                             AsyncPollResponse.class.getName(),
                             ManagementError.class.getName(),
                             ManagementException.class.getName(),
+                            HttpResponse.class.getName(),
                             LongRunningOperationStatus.class.getName(),
                             SerializerEncoding.class.getName(),
-                            IOException.class.getName()))
+                            IOException.class.getName(),
+                            // below import is actually used in HttpResponseImpl
+                            HttpHeaders.class.getName(),
+                            Charset.class.getName(),
+                            StandardCharsets.class.getName()))
                     .methodSignature("<T, U> Mono<U> getLroFinalResultOrError(AsyncPollResponse<PollResult<T>, U> response)")
                     .comment(comment -> {
                         comment.description("Gets the final result, or an error, based on last async poll response.");
@@ -109,44 +120,63 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                         comment.param("<U>", "type of final result.");
                         comment.methodReturns("the final result, or an error.");
                     })
-                    .method(method -> {
-                        method.ifBlock("response.getStatus() != LongRunningOperationStatus.SUCCESSFULLY_COMPLETED", ifBlock -> {
-                            ifBlock.line("String errorMessage;");
-                            ifBlock.line("ManagementError managementError = null;");
-                            ifBlock.ifBlock("response.getValue().getError() != null", ifBlock2 -> {
-                                ifBlock2.line("errorMessage = response.getValue().getError().getMessage();");
-                                ifBlock2.line("String errorBody = response.getValue().getError().getResponseBody();");
-                                ifBlock2.ifBlock("errorBody != null", ifBlock3 -> {
-                                    ifBlock3.tryBlock(tryBlock -> {
-                                        tryBlock.line("managementError = this.getSerializerAdapter().deserialize(errorBody, ManagementError.class, SerializerEncoding.JSON);");
-                                        tryBlock.ifBlock("managementError.getCode() == null || managementError.getMessage() == null", ifBlock4 -> {
-                                            ifBlock4.line("managementError = null;");
-                                        });
-                                    }).catchBlock("IOException ioe", catchBlock -> {
-                                        catchBlock.line("logger.logThrowableAsWarning(ioe);");
-                                    });
-                                });
-                            }).elseBlock(elseBlock2 -> {
-                                elseBlock2.line("errorMessage = \"Long running operation failed.\";");
-                            });
-                            ifBlock.ifBlock("response.getValue().getError() != null", ifBlock2 -> {
-                                ifBlock2.line("managementError = new ManagementError(response.getStatus().toString(), errorMessage);");
-                            });
-                            ifBlock.methodReturn("Mono.error(new ManagementException(errorMessage, null, managementError))");
-                        }).elseBlock(elseBlock -> {
-                            elseBlock.methodReturn("response.getFinalResult()");
-                        });
-                    })
+                    .method(method -> method.text(FluentUtils.loadTextFromResource("Client_getLroFinalResultOrError.txt")))
                     .build();
 
-            instance.additionalMethods.add(getContextMethod);
-            instance.additionalMethods.add(mergeContextMethod);
-            instance.additionalMethods.add(getLroResultMethod);
-            instance.additionalMethods.add(getLroFinalResultOrErrorMethod);
+            INSTANCE.additionalMethods.add(getContextMethod);
+            INSTANCE.additionalMethods.add(mergeContextMethod);
+            INSTANCE.additionalMethods.add(getLroResultMethod);
+            INSTANCE.additionalMethods.add(getLroFinalResultOrErrorMethod);
         }
     }
 
     public static FluentServiceClientTemplate getInstance() {
-        return instance;
+        return INSTANCE;
+    }
+
+    @Override
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
+        if (JavaSettings.getInstance().isFluentLite()) {
+            classBlock.privateStaticFinalClass("HttpResponseImpl extends HttpResponse", block -> {
+                block.privateFinalMemberVariable("int", "statusCode");
+                block.privateFinalMemberVariable("byte[]", "responseBody");
+                block.privateFinalMemberVariable("HttpHeaders", "httpHeaders");
+
+                block.packagePrivateConstructor("HttpResponseImpl(int statusCode, HttpHeaders httpHeaders, String responseBody)", code -> {
+                    code.line("super(null);");
+                    code.line("this.statusCode = statusCode;");
+                    code.line("this.httpHeaders = httpHeaders;");
+                    code.line("this.responseBody = responseBody.getBytes(StandardCharsets.UTF_8);");
+                });
+
+                block.publicMethod("int getStatusCode()", code -> {
+                    code.methodReturn("statusCode");
+                });
+
+                block.publicMethod("String getHeaderValue(String s)", code -> {
+                    code.methodReturn("httpHeaders.getValue(s)");
+                });
+
+                block.publicMethod("HttpHeaders getHeaders()", code -> {
+                    code.methodReturn("httpHeaders");
+                });
+
+                block.publicMethod("Flux<ByteBuffer> getBody()", code -> {
+                    code.methodReturn("Flux.just(ByteBuffer.wrap(responseBody))");
+                });
+
+                block.publicMethod("Mono<byte[]> getBodyAsByteArray()", code -> {
+                    code.methodReturn("Mono.just(responseBody)");
+                });
+
+                block.publicMethod("Mono<String> getBodyAsString()", code -> {
+                    code.methodReturn("Mono.just(new String(responseBody, StandardCharsets.UTF_8))");
+                });
+
+                block.publicMethod("Mono<String> getBodyAsString(Charset charset)", code -> {
+                    code.methodReturn("Mono.just(new String(responseBody, charset))");
+                });
+            });
+        }
     }
 }

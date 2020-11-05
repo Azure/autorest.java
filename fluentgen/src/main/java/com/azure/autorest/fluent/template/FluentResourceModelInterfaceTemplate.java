@@ -47,6 +47,9 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                 interfaceBlock.publicMethod(property.getMethodSignature());
             });
 
+            // additional methods
+            model.getAdditionalMethods().forEach(m -> m.writeMethodInterface(interfaceBlock));
+
             // method for inner model
             interfaceBlock.javadocComment(comment -> {
                 comment.description(String.format("Gets the inner %s object", model.getInnerModel().getFullName()));
@@ -63,6 +66,14 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                 // update flow
                 if (model.getResourceUpdate() != null) {
                     UPDATE_TEMPLATE.write(model.getResourceUpdate(), interfaceBlock);
+                }
+                // refresh
+                if (model.getResourceRefresh() != null) {
+                    model.getResourceRefresh().getFluentMethods().forEach(
+                            refreshMethod -> {
+                                interfaceBlock.javadocComment(refreshMethod::writeJavadoc);
+                                interfaceBlock.publicMethod(refreshMethod.getInterfaceMethodSignature());
+                            });
                 }
             }
         });

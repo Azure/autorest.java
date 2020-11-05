@@ -59,13 +59,38 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generate-sync-async-clients`|Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.|
 |`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
 |`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
-|`--add-context-parameter`|Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated proxy methods. Default is false.|
-|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the leading com.microsoft.rest.v3.Context parameter should also be included in generated client methods. Default is false.|
+|`--add-context-parameter`|Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.|
+|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Default is false.|
 |`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
 |`--required-parameter-client-methods`|Indicates whether client method overloads with only required parameters should be generated. Default is false.|
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
+|`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
+
+## Additional settings for Fluent
+
+`fluent` option enables the generator extension for [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).
+
+Following settings only works when `fluent` option is specified.
+
+| Option      | Description |
+| ----------- | ----------- |
+| `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values. |
+| `--pom-file` | String. Name for Maven POM file. Default is `pom.xml`. |
+| `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
+| `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
+| `--sdk-integration` | Boolean. Integrate to `azure-sdk-for-java`. Default is `false`. |
+| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default is `true`. |
+| `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
+| `--remove-inner` | CSV. Exclude from inner classes. |
+| `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
+| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
+
+Also `fluent` option will change the default value for some vanilla options.
+For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
+
+The code formatter would require Java 11+ runtime.
 
 # Project structure
 ## extension-base
@@ -75,6 +100,9 @@ Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 
 ## javagen
 This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
+
+## fluentgen
+This contains the [generator extension for Azure Management Libraries](#additional-settings-for-fluent).
 
 ## tests
 This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 

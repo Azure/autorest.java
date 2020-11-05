@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /** The Shark model. */
 @JsonTypeInfo(
@@ -75,6 +76,20 @@ public class Shark extends Fish {
      */
     public OffsetDateTime getBirthday() {
         return this.birthday;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Shark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Shark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
     }
 
     /**

@@ -12,12 +12,15 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +29,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public abstract class ResourceOperation {
@@ -78,6 +82,10 @@ public abstract class ResourceOperation {
         return methodReferences;
     }
 
+    abstract public List<FluentMethod> getFluentMethods();
+
+    abstract public String getLocalVariablePrefix();
+
     // properties on model inner object, or request body model
     protected List<ClientModelProperty> getProperties() {
         List<ClientModelProperty> properties = new ArrayList<>();
@@ -117,33 +125,34 @@ public abstract class ResourceOperation {
     }
 
     // method parameters
-    private List<ClientMethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
+    private List<MethodParameter> getParametersByLocation(RequestParameterLocation parameterLocation) {
         return getParametersByLocation(new HashSet<>(Collections.singletonList(parameterLocation)));
     }
 
-    private List<ClientMethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
+    private List<MethodParameter> getParametersByLocation(Set<RequestParameterLocation> parameterLocations) {
         ClientMethod clientMethod = getMethodReferencesOfFullParameters().iterator().next().getInnerClientMethod();
-        Set<String> paramNames = clientMethod.getProxyMethod().getParameters().stream()
+        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
-                .map(ProxyMethodParameter::getName)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return clientMethod.getParameters().stream()
-                .filter(p -> paramNames.contains(p.getName()))
+                .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
+                .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
     }
 
     public ClientMethodParameter getBodyParameter() {
-        List<ClientMethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
-        return parameters.isEmpty() ? null : parameters.iterator().next();
+        List<MethodParameter> parameters = getParametersByLocation(RequestParameterLocation.Body);
+        return parameters.isEmpty() ? null : parameters.iterator().next().getClientMethodParameter();
     }
 
-    public List<ClientMethodParameter> getPathParameters() {
+    public List<MethodParameter> getPathParameters() {
         return getParametersByLocation(RequestParameterLocation.Path);
     }
 
     public List<ClientMethodParameter> getMiscParameters() {
         // header or query
-        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)));
+        return getParametersByLocation(new HashSet<>(Arrays.asList(RequestParameterLocation.Header, RequestParameterLocation.Query)))
+                .stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList());
     }
 
     public Collection<LocalVariable> getLocalVariables() {
@@ -197,7 +206,7 @@ public abstract class ResourceOperation {
 
     private void initRequestBodyClientModel() {
         if (requestBodyModelPropertiesMap == null) {
-            requestBodyModelPropertiesMap = new HashMap<>();
+            requestBodyModelPropertiesMap = new LinkedHashMap<>();
             requestBodyModelProperties = new ArrayList<>();
 
             List<ClientModel> parentModels = new ArrayList<>();
@@ -245,5 +254,13 @@ public abstract class ResourceOperation {
     private Map<String, ClientModelProperty> getRequestBodyModelPropertiesMap() {
         initRequestBodyClientModel();
         return this.requestBodyModelPropertiesMap;
+    }
+
+    protected boolean isIdProperty(ClientModelProperty property) {
+        return property.getName().equals(ResourceTypeName.FIELD_ID);
+    }
+
+    protected boolean isLocationProperty(ClientModelProperty property) {
+        return FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION);
     }
 }

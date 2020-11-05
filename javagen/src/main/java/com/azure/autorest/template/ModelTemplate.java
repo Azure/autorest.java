@@ -8,6 +8,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -16,6 +17,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +56,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             imports.addAll(parentModel.getImports());
             parentModel = ClientModels.Instance.getModel(parentModel.getParentModelName());
         }
+
+        List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
+        propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
 
         model.addImportsTo(imports, settings);
 
@@ -272,6 +277,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
+            for (ClientModelPropertyReference propertyReference : propertyReferences) {
+                ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
+                if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), parentProperty.getSetterName(), parentProperty.getClientType(), parentProperty.getName()),
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
+                }
+            }
+
             addPropertyValidations(classBlock, model, settings);
         });
     }
@@ -429,5 +447,29 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected String getGetterName(ClientModel model, ClientModelProperty property) {
         return property.getGetterName();
+    }
+
+    /**
+     * Extension for Fluent list of client model property reference.
+     *
+     * @param model the client model.
+     * @return the list of client model property reference.
+     */
+    protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
+        List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
+        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+            String parentModelName = model.getParentModelName();
+            while (parentModelName != null) {
+                ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+                if (parentModel != null) {
+                    if (parentModel.getProperties() != null) {
+                        propertyReferences.addAll(parentModel.getProperties().stream().map(ClientModelPropertyReference::new).collect(Collectors.toList()));
+                    }
+                }
+
+                parentModelName = parentModel == null ? null : parentModel.getParentModelName();
+            }
+        }
+        return propertyReferences;
     }
 }

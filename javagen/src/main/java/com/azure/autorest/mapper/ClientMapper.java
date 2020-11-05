@@ -52,18 +52,25 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Client.Builder builder = new Client.Builder();
 
         List<EnumType> enumTypes = new ArrayList<>();
+        Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                enumTypes.add(enumType);
+                if (!enumNames.contains(enumType.getName())) {
+                    enumTypes.add(enumType);
+                    enumNames.add(enumType.getName());
+                }
             }
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                enumTypes.add(enumType);
+                if (!enumNames.contains(enumType.getName())) {
+                    enumTypes.add(enumType);
+                    enumNames.add(enumType.getName());
+                }
             }
         }
         builder.enums(enumTypes);
@@ -75,6 +82,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
@@ -85,15 +93,19 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
         List<ClientModel> clientModels = autoRestModelTypes
-            .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-            .filter(Objects::nonNull)
-            .collect(Collectors.toList());
+                .distinct()
+                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
         builder.models(clientModels);
 
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
+                .distinct()
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         String serviceClientName = codeModel.getLanguage().getJava().getName();
@@ -133,7 +145,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             String.format("Package containing the service clients for %s.\n%s",
                                     serviceClientName, serviceClientDescription)));
                 }
-                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), "models");
+                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(fluentInnerPackage)) {
                     packageInfos.put(fluentInnerPackage, new PackageInfo(
                         fluentInnerPackage,

@@ -9,19 +9,24 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Model for Azure resource instance.
+ */
 // Fluent resource instance. E.g. StorageAccount.
 // Also include some simple wrapper class.
 public class FluentResourceModel {
@@ -36,13 +41,15 @@ public class FluentResourceModel {
     private final ClassType implementationType;
 
     // resource properties
-    private final Map<String, FluentModelProperty> propertiesMap = new HashMap<>();
+    private final Map<String, FluentModelProperty> propertiesMap = new LinkedHashMap<>();
     private final List<FluentModelProperty> properties = new ArrayList<>();
 
     // category of the resource
     private ModelCategory category = ModelCategory.IMMUTABLE;
     private ResourceCreate resourceCreate;
     private ResourceUpdate resourceUpdate;
+    private ResourceRefresh resourceRefresh;
+    private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -117,7 +124,7 @@ public class FluentResourceModel {
 
     // method signature for inner model
     public String getInnerMethodSignature() {
-        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER));
+        return String.format("%1$s %2$s()", this.getInnerModel().getName(), FluentUtils.getGetterName(ModelNaming.METHOD_INNER_MODEL));
     }
 
     public ModelCategory getCategory() {
@@ -148,6 +155,18 @@ public class FluentResourceModel {
         this.resourceUpdate = resourceUpdate;
     }
 
+    public ResourceRefresh getResourceRefresh() {
+        return resourceRefresh;
+    }
+
+    public void setResourceRefresh(ResourceRefresh resourceRefresh) {
+        this.resourceRefresh = resourceRefresh;
+    }
+
+    public List<MethodTemplate> getAdditionalMethods() {
+        return additionalMethods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(this.getInnerModel().getFullName());
 
@@ -163,5 +182,9 @@ public class FluentResourceModel {
         if (resourceUpdate != null) {
             resourceUpdate.addImportsTo(imports, includeImplementationImports);
         }
+        if (resourceRefresh != null) {
+            resourceRefresh.addImportsTo(imports, includeImplementationImports);
+        }
+        additionalMethods.forEach(m -> m.addImportsTo(imports));
     }
 }

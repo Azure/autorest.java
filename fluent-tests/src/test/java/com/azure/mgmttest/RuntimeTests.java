@@ -3,19 +3,26 @@
 
 package com.azure.mgmttest;
 
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.management.Region;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.serializer.AzureJacksonAdapter;
-import com.azure.core.util.Configuration;
+import com.azure.core.management.profile.AzureProfile;
+import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.resources.ResourceManager;
+import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
@@ -31,10 +38,20 @@ import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
-
-import static org.mockito.Mockito.mock;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RuntimeTests {
 
@@ -56,7 +73,7 @@ public class RuntimeTests {
     public void testWebException() throws IOException {
         final String errorBody = "{\"error\":{\"code\":\"WepAppError\",\"message\":\"Web app error.\",\"innererror\":\"Deployment error.\",\"details\":[{\"code\":\"InnerError\"}]}}";
 
-        AzureJacksonAdapter serializerAdapter = new AzureJacksonAdapter();
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
         DefaultErrorResponseError webError = serializerAdapter.deserialize(errorBody, DefaultErrorResponseError.class, SerializerEncoding.JSON);
         Assertions.assertEquals("WepAppError", webError.getCode());
         Assertions.assertNotNull(webError.getDetails());
@@ -76,39 +93,86 @@ public class RuntimeTests {
     }
 
     @Test
+    public void testPom() throws ParserConfigurationException, IOException, SAXException {
+        File pomFile = new File("pom_generated_resources.xml");
+
+        Map<String, String> rootTags = new HashMap<>();
+
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(pomFile);
+        NodeList nodeList = doc.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); ++i) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element elementNode = (Element) node;
+                if (elementNode.getChildNodes().getLength() == 1 && elementNode.getChildNodes().item(0).getNodeType() == Node.TEXT_NODE) {
+                    Text textNode = (Text) elementNode.getChildNodes().item(0);
+                    rootTags.put(elementNode.getTagName(), textNode.getWholeText());
+                }
+            }
+        }
+
+        Assertions.assertTrue(rootTags.containsKey("name"));
+        Assertions.assertTrue(rootTags.get("name").contains("Azure SDK"));
+    }
+
+    @Test
     @Disabled("live test")
     public void testStorage() {
+        ResourceManager resourceManager = authenticateResourceManager();
         StorageManager storageManager = authenticateStorageManager();
 
-        StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
-                .withLocation("westus")
-                .withExistingResourceGroup("rg-weidxu")
-                .withSku(new Sku().withName(SkuName.STANDARD_LRS))
-                .withKind(Kind.STORAGE_V2)
-                .withEnableHttpsTrafficOnly(true)
+        String rgName = "rg1-weidxu-fluentlite";
+        String saName = "sa1weidxulite";
+        String blobContainerName = "container1";
+        Region region = Region.US_WEST;
+
+        ResourceGroup rg = resourceManager.resourceGroups().define(rgName)
+                .withRegion(region)
                 .create();
 
-        storageAccount = storageManager.storageAccounts().getByResourceGroup("rg-weidxu", "sa1weidxu");
-        storageAccount.update()
-                .withAccessTier(AccessTier.COOL)
-                .apply();
+        try {
+            StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
+                    .withRegion(rg.region())
+                    .withExistingResourceGroup(rgName)
+                    .withSku(new Sku().withName(SkuName.STANDARD_LRS))
+                    .withKind(Kind.STORAGE_V2)
+                    .withEnableHttpsTrafficOnly(true)
+                    .create();
 
-        BlobContainer blobContainer = storageManager.blobContainers().defineContainer("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
-                .withPublicAccess(PublicAccess.BLOB)
-                .create(new Context("key", "value"));
+            storageAccount.refresh();
 
-        blobContainer = storageManager.blobContainers().get("rg-weidxu", "sa1weidxu", "container1");
-        blobContainer.update()
-                .withPublicAccess(PublicAccess.NONE)
-                .apply(new Context("key", "value"));
+            StorageAccount storageAccount2 = storageManager.storageAccounts().getByResourceGroup(rgName, saName);
+            storageAccount2.update()
+                    .withAccessTier(AccessTier.COOL)
+                    .apply();
+
+            BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
+                    .withExistingStorageAccount(rgName, saName)
+                    .withPublicAccess(PublicAccess.BLOB)
+                    .create(new Context("key", "value"));
+
+            blobContainer.refresh();
+
+            BlobContainer blobContainer2 = storageManager.blobContainers().get(rgName, saName, blobContainerName);
+            blobContainer2.update()
+                    .withPublicAccess(PublicAccess.NONE)
+                    .apply(new Context("key", "value"));
+        } finally {
+            resourceManager.resourceGroups().delete(rgName);
+        }
+    }
+
+    private ResourceManager authenticateResourceManager() {
+        return ResourceManager.configure()
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 
     private StorageManager authenticateStorageManager() {
-        String subscriptionId = Configuration.getGlobalConfiguration().get(Configuration.PROPERTY_AZURE_SUBSCRIPTION_ID);
-        if (subscriptionId == null) {
-            subscriptionId = "";
-        }
-        return StorageManager.authenticate(new EnvironmentCredentialBuilder().build(), AzureEnvironment.AZURE, subscriptionId);
+        return StorageManager.configure()
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 }
