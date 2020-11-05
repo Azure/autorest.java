@@ -70,6 +70,8 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 ## Additional settings for Fluent
 
+`fluent` option enables the generator extension for [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).
+
 Following settings only works when `fluent` option is specified.
 
 Also `fluent` option will change the default value for some vanilla options.
@@ -88,6 +90,8 @@ For example, `generate-client-interfaces`, `context-client-method-parameter`, `r
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
 | `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
+The code formatter would require Java 11+ runtime.
+
 # Project structure
 ## extension-base
 This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).
@@ -98,7 +102,7 @@ Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
 
 ## fluentgen
-This contains the [generator extension for Azure Resource Manager SDK](fluentnamer/readme.md).
+This contains the [generator extension for Azure Management Libraries](#additional-settings-for-fluent).
 
 ## tests
 This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 
