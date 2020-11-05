@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jianghaolu/autorest.java.v3"
+    "url": "https://github.com/Azure/autorest.java"
   },
   "readme": "./readme.md",
   "keywords": [
@@ -20,7 +20,7 @@
   "author": "Microsoft Corporation",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/autorest/issues"
+    "url": "https://github.com/Azure/autorest.java/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md"
+  "homepage": "https://github.com/Azure/autorest.java/blob/v4/readme.md"
 }

@@ -66,7 +66,27 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
-|`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model.|
+|`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
+
+## Additional settings for Fluent
+
+Following settings only works when `fluent` option is specified.
+
+Also `fluent` option will change the default value for some vanilla options.
+For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
+
+| Option      | Description |
+| ----------- | ----------- |
+| `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values. |
+| `--pom-file` | String. Name for Maven POM file. Default is `pom.xml`. |
+| `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
+| `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
+| `--sdk-integration` | Boolean. Integrate to `azure-sdk-for-java`. Default is `false`. |
+| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default is `true`. |
+| `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
+| `--remove-inner` | CSV. Exclude from inner classes. |
+| `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
+| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
 # Project structure
 ## extension-base
