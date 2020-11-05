@@ -74,9 +74,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 Following settings only works when `fluent` option is specified.
 
-Also `fluent` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
-
 | Option      | Description |
 | ----------- | ----------- |
 | `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values. |
@@ -89,6 +86,9 @@ For example, `generate-client-interfaces`, `context-client-method-parameter`, `r
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
 | `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
+
+Also `fluent` option will change the default value for some vanilla options.
+For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
 
 The code formatter would require Java 11+ runtime.
 
