@@ -13,7 +13,7 @@ import fixtures.bodycomplex.implementation.ArraysImpl;
 import fixtures.bodycomplex.implementation.models.ArrayWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
+/** The sync client containing Array operations. */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ArrayClient {
     private final ArraysImpl serviceClient;
@@ -58,9 +58,10 @@ public final class ArrayClient {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      *     jumps over the lazy dog".
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return The ArrayClient itself
+     * @throws RuntimeException RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException ErrorException thrown if the request is rejected by server.
+     * @throws IllegalArgumentException IllegalArgumentException thrown if parameters fail the validation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayClient putValid(ArrayWrapper complexBody) {

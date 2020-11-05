@@ -249,7 +249,7 @@ public class Connection {
         {
             executorService.submit(() -> {
                 ObjectNode jobject = (ObjectNode) content;
-                System.err.println("receive: " + jobject.toPrettyString());
+//                System.err.println("receive: " + jobject.toPrettyString());
                 try
                 {
                     Iterator<Map.Entry<String, JsonNode>> fieldIterator = jobject.fields();
@@ -334,7 +334,7 @@ public class Connection {
     private final Semaphore streamReady = new Semaphore(1);
 
     private void send(String text) {
-        System.err.println("JSON RPC send: " + text);
+//        System.err.println("JSON RPC send: " + text);
         try {
             synchronized (streamReady) {
                 streamReady.acquire();

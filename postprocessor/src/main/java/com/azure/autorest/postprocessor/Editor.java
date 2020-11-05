@@ -165,6 +165,29 @@ public class Editor {
         return null;
     }
 
+    public String getTextInRange(String fileName, Range range, String delimiter) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        for (int line = range.getStart().getLine(); line <= range.getEnd().getLine(); line++) {
+            String lineContent = getFileLine(fileName, line);
+            int truncateIndex = 0;
+            if (line == range.getStart().getLine()) {
+               lineContent = lineContent.substring(range.getStart().getCharacter());
+               truncateIndex = range.getStart().getCharacter();
+            }
+            if (line == range.getEnd().getLine()) {
+                lineContent = lineContent.substring(0, range.getEnd().getCharacter() - truncateIndex);
+            }
+            if (delimiter == null) {
+                printWriter.println(lineContent);
+            } else {
+                printWriter.print(lineContent);
+                printWriter.print(delimiter);
+            }
+        }
+        return stringWriter.toString();
+    }
+
     private static List<String> splitContentIntoLines(String content) {
         List<String> res = new ArrayList<>();
         Scanner scanner = new Scanner(content);

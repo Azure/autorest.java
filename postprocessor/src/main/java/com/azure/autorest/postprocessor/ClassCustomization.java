@@ -35,6 +35,36 @@ public class ClassCustomization {
         this.className = className;
     }
 
+    public JavadocCustomization classJavadoc() {
+        String packagePath = packageName.replace(".", "/");
+        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
+                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+                .findFirst();
+
+        if (classSymbol.isPresent()) {
+            return new JavadocCustomization(editor, languageClient, packagePath, className, classSymbol.get().getLocation().getRange().getStart().getLine());
+        }
+        return null;
+    }
+
+    public JavadocCustomization methodJavadoc(String methodName) {
+        String packagePath = packageName.replace(".", "/");
+        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
+                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+                .findFirst();
+
+        if (classSymbol.isPresent()) {
+            URI fileUri = classSymbol.get().getLocation().getUri();
+            Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
+                    .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
+                    .findFirst();
+            if (symbol.isPresent()) {
+                return new JavadocCustomization(editor, languageClient, packagePath, className, symbol.get().getLocation().getRange().getStart().getLine());
+            }
+        }
+        return null;
+    }
+
     public ClassCustomization changeClassModifier(String modifier) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -59,7 +89,7 @@ public class ClassCustomization {
                 textEdit.setRange(new Range(start, end));
                 WorkspaceEdit workspaceEdit = new WorkspaceEdit();
                 workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-                applyWorkspaceEdit(workspaceEdit);
+                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
             }
         }
         return this;
@@ -101,7 +131,7 @@ public class ClassCustomization {
                         if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
                             command = (WorkspaceEditCommand) organizeImports.get().getCommand();
                             for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-                                applyWorkspaceEdit(workspaceEdit);
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                             }
                         }
                     }
@@ -145,7 +175,7 @@ public class ClassCustomization {
                         if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
                             command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
                             for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                                applyWorkspaceEdit(workspaceEdit);
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                             }
                         }
                     }
@@ -168,7 +198,7 @@ public class ClassCustomization {
                     .findFirst();
             if (symbol.isPresent()) {
                 WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.get().getLocation().getRange().getStart(), newName);
-                applyWorkspaceEdit(edit);
+                Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }
         }
         return this;
@@ -210,7 +240,7 @@ public class ClassCustomization {
                         if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
                             command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
                             for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-                                applyWorkspaceEdit(workspaceEdit);
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                             }
                         }
                     }
@@ -239,12 +269,14 @@ public class ClassCustomization {
                     WorkspaceEditCommand command;
                     if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
                         command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                        for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-                            applyWorkspaceEdit(workspaceEdit);
+                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
+                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                         }
+                        List<TextEdit> formats = languageClient.format(fileUri);
+                        Utils.applyTextEdits(fileUri, formats, editor, languageClient);
 
-                        changeMethodReturnType("set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1),
-                                className, "this");
+                        String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+                        changeMethodReturnType(setterMethod, className, "this");
                     }
                 }
             }
@@ -268,12 +300,12 @@ public class ClassCustomization {
             for (SymbolInformation symbol : symbols) {
                 if (symbol.getKind() == SymbolKind.FIELD) {
                     WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
-                    applyWorkspaceEdit(edit);
+                    Utils.applyWorkspaceEdit(edit, editor, languageClient);
                 } else if (symbol.getKind() == SymbolKind.METHOD) {
                     String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
                             .replace(propertyName, newName).replaceFirst("\\(.*\\)", "");
                     WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName);
-                    applyWorkspaceEdit(edit);
+                    Utils.applyWorkspaceEdit(edit, editor, languageClient);
                 }
             }
         }
@@ -293,7 +325,7 @@ public class ClassCustomization {
                     .collect(Collectors.toList());
             for (SymbolInformation symbol : symbols) {
                 WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
-                applyWorkspaceEdit(edit);
+                Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }
         }
         return this;
@@ -324,7 +356,7 @@ public class ClassCustomization {
                 textEdit.setRange(new Range(start, end));
                 WorkspaceEdit workspaceEdit = new WorkspaceEdit();
                 workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-                applyWorkspaceEdit(workspaceEdit);
+                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
             }
         }
         return this;
@@ -356,10 +388,11 @@ public class ClassCustomization {
                 signatureEdit.setRange(new Range(start, end));
                 edits.add(signatureEdit);
 
-                String indent = oldLineContent.replaceAll("\\w.*$", "");
-                String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "").replaceFirst(indent + "(\\w.* )?", "").trim();
+                String methodIndent = editor.getFileLine(fileName, line).replaceAll("\\w.*$", "");
+                String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
+                String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "").replaceFirst(methodIndent + "(\\w.* )?", "").trim();
                 int returnLine = -1;
-                while (!oldLineContent.startsWith(indent + "}")) {
+                while (!oldLineContent.startsWith(methodIndent + "}")) {
                     if (oldLineContent.contains("return ")) {
                         returnLine = line;
                     }
@@ -375,7 +408,7 @@ public class ClassCustomization {
 
                     TextEdit returnEdit = new TextEdit();
                     returnEdit.setRange(new Range(new Position(line, 0), new Position(line, 0)));
-                    returnEdit.setNewText(indent + "return " + returnValueFormatter + ";");
+                    returnEdit.setNewText(methodContentIndent + "return " + returnValueFormatter + ";");
                     edits.add(returnEdit);
                 } else if (newReturnType.equals("void")) {
                     // remove return statement
@@ -399,13 +432,13 @@ public class ClassCustomization {
 
                     TextEdit returnEdit = new TextEdit();
                     returnEdit.setRange(new Range(new Position(line, 0), new Position(line, 0)));
-                    returnEdit.setNewText(indent + "return " + String.format(returnValueFormatter, "returnValue") + ";");
+                    returnEdit.setNewText(methodContentIndent + "return " + String.format(returnValueFormatter, "returnValue") + ";");
                     edits.add(returnEdit);
                 }
 
                 WorkspaceEdit workspaceEdit = new WorkspaceEdit();
                 workspaceEdit.setChanges(Collections.singletonMap(fileUri, edits));
-                applyWorkspaceEdit(workspaceEdit);
+                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
 
                 Optional<CodeAction> organizeImports = languageClient.listCodeActions(fileUri, new Range(start, end))
                         .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
@@ -415,31 +448,12 @@ public class ClassCustomization {
                     if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
                         command = (WorkspaceEditCommand) organizeImports.get().getCommand();
                         for(WorkspaceEdit importEdit : command.getArguments()) {
-                            applyWorkspaceEdit(importEdit);
+                            Utils.applyWorkspaceEdit(importEdit, editor, languageClient);
                         }
                     }
                 }
             }
         }
-        return this;
-    }
-
-    private ClassCustomization applyWorkspaceEdit(WorkspaceEdit workspaceEdit) {
-        List<FileEvent> changes = new ArrayList<>();
-        for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
-            int i = edit.getKey().toString().indexOf("src/main/java/");
-            String oldEntry = edit.getKey().toString().substring(i);
-            if (editor.getContents().containsKey(oldEntry)) {
-                for (TextEdit textEdit : edit.getValue()) {
-                    editor.replace(oldEntry, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
-                }
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(edit.getKey());
-                fileEvent.setType(FileChangeType.CHANGED);
-                changes.add(fileEvent);
-            }
-        }
-        languageClient.notifyWatchedFilesChanged(changes);
         return this;
     }
 }

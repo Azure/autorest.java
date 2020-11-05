@@ -12,8 +12,10 @@ import com.azure.autorest.postprocessor.ls.models.DidChangeWatchedFilesParams;
 import com.azure.autorest.postprocessor.ls.models.DidCloseTextDocumentParams;
 import com.azure.autorest.postprocessor.ls.models.DidOpenTextDocumentParams;
 import com.azure.autorest.postprocessor.ls.models.DidSaveTextDocumentParams;
+import com.azure.autorest.postprocessor.ls.models.DocumentFormattingParams;
 import com.azure.autorest.postprocessor.ls.models.DocumentSymbolParams;
 import com.azure.autorest.postprocessor.ls.models.FileEvent;
+import com.azure.autorest.postprocessor.ls.models.FormattingOptions;
 import com.azure.autorest.postprocessor.ls.models.InitializeParams;
 import com.azure.autorest.postprocessor.ls.models.InitializeResponse;
 import com.azure.autorest.postprocessor.ls.models.JavaCodeActionKind;
@@ -125,6 +127,20 @@ public class EclipseLanguageClient {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public List<TextEdit> format(URI fileUri) {
+        if (serverCapabilities.getDocumentFormattingProvider()) {
+            DocumentFormattingParams params = new DocumentFormattingParams();
+            params.setTextDocument(new TextDocumentIdentifier(fileUri));
+            params.setOptions(new FormattingOptions());
+            params.getOptions().setTabSize(4);
+            params.getOptions().setInsertSpaces(true);
+            params.getOptions().setTrimTrailingWhitespace(true);
+            return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, TextEdit.class), "textDocument/formatting", params);
+        } else {
+            return Collections.emptyList();
         }
     }
 

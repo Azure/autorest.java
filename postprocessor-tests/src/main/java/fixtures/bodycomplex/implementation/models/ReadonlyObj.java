@@ -24,7 +24,7 @@ public final class ReadonlyObj {
     private Integer size;
 
     /**
-     * Get the id property: The id property.
+     * Get the ID of the object.
      *
      * @return the id value.
      */
@@ -50,6 +50,16 @@ public final class ReadonlyObj {
      */
     public ReadonlyObj setSize(Integer size) {
         this.size = size;
+        return this;
+    }
+    /**
+     * Set the ID of the object.
+     *
+     * @param id The ID value
+     * @return The current ReadonlyObj instance
+     */
+    ReadonlyObj setId(String id) {
+        this.id = id;
         return this;
     }
 }
