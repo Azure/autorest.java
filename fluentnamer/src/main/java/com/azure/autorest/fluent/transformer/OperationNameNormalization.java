@@ -183,17 +183,17 @@ class OperationNameNormalization {
                         && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> p.getSerializedName().equals("value") && p.getSchema() instanceof ArraySchema));
     }
 
-    private static boolean isPathParameterInMethod(Parameter p) {
-        return p.getImplementation() == Parameter.ImplementationLocation.METHOD
-                && p.getProtocol() != null
-                && p.getProtocol().getHttp() != null
-                && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path;
+    private static boolean isPathParameterInMethod(Parameter parameter) {
+        return parameter.getImplementation() == Parameter.ImplementationLocation.METHOD
+                && parameter.getProtocol() != null
+                && parameter.getProtocol().getHttp() != null
+                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Path;
     }
 
-    private static String parameterSerializedName(String parameterInUrl) {
-        if (parameterInUrl.startsWith("{") && parameterInUrl.endsWith("}")) {
-            parameterInUrl = parameterInUrl.substring(1, parameterInUrl.length() - 1);
+    private static String parameterSerializedName(String parameterNameInUrl) {
+        if (parameterNameInUrl.startsWith("{") && parameterNameInUrl.endsWith("}")) {
+            parameterNameInUrl = parameterNameInUrl.substring(1, parameterNameInUrl.length() - 1);
         }
-        return parameterInUrl;
+        return parameterNameInUrl;
     }
 }
