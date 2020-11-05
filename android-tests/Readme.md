@@ -16,8 +16,8 @@ After generating the client code for the swagger, write your tests in a file ins
 
 ## Start TestServer
 Clone https://github.com/Azure/autorest.testserver.git to a local folder. Open a command line window and navigate to the folder. Run this command to start the server.
-```yml
-npm start
+```ps
+npm run start
 ```
 
 By default a webserver will be started listenging on "localhost:3000"
@@ -25,7 +25,7 @@ By default a webserver will be started listenging on "localhost:3000"
 ## Run Tests
 
 Modify network_security_config.xml in \app\src\main\res\xml to add your machine id to the domain list. For example
-```yml
+```xml
 <domain includeSubdomains="true">IPV4 Address Of Your Machine Running TestServer</domain>
 ```
 
