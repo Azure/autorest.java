@@ -19,16 +19,6 @@
       <id>azuresdkmaven</id>
       <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
     </repository>
-    <repository>
-      <id>azure-sdk-for-java</id>
-      <url>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-java/maven/v1</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
   </repositories>
 
   <dependencies>
@@ -46,7 +36,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.10.0-alpha.20201028.0</version>
+      <version>1.10.0</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>

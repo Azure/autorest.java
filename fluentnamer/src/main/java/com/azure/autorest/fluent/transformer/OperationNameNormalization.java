@@ -10,6 +10,8 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
@@ -19,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -107,6 +110,37 @@ class OperationNameNormalization {
                         && urlSegments[4].equalsIgnoreCase(SEGMENT_PROVIDERS)) {
                     if (candidateWellKnownName.contains(WellKnownMethodName.GET_BY_RESOURCE_GROUP)) {
                         newName = WellKnownMethodName.GET_BY_RESOURCE_GROUP.getMethodName();
+
+                        // check path parameter order
+                        String resourceGroupParameterName = parameterSerializedName(urlSegments[3]);
+                        operation.getRequests().forEach(request -> {
+                            List<Parameter> pathMethodParameters = request.getParameters().stream()
+                                    .filter(OperationNameNormalization::isPathParameterInMethod)
+                                    .collect(Collectors.toList());
+                            if (pathMethodParameters.size() == 2
+                                    && resourceGroupParameterName.equals(pathMethodParameters.get(1).getLanguage().getDefault().getSerializedName())) {
+                                // resourceGroup parameter and resourceName parameter in reverse order
+                                String resourceNameParameterName = parameterSerializedName(urlSegments[7]);
+
+                                logger.info("Reorder {} parameter and {} parameter, in operation {}", resourceGroupParameterName, resourceNameParameterName, Utils.getJavaName(operation));
+
+                                int rgIndex = -1;
+                                int nameIndex = -1;
+                                for (int i = 0; i < request.getParameters().size(); ++i) {
+                                    Parameter p = request.getParameters().get(i);
+                                    if (isPathParameterInMethod(p)) {
+                                        if (resourceGroupParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
+                                            rgIndex = i;
+                                        } else if (resourceNameParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
+                                            nameIndex = i;
+                                        }
+                                    }
+                                }
+                                if (rgIndex >= 0 && nameIndex >= 0) {
+                                    Collections.swap(request.getParameters(), rgIndex, nameIndex);
+                                }
+                            }
+                        });
                     }
                 } else if ((urlSegments.length == 5 || urlSegments.length == 7)
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
@@ -147,5 +181,19 @@ class OperationNameNormalization {
         return responses.stream()
                 .anyMatch(r -> r.getSchema() instanceof ObjectSchema
                         && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> p.getSerializedName().equals("value") && p.getSchema() instanceof ArraySchema));
+    }
+
+    private static boolean isPathParameterInMethod(Parameter parameter) {
+        return parameter.getImplementation() == Parameter.ImplementationLocation.METHOD
+                && parameter.getProtocol() != null
+                && parameter.getProtocol().getHttp() != null
+                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Path;
+    }
+
+    private static String parameterSerializedName(String parameterNameInUrl) {
+        if (parameterNameInUrl.startsWith("{") && parameterNameInUrl.endsWith("}")) {
+            parameterNameInUrl = parameterNameInUrl.substring(1, parameterNameInUrl.length() - 1);
+        }
+        return parameterNameInUrl;
     }
 }
