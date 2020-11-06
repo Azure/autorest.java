@@ -28,7 +28,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
     @Override
     public void write(FluentResourceModel model, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
-        imports.add(Immutable.class.getName());
+        //imports.add(Immutable.class.getName());
         model.addImportsTo(imports, false);
         javaFile.declareImport(imports);
 
@@ -36,7 +36,7 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
             comment.description(model.getDescription());
         });
 
-        javaFile.annotation("Immutable");
+        //javaFile.annotation("Immutable");
         javaFile.publicInterface(model.getInterfaceType().getName(), interfaceBlock -> {
             // method for properties
             model.getProperties().forEach(property -> {

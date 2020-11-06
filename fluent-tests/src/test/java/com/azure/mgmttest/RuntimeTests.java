@@ -143,7 +143,7 @@ public class RuntimeTests {
 
             storageAccount.refresh();
 
-            StorageAccount storageAccount2 = storageManager.storageAccounts().getByResourceGroup(rgName, saName);
+            StorageAccount storageAccount2 = storageManager.storageAccounts().getById(storageAccount.id());
             storageAccount2.update()
                     .withAccessTier(AccessTier.COOL)
                     .apply();

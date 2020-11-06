@@ -9,12 +9,16 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.CollectionMethodOperationByIdTemplate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentRefreshMethod;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +48,7 @@ public class ResourceRefresh extends ResourceOperation {
 
     @Override
     public String getLocalVariablePrefix() {
-        return "refresh";
+        return "local";
     }
 
     public List<FluentMethod> getRefreshMethods() {
@@ -76,5 +80,42 @@ public class ResourceRefresh extends ResourceOperation {
         if (includeImplementationImports) {
             getRefreshMethods().forEach(m -> m.addImportsTo(imports, true));
         }
+    }
+
+    public List<MethodTemplate> getGetByIdCollectionMethods() {
+        List<MethodTemplate> methods = new ArrayList<>();
+        List<ClientMethodParameter> parameters = new ArrayList<>();
+        Optional<FluentCollectionMethod> methodOpt = this.findMethod(true, parameters);
+        if (methodOpt.isPresent()) {
+            FluentCollectionMethod collectionMethod = methodOpt.get();
+
+            String name = getGetByIdMethodName(collectionMethod.getInnerClientMethod().getName());
+            List<MethodParameter> pathParameters = this.getPathParameters();
+
+            methods.add(new CollectionMethodOperationByIdTemplate(
+                    resourceModel, name,
+                    pathParameters, urlPathSegments, false, getResourceLocalVariables(),
+                    collectionMethod)
+                    .getMethodTemplate());
+
+            methods.add(new CollectionMethodOperationByIdTemplate(
+                    resourceModel, name,
+                    pathParameters, urlPathSegments, true, getResourceLocalVariables(),
+                    collectionMethod)
+                    .getMethodTemplate());
+        }
+        return methods;
+    }
+
+    private static String getGetByIdMethodName(String methodName) {
+        String getByIdMethodName = methodName;
+        int indexOfBy = methodName.indexOf("By");
+        if (indexOfBy > 0) {
+            getByIdMethodName = methodName.substring(0, indexOfBy);
+        } else if (methodName.endsWith(Utils.METHOD_POSTFIX_WITH_RESPONSE)) {
+            getByIdMethodName = methodName.substring(0, methodName.length() - Utils.METHOD_POSTFIX_WITH_RESPONSE.length());
+        }
+        getByIdMethodName += "ById";
+        return getByIdMethodName;
     }
 }
