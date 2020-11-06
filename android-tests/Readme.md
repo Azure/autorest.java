@@ -20,7 +20,7 @@ Clone https://github.com/Azure/autorest.testserver.git to a local folder. Open a
 npm run start
 ```
 
-By default a webserver will be started listenging on "localhost:3000"
+By default a webserver will be started listening on "localhost:3000"
 
 ## Run Tests
 

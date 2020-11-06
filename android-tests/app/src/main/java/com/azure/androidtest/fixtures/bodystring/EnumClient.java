@@ -51,7 +51,7 @@ public final class EnumClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the completion.
      */
     public Response<Void> putNotExpandableWithRestResponse(Colors stringBody) {
         return this.serviceClient.putNotExpandableWithRestResponse(stringBody);
@@ -75,7 +75,7 @@ public final class EnumClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the completion.
      */
     public Response<Void> putReferencedWithRestResponse(Colors enumStringBody) {
         return this.serviceClient.putReferencedWithRestResponse(enumStringBody);
@@ -99,7 +99,7 @@ public final class EnumClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the completion.
      */
     public Response<Void> putReferencedConstantWithRestResponse(String field1) {
         return this.serviceClient.putReferencedConstantWithRestResponse(field1);

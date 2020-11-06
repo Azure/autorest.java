@@ -43,4 +43,9 @@ public class AndroidPrimitiveMapper extends PrimitiveMapper {
     protected IType getUnixTimeDateTime() {
         return ClassType.AndroidUnixTimeDateTime;
     }
+
+    @Override
+    protected IType getUnixTimeDateTimeLong() {
+        return ClassType.AndroidUnixTimeDateTimeLong;
+    }
 }

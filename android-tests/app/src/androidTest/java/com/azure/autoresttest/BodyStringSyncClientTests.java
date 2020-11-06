@@ -1,8 +1,5 @@
 package com.azure.autoresttest;
 
-import android.content.Context;
-
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.azure.android.core.http.Response;
@@ -16,16 +13,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class BodyStringSyncClientTests {
     private static StringOperationClient client;
-    private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {
