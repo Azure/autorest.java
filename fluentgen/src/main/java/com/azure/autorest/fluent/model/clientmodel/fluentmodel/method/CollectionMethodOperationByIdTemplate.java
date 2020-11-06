@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
@@ -48,13 +49,14 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         }
         this.name = name;
 
+        final ResourceLocalVariables localVariables = resourceLocalVariables.getDeduplicatedLocalVariables(new HashSet<>(Collections.singleton(ModelNaming.METHOD_PARAMETER_NAME_ID)));
         final boolean removeResponseInReturnType = !includeContextParameter;
         final IType returnType = getReturnType(collectionMethod.getFluentReturnType(), removeResponseInReturnType);
 
         final List<ClientMethodParameter> parameters = new ArrayList<>();
         // id parameter
         parameters.add(new ClientMethodParameter.Builder()
-                .name("id")
+                .name(ModelNaming.METHOD_PARAMETER_NAME_ID)
                 .description("the id of the resource.")
                 .wireType(ClassType.String)
                 .annotations(new ArrayList<>())
@@ -78,7 +80,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
         List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodParameters();
         String argumentsLine = methodParameters.stream()
-                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod))
+                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, localVariables, model, collectionMethod))
                 .collect(Collectors.joining(", "));
         String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
 
@@ -108,13 +110,13 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                         if (p.getClientMethodParameter().getClientType() != ClassType.String) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
                         }
-                        LocalVariable var = resourceLocalVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
+                        LocalVariable var = localVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
                         block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), valueFromIdText));
                     });
 
                     if (!includeContextParameter) {
                         // init local variables to default value
-                        for (LocalVariable var : resourceLocalVariables.getLocalVariablesMap().values()) {
+                        for (LocalVariable var : localVariables.getLocalVariablesMap().values()) {
                             if (var.getParameterLocation() == RequestParameterLocation.Query) {
                                 block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), var.getInitializeExpression()));
                             }
