@@ -48,8 +48,9 @@
     <module>./javagen</module>
     <module>./preprocessor</module>
     <module>./postprocessor</module>
-    <module>./postprocessor-tests</module>
-    <module>./postprocessor-tests/swagger</module>
+    <module>./customization-base</module>
+    <module>./customization-tests</module>
+    <module>./customization-tests/swagger</module>
     <module>./extension-base</module>
     <module>./fluentgen</module>
     <module>./fluentnamer</module>

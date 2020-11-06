@@ -92,6 +92,18 @@ For example, `generate-client-interfaces`, `context-client-method-parameter`, `r
 
 The code formatter would require Java 11+ runtime.
 
+# Customizations
+
+To set up customizations, create a Maven project with dependency:
+
+```xml
+<dependency>
+  <groupId>com.azure</groupId>
+  <artifactId>autorest-java-customizations</artifactId>
+  <version>1.0.0-beta.1</version>
+</dependency>
+```
+
 # Project structure
 ## extension-base
 This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).

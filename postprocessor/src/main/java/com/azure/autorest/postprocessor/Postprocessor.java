@@ -1,5 +1,6 @@
 package com.azure.autorest.postprocessor;
 
+import com.azure.autorest.customization.Customization;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
