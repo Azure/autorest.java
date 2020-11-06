@@ -14,7 +14,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
-import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -59,25 +59,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
         List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodParameters();
         String argumentsLine = methodParameters.stream()
-                .map(p -> {
-                    if (parametersSet.contains(p)) {
-                        return p.getName();
-                    } else if (fluentResourceModel.getInnerModel().getName().equals(p.getClientType().toString())) {
-                        return ModelNaming.MODEL_PROPERTY_INNER;
-                    } else if (ClassType.Context == p.getClientType()) {
-                        return "Context.NONE";
-                    } else {
-                        LocalVariable localVariable = resourceLocalVariables.getLocalVariableByMethodParameter(p);
-                        if (localVariable == null) {
-                            throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
-                                    collectionMethod.getInnerClientMethod().getName(),
-                                    model.getName(),
-                                    p.getName(),
-                                    resourceLocalVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
-                        }
-                        return localVariable.getName();
-                    }
-                })
+                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod))
                 .collect(Collectors.joining(", "));
         String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
 

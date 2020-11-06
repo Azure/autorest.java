@@ -10,10 +10,10 @@ import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
-import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -48,8 +48,8 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         }
         this.name = name;
 
-        final boolean removeResponse = !includeContextParameter;
-        final IType returnType = getReturnType(removeResponse, collectionMethod.getFluentReturnType());
+        final boolean removeResponseInReturnType = !includeContextParameter;
+        final IType returnType = getReturnType(collectionMethod.getFluentReturnType(), removeResponseInReturnType);
 
         final List<ClientMethodParameter> parameters = new ArrayList<>();
         // id parameter
@@ -78,25 +78,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
         List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodParameters();
         String argumentsLine = methodParameters.stream()
-                .map(p -> {
-                    if (parametersSet.contains(p)) {
-                        return p.getName();
-                    } else if (model.getInnerModel().getName().equals(p.getClientType().toString())) {
-                        return ModelNaming.MODEL_PROPERTY_INNER;
-                    } else if (ClassType.Context == p.getClientType()) {
-                        return "Context.NONE";
-                    } else {
-                        LocalVariable localVariable = resourceLocalVariables.getLocalVariableByMethodParameter(p);
-                        if (localVariable == null) {
-                            throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
-                                    collectionMethod.getInnerClientMethod().getName(),
-                                    model.getName(),
-                                    p.getName(),
-                                    resourceLocalVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
-                        }
-                        return localVariable.getName();
-                    }
-                })
+                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod))
                 .collect(Collectors.joining(", "));
         String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
 
@@ -105,7 +87,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         Map<String, String> urlSegmentNameByParameterName = urlPathSegments.getReverseParameterSegments().stream()
                 .collect(Collectors.toMap(UrlPathSegments.ParameterSegment::getParameterName, UrlPathSegments.ParameterSegment::getSegmentName));
 
-        String afterInvocationCode = removeResponse ? ".getValue()" : "";
+        String afterInvocationCode = removeResponseInReturnType ? ".getValue()" : "";
 
         // a dummy client method only for generating javadoc
         ClientMethod dummyClientMethodForJavadoc = new ClientMethod.Builder()
@@ -157,7 +139,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         return methodTemplate;
     }
 
-    private static IType getReturnType(boolean removeResponse, IType collectionMethodReturnType) {
+    private static IType getReturnType(IType collectionMethodReturnType, boolean removeResponse) {
         IType returnType;
         if (removeResponse) {
             if (collectionMethodReturnType instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) collectionMethodReturnType).getName())) {
