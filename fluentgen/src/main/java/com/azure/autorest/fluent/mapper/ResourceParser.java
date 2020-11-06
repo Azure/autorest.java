@@ -17,6 +17,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCr
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -59,32 +60,46 @@ public class ResourceParser {
 
     public static void processAdditionalMethods(FluentClient fluentClient) {
         fluentClient.getResourceModels().forEach(model -> {
-            // if resource instance has location property, add region() method
-            if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
-                List<MethodTemplate> methods = model.getAdditionalMethods();
-                methods.add(MethodTemplate.builder()
-                        .imports(Collections.singletonList(Region.class.getName()))
-                        .comment(commentBlock -> {
-                            commentBlock.description("Gets the region of the resource.");
-                            commentBlock.methodReturns("the region of the resource.");
-                        })
-                        .methodSignature("Region region()")
-                        .method(methodBlock -> {
-                            methodBlock.methodReturn("Region.fromName(this.regionName())");
-                        })
-                        .build());
-                methods.add(MethodTemplate.builder()
-                        .comment(commentBlock -> {
-                            commentBlock.description("Gets the name of the resource region.");
-                            commentBlock.methodReturns("the name of the resource region.");
-                        })
-                        .methodSignature("String regionName()")
-                        .method(methodBlock -> {
-                            methodBlock.methodReturn("this.location()");
-                        })
-                        .build());
-            }
+            processAdditionalProperties(model);
+
+            processAdditionalCollectionMethods(model);
         });
+    }
+
+    private static void processAdditionalProperties(FluentResourceModel model) {
+        if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
+            // if resource instance has location property, add region() method
+            List<MethodTemplate> methods = model.getAdditionalMethods();
+            methods.add(MethodTemplate.builder()
+                    .imports(Collections.singletonList(Region.class.getName()))
+                    .comment(commentBlock -> {
+                        commentBlock.description("Gets the region of the resource.");
+                        commentBlock.methodReturns("the region of the resource.");
+                    })
+                    .methodSignature("Region region()")
+                    .method(methodBlock -> {
+                        methodBlock.methodReturn("Region.fromName(this.regionName())");
+                    })
+                    .build());
+            methods.add(MethodTemplate.builder()
+                    .comment(commentBlock -> {
+                        commentBlock.description("Gets the name of the resource region.");
+                        commentBlock.methodReturns("the name of the resource region.");
+                    })
+                    .methodSignature("String regionName()")
+                    .method(methodBlock -> {
+                        methodBlock.methodReturn("this.location()");
+                    })
+                    .build());
+        }
+    }
+
+    private static void processAdditionalCollectionMethods(FluentResourceModel model) {
+        if (model.getResourceRefresh() != null) {
+            // getById method
+            FluentResourceCollection collection = model.getResourceRefresh().getResourceCollection();
+            collection.getAdditionalMethods().addAll(model.getResourceRefresh().getGetByIdCollectionMethods());
+        }
     }
 
     private static List<ResourceCreate> resolveResourceCreate(
@@ -313,7 +328,7 @@ public class ResourceParser {
     private static List<FluentCollectionMethod> collectMethodReferences(FluentResourceCollection collection, String methodName) {
         return collection.getMethods().stream()
                 .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
-                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + "WithResponse")))
+                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + Utils.METHOD_POSTFIX_WITH_RESPONSE)))
                 .collect(Collectors.toList());
     }
 }

@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaInterface;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
@@ -497,33 +498,43 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
-        typeBlock.javadocComment(comment -> {
-            comment.description(clientMethod.getDescription());
-            List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
-                    ? clientMethod.getMethodRequiredParameters()
-                    : clientMethod.getMethodParameters();
-            for (ClientMethodParameter parameter : methodParameters) {
-                comment.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
+        typeBlock.javadocComment(comment -> generateJavadoc(clientMethod, comment, restAPIMethod, useFullClassName));
+    }
+
+    /**
+     * Generate javadoc for client method.
+     *
+     * @param clientMethod client method
+     * @param commentBlock comment block
+     * @param restAPIMethod proxy method
+     * @param useFullClassName whether to use fully-qualified class name in javadoc
+     */
+    public static void generateJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
+        commentBlock.description(clientMethod.getDescription());
+        List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
+                ? clientMethod.getMethodRequiredParameters()
+                : clientMethod.getMethodParameters();
+        for (ClientMethodParameter parameter : methodParameters) {
+            commentBlock.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
+        }
+        if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
+            commentBlock.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
+        }
+        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+            commentBlock.methodThrows(useFullClassName
+                            ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
+                            : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
+                    "thrown if the request is rejected by server");
+        }
+        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+            for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                commentBlock.methodThrows(exception.getKey().toString(),
+                        String.format("thrown if the request is rejected by server on status code %s",
+                                exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
             }
-            if (restAPIMethod != null && clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
-                comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
-            }
-            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                comment.methodThrows(useFullClassName
-                        ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
-                        : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
-                        "thrown if the request is rejected by server");
-            }
-            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
-                for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-                    comment.methodThrows(exception.getKey().toString(),
-                            String.format("thrown if the request is rejected by server on status code %s",
-                                    exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
-                }
-            }
-            comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-            comment.methodReturns(clientMethod.getReturnValue().getDescription());
-        });
+        }
+        commentBlock.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+        commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
 
     protected static String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
