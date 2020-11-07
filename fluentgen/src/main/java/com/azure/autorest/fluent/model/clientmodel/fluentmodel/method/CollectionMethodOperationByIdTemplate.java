@@ -57,7 +57,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         // id parameter
         parameters.add(new ClientMethodParameter.Builder()
                 .name(ModelNaming.METHOD_PARAMETER_NAME_ID)
-                .description("the id of the resource.")
+                .description("the resource ID.")
                 .wireType(ClassType.String)
                 .annotations(new ArrayList<>())
                 .isConstant(false)
@@ -106,12 +106,20 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                 .method(block -> {
                     // init path parameters from resource id
                     pathParameters.forEach(p -> {
-                        String valueFromIdText = String.format("Utils.getValueFromIdByName(id, \"%1$s\")", urlSegmentNameByParameterName.get(p.getSerializedName()));
+                        String urlSegmentName = urlSegmentNameByParameterName.get(p.getSerializedName());
+                        String valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s, \"%2$s\")", ModelNaming.METHOD_PARAMETER_NAME_ID, urlSegmentName);
                         if (p.getClientMethodParameter().getClientType() != ClassType.String) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
                         }
                         LocalVariable var = localVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
                         block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), valueFromIdText));
+
+                        block.ifBlock(String.format("%1$s == null", var.getName()), ifBlock -> {
+                            String errorMessageExpr = String.format("String.format(\"The resource ID '%%s' is not valid. Missing path segment '%1$s'.\", %2$s)", urlSegmentName, ModelNaming.METHOD_PARAMETER_NAME_ID);
+                            ifBlock.line(String.format(
+                                    "throw logger.logExceptionAsError(new IllegalArgumentException(%1$s));",
+                                    errorMessageExpr));
+                        });
                     });
 
                     if (!includeContextParameter) {
