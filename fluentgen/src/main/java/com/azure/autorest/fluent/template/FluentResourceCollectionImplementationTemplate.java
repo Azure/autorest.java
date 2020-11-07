@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,7 +36,12 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         ClassType managerType = FluentStatic.getFluentManager().getType();
 
         Set<String> imports = new HashSet<>();
+        // ClientLogger
+        imports.add(JsonIgnore.class.getName());
+        ClassType.ClientLogger.addImportsTo(imports, false);
+        // manager
         imports.add(managerType.getFullName());
+        // resource collection
         collection.addImportsTo(imports, true);
         if (collection.getResourceCreates() != null) {
             collection.getResourceCreates().forEach(rc -> rc.getDefineMethod().addImportsTo(imports, true));
@@ -47,6 +53,10 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         methodTemplates.addAll(collection.getAdditionalMethods());
 
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
+            // logger
+            classBlock.annotation("JsonIgnore");
+            classBlock.privateFinalMemberVariable(ClassType.ClientLogger.toString(), String.format("logger = new ClientLogger(%1$s.class)", collection.getImplementationType().getName()));
+
             // variable for inner model
             classBlock.privateFinalMemberVariable(collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
 
