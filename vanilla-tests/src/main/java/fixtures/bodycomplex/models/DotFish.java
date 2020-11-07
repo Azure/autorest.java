@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -10,10 +11,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "fish.type",
+        property = "fish\\.type",
         defaultImpl = DotFish.class)
 @JsonTypeName("DotFish")
 @JsonSubTypes({@JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)})
+@JsonFlatten
 @Fluent
 public class DotFish {
     /*
