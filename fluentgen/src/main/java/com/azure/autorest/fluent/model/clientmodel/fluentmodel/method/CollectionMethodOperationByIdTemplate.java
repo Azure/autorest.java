@@ -52,6 +52,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         final ResourceLocalVariables localVariables = resourceLocalVariables.getDeduplicatedLocalVariables(new HashSet<>(Collections.singleton(ModelNaming.METHOD_PARAMETER_NAME_ID)));
         final boolean removeResponseInReturnType = !includeContextParameter;
         final IType returnType = getReturnType(collectionMethod.getFluentReturnType(), removeResponseInReturnType);
+        final boolean responseInReturnTypeRemoved = returnType != collectionMethod.getFluentReturnType();
 
         final List<ClientMethodParameter> parameters = new ArrayList<>();
         // id parameter
@@ -89,13 +90,13 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         Map<String, String> urlSegmentNameByParameterName = urlPathSegments.getReverseParameterSegments().stream()
                 .collect(Collectors.toMap(UrlPathSegments.ParameterSegment::getParameterName, UrlPathSegments.ParameterSegment::getSegmentName));
 
-        String afterInvocationCode = removeResponseInReturnType ? ".getValue()" : "";
+        String afterInvocationCode = responseInReturnTypeRemoved ? ".getValue()" : "";
 
         // a dummy client method only for generating javadoc
         ClientMethod dummyClientMethodForJavadoc = new ClientMethod.Builder()
                 .proxyMethod(collectionMethod.getInnerProxyMethod())
                 .name(name)
-                .returnValue(new ReturnValue(collectionMethod.getInnerClientMethod().getReturnValue().getDescription(), returnType))
+                .returnValue(new ReturnValue(returnType == PrimitiveType.Void ? "" : collectionMethod.getInnerClientMethod().getReturnValue().getDescription(), returnType))
                 .parameters(parameters)
                 .description(collectionMethod.getInnerClientMethod().getDescription())
                 .build();
@@ -158,7 +159,8 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                     returnType = PrimitiveType.Void;
                 }
             } else {
-                throw new IllegalStateException("type error, return type should be of type Response<T>");
+                // LRO would not have Response<T> for method takes Context, usually happens to delete method
+                returnType = collectionMethodReturnType;
             }
         } else {
             returnType = collectionMethodReturnType;
