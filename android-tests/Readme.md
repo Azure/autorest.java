@@ -8,7 +8,7 @@ Code in app\src\androidTest folder contains test code that runs in an Android em
 
 # Regenerate Fixtures
 
-generate-android.bat in parent folder can be used to regenerate in code in \app\src\main. Modify it to add or remove swagger files you are interested in testing.
+generate-android.bat in parent folder can be used to regenerate code in \app\src\main. Modify it to add or remove swagger files you are interested in testing.
 
 After generating the client code for the swagger, write your tests in a file inside \app\src\androidTest\java\com\azure\autoresttest folder.
 

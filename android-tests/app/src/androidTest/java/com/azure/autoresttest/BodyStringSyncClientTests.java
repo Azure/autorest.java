@@ -35,7 +35,7 @@ public class BodyStringSyncClientTests {
     public void putNull() throws Exception {
         try {
             Response<Void> putResult = client.putNullWithRestResponse(null);
-            assertEquals(200, putResult.getStatusCode());
+            Assert.fail();
         } catch (Exception ex) {
             Assert.assertEquals(NullPointerException.class, ex.getClass());
         }
