@@ -26,6 +26,7 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
@@ -155,10 +156,13 @@ public class RuntimeTests {
 
             blobContainer.refresh();
 
-            BlobContainer blobContainer2 = storageManager.blobContainers().get(rgName, saName, blobContainerName);
+            BlobContainer blobContainer2 = storageManager.blobContainers().getById(blobContainer.id());
             blobContainer2.update()
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
+
+            storageManager.blobContainers().deleteById(blobContainer.id());
+            storageManager.storageAccounts().deleteById(storageAccount.id());
         } finally {
             resourceManager.resourceGroups().delete(rgName);
         }
