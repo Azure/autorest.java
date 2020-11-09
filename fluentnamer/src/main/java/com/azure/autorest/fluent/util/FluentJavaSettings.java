@@ -8,6 +8,8 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +23,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FluentJavaSettings {
+
+    private static final Logger logger = LoggerFactory.getLogger(FluentJavaSettings.class);
 
     private final NewPlugin host;
 
@@ -53,6 +57,8 @@ public class FluentJavaSettings {
      * Naming override.
      */
     private final Map<String, String> namingOverride = new HashMap<>();
+
+    private final Map<String, String> renameModel = new HashMap<>();
 
     private String pomFilename = "pom.xml";
 
@@ -116,6 +122,10 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
+    public Map<String, String> getRenameModel() {
+        return renameModel;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -134,6 +144,7 @@ public class FluentJavaSettings {
 
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
+        logger.info("Option, string, {} : {}", "add-inner", addInnerSetting);
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
             javaNamesForAddInner = Arrays.stream(addInnerSetting.split(Pattern.quote(",")))
                     .map(String::trim)
@@ -144,6 +155,7 @@ public class FluentJavaSettings {
         }
 
         String removeInnerSetting = host.getStringValue("remove-inner");
+        logger.info("Option, string, {} : {}", "remove-inner", removeInnerSetting);
         if (removeInnerSetting != null && !removeInnerSetting.isEmpty()) {
             javaNamesForRemoveInner = Arrays.stream(removeInnerSetting.split(Pattern.quote(",")))
                     .map(String::trim)
@@ -168,7 +180,18 @@ public class FluentJavaSettings {
             this.namingOverride.putAll(namingOverride);
         }
 
+        loadStringSetting("rename-model", s -> {
+            String[] renamePairs = s.split(Pattern.quote(","));
+            for (String pair : renamePairs) {
+                String[] fromAndTo = pair.split(Pattern.quote(":"));
+                if (fromAndTo.length == 2) {
+                    renameModel.put(fromAndTo[0], fromAndTo[1]);
+                }
+            }
+        });
+
         loadStringSetting("tag", s -> autorestSettings.tag = s);
+
         loadStringSetting("base-folder", s -> autorestSettings.baseFolder = s);
         loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s);
         loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = Optional.of(s));
@@ -176,6 +199,7 @@ public class FluentJavaSettings {
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
         Boolean settingValue = host.getBooleanValue(settingName);
+        logger.info("Option, boolean, {} : {}", settingName, settingValue);
         if (settingValue != null) {
             action.accept(settingValue);
         }
@@ -183,6 +207,7 @@ public class FluentJavaSettings {
 
     private void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
+        logger.info("Option, string, {} : {}", settingName, settingValue);
         if (settingValue != null) {
             action.accept(settingValue);
         }

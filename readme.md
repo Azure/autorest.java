@@ -84,6 +84,7 @@ Following settings only works when `fluent` option is specified.
 | `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default is `true`. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
+| `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
 | `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
