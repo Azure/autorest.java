@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -80,12 +81,9 @@ public class BodyStringSyncClientTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        try {
-            client.getNotProvidedWithRestResponse();
-        } catch (Exception ex) {
-            Assert.assertEquals(HttpResponseException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+            Response<String> notProvidedResponse = client.getNotProvidedWithRestResponse();
+            assertEquals(200, notProvidedResponse.getStatusCode());
+            assertNull(notProvidedResponse.getValue());
     }
 
     @Test
@@ -126,7 +124,7 @@ public class BodyStringSyncClientTests {
     public void putBase64UrlEncoded() throws Exception {
         try {
             Response<Void> putResult = client.putBase64UrlEncodedWithRestResponse(new Base64Url("http://myhost.com/path?email=a.b@c.com&value=a%20B"));
-            assertEquals(200, putResult.getStatusCode());
+            Assert.fail();
         }
         catch (Exception ex){
             Assert.assertEquals(HttpResponseException.class, ex.getClass());
