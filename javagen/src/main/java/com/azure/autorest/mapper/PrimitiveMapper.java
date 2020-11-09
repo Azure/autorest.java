@@ -47,6 +47,10 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
         return ClassType.UnixTimeDateTime;
     }
 
+    protected IType getUnixTimeDateTimeLong() {
+        return ClassType.UnixTimeLong;
+    }
+
     @Override
     public IType map(PrimitiveSchema primaryType) {
         if (primaryType == null) {
@@ -126,7 +130,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = this.getDurationClassType();
                 break;
             case UNIXTIME:
-                iType = PrimitiveType.UnixTimeLong;
+                iType = getUnixTimeDateTimeLong(); // PrimitiveType.UnixTimeLong;
                 break;
             case UUID:
                 iType = ClassType.UUID;

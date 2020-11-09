@@ -291,6 +291,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 "= okhttp3.RequestBody.create(okhttp3.MediaType.get(\"application/octet-stream\"), %s);", parameterWireName));
                     }
                 } else {
+                    if (parameterWireType != parameterClientType) {
+                        parameterWireName = parameterWireType.convertFromClientType(parameterName);
+                    }
                     function.line("final okhttp3.RequestBody okHttp3RequestBody;");
                     final List<String> exceptions = new ArrayList<>();
                     exceptions.add("java.io.IOException");
@@ -734,7 +737,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 .stream()
                                 .reduce((current, next) -> next);
                         final ClientMethodParameter lastParam = lastParamOpt.get();
-                        final GenericType callbackParameter = (GenericType) lastParam.getWireType();
                         final String callbackParameterName = lastParam.getName();
 
                         final String clientReferenceDot;

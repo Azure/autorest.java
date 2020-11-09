@@ -188,7 +188,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .methodPageDetails(null);
 
             // by default, client method returns whatever the proxy method returns
-            IType returnType = proxyMethod.getReturnType();
+            IType returnType = SchemaUtil.getOperationResponseType(operation); //proxyMethod.getReturnType();
             IType elementType = null;
             boolean isPaging = false;
             boolean isNextMethod = false;
