@@ -7,11 +7,14 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,17 +25,19 @@ import java.util.stream.Collectors;
 
 public class FluentJavaSettings {
 
+    private static final Logger logger = LoggerFactory.getLogger(FluentJavaSettings.class);
+
     private final NewPlugin host;
 
     /**
      * Java class names for extra Inner classes.
      */
-    private Set<String> javaNamesForAddInner;
+    private final Set<String> javaNamesForAddInner = new HashSet<>();
 
     /**
      * Java class names for excluded Inner classes.
      */
-    private Set<String> javaNamesForRemoveInner;
+    private final Set<String> javaNamesForRemoveInner = new HashSet<>();
 
     /**
      * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
@@ -53,6 +58,8 @@ public class FluentJavaSettings {
      * Naming override.
      */
     private final Map<String, String> namingOverride = new HashMap<>();
+
+    private final Map<String, String> renameModel = new HashMap<>();
 
     private String pomFilename = "pom.xml";
 
@@ -116,6 +123,10 @@ public class FluentJavaSettings {
         return namingOverride;
     }
 
+    public Map<String, String> getRenameModel() {
+        return renameModel;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -133,25 +144,41 @@ public class FluentJavaSettings {
     }
 
     private void loadSettings() {
-        String addInnerSetting = host.getStringValue("add-inner");
-        if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
-            javaNamesForAddInner = Arrays.stream(addInnerSetting.split(Pattern.quote(",")))
-                    .map(String::trim)
-                    .filter(s -> !s.isEmpty())
-                    .collect(Collectors.toSet());
-        } else {
-            javaNamesForAddInner = Collections.emptySet();
-        }
+        loadStringSetting("add-inner", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForAddInner.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
 
-        String removeInnerSetting = host.getStringValue("remove-inner");
-        if (removeInnerSetting != null && !removeInnerSetting.isEmpty()) {
-            javaNamesForRemoveInner = Arrays.stream(removeInnerSetting.split(Pattern.quote(",")))
-                    .map(String::trim)
-                    .filter(s -> !s.isEmpty())
-                    .collect(Collectors.toSet());
-        } else {
-            javaNamesForRemoveInner = Collections.emptySet();
-        }
+        loadStringSetting("remove-inner", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForRemoveInner.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
+
+        loadStringSetting("rename-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                String[] renamePairs = s.split(Pattern.quote(","));
+                for (String pair : renamePairs) {
+                    String[] fromAndTo = pair.split(Pattern.quote(":"));
+                    if (fromAndTo.length == 2) {
+                        String from = fromAndTo[0];
+                        String to = fromAndTo[1];
+                        if (!CoreUtils.isNullOrEmpty(from) && !CoreUtils.isNullOrEmpty(to)) {
+                            renameModel.put(from, to);
+                        }
+                    }
+                }
+            }
+        });
 
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
@@ -169,6 +196,7 @@ public class FluentJavaSettings {
         }
 
         loadStringSetting("tag", s -> autorestSettings.tag = s);
+
         loadStringSetting("base-folder", s -> autorestSettings.baseFolder = s);
         loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s);
         loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = Optional.of(s));
@@ -176,6 +204,7 @@ public class FluentJavaSettings {
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
         Boolean settingValue = host.getBooleanValue(settingName);
+        logger.info("Option, boolean, {} : {}", settingName, settingValue);
         if (settingValue != null) {
             action.accept(settingValue);
         }
@@ -183,6 +212,7 @@ public class FluentJavaSettings {
 
     private void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
+        logger.info("Option, string, {} : {}", settingName, settingValue);
         if (settingValue != null) {
             action.accept(settingValue);
         }

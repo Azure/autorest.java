@@ -14,11 +14,14 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.management.Region;
@@ -53,38 +56,59 @@ public class ResourceParser {
         // resource update
         resourceCreates.forEach(rc -> ResourceParser.resolveResourceUpdate(collection, rc, availableModels));
 
-        // resource refresh
+        // resource refresh (and get in collection)
         resourceCreates.forEach(rc -> ResourceParser.resolveResourceRefresh(collection, rc, availableModels));
+
+        // delete in collection
+        resourceCreates.forEach(rc -> ResourceParser.resolveResourceDelete(collection, rc, availableModels));
     }
 
     public static void processAdditionalMethods(FluentClient fluentClient) {
-        fluentClient.getResourceModels().forEach(model -> {
+        fluentClient.getResourceModels().forEach(ResourceParser::processAdditionalProperties);
+
+        fluentClient.getResourceCollections().forEach(ResourceParser::processAdditionalCollectionMethods);
+    }
+
+    private static void processAdditionalProperties(FluentResourceModel model) {
+        if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
             // if resource instance has location property, add region() method
-            if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
-                List<MethodTemplate> methods = model.getAdditionalMethods();
-                methods.add(MethodTemplate.builder()
-                        .imports(Collections.singletonList(Region.class.getName()))
-                        .comment(commentBlock -> {
-                            commentBlock.description("Gets the region of the resource.");
-                            commentBlock.methodReturns("the region of the resource.");
-                        })
-                        .methodSignature("Region region()")
-                        .method(methodBlock -> {
-                            methodBlock.methodReturn("Region.fromName(this.regionName())");
-                        })
-                        .build());
-                methods.add(MethodTemplate.builder()
-                        .comment(commentBlock -> {
-                            commentBlock.description("Gets the name of the resource region.");
-                            commentBlock.methodReturns("the name of the resource region.");
-                        })
-                        .methodSignature("String regionName()")
-                        .method(methodBlock -> {
-                            methodBlock.methodReturn("this.location()");
-                        })
-                        .build());
-            }
-        });
+            List<MethodTemplate> methods = model.getAdditionalMethods();
+            methods.add(MethodTemplate.builder()
+                    .imports(Collections.singletonList(Region.class.getName()))
+                    .comment(commentBlock -> {
+                        commentBlock.description("Gets the region of the resource.");
+                        commentBlock.methodReturns("the region of the resource.");
+                    })
+                    .methodSignature("Region region()")
+                    .method(methodBlock -> {
+                        methodBlock.methodReturn("Region.fromName(this.regionName())");
+                    })
+                    .build());
+            methods.add(MethodTemplate.builder()
+                    .comment(commentBlock -> {
+                        commentBlock.description("Gets the name of the resource region.");
+                        commentBlock.methodReturns("the name of the resource region.");
+                    })
+                    .methodSignature("String regionName()")
+                    .method(methodBlock -> {
+                        methodBlock.methodReturn("this.location()");
+                    })
+                    .build());
+        }
+    }
+
+    private static void processAdditionalCollectionMethods(FluentResourceCollection collection) {
+        // getById method
+        collection.getAdditionalMethods().addAll(
+                collection.getResourceGets().stream()
+                        .flatMap(rg -> rg.getGetByIdCollectionMethods().stream())
+                        .collect(Collectors.toList()));
+
+        // deleteById method
+        collection.getAdditionalMethods().addAll(
+                collection.getResourceDeletes().stream()
+                        .flatMap(rg -> rg.getDeleteByIdCollectionMethods().stream())
+                        .collect(Collectors.toList()));
     }
 
     private static List<ResourceCreate> resolveResourceCreate(
@@ -172,11 +196,33 @@ public class ResourceParser {
                     getBodyClientModel(method, availableModels));
 
             resourceCreate.getResourceModel().setResourceRefresh(resourceRefresh);
+            collection.getResourceGets().add(resourceRefresh);
 
             resourceRefresh.getMethodReferences().addAll(collectMethodReferences(collection, resourceRefresh.getMethodName()));
         }
 
         return Optional.ofNullable(resourceRefresh);
+    }
+
+    private static Optional<ResourceDelete> resolveResourceDelete(
+            FluentResourceCollection collection,
+            ResourceCreate resourceCreate,
+            List<ClientModel> availableModels) {
+
+        ResourceDelete resourceDelete = null;
+
+        FluentCollectionMethod method = findCollectionMethod(collection, resourceCreate, HttpMethod.DELETE, name -> name.contains("delete"));
+        if (method != null) {
+            resourceDelete = new ResourceDelete(resourceCreate.getResourceModel(), collection,
+                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
+                    getBodyClientModel(method, availableModels));
+
+            collection.getResourceDeletes().add(resourceDelete);
+
+            resourceDelete.getMethodReferences().addAll(collectMethodReferences(collection, resourceDelete.getMethodName()));
+        }
+
+        return Optional.ofNullable(resourceDelete);
     }
 
     private static Map<FluentResourceModel, ResourceCreate> findResourceCreateForCategory(
@@ -276,7 +322,8 @@ public class ResourceParser {
     private static FluentCollectionMethod findCollectionMethod(FluentResourceCollection collection,
                                                                ResourceCreate resourceCreate,
                                                                HttpMethod matchingMethod, Predicate<String> nameMatcher) {
-        boolean isRefreshMethod = matchingMethod == HttpMethod.GET;
+        boolean isGetOrDelete = matchingMethod == HttpMethod.GET || matchingMethod == HttpMethod.DELETE;
+        boolean isDelete = matchingMethod == HttpMethod.DELETE;
 
         for (FluentCollectionMethod method : collection.getMethods()) {
             HttpMethod httpMethod = method.getInnerProxyMethod().getHttpMethod();
@@ -287,7 +334,8 @@ public class ResourceParser {
                 if (nameMatcher.test(methodNameLowerCase)) {
                     String returnTypeName = method.getFluentReturnType().toString();
                     // same model as create
-                    if (returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
+                    if ((isDelete && returnTypeName.equals(PrimitiveType.Void.getName()))
+                            || (!isDelete && returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName()))) {
                         String url = method.getInnerProxyMethod().getUrlPath();
                         // same url as create
                         if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
@@ -298,8 +346,9 @@ public class ResourceParser {
                                             && p.getIsRequired()
                                             && !p.getFromClient() && !p.getIsConstant());
                             // if for update, need a body parameter
-                            // if for refresh, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
-                            if ((isRefreshMethod && !hasRequiredQueryParam) || (!isRefreshMethod && hasBodyParam)) {
+                            // if for get or delete, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
+                            if ((isGetOrDelete && !hasRequiredQueryParam)
+                                    || (!isGetOrDelete && hasBodyParam)) {
                                 return method;
                             }
                         }
@@ -313,7 +362,7 @@ public class ResourceParser {
     private static List<FluentCollectionMethod> collectMethodReferences(FluentResourceCollection collection, String methodName) {
         return collection.getMethods().stream()
                 .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
-                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + "WithResponse")))
+                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + Utils.METHOD_POSTFIX_WITH_RESPONSE)))
                 .collect(Collectors.toList());
     }
 }

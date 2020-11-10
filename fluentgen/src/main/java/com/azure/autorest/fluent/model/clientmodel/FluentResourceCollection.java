@@ -7,6 +7,8 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -43,6 +45,8 @@ public class FluentResourceCollection {
     // resource models
     private final List<ResourceCreate> resourceCreates = new ArrayList<>();
     private final List<ResourceUpdate> resourceUpdates = new ArrayList<>();
+    private final List<ResourceRefresh> resourceRefreshes = new ArrayList<>();
+    private final List<ResourceDelete> resourceDeletes = new ArrayList<>();
     private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceCollection(MethodGroupClient groupClient) {
@@ -121,6 +125,14 @@ public class FluentResourceCollection {
 
     public List<ResourceUpdate> getResourceUpdates() {
         return resourceUpdates;
+    }
+
+    public List<ResourceRefresh> getResourceGets() {
+        return resourceRefreshes;
+    }
+
+    public List<ResourceDelete> getResourceDeletes() {
+        return resourceDeletes;
     }
 
     public List<MethodTemplate> getAdditionalMethods() {

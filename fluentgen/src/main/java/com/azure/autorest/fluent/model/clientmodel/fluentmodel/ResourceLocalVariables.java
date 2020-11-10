@@ -13,6 +13,7 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResourceLocalVariables {
@@ -40,11 +41,26 @@ public class ResourceLocalVariables {
         }
     }
 
+    private ResourceLocalVariables() {
+    }
+
     public Map<ClientMethodParameter, LocalVariable> getLocalVariablesMap() {
         return this.localVariablesMap;
     }
 
     public LocalVariable getLocalVariableByMethodParameter(ClientMethodParameter methodParameter) {
         return this.localVariablesMap.get(methodParameter);
+    }
+
+    public ResourceLocalVariables getDeduplicatedLocalVariables(Set<String> occupiedVariableNames) {
+        ResourceLocalVariables newLocalVariables = new ResourceLocalVariables();
+        this.localVariablesMap.forEach((parameter, variable) -> {
+            if (occupiedVariableNames.contains(variable.getName())) {
+                newLocalVariables.localVariablesMap.put(parameter, variable.getRenameLocalVariable("var" + CodeNamer.toPascalCase(variable.getName())));
+            } else {
+                newLocalVariables.localVariablesMap.put(parameter, variable);
+            }
+        });
+        return newLocalVariables;
     }
 }

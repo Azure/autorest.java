@@ -42,6 +42,7 @@ public class FluentTransformer {
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
+        codeModel = new SchemaRenamer(fluentJavaSettings.getRenameModel()).process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
         codeModel = new ErrorTypeNormalization().process(codeModel);

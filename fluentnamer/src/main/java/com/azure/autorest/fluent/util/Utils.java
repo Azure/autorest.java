@@ -15,6 +15,8 @@ import java.lang.reflect.Field;
 
 public class Utils {
 
+    public final static String METHOD_POSTFIX_WITH_RESPONSE = "WithResponse";
+
     public static String getDefaultName(Metadata m) {
         return m.getLanguage().getDefault().getName();
     }

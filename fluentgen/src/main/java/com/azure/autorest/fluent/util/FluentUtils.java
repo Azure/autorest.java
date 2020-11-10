@@ -8,8 +8,12 @@ package com.azure.autorest.fluent.util;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -240,6 +244,32 @@ public class FluentUtils {
         } catch (IOException e) {
             logger.warn("Failed to read file {}", filename);
             throw new IllegalStateException(e);
+        }
+    }
+
+    public static String getLocalMethodArgument(ClientMethodParameter parameter,
+                                                Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
+                                                FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod) {
+        if (inputParametersSet.contains(parameter)) {
+            // input parameter
+            return parameter.getName();
+        } else if (resourceModel.getInnerModel().getName().equals(parameter.getClientType().toString())) {
+            // body payload, use innerModel
+            return String.format("this.%1$s()", ModelNaming.METHOD_INNER_MODEL);
+        } else if (ClassType.Context == parameter.getClientType()) {
+            // context not in input, use NONE
+            return "Context.NONE";
+        } else {
+            // local variables
+            LocalVariable localVariable = localVariables.getLocalVariableByMethodParameter(parameter);
+            if (localVariable == null) {
+                throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
+                        collectionMethod.getInnerClientMethod().getName(),
+                        resourceModel.getName(),
+                        parameter.getName(),
+                        localVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
+            }
+            return localVariable.getName();
         }
     }
 

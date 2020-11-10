@@ -52,4 +52,8 @@ public class LocalVariable {
         this.initializeRequired = true;
         this.initializeExpression = initializeExpression;
     }
+
+    public LocalVariable getRenameLocalVariable(String newName) {
+        return new LocalVariable(newName, this.getVariableType(), this.getParameterLocation(), this.getMethodParameterReference());
+    }
 }
