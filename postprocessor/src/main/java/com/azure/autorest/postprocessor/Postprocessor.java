@@ -2,6 +2,7 @@ package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.google.googlejavaformat.java.Formatter;
@@ -12,8 +13,12 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -33,11 +38,25 @@ public class Postprocessor extends NewPlugin {
       String jarPath = JavaSettings.getInstance().getPostProcessorJarPath();
       String className = JavaSettings.getInstance().getPostProcessorClass();
       if (jarPath != null && className != null) {
-        URL jarUrl;
+        URL jarUrl = null;
         if (!jarPath.startsWith("http")) {
-          jarUrl = new File(jarPath).toURI().toURL();
+          if (Paths.get(jarPath).isAbsolute()) {
+            jarUrl = new File(jarPath).toURI().toURL();
+          } else {
+            String baseDirectory = getBaseDirectory();
+            if (baseDirectory != null) {
+              jarUrl = Paths.get(baseDirectory, jarPath).toUri().toURL();
+            }
+          }
         } else {
           jarUrl = new URI(jarPath).toURL();
+        }
+        if (jarUrl == null) {
+          Message message = new Message();
+          message.setChannel("error");
+          message.setText("Customization JAR " + jarPath + " not found. Customization skipped.");
+          message(message);
+          return false;
         }
         URLClassLoader loader = URLClassLoader.newInstance(new URL[]{ jarUrl }, ClassLoader.getSystemClassLoader());
         Class<? extends Customization> customizationClass = (Class<? extends Customization>) Class.forName(className, true, loader);
@@ -55,10 +74,24 @@ public class Postprocessor extends NewPlugin {
         writeFile(javaFile.getKey(), formattedSource, null);
       }
     } catch (Exception e) {
-      LOGGER.info("Failed to complete postprocessing " + e);
-      throw new RuntimeException(e);
+      Message message = new Message();
+      message.setChannel("error");
+      message.setText("Failed to complete postprocessing. Postprocessing skipped. Error: " + e.getMessage());
+      message.setDetails(e.getStackTrace());
+      message(message);
+      return false;
     }
     return true;
   }
 
+  private String getBaseDirectory() {
+    LinkedHashMap<String, String> configurationFiles = getValue(LinkedHashMap.class, "configurationFiles");
+    Optional<String> readme = configurationFiles.keySet().stream().filter(key -> !key.contains(".autorest")).findFirst();
+    if (readme.isPresent()) {
+      return new File(readme.get().replace("file:///", "")).getParent();
+    }
+
+    // TODO: get autorest running directory
+    return null;
+  }
 }
