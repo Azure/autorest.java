@@ -105,6 +105,10 @@ To set up customizations, create a Maven project with dependency:
 </dependency>
 ```
 
+Create a customization class that extends from `com.azure.autorest.customization.Customization` and override the `customize(LibraryCustomization)` method. You will have access to a `LibraryCustomization` class where you will be able to customize the generated Java code before it's written to the disk.
+
+## 
+
 # Project structure
 ## extension-base
 This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).

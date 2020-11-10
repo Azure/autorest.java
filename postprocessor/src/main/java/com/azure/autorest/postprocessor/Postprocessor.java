@@ -35,8 +35,8 @@ public class Postprocessor extends NewPlugin {
 
     try {
       //Step 1: post process
-      String jarPath = JavaSettings.getInstance().getPostProcessorJarPath();
-      String className = JavaSettings.getInstance().getPostProcessorClass();
+      String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
+      String className = JavaSettings.getInstance().getCustomizationClass();
       if (jarPath != null && className != null) {
         URL jarUrl = null;
         if (!jarPath.startsWith("http")) {

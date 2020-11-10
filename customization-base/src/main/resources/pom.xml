@@ -7,7 +7,7 @@
 
   <groupId>com.azure</groupId>
   <artifactId>autorest-generated-client</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-beta.1</version>
 
   <name>Microsoft Azure client library</name>
   <description>This package contains the generated client library.</description>

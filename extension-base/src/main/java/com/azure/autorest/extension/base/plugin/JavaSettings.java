@@ -117,8 +117,8 @@ public class JavaSettings
                     host.getBooleanValue("service-interface-as-public", false),
                     host.getStringValue("artifact-id", ""),
                     host.getStringValue("credential-types", "none"),
-                    host.getStringValue("postprocessor-jar-path"),
-                    host.getStringValue("postprocessor-class"),
+                    host.getStringValue("customization-jar-path"),
+                    host.getStringValue("customization-class"),
                     host.getBooleanValue("model-override-setter-from-superclass", modelOverrideSetterFromSuperclassDefault));
         }
         return _instance;
@@ -170,8 +170,8 @@ public class JavaSettings
                          boolean serviceInterfaceAsPublic,
                          String artifactId,
                          String credentialType,
-                         String postProcessorJarPath,
-                         String postProcessorClass,
+                         String customizationJarPath,
+                         String customizationClass,
                          boolean overrideSetterFromSuperclass)
     {
         this.azure = azure;
@@ -210,8 +210,8 @@ public class JavaSettings
                     .map(type -> CredentialType.fromValue(credentialType))
                     .collect(Collectors.toSet());
         }
-        this.postProcessorJarPath = postProcessorJarPath;
-        this.postProcessorClass = postProcessorClass;
+        this.customizationJarPath = customizationJarPath;
+        this.customizationClass = customizationClass;
     }
 
     private Set<CredentialType> credentialTypes;
@@ -469,14 +469,14 @@ public class JavaSettings
         return clientLogger;
     }
 
-    private String postProcessorJarPath;
-    public final String getPostProcessorJarPath() {
-        return postProcessorJarPath;
+    private String customizationJarPath;
+    public final String getCustomizationJarPath() {
+        return customizationJarPath;
     }
 
-    private String postProcessorClass;
-    public final String getPostProcessorClass() {
-        return postProcessorClass;
+    private String customizationClass;
+    public final String getCustomizationClass() {
+        return customizationClass;
     }
 
     boolean overrideSetterFromParent;
