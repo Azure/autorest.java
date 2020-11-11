@@ -121,7 +121,7 @@ Create a customization class extending from `com.azure.autorest.customization.Cu
 - [Javadoc: Set the description for a class / method](#javadoc-set-the-description-for-a-class--method)
 - [Javadoc: Set / remove a parameter's javadoc on a method](#javadoc-set--remove-a-parameters-javadoc-on-a-method)
 - [Javadoc: Set the return javadoc on a method](#javadoc-set-the-return-javadoc-on-a-method)
-- [Javadoc: Set / remove an exception's javadoc on a method ](#javadoc-set--remove-an-exceptions-javadoc-on-a-method)
+- [Javadoc: Set / remove an exception's javadoc on a method ](#javadoc-add--remove-an-exceptions-javadoc-on-a-method)
 
 ## Navigate through the packages and classes
 There are 4 customization classes currently available, `LibraryCustomization`, `PackageCustomization`, `ClassCustomization` and `JavadocCustomization`. From a given `LibraryCustomization`, you can navigate through the packages and classes intuitively with the following methods:

@@ -33,6 +33,6 @@ license-header: MICROSOFT_MIT_SMALL
 add-context-parameter: true
 models-subpackage: implementation.models
 context-client-method-parameter: true
-customization-jar-path: target\bodycomplex-customization-jar-with-dependencies.jar
+customization-jar-path: target/bodycomplex-customization-1.0.0-beta.1.jar
 customization-class: fixtures.bodycomplex.customization.BodyComplexCustomization
 ```
