@@ -13,7 +13,6 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -88,7 +87,7 @@ public class Postprocessor extends NewPlugin {
     LinkedHashMap<String, String> configurationFiles = getValue(LinkedHashMap.class, "configurationFiles");
     Optional<String> readme = configurationFiles.keySet().stream().filter(key -> !key.contains(".autorest")).findFirst();
     if (readme.isPresent()) {
-      return new File(readme.get().replace("file:///", "")).getParent();
+      return new File(URI.create(readme.get()).getPath()).getParent();
     }
 
     // TODO: get autorest running directory
