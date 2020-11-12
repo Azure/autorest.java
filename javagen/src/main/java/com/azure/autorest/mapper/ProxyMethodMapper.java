@@ -48,6 +48,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         return new ProxyMethod.Builder();
     }
 
+    protected List<ProxyMethodParameter> sortProxyParameters(List<ProxyMethodParameter> parameters) {
+        return parameters;
+    }
+
     @Override
     public Map<Request, ProxyMethod> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
@@ -113,6 +117,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameter.setOperation(operation);
                 parameters.add(Mappers.getProxyParameterMapper().map(parameter));
             }
+            parameters = sortProxyParameters(parameters);
             if (settings.getAddContextParameter()) {
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
                         .description("The context to associate with this operation.")

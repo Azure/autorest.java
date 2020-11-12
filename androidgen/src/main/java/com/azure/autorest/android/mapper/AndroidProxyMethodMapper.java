@@ -3,12 +3,16 @@ package com.azure.autorest.android.mapper;
 import com.azure.autorest.android.model.AndroidProxyMethod;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMapper;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     private static AndroidProxyMethodMapper instance = new AndroidProxyMethodMapper();
@@ -55,5 +59,16 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
             }
             builder.returnType(singleValueType);
         }
+    }
+
+    @Override
+    protected List<ProxyMethodParameter> sortProxyParameters(List<ProxyMethodParameter> parameters) {
+        ArrayList<ProxyMethodParameter> sorted = new ArrayList<>();
+        sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Header).collect(Collectors.toList()));
+        sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Uri).collect(Collectors.toList()));
+        sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path).collect(Collectors.toList()));
+        sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query).collect(Collectors.toList()));
+        sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body).collect(Collectors.toList()));
+        return sorted;
     }
 }

@@ -7,7 +7,9 @@ import com.azure.android.core.internal.util.serializer.SerializerFormat;
 import com.azure.androidtest.fixtures.bodyinteger.models.ErrorException;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -826,14 +828,14 @@ public final class IntsImpl {
             public void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
-                        final OffsetDateTime decodedResult;
+                        final Long decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class);
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), Long.class);
                         } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(decodedResult, response.raw());
+                        callback.onSuccess(LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new ErrorException(strContent, response.raw()), response.raw());
@@ -863,10 +865,11 @@ public final class IntsImpl {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getUnixTime());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
+                final Long decodedResult = this.client.deserializeContent(response.headers(), response.body(), Long.class);
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class));
+                                        LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -974,14 +977,14 @@ public final class IntsImpl {
             public void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
-                        final OffsetDateTime decodedResult;
+                        final Long decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class);
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), Long.class);
                         } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(decodedResult, response.raw());
+                        callback.onSuccess(LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new ErrorException(strContent, response.raw()), response.raw());
@@ -1011,10 +1014,11 @@ public final class IntsImpl {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalidUnixTime());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
+                final Long decodedResult = this.client.deserializeContent(response.headers(), response.body(), Long.class);
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class));
+                                        LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1040,14 +1044,14 @@ public final class IntsImpl {
             public void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
-                        final OffsetDateTime decodedResult;
+                        final Long decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class);
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), Long.class);
                         } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(decodedResult, response.raw());
+                        callback.onSuccess(LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new ErrorException(strContent, response.raw()), response.raw());
@@ -1077,10 +1081,11 @@ public final class IntsImpl {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNullUnixTime());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
+                final Long decodedResult = this.client.deserializeContent(response.headers(), response.body(), Long.class);
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), OffsetDateTime.class));
+                                        LocalDateTime.ofEpochSecond(decodedResult, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());

@@ -2,10 +2,7 @@ package com.azure.autorest.android.model;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -55,6 +52,14 @@ public class AndroidProxyMethod extends ProxyMethod {
             }
             if (parameter.getRequestParameterLocation() == RequestParameterLocation.Body) {
                 imports.add("okhttp3.RequestBody");
+            }
+            if (parameter.getClientType() == ArrayType.ByteArray
+                    && parameter.getWireType() == ClassType.String) {
+                imports.add("com.azure.android.core.util.Base64Util");
+            }
+            if (parameter.getClientType() instanceof ListType) {
+                imports.add("com.azure.android.core.internal.util.serializer.JacksonAdapter");
+                imports.add("com.azure.android.core.internal.util.serializer.SerializerAdapter");
             }
         }
 

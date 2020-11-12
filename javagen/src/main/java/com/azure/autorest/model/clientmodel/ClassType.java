@@ -62,7 +62,8 @@ public class ClassType implements IType {
     public static final ClassType AndroidDuration = new ClassType.Builder().packageName("org.threeten.bp").name("Duration").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType AndroidDateTimeRfc1123 = new Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType AndroidUnixTimeDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
-    public static final ClassType AndroidUnixTimeDateTimeLong = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
+    public static final ClassType AndroidUnixTimeDateTimeLong = new Builder().knownClass(java.lang.Long.class).implementationImports("org.threeten.bp.OffsetDateTime", "org.threeten.bp.LocalDateTime", "org.threeten.bp.ZoneOffset").build();
+        // new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
 
     private final String packageName;
     private final String name;
@@ -178,7 +179,7 @@ public class ClassType implements IType {
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.AndroidUnixTimeDateTimeLong) {
-            expression = java.lang.String.format("(%s == null ? null : LocalDateTime.ofEpochSecond(%s, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC))", expression);
+            expression = java.lang.String.format("LocalDateTime.ofEpochSecond(%s, 0, ZoneOffset.UTC).atOffset(ZoneOffset.UTC)", expression);
         }
 
         return expression;
