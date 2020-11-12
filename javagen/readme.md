@@ -1,7 +1,9 @@
 #### Javagen
 
 ``` yaml
-use: $(this-folder)/../preprocessor
+use:
+  - $(this-folder)/../preprocessor
+  - $(this-folder)/../postprocessor
 
 pipeline:
 
@@ -11,8 +13,12 @@ pipeline:
     input: preprocessor
     output-artifact: java-files
   
-  javagen/emitter:
+  postprocessor:
     input: javagen
+    output-artifact: java-files
+  
+  postprocess/emitter:
+    input: postprocessor
     scope: scope-javagen/emitter
 
 scope-javagen/emitter:

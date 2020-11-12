@@ -117,6 +117,8 @@ public class JavaSettings
                     host.getBooleanValue("service-interface-as-public", false),
                     host.getStringValue("artifact-id", ""),
                     host.getStringValue("credential-types", "none"),
+                    host.getStringValue("customization-jar-path"),
+                    host.getStringValue("customization-class"),
                     host.getBooleanValue("model-override-setter-from-superclass", modelOverrideSetterFromSuperclassDefault));
         }
         return _instance;
@@ -168,6 +170,8 @@ public class JavaSettings
                          boolean serviceInterfaceAsPublic,
                          String artifactId,
                          String credentialType,
+                         String customizationJarPath,
+                         String customizationClass,
                          boolean overrideSetterFromSuperclass)
     {
         this.azure = azure;
@@ -206,6 +210,8 @@ public class JavaSettings
                     .map(type -> CredentialType.fromValue(credentialType))
                     .collect(Collectors.toSet());
         }
+        this.customizationJarPath = customizationJarPath;
+        this.customizationClass = customizationClass;
     }
 
     private Set<CredentialType> credentialTypes;
@@ -461,6 +467,16 @@ public class JavaSettings
     private boolean clientLogger;
     public final boolean shouldClientLogger() {
         return clientLogger;
+    }
+
+    private String customizationJarPath;
+    public final String getCustomizationJarPath() {
+        return customizationJarPath;
+    }
+
+    private String customizationClass;
+    public final String getCustomizationClass() {
+        return customizationClass;
     }
 
     boolean overrideSetterFromParent;
