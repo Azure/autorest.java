@@ -367,7 +367,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 expression = "null";
                             } else {
                                 expression
-                                        = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
+                                        = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, SerializerAdapter.CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
                             }
                             function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                             addedConversion = true;
@@ -649,7 +649,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                                        String clientReferenceDot,
                                                        JavaBlock succeededCodeBlock,
                                                        boolean isPaging) {
-        IType bodyType = clientMethod.getProxyMethod().getReturnType(); // responseType.getTypeArguments()[0];
+        IType bodyType = clientMethod.getProxyMethod().getReturnType();
         if (bodyType == PrimitiveType.Void) {
             succeededCodeBlock.line("response.body().close();");
             succeededCodeBlock.methodReturn("new Response<>(response.raw().request(),\n" +
@@ -704,12 +704,24 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                         elementType, pageId));
             }
             else {
-                succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
-                                "                        response.code(),\n" +
-                                "                        response.headers(),\n" +
-                                "                        %sdeserializeContent(response.headers(), response.body(), %s))",
-                        clientReferenceDot,
-                        bodyJvaType));
+                IType clientType = bodyType.getClientType();
+                if (!bodyType.equals(clientType)) {
+                    succeededCodeBlock.line(String.format("final %1$s decodedResult = %2$sdeserializeContent(response.headers(), response.body(), %3$s);",
+                            bodyType, clientReferenceDot, bodyJvaType));
+                    String callbackValueName = bodyType.convertToClientType("decodedResult");
+                    succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
+                                    "                        response.code(),\n" +
+                                    "                        response.headers(),\n" +
+                                    "                        %s)", callbackValueName));
+                }
+                else {
+                    succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
+                                    "                        response.code(),\n" +
+                                    "                        response.headers(),\n" +
+                                    "                        %sdeserializeContent(response.headers(), response.body(), %s))",
+                            clientReferenceDot,
+                            bodyJvaType));
+                }
             }
         }
     }
@@ -867,9 +879,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     },
                     null);
 
+            ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
+            final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
             if (isPaging) {
-                ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
-                final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
                 final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
                 final IType elementType = pageType.getTypeArguments()[0];
                 MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
@@ -880,9 +892,14 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
             }
             else {
+                IType clientType = callbackParameterType.getTypeArguments()[0];
+                String callbackValueName = "decodedResult";
+                if (!bodyType.equals(clientType)) {
+                    callbackValueName = bodyType.convertToClientType(callbackValueName);
+                }
                 succeededCodeBlock
-                        .line(String.format("%s.onSuccess(decodedResult, response.raw());",
-                                callbackParameterName));
+                        .line(String.format("%2$s.onSuccess(%1$s, response.raw());",
+                                callbackValueName, callbackParameterName));
             }
         }
     }

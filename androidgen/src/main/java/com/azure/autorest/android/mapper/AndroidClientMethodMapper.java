@@ -187,8 +187,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .methodTransformationDetails(methodTransformationDetails)
                     .methodPageDetails(null);
 
-            // by default, client method returns whatever the proxy method returns
-            IType returnType = SchemaUtil.getOperationResponseType(operation); //proxyMethod.getReturnType();
+            IType returnType = SchemaUtil.getOperationResponseType(operation);
             IType elementType = null;
             boolean isPaging = false;
             boolean isNextMethod = false;
@@ -223,7 +222,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             List<ClientMethodParameter> withCallbackParameters = new ArrayList<>(parameters);
             final ClientMethodParameter callbackParam = new ClientMethodParameter.Builder()
                     .description("the Callback that receives the response.")
-                    .wireType(GenericType.AndroidCallback(returnType))
+                    .wireType(GenericType.AndroidCallback(returnType.getClientType()))
                     .name("callback")
                     .annotations(new ArrayList<>())
                     .isConstant(false)
@@ -263,7 +262,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 // Sync method with Optional parameters.
                 //
                 methodType = isPaging ? ClientMethodType.PagingSync : ClientMethodType.SimpleSync;
-                GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType);
+                GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType.getClientType());
                 methods.add(builder
                         .parameters(parameters)
                         .returnValue(new ReturnValue(returnTypeDescription(operation, responseWithResultType, returnType),
