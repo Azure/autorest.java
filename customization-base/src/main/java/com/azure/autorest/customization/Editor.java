@@ -1,7 +1,7 @@
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.ls.models.Position;
-import com.azure.autorest.customization.ls.models.Range;
+import com.azure.autorest.customization.models.Position;
+import com.azure.autorest.customization.models.Range;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,12 +18,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Editor {
+/**
+ * The raw editor containing the current files being customized.
+ */
+public final class Editor {
     private Path rootDir;
     private Map<String, String> contents;
     private Map<String, List<String>> lines;
     private Map<String, Path> paths;
 
+    /**
+     * Creates an editor instance with the file contents and the root directory path.
+     * @param contents the map from file relative paths (starting with "src/main/java") and file contents
+     * @param rootDir the root directory path containing the files
+     */
     public Editor(Map<String, String> contents, Path rootDir) {
         this.contents = contents;
         this.lines = new HashMap<>();
@@ -35,10 +43,21 @@ public class Editor {
 
     }
 
+    /**
+     * Gets the mapping from file relative paths (starting with "src/main/java") to file contents.
+     *
+     * @return the mapping
+     */
     public Map<String, String> getContents() {
         return contents;
     }
 
+    /**
+     * Adds a new file.
+     *
+     * @param name the relative path of the file, starting with "src/main/java"
+     * @param content the file content
+     */
     public void addFile(String name, String content) {
         Path newFilePath = Paths.get(rootDir.toString(), name);
         File newFile = newFilePath.toFile();
@@ -62,6 +81,11 @@ public class Editor {
         }
     }
 
+    /**
+     * Removes a file.
+     *
+     * @param name the relative file path, starting with "src/main/java"
+     */
     public void removeFile(String name) {
         contents.remove(name);
         lines.remove(name);
@@ -69,19 +93,44 @@ public class Editor {
         paths.remove(name);
     }
 
+    /**
+     * Gets the content of a file.
+     * @param name the relative path of a file, starting with "src/main/java"
+     * @return the file content
+     */
     public String getFileContent(String name) {
         return contents.get(name);
     }
 
+    /**
+     * Gets the file content split into lines.
+     * @param name the relative path of a file, starting with "src/main/java"
+     * @return the file content split into lines
+     */
     public List<String> getFileLines(String name) {
         return lines.get(name);
 
     }
 
+    /**
+     * Gets a line in a file.
+     *
+     * @param name the relative path of a file, starting with "src/main/java"
+     * @param line the line number
+     * @return the file content in this line
+     */
     public String getFileLine(String name, int line) {
         return lines.get(name).get(line);
     }
 
+    /**
+     * Inserts a blank line at a given line number.
+     *
+     * @param fileName the relative path of a file, starting with "src/main/java"
+     * @param line the line number to insert a new line
+     * @param indented if the line should be indented at the same level as the next line
+     * @return the position of the cursor after indentation (if indented) in this line
+     */
     public Position insertBlankLine(String fileName, int line, boolean indented) {
         List<String> lineContent = lines.get(fileName);
         String nextLine = lineContent.get(line);
@@ -94,6 +143,14 @@ public class Editor {
         return new Position(line, indentation.length());
     }
 
+    /**
+     * Replaces a chunk of a text with a new text in the file.
+     *
+     * @param fileName the relative path of a file, starting with "src/main/java"
+     * @param start the starting position to replace, inclusive
+     * @param end the ending position to replace, exclusive
+     * @param newContent the new content to replace the chunk
+     */
     public void replace(String fileName, Position start, Position end, String newContent) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -122,6 +179,12 @@ public class Editor {
         }
     }
 
+    /**
+     * Renames a file. This simply renames the file, without renaming any class content.
+     *
+     * @param fileName the original relative path of a file, starting with "src/main/java"
+     * @param newName the new relative path of the file, starting with "src/main/java"
+     */
     public void renameFile(String fileName, String newName) {
         contents.put(newName, contents.remove(fileName));
         lines.put(newName, lines.remove(fileName));
@@ -130,6 +193,13 @@ public class Editor {
         path.toFile().renameTo(newPath.toFile());
     }
 
+    /**
+     * Searches all occurrences of a text in the file.
+     *
+     * @param fileName the relative path of a file, starting with "src/main/java"
+     * @param text the text to search
+     * @return the list of ranges containing the occurrences
+     */
     public List<Range> searchText(String fileName, String text) {
         if (!lines.containsKey(fileName)) {
             return null;
@@ -150,6 +220,13 @@ public class Editor {
         }
     }
 
+    /**
+     * Searches the first occurrence of a text in the file.
+     *
+     * @param fileName the relative path of a file, starting with "src/main/java"
+     * @param text the text to search
+     * @return the range containing the occurrence
+     */
     public Range searchTextFirstOccurrence(String fileName, String text) {
         if (lines.containsKey(fileName)) {
             for (int i = 0; i != lines.get(fileName).size(); i++) {
@@ -164,6 +241,15 @@ public class Editor {
         return null;
     }
 
+    /**
+     * Gets the text content in a range in the file. The lines will be joined with an optional delimiter. If the
+     * delimiter is null, the lines will be joined with line endings.
+     *
+     * @param fileName the relative path of a file, starting with "src/main/java"
+     * @param range the range to convert to text
+     * @param delimiter the optional delimiter described above
+     * @return the text in the range
+     */
     public String getTextInRange(String fileName, Range range, String delimiter) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);

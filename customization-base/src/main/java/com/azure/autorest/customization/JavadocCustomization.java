@@ -1,11 +1,11 @@
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.ls.models.FileChangeType;
-import com.azure.autorest.customization.ls.models.FileEvent;
-import com.azure.autorest.customization.ls.models.Position;
-import com.azure.autorest.customization.ls.models.Range;
-import com.azure.autorest.customization.ls.models.SymbolInformation;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
+import com.azure.autorest.customization.implementation.ls.models.FileEvent;
+import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+import com.azure.autorest.customization.models.Position;
+import com.azure.autorest.customization.models.Range;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,7 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class JavadocCustomization {
+
+/**
+ * The Javadoc customization for an AutoRest generated classes and methods.
+ */
+public final class JavadocCustomization {
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final URI fileUri;
@@ -46,6 +50,11 @@ public class JavadocCustomization {
         parseJavadoc(symbolLine);
     }
 
+    /**
+     * Sets the description in the Javadoc.
+     * @param description the description for the current class/method.
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization setDescription(String description) {
 //        if (descriptionRange == null) {
 //            int descriptionLine = symbolLine;
@@ -83,6 +92,13 @@ public class JavadocCustomization {
         return this;
     }
 
+    /**
+     * Sets the param Javadoc for a parameter on the method.
+     *
+     * @param parameterName the parameter name on the method
+     * @param description the description for this parameter
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization setParam(String parameterName, String description) {
 //        TextEdit textEdit = new TextEdit();
 //        if (paramRanges.containsKey(parameterName)) {
@@ -135,12 +151,24 @@ public class JavadocCustomization {
         return this;
     }
 
+    /**
+     * Removes a parameter Javadoc on the method.
+     *
+     * @param parameterName the name of the parameter on the method
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization removeParam(String parameterName) {
         paramDocs.remove(parameterName);
         commit();
         return this;
     }
 
+    /**
+     * Sets the return Javadoc on the method.
+     *
+     * @param description the description for the return value
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization setReturn(String description) {
 //        TextEdit textEdit = new TextEdit();
 //        if (returnRange != null) {
@@ -191,19 +219,35 @@ public class JavadocCustomization {
         return this;
     }
 
+    /**
+     * Removes the return Javadoc for a method.
+     *
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization removeReturn() {
         returnDoc = null;
         commit();
         return this;
     }
 
+    /**
+     * Adds a throws Javadoc for a method.
+     * @param exceptionType the type of the exception the method will throw
+     * @param description the description for the exception
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization addThrows(String exceptionType, String description) {
         throwsDocs.put(exceptionType, description);
         commit();
         return this;
     }
 
-    public JavadocCustomization removeThrows(String exceptionType, String description) {
+    /**
+     * Removes a throw Javadoc for a method.
+     * @param exceptionType the type of the exception the method will throw
+     * @return the Javadoc customization object for chaining
+     */
+    public JavadocCustomization removeThrows(String exceptionType) {
         throwsDocs.remove(exceptionType);
         commit();
         return this;
