@@ -68,7 +68,7 @@ public class FluentNamer extends NewPlugin {
             writeFile(fluentNamerFile.getName(), output, null);
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentnamer plugin " + e, e);
-            connection.sendError(1, 500, "Error occured while running fluentnamer plugin: " + e.getMessage());
+            connection.sendError(1, 500, "Error occurred while running fluentnamer plugin: " + e.getMessage());
             return false;
         }
         return true;

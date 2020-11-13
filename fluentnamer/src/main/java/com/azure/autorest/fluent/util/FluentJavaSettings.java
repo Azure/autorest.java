@@ -52,7 +52,7 @@ public class FluentJavaSettings {
     /**
      * Operation group name for ungrouped operations.
      */
-    private Optional<String> nameForUngroupedOperations = Optional.empty();
+    private String nameForUngroupedOperations;
 
     /**
      * Naming override.
@@ -63,7 +63,7 @@ public class FluentJavaSettings {
 
     private String pomFilename = "pom.xml";
 
-    private Optional<String> artifactVersion = Optional.empty();
+    private String artifactVersion;
 
     private boolean sdkIntegration = false;
 
@@ -73,7 +73,7 @@ public class FluentJavaSettings {
         private String tag;
         private String baseFolder;
         private String outputFolder;
-        private Optional<String> azureLibrariesForJavaFolder = Optional.empty();
+        private String azureLibrariesForJavaFolder;
 
         public String getTag() {
             return tag;
@@ -88,7 +88,7 @@ public class FluentJavaSettings {
         }
 
         public Optional<String> getAzureLibrariesForJavaFolder() {
-            return azureLibrariesForJavaFolder;
+            return Optional.ofNullable(azureLibrariesForJavaFolder);
         }
     }
 
@@ -116,7 +116,7 @@ public class FluentJavaSettings {
     }
 
     public Optional<String> getNameForUngroupedOperations() {
-        return nameForUngroupedOperations;
+        return Optional.ofNullable(nameForUngroupedOperations);
     }
 
     public Map<String, String> getNamingOverride() {
@@ -132,7 +132,7 @@ public class FluentJavaSettings {
     }
 
     public Optional<String> getArtifactVersion() {
-        return artifactVersion;
+        return Optional.ofNullable(artifactVersion);
     }
 
     public boolean isSdkIntegration() {
@@ -183,10 +183,10 @@ public class FluentJavaSettings {
         loadBooleanSetting("track1-naming", b -> track1Naming = b);
         loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
-        loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = Optional.of(s));
+        loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = s);
 
         loadStringSetting("pom-file", s -> pomFilename = s);
-        loadStringSetting("package-version", s -> artifactVersion = Optional.of(s));
+        loadStringSetting("package-version", s -> artifactVersion = s);
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
@@ -199,7 +199,7 @@ public class FluentJavaSettings {
 
         loadStringSetting("base-folder", s -> autorestSettings.baseFolder = s);
         loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s);
-        loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = Optional.of(s));
+        loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = s);
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
