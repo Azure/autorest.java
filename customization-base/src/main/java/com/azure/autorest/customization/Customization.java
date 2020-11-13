@@ -1,6 +1,6 @@
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+/**
+ * The base class for customization. Extend this class to plug into AutoRest generation.
+ */
 public abstract class Customization {
+    /**
+     * Start the customization process. This is called by the post processor in AutoRest.
+     * @param files the list of files generated in the previous steps in AutoRest
+     * @return the list of files after customization
+     */
     public Map<String, String> run(Map<String, String> files) {
         Path tempDirWithPrefix;
 
@@ -45,6 +53,10 @@ public abstract class Customization {
         }
     }
 
+    /**
+     * Override this method to customize the client library.
+     * @param libraryCustomization the top level customization object
+     */
     public abstract void customize(LibraryCustomization libraryCustomization);
 
     private void deleteDirectory(File directoryToBeDeleted) {

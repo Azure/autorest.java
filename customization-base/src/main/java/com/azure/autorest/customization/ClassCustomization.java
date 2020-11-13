@@ -1,18 +1,19 @@
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.ls.models.CodeAction;
-import com.azure.autorest.customization.ls.models.CodeActionKind;
-import com.azure.autorest.customization.ls.models.FileChangeType;
-import com.azure.autorest.customization.ls.models.FileEvent;
-import com.azure.autorest.customization.ls.models.JavaCodeActionKind;
-import com.azure.autorest.customization.ls.models.Position;
-import com.azure.autorest.customization.ls.models.Range;
-import com.azure.autorest.customization.ls.models.SymbolInformation;
-import com.azure.autorest.customization.ls.models.SymbolKind;
-import com.azure.autorest.customization.ls.models.TextEdit;
-import com.azure.autorest.customization.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.ls.models.WorkspaceEditCommand;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.implementation.ls.models.CodeAction;
+import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
+import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
+import com.azure.autorest.customization.implementation.ls.models.FileEvent;
+import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
+import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
+import com.azure.autorest.customization.implementation.ls.models.TextEdit;
+import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
+import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
+import com.azure.autorest.customization.models.Position;
+import com.azure.autorest.customization.models.Range;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ClassCustomization {
+/**
+ * The class level customization for an AutoRest generated class.
+ */
+public final class ClassCustomization {
     final EclipseLanguageClient languageClient;
     final Editor editor;
     final String packageName;
@@ -34,6 +38,11 @@ public class ClassCustomization {
         this.className = className;
     }
 
+    /**
+     * Gets the Javadoc customization for this class.
+     *
+     * @return the Javadoc customization
+     */
     public JavadocCustomization classJavadoc() {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -46,6 +55,12 @@ public class ClassCustomization {
         return null;
     }
 
+    /**
+     * Gets the Javadoc customization for a method in this class.
+     *
+     * @param methodName the name of the method to customize
+     * @return the Javadoc customization
+     */
     public JavadocCustomization methodJavadoc(String methodName) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -64,6 +79,12 @@ public class ClassCustomization {
         return null;
     }
 
+    /**
+     * Change the modifier for this class. The current modifier will be replaced. For package private, use empty String.
+     *
+     * @param modifier the new modifier for the class
+     * @return the current class customization for chaining
+     */
     public ClassCustomization changeClassModifier(String modifier) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -94,6 +115,12 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Add an annotation on the class. The annotation class will be automatically imported.
+     *
+     * @param annotation the annotation to add to the class. The leading @ can be omitted.
+     * @return the current class customization for chaining
+     */
     public ClassCustomization addClassAnnotation(String annotation) {
         if (!annotation.startsWith("@")) {
             annotation = "@" + annotation;
@@ -140,6 +167,12 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Remove an annotation from the class.
+     *
+     * @param annotation the annotation to remove from the class. The leading @ can be omitted.
+     * @return the current class customization for chaining
+     */
     public ClassCustomization removeClassAnnotation(String annotation) {
         if (!annotation.startsWith("@")) {
             annotation = "@" + annotation;
@@ -184,6 +217,14 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Rename a method in the class. This is a refactor operation. All references to this method across the client
+     * library will be automatically modified.
+     *
+     * @param methodName the current name of the method
+     * @param newName the new name for the method
+     * @return the current class customization for chaining
+     */
     public ClassCustomization renameMethod(String methodName, String newName) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -203,6 +244,13 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Add an annotation to a method in the class.
+     *
+     * @param methodName the name of the method
+     * @param annotation the annotation to add. The leading @ can be omitted.
+     * @return the current class customization for chaining
+     */
     public ClassCustomization addMethodAnnotation(String methodName, String annotation) {
         if (!annotation.startsWith("@")) {
             annotation = "@" + annotation;
@@ -249,6 +297,13 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Generates a getter and a setter method(s) for a property in the class. This is a refactor operation.
+     * If a getter or a setter is already available on the class, the current getter or setter will be kept.
+     *
+     * @param propertyName the name of the property to generate
+     * @return the current class customization for chaining
+     */
     public ClassCustomization generateGetterAndSetter(String propertyName) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -283,6 +338,14 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Rename a property in the class. This is a refactor operation. All references of the property will be renamed
+     * and the getter and setter method(s) for this property will be renamed accordingly as well.
+     *
+     * @param propertyName the current name of the property
+     * @param newName the new name for the property
+     * @return the current class customization for chaining
+     */
     public ClassCustomization renameProperty(String propertyName, String newName) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -311,6 +374,12 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Rename an enum member if the current class is an enum class.
+     * @param enumMemberName the current enum member name
+     * @param newName the new enum member name
+     * @return the current class customization for chaining
+     */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -330,6 +399,12 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Change the modifier for a method in the class. For package private, use empty string as the modifier.
+     * @param methodName the name of the method
+     * @param modifier the new modifier for the method
+     * @return the current class customization for chaining
+     */
     public ClassCustomization changeMethodModifier(String methodName, String modifier) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
@@ -361,6 +436,21 @@ public class ClassCustomization {
         return this;
     }
 
+    /**
+     * Change the return type of a method. The new return type will be automatically imported.
+     *
+     * <p>
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is
+     * {@code void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is
+     * {@code void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new
+     * return type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains
+     * exactly 1 instance of {@code %s}.
+     *
+     * @param methodName the name of the method
+     * @param newReturnType the simple name of the new return type
+     * @param returnValueFormatter the return value String formatter as described above
+     * @return the current class customization for chaining
+     */
     public ClassCustomization changeMethodReturnType(String methodName, String newReturnType, String returnValueFormatter) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
