@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FluentTransformer {
 
@@ -30,9 +33,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
-        if (fluentJavaSettings.getNameForUngroupedOperations().isPresent()) {
-            codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings.getNameForUngroupedOperations().get());
-        }
+        codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings);
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = new NamingConflictResolver().process(codeModel);
@@ -54,15 +55,37 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    public CodeModel renameUngroupedOperationGroup(CodeModel codeModel, String nameForUngroupOperations) {
+    public CodeModel renameUngroupedOperationGroup(CodeModel codeModel, FluentJavaSettings settings) {
+        final String nameForUngroupedOperations = getNameForUngroupedOperations(codeModel, settings);
+        if (nameForUngroupedOperations == null) {
+            return codeModel;
+        }
+
         codeModel.getOperationGroups().stream()
                 .filter(og -> Utils.getDefaultName(og) == null || Utils.getDefaultName(og).isEmpty())
                 .forEach(og -> {
-                    logger.info("Rename ungrouped operation group to {}", nameForUngroupOperations);
-                    og.set$key(nameForUngroupOperations);
-                    og.getLanguage().getDefault().setName(nameForUngroupOperations);
+                    logger.info("Rename ungrouped operation group to {}", nameForUngroupedOperations);
+                    og.set$key(nameForUngroupedOperations);
+                    og.getLanguage().getDefault().setName(nameForUngroupedOperations);
                 });
         return codeModel;
+    }
+
+    private static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
+        String nameForUngroupOperations = null;
+        if (settings.getNameForUngroupedOperations().isPresent()) {
+            nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
+        } else if (JavaSettings.getInstance().isFluentLite()) {
+            nameForUngroupOperations = "ResourceProviders";
+
+            Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
+                    .map(Utils::getDefaultName)
+                    .collect(Collectors.toSet());
+            if (operationGroupNames.contains(nameForUngroupOperations)) {
+                nameForUngroupOperations += "Operations";
+            }
+        }
+        return nameForUngroupOperations;
     }
 
     /**
