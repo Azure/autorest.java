@@ -3,7 +3,6 @@ package com.azure.autorest.extension.base.plugin;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
-import com.azure.core.implementation.TypeUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -119,7 +119,22 @@ public abstract class NewPlugin {
     }
 
     public String getConfigurationFile(String fileName) {
-        Map<String,String> configurations = getValue(TypeUtil.createParameterizedType(Map.class, String.class, String.class), "configurationFiles");
+        Map<String,String> configurations = getValue(new ParameterizedType() {
+            @Override
+            public Type[] getActualTypeArguments() {
+                return new Type[] { String.class, String.class };
+            }
+
+            @Override
+            public Type getRawType() {
+                return Map.class;
+            }
+
+            @Override
+            public Type getOwnerType() {
+                return null;
+            }
+        }, "configurationFiles");
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();
             if (it.hasNext()) {
