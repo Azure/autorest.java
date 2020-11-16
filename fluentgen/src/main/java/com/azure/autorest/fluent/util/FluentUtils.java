@@ -102,22 +102,31 @@ public class FluentUtils {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
-            String packageLastName = getPackageLastName();
+            serviceName = getServiceNameFromClientName(clientName, settings.getPackage());
+        }
+        return serviceName;
+    }
 
-            if (clientName != null) {
-                if (clientName.toLowerCase(Locale.ROOT).startsWith(packageLastName.toLowerCase(Locale.ROOT))) {
-                    serviceName = clientName.substring(0, packageLastName.length());
-                } else {
-                    final String keywordManagementClient = "ManagementClient";
-                    if (clientName.endsWith(keywordManagementClient)) {
-                        serviceName = clientName.substring(0, clientName.length() - keywordManagementClient.length());
-                    }
+    static String getServiceNameFromClientName(String clientName, String packageName) {
+        String serviceName = null;
+        String packageLastName = getPackageLastName(packageName);
+
+        if (clientName != null) {
+            if (clientName.toLowerCase(Locale.ROOT).startsWith(packageLastName.toLowerCase(Locale.ROOT))) {
+                serviceName = clientName.substring(0, packageLastName.length());
+            } else {
+                final String keywordManagementClient = "ManagementClient";
+                final String keywordClient = "Client";
+                if (clientName.endsWith(keywordManagementClient)) {
+                    serviceName = clientName.substring(0, clientName.length() - keywordManagementClient.length());
+                } else if (clientName.endsWith(keywordClient)) {
+                    serviceName = clientName.substring(0, clientName.length() - keywordClient.length());
                 }
             }
+        }
 
-            if (CoreUtils.isNullOrEmpty(serviceName)) {
-                serviceName = packageLastName;
-            }
+        if (CoreUtils.isNullOrEmpty(serviceName)) {
+            serviceName = packageLastName;
         }
         return serviceName;
     }
@@ -126,21 +135,25 @@ public class FluentUtils {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = settings.getArtifactId();
         if (CoreUtils.isNullOrEmpty(artifactId)) {
-            String packageName = settings.getPackage().toLowerCase(Locale.ROOT);
-            if (packageName.startsWith("com.azure.resourcemanager")) {
-                // if namespace looks good, convert it to artifactId directly
-                artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
-            } else {
-                String packageLastName = getPackageLastName().toLowerCase(Locale.ROOT);
-                artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
-            }
+            artifactId = getArtifactIdFromPackageName(settings.getPackage().toLowerCase(Locale.ROOT));
         }
         return artifactId;
     }
 
-    private static String getPackageLastName() {
-        JavaSettings settings = JavaSettings.getInstance();
-        String packageLastName = settings.getPackage();
+    static String getArtifactIdFromPackageName(String packageName) {
+        String artifactId;
+        if (packageName.startsWith("com.azure.resourcemanager")) {
+            // if namespace looks good, convert it to artifactId directly
+            artifactId = packageName.substring("com.".length()).replaceAll(Pattern.quote("."), "-");
+        } else {
+            String packageLastName = getPackageLastName(packageName).toLowerCase(Locale.ROOT);
+            artifactId = String.format("azure-resourcemanager-%1$s-generated", packageLastName);
+        }
+        return artifactId;
+    }
+
+    private static String getPackageLastName(String packageName) {
+        String packageLastName = packageName;
         if (packageLastName.endsWith(".generated")) {
             packageLastName = packageLastName.substring(0, packageLastName.lastIndexOf("."));
         }

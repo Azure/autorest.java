@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.util.FluentUtils;
 
@@ -16,7 +17,8 @@ public class ReadmeTemplate {
                 TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
                 TextTemplate.GROUP_ID, project.getGroupId(),
                 TextTemplate.ARTIFACT_ID, project.getArtifactId(),
-                TextTemplate.ARTIFACT_VERSION, project.getVersion()
+                TextTemplate.ARTIFACT_VERSION, project.getVersion(),
+                TextTemplate.MANAGER_CLASS, FluentStatic.getFluentManager().getType().getName()
         );
     }
 }
