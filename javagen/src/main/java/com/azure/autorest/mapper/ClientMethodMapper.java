@@ -308,7 +308,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
                     }
                 }
-            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                    && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
                 // WithResponseAsync, with required and optional parameters
                 methods.add(builder
                         .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
