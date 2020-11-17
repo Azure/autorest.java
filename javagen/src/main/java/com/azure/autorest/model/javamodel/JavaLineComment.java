@@ -1,5 +1,7 @@
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 public class JavaLineComment {
     private JavaFileContents contents;
 
@@ -8,6 +10,6 @@ public class JavaLineComment {
     }
 
     public final void line(String text) {
-        contents.line(text);
+        contents.line(CodeNamer.escapeComment(text));
     }
 }

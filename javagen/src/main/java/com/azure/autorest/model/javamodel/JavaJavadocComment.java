@@ -22,7 +22,7 @@ public class JavaJavadocComment {
     }
 
     private static String processText(String value) {
-        return CodeNamer.escapeXmlComment(ensurePeriod(trim(value)));
+        return CodeNamer.escapeComment(CodeNamer.escapeXmlComment(ensurePeriod(trim(value))));
     }
 
     private void addExpectedLineSeparator() {
