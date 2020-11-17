@@ -96,6 +96,10 @@ public class SchemaUtil {
                 }
             }
         }
+        if (discriminator == null) {
+            throw new IllegalStateException(String.format("discriminator not found in type %s and its parents",
+                    compositeType.getLanguage().getJava().getName()));
+        }
         return discriminator;
     }
 }
