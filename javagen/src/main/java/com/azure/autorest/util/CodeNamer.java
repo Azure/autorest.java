@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
@@ -139,6 +140,14 @@ public class CodeNamer {
                 .replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;");
+    }
+
+    public static String escapeComment(String comment) {
+        if (comment == null) {
+            return null;
+        }
+
+        return comment.replaceAll(Pattern.quote("*/"), "*&#47;");
     }
 
     private static String formatCase(String name, boolean toLower) {

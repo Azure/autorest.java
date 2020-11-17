@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
 import com.azure.autorest.fluent.model.ResourceTypeName;
+import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
@@ -72,11 +73,11 @@ public class ResourceCreate extends ResourceOperation {
         DefinitionStageParent definitionStageParent = null;
         switch (this.getResourceModel().getCategory()) {
             case RESOURCE_GROUP_AS_PARENT:
-                definitionStageParent = new DefinitionStageParent("WithResourceGroup");
+                definitionStageParent = new DefinitionStageParent(deduplicateStageName("WithResourceGroup"));
                 break;
 
             case NESTED_CHILD:
-                definitionStageParent = new DefinitionStageParent("WithParentResource");
+                definitionStageParent = new DefinitionStageParent(deduplicateStageName("WithParentResource"));
                 break;
         }
 
@@ -182,6 +183,19 @@ public class ResourceCreate extends ResourceOperation {
         definitionStages.addAll(optionalDefinitionStages);
 
         return definitionStages;
+    }
+
+    private String deduplicateStageName(String stageName) {
+        Set<String> propertyStageNames = this.getProperties().stream()
+                .map(p -> "With" + CodeNamer.toPascalCase(p.getName()))
+                .collect(Collectors.toSet());
+        Set<String> parameterStageNames = this.getMiscParameters().stream()
+                .map(p -> "With" + CodeNamer.toPascalCase(p.getName()))
+                .collect(Collectors.toSet());
+        if (propertyStageNames.contains(stageName) || parameterStageNames.contains(stageName)) {
+            stageName += "Stage";
+        }
+        return stageName;
     }
 
     private List<ClientModelProperty> getRequiredProperties() {
@@ -317,6 +331,11 @@ public class ResourceCreate extends ResourceOperation {
         }
         // next path parameter is the parent path parameter
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(iterator.next().getSegmentName()));
+
+        // if parent is resourceGroup, just set it as such
+        if (resourceModel.getCategory() == ModelCategory.RESOURCE_GROUP_AS_PARENT) {
+            parentResourceName = "ResourceGroup";
+        }
 
         List<MethodParameter> parameters = this.getPathParameters().stream()
                 .filter(p -> !p.getSerializedName().equals(resourceNamePathParameter.getSerializedName()))

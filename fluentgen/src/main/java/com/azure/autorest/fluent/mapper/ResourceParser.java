@@ -361,9 +361,17 @@ public class ResourceParser {
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query
                                             && p.getIsRequired()
                                             && !p.getFromClient() && !p.getIsConstant());
+                            boolean hasNewNonConstantPathParam = method.getInnerProxyMethod().getParameters().stream()
+                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path
+                                            && !p.getIsConstant() && !p.getFromClient()
+                                            && resourceCreate.getMethodReferences().stream().allMatch(
+                                                    m -> m.getInnerProxyMethod().getParameters().stream().anyMatch(
+                                                            p1 -> p1.getRequestParameterLocation() == RequestParameterLocation.Path
+                                                                    && p1.getRequestParameterName().equals(p.getRequestParameterName())
+                                                                    && p1.getIsConstant() && !p1.getFromClient())));
                             // if for update, need a body parameter
                             // if for get or delete, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
-                            if ((isGetOrDelete && !hasRequiredQueryParam)
+                            if ((isGetOrDelete && !hasRequiredQueryParam && !hasNewNonConstantPathParam)
                                     || (!isGetOrDelete && hasBodyParam)) {
                                 return method;
                             }
