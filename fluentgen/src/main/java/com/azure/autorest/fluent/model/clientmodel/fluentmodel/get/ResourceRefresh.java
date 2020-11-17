@@ -34,8 +34,8 @@ public class ResourceRefresh extends ResourceOperation {
     private List<FluentMethod> refreshMethods;
 
     public ResourceRefresh(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
-                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
-        super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+                           UrlPathSegments urlPathSegments, String methodName) {
+        super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
         logger.info("ResourceRefresh: Fluent model {}, method reference {}",
                 resourceModel.getName(), methodName);
