@@ -19,8 +19,10 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefre
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.core.http.HttpMethod;
@@ -57,10 +59,10 @@ public class ResourceParser {
         resourceCreates.forEach(rc -> ResourceParser.resolveResourceUpdate(collection, rc, availableModels));
 
         // resource refresh (and get in collection)
-        resourceCreates.forEach(rc -> ResourceParser.resolveResourceRefresh(collection, rc, availableModels));
+        resourceCreates.forEach(rc -> ResourceParser.resolveResourceRefresh(collection, rc));
 
         // delete in collection
-        resourceCreates.forEach(rc -> ResourceParser.resolveResourceDelete(collection, rc, availableModels));
+        resourceCreates.forEach(rc -> ResourceParser.resolveResourceDelete(collection, rc));
     }
 
     public static void processAdditionalMethods(FluentClient fluentClient) {
@@ -169,14 +171,19 @@ public class ResourceParser {
             method = findCollectionMethod(collection, resourceCreate, HttpMethod.PUT, nameMatcher);
         }
         if (method != null) {
-            resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
-                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
-                    getBodyClientModel(method, availableModels));
+            ClientModel bodyClientModel = getBodyClientModel(method, availableModels);
+            if (bodyClientModel == null) {
+                logger.warn("client model not found for collection {}, method {}", collection.getInterfaceType().getName(), method.getInnerClientMethod().getName());
+            } else {
+                resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
+                        resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
+                        bodyClientModel);
 
-            resourceCreate.getResourceModel().setResourceUpdate(resourceUpdate);
-            collection.getResourceUpdates().add(resourceUpdate);
+                resourceCreate.getResourceModel().setResourceUpdate(resourceUpdate);
+                collection.getResourceUpdates().add(resourceUpdate);
 
-            resourceUpdate.getMethodReferences().addAll(collectMethodReferences(collection, resourceUpdate.getMethodName()));
+                resourceUpdate.getMethodReferences().addAll(collectMethodReferences(collection, resourceUpdate.getMethodName()));
+            }
         }
 
         return Optional.ofNullable(resourceUpdate);
@@ -184,16 +191,14 @@ public class ResourceParser {
 
     private static Optional<ResourceRefresh> resolveResourceRefresh(
             FluentResourceCollection collection,
-            ResourceCreate resourceCreate,
-            List<ClientModel> availableModels) {
+            ResourceCreate resourceCreate) {
 
         ResourceRefresh resourceRefresh = null;
 
         FluentCollectionMethod method = findCollectionMethod(collection, resourceCreate, HttpMethod.GET, name -> name.contains("get"));
         if (method != null) {
             resourceRefresh = new ResourceRefresh(resourceCreate.getResourceModel(), collection,
-                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
-                    getBodyClientModel(method, availableModels));
+                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName());
 
             resourceCreate.getResourceModel().setResourceRefresh(resourceRefresh);
             collection.getResourceGets().add(resourceRefresh);
@@ -206,16 +211,14 @@ public class ResourceParser {
 
     private static Optional<ResourceDelete> resolveResourceDelete(
             FluentResourceCollection collection,
-            ResourceCreate resourceCreate,
-            List<ClientModel> availableModels) {
+            ResourceCreate resourceCreate) {
 
         ResourceDelete resourceDelete = null;
 
         FluentCollectionMethod method = findCollectionMethod(collection, resourceCreate, HttpMethod.DELETE, name -> name.contains("delete"));
         if (method != null) {
             resourceDelete = new ResourceDelete(resourceCreate.getResourceModel(), collection,
-                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
-                    getBodyClientModel(method, availableModels));
+                    resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName());
 
             collection.getResourceDeletes().add(resourceDelete);
 
@@ -291,10 +294,15 @@ public class ResourceParser {
                                     }
 
                                     if (categoryMatch) {
-                                        ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
-                                                m.getInnerClientMethod().getName(), getBodyClientModel(m, availableModels));
+                                        ClientModel bodyClientModel = getBodyClientModel(m, availableModels);
+                                        if (bodyClientModel == null) {
+                                            logger.warn("client model not found for collection {}, method {}", collection.getInterfaceType().getName(), m.getInnerClientMethod().getName());
+                                        } else {
+                                            ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
+                                                    m.getInnerClientMethod().getName(), bodyClientModel);
 
-                                        foundModels.put(fluentModel, resourceCreate);
+                                            foundModels.put(fluentModel, resourceCreate);
+                                        }
                                     }
                                 }
                             }
@@ -308,15 +316,24 @@ public class ResourceParser {
     }
 
     private static ClientModel getBodyClientModel(FluentCollectionMethod method, List<ClientModel> availableModels) {
-        String bodyTypeName = method.getInnerClientMethod().getProxyMethod().getParameters()
+        Optional<String> bodyTypeNameOpt = method.getInnerClientMethod().getProxyMethod().getParameters()
                 .stream()
                 .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body)
                 .map(p -> p.getClientType().toString())
-                .findAny().orElse(null);
+                .findAny();
 
-        return availableModels.stream()
-                .filter(model -> model.getName().equals(bodyTypeName))
-                .findAny().orElse(null);
+        if (!bodyTypeNameOpt.isPresent()) {
+            throw new IllegalStateException("body type not found for method " + method.getInnerClientMethod().getName());
+        }
+
+        Optional<ClientModel> clientModelOpt = availableModels.stream()
+                .filter(model -> model.getName().equals(bodyTypeNameOpt.get()))
+                .findAny();
+
+        if (!clientModelOpt.isPresent()) {
+            logger.warn("client model not found for type name {}, method {}", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
+        }
+        return clientModelOpt.orElse(null);
     }
 
     private static FluentCollectionMethod findCollectionMethod(FluentResourceCollection collection,
@@ -339,8 +356,7 @@ public class ResourceParser {
                         String url = method.getInnerProxyMethod().getUrlPath();
                         // same url as create
                         if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
-                            boolean hasBodyParam = method.getInnerProxyMethod().getParameters().stream()
-                                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
+                            boolean hasBodyParam = methodHasBodyParameter(method);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query
                                             && p.getIsRequired()
@@ -363,6 +379,24 @@ public class ResourceParser {
         return collection.getMethods().stream()
                 .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
                         || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + Utils.METHOD_POSTFIX_WITH_RESPONSE)))
+                .filter(m -> m.getInnerProxyMethod().getHttpMethod() == HttpMethod.GET
+                        || m.getInnerProxyMethod().getHttpMethod() == HttpMethod.DELETE
+                        || methodHasBodyParameter(m))
                 .collect(Collectors.toList());
+    }
+
+    private static boolean methodHasBodyParameter(FluentCollectionMethod method) {
+        return method.getInnerProxyMethod().getParameters().stream()
+                .filter(p -> nonSimpleJavaType(p.getClientType()))
+                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body);
+    }
+
+    private static boolean nonSimpleJavaType(IType type) {
+        boolean ret = false;
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            ret = !classType.getPackage().startsWith("java");
+        }
+        return ret;
     }
 }

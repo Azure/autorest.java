@@ -30,8 +30,8 @@ public class ResourceDelete extends ResourceOperation {
     private static final Logger logger = LoggerFactory.getLogger(ResourceDelete.class);
 
     public ResourceDelete(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
-                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
-        super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
+                           UrlPathSegments urlPathSegments, String methodName) {
+        super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
         logger.info("ResourceDelete: Fluent model {}, method reference {}",
                 resourceModel.getName(), methodName);
