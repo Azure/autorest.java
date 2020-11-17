@@ -7,12 +7,12 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
@@ -222,9 +222,9 @@ class ResourceTypeNormalization {
         ObjectSchema currentParentType = getObjectParent(compositeType).get();
 
         // remove parent from type
-        Iterator<ComplexSchema> itor = compositeType.getParents().getImmediate().iterator();
+        Iterator<Schema> itor = compositeType.getParents().getImmediate().iterator();
         while (itor.hasNext()) {
-            ComplexSchema type = itor.next();
+            Schema type = itor.next();
             if (type == currentParentType) {
                 itor.remove();
                 break;
@@ -232,7 +232,7 @@ class ResourceTypeNormalization {
         }
         itor = compositeType.getParents().getAll().iterator();
         while (itor.hasNext()) {
-            ComplexSchema type = itor.next();
+            Schema type = itor.next();
             if (type == currentParentType) {
                 itor.remove();
                 break;
@@ -244,7 +244,7 @@ class ResourceTypeNormalization {
             if (currentParentType.getChildren().getImmediate() != null) {
                 itor = currentParentType.getChildren().getImmediate().iterator();
                 while (itor.hasNext()) {
-                    ComplexSchema type = itor.next();
+                    Schema type = itor.next();
                     if (type == compositeType) {
                         itor.remove();
                         break;
@@ -254,7 +254,7 @@ class ResourceTypeNormalization {
             if (currentParentType.getChildren().getAll() != null) {
                 itor = currentParentType.getChildren().getAll().iterator();
                 while (itor.hasNext()) {
-                    ComplexSchema type = itor.next();
+                    Schema type = itor.next();
                     if (type == compositeType) {
                         itor.remove();
                         break;

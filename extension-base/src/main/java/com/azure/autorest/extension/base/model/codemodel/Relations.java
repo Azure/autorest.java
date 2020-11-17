@@ -3,23 +3,23 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.List;
 
 public class Relations {
-    private List<ComplexSchema> all;
+    private List<Schema> all;
 
-    private List<ComplexSchema> immediate;
+    private List<Schema> immediate;
 
-    public List<ComplexSchema> getAll() {
+    public List<Schema> getAll() {
         return all;
     }
 
-    public void setAll(List<ComplexSchema> all) {
+    public void setAll(List<Schema> all) {
         this.all = all;
     }
 
-    public List<ComplexSchema> getImmediate() {
+    public List<Schema> getImmediate() {
         return immediate;
     }
 
-    public void setImmediate(List<ComplexSchema> immediate) {
+    public void setImmediate(List<Schema> immediate) {
         this.immediate = immediate;
     }
 }

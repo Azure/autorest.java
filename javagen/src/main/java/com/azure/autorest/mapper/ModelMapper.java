@@ -3,8 +3,8 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
-import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -177,7 +177,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             List<ClientModel> derivedTypes = new ArrayList<>();
             if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
-                for (ComplexSchema childSchema : compositeType.getChildren().getImmediate()) {
+                for (Schema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = this.map((ObjectSchema) childSchema);
                         derivedTypes.add(model);
