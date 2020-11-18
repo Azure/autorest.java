@@ -41,7 +41,7 @@ public class JavaPackage {
         this.javaFiles = new ArrayList<>();
         this.xmlFiles = new ArrayList<>();
         this.javaFileFactory = new JavaFileFactory(settings);
-        this.logger = new PluginLogger(Javagen.getPluginInstance(), JavaPackage.class);
+        this.logger = new PluginLogger(host, JavaPackage.class);
     }
 
     protected JavaFileFactory getJavaFileFactory() {
