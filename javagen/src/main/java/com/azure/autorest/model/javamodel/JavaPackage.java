@@ -1,6 +1,8 @@
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -17,7 +19,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,8 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 public class JavaPackage {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JavaPackage.class);
+    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), JavaPackage.class);
 
     private final JavaSettings settings;
     private final List<JavaFile> javaFiles;
@@ -184,7 +184,7 @@ public class JavaPackage {
     protected void checkDuplicateFile(String filePath) {
         if (filePaths.contains(filePath)) {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));
-            LOGGER.warn(String.format("Name conflict for output file '%1$s'.", filePath));
+            logger.warn(String.format("Name conflict for output file '%1$s'.", filePath));
         }
     }
 }

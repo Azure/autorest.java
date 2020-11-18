@@ -7,17 +7,18 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ValueSchema;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class NamingConflictResolver {
 
-    private static final Logger logger = LoggerFactory.getLogger(NamingConflictResolver.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), NamingConflictResolver.class);
 
     public CodeModel process(CodeModel codeModel) {
         Set<String> objectNames = codeModel.getSchemas().getObjects().stream()

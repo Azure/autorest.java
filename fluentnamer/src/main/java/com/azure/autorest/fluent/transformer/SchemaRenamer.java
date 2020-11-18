@@ -7,15 +7,16 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class SchemaRenamer {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchemaRenamer.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaRenamer.class);
 
     private final Map<String, String> renameModel;
 

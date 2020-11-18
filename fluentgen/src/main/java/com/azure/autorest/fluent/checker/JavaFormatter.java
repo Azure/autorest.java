@@ -5,9 +5,10 @@
 
 package com.azure.autorest.fluent.checker;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class JavaFormatter {
 
-    private static final Logger logger = LoggerFactory.getLogger(JavaFormatter.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
 
     private static final boolean ENABLED;
     static {

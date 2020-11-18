@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
@@ -18,7 +20,6 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +28,7 @@ import java.util.Optional;
 
 public class ResourceDelete extends ResourceOperation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceDelete.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceDelete.class);
 
     public ResourceDelete(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                            UrlPathSegments urlPathSegments, String methodName) {

@@ -7,10 +7,11 @@ package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.http.HttpMethod;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Locale;
 
 public class ResponseStatusCodeNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResponseStatusCodeNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ResponseStatusCodeNormalization.class);
 
     private static final boolean REMOVE_404_IN_GET_RESPONSE = true;
 

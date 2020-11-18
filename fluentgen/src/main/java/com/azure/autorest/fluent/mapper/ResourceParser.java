@@ -6,6 +6,8 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
@@ -29,7 +31,6 @@ import com.azure.core.http.HttpMethod;
 import com.azure.core.management.Region;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +48,7 @@ import java.util.stream.Collectors;
 
 public class ResourceParser {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceParser.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceParser.class);
 
     public static void parseResourcesCategory(FluentResourceCollection collection,
                                               List<FluentResourceModel> availableFluentModels,

@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
@@ -31,7 +33,6 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ import java.util.stream.Collectors;
 
 public class ResourceCreate extends ResourceOperation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceCreate.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceCreate.class);
 
     private List<DefinitionStage> definitionStages;
 

@@ -6,13 +6,14 @@
 package com.azure.autorest.fluent.model.projectmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.template.FluentPomTemplate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class Project {
 
-    private static final Logger logger = LoggerFactory.getLogger(Project.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Project.class);
 
     private final String serviceName;
     private final String serviceDescription;

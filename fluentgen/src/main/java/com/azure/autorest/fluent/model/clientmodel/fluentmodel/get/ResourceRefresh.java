@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.get;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
@@ -20,7 +22,6 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Set;
 
 public class ResourceRefresh extends ResourceOperation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceRefresh.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceRefresh.class);
 
     private List<FluentMethod> refreshMethods;
 

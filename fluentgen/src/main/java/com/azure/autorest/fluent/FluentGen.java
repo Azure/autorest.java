@@ -9,16 +9,17 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
-import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
+import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -40,7 +41,6 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
@@ -53,10 +53,16 @@ import java.util.stream.Collectors;
 
 public class FluentGen extends NewPlugin {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentGen.class);
+    private final Logger logger = new PluginLogger(this, FluentGen.class);
+    private static FluentGen instance;
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
+        instance = this;
+    }
+
+    public static FluentGen getPluginInstance() {
+        return instance;
     }
 
     @Override

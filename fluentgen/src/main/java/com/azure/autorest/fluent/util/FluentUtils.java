@@ -6,6 +6,8 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
@@ -28,7 +30,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +47,7 @@ import java.util.stream.Collectors;
 
 public class FluentUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentUtils.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentUtils.class);
 
     private static final Set<String> RESERVED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
             Response.class.getSimpleName(),

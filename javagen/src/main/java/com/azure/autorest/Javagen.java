@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
@@ -18,21 +19,28 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Javagen extends NewPlugin {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Javagen.class);
+    private final Logger LOGGER = new PluginLogger(this, Javagen.class);
+    private static Javagen instance;
+
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
+        instance = this;
+    }
+
+    public static Javagen getPluginInstance() {
+        return instance;
     }
 
     @Override
@@ -142,8 +150,13 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                writeFile(javaFile.getFilePath(), formattedSource, null);
+                try {
+                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
+                    writeFile(javaFile.getFilePath(), formattedSource, null);
+                } catch (Exception e) {
+                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                    return false;
+                }
             }
             String artifactId = JavaSettings.getInstance().getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {
@@ -151,8 +164,7 @@ public class Javagen extends NewPlugin {
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
-            LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
-            connection.sendError(1, 500, "Failed to generate code: " + ex.getMessage());
+            LOGGER.error("Failed to generate code.", ex);
             return false;
         }
         return true;

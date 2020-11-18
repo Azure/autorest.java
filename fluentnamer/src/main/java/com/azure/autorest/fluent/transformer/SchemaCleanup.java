@@ -14,10 +14,11 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.Set;
@@ -29,7 +30,7 @@ import java.util.stream.Stream;
  */
 public class SchemaCleanup {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchemaCleanup.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaCleanup.class);
 
     public CodeModel process(CodeModel codeModel) {
         Set<ObjectSchema> schemasNotInUse = codeModel.getSchemas().getObjects().stream()
