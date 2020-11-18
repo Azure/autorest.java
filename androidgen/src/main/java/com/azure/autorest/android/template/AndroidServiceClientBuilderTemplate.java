@@ -335,7 +335,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
                 function.ifBlock(anyHostParamAbsentExpression, illegalArgBlock ->
                 {
                     illegalArgBlock.line("throw new IllegalArgumentException(\"Missing required parameters '%s'.\");",
-                            String.join(", ", hostMapping.getHostParams()));
+                            String.join(", ", hostMapping.getHostParams().stream().map(h -> h.getName()).collect(Collectors.toList())));
                 });
             }
             ifBlock.line("this.%1$s = %2$s;", restClientBuilder.getName(), restClientBuilder.getDefaultValue());
@@ -344,7 +344,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
         if (!allHostParamPresentExpression.isEmpty()) {
             function.ifBlock(allHostParamPresentExpression, ifBlock ->
             {
-                ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression());
+                ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression("this.baseUrl"));
                 ifBlock.line("%s.setBaseUrl(retrofitBaseUrl);", restClientBuilder.getName());
             });
         }

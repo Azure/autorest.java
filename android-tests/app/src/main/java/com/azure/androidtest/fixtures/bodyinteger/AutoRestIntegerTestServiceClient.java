@@ -266,7 +266,7 @@ public final class AutoRestIntegerTestServiceClient {
                 this.serviceClientBuilder = new ServiceClient.Builder();
             }
             if (host != null) {
-                final String retrofitBaseUrl = this.host.replace("{host}", host);
+                final String retrofitBaseUrl = host.replace("{host}", host);
                 serviceClientBuilder.setBaseUrl(retrofitBaseUrl);
             }
             if (credentialInterceptor != null) {

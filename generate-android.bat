@@ -4,3 +4,4 @@ set NAMESPACE=com.azure.androidtest
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-string.json --namespace=%NAMESPACE%.fixtures.bodystring --payload-flattening-threshold=1
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-integer.json --namespace=%NAMESPACE%.fixtures.bodyinteger --payload-flattening-threshold=1
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/url.json --namespace=%NAMESPACE%.fixtures.url --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/custom-baseUrl.json --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1

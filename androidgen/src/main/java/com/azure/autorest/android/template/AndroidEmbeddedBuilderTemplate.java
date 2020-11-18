@@ -4,12 +4,7 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.Constructor;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -25,13 +20,20 @@ import java.util.stream.Stream;
 public class AndroidEmbeddedBuilderTemplate {
     private static final String EMBEDDED_BUILDER_CLS_NAME = "Builder";
     private static final String BUILD_METHOD_NAME = "build";
+    private static final String BASE_URL_PROPERTY_NAME = "baseUrl";
+    private static final String HOST_PROPERTY_NAME = "host";
 
     private final ServiceClient serviceClient;
     private final AsyncSyncClient asyncSyncClient;
     private final List<ClientMethodParameter> commonProperties;
+    private final HostMapping hostMapping;
+    private final boolean hostIsBaseUrl;
 
     AndroidEmbeddedBuilderTemplate(ServiceClient serviceClient) {
         this.serviceClient = serviceClient;
+        this.hostMapping = HostMapping.create(this.serviceClient);
+        Optional<ServiceClientProperty> hostProperty = this.serviceClient.getProperties().stream().filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
+        this.hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
         this.asyncSyncClient = null;
 
         final Constructor serviceClientCtr = this.serviceClient.getConstructors().get(0);
@@ -41,6 +43,9 @@ public class AndroidEmbeddedBuilderTemplate {
 
     AndroidEmbeddedBuilderTemplate(AsyncSyncClient asyncSyncClient) {
         this.serviceClient = asyncSyncClient.getServiceClient();
+        this.hostMapping = HostMapping.create(this.serviceClient);
+        Optional<ServiceClientProperty> hostProperty = this.serviceClient.getProperties().stream().filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
+        this.hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
         this.asyncSyncClient = asyncSyncClient;
 
         final Constructor serviceClientCtr = this.serviceClient.getConstructors().get(0);
@@ -97,6 +102,24 @@ public class AndroidEmbeddedBuilderTemplate {
                                 p.getWireType());
                     });
 
+            hostMapping.getHostParams().stream()
+                    .filter(h -> !this.serviceClient.getProperties().stream().anyMatch(p -> p.getName().equals(h.getName())))
+                    .forEach(hp ->{
+                        writeBuilderProperty(settings,
+                                classBlock,
+                                hp.getDescription(),
+                                hp.getName(),
+                                hp.getWireType());
+                    });
+
+            if (!this.hostIsBaseUrl) {
+                writeBuilderProperty(settings,
+                        classBlock,
+                        "base url of the service",
+                        BASE_URL_PROPERTY_NAME,
+                        ClassType.String);
+            }
+
             classBlock.javadocComment(comment ->
             {
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", clientClsName));
@@ -105,6 +128,13 @@ public class AndroidEmbeddedBuilderTemplate {
 
             classBlock.method(JavaVisibility.Public, null, String.format("%1$s %2$s()", clientClsName, BUILD_METHOD_NAME), function ->
             {
+                if (!this.hostIsBaseUrl) {
+                    function.ifBlock(String.format("%1$s == null", BASE_URL_PROPERTY_NAME), ifBlock ->
+                    {
+                        function.line("this.%1$s = \"%2$s\";", BASE_URL_PROPERTY_NAME, hostMapping.getBaseUrlPattern());
+                    });
+                }
+
                 final List<String> constructorArgsSet1 = new ArrayList<>();
                 this.serviceClient.getProperties()
                         .stream()
@@ -270,7 +300,6 @@ public class AndroidEmbeddedBuilderTemplate {
                                         ServiceClient serviceClient,
                                         List<ClientMethodParameter> commonProperties,
                                         ClientMethodParameter restClientBuilder) {
-        final HostMapping hostMapping = HostMapping.create(serviceClient);
         function.ifBlock(String.format("%1$s == null", restClientBuilder.getName()), ifBlock ->
         {
             String anyHostParamAbsentExpression = hostMapping.anyHostParamAbsentExpression();
@@ -278,7 +307,7 @@ public class AndroidEmbeddedBuilderTemplate {
                 function.ifBlock(anyHostParamAbsentExpression, illegalArgBlock ->
                 {
                     illegalArgBlock.line("throw new IllegalArgumentException(\"Missing required parameters '%s'.\");",
-                            String.join(", ", hostMapping.getHostParams()));
+                            String.join(", ", hostMapping.getHostParams().stream().map(p -> p.getName()).collect(Collectors.toList())));
                 });
             }
             ifBlock.line("this.%1$s = %2$s;", restClientBuilder.getName(), restClientBuilder.getDefaultValue());
@@ -287,7 +316,11 @@ public class AndroidEmbeddedBuilderTemplate {
         if (!allHostParamPresentExpression.isEmpty()) {
             function.ifBlock(allHostParamPresentExpression, ifBlock ->
             {
-                ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression());
+                final String baseUrlPropertyName = this.hostIsBaseUrl
+                        ? HOST_PROPERTY_NAME
+                        : BASE_URL_PROPERTY_NAME;
+
+                ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression(baseUrlPropertyName));
                 ifBlock.line("%s.setBaseUrl(retrofitBaseUrl);", restClientBuilder.getName());
             });
         }

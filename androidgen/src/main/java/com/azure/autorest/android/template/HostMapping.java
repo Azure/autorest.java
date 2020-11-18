@@ -3,6 +3,7 @@ package com.azure.autorest.android.template;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 
 import java.util.ArrayList;
@@ -11,59 +12,59 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 class HostMapping {
-    private final String host;
-    private final List<String> hostParams;
+    private final String baseUrl;
+    private final List<ProxyMethodParameter> hostParams;
 
-    public List<String> getHostParams() {
+    public List<ProxyMethodParameter> getHostParams() {
         return this.hostParams;
     }
 
     public String anyHostParamAbsentExpression() {
         return this.hostParams
                 .stream()
-                .map(h -> String.format("%s == null", h))
-                .collect(Collectors.joining("|| "));
+                .map(h -> String.format("%s == null", h.getName()))
+                .collect(Collectors.joining(" || "));
     }
 
     public String allHostParamPresentExpression() {
         return this.hostParams
                 .stream()
-                .map(h -> String.format("%s != null", h))
-                .collect(Collectors.joining("&& "));
+                .map(h -> String.format("%s != null", h.getName()))
+                .collect(Collectors.joining(" && "));
     }
 
-    public String getBaseUrlExpression() {
-        if (this.host == null || this.host.isEmpty()) {
-            // Host is absent.
-            //
+    public String getBaseUrlPattern() {
+        return baseUrl;
+    }
+
+    public String getBaseUrlExpression(String baseUrlVariableName) {
+        if (this.baseUrl == null || this.baseUrl.isEmpty()) {
             if (this.hostParams.isEmpty()) {
-                return "";
+                return baseUrlVariableName;
             } else {
-                return this.hostParams.get(0);
+                return this.hostParams.get(0).getName();
             }
         } else {
-            // Host is present.
-            //
             if (this.hostParams.isEmpty()) {
-                return this.host;
+                return this.baseUrl;
             } else {
-                if (this.host.equalsIgnoreCase(String.format("{%s}", this.hostParams.get(0)))) {
-                    return this.hostParams.get(0) + ";";
+                if (this.baseUrl.equalsIgnoreCase(String.format("{%s}", this.hostParams.get(0).getName()))) {
+                    return this.hostParams.get(0).getName();
                 } else {
                     StringBuilder endpoint = new StringBuilder();
-                    for (String hostParam : this.hostParams) {
-                        endpoint.append(String.format("this.host.replace(\"{%s}\", %s)", hostParam, hostParam));
+                    endpoint.append(baseUrlVariableName);
+                    for (ProxyMethodParameter hostParam : this.hostParams) {
+                        endpoint.append(String.format(".replace(\"{%s}\", %s)", hostParam.getName(), hostParam.getName()));
                     }
-                    return endpoint
-                            .append(";")
-                            .toString();
+                    endpoint.append(";");
+                    return endpoint.toString();
                 }
             }
         }
     }
 
-    private HostMapping(String host, List<String> hostParams) {
-        this.host = host;
+    private HostMapping(String host, List<ProxyMethodParameter> hostParams) {
+        this.baseUrl = host;
         this.hostParams = hostParams;
     }
 
@@ -96,7 +97,7 @@ class HostMapping {
         if (host == null || host.isEmpty()) {
             return new HostMapping(host, new ArrayList<>());
         }
-        List<String> hostParams;
+        List<ProxyMethodParameter> hostParams;
         ProxyMethod proxyMethod = proxy.getMethods().get(0);
         // find all @HostParam("endpoint")
         // In ServiceClient these are global parameters
@@ -108,7 +109,6 @@ class HostMapping {
                     return p.getRequestParameterLocation() == RequestParameterLocation.Uri &&
                             !p.getIsConstant();
                 })
-                .map(p -> p.getName())
                 .collect(Collectors.toList());
 
         String[] resolvedHost = new String[1];
