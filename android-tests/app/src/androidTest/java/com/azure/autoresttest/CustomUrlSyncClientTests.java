@@ -5,12 +5,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.azure.android.core.http.Response;
 import com.azure.androidtest.fixtures.custombaseurl.AutoRestParameterizedHostTestClient;
 
-<<<<<<< HEAD
 import java.util.regex.*;
 
 import org.junit.Assert;
-=======
->>>>>>> 5bee039e... Create a baseline for host mapping hack
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,8 +21,8 @@ public class CustomUrlSyncClientTests {
         public void getEmptyWithValidCustomUri() {
                 AutoRestParameterizedHostTestClient.Builder builder = new AutoRestParameterizedHostTestClient.Builder();
                 // Read this as "eastus" ("100.64.") and "contoso.azure.net" ("244.219:3000")
-                AutoRestParameterizedHostTestClient client = builder.accountName(TestConstants.IpLeading).host(TestConstants.IpTrailing + ":3000")
-                        .build();
+                AutoRestParameterizedHostTestClient client = builder.accountName(TestConstants.IpLeading)
+                                .host(TestConstants.IpTrailing + ":3000").build();
                 final Response<Void> getResponse = client.getEmptyWithRestResponse();
                 assertEquals(200, getResponse.getStatusCode());
         }
