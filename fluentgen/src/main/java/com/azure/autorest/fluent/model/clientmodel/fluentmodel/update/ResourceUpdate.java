@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.update;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
@@ -24,7 +26,6 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 
 public class ResourceUpdate extends ResourceOperation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceUpdate.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceUpdate.class);
 
     private List<UpdateStage> updateStages;
 

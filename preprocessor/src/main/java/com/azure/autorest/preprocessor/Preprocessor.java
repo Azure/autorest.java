@@ -3,9 +3,9 @@ package com.azure.autorest.preprocessor;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Preprocessor extends NewPlugin {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Preprocessor.class);
+  private final Logger logger = new PluginLogger(this, Preprocessor.class);
 
   public Preprocessor(Connection connection, String plugin, String sessionId) {
     super(connection, plugin, sessionId);
@@ -82,7 +82,8 @@ public class Preprocessor extends NewPlugin {
       new FileOutputStream(tempFile).write(output.getBytes(StandardCharsets.UTF_8));
       writeFile(tempFile.getName(), output, null);
     } catch (Exception e) {
-      LOGGER.info("Failed to complete preprocessing " + e);
+      logger.error("Failed to pre-process the code model.", e);
+      return false;
     }
     return true;
   }

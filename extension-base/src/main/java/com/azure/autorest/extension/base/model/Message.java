@@ -1,12 +1,19 @@
 package com.azure.autorest.extension.base.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Message {
-    public String channel;
+    @JsonProperty("Channel")
+    public MessageChannel channel;
+    @JsonProperty("Details")
     public Object details;
+    @JsonProperty("Text")
     public String text;
+    @JsonProperty("Key")
     public List<String> key;
+    @JsonProperty("Source")
     public List<SourceLocation> source;
 
     public List<SourceLocation> getSource() {
@@ -21,7 +28,7 @@ public class Message {
         return details;
     }
 
-    public String getChannel() {
+    public MessageChannel getChannel() {
         return channel;
     }
 
@@ -29,7 +36,7 @@ public class Message {
         return text;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(MessageChannel channel) {
         this.channel = channel;
     }
 

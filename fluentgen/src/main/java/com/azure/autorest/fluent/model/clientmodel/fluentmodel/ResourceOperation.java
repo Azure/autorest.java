@@ -6,6 +6,8 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.UrlPathSegments;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
@@ -23,7 +25,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ import java.util.stream.Collectors;
 
 public abstract class ResourceOperation {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceOperation.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ResourceOperation.class);
 
     protected final FluentResourceModel resourceModel;
     protected final FluentResourceCollection resourceCollection;

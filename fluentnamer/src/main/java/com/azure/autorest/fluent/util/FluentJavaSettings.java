@@ -7,10 +7,11 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class FluentJavaSettings {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentJavaSettings.class);
+    private final Logger logger;
 
     private final NewPlugin host;
 
@@ -95,7 +96,7 @@ public class FluentJavaSettings {
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
-
+        this.logger = new PluginLogger(host, FluentJavaSettings.class);
         loadSettings();
     }
 

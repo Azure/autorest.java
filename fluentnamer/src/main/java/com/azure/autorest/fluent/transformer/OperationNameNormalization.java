@@ -13,12 +13,13 @@ import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
+import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.http.HttpMethod;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
  */
 class OperationNameNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(OperationNameNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), OperationNameNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);

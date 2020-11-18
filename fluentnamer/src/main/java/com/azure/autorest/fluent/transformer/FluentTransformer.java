@@ -12,10 +12,11 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class FluentTransformer {
 
     private final FluentJavaSettings fluentJavaSettings;
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentTransformer.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), FluentTransformer.class);
 
     public FluentTransformer(FluentJavaSettings fluentJavaSettings) {
         this.fluentJavaSettings = fluentJavaSettings;

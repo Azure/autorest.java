@@ -10,9 +10,10 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import java.util.Set;
 
 public class ConstantSchemaOptimization {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchemaNameNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaNameNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());

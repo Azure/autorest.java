@@ -2,6 +2,7 @@ package com.azure.autorest.extension.base.plugin;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.MessageChannel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -11,9 +12,12 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -88,13 +92,25 @@ public abstract class NewPlugin {
         connection.notify("Message", sessionId, message);
     }
 
+    public void message(MessageChannel channel, String text, Throwable error, List<String> keys) {
+        Message message = new Message();
+        message.setChannel(channel);
+        message.setKey(keys);
+        message.setSource(Collections.emptyList());
+        if (error != null) {
+            text += "\n" + formatThrowableMessage(error);
+        }
+        message.setText(text);
+        message(message);
+    }
+
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
         connection.notify("WriteFile", sessionId, fileName, content, sourceMap);
     }
 
     public void writeFile(String fileName, String content, List<Object> sourceMap, String artifactType) {
         Message message = new Message();
-        message.setChannel("file");
+        message.setChannel(MessageChannel.FILE);
         message.setDetails(new HashMap<String, Object>() {{
             put("content", content);
             put("type", artifactType);
@@ -152,7 +168,7 @@ public abstract class NewPlugin {
 
     public void updateConfigurationFile(String filename, String content) {
         Message message = new Message();
-        message.setChannel("configuration");
+        message.setChannel(MessageChannel.CONFIGURATION);
         message.setKey(Arrays.asList(filename));
         message.setText(content);
         connection.notify("Message", sessionId, message);
@@ -185,13 +201,18 @@ public abstract class NewPlugin {
             JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
-            Message message = new Message();
-            message.setChannel("fatal");
-            message.setText(t.getMessage());
-            message(message);
+            message(MessageChannel.FATAL, "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
             return false;
         }
     }
 
     public abstract boolean processInternal();
+
+    private String formatThrowableMessage(Throwable t) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        t.printStackTrace(printWriter);
+        return stringWriter.toString();
+    }
 }

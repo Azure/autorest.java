@@ -13,11 +13,12 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class ResourcePropertyNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourcePropertyNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ResourcePropertyNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         // Heuristic, only consider type used in request parameter.
