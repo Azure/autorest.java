@@ -5,9 +5,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.azure.android.core.http.Response;
 import com.azure.androidtest.fixtures.custombaseurl.AutoRestParameterizedHostTestClient;
 
+<<<<<<< HEAD
 import java.util.regex.*;
 
 import org.junit.Assert;
+=======
+>>>>>>> 5bee039e... Create a baseline for host mapping hack
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

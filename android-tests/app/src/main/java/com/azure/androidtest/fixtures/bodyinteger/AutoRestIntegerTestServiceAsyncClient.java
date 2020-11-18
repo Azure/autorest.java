@@ -22,7 +22,8 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 /**
- * Initializes a new instance of the asynchronous AutoRestIntegerTestService type.
+ * Initializes a new instance of the asynchronous AutoRestIntegerTestService
+ * type.
  */
 public final class AutoRestIntegerTestServiceAsyncClient {
     private IntsImpl serviceClient;
@@ -39,8 +40,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getNull(final Callback<Integer> callback) {
         this.serviceClient.getNull(callback);
@@ -51,8 +53,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalid(final Callback<Integer> callback) {
         this.serviceClient.getInvalid(callback);
@@ -63,8 +66,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getOverflowInt32(final Callback<Integer> callback) {
         this.serviceClient.getOverflowInt32(callback);
@@ -75,8 +79,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getUnderflowInt32(final Callback<Integer> callback) {
         this.serviceClient.getUnderflowInt32(callback);
@@ -87,8 +92,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getOverflowInt64(final Callback<Long> callback) {
         this.serviceClient.getOverflowInt64(callback);
@@ -99,8 +105,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getUnderflowInt64(final Callback<Long> callback) {
         this.serviceClient.getUnderflowInt64(callback);
@@ -109,11 +116,12 @@ public final class AutoRestIntegerTestServiceAsyncClient {
     /**
      * Put max int32 value.
      * 
-     * @param intBody int body.
+     * @param intBody  int body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMax32(int intBody, final Callback<Void> callback) {
         this.serviceClient.putMax32(intBody, callback);
@@ -122,11 +130,12 @@ public final class AutoRestIntegerTestServiceAsyncClient {
     /**
      * Put max int64 value.
      * 
-     * @param intBody int body.
+     * @param intBody  int body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMax64(long intBody, final Callback<Void> callback) {
         this.serviceClient.putMax64(intBody, callback);
@@ -135,11 +144,12 @@ public final class AutoRestIntegerTestServiceAsyncClient {
     /**
      * Put min int32 value.
      * 
-     * @param intBody int body.
+     * @param intBody  int body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMin32(int intBody, final Callback<Void> callback) {
         this.serviceClient.putMin32(intBody, callback);
@@ -148,11 +158,12 @@ public final class AutoRestIntegerTestServiceAsyncClient {
     /**
      * Put min int64 value.
      * 
-     * @param intBody int body.
+     * @param intBody  int body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMin64(long intBody, final Callback<Void> callback) {
         this.serviceClient.putMin64(intBody, callback);
@@ -163,8 +174,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getUnixTime(final Callback<OffsetDateTime> callback) {
         this.serviceClient.getUnixTime(callback);
@@ -173,11 +185,12 @@ public final class AutoRestIntegerTestServiceAsyncClient {
     /**
      * Put datetime encoded as Unix time.
      * 
-     * @param intBody date in seconds since 1970-01-01T00:00:00Z.
+     * @param intBody  date in seconds since 1970-01-01T00:00:00Z.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putUnixTimeDate(OffsetDateTime intBody, final Callback<Void> callback) {
         this.serviceClient.putUnixTimeDate(intBody, callback);
@@ -188,8 +201,9 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalidUnixTime(final Callback<OffsetDateTime> callback) {
         this.serviceClient.getInvalidUnixTime(callback);
@@ -200,15 +214,17 @@ public final class AutoRestIntegerTestServiceAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getNullUnixTime(final Callback<OffsetDateTime> callback) {
         this.serviceClient.getNullUnixTime(callback);
     }
 
     /**
-     * A builder for creating a new instance of the AutoRestIntegerTestServiceAsyncClient type.
+     * A builder for creating a new instance of the
+     * AutoRestIntegerTestServiceAsyncClient type.
      */
     public static final class Builder {
         /*
@@ -260,7 +276,8 @@ public final class AutoRestIntegerTestServiceAsyncClient {
         }
 
         /**
-         * Builds an instance of AutoRestIntegerTestServiceAsyncClient with the provided parameters.
+         * Builds an instance of AutoRestIntegerTestServiceAsyncClient with the provided
+         * parameters.
          * 
          * @return an instance of AutoRestIntegerTestServiceAsyncClient.
          */
@@ -275,7 +292,8 @@ public final class AutoRestIntegerTestServiceAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestIntegerTestServiceImpl internalClient = new AutoRestIntegerTestServiceImpl(serviceClientBuilder.build(), host);
+            AutoRestIntegerTestServiceImpl internalClient = new AutoRestIntegerTestServiceImpl(
+                    serviceClientBuilder.build(), host);
             return new AutoRestIntegerTestServiceAsyncClient(internalClient.getInts());
         }
     }

@@ -24,10 +24,8 @@ class HostMapping {
     }
 
     public String anyHostParamAbsentExpression() {
-        return this.hostParams
-            .stream()
-            .map(h -> String.format("%s == null", h.getName()))
-            .collect(Collectors.joining(" || "));
+        return this.hostParams.stream().map(h -> String.format("%s == null", h.getName()))
+                .collect(Collectors.joining(" || "));
     }
 
     public boolean serviceHostPropertyIsBaseUrl() {
@@ -35,10 +33,8 @@ class HostMapping {
     }
 
     public String allHostParamPresentExpression() {
-        return this.hostParams
-            .stream()
-            .map(h -> String.format("%s != null", h.getName()))
-            .collect(Collectors.joining(" && "));
+        return this.hostParams.stream().map(h -> String.format("%s != null", h.getName()))
+                .collect(Collectors.joining(" && "));
     }
 
     public String getBaseUrlPattern() {
@@ -73,19 +69,14 @@ class HostMapping {
         Proxy proxy = null;
         // Find a proxy with host set and at least one method.
         //
-        if (serviceClient.getProxy() != null
-            && serviceClient.getProxy().getBaseURL() != null
-            && !serviceClient.getProxy().getMethods().isEmpty()) {
+        if (serviceClient.getProxy() != null && serviceClient.getProxy().getBaseURL() != null
+                && !serviceClient.getProxy().getMethods().isEmpty()) {
             proxy = serviceClient.getProxy();
         } else {
             Optional<Proxy> proxyOpt = serviceClient
-                    .getMethodGroupClients()
-                    .stream()
-                    .filter(mg -> mg.getProxy() != null
-                        && mg.getProxy().getBaseURL() != null
-                        && !mg.getProxy().getMethods().isEmpty())
-                    .map(mg -> mg.getProxy())
-                    .findFirst();
+                    .getMethodGroupClients().stream().filter(mg -> mg.getProxy() != null
+                            && mg.getProxy().getBaseURL() != null && !mg.getProxy().getMethods().isEmpty())
+                    .map(mg -> mg.getProxy()).findFirst();
             if (proxyOpt.isPresent()) {
                 proxy = proxyOpt.get();
             }
@@ -100,28 +91,21 @@ class HostMapping {
             return new HostMapping(baseURL, new ArrayList<>(), true);
         }
 
-        Optional<ServiceClientProperty> hostProperty = serviceClient
-            .getProperties()
-            .stream()
-            .filter(p -> p.getName().equals(HOST_PROPERTY_NAME))
-            .findFirst();
-        final boolean hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
+        Optional<ServiceClientProperty> hostProperty = serviceClient.getProperties().stream()
+                .filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
+        final boolean hostIsBaseUrl = hostProperty.isPresent()
+                && hostProperty.get().getDefaultValueExpression().contains("http");
 
         List<ProxyMethodParameter> hostParams;
         ProxyMethod proxyMethod = proxy.getMethods().get(0);
         // find all @HostParam("endpoint")
         // In ServiceClient these are global parameters
         // http://azure.github.io/autorest/extensions/#x-ms-parameterized-host
-        hostParams = proxyMethod
-            .getParameters()
-            .stream()
-            .filter(p -> {
-                return p.getRequestParameterLocation() == RequestParameterLocation.Uri
-                    && !p.getIsConstant()
-                    && (!hostIsBaseUrl
-                        || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used for base url
-                })
-            .collect(Collectors.toList());
+        hostParams = proxyMethod.getParameters().stream().filter(p -> {
+            return p.getRequestParameterLocation() == RequestParameterLocation.Uri && !p.getIsConstant()
+                    && (!hostIsBaseUrl || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used
+                                                                                    // for base url
+        }).collect(Collectors.toList());
 
         return new HostMapping(baseURL, hostParams, hostIsBaseUrl);
     }
