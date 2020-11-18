@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 class HostMapping {
-    private static final String HOST_PROPERTY_NAME = "host";
+    public static final String HOST_PROPERTY_NAME = "host";
 
     private final String baseUrlTemplate;
     private final List<ProxyMethodParameter> hostParams;

@@ -21,7 +21,6 @@ public class AndroidEmbeddedBuilderTemplate {
     private static final String EMBEDDED_BUILDER_CLS_NAME = "Builder";
     private static final String BUILD_METHOD_NAME = "build";
     private static final String BASE_URL_PROPERTY_NAME = "baseUrl";
-    private static final String HOST_PROPERTY_NAME = "host";
 
     private final ServiceClient serviceClient;
     private final AsyncSyncClient asyncSyncClient;
@@ -312,14 +311,14 @@ public class AndroidEmbeddedBuilderTemplate {
             function.ifBlock(allHostParamPresentExpression, ifBlock ->
             {
                 final String baseUrlPropertyName = this.hostMapping.serviceHostPropertyIsBaseUrl()
-                        ? HOST_PROPERTY_NAME
+                        ? this.hostMapping.HOST_PROPERTY_NAME
                         : BASE_URL_PROPERTY_NAME;
 
                 ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression(baseUrlPropertyName));
                 ifBlock.line("%s.setBaseUrl(retrofitBaseUrl);", restClientBuilder.getName());
             });
         } else {
-            function.line("%1$s.setBaseUrl(%2$s);", restClientBuilder.getName(), HOST_PROPERTY_NAME);
+            function.line("%1$s.setBaseUrl(%2$s);", restClientBuilder.getName(), this.hostMapping.HOST_PROPERTY_NAME);
         }
 
         Optional<ClientMethodParameter> credInterceptorOpt = commonProperties
