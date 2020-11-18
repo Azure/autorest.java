@@ -27,13 +27,10 @@ public class AndroidEmbeddedBuilderTemplate {
     private final AsyncSyncClient asyncSyncClient;
     private final List<ClientMethodParameter> commonProperties;
     private final HostMapping hostMapping;
-    private final boolean hostIsBaseUrl;
 
     AndroidEmbeddedBuilderTemplate(ServiceClient serviceClient) {
         this.serviceClient = serviceClient;
         this.hostMapping = HostMapping.create(this.serviceClient);
-        Optional<ServiceClientProperty> hostProperty = this.serviceClient.getProperties().stream().filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
-        this.hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
         this.asyncSyncClient = null;
 
         final Constructor serviceClientCtr = this.serviceClient.getConstructors().get(0);
@@ -44,8 +41,6 @@ public class AndroidEmbeddedBuilderTemplate {
     AndroidEmbeddedBuilderTemplate(AsyncSyncClient asyncSyncClient) {
         this.serviceClient = asyncSyncClient.getServiceClient();
         this.hostMapping = HostMapping.create(this.serviceClient);
-        Optional<ServiceClientProperty> hostProperty = this.serviceClient.getProperties().stream().filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
-        this.hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
         this.asyncSyncClient = asyncSyncClient;
 
         final Constructor serviceClientCtr = this.serviceClient.getConstructors().get(0);
@@ -112,7 +107,7 @@ public class AndroidEmbeddedBuilderTemplate {
                                 hp.getWireType());
                     });
 
-            if (!this.hostIsBaseUrl) {
+            if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
                 writeBuilderProperty(settings,
                         classBlock,
                         "base url of the service",
@@ -128,7 +123,7 @@ public class AndroidEmbeddedBuilderTemplate {
 
             classBlock.method(JavaVisibility.Public, null, String.format("%1$s %2$s()", clientClsName, BUILD_METHOD_NAME), function ->
             {
-                if (!this.hostIsBaseUrl) {
+                if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
                     function.ifBlock(String.format("%1$s == null", BASE_URL_PROPERTY_NAME), ifBlock ->
                     {
                         function.line("this.%1$s = \"%2$s\";", BASE_URL_PROPERTY_NAME, hostMapping.getBaseUrlPattern());
@@ -316,13 +311,15 @@ public class AndroidEmbeddedBuilderTemplate {
         if (!allHostParamPresentExpression.isEmpty()) {
             function.ifBlock(allHostParamPresentExpression, ifBlock ->
             {
-                final String baseUrlPropertyName = this.hostIsBaseUrl
+                final String baseUrlPropertyName = this.hostMapping.serviceHostPropertyIsBaseUrl()
                         ? HOST_PROPERTY_NAME
                         : BASE_URL_PROPERTY_NAME;
 
                 ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression(baseUrlPropertyName));
                 ifBlock.line("%s.setBaseUrl(retrofitBaseUrl);", restClientBuilder.getName());
             });
+        } else {
+            function.line("%1$s.setBaseUrl(%2$s);", restClientBuilder.getName(), HOST_PROPERTY_NAME);
         }
 
         Optional<ClientMethodParameter> credInterceptorOpt = commonProperties

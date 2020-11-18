@@ -24,7 +24,7 @@ public class CustomUrlSyncClientTests {
     public void getEmptyWithValidCustomUri() {
         // Read this as "eastus" ("100.64.") and "contoso.azure.net" ("244.219:3000") 100.64.198.155
         AutoRestParameterizedHostTestClient client = builder.accountName("100.64.").host("198.155:3000").build();
-        final Response<Void> getResponse = client.getEmptyWithRestResponse();
+        final Response<Void> getResponse = client.getEmptyWithRestResponse("useless");
         assertEquals(200, getResponse.getStatusCode());
     }
 

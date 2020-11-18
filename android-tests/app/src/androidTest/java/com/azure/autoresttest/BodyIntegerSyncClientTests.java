@@ -1,5 +1,7 @@
 package com.azure.autoresttest;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.azure.android.core.http.Response;
 import com.azure.android.core.internal.util.serializer.exception.MalformedValueException;
 import com.azure.androidtest.fixtures.bodyinteger.AutoRestIntegerTestServiceClient;
@@ -9,13 +11,14 @@ import com.fasterxml.jackson.core.exc.InputCoercionException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.ZoneOffset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-
+@RunWith(AndroidJUnit4.class)
 public class BodyIntegerSyncClientTests {
     private static AutoRestIntegerTestServiceClient client;
 
