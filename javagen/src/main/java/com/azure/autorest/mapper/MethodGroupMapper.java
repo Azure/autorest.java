@@ -38,8 +38,9 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         String classBaseName = methodGroup.getLanguage().getJava().getName();
         builder.classBaseName(classBaseName);
         String interfaceName = CodeNamer.getPlural(classBaseName);
-        final String interfaceNameFinal = interfaceName;
-        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> cm.getName().equals(interfaceNameFinal))) {
+        final String interfaceNameForCheckDeduplicate = interfaceName;
+        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> interfaceNameForCheckDeduplicate.equals(cm.getName()))
+                || parsed.values().stream().anyMatch(mg -> interfaceNameForCheckDeduplicate.equals(mg.getInterfaceName()))) {
             interfaceName += "Operations";
         }
         builder.interfaceName(interfaceName);
@@ -117,7 +118,11 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        return builder.build();
+        MethodGroupClient methodGroupClient = builder.build();
+
+        parsed.put(methodGroup, methodGroupClient);
+
+        return methodGroupClient;
     }
 
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {

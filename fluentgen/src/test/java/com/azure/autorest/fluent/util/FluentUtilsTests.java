@@ -11,21 +11,21 @@ import org.junit.jupiter.api.Test;
 
 public class FluentUtilsTests {
 
-    @Test
-    public void testGetServiceName() {
-        final String packageName = "com.azure.resourcemanager.appservice.generated";
-
-        Assertions.assertEquals("Web", FluentUtils.getServiceNameFromClientName("WebManagementClient", packageName));
-
-        Assertions.assertEquals("ResourceGraph", FluentUtils.getServiceNameFromClientName("ResourceGraphClient", packageName));
-
-        Assertions.assertEquals("Appservice", CodeNamer.toPascalCase(FluentUtils.getServiceNameFromClientName("Web", packageName)));
-    }
-
-    @Test
-    public void testGetArtifactId() {
-        final String packageName = "com.azure.resourcemanager.appservice.generated";
-
-        Assertions.assertEquals("azure-resourcemanager-appservice-generated", FluentUtils.getArtifactIdFromPackageName(packageName));
-    }
+//    @Test
+//    public void testGetServiceName() {
+//        final String packageName = "com.azure.resourcemanager.appservice.generated";
+//
+//        Assertions.assertEquals("Web", FluentUtils.getServiceNameFromClientName("WebManagementClient", packageName));
+//
+//        Assertions.assertEquals("ResourceGraph", FluentUtils.getServiceNameFromClientName("ResourceGraphClient", packageName));
+//
+//        Assertions.assertEquals("Appservice", CodeNamer.toPascalCase(FluentUtils.getServiceNameFromClientName("Web", packageName)));
+//    }
+//
+//    @Test
+//    public void testGetArtifactId() {
+//        final String packageName = "com.azure.resourcemanager.appservice.generated";
+//
+//        Assertions.assertEquals("azure-resourcemanager-appservice-generated", FluentUtils.getArtifactIdFromPackageName(packageName));
+//    }
 }
