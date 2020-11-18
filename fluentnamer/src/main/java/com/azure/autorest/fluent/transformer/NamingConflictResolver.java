@@ -22,7 +22,7 @@ public class NamingConflictResolver {
     private static final Logger logger = LoggerFactory.getLogger(NamingConflictResolver.class);
 
     public CodeModel process(CodeModel codeModel) {
-        Set<String> operationGroupNames = new HashSet<>();
+        Set<String> methodGroupNames = new HashSet<>();
         Set<String> objectNames = codeModel.getSchemas().getObjects().stream()
                 .map(Utils::getDefaultName)
                 .collect(Collectors.toSet());
@@ -33,11 +33,11 @@ public class NamingConflictResolver {
             if (objectNames.contains(methodGroupName)) {
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
-            } else if (operationGroupNames.contains(methodGroupName)) {
+            } else if (methodGroupNames.contains(methodGroupName)) {
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
             }
-            operationGroupNames.add(newMethodGroupName);
+            methodGroupNames.add(newMethodGroupName);
         });
 
         codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNames));
