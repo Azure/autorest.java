@@ -40,8 +40,9 @@ public final class PathsClient {
     /**
      * Get true Boolean value on path.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return true Boolean value on path.
      */
     public Response<Void> getBooleanTrueWithRestResponse() {
@@ -51,8 +52,9 @@ public final class PathsClient {
     /**
      * Get false Boolean value on path.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return false Boolean value on path.
      */
     public Response<Void> getBooleanFalseWithRestResponse() {
@@ -62,8 +64,9 @@ public final class PathsClient {
     /**
      * Get '1000000' integer value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '1000000' integer value.
      */
     public Response<Void> getIntOneMillionWithRestResponse() {
@@ -73,8 +76,9 @@ public final class PathsClient {
     /**
      * Get '-1000000' integer value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '-1000000' integer value.
      */
     public Response<Void> getIntNegativeOneMillionWithRestResponse() {
@@ -84,8 +88,9 @@ public final class PathsClient {
     /**
      * Get '10000000000' 64 bit integer value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '10000000000' 64 bit integer value.
      */
     public Response<Void> getTenBillionWithRestResponse() {
@@ -95,8 +100,9 @@ public final class PathsClient {
     /**
      * Get '-10000000000' 64 bit integer value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '-10000000000' 64 bit integer value.
      */
     public Response<Void> getNegativeTenBillionWithRestResponse() {
@@ -106,8 +112,9 @@ public final class PathsClient {
     /**
      * Get '1.034E+20' numeric value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '1.
      */
     public Response<Void> floatScientificPositiveWithRestResponse() {
@@ -117,8 +124,9 @@ public final class PathsClient {
     /**
      * Get '-1.034E-20' numeric value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '-1.
      */
     public Response<Void> floatScientificNegativeWithRestResponse() {
@@ -128,8 +136,9 @@ public final class PathsClient {
     /**
      * Get '9999999.999' numeric value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '9999999.
      */
     public Response<Void> doubleDecimalPositiveWithRestResponse() {
@@ -139,8 +148,9 @@ public final class PathsClient {
     /**
      * Get '-9999999.999' numeric value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '-9999999.
      */
     public Response<Void> doubleDecimalNegativeWithRestResponse() {
@@ -150,8 +160,9 @@ public final class PathsClient {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     public Response<Void> stringUnicodeWithRestResponse() {
@@ -161,8 +172,9 @@ public final class PathsClient {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     public Response<Void> stringUrlEncodedWithRestResponse() {
@@ -170,10 +182,12 @@ public final class PathsClient {
     }
 
     /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not
+     * encoded.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return the completion.
      */
     public Response<Void> stringUrlNonEncodedWithRestResponse() {
@@ -183,8 +197,9 @@ public final class PathsClient {
     /**
      * Get ''.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return ''.
      */
     public Response<Void> stringEmptyWithRestResponse() {
@@ -196,8 +211,9 @@ public final class PathsClient {
      * 
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return null (should throw).
      */
     public Response<Void> stringNullWithRestResponse(String stringPath) {
@@ -209,8 +225,9 @@ public final class PathsClient {
      * 
      * @param enumPath send the value green.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return using uri with 'green color' in path parameter.
      */
     public Response<Void> enumValidWithRestResponse(UriColor enumPath) {
@@ -222,8 +239,9 @@ public final class PathsClient {
      * 
      * @param enumPath send null should throw.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return null (should throw on the client before the request is sent on wire).
      */
     public Response<Void> enumNullWithRestResponse(UriColor enumPath) {
@@ -235,8 +253,9 @@ public final class PathsClient {
      * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     public Response<Void> byteMultiByteWithRestResponse(byte[] bytePath) {
@@ -246,8 +265,9 @@ public final class PathsClient {
     /**
      * Get '' as byte array.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '' as byte array.
      */
     public Response<Void> byteEmptyWithRestResponse() {
@@ -259,8 +279,9 @@ public final class PathsClient {
      * 
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return null as byte array (should throw).
      */
     public Response<Void> byteNullWithRestResponse(byte[] bytePath) {
@@ -270,8 +291,9 @@ public final class PathsClient {
     /**
      * Get '2012-01-01' as date.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '2012-01-01' as date.
      */
     public Response<Void> dateValidWithRestResponse() {
@@ -279,13 +301,16 @@ public final class PathsClient {
     }
 
     /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     * Get null as date - this should throw or be unusable on the client side,
+     * depending on date representation.
      * 
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
+     * @return null as date - this should throw or be unusable on the client side,
+     *         depending on date representation.
      */
     public Response<Void> dateNullWithRestResponse(LocalDate datePath) {
         return this.serviceClient.dateNullWithRestResponse(datePath);
@@ -294,8 +319,9 @@ public final class PathsClient {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     public Response<Void> dateTimeValidWithRestResponse() {
@@ -303,13 +329,16 @@ public final class PathsClient {
     }
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     * Get null as date-time, should be disallowed or throw depending on
+     * representation of date-time.
      * 
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
+     * @return null as date-time, should be disallowed or throw depending on
+     *         representation of date-time.
      */
     public Response<Void> dateTimeNullWithRestResponse(OffsetDateTime dateTimePath) {
         return this.serviceClient.dateTimeNullWithRestResponse(dateTimePath);
@@ -320,8 +349,9 @@ public final class PathsClient {
      * 
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url).
      */
     public Response<Void> base64UrlWithRestResponse(Base64Url base64UrlPath) {
@@ -329,13 +359,16 @@ public final class PathsClient {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+     * null, ''] using the csv-array format.
      * 
      * @param arrayPath Array of Get0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
+     *         null, ''] using the csv-array format.
      */
     public Response<Void> arrayCsvInPathWithRestResponse(List<String> arrayPath) {
         return this.serviceClient.arrayCsvInPathWithRestResponse(arrayPath);
@@ -346,8 +379,9 @@ public final class PathsClient {
      * 
      * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time).
      */
     public Response<Void> unixTimeUrlWithRestResponse(OffsetDateTime unixTimeUrlPath) {
@@ -454,7 +488,8 @@ public final class PathsClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(), globalStringPath, globalStringQuery, host);
+            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(),
+                    globalStringPath, globalStringQuery, host);
             return new PathsClient(internalClient.getPaths());
         }
     }
