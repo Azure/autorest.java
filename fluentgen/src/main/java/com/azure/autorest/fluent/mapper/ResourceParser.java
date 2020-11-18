@@ -72,30 +72,32 @@ public class ResourceParser {
     }
 
     private static void processAdditionalProperties(FluentResourceModel model) {
-        if (model.getCategory() != ModelCategory.IMMUTABLE && FluentUtils.modelHasLocationProperty(model)) {
-            // if resource instance has location property, add region() method
-            List<MethodTemplate> methods = model.getAdditionalMethods();
-            methods.add(MethodTemplate.builder()
-                    .imports(Collections.singletonList(Region.class.getName()))
-                    .comment(commentBlock -> {
-                        commentBlock.description("Gets the region of the resource.");
-                        commentBlock.methodReturns("the region of the resource.");
-                    })
-                    .methodSignature("Region region()")
-                    .method(methodBlock -> {
-                        methodBlock.methodReturn("Region.fromName(this.regionName())");
-                    })
-                    .build());
-            methods.add(MethodTemplate.builder()
-                    .comment(commentBlock -> {
-                        commentBlock.description("Gets the name of the resource region.");
-                        commentBlock.methodReturns("the name of the resource region.");
-                    })
-                    .methodSignature("String regionName()")
-                    .method(methodBlock -> {
-                        methodBlock.methodReturn("this.location()");
-                    })
-                    .build());
+        if (model.getCategory() != ModelCategory.IMMUTABLE) {
+            if (FluentUtils.modelHasLocationProperty(model) && model.getProperty("region") == null) {
+                // if resource instance has location property, add region() method
+                List<MethodTemplate> methods = model.getAdditionalMethods();
+                methods.add(MethodTemplate.builder()
+                        .imports(Collections.singletonList(Region.class.getName()))
+                        .comment(commentBlock -> {
+                            commentBlock.description("Gets the region of the resource.");
+                            commentBlock.methodReturns("the region of the resource.");
+                        })
+                        .methodSignature("Region region()")
+                        .method(methodBlock -> {
+                            methodBlock.methodReturn("Region.fromName(this.regionName())");
+                        })
+                        .build());
+                methods.add(MethodTemplate.builder()
+                        .comment(commentBlock -> {
+                            commentBlock.description("Gets the name of the resource region.");
+                            commentBlock.methodReturns("the name of the resource region.");
+                        })
+                        .methodSignature("String regionName()")
+                        .method(methodBlock -> {
+                            methodBlock.methodReturn("this.location()");
+                        })
+                        .build());
+            }
         }
     }
 

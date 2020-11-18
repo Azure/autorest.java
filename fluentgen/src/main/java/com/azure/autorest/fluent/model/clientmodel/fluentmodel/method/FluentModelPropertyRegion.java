@@ -27,9 +27,9 @@ public class FluentModelPropertyRegion {
         public FluentModelPropertyRegionMethod(FluentResourceModel model, FluentMethodType type,
                                                FluentInterfaceStage stage, ClientModel clientModel,
                                                ClientModelProperty modelProperty,
-                                               LocalVariable localVariable) {
+                                               LocalVariable localVariable, String baseName) {
             super(model, type, stage, clientModel, modelProperty, localVariable,
-                    CodeNamer.getModelNamer().modelPropertySetterName("region"),
+                    CodeNamer.getModelNamer().modelPropertySetterName(baseName),
                     "Specifies the region for the resource.");
 
             this.implementationMethodTemplate = MethodTemplate.builder()
@@ -65,9 +65,9 @@ public class FluentModelPropertyRegion {
         public FluentModelPropertyRegionNameMethod(FluentResourceModel model, FluentMethodType type,
                                                FluentInterfaceStage stage, ClientModel clientModel,
                                                ClientModelProperty modelProperty,
-                                               LocalVariable localVariable) {
+                                               LocalVariable localVariable, String baseName) {
             super(model, type, stage, clientModel, modelProperty, localVariable,
-                    CodeNamer.getModelNamer().modelPropertySetterName("region"),
+                    CodeNamer.getModelNamer().modelPropertySetterName(baseName),
                     "Specifies the region for the resource.");
         }
     }
