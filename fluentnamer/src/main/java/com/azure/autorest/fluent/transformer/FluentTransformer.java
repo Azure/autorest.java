@@ -77,13 +77,13 @@ public class FluentTransformer {
         if (settings.getNameForUngroupedOperations().isPresent()) {
             nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
         } else if (JavaSettings.getInstance().isFluentLite()) {
-            nameForUngroupOperations = "ResourceProviders";
+            nameForUngroupOperations = "ResourceProvider";
 
             Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
                     .map(Utils::getDefaultName)
                     .collect(Collectors.toSet());
             if (operationGroupNames.contains(nameForUngroupOperations)) {
-                nameForUngroupOperations += "Operations";
+                nameForUngroupOperations += "Operation";
             }
         }
         return nameForUngroupOperations;

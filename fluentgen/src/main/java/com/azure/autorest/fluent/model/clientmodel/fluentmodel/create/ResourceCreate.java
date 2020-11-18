@@ -299,15 +299,20 @@ public class ResourceCreate extends ResourceOperation {
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
         if (FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+            String baseName = "region";
+            if (getProperties().stream().anyMatch(p -> "region".equals(p.getName()))) {
+                baseName = ResourceTypeName.FIELD_LOCATION;
+            }
+
             // location -> region
             stage.getMethods().add(new FluentModelPropertyRegion.FluentModelPropertyRegionMethod(
                     this.getResourceModel(), FluentMethodType.CREATE_WITH,
                     stage, model, property,
-                    this.getLocalVariableByMethodParameter(this.getBodyParameter())));
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter()), baseName));
             stage.getMethods().add(new FluentModelPropertyRegion.FluentModelPropertyRegionNameMethod(
                     this.getResourceModel(), FluentMethodType.CREATE_WITH,
                     stage, model, property,
-                    this.getLocalVariableByMethodParameter(this.getBodyParameter())));
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter()), baseName));
         } else {
             stage.getMethods().add(getPropertyMethod(stage, model, property));
         }
