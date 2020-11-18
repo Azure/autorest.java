@@ -31,15 +31,18 @@ public class NamingConflictResolver {
             String methodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(name));
             String newMethodGroupName = methodGroupName;
             if (objectNames.contains(methodGroupName)) {
+                // deduplicate from objects
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
             } else if (methodGroupNames.contains(methodGroupName)) {
+                // deduplicate from other operation groups
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
             }
             methodGroupNames.add(newMethodGroupName);
         });
 
+        // deduplicate enums from objects
         codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNames));
         codeModel.getSchemas().getSealedChoices().forEach(c -> validateChoiceName(c, objectNames));
         return codeModel;
