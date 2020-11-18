@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class FluentJavaSettings {
 
-    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), FluentJavaSettings.class);
+    private final Logger logger;
 
     private final NewPlugin host;
 
@@ -96,7 +96,7 @@ public class FluentJavaSettings {
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
-
+        this.logger = new PluginLogger(host, FluentJavaSettings.class);
         loadSettings();
     }
 
