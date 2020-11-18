@@ -109,7 +109,7 @@ public class FluentGen extends NewPlugin {
 
             // Step 4: Write to templates
             logger.info("Java template for client model");
-            FluentJavaPackage javaPackage = new FluentJavaPackage();
+            FluentJavaPackage javaPackage = new FluentJavaPackage(this);
             // Service client
             String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
             javaPackage

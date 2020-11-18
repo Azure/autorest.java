@@ -2,6 +2,7 @@ package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 public class JavaPackage {
-    private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), JavaPackage.class);
+    private final Logger logger;
 
     private final JavaSettings settings;
     private final List<JavaFile> javaFiles;
@@ -35,11 +36,12 @@ public class JavaPackage {
 
     private final Set<String> filePaths = new HashSet<>();
 
-    public JavaPackage() {
+    public JavaPackage(NewPlugin host) {
         this.settings = JavaSettings.getInstance();
         this.javaFiles = new ArrayList<>();
         this.xmlFiles = new ArrayList<>();
         this.javaFileFactory = new JavaFileFactory(settings);
+        this.logger = new PluginLogger(Javagen.getPluginInstance(), JavaPackage.class);
     }
 
     protected JavaFileFactory getJavaFileFactory() {

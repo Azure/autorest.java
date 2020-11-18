@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -29,6 +30,10 @@ import java.util.List;
 public class FluentJavaPackage extends JavaPackage {
 
     private final List<TextFile> textFiles = new ArrayList<>();
+
+    public FluentJavaPackage(NewPlugin host) {
+        super(host);
+    }
 
     public final List<TextFile> getTextFiles() {
         return textFiles;
