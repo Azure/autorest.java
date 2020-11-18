@@ -22,12 +22,16 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentUpda
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -112,9 +116,61 @@ public class ResourceUpdate extends ResourceOperation {
     }
 
     private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property) {
-        return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
-                stage, model, property,
-                this.getLocalVariableByMethodParameter(this.getBodyParameter()));
+        if (hasDuplicateWithCreateMethodOnErasure(property)) {
+            return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
+                    stage, model, property,
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter()),
+                    property.getSetterName() + "ForUpdate",
+                    String.format("Specifies the %1$s property: %2$s.", property.getName(), property.getDescription()));
+        } else {
+            return new FluentModelPropertyMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
+                    stage, model, property,
+                    this.getLocalVariableByMethodParameter(this.getBodyParameter()));
+        }
+    }
+
+    private boolean hasDuplicateWithCreateMethodOnErasure(ClientModelProperty property) {
+        // find duplicate on generic type with erasure, e.g. same property of different generic type List<CreateParameter> with List<UpdateParameter>, but the generic type would be same under erasure.
+        boolean hasDuplicate = false;
+        String methodName = property.getSetterName();
+        IType type = property.getClientType();
+        if ((type instanceof ListType || type instanceof MapType) && resourceModel.getResourceCreate() != null) {
+            IType valueType = null;
+            if (type instanceof ListType) {
+                valueType = ((ListType) type).getElementType();
+            } else if (type instanceof MapType) {
+                valueType = ((MapType) type).getValueType();
+            }
+            IType valueTypeFinal = valueType;
+
+            hasDuplicate = resourceModel.getResourceCreate().getFluentMethods().stream()
+                    .filter(m -> m.getType() == FluentMethodType.CREATE_WITH)
+                    .filter(m -> methodName.equals(m.getName()))
+                    .map(m -> {
+                        IType t = null;
+                        if (m instanceof FluentModelPropertyMethod) {
+                            t = ((FluentModelPropertyMethod) m).getModelProperty().getClientType();
+                        } else if (m instanceof FluentMethodParameterMethod) {
+                            t = ((FluentMethodParameterMethod) m).getMethodParameter().getClientType();
+                        }
+                        return t;
+                    })
+                    .filter(Objects::nonNull)
+                    // generic type
+                    .map(t -> {
+                        IType valueType1 = null;
+                        if (t instanceof ListType) {
+                            valueType1 = ((ListType) t).getElementType();
+                        } else if (type instanceof MapType) {
+                            valueType1 = ((MapType) t).getValueType();
+                        }
+                        return valueType1;
+                    })
+                    .filter(Objects::nonNull)
+                    // different type
+                    .anyMatch(v -> !Objects.equals(valueTypeFinal.toString(), v.toString()));
+        }
+        return hasDuplicate;
     }
 
     public FluentMethod getUpdateMethod() {
