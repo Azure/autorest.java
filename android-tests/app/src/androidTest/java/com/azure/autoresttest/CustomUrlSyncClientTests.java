@@ -30,8 +30,7 @@ public class CustomUrlSyncClientTests {
             AutoRestParameterizedHostTestClient.Builder builder = new AutoRestParameterizedHostTestClient.Builder();
             builder.host("198.155:3000").build().getEmptyWithRestResponse();
             Assert.fail();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             assertEquals(IllegalArgumentException.class, e.getClass());
         }
     }
@@ -42,8 +41,7 @@ public class CustomUrlSyncClientTests {
             AutoRestParameterizedHostTestClient.Builder builder = new AutoRestParameterizedHostTestClient.Builder();
             builder.accountName("100.64.").build().getEmptyWithRestResponse();
             Assert.fail();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             assertEquals(RuntimeException.class, e.getClass());
         }
     }

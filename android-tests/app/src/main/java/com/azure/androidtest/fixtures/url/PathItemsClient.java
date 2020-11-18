@@ -31,67 +31,99 @@ public final class PathItemsClient {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery',
+     * pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
-     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringPath  A string value 'pathItemStringPath' that appears
+     *                            in the path.
+     * @param localStringPath     should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears
+     *                            as a query parameter.
+     * @param localStringQuery    should contain value 'localStringQuery'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
-    public Response<Void> getAllWithValuesWithRestResponse(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        return this.serviceClient.getAllWithValuesWithRestResponse(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
+    public Response<Void> getAllWithValuesWithRestResponse(String pathItemStringPath, String localStringPath,
+            String pathItemStringQuery, String localStringQuery) {
+        return this.serviceClient.getAllWithValuesWithRestResponse(pathItemStringPath, localStringPath,
+                pathItemStringQuery, localStringQuery);
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
-     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringPath  A string value 'pathItemStringPath' that appears
+     *                            in the path.
+     * @param localStringPath     should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears
+     *                            as a query parameter.
+     * @param localStringQuery    should contain value 'localStringQuery'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
-    public Response<Void> getGlobalQueryNullWithRestResponse(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        return this.serviceClient.getGlobalQueryNullWithRestResponse(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
+    public Response<Void> getGlobalQueryNullWithRestResponse(String pathItemStringPath, String localStringPath,
+            String pathItemStringQuery, String localStringQuery) {
+        return this.serviceClient.getGlobalQueryNullWithRestResponse(pathItemStringPath, localStringPath,
+                pathItemStringQuery, localStringQuery);
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     * send globalStringPath=globalStringPath,
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery=null.
      * 
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
-     * @param localStringQuery should contain null value.
+     * @param pathItemStringPath  A string value 'pathItemStringPath' that appears
+     *                            in the path.
+     * @param localStringPath     should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears
+     *                            as a query parameter.
+     * @param localStringQuery    should contain null value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
-    public Response<Void> getGlobalAndLocalQueryNullWithRestResponse(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        return this.serviceClient.getGlobalAndLocalQueryNullWithRestResponse(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
+    public Response<Void> getGlobalAndLocalQueryNullWithRestResponse(String pathItemStringPath, String localStringPath,
+            String pathItemStringQuery, String localStringQuery) {
+        return this.serviceClient.getGlobalAndLocalQueryNullWithRestResponse(pathItemStringPath, localStringPath,
+                pathItemStringQuery, localStringQuery);
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     * send globalStringPath='globalStringPath',
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+     * localStringQuery=null.
      * 
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath  A string value 'pathItemStringPath' that appears
+     *                            in the path.
+     * @param localStringPath     should contain value 'localStringPath'.
      * @param pathItemStringQuery should contain value null.
-     * @param localStringQuery should contain value null.
+     * @param localStringQuery    should contain value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
-    public Response<Void> getLocalPathItemQueryNullWithRestResponse(String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        return this.serviceClient.getLocalPathItemQueryNullWithRestResponse(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
+    public Response<Void> getLocalPathItemQueryNullWithRestResponse(String pathItemStringPath, String localStringPath,
+            String pathItemStringQuery, String localStringQuery) {
+        return this.serviceClient.getLocalPathItemQueryNullWithRestResponse(pathItemStringPath, localStringPath,
+                pathItemStringQuery, localStringQuery);
     }
 
     /**
@@ -194,7 +226,8 @@ public final class PathItemsClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(), globalStringPath, globalStringQuery, host);
+            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(),
+                    globalStringPath, globalStringQuery, host);
             return new PathItemsClient(internalClient.getPathItems());
         }
     }
