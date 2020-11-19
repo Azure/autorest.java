@@ -7,12 +7,10 @@
 
 package com.azure.autorest.template;
 
-
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
-import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,8 +62,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.tag("name", CodeNamer.escapeXmlComment(String.format("Microsoft Azure SDK for %s Management", pom.getServiceName())));
-            projectBlock.tag("description", CodeNamer.escapeXmlComment(pom.getServiceDescription()));
+            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s Management", pom.getServiceName()));
+            projectBlock.tag("description", pom.getServiceDescription());
             projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 
             projectBlock.line();
