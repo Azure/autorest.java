@@ -71,4 +71,9 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
         sorted.addAll(parameters.stream().filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Body).collect(Collectors.toList()));
         return sorted;
     }
+
+    @Override
+    protected ClassType getExceptionTypeForString(ClassType errorType) {
+        return ClassType.AndroidHttpResponseException;
+    }
 }

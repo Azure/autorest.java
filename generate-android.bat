@@ -14,3 +14,6 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/url.json --namespace=
 ECHO =======================
 ECHO %INPUTSOURCE%/custom-baseUrl.json
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/custom-baseUrl.json --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1
+ECHO =======================
+ECHO %INPUTSOURCE%/xms-error-responses.json
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/xms-error-responses.json --namespace=%NAMESPACE%.fixtures.errorResponse --payload-flattening-threshold=1
