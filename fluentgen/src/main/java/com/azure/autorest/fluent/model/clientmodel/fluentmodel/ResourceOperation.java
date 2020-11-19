@@ -186,7 +186,7 @@ public abstract class ResourceOperation {
     // local variables
     private ResourceLocalVariables resourceLocalVariables;
 
-    protected ResourceLocalVariables getResourceLocalVariables() {
+    public ResourceLocalVariables getResourceLocalVariables() {
         if (resourceLocalVariables == null) {
             resourceLocalVariables = new ResourceLocalVariables(this);
         }

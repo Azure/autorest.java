@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -266,6 +267,13 @@ public class FluentUtils {
     public static String getLocalMethodArgument(ClientMethodParameter parameter,
                                                 Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
                                                 FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod) {
+        return getLocalMethodArgument(parameter, inputParametersSet, localVariables, resourceModel, collectionMethod, null);
+    }
+
+    public static String getLocalMethodArgument(ClientMethodParameter parameter,
+                                                Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
+                                                FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod,
+                                                ResourceLocalVariables resourceLocalVariablesDefinedInClass) {
         if (inputParametersSet.contains(parameter)) {
             // input parameter
             return parameter.getName();
@@ -285,7 +293,22 @@ public class FluentUtils {
                         parameter.getName(),
                         localVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
             }
-            return localVariable.getName();
+            String name = localVariable.getName();
+
+            // there could be case that the variable used in method (ResourceUpdate or ResourceRefresh) is different from the one defined in class (by ResourceCreate)
+            LocalVariable localVariableDefinedInClass = resourceLocalVariablesDefinedInClass == null
+                    ? null
+                    : resourceLocalVariablesDefinedInClass.getLocalVariablesMap().values().stream()
+                    .filter(var -> localVariable.getName().equals(var.getName())).findFirst().orElse(null);
+            if (localVariableDefinedInClass != null
+                    && !Objects.equals(localVariableDefinedInClass.getVariableType().toString(), localVariable.getVariableType().toString())) {
+                if (localVariableDefinedInClass.getVariableType() == ClassType.String) {
+                    name = String.format("%1$s.fromString(%2$s)", localVariable.getVariableType().toString(), name);
+                } else if (localVariable.getVariableType() == ClassType.String) {
+                    name = String.format("%1$s.toString()", name);
+                }
+            }
+            return name;
         }
     }
 

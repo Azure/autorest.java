@@ -35,7 +35,16 @@ abstract public class FluentBaseMethod extends FluentMethod {
 
     public FluentBaseMethod(FluentResourceModel model, FluentMethodType type, String name, String description, String returnValueDescription,
                             List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
-                            FluentResourceCollection collection, FluentCollectionMethod collectionMethod, boolean initLocalVariables) {
+                            FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+        this(model, type, name, description, returnValueDescription, parameters, resourceLocalVariables, collection, collectionMethod, null, false);
+    }
+
+    public FluentBaseMethod(FluentResourceModel model, FluentMethodType type, String name, String description, String returnValueDescription,
+                            List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
+                            FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
+                            ResourceLocalVariables resourceLocalVariablesDefinedInClass,
+                            // below used for refresh method
+                            boolean initLocalVariables) {
         super(model, type);
 
         this.name = name;
@@ -59,7 +68,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
         List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodParameters();
         String argumentsLine = methodParameters.stream()
-                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod))
+                .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod, resourceLocalVariablesDefinedInClass))
                 .collect(Collectors.joining(", "));
         String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
 
