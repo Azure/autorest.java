@@ -223,7 +223,7 @@ public class CodeNamer {
         }
 
         // trim leading and trailing '_'
-        if (name.startsWith("_") || name.endsWith("_")) {
+        if ((name.startsWith("_") || name.endsWith("_")) && !name.chars().allMatch(c -> c == '_')) {
             StringBuilder sb = new StringBuilder(name);
             while (sb.length() > 0 && sb.charAt(0) == '_') {
                 sb.deleteCharAt(0);
@@ -248,7 +248,7 @@ public class CodeNamer {
 
         if (result.startsWith("_") || result.endsWith("_")) {
             if (!result.chars().allMatch(c -> c == (int) '_')) {
-                // some char is not _
+                // some char is not '_', trim it
 
                 StringBuilder sb = new StringBuilder(result);
                 while (sb.length() > 0 && sb.charAt(0) == '_') {
@@ -259,7 +259,7 @@ public class CodeNamer {
                 }
                 result = sb.toString();
             } else {
-                // all char is _
+                // all char is '_', then transform some '_' to
 
                 if (result.startsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(0))) {
                     result = BASIC_LATIC_CHARACTERS.get(name.charAt(0)) + result.substring(1);

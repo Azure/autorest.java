@@ -30,6 +30,8 @@ public class CodeNamerTests {
 
         Assert.assertEquals("SYSTEM_ASSIGNED_USER_ASSIGNED", CodeNamer.getEnumMemberName("SystemAssigned, UserAssigned"));
 
-        Assert.assertEquals("MINUTELY", CodeNamer.getEnumMemberName("ONE_ZEROMINUTELY"));
+        Assert.assertEquals("ONE_ZEROMINUTELY", CodeNamer.getEnumMemberName("_10minutely"));
+
+        Assert.assertEquals("_", CodeNamer.getEnumMemberName("_"));
     }
 }
