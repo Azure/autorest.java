@@ -222,6 +222,18 @@ public class CodeNamer {
             return name;
         }
 
+        // trim leading and trailing '_'
+        if (name.startsWith("_") || name.endsWith("_")) {
+            StringBuilder sb = new StringBuilder(name);
+            while (sb.length() > 0 && sb.charAt(0) == '_') {
+                sb.deleteCharAt(0);
+            }
+            while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '_') {
+                sb.setLength(sb.length() - 1);
+            }
+            name = sb.toString();
+        }
+
         String result = removeInvalidCharacters(name.replaceAll("[\\\\/.+ -]+", "_"));
         result = result.replaceAll("_{2,}", "_");  // merge multiple underlines
         Function<Character, Boolean> isUpper = c -> c >= 'A' && c <= 'Z';
