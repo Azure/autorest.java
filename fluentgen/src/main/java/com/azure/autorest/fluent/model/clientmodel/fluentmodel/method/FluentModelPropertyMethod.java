@@ -95,4 +95,8 @@ public class FluentModelPropertyMethod extends FluentMethod {
             return false;
         }
     }
+
+    public ClientModelProperty getModelProperty() {
+        return modelProperty;
+    }
 }

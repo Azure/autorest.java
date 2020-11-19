@@ -72,4 +72,8 @@ public class FluentMethodParameterMethod extends FluentMethod {
             return false;
         }
     }
+
+    public ClientMethodParameter getMethodParameter() {
+        return methodParameter;
+    }
 }
