@@ -7,7 +7,6 @@
 
 package com.azure.autorest.template;
 
-
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.extension.base.plugin.JavaSettings;

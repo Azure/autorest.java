@@ -19,24 +19,12 @@
       <groupId>com.azure</groupId>
       <artifactId>preprocessor</artifactId>
       <version>1.0.0-beta.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>javagen</artifactId>
       <version>1.0.0-beta.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>

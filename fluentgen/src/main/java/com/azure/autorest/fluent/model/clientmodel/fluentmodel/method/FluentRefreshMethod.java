@@ -17,9 +17,10 @@ public class FluentRefreshMethod extends FluentBaseMethod {
 
     public FluentRefreshMethod(FluentResourceModel model, FluentMethodType type,
                                List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables,
-                               FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+                               FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
+                               ResourceLocalVariables resourceLocalVariablesDefinedInClass) {
 
         super(model, type, "refresh", "Refreshes the resource to sync with Azure.", "the refreshed resource.",
-                parameters, resourceLocalVariables, collection, collectionMethod, true);
+                parameters, resourceLocalVariables, collection, collectionMethod, resourceLocalVariablesDefinedInClass, true);
     }
 }

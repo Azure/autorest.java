@@ -207,7 +207,8 @@ public class ResourceUpdate extends ResourceOperation {
             }
             return new FluentApplyMethod(resourceModel, FluentMethodType.APPLY,
                     parameters, this.getResourceLocalVariables(),
-                    resourceCollection, methodOpt.get());
+                    resourceCollection, methodOpt.get(),
+                    resourceModel.getResourceCreate().getResourceLocalVariables());
         } else {
             throw new IllegalStateException("update method not found on model " + resourceModel.getName());
         }

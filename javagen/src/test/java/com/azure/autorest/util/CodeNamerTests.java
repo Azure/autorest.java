@@ -29,5 +29,9 @@ public class CodeNamerTests {
         Assert.assertEquals("ALL", CodeNamer.getEnumMemberName("all*"));
 
         Assert.assertEquals("SYSTEM_ASSIGNED_USER_ASSIGNED", CodeNamer.getEnumMemberName("SystemAssigned, UserAssigned"));
+
+        Assert.assertEquals("ONE_ZEROMINUTELY", CodeNamer.getEnumMemberName("_10minutely"));
+
+        Assert.assertEquals("_", CodeNamer.getEnumMemberName("_"));
     }
 }

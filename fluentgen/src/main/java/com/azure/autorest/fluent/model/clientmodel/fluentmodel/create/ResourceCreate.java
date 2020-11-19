@@ -298,7 +298,7 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
-        if (FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
+        if (FluentUtils.modelHasLocationProperty(getProperties()) && property.getName().equals(ResourceTypeName.FIELD_LOCATION)) {
             String baseName = "region";
             if (getProperties().stream().anyMatch(p -> "region".equals(p.getName()))) {
                 baseName = ResourceTypeName.FIELD_LOCATION;
