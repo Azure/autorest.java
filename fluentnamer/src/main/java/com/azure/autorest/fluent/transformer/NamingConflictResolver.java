@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.transformer;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.ValueSchema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
@@ -40,8 +41,30 @@ public class NamingConflictResolver {
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
             }
+
             methodGroupNames.add(newMethodGroupName);
+            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                methodGroupNames.add(newMethodGroupName + "Client");
+            }
         });
+
+        if (methodGroupNames.contains(Utils.getDefaultName(codeModel))) {
+            String name = Utils.getDefaultName(codeModel);
+            String newName;
+
+            final String keywordManagementClient = "ManagementClient";
+            final String keywordClient = "Client";
+            if (name.endsWith(keywordClient) && !name.endsWith(keywordManagementClient)) {
+                newName = name.substring(0, name.length() - keywordClient.length()) + keywordManagementClient;
+            } else if (name.endsWith(keywordManagementClient)) {
+                newName = name.substring(0, name.length() - keywordManagementClient.length()) + "Main" + keywordManagementClient;
+            } else {
+                newName = name + keywordManagementClient;
+            }
+
+            logger.info("Rename code model from {} to {}", name, newName);
+            codeModel.getLanguage().getDefault().setName(newName);
+        }
 
         // deduplicate enums from objects
         codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNames));
