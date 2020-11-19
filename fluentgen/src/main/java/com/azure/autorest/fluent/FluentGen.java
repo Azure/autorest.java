@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
 public class FluentGen extends NewPlugin {
 
     private final Logger logger = new PluginLogger(this, FluentGen.class);
-    private static FluentGen instance;
+    protected static FluentGen instance;
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
