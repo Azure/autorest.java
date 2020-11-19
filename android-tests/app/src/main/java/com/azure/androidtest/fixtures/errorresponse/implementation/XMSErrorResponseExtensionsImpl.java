@@ -17,12 +17,14 @@ public final class XMSErrorResponseExtensionsImpl {
     final SerializerAdapter serializerAdapter = SerializerAdapter.createDefault();
 
     /**
-     * The Azure Core generic ServiceClient to setup interceptors and produce retrofit proxy.
+     * The Azure Core generic ServiceClient to setup interceptors and produce
+     * retrofit proxy.
      */
     private ServiceClient serviceClient;
 
     /**
-     * Gets The Azure Core generic ServiceClient to setup interceptors and produce retrofit proxy.
+     * Gets The Azure Core generic ServiceClient to setup interceptors and produce
+     * retrofit proxy.
      * 
      * @return the serviceClient value.
      */
@@ -61,8 +63,9 @@ public final class XMSErrorResponseExtensionsImpl {
     /**
      * Initializes an instance of XMSErrorResponseExtensions client.
      * 
-     * @param serviceClient The Azure Core generic ServiceClient to setup interceptors and produce retrofit proxy.
-     * @param host server parameter.
+     * @param serviceClient The Azure Core generic ServiceClient to setup
+     *                      interceptors and produce retrofit proxy.
+     * @param host          server parameter.
      */
     public XMSErrorResponseExtensionsImpl(ServiceClient serviceClient, String host) {
         this.serviceClient = serviceClient;
@@ -76,7 +79,7 @@ public final class XMSErrorResponseExtensionsImpl {
         }
         try {
             return new String(body.bytes());
-        } catch(java.io.IOException ex) {
+        } catch (java.io.IOException ex) {
             throw new RuntimeException(ex);
         } finally {
             body.close();
@@ -90,7 +93,7 @@ public final class XMSErrorResponseExtensionsImpl {
                     return null;
                 }
                 return (T) body.bytes();
-            } catch(java.io.IOException ex) {
+            } catch (java.io.IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
@@ -98,7 +101,7 @@ public final class XMSErrorResponseExtensionsImpl {
         try {
             final String mimeContentType = headers.get(CONTENT_TYPE);
             return this.serializerAdapter.deserialize(str, type, resolveSerializerFormat(mimeContentType));
-        } catch(java.io.IOException ex) {
+        } catch (java.io.IOException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -106,7 +109,7 @@ public final class XMSErrorResponseExtensionsImpl {
     <T> T deserializeHeaders(okhttp3.Headers headers, java.lang.reflect.Type type) {
         try {
             return this.serializerAdapter.deserialize(headers, type);
-        } catch(java.io.IOException ex) {
+        } catch (java.io.IOException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -114,21 +117,24 @@ public final class XMSErrorResponseExtensionsImpl {
     <T> retrofit2.Response<T> executeRetrofitCall(retrofit2.Call<T> call) {
         try {
             return call.execute();
-        } catch(java.io.IOException ex) {
+        } catch (java.io.IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    java.lang.reflect.ParameterizedType createParameterizedType(Class<?> rawClass, java.lang.reflect.Type... genericTypes) {
+    java.lang.reflect.ParameterizedType createParameterizedType(Class<?> rawClass,
+            java.lang.reflect.Type... genericTypes) {
         return new java.lang.reflect.ParameterizedType() {
             @Override
             public java.lang.reflect.Type[] getActualTypeArguments() {
                 return genericTypes;
             }
+
             @Override
             public java.lang.reflect.Type getRawType() {
                 return rawClass;
             }
+
             @Override
             public java.lang.reflect.Type getOwnerType() {
                 return null;
@@ -138,9 +144,11 @@ public final class XMSErrorResponseExtensionsImpl {
 
     private static final String CONTENT_TYPE = "Content-Type";
 
-    private static final java.util.Map<String, SerializerFormat> SUPPORTED_MIME_TYPES = new java.util.TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final java.util.Map<String, SerializerFormat> SUPPORTED_MIME_TYPES = new java.util.TreeMap<>(
+            String.CASE_INSENSITIVE_ORDER);
 
-    private static final java.util.TreeMap<String, SerializerFormat> SUPPORTED_SUFFIXES = new java.util.TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final java.util.TreeMap<String, SerializerFormat> SUPPORTED_SUFFIXES = new java.util.TreeMap<>(
+            String.CASE_INSENSITIVE_ORDER);
 
     private static final SerializerFormat DEFAULT_ENCODING = SerializerFormat.JSON;
     static {
