@@ -21,7 +21,7 @@ public class AndroidEmbeddedBuilderTemplate {
     private static final String EMBEDDED_BUILDER_CLS_NAME = "Builder";
     private static final String BUILD_METHOD_NAME = "build";
     private static final String BASE_URL_PROPERTY_NAME = "baseUrl";
-    
+
     private final ServiceClient serviceClient;
     private final AsyncSyncClient asyncSyncClient;
     private final List<ClientMethodParameter> commonProperties;
