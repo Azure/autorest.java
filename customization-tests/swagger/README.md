@@ -19,7 +19,7 @@ autorest --java --use=C:/work/autorest.java
 ```
 
 ### Code generation settings
-``` yaml
+```yaml
 input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json
 java: true
 output-folder: ..\
@@ -33,6 +33,40 @@ license-header: MICROSOFT_MIT_SMALL
 add-context-parameter: true
 models-subpackage: implementation.models
 context-client-method-parameter: true
-customization-jar-path: target/bodycomplex-customization-1.0.0-beta.1.jar
-customization-class: fixtures.bodycomplex.customization.BodyComplexCustomization
+customization-class: BodyComplexCustomization
+```
+
+### Customization
+```java
+public class BodyComplexCustomization extends Customization {
+    @Override
+    public void customize(LibraryCustomization customization) {
+        PackageCustomization implementationModels = customization.getPackage("fixtures.bodycomplex.implementation.models");
+        implementationModels.renameClass("Goblinshark", "GoblinShark");
+
+        implementationModels.getClass("DotSalmon")
+                .renameProperty("iswild", "isWild")
+                .renameMethod("setIsWild", "setWild")
+                .changeMethodReturnType("isWild", "boolean", "%s")
+                .changeMethodReturnType("setWild", "void", null);
+
+        implementationModels.getClass("CMYKColors")
+                .renameEnumMember("CYAN", "TEAL");
+
+        ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj")
+                .generateGetterAndSetter("id")
+                .changeMethodReturnType("getId", "UUID", "UUID.fromString(%s)")
+                .changeMethodModifier("setId", "");
+        readonlyObj.methodJavadoc("getId").setDescription("Get the ID of the object.");
+        readonlyObj.methodJavadoc("setId").setDescription("Set the ID of the object.")
+                .setReturn("The current ReadonlyObj instance")
+                .setParam("id", "The ID value");
+
+        PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
+        ClassCustomization arrayClient = root.getClass("ArrayClient")
+                .changeMethodReturnType("putValid", "ArrayClient", "this");
+        arrayClient.classJavadoc().setDescription("The sync client containing Array operations.");
+        arrayClient.methodJavadoc("putValid").setReturn("The ArrayClient itself");
+    }
+}
 ```
