@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -39,6 +40,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
@@ -290,5 +292,10 @@ public class FluentUtils {
     public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
         return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
+    }
+
+    public static boolean modelHasLocationProperty(List<ClientModelProperty> properties) {
+        return properties.stream()
+                .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
     }
 }
