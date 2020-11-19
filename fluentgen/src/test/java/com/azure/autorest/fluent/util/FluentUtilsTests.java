@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.util;
 
+import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.util.CodeNamer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +15,7 @@ public class FluentUtilsTests {
 
     @BeforeAll
     public static void ensurePlugin() {
-        new Utils.MockFluentGen();
+        new TestUtils.MockFluentGen();
     }
 
     @Test

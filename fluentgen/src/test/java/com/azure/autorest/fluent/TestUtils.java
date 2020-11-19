@@ -3,14 +3,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.util;
+package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.fluent.FluentGen;
 
 import java.lang.reflect.Type;
 
-public class Utils {
+public class TestUtils {
 
     public static class MockFluentGen extends FluentGen {
 
