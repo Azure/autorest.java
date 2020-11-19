@@ -1,7 +1,11 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.Proxy;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
 import java.util.ArrayList;
 import java.util.List;
