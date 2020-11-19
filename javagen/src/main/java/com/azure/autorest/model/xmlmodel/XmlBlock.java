@@ -36,7 +36,7 @@ public class XmlBlock {
     }
 
     public final void tag(String tag, String value) {
-        contents.tag(tag, value);
+        contents.tag(tag, CodeNamer.escapeXmlComment(value));
     }
 
     public final void block(String text, Consumer<XmlBlock> bodyAction) {
