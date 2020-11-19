@@ -1,15 +1,11 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-<<<<<<< HEAD
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
-=======
-import com.azure.autorest.model.clientmodel.*;
->>>>>>> c5168f72... Move all hacks to HostMapping
 
 import java.util.ArrayList;
 import java.util.List;
