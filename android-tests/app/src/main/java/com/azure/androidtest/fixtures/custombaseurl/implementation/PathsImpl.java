@@ -47,13 +47,12 @@ public final class PathsImpl {
     /**
      * Get a 200 to test a valid base uri.
      * 
-     * @param accountName simple string.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getEmpty(String accountName, final Callback<Void> callback) {
+    public void getEmpty(final Callback<Void> callback) {
         Call<ResponseBody> call = service.getEmpty();
         retrofit2.Callback<ResponseBody> retrofitCallback = new retrofit2.Callback<ResponseBody>() {
             @Override
@@ -89,13 +88,11 @@ public final class PathsImpl {
     /**
      * Get a 200 to test a valid base uri.
      * 
-     * @param accountName simple string.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri.
      */
-    public Response<Void> getEmptyWithRestResponse(String accountName) {
+    public Response<Void> getEmptyWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getEmpty());
         if (response.isSuccessful()) {
             if (response.code() == 200) {

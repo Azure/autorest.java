@@ -31,14 +31,13 @@ public final class AutoRestParameterizedHostTestAsyncClient {
     /**
      * Get a 200 to test a valid base uri.
      * 
-     * @param accountName simple string.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getEmpty(String accountName, final Callback<Void> callback) {
-        this.serviceClient.getEmpty(accountName, callback);
+    public void getEmpty(final Callback<Void> callback) {
+        this.serviceClient.getEmpty(callback);
     }
 
     /**

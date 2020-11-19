@@ -31,14 +31,12 @@ public final class AutoRestParameterizedHostTestClient {
     /**
      * Get a 200 to test a valid base uri.
      * 
-     * @param accountName simple string.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri.
      */
-    public Response<Void> getEmptyWithRestResponse(String accountName) {
-        return this.serviceClient.getEmptyWithRestResponse(accountName);
+    public Response<Void> getEmptyWithRestResponse() {
+        return this.serviceClient.getEmptyWithRestResponse();
     }
 
     /**
