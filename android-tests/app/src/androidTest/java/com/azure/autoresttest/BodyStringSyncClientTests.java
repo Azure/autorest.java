@@ -82,9 +82,9 @@ public class BodyStringSyncClientTests {
 
     @Test
     public void getNotProvided() throws Exception {
-            Response<String> notProvidedResponse = client.getNotProvidedWithRestResponse();
-            assertEquals(200, notProvidedResponse.getStatusCode());
-            assertNull(notProvidedResponse.getValue());
+        Response<String> notProvidedResponse = client.getNotProvidedWithRestResponse();
+        assertEquals(200, notProvidedResponse.getStatusCode());
+        assertNull(notProvidedResponse.getValue());
     }
 
     @Test
@@ -109,7 +109,8 @@ public class BodyStringSyncClientTests {
     }
 
     public static String byteToString(byte[] bytes) {
-        return new String(Base64.getDecoder().decode(unquote(new String(bytes, StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        return new String(Base64.getDecoder().decode(unquote(new String(bytes, StandardCharsets.UTF_8))),
+                StandardCharsets.UTF_8);
     }
 
     @Test
@@ -127,10 +128,10 @@ public class BodyStringSyncClientTests {
     @Test
     public void putBase64UrlEncoded() throws Exception {
         try {
-            Response<Void> putResult = client.putBase64UrlEncodedWithRestResponse(new Base64Url("http://myhost.com/path?email=a.b@c.com&value=a%20B"));
+            Response<Void> putResult = client.putBase64UrlEncodedWithRestResponse(
+                    new Base64Url("http://myhost.com/path?email=a.b@c.com&value=a%20B"));
             Assert.fail();
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             Assert.assertEquals(HttpResponseException.class, ex.getClass());
         }
     }
