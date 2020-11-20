@@ -34,7 +34,8 @@ public final class NumbersImpl {
     /**
      * Initializes an instance of NumbersImpl.
      * 
-     * @param client the instance of the service client containing this operation class.
+     * @param client the instance of the service client containing this operation
+     *               class.
      */
     NumbersImpl(AutoRestNumberTestServiceImpl client) {
         this.client = client;
@@ -42,9 +43,8 @@ public final class NumbersImpl {
     }
 
     /**
-     * The interface defining all the services for
-     * AutoRestNumberTestServiceNumbers to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestNumberTestServiceNumbers
+     * to be used by the proxy service to perform REST calls.
      */
     private interface NumbersService {
         @GET("/number/null")
@@ -125,8 +125,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getNull(final Callback<Float> callback) {
         Call<ResponseBody> call = service.getNull();
@@ -138,7 +139,7 @@ public final class NumbersImpl {
                         final float decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), float.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -164,18 +165,17 @@ public final class NumbersImpl {
     /**
      * Get null Number value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return null Number value.
      */
     public Response<Float> getNullWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNull());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), float.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), float.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -191,8 +191,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalidFloat(final Callback<Float> callback) {
         Call<ResponseBody> call = service.getInvalidFloat();
@@ -204,7 +205,7 @@ public final class NumbersImpl {
                         final float decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), float.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -230,18 +231,17 @@ public final class NumbersImpl {
     /**
      * Get invalid float Number value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return invalid float Number value.
      */
     public Response<Float> getInvalidFloatWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalidFloat());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), float.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), float.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -257,8 +257,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalidDouble(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getInvalidDouble();
@@ -269,8 +270,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -296,18 +298,17 @@ public final class NumbersImpl {
     /**
      * Get invalid double Number value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return invalid double Number value.
      */
     public Response<Double> getInvalidDoubleWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalidDouble());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -323,8 +324,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalidDecimal(final Callback<BigDecimal> callback) {
         Call<ResponseBody> call = service.getInvalidDecimal();
@@ -335,8 +337,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final BigDecimal decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), BigDecimal.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    BigDecimal.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -362,18 +365,17 @@ public final class NumbersImpl {
     /**
      * Get invalid decimal Number value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return invalid decimal Number value.
      */
     public Response<BigDecimal> getInvalidDecimalWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalidDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -388,16 +390,18 @@ public final class NumbersImpl {
      * Put big float value 3.402823e+20.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigFloat(float numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -410,7 +414,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -438,24 +442,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigFloatWithRestResponse(float numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigFloat(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigFloat(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -471,8 +477,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigFloat(final Callback<Float> callback) {
         Call<ResponseBody> call = service.getBigFloat();
@@ -484,7 +491,7 @@ public final class NumbersImpl {
                         final float decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), float.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -510,18 +517,17 @@ public final class NumbersImpl {
     /**
      * Get big float value 3.402823e+20.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big float value 3.
      */
     public Response<Float> getBigFloatWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigFloat());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), float.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), float.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -536,16 +542,18 @@ public final class NumbersImpl {
      * Put big double value 2.5976931e+101.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDouble(double numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -558,7 +566,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -586,24 +594,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDoubleWithRestResponse(double numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDouble(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDouble(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -619,8 +629,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDouble(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getBigDouble();
@@ -631,8 +642,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -658,18 +670,17 @@ public final class NumbersImpl {
     /**
      * Get big double value 2.5976931e+101.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big double value 2.
      */
     public Response<Double> getBigDoubleWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDouble());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -685,15 +696,17 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDoublePositiveDecimal(final Callback<Void> callback) {
         final double numberBody = 9.999999999E7;
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -706,7 +719,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -732,25 +745,27 @@ public final class NumbersImpl {
     /**
      * Put big double value 99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDoublePositiveDecimalWithRestResponse() {
         final double numberBody = 9.999999999E7;
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDoublePositiveDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDoublePositiveDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -766,8 +781,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDoublePositiveDecimal(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
@@ -778,8 +794,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -805,18 +822,18 @@ public final class NumbersImpl {
     /**
      * Get big double value 99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big double value 99999999.
      */
     public Response<Double> getBigDoublePositiveDecimalWithRestResponse() {
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDoublePositiveDecimal());
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.getBigDoublePositiveDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -832,15 +849,17 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDoubleNegativeDecimal(final Callback<Void> callback) {
         final double numberBody = -9.999999999E7;
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -853,7 +872,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -879,25 +898,27 @@ public final class NumbersImpl {
     /**
      * Put big double value -99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDoubleNegativeDecimalWithRestResponse() {
         final double numberBody = -9.999999999E7;
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDoubleNegativeDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDoubleNegativeDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -913,8 +934,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDoubleNegativeDecimal(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
@@ -925,8 +947,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -952,18 +975,18 @@ public final class NumbersImpl {
     /**
      * Get big double value -99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big double value -99999999.
      */
     public Response<Double> getBigDoubleNegativeDecimalWithRestResponse() {
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDoubleNegativeDecimal());
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.getBigDoubleNegativeDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -978,16 +1001,18 @@ public final class NumbersImpl {
      * Put big decimal value 2.5976931e+101.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDecimal(BigDecimal numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1000,7 +1025,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1028,24 +1053,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDecimalWithRestResponse(BigDecimal numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1061,8 +1088,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDecimal(final Callback<BigDecimal> callback) {
         Call<ResponseBody> call = service.getBigDecimal();
@@ -1073,8 +1101,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final BigDecimal decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), BigDecimal.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    BigDecimal.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1100,18 +1129,17 @@ public final class NumbersImpl {
     /**
      * Get big decimal value 2.5976931e+101.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big decimal value 2.
      */
     public Response<BigDecimal> getBigDecimalWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1127,15 +1155,17 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDecimalPositiveDecimal(final Callback<Void> callback) {
         final BigDecimal numberBody = new BigDecimal("9.999999999E7");
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1148,7 +1178,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1174,25 +1204,27 @@ public final class NumbersImpl {
     /**
      * Put big decimal value 99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDecimalPositiveDecimalWithRestResponse() {
         final BigDecimal numberBody = new BigDecimal("9.999999999E7");
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDecimalPositiveDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDecimalPositiveDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1208,8 +1240,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDecimalPositiveDecimal(final Callback<BigDecimal> callback) {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
@@ -1220,8 +1253,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final BigDecimal decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), BigDecimal.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    BigDecimal.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1247,18 +1281,18 @@ public final class NumbersImpl {
     /**
      * Get big decimal value 99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big decimal value 99999999.
      */
     public Response<BigDecimal> getBigDecimalPositiveDecimalWithRestResponse() {
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDecimalPositiveDecimal());
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.getBigDecimalPositiveDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1274,15 +1308,17 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putBigDecimalNegativeDecimal(final Callback<Void> callback) {
         final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1295,7 +1331,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1321,25 +1357,27 @@ public final class NumbersImpl {
     /**
      * Put big decimal value -99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return the completion.
      */
     public Response<Void> putBigDecimalNegativeDecimalWithRestResponse() {
         final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putBigDecimalNegativeDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putBigDecimalNegativeDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1355,8 +1393,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getBigDecimalNegativeDecimal(final Callback<BigDecimal> callback) {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
@@ -1367,8 +1406,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final BigDecimal decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), BigDecimal.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    BigDecimal.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1394,18 +1434,18 @@ public final class NumbersImpl {
     /**
      * Get big decimal value -99999999.99.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big decimal value -99999999.
      */
     public Response<BigDecimal> getBigDecimalNegativeDecimalWithRestResponse() {
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getBigDecimalNegativeDecimal());
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.getBigDecimalNegativeDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1420,16 +1460,18 @@ public final class NumbersImpl {
      * Put small float value 3.402823e-20.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putSmallFloat(float numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1442,7 +1484,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1470,24 +1512,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putSmallFloatWithRestResponse(float numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putSmallFloat(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putSmallFloat(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1503,8 +1547,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getSmallFloat(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getSmallFloat();
@@ -1515,8 +1560,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1542,18 +1588,17 @@ public final class NumbersImpl {
     /**
      * Get big double value 3.402823e-20.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big double value 3.
      */
     public Response<Double> getSmallFloatWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSmallFloat());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1568,16 +1613,18 @@ public final class NumbersImpl {
      * Put small double value 2.5976931e-101.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putSmallDouble(double numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1590,7 +1637,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1618,24 +1665,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putSmallDoubleWithRestResponse(double numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putSmallDouble(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putSmallDouble(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1651,8 +1700,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getSmallDouble(final Callback<Double> callback) {
         Call<ResponseBody> call = service.getSmallDouble();
@@ -1663,8 +1713,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final double decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), double.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    double.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1690,18 +1741,17 @@ public final class NumbersImpl {
     /**
      * Get big double value 2.5976931e-101.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return big double value 2.
      */
     public Response<Double> getSmallDoubleWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSmallDouble());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), double.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), double.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1716,16 +1766,18 @@ public final class NumbersImpl {
      * Put small decimal value 2.5976931e-101.
      * 
      * @param numberBody number body.
-     * @param callback the Callback that receives the response.
+     * @param callback   the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putSmallDecimal(BigDecimal numberBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(numberBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -1738,7 +1790,7 @@ public final class NumbersImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1766,24 +1818,26 @@ public final class NumbersImpl {
      * 
      * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putSmallDecimalWithRestResponse(BigDecimal numberBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(numberBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(numberBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putSmallDecimal(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putSmallDecimal(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -1799,8 +1853,9 @@ public final class NumbersImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getSmallDecimal(final Callback<BigDecimal> callback) {
         Call<ResponseBody> call = service.getSmallDecimal();
@@ -1811,8 +1866,9 @@ public final class NumbersImpl {
                     if (response.code() == 200) {
                         final BigDecimal decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), BigDecimal.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    BigDecimal.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -1838,18 +1894,17 @@ public final class NumbersImpl {
     /**
      * Get small decimal value 2.5976931e-101.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return small decimal value 2.
      */
     public Response<BigDecimal> getSmallDecimalWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSmallDecimal());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), BigDecimal.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
