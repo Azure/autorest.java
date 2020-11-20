@@ -3,17 +3,27 @@ set AZURE_ARGUMENTS=--android --v4 --java --use:.\ --output-folder=android-tests
 set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger
 set NAMESPACE=com.azure.androidtest
 ECHO =======================
+<<<<<<< HEAD
 set INPUTFILE=%INPUTSOURCE%/body-array.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyarray --payload-flattening-threshold=1
+=======
+ECHO %INPUTSOURCE%/body-byte.json
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-byte.json --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
+>>>>>>> a9a7efa4... Get body-byte tests to run
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-byte.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
 ECHO =======================
+<<<<<<< HEAD
 set INPUTFILE=%INPUTSOURCE%/body-date.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydate --payload-flattening-threshold=1
+=======
+ECHO %INPUTSOURCE%/body-string.json
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-string.json --namespace=%NAMESPACE%.fixtures.bodystring --payload-flattening-threshold=1
+>>>>>>> a9a7efa4... Get body-byte tests to run
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-datetime.json
 ECHO %INPUTFILE%
