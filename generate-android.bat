@@ -3,20 +3,30 @@ set AZURE_ARGUMENTS=--android --v4 --java --use:.\ --output-folder=android-tests
 set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger
 set NAMESPACE=com.azure.androidtest
 ECHO =======================
-ECHO %INPUTSOURCE%/body-byte.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-byte.json --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/body-byte.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
 ECHO =======================
-ECHO %INPUTSOURCE%/body-integer.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-integer.json --namespace=%NAMESPACE%.fixtures.bodyinteger --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/body-integer.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyinteger --payload-flattening-threshold=1
 ECHO =======================
-ECHO %INPUTSOURCE%/body-string.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/body-string.json --namespace=%NAMESPACE%.fixtures.bodystring --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/body-number.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodynumber --payload-flattening-threshold=1
 ECHO =======================
-ECHO %INPUTSOURCE%/custom-baseUrl.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/custom-baseUrl.json --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/body-string.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodystring --payload-flattening-threshold=1
 ECHO =======================
-ECHO %INPUTSOURCE%/url.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/url.json --namespace=%NAMESPACE%.fixtures.url --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/custom-baseUrl.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1
 ECHO =======================
-ECHO %INPUTSOURCE%/xms-error-responses.json
-call autorest %AZURE_ARGUMENTS% --input-file=%INPUTSOURCE%/xms-error-responses.json --namespace=%NAMESPACE%.fixtures.errorResponse --payload-flattening-threshold=1
+set INPUTFILE=%INPUTSOURCE%/url.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.url --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/xms-error-responses.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.errorResponse --payload-flattening-threshold=1
