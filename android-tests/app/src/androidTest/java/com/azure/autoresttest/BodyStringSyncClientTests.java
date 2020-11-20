@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -89,7 +90,7 @@ public class BodyStringSyncClientTests {
     @Test
     public void getBase64Encoded() throws Exception {
         byte[] result = client.getBase64EncodedWithRestResponse().getValue();
-        Assert.assertEquals("a string that gets encoded with base64", new String(result, StandardCharsets.UTF_8));
+        Assert.assertEquals("a string that gets encoded with base64", byteToString(result));
     }
 
     // copied from azure-core
@@ -107,11 +108,14 @@ public class BodyStringSyncClientTests {
         return string;
     }
 
+    private static String byteToString(byte[] bytes) {
+        return new String(Base64.getDecoder().decode(unquote(new String(bytes, StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+    }
+
     @Test
     public void getBase64UrlEncoded() throws Exception {
         byte[] result = client.getBase64EncodedWithRestResponse().getValue();
-        String resultString = new String(result);
-        Assert.assertEquals("a string that gets encoded with base64", resultString);
+        Assert.assertEquals("a string that gets encoded with base64", byteToString(result));
     }
 
     @Test

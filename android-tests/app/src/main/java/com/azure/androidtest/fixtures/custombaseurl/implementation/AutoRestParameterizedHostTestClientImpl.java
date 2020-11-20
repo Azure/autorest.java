@@ -84,6 +84,16 @@ public final class AutoRestParameterizedHostTestClientImpl {
     }
 
     <T> T deserializeContent(okhttp3.Headers headers, okhttp3.ResponseBody body, java.lang.reflect.Type type) {
+        if (type.equals(byte[].class)) {
+            try {
+                if (body.contentLength() == 0) {
+                    return null;
+                }
+                return (T) body.bytes();
+            } catch(java.io.IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
         final String str = readAsString(body);
         try {
             final String mimeContentType = headers.get(CONTENT_TYPE);

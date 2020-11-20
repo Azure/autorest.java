@@ -1,4 +1,4 @@
-package com.azure.androidtest.fixtures.bodyinteger.implementation;
+package com.azure.androidtest.fixtures.bodybyte.implementation;
 
 import com.azure.android.core.http.ServiceClient;
 import com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever;
@@ -8,9 +8,9 @@ import com.azure.android.core.internal.util.serializer.SerializerFormat;
 import com.azure.android.core.util.paging.PagedDataRetriever;
 
 /**
- * Initializes a new instance of the AutoRestIntegerTestService type.
+ * Initializes a new instance of the AutoRestSwaggerBATByteService type.
  */
-public final class AutoRestIntegerTestServiceImpl {
+public final class AutoRestSwaggerBATByteServiceImpl {
     /**
      * The serializer.
      */
@@ -45,29 +45,29 @@ public final class AutoRestIntegerTestServiceImpl {
     }
 
     /**
-     * The IntsImpl object to access its operations.
+     * The ByteOperationsImpl object to access its operations.
      */
-    private final IntsImpl ints;
+    private final ByteOperationsImpl byteOperations;
 
     /**
-     * Gets the IntsImpl object to access its operations.
+     * Gets the ByteOperationsImpl object to access its operations.
      * 
-     * @return the IntsImpl object.
+     * @return the ByteOperationsImpl object.
      */
-    public IntsImpl getInts() {
-        return this.ints;
+    public ByteOperationsImpl getByteOperations() {
+        return this.byteOperations;
     }
 
     /**
-     * Initializes an instance of AutoRestIntegerTestService client.
+     * Initializes an instance of AutoRestSwaggerBATByteService client.
      * 
      * @param serviceClient The Azure Core generic ServiceClient to setup interceptors and produce retrofit proxy.
      * @param host server parameter.
      */
-    public AutoRestIntegerTestServiceImpl(ServiceClient serviceClient, String host) {
+    public AutoRestSwaggerBATByteServiceImpl(ServiceClient serviceClient, String host) {
         this.serviceClient = serviceClient;
         this.host = host;
-        this.ints = new IntsImpl(this);
+        this.byteOperations = new ByteOperationsImpl(this);
     }
 
     String readAsString(okhttp3.ResponseBody body) {
