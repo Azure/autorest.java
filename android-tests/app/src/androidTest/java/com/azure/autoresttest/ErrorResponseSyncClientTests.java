@@ -19,7 +19,7 @@ public class ErrorResponseSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new XMSErrorResponseExtensionsClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new XMSErrorResponseExtensionsClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

@@ -5,6 +5,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.azure.android.core.http.Response;
 import com.azure.androidtest.fixtures.custombaseurl.AutoRestParameterizedHostTestClient;
 
+import java.util.regex.*;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

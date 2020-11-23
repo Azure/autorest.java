@@ -20,7 +20,7 @@ public class BodyStringEnumSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new EnumClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new EnumClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

@@ -22,7 +22,7 @@ public class BodyByteSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new AutoRestSwaggerBATByteServiceClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

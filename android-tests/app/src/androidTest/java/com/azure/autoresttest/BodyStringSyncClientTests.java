@@ -25,7 +25,7 @@ public class BodyStringSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new StringOperationClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new StringOperationClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

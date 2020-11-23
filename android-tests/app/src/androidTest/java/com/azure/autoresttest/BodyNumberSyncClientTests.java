@@ -23,7 +23,7 @@ public class BodyNumberSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestNumberTestServiceClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new AutoRestNumberTestServiceClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

@@ -26,7 +26,7 @@ public class UrlPathsSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new PathsClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new PathsClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test
