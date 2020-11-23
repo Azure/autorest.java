@@ -36,7 +36,8 @@ public class TypeConversionUtils {
         } else if (clientType instanceof MapType) {
             MapType type = (MapType) clientType;
             String nestedPropertyName = nextPropertyName(propertyName);
-            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Entry::getKey, %2$s -> %3$s)", propertyName, nestedPropertyName, conversionExpression(type.getValueType(), nestedPropertyName));
+            String valuePropertyName = nestedPropertyName + ".getValue()";
+            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, %2$s -> %3$s))", propertyName, nestedPropertyName, conversionExpression(type.getValueType(), valuePropertyName));
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
@@ -108,9 +109,10 @@ public class TypeConversionUtils {
     }
 
     private static String nextPropertyName(String propertyName) {
+        if (propertyName.indexOf('.') > 0) {
+            propertyName = propertyName.substring(0, propertyName.indexOf('.'));
+        }
         if (propertyName.equals(tempPropertyName())) {
-            return tempPropertyName() + "1";
-        } else if (propertyName.charAt(5) == '.') {
             return tempPropertyName() + "1";
         } else {
             return tempPropertyName() + (Integer.parseInt(propertyName.substring(tempPropertyName().length())) + 1);
