@@ -70,7 +70,13 @@ public class CodeNamer {
             "throws", "transient", "true", "try", "void",
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header", "_"
+            "String", "Object", "header", "_",
+            // following are commonly used classes/annotations in service client, from azure-core
+            "Host", "ServiceInterface", "ServiceMethod", "ReturnType",
+            "Get", "Put", "Post", "Patch", "Delete", "Headers",
+            "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
+            "HostParam", "PathParam", "QueryParam", "HeaderParam",
+            "Fluent", "Immutable", "JsonFlatten"
     );
 
     private CodeNamer() {
