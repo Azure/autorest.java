@@ -34,7 +34,8 @@ public final class DateOperationsImpl {
     /**
      * Initializes an instance of DateOperationsImpl.
      * 
-     * @param client the instance of the service client containing this operation class.
+     * @param client the instance of the service client containing this operation
+     *               class.
      */
     DateOperationsImpl(AutoRestDateTestServiceImpl client) {
         this.client = client;
@@ -77,8 +78,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getNull(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getNull();
@@ -89,8 +91,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -116,18 +119,17 @@ public final class DateOperationsImpl {
     /**
      * Get null date value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return null date value.
      */
     public Response<LocalDate> getNullWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNull());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -143,8 +145,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getInvalidDate(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getInvalidDate();
@@ -155,8 +158,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -182,18 +186,17 @@ public final class DateOperationsImpl {
     /**
      * Get invalid date value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return invalid date value.
      */
     public Response<LocalDate> getInvalidDateWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalidDate());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -209,8 +212,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getOverflowDate(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getOverflowDate();
@@ -221,8 +225,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -248,18 +253,17 @@ public final class DateOperationsImpl {
     /**
      * Get overflow date value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return overflow date value.
      */
     public Response<LocalDate> getOverflowDateWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getOverflowDate());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -275,8 +279,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getUnderflowDate(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getUnderflowDate();
@@ -287,8 +292,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -314,18 +320,17 @@ public final class DateOperationsImpl {
     /**
      * Get underflow date value.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return underflow date value.
      */
     public Response<LocalDate> getUnderflowDateWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getUnderflowDate());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -342,14 +347,16 @@ public final class DateOperationsImpl {
      * @param dateBody date body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMaxDate(LocalDate dateBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(dateBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(dateBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -362,7 +369,7 @@ public final class DateOperationsImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -390,24 +397,26 @@ public final class DateOperationsImpl {
      * 
      * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMaxDateWithRestResponse(LocalDate dateBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(dateBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(dateBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putMaxDate(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putMaxDate(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -423,8 +432,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getMaxDate(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getMaxDate();
@@ -435,8 +445,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -462,18 +473,17 @@ public final class DateOperationsImpl {
     /**
      * Get max date value 9999-12-31.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return max date value 9999-12-31.
      */
     public Response<LocalDate> getMaxDateWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMaxDate());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -490,14 +500,16 @@ public final class DateOperationsImpl {
      * @param dateBody date body.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void putMinDate(LocalDate dateBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(dateBody, client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    client.serializerAdapter.serialize(dateBody, client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -510,7 +522,7 @@ public final class DateOperationsImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch(Exception ex) {
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -538,24 +550,26 @@ public final class DateOperationsImpl {
      * 
      * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMinDateWithRestResponse(LocalDate dateBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(dateBody, this.client.resolveSerializerFormat("application/json")));
-        } catch(java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
+                    this.client.serializerAdapter.serialize(dateBody,
+                            this.client.resolveSerializerFormat("application/json")));
+        } catch (java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putMinDate(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client
+                .executeRetrofitCall(service.putMinDate(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -571,8 +585,9 @@ public final class DateOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException           thrown if the request is rejected by server.
+     * @throws RuntimeException         all other wrapped checked exceptions if the
+     *                                  request fails to be sent.
      */
     public void getMinDate(final Callback<LocalDate> callback) {
         Call<ResponseBody> call = service.getMinDate();
@@ -583,8 +598,9 @@ public final class DateOperationsImpl {
                     if (response.code() == 200) {
                         final LocalDate decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(), LocalDate.class);
-                        } catch(Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(),
+                                    LocalDate.class);
+                        } catch (Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -610,18 +626,17 @@ public final class DateOperationsImpl {
     /**
      * Get min date value 0000-01-01.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @throws ErrorException   thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request
+     *                          fails to be sent.
      * @return min date value 0000-01-01.
      */
     public Response<LocalDate> getMinDateWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMinDate());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(),
-                                        response.code(),
-                                        response.headers(),
-                                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
+                return new Response<>(response.raw().request(), response.code(), response.headers(),
+                        this.client.deserializeContent(response.headers(), response.body(), LocalDate.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
