@@ -59,7 +59,7 @@ public class CodeNamer {
         put((char) 125, "RightCurlyBracket");
         put((char) 126, "Tilde");
     }};
-    private static final List<String> RESERVED_WORDS = Arrays.asList(
+    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
             "abstract", "assert", "boolean", "Boolean", "break",
             "byte", "Byte", "case", "catch", "char",
             "Character", "class", "Class", "const", "continue",
@@ -75,7 +75,7 @@ public class CodeNamer {
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
             "String", "Object", "header", "_"
-    );
+    ));
 
     private static NamerFactory factory = new DefaultNamerFactory();
 

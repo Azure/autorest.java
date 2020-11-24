@@ -5,9 +5,11 @@ import org.atteo.evo.inflector.English;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
@@ -55,7 +57,7 @@ public class CodeNamer {
         put((char) 125, "RightCurlyBracket");
         put((char) 126, "Tilde");
     }};
-    private static final List<String> RESERVED_WORDS = Arrays.asList(
+    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
             "abstract", "assert", "boolean", "Boolean", "break",
             "byte", "Byte", "case", "catch", "char",
             "Character", "class", "Class", "const", "continue",
@@ -70,14 +72,20 @@ public class CodeNamer {
             "throws", "transient", "true", "try", "void",
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header", "_",
-            // following are commonly used classes/annotations in service client, from azure-core
-            "Host", "ServiceInterface", "ServiceMethod", "ReturnType",
-            "Get", "Put", "Post", "Patch", "Delete", "Headers",
-            "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
-            "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam",
-            "Fluent", "Immutable", "JsonFlatten"
-    );
+            "String", "Object", "header", "_"
+    ));
+
+    private static final Set<String> RESERVED_WORDS_CLASSES = new HashSet<>(RESERVED_WORDS);
+    static {
+        RESERVED_WORDS_CLASSES.addAll(Arrays.asList(
+                // following are commonly used classes/annotations in service client, from azure-core
+                "Host", "ServiceInterface", "ServiceMethod", "ReturnType",
+                "Get", "Put", "Post", "Patch", "Delete", "Headers",
+                "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
+                "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam",
+                "Fluent", "Immutable", "JsonFlatten"
+        ));
+    }
 
     private CodeNamer() {
     }
@@ -184,7 +192,7 @@ public class CodeNamer {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
+        return toPascalCase(removeInvalidCharacters(getEscapedReservedNameAndClasses(name, "Model")));
     }
 
     public static String getParameterName(String name) {
@@ -226,6 +234,17 @@ public class CodeNamer {
         Objects.requireNonNull(appendValue);
 
         if (RESERVED_WORDS.contains(name)) {
+            name += appendValue;
+        }
+
+        return name;
+    }
+
+    protected static String getEscapedReservedNameAndClasses(String name, String appendValue) {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(appendValue);
+
+        if (RESERVED_WORDS_CLASSES.contains(name)) {
             name += appendValue;
         }
 
