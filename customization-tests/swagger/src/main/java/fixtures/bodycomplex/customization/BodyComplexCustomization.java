@@ -34,5 +34,9 @@ public class BodyComplexCustomization extends Customization {
                 .changeMethodReturnType("putValid", "ArrayClient", "this");
         arrayClient.classJavadoc().setDescription("The sync client containing Array operations.");
         arrayClient.methodJavadoc("putValid").setReturn("The ArrayClient itself");
+
+        ClassCustomization cat = implementationModels.getClass("Cat")
+                .changeMethodReturnType("getColor", "byte[]", "String colorStr = %s; try { return colorStr.getBytes" +
+                        "(\"UTF-8\"); } catch (UnsupportedEncodingException ex) { return colorStr.getBytes(); }", true);
     }
 }
