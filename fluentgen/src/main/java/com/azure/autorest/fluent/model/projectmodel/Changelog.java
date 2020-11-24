@@ -34,7 +34,7 @@ public class Changelog {
     }
 
     public Changelog(String content) {
-        this.lines = Arrays.stream(content.split("\n")).collect(Collectors.toList());
+        this.lines = Arrays.stream(content.split("\r?\n")).collect(Collectors.toList());
     }
 
     public Changelog(BufferedReader reader) {
@@ -104,5 +104,9 @@ public class Changelog {
 
     public String getContent() {
         return String.join("\n", lines);
+    }
+
+    public List<String> getLines() {
+        return lines;
     }
 }

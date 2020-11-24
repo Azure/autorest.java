@@ -57,15 +57,18 @@ public class Project {
     }
 
     public Project(FluentClient fluentClient) {
+        this(fluentClient.getManager().getServiceName(), fluentClient.getInnerClient().getClientDescription());
+    }
+
+    protected Project(String serviceName, String clientDescription) {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
 
-        this.serviceName = fluentClient.getManager().getServiceName();
+        this.serviceName = serviceName;
         this.namespace = JavaSettings.getInstance().getPackage();
         this.artifactId = FluentUtils.getArtifactId();
 
         settings.getArtifactVersion().ifPresent(version -> this.version = version);
 
-        String clientDescription = fluentClient.getInnerClient().getClientDescription();
         if (clientDescription == null) {
             clientDescription = "";
         }
