@@ -3,9 +3,25 @@ set AZURE_ARGUMENTS=--android --v4 --java --use:.\ --output-folder=android-tests
 set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger
 set NAMESPACE=com.azure.androidtest
 ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-array.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyarray --payload-flattening-threshold=1
+ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-byte.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-date.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydate --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-datetime.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydatetime --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-datetime-rfc1123.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydatetimerfc1123 --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-integer.json
 ECHO %INPUTFILE%

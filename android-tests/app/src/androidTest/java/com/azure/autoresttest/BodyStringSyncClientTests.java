@@ -108,7 +108,7 @@ public class BodyStringSyncClientTests {
         return string;
     }
 
-    private static String byteToString(byte[] bytes) {
+    public static String byteToString(byte[] bytes) {
         return new String(Base64.getDecoder().decode(unquote(new String(bytes, StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
     }
 
