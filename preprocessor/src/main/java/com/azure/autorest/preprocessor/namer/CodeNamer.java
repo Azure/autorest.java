@@ -75,7 +75,7 @@ public class CodeNamer {
             "Host", "ServiceInterface", "ServiceMethod", "ReturnType",
             "Get", "Put", "Post", "Patch", "Delete", "Headers",
             "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
-            "HostParam", "PathParam", "QueryParam", "HeaderParam",
+            "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam",
             "Fluent", "Immutable", "JsonFlatten"
     );
 
