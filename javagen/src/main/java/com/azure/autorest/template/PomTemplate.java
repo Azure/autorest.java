@@ -94,7 +94,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
-                propertiesBlock.tag("legal", "<![CDATA[[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.]]>");
+                propertiesBlock.tagCdata("legal", "[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.");
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
