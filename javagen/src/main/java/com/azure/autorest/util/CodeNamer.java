@@ -196,13 +196,6 @@ public class CodeNamer {
         return correctName;
     }
 
-    public static String getTypeName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-        return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
-    }
-
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
