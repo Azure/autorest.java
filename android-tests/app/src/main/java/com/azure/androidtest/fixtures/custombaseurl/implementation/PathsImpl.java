@@ -46,7 +46,7 @@ public final class PathsImpl {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -87,7 +87,7 @@ public final class PathsImpl {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri.
