@@ -10,15 +10,15 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 public class PageRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
-    private final ServiceClient serviceClient;
+    private final String serviceClientClassName;
     private final ClientMethod getNextPageMethod;
 
     public PageRetrieverTemplate(ClientMethod getFirstPageMethod,
                                          ClientMethod getNextPageMethod,
-                                         ServiceClient serviceClient) {
+                                         String serviceClientClassName) {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
-        this.serviceClient = serviceClient;
+        this.serviceClientClassName = serviceClientClassName;
     }
 
     public static String getRetrieverClassName(IType elementType) {
@@ -51,8 +51,8 @@ public class PageRetrieverTemplate {
             if (hasPrevious) {
                 ctorSignatureBuilder.append(", ");
             }
-            javaClass.privateFinalMemberVariable(serviceClient.getClassName(), "serviceClient");
-            ctorSignatureBuilder.append(String.format("%s serviceClient", serviceClient.getClassName()));
+            javaClass.privateFinalMemberVariable(serviceClientClassName, "serviceClient");
+            ctorSignatureBuilder.append(String.format("%s serviceClient", serviceClientClassName));
             ctorSignatureBuilder.append(")");
 
             javaClass.constructor(JavaVisibility.Public, ctorSignatureBuilder.toString(), constructor -> {
