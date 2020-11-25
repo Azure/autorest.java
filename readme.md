@@ -88,8 +88,11 @@ Following settings only works when `fluent` option is specified.
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 | `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
-Also `fluent` option will change the default value for some vanilla options.
+`fluent` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
+
+For `fluent=LITE`, please set the overriding option `--pipeline.modelerfour.flatten-payloads=false`.
+This will disable the payload flattening on client method parameters, which provides better backward-compatibility for generated code.
 
 The code formatter would require Java 11+ runtime.
 
