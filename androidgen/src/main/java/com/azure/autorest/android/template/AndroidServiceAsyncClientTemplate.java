@@ -89,7 +89,10 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
                 methodGroupClient
                         .getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
+                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleAsyncRestResponse
+                                || clientMethod.getType() == ClientMethodType.SimpleAsync
+                                || (clientMethod.getType() == ClientMethodType.PagingAsync
+                                    && clientMethod.getName().contains("Pages")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
