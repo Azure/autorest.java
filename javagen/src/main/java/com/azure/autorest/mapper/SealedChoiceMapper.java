@@ -41,7 +41,6 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
             _itype = ClassType.String;
         } else {
-            enumTypeName = CodeNamer.getTypeName(enumTypeName);
             String enumSubpackage = settings.getModelsSubpackage();
             if (settings.isCustomType(enumTypeName)) {
                 enumSubpackage = settings.getCustomTypesSubpackage();

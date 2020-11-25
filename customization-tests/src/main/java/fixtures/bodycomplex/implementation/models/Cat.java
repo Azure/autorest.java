@@ -6,6 +6,7 @@ package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /** The Cat model. */
@@ -28,8 +29,14 @@ public class Cat extends Pet {
      *
      * @return the color value.
      */
-    public String getColor() {
-        return this.color;
+    public byte[] getColor() {
+        String returnValue = this.color;
+        String colorStr = returnValue;
+        try {
+            return colorStr.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            return colorStr.getBytes();
+        }
     }
 
     /**
