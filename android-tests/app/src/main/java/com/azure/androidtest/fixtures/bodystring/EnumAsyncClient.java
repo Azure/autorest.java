@@ -170,15 +170,9 @@ public final class EnumAsyncClient {
                 this.host = "http://localhost:3000";
             }
             if (serviceClientBuilder == null) {
-                if (host == null) {
-                    throw new IllegalArgumentException("Missing required parameters 'host'.");
-                }
                 this.serviceClientBuilder = new ServiceClient.Builder();
             }
-            if (host != null) {
-                final String retrofitBaseUrl = this.host.replace("{host}", host);
-                serviceClientBuilder.setBaseUrl(retrofitBaseUrl);
-            }
+            serviceClientBuilder.setBaseUrl(host);
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }

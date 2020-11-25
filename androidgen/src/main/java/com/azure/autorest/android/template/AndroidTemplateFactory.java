@@ -47,11 +47,6 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
     }
 
     @Override
-    public ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
-        return AndroidServiceClientBuilderTemplate.getInstance();
-    }
-
-    @Override
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return AndroidWrapperClientMethodTemplate.getInstance();
     }

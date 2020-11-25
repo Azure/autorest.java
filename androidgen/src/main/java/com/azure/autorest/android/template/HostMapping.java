@@ -3,7 +3,9 @@ package com.azure.autorest.android.template;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,60 +13,60 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 class HostMapping {
-    private final String host;
-    private final List<String> hostParams;
+    public static final String HOST_PROPERTY_NAME = "host";
 
-    public List<String> getHostParams() {
+    private final String baseUrlTemplate;
+    private final List<ProxyMethodParameter> hostParams;
+    private final boolean hostIsBaseUrl;
+
+    public List<ProxyMethodParameter> getHostParams() {
         return this.hostParams;
     }
 
     public String anyHostParamAbsentExpression() {
         return this.hostParams
                 .stream()
-                .map(h -> String.format("%s == null", h))
-                .collect(Collectors.joining("|| "));
+                .map(h -> String.format("%s == null", h.getName()))
+                .collect(Collectors.joining(" || "));
+    }
+
+    public boolean serviceHostPropertyIsBaseUrl() {
+        return this.hostIsBaseUrl;
     }
 
     public String allHostParamPresentExpression() {
         return this.hostParams
                 .stream()
-                .map(h -> String.format("%s != null", h))
-                .collect(Collectors.joining("&& "));
+                .map(h -> String.format("%s != null", h.getName()))
+                .collect(Collectors.joining(" && "));
     }
 
-    public String getBaseUrlExpression() {
-        if (this.host == null || this.host.isEmpty()) {
-            // Host is absent.
-            //
-            if (this.hostParams.isEmpty()) {
-                return "";
-            } else {
-                return this.hostParams.get(0);
-            }
+    public String getBaseUrlPattern() {
+        return baseUrlTemplate;
+    }
+
+    public String getBaseUrlExpression(String baseUrlVariableName) {
+        if (this.baseUrlTemplate == null || this.baseUrlTemplate.isEmpty()) {
+            return baseUrlVariableName;
         } else {
-            // Host is present.
-            //
             if (this.hostParams.isEmpty()) {
-                return this.host;
+                return baseUrlVariableName;
             } else {
-                if (this.host.equalsIgnoreCase(String.format("{%s}", this.hostParams.get(0)))) {
-                    return this.hostParams.get(0) + ";";
-                } else {
-                    StringBuilder endpoint = new StringBuilder();
-                    for (String hostParam : this.hostParams) {
-                        endpoint.append(String.format("this.host.replace(\"{%s}\", %s)", hostParam, hostParam));
-                    }
-                    return endpoint
-                            .append(";")
-                            .toString();
+                StringBuilder endpoint = new StringBuilder();
+                endpoint.append(baseUrlVariableName);
+                for (ProxyMethodParameter hostParam : this.hostParams) {
+                    endpoint.append(String.format(".replace(\"{%s}\", %s)", hostParam.getName(), hostParam.getName()));
                 }
+                endpoint.append(";");
+                return endpoint.toString();
             }
         }
     }
 
-    private HostMapping(String host, List<String> hostParams) {
-        this.host = host;
+    private HostMapping(String baseUrl, List<ProxyMethodParameter> hostParams, boolean hostIsBaseUrl) {
+        this.baseUrlTemplate = baseUrl;
         this.hostParams = hostParams;
+        this.hostIsBaseUrl = hostIsBaseUrl;
     }
 
     public static HostMapping create(ServiceClient serviceClient) {
@@ -88,15 +90,19 @@ class HostMapping {
             }
         }
         if (proxy == null) {
-            return new HostMapping(null, new ArrayList<>());
+            return new HostMapping(null, new ArrayList<>(), true);
         }
 
         // @Host("{endpoint}/anomalydetector-ee/v1.0")
-        final String host = proxy.getBaseURL();
-        if (host == null || host.isEmpty()) {
-            return new HostMapping(host, new ArrayList<>());
+        final String baseURL = proxy.getBaseURL();
+        if (baseURL == null || baseURL.isEmpty()) {
+            return new HostMapping(baseURL, new ArrayList<>(), true);
         }
-        List<String> hostParams;
+
+        Optional<ServiceClientProperty> hostProperty = serviceClient.getProperties().stream().filter(p -> p.getName().equals(HOST_PROPERTY_NAME)).findFirst();
+        final boolean hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
+
+        List<ProxyMethodParameter> hostParams;
         ProxyMethod proxyMethod = proxy.getMethods().get(0);
         // find all @HostParam("endpoint")
         // In ServiceClient these are global parameters
@@ -105,29 +111,12 @@ class HostMapping {
                 .getParameters()
                 .stream()
                 .filter(p -> {
-                    return p.getRequestParameterLocation() == RequestParameterLocation.Uri &&
-                            !p.getIsConstant();
+                    return p.getRequestParameterLocation() == RequestParameterLocation.Uri
+                            && !p.getIsConstant()
+                            && (!hostIsBaseUrl || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used for base url
                 })
-                .map(p -> p.getName())
                 .collect(Collectors.toList());
 
-        String[] resolvedHost = new String[1];
-        resolvedHost[0] = host;
-
-        proxyMethod
-                .getParameters()
-                .stream()
-                .filter(p -> {
-                    return p.getRequestParameterLocation() == RequestParameterLocation.Uri &&
-                            p.getIsConstant();
-                }).forEach(parameter -> {
-            if (resolvedHost[0].contains(String.format("{%s}", parameter.getName()))) {
-                resolvedHost[0]
-                        = resolvedHost[0].replace(String.format("{%s}",
-                        parameter.getName()),
-                        parameter.getDefaultValue());
-            }
-        });
-        return new HostMapping(resolvedHost[0], hostParams);
+        return new HostMapping(baseURL, hostParams, hostIsBaseUrl);
     }
 }

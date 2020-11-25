@@ -2,6 +2,7 @@ package com.azure.autorest.android.mapper;
 
 import com.azure.autorest.android.model.AndroidClientMethod;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
@@ -95,6 +96,12 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
                 if (this.shouldCollapseOptionalParameters && !parameter.isRequired()) {
                     optionalParameters.add(parameter);
+                    continue;
+                }
+
+                // host parameters are handled by the builder
+                if (parameter.getProtocol().getHttp() != null
+                    && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Uri) {
                     continue;
                 }
 
