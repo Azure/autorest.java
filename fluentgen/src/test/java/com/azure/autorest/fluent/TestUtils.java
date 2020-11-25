@@ -6,8 +6,10 @@
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.plugin.JavaSettingsAccessor;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.util.FluentJavaSettings;
 
 import java.lang.reflect.Type;
 
@@ -20,6 +22,8 @@ public class TestUtils {
             instance = this;
 
             JavaSettingsAccessor.setHost(this);
+
+            FluentStatic.setFluentJavaSettings(new FluentJavaSettings(this));
         }
 
         @Override
@@ -31,6 +35,11 @@ public class TestUtils {
             }
 
             return null;
+        }
+
+        @Override
+        public void message(Message message) {
+            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
         }
     }
 }
