@@ -103,6 +103,7 @@ public class ErrorTypeNormalization {
 
                 if (errorSchema != error) {
                     errorSchema.setParents(parents);
+                    error.setChildren(errorSchema.getChildren());
                 }
 
                 List<Property> properties = new ArrayList<>();
