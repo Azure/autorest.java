@@ -9,6 +9,8 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -60,6 +62,10 @@ public class FluentManagerTemplate {
 
         final boolean requiresSubscriptionIdParameter = serviceClient.getProperties().stream()
                 .anyMatch(p -> p.getName().equals("subscriptionId"));
+        final IType subscriptionIdParameterType = serviceClient.getProperties().stream()
+                .filter(p -> p.getName().equals("subscriptionId"))
+                .map(ServiceClientProperty::getType)
+                .findFirst().orElse(null);
 
         String builderPackageName = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
         String builderTypeName = serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix();
@@ -95,6 +101,10 @@ public class FluentManagerTemplate {
                 AzureProfile.class.getName()
         ));
 
+        if (requiresSubscriptionIdParameter && subscriptionIdParameterType != null) {
+            subscriptionIdParameterType.addImportsTo(imports, false);
+        }
+
         imports.add(String.format("%1$s.%2$s", builderPackageName, builderTypeName));
         imports.add(String.format("%1$s.%2$s", serviceClientPackageName, serviceClientTypeName));
 
@@ -124,7 +134,11 @@ public class FluentManagerTemplate {
                     methodBlock.line(".pipeline(httpPipeline)");
                     methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())");
                     if (requiresSubscriptionIdParameter) {
-                        methodBlock.line(".subscriptionId(profile.getSubscriptionId())");
+                        if (subscriptionIdParameterType == ClassType.UUID) {
+                            methodBlock.line(".subscriptionId(UUID.fromString(profile.getSubscriptionId()))");
+                        } else {
+                            methodBlock.line(".subscriptionId(profile.getSubscriptionId())");
+                        }
                     }
                     methodBlock.line(".defaultPollInterval(defaultPollInterval)");
                     methodBlock.line(".buildClient();");
