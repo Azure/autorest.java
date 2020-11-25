@@ -12,12 +12,20 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.SignStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoField.*;
 
 public class Changelog {
 
@@ -29,7 +37,8 @@ public class Changelog {
         this(FluentUtils.loadTextFromResource("Changelog.txt",
                 TextTemplate.SERVICE_NAME, project.getServiceName(),
                 TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
-                TextTemplate.ARTIFACT_VERSION, project.getVersion()
+                TextTemplate.ARTIFACT_VERSION, project.getVersion(),
+                TextTemplate.DATE_UTC, getDateUtc()
         ));
     }
 
@@ -83,7 +92,7 @@ public class Changelog {
         this.lines.clear();
 
         this.lines.addAll(sectionBefore);
-        this.lines.add(String.format("## %s (Unreleased)", project.getVersion()));
+        this.lines.add(String.format("## %1$s (%2$s)", project.getVersion(), getDateUtc()));
         this.lines.add("");
         this.lines.add(currentChangelog);
         if (!previousChangelog.isEmpty() && !previousChangelog.iterator().next().startsWith("- ")) {
@@ -108,5 +117,18 @@ public class Changelog {
 
     public List<String> getLines() {
         return lines;
+    }
+
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+            .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-')
+            .appendValue(MONTH_OF_YEAR, 2)
+            .appendLiteral('-')
+            .appendValue(DAY_OF_MONTH, 2)
+            .toFormatter(Locale.ROOT);
+
+    static String getDateUtc() {
+        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
+        return now.format(FORMATTER);
     }
 }

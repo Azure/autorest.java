@@ -39,10 +39,11 @@ public class ChangelogTests {
     @Test
     public void testChangelog() {
         Project mockProject = new MockProject();
+        String dateUtc = Changelog.getDateUtc();
 
         {
             Changelog changelog = new Changelog(mockProject);
-            Assertions.assertTrue(changelog.getLines().contains("## 1.1.0-beta.1 (Unreleased)"));
+            Assertions.assertTrue(changelog.getLines().contains(String.format("## 1.1.0-beta.1 (%s)", dateUtc)));
             Assertions.assertTrue(changelog.getLines().stream().anyMatch(l -> l.equals("- Azure Resource Manager Resource client library for Java. " + CHANGELOG_LINE)));
         }
 
@@ -62,7 +63,7 @@ public class ChangelogTests {
             Changelog changelog = new Changelog(existingChangelog);
             changelog.updateForVersion(mockProject);
 
-            Assertions.assertTrue(changelog.getLines().contains("## 1.1.0-beta.1 (Unreleased)"));
+            Assertions.assertTrue(changelog.getLines().contains(String.format("## 1.1.0-beta.1 (%s)", dateUtc)));
             Assertions.assertTrue(changelog.getLines().contains("## 1.0.0 (2020-10-29)"));
 
             Assertions.assertFalse(changelog.getLines().contains("## 1.0.1-beta.1 (Unreleased)"));
@@ -72,6 +73,23 @@ public class ChangelogTests {
             Assertions.assertTrue(previousChangelog > 0);
             Assertions.assertTrue(addedChangelog > 0);
             Assertions.assertEquals(previousChangelog - 1, addedChangelog);
+
+            Assertions.assertTrue(changelog.getLines().contains("- Initial release."));
+        }
+
+        {
+            String existingChangelog =
+                    "# Release History\n" +
+                            "\n" +
+                            "## 1.0.0 (2020-10-29)\n" +
+                            "\n" +
+                            "- Initial release.";
+
+            Changelog changelog = new Changelog(existingChangelog);
+            changelog.updateForVersion(mockProject);
+
+            Assertions.assertTrue(changelog.getLines().contains(String.format("## 1.1.0-beta.1 (%s)", dateUtc)));
+            Assertions.assertTrue(changelog.getLines().contains("## 1.0.0 (2020-10-29)"));
 
             Assertions.assertTrue(changelog.getLines().contains("- Initial release."));
         }
