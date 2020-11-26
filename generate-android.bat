@@ -46,3 +46,7 @@ ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/xms-error-responses.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.errorResponse --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/report.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.report --payload-flattening-threshold=1
