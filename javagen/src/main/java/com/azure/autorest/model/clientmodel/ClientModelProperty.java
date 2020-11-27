@@ -93,7 +93,7 @@ public class ClientModelProperty {
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      * @param isAdditionalProperties Whether or not this property contain the additional properties.
      */
-    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
+    protected ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
             String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
             IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly,
             boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties) {
@@ -203,7 +203,7 @@ public class ClientModelProperty {
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.ByteArray)) {
-            imports.add("com.azure.core.util.CoreUtils");
+            addCoreUtilsImports(imports);
         }
 
         if (shouldGenerateXmlSerialization) {
@@ -214,6 +214,10 @@ public class ClientModelProperty {
         } else {
             imports.add("com.fasterxml.jackson.annotation.JsonProperty");
         }
+    }
+
+    protected void addCoreUtilsImports(Set<String> imports) {
+        imports.add("com.azure.core.util.CoreUtils");
     }
 
     public boolean isRequired() {
@@ -229,23 +233,23 @@ public class ClientModelProperty {
     }
 
     public static class Builder {
-        private String name;
-        private String description;
-        private String annotationArguments;
-        private boolean isXmlAttribute;
-        private String xmlName;
-        private String serializedName;
-        private boolean isXmlWrapper;
-        private String xmlListElementName;
-        private IType wireType;
-        private IType clientType;
-        private boolean isConstant = false;
-        private String defaultValue;
-        private boolean isReadOnly;
-        private boolean isRequired;
-        private String headerCollectionPrefix;
-        private boolean isAdditionalProperties = false;
-        private String xmlNamespace;
+        protected String name;
+        protected String description;
+        protected String annotationArguments;
+        protected boolean isXmlAttribute;
+        protected String xmlName;
+        protected String serializedName;
+        protected boolean isXmlWrapper;
+        protected String xmlListElementName;
+        protected IType wireType;
+        protected IType clientType;
+        protected boolean isConstant = false;
+        protected String defaultValue;
+        protected boolean isReadOnly;
+        protected boolean isRequired;
+        protected String headerCollectionPrefix;
+        protected boolean isAdditionalProperties = false;
+        protected String xmlNamespace;
 
         /**
          * Sets the name of this property.

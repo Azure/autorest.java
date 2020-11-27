@@ -175,7 +175,7 @@ public class ClientModel {
         addReadWriteAnnotationImport(properties, imports);        
 
         if (needsFlatten) {
-            imports.add("com.azure.core.annotation.JsonFlatten");
+            addJsonFlattenImport(imports);
         }
 
         for (String import_Keyword : getImports()) {
@@ -194,6 +194,10 @@ public class ClientModel {
         for (ClientModelProperty property : getProperties()) {
             property.addImportsTo(imports, settings.shouldGenerateXmlSerialization());
         }
+    }
+
+    protected void addJsonFlattenImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.JsonFlatten");
     }
 
     public static class Builder {

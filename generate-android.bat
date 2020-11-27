@@ -7,6 +7,18 @@ set INPUTFILE=%INPUTSOURCE%/body-array.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyarray --payload-flattening-threshold=1
 ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-boolean.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyboolean --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-boolean.quirks.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybooleanquirks --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-complex.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodycomplex --payload-flattening-threshold=1
+ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-byte.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
