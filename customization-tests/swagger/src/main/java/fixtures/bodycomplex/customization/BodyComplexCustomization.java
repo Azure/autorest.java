@@ -9,30 +9,32 @@ public class BodyComplexCustomization extends Customization {
     @Override
     public void customize(LibraryCustomization customization) {
         PackageCustomization implementationModels = customization.getPackage("fixtures.bodycomplex.implementation.models");
-        implementationModels.renameClass("Goblinshark", "GoblinShark");
+        implementationModels.getClass("Goblinshark").rename("GoblinShark");
 
-        implementationModels.getClass("DotSalmon")
-                .renameProperty("iswild", "isWild")
-                .renameMethod("setIsWild", "setWild")
-                .changeMethodReturnType("isWild", "boolean", "%s")
-                .changeMethodReturnType("setWild", "void", null);
+        ClassCustomization dotSalmon = implementationModels.getClass("DotSalmon");
+        dotSalmon.getProperty("iswild").rename("isWild");
+        dotSalmon.getMethod("setIsWild")
+                .rename("setWild")
+                .setReturnType("void", null);
+        dotSalmon.getMethod("isWild")
+                .setReturnType("boolean", "%s");
 
         implementationModels.getClass("CMYKColors")
                 .renameEnumMember("CYAN", "TEAL");
 
-        ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj")
-                .generateGetterAndSetter("id")
-                .changeMethodReturnType("getId", "UUID", "UUID.fromString(%s)")
-                .changeMethodModifier("setId", "");
-        readonlyObj.methodJavadoc("getId").setDescription("Get the ID of the object.");
-        readonlyObj.methodJavadoc("setId").setDescription("Set the ID of the object.")
+        ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj");
+        readonlyObj.getProperty("id").generateGetterAndSetter();
+        readonlyObj.getMethod("getId").setReturnType("UUID", "UUID.fromString(%s)");
+        readonlyObj.getMethod("setId").setModifier("");
+        readonlyObj.getMethod("getId").getJavadoc().setDescription("Get the ID of the object.");
+        readonlyObj.getMethod("setId").getJavadoc().setDescription("Set the ID of the object.")
                 .setReturn("The current ReadonlyObj instance")
                 .setParam("id", "The ID value");
 
         PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
-        ClassCustomization arrayClient = root.getClass("ArrayClient")
-                .changeMethodReturnType("putValid", "ArrayClient", "this");
-        arrayClient.classJavadoc().setDescription("The sync client containing Array operations.");
-        arrayClient.methodJavadoc("putValid").setReturn("The ArrayClient itself");
+        ClassCustomization arrayClient = root.getClass("ArrayClient");
+        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this");
+        arrayClient.getJavadoc().setDescription("The sync client containing Array operations.");
+        arrayClient.getMethod("putValid").getJavadoc().setReturn("The ArrayClient itself");
     }
 }

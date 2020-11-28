@@ -56,37 +56,6 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setDescription(String description) {
-//        if (descriptionRange == null) {
-//            int descriptionLine = symbolLine;
-//            String lineContent = editor.getFileLine(fileName, descriptionLine);
-//            while (!lineContent.startsWith(indent + "/*")) {
-//                lineContent = editor.getFileLine(fileName, --descriptionLine);
-//            }
-//            descriptionLine ++;
-//            editor.insertBlankLine(fileName, descriptionLine, false);
-//            FileEvent blankLineEvent = new FileEvent();
-//            blankLineEvent.setUri(fileUri);
-//            blankLineEvent.setType(FileChangeType.CHANGED);
-//            languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
-//
-//            Position start = new Position(descriptionLine, 0);
-//            TextEdit textEdit = new TextEdit();
-//            textEdit.setNewText(indent + " * " + description);
-//            textEdit.setRange(new Range(start, start));
-//            WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-//            workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-//            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-//            descriptionRange = new Range(start, new Position(start.getLine(), editor.getFileLine(fileName, descriptionLine).length()));
-//        } else {
-//            TextEdit textEdit = new TextEdit();
-//            textEdit.setNewText(description);
-//            textEdit.setRange(descriptionRange);
-//            WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-//            workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-//            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-//            descriptionRange = new Range(descriptionRange.getStart(),
-//                    new Position(descriptionRange.getStart().getLine(), descriptionRange.getStart().getCharacter() + description.length()));
-//        }
         descriptionDoc = description;
         commit();
         return this;
@@ -100,52 +69,6 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setParam(String parameterName, String description) {
-//        TextEdit textEdit = new TextEdit();
-//        if (paramRanges.containsKey(parameterName)) {
-//            textEdit.setNewText(description);
-//            textEdit.setRange(paramRanges.get(parameterName));
-//        } else {
-//            int newParamLine = -1;
-//            if (!paramRanges.isEmpty()) {
-//                for (Range paramRange : paramRanges.values()) {
-//                    if (paramRange.getEnd().getLine() + 1 > newParamLine) {
-//                        newParamLine = paramRange.getEnd().getLine() + 1;
-//                    }
-//                }
-//            } else if (returnRange != null) {
-//                newParamLine = returnRange.getStart().getLine();
-//            } else if (!throwsRanges.isEmpty()) {
-//                newParamLine = symbolLine;
-//                for (Range throwsRange : throwsRanges.values()) {
-//                    if (throwsRange.getEnd().getLine() < newParamLine) {
-//                        newParamLine = throwsRange.getStart().getLine();
-//                    }
-//                }
-//            } else if (descriptionRange != null) {
-//                newParamLine = descriptionRange.getEnd().getLine() + 1;
-//                if (!editor.getFileLine(fileName, newParamLine).endsWith("*/")) {
-//                    editor.insertBlankLine(fileName, newParamLine, false);
-//                    String indent = editor.getFileLine(fileName, newParamLine);
-//                    Position insert = new Position(newParamLine, indent.length());
-//                    editor.replace(fileName, insert, insert, indent + " * ");
-//                    newParamLine++;
-//                }
-//            }
-//            editor.insertBlankLine(fileName, newParamLine, false);
-//            FileEvent blankLineEvent = new FileEvent();
-//            blankLineEvent.setUri(fileUri);
-//            blankLineEvent.setType(FileChangeType.CHANGED);
-//            languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
-//
-//            textEdit.setNewText(indent + " * @param " + parameterName + " " + description);
-//            Position newParamStart = new Position(newParamLine, editor.getFileLine(fileName, newParamLine).length());
-//            textEdit.setRange(new Range(newParamStart, newParamStart));
-//            Position newParamEnd = new Position(newParamLine, newParamStart.getCharacter() + textEdit.getNewText().length());
-//            paramRanges.put(parameterName, new Range(newParamStart, newParamEnd));
-//        }
-//        WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-//        workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-//        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
         paramDocs.put(parameterName, description);
         commit();
         return this;
@@ -170,50 +93,6 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setReturn(String description) {
-//        TextEdit textEdit = new TextEdit();
-//        if (returnRange != null) {
-//            textEdit.setNewText(description);
-//            textEdit.setRange(returnRange);
-//        } else {
-//            int newReturnLine = -1;
-//            if (!paramRanges.isEmpty()) {
-//                for (Range paramRange : paramRanges.values()) {
-//                    if (paramRange.getEnd().getLine() > newReturnLine) {
-//                        newReturnLine = paramRange.getEnd().getLine() + 1;
-//                    }
-//                }
-//            } else if (!throwsRanges.isEmpty()) {
-//                newReturnLine = symbolLine;
-//                for (Range throwsRange : throwsRanges.values()) {
-//                    if (throwsRange.getEnd().getLine() < newReturnLine) {
-//                        newReturnLine = throwsRange.getStart().getLine();
-//                    }
-//                }
-//            } else if (descriptionRange != null) {
-//                newReturnLine = descriptionRange.getEnd().getLine() + 1;
-//                if (!editor.getFileLine(fileName, newReturnLine).endsWith("*/")) {
-//                    editor.insertBlankLine(fileName, newReturnLine, false);
-//                    String indent = editor.getFileLine(fileName, newReturnLine);
-//                    Position insert = new Position(newReturnLine, indent.length());
-//                    editor.replace(fileName, insert, insert, indent + " * ");
-//                    newReturnLine++;
-//                }
-//            }
-//            editor.insertBlankLine(fileName, newReturnLine, false);
-//            FileEvent blankLineEvent = new FileEvent();
-//            blankLineEvent.setUri(fileUri);
-//            blankLineEvent.setType(FileChangeType.CHANGED);
-//            languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
-//
-//            textEdit.setNewText(indent + " * @return " + description);
-//            Position newReturnStart = new Position(newReturnLine, editor.getFileLine(fileName, newReturnLine).length());
-//            textEdit.setRange(new Range(newReturnStart, newReturnStart));
-//            Position newReturnEnd = new Position(newReturnLine, newReturnStart.getCharacter() + textEdit.getNewText().length());
-//            returnRange = new Range(newReturnStart, newReturnEnd);
-//        }
-//        WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-//        workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-//        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
         returnDoc = description;
         commit();
         return this;
