@@ -15,6 +15,7 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCo
 import com.azure.autorest.customization.models.Modifier;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
+import sun.nio.ch.Util;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -50,8 +52,10 @@ public final class ClassCustomization {
      */
     public MethodCustomization getMethod(String methodNameOrSignature) {
         String methodName;
+        String methodSignature = null;
         if (methodNameOrSignature.contains("(")) {
             // method signature
+            methodSignature = methodNameOrSignature.replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
             String returnTypeAndMethodName = methodNameOrSignature.split("\\(")[0];
             if (returnTypeAndMethodName.contains(" ")) {
                 methodName = returnTypeAndMethodName.replaceAll(".* ", "");
@@ -71,7 +75,11 @@ public final class ClassCustomization {
         if (!methodSymbol.isPresent()) {
             throw new IllegalArgumentException("Method " + methodNameOrSignature + " does not exist in class " + className);
         }
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSymbol.get());
+        if (methodSignature == null) {
+            methodSignature = editor.getFileLine(fileName, methodSymbol.get().getLocation().getRange().getStart().getLine())
+                    .replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
+        }
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature, methodSymbol.get());
     }
 
     /**
@@ -92,6 +100,35 @@ public final class ClassCustomization {
     public JavadocCustomization getJavadoc() {
         String packagePath = packageName.replace(".", "/");
         return new JavadocCustomization(editor, languageClient, packagePath, className, classSymbol.getLocation().getRange().getStart().getLine());
+    }
+
+    public MethodCustomization addMethod(String method) {
+        // find position
+        URI fileUri = classSymbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        String fileName = fileUri.toString().substring(i);
+        List<String> fileLines = editor.getFileLines(fileName);
+        int lineNum = fileLines.size();
+        String currentLine = fileLines.get(--lineNum);
+        while (!currentLine.endsWith("}") || currentLine.startsWith("}")) {
+            currentLine = fileLines.get(--lineNum);
+        }
+        editor.insertBlankLine(fileName, ++lineNum, false);
+        Position newMethod = editor.insertBlankLine(fileName, ++lineNum, false);
+
+        // replace
+        editor.replace(fileName, newMethod, newMethod, method);
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        // format
+        List<TextEdit> textEdits = languageClient.format(fileUri);
+        Utils.applyTextEdits(fileUri, textEdits, editor, languageClient);
+
+        String methodSignature = editor.getFileLine(fileName, lineNum);
+        return getMethod(methodSignature);
     }
 
     /**

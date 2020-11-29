@@ -4,6 +4,7 @@ import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
+import com.azure.autorest.customization.models.Modifier;
 
 public class BodyComplexCustomization extends Customization {
     @Override
@@ -18,6 +19,13 @@ public class BodyComplexCustomization extends Customization {
                 .setReturnType("void", null);
         dotSalmon.getMethod("isWild")
                 .setReturnType("boolean", "%s");
+        dotSalmon.addMethod("public boolean isDomestic() {\n" +
+                "    return \"US\".equalsIgnoreCase(getLocation());\n" +
+                "}")
+                .addAnnotation("JsonIgnore")
+                .getJavadoc()
+                    .setDescription("Return if the salmon is a domestic species.")
+                    .setReturn("true if the salmon is domestic");
 
         implementationModels.getClass("CMYKColors")
                 .renameEnumMember("CYAN", "TEAL");
@@ -25,7 +33,7 @@ public class BodyComplexCustomization extends Customization {
         ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj");
         readonlyObj.getProperty("id").generateGetterAndSetter();
         readonlyObj.getMethod("getId").setReturnType("UUID", "UUID.fromString(%s)");
-        readonlyObj.getMethod("setId").setModifier("");
+        readonlyObj.getMethod("setId").setModifier(Modifier.PACKAGE_PRIVATE);
         readonlyObj.getMethod("getId").getJavadoc().setDescription("Get the ID of the object.");
         readonlyObj.getMethod("setId").getJavadoc().setDescription("Set the ID of the object.")
                 .setReturn("The current ReadonlyObj instance")

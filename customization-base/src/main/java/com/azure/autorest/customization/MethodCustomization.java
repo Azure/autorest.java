@@ -31,14 +31,16 @@ public final class MethodCustomization {
     private final String packageName;
     private final String className;
     private final String methodName;
-    private final SymbolInformation symbol;
+    private String methodSignature;
+    private SymbolInformation symbol;
 
-    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, String methodName, SymbolInformation symbol) {
+    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, String methodName, String methodSignature, SymbolInformation symbol) {
         this.editor = editor;
         this.languageClient = languageClient;
         this.packageName = packageName;
         this.className = className;
         this.methodName = methodName;
+        this.methodSignature = methodSignature;
         this.symbol = symbol;
     }
 
@@ -69,7 +71,7 @@ public final class MethodCustomization {
         if (!newMethodSymbol.isPresent()) {
             throw new IllegalArgumentException("Renamed failed with new method " + newName + " not found.");
         }
-        return new MethodCustomization(editor, languageClient, packageName, className, newName, newMethodSymbol.get());
+        return new MethodCustomization(editor, languageClient, packageName, className, newName, methodSignature.replace(methodName + "(", newName + "("), newMethodSymbol.get());
     }
 
     /**
@@ -109,6 +111,7 @@ public final class MethodCustomization {
                 }
             }
         }
+        refreshSymbol();
         return this;
     }
 
@@ -134,6 +137,7 @@ public final class MethodCustomization {
         WorkspaceEdit workspaceEdit = new WorkspaceEdit();
         workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
         Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+        refreshSymbol();
         return this;
     }
 
@@ -231,6 +235,22 @@ public final class MethodCustomization {
                 }
             }
         }
+        methodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
+        refreshSymbol();
         return this;
+    }
+
+    private void refreshSymbol() {
+        URI fileUri = symbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        String fileName = fileUri.toString().substring(i);
+        Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
+                .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
+                .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
+                .findFirst();
+        if (!methodSymbol.isPresent()) {
+            throw new IllegalArgumentException("Method " + methodSignature + " does not exist in class " + className);
+        }
+        symbol = methodSymbol.get();
     }
 }

@@ -6,6 +6,7 @@ package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -66,5 +67,14 @@ public class DotSalmon extends DotFish {
      */
     public void setWild(Boolean iswild) {
         this.isWild = iswild;
+    }
+    /**
+     * Return if the salmon is a domestic species.
+     *
+     * @return true if the salmon is domestic
+     */
+    @JsonIgnore
+    public boolean isDomestic() {
+        return "US".equalsIgnoreCase(getLocation());
     }
 }
