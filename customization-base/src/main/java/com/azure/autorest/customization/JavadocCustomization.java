@@ -133,7 +133,7 @@ public final class JavadocCustomization {
     }
 
     private void initialize(int symbolLine) {
-        editor.insertBlankLine(fileName, symbolLine, false);
+        editor.insertBlankLine(fileName, symbolLine++, false);
         editor.replace(fileName, new Position(symbolLine, 0), new Position(symbolLine, 0), indent);
         Position javadocCursor = new Position(symbolLine, indent.length());
         javadocRange = new Range(javadocCursor, javadocCursor);
@@ -218,10 +218,10 @@ public final class JavadocCustomization {
         printWriter.print(indent + " */");
 
         editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringWriter.toString());
-        FileEvent blankLineEvent = new FileEvent();
-        blankLineEvent.setUri(fileUri);
-        blankLineEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
+        FileEvent replaceEvent = new FileEvent();
+        replaceEvent.setUri(fileUri);
+        replaceEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(replaceEvent));
 
         int javadocStartLine = javadocRange.getStart().getLine();
         String lineContent = editor.getFileLine(fileName, javadocStartLine);

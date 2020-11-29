@@ -6,7 +6,6 @@ import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
@@ -15,7 +14,6 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCo
 import com.azure.autorest.customization.models.Modifier;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
-import sun.nio.ch.Util;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -23,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +31,7 @@ public final class ClassCustomization {
     private final Editor editor;
     private final String packageName;
     private final String className;
-    private final SymbolInformation classSymbol;
+    private SymbolInformation classSymbol;
 
     ClassCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, SymbolInformation classSymbol) {
         this.editor = editor;
@@ -203,6 +200,7 @@ public final class ClassCustomization {
             workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
             Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
         }
+        refreshSymbol();
         return this;
     }
 
@@ -248,6 +246,7 @@ public final class ClassCustomization {
                 }
             }
         }
+        refreshSymbol();
         return this;
     }
 
@@ -291,6 +290,7 @@ public final class ClassCustomization {
                 }
             }
         }
+        refreshSymbol();
         return this;
     }
 
@@ -310,5 +310,9 @@ public final class ClassCustomization {
             Utils.applyWorkspaceEdit(edit, editor, languageClient);
         }
         return this;
+    }
+
+    private void refreshSymbol() {
+        this.classSymbol = new PackageCustomization(editor, languageClient, packageName).getClass(className).classSymbol;
     }
 }
