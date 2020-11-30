@@ -167,9 +167,6 @@ def main():
 
     sdks.sort()
 
-    # test
-    sdks = sdks[0:2]
-
     autorest_java = args['use']
     output_dir = args['test_output']
     report_dir = args['report_output']
