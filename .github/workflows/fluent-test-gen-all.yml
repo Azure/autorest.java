@@ -1,4 +1,4 @@
-name: Build and Test Generation for All RPs
+name: Fluent Lite - Build and Test Generation for All RPs
 on:
   schedule:
     - cron: 0 18 * * *
