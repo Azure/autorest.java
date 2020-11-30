@@ -3,7 +3,7 @@ package fixtures.mediatypes.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SourcePath model. */
+/** Uri or local path to source data. */
 @Fluent
 public final class SourcePath {
     /*

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
@@ -31,7 +34,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
         ClassType result = null;
         if (settings.isFluent()) {
-            result = mapImplementedModel(compositeType);
+            result = mapPredefinedModel(compositeType);
         }
         if (result == null) {
             if (isPlainObject(compositeType)) {
@@ -43,11 +46,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                     classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
                 } else if (settings.isFluent() && isInnerModel(compositeType)) {
                     className += "Inner";
-                    if (settings.isFluentLite()) {
-                        classPackage = settings.getPackage(settings.getModelsSubpackage(), "inner");
-                    } else {
-                        classPackage = settings.getPackage(settings.getImplementationSubpackage(), "inner");
-                    }
+                    classPackage = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
                 } else {
                     classPackage = settings.getPackage(settings.getModelsSubpackage());
                 }
@@ -74,22 +73,12 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     }
 
     /**
-     * Extension for Fluent implemented type.
+     * Extension for Fluent predefined type.
      *
      * @param compositeType object type
-     * @return Whether the type is already implemented.
+     * @return The predefined type.
      */
-    protected boolean isImplementedModel(ClassType compositeType) {
-        return false;
-    }
-
-    /**
-     * Extension for Fluent implemented type.
-     *
-     * @param compositeType object type
-     * @return The implemented type.
-     */
-    protected ClassType mapImplementedModel(ObjectSchema compositeType) {
+    protected ClassType mapPredefinedModel(ObjectSchema compositeType) {
         return null;
     }
 

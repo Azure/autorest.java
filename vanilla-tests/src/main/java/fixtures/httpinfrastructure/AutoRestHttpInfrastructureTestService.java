@@ -106,16 +106,16 @@ public final class AutoRestHttpInfrastructureTestService {
         return this.httpServerFailures;
     }
 
-    /** The HttpRetrys object to access its operations. */
-    private final HttpRetrys httpRetrys;
+    /** The HttpRetries object to access its operations. */
+    private final HttpRetries httpRetries;
 
     /**
-     * Gets the HttpRetrys object to access its operations.
+     * Gets the HttpRetries object to access its operations.
      *
-     * @return the HttpRetrys object.
+     * @return the HttpRetries object.
      */
-    public HttpRetrys getHttpRetrys() {
-        return this.httpRetrys;
+    public HttpRetries getHttpRetries() {
+        return this.httpRetries;
     }
 
     /** The MultipleResponses object to access its operations. */
@@ -130,7 +130,11 @@ public final class AutoRestHttpInfrastructureTestService {
         return this.multipleResponses;
     }
 
-    /** Initializes an instance of AutoRestHttpInfrastructureTestService client. */
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestHttpInfrastructureTestService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -144,6 +148,7 @@ public final class AutoRestHttpInfrastructureTestService {
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -154,6 +159,7 @@ public final class AutoRestHttpInfrastructureTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestHttpInfrastructureTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
@@ -164,7 +170,7 @@ public final class AutoRestHttpInfrastructureTestService {
         this.httpRedirects = new HttpRedirects(this);
         this.httpClientFailures = new HttpClientFailures(this);
         this.httpServerFailures = new HttpServerFailures(this);
-        this.httpRetrys = new HttpRetrys(this);
+        this.httpRetries = new HttpRetries(this);
         this.multipleResponses = new MultipleResponses(this);
     }
 }

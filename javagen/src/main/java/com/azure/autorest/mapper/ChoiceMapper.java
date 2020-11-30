@@ -42,13 +42,25 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
             _itype = ClassType.String;
         } else {
             String enumSubpackage = settings.getModelsSubpackage();
+            if (settings.isCustomType(enumTypeName)) {
+                enumSubpackage = settings.getCustomTypesSubpackage();
+            }
             String enumPackage = settings.getPackage(enumSubpackage);
-
-            enumTypeName = CodeNamer.getTypeName(enumTypeName);
 
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
-                final String memberName = CodeNamer.getEnumMemberName(enumValue.getValue());
+                String enumName = enumValue.getValue();
+                if (!settings.isFluent()) {
+                    // there exists cases that namer in modelerfour doing a really poor job on enum values, hence for Fluent still do this on raw enum values
+                    if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
+                            && enumValue.getLanguage().getJava().getName() != null) {
+                        enumName = enumValue.getLanguage().getJava().getName();
+                    } else if (enumValue.getLanguage() != null && enumValue.getLanguage().getDefault() != null
+                            && enumValue.getLanguage().getDefault().getName() != null) {
+                        enumName = enumValue.getLanguage().getDefault().getName();
+                    }
+                }
+                final String memberName = CodeNamer.getEnumMemberName(enumName);
                 long counter = enumValues.stream().filter(v -> v.getName().equals(memberName)).count();
                 if (counter > 0) {
                     enumValues.add(new ClientEnumValue(memberName + "_" + counter, enumValue.getValue()));

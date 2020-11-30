@@ -1,7 +1,6 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
-import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -90,12 +89,16 @@ public class SchemaUtil {
         if (compositeType.getDiscriminator() != null) {
             discriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
         } else if (compositeType.getDiscriminatorValue() != null) {
-            for (ComplexSchema parent : compositeType.getParents().getAll()) {
-                if (((ObjectSchema) parent).getDiscriminator() != null) {
+            for (Schema parent : compositeType.getParents().getAll()) {
+                if (parent instanceof ObjectSchema && ((ObjectSchema) parent).getDiscriminator() != null) {
                     discriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
                     break;
                 }
             }
+        }
+        if (discriminator == null) {
+            throw new IllegalStateException(String.format("discriminator not found in type %s and its parents",
+                    compositeType.getLanguage().getJava().getName()));
         }
         return discriminator;
     }

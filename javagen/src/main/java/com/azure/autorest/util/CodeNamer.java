@@ -1,12 +1,17 @@
 package com.azure.autorest.util;
 
+import org.atteo.evo.inflector.English;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
@@ -54,7 +59,7 @@ public class CodeNamer {
         put((char) 125, "RightCurlyBracket");
         put((char) 126, "Tilde");
     }};
-    private static final List<String> RESERVED_WORDS = Arrays.asList(
+    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
             "abstract", "assert", "boolean", "Boolean", "break",
             "byte", "Byte", "case", "catch", "char",
             "Character", "class", "Class", "const", "continue",
@@ -70,7 +75,7 @@ public class CodeNamer {
             "Void", "volatile", "while", "Date", "Datetime",
             "OffsetDateTime", "Duration", "Period", "Stream",
             "String", "Object", "header", "_"
-    );
+    ));
 
     private static NamerFactory factory = new DefaultNamerFactory();
 
@@ -137,6 +142,14 @@ public class CodeNamer {
                 .replace(">", "&gt;");
     }
 
+    public static String escapeComment(String comment) {
+        if (comment == null) {
+            return null;
+        }
+
+        return comment.replaceAll(Pattern.quote("*/"), "*&#47;");
+    }
+
     private static String formatCase(String name, boolean toLower) {
         if (name != null && !name.isEmpty()) {
             if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
@@ -183,13 +196,6 @@ public class CodeNamer {
         return correctName;
     }
 
-    public static String getTypeName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-        return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
-    }
-
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
@@ -199,7 +205,7 @@ public class CodeNamer {
 
     public static String getPlural(String name) {
         if (name != null && !name.isEmpty() && !name.endsWith("s") && !name.endsWith("S")) {
-            name += "s";
+            name = English.plural(name);
         }
         return name;
     }
@@ -209,7 +215,20 @@ public class CodeNamer {
             return name;
         }
 
+        // trim leading and trailing '_'
+        if ((name.startsWith("_") || name.endsWith("_")) && !name.chars().allMatch(c -> c == '_')) {
+            StringBuilder sb = new StringBuilder(name);
+            while (sb.length() > 0 && sb.charAt(0) == '_') {
+                sb.deleteCharAt(0);
+            }
+            while (sb.length() > 0 && sb.charAt(sb.length() - 1) == '_') {
+                sb.setLength(sb.length() - 1);
+            }
+            name = sb.toString();
+        }
+
         String result = removeInvalidCharacters(name.replaceAll("[\\\\/.+ -]+", "_"));
+        result = result.replaceAll("_{2,}", "_");  // merge multiple underlines
         Function<Character, Boolean> isUpper = c -> c >= 'A' && c <= 'Z';
         Function<Character, Boolean> isLower = c -> c >= 'a' && c <= 'z';
         for (int i = 1; i < result.length() - 1; i++) {
@@ -222,7 +241,7 @@ public class CodeNamer {
 
         if (result.startsWith("_") || result.endsWith("_")) {
             if (!result.chars().allMatch(c -> c == (int) '_')) {
-                // some char is not _
+                // some char is not '_', trim it
 
                 StringBuilder sb = new StringBuilder(result);
                 while (sb.length() > 0 && sb.charAt(0) == '_') {
@@ -233,7 +252,7 @@ public class CodeNamer {
                 }
                 result = sb.toString();
             } else {
-                // all char is _
+                // all char is '_', then transform some '_' to
 
                 if (result.startsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(0))) {
                     result = BASIC_LATIC_CHARACTERS.get(name.charAt(0)) + result.substring(1);
@@ -300,6 +319,18 @@ public class CodeNamer {
             name += appendValue;
         }
 
+        return name;
+    }
+
+    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
+            "service",      // the ServiceInterface local variable
+            "client"        // the ManagementClient local variable
+    ));
+
+    public static String getEscapedReservedClientMethodParameterName(String name) {
+        if (RESERVED_CLIENT_METHOD_PARAMETER_NAME.contains(name)) {
+            name += "Param";
+        }
         return name;
     }
 

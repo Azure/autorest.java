@@ -300,6 +300,20 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerParameterAsync() {
+        final Integer bodyParameter = null;
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -307,6 +321,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerParameter(Integer bodyParameter) {
+        postOptionalIntegerParameterAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalIntegerParameter() {
+        final Integer bodyParameter = null;
         postOptionalIntegerParameterAsync(bodyParameter).block();
     }
 
@@ -405,6 +431,20 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerPropertyAsync() {
+        final IntOptionalWrapper bodyParameter = null;
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -412,6 +452,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
+        postOptionalIntegerPropertyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalIntegerProperty() {
+        final IntOptionalWrapper bodyParameter = null;
         postOptionalIntegerPropertyAsync(bodyParameter).block();
     }
 
@@ -502,6 +554,20 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerHeaderAsync() {
+        final Integer headerParameter = null;
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -509,6 +575,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerHeader(Integer headerParameter) {
+        postOptionalIntegerHeaderAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalIntegerHeader() {
+        final Integer headerParameter = null;
         postOptionalIntegerHeaderAsync(headerParameter).block();
     }
 
@@ -599,6 +677,20 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringParameterAsync() {
+        final String bodyParameter = null;
+        return postOptionalStringParameterWithResponseAsync(bodyParameter)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -606,6 +698,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringParameter(String bodyParameter) {
+        postOptionalStringParameterAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalStringParameter() {
+        final String bodyParameter = null;
         postOptionalStringParameterAsync(bodyParameter).block();
     }
 
@@ -702,6 +806,19 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringPropertyAsync() {
+        final StringOptionalWrapper bodyParameter = null;
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -709,6 +826,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
+        postOptionalStringPropertyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalStringProperty() {
+        final StringOptionalWrapper bodyParameter = null;
         postOptionalStringPropertyAsync(bodyParameter).block();
     }
 
@@ -801,6 +930,19 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringHeaderAsync() {
+        final String bodyParameter = null;
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -808,6 +950,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringHeader(String bodyParameter) {
+        postOptionalStringHeaderAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalStringHeader() {
+        final String bodyParameter = null;
         postOptionalStringHeaderAsync(bodyParameter).block();
     }
 
@@ -904,6 +1058,19 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalClassParameterAsync() {
+        final Product bodyParameter = null;
+        return postOptionalClassParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -911,6 +1078,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassParameter(Product bodyParameter) {
+        postOptionalClassParameterAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalClassParameter() {
+        final Product bodyParameter = null;
         postOptionalClassParameterAsync(bodyParameter).block();
     }
 
@@ -1007,6 +1186,19 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalClassPropertyAsync() {
+        final ClassOptionalWrapper bodyParameter = null;
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1014,6 +1206,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
+        postOptionalClassPropertyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalClassProperty() {
+        final ClassOptionalWrapper bodyParameter = null;
         postOptionalClassPropertyAsync(bodyParameter).block();
     }
 
@@ -1102,6 +1306,19 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayParameterAsync() {
+        final List<String> bodyParameter = null;
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
      * @param bodyParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1109,6 +1326,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayParameter(List<String> bodyParameter) {
+        postOptionalArrayParameterAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalArrayParameter() {
+        final List<String> bodyParameter = null;
         postOptionalArrayParameterAsync(bodyParameter).block();
     }
 
@@ -1205,6 +1434,19 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayPropertyAsync() {
+        final ArrayOptionalWrapper bodyParameter = null;
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1212,6 +1454,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
+        postOptionalArrayPropertyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalArrayProperty() {
+        final ArrayOptionalWrapper bodyParameter = null;
         postOptionalArrayPropertyAsync(bodyParameter).block();
     }
 
@@ -1308,6 +1562,19 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayHeaderAsync() {
+        final List<String> headerParameter = null;
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
      * @param headerParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1315,6 +1582,18 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayHeader(List<String> headerParameter) {
+        postOptionalArrayHeaderAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postOptionalArrayHeader() {
+        final List<String> headerParameter = null;
         postOptionalArrayHeaderAsync(headerParameter).block();
     }
 }

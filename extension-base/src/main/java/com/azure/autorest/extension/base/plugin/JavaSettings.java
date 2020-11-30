@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 /**
  Settings that are used by the Java AutoRest Generator.
@@ -63,33 +66,60 @@ public class JavaSettings
     {
         if (_instance == null)
         {
+            String syncMethodsDefault = "essential";
+            boolean addContextParameterDefault = false;
+            boolean contextClientMethodParameterDefault = false;
+            boolean clientSideValidationsDefault = false;
+            boolean clientLoggerDefault = false;
+            boolean generateClientInterfacesDefault = false;
+            boolean requiredParameterClientMethodsDefault = false;
+            boolean modelOverrideSetterFromSuperclassDefault = false;
+
+            String fluentSetting = host.getStringValue("fluent");
+            if (fluentSetting != null) {
+                syncMethodsDefault = "all";
+                addContextParameterDefault = true;
+                contextClientMethodParameterDefault = true;
+                clientSideValidationsDefault = true;
+                clientLoggerDefault = true;
+                generateClientInterfacesDefault = true;
+                requiredParameterClientMethodsDefault = true;
+                modelOverrideSetterFromSuperclassDefault = true;
+            }
+
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
-                    host.getBooleanValue("azure-arm"),
-                    host.getStringValue("fluent"),
-                    host.getBooleanValue("regenerate-pom"),
+                    host.getBooleanValue("azure-arm", false),
+                    fluentSetting,
+                    host.getBooleanValue("regenerate-pom", false),
                     _header,
                     80,
-                    host.getStringValue("serviceName"),
+                    host.getStringValue("service-name"),
                     host.getStringValue("namespace", "").toLowerCase(),
                     host.getBooleanValue("enable-xml", false),
                     host.getBooleanValue("non-null-annotations", false),
-                    host.getBooleanValue("client-side-validations", false),
+                    host.getBooleanValue("client-side-validations", clientSideValidationsDefault),
                     host.getStringValue("client-type-prefix"),
-                    host.getBooleanValue("generate-client-interfaces", true),
-                    host.getBooleanValue("generate-client-as-impl", true),
+                    host.getBooleanValue("generate-client-interfaces", generateClientInterfacesDefault),
+                    host.getBooleanValue("generate-client-as-impl", false),
                     host.getStringValue("implementation-subpackage", "implementation"),
                     host.getStringValue("models-subpackage", "models"),
                     host.getStringValue("custom-types", ""),
                     host.getStringValue("custom-types-subpackage", ""),
-                    host.getBooleanValue("required-parameter-client-methods", true),
-                    host.getBooleanValue("add-context-parameter", false),
-                    host.getBooleanValue("context-client-method-parameter", false),
+                    host.getStringValue("fluent-subpackage", "fluent"),
+                    host.getBooleanValue("required-parameter-client-methods", requiredParameterClientMethodsDefault),
+                    host.getBooleanValue("add-context-parameter", addContextParameterDefault),
+                    host.getBooleanValue("context-client-method-parameter", contextClientMethodParameterDefault),
                     host.getBooleanValue("generate-sync-async-clients", false),
-                    host.getStringValue("sync-methods", "essential"),
-                    host.getBooleanValue("client-logger", false),
+                    host.getStringValue("sync-methods", syncMethodsDefault),
+                    host.getBooleanValue("client-logger", clientLoggerDefault),
                     host.getBooleanValue("required-fields-as-ctor-args", false),
-                    host.getBooleanValue("service-interface-as-public", false));
+                    host.getBooleanValue("service-interface-as-public", false),
+                    host.getStringValue("artifact-id", ""),
+                    host.getStringValue("credential-types", "none"),
+                    host.getStringValue("customization-jar-path"),
+                    host.getStringValue("customization-class"),
+                    host.getBooleanValue("model-override-setter-from-superclass", modelOverrideSetterFromSuperclassDefault));
         }
         return _instance;
     }
@@ -129,6 +159,7 @@ public class JavaSettings
                          String modelsSubpackage,
                          String customTypes,
                          String customTypesSubpackage,
+                         String fluentSubpackage,
                          boolean requiredParameterClientMethods,
                          boolean addContextParameter,
                          boolean contextClientMethodParameter,
@@ -136,7 +167,12 @@ public class JavaSettings
                          String syncMethods,
                          boolean clientLogger,
                          boolean requiredFieldsAsConstructorArgs,
-                         boolean serviceInterfaceAsPublic)
+                         boolean serviceInterfaceAsPublic,
+                         String artifactId,
+                         String credentialType,
+                         String customizationJarPath,
+                         String customizationClass,
+                         boolean overrideSetterFromSuperclass)
     {
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -155,6 +191,7 @@ public class JavaSettings
         this.modelsSubpackage = modelsSubpackage;
         this.customTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
         this.customTypesSubpackage = customTypesSubpackage;
+        this.fluentSubpackage = fluentSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
         this.addContextParameter = addContextParameter || contextClientMethodParameter;
         this.contextClientMethodParameter = contextClientMethodParameter;
@@ -163,13 +200,35 @@ public class JavaSettings
         this.clientLogger = clientLogger;
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
         this.serviceInterfaceAsPublic = serviceInterfaceAsPublic;
+        this.artifactId = artifactId;
+        this.overrideSetterFromParent = overrideSetterFromSuperclass;
+
+        if (credentialType != null) {
+            String[] splits = credentialType.split(",");
+            this.credentialTypes = Arrays.stream(splits)
+                    .map(split -> split.trim())
+                    .map(type -> CredentialType.fromValue(credentialType))
+                    .collect(Collectors.toSet());
+        }
+        this.customizationJarPath = customizationJarPath;
+        this.customizationClass = customizationClass;
     }
 
+    private Set<CredentialType> credentialTypes;
+    public Set<CredentialType> getCredentialTypes() {
+        return credentialTypes;
+    }
 
     private boolean azure;
     public final boolean isAzure()
     {
         return azure;
+    }
+
+    private String artifactId;
+
+    public String getArtifactId() {
+        return artifactId;
     }
 
     public enum Fluent {
@@ -302,6 +361,14 @@ public class JavaSettings
         return modelsSubpackage;
     }
 
+    private String fluentSubpackage;
+    /**
+     * @return The sub-package specific to Fluent SDK.
+     */
+    public final String getFluentSubpackage() {
+        return fluentSubpackage;
+    }
+
     /**
      Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      */
@@ -378,9 +445,47 @@ public class JavaSettings
         return customTypesSubpackage;
     }
 
+    public enum CredentialType {
+        TOKEN_CREDENTIAL,
+        AZURE_KEY_CREDENTIAL,
+        NONE;
+
+        public static CredentialType fromValue(String value) {
+            if (value == null) {
+                return null;
+            } else if (value.equals("tokencredential")) {
+                return TOKEN_CREDENTIAL;
+            } else if (value.equals("azurekeycredential")) {
+                return AZURE_KEY_CREDENTIAL;
+            } else if (value.equals("none")) {
+                return NONE;
+            }
+            return NONE;
+        }
+    }
+
     private boolean clientLogger;
     public final boolean shouldClientLogger() {
         return clientLogger;
+    }
+
+    private String customizationJarPath;
+    public final String getCustomizationJarPath() {
+        return customizationJarPath;
+    }
+
+    private String customizationClass;
+    public final String getCustomizationClass() {
+        return customizationClass;
+    }
+
+    boolean overrideSetterFromParent;
+
+    /**
+     * @return whether to override superclass setter method in model.
+     */
+    public boolean isOverrideSetterFromSuperclass() {
+        return overrideSetterFromParent;
     }
 
     public static final String DefaultCodeGenerationHeader = "Code generated by Microsoft (R) AutoRest Code Generator %s" + "\r\n" +

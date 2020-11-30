@@ -125,6 +125,24 @@ public final class Paths {
      * @param vault simple string.
      * @param secret simple string.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getEmptyAsync(String vault, String secret, String keyName) {
+        final String keyVersion = null;
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault simple string.
+     * @param secret simple string.
+     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -132,6 +150,22 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
+        getEmptyAsync(vault, secret, keyName, keyVersion).block();
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault simple string.
+     * @param secret simple string.
+     * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getEmpty(String vault, String secret, String keyName) {
+        final String keyVersion = null;
         getEmptyAsync(vault, secret, keyName, keyVersion).block();
     }
 }

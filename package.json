@@ -1,6 +1,6 @@
 {
   "name": "@autorest/java",
-  "version": "4.0.1",
+  "version": "4.0.5",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jianghaolu/autorest.java.v3"
+    "url": "https://github.com/Azure/autorest.java"
   },
   "readme": "./readme.md",
   "keywords": [
@@ -22,9 +22,9 @@
   "author": "Microsoft Corporation",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/autorest/issues"
+    "url": "https://github.com/Azure/autorest.java/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md",
+  "homepage": "https://github.com/Azure/autorest.java/blob/v4/readme.md",
   "devDependencies": {
     "autorest": "^3.0.0",
     "@microsoft.azure/autorest.testserver": "^2.10.57"

@@ -1,13 +1,3 @@
-# Settings
-
-| Option      | Description |
-| ----------- | ----------- |
-| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). |
-| `--add-inner` | CSV. Treat as inner class (append `Inner` to class name). |
-| `--add-inner` | CSV. Exclude from inner classes. |
-| `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. |
-| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. |
-
 #### Fluentnamer
 
 ``` yaml
@@ -16,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.15.375"
+  "@autorest/modelerfour": "4.15.423"
 
 pipeline:
 
@@ -25,11 +15,10 @@ pipeline:
   # "Shake the tree", and normalize the model
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
-    additional-checks: false
-    lenient-model-deduplication: true
     flatten-models: true
     flatten-payloads: true
     naming:
+      choiceValue: upper
       preserve-uppercase-max-length: 2
       override:
         ip: Ip

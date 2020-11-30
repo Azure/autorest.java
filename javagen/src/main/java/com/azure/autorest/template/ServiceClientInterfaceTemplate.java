@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashSet;
@@ -40,21 +41,23 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
         javaFile.publicInterface(serviceClient.getInterfaceName(), interfaceBlock ->
         {
             for (ServiceClientProperty property : serviceClient.getProperties()) {
-                interfaceBlock.javadocComment(comment ->
-                {
-                    comment.description(String.format("Gets %1$s", property.getDescription()));
-                    comment.methodReturns(String.format("the %1$s value", property.getName()));
-                });
-                interfaceBlock.publicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
-
-                if (!property.isReadOnly()) {
+                if (property.getMethodVisibility() == JavaVisibility.Public) {
                     interfaceBlock.javadocComment(comment ->
                     {
-                        comment.description(String.format("Sets %1$s", property.getDescription()));
-                        comment.param(property.getName(), String.format("the %1$s value", property.getName()));
-                        comment.methodReturns("the service client itself");
+                        comment.description(String.format("Gets %1$s", property.getDescription()));
+                        comment.methodReturns(String.format("the %1$s value", property.getName()));
                     });
-                    interfaceBlock.publicMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getInterfaceName(), CodeNamer.toPascalCase(property.getName()), property.getType(), property.getName()));
+                    interfaceBlock.publicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
+
+                    /* if (!property.isReadOnly()) {
+                        interfaceBlock.javadocComment(comment ->
+                        {
+                            comment.description(String.format("Sets %1$s", property.getDescription()));
+                            comment.param(property.getName(), String.format("the %1$s value", property.getName()));
+                            comment.methodReturns("the service client itself");
+                        });
+                        interfaceBlock.publicMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getInterfaceName(), CodeNamer.toPascalCase(property.getName()), property.getType(), property.getName()));
+                    } */
                 }
             }
 
@@ -64,7 +67,7 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
                     comment.description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getInterfaceName()));
                     comment.methodReturns(String.format("the %1$s object.", methodGroupClient.getInterfaceName()));
                 });
-                interfaceBlock.publicMethod(String.format("%1$s %2$s()", methodGroupClient.getInterfaceName(), methodGroupClient.getVariableName()));
+                interfaceBlock.publicMethod(String.format("%1$s get%2$s()", methodGroupClient.getInterfaceName(), CodeNamer.toPascalCase(methodGroupClient.getVariableName())));
             }
 
             for (ClientMethod clientMethod : serviceClient.getClientMethods()) {

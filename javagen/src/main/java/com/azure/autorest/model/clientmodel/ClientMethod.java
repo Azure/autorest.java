@@ -10,6 +10,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,8 @@ public class ClientMethod {
      */
     private List<MethodTransformationDetail> methodTransformationDetails;
 
+    private JavaVisibility methodVisibility;
+
     /**
      * Create a new ClientMethod with the provided properties.
      * @param description The description of this ClientMethod.
@@ -94,7 +97,7 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    private ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+    private ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -109,6 +112,7 @@ public class ClientMethod {
         this.groupedParameterTypeName = groupedParameterTypeName;
         this.methodPageDetails = methodPageDetails;
         this.methodTransformationDetails = methodTransformationDetails;
+        this.methodVisibility = methodVisibility;
     }
 
     public final String getDescription() {
@@ -177,6 +181,10 @@ public class ClientMethod {
         return getProxyMethod().getName() + "Async";
     }
 
+    public final String getSimpleWithResponseAsyncMethodName() {
+        return getProxyMethod().getName() + "WithResponseAsync";
+    }
+
     public final List<ClientMethodParameter> getMethodParameters() {
         return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
@@ -239,6 +247,10 @@ public class ClientMethod {
             return result;
         }).collect(Collectors.toList());
         return restAPIMethodArguments;
+    }
+
+    public JavaVisibility getMethodVisibility() {
+        return methodVisibility;
     }
 
     /**
@@ -305,6 +317,7 @@ public class ClientMethod {
         private String groupedParameterTypeName;
         private MethodPageDetails methodPageDetails;
         private List<MethodTransformationDetail> methodTransformationDetails;
+        private JavaVisibility methodVisibility = JavaVisibility.Public;
 
         /**
          * Sets the description of this ClientMethod.
@@ -447,6 +460,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets the parameter method visibility.
+         * @param methodVisibility the method visibility, default is Public.
+         * @return the Builder itself
+         */
+        public Builder methodVisibility(JavaVisibility methodVisibility) {
+            this.methodVisibility = methodVisibility;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -464,7 +487,8 @@ public class ClientMethod {
                     isGroupedParameterRequired,
                     groupedParameterTypeName,
                     methodPageDetails,
-                    methodTransformationDetails);
+                    methodTransformationDetails,
+                    methodVisibility);
         }
     }
 }

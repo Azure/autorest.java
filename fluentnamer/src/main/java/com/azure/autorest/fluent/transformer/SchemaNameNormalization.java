@@ -15,10 +15,11 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +33,7 @@ import java.util.stream.Stream;
  */
 public class SchemaNameNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchemaNameNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), SchemaNameNormalization.class);
 
     private final Map<String, String> nameOverridePlan = new HashMap<>();
 

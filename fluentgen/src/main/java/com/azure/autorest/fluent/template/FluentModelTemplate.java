@@ -5,15 +5,24 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
+import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ModelNamer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public class FluentModelTemplate extends ModelTemplate {
 
-    private static final FluentModelTemplate instance = new FluentModelTemplate();
+    private static final FluentModelTemplate INSTANCE = new FluentModelTemplate();
 
     private static ModelNamer modelNamer;
 
@@ -21,7 +30,7 @@ public class FluentModelTemplate extends ModelTemplate {
     }
 
     public static FluentModelTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -43,5 +52,31 @@ public class FluentModelTemplate extends ModelTemplate {
         } else {
             return super.getGetterName(model, property);
         }
+    }
+
+    @Override
+    protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
+        List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
+        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+            String parentModelName = model.getParentModelName();
+            while (parentModelName != null) {
+                ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+                if (parentModel == null) {
+                    parentModel = getPredefinedModel(parentModelName).orElse(null);
+                }
+                if (parentModel != null) {
+                    if (parentModel.getProperties() != null) {
+                        propertyReferences.addAll(parentModel.getProperties().stream().map(ClientModelPropertyReference::new).collect(Collectors.toList()));
+                    }
+                }
+
+                parentModelName = parentModel == null ? null : parentModel.getParentModelName();
+            }
+        }
+        return propertyReferences;
+    }
+
+    private Optional<ClientModel> getPredefinedModel(String modelName) {
+        return ResourceClientModel.getResourceClientModel(modelName);
     }
 }

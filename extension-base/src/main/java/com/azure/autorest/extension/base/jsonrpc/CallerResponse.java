@@ -18,11 +18,10 @@ public class CallerResponse<T> extends CompletableFuture<T> {
     @Override
     public boolean complete(Object result) {
         T value;
-        Function<Object, Boolean> trueLikeValue = obj -> obj != null && !obj.equals(0) && !obj.equals(false) && !obj.equals("");
+        Function<Object, Boolean> trueLikeValue = obj -> obj == null ? null : (!obj.equals(0) && !obj.equals(false) && !obj.equals(""));
         if (type.isTypeOrSubTypeOf(Boolean.class)) {
             value = (T) (trueLikeValue.apply(result));
-        }
-        else {
+        } else {
             value = (T) result;
         }
         return super.complete(value);

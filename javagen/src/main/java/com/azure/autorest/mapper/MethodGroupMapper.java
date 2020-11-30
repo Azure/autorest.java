@@ -38,8 +38,9 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         String classBaseName = methodGroup.getLanguage().getJava().getName();
         builder.classBaseName(classBaseName);
         String interfaceName = CodeNamer.getPlural(classBaseName);
-        final String interfaceNameFinal = interfaceName;
-        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> cm.getName().equals(interfaceNameFinal))) {
+        final String interfaceNameForCheckDeduplicate = interfaceName;
+        if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> interfaceNameForCheckDeduplicate.equals(cm.getName()))
+                || parsed.values().stream().anyMatch(mg -> interfaceNameForCheckDeduplicate.equals(mg.getInterfaceName()))) {
             interfaceName += "Operations";
         }
         builder.interfaceName(interfaceName);
@@ -57,10 +58,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         Proxy.Builder proxyBuilder = new Proxy.Builder();
 
-        String restAPIName = CodeNamer.toPascalCase(methodGroup.getLanguage().getJava().getName());
-        if (!restAPIName.endsWith("s")) {
-            restAPIName += 's';
-        }
+        String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
         restAPIName += "Service";
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
         // TODO: Assume all operations share the same base url
@@ -85,18 +83,24 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.proxy(proxyBuilder.build())
                 .serviceClientName(serviceClientName);
 
+        builder.variableName(CodeNamer.toCamelCase(interfaceName));
+
+        if (settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+            interfaceName += "Client";
+            builder.interfaceName(interfaceName);
+        }
+
+        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
+
         List<String> implementedInterfaces = new ArrayList<>();
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (settings.shouldGenerateClientInterfaces()) {
             implementedInterfaces.add(interfaceName);
         }
         builder.implementedInterfaces(implementedInterfaces);
 
-        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
-        builder.variableName(CodeNamer.toCamelCase(interfaceName));
-
         String packageName;
         if (settings.isFluent()) {
-            packageName = settings.getPackage(settings.getImplementationSubpackage());
+            packageName = settings.getPackage(settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : settings.getFluentSubpackage());
         } else {
             boolean isCustomType = settings.isCustomType(className);
             packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
@@ -114,7 +118,11 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        return builder.build();
+        MethodGroupClient methodGroupClient = builder.build();
+
+        parsed.put(methodGroup, methodGroupClient);
+
+        return methodGroupClient;
     }
 
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {

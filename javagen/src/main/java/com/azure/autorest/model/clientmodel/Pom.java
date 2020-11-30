@@ -8,6 +8,7 @@ public class Pom {
     private String parentVersion;
     private String groupId;
     private String artifactId;
+    private String version;
     private String serviceName;
     private String serviceDescription;
     private List<String> dependencyIdentifiers;
@@ -62,6 +63,15 @@ public class Pom {
 
     public Pom setArtifactId(String artifactId) {
         this.artifactId = artifactId;
+        return this;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public Pom setVersion(String version) {
+        this.version = version;
         return this;
     }
 

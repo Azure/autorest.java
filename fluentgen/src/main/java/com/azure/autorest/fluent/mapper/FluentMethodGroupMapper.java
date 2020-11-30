@@ -7,15 +7,16 @@ package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.MethodGroupMapper;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,12 @@ import java.util.stream.Collectors;
 
 public class FluentMethodGroupMapper extends MethodGroupMapper {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentMethodGroupMapper.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentMethodGroupMapper.class);
 
-    private static final FluentMethodGroupMapper instance = new FluentMethodGroupMapper();
+    private static final FluentMethodGroupMapper INSTANCE = new FluentMethodGroupMapper();
 
     public static FluentMethodGroupMapper getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

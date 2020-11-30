@@ -7,7 +7,7 @@
 
 package com.azure.autorest.template;
 
-
+import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -22,7 +22,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     private static PomTemplate _instance = new PomTemplate();
     private static JavaSettings settings = JavaSettings.getInstance();
 
-    private PomTemplate() {
+    protected PomTemplate() {
     }
 
     public static PomTemplate getInstance() {
@@ -38,26 +38,31 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
         xmlFile.block("project", projectAnnotations, projectBlock -> {
             projectBlock.tag("modelVersion", "4.0.0");
-            projectBlock.block("parent", parentBlock -> {
-                String[] parts = pom.getParentIdentifier().split(":");
-                String parentGroupId = parts[0];
-                String parentArtifactId = parts[1];
-                String parentVersion = parts[2];
-                parentBlock.tag("groupId", parentGroupId);
-                parentBlock.tag("artifactId", parentArtifactId);
-                parentBlock.tag("parentVersion", parentVersion);
-                parentBlock.tag("relativePath", pom.getParentRelativePath());
-            });
+            if (pom.getParentIdentifier() != null) {
+                projectBlock.block("parent", parentBlock -> {
+                    String[] parts = pom.getParentIdentifier().split(":");
+                    String parentGroupId = parts[0];
+                    String parentArtifactId = parts[1];
+                    String parentVersion = parts[2];
+                    parentBlock.tag("groupId", parentGroupId);
+                    parentBlock.tag("artifactId", parentArtifactId);
+                    parentBlock.tagWithInlineComment("version", parentVersion,
+                            "{x-version-update;com.azure:azure-client-sdk-parent;current}");
+                    parentBlock.tag("relativePath", pom.getParentRelativePath());
+                });
+            }
 
             projectBlock.line();
 
             projectBlock.tag("groupId", pom.getGroupId());
             projectBlock.tag("artifactId", pom.getArtifactId());
-            projectBlock.tag("packing", "jar");
+            projectBlock.tagWithInlineComment("version", pom.getVersion(),
+                    String.format("{x-version-update;%1$s:%2$s;current}", pom.getGroupId(), pom.getArtifactId()));
+            projectBlock.tag("packaging", "jar");
 
             projectBlock.line();
 
-            projectBlock.tag("name", "Microsoft Azure SDK for " + pom.getServiceName());
+            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s Management", pom.getServiceName()));
             projectBlock.tag("description", pom.getServiceDescription());
             projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 
@@ -74,8 +79,9 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
             projectBlock.line();
 
             projectBlock.block("scm", scmBlock -> {
-                scmBlock.tag("url", "scm:git:https://github.com/Azure/azure-sdk-for-java");
+                scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
                 scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
                 scmBlock.tag("tag", "HEAD");
             });
 
@@ -84,6 +90,11 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                     developerBlock.tag("id", "microsoft");
                     developerBlock.tag("name", "Microsoft");
                 });
+            });
+
+            projectBlock.block("properties", propertiesBlock -> {
+                propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
+                propertiesBlock.tagCData("legal", "[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.");
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
@@ -102,12 +113,24 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                             dependenciesBlock.tag("groupId", groupId);
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
-                                dependencyBlock.tag("version", version);
+                                dependencyBlock.tagWithInlineComment("version", version,
+                                        String.format("{x-version-update;%1$s:%2$s;dependency}", groupId, artifactId));
                             }
                         });
                     }
                 });
             }
+
+            writeBuildBlock(projectBlock, pom);
         });
+    }
+
+    /**
+     * Extension for writing a "build" block, with array of "plugin" within.
+     *
+     * @param projectBlock the project block.
+     * @param pom the pom model.
+     */
+    protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
     }
 }

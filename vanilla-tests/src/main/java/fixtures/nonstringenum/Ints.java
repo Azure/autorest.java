@@ -98,6 +98,27 @@ public final class Ints {
     /**
      * Put an int enum.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putAsync() {
+        final IntEnum input = null;
+        return putWithResponseAsync(input)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Put an int enum.
+     *
      * @param input List of integer enums.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -106,6 +127,19 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put(IntEnum input) {
+        return putAsync(input).block();
+    }
+
+    /**
+     * Put an int enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String put() {
+        final IntEnum input = null;
         return putAsync(input).block();
     }
 

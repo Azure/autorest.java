@@ -3,7 +3,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The BaseProduct model. */
+/** The product documentation. */
 @Fluent
 public class BaseProduct {
     /*

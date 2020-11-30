@@ -14,8 +14,7 @@ public class FluentManagerProperty {
 
     private final ClassType fluentType;
     private final ClassType fluentImplementType;
-
-    private final String buildMethodInvocation;
+    private final String innerClientGetMethod;
 
     public FluentManagerProperty(FluentResourceCollection collection) {
         this.fluentType = collection.getInterfaceType();
@@ -24,10 +23,7 @@ public class FluentManagerProperty {
         String interfaceName = fluentType.getName();
         this.name = CodeNamer.toCamelCase(interfaceName);
 
-        String innerClientName = collection.getInnerGroupClient().getClassBaseName().endsWith("Client")
-                ? collection.getInnerGroupClient().getClassBaseName()
-                : collection.getInnerGroupClient().getClassBaseName() + "Client";
-        this.buildMethodInvocation = String.format("build%1$s()", innerClientName);
+        this.innerClientGetMethod = "get" + CodeNamer.toPascalCase(collection.getInnerGroupClient().getVariableName());
     }
 
     public String getName() {
@@ -46,7 +42,7 @@ public class FluentManagerProperty {
         return CodeNamer.getModelNamer().modelPropertyGetterName(name);
     }
 
-    public String getBuildMethodInvocation() {
-        return buildMethodInvocation;
+    public String getInnerClientGetMethod() {
+        return innerClientGetMethod;
     }
 }

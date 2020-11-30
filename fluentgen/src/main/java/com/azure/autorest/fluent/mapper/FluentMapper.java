@@ -12,6 +12,9 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
@@ -21,10 +24,12 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,7 +37,7 @@ import java.util.stream.Stream;
 
 public class FluentMapper {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentMapper.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentMapper.class);
 
     private final FluentJavaSettings fluentJavaSettings;
 
@@ -47,28 +52,60 @@ public class FluentMapper {
     public FluentClient map(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
 
+        fluentClient.setModuleInfo(moduleInfo());
+
         FluentStatic.setFluentClient(fluentClient);
 
+        // manager, service API
         fluentClient.setManager(new FluentManager(client, Utils.getJavaName(codeModel)));
 
+        // wrapper for response objects, potentially as resource instance
         fluentClient.getResourceModels().addAll(
                 codeModel.getSchemas().getObjects().stream()
                         .map(o -> FluentResourceModelMapper.getInstance().map(o))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        // resource collection APIs
         fluentClient.getResourceCollections().addAll(
                 codeModel.getOperationGroups().stream()
                         .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
 
+        // parse resource collections to identify create/update/refresh flow on resource instance
+        fluentClient.getResourceCollections()
+                .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
+        ResourceParser.processAdditionalMethods(fluentClient);
+
+        // set resource collection APIs to service API
         fluentClient.getManager().getProperties().addAll(
                 fluentClient.getResourceCollections().stream()
                         .map(FluentManagerProperty::new)
                         .collect(Collectors.toList()));
 
         return fluentClient;
+    }
+
+    private static ModuleInfo moduleInfo() {
+        JavaSettings settings = JavaSettings.getInstance();
+        ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
+
+        List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.management", true));
+
+        List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage())));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage())));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
+
+        List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
+        List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
+        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage()), openToModules));
+        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+
+        return moduleInfo;
     }
 
     private void processInnerModel(CodeModel codeModel) {
@@ -80,6 +117,7 @@ public class FluentMapper {
                 // ObjectSchema
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
+                        .filter(o -> !isPossiblePagedList(o))
                         .flatMap(o -> o.getResponses().stream())
                         .map(Response::getSchema),
                 // Paged list
@@ -110,6 +148,17 @@ public class FluentMapper {
                 .map(s -> (ObjectSchema) s)
                 .filter(FluentType::nonResourceType)
                 .collect(Collectors.toSet());
+
+        Set<ObjectSchema> errorTypes = codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .flatMap(o -> o.getExceptions().stream())
+                .map(Response::getSchema)
+                .filter(s -> s instanceof ObjectSchema)
+                .map(s -> (ObjectSchema) s)
+                .filter(o -> FluentType.nonManagementError(Utils.getJavaName(o)))
+                .collect(Collectors.toSet());
+
+        compositeTypes.removeAll(errorTypes);
 
         compositeTypes = objectMapper.addInnerModels(compositeTypes);
         if (logger.isInfoEnabled()) {

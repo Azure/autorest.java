@@ -7,17 +7,17 @@
   <parent>
     <groupId>com.azure</groupId>
     <artifactId>autorest-java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>fluentgen</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-beta.1</version>
 
   <repositories>
     <repository>
       <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2</url>
+      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
     </repository>
   </repositories>
 
@@ -25,19 +25,13 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>fluentnamer</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
+      <version>1.0.0-beta.1</version>
     </dependency>
 
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
       <artifactId>google-java-format</artifactId>
-      <version>1.8_customized-SNAPSHOT</version>
+      <version>1.8.0-beta.1</version>
     </dependency>
 
     <dependency>
@@ -47,9 +41,17 @@
     </dependency>
 
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.28</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -83,6 +85,17 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M4</version>
+            <configuration>
+              <includes>
+                <include>**/*Tests.java</include>
+              </includes>
+            </configuration>
           </plugin>
         </plugins>
       </build>

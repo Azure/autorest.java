@@ -5,9 +5,9 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyImplementationMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperPropertyTypeConversionMethod;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTemplate;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.PropertyTypeConversionTemplate;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -25,14 +25,14 @@ public class FluentModelProperty {
 
     private final IType fluentType;
 
-    private final WrapperMethod wrapperMethod;
+    private final ImmutableMethod immutableMethod;
 
     public FluentModelProperty(ClientModelProperty property) {
         this.modelProperty = property;
         this.fluentType = getWrapperType(property.getClientType());
-        this.wrapperMethod = this.fluentType == property.getClientType()
-                ? new WrapperPropertyImplementationMethod(this, this.modelProperty)
-                : new WrapperPropertyTypeConversionMethod(this, this.modelProperty);
+        this.immutableMethod = this.fluentType == property.getClientType()
+                ? new PropertyTemplate(this, this.modelProperty)
+                : new PropertyTypeConversionTemplate(this, this.modelProperty);
     }
 
     public String getName() {
@@ -56,12 +56,12 @@ public class FluentModelProperty {
         this.fluentType.addImportsTo(imports, false);
 
         if (includeImplementationImports) {
-            this.wrapperMethod.getMethodTemplate().addImportsTo(imports);
+            this.immutableMethod.getMethodTemplate().addImportsTo(imports);
         }
     }
 
     public MethodTemplate getImplementationMethodTemplate() {
-        return wrapperMethod.getMethodTemplate();
+        return immutableMethod.getMethodTemplate();
     }
 
     private String getGetterName() {
@@ -85,5 +85,9 @@ public class FluentModelProperty {
             wrapperType = wrapperElementType == type.getValueType() ? type : new MapType(wrapperElementType);
         }
         return wrapperType;
+    }
+
+    public ClientModelProperty getInnerProperty() {
+        return modelProperty;
     }
 }

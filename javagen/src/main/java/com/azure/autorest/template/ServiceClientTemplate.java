@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -51,11 +52,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientClassDeclaration = String.format("%1$s", serviceClient.getClassName());
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
-            serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
-        }
         if (settings.isFluentPremium()) {
             serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
+        }
+        if (settings.shouldGenerateClientInterfaces()) {
+            serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
 
         Set<String> imports = new HashSet<String>();
@@ -115,7 +116,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Gets %1$s", serviceClientProperty.getDescription()));
                     comment.methodReturns(String.format("the %1$s value.", serviceClientProperty.getName()));
                 });
-                classBlock.publicMethod(String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
+                classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
                 {
                     function.methodReturn(String.format("this.%1$s", serviceClientProperty.getName()));
                 });
@@ -185,6 +186,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Initializes an instance of %1$s client.", serviceClient.getInterfaceName()));
                     for (ClientMethodParameter parameter : constructor.getParameters()) {
                         comment.param(parameter.getName(), parameter.getDescription());
+                    }
+                    for (ServiceClientProperty property : serviceClient.getProperties().stream()
+                            .filter(p -> !p.isReadOnly())
+                            .collect(Collectors.toList())) {
+                        comment.param(property.getName(), property.getDescription());
                     }
                 });
 
@@ -275,6 +281,15 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             }
 
             additionalMethods.forEach(method -> method.writeMethod(classBlock));
+
+            this.writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    /**
+     * Extention for additional code in class.
+     * @param classBlock the class block.
+     */
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
     }
 }

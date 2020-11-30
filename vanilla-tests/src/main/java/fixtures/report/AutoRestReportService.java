@@ -65,7 +65,11 @@ public final class AutoRestReportService {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of AutoRestReportService client. */
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param host server parameter.
+     */
     AutoRestReportService(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -79,6 +83,7 @@ public final class AutoRestReportService {
      * Initializes an instance of AutoRestReportService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestReportService(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -89,6 +94,7 @@ public final class AutoRestReportService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestReportService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
@@ -162,6 +168,27 @@ public final class AutoRestReportService {
     /**
      * Get test coverage report.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getReportAsync() {
+        final String qualifier = null;
+        return getReportWithResponseAsync(qualifier)
+                .flatMap(
+                        (Response<Map<String, Integer>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Get test coverage report.
+     *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
      *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -171,6 +198,19 @@ public final class AutoRestReportService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport(String qualifier) {
+        return getReportAsync(qualifier).block();
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Map<String, Integer> getReport() {
+        final String qualifier = null;
         return getReportAsync(qualifier).block();
     }
 
@@ -218,6 +258,27 @@ public final class AutoRestReportService {
     /**
      * Get optional test coverage report.
      *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return optional test coverage report.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getOptionalReportAsync() {
+        final String qualifier = null;
+        return getOptionalReportWithResponseAsync(qualifier)
+                .flatMap(
+                        (Response<Map<String, Integer>> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Get optional test coverage report.
+     *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
      *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -227,6 +288,19 @@ public final class AutoRestReportService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getOptionalReport(String qualifier) {
+        return getOptionalReportAsync(qualifier).block();
+    }
+
+    /**
+     * Get optional test coverage report.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return optional test coverage report.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Map<String, Integer> getOptionalReport() {
+        final String qualifier = null;
         return getOptionalReportAsync(qualifier).block();
     }
 }

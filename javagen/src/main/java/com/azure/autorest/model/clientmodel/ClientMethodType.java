@@ -22,8 +22,9 @@ public enum ClientMethodType {
     SimpleSync(9),
     SimpleAsync(10), // will not generate when sync-methods=none, will generate when sync-methods=essential
     SimpleAsyncRestResponse(11),
+    SimpleSyncRestResponse(12),
 
-    Resumable(12);
+    Resumable(13);
 
     public static final int SIZE = Integer.SIZE;
     private static java.util.HashMap<Integer, ClientMethodType> mappings;

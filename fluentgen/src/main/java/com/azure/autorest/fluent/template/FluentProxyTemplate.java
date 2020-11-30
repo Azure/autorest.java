@@ -13,16 +13,17 @@ import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.template.ProxyTemplate;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentProxyTemplate extends ProxyTemplate {
 
-    private static final FluentProxyTemplate instance = new FluentProxyTemplate();
+    private static final FluentProxyTemplate INSTANCE = new FluentProxyTemplate();
 
     public static FluentProxyTemplate getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -38,7 +39,7 @@ public class FluentProxyTemplate extends ProxyTemplate {
                 .collect(Collectors.toSet());
 
         headers = headers.entrySet().stream()
-                .filter(e -> !headerParameterNames.contains(e.getKey().toLowerCase()))
+                .filter(e -> !headerParameterNames.contains(e.getKey().toLowerCase(Locale.ROOT)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if (!headers.isEmpty()) {

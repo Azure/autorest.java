@@ -993,6 +993,22 @@ public final class Headers {
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> paramStringAsync(String scenario) {
+        final String value = null;
+        return paramStringWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1000,6 +1016,21 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramString(String scenario, String value) {
+        paramStringAsync(scenario, value).block();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramString(String scenario) {
+        final String value = null;
         paramStringAsync(scenario, value).block();
     }
 
@@ -1310,6 +1341,22 @@ public final class Headers {
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> paramDatetimeRfc1123Async(String scenario) {
+        final OffsetDateTime value = null;
+        return paramDatetimeRfc1123WithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
      *     GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1318,6 +1365,21 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramDatetimeRfc1123(String scenario, OffsetDateTime value) {
+        paramDatetimeRfc1123Async(scenario, value).block();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDatetimeRfc1123(String scenario) {
+        final OffsetDateTime value = null;
         paramDatetimeRfc1123Async(scenario, value).block();
     }
 
@@ -1619,6 +1681,21 @@ public final class Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> paramEnumAsync(String scenario) {
+        final GreyscaleColors value = null;
+        return paramEnumWithResponseAsync(scenario, value).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values 'GREY'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1626,6 +1703,20 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramEnum(String scenario, GreyscaleColors value) {
+        paramEnumAsync(scenario, value).block();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramEnum(String scenario) {
+        final GreyscaleColors value = null;
         paramEnumAsync(scenario, value).block();
     }
 

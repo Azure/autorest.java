@@ -1,0 +1,102 @@
+/**
+ * The Configurable allowing configurations to be set.
+ */
+public static final class Configurable {
+    private final ClientLogger logger = new ClientLogger(Configurable.class);
+
+    private HttpClient httpClient;
+    private HttpLogOptions httpLogOptions;
+    private final List<HttpPipelinePolicy> policies = new ArrayList<>();
+    private RetryPolicy retryPolicy;
+    private Duration defaultPollInterval;
+
+    private Configurable() {
+    }
+
+    /**
+     * Sets the http client.
+     *
+     * @param httpClient the HTTP client.
+     * @return the configurable object itself.
+     */
+    public Configurable withHttpClient(HttpClient httpClient) {
+        this.httpClient = Objects.requireNonNull(httpClient, "'httpClient' cannot be null.");
+        return this;
+    }
+
+    /**
+     * Sets the logging options to the HTTP pipeline.
+     *
+     * @param httpLogOptions the HTTP log options.
+     * @return the configurable object itself.
+     */
+    public Configurable withLogOptions(HttpLogOptions httpLogOptions) {
+        this.httpLogOptions = Objects.requireNonNull(httpLogOptions, "'httpLogOptions' cannot be null.");
+        return this;
+    }
+
+    /**
+     * Adds the pipeline policy to the HTTP pipeline.
+     *
+     * @param policy the HTTP pipeline policy.
+     * @return the configurable object itself.
+     */
+    public Configurable withPolicy(HttpPipelinePolicy policy) {
+        this.policies.add(Objects.requireNonNull(policy, "'policy' cannot be null."));
+        return this;
+    }
+
+    /**
+     * Sets the retry policy to the HTTP pipeline.
+     *
+     * @param retryPolicy the HTTP pipeline retry policy.
+     * @return the configurable object itself.
+     */
+    public Configurable withRetryPolicy(RetryPolicy retryPolicy) {
+        this.retryPolicy = Objects.requireNonNull(retryPolicy, "'retryPolicy' cannot be null.");
+        return this;
+    }
+
+    /**
+     * Sets the default poll interval, used when service does not provide "Retry-After" header.
+     *
+     * @param defaultPollInterval the default poll interval.
+     * @return the configurable object itself.
+     */
+    public Configurable withDefaultPollInterval(Duration defaultPollInterval) {
+        this.defaultPollInterval = Objects.requireNonNull(defaultPollInterval, "'retryPolicy' cannot be null.");
+        if (this.defaultPollInterval.isNegative()) {
+            throw logger.logExceptionAsError(new IllegalArgumentException("'httpPipeline' cannot be negative"));
+        }
+        return this;
+    }
+
+    /**
+     * Creates an instance of {{service-name}} service API entry point.
+     *
+     * @param credential the credential to use.
+     * @param profile the Azure profile for client.
+     * @return the {{service-name}} service API instance.
+     */
+    public {{manager-class}} authenticate(TokenCredential credential, AzureProfile profile) {
+        Objects.requireNonNull(credential, "'credential' cannot be null.");
+        Objects.requireNonNull(profile, "'profile' cannot be null.");
+
+        if (retryPolicy == null) {
+            retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+        }
+        List<HttpPipelinePolicy> policies = new ArrayList<>();
+        policies.add(new UserAgentPolicy(null, "{{package-name}}", "{{artifact-version}}", Configuration.getGlobalConfiguration()));
+        policies.add(new RequestIdPolicy());
+        HttpPolicyProviders.addBeforeRetryPolicies(policies);
+        policies.add(retryPolicy);
+        policies.add(new AddDatePolicy());
+        policies.add(new BearerTokenAuthenticationPolicy(credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+        HttpPolicyProviders.addAfterRetryPolicies(policies);
+        policies.add(new HttpLoggingPolicy(httpLogOptions));
+        HttpPipeline httpPipeline = new HttpPipelineBuilder()
+            .httpClient(httpClient)
+            .policies(policies.toArray(new HttpPipelinePolicy[0])).build();
+        return new {{manager-class}}(httpPipeline, profile, defaultPollInterval);
+    }
+}

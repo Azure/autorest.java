@@ -1,6 +1,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.ClientModelUtil;
+
 import java.util.List;
 import java.util.Set;
 
@@ -186,6 +188,12 @@ public class ServiceClient {
             if (!settings.shouldGenerateClientInterfaces()) {
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
                     imports.add(String.format("%1$s.%2$s", methodGroupClient.getPackage(), methodGroupClient.getClassName()));
+                }
+            } else {
+                String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
+                imports.add(String.format("%1$s.%2$s", interfacePackage, this.getInterfaceName()));
+                for (MethodGroupClient methodGroupClient : this.getMethodGroupClients()) {
+                    imports.add(String.format("%1$s.%2$s", interfacePackage, methodGroupClient.getInterfaceName()));
                 }
             }
         }

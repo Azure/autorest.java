@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /** The Sawshark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
@@ -19,7 +20,12 @@ public final class Sawshark extends Shark {
     @JsonProperty(value = "picture")
     private byte[] picture;
 
-    /** Creates an instance of Sawshark class. */
+    /**
+     * Creates an instance of Sawshark class.
+     *
+     * @param length the length value to set.
+     * @param birthday the birthday value to set.
+     */
     @JsonCreator
     public Sawshark(
             @JsonProperty(value = "length", required = true) float length,
@@ -44,6 +50,27 @@ public final class Sawshark extends Shark {
      */
     public Sawshark setPicture(byte[] picture) {
         this.picture = CoreUtils.clone(picture);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Sawshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Sawshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Sawshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 

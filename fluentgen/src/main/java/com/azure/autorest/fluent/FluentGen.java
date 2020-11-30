@@ -9,14 +9,18 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
+import com.azure.autorest.fluent.mapper.PomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
+import com.azure.autorest.fluent.model.projectmodel.Project;
+import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -29,13 +33,14 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
@@ -48,10 +53,16 @@ import java.util.stream.Collectors;
 
 public class FluentGen extends NewPlugin {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentGen.class);
+    private final Logger logger = new PluginLogger(this, FluentGen.class);
+    static FluentGen instance;
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
+        instance = this;
+    }
+
+    public static FluentGen getPluginInstance() {
+        return instance;
     }
 
     @Override
@@ -98,14 +109,15 @@ public class FluentGen extends NewPlugin {
 
             // Step 4: Write to templates
             logger.info("Java template for client model");
-            FluentJavaPackage javaPackage = new FluentJavaPackage();
+            FluentJavaPackage javaPackage = new FluentJavaPackage(this);
             // Service client
+            String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
             javaPackage
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
             if (javaSettings.shouldGenerateClientInterfaces()) {
                 javaPackage
-                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+                        .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
 
             // Service client builder
@@ -122,12 +134,12 @@ public class FluentGen extends NewPlugin {
                 if (!javaSettings.isFluentLite()) {
                     // fluent lite only expose sync client
                     for (AsyncSyncClient asyncClient : asyncClients) {
-                        javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                        javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                     }
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
                 }
             }
 
@@ -135,7 +147,7 @@ public class FluentGen extends NewPlugin {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
                 if (javaSettings.shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                    javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
 
@@ -172,20 +184,44 @@ public class FluentGen extends NewPlugin {
 
             // Fluent Lite
             if (javaSettings.isFluentLite()) {
+                final boolean isSdkIntegration = fluentJavaSettings.isSdkIntegration();
+                FluentStatic.setFluentJavaSettings(fluentJavaSettings);
                 FluentStatic.setClient(client);
 
                 FluentClient fluentClient = fluentMapper.map(codeModel, client);
 
-                // Fluent manager
-                javaPackage.addFluentManager(fluentClient.getManager());
+                // project
+                Project project = new Project(fluentClient);
+                if (isSdkIntegration) {
+                    project.integrateWithSdk();
+                }
 
-                // Fluent resource model
+                // Fluent manager
+                javaPackage.addFluentManager(fluentClient.getManager(), project);
+
+                // Fluent resource models
                 for (FluentResourceModel model : fluentClient.getResourceModels()) {
                     javaPackage.addFluentResourceModel(model);
                 }
 
+                // Fluent resource collections
                 for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
                     javaPackage.addFluentResourceCollection(collection);
+                }
+
+                // Utils
+                javaPackage.addUtils();
+
+                // module-info
+                javaPackage.addModuleInfo(fluentClient.getModuleInfo());
+
+                // POM
+                Pom pom = new PomMapper().map(project);
+                javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+
+                if (isSdkIntegration) {
+                    javaPackage.addReadme(project);
+                    javaPackage.addChangelog(project.getChangelog());
                 }
             }
 
@@ -200,10 +236,18 @@ public class FluentGen extends NewPlugin {
 
                 writeFile(path, formattedContent, null);
             }
+            logger.info("Write Xml");
+            for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
+                writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
+            }
+            logger.info("Write Text");
+            for (TextFile textFile : javaPackage.getTextFiles()) {
+                writeFile(textFile.getFilePath(), textFile.getContents(), null);
+            }
             return true;
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentgen plugin " + e, e);
-            connection.sendError(1, 500, "Error occured while running fluentgen plugin: " + e.getMessage());
+            connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
             throw e;
         }
     }

@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SimpleProduct model. */
+/** The product documentation. */
 @JsonFlatten
 @Fluent
 public class SimpleProduct extends BaseProduct {

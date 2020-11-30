@@ -1,7 +1,10 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
-import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -16,17 +19,20 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static ModelMapper instance = new ModelMapper();
     private ClientModels serviceModels = ClientModels.Instance;
 
-    private ModelMapper() {
+    protected ModelMapper() {
     }
 
     public static ModelMapper getInstance() {
@@ -41,7 +47,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !Mappers.getObjectMapper().isImplementedModel(modelType))) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !isPredefinedModel(modelType))) {
             ClientModel.Builder builder = new ClientModel.Builder()
                     .name(modelName)
                     .packageName(modelType.getPackage());
@@ -54,11 +60,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             String parentModelName = null;
             boolean hasAdditionalProperties = false;
             List<ObjectSchema> parentsNeedFlatten = new ArrayList<>();
+            ObjectSchema firstParentComplexSchema = null;
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
                 hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
                         .anyMatch(s -> s instanceof DictionarySchema);
 
-                ObjectSchema firstParentComplexSchema = null;
                 for (Schema parent : compositeType.getParents().getImmediate()) {
                     if (parent instanceof ObjectSchema) {
                         if (firstParentComplexSchema == null) {
@@ -148,10 +154,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
-            if ((compositeType.getSummary() == null || compositeType.getSummary().isEmpty()) && (compositeType.getDescription() == null || compositeType.getDescription().isEmpty())) {
+            if (compositeType.getLanguage().getDefault() == null
+                    || CoreUtils.isNullOrEmpty(compositeType.getLanguage().getDefault().getDescription())) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
-                builder.description(String.format("%s%s", compositeType.getSummary(), compositeType.getDescription()));
+                builder.description(compositeType.getLanguage().getDefault().getDescription());
             }
 
             boolean discriminatorNeedEscape = false;
@@ -170,11 +177,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             List<ClientModel> derivedTypes = new ArrayList<>();
             if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
-                for (ComplexSchema childSchema : compositeType.getChildren().getImmediate()) {
+                for (Schema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
-                        ClientModel model = map((ObjectSchema) childSchema);
+                        ClientModel model = this.map((ObjectSchema) childSchema);
                         derivedTypes.add(model);
-                        serviceModels.addModel(model);
                     } else {
                         throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
                     }
@@ -190,8 +196,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(discriminatorNeedEscape || compositeType.getProperties().stream()
-                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty()));
+            builder.needsFlatten(discriminatorNeedEscape || hasFlattenedProperty(compositeType, parentsNeedFlatten));
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
@@ -221,5 +226,29 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         }
 
         return result;
+    }
+
+    private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {
+        boolean ret = compositeType.getProperties().stream()
+                .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+        if (!ret && !parentsNeedFlatten.isEmpty()) {
+            // Check properties from base class of multiple inheritance as properties of this class.
+            ret = parentsNeedFlatten.stream()
+                    .flatMap(s -> (s.getParents() != null && s.getParents().getAll() != null) ? Stream.concat(Stream.of(s), s.getParents().getAll().stream()) : Stream.of(s))
+                    .filter(s -> s instanceof ObjectSchema)
+                    .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+        }
+        return ret;
+    }
+
+    /**
+     * Extension for Fluent predefined type.
+     *
+     * @param compositeType object type
+     * @return Whether the type is predefined.
+     */
+    protected boolean isPredefinedModel(ClassType compositeType) {
+        return false;
     }
 }

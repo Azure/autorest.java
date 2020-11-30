@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.DefaultTemplateFactory;
 import com.azure.autorest.template.ModelTemplate;
+import com.azure.autorest.template.PomTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
@@ -37,5 +38,10 @@ public class FluentTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ServiceClientTemplate getServiceClientTemplate() {
         return FluentServiceClientTemplate.getInstance();
+    }
+
+    @Override
+    public PomTemplate getPomTemplate() {
+        return FluentPomTemplate.getInstance();
     }
 }

@@ -15,10 +15,11 @@ import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Value;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 
 public class ErrorTypeNormalization {
 
-    private static final Logger logger = LoggerFactory.getLogger(ErrorTypeNormalization.class);
+    private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), ErrorTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().stream()
@@ -102,6 +103,7 @@ public class ErrorTypeNormalization {
 
                 if (errorSchema != error) {
                     errorSchema.setParents(parents);
+                    error.setChildren(errorSchema.getChildren());
                 }
 
                 List<Property> properties = new ArrayList<>();

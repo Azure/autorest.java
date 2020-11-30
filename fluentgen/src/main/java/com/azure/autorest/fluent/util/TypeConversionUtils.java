@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.Response;
 
 import java.util.Objects;
 
@@ -35,7 +36,8 @@ public class TypeConversionUtils {
         } else if (clientType instanceof MapType) {
             MapType type = (MapType) clientType;
             String nestedPropertyName = nextPropertyName(propertyName);
-            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Entry::getKey, %2$s -> %3$s)", propertyName, nestedPropertyName, conversionExpression(type.getValueType(), nestedPropertyName));
+            String valuePropertyName = nestedPropertyName + ".getValue()";
+            expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, %2$s -> %3$s))", propertyName, nestedPropertyName, conversionExpression(type.getValueType(), valuePropertyName));
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
@@ -44,10 +46,40 @@ public class TypeConversionUtils {
                     String nestedPropertyName = nextPropertyName(propertyName);
                     expression = String.format("%1$s.mapPage(%2$s -> new %3$s(%4$s, this.%5$s()))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
                 }
+            } else if (Response.class.getSimpleName().equals(type.getName())) {
+                IType valueType = type.getTypeArguments()[0];
+                if (valueType instanceof ClassType || valueType instanceof GenericType) {
+                    String valuePropertyName = propertyName + ".getValue()";
+                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", propertyName, conversionExpression(valueType, valuePropertyName));
+                } else {
+                    expression = propertyName;
+                }
             }
         }
         Objects.requireNonNull(expression, "Unexpected scenario in WrapperTypeConversionMethod.conversionExpression. ClientType is " + clientType);
         return expression;
+    }
+
+    public static String objectOrUnmodifiableCollection(IType clientType, String expression) {
+        String unmodifiableMethodName = null;
+        if (clientType instanceof ListType) {
+            unmodifiableMethodName = "unmodifiableList";
+        } else if (clientType instanceof MapType) {
+            unmodifiableMethodName = "unmodifiableMap";
+        }
+        return (unmodifiableMethodName == null)
+                ? expression
+                : String.format("Collections.%1$s(%2$s)", unmodifiableMethodName, expression);
+    }
+
+    public static String nullOrEmptyCollection(IType clientType) {
+        String emptyExpression = "null";
+        if (clientType instanceof ListType) {
+            emptyExpression = "Collections.emptyList()";
+        } else if (clientType instanceof MapType) {
+            emptyExpression = "Collections.emptyMap()";
+        }
+        return emptyExpression;
     }
 
     public static boolean isPagedIterable(IType clientType) {
@@ -61,11 +93,29 @@ public class TypeConversionUtils {
         return ret;
     }
 
+    public static boolean isResponse(IType clientType) {
+        boolean ret = false;
+        if (clientType instanceof GenericType) {
+            GenericType type = (GenericType) clientType;
+            if (Response.class.getSimpleName().equals(type.getName())) {
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
+    public static String tempPropertyName() {
+        return "inner";
+    }
+
     private static String nextPropertyName(String propertyName) {
-        if (propertyName.equals("inner")) {
-            return "inner1";
+        if (propertyName.indexOf('.') > 0) {
+            propertyName = propertyName.substring(0, propertyName.indexOf('.'));
+        }
+        if (propertyName.equals(tempPropertyName())) {
+            return tempPropertyName() + "1";
         } else {
-            return "inner" + (Integer.parseInt(propertyName.substring(5)) + 1);
+            return tempPropertyName() + (Integer.parseInt(propertyName.substring(tempPropertyName().length())) + 1);
         }
     }
 

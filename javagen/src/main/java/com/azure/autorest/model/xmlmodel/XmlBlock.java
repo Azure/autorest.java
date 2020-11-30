@@ -1,5 +1,7 @@
 package com.azure.autorest.model.xmlmodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 import java.util.function.Consumer;
 
 public class XmlBlock {
@@ -34,10 +36,18 @@ public class XmlBlock {
     }
 
     public final void tag(String tag, String value) {
-        contents.tag(tag, value);
+        contents.tag(tag, CodeNamer.escapeXmlComment(value));
     }
 
     public final void block(String text, Consumer<XmlBlock> bodyAction) {
         contents.block(text, bodyAction);
+    }
+
+    public final void tagWithInlineComment(String tag, String value, String comment) {
+        contents.line("<%1$s>%2$s</%1$s> <!-- %3$s -->", tag, CodeNamer.escapeXmlComment(value), CodeNamer.escapeXmlComment(comment));
+    }
+
+    public final void tagCData(String tag, String value) {
+        contents.line("<%1$s><![CDATA[%2$s]]></%1$s>", tag, value);
     }
 }

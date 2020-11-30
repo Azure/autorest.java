@@ -2,10 +2,13 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -30,11 +33,15 @@ public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupCl
         methodGroupClient.addImportsTo(imports, false, settings);
         javaFile.declareImport(imports);
 
+        List<String> interfaces = methodGroupClient.getSupportedInterfaces().stream()
+                .map(IType::toString).collect(Collectors.toList());
+        String parentDeclaration = !interfaces.isEmpty() ? String.format(" extends %1$s", String.join(", ", interfaces)) : "";
+
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
         {
             comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
-        javaFile.publicInterface(methodGroupClient.getInterfaceName(), interfaceBlock ->
+        javaFile.publicInterface(String.format("%1$s%2$s", methodGroupClient.getInterfaceName(), parentDeclaration), interfaceBlock ->
         {
             for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, interfaceBlock);

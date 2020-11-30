@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.model.javamodel.JavaVisibility;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,6 +25,11 @@ public class ServiceClientProperty {
      * The name of this property.
      */
     private String name;
+
+    /**
+     * THe accessor method suffix of this property
+     */
+    private String accessorMethodSuffix;
     /**
      * Get whether or not this property's value can be changed by the client library.
      */
@@ -31,6 +38,8 @@ public class ServiceClientProperty {
      * Get the expression that evaluates to this property's default value.
      */
     private String defaultValueExpression;
+
+    private JavaVisibility methodVisibility = JavaVisibility.Public;
 
     /**
      * Create a new ServiceClientProperty with the provided properties.
@@ -41,9 +50,20 @@ public class ServiceClientProperty {
      * @param defaultValueExpression The expression that evaluates to this property's default value.
      */
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression) {
+        this(description, type, name, name, readOnly, defaultValueExpression);
+    }
+
+    public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression, JavaVisibility methodVisibility) {
+        this(description, type, name, name, readOnly, defaultValueExpression);
+        this.methodVisibility = methodVisibility;
+    }
+
+    public ServiceClientProperty(String description, IType type, String name, String accessorMethodSuffix, boolean readOnly,
+            String defaultValueExpression) {
         this.description = description;
         this.type = type;
         this.name = name;
+        this.accessorMethodSuffix = accessorMethodSuffix;
         this.readOnly = readOnly;
         this.defaultValueExpression = defaultValueExpression;
     }
@@ -60,12 +80,20 @@ public class ServiceClientProperty {
         return name;
     }
 
+    public final String getAccessorMethodSuffix() {
+        return accessorMethodSuffix;
+    }
+
     public final boolean isReadOnly() {
         return readOnly;
     }
 
     public final String getDefaultValueExpression() {
         return defaultValueExpression;
+    }
+
+    public JavaVisibility getMethodVisibility() {
+        return methodVisibility;
     }
 
     /**

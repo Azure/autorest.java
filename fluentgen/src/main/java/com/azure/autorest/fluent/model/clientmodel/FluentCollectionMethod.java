@@ -6,9 +6,9 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperCollectionMethodImplementationMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperCollectionMethodTypeConversionMethod;
-import com.azure.autorest.fluent.model.clientmodel.modelimpl.WrapperMethod;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.CollectionMethodTemplate;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.CollectionMethodTypeConversionTemplate;
+import com.azure.autorest.fluent.model.clientmodel.immutablemodel.ImmutableMethod;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -26,15 +26,15 @@ public class FluentCollectionMethod {
 
     private final IType fluentReturnType;
 
-    private final WrapperMethod wrapperMethod;
+    private final ImmutableMethod immutableMethod;
 
     public FluentCollectionMethod(ClientMethod method) {
         this.method = method;
         this.fluentReturnType = FluentUtils.getFluentWrapperType(method.getReturnValue().getType());
 
-        this.wrapperMethod = this.fluentReturnType == method.getReturnValue().getType()
-                ? new WrapperCollectionMethodImplementationMethod(this, method.getReturnValue().getType())
-                : new WrapperCollectionMethodTypeConversionMethod(this, method.getReturnValue().getType());
+        this.immutableMethod = this.fluentReturnType == method.getReturnValue().getType()
+                ? new CollectionMethodTemplate(this, method.getReturnValue().getType())
+                : new CollectionMethodTypeConversionTemplate(this, method.getReturnValue().getType());
     }
 
     public IType getFluentReturnType() {
@@ -66,7 +66,7 @@ public class FluentCollectionMethod {
     }
 
     public MethodTemplate getImplementationMethodTemplate() {
-        return wrapperMethod.getMethodTemplate();
+        return immutableMethod.getMethodTemplate();
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
@@ -74,7 +74,7 @@ public class FluentCollectionMethod {
         method.addImportsTo(imports, includeImplementationImports, JavaSettings.getInstance());
 
         if (includeImplementationImports) {
-            wrapperMethod.getMethodTemplate().addImportsTo(imports);
+            immutableMethod.getMethodTemplate().addImportsTo(imports);
         }
     }
 }

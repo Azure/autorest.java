@@ -24,6 +24,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,18 +52,25 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Client.Builder builder = new Client.Builder();
 
         List<EnumType> enumTypes = new ArrayList<>();
+        Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                enumTypes.add(enumType);
+                if (!enumNames.contains(enumType.getName())) {
+                    enumTypes.add(enumType);
+                    enumNames.add(enumType.getName());
+                }
             }
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                enumTypes.add(enumType);
+                if (!enumNames.contains(enumType.getName())) {
+                    enumTypes.add(enumType);
+                    enumNames.add(enumType.getName());
+                }
             }
         }
         builder.enums(enumTypes);
@@ -74,6 +82,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
@@ -84,15 +93,19 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
         List<ClientModel> clientModels = autoRestModelTypes
-            .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-            .filter(Objects::nonNull)
-            .collect(Collectors.toList());
+                .distinct()
+                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
         builder.models(clientModels);
 
         builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
+                .distinct()
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList()));
 
         String serviceClientName = codeModel.getLanguage().getJava().getName();
@@ -108,28 +121,35 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
                     serviceClientDescription)));
         }
         if (settings.isFluent()) {
-            if (settings.getImplementationSubpackage() != null && !settings.getImplementationSubpackage().isEmpty()) {
+            if (settings.isFluentLite() && !CoreUtils.isNullOrEmpty(settings.getImplementationSubpackage())) {
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
-                        implementationPackage,
-                        String.format("Package containing the client classes for %s.\n%s",
-                            serviceClientName, serviceClientDescription)));
+                            implementationPackage,
+                            String.format("Package containing the implementations for %s.\n%s",
+                                    serviceClientName, serviceClientDescription)));
                 }
-                String implementationInnerPackage = settings.isFluentLite()
-                        ? settings.getPackage(settings.getModelsSubpackage(), "inner")
-                        : settings.getPackage(settings.getImplementationSubpackage(), "inner");
-                if (!packageInfos.containsKey(implementationInnerPackage)) {
-                    packageInfos.put(implementationInnerPackage, new PackageInfo(
-                        implementationInnerPackage,
-                        String.format("Package containing the inner classes for %s.\n%s",
+            }
+            if (!CoreUtils.isNullOrEmpty(settings.getFluentSubpackage())) {
+                String fluentPackage = settings.getPackage(settings.getFluentSubpackage());
+                if (!packageInfos.containsKey(fluentPackage)) {
+                    packageInfos.put(fluentPackage, new PackageInfo(
+                            fluentPackage,
+                            String.format("Package containing the service clients for %s.\n%s",
+                                    serviceClientName, serviceClientDescription)));
+                }
+                String fluentInnerPackage = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
+                if (!packageInfos.containsKey(fluentInnerPackage)) {
+                    packageInfos.put(fluentInnerPackage, new PackageInfo(
+                        fluentInnerPackage,
+                        String.format("Package containing the inner data models for %s.\n%s",
                             serviceClientName, serviceClientDescription)));
                 }
             }
@@ -140,7 +160,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
                         implementationPackage,
-                        String.format("Package containing the implementations and inner classes for %s.\n%s",
+                        String.format("Package containing the implementations for %s.\n%s",
                             serviceClientName, serviceClientDescription)));
                 }
             }

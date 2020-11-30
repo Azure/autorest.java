@@ -14,8 +14,10 @@ import com.azure.autorest.util.CodeNamer;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -86,6 +88,8 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         interfaceBlock.annotation(String.format("ResumeOperation"));
                     }
 
+                    Set<String> usedParameterNames = new HashSet<>();
+
                     for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
                         StringBuilder parameterDeclarationBuilder = new StringBuilder();
 
@@ -122,7 +126,14 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
                         }
 
-                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameter.getName());
+                        // avoid name conflict
+                        String parameterName = parameter.getName();
+                        if (usedParameterNames.contains(parameterName)) {
+                            parameterName = parameterName + "Param";
+                        }
+                        usedParameterNames.add(parameterName);
+
+                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameterName);
                         parameterDeclarationList.add(parameterDeclarationBuilder.toString());
                     }
 

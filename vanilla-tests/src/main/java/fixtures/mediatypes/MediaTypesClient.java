@@ -69,7 +69,11 @@ public final class MediaTypesClient {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of MediaTypesClient client. */
+    /**
+     * Initializes an instance of MediaTypesClient client.
+     *
+     * @param host server parameter.
+     */
     MediaTypesClient(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -83,6 +87,7 @@ public final class MediaTypesClient {
      * Initializes an instance of MediaTypesClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     MediaTypesClient(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -93,6 +98,7 @@ public final class MediaTypesClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     MediaTypesClient(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
@@ -246,6 +252,27 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> analyzeBodyAsync() {
+        final String source = null;
+        return analyzeBodyWithResponseAsync(source)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -254,6 +281,19 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(String source) {
+        return analyzeBodyAsync(source).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String analyzeBody() {
+        final String source = null;
         return analyzeBodyAsync(source).block();
     }
 

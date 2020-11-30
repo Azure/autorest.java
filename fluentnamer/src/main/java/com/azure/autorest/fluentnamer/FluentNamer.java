@@ -9,10 +9,18 @@ package com.azure.autorest.fluentnamer;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.CodeNamer;
+import org.slf4j.Logger;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.Property;
+import org.yaml.snakeyaml.nodes.NodeTuple;
+import org.yaml.snakeyaml.nodes.Tag;
+import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,22 +29,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.azure.autorest.util.CodeNamer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.Tag;
-import org.yaml.snakeyaml.representer.Representer;
-
 public class FluentNamer extends NewPlugin {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentNamer.class);
+    private final Logger logger = new PluginLogger(this, FluentNamer.class);
+    private static FluentNamer instance;
 
     public FluentNamer(Connection connection, String plugin,
                        String sessionId) {
         super(connection, plugin, sessionId);
+        instance = this;
+    }
+
+    public static FluentNamer getPluginInstance() {
+        return instance;
     }
 
     @Override
@@ -67,8 +72,7 @@ public class FluentNamer extends NewPlugin {
             // Output updated code model
             writeFile(fluentNamerFile.getName(), output, null);
         } catch (Exception e) {
-            logger.error("Failed to successfully run fluentnamer plugin " + e, e);
-            connection.sendError(1, 500, "Error occured while running fluentnamer plugin: " + e.getMessage());
+            logger.error("Failed to successfully run fluentnamer plugin.", e);
             return false;
         }
         return true;

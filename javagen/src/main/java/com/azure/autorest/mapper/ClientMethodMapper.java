@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
@@ -36,13 +37,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
     private static ClientMethodMapper instance = new ClientMethodMapper();
     private Map<Operation, List<ClientMethod>> parsed = new HashMap<>();
 
-    private ClientMethodMapper() {
+    protected ClientMethodMapper() {
     }
 
     public static ClientMethodMapper getInstance() {
@@ -67,15 +69,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
         IType syncReturnType;
+        IType syncReturnWithResponse;
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             // Mono<SimpleResponse<Page>>
             Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
-            IType listType = responseBodyModel.getProperties().stream()
+            Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
                     .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                    .findFirst().get().getWireType();
+                    .findFirst();
+            if (!itemPropertyOpt.isPresent()) {
+                throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] item name %s not found among properties of client model %s",
+                        operation.getExtensions().getXmsPageable().getItemName(), responseBodyModel.getName()));
+            }
+            IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
             asyncRestResponseReturnType = GenericType.Mono(GenericType.PagedResponse(elementType));
             asyncReturnType = GenericType.PagedFlux(elementType);
@@ -98,6 +106,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         }
 
+        if (syncReturnType == ClassType.InputStream) {
+            syncReturnWithResponse = ClassType.StreamResponse;
+        } else {
+            syncReturnWithResponse = GenericType.Response(syncReturnType);
+        }
+
         for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
             builder.proxyMethod(proxyMethod);
@@ -109,6 +123,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+
+                if (request.getProtocol() != null
+                    && request.getProtocol().getHttp() != null
+                    && request.getProtocol().getHttp().getMediaTypes() != null
+                    && request.getProtocol().getHttp().getMediaTypes().stream().anyMatch(mediaType -> mediaType.equals(
+                        "application/json-patch+json"))) {
+                    clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
+                }
+
                 if (request.getSignatureParameters().contains(parameter)) {
                     parameters.add(clientMethodParameter);
                 }
@@ -172,7 +195,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);
+            final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
 
             builder.parameters(parameters)
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
@@ -209,9 +232,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.PagingAsyncSinglePage)
                                 .isGroupedParameterRequired(false)
+                                .methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, false))
                                 .build());
                     }
                     if (settings.isContextClientMethodParameter()) {
+                        builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, true));
                         addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                 ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
                                 new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
@@ -229,7 +254,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingAsync)
                                     .isGroupedParameterRequired(false)
+                                    .methodVisibility(methodVisibility(ClientMethodType.PagingAsync, false))
                                     .build());
+
+                            if (generateClientMethodWithOnlyRequiredParameters) {
+                                methods.add(builder
+                                        .onlyRequiredParameters(true)
+                                        .build());
+                            }
+
                             if (settings.isContextClientMethodParameter()) {
                                 MethodPageDetails detailsWithContext = details;
                                 if (nextMethods != null) {
@@ -242,32 +275,31 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             lroIntermediateType);
                                 }
 
-                                addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                                addClientMethodWithContext(methods,
+                                        builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true)),
+                                        proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
                                         new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
                                                 asyncReturnType),
                                         detailsWithContext);
                             }
-
-                            if (generateClientMethodWithOnlyRequiredParameters) {
-                                methods.add(builder
-                                        .onlyRequiredParameters(true)
-                                        .build());
-                            }
                         }
 
                         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                            methods.add(builder
+                            builder.methodVisibility(VISIBLE);
+
+                            builder
                                     .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                             syncReturnType))
                                     .name(proxyMethod.getName())
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingSync)
                                     .isGroupedParameterRequired(false)
-                                    .build());
+                                    .build();
 
-                            if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder, parameters);
+                            if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                                // if context parameter is required, that method will do the overload with max parameters
+                                methods.add(builder.build());
                             }
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -275,10 +307,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                         .onlyRequiredParameters(true)
                                         .build());
                             }
+
+                            if (settings.isContextClientMethodParameter()) {
+                                addClientMethodWithContext(methods, builder, parameters);
+                            }
                         }
                     }
                 }
-            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                    && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
                 // WithResponseAsync, with required and optional parameters
                 methods.add(builder
                         .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
@@ -287,10 +324,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .isGroupedParameterRequired(false)
+                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
                         .build());
 
                 if (settings.isContextClientMethodParameter()) {
-                    addClientMethodWithContext(methods, builder, parameters);
+                    addClientMethodWithContext(methods,
+                            builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                            parameters);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
@@ -302,14 +342,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
+                                parameters);
                     }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    builder.methodVisibility(VISIBLE);
+
                     // begin method sync
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
@@ -333,20 +378,25 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
                             .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
                     }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
+                                parameters);
+                    }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    builder.methodVisibility(VISIBLE);
+
                     methods.add(builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                     syncReturnType))
@@ -356,14 +406,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .isGroupedParameterRequired(false)
                             .build());
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
-
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
+                    }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
             } else {
@@ -381,11 +431,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .isGroupedParameterRequired(false)
+                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
                         .build());
                 }
 
                 if (settings.isContextClientMethodParameter()) {
-                    addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                    addClientMethodWithContext(methods,
+                        builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                        proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
                         new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
                             syncReturnType), proxyMethod.getReturnType().getClientType()),
@@ -400,31 +453,40 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleAsync)
                             .isGroupedParameterRequired(false)
+                            .methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, false))
                             .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
                                 .onlyRequiredParameters(true)
                                 .build());
                     }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        JavaVisibility visibility = methodVisibility(ClientMethodType.SimpleAsync, true);
+                        if (visibility != NOT_GENERATE) {
+                            addClientMethodWithContext(methods,
+                                    builder.methodVisibility(visibility),
+                                    parameters);
+                        }
+                    }
                 }
 
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    methods.add(builder
+                    builder.methodVisibility(VISIBLE);
+
+                    builder
                             .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
                                     syncReturnType))
                             .name(proxyMethod.getName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleSync)
                             .isGroupedParameterRequired(false)
-                            .build());
+                            .build();
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
+                    if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                        // if context parameter is required, that method will do the overload with max parameters
+                        methods.add(builder.build());
                     }
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
@@ -432,11 +494,37 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .onlyRequiredParameters(true)
                                 .build());
                     }
+
+                    if (settings.isContextClientMethodParameter()) {
+                        builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                .onlyRequiredParameters(false)
+                                .name(proxyMethod.getSimpleRestResponseMethodName())
+                                .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
+                                        syncReturnWithResponse), syncReturnWithResponse));
+                        addClientMethodWithContext(methods, builder, parameters);
+                    }
                 }
             }
         }
         parsed.put(operation, methods);
         return methods;
+    }
+
+    protected static final JavaVisibility NOT_VISIBLE = JavaVisibility.Private;
+    protected static final JavaVisibility VISIBLE = JavaVisibility.Public;
+    protected static final JavaVisibility NOT_GENERATE = null;
+
+    /**
+     * Extension for configuration on method visibility.
+     * <p>
+     * ClientMethodTemplate.writeMethod (and whether it is called) would also decide the visibility in generated code.
+     *
+     * @param methodType the type of the client method.
+     * @param hasContextParameter whether the method has Context parameter.
+     * @return method visibility, null if do not generate.
+     */
+    protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
+        return VISIBLE;
     }
 
     private static final ClientMethodParameter CONTEXT_PARAM = new ClientMethodParameter.Builder()
@@ -477,6 +565,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         methods.add(builder
                 .parameters(withContextParameters) // update builder parameters to include context
+                .onlyRequiredParameters(false)
                 .build());
         // reset the parameters to original params
         builder.parameters(parameters);
@@ -491,9 +580,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .map(ClientModelProperty::getName).findAny().orElse(null);
     }
 
-    private static boolean hasNonRequiredParameters(Request request) {
-        return request.getParameters().stream().anyMatch(p -> p.getImplementation() == Parameter.ImplementationLocation.METHOD && !p.isRequired() && !(p.getSchema() instanceof ConstantSchema))
-                && request.getParameters().stream().noneMatch(Parameter::isFlattened);   // for now, ignore operation with flattened parameters
+    private static boolean hasNonRequiredParameters(List<ClientMethodParameter> parameters) {
+        return parameters.stream().anyMatch(p -> !p.getIsRequired());
     }
 
     private static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {

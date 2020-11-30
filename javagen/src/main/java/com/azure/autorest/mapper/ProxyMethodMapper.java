@@ -65,7 +65,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
-                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
+                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
             returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
             builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
@@ -121,7 +122,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // check for mediaTypes first as that is more specific than the knownMediaType
             // if there are multiple, we'll use the generic type
             if (request.getProtocol().getHttp().getMediaTypes() != null
-                && !request.getProtocol().getHttp().getMediaTypes().isEmpty()
                 && request.getProtocol().getHttp().getMediaTypes().size() == 1) {
                 requestContentType = request.getProtocol().getHttp().getMediaTypes().get(0);
             } else if (request.getProtocol().getHttp().getKnownMediaType() != null) {
@@ -137,7 +137,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
                 parameter.setOperation(operation);
-                parameters.add(Mappers.getProxyParameterMapper().map(parameter));
+                ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
+                if (requestContentType.startsWith("application/json-patch+json")) {
+                    proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
+                }
+                parameters.add(proxyMethodParameter);
             }
             if (settings.getAddContextParameter()) {
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()

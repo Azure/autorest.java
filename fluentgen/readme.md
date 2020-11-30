@@ -1,3 +1,7 @@
+### Java Code Formatter
+
+Formatter depends on a customized [google-java-format](https://github.com/weidongxu-microsoft/google-java-format?organization=weidongxu-microsoft&organization=weidongxu-microsoft), which requires JRE 11.
+
 #### Fluentgen
 
 ``` yaml

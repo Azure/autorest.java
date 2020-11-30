@@ -2,8 +2,8 @@ package com.azure.autorest.extension.base.plugin;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.MessageChannel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
-import com.azure.core.implementation.TypeUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,8 +12,12 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -48,6 +52,21 @@ public abstract class NewPlugin {
         }
     }
 
+    public String getStringValue(String[] keys, String defaultValue) {
+        String ret = null;
+        for (String key : keys) {
+            ret = getStringValue(key);
+            if (ret != null) {
+                break;
+            }
+        }
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            return ret;
+        }
+    }
+
     public Boolean getBooleanValue(String key) {
         return getValue(Boolean.class, key);
     }
@@ -73,13 +92,25 @@ public abstract class NewPlugin {
         connection.notify("Message", sessionId, message);
     }
 
+    public void message(MessageChannel channel, String text, Throwable error, List<String> keys) {
+        Message message = new Message();
+        message.setChannel(channel);
+        message.setKey(keys);
+        message.setSource(Collections.emptyList());
+        if (error != null) {
+            text += "\n" + formatThrowableMessage(error);
+        }
+        message.setText(text);
+        message(message);
+    }
+
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
         connection.notify("WriteFile", sessionId, fileName, content, sourceMap);
     }
 
     public void writeFile(String fileName, String content, List<Object> sourceMap, String artifactType) {
         Message message = new Message();
-        message.setChannel("file");
+        message.setChannel(MessageChannel.FILE);
         message.setDetails(new HashMap<String, Object>() {{
             put("content", content);
             put("type", artifactType);
@@ -104,7 +135,22 @@ public abstract class NewPlugin {
     }
 
     public String getConfigurationFile(String fileName) {
-        Map<String,String> configurations = getValue(TypeUtil.createParameterizedType(Map.class, String.class, String.class), "configurationFiles");
+        Map<String,String> configurations = getValue(new ParameterizedType() {
+            @Override
+            public Type[] getActualTypeArguments() {
+                return new Type[] { String.class, String.class };
+            }
+
+            @Override
+            public Type getRawType() {
+                return Map.class;
+            }
+
+            @Override
+            public Type getOwnerType() {
+                return null;
+            }
+        }, "configurationFiles");
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();
             if (it.hasNext()) {
@@ -122,7 +168,7 @@ public abstract class NewPlugin {
 
     public void updateConfigurationFile(String filename, String content) {
         Message message = new Message();
-        message.setChannel("configuration");
+        message.setChannel(MessageChannel.CONFIGURATION);
         message.setKey(Arrays.asList(filename));
         message.setText(content);
         connection.notify("Message", sessionId, message);
@@ -155,13 +201,18 @@ public abstract class NewPlugin {
             JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
-            Message message = new Message();
-            message.setChannel("fatal");
-            message.setText(t.getMessage());
-            message(message);
+            message(MessageChannel.FATAL, "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
             return false;
         }
     }
 
     public abstract boolean processInternal();
+
+    private String formatThrowableMessage(Throwable t) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        t.printStackTrace(printWriter);
+        return stringWriter.toString();
+    }
 }

@@ -26,8 +26,11 @@ public class ClientModelUtil {
      */
     public static void getAsyncSyncClients(ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
+        String packageName = getAsyncSyncClientPackageName(serviceClient);
+
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
                     .serviceClient(serviceClient);
 
             String asyncClassName =
@@ -48,6 +51,7 @@ public class ClientModelUtil {
         final int count = serviceClient.getMethodGroupClients().size() + asyncClients.size();
         for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
                     .serviceClient(serviceClient)
                     .methodGroupClient(methodGroupClient);
 
@@ -88,7 +92,7 @@ public class ClientModelUtil {
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
-        if (settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
+        if (!settings.isFluent() && settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
@@ -96,9 +100,12 @@ public class ClientModelUtil {
     }
 
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
-            builderPackage = JavaSettings.getInstance().getPackage();
+        if (settings.shouldGenerateSyncAsyncClients() && !settings.isFluent()) {
+            builderPackage = settings.getPackage();
+        } else if (settings.isFluent()) {
+            builderPackage = settings.getPackage(settings.getImplementationSubpackage());
         }
         return builderPackage;
     }
@@ -106,9 +113,34 @@ public class ClientModelUtil {
     public static String getServiceClientPackageName(String serviceClientClassName) {
         JavaSettings settings = JavaSettings.getInstance();
         String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
+        if (settings.isFluent()) {
+            if (settings.shouldGenerateSyncAsyncClients() || settings.shouldGenerateClientInterfaces()) {
+                subpackage = settings.getImplementationSubpackage();
+            } else {
+                subpackage = settings.getFluentSubpackage();
+            }
+        }
         if (settings.isCustomType(serviceClientClassName)) {
             subpackage = settings.getCustomTypesSubpackage();
         }
         return settings.getPackage(subpackage);
+    }
+
+    public static String getAsyncSyncClientPackageName(ServiceClient serviceClient) {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isFluent()) {
+            return settings.getPackage(settings.getFluentSubpackage());
+        } else {
+            return getServiceClientBuilderPackageName(serviceClient);
+        }
+    }
+
+    public static String getServiceClientInterfacePackageName() {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isFluent()) {
+            return settings.getPackage(settings.getFluentSubpackage());
+        } else {
+            return settings.getPackage();
+        }
     }
 }

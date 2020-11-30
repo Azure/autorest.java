@@ -58,7 +58,11 @@ public final class AutoRestParameterFlattening {
         return this.availabilitySets;
     }
 
-    /** Initializes an instance of AutoRestParameterFlattening client. */
+    /**
+     * Initializes an instance of AutoRestParameterFlattening client.
+     *
+     * @param host server parameter.
+     */
     AutoRestParameterFlattening(String host) {
         this(
                 new HttpPipelineBuilder()
@@ -72,6 +76,7 @@ public final class AutoRestParameterFlattening {
      * Initializes an instance of AutoRestParameterFlattening client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param host server parameter.
      */
     AutoRestParameterFlattening(HttpPipeline httpPipeline, String host) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
@@ -82,6 +87,7 @@ public final class AutoRestParameterFlattening {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param host server parameter.
      */
     AutoRestParameterFlattening(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
         this.httpPipeline = httpPipeline;
