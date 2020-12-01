@@ -18,7 +18,6 @@ class HostMapping {
     private final String baseUrlTemplate;
     private final List<ProxyMethodParameter> hostParams;
     private final boolean hostIsBaseUrl;
-
     public List<ProxyMethodParameter> getHostParams() {
         return this.hostParams;
     }

@@ -193,6 +193,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
 
         if (errorType != null) {
+            if (errorType.equals(ClassType.String)){
+                builder.unexpectedResponseExceptionType(getExceptionTypeForString(errorType));
+                return;
+            }
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
             if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();
@@ -214,4 +218,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
         }
     }
+
+    protected ClassType getExceptionTypeForString(ClassType errorType) {
+        return ClassType.HttpResponseException;
+    }
+
 }

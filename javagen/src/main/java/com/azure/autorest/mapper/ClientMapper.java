@@ -71,6 +71,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .flatMap(og -> og.getOperations().stream())
                 .flatMap(o -> o.getExceptions().stream())
                 .map(Response::getSchema)
+                .filter(s -> s instanceof ObjectSchema)
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
                 .filter(Objects::nonNull)
