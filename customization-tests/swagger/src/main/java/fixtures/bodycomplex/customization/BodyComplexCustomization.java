@@ -22,10 +22,11 @@ public class BodyComplexCustomization extends Customization {
         dotSalmon.addMethod("public boolean isDomestic() {\n" +
                 "    return \"US\".equalsIgnoreCase(getLocation());\n" +
                 "}")
-                .addAnnotation("JsonIgnore")
+                .addAnnotation("Deprecated")
                 .getJavadoc()
                     .setDescription("Return if the salmon is a domestic species.")
-                    .setReturn("true if the salmon is domestic");
+                    .setReturn("true if the salmon is domestic")
+                    .setDeprecated("Removing in the next version");
 
         implementationModels.getClass("CMYKColors")
                 .renameEnumMember("CYAN", "TEAL");
@@ -43,6 +44,9 @@ public class BodyComplexCustomization extends Customization {
         ClassCustomization arrayClient = root.getClass("ArrayClient");
         arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this");
         arrayClient.getJavadoc().setDescription("The sync client containing Array operations.");
-        arrayClient.getMethod("putValid").getJavadoc().setReturn("The ArrayClient itself");
+        arrayClient.getMethod("putValid").getJavadoc()
+                .setReturn("The ArrayClient itself")
+                .setSince("1.0.0-beta.1")
+                .addSee("ArrayAsyncClient#putValid(ArrayWrapper)");
     }
 }

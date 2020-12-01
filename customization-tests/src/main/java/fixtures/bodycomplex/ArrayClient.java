@@ -59,9 +59,13 @@ public final class ArrayClient {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      *     jumps over the lazy dog".
      * @return The ArrayClient itself
-     * @throws RuntimeException RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @throws ErrorException ErrorException thrown if the request is rejected by server.
-     * @throws IllegalArgumentException IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RuntimeException RuntimeException RuntimeException RuntimeException all other wrapped checked exceptions
+     *     if the request fails to be sent.
+     * @throws ErrorException ErrorException ErrorException ErrorException thrown if the request is rejected by server.
+     * @throws IllegalArgumentException IllegalArgumentException IllegalArgumentException IllegalArgumentException
+     *     thrown if parameters fail the validation.
+     * @see ArrayAsyncClient#putValid(ArrayWrapper)
+     * @since 1.0.0-beta.1
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayClient putValid(ArrayWrapper complexBody) {

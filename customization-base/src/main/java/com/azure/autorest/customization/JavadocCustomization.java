@@ -10,8 +10,10 @@ import com.azure.autorest.customization.models.Range;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,6 +32,9 @@ public final class JavadocCustomization {
     private final Map<String, String> paramDocs;
     private String returnDoc;
     private final Map<String, String> throwsDocs;
+    private final List<String> seeDocs;
+    private String sinceDoc;
+    private String deprecatedDoc;
     private Range javadocRange;
 
     JavadocCustomization(Editor editor, EclipseLanguageClient languageClient, String packagePath, String className, int symbolLine) {
@@ -38,6 +43,7 @@ public final class JavadocCustomization {
 
         this.paramDocs = new HashMap<>();
         this.throwsDocs = new HashMap<>();
+        this.seeDocs = new ArrayList<>();
 
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
                 .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
@@ -132,6 +138,24 @@ public final class JavadocCustomization {
         return this;
     }
 
+    public JavadocCustomization addSee(String seeDoc) {
+        seeDocs.add(seeDoc);
+        commit();
+        return this;
+    }
+
+    public JavadocCustomization setSince(String sinceDoc) {
+        this.sinceDoc = sinceDoc;
+        commit();
+        return this;
+    }
+
+    public JavadocCustomization setDeprecated(String deprecatedDoc) {
+        this.deprecatedDoc = deprecatedDoc;
+        commit();
+        return this;
+    }
+
     private void initialize(int symbolLine) {
         editor.insertBlankLine(fileName, symbolLine++, false);
         editor.replace(fileName, new Position(symbolLine, 0), new Position(symbolLine, 0), indent);
@@ -163,6 +187,21 @@ public final class JavadocCustomization {
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@return") + 8);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
                     returnDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
+                    currentDocEndLine = symbolLine - 1;
+                } else if (lineContent.contains("@since")) {
+                    Position docStart = new Position(symbolLine, lineContent.indexOf("@since") + 7);
+                    Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
+                    sinceDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
+                    currentDocEndLine = symbolLine - 1;
+                } else if (lineContent.contains("@see")) {
+                    Position docStart = new Position(symbolLine, lineContent.indexOf("@see") + 5);
+                    Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
+                    seeDocs.add(editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim());
+                    currentDocEndLine = symbolLine - 1;
+                } else if (lineContent.contains("@deprecated")) {
+                    Position docStart = new Position(symbolLine, lineContent.indexOf("@see") + 5);
+                    Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
+                    deprecatedDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@param")) {
                     String name = lineContent.replaceFirst(".*@param ", "").replaceFirst(" .*", "");
@@ -214,6 +253,19 @@ public final class JavadocCustomization {
             for (Map.Entry<String, String> throwsDoc : throwsDocs.entrySet()) {
                 printWriter.println(indent + " * @throws " + throwsDoc.getKey() + " " + throwsDoc.getValue());
             }
+
+            for (String seeDoc: seeDocs) {
+                printWriter.println(indent + " * @see " + seeDoc);
+            }
+
+            if (sinceDoc != null) {
+                printWriter.println(indent + " * @since " + sinceDoc);
+            }
+
+            if (deprecatedDoc != null) {
+                printWriter.println(indent + " * @deprecated " + deprecatedDoc);
+            }
+
         }
         printWriter.print(indent + " */");
 
