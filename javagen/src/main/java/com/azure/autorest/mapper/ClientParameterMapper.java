@@ -55,9 +55,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
             String description = parameter.getSchema().getLanguage().getDefault().getDescription();
             if (description == null || description.isEmpty()) {
-                if (parameter.getLanguage() != null) {
-                    description = parameter.getLanguage().getDefault().getDescription();
-                }
+                description = String.format("The %s parameter", name);
             }
             builder.description(description);
         }
