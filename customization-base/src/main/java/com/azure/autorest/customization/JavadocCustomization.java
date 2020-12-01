@@ -138,18 +138,36 @@ public final class JavadocCustomization {
         return this;
     }
 
+    /**
+     * Adds a see Javadoc.
+     * @param seeDoc the link to the extra documentation
+     * @return the Javadoc customization object for chaining
+     * @see <a href=https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#see>Oracle docs on see tag</a>
+     */
     public JavadocCustomization addSee(String seeDoc) {
         seeDocs.add(seeDoc);
         commit();
         return this;
     }
 
+    /**
+     * Sets the since Javadoc on the method.
+     *
+     * @param sinceDoc the version for the since tag
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization setSince(String sinceDoc) {
         this.sinceDoc = sinceDoc;
         commit();
         return this;
     }
 
+    /**
+     * Sets the deprecated Javadoc on the method.
+     *
+     * @param deprecatedDoc the deprecation reason
+     * @return the Javadoc customization object for chaining
+     */
     public JavadocCustomization setDeprecated(String deprecatedDoc) {
         this.deprecatedDoc = deprecatedDoc;
         commit();

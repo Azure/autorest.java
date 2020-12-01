@@ -99,6 +99,12 @@ public final class ClassCustomization {
         return new JavadocCustomization(editor, languageClient, packagePath, className, classSymbol.getLocation().getRange().getStart().getLine());
     }
 
+    /**
+     * Adds a method to this class.
+     *
+     * @param method the entire literal string of the method
+     * @return the method level customization for the added method
+     */
     public MethodCustomization addMethod(String method) {
         // find position
         URI fileUri = classSymbol.getLocation().getUri();
