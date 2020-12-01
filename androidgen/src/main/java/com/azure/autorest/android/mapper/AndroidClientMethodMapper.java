@@ -61,8 +61,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
      * paging request is mapped to two operations, one for get first page and one
      * for get next page.
      */
-    @Override
-    public List<ClientMethod> map(Operation operation) {
+    public List<ClientMethod> map(Operation operation, String clientClassName) {
         JavaSettings settings = JavaSettings.getInstance();
         if (parsed.containsKey(operation)) {
             return parsed.get(operation);
@@ -78,8 +77,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
         for (Request request : operation.getRequests()) {
             // create service client method builder
-            ClientMethod.Builder builder = createClientMethodBuilder()
-                    .description(operation.getLanguage().getJava().getDescription())
+            ClientMethod.Builder builder = ((AndroidClientMethod.Builder) createClientMethodBuilder())
+                    .clientClassName(clientClassName).description(operation.getLanguage().getJava().getDescription())
                     .clientReference((operation.getOperationGroup() == null
                             || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this"
                                     : "this.client");
@@ -205,9 +204,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             IType elementType = null;
             boolean isPaging = false;
             boolean isNextMethod = false;
+            boolean isLongRunning = false;
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
                 if (operation.getExtensions().isXmsLongRunningOperation()) {
-                    throw new UnsupportedOperationException();
+                    isLongRunning = true;
                 }
                 // In paging case, we should return Page<elementType> and require client method
                 // template to do conversion
@@ -264,7 +264,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
                 // Sync method with Optional parameters.
                 //
-                methodType = isPaging ? ClientMethodType.PagingSync : ClientMethodType.SimpleSync;
+                methodType = isPaging ? (isLongRunning ? ClientMethodType.LongRunningSync : ClientMethodType.PagingSync)
+                        : ClientMethodType.SimpleSync;
                 GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType.getClientType());
                 methods.add(
                         builder.parameters(parameters)
@@ -307,6 +308,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 List<ClientMethodParameter> withCollectionCallbackParameters = new ArrayList<>(parameters);
                 withCollectionCallbackParameters.add(callbackCollectionParam);
 
+                final Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                         getPageableItemName(operation), null, null);

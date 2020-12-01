@@ -49,10 +49,10 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
 
-        String serviceClientClassName = serviceClientInterfaceName;
-        if (settings.shouldGenerateClientAsImpl()) {
-            serviceClientClassName += "Impl";
-        }
+        final String serviceClientClassName = settings.shouldGenerateClientAsImpl()
+                ? serviceClientInterfaceName + "Impl"
+                : serviceClientInterfaceName;
+
         String packageName = ClientModelUtil.getServiceClientPackageName(serviceClientClassName);
         builder.interfaceName(serviceClientInterfaceName)
                 .className(serviceClientClassName)
@@ -77,7 +77,7 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
             proxyBuilder.methods(restAPIMethods);
             builder.proxy(proxyBuilder.build());
             builder.clientMethods(codeModelRestAPIMethods.stream()
-                    .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
+                    .flatMap(m -> ((AndroidClientMethodMapper)Mappers.getClientMethodMapper()).map(m, serviceClientClassName).stream())
                     .collect(Collectors.toList()));
         } else {
             builder.clientMethods(new ArrayList<>());

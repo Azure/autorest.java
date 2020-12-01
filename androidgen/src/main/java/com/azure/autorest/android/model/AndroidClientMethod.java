@@ -2,18 +2,7 @@ package com.azure.autorest.android.model;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ArrayType;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MethodPageDetails;
-import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.ReturnValue;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
@@ -22,13 +11,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AndroidClientMethod extends ClientMethod {
+    private final String clientClassName;
+
     private AndroidClientMethod(String description, ReturnValue returnValue,
                                 String name, List<ClientMethodParameter> parameters,
                                 boolean onlyRequiredParameters, ClientMethodType type,
                                 ProxyMethod proxyMethod, Map<String, String> validateExpressions,
                                 String clientReference, List<String> requiredNullableParameterExpressions,
                                 boolean isGroupedParameterRequired, String groupedParameterTypeName,
-                                MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+                                MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
+                                String clientClassName) {
         super(description, returnValue,
                 name, parameters,
                 onlyRequiredParameters, type,
@@ -36,6 +28,11 @@ public class AndroidClientMethod extends ClientMethod {
                 clientReference, requiredNullableParameterExpressions,
                 isGroupedParameterRequired, groupedParameterTypeName,
                 methodPageDetails, methodTransformationDetails);
+        this.clientClassName = clientClassName;
+    }
+
+    public String clientClassName() {
+        return clientClassName;
     }
 
     @Override
@@ -107,6 +104,8 @@ public class AndroidClientMethod extends ClientMethod {
     }
 
     public static class Builder extends ClientMethod.Builder {
+        private String clientClassName;
+
         public AndroidClientMethod build() {
             return new AndroidClientMethod(super.description, super.returnValue,
                     super.name, super.parameters,
@@ -114,7 +113,13 @@ public class AndroidClientMethod extends ClientMethod {
                     super.proxyMethod, super.validateExpressions,
                     super.clientReference, super.requiredNullableParameterExpressions,
                     super.isGroupedParameterRequired, super.groupedParameterTypeName,
-                    super.methodPageDetails, super.methodTransformationDetails);
+                    super.methodPageDetails, super.methodTransformationDetails,
+                    clientClassName);
+        }
+
+        public Builder clientClassName(String clientClassName) {
+            this.clientClassName = clientClassName;
+            return this;
         }
     }
 }

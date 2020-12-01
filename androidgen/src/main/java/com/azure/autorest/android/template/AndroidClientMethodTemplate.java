@@ -3,6 +3,9 @@ package com.azure.autorest.android.template;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+<<<<<<<HEAD=======
+
+import com.azure.autorest.android.model.AndroidClientMethod;>>>>>>>0f 8 c92f2...Halfway in refactoring for paging.json tests
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -489,10 +492,29 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             return;
         }
 
+        ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
+        if (nextMethod == null) {
+            return;
+        }
+
+        String retrieverClassName;
+        if (methodReturnType.equals(GenericType.AndroidPage(elementType))) {
+            PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
+                    nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
+            pageRetrieverTemplate.write((JavaClass) typeBlock);
+            retrieverClassName = pageRetrieverTemplate.getRetrieverClassName();
+        }
+        else if (methodReturnType.equals(GenericType.AndroidPageResponseCollection(elementType))) {
+            PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
+                    nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
+            pageResponseRetrieverTemplate.write((JavaClass) typeBlock);
+            retrieverClassName = pageResponseRetrieverTemplate.getRetrieverClassName();
+        }
+        else {
+            return;
+        }
+
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            String retrieverClassName = methodReturnType.equals(GenericType.AndroidPageResponseCollection(elementType))
-                    ? PageResponseRetrieverTemplate.getRetrieverClassName(elementType)
-                    : PageRetrieverTemplate.getRetrieverClassName(elementType);
             StringBuilder retrieverConstructionBuilder = new StringBuilder();
             retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
             boolean hasPreviousParam = false;
@@ -532,6 +554,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         } else {
             // ***WithRestResponse method.
             //
+
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
 
                 final String clientReferenceDot = clientMethod.getClientReference() != null
@@ -657,6 +680,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     private void writeAsyncWithRestResponseMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings,
             ProxyMethod restAPIMethod, boolean isPaging) {
         boolean generateAsyncMethodWithOnlyRequiredParams = clientMethod.getOnlyRequiredParameters();
+
         if (generateAsyncMethodWithOnlyRequiredParams) {
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                 // async-method-with-only-required-params delegate call to
