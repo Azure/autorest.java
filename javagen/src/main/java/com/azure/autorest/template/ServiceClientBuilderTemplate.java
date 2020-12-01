@@ -12,6 +12,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -266,9 +267,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
             if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL) && clientProperties.stream()
                     .anyMatch(clientProperty -> clientProperty.getName().equals("endpoint"))) {
+                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+                String scopeParams;
+                if (scopes == null || scopes.isEmpty()) {
+                    scopeParams = "String.format(\"%s/.default\", endpoint)";
+                } else {
+                    scopeParams = String.join(", ", scopes);
+                }
                 function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, String"
-                            + ".format(\"%s/.default\", endpoint)));");
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", scopeParams);
                 });
             }
 
