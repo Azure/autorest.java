@@ -27,6 +27,8 @@ public class PageResponseRetrieverTemplate {
 
     this.methodReturnType=(GenericType)getFirstPageMethod.getReturnValue().getType();this.elementType=methodReturnType.getTypeArguments()[0];this.pageType=GenericType.AndroidPage(elementType);this.retrieverClassName=CodeNamer.toPascalCase(getFirstPageMethod.getName())+elementType.toString()+"PageResponseRetriever";
 
+    this.methodReturnType=(GenericType)getFirstPageMethod.getReturnValue().getType();this.elementType=methodReturnType.getTypeArguments()[0];this.pageType=GenericType.AndroidPage(elementType);this.retrieverClassName=CodeNamer.toPascalCase(getFirstPageMethod.getName())+"Retriever";
+
     }
 
     public void write(JavaClass clientClass) {

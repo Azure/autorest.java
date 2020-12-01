@@ -19,6 +19,11 @@ public class PageRetrieverTemplate {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
         this.serviceClientClassName = serviceClientClassName;
+
+        this.returnType = (GenericType) this.getFirstPageMethod.getReturnValue().getType();
+        this.elementType = returnType.getTypeArguments()[0];
+        this.pageType = GenericType.AndroidPage(elementType);
+        this.retrieverClassName = CodeNamer.toPascalCase(getFirstPageMethod.getName()) + "Retriever";
     }
 
     public String getRetrieverClassName() {

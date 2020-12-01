@@ -208,6 +208,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getNoItemNamePagesWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNoItemNamePages());
         if (response.isSuccessful()) {
@@ -240,10 +247,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetNoItemNamePagesWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetNoItemNamePagesWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetNoItemNamePagesWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetNoItemNamePagesWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -257,10 +264,45 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getNoItemNamePagesWithPageResponse() {
-        GetNoItemNamePagesWithPageResponseProductPageResponseRetriever retriever = new GetNoItemNamePagesWithPageResponseProductPageResponseRetriever(this);
+        GetNoItemNamePagesWithPageResponseRetriever retriever = new GetNoItemNamePagesWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    private static final class GetNoItemNamePagesPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetNoItemNamePagesPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getNoItemNamePagesPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getNoItemNamePagesNextSinglePageAsync(pageId, callback);
+        }
+    }
+
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getNoItemNamePagesPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetNoItemNamePagesPagesAsyncRetriever retriever = new GetNoItemNamePagesPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
@@ -284,7 +326,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(null, decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(response.raw().request().url().toString(), decodedResult.getValues(), null), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -310,6 +352,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getNullNextLinkNamePagesWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNullNextLinkNamePages());
         if (response.isSuccessful()) {
@@ -324,7 +373,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(null, decodedResult.getValues(), decodedResult.getNextLink()));
+                                        new Page<Product>(response.raw().request().url().toString(), decodedResult.getValues(), null));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -348,14 +397,6 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
-     */
-    /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-     * 
-     * @param callback the Callback that receives the response collection.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -405,6 +446,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getSinglePagesWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSinglePages());
         if (response.isSuccessful()) {
@@ -437,10 +485,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetSinglePagesWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetSinglePagesWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetSinglePagesWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetSinglePagesWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -454,8 +502,44 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getSinglePagesWithPageResponse() {
-        GetSinglePagesWithPageResponseProductPageResponseRetriever retriever = new GetSinglePagesWithPageResponseProductPageResponseRetriever(this);
+        GetSinglePagesWithPageResponseRetriever retriever = new GetSinglePagesWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
+    }
+
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    private static final class GetSinglePagesPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetSinglePagesPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getSinglePagesPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getSinglePagesNextSinglePageAsync(pageId, callback);
+        }
+    }
+
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getSinglePagesPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetSinglePagesPagesAsyncRetriever retriever = new GetSinglePagesPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
     }
 
     /**
@@ -506,6 +590,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> firstResponseEmptyWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.firstResponseEmpty());
         if (response.isSuccessful()) {
@@ -538,10 +629,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class FirstResponseEmptyWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class FirstResponseEmptyWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public FirstResponseEmptyWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public FirstResponseEmptyWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -555,7 +646,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> firstResponseEmptyWithPageResponse() {
-        FirstResponseEmptyWithPageResponseProductPageResponseRetriever retriever = new FirstResponseEmptyWithPageResponseProductPageResponseRetriever(this);
+        FirstResponseEmptyWithPageResponseRetriever retriever = new FirstResponseEmptyWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -566,7 +657,34 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class FirstResponseEmptyPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
 
+        public FirstResponseEmptyPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.firstResponseEmptyPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.firstResponseEmptyNextSinglePageAsync(pageId, callback);
+        }
+    }
+
+    /**
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void firstResponseEmptyPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        FirstResponseEmptyPagesAsyncRetriever retriever = new FirstResponseEmptyPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -631,6 +749,16 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId The clientRequestId parameter.
+     * @param pagingGetMultiplePagesOptions Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesWithRestResponse(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         Integer maxresultsInternal = null;
         if (pagingGetMultiplePagesOptions != null) {
@@ -676,14 +804,14 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final String clientRequestId;
 
         private final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions;
 
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesWithPageResponseProductPageResponseRetriever(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, PagingsImpl serviceClient) {
+        public GetMultiplePagesWithPageResponseRetriever(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, PagingsImpl serviceClient) {
             this.clientRequestId = clientRequestId;
             this.pagingGetMultiplePagesOptions = pagingGetMultiplePagesOptions;
             this.serviceClient = serviceClient;
@@ -699,8 +827,55 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesWithPageResponse(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        GetMultiplePagesWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesWithPageResponseProductPageResponseRetriever(clientRequestId, pagingGetMultiplePagesOptions, this);
+        GetMultiplePagesWithPageResponseRetriever retriever = new GetMultiplePagesWithPageResponseRetriever(clientRequestId, pagingGetMultiplePagesOptions, this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId The clientRequestId parameter.
+     * @param pagingGetMultiplePagesOptions Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    private static final class GetMultiplePagesPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final String clientRequestId;
+
+        private final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesPagesAsyncRetriever(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, PagingsImpl serviceClient) {
+            this.clientRequestId = clientRequestId;
+            this.pagingGetMultiplePagesOptions = pagingGetMultiplePagesOptions;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesPagesAsync(clientRequestId, pagingGetMultiplePagesOptions, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesNextSinglePageAsync(pageId, callback);
+        }
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId The clientRequestId parameter.
+     * @param pagingGetMultiplePagesOptions Parameter group.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesPagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesPagesAsyncRetriever retriever = new GetMultiplePagesPagesAsyncRetriever(clientRequestId, pagingGetMultiplePagesOptions, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
     }
 
     /**
@@ -755,6 +930,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getWithQueryParamsWithRestResponse(int requiredQueryParameter) {
         final boolean queryConstant = true;
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getWithQueryParams(requiredQueryParameter, queryConstant));
@@ -790,6 +974,58 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetWithQueryParamsWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+        private final int requiredQueryParameter;
+
+        private final PagingsImpl serviceClient;
+
+        public GetWithQueryParamsWithPageResponseRetriever(int requiredQueryParameter, PagingsImpl serviceClient) {
+            this.requiredQueryParameter = requiredQueryParameter;
+            this.serviceClient = serviceClient;
+        }
+
+        public Response<Page<Product>> getFirstPage() {
+             return serviceClient.getWithQueryParamsWithRestResponse(requiredQueryParameter);
+        }
+
+        public Response<Page<Product>> getPage(String pageId) {
+            return serviceClient.nextOperationWithQueryParamsWithRestResponse(pageId);
+        }
+    }
+
+    public PagedDataResponseCollection<Product, Page<Product>> getWithQueryParamsWithPageResponse(int requiredQueryParameter) {
+        GetWithQueryParamsWithPageResponseRetriever retriever = new GetWithQueryParamsWithPageResponseRetriever(requiredQueryParameter, this);
+        return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    private static final class GetWithQueryParamsPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final int requiredQueryParameter;
+
+        private final PagingsImpl serviceClient;
+
+        public GetWithQueryParamsPagesAsyncRetriever(int requiredQueryParameter, PagingsImpl serviceClient) {
+            this.requiredQueryParameter = requiredQueryParameter;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getWithQueryParamsPagesAsync(requiredQueryParameter, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.nextOperationWithQueryParamsSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
@@ -799,6 +1035,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getWithQueryParamsPagesAsync(int requiredQueryParameter, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetWithQueryParamsPagesAsyncRetriever retriever = new GetWithQueryParamsPagesAsyncRetriever(requiredQueryParameter, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
@@ -823,7 +1063,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(null, decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(response.raw().request().url().toString(), decodedResult.getValues(), null), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -849,6 +1089,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> nextOperationWithQueryParamsWithRestResponse() {
         final boolean queryConstant = true;
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.nextOperationWithQueryParams(queryConstant));
@@ -864,7 +1111,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(null, decodedResult.getValues(), decodedResult.getNextLink()));
+                                        new Page<Product>(response.raw().request().url().toString(), decodedResult.getValues(), null));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -938,6 +1185,16 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     * 
+     * @param clientRequestId The clientRequestId parameter.
+     * @param pagingGetOdataMultiplePagesOptions Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getOdataMultiplePagesWithRestResponse(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         Integer maxresultsInternal = null;
         if (pagingGetOdataMultiplePagesOptions != null) {
@@ -983,14 +1240,14 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetOdataMultiplePagesWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetOdataMultiplePagesWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final String clientRequestId;
 
         private final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions;
 
         private final PagingsImpl serviceClient;
 
-        public GetOdataMultiplePagesWithPageResponseProductPageResponseRetriever(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, PagingsImpl serviceClient) {
+        public GetOdataMultiplePagesWithPageResponseRetriever(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, PagingsImpl serviceClient) {
             this.clientRequestId = clientRequestId;
             this.pagingGetOdataMultiplePagesOptions = pagingGetOdataMultiplePagesOptions;
             this.serviceClient = serviceClient;
@@ -1006,7 +1263,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getOdataMultiplePagesWithPageResponse(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        GetOdataMultiplePagesWithPageResponseProductPageResponseRetriever retriever = new GetOdataMultiplePagesWithPageResponseProductPageResponseRetriever(clientRequestId, pagingGetOdataMultiplePagesOptions, this);
+        GetOdataMultiplePagesWithPageResponseRetriever retriever = new GetOdataMultiplePagesWithPageResponseRetriever(clientRequestId, pagingGetOdataMultiplePagesOptions, this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1020,6 +1277,28 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetOdataMultiplePagesPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final String clientRequestId;
+
+        private final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions;
+
+        private final PagingsImpl serviceClient;
+
+        public GetOdataMultiplePagesPagesAsyncRetriever(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, PagingsImpl serviceClient) {
+            this.clientRequestId = clientRequestId;
+            this.pagingGetOdataMultiplePagesOptions = pagingGetOdataMultiplePagesOptions;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getOdataMultiplePagesPagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getOdataMultiplePagesNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      * 
@@ -1030,6 +1309,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getOdataMultiplePagesPagesAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetOdataMultiplePagesPagesAsyncRetriever retriever = new GetOdataMultiplePagesPagesAsyncRetriever(clientRequestId, pagingGetOdataMultiplePagesOptions, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -1087,6 +1370,16 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
+     * @param clientRequestId The clientRequestId parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesWithOffsetWithRestResponse(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
@@ -1125,14 +1418,14 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesWithOffsetWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesWithOffsetWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions;
 
         private final String clientRequestId;
 
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesWithOffsetWithPageResponseProductPageResponseRetriever(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId, PagingsImpl serviceClient) {
+        public GetMultiplePagesWithOffsetWithPageResponseRetriever(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId, PagingsImpl serviceClient) {
             this.pagingGetMultiplePagesWithOffsetOptions = pagingGetMultiplePagesWithOffsetOptions;
             this.clientRequestId = clientRequestId;
             this.serviceClient = serviceClient;
@@ -1148,7 +1441,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesWithOffsetWithPageResponse(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
-        GetMultiplePagesWithOffsetWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesWithOffsetWithPageResponseProductPageResponseRetriever(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, this);
+        GetMultiplePagesWithOffsetWithPageResponseRetriever retriever = new GetMultiplePagesWithOffsetWithPageResponseRetriever(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1162,6 +1455,28 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesWithOffsetPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions;
+
+        private final String clientRequestId;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesWithOffsetPagesAsyncRetriever(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId, PagingsImpl serviceClient) {
+            this.pagingGetMultiplePagesWithOffsetOptions = pagingGetMultiplePagesWithOffsetOptions;
+            this.clientRequestId = clientRequestId;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesWithOffsetPagesAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesWithOffsetNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
@@ -1172,6 +1487,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesWithOffsetPagesAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesWithOffsetPagesAsyncRetriever retriever = new GetMultiplePagesWithOffsetPagesAsyncRetriever(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -1221,6 +1540,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesRetryFirstWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesRetryFirst());
         if (response.isSuccessful()) {
@@ -1253,10 +1579,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesRetryFirstWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesRetryFirstWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesRetryFirstWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetMultiplePagesRetryFirstWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -1270,7 +1596,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesRetryFirstWithPageResponse() {
-        GetMultiplePagesRetryFirstWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesRetryFirstWithPageResponseProductPageResponseRetriever(this);
+        GetMultiplePagesRetryFirstWithPageResponseRetriever retriever = new GetMultiplePagesRetryFirstWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1281,6 +1607,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesRetryFirstPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesRetryFirstPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesRetryFirstPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesRetryFirstNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
@@ -1289,6 +1631,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesRetryFirstPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesRetryFirstPagesAsyncRetriever retriever = new GetMultiplePagesRetryFirstPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -1338,6 +1684,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesRetrySecondWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesRetrySecond());
         if (response.isSuccessful()) {
@@ -1370,10 +1723,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesRetrySecondWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesRetrySecondWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesRetrySecondWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetMultiplePagesRetrySecondWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -1387,7 +1740,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesRetrySecondWithPageResponse() {
-        GetMultiplePagesRetrySecondWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesRetrySecondWithPageResponseProductPageResponseRetriever(this);
+        GetMultiplePagesRetrySecondWithPageResponseRetriever retriever = new GetMultiplePagesRetrySecondWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1398,6 +1751,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesRetrySecondPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesRetrySecondPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesRetrySecondPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesRetrySecondNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
@@ -1406,6 +1775,11 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesRetrySecondPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesRetrySecondPagesAsyncRetriever retriever = new GetMultiplePagesRetrySecondPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
+
     /**
      * A paging operation that receives a 400 on the first call.
      * 
@@ -1454,6 +1828,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that receives a 400 on the first call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getSinglePagesFailureWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSinglePagesFailure());
         if (response.isSuccessful()) {
@@ -1486,10 +1867,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetSinglePagesFailureWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetSinglePagesFailureWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetSinglePagesFailureWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetSinglePagesFailureWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -1503,7 +1884,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getSinglePagesFailureWithPageResponse() {
-        GetSinglePagesFailureWithPageResponseProductPageResponseRetriever retriever = new GetSinglePagesFailureWithPageResponseProductPageResponseRetriever(this);
+        GetSinglePagesFailureWithPageResponseRetriever retriever = new GetSinglePagesFailureWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1514,6 +1895,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetSinglePagesFailurePagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetSinglePagesFailurePagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getSinglePagesFailurePagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getSinglePagesFailureNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that receives a 400 on the first call.
      * 
@@ -1522,6 +1919,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getSinglePagesFailurePagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetSinglePagesFailurePagesAsyncRetriever retriever = new GetSinglePagesFailurePagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -1571,6 +1972,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that receives a 400 on the second call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesFailureWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesFailure());
         if (response.isSuccessful()) {
@@ -1603,10 +2011,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesFailureWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesFailureWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesFailureWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetMultiplePagesFailureWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -1620,7 +2028,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesFailureWithPageResponse() {
-        GetMultiplePagesFailureWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesFailureWithPageResponseProductPageResponseRetriever(this);
+        GetMultiplePagesFailureWithPageResponseRetriever retriever = new GetMultiplePagesFailureWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1631,6 +2039,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFailurePagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFailurePagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFailurePagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFailureNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that receives a 400 on the second call.
      * 
@@ -1639,6 +2063,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesFailurePagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesFailurePagesAsyncRetriever retriever = new GetMultiplePagesFailurePagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -1688,6 +2116,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that receives an invalid nextLink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesFailureUriWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesFailureUri());
         if (response.isSuccessful()) {
@@ -1720,10 +2155,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetMultiplePagesFailureUriWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetMultiplePagesFailureUriWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetMultiplePagesFailureUriWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetMultiplePagesFailureUriWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -1737,7 +2172,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesFailureUriWithPageResponse() {
-        GetMultiplePagesFailureUriWithPageResponseProductPageResponseRetriever retriever = new GetMultiplePagesFailureUriWithPageResponseProductPageResponseRetriever(this);
+        GetMultiplePagesFailureUriWithPageResponseRetriever retriever = new GetMultiplePagesFailureUriWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -1748,6 +2183,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFailureUriPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFailureUriPagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFailureUriPagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFailureUriNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that receives an invalid nextLink.
      * 
@@ -1756,6 +2207,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesFailureUriPagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesFailureUriPagesAsyncRetriever retriever = new GetMultiplePagesFailureUriPagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -1810,6 +2265,16 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesFragmentNextLinkWithRestResponse(String apiVersion, String tenant) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesFragmentNextLink(tenant, apiVersion));
         if (response.isSuccessful()) {
@@ -1845,6 +2310,32 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFragmentNextLinkWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+        private final String apiVersion;
+
+        private final String tenant;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFragmentNextLinkWithPageResponseRetriever(String apiVersion, String tenant, PagingsImpl serviceClient) {
+            this.apiVersion = apiVersion;
+            this.tenant = tenant;
+            this.serviceClient = serviceClient;
+        }
+
+        public Response<Page<Product>> getFirstPage() {
+             return serviceClient.getMultiplePagesFragmentNextLinkWithRestResponse(apiVersion, tenant);
+        }
+
+        public Response<Page<Product>> getPage(String pageId) {
+            return serviceClient.nextFragmentWithRestResponse(pageId);
+        }
+    }
+
+    public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesFragmentNextLinkWithPageResponse(String apiVersion, String tenant) {
+        GetMultiplePagesFragmentNextLinkWithPageResponseRetriever retriever = new GetMultiplePagesFragmentNextLinkWithPageResponseRetriever(apiVersion, tenant, this);
+        return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
+    }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -1856,6 +2347,28 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFragmentNextLinkPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final String apiVersion;
+
+        private final String tenant;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFragmentNextLinkPagesAsyncRetriever(String apiVersion, String tenant, PagingsImpl serviceClient) {
+            this.apiVersion = apiVersion;
+            this.tenant = tenant;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFragmentNextLinkPagesAsync(apiVersion, tenant, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.nextFragmentSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
@@ -1866,6 +2379,11 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesFragmentNextLinkPagesAsync(String apiVersion, String tenant, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesFragmentNextLinkPagesAsyncRetriever retriever = new GetMultiplePagesFragmentNextLinkPagesAsyncRetriever(apiVersion, tenant, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * 
@@ -1919,6 +2437,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * 
+     * @param customParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkWithRestResponse(CustomParameterGroup customParameterGroup) {
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
@@ -1955,6 +2482,29 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFragmentWithGroupingNextLinkWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+        private final CustomParameterGroup customParameterGroup;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFragmentWithGroupingNextLinkWithPageResponseRetriever(CustomParameterGroup customParameterGroup, PagingsImpl serviceClient) {
+            this.customParameterGroup = customParameterGroup;
+            this.serviceClient = serviceClient;
+        }
+
+        public Response<Page<Product>> getFirstPage() {
+             return serviceClient.getMultiplePagesFragmentWithGroupingNextLinkWithRestResponse(customParameterGroup);
+        }
+
+        public Response<Page<Product>> getPage(String pageId) {
+            return serviceClient.nextFragmentWithGroupingWithRestResponse(pageId);
+        }
+    }
+
+    public PagedDataResponseCollection<Product, Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkWithPageResponse(CustomParameterGroup customParameterGroup) {
+        GetMultiplePagesFragmentWithGroupingNextLinkWithPageResponseRetriever retriever = new GetMultiplePagesFragmentWithGroupingNextLinkWithPageResponseRetriever(customParameterGroup, this);
+        return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
+    }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
@@ -1965,6 +2515,25 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetMultiplePagesFragmentWithGroupingNextLinkPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final CustomParameterGroup customParameterGroup;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesFragmentWithGroupingNextLinkPagesAsyncRetriever(CustomParameterGroup customParameterGroup, PagingsImpl serviceClient) {
+            this.customParameterGroup = customParameterGroup;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesFragmentWithGroupingNextLinkPagesAsync(customParameterGroup, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.nextFragmentWithGroupingSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * 
@@ -1974,47 +2543,33 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesFragmentWithGroupingNextLinkPagesAsync(CustomParameterGroup customParameterGroup, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesFragmentWithGroupingNextLinkPagesAsyncRetriever retriever = new GetMultiplePagesFragmentWithGroupingNextLinkPagesAsyncRetriever(customParameterGroup, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     * 
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @param callback the Callback that receives the response.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     * 
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     * 
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     * 
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
+    private static final class GetMultiplePagesLROPagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final String clientRequestId;
+
+        private final PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions;
+
+        private final PagingsImpl serviceClient;
+
+        public GetMultiplePagesLROPagesAsyncRetriever(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, PagingsImpl serviceClient) {
+            this.clientRequestId = clientRequestId;
+            this.pagingGetMultiplePagesLroOptions = pagingGetMultiplePagesLroOptions;
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesLROPagesAsync(clientRequestId, pagingGetMultiplePagesLroOptions, callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getMultiplePagesLRONextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      * 
@@ -2025,6 +2580,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getMultiplePagesLROPagesAsync(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetMultiplePagesLROPagesAsyncRetriever retriever = new GetMultiplePagesLROPagesAsyncRetriever(clientRequestId, pagingGetMultiplePagesLroOptions, this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -2070,6 +2629,17 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
@@ -2132,7 +2702,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(odataNextLink, decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(nextLink, decodedResult.getValues(), decodedResult.getOdataNextLink()), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -2161,6 +2731,16 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> nextFragmentWithGroupingWithRestResponse(String nextLink, CustomParameterGroup customParameterGroup) {
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
@@ -2177,7 +2757,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(odataNextLink, decodedResult.getValues(), decodedResult.getNextLink()));
+                                        new Page<Product>(nextLink, decodedResult.getValues(), decodedResult.getOdataNextLink()));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -2210,7 +2790,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(response.raw().request().url().toString(), decodedResult.getValue(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(response.raw().request().url().toString(), decodedResult.getIndexes(), decodedResult.getNextLink()), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -2236,6 +2816,13 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getPagingModelWithItemNameWithXMSClientNameWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getPagingModelWithItemNameWithXMSClientName());
         if (response.isSuccessful()) {
@@ -2250,7 +2837,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(response.raw().request().url().toString(), decodedResult.getValue(), decodedResult.getNextLink()));
+                                        new Page<Product>(response.raw().request().url().toString(), decodedResult.getIndexes(), decodedResult.getNextLink()));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -2268,10 +2855,10 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    private static final class GetPagingModelWithItemNameWithXMSClientNameWithPageResponseProductPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
+    private static final class GetPagingModelWithItemNameWithXMSClientNameWithPageResponseRetriever extends PagedDataResponseRetriever<Product, Page<Product>> {
         private final PagingsImpl serviceClient;
 
-        public GetPagingModelWithItemNameWithXMSClientNameWithPageResponseProductPageResponseRetriever(PagingsImpl serviceClient) {
+        public GetPagingModelWithItemNameWithXMSClientNameWithPageResponseRetriever(PagingsImpl serviceClient) {
             this.serviceClient = serviceClient;
         }
 
@@ -2285,7 +2872,7 @@ public final class PagingsImpl {
     }
 
     public PagedDataResponseCollection<Product, Page<Product>> getPagingModelWithItemNameWithXMSClientNameWithPageResponse() {
-        GetPagingModelWithItemNameWithXMSClientNameWithPageResponseProductPageResponseRetriever retriever = new GetPagingModelWithItemNameWithXMSClientNameWithPageResponseProductPageResponseRetriever(this);
+        GetPagingModelWithItemNameWithXMSClientNameWithPageResponseRetriever retriever = new GetPagingModelWithItemNameWithXMSClientNameWithPageResponseRetriever(this);
         return new PagedDataResponseCollection<Product, Page<Product>>(retriever);
     }
 
@@ -2296,6 +2883,22 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    private static final class GetPagingModelWithItemNameWithXMSClientNamePagesAsyncRetriever extends AsyncPagedDataRetriever<Product, Page<Product>> {
+        private final PagingsImpl serviceClient;
+
+        public GetPagingModelWithItemNameWithXMSClientNamePagesAsyncRetriever(PagingsImpl serviceClient) {
+            this.serviceClient = serviceClient;
+        }
+
+        public void getFirstPage(Callback<Page<Product>> callback) {
+            serviceClient.getPagingModelWithItemNameWithXMSClientNamePagesAsync(callback);
+        }
+
+        public void getPage(String pageId, Callback<Page<Product>> callback) {
+            serviceClient.getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(pageId, callback);
+        }
+    }
+
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      * 
@@ -2304,6 +2907,10 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void getPagingModelWithItemNameWithXMSClientNamePagesAsync(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        GetPagingModelWithItemNameWithXMSClientNamePagesAsyncRetriever retriever = new GetPagingModelWithItemNameWithXMSClientNamePagesAsyncRetriever(this);
+        callback.onSuccess(new AsyncPagedDataCollection<Product, Page<Product>>(retriever), null);
+    }
 
     /**
      * Get the next page of items.
@@ -2347,6 +2954,15 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * Get the next page of items.
      * 
@@ -2432,6 +3048,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getSinglePagesNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSinglePagesNext(nextLink));
         if (response.isSuccessful()) {
@@ -2499,6 +3124,15 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * Get the next page of items.
      * 
@@ -2584,6 +3218,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesNext(nextLink));
         if (response.isSuccessful()) {
@@ -2632,7 +3275,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(odataNextLink, decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(nextLink, decodedResult.getValues(), decodedResult.getOdataNextLink()), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -2660,6 +3303,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getOdataMultiplePagesNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getOdataMultiplePagesNext(nextLink));
         if (response.isSuccessful()) {
@@ -2674,7 +3326,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(odataNextLink, decodedResult.getValues(), decodedResult.getNextLink()));
+                                        new Page<Product>(nextLink, decodedResult.getValues(), decodedResult.getOdataNextLink()));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -2727,6 +3379,15 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * Get the next page of items.
      * 
@@ -2812,6 +3473,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesRetryFirstNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesRetryFirstNext(nextLink));
         if (response.isSuccessful()) {
@@ -2879,6 +3549,15 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * Get the next page of items.
      * 
@@ -2964,6 +3643,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getSinglePagesFailureNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getSinglePagesFailureNext(nextLink));
         if (response.isSuccessful()) {
@@ -3031,6 +3719,15 @@ public final class PagingsImpl {
         call.enqueue(retrofitCallback);
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     /**
      * Get the next page of items.
      * 
@@ -3116,6 +3813,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getMultiplePagesFailureUriNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getMultiplePagesFailureUriNext(nextLink));
         if (response.isSuccessful()) {
@@ -3150,24 +3856,6 @@ public final class PagingsImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The nextLink parameter.
-     * @param callback the Callback that receives the response.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
     public void getPagingModelWithItemNameWithXMSClientNameNext(String nextLink, final Callback<Page<Product>> callback) {
         Call<ResponseBody> call = service.getPagingModelWithItemNameWithXMSClientNameNext(nextLink);
         retrofit2.Callback<ResponseBody> retrofitCallback = new retrofit2.Callback<ResponseBody>() {
@@ -3182,7 +3870,7 @@ public final class PagingsImpl {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
-                        callback.onSuccess(new Page<Product>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());
+                        callback.onSuccess(new Page<Product>(nextLink, decodedResult.getIndexes(), decodedResult.getNextLink()), response.raw());
                     } else {
                         final String strContent = client.readAsString(response.body());
                         callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
@@ -3210,6 +3898,15 @@ public final class PagingsImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
     public Response<Page<Product>> getPagingModelWithItemNameWithXMSClientNameNextWithRestResponse(String nextLink) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getPagingModelWithItemNameWithXMSClientNameNext(nextLink));
         if (response.isSuccessful()) {
@@ -3224,7 +3921,7 @@ public final class PagingsImpl {
                 return new Response<>(response.raw().request(),
                                         response.code(),
                                         response.headers(),
-                                        new Page<Product>(nextLink, decodedResult.getValue(), decodedResult.getNextLink()));
+                                        new Page<Product>(nextLink, decodedResult.getIndexes(), decodedResult.getNextLink()));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());

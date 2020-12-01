@@ -22,6 +22,13 @@ public class AsyncPageRetrieverTemplate {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
         this.serviceClientClassName = serviceClientClassName;
+
+        this.callbackParameter = AndroidClientMethodTemplate.getCallbackParameter(getFirstPageMethod);
+        this.callbackParameterType = (GenericType) callbackParameter.getWireType();
+        final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
+        this.elementType = pageType.getTypeArguments()[0];
+        this.retrieverClassName = CodeNamer.toPascalCase(getFirstPageMethod.getName()) + "Retriever";
+
     }
 
     public String getRetrieverClassName() {
