@@ -28,6 +28,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestUrlMutliCollectionFormatTestServiceBuilder. */
     public AutoRestUrlMutliCollectionFormatTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }

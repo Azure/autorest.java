@@ -28,6 +28,7 @@ public final class AutoRestComplexTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestComplexTestServiceBuilder. */
     public AutoRestComplexTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }

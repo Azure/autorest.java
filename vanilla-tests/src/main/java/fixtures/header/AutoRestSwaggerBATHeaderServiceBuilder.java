@@ -28,6 +28,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestSwaggerBATHeaderServiceBuilder. */
     public AutoRestSwaggerBATHeaderServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }

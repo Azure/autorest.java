@@ -28,6 +28,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestRFC1123DateTimeTestServiceBuilder. */
     public AutoRestRFC1123DateTimeTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }

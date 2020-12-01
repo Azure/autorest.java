@@ -52,13 +52,22 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.isConstant(isConstant).defaultValue(defaultValue);
 
-        if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-            String description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            if (description == null || description.isEmpty()) {
-                description = String.format("The %s parameter", name);
-            }
-            builder.description(description);
+        String description = null;
+        // parameter description
+        if (parameter.getLanguage() != null) {
+            description = parameter.getLanguage().getDefault().getDescription();
         }
+        // fallback to parameter schema description
+        if (description == null || description.isEmpty()) {
+            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
+                description = parameter.getSchema().getLanguage().getDefault().getDescription();
+            }
+        }
+        // fallback to dummy description
+        if (description == null || description.isEmpty()) {
+            description = String.format("The %s parameter", name);
+        }
+        builder.description(description);
         return builder.build();
     }
 }

@@ -59,7 +59,7 @@ public final class FloatOperations {
     /**
      * Put a float enum.
      *
-     * @param input List of float enums.
+     * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -77,7 +77,7 @@ public final class FloatOperations {
     /**
      * Put a float enum.
      *
-     * @param input List of float enums.
+     * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -120,7 +120,7 @@ public final class FloatOperations {
     /**
      * Put a float enum.
      *
-     * @param input List of float enums.
+     * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

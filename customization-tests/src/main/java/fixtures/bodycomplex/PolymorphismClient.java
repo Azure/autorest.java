@@ -211,7 +211,7 @@ public final class PolymorphismClient {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody
+     * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -224,7 +224,7 @@ public final class PolymorphismClient {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody
+     * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -239,7 +239,7 @@ public final class PolymorphismClient {
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
      *
-     * @param complexBody
+     * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -253,7 +253,7 @@ public final class PolymorphismClient {
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
      *
-     * @param complexBody
+     * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

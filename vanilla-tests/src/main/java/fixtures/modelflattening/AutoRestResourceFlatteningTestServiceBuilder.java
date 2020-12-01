@@ -28,6 +28,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestResourceFlatteningTestServiceBuilder. */
     public AutoRestResourceFlatteningTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
