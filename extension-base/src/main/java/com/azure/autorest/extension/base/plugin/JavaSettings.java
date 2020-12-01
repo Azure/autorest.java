@@ -117,6 +117,7 @@ public class JavaSettings
                     host.getBooleanValue("service-interface-as-public", false),
                     host.getStringValue("artifact-id", ""),
                     host.getStringValue("credential-types", "none"),
+                    host.getStringValue("credential-scopes"),
                     host.getStringValue("customization-jar-path"),
                     host.getStringValue("customization-class"),
                     host.getBooleanValue("model-override-setter-from-superclass", modelOverrideSetterFromSuperclassDefault));
@@ -170,6 +171,7 @@ public class JavaSettings
                          boolean serviceInterfaceAsPublic,
                          String artifactId,
                          String credentialType,
+                         String credentialScopes,
                          String customizationJarPath,
                          String customizationClass,
                          boolean overrideSetterFromSuperclass)
@@ -210,6 +212,18 @@ public class JavaSettings
                     .map(type -> CredentialType.fromValue(credentialType))
                     .collect(Collectors.toSet());
         }
+        if (credentialScopes != null) {
+            String[] splits = credentialScopes.split(",");
+            this.credentialScopes = Arrays.stream(splits)
+                    .map(split -> split.trim())
+                    .map(split -> {
+                        if (!split.startsWith("\"")) {
+                            split = String.format("\"%s\"", split);
+                        }
+                        return split;
+                    })
+                    .collect(Collectors.toSet());
+        }
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
     }
@@ -217,6 +231,11 @@ public class JavaSettings
     private Set<CredentialType> credentialTypes;
     public Set<CredentialType> getCredentialTypes() {
         return credentialTypes;
+    }
+
+    private Set<String> credentialScopes;
+    public Set<String> getCredentialScopes() {
+        return credentialScopes;
     }
 
     private boolean azure;
