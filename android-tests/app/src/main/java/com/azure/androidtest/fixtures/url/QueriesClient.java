@@ -39,9 +39,8 @@ public final class QueriesClient {
     /**
      * Get true Boolean value on path.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path.
      */
     public Response<Void> getBooleanTrueWithRestResponse() {
@@ -51,9 +50,8 @@ public final class QueriesClient {
     /**
      * Get false Boolean value on path.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value on path.
      */
     public Response<Void> getBooleanFalseWithRestResponse() {
@@ -65,9 +63,8 @@ public final class QueriesClient {
      * 
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value on query (query string should be absent).
      */
     public Response<Void> getBooleanNullWithRestResponse(Boolean boolQuery) {
@@ -77,9 +74,8 @@ public final class QueriesClient {
     /**
      * Get '1000000' integer value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1000000' integer value.
      */
     public Response<Void> getIntOneMillionWithRestResponse() {
@@ -89,9 +85,8 @@ public final class QueriesClient {
     /**
      * Get '-1000000' integer value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1000000' integer value.
      */
     public Response<Void> getIntNegativeOneMillionWithRestResponse() {
@@ -103,9 +98,8 @@ public final class QueriesClient {
      * 
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null integer value (no query parameter).
      */
     public Response<Void> getIntNullWithRestResponse(Integer intQuery) {
@@ -115,9 +109,8 @@ public final class QueriesClient {
     /**
      * Get '10000000000' 64 bit integer value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '10000000000' 64 bit integer value.
      */
     public Response<Void> getTenBillionWithRestResponse() {
@@ -127,9 +120,8 @@ public final class QueriesClient {
     /**
      * Get '-10000000000' 64 bit integer value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-10000000000' 64 bit integer value.
      */
     public Response<Void> getNegativeTenBillionWithRestResponse() {
@@ -141,9 +133,8 @@ public final class QueriesClient {
      * 
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'null 64 bit integer value (no query param in uri).
      */
     public Response<Void> getLongNullWithRestResponse(Long longQuery) {
@@ -153,9 +144,8 @@ public final class QueriesClient {
     /**
      * Get '1.034E+20' numeric value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1.
      */
     public Response<Void> floatScientificPositiveWithRestResponse() {
@@ -165,9 +155,8 @@ public final class QueriesClient {
     /**
      * Get '-1.034E-20' numeric value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1.
      */
     public Response<Void> floatScientificNegativeWithRestResponse() {
@@ -179,9 +168,8 @@ public final class QueriesClient {
      * 
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null numeric value (no query parameter).
      */
     public Response<Void> floatNullWithRestResponse(Float floatQuery) {
@@ -191,9 +179,8 @@ public final class QueriesClient {
     /**
      * Get '9999999.999' numeric value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '9999999.
      */
     public Response<Void> doubleDecimalPositiveWithRestResponse() {
@@ -203,9 +190,8 @@ public final class QueriesClient {
     /**
      * Get '-9999999.999' numeric value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-9999999.
      */
     public Response<Void> doubleDecimalNegativeWithRestResponse() {
@@ -217,9 +203,8 @@ public final class QueriesClient {
      * 
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null numeric value (no query parameter).
      */
     public Response<Void> doubleNullWithRestResponse(Double doubleQuery) {
@@ -229,9 +214,8 @@ public final class QueriesClient {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      */
     public Response<Void> stringUnicodeWithRestResponse() {
@@ -241,9 +225,8 @@ public final class QueriesClient {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end.
      */
     public Response<Void> stringUrlEncodedWithRestResponse() {
@@ -253,9 +236,8 @@ public final class QueriesClient {
     /**
      * Get ''.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return ''.
      */
     public Response<Void> stringEmptyWithRestResponse() {
@@ -267,9 +249,8 @@ public final class QueriesClient {
      * 
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (no query parameter in url).
      */
     public Response<Void> stringNullWithRestResponse(String stringQuery) {
@@ -281,9 +262,8 @@ public final class QueriesClient {
      * 
      * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with query parameter 'green color'.
      */
     public Response<Void> enumValidWithRestResponse(UriColor enumQuery) {
@@ -295,9 +275,8 @@ public final class QueriesClient {
      * 
      * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (no query parameter in url).
      */
     public Response<Void> enumNullWithRestResponse(UriColor enumQuery) {
@@ -309,9 +288,8 @@ public final class QueriesClient {
      * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      */
     public Response<Void> byteMultiByteWithRestResponse(byte[] byteQuery) {
@@ -321,9 +299,8 @@ public final class QueriesClient {
     /**
      * Get '' as byte array.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' as byte array.
      */
     public Response<Void> byteEmptyWithRestResponse() {
@@ -335,9 +312,8 @@ public final class QueriesClient {
      * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as byte array (no query parameters in uri).
      */
     public Response<Void> byteNullWithRestResponse(byte[] byteQuery) {
@@ -347,9 +323,8 @@ public final class QueriesClient {
     /**
      * Get '2012-01-01' as date.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01' as date.
      */
     public Response<Void> dateValidWithRestResponse() {
@@ -361,9 +336,8 @@ public final class QueriesClient {
      * 
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should result in no query parameters in uri.
      */
     public Response<Void> dateNullWithRestResponse(LocalDate dateQuery) {
@@ -373,9 +347,8 @@ public final class QueriesClient {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time.
      */
     public Response<Void> dateTimeValidWithRestResponse() {
@@ -387,9 +360,8 @@ public final class QueriesClient {
      * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should result in no query parameters in uri.
      */
     public Response<Void> dateTimeNullWithRestResponse(OffsetDateTime dateTimeQuery) {
@@ -397,16 +369,13 @@ public final class QueriesClient {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the csv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end'
-     *         , null, ''] using the csv-array format.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      */
     public Response<Void> arrayStringCsvValidWithRestResponse(List<String> arrayQuery) {
         return this.serviceClient.arrayStringCsvValidWithRestResponse(arrayQuery);
@@ -417,9 +386,8 @@ public final class QueriesClient {
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the csv-array format.
      */
     public Response<Void> arrayStringCsvNullWithRestResponse(List<String> arrayQuery) {
@@ -431,9 +399,8 @@ public final class QueriesClient {
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the csv-array format.
      */
     public Response<Void> arrayStringCsvEmptyWithRestResponse(List<String> arrayQuery) {
@@ -441,14 +408,12 @@ public final class QueriesClient {
     }
 
     /**
-     * Array query has no defined collection format, should default to csv. Pass in
-     * ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> arrayStringNoCollectionFormatEmptyWithRestResponse(List<String> arrayQuery) {
@@ -456,48 +421,39 @@ public final class QueriesClient {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the ssv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end'
-     *         , null, ''] using the ssv-array format.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      */
     public Response<Void> arrayStringSsvValidWithRestResponse(List<String> arrayQuery) {
         return this.serviceClient.arrayStringSsvValidWithRestResponse(arrayQuery);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the tsv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end'
-     *         , null, ''] using the tsv-array format.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      */
     public Response<Void> arrayStringTsvValidWithRestResponse(List<String> arrayQuery) {
         return this.serviceClient.arrayStringTsvValidWithRestResponse(arrayQuery);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the pipes-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * 
      * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end'
-     *         , null, ''] using the pipes-array format.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      */
     public Response<Void> arrayStringPipesValidWithRestResponse(List<String> arrayQuery) {
         return this.serviceClient.arrayStringPipesValidWithRestResponse(arrayQuery);
@@ -603,8 +559,7 @@ public final class QueriesClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(),
-                    globalStringPath, globalStringQuery, host);
+            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(), globalStringPath, globalStringQuery, host);
             return new QueriesClient(internalClient.getQueries());
         }
     }

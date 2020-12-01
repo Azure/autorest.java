@@ -21,7 +21,7 @@ public class CustomUrlSyncClientTests {
         public void getEmptyWithValidCustomUri() {
                 AutoRestParameterizedHostTestClient.Builder builder = new AutoRestParameterizedHostTestClient.Builder();
                 // Read this as "eastus" ("100.64.") and "contoso.azure.net" ("244.219:3000")
-                AutoRestParameterizedHostTestClient client = builder.accountName("100.64.").host("202.121:3000")
+                AutoRestParameterizedHostTestClient client = builder.accountName(TestConstants.IpLeading).host(TestConstants.IpTrailing + ":3000")
                                 .build();
                 final Response<Void> getResponse = client.getEmptyWithRestResponse();
                 assertEquals(200, getResponse.getStatusCode());

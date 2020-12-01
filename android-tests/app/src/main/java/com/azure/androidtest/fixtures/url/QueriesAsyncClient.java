@@ -41,9 +41,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanTrue(final Callback<Void> callback) {
         this.serviceClient.getBooleanTrue(callback);
@@ -54,9 +53,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanFalse(final Callback<Void> callback) {
         this.serviceClient.getBooleanFalse(callback);
@@ -66,11 +64,10 @@ public final class QueriesAsyncClient {
      * Get null Boolean value on query (query string should be absent).
      * 
      * @param boolQuery null boolean value.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanNull(Boolean boolQuery, final Callback<Void> callback) {
         this.serviceClient.getBooleanNull(boolQuery, callback);
@@ -81,9 +78,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntOneMillion(final Callback<Void> callback) {
         this.serviceClient.getIntOneMillion(callback);
@@ -94,9 +90,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNegativeOneMillion(final Callback<Void> callback) {
         this.serviceClient.getIntNegativeOneMillion(callback);
@@ -108,9 +103,8 @@ public final class QueriesAsyncClient {
      * @param intQuery null integer value.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNull(Integer intQuery, final Callback<Void> callback) {
         this.serviceClient.getIntNull(intQuery, callback);
@@ -121,9 +115,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getTenBillion(final Callback<Void> callback) {
         this.serviceClient.getTenBillion(callback);
@@ -134,9 +127,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNegativeTenBillion(final Callback<Void> callback) {
         this.serviceClient.getNegativeTenBillion(callback);
@@ -146,11 +138,10 @@ public final class QueriesAsyncClient {
      * Get 'null 64 bit integer value (no query param in uri).
      * 
      * @param longQuery null 64 bit integer value.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getLongNull(Long longQuery, final Callback<Void> callback) {
         this.serviceClient.getLongNull(longQuery, callback);
@@ -161,9 +152,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificPositive(final Callback<Void> callback) {
         this.serviceClient.floatScientificPositive(callback);
@@ -174,9 +164,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificNegative(final Callback<Void> callback) {
         this.serviceClient.floatScientificNegative(callback);
@@ -186,11 +175,10 @@ public final class QueriesAsyncClient {
      * Get null numeric value (no query parameter).
      * 
      * @param floatQuery null numeric value.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatNull(Float floatQuery, final Callback<Void> callback) {
         this.serviceClient.floatNull(floatQuery, callback);
@@ -201,9 +189,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalPositive(final Callback<Void> callback) {
         this.serviceClient.doubleDecimalPositive(callback);
@@ -214,9 +201,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalNegative(final Callback<Void> callback) {
         this.serviceClient.doubleDecimalNegative(callback);
@@ -226,11 +212,10 @@ public final class QueriesAsyncClient {
      * Get null numeric value (no query parameter).
      * 
      * @param doubleQuery null numeric value.
-     * @param callback    the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleNull(Double doubleQuery, final Callback<Void> callback) {
         this.serviceClient.doubleNull(doubleQuery, callback);
@@ -241,9 +226,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUnicode(final Callback<Void> callback) {
         this.serviceClient.stringUnicode(callback);
@@ -254,9 +238,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUrlEncoded(final Callback<Void> callback) {
         this.serviceClient.stringUrlEncoded(callback);
@@ -267,9 +250,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringEmpty(final Callback<Void> callback) {
         this.serviceClient.stringEmpty(callback);
@@ -279,11 +261,10 @@ public final class QueriesAsyncClient {
      * Get null (no query parameter in url).
      * 
      * @param stringQuery null string value.
-     * @param callback    the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringNull(String stringQuery, final Callback<Void> callback) {
         this.serviceClient.stringNull(stringQuery, callback);
@@ -293,11 +274,10 @@ public final class QueriesAsyncClient {
      * Get using uri with query parameter 'green color'.
      * 
      * @param enumQuery 'green color' enum value.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumValid(UriColor enumQuery, final Callback<Void> callback) {
         this.serviceClient.enumValid(enumQuery, callback);
@@ -307,11 +287,10 @@ public final class QueriesAsyncClient {
      * Get null (no query parameter in url).
      * 
      * @param enumQuery null string value.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumNull(UriColor enumQuery, final Callback<Void> callback) {
         this.serviceClient.enumNull(enumQuery, callback);
@@ -321,11 +300,10 @@ public final class QueriesAsyncClient {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteMultiByte(byte[] byteQuery, final Callback<Void> callback) {
         this.serviceClient.byteMultiByte(byteQuery, callback);
@@ -336,9 +314,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteEmpty(final Callback<Void> callback) {
         this.serviceClient.byteEmpty(callback);
@@ -348,11 +325,10 @@ public final class QueriesAsyncClient {
      * Get null as byte array (no query parameters in uri).
      * 
      * @param byteQuery null as byte array (no query parameters in uri).
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteNull(byte[] byteQuery, final Callback<Void> callback) {
         this.serviceClient.byteNull(byteQuery, callback);
@@ -363,9 +339,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateValid(final Callback<Void> callback) {
         this.serviceClient.dateValid(callback);
@@ -375,11 +350,10 @@ public final class QueriesAsyncClient {
      * Get null as date - this should result in no query parameters in uri.
      * 
      * @param dateQuery null as date (no query parameters in uri).
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateNull(LocalDate dateQuery, final Callback<Void> callback) {
         this.serviceClient.dateNull(dateQuery, callback);
@@ -390,9 +364,8 @@ public final class QueriesAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeValid(final Callback<Void> callback) {
         this.serviceClient.dateTimeValid(callback);
@@ -402,26 +375,23 @@ public final class QueriesAsyncClient {
      * Get null as date-time, should result in no query parameters in uri.
      * 
      * @param dateTimeQuery null as date-time (no query parameters).
-     * @param callback      the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeNull(OffsetDateTime dateTimeQuery, final Callback<Void> callback) {
         this.serviceClient.dateTimeNull(dateTimeQuery, callback);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the csv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvValid(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringCsvValid(arrayQuery, callback);
@@ -431,11 +401,10 @@ public final class QueriesAsyncClient {
      * Get a null array of string using the csv-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvNull(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringCsvNull(arrayQuery, callback);
@@ -445,71 +414,62 @@ public final class QueriesAsyncClient {
      * Get an empty array [] of string using the csv-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringCsvEmpty(arrayQuery, callback);
     }
 
     /**
-     * Array query has no defined collection format, should default to csv. Pass in
-     * ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringNoCollectionFormatEmpty(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringNoCollectionFormatEmpty(arrayQuery, callback);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the ssv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringSsvValid(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringSsvValid(arrayQuery, callback);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the tsv-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringTsvValid(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringTsvValid(arrayQuery, callback);
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the pipes-array format.
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * 
      * @param arrayQuery Array of String.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringPipesValid(List<String> arrayQuery, final Callback<Void> callback) {
         this.serviceClient.arrayStringPipesValid(arrayQuery, callback);
@@ -615,8 +575,7 @@ public final class QueriesAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(),
-                    globalStringPath, globalStringQuery, host);
+            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(), globalStringPath, globalStringQuery, host);
             return new QueriesAsyncClient(internalClient.getQueries());
         }
     }
