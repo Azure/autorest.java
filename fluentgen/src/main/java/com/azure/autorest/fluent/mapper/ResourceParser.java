@@ -365,8 +365,7 @@ public class ResourceParser {
                 if (nameMatcher.test(methodNameLowerCase)) {
                     String returnTypeName = method.getFluentReturnType().toString();
                     // same model as create
-                    if ((isDelete && returnTypeName.equals(PrimitiveType.Void.getName()))
-                            || (!isDelete && returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName()))) {
+                    if (isDelete || returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
                         String url = method.getInnerProxyMethod().getUrlPath();
                         // same url as create
                         if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {
