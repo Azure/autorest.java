@@ -384,22 +384,22 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
     }
 
-    private static void parameterizedTypeExpression(IType bodyType, StringBuilder stringBuilder, String cientReferenceDot) {
+    private static void parameterizedTypeExpression(IType bodyType, StringBuilder stringBuilder, String clientReferenceDot) {
         if (bodyType instanceof ListType) {
             ListType listType = ((ListType) bodyType);
-            stringBuilder.append(cientReferenceDot);
+            stringBuilder.append(clientReferenceDot);
             stringBuilder.append("createParameterizedType(");
             stringBuilder.append(String.format("%s.%s.class", listType.getPackage(), listType.getName()));
             stringBuilder.append(", ");
-            parameterizedTypeExpression(listType.getElementType(), stringBuilder, cientReferenceDot);
+            parameterizedTypeExpression(listType.getElementType(), stringBuilder, clientReferenceDot);
             stringBuilder.append(")");
         } else if (bodyType instanceof MapType) {
             MapType mapType = ((MapType) bodyType);
-            stringBuilder.append(cientReferenceDot);
+            stringBuilder.append(clientReferenceDot);
             stringBuilder.append("createParameterizedType(");
             stringBuilder.append(String.format("%s.%s.class", mapType.getPackage(), mapType.getName()));
             stringBuilder.append(", String.class, ");
-            parameterizedTypeExpression(mapType.getValueType(), stringBuilder, cientReferenceDot);
+            parameterizedTypeExpression(mapType.getValueType(), stringBuilder, clientReferenceDot);
             stringBuilder.append(")");
         } else {
             stringBuilder.append(String.format("%s.class", bodyType));
