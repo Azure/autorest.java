@@ -19,6 +19,7 @@ public class UrlPathSegments {
     public enum ParameterSegmentType {
         RESOURCE_GROUP,
         SUBSCRIPTION,
+        SCOPE,
         OTHER
     }
 
@@ -45,7 +46,12 @@ public class UrlPathSegments {
                     this.type = ParameterSegmentType.SUBSCRIPTION;
                     break;
                 default:
-                    this.type = ParameterSegmentType.OTHER;
+                    if (this.parameterName.toLowerCase(Locale.ROOT).equals("scope")
+                            && SEGMENT_NAME_EMPTY.equals(segmentName)) {
+                        this.type = ParameterSegmentType.SCOPE;
+                    } else {
+                        this.type = ParameterSegmentType.OTHER;
+                    }
                     break;
             }
         }
@@ -122,10 +128,8 @@ public class UrlPathSegments {
 
                     if (currentParameterName != null) {
                         reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName));
-                        currentParameterName = parameterName;
-                    } else {
-                        currentParameterName = parameterName;
                     }
+                    currentParameterName = parameterName;
                 } else {
                     String segmentName = segmentStr;
 
@@ -137,6 +141,9 @@ public class UrlPathSegments {
                     }
                 }
             }
+        }
+        if (currentParameterName != null) {
+            reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName));
         }
     }
 
@@ -169,6 +176,13 @@ public class UrlPathSegments {
                 .filter(Segment::isParameterSegment)
                 .map(s -> (ParameterSegment) s)
                 .anyMatch(s -> s.getType() == ParameterSegmentType.SUBSCRIPTION);
+    }
+
+    public boolean hasScope() {
+        return getNestLevel() >= 1 && reverseSegments.stream()
+                .filter(Segment::isParameterSegment)
+                .map(s -> (ParameterSegment) s)
+                .anyMatch(s -> s.getType() == ParameterSegmentType.SCOPE);
     }
 
     public boolean isNested() {

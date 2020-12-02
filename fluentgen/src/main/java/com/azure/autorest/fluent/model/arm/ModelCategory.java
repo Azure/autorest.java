@@ -15,6 +15,9 @@ public enum ModelCategory {
     // e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
     NESTED_CHILD,
 
+    // e.g. /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+    SCOPE_AS_PARENT,
+
     // not an Azure resource, merely an immutable
     IMMUTABLE
 }
