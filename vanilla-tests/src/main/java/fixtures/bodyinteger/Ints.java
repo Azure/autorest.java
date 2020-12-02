@@ -672,7 +672,7 @@ public final class Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody date in seconds since 1970-01-01T00:00:00Z.
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -695,7 +695,7 @@ public final class Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody date in seconds since 1970-01-01T00:00:00Z.
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -709,7 +709,7 @@ public final class Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody date in seconds since 1970-01-01T00:00:00Z.
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -140,8 +140,8 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
-     * @param contentType Content type for upload.
-     * @param input Uri or local path to source data.
+     * @param contentType Upload file type.
+     * @param input Input parameter.
      * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -167,8 +167,8 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
-     * @param contentType Content type for upload.
-     * @param input Uri or local path to source data.
+     * @param contentType Upload file type.
+     * @param input Input parameter.
      * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -191,8 +191,8 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
-     * @param contentType Content type for upload.
-     * @param input Uri or local path to source data.
+     * @param contentType Upload file type.
+     * @param input Input parameter.
      * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -300,7 +300,7 @@ public final class MediaTypesClient {
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
      *
-     * @param input simple string.
+     * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -320,7 +320,7 @@ public final class MediaTypesClient {
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
      *
-     * @param input simple string.
+     * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -342,7 +342,7 @@ public final class MediaTypesClient {
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
      *
-     * @param input simple string.
+     * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

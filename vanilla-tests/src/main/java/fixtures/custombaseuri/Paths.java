@@ -50,7 +50,7 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName simple string.
+     * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -71,7 +71,7 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName simple string.
+     * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -85,7 +85,7 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName simple string.
+     * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -28,6 +28,7 @@ public final class MonitorManagementClientBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the MonitorManagementClientBuilder. */
     public MonitorManagementClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }

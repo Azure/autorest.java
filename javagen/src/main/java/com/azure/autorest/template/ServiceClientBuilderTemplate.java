@@ -110,6 +110,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
                 }
                 classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
                 classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                     javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                 });

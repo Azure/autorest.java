@@ -1297,7 +1297,8 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @param arrayPath Array of Get0ItemsItem.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1322,7 +1323,8 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @param arrayPath Array of Get0ItemsItem.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1337,7 +1339,8 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @param arrayPath Array of Get0ItemsItem.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1350,7 +1353,7 @@ public final class Paths {
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
-     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1374,7 +1377,7 @@ public final class Paths {
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
-     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1388,7 +1391,7 @@ public final class Paths {
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
-     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -28,6 +28,7 @@ public final class AutoRestReportServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestReportServiceBuilder. */
     public AutoRestReportServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
