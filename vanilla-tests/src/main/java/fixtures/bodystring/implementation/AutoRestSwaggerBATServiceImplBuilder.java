@@ -151,7 +151,7 @@ public final class AutoRestSwaggerBATServiceImplBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private List<HttpPipelinePolicy> pipelinePolicies;
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /**
      * Adds a custom Http pipeline policy.
