@@ -79,9 +79,9 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             ClientMethod.Builder builder = createClientMethodBuilder()
                     .description(operation.getLanguage().getJava().getDescription())
                     .clientReference((operation.getOperationGroup() == null
-                            || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ?
-                            "this" :
-                            "this.client");
+                            || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty())
+                            ? "this"
+                            : "this.client");
 
             ProxyMethod proxyMethod = proxyMethods.get(request);
             builder.proxyMethod(proxyMethod);
@@ -93,7 +93,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             Map<String, String> validateExpressions = new HashMap<>();
             List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
-            for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
+            for (Parameter parameter : request.getParameters().stream().filter(p -> !p.isFlattened())
+                    .collect(Collectors.toList())) {
                 if (this.shouldCollapseOptionalParameters && !parameter.isRequired()) {
                     optionalParameters.add(parameter);
                     continue;
@@ -219,10 +220,9 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 isNextMethod = nextOperation == operation;
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        getPageableItemName(operation),
-                        (isNextMethod || nextOperation == null)
-                                ? null
-                                : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
+                        getPageableItemName(operation), (isNextMethod || nextOperation == null)
+                            ? null
+                            : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
                         null);
                 builder.methodPageDetails(details);
             }
@@ -236,33 +236,30 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .defaultValue(null)
                     .fromClient(false)
                     .isFinal(true)
-                    .isRequired(true)
-                    .build();
+                    .isRequired(true).build();
             withCallbackParameters.add(callbackParam);
 
             ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync : ClientMethodType.SimpleAsyncRestResponse;
             // Async method with Optional parameters (always generated).
             //
             methods.add(builder
-                    .parameters(withCallbackParameters)
-                    .returnValue(new ReturnValue(
-                            returnTypeDescription(operation,
-                                    PrimitiveType.Void,
-                                    PrimitiveType.Void),
-                            PrimitiveType.Void))
-                    .name(proxyMethod.getName())
-                    .type(methodType)
-                    .onlyRequiredParameters(false)
-                    .isGroupedParameterRequired(false)
-                    .build());
+                .parameters(withCallbackParameters)
+                .returnValue(new ReturnValue(
+                    returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
+                    PrimitiveType.Void))
+                .name(proxyMethod.getName())
+                .type(methodType)
+                .onlyRequiredParameters(false)
+                .isGroupedParameterRequired(false)
+                .build());
 
             // Async method with Required parameters.
             //
             if (generateClientMethodWithOnlyRequiredParameters) {
                 // generate only if the settings 'required-parameter-client-methods: true' exists.
                 methods.add(builder
-                        .onlyRequiredParameters(true)
-                        .build());
+                    .onlyRequiredParameters(true)
+                    .build());
             }
 
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
@@ -271,47 +268,48 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 methodType = isPaging ? ClientMethodType.PagingSync : ClientMethodType.SimpleSync;
                 GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType.getClientType());
                 methods.add(builder
+                    .parameters(parameters)
+                    .returnValue(new ReturnValue(
+                        returnTypeDescription(operation, responseWithResultType, returnType),
+                       responseWithResultType))
+                    .name(proxyMethod.getName() + "WithRestResponse")
+                    .onlyRequiredParameters(false)
+                    .type(methodType)
+                    .isGroupedParameterRequired(false)
+                    .build());
+                if (isPaging && !isNextMethod) {
+                    IType pageWithResponse = GenericType.AndroidPageResponseCollection(elementType);
+                    methods.add(builder
                         .parameters(parameters)
-                        .returnValue(new ReturnValue(returnTypeDescription(operation, responseWithResultType, returnType),
-                                responseWithResultType))
-                        .name(proxyMethod.getName() + "WithRestResponse")
+                        .returnValue(new ReturnValue(
+                            returnTypeDescription(operation, pageWithResponse, elementType), pageWithResponse))
+                        .name(proxyMethod.getName() + "WithPageResponse")
                         .onlyRequiredParameters(false)
                         .type(methodType)
                         .isGroupedParameterRequired(false)
                         .build());
-                if (isPaging && !isNextMethod) {
-                    IType pageWithResponse = GenericType.AndroidPageResponseCollection(elementType);
-                    methods.add(builder
-                            .parameters(parameters)
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, pageWithResponse, elementType),
-                                    pageWithResponse))
-                            .name(proxyMethod.getName() + "WithPageResponse")
-                            .onlyRequiredParameters(false)
-                            .type(methodType)
-                            .isGroupedParameterRequired(false)
-                            .build());
 
                     IType pageCollection = GenericType.AndroidPageRCollection(elementType);
                     methods.add(builder
-                            .parameters(parameters)
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, elementType),
-                                    pageCollection))
-                            .name(proxyMethod.getName() + "WithPage")
-                            .onlyRequiredParameters(false)
-                            .type(methodType)
-                            .isGroupedParameterRequired(false)
-                            .build());
+                        .parameters(parameters)
+                        .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, elementType),
+                            pageCollection))
+                        .name(proxyMethod.getName() + "WithPage")
+                        .onlyRequiredParameters(false)
+                        .type(methodType)
+                        .isGroupedParameterRequired(false)
+                        .build());
                 }
 
                 if (generateClientMethodWithOnlyRequiredParameters) {
                     // Sync method with Required parameters.
                     //
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, returnType, returnType),
-                                    returnType))
-                            .name(proxyMethod.getName())
-                            .onlyRequiredParameters(true)
-                            .build());
+                        .returnValue(
+                            new ReturnValue(returnTypeDescription(operation, returnType, returnType), returnType))
+                        .name(proxyMethod.getName())
+                        .onlyRequiredParameters(true)
+                        .build());
                 }
             }
 
@@ -332,21 +330,21 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        getPageableItemName(operation),null,null);
+                        getPageableItemName(operation), null, null);
                 methodType = ClientMethodType.PagingAsync;
                 methods.add(builder
-                        .parameters(withCollectionCallbackParameters)
-                        .returnValue(new ReturnValue(
+                    .parameters(withCollectionCallbackParameters)
+                    .returnValue(new ReturnValue(
                                 returnTypeDescription(operation,
-                                        PrimitiveType.Void,
-                                        PrimitiveType.Void),
+                                    PrimitiveType.Void,
+                                    PrimitiveType.Void),
                                 PrimitiveType.Void))
-                        .name(proxyMethod.getName()+"PagesAsync")
-                        .type(methodType)
-                        .methodPageDetails(details)
-                        .onlyRequiredParameters(false)
-                        .isGroupedParameterRequired(false)
-                        .build());
+                    .name(proxyMethod.getName() + "PagesAsync")
+                    .type(methodType)
+                    .methodPageDetails(details)
+                    .onlyRequiredParameters(false)
+                    .isGroupedParameterRequired(false)
+                    .build());
             }
         }
 
@@ -355,8 +353,11 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     private static boolean hasNonRequiredParameters(Request request) {
-        return request.getParameters().stream().anyMatch(p -> p.getImplementation() == Parameter.ImplementationLocation.METHOD && !p.isRequired() && !(p.getSchema() instanceof ConstantSchema))
-                && request.getParameters().stream().noneMatch(Parameter::isFlattened);   // for now, ignore operation with flattened parameters
+        return request.getParameters().stream()
+                .anyMatch(p -> p.getImplementation() == Parameter.ImplementationLocation.METHOD
+                    && !p.isRequired()
+                    && !(p.getSchema() instanceof ConstantSchema))
+                    && request.getParameters().stream().noneMatch(Parameter::isFlattened); // for now, ignore operation with flattened parameters
     }
 
     private static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
@@ -365,7 +366,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
                 String operationDescription = operation.getLanguage().getDefault().getDescription();
                 if (!CoreUtils.isNullOrEmpty(operationDescription)) {
-                    if (operationDescription.toLowerCase().startsWith("get ") || operationDescription.toLowerCase().startsWith("gets ")) {
+                    if (operationDescription.toLowerCase().startsWith("get ")
+                            || operationDescription.toLowerCase().startsWith("gets ")) {
                         int startIndex = operationDescription.indexOf(" ") + 1;
                         description = formatReturnTypeDescription(operationDescription.substring(startIndex));
                     }
@@ -374,7 +376,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
             if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
                 Schema responseSchema = operation.getResponses().get(0).getSchema();
-                if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
+                if (responseSchema != null && responseSchema.getLanguage() != null
+                        && responseSchema.getLanguage().getDefault() != null) {
                     String responseSchemaDescription = responseSchema.getLanguage().getDefault().getDescription();
                     if (!CoreUtils.isNullOrEmpty(responseSchemaDescription)) {
                         description = formatReturnTypeDescription(responseSchemaDescription);
@@ -388,10 +391,11 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     description = "the completion";
                 }
                 if (baseType == PrimitiveType.Boolean
-                        && operation.getRequests() != null && !operation.getRequests().isEmpty()
-                        && operation.getRequests().get(0).getProtocol() != null
-                        && operation.getRequests().get(0).getProtocol().getHttp() != null
-                        && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                    && operation.getRequests() != null
+                    && !operation.getRequests().isEmpty()
+                    && operation.getRequests().get(0).getProtocol() != null
+                    && operation.getRequests().get(0).getProtocol().getHttp() != null
+                    && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
                     // Mono<Boolean> of HEAD method
                     description = "whether resource exists";
                 }

@@ -19,7 +19,7 @@ public class UrlPathItemsSyncClientTests {
     @Test
     public void getAllWithValues() {
         client = new PathItemsClient.Builder()
-                .host(TestConstants.TestServerRootUrl)
+                .host(TestConstants.testServerRootUrl())
                 .globalStringPath("globalStringPath")
                 .globalStringQuery("globalStringQuery")
                 .build();
@@ -33,7 +33,7 @@ public class UrlPathItemsSyncClientTests {
     @Test
     public void getGlobalQueryNull() {
         client = new PathItemsClient.Builder()
-                .host(TestConstants.TestServerRootUrl)
+                .host(TestConstants.testServerRootUrl())
                 .globalStringPath("globalStringPath")
                 .globalStringQuery(null)
                 .build();
@@ -47,7 +47,7 @@ public class UrlPathItemsSyncClientTests {
     @Test
     public void getGlobalAndLocalQueryNull() {
         client = new PathItemsClient.Builder()
-                .host(TestConstants.TestServerRootUrl)
+                .host(TestConstants.testServerRootUrl())
                 .globalStringPath("globalStringPath")
                 .globalStringQuery(null)
                 .build();
@@ -61,7 +61,7 @@ public class UrlPathItemsSyncClientTests {
     @Test
     public void getLocalPathItemQueryNull() {
         client = new PathItemsClient.Builder()
-                .host(TestConstants.TestServerRootUrl)
+                .host(TestConstants.testServerRootUrl())
                 .globalStringPath("globalStringPath")
                 .globalStringQuery("globalStringQuery")
                 .build();

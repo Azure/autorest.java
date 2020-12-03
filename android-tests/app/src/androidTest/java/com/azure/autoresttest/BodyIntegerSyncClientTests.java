@@ -24,7 +24,7 @@ public class BodyIntegerSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestIntegerTestServiceClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new AutoRestIntegerTestServiceClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test

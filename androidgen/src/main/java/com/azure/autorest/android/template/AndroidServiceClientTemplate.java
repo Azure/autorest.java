@@ -263,6 +263,19 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                     modifiers,
                     "<T> T deserializeContent(okhttp3.Headers headers, okhttp3.ResponseBody body, java.lang.reflect.Type type)",
                     methodBodyBlock -> {
+                        methodBodyBlock.ifBlock("type.equals(byte[].class)", actionBlock -> {
+                            List<String> exceptions = new ArrayList<>();
+                            exceptions.add("java.io.IOException");
+                            actionBlock.tryCatch(tryBlock -> {
+                                        tryBlock.ifBlock("body.contentLength() == 0", bodyEmptyBlock -> bodyEmptyBlock.line("return null;"));
+                                        tryBlock.line("return (T) body.bytes();");
+                                    },
+                                    exceptions,
+                                    "ex",
+                                    catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
+                                    null);
+                            });
+
                         methodBodyBlock.line("final String str = readAsString(body);");
                         List<String> exceptions = new ArrayList<>();
                         exceptions.add("java.io.IOException");

@@ -384,20 +384,22 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
     }
 
-    private static void parameterizedTypeExpression(IType bodyType, StringBuilder stringBuilder) {
+    private static void parameterizedTypeExpression(IType bodyType, StringBuilder stringBuilder, String clientReferenceDot) {
         if (bodyType instanceof ListType) {
             ListType listType = ((ListType) bodyType);
+            stringBuilder.append(clientReferenceDot);
             stringBuilder.append("createParameterizedType(");
             stringBuilder.append(String.format("%s.%s.class", listType.getPackage(), listType.getName()));
             stringBuilder.append(", ");
-            parameterizedTypeExpression(listType.getElementType(), stringBuilder);
+            parameterizedTypeExpression(listType.getElementType(), stringBuilder, clientReferenceDot);
             stringBuilder.append(")");
         } else if (bodyType instanceof MapType) {
-            ListType mapType = ((ListType) bodyType);
+            MapType mapType = ((MapType) bodyType);
+            stringBuilder.append(clientReferenceDot);
             stringBuilder.append("createParameterizedType(");
             stringBuilder.append(String.format("%s.%s.class", mapType.getPackage(), mapType.getName()));
-            stringBuilder.append(", String, ");
-            parameterizedTypeExpression(mapType.getElementType(), stringBuilder);
+            stringBuilder.append(", String.class, ");
+            parameterizedTypeExpression(mapType.getValueType(), stringBuilder, clientReferenceDot);
             stringBuilder.append(")");
         } else {
             stringBuilder.append(String.format("%s.class", bodyType));
@@ -665,8 +667,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             final String bodyJvaType;
             if (bodyType instanceof ListType || bodyType instanceof MapType) {
                 StringBuilder builder = new StringBuilder();
-                builder.append(clientReferenceDot);
-                parameterizedTypeExpression(bodyType, builder);
+                parameterizedTypeExpression(bodyType, builder, clientReferenceDot);
                 bodyJvaType = builder.toString();
             } else {
                 bodyJvaType = String.format("%s.class", bodyType);
@@ -854,8 +855,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             final String bodyJvaType;
             if (bodyType instanceof ListType || bodyType instanceof MapType) {
                 StringBuilder builder = new StringBuilder();
-                builder.append(clientReferenceDot);
-                parameterizedTypeExpression(bodyType, builder);
+                parameterizedTypeExpression(bodyType, builder, clientReferenceDot);
                 bodyJvaType = builder.toString();
             } else {
                 bodyJvaType = String.format("%s.class", bodyType);

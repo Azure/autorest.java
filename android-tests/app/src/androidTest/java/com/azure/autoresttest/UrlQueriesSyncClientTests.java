@@ -25,7 +25,7 @@ public class UrlQueriesSyncClientTests {
 
     @BeforeClass
     public static void setup() {
-        client = new QueriesClient.Builder().host(TestConstants.TestServerRootUrl).build();
+        client = new QueriesClient.Builder().host(TestConstants.testServerRootUrl()).build();
     }
 
     @Test
