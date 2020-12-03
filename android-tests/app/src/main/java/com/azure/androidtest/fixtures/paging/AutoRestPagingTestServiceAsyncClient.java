@@ -13,12 +13,24 @@ import com.azure.android.core.util.paging.PagedDataCollection;
 import com.azure.android.core.util.paging.PagedDataRetriever;
 import com.azure.androidtest.fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import com.azure.androidtest.fixtures.paging.implementation.PagingsImpl;
+import com.azure.androidtest.fixtures.paging.models.CustomParameterGroup;
+import com.azure.androidtest.fixtures.paging.models.OdataProductResult;
+import com.azure.androidtest.fixtures.paging.models.PagingGetMultiplePagesLroOptions;
+import com.azure.androidtest.fixtures.paging.models.PagingGetMultiplePagesOptions;
+import com.azure.androidtest.fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import com.azure.androidtest.fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import com.azure.androidtest.fixtures.paging.models.Product;
 import com.azure.androidtest.fixtures.paging.models.ProductResult;
+import com.azure.androidtest.fixtures.paging.models.ProductResultValue;
+import com.azure.androidtest.fixtures.paging.models.ProductResultValueWithXMSClientName;
 import okhttp3.Interceptor;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Initializes a new instance of the asynchronous AutoRestPagingTestService type.
@@ -34,15 +46,15 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     * A paging operation that must return result of the default 'value' node.
      * 
-     * @param callback the Callback that receives the response.
+     * @param callback the Callback that receives the response collection.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getNullNextLinkNamePages(final Callback<Page<Product>> callback) {
-        this.serviceClient.getNullNextLinkNamePages(callback);
+    public void getNoItemNamePagesPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getNoItemNamePagesPagesAsync(callback);
     }
 
     /**
@@ -55,6 +67,184 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     public void getNullNextLinkNamePagesPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
         this.serviceClient.getNullNextLinkNamePagesPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getSinglePagesPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getSinglePagesPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void firstResponseEmptyPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.firstResponseEmptyPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId 
+     * @param pagingGetMultiplePagesOptions Parameter group.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesPages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesPagesAsync(clientRequestId, pagingGetMultiplePagesOptions, callback);
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * 
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getWithQueryParamsPages(int requiredQueryParameter, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getWithQueryParamsPagesAsync(requiredQueryParameter, callback);
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     * 
+     * @param clientRequestId 
+     * @param pagingGetOdataMultiplePagesOptions Parameter group.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getOdataMultiplePagesPages(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getOdataMultiplePagesPagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, callback);
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
+     * @param clientRequestId 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesWithOffsetPages(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesWithOffsetPagesAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, callback);
+    }
+
+    /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesRetryFirstPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesRetryFirstPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesRetrySecondPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesRetrySecondPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that receives a 400 on the first call.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getSinglePagesFailurePages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getSinglePagesFailurePagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that receives a 400 on the second call.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesFailurePages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesFailurePagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that receives an invalid nextLink.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesFailureUriPages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesFailureUriPagesAsync(callback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesFragmentNextLinkPages(String apiVersion, String tenant, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesFragmentNextLinkPagesAsync(apiVersion, tenant, callback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * 
+     * @param customParameterGroup Parameter group.
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesFragmentWithGroupingNextLinkPages(CustomParameterGroup customParameterGroup, final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkPagesAsync(customParameterGroup, callback);
+    }
+
+    /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     * 
+     * @param callback the Callback that receives the response collection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getPagingModelWithItemNameWithXMSClientNamePages(final Callback<AsyncPagedDataCollection<Product, Page<Product>>> callback) {
+        this.serviceClient.getPagingModelWithItemNameWithXMSClientNamePagesAsync(callback);
     }
 
     /**

@@ -9,6 +9,7 @@ import com.azure.androidtest.fixtures.bodyarray.AutoRestSwaggerBATArrayServiceCl
 import com.azure.androidtest.fixtures.bodyarray.models.Enum0;
 import com.azure.androidtest.fixtures.bodyarray.models.Enum1;
 import com.azure.androidtest.fixtures.bodyarray.models.FooEnum;
+import com.azure.androidtest.fixtures.bodyarray.models.Product;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -498,21 +499,21 @@ public class BodyArraySyncClientTests {
 
     @Test
     public void getComplexNull() {
-        final Response<List<Product1>> getResponse = client.getComplexNullWithRestResponse();
+        final Response<List<Product>> getResponse = client.getComplexNullWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
         assertNull(getResponse.getValue());
     }
 
     @Test
     public void getComplexEmpty() {
-        final Response<List<Product1>> getResponse = client.getComplexEmptyWithRestResponse();
+        final Response<List<Product>> getResponse = client.getComplexEmptyWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
         assertEquals(0, getResponse.getValue().size());
     }
 
     @Test
     public void getComplexItemNull() {
-        final Response<List<Product1>> getResponse = client.getComplexItemNullWithRestResponse();
+        final Response<List<Product>> getResponse = client.getComplexItemNullWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
         assertEquals(3, getResponse.getValue().size());
         assertNull(getResponse.getValue().get(1));
@@ -520,18 +521,18 @@ public class BodyArraySyncClientTests {
 
     @Test
     public void getComplexItemEmpty() {
-        final Response<List<Product1>> getResponse = client.getComplexItemEmptyWithRestResponse();
+        final Response<List<Product>> getResponse = client.getComplexItemEmptyWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
-        List<Product1> result = getResponse.getValue();
+        List<Product> result = getResponse.getValue();
         assertEquals(3, result.size());
         assertNull(result.get(1).getString());
     }
 
     @Test
     public void getComplexValid() {
-        final Response<List<Product1>> getResponse = client.getComplexValidWithRestResponse();
+        final Response<List<Product>> getResponse = client.getComplexValidWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
-        List<Product1> result = getResponse.getValue();
+        List<Product> result = getResponse.getValue();
         assertEquals(3, result.size());
         assertEquals(5, result.get(2).getInteger().intValue());
         assertEquals("6", result.get(2).getString());
@@ -539,16 +540,16 @@ public class BodyArraySyncClientTests {
 
     @Test
     public void putComplexValid() {
-        List<Product1> body = new ArrayList<Product1>();
-        Product1 p1 = new Product1();
+        List<Product> body = new ArrayList<Product>();
+        Product p1 = new Product();
         p1.setInteger(1);
         p1.setString("2");
         body.add(p1);
-        Product1 p2 = new Product1();
+        Product p2 = new Product();
         p2.setInteger(3);
         p2.setString("4");
         body.add(p2);
-        Product1 p3 = new Product1();
+        Product p3 = new Product();
         p3.setInteger(5);
         p3.setString("6");
         body.add(p3);

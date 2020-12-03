@@ -15,7 +15,7 @@ public class ReportCoverage {
 
     @Test
     public void reportTest() {
-        AutoRestReportServiceClient client = new AutoRestReportServiceClient.Builder().host("http://100.64.202.121:3000").build();
+        AutoRestReportServiceClient client = new AutoRestReportServiceClient.Builder().host("http://100.64.244.219:3000").build();
         final Response<Map<String, Integer>> reportResponse = client.getReportWithRestResponse(System.getProperty("java.version"));
         assertEquals(200, reportResponse.getStatusCode());
 

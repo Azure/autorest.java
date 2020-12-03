@@ -97,32 +97,41 @@ public class AsyncPageRetrieverTemplate {
                     });
 
             String pageNextParamName = "dummy";
-            Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
-                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
-                    .reduce((current, next) -> next);
-            if (pageIdParam.isPresent()) {
-                pageNextParamName = pageIdParam.get().getName();
-            }
             String methodSignature = String.format("void getPage(String %1$s, %2$s callback)", pageNextParamName,
                     GenericType.AndroidCallback(GenericType.AndroidPage(elementType)));
+            if (getNextPageMethod == null) {
+                javaClass.publicMethod(methodSignature, getPageMethod -> {
+                    getPageMethod.line("callback.onFailure(new RuntimeException(\"No more pages.\"), null);");
+                });
+            } else {
+                Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
+                        .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                        .reduce((current, next) -> next);
+                if (pageIdParam.isPresent()) {
+                    pageNextParamName = pageIdParam.get().getName();
+                }
+                methodSignature = String.format("void getPage(String %1$s, %2$s callback)", pageNextParamName,
+                        GenericType.AndroidCallback(GenericType.AndroidPage(elementType)));
 
-            javaClass.publicMethod(methodSignature, getPageMethod -> {
-                StringBuilder getPageBuilder = new StringBuilder();
-                getPageBuilder.append(String.format("serviceClient.%s(", getNextPageMethod.getProxyMethod().getName()));
-                boolean hasPreviousParam = false;
-                for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                javaClass.publicMethod(methodSignature, getPageMethod -> {
+                    StringBuilder getPageBuilder = new StringBuilder();
+                    getPageBuilder
+                            .append(String.format("serviceClient.%s(", getNextPageMethod.getProxyMethod().getName()));
+                    boolean hasPreviousParam = false;
+                    for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                        if (hasPreviousParam) {
+                            getPageBuilder.append(", ");
+                        }
+                        getPageBuilder.append(clientMethodParameter.getName());
+                        hasPreviousParam = true;
+                    }
                     if (hasPreviousParam) {
                         getPageBuilder.append(", ");
                     }
-                    getPageBuilder.append(clientMethodParameter.getName());
-                    hasPreviousParam = true;
-                }
-                if (hasPreviousParam) {
-                    getPageBuilder.append(", ");
-                }
-                getPageBuilder.append("callback);");
-                getPageMethod.line(getPageBuilder.toString());
-            });
+                    getPageBuilder.append("callback);");
+                    getPageMethod.line(getPageBuilder.toString());
+                });
+            }
         });
     }
 }

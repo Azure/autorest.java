@@ -82,28 +82,37 @@ public class PageRetrieverTemplate {
             });
 
             String nextPageParamName = "dummy";
-            Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
-                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
-                    .reduce((current, next) -> next);
-            if (pageIdParam.isPresent()) {
-                nextPageParamName = pageIdParam.get().getName();
-            }
             String methodSignature = String.format("%1$s getPage(String %2$s)", pageType, nextPageParamName);
-            javaClass.publicMethod(methodSignature, getPageMethod -> {
-                StringBuilder getPageBuilder = new StringBuilder();
-                getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(",
-                        getNextPageMethod.getProxyMethod().getName()));
-                boolean hasPreviousParam = false;
-                for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
-                    if (hasPreviousParam) {
-                        getPageBuilder.append(", ");
-                    }
-                    getPageBuilder.append(clientMethodParameter.getName());
-                    hasPreviousParam = true;
+
+            if (getNextPageMethod == null) {
+                javaClass.publicMethod(methodSignature, getNextPageMethod -> {
+                    getNextPageMethod.line("return null;");
+                });
+            } else {
+                Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
+                        .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                        .reduce((current, next) -> next);
+                if (pageIdParam.isPresent()) {
+                    nextPageParamName = pageIdParam.get().getName();
+                    methodSignature = String.format("%1$s getPage(String %2$s)", pageType, nextPageParamName);
                 }
-                getPageBuilder.append(").getValue();");
-                getPageMethod.line(getPageBuilder.toString());
-            });
+
+                javaClass.publicMethod(methodSignature, getPageMethod -> {
+                    StringBuilder getPageBuilder = new StringBuilder();
+                    getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(",
+                            getNextPageMethod.getProxyMethod().getName()));
+                    boolean hasPreviousParam = false;
+                    for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                        if (hasPreviousParam) {
+                            getPageBuilder.append(", ");
+                        }
+                        getPageBuilder.append(clientMethodParameter.getName());
+                        hasPreviousParam = true;
+                    }
+                    getPageBuilder.append(").getValue();");
+                    getPageMethod.line(getPageBuilder.toString());
+                });
+            }
         });
     }
 }

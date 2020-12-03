@@ -455,9 +455,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
 
         ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
-        if (nextMethod == null) {
-            return;
-        }
         AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
                 nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
         asyncPageRetrieverTemplate.write((JavaClass) typeBlock);
@@ -506,10 +503,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
 
         ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
-        if (nextMethod == null) {
-            return;
-        }
-
         String retrieverClassName;
         if (methodReturnType.equals(GenericType.AndroidPageCollection(elementType))) {
             PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
