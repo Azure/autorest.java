@@ -34,28 +34,23 @@ public final class EnumClient {
     }
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color',
-     *         'green-color', 'blue_color'.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     public Response<Colors> getNotExpandableWithRestResponse() {
         return this.serviceClient.getNotExpandableWithRestResponse();
     }
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putNotExpandableWithRestResponse(Colors stringBody) {
@@ -63,28 +58,23 @@ public final class EnumClient {
     }
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color',
-     *         'green-color', 'blue_color'.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     public Response<Colors> getReferencedWithRestResponse() {
         return this.serviceClient.getReferencedWithRestResponse();
     }
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param enumStringBody enum string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putReferencedWithRestResponse(Colors enumStringBody) {
@@ -94,9 +84,8 @@ public final class EnumClient {
     /**
      * Get value 'green-color' from the constant.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value 'green-color' from the constant.
      */
     public Response<RefColorConstant> getReferencedConstantWithRestResponse() {
@@ -108,9 +97,8 @@ public final class EnumClient {
      * 
      * @param field1 Sample string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putReferencedConstantWithRestResponse(String field1) {
@@ -185,8 +173,7 @@ public final class EnumClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(serviceClientBuilder.build(), host);
             return new EnumClient(internalClient.getEnums());
         }
     }

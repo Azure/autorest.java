@@ -16,8 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
- * Initializes a new instance of the asynchronous
- * AutoRestParameterizedHostTestClient type.
+ * Initializes a new instance of the asynchronous AutoRestParameterizedHostTestClient type.
  */
 public final class AutoRestParameterizedHostTestAsyncClient {
     private PathsImpl serviceClient;
@@ -34,21 +33,20 @@ public final class AutoRestParameterizedHostTestAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(final Callback<Void> callback) {
         this.serviceClient.getEmpty(callback);
     }
 
     /**
-     * A builder for creating a new instance of the
-     * AutoRestParameterizedHostTestAsyncClient type.
+     * A builder for creating a new instance of the AutoRestParameterizedHostTestAsyncClient type.
      */
     public static final class Builder {
         /*
-         * A string value that is used as a global part of the parameterized host
+         * A string value that is used as a global part of the parameterized
+         * host
          */
         private String host;
 
@@ -128,8 +126,7 @@ public final class AutoRestParameterizedHostTestAsyncClient {
         }
 
         /**
-         * Builds an instance of AutoRestParameterizedHostTestAsyncClient with the
-         * provided parameters.
+         * Builds an instance of AutoRestParameterizedHostTestAsyncClient with the provided parameters.
          * 
          * @return an instance of AutoRestParameterizedHostTestAsyncClient.
          */
@@ -153,8 +150,7 @@ public final class AutoRestParameterizedHostTestAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestParameterizedHostTestClientImpl internalClient = new AutoRestParameterizedHostTestClientImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestParameterizedHostTestClientImpl internalClient = new AutoRestParameterizedHostTestClientImpl(serviceClientBuilder.build(), host);
             return new AutoRestParameterizedHostTestAsyncClient(internalClient.getPaths());
         }
     }
