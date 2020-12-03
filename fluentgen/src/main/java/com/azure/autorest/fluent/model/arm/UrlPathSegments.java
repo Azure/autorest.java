@@ -35,24 +35,27 @@ public class UrlPathSegments {
         private final ParameterSegmentType type;
 
         public ParameterSegment(String segmentName, String parameterName) {
+            this(segmentName, parameterName, false);
+        }
+
+        public ParameterSegment(String segmentName, String parameterName, boolean scopeSegment) {
             this.segmentName = segmentName;
             this.parameterName = parameterName;
 
-            switch (segmentName.toLowerCase(Locale.ROOT)) {
-                case "resourcegroups":
-                    this.type = ParameterSegmentType.RESOURCE_GROUP;
-                    break;
-                case "subscriptions":
-                    this.type = ParameterSegmentType.SUBSCRIPTION;
-                    break;
-                default:
-                    if (this.parameterName.toLowerCase(Locale.ROOT).equals("scope")
-                            && SEGMENT_NAME_EMPTY.equals(segmentName)) {
-                        this.type = ParameterSegmentType.SCOPE;
-                    } else {
+            if (scopeSegment) {
+                this.type = ParameterSegmentType.SCOPE;
+            } else {
+                switch (segmentName.toLowerCase(Locale.ROOT)) {
+                    case "resourcegroups":
+                        this.type = ParameterSegmentType.RESOURCE_GROUP;
+                        break;
+                    case "subscriptions":
+                        this.type = ParameterSegmentType.SUBSCRIPTION;
+                        break;
+                    default:
                         this.type = ParameterSegmentType.OTHER;
-                    }
-                    break;
+                        break;
+                }
             }
         }
 
@@ -143,7 +146,7 @@ public class UrlPathSegments {
             }
         }
         if (currentParameterName != null) {
-            reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName));
+            reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName, true));
         }
     }
 

@@ -131,7 +131,8 @@ public class ResourceParser {
                 ModelCategory.RESOURCE_GROUP_AS_PARENT,
                 ModelCategory.SUBSCRIPTION_AS_PARENT,
                 ModelCategory.NESTED_CHILD,
-                ModelCategory.SCOPE_AS_PARENT);
+                ModelCategory.SCOPE_AS_PARENT,
+                ModelCategory.SCOPE_NESTED_CHILD);
 
         for (ModelCategory category : categories) {
             Map<FluentResourceModel, ResourceCreate> modelOfResourceGroupAsParent =
@@ -295,15 +296,26 @@ public class ResourceParser {
                                                 break;
                                         }
                                     }
-                                    if (!categoryMatch && category == ModelCategory.SCOPE_AS_PARENT) {
-                                        // check for scope
+                                    if (!categoryMatch && (category == ModelCategory.SCOPE_AS_PARENT || category == ModelCategory.SCOPE_NESTED_CHILD)) {
+                                        // check for scope, required named parameters except scope
                                         boolean urlParameterSegmentsNamedExceptScope = urlPathSegments.getReverseParameterSegments().stream()
                                                 .noneMatch(s -> s.getType() != UrlPathSegments.ParameterSegmentType.SCOPE && CoreUtils.isNullOrEmpty(s.getSegmentName()));
 
                                         if (urlParameterSegmentsNamedExceptScope && urlPathSegments.hasScope()
-                                                && !urlPathSegments.hasSubscription() && !urlPathSegments.hasResourceGroup()
-                                                && !urlPathSegments.isNested()) {
-                                            categoryMatch = true;
+                                                && !urlPathSegments.hasSubscription() && !urlPathSegments.hasResourceGroup()) {
+                                            switch (category) {
+                                                case SCOPE_AS_PARENT:
+                                                    if (!urlPathSegments.isNested()) {
+                                                        categoryMatch = true;
+                                                    }
+                                                    break;
+
+                                                case SCOPE_NESTED_CHILD:
+                                                    if (urlPathSegments.isNested()) {
+                                                        categoryMatch = true;
+                                                    }
+                                                    break;
+                                            }
                                         }
                                     }
 

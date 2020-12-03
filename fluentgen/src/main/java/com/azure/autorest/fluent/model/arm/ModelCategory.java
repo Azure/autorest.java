@@ -18,6 +18,9 @@ public enum ModelCategory {
     // e.g. /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
     SCOPE_AS_PARENT,
 
+    // e.g. /{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}
+    SCOPE_NESTED_CHILD,
+
     // not an Azure resource, merely an immutable
     IMMUTABLE
 }

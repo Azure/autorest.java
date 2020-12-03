@@ -25,6 +25,11 @@ public class UrlPathSegmentsTests {
         Assertions.assertTrue(segments.hasResourceGroup());
         Assertions.assertFalse(segments.hasScope());
         Assertions.assertTrue(segments.isNested());
+        Assertions.assertEquals(4, segments.getReverseParameterSegments().size());
+        Assertions.assertEquals("containers", segments.getReverseParameterSegments().get(0).getSegmentName());
+        Assertions.assertEquals("storageAccounts", segments.getReverseParameterSegments().get(1).getSegmentName());
+        Assertions.assertEquals("resourceGroups", segments.getReverseParameterSegments().get(2).getSegmentName());
+        Assertions.assertEquals("subscriptions", segments.getReverseParameterSegments().get(3).getSegmentName());
 
         segments = new UrlPathSegments("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}");
 
@@ -39,5 +44,27 @@ public class UrlPathSegmentsTests {
         Assertions.assertFalse(segments.hasResourceGroup());
         Assertions.assertTrue(segments.hasScope());
         Assertions.assertFalse(segments.isNested());
+
+        segments = new UrlPathSegments("/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}");
+
+        Assertions.assertFalse(segments.hasSubscription());
+        Assertions.assertFalse(segments.hasResourceGroup());
+        Assertions.assertTrue(segments.hasScope());
+        Assertions.assertTrue(segments.isNested());
+        Assertions.assertEquals(3, segments.getReverseParameterSegments().size());
+        Assertions.assertEquals("suppressions", segments.getReverseParameterSegments().get(0).getSegmentName());
+        Assertions.assertEquals("recommendations", segments.getReverseParameterSegments().get(1).getSegmentName());
+        Assertions.assertEquals("", segments.getReverseParameterSegments().get(2).getSegmentName());
+
+        segments = new UrlPathSegments("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}");
+
+        Assertions.assertTrue(segments.hasSubscription());
+        Assertions.assertTrue(segments.hasResourceGroup());
+        Assertions.assertFalse(segments.hasScope());
+        Assertions.assertEquals(6, segments.getReverseParameterSegments().size());
+        Assertions.assertEquals("", segments.getReverseParameterSegments().get(0).getSegmentName());
+        Assertions.assertEquals("", segments.getReverseParameterSegments().get(1).getSegmentName());
+        Assertions.assertEquals("", segments.getReverseParameterSegments().get(2).getSegmentName());
+        Assertions.assertEquals("providers", segments.getReverseParameterSegments().get(3).getSegmentName());
     }
 }

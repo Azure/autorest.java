@@ -54,8 +54,7 @@ public class GeneratedUtilsClassWorkbenchTests {
                 String pathSegment = pathSegments.get(--pathIndex);
                 if (!CoreUtils.isNullOrEmpty(idSegment) && !CoreUtils.isNullOrEmpty(pathSegment)) {
                     if (pathSegment.equalsIgnoreCase(parameterNameParentheses)) {
-                        if ("scope".equalsIgnoreCase(parameterName)
-                                && pathIndex == 0 || (pathIndex == 1 && pathSegments.get(0).isEmpty())) {
+                        if (pathIndex == 0 || (pathIndex == 1 && pathSegments.get(0).isEmpty())) {
                             List<String> segments = new ArrayList<>();
                             segments.add(idSegment);
                             idItrReverted.forEachRemaining(segments::add);
@@ -93,5 +92,12 @@ public class GeneratedUtilsClassWorkbenchTests {
 
         Assertions.assertEquals("00000000-0000-0000-0000-000000000001", Utils.getValueFromIdByParameterName(id, pathTemplate, "roleAssignmentName"));
         Assertions.assertEquals("subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-weidxu", Utils.getValueFromIdByParameterName(id, pathTemplate, "scope"));
+
+        pathTemplate = "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}";
+        id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-weidxu/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/recommendation1/suppressions/suppressionName1";
+
+        Assertions.assertEquals("recommendation1", Utils.getValueFromIdByParameterName(id, pathTemplate, "recommendationId"));
+        Assertions.assertEquals("suppressionName1", Utils.getValueFromIdByParameterName(id, pathTemplate, "name"));
+        Assertions.assertEquals("subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-weidxu/providers/Microsoft.Compute/virtualMachines/vm1", Utils.getValueFromIdByParameterName(id, pathTemplate, "resourceUri"));
     }
 }
