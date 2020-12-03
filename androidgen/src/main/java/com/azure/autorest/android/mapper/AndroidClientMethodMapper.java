@@ -282,7 +282,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                             .name(proxyMethod.getName() + "WithPageResponse").onlyRequiredParameters(false)
                             .type(methodType).isGroupedParameterRequired(false).build());
 
-                    IType pageCollection = GenericType.AndroidPageRCollection(elementType);
+                    IType pageCollection = GenericType.AndroidPageCollection(elementType);
                     methods.add(builder.parameters(parameters)
                             .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, elementType),
                                     pageCollection))
@@ -311,8 +311,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 final Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        getPageableItemName(operation), null, null);
-                methodType = ClientMethodType.PagingAsync;
+                        getPageableItemName(operation), (isNextMethod || nextOperation == null) ? null
+                                : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
+                        null);
+                methodType = isLongRunning ? ClientMethodType.LongRunningAsync : ClientMethodType.PagingAsync;
                 methods.add(builder.parameters(withCollectionCallbackParameters)
                         .returnValue(new ReturnValue(
                                 returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),

@@ -496,7 +496,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     }
 
     private void writePagingSyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+
         GenericType methodReturnType = (GenericType) clientMethod.getReturnValue().getType();
         IType elementType = methodReturnType.getTypeArguments()[0];
         if (methodReturnType.equals(GenericType.AndroidHttpResponse(elementType))
@@ -511,7 +511,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
 
         String retrieverClassName;
-        if (methodReturnType.equals(GenericType.AndroidPage(elementType))) {
+        if (methodReturnType.equals(GenericType.AndroidPageCollection(elementType))) {
             PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
                     nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
             pageRetrieverTemplate.write((JavaClass) typeBlock);
@@ -527,6 +527,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             return;
         }
 
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             StringBuilder retrieverConstructionBuilder = new StringBuilder();
             retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
@@ -553,26 +554,29 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                              ProxyMethod restAPIMethod,
                                              boolean isPaging) {
 
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+
         boolean generateSyncMethodWithOnlyRequiredParams = clientMethod.getOnlyRequiredParameters();
         if (generateSyncMethodWithOnlyRequiredParams) {
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                // sync-method-with-only-required-params delegate call to
-                // sync-method-with-required-and-optional-param.
-                //
-                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                IType returnType = clientMethod.getReturnValue().getType();
-                if (returnType == PrimitiveType.Void) {
-                    function.line("%sWithRestResponse(%s);", clientMethod.getName(), clientMethod.getArgumentList());
-                } else {
-                    function.line("return %sWithRestResponse(%s).getValue();", clientMethod.getName(),
-                            clientMethod.getArgumentList());
-                }
-            });
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+            typeBlock.publicMethod(clientMethod.getDeclaration(),
+                    function -> {
+                        // sync-method-with-only-required-params delegate call to
+                        // sync-method-with-required-and-optional-param.
+                        //
+                        addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                        IType returnType = clientMethod.getReturnValue().getType();
+                        if (returnType == PrimitiveType.Void) {
+                            function.line("%sWithRestResponse(%s);",
+                                    clientMethod.getName(), clientMethod.getArgumentList());
+                        } else {
+                            function.line("return %sWithRestResponse(%s).getValue();",
+                                    clientMethod.getName(), clientMethod.getArgumentList());
+                        }
+                    });
         } else {
             // ***WithRestResponse method.
             //
-
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
 
                 final String clientReferenceDot = clientMethod.getClientReference() != null

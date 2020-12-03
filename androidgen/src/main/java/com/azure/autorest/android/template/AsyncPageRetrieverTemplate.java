@@ -1,12 +1,12 @@
 package com.azure.autorest.android.template;
 
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.Optional;
 
 public class AsyncPageRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
@@ -75,7 +75,8 @@ public class AsyncPageRetrieverTemplate {
             javaClass.publicMethod(String.format("void getFirstPage(%s callback)",
                     GenericType.AndroidCallback(GenericType.AndroidPage(elementType))), getPageMethod -> {
                         StringBuilder getPageBuilder = new StringBuilder();
-                        getPageBuilder.append(String.format("serviceClient.%s(", getFirstPageMethod.getName()));
+                        getPageBuilder.append(
+                                String.format("serviceClient.%s(", getFirstPageMethod.getProxyMethod().getName()));
                         boolean hasPreviousParam = false;
                         for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
                             if (clientMethodParameter.equals(callbackParameter)) {
@@ -95,11 +96,33 @@ public class AsyncPageRetrieverTemplate {
                         getPageMethod.line(getPageBuilder.toString());
                     });
 
-            javaClass.publicMethod(String.format("void getPage(String pageId, %s callback)",
-                    GenericType.AndroidCallback(GenericType.AndroidPage(elementType))), getPageMethod -> {
-                        getPageMethod.line(
-                                String.format("serviceClient.%s(pageId, callback);", getNextPageMethod.getName()));
-                    });
+            String pageNextParamName = "dummy";
+            Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                    .reduce((current, next) -> next);
+            if (pageIdParam.isPresent()) {
+                pageNextParamName = pageIdParam.get().getName();
+            }
+            String methodSignature = String.format("void getPage(String %1$s, %2$s callback)", pageNextParamName,
+                    GenericType.AndroidCallback(GenericType.AndroidPage(elementType)));
+
+            javaClass.publicMethod(methodSignature, getPageMethod -> {
+                StringBuilder getPageBuilder = new StringBuilder();
+                getPageBuilder.append(String.format("serviceClient.%s(", getNextPageMethod.getProxyMethod().getName()));
+                boolean hasPreviousParam = false;
+                for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                    if (hasPreviousParam) {
+                        getPageBuilder.append(", ");
+                    }
+                    getPageBuilder.append(clientMethodParameter.getName());
+                    hasPreviousParam = true;
+                }
+                if (hasPreviousParam) {
+                    getPageBuilder.append(", ");
+                }
+                getPageBuilder.append("callback);");
+                getPageMethod.line(getPageBuilder.toString());
+            });
         });
     }
 }

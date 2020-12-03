@@ -4,9 +4,14 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.Optional;
 
 public class PageResponseRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
@@ -76,9 +81,30 @@ public class PageResponseRetrieverTemplate {
                 getPageMethod.line(getPageBuilder.toString());
             });
 
-            javaClass.publicMethod(String.format("%1$s getPage(String pageId)", GenericType.AndroidHttpResponse(pageType)), getPageMethod -> {
-                        getPageMethod.line(String.format("return serviceClient.%sWithRestResponse(pageId);", getNextPageMethod.getProxyMethod().getName()));
-                    });
+            String nextPageParamName = "dummy";
+            Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                    .reduce((current, next) -> next);
+            if (pageIdParam.isPresent()) {
+                nextPageParamName = pageIdParam.get().getName();
+            }
+            String methodSignature = String.format("%1$s getPage(String %2$s)",
+                    GenericType.AndroidHttpResponse(pageType),
+                    nextPageParamName);
+            javaClass.publicMethod(methodSignature, getPageMethod -> {
+                StringBuilder getPageBuilder = new StringBuilder();
+                getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(", getNextPageMethod.getProxyMethod().getName()));
+                boolean hasPreviousParam = false;
+                for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                    if (hasPreviousParam) {
+                        getPageBuilder.append(", ");
+                    }
+                    getPageBuilder.append(clientMethodParameter.getName());
+                    hasPreviousParam = true;
+                }
+                getPageBuilder.append(");");
+                getPageMethod.line(getPageBuilder.toString());
+            });
         });
     }
 

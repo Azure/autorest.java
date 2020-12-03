@@ -1,9 +1,12 @@
 package com.azure.autorest.android.template;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+
+import java.util.Optional;
 
 public class PageRetrieverTemplate {
     private final ClientMethod getFirstPageMethod;
@@ -78,11 +81,29 @@ public class PageRetrieverTemplate {
                 getPageMethod.line(getPageBuilder.toString());
             });
 
-            javaClass.publicMethod(String.format("%1$s getPage(String pageId)", pageType, elementType),
-                    getPageMethod -> {
-                        getPageMethod.line(String.format("return serviceClient.%sWithRestResponse(pageId).getValue();",
-                                getNextPageMethod.getProxyMethod().getName()));
-                    });
+            String nextPageParamName = "dummy";
+            Optional<ProxyMethodParameter> pageIdParam = getNextPageMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                    .reduce((current, next) -> next);
+            if (pageIdParam.isPresent()) {
+                nextPageParamName = pageIdParam.get().getName();
+            }
+            String methodSignature = String.format("%1$s getPage(String %2$s)", pageType, nextPageParamName);
+            javaClass.publicMethod(methodSignature, getPageMethod -> {
+                StringBuilder getPageBuilder = new StringBuilder();
+                getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(",
+                        getNextPageMethod.getProxyMethod().getName()));
+                boolean hasPreviousParam = false;
+                for (ClientMethodParameter clientMethodParameter : getNextPageMethod.getMethodParameters()) {
+                    if (hasPreviousParam) {
+                        getPageBuilder.append(", ");
+                    }
+                    getPageBuilder.append(clientMethodParameter.getName());
+                    hasPreviousParam = true;
+                }
+                getPageBuilder.append(").getValue();");
+                getPageMethod.line(getPageBuilder.toString());
+            });
         });
     }
 }

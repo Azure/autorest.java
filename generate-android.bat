@@ -55,7 +55,7 @@ set INPUTFILE=%INPUTSOURCE%/custom-baseUrl.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1
 ECHO =======================
-set INPUTFILE=%INPUTSOURCE%/paging.json
+set INPUTFILE=./testSwaggers/SimplePaging.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.paging --payload-flattening-threshold=1
 ECHO =======================

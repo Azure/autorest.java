@@ -12,10 +12,12 @@ import com.azure.autorest.template.Templates;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate {
+public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate {
     private static final AndroidServiceSyncClientTemplate instance = new AndroidServiceSyncClientTemplate();
 
-    public static AndroidServiceSyncClientTemplate getInstance() { return instance;}
+    public static AndroidServiceSyncClientTemplate getInstance() {
+        return instance;
+    }
 
     private AndroidServiceSyncClientTemplate() {
     }
@@ -43,12 +45,10 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
         embeddedBuilderTemplate.addImportsTo(imports);
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment ->
-                comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
-                        serviceClient.getInterfaceName())));
+        javaFile.javadocComment(comment -> comment.description(String
+                .format("Initializes a new instance of the synchronous %1$s type.", serviceClient.getInterfaceName())));
 
-        javaFile.publicFinalClass(syncClassName, classBlock ->
-        {
+        javaFile.publicFinalClass(syncClassName, classBlock -> {
             // Add service client member variable
             if (wrapServiceClient) {
                 classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
@@ -57,40 +57,36 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
             }
 
             // Service Client Constructor
-            classBlock.javadocComment(comment ->
-                    comment
-                            .description(String.format("Initializes an instance of %1$s client.",
-                                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
-            );
+            classBlock.javadocComment(comment -> comment.description(String.format(
+                    "Initializes an instance of %1$s client.",
+                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
 
             if (wrapServiceClient) {
-                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
-                        serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
-                    constructorBlock.line("this.serviceClient = serviceClient;");
-                });
+                classBlock.packagePrivateConstructor(
+                        String.format("%1$s(%2$s %3$s)", syncClassName, serviceClient.getClassName(), "serviceClient"),
+                        constructorBlock -> {
+                            constructorBlock.line("this.serviceClient = serviceClient;");
+                        });
             } else {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
                         methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
-                    constructorBlock.line("this.serviceClient = serviceClient;");
-                });
+                            constructorBlock.line("this.serviceClient = serviceClient;");
+                        });
             }
 
             if (wrapServiceClient) {
-                serviceClient.getClientMethods()
-                        .stream()
+                serviceClient.getClientMethods().stream()
                         .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
-                            || (clientMethod.getType() == ClientMethodType.PagingSync
-                                && clientMethod.getName().contains("WithPage")))
+                                || (clientMethod.getType() == ClientMethodType.PagingSync
+                                        && clientMethod.getName().contains("WithPage")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
             } else {
-                methodGroupClient
-                        .getClientMethods()
-                        .stream()
+                methodGroupClient.getClientMethods().stream()
                         .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
                                 || (clientMethod.getType() == ClientMethodType.PagingSync
-                                && clientMethod.getName().contains("WithPage")))
+                                        && clientMethod.getName().contains("WithPage")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
