@@ -12,6 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVari
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.Set;
@@ -32,6 +33,7 @@ public class FluentConstructorByName extends FluentMethod {
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
 
         this.implementationMethodTemplate = MethodTemplate.builder()
+                .visibility(JavaVisibility.PackagePrivate)
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
                     block.line(String.format("this.%1$s = new %2$s();", ModelNaming.MODEL_PROPERTY_INNER, model.getInnerModel().getName()));

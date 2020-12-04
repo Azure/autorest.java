@@ -130,7 +130,9 @@ public class ResourceParser {
         List<ModelCategory> categories = Arrays.asList(
                 ModelCategory.RESOURCE_GROUP_AS_PARENT,
                 ModelCategory.SUBSCRIPTION_AS_PARENT,
-                ModelCategory.NESTED_CHILD);
+                ModelCategory.NESTED_CHILD,
+                ModelCategory.SCOPE_AS_PARENT,
+                ModelCategory.SCOPE_NESTED_CHILD);
 
         for (ModelCategory category : categories) {
             Map<FluentResourceModel, ResourceCreate> modelOfResourceGroupAsParent =
@@ -265,35 +267,56 @@ public class ResourceParser {
 
                                 //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
 
-                                // requires named parameters in URL (this might be relaxed after better solution to parse URL to parameters)
-                                boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
-                                        .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
-
                                 // has "subscriptions" segment, and last segment should be resource name
-                                if (!urlPathSegments.getReverseSegments().isEmpty()
-                                        && urlParameterSegmentsNamed
-                                        && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()
-                                        && urlPathSegments.hasSubscription()) {
+                                if (!urlPathSegments.getReverseSegments().isEmpty() && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()) {
+
+                                    // requires named parameters in URL
+                                    boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
+                                            .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
 
                                     boolean categoryMatch = false;
-                                    switch (category) {
-                                        case RESOURCE_GROUP_AS_PARENT:
-                                            if (urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
-                                                categoryMatch = true;
-                                            }
-                                            break;
+                                    if (urlParameterSegmentsNamed && urlPathSegments.hasSubscription()) {
+                                        switch (category) {
+                                            case RESOURCE_GROUP_AS_PARENT:
+                                                if (urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
+                                                    categoryMatch = true;
+                                                }
+                                                break;
 
-                                        case SUBSCRIPTION_AS_PARENT:
-                                            if (!urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
-                                                categoryMatch = true;
-                                            }
-                                            break;
+                                            case SUBSCRIPTION_AS_PARENT:
+                                                if (!urlPathSegments.hasResourceGroup() && !urlPathSegments.isNested()) {
+                                                    categoryMatch = true;
+                                                }
+                                                break;
 
-                                        case NESTED_CHILD:
-                                            if (urlPathSegments.isNested()) {
-                                                categoryMatch = true;
+                                            case NESTED_CHILD:
+                                                if (urlPathSegments.isNested()) {
+                                                    categoryMatch = true;
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    if (!categoryMatch && (category == ModelCategory.SCOPE_AS_PARENT || category == ModelCategory.SCOPE_NESTED_CHILD)) {
+                                        // check for scope, required named parameters except scope
+                                        boolean urlParameterSegmentsNamedExceptScope = urlPathSegments.getReverseParameterSegments().stream()
+                                                .noneMatch(s -> s.getType() != UrlPathSegments.ParameterSegmentType.SCOPE && CoreUtils.isNullOrEmpty(s.getSegmentName()));
+
+                                        if (urlParameterSegmentsNamedExceptScope && urlPathSegments.hasScope()
+                                                && !urlPathSegments.hasSubscription() && !urlPathSegments.hasResourceGroup()) {
+                                            switch (category) {
+                                                case SCOPE_AS_PARENT:
+                                                    if (!urlPathSegments.isNested()) {
+                                                        categoryMatch = true;
+                                                    }
+                                                    break;
+
+                                                case SCOPE_NESTED_CHILD:
+                                                    if (urlPathSegments.isNested()) {
+                                                        categoryMatch = true;
+                                                    }
+                                                    break;
                                             }
-                                            break;
+                                        }
                                     }
 
                                     if (categoryMatch) {
@@ -354,8 +377,7 @@ public class ResourceParser {
                 if (nameMatcher.test(methodNameLowerCase)) {
                     String returnTypeName = method.getFluentReturnType().toString();
                     // same model as create
-                    if ((isDelete && returnTypeName.equals(PrimitiveType.Void.getName()))
-                            || (!isDelete && returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName()))) {
+                    if (isDelete || returnTypeName.equals(resourceCreate.getResourceModel().getInterfaceType().getName())) {
                         String url = method.getInnerProxyMethod().getUrlPath();
                         // same url as create
                         if (url.equals(resourceCreate.getUrlPathSegments().getPath())) {

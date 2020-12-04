@@ -91,19 +91,21 @@ public class ResourceRefresh extends ResourceOperation {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
             String name = getGetByIdMethodName(collectionMethod.getInnerClientMethod().getName());
-            List<MethodParameter> pathParameters = this.getPathParameters();
+            if (!hasConflictingMethod(name)) {
+                List<MethodParameter> pathParameters = this.getPathParameters();
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, false, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, false, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, true, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, true, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
+            }
         }
         return methods;
     }
