@@ -52,8 +52,14 @@ public class FluentConstructorByInner extends FluentMethod {
 
                     // init from resource id
                     pathParameters.forEach(p -> {
-                        String valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s.id(), \"%2$s\")",
-                                ModelNaming.MODEL_PROPERTY_INNER, urlSegmentNameByParameterName.get(p.getSerializedName()));
+                        String valueFromIdText;
+                        if (urlPathSegments.hasScope()) {
+                            valueFromIdText = String.format("Utils.getValueFromIdByParameterName(%1$s.id(), \"%2$s\", \"%3$s\")",
+                                    ModelNaming.MODEL_PROPERTY_INNER, urlPathSegments.getPath(), p.getSerializedName());
+                        } else {
+                            valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s.id(), \"%2$s\")",
+                                    ModelNaming.MODEL_PROPERTY_INNER, urlSegmentNameByParameterName.get(p.getSerializedName()));
+                        }
                         if (p.getClientMethodParameter().getClientType() != ClassType.String) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
                         }

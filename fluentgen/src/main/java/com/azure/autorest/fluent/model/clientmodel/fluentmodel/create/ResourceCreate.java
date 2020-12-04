@@ -344,7 +344,7 @@ public class ResourceCreate extends ResourceOperation {
         UrlPathSegments.ParameterSegment parentSegment = iterator.next();
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getSegmentName()));
 
-        // sgement name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
+        // segment name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
         if (parentResourceName.isEmpty()) {
             parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getParameterName()));
         }
