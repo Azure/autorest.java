@@ -28,6 +28,7 @@ public final class PetStoreIncBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the PetStoreIncBuilder. */
     public PetStoreIncBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
