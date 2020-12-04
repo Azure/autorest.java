@@ -78,7 +78,12 @@ public class ResourceCreate extends ResourceOperation {
                 break;
 
             case NESTED_CHILD:
+            case SCOPE_NESTED_CHILD:
                 definitionStageParent = new DefinitionStageParent(deduplicateStageName("WithParentResource"));
+                break;
+
+            case SCOPE_AS_PARENT:
+                definitionStageParent = new DefinitionStageParent(deduplicateStageName("WithScope"));
                 break;
         }
 
@@ -336,7 +341,13 @@ public class ResourceCreate extends ResourceOperation {
             }
         }
         // next path parameter is the parent path parameter
-        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(iterator.next().getSegmentName()));
+        UrlPathSegments.ParameterSegment parentSegment = iterator.next();
+        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getSegmentName()));
+
+        // sgement name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
+        if (parentResourceName.isEmpty()) {
+            parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getParameterName()));
+        }
 
         // if parent is resourceGroup, just set it as such
         if (resourceModel.getCategory() == ModelCategory.RESOURCE_GROUP_AS_PARENT) {

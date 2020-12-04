@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
 import java.util.Collections;
@@ -38,6 +39,7 @@ public class FluentConstructorByInner extends FluentMethod {
         this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
 
         this.implementationMethodTemplate = MethodTemplate.builder()
+                .visibility(JavaVisibility.PackagePrivate)
                 .methodSignature(this.getImplementationMethodSignature())
                 .method(block -> {
                     block.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
