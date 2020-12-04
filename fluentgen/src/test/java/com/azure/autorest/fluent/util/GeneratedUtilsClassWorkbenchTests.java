@@ -22,8 +22,7 @@ public class GeneratedUtilsClassWorkbenchTests {
             if (id == null) {
                 return null;
             }
-            Iterable<String> iterable = Arrays.asList(id.split("/"));
-            Iterator<String> itr = iterable.iterator();
+            Iterator<String> itr = Arrays.stream(id.split("/")).iterator();
             while (itr.hasNext()) {
                 String part = itr.next();
                 if (part != null && !part.trim().isEmpty()) {
