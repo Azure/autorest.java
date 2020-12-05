@@ -87,15 +87,15 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             List<String> exceptions = new ArrayList<>();
                             exceptions.add("Exception");
                             ifBlock.tryCatch(
-                                tryBlock -> {
-                                    ifBlock.line(validateExpression.getValue() + ";");
-                                },
-                                exceptions,
-                                "ex",
-                                catchBlock -> {
-                                    onError.apply("ex", catchBlock);
-                                },
-                                null);
+                                    tryBlock -> {
+                                        ifBlock.line(validateExpression.getValue() + ";");
+                                    },
+                                    exceptions,
+                                    "ex",
+                                    catchBlock -> {
+                                        onError.apply("ex", catchBlock);
+                                    },
+                                    null);
                         } else {
                             ifBlock.line(validateExpression.getValue() + ";");
                         }
@@ -521,7 +521,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 retrieverConstructionBuilder.append("this);");
                 function.line(retrieverConstructionBuilder.toString());
                 function.line(String.format("%1$s.onSuccess(new %2$s(retriever), null);", callbackParameter.getName(), callbackDataType));
-        });
+            });
     }
 
     private void writePagingSyncMethod(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings, ProxyMethod restAPIMethod) {
@@ -577,7 +577,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             function.line("return %sWithRestResponse(%s).getValue();",
                                     clientMethod.getName(), clientMethod.getArgumentList());
                         }
-                });
+                    });
         } else {
             // ***WithRestResponse method.
             //
@@ -681,16 +681,15 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 succeededCodeBlock.line("final %s decodedResult;", bodyType);
                 succeededCodeBlock.tryCatch(tryBlock -> {
                             succeededCodeBlock.line("decodedResult = %sdeserializeContent(response.headers(), response.body(), %s);",
-                                clientReferenceDot,
-                                bodyJvaType);
+                                    clientReferenceDot,
+                                    bodyJvaType);
                         },
                         exceptions,
                         "ex",
                         catchBlock -> {
                             catchBlock.line("final String strContent = %sreadAsString(response.body());", clientReferenceDot);
                             ClassType exceptionType = clientMethod.getProxyMethod().getUnexpectedResponseExceptionType();
-                            String exceptionCreateExpression = String.format("new %s(strContent, response.raw())",
-                                exceptionType.getName());
+                            String exceptionCreateExpression = String.format("new %s(strContent, response.raw())", exceptionType.getName());
                             catchBlock.line(String.format("throw %s;", exceptionCreateExpression));
                         },
                         null);
@@ -793,7 +792,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
                         function.line("Call<ResponseBody> call = %s;", retrofitAPICall);
                         function.anonymousClass("retrofit2.Callback<ResponseBody>",
-                        "retrofitCallback",
+                            "retrofitCallback",
                                 anonymousCls -> {
                             anonymousCls.annotation("Override");
                             anonymousCls.publicMethod("void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response)",
@@ -806,20 +805,20 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
                                         responseSuccessBlock.ifBlock(successCodeExpression, succeededCodeBlock -> {
                                             writeAsyncSuccessBlock(clientMethod, callbackParameterName, clientReferenceDot, succeededCodeBlock, (JavaClass) typeBlock, isPaging);
-                                            }).elseBlock(errorCodeBlock -> {
-                                                errorCodeBlock.line("final String strContent = %sreadAsString(response.body());", clientReferenceDot);
-                                                ClassType exceptionType = clientMethod.getProxyMethod().getUnexpectedResponseExceptionType();
-                                                String exceptionCreateExpression = String.format("new %s(strContent, response.raw())", exceptionType.getName());
-                                                errorCodeBlock
-                                                        .line(String.format("%s.onFailure(%s, response.raw());",
-                                                                callbackParameterName,
-                                                                exceptionCreateExpression));
-                                            });
-                                        }).elseBlock(responseFailureBlock -> {
-                                            responseFailureBlock.line("final String strContent = %sreadAsString(response.errorBody());", clientReferenceDot);
-                                            responseFailureBlock.line(String.format("%s.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());",
-                                                    callbackParameterName));
-                                        }));
+                                        }).elseBlock(errorCodeBlock -> {
+                                            errorCodeBlock.line("final String strContent = %sreadAsString(response.body());", clientReferenceDot);
+                                            ClassType exceptionType = clientMethod.getProxyMethod().getUnexpectedResponseExceptionType();
+                                            String exceptionCreateExpression = String.format("new %s(strContent, response.raw())", exceptionType.getName());
+                                            errorCodeBlock
+                                                    .line(String.format("%s.onFailure(%s, response.raw());",
+                                                            callbackParameterName,
+                                                            exceptionCreateExpression));
+                                        });
+                                    }).elseBlock(responseFailureBlock -> {
+                                        responseFailureBlock.line("final String strContent = %sreadAsString(response.errorBody());", clientReferenceDot);
+                                        responseFailureBlock.line(String.format("%s.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());",
+                                                callbackParameterName));
+                                    }));
 
                             anonymousCls.annotation("Override");
                             anonymousCls.publicMethod("void onFailure(Call<ResponseBody> call, Throwable t)",
@@ -828,7 +827,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                     });
                         });
                         function.line("call.enqueue(retrofitCallback);");
-                });
+                    });
         }
     }
 
@@ -862,19 +861,19 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             exceptions.add("Exception");
             succeededCodeBlock.line("final %s decodedResult;", bodyType);
             succeededCodeBlock.tryCatch(tryBlock -> {
-                succeededCodeBlock.line("decodedResult = %sdeserializeContent(response.headers(), response.body(), %s);",
-                        clientReferenceDot,
-                        bodyJvaType);
-                },
-                exceptions,
-                "ex",
-                catchBlock -> {
-                    catchBlock
-                            .line(String.format("%s.onFailure(ex, response.raw());",
-                                    callbackParameterName));
-                    catchBlock.line("return;");
-                },
-                null);
+                    succeededCodeBlock.line("decodedResult = %sdeserializeContent(response.headers(), response.body(), %s);",
+                            clientReferenceDot,
+                            bodyJvaType);
+                    },
+                    exceptions,
+                    "ex",
+                    catchBlock -> {
+                        catchBlock
+                                .line(String.format("%s.onFailure(ex, response.raw());",
+                                        callbackParameterName));
+                        catchBlock.line("return;");
+                    },
+                    null);
 
             ClientMethodParameter callbackParameter = getCallbackParameter(clientMethod);
             final GenericType callbackParameterType = (GenericType) callbackParameter.getWireType();
@@ -885,7 +884,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final String pageId = (pageDetails.getNextMethod() == null) ? pageDetails.getNextLinkName() : "response.raw().request().url().toString()";
                 succeededCodeBlock
                         .line(String.format("%1$s.onSuccess(new Page<%2$s>(%3$s, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                            callbackParameterName, elementType, pageId));
+                                callbackParameterName, elementType, pageId));
 
             } else {
                 IType clientType = callbackParameterType.getTypeArguments()[0];
@@ -917,10 +916,10 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 comment.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
             }
             if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
-                comment.methodThrows("IllegalArgumentException","thrown if parameters fail the validation");
+                comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
             }
             if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(),"thrown if the request is rejected by server");
+                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
             }
             if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
                 for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
@@ -961,7 +960,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     }
                 } else {
                     function.line(String.format("return %s",
-                        serviceMethodCall));
+                            serviceMethodCall));
                 }
                 function.indent(() -> {
                     function.line(".map(res -> new PagedResponseBase<>(");
@@ -993,10 +992,11 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                         function.line(String.format("return %s", serviceMethodCall));
                     } else {
                         function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                                serviceMethodCall));
+                            serviceMethodCall));
                     }
                 } else {
-                    function.line(String.format("return %s", serviceMethodCall));
+                    function.line(String.format("return %s",
+                            serviceMethodCall));
                 }
                 function.indent(() -> {
                     function.line(".map(res -> new PagedResponseBase<>(");

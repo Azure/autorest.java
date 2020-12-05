@@ -121,27 +121,27 @@ public class AndroidEmbeddedBuilderTemplate {
 
                     final List<String> constructorArgsSet2 = new ArrayList<>();
                     this.commonProperties.stream()
-                            .filter(p -> p.getWireType() != ClassType.AndroidOkHttpInterceptor)
-                            .forEach(p -> {
-                                // 1. Collect ServiceClient Ctr args.
-                                if (isBuilderType(p)) {
-                                    constructorArgsSet2.add(p.getName() + ".build()");
-                                } else {
-                                    constructorArgsSet2.add(p.getName());
+                        .filter(p -> p.getWireType() != ClassType.AndroidOkHttpInterceptor)
+                        .forEach(p -> {
+                            // 1. Collect ServiceClient Ctr args.
+                            if (isBuilderType(p)) {
+                                constructorArgsSet2.add(p.getName() + ".build()");
+                            } else {
+                                constructorArgsSet2.add(p.getName());
+                            }
+                            // 2. Set-up/Init common properties and
+                            // Set default value for common properties whose builder setters are not called
+                            // by the app.
+                            if (p.getWireType() == ClassType.AndroidRestClientBuilder) {
+                                setupRestClientBuilder(function, serviceClient, commonProperties, p);
+                            } else {
+                                if (p.getDefaultValue() != null) {
+                                    function.ifBlock(String.format("%1$s == null", p.getName()), ifBlock -> {
+                                        function.line("this.%1$s = %2$s;", p.getName(), p.getDefaultValue());
+                                    });
                                 }
-                                // 2. Set-up/Init common properties and
-                                // Set default value for common properties whose builder setters are not called
-                                // by the app.
-                                if (p.getWireType() == ClassType.AndroidRestClientBuilder) {
-                                    setupRestClientBuilder(function, serviceClient, commonProperties, p);
-                                } else {
-                                    if (p.getDefaultValue() != null) {
-                                        function.ifBlock(String.format("%1$s == null", p.getName()), ifBlock -> {
-                                            function.line("this.%1$s = %2$s;", p.getName(), p.getDefaultValue());
-                                        });
-                                    }
-                                }
-                            });
+                            }
+                        });
 
                     final String constructorArgsStr = Stream
                         .concat(constructorArgsSet2.stream(), constructorArgsSet1.stream())
@@ -151,12 +151,12 @@ public class AndroidEmbeddedBuilderTemplate {
                         // For separate Sync|Async Client scenario, method call in each of
                         // these Client get delegated to the internal Client implementation.
                         final String internalClientTypeName = JavaSettings.getInstance()
-                                .shouldGenerateClientInterfaces()
-                                    ? serviceClient.getInterfaceName()
-                                    : serviceClient.getClassName();
+                            .shouldGenerateClientInterfaces()
+                                ? serviceClient.getInterfaceName()
+                                : serviceClient.getClassName();
 
                         function.line(String.format("%1$s internalClient = new %2$s(%3$s);", internalClientTypeName,
-                                internalClientTypeName, constructorArgsStr));
+                            internalClientTypeName, constructorArgsStr));
 
                         final boolean wrapServiceClient = this.asyncSyncClient.getMethodGroupClient() == null;
                         if (wrapServiceClient) {
@@ -170,7 +170,7 @@ public class AndroidEmbeddedBuilderTemplate {
                         function.line(String.format("return new %2$s(%3$s);", clientClsName, clientClsName,
                                 constructorArgsStr));
                     }
-            });
+                });
         });
     }
 
