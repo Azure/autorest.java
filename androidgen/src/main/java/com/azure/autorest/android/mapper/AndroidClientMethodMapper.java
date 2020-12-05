@@ -140,7 +140,6 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 //
                 //  1. From multiple client-method params    -> a single param in retrofit proxy.
                 //  2. From single client-method group param -> multiple retrofit proxy method params.
-                // params.
                 if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
                         && !(parameter.getSchema() instanceof ConstantSchema)) {
                     ClientMethodParameter outParameter;
@@ -222,8 +221,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                         getPageableItemName(operation), (isNextMethod || nextOperation == null)
-                                ? null
-                                : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
+                            ? null
+                            : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
                         null);
                 builder.methodPageDetails(details);
             }
@@ -244,15 +243,15 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             // Async method with Optional parameters (always generated).
             //
             methods.add(builder
-                    .parameters(withCallbackParameters)
-                    .returnValue(new ReturnValue(
-                        returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
-                        PrimitiveType.Void))
-                    .name(proxyMethod.getName())
-                    .type(methodType)
-                    .onlyRequiredParameters(false)
-                    .isGroupedParameterRequired(false)
-                    .build());
+                .parameters(withCallbackParameters)
+                .returnValue(new ReturnValue(
+                    returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
+                    PrimitiveType.Void))
+                .name(proxyMethod.getName())
+                .type(methodType)
+                .onlyRequiredParameters(false)
+                .isGroupedParameterRequired(false)
+                .build());
 
             // Async method with Required parameters.
             //
@@ -336,10 +335,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 methods.add(builder
                     .parameters(withCollectionCallbackParameters)
                     .returnValue(new ReturnValue(
-                            returnTypeDescription(operation,
+                                returnTypeDescription(operation,
                                     PrimitiveType.Void,
                                     PrimitiveType.Void),
-                            PrimitiveType.Void))
+                                PrimitiveType.Void))
                     .name(proxyMethod.getName() + "PagesAsync")
                     .type(methodType)
                     .methodPageDetails(details)

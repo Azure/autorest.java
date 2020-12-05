@@ -111,8 +111,7 @@ public class AndroidEmbeddedBuilderTemplate {
                     this.serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()).forEach(p -> {
                         // 1. Collect ServiceClient Ctr args.
                         constructorArgsSet1.add(p.getName());
-                        // 2. Set default value for ServiceClient properties whose builder setters are
-                        // not called by the app.
+                        // 2. Set default value for ServiceClient properties whose builder setters are not called by the app.
                         if (p.getDefaultValueExpression() != null) {
                             function.ifBlock(String.format("%1$s == null", p.getName()), ifBlock -> {
                                 function.line("this.%1$s = %2$s;", p.getName(), p.getDefaultValueExpression());
@@ -144,34 +143,34 @@ public class AndroidEmbeddedBuilderTemplate {
                                 }
                             });
 
-                        final String constructorArgsStr = Stream
-                                .concat(constructorArgsSet2.stream(), constructorArgsSet1.stream())
-                                .collect(Collectors.joining(", "));
+                    final String constructorArgsStr = Stream
+                        .concat(constructorArgsSet2.stream(), constructorArgsSet1.stream())
+                        .collect(Collectors.joining(", "));
 
-                        if (isSyncOrAsyncClient) {
-                            // For separate Sync|Async Client scenario, method call in each of
-                            // these Client get delegated to the internal Client implementation.
-                            final String internalClientTypeName = JavaSettings.getInstance()
-                                    .shouldGenerateClientInterfaces()
-                                        ? serviceClient.getInterfaceName()
-                                        : serviceClient.getClassName();
+                    if (isSyncOrAsyncClient) {
+                        // For separate Sync|Async Client scenario, method call in each of
+                        // these Client get delegated to the internal Client implementation.
+                        final String internalClientTypeName = JavaSettings.getInstance()
+                                .shouldGenerateClientInterfaces()
+                                    ? serviceClient.getInterfaceName()
+                                    : serviceClient.getClassName();
 
-                            function.line(String.format("%1$s internalClient = new %2$s(%3$s);", internalClientTypeName,
-                                    internalClientTypeName, constructorArgsStr));
+                        function.line(String.format("%1$s internalClient = new %2$s(%3$s);", internalClientTypeName,
+                                internalClientTypeName, constructorArgsStr));
 
-                            final boolean wrapServiceClient = this.asyncSyncClient.getMethodGroupClient() == null;
-                            if (wrapServiceClient) {
-                                function.line("return new %1$s(internalClient);", clientClsName);
-                            } else {
-                                function.line("return new %1$s(internalClient.get%2$s());", clientClsName, CodeNamer
-                                        .toPascalCase(asyncSyncClient.getMethodGroupClient().getVariableName()));
-                            }
+                        final boolean wrapServiceClient = this.asyncSyncClient.getMethodGroupClient() == null;
+                        if (wrapServiceClient) {
+                            function.line("return new %1$s(internalClient);", clientClsName);
                         } else {
-                            // Client composing both sync and async methods.
-                            function.line(String.format("return new %2$s(%3$s);", clientClsName, clientClsName,
-                                    constructorArgsStr));
+                            function.line("return new %1$s(internalClient.get%2$s());", clientClsName, CodeNamer
+                                    .toPascalCase(asyncSyncClient.getMethodGroupClient().getVariableName()));
                         }
-                    });
+                    } else {
+                        // Client composing both sync and async methods.
+                        function.line(String.format("return new %2$s(%3$s);", clientClsName, clientClsName,
+                                constructorArgsStr));
+                    }
+            });
         });
     }
 

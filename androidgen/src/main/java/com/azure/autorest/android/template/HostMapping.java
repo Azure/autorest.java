@@ -25,9 +25,9 @@ class HostMapping {
 
     public String anyHostParamAbsentExpression() {
         return this.hostParams
-                .stream()
-                .map(h -> String.format("%s == null", h.getName()))
-                .collect(Collectors.joining(" || "));
+            .stream()
+            .map(h -> String.format("%s == null", h.getName()))
+            .collect(Collectors.joining(" || "));
     }
 
     public boolean serviceHostPropertyIsBaseUrl() {
@@ -36,9 +36,9 @@ class HostMapping {
 
     public String allHostParamPresentExpression() {
         return this.hostParams
-                .stream()
-                .map(h -> String.format("%s != null", h.getName()))
-                .collect(Collectors.joining(" && "));
+            .stream()
+            .map(h -> String.format("%s != null", h.getName()))
+            .collect(Collectors.joining(" && "));
     }
 
     public String getBaseUrlPattern() {
@@ -82,8 +82,8 @@ class HostMapping {
                     .getMethodGroupClients()
                     .stream()
                     .filter(mg -> mg.getProxy() != null
-                            && mg.getProxy().getBaseURL() != null
-                            && !mg.getProxy().getMethods().isEmpty())
+                        && mg.getProxy().getBaseURL() != null
+                        && !mg.getProxy().getMethods().isEmpty())
                     .map(mg -> mg.getProxy())
                     .findFirst();
             if (proxyOpt.isPresent()) {
@@ -105,8 +105,7 @@ class HostMapping {
             .stream()
             .filter(p -> p.getName().equals(HOST_PROPERTY_NAME))
             .findFirst();
-        final boolean hostIsBaseUrl = hostProperty.isPresent()
-                && hostProperty.get().getDefaultValueExpression().contains("http");
+        final boolean hostIsBaseUrl = hostProperty.isPresent() && hostProperty.get().getDefaultValueExpression().contains("http");
 
         List<ProxyMethodParameter> hostParams;
         ProxyMethod proxyMethod = proxy.getMethods().get(0);
@@ -118,10 +117,9 @@ class HostMapping {
             .stream()
             .filter(p -> {
                 return p.getRequestParameterLocation() == RequestParameterLocation.Uri
-                        && !p.getIsConstant()
-                        && (!hostIsBaseUrl
-                            || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used
-                                                                                    // for base url
+                    && !p.getIsConstant()
+                    && (!hostIsBaseUrl
+                        || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used for base url
                 })
             .collect(Collectors.toList());
 

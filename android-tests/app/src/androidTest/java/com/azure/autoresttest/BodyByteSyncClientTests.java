@@ -53,8 +53,8 @@ public class BodyByteSyncClientTests {
     @Test
     public void putNonAscii() {
         byte[] body = new byte[] {
-            (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 251,
-            (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
+                (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 251,
+                (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
         };
 
         final Response<Void> putResponse = client.putNonAsciiWithRestResponse(body);
