@@ -106,9 +106,25 @@ public class Project {
             }
         }
 
-        // try to deduct from "output-folder"
+        // try to deduct it from "output-folder"
         if (!sdkFolderOpt.isPresent()) {
+            String outputFolder = settings.getAutorestSettings().getOutputFolder();
+            if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
+                Path path = Paths.get(outputFolder).normalize();
+                while (path != null) {
+                    Path childPath = path;
+                    path = path.getParent();
 
+                    if ("sdk".equals(childPath.getFileName().toString())) {
+                        // childPath = azure-sdk-for-java/sdk, path = azure-sdk-for-java
+                        break;
+                    }
+                }
+                if (path != null) {
+                    logger.info("'azure-sdk-for-java' SDK folder '{}' deduced from 'output-folder' parameter", path.toString());
+                    sdkFolderOpt = Optional.of(path.toString());
+                }
+            }
         }
 
         if (!sdkFolderOpt.isPresent()) {
@@ -181,7 +197,7 @@ public class Project {
                     logger.warn("Failed to parse 'CHANGELOG.md'", e);
                 }
             } else {
-                logger.warn("'CHANGELOG.md' not found or not readable");
+                logger.info("'CHANGELOG.md' not found or not readable");
             }
         } else {
             logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");

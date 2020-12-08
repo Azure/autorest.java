@@ -150,7 +150,7 @@ public class ResourceParser {
 
                 supportsCreateList.add(resourceCreate);
 
-                logger.info("Fluent model '{}' as category '{}'", fluentModel.getName(), category);
+                logger.info("Fluent model '{}' as category {}", fluentModel.getName(), category);
             }
         }
 

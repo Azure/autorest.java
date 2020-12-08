@@ -246,7 +246,7 @@ public class ResourceCreate extends ResourceOperation {
     public FluentMethod getDefineMethod() {
         if (defineMethod == null) {
             String resourceName = this.getResourceName();
-            logger.info("ResourceCreate: Fluent model '{}', define method '{}'", resourceModel.getName(), "define" + resourceName);
+            logger.info("ResourceCreate: Fluent model '{}', resource define method '{}'", resourceModel.getName(), "define" + resourceName);
 
             IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
             defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
