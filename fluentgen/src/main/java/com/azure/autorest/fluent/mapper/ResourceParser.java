@@ -115,7 +115,7 @@ public class ResourceParser {
                         .collect(Collectors.toList()));
     }
 
-    private static List<ResourceCreate> resolveResourceCreate(
+    static List<ResourceCreate> resolveResourceCreate(
             FluentResourceCollection collection,
             List<FluentResourceModel> availableFluentModels,
             List<ClientModel> availableModels) {
@@ -160,7 +160,7 @@ public class ResourceParser {
         return supportsCreateList;
     }
 
-    private static Optional<ResourceUpdate> resolveResourceUpdate(
+    static Optional<ResourceUpdate> resolveResourceUpdate(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate,
             List<ClientModel> availableModels) {
@@ -193,7 +193,7 @@ public class ResourceParser {
         return Optional.ofNullable(resourceUpdate);
     }
 
-    private static Optional<ResourceRefresh> resolveResourceRefresh(
+    static Optional<ResourceRefresh> resolveResourceRefresh(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate) {
 
@@ -213,7 +213,7 @@ public class ResourceParser {
         return Optional.ofNullable(resourceRefresh);
     }
 
-    private static Optional<ResourceDelete> resolveResourceDelete(
+    static Optional<ResourceDelete> resolveResourceDelete(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate) {
 
