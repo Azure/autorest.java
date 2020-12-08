@@ -39,7 +39,7 @@ public class TestUtils {
 
         @Override
         public void message(Message message) {
-            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
+//            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
         }
     }
 }
