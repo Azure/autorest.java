@@ -162,7 +162,7 @@ public class FluentMapper {
 
         compositeTypes = objectMapper.addInnerModels(compositeTypes);
         if (logger.isInfoEnabled()) {
-            logger.info("Add Inner to response types: " +
+            logger.info("Add Inner to response types: {}",
                     compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
         }
         recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
@@ -175,7 +175,7 @@ public class FluentMapper {
 
             compositeTypes = objectMapper.addInnerModels(compositeTypes);
             if (logger.isInfoEnabled()) {
-                logger.info("Add Inner as requested: " +
+                logger.info("Add Inner as requested: {}",
                         compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
@@ -223,7 +223,7 @@ public class FluentMapper {
         if (!compositeTypesInProperties.isEmpty()) {
             compositeTypesInProperties = objectMapper.addInnerModels(compositeTypesInProperties);
             if (logger.isInfoEnabled()) {
-                logger.info("Add Inner for type " + typeName + ": " +
+                logger.info("Add Inner for type '{}': {}", typeName,
                         compositeTypesInProperties.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypesInProperties);

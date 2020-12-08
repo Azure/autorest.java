@@ -77,17 +77,15 @@ Following settings only works when `fluent` option is specified.
 | Option      | Description |
 | ----------- | ----------- |
 | `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values. |
-| `--fluent-subpackage` | String. The sub-package that fluent generation will be put into. Default is `fluent`. |
+| `--fluent-subpackage` | String. The sub-package that vanilla client and builder will be put into. Default is `fluent`. |
 | `--pom-file` | String. Name for Maven POM file. Default is `pom.xml`. |
 | `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
 | `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
-| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. |
-| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default is `true`. |
+| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
-| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
 `fluent` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.

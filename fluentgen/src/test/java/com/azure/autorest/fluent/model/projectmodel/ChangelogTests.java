@@ -80,10 +80,10 @@ public class ChangelogTests {
         {
             String existingChangelog =
                     "# Release History\n" +
-                            "\n" +
-                            "## 1.0.0 (2020-10-29)\n" +
-                            "\n" +
-                            "- Initial release.";
+                    "\n" +
+                    "## 1.0.0 (2020-10-29)\n" +
+                    "\n" +
+                    "- Initial release.";
 
             Changelog changelog = new Changelog(existingChangelog);
             changelog.updateForVersion(mockProject);
@@ -91,6 +91,30 @@ public class ChangelogTests {
             Assertions.assertTrue(changelog.getLines().contains(String.format("## 1.1.0-beta.1 (%s)", dateUtc)));
             Assertions.assertTrue(changelog.getLines().contains("## 1.0.0 (2020-10-29)"));
 
+            Assertions.assertTrue(changelog.getLines().contains("- Initial release."));
+        }
+
+        {
+            String existingChangelog =
+                    "# Release History\n" +
+                    "\n" +
+                    "## 1.1.0-beta.1 (2020-11-20)\n" +
+                    "\n" +
+                    "- Unreleased changes.\n" +
+                    "\n" +
+                    "## 1.0.0 (2020-10-29)\n" +
+                    "\n" +
+                    "- Initial release.";
+
+            Changelog changelog = new Changelog(existingChangelog);
+            changelog.updateForVersion(mockProject);
+
+            Assertions.assertTrue(changelog.getLines().contains(String.format("## 1.1.0-beta.1 (%s)", dateUtc)));
+            Assertions.assertTrue(changelog.getLines().contains("## 1.0.0 (2020-10-29)"));
+
+            Assertions.assertFalse(changelog.getLines().contains("## 1.1.0-beta.1 (2020-11-20)"));
+
+            Assertions.assertTrue(changelog.getLines().contains("- Unreleased changes."));
             Assertions.assertTrue(changelog.getLines().contains("- Initial release."));
         }
     }

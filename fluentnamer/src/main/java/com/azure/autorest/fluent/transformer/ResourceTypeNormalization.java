@@ -96,13 +96,13 @@ class ResourceTypeNormalization {
                 compositeType.getProperties().removeIf(p -> (PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly())
                         || RESOURCE_EXTRA_FIELDS.contains(p.getSerializedName()));
 
-                logger.info("Add parent Resource, for {}", Utils.getJavaName(compositeType));
+                logger.info("Add parent Resource, for '{}'", Utils.getJavaName(compositeType));
             } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
                 addDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
 
                 compositeType.getProperties().removeIf(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly());
 
-                logger.info("Add parent ProxyResource, for {}", Utils.getJavaName(compositeType));
+                logger.info("Add parent ProxyResource, for '{}'", Utils.getJavaName(compositeType));
             }
         }
     }
@@ -201,7 +201,7 @@ class ResourceTypeNormalization {
                 }
             }
 
-            logger.info("Change parent from {} to {}, for {}", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
+            logger.info("Change parent from '{}' to '{}', for '{}'", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
         }
     }
 

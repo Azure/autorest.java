@@ -150,7 +150,7 @@ public class ResourceParser {
 
                 supportsCreateList.add(resourceCreate);
 
-                logger.info("Fluent model {} as category {}", fluentModel.getName(), category);
+                logger.info("Fluent model '{}' as category {}", fluentModel.getName(), category);
             }
         }
 
@@ -178,7 +178,7 @@ public class ResourceParser {
         if (method != null) {
             ClientModel bodyClientModel = getBodyClientModel(method, availableModels);
             if (bodyClientModel == null) {
-                logger.warn("client model not found for collection {}, method {}", collection.getInterfaceType().getName(), method.getInnerClientMethod().getName());
+                logger.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), method.getInnerClientMethod().getName());
             } else {
                 resourceUpdate = new ResourceUpdate(resourceCreate.getResourceModel(), collection,
                         resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName(),
@@ -265,7 +265,7 @@ public class ResourceParser {
                                 String url = m.getInnerProxyMethod().getUrlPath();
                                 UrlPathSegments urlPathSegments = new UrlPathSegments(url);
 
-                                //logger.info("Candidate fluent model {}, hasSubscription {}, hasResourceGroup {}, isNested {}, method name {}", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
+                                //logger.info("Candidate fluent model '{}', hasSubscription '{}', hasResourceGroup '{}', isNested '{}', method name '{}'", fluentModel.getName(), urlPathSegments.hasSubscription(), urlPathSegments.hasResourceGroup(), urlPathSegments.isNested(), m.getInnerClientMethod().getName());
 
                                 // has "subscriptions" segment, and last segment should be resource name
                                 if (!urlPathSegments.getReverseSegments().isEmpty() && urlPathSegments.getReverseSegments().iterator().next().isParameterSegment()) {
@@ -322,7 +322,7 @@ public class ResourceParser {
                                     if (categoryMatch) {
                                         ClientModel bodyClientModel = getBodyClientModel(m, availableModels);
                                         if (bodyClientModel == null) {
-                                            logger.warn("client model not found for collection {}, method {}", collection.getInterfaceType().getName(), m.getInnerClientMethod().getName());
+                                            logger.warn("client model not found for collection '{}', method '{}'", collection.getInterfaceType().getName(), m.getInnerClientMethod().getName());
                                         } else {
                                             ResourceCreate resourceCreate = new ResourceCreate(fluentModel, collection, urlPathSegments,
                                                     m.getInnerClientMethod().getName(), bodyClientModel);
@@ -357,7 +357,7 @@ public class ResourceParser {
                 .findAny();
 
         if (!clientModelOpt.isPresent()) {
-            logger.warn("client model not found for type name {}, method {}", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
+            logger.warn("client model not found for type name '{}', method '{}'", bodyTypeNameOpt.get(), method.getInnerClientMethod().getName());
         }
         return clientModelOpt.orElse(null);
     }
