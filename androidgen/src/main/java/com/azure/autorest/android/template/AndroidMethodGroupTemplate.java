@@ -1,10 +1,7 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.MethodGroupTemplate;
@@ -86,6 +83,25 @@ public class AndroidMethodGroupTemplate extends MethodGroupTemplate {
 
             for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
+
+                ClientMethodType clientMethodType = clientMethod.getType();
+                if (clientMethodType == ClientMethodType.PagingAsync
+                        && clientMethod.getMethodPageDetails().getNextMethod() != null
+                        && !clientMethod.getOnlyRequiredParameters()) {
+                    AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod(), methodGroupClient.getClassName());
+                    asyncPageRetrieverTemplate.write(classBlock);
+
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                        PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), methodGroupClient.getClassName());
+                        pageResponseRetrieverTemplate.write(classBlock);
+
+                        PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
+                                clientMethod.getMethodPageDetails().getNextMethod(), methodGroupClient.getClassName());
+                        pageRetrieverTemplate.write(classBlock);
+                    }
+                }
             }
         });
     }

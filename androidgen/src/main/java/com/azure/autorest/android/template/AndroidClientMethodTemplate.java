@@ -3,7 +3,6 @@ package com.azure.autorest.android.template;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -126,12 +125,12 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     }
 
     private static void addOptionalAndConstantVariables(JavaBlock function,
-                                                          ClientMethod clientMethod,
-                                                          List<ProxyMethodParameter> proxyMethodAndConstantParameters,
-                                                          JavaSettings settings,
-                                                          boolean addOptional,
-                                                          boolean addConstant,
-                                                          boolean ignoreParameterNeedConvert) {
+                                                        ClientMethod clientMethod,
+                                                        List<ProxyMethodParameter> proxyMethodAndConstantParameters,
+                                                        JavaSettings settings,
+                                                        boolean addOptional,
+                                                        boolean addConstant,
+                                                        boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
             if (parameter.getIsNullable()) {
@@ -673,7 +672,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 bodyJvaType = String.format("%s.class", bodyType);
             }
 
-            if (isPaging){
+            if (isPaging) {
                 GenericType responseType = (GenericType) clientMethod.getReturnValue().getType();
                 GenericType pageType = (GenericType) responseType.getTypeArguments()[0];
                 IType elementType = pageType.getTypeArguments()[0];
@@ -703,8 +702,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                 "                        response.headers(),\n" +
                                 "                        new Page<%1$s>(%2$s, decodedResult.getValue(), decodedResult.getNextLink()))",
                         elementType, pageId));
-            }
-            else {
+            } else {
                 IType clientType = bodyType.getClientType();
                 if (!bodyType.equals(clientType)) {
                     succeededCodeBlock.line(String.format("final %1$s decodedResult = %2$sdeserializeContent(response.headers(), response.body(), %3$s);",
@@ -714,8 +712,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                     "                        response.code(),\n" +
                                     "                        response.headers(),\n" +
                                     "                        %s)", callbackValueName));
-                }
-                else {
+                } else {
                     succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
                                     "                        response.code(),\n" +
                                     "                        response.headers(),\n" +
@@ -795,7 +792,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
                         function.line("Call<ResponseBody> call = %s;", retrofitAPICall);
                         function.anonymousClass("retrofit2.Callback<ResponseBody>",
-                                "retrofitCallback",
+                            "retrofitCallback",
                                 anonymousCls -> {
                             anonymousCls.annotation("Override");
                             anonymousCls.publicMethod("void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response)",
@@ -805,7 +802,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                                 .stream()
                                                 .map(statusCode -> String.format("response.code() == %d", statusCode.code()))
                                                 .collect(Collectors.joining(" || "));
-
 
                                         responseSuccessBlock.ifBlock(successCodeExpression, succeededCodeBlock -> {
                                             writeAsyncSuccessBlock(clientMethod, callbackParameterName, clientReferenceDot, succeededCodeBlock, (JavaClass) typeBlock, isPaging);
@@ -865,9 +861,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             exceptions.add("Exception");
             succeededCodeBlock.line("final %s decodedResult;", bodyType);
             succeededCodeBlock.tryCatch(tryBlock -> {
-                        succeededCodeBlock.line("decodedResult = %sdeserializeContent(response.headers(), response.body(), %s);",
-                                clientReferenceDot,
-                                bodyJvaType);
+                    succeededCodeBlock.line("decodedResult = %sdeserializeContent(response.headers(), response.body(), %s);",
+                            clientReferenceDot,
+                            bodyJvaType);
                     },
                     exceptions,
                     "ex",
@@ -890,8 +886,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                         .line(String.format("%1$s.onSuccess(new Page<%2$s>(%3$s, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
                                 callbackParameterName, elementType, pageId));
 
-            }
-            else {
+            } else {
                 IType clientType = callbackParameterType.getTypeArguments()[0];
                 String callbackValueName = "decodedResult";
                 if (!bodyType.equals(clientType)) {

@@ -210,10 +210,10 @@ public class AndroidEmbeddedBuilderTemplate {
     }
 
     private static void writeBuilderProperty(JavaSettings settings,
-                                            JavaClass classBlock,
-                                            String propDescription,
-                                            String propName,
-                                            IType propType) {
+                                             JavaClass classBlock,
+                                             String propDescription,
+                                             String propName,
+                                             IType propType) {
         classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment -> {
             comment.line(propDescription);
         });

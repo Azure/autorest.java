@@ -44,7 +44,7 @@ public class BodyByteSyncClientTests {
         final Response<byte[]> getResponse = client.getNonAsciiWithRestResponse();
         assertEquals(200, getResponse.getStatusCode());
         // Previously, byte[] response bodies were automatically base64 decoded by the runtime.
-        // This conflicts with the octet-stream  (e.g. file/media download) use case,
+        // This conflicts with the octet-stream (e.g. file/media download) use case,
         // so we're now passing the byte[] through as-is.
         byte[] expected = new byte[] { 34, 47, 47, 55, 57, 47, 80, 118, 54, 43, 102, 106, 51, 57, 103, 61, 61, 34 };
         assertArrayEquals(expected, getResponse.getValue());

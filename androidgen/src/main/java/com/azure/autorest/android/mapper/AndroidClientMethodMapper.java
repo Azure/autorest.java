@@ -271,7 +271,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .parameters(parameters)
                     .returnValue(new ReturnValue(
                         returnTypeDescription(operation, responseWithResultType, returnType),
-                       responseWithResultType))
+                        responseWithResultType))
                     .name(proxyMethod.getName() + "WithRestResponse")
                     .onlyRequiredParameters(false)
                     .type(methodType)

@@ -80,7 +80,7 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
                         .stream()
                         .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
                             || (clientMethod.getType() == ClientMethodType.PagingSync
-                                && clientMethod.getName().contains("WithPage")) )
+                                && clientMethod.getName().contains("WithPage")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
@@ -88,7 +88,9 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
                 methodGroupClient
                         .getClientMethods()
                         .stream()
-                        .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
+                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
+                                || (clientMethod.getType() == ClientMethodType.PagingSync
+                                && clientMethod.getName().contains("WithPage")))
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });

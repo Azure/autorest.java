@@ -217,16 +217,16 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                         && clientMethod.getMethodPageDetails().getNextMethod() != null
                         && !clientMethod.getOnlyRequiredParameters()) {
                     AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
-                            clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                            clientMethod.getMethodPageDetails().getNextMethod(), serviceClient.getClassName());
                     asyncPageRetrieverTemplate.write(classBlock);
 
                     if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
                         PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
-                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient.getClassName());
                         pageResponseRetrieverTemplate.write(classBlock);
 
                         PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
-                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient);
+                                clientMethod.getMethodPageDetails().getNextMethod(), serviceClient.getClassName());
                         pageRetrieverTemplate.write(classBlock);
                     }
                 }
