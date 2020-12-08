@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2020-12-07T19:07:54.636064
+Generated at 2020-12-08T19:09:54.820526
 ## Success
 <details>
 <summary>RP count: 150</summary>
@@ -312,7 +312,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ProviderOperationsMetadata, DenyAssignment, RoleDefinition, RoleAssignment, Error, Permission, ClassicAdministrator]
+INFORMATION (FluentMapper): Add Inner to response types: [RoleAssignment, ProviderOperationsMetadata, RoleDefinition, DenyAssignment, Permission, Error, ClassicAdministrator]
 
 ```
 **stderr**
@@ -1218,7 +1218,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-deploymentmanager
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, ServiceTopologyResource, Rollout, ServiceResource, RolloutRequest, OperationsList, StepResource, ServiceUnitResource]
+INFORMATION (FluentMapper): Add Inner to response types: [Rollout, StepResource, ServiceUnitResource, OperationsList, ServiceResource, ServiceTopologyResource, RolloutRequest, ArtifactSource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model ServiceTopologyResource, method reference createOrUpdate, body parameter ServiceTopologyResourceInner
 INFORMATION (ResourceParser): Fluent model ServiceTopologyResource as category RESOURCE_GROUP_AS_PARENT
@@ -1254,8 +1254,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model ArtifactSource, metho
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb4d4ed and com.azure.autorest.model.clientmodel.ProxyMethodParameter@158f1998)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb4d4ed and com.azure.autorest.model.clientmodel.ProxyMethodParameter@158f1998)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@150f5255 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2e195d70)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@150f5255 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2e195d70)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1293,8 +1293,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb4d4ed and com.azure.autorest.model.clientmodel.ProxyMethodParameter@158f1998)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb4d4ed and com.azure.autorest.model.clientmodel.ProxyMethodParameter@158f1998)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@150f5255 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2e195d70)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@150f5255 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2e195d70)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1937,7 +1937,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-security
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [SecurityAssessmentMetadata, IotAlertType, AdaptiveNetworkHardening, AdvancedThreatProtectionSetting, AutomationValidationStatus, IotAlertTypeList, PackageDownloads, Device, ServerVulnerabilityAssessment, RegulatoryComplianceAssessment, SecureScoreControlDefinitionItem, ServerVulnerabilityAssessmentsList, JitNetworkAccessPolicy, ComplianceResult, IoTSecuritySolutionAnalyticsModel, SecuritySolutionsReferenceDataList, IotDefenderSettingsList, IotSensorsList, IotSitesModel, ScanResult, IotAlert, TopologyResource, OnPremiseIotSensor, RulesResults, DiscoveredSecuritySolution, RegulatoryComplianceControl, IotRecommendationModel, IoTSecurityAggregatedRecommendation, SecurityTask, IotRecommendationTypeList, RegulatoryComplianceStandard, SecureScoreControlDetails, IotAlertModel, SecurityContact, SecurityAssessment, AutoProvisioningSetting, Automation, ConnectorSetting, AllowedConnectionsResource, AlertsSuppressionRule, OnPremiseIotSensorsList, IotSensorsModel, IotDefenderSettingsModel, Setting, IotRecommendation, SecureScoreItem, ScanResults, WorkspaceSetting, IoTSecuritySolutionModel, PricingList, AdaptiveApplicationControlGroup, IotSitesList, DeviceSecurityGroup, AdaptiveApplicationControlGroups, IoTSecuritySolutionAnalyticsModelList, AscLocation, SecuritySolution, ExternalSecuritySolution, Pricing, Scans, IoTSecurityAggregatedAlert, JitNetworkAccessRequest, Alert, SecuritySubAssessment, IotRecommendationType, RuleResults, Operation, InformationProtectionPolicy, Scan, Compliance]
+INFORMATION (FluentMapper): Add Inner to response types: [DeviceSecurityGroup, AutoProvisioningSetting, AllowedConnectionsResource, IotDefenderSettingsModel, AutomationValidationStatus, InformationProtectionPolicy, OnPremiseIotSensor, SecureScoreControlDefinitionItem, SecuritySubAssessment, IoTSecuritySolutionAnalyticsModel, IotDefenderSettingsList, IotSensorsList, OnPremiseIotSensorsList, Automation, IotRecommendationModel, SecurityTask, AdvancedThreatProtectionSetting, ComplianceResult, IotRecommendation, ScanResult, Setting, IoTSecurityAggregatedRecommendation, IotSensorsModel, IoTSecurityAggregatedAlert, SecurityAssessmentMetadata, SecurityContact, RegulatoryComplianceControl, SecureScoreControlDetails, IotAlertType, ServerVulnerabilityAssessment, Scans, Operation, SecurityAssessment, Device, IoTSecuritySolutionModel, DiscoveredSecuritySolution, ServerVulnerabilityAssessmentsList, SecuritySolution, RuleResults, Compliance, AdaptiveNetworkHardening, IotAlertTypeList, IotAlert, IoTSecuritySolutionAnalyticsModelList, SecuritySolutionsReferenceDataList, Pricing, RegulatoryComplianceStandard, IotRecommendationTypeList, IotSitesModel, PricingList, IotAlertModel, IotRecommendationType, ScanResults, AlertsSuppressionRule, WorkspaceSetting, RegulatoryComplianceAssessment, AdaptiveApplicationControlGroups, JitNetworkAccessPolicy, ConnectorSetting, AdaptiveApplicationControlGroup, TopologyResource, SecureScoreItem, ExternalSecuritySolution, Scan, AscLocation, Alert, IotSitesList, JitNetworkAccessRequest, RulesResults, PackageDownloads]
 INFORMATION (FluentMapper): Add Inner for type SecureScoreControlDefinitionItem: []
 
 ```
@@ -2227,7 +2227,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-service-map
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MachinesSummary, MapResponse, Liveness, ClientGroup, ClientGroupMember, Process, Machine, Port, MachineGroup, Connection, ClientGroupMembersCount]
+INFORMATION (FluentMapper): Add Inner to response types: [Liveness, MapResponse, Machine, Process, ClientGroupMember, Connection, MachineGroup, MachinesSummary, Port, ClientGroupMembersCount, ClientGroup]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Write Java
 INFORMATION (JavaFormatter): Java version: 11.0.9
@@ -2240,12 +2240,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:23095) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:23078) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:26:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:294:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:23095) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:23095) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:23078) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:23078) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2316,8 +2316,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.906 s
-[INFO] Finished at: 2020-12-07T18:53:46Z
+[INFO] Total time:  4.516 s
+[INFO] Finished at: 2020-12-08T18:55:07Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2624,6 +2624,18 @@ WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkGatewayProperti
 WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkGateway' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkGatewayList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsServiceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsService' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsServicesList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsZoneProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsZone' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkloadNetworkDnsZonesList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
