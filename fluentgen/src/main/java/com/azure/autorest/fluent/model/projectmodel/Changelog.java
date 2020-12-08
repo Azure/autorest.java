@@ -57,18 +57,26 @@ public class Changelog {
         List<String> previousChangelog = new ArrayList<>();
 
         Pattern unreleasedVersionPattern = Pattern.compile("^## ([0-9][-.a-z|0-9]+) \\(Unreleased\\)");
+        Pattern currentVersionPattern = Pattern.compile("^## " + Pattern.quote(project.getVersion())+ " \\(.*\\)");
 
         boolean beforeUnreleasedSection = true;
         boolean afterUnreleasedSection = false;
         for (String line : this.lines) {
             if (line.trim().startsWith("## ")) {
-                beforeUnreleasedSection = false;
+                if (beforeUnreleasedSection) {
+                    beforeUnreleasedSection = false;
 
-                if (line.trim().endsWith("(Unreleased)")) {
-                    Matcher m = unreleasedVersionPattern.matcher(line.trim());
-                    if (m.find()) {
-                        previousUnreleasedVersion = m.group(1);
-                        logger.info("Found last unreleased version '{}'", previousUnreleasedVersion);
+                    if (line.trim().endsWith("(Unreleased)")) {
+                        Matcher m = unreleasedVersionPattern.matcher(line.trim());
+                        if (m.find()) {
+                            previousUnreleasedVersion = m.group(1);
+                            logger.info("Found last unreleased version '{}'", previousUnreleasedVersion);
+                        }
+                    } else if (currentVersionPattern.matcher(line.trim()).find()) {
+                        previousUnreleasedVersion = project.getVersion();
+                        logger.info("Found last version '{}', which is same as current version", previousUnreleasedVersion);
+                    } else {
+                        afterUnreleasedSection = true;
                     }
                 } else {
                     afterUnreleasedSection = true;
