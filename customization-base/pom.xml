@@ -6,14 +6,18 @@
 
   <parent>
     <artifactId>autorest-java</artifactId>
-    <groupId>com.azure</groupId>
+    <groupId>com.azure.autorest</groupId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>com.azure</groupId>
+  <groupId>com.azure.autorest</groupId>
   <artifactId>customization-base</artifactId>
   <version>1.0.0-beta.1</version>
+
+  <name>Microsoft Azure AutoRest for Java Customization Base</name>
+  <description>This module contains the base classes needed for customizing a generated library.</description>
+  <url>https://github.com/Azure/autorest.java</url>
 
   <repositories>
     <repository>
@@ -31,7 +35,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>extension-base</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>

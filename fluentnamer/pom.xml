@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <parent>
-    <groupId>com.azure</groupId>
+    <groupId>com.azure.autorest</groupId>
     <artifactId>autorest-java</artifactId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
@@ -16,19 +16,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>preprocessor</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
 
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>javagen</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
 
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>azure-core-management</artifactId>
       <version>1.0.0</version>
     </dependency>

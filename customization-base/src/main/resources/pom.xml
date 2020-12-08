@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.azure</groupId>
+  <groupId>com.azure.autorest</groupId>
   <artifactId>autorest-generated-client</artifactId>
   <version>1.0.0-beta.1</version>
 
@@ -28,19 +28,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>azure-core</artifactId>
       <version>1.7.0</version>
     </dependency>
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>azure-core-http-netty</artifactId>
       <version>1.5.4</version>
     </dependency>
 
     <!-- Test Dependencies -->
     <dependency>
-      <groupId>com.azure</groupId>
+      <groupId>com.azure.autorest</groupId>
       <artifactId>azure-core-test</artifactId>
       <version>1.4.0</version>
       <scope>test</scope>

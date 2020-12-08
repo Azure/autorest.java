@@ -101,7 +101,7 @@ To set up customizations, create a Maven project with dependency:
 
 ```xml
 <dependency>
-  <groupId>com.azure</groupId>
+  <groupId>com.azure.autorest</groupId>
   <artifactId>autorest-java-customizations</artifactId>
   <version>1.0.0-beta.1</version>
 </dependency>

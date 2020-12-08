@@ -5,14 +5,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.azure</groupId>
+    <groupId>com.azure.autorest</groupId>
     <artifactId>autorest-java</artifactId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>com.azure</groupId>
+
+  <groupId>com.azure.autorest</groupId>
   <artifactId>extension-base</artifactId>
   <version>1.0.0-beta.1</version>
+
+  <name>Microsoft Azure AutoRest for Java Extension Base</name>
+  <description>This module contains the base classes an utilities needed for writing an AutoRest extension in Java.</description>
+  <url>https://github.com/Azure/autorest.java</url>
 
   <dependencies>
     <dependency>

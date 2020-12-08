@@ -4,10 +4,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.azure</groupId>
+  <groupId>com.azure.autorest</groupId>
   <artifactId>autorest-java</artifactId>
   <version>1.0.0-beta.1</version>
   <packaging>pom</packaging>
+
+  <name>Microsoft Azure AutoRest for Java</name>
+  <description>This is the parent pom for Microsoft Azure AutoRest for Java.</description>
+  <url>https://github.com/Azure/autorest.java</url>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Microsoft Corporation</name>
+    <url>http://microsoft.com</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>microsoft</id>
+      <name>Microsoft Corporation</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/Azure/autorest.java</url>
+    <connection>scm:git:https://github.com/Azure/autorest.java.git</connection>
+    <developerConnection/>
+    <tag>HEAD</tag>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
