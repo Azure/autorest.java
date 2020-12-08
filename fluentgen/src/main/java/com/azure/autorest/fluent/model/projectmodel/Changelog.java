@@ -68,7 +68,7 @@ public class Changelog {
                     Matcher m = unreleasedVersionPattern.matcher(line.trim());
                     if (m.find()) {
                         previousUnreleasedVersion = m.group(1);
-                        logger.info("Found last unreleased version {}", previousUnreleasedVersion);
+                        logger.info("Found last unreleased version '{}'", previousUnreleasedVersion);
                     }
                 } else {
                     afterUnreleasedSection = true;

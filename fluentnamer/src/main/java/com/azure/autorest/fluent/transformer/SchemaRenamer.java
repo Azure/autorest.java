@@ -39,7 +39,7 @@ public class SchemaRenamer {
         String name = Utils.getJavaName(m);
         String newName = renameModel.get(name);
         if (newName != null) {
-            logger.info("Rename model from {} to {}", name, newName);
+            logger.info("Rename model from '{}' to '{}'", name, newName);
             m.getLanguage().getJava().setName(newName);
         }
     }

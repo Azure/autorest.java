@@ -254,12 +254,12 @@ public class FluentUtils {
                         text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
                     }
                 } else {
-                    logger.warn("Replacements skipped due to incorrect length. {}", Arrays.asList(replacements));
+                    logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                 }
             }
             return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file {}", filename);
+            logger.warn("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }

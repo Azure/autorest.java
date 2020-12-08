@@ -33,7 +33,7 @@ public class ResourceDelete extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceDelete: Fluent model {}, method reference {}",
+        logger.info("ResourceDelete: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 

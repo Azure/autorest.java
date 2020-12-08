@@ -94,17 +94,34 @@ public class Project {
         updateChangelog();
     }
 
-    private void findPackageVersions() {
+    private Optional<String> findSdkFolder() {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
         if (!sdkFolderOpt.isPresent()) {
-            logger.warn("azure-libraries-for-java-folder parameter not available, fallback to default versions for dependencies");
-            return;
+            logger.info("'azure-libraries-for-java-folder' parameter not available");
         } else {
             if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
-                logger.warn("azure-libraries-for-java-folder parameter is not an absolute path, fallback to default versions for dependencies");
-                return;
+                logger.info("'azure-libraries-for-java-folder' parameter is not an absolute path");
+                sdkFolderOpt = Optional.empty();
             }
+        }
+
+        // try to deduct from "output-folder"
+        if (!sdkFolderOpt.isPresent()) {
+
+        }
+
+        if (!sdkFolderOpt.isPresent()) {
+            logger.warn("'azure-sdk-for-java' SDK folder not found, fallback to default versions for dependencies");
+        }
+
+        return sdkFolderOpt;
+    }
+
+    private void findPackageVersions() {
+        Optional<String> sdkFolderOpt = findSdkFolder();
+        if (!sdkFolderOpt.isPresent()) {
+            return;
         }
 
         // find dependency version from versioning txt
@@ -115,15 +132,15 @@ public class Project {
             try {
                 findPackageVersions(versionClientPath);
             } catch (IOException e) {
-                logger.warn("Failed to parse version_client.txt", e);
+                logger.warn("Failed to parse 'version_client.txt'", e);
             }
             try {
                 findPackageVersions(versionExternalPath);
             } catch (IOException e) {
-                logger.warn("Failed to parse external_dependencies.txt", e);
+                logger.warn("Failed to parse 'external_dependencies.txt'", e);
             }
         } else {
-            logger.warn("version_client.txt or external_dependencies.txt not found or not readable");
+            logger.warn("'version_client.txt' or 'external_dependencies.txt' not found or not readable");
         }
     }
 
@@ -142,7 +159,7 @@ public class Project {
             String[] segments = line.split(Pattern.quote(";"));
             if (segments.length >= 2) {
                 String version = segments[1];
-                logger.info("Found version {} for artifact {}", version, artifact);
+                logger.info("Found version '{}' for artifact '{}'", version, artifact);
                 return Optional.of(version);
             }
         }
@@ -158,16 +175,16 @@ public class Project {
             if (Files.isReadable(changelogPath)) {
                 try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
                     this.changelog = new Changelog(reader);
-                    logger.info("Update CHANGELOG.md for version {}", version);
+                    logger.info("Update 'CHANGELOG.md' for version '{}'", version);
                     this.changelog.updateForVersion(this);
                 } catch (IOException e) {
-                    logger.warn("Failed to parse CHANGELOG.md", e);
+                    logger.warn("Failed to parse 'CHANGELOG.md'", e);
                 }
             } else {
-                logger.warn("CHANGELOG.md not found or not readable");
+                logger.warn("'CHANGELOG.md' not found or not readable");
             }
         } else {
-            logger.warn("output-folder parameter is not an absolute path, fallback to default CHANGELOG.md");
+            logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
         }
     }
 

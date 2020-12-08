@@ -81,7 +81,7 @@ Following settings only works when `fluent` option is specified.
 | `--pom-file` | String. Name for Maven POM file. Default is `pom.xml`. |
 | `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
 | `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
-| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. |
+| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |

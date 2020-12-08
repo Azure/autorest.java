@@ -37,7 +37,7 @@ public class ResourceRefresh extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceRefresh: Fluent model {}, method reference {}",
+        logger.info("ResourceRefresh: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 

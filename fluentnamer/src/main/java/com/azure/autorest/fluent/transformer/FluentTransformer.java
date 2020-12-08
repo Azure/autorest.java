@@ -65,7 +65,7 @@ public class FluentTransformer {
         codeModel.getOperationGroups().stream()
                 .filter(og -> Utils.getDefaultName(og) == null || Utils.getDefaultName(og).isEmpty())
                 .forEach(og -> {
-                    logger.info("Rename ungrouped operation group to {}", nameForUngroupedOperations);
+                    logger.info("Rename ungrouped operation group to '{}'", nameForUngroupedOperations);
                     og.set$key(nameForUngroupedOperations);
                     og.getLanguage().getDefault().setName(nameForUngroupedOperations);
                 });
