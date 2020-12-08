@@ -81,8 +81,6 @@ public class ResourceParserTests {
         Assertions.assertEquals(serviceCreate, serviceCollection.getResourceCreates().iterator().next());
 
         Assertions.assertEquals(serviceCreate, serviceModel.getResourceCreate());
-
-        int i = 1;
     }
 
     public static String loadYaml(String filename) {
