@@ -28,7 +28,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.azure.autorest</groupId>
+      <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
       <version>1.0.0</version>
     </dependency>

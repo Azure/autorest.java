@@ -118,18 +118,18 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.azure.autorest</groupId>
+      <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
       <version>1.9.0</version>
     </dependency>
     <dependency>
-      <groupId>com.azure.autorest</groupId>
+      <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
       <version>1.0.0</version>
     </dependency>
 
     <dependency>
-      <groupId>com.azure.autorest</groupId>
+      <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
       <version>1.6.2</version>
       <scope>test</scope>
