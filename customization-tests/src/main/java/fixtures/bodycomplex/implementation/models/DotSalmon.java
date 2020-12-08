@@ -67,4 +67,15 @@ public class DotSalmon extends DotFish {
     public void setWild(Boolean iswild) {
         this.isWild = iswild;
     }
+
+    /**
+     * Return if the salmon is a domestic species.
+     *
+     * @return true if the salmon is domestic
+     * @deprecated Removing in the next version
+     */
+    @Deprecated
+    public boolean isDomestic() {
+        return "US".equalsIgnoreCase(getLocation());
+    }
 }
