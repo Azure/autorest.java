@@ -56,6 +56,9 @@ public class FluentGen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
 
+    private FluentJavaSettings fluentJavaSettings;
+    private FluentMapper fluentMapper;
+
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
         instance = this;
@@ -74,156 +77,19 @@ public class FluentGen extends NewPlugin {
 
         try {
             logger.info("Read YAML");
-            String file = readFile(files.get(0));
-            Representer representer = new Representer() {
-                @Override
-                protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
-                                                              Tag customTag) {
-                    // if value of property is null, ignore it.
-                    if (propertyValue == null) {
-                        return null;
-                    }
-                    else {
-                        return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-                    }
-                }
-            };
-            Yaml newYaml = new Yaml(representer);
-            CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+            String fileContent = readFile(files.get(0));
 
-            // use fluent mapper and template
-            Mappers.setFactory(new FluentMapperFactory());
-            Templates.setFactory(new FluentTemplateFactory());
+            // Parse yaml to code model
+            CodeModel codeModel = this.handleYaml(fileContent);
 
-            FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
-            CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
+            // Map code model to client model
+            Client client = this.handleMap(codeModel);
 
-            // Step 3: Map
-            logger.info("Map code model to client model");
-            FluentMapper fluentMapper = new FluentMapper(fluentJavaSettings);
-            fluentMapper.preModelMap(codeModel);
-
-            Client client = Mappers.getClientMapper().map(codeModel);
-
-            JavaSettings javaSettings = JavaSettings.getInstance();
-
-            // Step 4: Write to templates
-            logger.info("Java template for client model");
-            FluentJavaPackage javaPackage = new FluentJavaPackage(this);
-            // Service client
-            String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-            javaPackage
-                    .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                            client.getServiceClient());
-            if (javaSettings.shouldGenerateClientInterfaces()) {
-                javaPackage
-                        .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
-            }
-
-            // Service client builder
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            javaPackage.addServiceClientBuilder(builderPackage,
-                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
-
-            if (javaSettings.shouldGenerateSyncAsyncClients()) {
-                List<AsyncSyncClient> asyncClients = new ArrayList<>();
-                List<AsyncSyncClient> syncClients = new ArrayList<>();
-                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-                if (!javaSettings.isFluentLite()) {
-                    // fluent lite only expose sync client
-                    for (AsyncSyncClient asyncClient : asyncClients) {
-                        javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
-                    }
-                }
-
-                for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
-                }
-            }
-
-            // Method group
-            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-                if (javaSettings.shouldGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
-                }
-            }
-
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-            }
-
-            // Client model
-            for (ClientModel model : client.getModels()) {
-                javaPackage.addModel(model.getPackage(), model.getName(), model);
-            }
-
-            // Enum
-            for (EnumType enumType : client.getEnums()) {
-                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-            }
-
-            // XML sequence wrapper
-            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
-                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
-            }
-
-            // Exception
-            for (ClientException exception : client.getExceptions()) {
-                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-            }
-
-            // Package-info
-            for (PackageInfo packageInfo : client.getPackageInfos()) {
-                javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
-            }
+            // Write to templates
+            FluentJavaPackage javaPackage = this.handleTemplate(client);
 
             // Fluent Lite
-            if (javaSettings.isFluentLite()) {
-                final boolean isSdkIntegration = fluentJavaSettings.isSdkIntegration();
-                FluentStatic.setFluentJavaSettings(fluentJavaSettings);
-                FluentStatic.setClient(client);
-
-                FluentClient fluentClient = fluentMapper.map(codeModel, client);
-
-                // project
-                Project project = new Project(fluentClient);
-                if (isSdkIntegration) {
-                    project.integrateWithSdk();
-                }
-
-                // Fluent manager
-                javaPackage.addFluentManager(fluentClient.getManager(), project);
-
-                // Fluent resource models
-                for (FluentResourceModel model : fluentClient.getResourceModels()) {
-                    javaPackage.addFluentResourceModel(model);
-                }
-
-                // Fluent resource collections
-                for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
-                    javaPackage.addFluentResourceCollection(collection);
-                }
-
-                // Utils
-                javaPackage.addUtils();
-
-                // module-info
-                javaPackage.addModuleInfo(fluentClient.getModuleInfo());
-
-                // POM
-                Pom pom = new PomMapper().map(project);
-                javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
-
-                if (isSdkIntegration) {
-                    javaPackage.addReadme(project);
-                    javaPackage.addChangelog(project.getChangelog());
-                }
-            }
+            this.handleFluentLite(codeModel, client, javaPackage);
 
             // Print to files
             logger.info("Write Java");
@@ -250,5 +116,185 @@ public class FluentGen extends NewPlugin {
             connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
             throw e;
         }
+    }
+
+    CodeModel handleYaml(String yamlContent) {
+        Representer representer = new Representer() {
+            @Override
+            protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
+                // if value of property is null, ignore it.
+                if (propertyValue == null) {
+                    return null;
+                }
+                else {
+                    return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+                }
+            }
+        };
+        Yaml newYaml = new Yaml(representer);
+        CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
+        return codeModel;
+    }
+
+    Client handleMap(CodeModel codeModel) {
+        FluentMapper fluentMapper = this.getFluentMapper();
+
+        logger.info("Map code model to client model");
+        fluentMapper.preModelMap(codeModel);
+
+        Client client = Mappers.getClientMapper().map(codeModel);
+        return client;
+    }
+
+    FluentJavaPackage handleTemplate(Client client) {
+        JavaSettings javaSettings = JavaSettings.getInstance();
+
+        logger.info("Java template for client model");
+        FluentJavaPackage javaPackage = new FluentJavaPackage(this);
+
+        // Service client
+        String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
+        javaPackage
+                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                        client.getServiceClient());
+        if (javaSettings.shouldGenerateClientInterfaces()) {
+            javaPackage
+                    .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
+        }
+
+        // Service client builder
+        String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(client.getServiceClient());
+        String builderSuffix = ClientModelUtil.getBuilderSuffix();
+        javaPackage.addServiceClientBuilder(builderPackage,
+                client.getServiceClient().getInterfaceName() + builderSuffix, client.getServiceClient());
+
+        if (javaSettings.shouldGenerateSyncAsyncClients()) {
+            List<AsyncSyncClient> asyncClients = new ArrayList<>();
+            List<AsyncSyncClient> syncClients = new ArrayList<>();
+            ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+
+            if (!javaSettings.isFluentLite()) {
+                // fluent lite only expose sync client
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
+                }
+            }
+
+            for (AsyncSyncClient syncClient : syncClients) {
+                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
+            }
+        }
+
+        // Method group
+        for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+            if (javaSettings.shouldGenerateClientInterfaces()) {
+                javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
+            }
+        }
+
+        // Response
+        for (ClientResponse response : client.getResponseModels()) {
+            javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+        }
+
+        // Client model
+        for (ClientModel model : client.getModels()) {
+            javaPackage.addModel(model.getPackage(), model.getName(), model);
+        }
+
+        // Enum
+        for (EnumType enumType : client.getEnums()) {
+            javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+        }
+
+        // XML sequence wrapper
+        for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+            javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+        }
+
+        // Exception
+        for (ClientException exception : client.getExceptions()) {
+            javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+        }
+
+        // Package-info
+        for (PackageInfo packageInfo : client.getPackageInfos()) {
+            javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+        }
+
+        return javaPackage;
+    }
+
+    void handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+        FluentJavaSettings fluentJavaSettings = this.getFluentJavaSettings();
+        JavaSettings javaSettings = JavaSettings.getInstance();
+
+        // Fluent Lite
+        if (javaSettings.isFluentLite()) {
+            final boolean isSdkIntegration = fluentJavaSettings.isSdkIntegration();
+            FluentStatic.setFluentJavaSettings(fluentJavaSettings);
+            FluentStatic.setClient(client);
+
+            logger.info("Process for Fluent Lite, SDK integration {}", (isSdkIntegration ? "enabled" : "disabled"));
+
+            FluentClient fluentClient = this.getFluentMapper().map(codeModel, client);
+
+            // project
+            Project project = new Project(fluentClient);
+            if (isSdkIntegration) {
+                project.integrateWithSdk();
+            }
+
+            // Fluent manager
+            javaPackage.addFluentManager(fluentClient.getManager(), project);
+
+            // Fluent resource models
+            for (FluentResourceModel model : fluentClient.getResourceModels()) {
+                javaPackage.addFluentResourceModel(model);
+            }
+
+            // Fluent resource collections
+            for (FluentResourceCollection collection : fluentClient.getResourceCollections()) {
+                javaPackage.addFluentResourceCollection(collection);
+            }
+
+            // Utils
+            javaPackage.addUtils();
+
+            // module-info
+            javaPackage.addModuleInfo(fluentClient.getModuleInfo());
+
+            // POM
+            Pom pom = new PomMapper().map(project);
+            javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+
+            if (isSdkIntegration) {
+                javaPackage.addReadme(project);
+                javaPackage.addChangelog(project.getChangelog());
+            }
+        }
+    }
+
+    private FluentJavaSettings getFluentJavaSettings() {
+        if (fluentJavaSettings == null) {
+            fluentJavaSettings = new FluentJavaSettings(this);
+        }
+        return fluentJavaSettings;
+    }
+
+    private FluentMapper getFluentMapper() {
+        if (fluentMapper == null) {
+            // use fluent mapper and template
+            Mappers.setFactory(new FluentMapperFactory());
+            Templates.setFactory(new FluentTemplateFactory());
+
+            FluentJavaSettings fluentJavaSettings = getFluentJavaSettings();
+            CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
+
+            fluentMapper = new FluentMapper(fluentJavaSettings);
+        }
+        return fluentMapper;
     }
 }
