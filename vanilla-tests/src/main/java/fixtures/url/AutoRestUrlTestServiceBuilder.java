@@ -28,6 +28,7 @@ public final class AutoRestUrlTestServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestUrlTestServiceBuilder. */
     public AutoRestUrlTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -181,7 +182,7 @@ public final class AutoRestUrlTestServiceBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private List<HttpPipelinePolicy> pipelinePolicies;
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /**
      * Adds a custom Http pipeline policy.

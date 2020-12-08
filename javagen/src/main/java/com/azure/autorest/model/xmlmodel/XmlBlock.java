@@ -46,4 +46,8 @@ public class XmlBlock {
     public final void tagWithInlineComment(String tag, String value, String comment) {
         contents.line("<%1$s>%2$s</%1$s> <!-- %3$s -->", tag, CodeNamer.escapeXmlComment(value), CodeNamer.escapeXmlComment(comment));
     }
+
+    public final void tagCData(String tag, String value) {
+        contents.line("<%1$s><![CDATA[%2$s]]></%1$s>", tag, value);
+    }
 }

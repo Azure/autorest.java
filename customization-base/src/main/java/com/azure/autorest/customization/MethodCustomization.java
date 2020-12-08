@@ -153,12 +153,16 @@ public final class MethodCustomization {
      *
      * @param newReturnType the simple name of the new return type
      * @param returnValueFormatter the return value String formatter as described above
+     * @param replaceReturnStatement if set to {@code true}, the return statement will be replaced by the provided
+     * returnValueFormatter text with exactly one instance of {@code %s}. If set to true, appropriate semi-colons,
+     * parentheses, opening and closing of code blocks have to be taken care of in the {@code returnValueFormatter}.
      * @return the current class customization for chaining
      */
-    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
+    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter, boolean replaceReturnStatement) {
         URI fileUri = symbol.getLocation().getUri();
         int i = fileUri.toString().indexOf("src/main/java/");
         String fileName = fileUri.toString().substring(i);
+
         List<TextEdit> edits = new ArrayList<>();
 
         int line = symbol.getLocation().getRange().getStart().getLine();
@@ -215,7 +219,13 @@ public final class MethodCustomization {
 
             TextEdit returnEdit = new TextEdit();
             returnEdit.setRange(new Range(new Position(line, 0), new Position(line, 0)));
-            returnEdit.setNewText(methodContentIndent + "return " + String.format(returnValueFormatter, "returnValue") + ";");
+
+            if (replaceReturnStatement) {
+                returnEdit.setNewText(String.format(returnValueFormatter, "returnValue"));
+            } else {
+                returnEdit.setNewText(methodContentIndent + "return " + String.format(returnValueFormatter, "returnValue") + ";");
+            }
+
             edits.add(returnEdit);
         }
 
@@ -238,6 +248,24 @@ public final class MethodCustomization {
         methodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
         refreshSymbol();
         return this;
+    }
+
+    /**
+     * Change the return type of a method. The new return type will be automatically imported.
+     *
+     * <p>
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is
+     * {@code void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is
+     * {@code void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new
+     * return type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains
+     * exactly 1 instance of {@code %s}.
+     *
+     * @param newReturnType the simple name of the new return type
+     * @param returnValueFormatter the return value String formatter as described above
+     * @return the current class customization for chaining
+     */
+    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
+        return setReturnType(newReturnType, returnValueFormatter, false);
     }
 
     private void refreshSymbol() {

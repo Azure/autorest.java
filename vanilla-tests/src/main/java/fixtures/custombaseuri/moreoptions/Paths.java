@@ -58,8 +58,8 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault simple string.
-     * @param secret simple string.
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -104,8 +104,8 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault simple string.
-     * @param secret simple string.
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -122,8 +122,8 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault simple string.
-     * @param secret simple string.
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -140,8 +140,8 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault simple string.
-     * @param secret simple string.
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -156,8 +156,8 @@ public final class Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault simple string.
-     * @param secret simple string.
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

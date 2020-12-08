@@ -36,6 +36,7 @@ public class Project {
     private final String artifactId;
     private String version = "1.0.0-beta.1";
     private final PackageVersions packageVersions = new PackageVersions();
+    private Changelog changelog;
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
@@ -56,15 +57,18 @@ public class Project {
     }
 
     public Project(FluentClient fluentClient) {
+        this(fluentClient.getManager().getServiceName(), fluentClient.getInnerClient().getClientDescription());
+    }
+
+    protected Project(String serviceName, String clientDescription) {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
 
-        this.serviceName = fluentClient.getManager().getServiceName();
+        this.serviceName = serviceName;
         this.namespace = JavaSettings.getInstance().getPackage();
         this.artifactId = FluentUtils.getArtifactId();
 
         settings.getArtifactVersion().ifPresent(version -> this.version = version);
 
-        String clientDescription = fluentClient.getInnerClient().getClientDescription();
         if (clientDescription == null) {
             clientDescription = "";
         }
@@ -77,21 +81,28 @@ public class Project {
                 serviceName,
                 clientDescription,
                 settings.getAutorestSettings().getTag());
-        // TODO aka link to Lite guidance page
         this.serviceDescription = serviceDescription;
+
+        this.changelog = new Changelog(this);
     }
 
     public void integrateWithSdk() {
         FluentPomTemplate.setProject(this);
 
+        findPackageVersions();
+
+        updateChangelog();
+    }
+
+    private void findPackageVersions() {
         FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
         Optional<String> sdkFolderOpt = settings.getAutorestSettings().getAzureLibrariesForJavaFolder();
         if (!sdkFolderOpt.isPresent()) {
-            logger.warn("azure-libraries-for-java-folder parameter not available");
+            logger.warn("azure-libraries-for-java-folder parameter not available, fallback to default versions for dependencies");
             return;
         } else {
             if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
-                logger.warn("azure-libraries-for-java-folder parameter is not an absolute path");
+                logger.warn("azure-libraries-for-java-folder parameter is not an absolute path, fallback to default versions for dependencies");
                 return;
             }
         }
@@ -111,6 +122,8 @@ public class Project {
             } catch (IOException e) {
                 logger.warn("Failed to parse external_dependencies.txt", e);
             }
+        } else {
+            logger.warn("version_client.txt or external_dependencies.txt not found or not readable");
         }
     }
 
@@ -134,6 +147,28 @@ public class Project {
             }
         }
         return Optional.empty();
+    }
+
+    private void updateChangelog() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
+            Path changelogPath = Paths.get(outputFolder, "CHANGELOG.md");
+
+            if (Files.isReadable(changelogPath)) {
+                try (BufferedReader reader = Files.newBufferedReader(changelogPath, StandardCharsets.UTF_8)) {
+                    this.changelog = new Changelog(reader);
+                    logger.info("Update CHANGELOG.md for version {}", version);
+                    this.changelog.updateForVersion(this);
+                } catch (IOException e) {
+                    logger.warn("Failed to parse CHANGELOG.md", e);
+                }
+            } else {
+                logger.warn("CHANGELOG.md not found or not readable");
+            }
+        } else {
+            logger.warn("output-folder parameter is not an absolute path, fallback to default CHANGELOG.md");
+        }
     }
 
     public String getServiceName() {
@@ -170,5 +205,9 @@ public class Project {
 
     public PackageVersions getPackageVersions() {
         return packageVersions;
+    }
+
+    public Changelog getChangelog() {
+        return changelog;
     }
 }

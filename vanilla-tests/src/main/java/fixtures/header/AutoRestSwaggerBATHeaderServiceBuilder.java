@@ -28,6 +28,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
 
     private final Map<String, String> properties = new HashMap<>();
 
+    /** Create an instance of the AutoRestSwaggerBATHeaderServiceBuilder. */
     public AutoRestSwaggerBATHeaderServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
@@ -149,7 +150,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
     /*
      * The list of Http pipeline policies to add.
      */
-    private List<HttpPipelinePolicy> pipelinePolicies;
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /**
      * Adds a custom Http pipeline policy.

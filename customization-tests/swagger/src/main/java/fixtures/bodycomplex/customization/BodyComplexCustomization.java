@@ -48,5 +48,10 @@ public class BodyComplexCustomization extends Customization {
                 .setReturn("The ArrayClient itself")
                 .setSince("1.0.0-beta.1")
                 .addSee("ArrayAsyncClient#putValid(ArrayWrapper)");
+
+        ClassCustomization cat = implementationModels.getClass("Cat");
+        cat.getMethod("getColor")
+                .setReturnType("byte[]", "String colorStr = %s; try { return colorStr.getBytes" +
+                        "(\"UTF-8\"); } catch (UnsupportedEncodingException ex) { return colorStr.getBytes(); }", true);
     }
 }

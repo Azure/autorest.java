@@ -53,6 +53,12 @@ public class JavaClass implements JavaType {
         addNewLine = true;
     }
 
+    public final void packagePrivateStaticFinalVariable(String variableDeclaration) {
+        addExpectedNewLine();
+        contents.line(String.format("static final %1$s;", variableDeclaration));
+        addNewLine = true;
+    }
+
     public final void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
         addExpectedNewLine();
         contents.constructor(visibility, constructorSignature, constructor);

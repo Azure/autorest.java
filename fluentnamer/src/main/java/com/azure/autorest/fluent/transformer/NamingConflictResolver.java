@@ -16,6 +16,7 @@ import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,31 +25,33 @@ public class NamingConflictResolver {
     private static final Logger logger = new PluginLogger(FluentNamer.getPluginInstance(), NamingConflictResolver.class);
 
     public CodeModel process(CodeModel codeModel) {
-        Set<String> methodGroupNames = new HashSet<>();
-        Set<String> objectNames = codeModel.getSchemas().getObjects().stream()
+        // conform to lowercase, to avoid problem on Windows system, where file name is case insensitive
+        Set<String> methodGroupNamesLowerCase = new HashSet<>();
+        Set<String> objectNamesLowerCase = codeModel.getSchemas().getObjects().stream()
                 .map(Utils::getDefaultName)
+                .map(n -> n.toLowerCase(Locale.ROOT))
                 .collect(Collectors.toSet());
         codeModel.getOperationGroups().forEach(og -> {
             String name = Utils.getDefaultName(og);
             String methodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(name));
             String newMethodGroupName = methodGroupName;
-            if (objectNames.contains(methodGroupName)) {
+            if (objectNamesLowerCase.contains(methodGroupName.toLowerCase(Locale.ROOT))) {
                 // deduplicate from objects
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
-            } else if (methodGroupNames.contains(methodGroupName)) {
+            } else if (methodGroupNamesLowerCase.contains(methodGroupName.toLowerCase(Locale.ROOT))) {
                 // deduplicate from other operation groups
                 String newName = renameOperationGroup(og);
                 newMethodGroupName = CodeNamer.getPlural(CodeNamer.getMethodGroupName(newName));
             }
 
-            methodGroupNames.add(newMethodGroupName);
+            methodGroupNamesLowerCase.add(newMethodGroupName.toLowerCase(Locale.ROOT));
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                methodGroupNames.add(newMethodGroupName + "Client");
+                methodGroupNamesLowerCase.add((newMethodGroupName + "Client").toLowerCase(Locale.ROOT));
             }
         });
 
-        if (methodGroupNames.contains(Utils.getDefaultName(codeModel))) {
+        if (methodGroupNamesLowerCase.contains(Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT))) {
             String name = Utils.getDefaultName(codeModel);
             String newName;
 
@@ -67,8 +70,8 @@ public class NamingConflictResolver {
         }
 
         // deduplicate enums from objects
-        codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNames));
-        codeModel.getSchemas().getSealedChoices().forEach(c -> validateChoiceName(c, objectNames));
+        codeModel.getSchemas().getChoices().forEach(c -> validateChoiceName(c, objectNamesLowerCase));
+        codeModel.getSchemas().getSealedChoices().forEach(c -> validateChoiceName(c, objectNamesLowerCase));
         return codeModel;
     }
 
@@ -82,7 +85,7 @@ public class NamingConflictResolver {
 
     private static void validateChoiceName(ValueSchema choice, Set<String> objectNames) {
         String name = Utils.getDefaultName(choice);
-        if (objectNames.contains(name)) {
+        if (objectNames.contains(name.toLowerCase(Locale.ROOT))) {
             String newName = name + "Value";
             logger.warn("Name conflict of choice with object {}", name);
             logger.info("Rename choice from {} to {}", name, newName);

@@ -31,8 +31,8 @@ public class FluentUtilsTests {
 
     @Test
     public void testGetArtifactId() {
-        final String packageName = "com.azure.resourcemanager.appservice.generated";
+        Assertions.assertEquals("azure-resourcemanager-appservice-generated", FluentUtils.getArtifactIdFromPackageName("com.azure.resourcemanager.appservice.generated"));
 
-        Assertions.assertEquals("azure-resourcemanager-appservice-generated", FluentUtils.getArtifactIdFromPackageName(packageName));
+        Assertions.assertEquals("azure-resourcemanager-appservice", FluentUtils.getArtifactIdFromPackageName("com.azure.resourcemanager.appservice"));
     }
 }

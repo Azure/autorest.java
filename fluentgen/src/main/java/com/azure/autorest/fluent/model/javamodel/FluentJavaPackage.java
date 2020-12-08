@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
@@ -45,8 +46,8 @@ public class FluentJavaPackage extends JavaPackage {
         textFiles.add(textFile);
     }
 
-    public final void addChangelog(Project project) {
-        TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project));
+    public final void addChangelog(Changelog changelog) {
+        TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(changelog));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

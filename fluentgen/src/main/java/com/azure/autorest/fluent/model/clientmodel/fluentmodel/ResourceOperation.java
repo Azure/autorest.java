@@ -264,4 +264,9 @@ public abstract class ResourceOperation {
     protected boolean isLocationProperty(ClientModelProperty property) {
         return FluentUtils.modelHasLocationProperty(resourceModel) && property.getName().equals(ResourceTypeName.FIELD_LOCATION);
     }
+
+    protected boolean hasConflictingMethod(String name) {
+        return resourceCollection.getMethods().stream()
+                .anyMatch(m -> name.equals(m.getInnerClientMethod().getName()));
+    }
 }

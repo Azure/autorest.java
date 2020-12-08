@@ -221,7 +221,7 @@ public class FluentGen extends NewPlugin {
 
                 if (isSdkIntegration) {
                     javaPackage.addReadme(project);
-                    javaPackage.addChangelog(project);
+                    javaPackage.addChangelog(project.getChangelog());
                 }
             }
 
