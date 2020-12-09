@@ -13,8 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
- * Initializes a new instance of the synchronous
- * AutoRestParameterizedHostTestClient type.
+ * Initializes a new instance of the synchronous AutoRestParameterizedHostTestClient type.
  */
 public final class AutoRestParameterizedHostTestClient {
     private PathsImpl serviceClient;
@@ -29,9 +28,8 @@ public final class AutoRestParameterizedHostTestClient {
     /**
      * Get a 200 to test a valid base uri.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri.
      */
     public Response<Void> getEmptyWithRestResponse() {
@@ -39,12 +37,12 @@ public final class AutoRestParameterizedHostTestClient {
     }
 
     /**
-     * A builder for creating a new instance of the
-     * AutoRestParameterizedHostTestClient type.
+     * A builder for creating a new instance of the AutoRestParameterizedHostTestClient type.
      */
     public static final class Builder {
         /*
-         * A string value that is used as a global part of the parameterized host
+         * A string value that is used as a global part of the parameterized
+         * host
          */
         private String host;
 
@@ -124,8 +122,7 @@ public final class AutoRestParameterizedHostTestClient {
         }
 
         /**
-         * Builds an instance of AutoRestParameterizedHostTestClient with the provided
-         * parameters.
+         * Builds an instance of AutoRestParameterizedHostTestClient with the provided parameters.
          * 
          * @return an instance of AutoRestParameterizedHostTestClient.
          */
@@ -149,8 +146,7 @@ public final class AutoRestParameterizedHostTestClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestParameterizedHostTestClientImpl internalClient = new AutoRestParameterizedHostTestClientImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestParameterizedHostTestClientImpl internalClient = new AutoRestParameterizedHostTestClientImpl(serviceClientBuilder.build(), host);
             return new AutoRestParameterizedHostTestClient(internalClient.getPaths());
         }
     }

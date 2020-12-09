@@ -17,8 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 /**
- * Initializes a new instance of the asynchronous AutoRestSwaggerBATService
- * type.
+ * Initializes a new instance of the asynchronous AutoRestSwaggerBATService type.
  */
 public final class StringOperationAsyncClient {
     private StringOperationsImpl serviceClient;
@@ -35,9 +34,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNull(final Callback<String> callback) {
         this.serviceClient.getNull(callback);
@@ -47,11 +45,10 @@ public final class StringOperationAsyncClient {
      * Set string value null.
      * 
      * @param stringBody string body.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNull(String stringBody, final Callback<Void> callback) {
         this.serviceClient.putNull(stringBody, callback);
@@ -62,9 +59,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(final Callback<String> callback) {
         this.serviceClient.getEmpty(callback);
@@ -75,67 +71,56 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty(final Callback<Void> callback) {
         this.serviceClient.putEmpty(callback);
     }
 
     /**
-     * Get mbcs string value
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMbcs(final Callback<String> callback) {
         this.serviceClient.getMbcs(callback);
     }
 
     /**
-     * Set string value mbcs
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMbcs(final Callback<Void> callback) {
         this.serviceClient.putMbcs(callback);
     }
 
     /**
-     * Get string value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
-     * come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWhitespace(final Callback<String> callback) {
         this.serviceClient.getWhitespace(callback);
     }
 
     /**
-     * Set String value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to
-     * come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putWhitespace(final Callback<Void> callback) {
         this.serviceClient.putWhitespace(callback);
@@ -146,9 +131,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNotProvided(final Callback<String> callback) {
         this.serviceClient.getNotProvided(callback);
@@ -159,9 +143,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBase64Encoded(final Callback<byte[]> callback) {
         this.serviceClient.getBase64Encoded(callback);
@@ -172,9 +155,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBase64UrlEncoded(final Callback<Base64Url> callback) {
         this.serviceClient.getBase64UrlEncoded(callback);
@@ -184,11 +166,10 @@ public final class StringOperationAsyncClient {
      * Put value that is base64url encoded.
      * 
      * @param stringBody string body.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBase64UrlEncoded(Base64Url stringBody, final Callback<Void> callback) {
         this.serviceClient.putBase64UrlEncoded(stringBody, callback);
@@ -199,9 +180,8 @@ public final class StringOperationAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNullBase64UrlEncoded(final Callback<Base64Url> callback) {
         this.serviceClient.getNullBase64UrlEncoded(callback);
@@ -260,8 +240,7 @@ public final class StringOperationAsyncClient {
         }
 
         /**
-         * Builds an instance of StringOperationAsyncClient with the provided
-         * parameters.
+         * Builds an instance of StringOperationAsyncClient with the provided parameters.
          * 
          * @return an instance of StringOperationAsyncClient.
          */
@@ -276,8 +255,7 @@ public final class StringOperationAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(serviceClientBuilder.build(), host);
             return new StringOperationAsyncClient(internalClient.getStringOperations());
         }
     }

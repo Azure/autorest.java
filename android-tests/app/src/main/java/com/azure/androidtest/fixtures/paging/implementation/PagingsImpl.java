@@ -2816,6 +2816,59 @@ public final class PagingsImpl {
     }
 
     /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId The clientRequestId parameter.
+     * @param pagingGetMultiplePagesLroOptions Parameter group.
+     * @param callback the Callback that receives the response.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesLRO(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, final Callback<Page<Product>> callback) {
+        Integer maxresultsInternal = null;
+        if (pagingGetMultiplePagesLroOptions != null) {
+            maxresultsInternal = pagingGetMultiplePagesLroOptions.getMaxresults();
+        }
+        Integer maxresults = maxresultsInternal;
+        Integer timeoutInternal = null;
+        if (pagingGetMultiplePagesLroOptions != null) {
+            timeoutInternal = pagingGetMultiplePagesLroOptions.getTimeout();
+        }
+        Integer timeout = timeoutInternal;
+        Call<ResponseBody> call = service.getMultiplePagesLRO(clientRequestId, maxresults, timeout);
+        retrofit2.Callback<ResponseBody> retrofitCallback = new retrofit2.Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 202) {
+                        final ProductResult decodedResult;
+                        try {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), ProductResult.class);
+                        } catch(Exception ex) {
+                            callback.onFailure(ex, response.raw());
+                            return;
+                        }
+                        callback.onSuccess(new Page<Product>(response.raw().request().url().toString(), decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                    } else {
+                        final String strContent = client.readAsString(response.body());
+                        callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
+                    }
+                } else {
+                    final String strContent = client.readAsString(response.errorBody());
+                    callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                callback.onFailure(t, null);
+            }
+        };
+        call.enqueue(retrofitCallback);
+    }
+
+    /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
      * @param apiVersion Sets the api version to use.
@@ -3969,6 +4022,48 @@ public final class PagingsImpl {
             final String strContent = this.client.readAsString(response.errorBody());
             throw new HttpResponseException(strContent, response.raw());
         }
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The nextLink parameter.
+     * @param callback the Callback that receives the response.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getMultiplePagesLRONext(String nextLink, final Callback<Page<Product>> callback) {
+        Call<ResponseBody> call = service.getMultiplePagesLRONext(nextLink);
+        retrofit2.Callback<ResponseBody> retrofitCallback = new retrofit2.Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 202) {
+                        final ProductResult decodedResult;
+                        try {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), ProductResult.class);
+                        } catch(Exception ex) {
+                            callback.onFailure(ex, response.raw());
+                            return;
+                        }
+                        callback.onSuccess(new Page<Product>(nextLink, decodedResult.getValues(), decodedResult.getNextLink()), response.raw());
+                    } else {
+                        final String strContent = client.readAsString(response.body());
+                        callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
+                    }
+                } else {
+                    final String strContent = client.readAsString(response.errorBody());
+                    callback.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                callback.onFailure(t, null);
+            }
+        };
+        call.enqueue(retrofitCallback);
     }
 
     /**

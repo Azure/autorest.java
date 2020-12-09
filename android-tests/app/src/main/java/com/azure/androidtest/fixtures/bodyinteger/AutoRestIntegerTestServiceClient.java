@@ -19,8 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 /**
- * Initializes a new instance of the synchronous AutoRestIntegerTestService
- * type.
+ * Initializes a new instance of the synchronous AutoRestIntegerTestService type.
  */
 public final class AutoRestIntegerTestServiceClient {
     private IntsImpl serviceClient;
@@ -35,9 +34,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get null Int value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value.
      */
     public Response<Integer> getNullWithRestResponse() {
@@ -47,9 +45,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get invalid Int value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value.
      */
     public Response<Integer> getInvalidWithRestResponse() {
@@ -59,9 +56,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get overflow Int32 value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value.
      */
     public Response<Integer> getOverflowInt32WithRestResponse() {
@@ -71,9 +67,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get underflow Int32 value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value.
      */
     public Response<Integer> getUnderflowInt32WithRestResponse() {
@@ -83,9 +78,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get overflow Int64 value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value.
      */
     public Response<Long> getOverflowInt64WithRestResponse() {
@@ -95,9 +89,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get underflow Int64 value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value.
      */
     public Response<Long> getUnderflowInt64WithRestResponse() {
@@ -109,9 +102,8 @@ public final class AutoRestIntegerTestServiceClient {
      * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMax32WithRestResponse(int intBody) {
@@ -123,9 +115,8 @@ public final class AutoRestIntegerTestServiceClient {
      * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMax64WithRestResponse(long intBody) {
@@ -137,9 +128,8 @@ public final class AutoRestIntegerTestServiceClient {
      * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMin32WithRestResponse(int intBody) {
@@ -151,9 +141,8 @@ public final class AutoRestIntegerTestServiceClient {
      * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putMin64WithRestResponse(long intBody) {
@@ -163,9 +152,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get datetime encoded as Unix time value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value.
      */
     public Response<OffsetDateTime> getUnixTimeWithRestResponse() {
@@ -177,9 +165,8 @@ public final class AutoRestIntegerTestServiceClient {
      * 
      * @param intBody date in seconds since 1970-01-01T00:00:00Z.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putUnixTimeDateWithRestResponse(OffsetDateTime intBody) {
@@ -189,9 +176,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get invalid Unix time value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value.
      */
     public Response<OffsetDateTime> getInvalidUnixTimeWithRestResponse() {
@@ -201,9 +187,8 @@ public final class AutoRestIntegerTestServiceClient {
     /**
      * Get null Unix time value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value.
      */
     public Response<OffsetDateTime> getNullUnixTimeWithRestResponse() {
@@ -211,8 +196,7 @@ public final class AutoRestIntegerTestServiceClient {
     }
 
     /**
-     * A builder for creating a new instance of the AutoRestIntegerTestServiceClient
-     * type.
+     * A builder for creating a new instance of the AutoRestIntegerTestServiceClient type.
      */
     public static final class Builder {
         /*
@@ -264,8 +248,7 @@ public final class AutoRestIntegerTestServiceClient {
         }
 
         /**
-         * Builds an instance of AutoRestIntegerTestServiceClient with the provided
-         * parameters.
+         * Builds an instance of AutoRestIntegerTestServiceClient with the provided parameters.
          * 
          * @return an instance of AutoRestIntegerTestServiceClient.
          */
@@ -280,8 +263,7 @@ public final class AutoRestIntegerTestServiceClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestIntegerTestServiceImpl internalClient = new AutoRestIntegerTestServiceImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestIntegerTestServiceImpl internalClient = new AutoRestIntegerTestServiceImpl(serviceClientBuilder.build(), host);
             return new AutoRestIntegerTestServiceClient(internalClient.getInts());
         }
     }

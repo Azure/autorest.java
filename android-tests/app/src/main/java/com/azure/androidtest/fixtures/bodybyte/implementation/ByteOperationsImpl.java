@@ -3,10 +3,7 @@ package com.azure.androidtest.fixtures.bodybyte.implementation;
 import com.azure.android.core.http.Callback;
 import com.azure.android.core.http.Response;
 import com.azure.android.core.http.exception.HttpResponseException;
-import com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever;
-import com.azure.android.core.http.responsepaging.PagedDataResponseRetriever;
 import com.azure.android.core.internal.util.serializer.SerializerFormat;
-import com.azure.android.core.util.paging.PagedDataRetriever;
 import com.azure.androidtest.fixtures.bodybyte.models.ErrorException;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -33,8 +30,7 @@ public final class ByteOperationsImpl {
     /**
      * Initializes an instance of ByteOperationsImpl.
      * 
-     * @param client the instance of the service client containing this operation
-     *               class.
+     * @param client the instance of the service client containing this operation class.
      */
     ByteOperationsImpl(AutoRestSwaggerBATByteServiceImpl client) {
         this.client = client;
@@ -43,8 +39,8 @@ public final class ByteOperationsImpl {
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATByteServiceByteOperations to be used by the proxy service
-     * to perform REST calls.
+     * AutoRestSwaggerBATByteServiceByteOperations to be used by the proxy
+     * service to perform REST calls.
      */
     private interface ByteOperationsService {
         @GET("/byte/null")
@@ -68,9 +64,8 @@ public final class ByteOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNull(final Callback<byte[]> callback) {
         Call<ResponseBody> call = service.getNull();
@@ -81,9 +76,8 @@ public final class ByteOperationsImpl {
                     if (response.code() == 200) {
                         final byte[] decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(),
-                                    byte[].class);
-                        } catch (Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), byte[].class);
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -109,17 +103,18 @@ public final class ByteOperationsImpl {
     /**
      * Get null byte value.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null byte value.
      */
     public Response<byte[]> getNullWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNull());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -135,9 +130,8 @@ public final class ByteOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(final Callback<byte[]> callback) {
         Call<ResponseBody> call = service.getEmpty();
@@ -148,9 +142,8 @@ public final class ByteOperationsImpl {
                     if (response.code() == 200) {
                         final byte[] decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(),
-                                    byte[].class);
-                        } catch (Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), byte[].class);
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -176,17 +169,18 @@ public final class ByteOperationsImpl {
     /**
      * Get empty byte value ''.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty byte value ''.
      */
     public Response<byte[]> getEmptyWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getEmpty());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -202,9 +196,8 @@ public final class ByteOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNonAscii(final Callback<byte[]> callback) {
         Call<ResponseBody> call = service.getNonAscii();
@@ -215,9 +208,8 @@ public final class ByteOperationsImpl {
                     if (response.code() == 200) {
                         final byte[] decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(),
-                                    byte[].class);
-                        } catch (Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), byte[].class);
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -243,17 +235,18 @@ public final class ByteOperationsImpl {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     public Response<byte[]> getNonAsciiWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getNonAscii());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -267,20 +260,17 @@ public final class ByteOperationsImpl {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9
-     *                 F8 F7 F6).
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNonAscii(byte[] byteBody, final Callback<Void> callback) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
-                    client.serializerAdapter.serialize(byteBody, client.resolveSerializerFormat("application/json")));
-        } catch (java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), client.serializerAdapter.serialize(byteBody, client.resolveSerializerFormat("application/json")));
+        } catch(java.io.IOException ioe) {
             callback.onFailure(new RuntimeException(ioe), null);
             return;
         }
@@ -293,7 +283,7 @@ public final class ByteOperationsImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch (Exception ex) {
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -319,29 +309,26 @@ public final class ByteOperationsImpl {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9
-     *                 F8 F7 F6).
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> putNonAsciiWithRestResponse(byte[] byteBody) {
         final okhttp3.RequestBody okHttp3RequestBody;
         try {
-            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"),
-                    this.client.serializerAdapter.serialize(byteBody,
-                            this.client.resolveSerializerFormat("application/json")));
-        } catch (java.io.IOException ioe) {
+            okHttp3RequestBody = RequestBody.create(okhttp3.MediaType.get("application/json"), this.client.serializerAdapter.serialize(byteBody, this.client.resolveSerializerFormat("application/json")));
+        } catch(java.io.IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        final retrofit2.Response<ResponseBody> response = this.client
-                .executeRetrofitCall(service.putNonAscii(okHttp3RequestBody));
+        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.putNonAscii(okHttp3RequestBody));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());
@@ -357,9 +344,8 @@ public final class ByteOperationsImpl {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getInvalid(final Callback<byte[]> callback) {
         Call<ResponseBody> call = service.getInvalid();
@@ -370,9 +356,8 @@ public final class ByteOperationsImpl {
                     if (response.code() == 200) {
                         final byte[] decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(),
-                                    byte[].class);
-                        } catch (Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), byte[].class);
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -398,17 +383,18 @@ public final class ByteOperationsImpl {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      * 
-     * @throws ErrorException   thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request
-     *                          fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid byte value ':::SWAGGER::::'.
      */
     public Response<byte[]> getInvalidWithRestResponse() {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getInvalid());
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), byte[].class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new ErrorException(strContent, response.raw());

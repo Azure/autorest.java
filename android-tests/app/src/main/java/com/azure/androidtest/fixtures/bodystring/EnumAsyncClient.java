@@ -18,8 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 /**
- * Initializes a new instance of the asynchronous AutoRestSwaggerBATService
- * type.
+ * Initializes a new instance of the asynchronous AutoRestSwaggerBATService type.
  */
 public final class EnumAsyncClient {
     private EnumsImpl serviceClient;
@@ -32,58 +31,50 @@ public final class EnumAsyncClient {
     }
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNotExpandable(final Callback<Colors> callback) {
         this.serviceClient.getNotExpandable(callback);
     }
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param stringBody string body.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNotExpandable(Colors stringBody, final Callback<Void> callback) {
         this.serviceClient.putNotExpandable(stringBody, callback);
     }
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getReferenced(final Callback<Colors> callback) {
         this.serviceClient.getReferenced(callback);
     }
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'.
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
      * @param enumStringBody enum string body.
-     * @param callback       the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferenced(Colors enumStringBody, final Callback<Void> callback) {
         this.serviceClient.putReferenced(enumStringBody, callback);
@@ -94,9 +85,8 @@ public final class EnumAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getReferencedConstant(final Callback<RefColorConstant> callback) {
         this.serviceClient.getReferencedConstant(callback);
@@ -105,12 +95,11 @@ public final class EnumAsyncClient {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param field1   Sample string.
+     * @param field1 Sample string.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferencedConstant(String field1, final Callback<Void> callback) {
         this.serviceClient.putReferencedConstant(field1, callback);
@@ -184,8 +173,7 @@ public final class EnumAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(
-                    serviceClientBuilder.build(), host);
+            AutoRestSwaggerBATServiceImpl internalClient = new AutoRestSwaggerBATServiceImpl(serviceClientBuilder.build(), host);
             return new EnumAsyncClient(internalClient.getEnums());
         }
     }

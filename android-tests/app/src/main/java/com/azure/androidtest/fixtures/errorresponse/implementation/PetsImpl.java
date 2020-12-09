@@ -3,10 +3,7 @@ package com.azure.androidtest.fixtures.errorresponse.implementation;
 import com.azure.android.core.http.Callback;
 import com.azure.android.core.http.Response;
 import com.azure.android.core.http.exception.HttpResponseException;
-import com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever;
-import com.azure.android.core.http.responsepaging.PagedDataResponseRetriever;
 import com.azure.android.core.internal.util.serializer.SerializerFormat;
-import com.azure.android.core.util.paging.PagedDataRetriever;
 import com.azure.androidtest.fixtures.errorresponse.models.Pet;
 import com.azure.androidtest.fixtures.errorresponse.models.PetAction;
 import com.azure.androidtest.fixtures.errorresponse.models.PetActionErrorException;
@@ -35,8 +32,7 @@ public final class PetsImpl {
     /**
      * Initializes an instance of PetsImpl.
      * 
-     * @param client the instance of the service client containing this operation
-     *               class.
+     * @param client the instance of the service client containing this operation class.
      */
     PetsImpl(XMSErrorResponseExtensionsImpl client) {
         this.client = client;
@@ -44,8 +40,9 @@ public final class PetsImpl {
     }
 
     /**
-     * The interface defining all the services for XMSErrorResponseExtensionsPets to
-     * be used by the proxy service to perform REST calls.
+     * The interface defining all the services for
+     * XMSErrorResponseExtensionsPets to be used by the proxy service to
+     * perform REST calls.
      */
     private interface PetsService {
         @GET("/errorStatusCodes/Pets/{petId}/GetPet")
@@ -61,12 +58,11 @@ public final class PetsImpl {
     /**
      * Gets pets by id.
      * 
-     * @param petId    pet id.
+     * @param petId pet id.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException    thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getPetById(String petId, final Callback<Pet> callback) {
         Call<ResponseBody> call = service.getPetById(petId);
@@ -78,7 +74,7 @@ public final class PetsImpl {
                         final Pet decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Pet.class);
-                        } catch (Exception ex) {
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -106,17 +102,18 @@ public final class PetsImpl {
      * 
      * @param petId pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException    thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return pets by id.
      */
     public Response<Pet> getPetByIdWithRestResponse(String petId) {
         final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.getPetById(petId));
         if (response.isSuccessful()) {
             if (response.code() == 200 || response.code() == 202) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), Pet.class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), Pet.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new HttpResponseException(strContent, response.raw());
@@ -131,11 +128,10 @@ public final class PetsImpl {
      * Asks pet to do something.
      * 
      * @param whatAction what action the pet should do.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws PetActionErrorException  thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws PetActionErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doSomething(String whatAction, final Callback<PetAction> callback) {
         Call<ResponseBody> call = service.doSomething(whatAction);
@@ -146,9 +142,8 @@ public final class PetsImpl {
                     if (response.code() == 200) {
                         final PetAction decodedResult;
                         try {
-                            decodedResult = client.deserializeContent(response.headers(), response.body(),
-                                    PetAction.class);
-                        } catch (Exception ex) {
+                            decodedResult = client.deserializeContent(response.headers(), response.body(), PetAction.class);
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -176,18 +171,18 @@ public final class PetsImpl {
      * 
      * @param whatAction what action the pet should do.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws PetActionErrorException  thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws PetActionErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     public Response<PetAction> doSomethingWithRestResponse(String whatAction) {
-        final retrofit2.Response<ResponseBody> response = this.client
-                .executeRetrofitCall(service.doSomething(whatAction));
+        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.doSomething(whatAction));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), PetAction.class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), PetAction.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new PetActionErrorException(strContent, response.raw());
@@ -199,17 +194,13 @@ public final class PetsImpl {
     }
 
     /**
-     * Ensure you can correctly deserialize the returned PetActionError and
-     * deserialization doesn't conflict with the input param name 'models'.
+     * Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'.
      * 
-     * @param models   Make sure model deserialization doesn't conflict with this
-     *                 param name, which has input name 'models'. Use client default
-     *                 value in call.
+     * @param models Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws PetActionErrorException  thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws PetActionErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void hasModelsParam(String models, final Callback<Void> callback) {
         Call<ResponseBody> call = service.hasModelsParam(models);
@@ -221,7 +212,7 @@ public final class PetsImpl {
                         final Void decodedResult;
                         try {
                             decodedResult = client.deserializeContent(response.headers(), response.body(), Void.class);
-                        } catch (Exception ex) {
+                        } catch(Exception ex) {
                             callback.onFailure(ex, response.raw());
                             return;
                         }
@@ -245,25 +236,22 @@ public final class PetsImpl {
     }
 
     /**
-     * Ensure you can correctly deserialize the returned PetActionError and
-     * deserialization doesn't conflict with the input param name 'models'.
+     * Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'.
      * 
-     * @param models Make sure model deserialization doesn't conflict with this
-     *               param name, which has input name 'models'. Use client default
-     *               value in call.
+     * @param models Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws PetActionErrorException  thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws PetActionErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
     public Response<Void> hasModelsParamWithRestResponse(String models) {
-        final retrofit2.Response<ResponseBody> response = this.client
-                .executeRetrofitCall(service.hasModelsParam(models));
+        final retrofit2.Response<ResponseBody> response = this.client.executeRetrofitCall(service.hasModelsParam(models));
         if (response.isSuccessful()) {
             if (response.code() == 200) {
-                return new Response<>(response.raw().request(), response.code(), response.headers(),
-                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
+                return new Response<>(response.raw().request(),
+                                        response.code(),
+                                        response.headers(),
+                                        this.client.deserializeContent(response.headers(), response.body(), Void.class));
             } else {
                 final String strContent = this.client.readAsString(response.body());
                 throw new PetActionErrorException(strContent, response.raw());

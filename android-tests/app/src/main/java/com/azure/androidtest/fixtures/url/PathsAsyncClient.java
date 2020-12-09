@@ -39,9 +39,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanTrue(final Callback<Void> callback) {
         this.serviceClient.getBooleanTrue(callback);
@@ -52,9 +51,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanFalse(final Callback<Void> callback) {
         this.serviceClient.getBooleanFalse(callback);
@@ -65,9 +63,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntOneMillion(final Callback<Void> callback) {
         this.serviceClient.getIntOneMillion(callback);
@@ -78,9 +75,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNegativeOneMillion(final Callback<Void> callback) {
         this.serviceClient.getIntNegativeOneMillion(callback);
@@ -91,9 +87,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getTenBillion(final Callback<Void> callback) {
         this.serviceClient.getTenBillion(callback);
@@ -104,9 +99,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNegativeTenBillion(final Callback<Void> callback) {
         this.serviceClient.getNegativeTenBillion(callback);
@@ -117,9 +111,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificPositive(final Callback<Void> callback) {
         this.serviceClient.floatScientificPositive(callback);
@@ -130,9 +123,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificNegative(final Callback<Void> callback) {
         this.serviceClient.floatScientificNegative(callback);
@@ -143,9 +135,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalPositive(final Callback<Void> callback) {
         this.serviceClient.doubleDecimalPositive(callback);
@@ -156,9 +147,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalNegative(final Callback<Void> callback) {
         this.serviceClient.doubleDecimalNegative(callback);
@@ -169,9 +159,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUnicode(final Callback<Void> callback) {
         this.serviceClient.stringUnicode(callback);
@@ -182,23 +171,20 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUrlEncoded(final Callback<Void> callback) {
         this.serviceClient.stringUrlEncoded(callback);
     }
 
     /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not
-     * encoded.
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUrlNonEncoded(final Callback<Void> callback) {
         this.serviceClient.stringUrlNonEncoded(callback);
@@ -209,9 +195,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringEmpty(final Callback<Void> callback) {
         this.serviceClient.stringEmpty(callback);
@@ -221,11 +206,10 @@ public final class PathsAsyncClient {
      * Get null (should throw).
      * 
      * @param stringPath null string value.
-     * @param callback   the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringNull(String stringPath, final Callback<Void> callback) {
         this.serviceClient.stringNull(stringPath, callback);
@@ -237,9 +221,8 @@ public final class PathsAsyncClient {
      * @param enumPath send the value green.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumValid(UriColor enumPath, final Callback<Void> callback) {
         this.serviceClient.enumValid(enumPath, callback);
@@ -251,9 +234,8 @@ public final class PathsAsyncClient {
      * @param enumPath send null should throw.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumNull(UriColor enumPath, final Callback<Void> callback) {
         this.serviceClient.enumNull(enumPath, callback);
@@ -265,9 +247,8 @@ public final class PathsAsyncClient {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteMultiByte(byte[] bytePath, final Callback<Void> callback) {
         this.serviceClient.byteMultiByte(bytePath, callback);
@@ -278,9 +259,8 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteEmpty(final Callback<Void> callback) {
         this.serviceClient.byteEmpty(callback);
@@ -292,9 +272,8 @@ public final class PathsAsyncClient {
      * @param bytePath null as byte array (should throw).
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteNull(byte[] bytePath, final Callback<Void> callback) {
         this.serviceClient.byteNull(bytePath, callback);
@@ -305,24 +284,21 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateValid(final Callback<Void> callback) {
         this.serviceClient.dateValid(callback);
     }
 
     /**
-     * Get null as date - this should throw or be unusable on the client side,
-     * depending on date representation.
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      * 
      * @param datePath null as date (should throw).
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateNull(LocalDate datePath, final Callback<Void> callback) {
         this.serviceClient.dateNull(datePath, callback);
@@ -333,24 +309,21 @@ public final class PathsAsyncClient {
      * 
      * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeValid(final Callback<Void> callback) {
         this.serviceClient.dateTimeValid(callback);
     }
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on
-     * representation of date-time.
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      * 
      * @param dateTimePath null as date-time.
-     * @param callback     the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeNull(OffsetDateTime dateTimePath, final Callback<Void> callback) {
         this.serviceClient.dateTimeNull(dateTimePath, callback);
@@ -360,26 +333,23 @@ public final class PathsAsyncClient {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      * 
      * @param base64UrlPath base64url encoded value.
-     * @param callback      the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void base64Url(Base64Url base64UrlPath, final Callback<Void> callback) {
         this.serviceClient.base64Url(base64UrlPath, callback);
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-     * null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
      * @param arrayPath Array of Get0ItemsItem.
-     * @param callback  the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayCsvInPath(List<String> arrayPath, final Callback<Void> callback) {
         this.serviceClient.arrayCsvInPath(arrayPath, callback);
@@ -389,11 +359,10 @@ public final class PathsAsyncClient {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      * 
      * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
-     * @param callback        the Callback that receives the response.
+     * @param callback the Callback that receives the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException           thrown if the request is rejected by server.
-     * @throws RuntimeException         all other wrapped checked exceptions if the
-     *                                  request fails to be sent.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void unixTimeUrl(OffsetDateTime unixTimeUrlPath, final Callback<Void> callback) {
         this.serviceClient.unixTimeUrl(unixTimeUrlPath, callback);
@@ -499,8 +468,7 @@ public final class PathsAsyncClient {
             if (credentialInterceptor != null) {
                 serviceClientBuilder.setCredentialsInterceptor(credentialInterceptor);
             }
-            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(),
-                    globalStringPath, globalStringQuery, host);
+            AutoRestUrlTestServiceImpl internalClient = new AutoRestUrlTestServiceImpl(serviceClientBuilder.build(), globalStringPath, globalStringQuery, host);
             return new PathsAsyncClient(internalClient.getPaths());
         }
     }
