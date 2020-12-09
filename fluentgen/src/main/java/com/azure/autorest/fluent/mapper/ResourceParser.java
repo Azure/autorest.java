@@ -232,7 +232,7 @@ public class ResourceParser {
         return Optional.ofNullable(resourceDelete);
     }
 
-    private static Map<FluentResourceModel, ResourceCreate> findResourceCreateForCategory(
+    static Map<FluentResourceModel, ResourceCreate> findResourceCreateForCategory(
             FluentResourceCollection collection,
             Map<String, FluentResourceModel> fluentModelMapByName,
             List<ClientModel> availableModels,
