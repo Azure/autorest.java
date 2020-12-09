@@ -74,7 +74,7 @@ public class LiteCompilationTests {
 
         blobContainer.refresh();
 
-        storageManager.storageAccounts().delete("rg-weidxu", "sa1weidxu");
+        storageManager.storageAccounts().deleteByResourceGroup("rg-weidxu", "sa1weidxu");
     }
 
     public void testResources() {

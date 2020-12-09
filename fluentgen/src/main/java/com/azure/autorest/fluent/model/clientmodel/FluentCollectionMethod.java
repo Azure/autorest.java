@@ -30,8 +30,12 @@ public class FluentCollectionMethod {
     private final ImmutableMethod immutableMethod;
 
     public FluentCollectionMethod(ClientMethod method) {
+        this(method, method.getName());
+    }
+
+    public FluentCollectionMethod(ClientMethod method, String methodName) {
         this.method = method;
-        this.methodName = method.getName();
+        this.methodName = methodName;
         this.fluentReturnType = FluentUtils.getFluentWrapperType(method.getReturnValue().getType());
 
         this.immutableMethod = this.fluentReturnType == method.getReturnValue().getType()
