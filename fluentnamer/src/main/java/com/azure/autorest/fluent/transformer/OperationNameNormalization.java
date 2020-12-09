@@ -112,36 +112,7 @@ class OperationNameNormalization {
                     if (candidateWellKnownName.contains(WellKnownMethodName.GET_BY_RESOURCE_GROUP)) {
                         newName = WellKnownMethodName.GET_BY_RESOURCE_GROUP.getMethodName();
 
-                        // check path parameter order
-                        String resourceGroupParameterName = parameterSerializedName(urlSegments[3]);
-                        operation.getRequests().forEach(request -> {
-                            List<Parameter> pathMethodParameters = request.getParameters().stream()
-                                    .filter(OperationNameNormalization::isPathParameterInMethod)
-                                    .collect(Collectors.toList());
-                            if (pathMethodParameters.size() == 2
-                                    && resourceGroupParameterName.equals(pathMethodParameters.get(1).getLanguage().getDefault().getSerializedName())) {
-                                // resourceGroup parameter and resourceName parameter in reverse order
-                                String resourceNameParameterName = parameterSerializedName(urlSegments[7]);
-
-                                logger.info("Reorder '{}' parameter and '{}' parameter, in operation '{}'", resourceGroupParameterName, resourceNameParameterName, Utils.getJavaName(operation));
-
-                                int rgIndex = -1;
-                                int nameIndex = -1;
-                                for (int i = 0; i < request.getParameters().size(); ++i) {
-                                    Parameter p = request.getParameters().get(i);
-                                    if (isPathParameterInMethod(p)) {
-                                        if (resourceGroupParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
-                                            rgIndex = i;
-                                        } else if (resourceNameParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
-                                            nameIndex = i;
-                                        }
-                                    }
-                                }
-                                if (rgIndex >= 0 && nameIndex >= 0) {
-                                    Collections.swap(request.getParameters(), rgIndex, nameIndex);
-                                }
-                            }
-                        });
+                        normalizePathParameterOrder(operation, urlSegments);
                     }
                 } else if ((urlSegments.length == 5 || urlSegments.length == 7)
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
@@ -159,8 +130,18 @@ class OperationNameNormalization {
                         }
                     }
                 }
+            } else if (HttpMethod.DELETE.name().equalsIgnoreCase(operation.getRequests().iterator().next().getProtocol().getHttp().getMethod())) {
+                if (urlSegments.length == 8
+                        && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
+                        && urlSegments[2].equalsIgnoreCase(SEGMENT_RESOURCE_GROUPS)
+                        && urlSegments[4].equalsIgnoreCase(SEGMENT_PROVIDERS)) {
+                    if (candidateWellKnownName.contains(WellKnownMethodName.DELETE)) {
+                        newName = WellKnownMethodName.DELETE.getMethodName();
+
+                        normalizePathParameterOrder(operation, urlSegments);
+                    }
+                }
             }
-            // TODO WellKnownMethodName.DELETE
 
             if (newName != null) {
                 if (!newName.equals(Utils.getJavaName(operation))) {
@@ -171,6 +152,39 @@ class OperationNameNormalization {
         }
 
         return renamePlan;
+    }
+
+    private static void normalizePathParameterOrder(Operation operation, String[] urlSegments) {
+        // check path parameter order
+        String resourceGroupParameterName = parameterSerializedName(urlSegments[3]);
+        operation.getRequests().forEach(request -> {
+            List<Parameter> pathMethodParameters = request.getParameters().stream()
+                    .filter(OperationNameNormalization::isPathParameterInMethod)
+                    .collect(Collectors.toList());
+            if (pathMethodParameters.size() == 2
+                    && resourceGroupParameterName.equals(pathMethodParameters.get(1).getLanguage().getDefault().getSerializedName())) {
+                // resourceGroup parameter and resourceName parameter in reverse order
+                String resourceNameParameterName = parameterSerializedName(urlSegments[7]);
+
+                logger.info("Reorder '{}' parameter and '{}' parameter, in operation '{}'", resourceGroupParameterName, resourceNameParameterName, Utils.getJavaName(operation));
+
+                int rgIndex = -1;
+                int nameIndex = -1;
+                for (int i = 0; i < request.getParameters().size(); ++i) {
+                    Parameter p = request.getParameters().get(i);
+                    if (isPathParameterInMethod(p)) {
+                        if (resourceGroupParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
+                            rgIndex = i;
+                        } else if (resourceNameParameterName.equals(p.getLanguage().getDefault().getSerializedName())) {
+                            nameIndex = i;
+                        }
+                    }
+                }
+                if (rgIndex >= 0 && nameIndex >= 0) {
+                    Collections.swap(request.getParameters(), rgIndex, nameIndex);
+                }
+            }
+        });
     }
 
     private static boolean isPossiblePagedList(Operation operation) {

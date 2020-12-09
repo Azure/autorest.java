@@ -54,7 +54,7 @@ public class ResourceDelete extends ResourceOperation {
         if (methodOpt.isPresent()) {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
-            String name = getDeleteByIdMethodName(collectionMethod.getInnerClientMethod().getName());
+            String name = getDeleteByIdMethodName(collectionMethod.getMethodName());
             if (!hasConflictingMethod(name)) {
                 List<MethodParameter> pathParameters = this.getPathParameters();
 

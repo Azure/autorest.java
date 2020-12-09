@@ -132,7 +132,7 @@ public class ResourceParserTests {
 
         List<FluentCollectionMethod> methodReferences = lockCreate.getMethodReferences();
         Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("createOrUpdateAtResourceGroupLevel"));
+        Assertions.assertTrue(methodReferences.iterator().next().getMethodName().startsWith("createOrUpdateAtResourceGroupLevel"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.PUT, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
 
@@ -140,7 +140,7 @@ public class ResourceParserTests {
         ResourceUpdate lockUpdate = ResourceParser.resolveResourceUpdate(lockCollection, lockCreate, client.getModels()).get();
         methodReferences = lockUpdate.getMethodReferences();
         Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("createOrUpdateAtResourceGroupLevel"));
+        Assertions.assertTrue(methodReferences.iterator().next().getMethodName().startsWith("createOrUpdateAtResourceGroupLevel"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.PUT, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
 
@@ -148,7 +148,7 @@ public class ResourceParserTests {
         ResourceRefresh lockRefresh = ResourceParser.resolveResourceRefresh(lockCollection, lockCreate).get();
         methodReferences = lockRefresh.getMethodReferences();
         Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("getByResourceGroup"));
+        Assertions.assertTrue(methodReferences.iterator().next().getMethodName().startsWith("getByResourceGroup"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.GET, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
 
@@ -156,7 +156,7 @@ public class ResourceParserTests {
         ResourceDelete lockDelete = ResourceParser.resolveResourceDelete(lockCollection, lockCreate).get();
         methodReferences = lockDelete.getMethodReferences();
         Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("deleteAtResourceGroupLevel"));
+        Assertions.assertTrue(methodReferences.iterator().next().getMethodName().startsWith("deleteByResourceGroup"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.DELETE, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
     }

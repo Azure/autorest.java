@@ -70,7 +70,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
         String argumentsLine = methodParameters.stream()
                 .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod, resourceLocalVariablesDefinedInClass))
                 .collect(Collectors.joining(", "));
-        String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
+        String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getMethodName(), argumentsLine);
 
         String afterInvocationCode = returnIsResponseType ? ".getValue()" : "";
 
