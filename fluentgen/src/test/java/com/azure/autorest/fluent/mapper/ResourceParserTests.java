@@ -156,7 +156,7 @@ public class ResourceParserTests {
         ResourceDelete lockDelete = ResourceParser.resolveResourceDelete(lockCollection, lockCreate).get();
         methodReferences = lockDelete.getMethodReferences();
         Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("deleteAtResourceGroupLevel"));
+        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("delete"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.DELETE, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
     }
