@@ -90,7 +90,7 @@ public class ResourceRefresh extends ResourceOperation {
         if (methodOpt.isPresent()) {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
-            String name = getGetByIdMethodName(collectionMethod.getInnerClientMethod().getName());
+            String name = getGetByIdMethodName(collectionMethod.getMethodName());
             if (!hasConflictingMethod(name)) {
                 List<MethodParameter> pathParameters = this.getPathParameters();
 

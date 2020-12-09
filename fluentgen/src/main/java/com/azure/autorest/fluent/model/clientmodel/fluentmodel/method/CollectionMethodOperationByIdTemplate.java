@@ -83,7 +83,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         String argumentsLine = methodParameters.stream()
                 .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, localVariables, model, collectionMethod))
                 .collect(Collectors.joining(", "));
-        String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getInnerClientMethod().getName(), argumentsLine);
+        String methodInvocation = String.format("%1$s(%2$s)", collectionMethod.getMethodName(), argumentsLine);
 
         List<UrlPathSegments.ParameterSegment> segments = urlPathSegments.getReverseParameterSegments();
         Collections.reverse(segments);
