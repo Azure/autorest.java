@@ -25,7 +25,6 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.management.Region;
@@ -116,7 +115,7 @@ public class ResourceParser {
                         .collect(Collectors.toList()));
     }
 
-    private static List<ResourceCreate> resolveResourceCreate(
+    static List<ResourceCreate> resolveResourceCreate(
             FluentResourceCollection collection,
             List<FluentResourceModel> availableFluentModels,
             List<ClientModel> availableModels) {
@@ -161,7 +160,7 @@ public class ResourceParser {
         return supportsCreateList;
     }
 
-    private static Optional<ResourceUpdate> resolveResourceUpdate(
+    static Optional<ResourceUpdate> resolveResourceUpdate(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate,
             List<ClientModel> availableModels) {
@@ -194,7 +193,7 @@ public class ResourceParser {
         return Optional.ofNullable(resourceUpdate);
     }
 
-    private static Optional<ResourceRefresh> resolveResourceRefresh(
+    static Optional<ResourceRefresh> resolveResourceRefresh(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate) {
 
@@ -214,7 +213,7 @@ public class ResourceParser {
         return Optional.ofNullable(resourceRefresh);
     }
 
-    private static Optional<ResourceDelete> resolveResourceDelete(
+    static Optional<ResourceDelete> resolveResourceDelete(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate) {
 
