@@ -73,6 +73,8 @@ public class LiteCompilationTests {
                 .apply(new Context("key", "value"));
 
         blobContainer.refresh();
+
+        storageManager.storageAccounts().delete("rg-weidxu", "sa1weidxu");
     }
 
     public void testResources() {
