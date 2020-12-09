@@ -28,11 +28,10 @@ public class PageResponseRetrieverTemplate {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
         this.serviceClientClassName = serviceClientClassName;
-    }
-
-    this.methodReturnType=(GenericType)getFirstPageMethod.getReturnValue().getType();this.elementType=methodReturnType.getTypeArguments()[0];this.pageType=GenericType.AndroidPage(elementType);this.retrieverClassName=CodeNamer.toPascalCase(getFirstPageMethod.getName())+elementType.toString()+"PageResponseRetriever";
-
-    this.methodReturnType=(GenericType)getFirstPageMethod.getReturnValue().getType();this.elementType=methodReturnType.getTypeArguments()[0];this.pageType=GenericType.AndroidPage(elementType);this.retrieverClassName=CodeNamer.toPascalCase(getFirstPageMethod.getName())+"Retriever";
+        this.methodReturnType=(GenericType)getFirstPageMethod.getReturnValue().getType();
+        this.elementType=methodReturnType.getTypeArguments()[0];
+        this.pageType=GenericType.AndroidPage(elementType);
+        this.retrieverClassName=CodeNamer.toPascalCase(getFirstPageMethod.getName())+"Retriever";
 
     }
 

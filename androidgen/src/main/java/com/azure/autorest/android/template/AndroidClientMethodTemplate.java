@@ -476,12 +476,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     retrieverConstructionBuilder.append(clientMethodParameter.getName());
                     hasPreviousParam = true;
                 }
-                if (hasPreviousParam) {
-                    retrieverConstructionBuilder.append(", ");
-                }
-                retrieverConstructionBuilder.append(clientMethodParameter.getName());
-                hasPreviousParam = true;
-            }
+
             if (hasPreviousParam) {
                 retrieverConstructionBuilder.append(", ");
             }
