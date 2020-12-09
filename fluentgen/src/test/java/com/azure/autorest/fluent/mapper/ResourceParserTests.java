@@ -10,6 +10,7 @@ import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -40,12 +41,8 @@ public class ResourceParserTests {
 
     @Test
     public void testResourceCreate() {
-        String searchYamlContent = loadYaml("code-model-fluentgen-search.yaml");
-
-        CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
-        Client client = fluentgenAccessor.handleMap(codeModel);
-
-        FluentStatic.setClient(client);
+        CodeModel codeModel = loadCodeModel();
+        Client client = FluentStatic.getClient();
 
         List<FluentResourceModel> fluentModels =
                 codeModel.getSchemas().getObjects().stream()
@@ -60,11 +57,11 @@ public class ResourceParserTests {
                         .collect(Collectors.toList());
 
         FluentResourceModel serviceModel = fluentModels.stream()
-                .filter(m -> m.getName().equals("SearchService"))
+                .filter(m -> m.getName().equals("ManagementLockObject"))
                 .findFirst().get();
 
         FluentResourceCollection serviceCollection = fluentCollections.stream()
-                .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("Services"))
+                .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("ManagementLocks"))
                 .findFirst().get();
 
         List<ResourceCreate> resourceCreates = ResourceParser.resolveResourceCreate(serviceCollection, fluentModels, client.getModels());
@@ -81,9 +78,24 @@ public class ResourceParserTests {
         Assertions.assertEquals(serviceCreate, serviceCollection.getResourceCreates().iterator().next());
 
         Assertions.assertEquals(serviceCreate, serviceModel.getResourceCreate());
+
+        List<FluentCollectionMethod> methodReferences = serviceCreate.getMethodReferences();
+        Assertions.assertEquals(2, methodReferences.size());
+        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("createOrUpdateAtResourceGroupLevel"));
     }
 
-    public static String loadYaml(String filename) {
+    private static CodeModel loadCodeModel() {
+        String searchYamlContent = loadYaml("code-model-fluentnamer-locks.yaml");
+
+        CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
+        Client client = fluentgenAccessor.handleMap(codeModel);
+
+        FluentStatic.setClient(client);
+
+        return codeModel;
+    }
+
+    private static String loadYaml(String filename) {
         final int bufferSize = 1024;
         final char[] buffer = new char[bufferSize];
         final StringBuilder out = new StringBuilder();
