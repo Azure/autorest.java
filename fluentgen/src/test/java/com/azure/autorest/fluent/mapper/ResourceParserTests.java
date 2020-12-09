@@ -25,8 +25,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResourceParserTests {
@@ -64,24 +67,66 @@ public class ResourceParserTests {
                 .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("ManagementLocks"))
                 .findFirst().get();
 
-        List<ResourceCreate> resourceCreates = ResourceParser.resolveResourceCreate(serviceCollection, fluentModels, client.getModels());
+        // test findResourceCreateForCategory
+        {
+            Map<String, FluentResourceModel> fluentModelMapByName = fluentModels.stream()
+                    .collect(Collectors.toMap(m -> m.getInterfaceType().toString(), Function.identity()));
 
-        Assertions.assertEquals(1, resourceCreates.size());
+            // RESOURCE_GROUP_AS_PARENT
+            Map<FluentResourceModel, ResourceCreate> resourceCreateMap =
+                    ResourceParser.findResourceCreateForCategory(serviceCollection, fluentModelMapByName, client.getModels(), Collections.emptySet(), ModelCategory.RESOURCE_GROUP_AS_PARENT);
 
-        ResourceCreate serviceCreate = resourceCreates.iterator().next();
+            Assertions.assertEquals(1, resourceCreateMap.size());
+            ResourceCreate resourceCreate = resourceCreateMap.values().iterator().next();
 
-        Assertions.assertEquals(serviceCollection, serviceCreate.getResourceCollection());
-        Assertions.assertEquals(serviceModel, serviceCreate.getResourceModel());
-        Assertions.assertEquals(ModelCategory.RESOURCE_GROUP_AS_PARENT, serviceCreate.getResourceModel().getCategory());
+            Assertions.assertEquals("createOrUpdateAtResourceGroupLevel", resourceCreate.getMethodName());
 
-        Assertions.assertEquals(1, serviceCollection.getResourceCreates().size());
-        Assertions.assertEquals(serviceCreate, serviceCollection.getResourceCreates().iterator().next());
+            // SCOPE_AS_PARENT
+            resourceCreateMap =
+                    ResourceParser.findResourceCreateForCategory(serviceCollection, fluentModelMapByName, client.getModels(), Collections.emptySet(), ModelCategory.SCOPE_AS_PARENT);
 
-        Assertions.assertEquals(serviceCreate, serviceModel.getResourceCreate());
+            Assertions.assertEquals(1, resourceCreateMap.size());
+            resourceCreate = resourceCreateMap.values().iterator().next();
 
-        List<FluentCollectionMethod> methodReferences = serviceCreate.getMethodReferences();
-        Assertions.assertEquals(2, methodReferences.size());
-        Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("createOrUpdateAtResourceGroupLevel"));
+            Assertions.assertEquals("createOrUpdateByScope", resourceCreate.getMethodName());
+
+            // SUBSCRIPTION_AS_PARENT
+            resourceCreateMap =
+                    ResourceParser.findResourceCreateForCategory(serviceCollection, fluentModelMapByName, client.getModels(), Collections.emptySet(), ModelCategory.SUBSCRIPTION_AS_PARENT);
+
+            Assertions.assertEquals(1, resourceCreateMap.size());
+            resourceCreate = resourceCreateMap.values().iterator().next();
+
+            Assertions.assertEquals("createOrUpdateAtSubscriptionLevel", resourceCreate.getMethodName());
+
+            // NESTED_CHILD, not available in locks
+            resourceCreateMap =
+                    ResourceParser.findResourceCreateForCategory(serviceCollection, fluentModelMapByName, client.getModels(), Collections.emptySet(), ModelCategory.NESTED_CHILD);
+
+            Assertions.assertTrue(resourceCreateMap.isEmpty());
+        }
+
+        // test resolveResourceCreate
+        {
+            List<ResourceCreate> resourceCreates = ResourceParser.resolveResourceCreate(serviceCollection, fluentModels, client.getModels());
+
+            Assertions.assertEquals(1, resourceCreates.size());
+
+            ResourceCreate serviceCreate = resourceCreates.iterator().next();
+
+            Assertions.assertEquals(serviceCollection, serviceCreate.getResourceCollection());
+            Assertions.assertEquals(serviceModel, serviceCreate.getResourceModel());
+            Assertions.assertEquals(ModelCategory.RESOURCE_GROUP_AS_PARENT, serviceCreate.getResourceModel().getCategory());
+
+            Assertions.assertEquals(1, serviceCollection.getResourceCreates().size());
+            Assertions.assertEquals(serviceCreate, serviceCollection.getResourceCreates().iterator().next());
+
+            Assertions.assertEquals(serviceCreate, serviceModel.getResourceCreate());
+
+            List<FluentCollectionMethod> methodReferences = serviceCreate.getMethodReferences();
+            Assertions.assertEquals(2, methodReferences.size());
+            Assertions.assertTrue(methodReferences.iterator().next().getInnerClientMethod().getName().startsWith("createOrUpdateAtResourceGroupLevel"));
+        }
     }
 
     private static CodeModel loadCodeModel() {
