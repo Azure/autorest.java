@@ -677,9 +677,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         if (bodyType == PrimitiveType.Void) {
             succeededCodeBlock.line("response.body().close();");
             succeededCodeBlock.methodReturn("new Response<>(response.raw().request(),\n" +
-                        "                        response.code(),\n" +
-                        "                        response.headers(),\n" +
-                        "                        null)");
+                            "                        response.code(),\n" +
+                            "                        response.headers(),\n" +
+                            "                        null)");
         } else if (bodyType == ClassType.OkHttp3ResponseBody) {
             succeededCodeBlock.methodReturn("new Response<>(response.raw().request(),\n" +
                     "                        response.code(),\n" +
@@ -854,13 +854,14 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                         });
                                     }).elseBlock(responseFailureBlock -> {
                                         responseFailureBlock.line("final String strContent = %sreadAsString(response.errorBody());", clientReferenceDot);
-                                        responseFailureBlock.line(String.format("%s.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());", callbackParameterName));
+                                        responseFailureBlock.line(String.format("%s.onFailure(new HttpResponseException(strContent, response.raw()), response.raw());",
+                                                callbackParameterName));
                                     }));
 
-                        anonymousCls.annotation("Override");
-                        anonymousCls.publicMethod("void onFailure(Call<ResponseBody> call, Throwable t)",
-                                onFailureBlock -> {
-                                    onFailureBlock.line(String.format("%s.onFailure(t, null);", callbackParameterName));
+                            anonymousCls.annotation("Override");
+                            anonymousCls.publicMethod("void onFailure(Call<ResponseBody> call, Throwable t)",
+                                    onFailureBlock -> {
+                                        onFailureBlock.line(String.format("%s.onFailure(t, null);", callbackParameterName));
                         });
                     });
                     function.line("call.enqueue(retrofitCallback);");

@@ -118,8 +118,9 @@ class HostMapping {
             .filter(p -> {
                 return p.getRequestParameterLocation() == RequestParameterLocation.Uri
                     && !p.getIsConstant()
-                    && (!hostIsBaseUrl || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used for base url
-            })
+                    && (!hostIsBaseUrl
+                        || !p.getName().equals(HOST_PROPERTY_NAME)); // exclude "host" when host is used for base url
+                })
             .collect(Collectors.toList());
 
         return new HostMapping(baseURL, hostParams, hostIsBaseUrl);

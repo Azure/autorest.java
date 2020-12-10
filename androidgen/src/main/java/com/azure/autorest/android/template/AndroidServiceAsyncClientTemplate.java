@@ -65,7 +65,8 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             classBlock.javadocComment(comment ->
                     comment
                             .description(String.format("Initializes an instance of %1$s client.",
-                                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
+                                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
+            );
 
             if (wrapServiceClient) {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,

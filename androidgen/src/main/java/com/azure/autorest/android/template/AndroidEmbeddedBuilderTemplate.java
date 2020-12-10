@@ -174,7 +174,7 @@ public class AndroidEmbeddedBuilderTemplate {
                             function.line(String.format("return new %2$s(%3$s);", clientClsName, clientClsName,
                                     constructorArgsStr));
                         }
-                    });
+                });
         });
     }
 
