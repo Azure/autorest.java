@@ -1,7 +1,10 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
@@ -34,8 +37,7 @@ public class PageRetrieverTemplate {
     }
 
     public void write(JavaClass clientClass) {
-        String classSignature = retrieverClassName
-                + String.format(" extends PagedDataRetriever<%1$s, Page<%1$s>>", elementType);
+        String classSignature = retrieverClassName + String.format(" extends PagedDataRetriever<%1$s, Page<%1$s>>", elementType);
 
         clientClass.privateStaticFinalClass(classSignature, javaClass -> {
             StringBuilder ctorSignatureBuilder = new StringBuilder();
@@ -45,10 +47,8 @@ public class PageRetrieverTemplate {
                 if (hasPrevious) {
                     ctorSignatureBuilder.append(", ");
                 }
-                javaClass.privateFinalMemberVariable(clientMethodParameter.getClientType().toString(),
-                        clientMethodParameter.getName());
-                ctorSignatureBuilder.append(String.format("%1$s %2$s", clientMethodParameter.getClientType(),
-                        clientMethodParameter.getName()));
+                javaClass.privateFinalMemberVariable(clientMethodParameter.getClientType().toString(), clientMethodParameter.getName());
+                ctorSignatureBuilder.append(String.format("%1$s %2$s", clientMethodParameter.getClientType(), clientMethodParameter.getName()));
                 hasPrevious = true;
             }
             if (hasPrevious) {
@@ -67,8 +67,7 @@ public class PageRetrieverTemplate {
 
             javaClass.publicMethod(String.format("%s getFirstPage()", pageType), getPageMethod -> {
                 StringBuilder getPageBuilder = new StringBuilder();
-                getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(",
-                        getFirstPageMethod.getProxyMethod().getName()));
+                getPageBuilder.append(String.format(" return serviceClient.%sWithRestResponse(", getFirstPageMethod.getProxyMethod().getName()));
                 boolean hasPreviousParam = false;
                 for (ClientMethodParameter clientMethodParameter : getFirstPageMethod.getMethodParameters()) {
                     if (hasPreviousParam) {

@@ -1,7 +1,10 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.Templates;
@@ -43,10 +46,12 @@ public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate 
         embeddedBuilderTemplate.addImportsTo(imports);
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment -> comment.description(String
-                .format("Initializes a new instance of the synchronous %1$s type.", serviceClient.getInterfaceName())));
+        javaFile.javadocComment(comment ->
+                comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
+                        serviceClient.getInterfaceName())));
 
-        javaFile.publicFinalClass(syncClassName, classBlock -> {
+        javaFile.publicFinalClass(syncClassName, classBlock ->
+        {
             // Add service client member variable
             if (wrapServiceClient) {
                 classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
@@ -55,31 +60,39 @@ public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate 
             }
 
             // Service Client Constructor
-            classBlock.javadocComment(comment -> comment.description(String.format(
-                    "Initializes an instance of %1$s client.",
-                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
+            classBlock.javadocComment(comment ->
+                    comment
+                            .description(String.format("Initializes an instance of %1$s client.",
+                                wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
+            );
 
             if (wrapServiceClient) {
-                classBlock.packagePrivateConstructor(
-                        String.format("%1$s(%2$s %3$s)", syncClassName, serviceClient.getClassName(), "serviceClient"),
-                        constructorBlock -> {
-                            constructorBlock.line("this.serviceClient = serviceClient;");
-                        });
+                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)",
+                        syncClassName, serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
+                    constructorBlock.line("this.serviceClient = serviceClient;");
+                });
             } else {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
                         methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
-                            constructorBlock.line("this.serviceClient = serviceClient;");
-                        });
+                    constructorBlock.line("this.serviceClient = serviceClient;");
+                });
             }
 
             if (wrapServiceClient) {
-                serviceClient.getClientMethods().stream().filter(this::shouldWriteMethod).forEach(clientMethod -> {
-                    Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
-                });
+                serviceClient.getClientMethods()
+                        .stream()
+                        .filter(this::shouldWriteMethod)
+                        .forEach(clientMethod -> {
+                            Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
+                        });
             } else {
-                methodGroupClient.getClientMethods().stream().filter(this::shouldWriteMethod).forEach(clientMethod -> {
-                    Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
-                });
+                methodGroupClient
+                        .getClientMethods()
+                        .stream()
+                        .filter(this::shouldWriteMethod)
+                        .forEach(clientMethod -> {
+                            Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
+                        });
             }
 
             // Add embedded builder for this Sync ServiceClient

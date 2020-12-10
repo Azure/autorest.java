@@ -63,12 +63,12 @@ public class AndroidEmbeddedBuilderTemplate {
         JavaSettings settings = JavaSettings.getInstance();
 
         final boolean isSyncOrAsyncClient = asyncSyncClient == null ? false : true;
-        final String clientClsName = isSyncOrAsyncClient ? asyncSyncClient.getClassName()
+        final String clientClsName = isSyncOrAsyncClient
+                ? asyncSyncClient.getClassName()
                 : serviceClient.getInterfaceName();
 
         clientClass.javadocComment(comment -> {
-            comment.description(
-                    String.format("A builder for creating a new instance of the %1$s type.", clientClsName));
+            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientClsName));
         });
 
         clientClass.publicStaticFinalClass(EMBEDDED_BUILDER_CLS_NAME, classBlock -> {
@@ -83,11 +83,11 @@ public class AndroidEmbeddedBuilderTemplate {
                 writeBuilderProperty(settings, classBlock, p.getDescription(), p.getName(), p.getWireType());
             });
 
-            hostMapping.getHostParams().stream().filter(
-                    h -> !this.serviceClient.getProperties().stream().anyMatch(p -> p.getName().equals(h.getName())))
-                    .forEach(hp -> {
-                        writeBuilderProperty(settings, classBlock, hp.getDescription(), hp.getName(), hp.getWireType());
-                    });
+            hostMapping.getHostParams().stream()
+                .filter(h -> !this.serviceClient.getProperties().stream().anyMatch(p -> p.getName().equals(h.getName())))
+                .forEach(hp -> {
+                    writeBuilderProperty(settings, classBlock, hp.getDescription(), hp.getName(), hp.getWireType());
+                });
 
             if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
                 writeBuilderProperty(settings, classBlock, "base url of the service", BASE_URL_PROPERTY_NAME,
@@ -95,8 +95,7 @@ public class AndroidEmbeddedBuilderTemplate {
             }
 
             classBlock.javadocComment(comment -> {
-                comment.description(
-                        String.format("Builds an instance of %1$s with the provided parameters", clientClsName));
+                comment.description(String.format("Builds an instance of %1$s with the provided parameters", clientClsName));
                 comment.methodReturns(String.format("an instance of %1$s", clientClsName));
             });
 
@@ -104,27 +103,31 @@ public class AndroidEmbeddedBuilderTemplate {
                     String.format("%1$s %2$s()", clientClsName, BUILD_METHOD_NAME), function -> {
                         if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
                             function.ifBlock(String.format("%1$s == null", BASE_URL_PROPERTY_NAME), ifBlock -> {
-                                function.line("this.%1$s = \"%2$s\";", BASE_URL_PROPERTY_NAME,
-                                        hostMapping.getBaseUrlPattern());
+                                function.line("this.%1$s = \"%2$s\";", BASE_URL_PROPERTY_NAME, hostMapping.getBaseUrlPattern());
                             });
                         }
 
                         final List<String> constructorArgsSet1 = new ArrayList<>();
-                        this.serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()).forEach(p -> {
-                            // 1. Collect ServiceClient Ctr args.
-                            constructorArgsSet1.add(p.getName());
-                            // 2. Set default value for ServiceClient properties whose builder setters are
-                            // not called by the app.
-                            if (p.getDefaultValueExpression() != null) {
-                                function.ifBlock(String.format("%1$s == null", p.getName()), ifBlock -> {
-                                    function.line("this.%1$s = %2$s;", p.getName(), p.getDefaultValueExpression());
-                                });
-                            }
-                        });
+                        this.serviceClient.getProperties()
+                            .stream()
+                            .filter(p -> !p.isReadOnly())
+                            .forEach(p -> {
+                                // 1. Collect ServiceClient Ctr args.
+                                constructorArgsSet1.add(p.getName());
+                                // 2. Set default value for ServiceClient properties whose builder setters are
+                                // not called by the app.
+                                if (p.getDefaultValueExpression() != null) {
+                                    function.ifBlock(String.format("%1$s == null", p.getName()), ifBlock -> {
+                                        function.line("this.%1$s = %2$s;", p.getName(), p.getDefaultValueExpression());
+                                    });
+                                }
+                            });
 
                         final List<String> constructorArgsSet2 = new ArrayList<>();
-                        this.commonProperties.stream()
-                                .filter(p -> p.getWireType() != ClassType.AndroidOkHttpInterceptor).forEach(p -> {
+                        this.commonProperties
+                                .stream()
+                                .filter(p -> p.getWireType() != ClassType.AndroidOkHttpInterceptor)
+                                .forEach(p -> {
                                     // 1. Collect ServiceClient Ctr args.
                                     if (isBuilderType(p)) {
                                         constructorArgsSet2.add(p.getName() + ".build()");
@@ -176,12 +179,21 @@ public class AndroidEmbeddedBuilderTemplate {
     }
 
     private List<ClientMethodParameter> commonPropertiesFromCtr(final Constructor constructor) {
-        return constructor.getParameters().stream().map(p -> {
+        return constructor.getParameters()
+            .stream()
+            .map(p -> {
             if (p.getWireType() == ClassType.AndroidRestClient) {
-                return new ClientMethodParameter.Builder().description("The Azure Core generic ServiceClient Builder.")
-                        .isFinal(false).wireType(ClassType.AndroidRestClientBuilder).name("serviceClientBuilder")
-                        .isRequired(true).isConstant(false).fromClient(true).annotations(new ArrayList<>())
-                        .defaultValue("new ServiceClient.Builder()").build();
+                return new ClientMethodParameter.Builder()
+                        .description("The Azure Core generic ServiceClient Builder.")
+                        .isFinal(false)
+                        .wireType(ClassType.AndroidRestClientBuilder)
+                        .name("serviceClientBuilder")
+                        .isRequired(true)
+                        .isConstant(false)
+                        .fromClient(true)
+                        .annotations(new ArrayList<>())
+                        .defaultValue("new ServiceClient.Builder()")
+                        .build();
             } else {
                 return p;
             }
@@ -195,8 +207,10 @@ public class AndroidEmbeddedBuilderTemplate {
                 .isConstant(false).fromClient(true).annotations(new ArrayList<>()).build();
     }
 
-    private static void writeBuilderProperty(JavaSettings settings, JavaClass classBlock, String propDescription,
-            String propName, IType propType) {
+    private static void writeBuilderProperty(JavaSettings settings,
+                                             JavaClass classBlock,
+                                             String propDescription,
+                                             String propName, IType propType) {
         classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment -> {
             comment.line(propDescription);
         });
@@ -207,11 +221,15 @@ public class AndroidEmbeddedBuilderTemplate {
             comment.param(propName, String.format("the %1$s value.", propName));
             comment.methodReturns(String.format("the %1$s", EMBEDDED_BUILDER_CLS_NAME));
         });
-        classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", EMBEDDED_BUILDER_CLS_NAME,
-                CodeNamer.toCamelCase(propName), propType, propName), function -> {
+        classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)",
+                EMBEDDED_BUILDER_CLS_NAME,
+                CodeNamer.toCamelCase(propName),
+                propType,
+                propName),
+            function -> {
                     function.line(String.format("this.%1$s = %2$s;", propName, propName));
                     function.methodReturn("this");
-                });
+            });
     }
 
     private void fixImportForBuilderParameters(List<ClientMethodParameter> parameters, Set<String> imports) {
@@ -239,15 +257,16 @@ public class AndroidEmbeddedBuilderTemplate {
         return builderClsType.getName().endsWith(".Builder");
     }
 
-    private void setupRestClientBuilder(JavaBlock function, ServiceClient serviceClient,
-            List<ClientMethodParameter> commonProperties, ClientMethodParameter restClientBuilder) {
+    private void setupRestClientBuilder(JavaBlock function,
+                                        ServiceClient serviceClient,
+                                        List<ClientMethodParameter> commonProperties,
+                                        ClientMethodParameter restClientBuilder) {
         function.ifBlock(String.format("%1$s == null", restClientBuilder.getName()), ifBlock -> {
             String anyHostParamAbsentExpression = hostMapping.anyHostParamAbsentExpression();
             if (!anyHostParamAbsentExpression.isEmpty()) {
                 function.ifBlock(anyHostParamAbsentExpression, illegalArgBlock -> {
                     illegalArgBlock.line("throw new IllegalArgumentException(\"Missing required parameters '%s'.\");",
-                            String.join(", ", hostMapping.getHostParams().stream().map(p -> p.getName())
-                                    .collect(Collectors.toList())));
+                            String.join(", ", hostMapping.getHostParams().stream().map(p -> p.getName()).collect(Collectors.toList())));
                 });
             }
             ifBlock.line("this.%1$s = %2$s;", restClientBuilder.getName(), restClientBuilder.getDefaultValue());
@@ -259,22 +278,22 @@ public class AndroidEmbeddedBuilderTemplate {
                         ? this.hostMapping.HOST_PROPERTY_NAME
                         : BASE_URL_PROPERTY_NAME;
 
-                ifBlock.line("final String retrofitBaseUrl = %s",
-                        hostMapping.getBaseUrlExpression(baseUrlPropertyName));
+                ifBlock.line("final String retrofitBaseUrl = %s", hostMapping.getBaseUrlExpression(baseUrlPropertyName));
                 ifBlock.line("%s.setBaseUrl(retrofitBaseUrl);", restClientBuilder.getName());
             });
         } else {
             function.line("%1$s.setBaseUrl(%2$s);", restClientBuilder.getName(), this.hostMapping.HOST_PROPERTY_NAME);
         }
 
-        Optional<ClientMethodParameter> credInterceptorOpt = commonProperties.stream()
-                .filter(p -> p.getWireType() == ClassType.AndroidOkHttpInterceptor).findFirst();
+        Optional<ClientMethodParameter> credInterceptorOpt = commonProperties
+                .stream()
+                .filter(p -> p.getWireType() == ClassType.AndroidOkHttpInterceptor)
+                .findFirst();
 
         if (credInterceptorOpt.isPresent()) {
             ClientMethodParameter credInterceptor = credInterceptorOpt.get();
             function.ifBlock(String.format("%s != null", credInterceptor.getName()), ifBlock -> {
-                ifBlock.line("%s.setCredentialsInterceptor(%s);", restClientBuilder.getName(),
-                        credInterceptor.getName());
+                ifBlock.line("%s.setCredentialsInterceptor(%s);", restClientBuilder.getName(), credInterceptor.getName());
             });
         }
     }

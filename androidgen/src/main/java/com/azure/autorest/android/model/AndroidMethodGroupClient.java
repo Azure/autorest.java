@@ -10,12 +10,18 @@ import java.util.List;
 import java.util.Set;
 
 public class AndroidMethodGroupClient extends MethodGroupClient {
-    protected AndroidMethodGroupClient(String package_Keyword, String className, String interfaceName,
-            List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType,
-            String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces,
-            String classBaseName) {
-        super(package_Keyword, className, interfaceName, implementedInterfaces, proxy, serviceClientName, variableType,
-                variableName, clientMethods, supportedInterfaces, classBaseName);
+    protected AndroidMethodGroupClient(String package_Keyword, String className,
+                                       String interfaceName, List<String> implementedInterfaces,
+                                       Proxy proxy, String serviceClientName,
+                                       String variableType, String variableName,
+                                       List<ClientMethod> clientMethods, List<IType> supportedInterfaces,
+                                       String classBaseName) {
+        super(package_Keyword, className,
+                interfaceName, implementedInterfaces,
+                proxy, serviceClientName,
+                variableType, variableName,
+                clientMethods, supportedInterfaces,
+                classBaseName);
     }
 
     @Override
@@ -46,9 +52,17 @@ public class AndroidMethodGroupClient extends MethodGroupClient {
     public static class Builder extends MethodGroupClient.Builder {
         @Override
         public AndroidMethodGroupClient build() {
-            return new AndroidMethodGroupClient(super.packageName, super.className, super.interfaceName,
-                    super.implementedInterfaces, super.proxy, super.serviceClientName, super.variableType,
-                    super.variableName, super.clientMethods, super.supportedInterfaces, super.classBaseName);
+            return new AndroidMethodGroupClient(super.packageName,
+                    super.className,
+                    super.interfaceName,
+                    super.implementedInterfaces,
+                    super.proxy,
+                    super.serviceClientName,
+                    super.variableType,
+                    super.variableName,
+                    super.clientMethods,
+                    super.supportedInterfaces,
+                    super.classBaseName);
         }
     }
 }

@@ -3,7 +3,17 @@
 
 package com.azure.autorest.android.template;
 
-import com.azure.autorest.template.*;
+import com.azure.autorest.template.ClientMethodTemplate;
+import com.azure.autorest.template.DefaultTemplateFactory;
+import com.azure.autorest.template.EnumTemplate;
+import com.azure.autorest.template.ExceptionTemplate;
+import com.azure.autorest.template.MethodGroupTemplate;
+import com.azure.autorest.template.ProxyTemplate;
+import com.azure.autorest.template.ServiceAsyncClientTemplate;
+import com.azure.autorest.template.ServiceClientBuilderTemplate;
+import com.azure.autorest.template.ServiceClientTemplate;
+import com.azure.autorest.template.ServiceSyncClientTemplate;
+import com.azure.autorest.template.WrapperClientMethodTemplate;
 
 public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override

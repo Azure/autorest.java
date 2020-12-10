@@ -43,8 +43,9 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
         embeddedBuilderTemplate.addImportsTo(imports);
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment -> comment.description(String.format(
-                "Initializes a new instance of the asynchronous %1$s type.", serviceClient.getInterfaceName())));
+        javaFile.javadocComment(comment ->
+                comment.description(String.format("Initializes a new instance of the asynchronous %1$s type.",
+                        serviceClient.getInterfaceName())));
 
         javaFile.publicFinalClass(asyncClassName, classBlock -> {
             // Add service client member variable
@@ -55,16 +56,16 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             }
 
             // Service Client Constructor
-            classBlock.javadocComment(comment -> comment.description(String.format(
-                    "Initializes an instance of %1$s client.",
-                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
+            classBlock.javadocComment(comment ->
+                    comment
+                            .description(String.format("Initializes an instance of %1$s client.",
+                                wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
 
             if (wrapServiceClient) {
-                classBlock.packagePrivateConstructor(
-                        String.format("%1$s(%2$s %3$s)", asyncClassName, serviceClient.getClassName(), "serviceClient"),
-                        constructorBlock -> {
-                            constructorBlock.line("this.serviceClient = serviceClient;");
-                        });
+                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
+                        serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
+                    constructorBlock.line("this.serviceClient = serviceClient;");
+                });
             } else {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
                         methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
@@ -73,13 +74,19 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             }
 
             if (wrapServiceClient) {
-                serviceClient.getClientMethods().stream().filter(this::shouldWriteMethod).forEach(clientMethod -> {
-                    Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
-                });
+                serviceClient.getClientMethods()
+                        .stream()
+                        .filter(this::shouldWriteMethod)
+                        .forEach(clientMethod -> {
+                            Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
+                        });
             } else {
-                methodGroupClient.getClientMethods().stream().filter(this::shouldWriteMethod).forEach(clientMethod -> {
-                    Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
-                });
+                methodGroupClient.getClientMethods()
+                        .stream()
+                        .filter(this::shouldWriteMethod)
+                        .forEach(clientMethod -> {
+                            Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
+                        });
             }
 
             // Add embedded builder for this AsyncServiceClient
