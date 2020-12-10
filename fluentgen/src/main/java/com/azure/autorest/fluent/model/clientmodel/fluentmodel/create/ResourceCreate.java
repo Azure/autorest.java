@@ -340,6 +340,10 @@ public class ResourceCreate extends ResourceOperation {
                 break;
             }
         }
+        if (!iterator.hasNext()) {
+            throw new IllegalStateException(String.format("parent segment not found on for url %1$s, model %2$s, name segment %3$s",
+                    urlPathSegments.getPath(), resourceModel.getName(), serializedResourceNamePathParameterName));
+        }
         // next path parameter is the parent path parameter
         UrlPathSegments.ParameterSegment parentSegment = iterator.next();
         String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getSegmentName()));
