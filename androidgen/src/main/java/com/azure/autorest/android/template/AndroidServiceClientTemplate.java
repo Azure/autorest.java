@@ -311,7 +311,7 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                         List<String> exceptions = new ArrayList<>();
                         exceptions.add("java.io.IOException");
                         methodBodyBlock.tryCatch(
-                                tryBlock ->tryBlock.methodReturn("call.execute()"),
+                                tryBlock -> tryBlock.methodReturn("call.execute()"),
                                 exceptions,
                                 "ex",
                                 catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
