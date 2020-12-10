@@ -238,19 +238,17 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     .defaultValue(null)
                     .fromClient(false)
                     .isFinal(true)
-                    .isRequired(true)
-                    .build();
+                    .isRequired(true).build();
             withCallbackParameters.add(callbackParam);
 
-            ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync
-                    : ClientMethodType.SimpleAsyncRestResponse;
+            ClientMethodType methodType = isPaging ? ClientMethodType.PagingAsync : ClientMethodType.SimpleAsyncRestResponse;
             // Async method with Optional parameters (always generated).
             //
             methods.add(builder
                 .parameters(withCallbackParameters)
                 .returnValue(new ReturnValue(
-                        returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
-                        PrimitiveType.Void))
+                    returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
+                    PrimitiveType.Void))
                 .name(proxyMethod.getName())
                 .type(methodType)
                 .onlyRequiredParameters(false)
@@ -272,19 +270,22 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 methodType = isPaging ? (isLongRunning ? ClientMethodType.LongRunningSync : ClientMethodType.PagingSync)
                         : ClientMethodType.SimpleSync;
                 GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType.getClientType());
-                methods.add(
-                        builder.parameters(parameters)
-                                .returnValue(new ReturnValue(
-                                        returnTypeDescription(operation, responseWithResultType, returnType),
-                                        responseWithResultType))
-                                .name(proxyMethod.getName() + "WithRestResponse").onlyRequiredParameters(false)
-                                .type(methodType).isGroupedParameterRequired(false).build());
+                methods.add(builder
+                    .parameters(parameters)
+                    .returnValue(new ReturnValue(
+                            returnTypeDescription(operation, responseWithResultType, returnType),
+                            responseWithResultType))
+                    .name(proxyMethod.getName() + "WithRestResponse")
+                    .onlyRequiredParameters(false)
+                    .type(methodType)
+                    .isGroupedParameterRequired(false)
+                    .build());
                 if (isPaging && !isNextMethod) {
                     IType pageWithResponse = GenericType.AndroidPageResponseCollection(elementType);
                     methods.add(builder
                         .parameters(parameters)
                         .returnValue(new ReturnValue(
-                                returnTypeDescription(operation, pageWithResponse, elementType), pageWithResponse))
+                            returnTypeDescription(operation, pageWithResponse, elementType), pageWithResponse))
                         .name(proxyMethod.getName() + "WithPageResponse")
                         .onlyRequiredParameters(false)
                         .type(methodType)
@@ -295,7 +296,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                     methods.add(builder
                         .parameters(parameters)
                         .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, elementType),
-                                pageCollection))
+                            pageCollection))
                         .name(proxyMethod.getName() + "WithPage")
                         .onlyRequiredParameters(false)
                         .type(methodType)
@@ -340,8 +341,10 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 methods.add(builder
                     .parameters(withCollectionCallbackParameters)
                     .returnValue(new ReturnValue(
-                            returnTypeDescription(operation, PrimitiveType.Void, PrimitiveType.Void),
-                            PrimitiveType.Void))
+                                returnTypeDescription(operation,
+                                    PrimitiveType.Void,
+                                    PrimitiveType.Void),
+                                PrimitiveType.Void))
                     .name(proxyMethod.getName() + "PagesAsync")
                     .type(methodType)
                     .methodPageDetails(details)

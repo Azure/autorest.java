@@ -10,7 +10,7 @@ import com.azure.autorest.template.ExceptionTemplate;
 import com.azure.autorest.template.MethodGroupTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceAsyncClientTemplate;
-import com.azure.autorest.template.ServiceClientBuilderTemplate;
+import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.WrapperClientMethodTemplate;

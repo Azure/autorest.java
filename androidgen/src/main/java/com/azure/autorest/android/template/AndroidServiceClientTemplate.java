@@ -69,9 +69,9 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
         javaFile.declareImport(imports);
 
         final JavaVisibility visibility = serviceClient.getPackage()
-                .equals(ClientModelUtil.getServiceClientBuilderPackageName(serviceClient))
-                ? JavaVisibility.PackagePrivate
-                : JavaVisibility.Public;
+            .equals(ClientModelUtil.getServiceClientBuilderPackageName(serviceClient))
+            ? JavaVisibility.PackagePrivate
+            : JavaVisibility.Public;
 
         javaFile.javadocComment(comment -> {
             comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClient.getInterfaceName()));
@@ -102,7 +102,8 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                 });
                 classBlock.privateMemberVariable(p.getDeclaration());
 
-                classBlock.javadocComment(comment -> {
+                classBlock.javadocComment(comment ->
+                {
                     comment.description(String.format("Gets %1$s", p.getDescription()));
                     comment.methodReturns(String.format("the %1$s value.", p.getName()));
                 });
@@ -143,8 +144,7 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                 {
                     comment.description(String.format("The %1$s object to access its operations.", methodGroupClient.getVariableType()));
                 });
-                classBlock.privateFinalMemberVariable(methodGroupClient.getVariableType(),
-                        methodGroupClient.getVariableName());
+                classBlock.privateFinalMemberVariable(methodGroupClient.getVariableType(), methodGroupClient.getVariableName());
 
                 classBlock.javadocComment(comment ->
                 {
@@ -159,7 +159,8 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
             }
 
             // Define the Constructor.
-            classBlock.javadocComment(comment -> {
+            classBlock.javadocComment(comment ->
+            {
                 comment.description(String.format("Initializes an instance of %1$s client.", serviceClient.getInterfaceName()));
                 ctrParamsSet1.forEach(parameter -> {
                     comment.param(parameter.getName(), parameter.getDescription());
@@ -175,14 +176,14 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                             ctrParamsSet2.stream().map(p -> String.format("%1$s %2$s", p.getType(), p.getName()))
                     ).collect(Collectors.joining(", "));
 
-            classBlock.constructor(visibility,
-                    String.format("%1$s(%2$s)", serviceClient.getClassName(), ctrParamsAsString), constructorBlock -> {
-                        ctrParamsSet1.forEach(p -> {
-                            constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
-                        });
-                        ctrParamsSet2.forEach(p -> {
-                            constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
-                        });
+            classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), ctrParamsAsString), constructorBlock ->
+            {
+                ctrParamsSet1.forEach(p -> {
+                    constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
+                });
+                ctrParamsSet2.forEach(p -> {
+                    constructorBlock.line("this.%1$s = %2$s;", p.getName(), p.getName());
+                });
 
                 serviceClient.getProperties()
                         .stream()
@@ -250,8 +251,11 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                                         handleNullBlock -> handleNullBlock.methodReturn("\"\""));
                         List<String> exceptions = new ArrayList<>();
                         exceptions.add("java.io.IOException");
-                        methodBodyBlock.tryCatch(tryBlock -> tryBlock.methodReturn("new String(body.bytes())"),
-                                exceptions, "ex", catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
+                        methodBodyBlock.tryCatch(
+                                tryBlock -> tryBlock.methodReturn("new String(body.bytes())"),
+                                exceptions,
+                                "ex",
+                                catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
                                 finallyBlock -> finallyBlock.line("body.close();"));
                     });
 
@@ -264,13 +268,13 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                             exceptions.add("java.io.IOException");
                             actionBlock.tryCatch(tryBlock -> {
                                         tryBlock.ifBlock("body.contentLength() == 0", bodyEmptyBlock -> bodyEmptyBlock.line("return null;"));
-                                            tryBlock.line("return (T) body.bytes();");
-                                        },
-                                        exceptions,
-                                        "ex",
-                                        catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
-                                        null);
-                        });
+                                        tryBlock.line("return (T) body.bytes();");
+                                    },
+                                    exceptions,
+                                    "ex",
+                                    catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
+                                    null);
+                            });
 
                         methodBodyBlock.line("final String str = readAsString(body);");
                         List<String> exceptions = new ArrayList<>();
@@ -278,8 +282,7 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                         methodBodyBlock.tryCatch(
                                 tryBlock -> {
                                     tryBlock.line("final String mimeContentType = headers.get(CONTENT_TYPE);");
-                                    tryBlock.methodReturn(
-                                            "this.serializerAdapter.deserialize(str, type, resolveSerializerFormat(mimeContentType))");
+                                    tryBlock.methodReturn("this.serializerAdapter.deserialize(str, type, resolveSerializerFormat(mimeContentType))");
                                 },
                                 exceptions,
                                 "ex",
@@ -287,14 +290,17 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                                 null);
                     });
 
-            classBlock.method(JavaVisibility.PackagePrivate, modifiers,
+            classBlock.method(JavaVisibility.PackagePrivate,
+                    modifiers,
                     "<T> T deserializeHeaders(okhttp3.Headers headers, java.lang.reflect.Type type)",
                     methodBodyBlock -> {
                         List<String> exceptions = new ArrayList<>();
                         exceptions.add("java.io.IOException");
                         methodBodyBlock.tryCatch(
                                 tryBlock -> tryBlock.methodReturn("this.serializerAdapter.deserialize(headers, type)"),
-                                exceptions, "ex", catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
+                                exceptions,
+                                "ex",
+                                catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
                                 null);
                     });
 
@@ -304,8 +310,7 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                     methodBodyBlock -> {
                         List<String> exceptions = new ArrayList<>();
                         exceptions.add("java.io.IOException");
-                        methodBodyBlock.tryCatch(tryBlock ->
-                                tryBlock.methodReturn("call.execute()"),
+                        methodBodyBlock.tryCatch(tryBlock ->tryBlock.methodReturn("call.execute()"),
                                 exceptions,
                                 "ex",
                                 catchBlock -> catchBlock.line("throw new RuntimeException(ex);"),
@@ -362,32 +367,32 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                     modifiers,
                     "SerializerFormat resolveSerializerFormat(String mimeContentType)",
                     methodBlock -> {
-                        methodBlock.ifBlock("mimeContentType == null || mimeContentType.isEmpty()", noMimeBlock -> {
-                            noMimeBlock.methodReturn("DEFAULT_ENCODING");
-                        });
+                methodBlock.ifBlock("mimeContentType == null || mimeContentType.isEmpty()", noMimeBlock -> {
+                    noMimeBlock.methodReturn("DEFAULT_ENCODING");
+                });
 
-                    methodBlock.line("final String[] parts = mimeContentType.split(\";\");");
-                    methodBlock.line("final SerializerFormat encoding = SUPPORTED_MIME_TYPES.get(parts[0]);");
-                    methodBlock.ifBlock("encoding != null", nonNullEncodingBlock -> {
-                        nonNullEncodingBlock.methodReturn("encoding");
-                    });
+                methodBlock.line("final String[] parts = mimeContentType.split(\";\");");
+                methodBlock.line("final SerializerFormat encoding = SUPPORTED_MIME_TYPES.get(parts[0]);");
+                methodBlock.ifBlock("encoding != null", nonNullEncodingBlock -> {
+                    nonNullEncodingBlock.methodReturn("encoding");
+                });
 
-                    methodBlock.line("final String[] mimeTypeParts = parts[0].split(\"/\");");
-                    methodBlock.ifBlock("mimeTypeParts.length != 2", noMimePartBlock -> {
-                        noMimePartBlock.methodReturn("DEFAULT_ENCODING");
-                    });
+                methodBlock.line("final String[] mimeTypeParts = parts[0].split(\"/\");");
+                methodBlock.ifBlock("mimeTypeParts.length != 2", noMimePartBlock -> {
+                    noMimePartBlock.methodReturn("DEFAULT_ENCODING");
+                });
 
-                    methodBlock.line("final String subtype = mimeTypeParts[1];");
-                    methodBlock.line("final int lastIndex = subtype.lastIndexOf(\"+\");");
-                    methodBlock.ifBlock("lastIndex == -1", noSubTypeBlock -> {
-                        noSubTypeBlock.methodReturn("DEFAULT_ENCODING");
-                    });
+                methodBlock.line("final String subtype = mimeTypeParts[1];");
+                methodBlock.line("final int lastIndex = subtype.lastIndexOf(\"+\");");
+                methodBlock.ifBlock("lastIndex == -1", noSubTypeBlock -> {
+                    noSubTypeBlock.methodReturn("DEFAULT_ENCODING");
+                });
 
-                    methodBlock.line("final String mimeTypeSuffix = subtype.substring(lastIndex + 1);");
-                    methodBlock.line("final SerializerFormat serializerEncoding = SUPPORTED_SUFFIXES.get(mimeTypeSuffix);");
-                    methodBlock.ifBlock("serializerEncoding != null", nonNullEncodingBlock -> {
-                        nonNullEncodingBlock.methodReturn("serializerEncoding");
-                    });
+                methodBlock.line("final String mimeTypeSuffix = subtype.substring(lastIndex + 1);");
+                methodBlock.line("final SerializerFormat serializerEncoding = SUPPORTED_SUFFIXES.get(mimeTypeSuffix);");
+                methodBlock.ifBlock("serializerEncoding != null", nonNullEncodingBlock -> {
+                    nonNullEncodingBlock.methodReturn("serializerEncoding");
+                });
 
                 methodBlock.methodReturn("DEFAULT_ENCODING");
             });

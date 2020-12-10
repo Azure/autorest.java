@@ -1,7 +1,14 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.ServiceAsyncClientTemplate;
 import com.azure.autorest.template.Templates;
@@ -13,9 +20,7 @@ import java.util.Set;
 public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplate {
     private static final AndroidServiceAsyncClientTemplate instance = new AndroidServiceAsyncClientTemplate();
 
-    public static AndroidServiceAsyncClientTemplate getInstance() {
-        return instance;
-    }
+    public static AndroidServiceAsyncClientTemplate getInstance() { return instance; }
 
     private AndroidServiceAsyncClientTemplate() {
     }
@@ -47,7 +52,8 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
                 comment.description(String.format("Initializes a new instance of the asynchronous %1$s type.",
                         serviceClient.getInterfaceName())));
 
-        javaFile.publicFinalClass(asyncClassName, classBlock -> {
+        javaFile.publicFinalClass(asyncClassName, classBlock ->
+        {
             // Add service client member variable
             if (wrapServiceClient) {
                 classBlock.privateMemberVariable(serviceClient.getClassName(), "serviceClient");
@@ -59,7 +65,7 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             classBlock.javadocComment(comment ->
                     comment
                             .description(String.format("Initializes an instance of %1$s client.",
-                                wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
+                                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName())));
 
             if (wrapServiceClient) {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
@@ -69,8 +75,8 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             } else {
                 classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", asyncClassName,
                         methodGroupClient.getClassName(), "serviceClient"), constructorBlock -> {
-                            constructorBlock.line("this.serviceClient = serviceClient;");
-                        });
+                    constructorBlock.line("this.serviceClient = serviceClient;");
+                });
             }
 
             if (wrapServiceClient) {
@@ -81,7 +87,8 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
             } else {
-                methodGroupClient.getClientMethods()
+                methodGroupClient
+                        .getClientMethods()
                         .stream()
                         .filter(this::shouldWriteMethod)
                         .forEach(clientMethod -> {

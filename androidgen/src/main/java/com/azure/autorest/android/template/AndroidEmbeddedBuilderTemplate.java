@@ -100,9 +100,9 @@ public class AndroidEmbeddedBuilderTemplate {
             });
 
             classBlock.method(JavaVisibility.Public, null,
-                    String.format("%1$s %2$s()", clientClsName, BUILD_METHOD_NAME), function -> {
-                        if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
-                            function.ifBlock(String.format("%1$s == null", BASE_URL_PROPERTY_NAME), ifBlock -> {
+                String.format("%1$s %2$s()", clientClsName, BUILD_METHOD_NAME), function -> {
+                    if (!this.hostMapping.serviceHostPropertyIsBaseUrl()) {
+                        function.ifBlock(String.format("%1$s == null", BASE_URL_PROPERTY_NAME), ifBlock -> {
                                 function.line("this.%1$s = \"%2$s\";", BASE_URL_PROPERTY_NAME, hostMapping.getBaseUrlPattern());
                             });
                         }
@@ -184,16 +184,16 @@ public class AndroidEmbeddedBuilderTemplate {
             .map(p -> {
             if (p.getWireType() == ClassType.AndroidRestClient) {
                 return new ClientMethodParameter.Builder()
-                        .description("The Azure Core generic ServiceClient Builder.")
-                        .isFinal(false)
-                        .wireType(ClassType.AndroidRestClientBuilder)
-                        .name("serviceClientBuilder")
-                        .isRequired(true)
-                        .isConstant(false)
-                        .fromClient(true)
-                        .annotations(new ArrayList<>())
-                        .defaultValue("new ServiceClient.Builder()")
-                        .build();
+                    .description("The Azure Core generic ServiceClient Builder.")
+                    .isFinal(false)
+                    .wireType(ClassType.AndroidRestClientBuilder)
+                    .name("serviceClientBuilder")
+                    .isRequired(true)
+                    .isConstant(false)
+                    .fromClient(true)
+                    .annotations(new ArrayList<>())
+                    .defaultValue("new ServiceClient.Builder()")
+                    .build();
             } else {
                 return p;
             }
@@ -202,15 +202,22 @@ public class AndroidEmbeddedBuilderTemplate {
 
     private ClientMethodParameter credentialInterceptorParameter() {
         return new ClientMethodParameter.Builder()
-                .description("The Interceptor to set intercept request and set credentials.").isFinal(false)
-                .wireType(ClassType.AndroidOkHttpInterceptor).name("credentialInterceptor").isRequired(true)
-                .isConstant(false).fromClient(true).annotations(new ArrayList<>()).build();
+                .description("The Interceptor to set intercept request and set credentials.")
+                .isFinal(false)
+                .wireType(ClassType.AndroidOkHttpInterceptor)
+                .name("credentialInterceptor")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .annotations(new ArrayList<>())
+                .build();
     }
 
     private static void writeBuilderProperty(JavaSettings settings,
                                              JavaClass classBlock,
                                              String propDescription,
-                                             String propName, IType propType) {
+                                             String propName,
+                                             IType propType) {
         classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment -> {
             comment.line(propDescription);
         });
@@ -227,8 +234,8 @@ public class AndroidEmbeddedBuilderTemplate {
                 propType,
                 propName),
             function -> {
-                    function.line(String.format("this.%1$s = %2$s;", propName, propName));
-                    function.methodReturn("this");
+                function.line(String.format("this.%1$s = %2$s;", propName, propName));
+                function.methodReturn("this");
             });
     }
 
@@ -286,9 +293,9 @@ public class AndroidEmbeddedBuilderTemplate {
         }
 
         Optional<ClientMethodParameter> credInterceptorOpt = commonProperties
-                .stream()
-                .filter(p -> p.getWireType() == ClassType.AndroidOkHttpInterceptor)
-                .findFirst();
+            .stream()
+            .filter(p -> p.getWireType() == ClassType.AndroidOkHttpInterceptor)
+            .findFirst();
 
         if (credInterceptorOpt.isPresent()) {
             ClientMethodParameter credInterceptor = credInterceptorOpt.get();

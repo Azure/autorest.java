@@ -5,6 +5,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
@@ -20,8 +21,9 @@ public class PageRetrieverTemplate {
     private final GenericType pageType;
     private final GenericType returnType;
 
-    public PageRetrieverTemplate(ClientMethod getFirstPageMethod, ClientMethod getNextPageMethod,
-            String serviceClientClassName) {
+    public PageRetrieverTemplate(ClientMethod getFirstPageMethod,
+                                 ClientMethod getNextPageMethod,
+                                 String serviceClientClassName) {
         this.getFirstPageMethod = getFirstPageMethod;
         this.getNextPageMethod = getNextPageMethod;
         this.serviceClientClassName = serviceClientClassName;

@@ -2,7 +2,11 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -16,9 +20,7 @@ import java.util.Set;
 public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate {
     private static final AndroidServiceSyncClientTemplate instance = new AndroidServiceSyncClientTemplate();
 
-    public static AndroidServiceSyncClientTemplate getInstance() {
-        return instance;
-    }
+    public static AndroidServiceSyncClientTemplate getInstance() { return instance; }
 
     private AndroidServiceSyncClientTemplate() {
     }
@@ -63,12 +65,12 @@ public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate 
             classBlock.javadocComment(comment ->
                     comment
                             .description(String.format("Initializes an instance of %1$s client.",
-                                wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
+                                    wrapServiceClient ? serviceClient.getInterfaceName() : methodGroupClient.getInterfaceName()))
             );
 
             if (wrapServiceClient) {
-                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)",
-                        syncClassName, serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
+                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s)", syncClassName,
+                        serviceClient.getClassName(), "serviceClient"), constructorBlock -> {
                     constructorBlock.line("this.serviceClient = serviceClient;");
                 });
             } else {
