@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2020-12-14T19:27:03.470026
+Generated at 2020-12-15T07:12:32.547197
 ## Success
 <details>
-<summary>RP count: 151</summary>
+<summary>RP count: 149</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -49,7 +49,6 @@ Generated at 2020-12-14T19:27:03.470026
 - databox
 - databoxedge
 - databricks
-- datacatalog
 - datadog
 - datalake-analytics
 - datalake-store
@@ -117,7 +116,6 @@ Generated at 2020-12-14T19:27:03.470026
 - providerhub
 - recoveryservices
 - recoveryservicesbackup
-- recoveryservicessiterecovery
 - redhatopenshift
 - redis
 - redisenterprise
@@ -158,7 +156,9 @@ Generated at 2020-12-14T19:27:03.470026
 </details>
 
 ## Failure at Codegen
+- datacatalog
 - deploymentmanager
+- recoveryservicessiterecovery
 - security
 
 ## Failure at Build
@@ -308,7 +308,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ClassicAdministrator, DenyAssignment, RoleAssignment, ProviderOperationsMetadata, RoleDefinition, Error, Permission]
+INFORMATION (FluentMapper): Add Inner to response types: [DenyAssignment, Error, RoleAssignment, RoleDefinition, ClassicAdministrator, Permission, ProviderOperationsMetadata]
 
 ```
 **stderr**
@@ -380,6 +380,118 @@ WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this c
 ```
 FATAL: Error: Not able to process media type default at this moment.
   Error: Plugin modelerfour reported failure.
+
+```
+</details>
+
+<details>
+<summary>datacatalog</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6247; node: v14.15.1, max-memory: 2048 gb]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist' (3.0.6326)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.423->4.15.423)
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ADCCatalogsListResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ADCCatalog' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ADCCatalogProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Principals' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentJavaSettings): Option, string, tag : package-2016-03-30
+INFORMATION (FluentJavaSettings): Option, string, base-folder : .
+INFORMATION (FluentJavaSettings): Option, string, output-folder : $(azure-libraries-for-java-folder)/azure-mgmt-datacatalog
+INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'AdcCatalogs'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentJavaSettings): Option, string, tag : package-2016-03-30
+INFORMATION (FluentJavaSettings): Option, string, base-folder : .
+INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-datacatalog
+INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [AdcCatalog, AdcCatalogsListResult, OperationEntityListResult]
+INFORMATION (FluentGen): Java template for client model
+INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'AdcCatalog', method reference 'createOrUpdate', body parameter 'AdcCatalogInner'
+INFORMATION (ResourceParser): Fluent model 'AdcCatalog' as category RESOURCE_GROUP_AS_PARENT
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'AdcCatalog', method reference 'update', body parameter 'AdcCatalogInner'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'AdcCatalog', method reference 'getByResourceGroup'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'AdcCatalog', method reference 'delete'
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: resource name parameter not found in client method createOrUpdate, name segment catalogName
+java.lang.IllegalStateException: resource name parameter not found in client method createOrUpdate, name segment catalogName
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getResourceNamePathParameter(ResourceCreate.java:317)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getExistingParentMethod(ResourceCreate.java:353)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getDefinitionStages(ResourceCreate.java:156)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.addImportsTo(ResourceCreate.java:408)
+	at com.azure.autorest.fluent.model.clientmodel.FluentResourceModel.addImportsTo(FluentResourceModel.java:180)
+	at com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate.write(FluentResourceModelInterfaceTemplate.java:32)
+	at com.azure.autorest.fluent.model.javamodel.FluentJavaPackage.addFluentResourceModel(FluentJavaPackage.java:59)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:255)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: resource name parameter not found in client method createOrUpdate, name segment catalogName
+java.lang.IllegalStateException: resource name parameter not found in client method createOrUpdate, name segment catalogName
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getResourceNamePathParameter(ResourceCreate.java:317)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getExistingParentMethod(ResourceCreate.java:353)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getDefinitionStages(ResourceCreate.java:156)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.addImportsTo(ResourceCreate.java:408)
+	at com.azure.autorest.fluent.model.clientmodel.FluentResourceModel.addImportsTo(FluentResourceModel.java:180)
+	at com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate.write(FluentResourceModelInterfaceTemplate.java:32)
+	at com.azure.autorest.fluent.model.javamodel.FluentJavaPackage.addFluentResourceModel(FluentJavaPackage.java:59)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:255)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
 
 ```
 </details>
@@ -1212,7 +1324,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-deploymentmanager
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ServiceUnitResource, StepResource, RolloutRequest, ArtifactSource, OperationsList, ServiceTopologyResource, ServiceResource, Rollout]
+INFORMATION (FluentMapper): Add Inner to response types: [ServiceResource, StepResource, OperationsList, ArtifactSource, ServiceTopologyResource, RolloutRequest, Rollout, ServiceUnitResource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1249,8 +1361,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4a2f4c45 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7c7b39d3)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4a2f4c45 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7c7b39d3)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4d53d3cf and com.azure.autorest.model.clientmodel.ProxyMethodParameter@58696433)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4d53d3cf and com.azure.autorest.model.clientmodel.ProxyMethodParameter@58696433)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1289,8 +1401,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4a2f4c45 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7c7b39d3)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4a2f4c45 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7c7b39d3)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4d53d3cf and com.azure.autorest.model.clientmodel.ProxyMethodParameter@58696433)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@4d53d3cf and com.azure.autorest.model.clientmodel.ProxyMethodParameter@58696433)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1690,6 +1802,222 @@ FATAL: Error: 1 errors occured -- cannot continue.
 </details>
 
 <details>
+<summary>recoveryservicessiterecovery</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6247; node: v14.15.1, max-memory: 2048 gb]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist' (3.0.6326)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.423->4.15.423)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'A2AApplyRecoveryPointInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'A2AContainerCreationInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AsrJobDetails' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'HyperVSiteDetails' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ReplicationGroupDetails' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'SanEnableProtectionInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmDetails' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToAzureCreateNetworkMappingInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToAzureNetworkMappingSettings' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToAzureUpdateNetworkMappingInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToVmmCreateNetworkMappingInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToVmmNetworkMappingSettings' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VmmToVmmUpdateNetworkMappingInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'VMwareCbtContainerCreationInput' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ReplicationProtectionIntent' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentJavaSettings): Option, string, tag : package-2018-07
+INFORMATION (FluentJavaSettings): Option, string, base-folder : .
+INFORMATION (FluentJavaSettings): Option, string, output-folder : $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices.siterecovery
+INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (NamingConflictResolver): Rename operation group from 'ReplicationEligibilityResults' to 'ReplicationEligibilityResultsOperation'
+INFORMATION (NamingConflictResolver): Rename operation group from 'SupportedOperatingSystems' to 'SupportedOperatingSystemsOperation'
+INFORMATION (OperationNameNormalization): Rename operation from 'list' to 'listByResourceGroup', in operation group 'Operations'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Alert'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Event'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Fabric'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'LogicalNetwork'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Network'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'NetworkMapping'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProtectionContainer'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'MigrationItem'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'MigrationRecoveryPoint'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProtectableItem'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ReplicationProtectedItem'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'RecoveryPoint'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProtectionContainerMapping'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ReplicationProtectionIntent'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'RecoveryServicesProvider'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'StorageClassification'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'StorageClassificationMapping'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'VCenter'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Job'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Policy'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'RecoveryPlan'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'SupportedOperatingSystems'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'VaultHealthDetails'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'VaultSetting'
+INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
+INFORMATION (SchemaCleanup): Remove unused schema 'EventQueryParameter'
+INFORMATION (SchemaCleanup): Remove unused schema 'InMageAgentVersionDetails'
+INFORMATION (SchemaCleanup): Remove unused schema 'MigrationItemsQueryParameter'
+INFORMATION (SchemaCleanup): Remove unused schema 'ProtectableItemQueryParameter'
+INFORMATION (SchemaCleanup): Remove unused schema 'ProtectedItemsQueryParameter'
+INFORMATION (SchemaCleanup): Remove unused schema 'RoleAssignment'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentJavaSettings): Option, string, tag : package-2018-07
+INFORMATION (FluentJavaSettings): Option, string, base-folder : .
+INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-recoveryservicessiterecovery
+INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [RecoveryPoint, MigrationItem, Network, Event, RecoveryServicesProvider, StorageClassification, VCenter, ProtectionContainer, ProtectableItem, NetworkMapping, StorageClassificationMapping, ReplicationEligibilityResultsCollection, ProtectionContainerMapping, Fabric, VaultHealthDetails, VaultSetting, Policy, TargetComputeSize, Alert, SupportedOperatingSystems, ReplicationProtectionIntent, ReplicationEligibilityResults, RecoveryPlan, OperationsDiscovery, MigrationRecoveryPoint, Job, ReplicationProtectedItem, LogicalNetwork]
+INFORMATION (FluentGen): Java template for client model
+INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'Alert', method reference 'create', body parameter 'ConfigureAlertRequest'
+INFORMATION (ResourceParser): Fluent model 'Alert' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'Alert', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'Fabric', method reference 'create', body parameter 'FabricCreationInput'
+INFORMATION (ResourceParser): Fluent model 'Fabric' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'Fabric', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'NetworkMapping', method reference 'create', body parameter 'CreateNetworkMappingInput'
+INFORMATION (ResourceParser): Fluent model 'NetworkMapping' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'NetworkMapping', method reference 'update', body parameter 'UpdateNetworkMappingInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'NetworkMapping', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'NetworkMapping', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ProtectionContainer', method reference 'create', body parameter 'CreateProtectionContainerInput'
+INFORMATION (ResourceParser): Fluent model 'ProtectionContainer' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ProtectionContainer', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'MigrationItem', method reference 'create', body parameter 'EnableMigrationInput'
+INFORMATION (ResourceParser): Fluent model 'MigrationItem' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'MigrationItem', method reference 'update', body parameter 'UpdateMigrationItemInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'MigrationItem', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'MigrationItem', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ReplicationProtectedItem', method reference 'create', body parameter 'EnableProtectionInput'
+INFORMATION (ResourceParser): Fluent model 'ReplicationProtectedItem' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ReplicationProtectedItem', method reference 'update', body parameter 'UpdateReplicationProtectedItemInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ReplicationProtectedItem', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ProtectionContainerMapping', method reference 'create', body parameter 'CreateProtectionContainerMappingInput'
+INFORMATION (ResourceParser): Fluent model 'ProtectionContainerMapping' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ProtectionContainerMapping', method reference 'update', body parameter 'UpdateProtectionContainerMappingInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ProtectionContainerMapping', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ReplicationProtectionIntent', method reference 'create', body parameter 'CreateProtectionIntentInput'
+INFORMATION (ResourceParser): Fluent model 'ReplicationProtectionIntent' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ReplicationProtectionIntent', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'RecoveryServicesProvider', method reference 'create', body parameter 'AddRecoveryServicesProviderInput'
+INFORMATION (ResourceParser): Fluent model 'RecoveryServicesProvider' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'RecoveryServicesProvider', method reference 'get'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'StorageClassificationMapping', method reference 'create', body parameter 'StorageClassificationMappingInput'
+INFORMATION (ResourceParser): Fluent model 'StorageClassificationMapping' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'StorageClassificationMapping', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'StorageClassificationMapping', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'VCenter', method reference 'create', body parameter 'AddVCenterRequest'
+INFORMATION (ResourceParser): Fluent model 'VCenter' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'VCenter', method reference 'update', body parameter 'UpdateVCenterRequest'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'VCenter', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'VCenter', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'Policy', method reference 'create', body parameter 'CreatePolicyInput'
+INFORMATION (ResourceParser): Fluent model 'Policy' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'Policy', method reference 'update', body parameter 'UpdatePolicyInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'Policy', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'Policy', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'RecoveryPlan', method reference 'create', body parameter 'CreateRecoveryPlanInput'
+INFORMATION (ResourceParser): Fluent model 'RecoveryPlan' as category NESTED_CHILD
+INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'RecoveryPlan', method reference 'update', body parameter 'UpdateRecoveryPlanInput'
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'RecoveryPlan', method reference 'get'
+INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'RecoveryPlan', method reference 'delete'
+INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'VaultSetting', method reference 'create', body parameter 'VaultSettingCreationInput'
+INFORMATION (ResourceParser): Fluent model 'VaultSetting' as category NESTED_CHILD
+INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'VaultSetting', method reference 'get'
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: resource name of immediate parent not found for url /Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings/{alertSettingName}, model Alert
+java.lang.IllegalStateException: resource name of immediate parent not found for url /Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings/{alertSettingName}, model Alert
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getExistingParentMethod(ResourceCreate.java:378)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getDefinitionStages(ResourceCreate.java:156)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.addImportsTo(ResourceCreate.java:408)
+	at com.azure.autorest.fluent.model.clientmodel.FluentResourceModel.addImportsTo(FluentResourceModel.java:180)
+	at com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate.write(FluentResourceModelInterfaceTemplate.java:32)
+	at com.azure.autorest.fluent.model.javamodel.FluentJavaPackage.addFluentResourceModel(FluentJavaPackage.java:59)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:255)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: resource name of immediate parent not found for url /Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings/{alertSettingName}, model Alert
+java.lang.IllegalStateException: resource name of immediate parent not found for url /Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings/{alertSettingName}, model Alert
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getExistingParentMethod(ResourceCreate.java:378)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.getDefinitionStages(ResourceCreate.java:156)
+	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate.addImportsTo(ResourceCreate.java:408)
+	at com.azure.autorest.fluent.model.clientmodel.FluentResourceModel.addImportsTo(FluentResourceModel.java:180)
+	at com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate.write(FluentResourceModelInterfaceTemplate.java:32)
+	at com.azure.autorest.fluent.model.javamodel.FluentJavaPackage.addFluentResourceModel(FluentJavaPackage.java:59)
+	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:255)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
 <summary>resources</summary>
 
 **stdout**
@@ -1928,15 +2256,15 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-security
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AdvancedThreatProtectionSetting, ScanResult, IotDefenderSettingsModel, IotRecommendation, SecuritySubAssessment, SecurityAssessment, PackageDownloads, IotDefenderSettingsList, AdaptiveApplicationControlGroups, IotSensorsModel, IoTSecuritySolutionAnalyticsModel, SecuritySolutionsReferenceDataList, AdaptiveApplicationControlGroup, IoTSecuritySolutionAnalyticsModelList, AdaptiveNetworkHardening, JitNetworkAccessRequest, IoTSecurityAggregatedAlert, Scan, Device, IotAlertModel, AutoProvisioningSetting, JitNetworkAccessPolicy, ServerVulnerabilityAssessmentsList, SecureScoreControlDetails, InformationProtectionPolicy, Scans, SecureScoreControlDefinitionItem, IotRecommendationType, RuleResults, SecurityContact, OnPremiseIotSensor, Automation, DiscoveredSecuritySolution, DeviceSecurityGroup, IoTSecurityAggregatedRecommendation, ConnectorSetting, AutomationValidationStatus, IotRecommendationModel, SecuritySolution, IotSensorsList, SecurityAssessmentMetadata, IotSitesModel, ComplianceResult, TopologyResource, IotAlertType, RegulatoryComplianceControl, IotAlertTypeList, IotSitesList, IotRecommendationTypeList, RulesResults, IotAlert, Setting, Compliance, ExternalSecuritySolution, PricingList, Pricing, AllowedConnectionsResource, Alert, IoTSecuritySolutionModel, SecureScoreItem, OnPremiseIotSensorsList, WorkspaceSetting, RegulatoryComplianceAssessment, SecurityTask, ServerVulnerabilityAssessment, AlertsSuppressionRule, Operation, AscLocation, ScanResults, RegulatoryComplianceStandard]
+INFORMATION (FluentMapper): Add Inner to response types: [IoTSecurityAggregatedAlert, PricingList, Device, RuleResults, IotSitesList, AutoProvisioningSetting, ScanResults, SecuritySolutionsReferenceDataList, AdaptiveApplicationControlGroups, SecuritySubAssessment, Operation, DeviceSecurityGroup, Pricing, IotRecommendationModel, IotDefenderSettingsModel, IoTSecuritySolutionModel, IotAlertType, Compliance, SecurityContact, AllowedConnectionsResource, AscLocation, Scans, OnPremiseIotSensorsList, IotSensorsList, IotAlertModel, IotRecommendationTypeList, AlertsSuppressionRule, IoTSecuritySolutionAnalyticsModelList, Alert, AutomationValidationStatus, IotRecommendation, RegulatoryComplianceStandard, AdvancedThreatProtectionSetting, JitNetworkAccessPolicy, RegulatoryComplianceAssessment, TopologyResource, IoTSecuritySolutionAnalyticsModel, Scan, RulesResults, SecureScoreControlDefinitionItem, RegulatoryComplianceControl, ServerVulnerabilityAssessmentsList, ExternalSecuritySolution, ScanResult, SecureScoreControlDetails, ConnectorSetting, ComplianceResult, IotAlertTypeList, WorkspaceSetting, DiscoveredSecuritySolution, InformationProtectionPolicy, IotDefenderSettingsList, OnPremiseIotSensor, SecuritySolution, JitNetworkAccessRequest, PackageDownloads, SecurityAssessmentMetadata, AdaptiveApplicationControlGroup, ServerVulnerabilityAssessment, SecurityAssessment, SecurityTask, IotSensorsModel, IotSitesModel, Automation, IoTSecurityAggregatedRecommendation, IotRecommendationType, AdaptiveNetworkHardening, Setting, IotAlert, SecureScoreItem]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: discriminator not found in type ExternalSecuritySolution and its parents
-java.lang.IllegalStateException: discriminator not found in type ExternalSecuritySolution and its parents
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
+java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:100)
 	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
 	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
@@ -1964,7 +2292,7 @@ java.lang.IllegalStateException: discriminator not found in type ExternalSecurit
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
 FATAL (FluentGen): Unhandled error: discriminator not found in type ExternalSecuritySolution and its parents
-java.lang.IllegalStateException: discriminator not found in type ExternalSecuritySolution and its parents
+java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:100)
 	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
 	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
@@ -2015,6 +2343,12 @@ https://aka.ms/autorest
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
    Loading AutoRest extension '@autorest/modelerfour' (4.15.423->4.15.423)
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
 
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MachineReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
 
@@ -2118,12 +2452,6 @@ WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this c
 
 WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
 
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
 
@@ -2169,13 +2497,13 @@ WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/prop
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
 
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'nodes' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
-
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'edges' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
+
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'nodes' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1:1
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: filterProcesses
@@ -2216,7 +2544,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-service-map
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Connection, ClientGroupMember, MachineGroup, ClientGroupMembersCount, Liveness, Process, Port, ClientGroup, MachinesSummary, Machine, MapResponse]
+INFORMATION (FluentMapper): Add Inner to response types: [Process, Connection, ClientGroupMember, ClientGroup, ClientGroupMembersCount, Machine, MapResponse, Liveness, Port, MachineGroup, MachinesSummary]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentGen): Write Java
@@ -2230,12 +2558,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:23266) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:23234) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:26:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:294:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:23266) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:23266) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:23234) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:23234) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2306,8 +2634,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.620 s
-[INFO] Finished at: 2020-12-14T19:11:27Z
+[INFO] Total time:  3.479 s
+[INFO] Finished at: 2020-12-15T07:00:48Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
