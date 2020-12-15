@@ -17,12 +17,19 @@ import java.util.Set;
 
 public class FluentDefineMethod extends FluentMethod {
 
+    private final boolean constantResourceName; // resource name is constant, "name" is not needed
     private final IType resourceNameType;
+
+    public static FluentDefineMethod defineMethodWithConstantResourceName(
+            FluentResourceModel model, FluentMethodType type, String resourceName) {
+        return new FluentDefineMethod(model, type, resourceName, null);
+    }
 
     public FluentDefineMethod(FluentResourceModel model, FluentMethodType type,
                               String resourceName, IType resourceNameType) {
         super(model, type);
 
+        this.constantResourceName = resourceNameType == null;
         this.resourceNameType = resourceNameType;
 
         this.name = "define" + resourceName;
@@ -46,9 +53,15 @@ public class FluentDefineMethod extends FluentMethod {
             this.implementationMethodTemplate = MethodTemplate.builder()
                     .methodSignature(this.getImplementationMethodSignature())
                     .method(block -> {
-                        block.methodReturn(String.format("new %1$s(name, this.%2$s())",
-                                fluentResourceModel.getImplementationType().toString(),
-                                ModelNaming.METHOD_MANAGER));
+                        if (constantResourceName) {
+                            block.methodReturn(String.format("new %1$s(this.%2$s())",
+                                    fluentResourceModel.getImplementationType().toString(),
+                                    ModelNaming.METHOD_MANAGER));
+                        } else {
+                            block.methodReturn(String.format("new %1$s(name, this.%2$s())",
+                                    fluentResourceModel.getImplementationType().toString(),
+                                    ModelNaming.METHOD_MANAGER));
+                        }
                     })
                     .build();
         }
@@ -57,13 +70,19 @@ public class FluentDefineMethod extends FluentMethod {
 
     @Override
     protected String getBaseMethodSignature() {
-        return String.format("%1$s(%2$s name)", this.name, resourceNameType.toString());
+        if (constantResourceName) {
+            return String.format("%1$s()", this.name);
+        } else {
+            return String.format("%1$s(%2$s name)", this.name, resourceNameType.toString());
+        }
     }
 
     @Override
     public void writeJavadoc(JavaJavadocComment commentBlock) {
         commentBlock.description(description);
-        commentBlock.param("name", "resource name.");
+        if (!constantResourceName) {
+            commentBlock.param("name", "resource name.");
+        }
         commentBlock.methodReturns(interfaceReturnValue.getDescription());
     }
 
@@ -74,6 +93,8 @@ public class FluentDefineMethod extends FluentMethod {
         } else {
             fluentResourceModel.getImplementationType().addImportsTo(imports, false);
         }
-        resourceNameType.addImportsTo(imports, false);
+        if (resourceNameType != null) {
+            resourceNameType.addImportsTo(imports, false);
+        }
     }
 }

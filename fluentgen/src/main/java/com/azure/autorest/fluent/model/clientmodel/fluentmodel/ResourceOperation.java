@@ -160,8 +160,8 @@ public abstract class ResourceOperation {
         return this.getResourceLocalVariables().getLocalVariablesMap().values();
     }
 
-    // method reference
-    private List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
+    protected List<FluentCollectionMethod> getMethodReferencesOfFullParameters() {
+        // method references of full parameters (include optional parameters)
         return this.getMethodReferences().stream()
                 .filter(m -> !m.getInnerClientMethod().getOnlyRequiredParameters())
                 .collect(Collectors.toList());

@@ -27,6 +27,6 @@ public class MethodParameter {
     }
 
     public String getSerializedName() {
-        return proxyMethodParameter.getRequestParameterName();
+        return this.getProxyMethodParameter().getRequestParameterName();
     }
 }
