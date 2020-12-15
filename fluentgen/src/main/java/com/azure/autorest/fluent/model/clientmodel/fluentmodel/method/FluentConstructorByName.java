@@ -19,14 +19,21 @@ import java.util.Set;
 
 public class FluentConstructorByName extends FluentMethod {
 
+    private final boolean constantResourceName; // resource name is constant, "name" is not needed
     private final IType resourceNameType;
     private final IType managerType;
+
+    public static FluentConstructorByName constructorMethodWithConstantResourceName(
+            FluentResourceModel model, FluentMethodType type, IType managerType, ResourceLocalVariables resourceLocalVariables) {
+        return new FluentConstructorByName(model, type, null, null, managerType, resourceLocalVariables);
+    }
 
     public FluentConstructorByName(FluentResourceModel model, FluentMethodType type,
                                    IType resourceNameType, String propertyNameForResourceName, IType managerType,
                                    ResourceLocalVariables resourceLocalVariables) {
         super(model, type);
 
+        this.constantResourceName = resourceNameType == null;
         this.resourceNameType = resourceNameType;
         this.managerType = managerType;
 
@@ -38,7 +45,9 @@ public class FluentConstructorByName extends FluentMethod {
                 .method(block -> {
                     block.line(String.format("this.%1$s = new %2$s();", ModelNaming.MODEL_PROPERTY_INNER, model.getInnerModel().getName()));
                     block.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
-                    block.line(String.format("this.%1$s = name;", propertyNameForResourceName));
+                    if (!constantResourceName) {
+                        block.line(String.format("this.%1$s = name;", propertyNameForResourceName));
+                    }
 
                     // init
                     resourceLocalVariables.getLocalVariablesMap().values().stream()
@@ -52,10 +61,16 @@ public class FluentConstructorByName extends FluentMethod {
 
     @Override
     public String getImplementationMethodSignature() {
-        return String.format("%1$s(%2$s name, %3$s %4$s)",
-                implementationReturnValue.getType().toString(),
-                resourceNameType.toString(),
-                managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+        if (constantResourceName) {
+            return String.format("%1$s(%2$s %3$s)",
+                    implementationReturnValue.getType().toString(),
+                    managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+        } else {
+            return String.format("%1$s(%2$s name, %3$s %4$s)",
+                    implementationReturnValue.getType().toString(),
+                    resourceNameType.toString(),
+                    managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+        }
     }
 
     @Override
@@ -71,7 +86,9 @@ public class FluentConstructorByName extends FluentMethod {
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (includeImplementationImports) {
-            resourceNameType.addImportsTo(imports, false);
+            if (resourceNameType != null) {
+                resourceNameType.addImportsTo(imports, false);
+            }
             managerType.addImportsTo(imports, false);
         }
     }

@@ -31,17 +31,15 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResourceCreate extends ResourceOperation {
@@ -248,9 +246,13 @@ public class ResourceCreate extends ResourceOperation {
             String resourceName = this.getResourceName();
             logger.info("ResourceCreate: Fluent model '{}', resource define method '{}'", resourceModel.getName(), "define" + resourceName);
 
-            IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
-            defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
-                    resourceName, resourceNameType);
+            if (this.isConstantResourceNamePathParameter()) {
+                defineMethod = FluentDefineMethod.defineMethodWithConstantResourceName(this.getResourceModel(), FluentMethodType.DEFINE, resourceName);
+            } else {
+                IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
+                defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
+                        resourceName, resourceNameType);
+            }
         }
         return defineMethod;
     }
@@ -270,36 +272,51 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getConstructor() {
-        ClientMethodParameter resourceNamePathParameter = this.getResourceNamePathParameter().getClientMethodParameter();
-        IType resourceNameType = resourceNamePathParameter.getClientType();
-        String propertyName = resourceNamePathParameter.getName();
-        return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
-                resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
-                this.getResourceLocalVariables());
+        if (this.isConstantResourceNamePathParameter()) {
+            return FluentConstructorByName.constructorMethodWithConstantResourceName(this.getResourceModel(),
+                    FluentMethodType.CONSTRUCTOR, FluentStatic.getFluentManager().getType(),
+                    this.getResourceLocalVariables());
+        } else {
+            ClientMethodParameter resourceNamePathParameter = this.getResourceNamePathParameter().getClientMethodParameter();
+            IType resourceNameType = resourceNamePathParameter.getClientType();
+            String propertyName = resourceNamePathParameter.getName();
+            return new FluentConstructorByName(this.getResourceModel(), FluentMethodType.CONSTRUCTOR,
+                    resourceNameType, propertyName, FluentStatic.getFluentManager().getType(),
+                    this.getResourceLocalVariables());
+        }
+    }
+
+    private boolean isConstantResourceNamePathParameter() {
+        // check whether the last segment in URL (resource name) is a constant parameter (which does not have a corresponding client method parameter)
+
+        String parameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
+        FluentCollectionMethod method = this.getMethodReferencesOfFullParameters().iterator().next();
+        ProxyMethod proxyMethod = method.getInnerProxyMethod();
+        Optional<ProxyMethodParameter> resourceNamePathParameter = proxyMethod.getParameters().stream()
+                .filter(m -> parameterName.equals(m.getRequestParameterName()))
+                .findFirst();
+        if (resourceNamePathParameter.isPresent()) {
+            return resourceNamePathParameter.get().getIsConstant();
+        } else {
+            throw new IllegalStateException(String.format("resource name parameter not found in proxy method %1$s, name segment %2$s",
+                    proxyMethod.getName(), parameterName));
+        }
     }
 
     private MethodParameter getResourceNamePathParameter() {
-        // some resource would have last url parameter segment assigned a constant, hence we cannot just take the last url parameter segment as resource name parameter
+        // this only works when isConstantResourceNamePathParameter() == false
 
-        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
-        Map<String, Integer> serializedParameterNameLocations = new HashMap<>();
-        for (int i = 0; i < parameterSegments.size(); ++i) {
-            serializedParameterNameLocations.put(parameterSegments.get(i).getParameterName(), i);
+        String parameterName = urlPathSegments.getReverseParameterSegments().iterator().next().getParameterName();
+        Optional<MethodParameter> pathParameter = this.getPathParameters().stream()
+                .filter(m -> parameterName.equals(m.getSerializedName()))
+                .findFirst();
+        if (pathParameter.isPresent()) {
+            return pathParameter.get();
+        } else {
+            FluentCollectionMethod method = this.getMethodReferencesOfFullParameters().iterator().next();
+            throw new IllegalStateException(String.format("resource name parameter not found in client method %1$s, name segment %2$s",
+                    method.getInnerClientMethod().getName(), parameterName));
         }
-
-        List<MethodParameter> pathParameters = this.getPathParameters();
-        Map<MethodParameter, Integer> pathParameterLocations = pathParameters.stream()
-                .collect(Collectors.toMap(Function.identity(), p -> serializedParameterNameLocations.get(p.getSerializedName())));
-
-        int minLocation = Integer.MAX_VALUE;
-        MethodParameter resourceNamePathParameter = null;
-        for (Map.Entry<MethodParameter, Integer> e : pathParameterLocations.entrySet()) {
-            if (e.getValue() < minLocation) {
-                minLocation = e.getValue();
-                resourceNamePathParameter = e.getKey();
-            }
-        }
-        return resourceNamePathParameter;
     }
 
     private void generatePropertyMethods(DefinitionStage stage, ClientModel model, ClientModelProperty property) {
@@ -330,39 +347,44 @@ public class ResourceCreate extends ResourceOperation {
     }
 
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
-        MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
-        String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
-        List<UrlPathSegments.ParameterSegment> parameterSegments = urlPathSegments.getReverseParameterSegments();
-        // skip till resource name path parameter
-        Iterator<UrlPathSegments.ParameterSegment> iterator = parameterSegments.iterator();
-        while (iterator.hasNext()) {
-            if (serializedResourceNamePathParameterName.equals(iterator.next().getParameterName())) {
+        // parameters for parent method
+        List<MethodParameter> parameters = this.getPathParameters();
+        if (!this.isConstantResourceNamePathParameter()) {
+            MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
+            String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
+
+            parameters = parameters.stream()
+                    .filter(p -> !p.getSerializedName().equals(serializedResourceNamePathParameterName))
+                    .collect(Collectors.toList());
+        }
+
+        // resource name of immediate parent
+        Set<String> serializedParameterNames = parameters.stream()
+                .map(MethodParameter::getSerializedName)
+                .collect(Collectors.toSet());
+        String resourceNameOfImmediateParent = null;
+        for (UrlPathSegments.ParameterSegment parameterSegment : urlPathSegments.getReverseParameterSegments()) {
+            if (serializedParameterNames.contains(parameterSegment.getParameterName())) {
+                resourceNameOfImmediateParent = CodeNamer.toPascalCase(FluentUtils.getSingular(parameterSegment.getSegmentName()));
+
+                if (resourceNameOfImmediateParent.isEmpty()) {
+                    // segment name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
+                    resourceNameOfImmediateParent = CodeNamer.toPascalCase(FluentUtils.getSingular(parameterSegment.getParameterName()));
+                }
                 break;
             }
         }
-        if (!iterator.hasNext()) {
-            throw new IllegalStateException(String.format("parent segment not found on for url %1$s, model %2$s, name segment %3$s",
-                    urlPathSegments.getPath(), resourceModel.getName(), serializedResourceNamePathParameterName));
+        if (resourceNameOfImmediateParent == null) {
+            throw new IllegalStateException(String.format("resource name of immediate parent not found for url %1$s, model %2$s",
+                    urlPathSegments.getPath(), resourceModel.getName()));
         }
-        // next path parameter is the parent path parameter
-        UrlPathSegments.ParameterSegment parentSegment = iterator.next();
-        String parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getSegmentName()));
-
-        // segment name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
-        if (parentResourceName.isEmpty()) {
-            parentResourceName = CodeNamer.toPascalCase(FluentUtils.getSingular(parentSegment.getParameterName()));
-        }
-
         // if parent is resourceGroup, just set it as such
         if (resourceModel.getCategory() == ModelCategory.RESOURCE_GROUP_AS_PARENT) {
-            parentResourceName = "ResourceGroup";
+            resourceNameOfImmediateParent = "ResourceGroup";
         }
 
-        List<MethodParameter> parameters = this.getPathParameters().stream()
-                .filter(p -> !p.getSerializedName().equals(resourceNamePathParameter.getSerializedName()))
-                .collect(Collectors.toList());
         return new FluentParentMethod(resourceModel, FluentMethodType.CREATE_PARENT,
-                stage, parentResourceName,
+                stage, resourceNameOfImmediateParent,
                 parameters.stream().map(MethodParameter::getClientMethodParameter).collect(Collectors.toList()),
                 this.getResourceLocalVariables());
     }
