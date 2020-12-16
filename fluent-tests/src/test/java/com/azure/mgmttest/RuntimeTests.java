@@ -28,6 +28,8 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
+import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
@@ -164,6 +166,16 @@ public class RuntimeTests {
             blobContainer2.update()
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
+
+            BlobServiceProperties blobService = storageManager.blobServices().define()
+                    .withExistingStorageAccount(rgName, saName)
+                    .create();
+
+            blobService.update()
+                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(1))
+                    .apply();
+            Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
+            Assertions.assertEquals(1, blobService.deleteRetentionPolicy().days());
 
             storageManager.blobContainers().deleteById(blobContainer.id());
 
