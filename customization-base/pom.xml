@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>autorest-java</artifactId>
-    <groupId>com.azure</groupId>
+    <artifactId>azure-autorest-parent</artifactId>
+    <groupId>com.azure.tools</groupId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>com.azure</groupId>
-  <artifactId>customization-base</artifactId>
+  <groupId>com.azure.tools</groupId>
+  <artifactId>azure-autorest-customization</artifactId>
   <version>1.0.0-beta.1</version>
 
   <repositories>
@@ -31,8 +31,8 @@
     </dependency>
 
     <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>extension-base</artifactId>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
     <dependency>
