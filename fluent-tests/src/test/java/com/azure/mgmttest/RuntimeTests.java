@@ -140,6 +140,7 @@ public class RuntimeTests {
                 .create();
 
         try {
+            // storage account
             StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
                     .withRegion(rg.region())
                     .withExistingResourceGroup(rgName)
@@ -155,6 +156,7 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
+            // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
                     .withExistingStorageAccount(rgName, saName)
                     .withPublicAccess(PublicAccess.BLOB)
@@ -167,6 +169,7 @@ public class RuntimeTests {
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
+            // container blob service properties
             BlobServiceProperties blobService = storageManager.blobServices().define()
                     .withExistingStorageAccount(rgName, saName)
                     .create();
@@ -180,7 +183,8 @@ public class RuntimeTests {
             storageManager.blobContainers().deleteById(blobContainer.id());
 
             // test advisor for it requires a base resource
-            testAdvisor(storageAccount);
+            // disabled as generate is async and it takes too long for a new resource
+            //testAdvisor(storageAccount);
 
             storageManager.storageAccounts().deleteById(storageAccount.id());
         } finally {
@@ -191,6 +195,7 @@ public class RuntimeTests {
     private void testAdvisor(StorageAccount storageAccount) {
         AdvisorManager advisorManager = authenticateAdvisorManager();
 
+        // generate is async
         advisorManager.recommendations().generate();
 
         PagedIterable<ResourceRecommendationBase> recommendations = advisorManager.recommendations().list();
@@ -212,6 +217,7 @@ public class RuntimeTests {
         ResourceRecommendationBase recommendationForStorageAccount = advisorManager.recommendations().get(storageAccount.id(), recommendationId);
         Assertions.assertTrue(recommendationForStorageAccount.suppressionIds().contains(suppressionId));
 
+        recommendations = advisorManager.recommendations().list();
         long countAfterSuppress = recommendations.stream()
                 .filter(recommendation -> recommendation.resourceMetadata().resourceId().equals(storageAccount.id()) && !recommendation.suppressionIds().contains(suppressionId))
                 .count();
