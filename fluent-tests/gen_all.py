@@ -64,7 +64,6 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str):
         '--fluent=lite',
         '--java.fluent=lite',
         '--java.license-header=MICROSOFT_MIT_SMALL',
-        '--pipeline.modelerfour.flatten-payloads=false',
         '--java.output-folder=' + output_sdk_dir,
         '--java.namespace=' + namespace,
         readme_dir]
