@@ -25,6 +25,7 @@ import fixtures.xmlservice.models.JsonInput;
 import fixtures.xmlservice.models.JsonOutput;
 import fixtures.xmlservice.models.ListBlobsResponse;
 import fixtures.xmlservice.models.ListContainersResponse;
+import fixtures.xmlservice.models.ObjectWithXMsTextProperty;
 import fixtures.xmlservice.models.RootWithRefAndMeta;
 import fixtures.xmlservice.models.RootWithRefAndNoMeta;
 import fixtures.xmlservice.models.SignedIdentifier;
@@ -48,7 +49,7 @@ public final class Xmls {
      * @param client the instance of the service client containing this operation class.
      */
     Xmls(AutoRestSwaggerBATXMLService client) {
-        this.service = RestProxy.create(XmlsService.class, client.getHttpPipeline());
+        this.service = RestProxy.create(XmlsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -245,6 +246,11 @@ public final class Xmls {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<JsonOutput>> jsonOutput(@HostParam("$host") String host, Context context);
+
+        @Get("/xml/x-ms-text")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ObjectWithXMsTextProperty>> getXMsText(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -1676,5 +1682,59 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public JsonOutput jsonOutput() {
         return jsonOutputAsync().block();
+    }
+
+    /**
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     *     property being 'english' and its 'content' property being 'I am text'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<ObjectWithXMsTextProperty>> getXMsTextWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.getXMsText(this.client.getHost(), context));
+    }
+
+    /**
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     *     property being 'english' and its 'content' property being 'I am text'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ObjectWithXMsTextProperty> getXMsTextAsync() {
+        return getXMsTextWithResponseAsync()
+                .flatMap(
+                        (Response<ObjectWithXMsTextProperty> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     *     property being 'english' and its 'content' property being 'I am text'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ObjectWithXMsTextProperty getXMsText() {
+        return getXMsTextAsync().block();
     }
 }

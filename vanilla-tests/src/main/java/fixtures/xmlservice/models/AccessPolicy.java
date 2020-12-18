@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** The AccessPolicy model. */
+/** An Access policy. */
 @JacksonXmlRootElement(localName = "AccessPolicy")
 @Fluent
 public final class AccessPolicy {

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
 
-/** The Container model. */
+/** An Azure Storage container. */
 @JacksonXmlRootElement(localName = "Container")
 @Fluent
 public final class Container {
