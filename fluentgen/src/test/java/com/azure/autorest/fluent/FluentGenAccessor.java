@@ -6,6 +6,8 @@
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.fluent.mapper.FluentMapper;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
 
@@ -27,5 +29,13 @@ public class FluentGenAccessor {
 
     public FluentJavaPackage handleTemplate(Client client) {
         return fluentgen.handleTemplate(client);
+    }
+
+    public FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+        return fluentgen.handleFluentLite(codeModel, client, javaPackage);
+    }
+
+    public FluentMapper getFluentMapper() {
+        return fluentgen.getFluentMapper();
     }
 }

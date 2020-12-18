@@ -50,6 +50,17 @@ public class FluentMapper {
     }
 
     public FluentClient map(CodeModel codeModel, Client client) {
+        FluentClient fluentClient = basicMap(codeModel, client);
+
+        // parse resource collections to identify create/update/refresh flow on resource instance
+        fluentClient.getResourceCollections()
+                .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
+        ResourceParser.processAdditionalMethods(fluentClient);
+
+        return fluentClient;
+    }
+
+    FluentClient basicMap(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
 
         fluentClient.setModuleInfo(moduleInfo());
@@ -72,11 +83,6 @@ public class FluentMapper {
                         .map(og -> FluentResourceCollectionMapper.getInstance().map(og))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList()));
-
-        // parse resource collections to identify create/update/refresh flow on resource instance
-        fluentClient.getResourceCollections()
-                .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
-        ResourceParser.processAdditionalMethods(fluentClient);
 
         // set resource collection APIs to service API
         fluentClient.getManager().getProperties().addAll(

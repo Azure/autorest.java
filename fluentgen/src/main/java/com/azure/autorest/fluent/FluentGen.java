@@ -227,9 +227,11 @@ public class FluentGen extends NewPlugin {
         return javaPackage;
     }
 
-    void handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+    FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
         FluentJavaSettings fluentJavaSettings = this.getFluentJavaSettings();
         JavaSettings javaSettings = JavaSettings.getInstance();
+
+        FluentClient fluentClient = null;
 
         // Fluent Lite
         if (javaSettings.isFluentLite()) {
@@ -239,7 +241,7 @@ public class FluentGen extends NewPlugin {
 
             logger.info("Process for Fluent Lite, SDK integration {}", (isSdkIntegration ? "enabled" : "disabled"));
 
-            FluentClient fluentClient = this.getFluentMapper().map(codeModel, client);
+            fluentClient = this.getFluentMapper().map(codeModel, client);
 
             // project
             Project project = new Project(fluentClient);
@@ -275,6 +277,8 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addChangelog(project.getChangelog());
             }
         }
+
+        return fluentClient;
     }
 
     private FluentJavaSettings getFluentJavaSettings() {
@@ -284,7 +288,7 @@ public class FluentGen extends NewPlugin {
         return fluentJavaSettings;
     }
 
-    private FluentMapper getFluentMapper() {
+    protected FluentMapper getFluentMapper() {
         if (fluentMapper == null) {
             // use fluent mapper and template
             Mappers.setFactory(new FluentMapperFactory());
