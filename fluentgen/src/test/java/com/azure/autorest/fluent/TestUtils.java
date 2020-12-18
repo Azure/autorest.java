@@ -21,10 +21,25 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestUtils {
 
     public static class MockFluentGen extends FluentGen {
+
+        private static final Map<String, Object> DEFAULT_SETTINGS = new HashMap<>();
+        static {
+            DEFAULT_SETTINGS.put("namespace", "com.azure.resourcemanager.mock");
+            DEFAULT_SETTINGS.put("fluent", "lite");
+            DEFAULT_SETTINGS.put("sync-methods", "all");
+            DEFAULT_SETTINGS.put("add-context-parameter", true);
+            DEFAULT_SETTINGS.put("context-client-method-parameter", true);
+            DEFAULT_SETTINGS.put("client-side-validations", true);
+            DEFAULT_SETTINGS.put("client-logger", true);
+            DEFAULT_SETTINGS.put("generate-client-interfaces", true);
+            DEFAULT_SETTINGS.put("required-parameter-client-methods", true);
+        }
 
         public MockFluentGen() {
             super(new Connection(System.out, System.in), "dummy", "dummy");
@@ -37,13 +52,7 @@ public class TestUtils {
 
         @Override
         public <T> T getValue(Type type, String key) {
-            if ("namespace".equals(key)) {
-                return (T) "com.azure.resourcemanager.mock";
-            } else if ("fluent".equals(key)) {
-                return (T) "lite";
-            }
-
-            return null;
+            return (T) DEFAULT_SETTINGS.get(key);
         }
 
         @Override
