@@ -7,11 +7,20 @@ package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettingsAccessor;
+import com.azure.autorest.fluent.mapper.ResourceParserTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.model.clientmodel.Client;
+import org.junit.jupiter.api.Assertions;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 
 public class TestUtils {
 
@@ -40,6 +49,34 @@ public class TestUtils {
         @Override
         public void message(Message message) {
 //            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
+        }
+    }
+
+    public static CodeModel loadCodeModel(FluentGenAccessor fluentgenAccessor, String filename) {
+        String searchYamlContent = loadYaml(filename);   // the YAML is produced by fluentnamer on locks.json
+
+        CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
+        Client client = fluentgenAccessor.handleMap(codeModel);
+
+        FluentStatic.setClient(client);
+
+        return codeModel;
+    }
+
+    public static String loadYaml(String filename) {
+        final int bufferSize = 1024;
+        final char[] buffer = new char[bufferSize];
+        final StringBuilder out = new StringBuilder();
+        try (InputStream inputStream = ResourceParserTests.class.getClassLoader().getResourceAsStream(filename);
+             Reader in = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+            int charsRead;
+            while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
+                out.append(buffer, 0, charsRead);
+            }
+            return out.toString();
+        } catch (IOException e) {
+            Assertions.fail(e);
+            return null;
         }
     }
 }

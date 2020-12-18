@@ -24,11 +24,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +43,7 @@ public class ResourceParserTests {
 
     @Test
     public void testResourceCreate() {
-        CodeModel codeModel = loadCodeModel();
+        CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
         Client client = FluentStatic.getClient();
 
         List<FluentResourceModel> fluentModels =
@@ -159,33 +154,5 @@ public class ResourceParserTests {
         Assertions.assertTrue(methodReferences.iterator().next().getMethodName().startsWith("deleteByResourceGroup"));
         Assertions.assertEquals(lockCreate.getUrlPathSegments().getPath(), methodReferences.iterator().next().getInnerProxyMethod().getUrlPath());
         Assertions.assertEquals(HttpMethod.DELETE, methodReferences.iterator().next().getInnerProxyMethod().getHttpMethod());
-    }
-
-    private static CodeModel loadCodeModel() {
-        String searchYamlContent = loadYaml("code-model-fluentnamer-locks.yaml");   // the YAML is produced by fluentnamer on locks.json
-
-        CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
-        Client client = fluentgenAccessor.handleMap(codeModel);
-
-        FluentStatic.setClient(client);
-
-        return codeModel;
-    }
-
-    private static String loadYaml(String filename) {
-        final int bufferSize = 1024;
-        final char[] buffer = new char[bufferSize];
-        final StringBuilder out = new StringBuilder();
-        try (InputStream inputStream = ResourceParserTests.class.getClassLoader().getResourceAsStream(filename);
-                Reader in = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
-            int charsRead;
-            while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
-                out.append(buffer, 0, charsRead);
-            }
-            return out.toString();
-        } catch (IOException e) {
-            Assertions.fail(e);
-            return null;
-        }
     }
 }
