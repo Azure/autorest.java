@@ -288,7 +288,7 @@ public class FluentGen extends NewPlugin {
         return fluentJavaSettings;
     }
 
-    private FluentMapper getFluentMapper() {
+    protected FluentMapper getFluentMapper() {
         if (fluentMapper == null) {
             // use fluent mapper and template
             Mappers.setFactory(new FluentMapperFactory());
