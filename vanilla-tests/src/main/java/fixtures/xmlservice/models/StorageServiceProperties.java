@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The StorageServiceProperties model. */
+/** Storage Service Properties. */
 @JacksonXmlRootElement(localName = "StorageServiceProperties")
 @Fluent
 public final class StorageServiceProperties {

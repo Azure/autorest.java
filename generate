@@ -1,7 +1,8 @@
 #!/bin/bash --verbose
 
-VANILLA_ARGUMENTS='--version=3.0.6282 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
-AZURE_ARGUMENTS='--version=3.0.6282 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
+VANILLA_ARGUMENTS='--version=3.0.6350 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
+AZURE_ARGUMENTS='--version=3.0.6350 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
+ARM_ARGUMENTS='--version=3.0.6350 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --pom-file=pom_arm.xml'
 
 # Vanilla
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
@@ -41,8 +42,12 @@ autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure
 autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.discriminatorflattening
 
 # Azure
-autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1 --required-parameter-client-methods
-autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1 --required-parameter-client-methods
+autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
+autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
+
+autorest $ARM_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json --namespace=fixtures.lro
+rm azure-tests/src/main/java/module-info.java
+rm azure-tests/pom_arm.xml
 
 # customization
 autorest --use:. customization-tests/swagger

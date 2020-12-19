@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The SignedIdentifier model. */
+/** signed identifier. */
 @JacksonXmlRootElement(localName = "SignedIdentifier")
 @Fluent
 public final class SignedIdentifier {

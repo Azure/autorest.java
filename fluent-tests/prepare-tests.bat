@@ -14,7 +14,7 @@ SET AUTOREST_CORE_VERSION=3.0.6350
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
 SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
-SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --pipeline.modelerfour.flatten-payloads=false
+SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite
 
 REM fluent premium
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources

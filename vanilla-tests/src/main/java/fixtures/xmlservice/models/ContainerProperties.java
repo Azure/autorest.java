@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** The ContainerProperties model. */
+/** Properties of a container. */
 @JacksonXmlRootElement(localName = "ContainerProperties")
 @Fluent
 public final class ContainerProperties {

@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The ComplexTypeWithMeta model. */
+/** I am a complex type with XML node. */
 @JacksonXmlRootElement(localName = "XMLComplexTypeWithMeta")
 @Fluent
 public final class ComplexTypeWithMeta {

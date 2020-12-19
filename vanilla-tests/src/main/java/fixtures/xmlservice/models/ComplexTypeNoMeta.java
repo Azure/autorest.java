@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The ComplexTypeNoMeta model. */
+/** I am a complex type with no XML node. */
 @JacksonXmlRootElement(localName = "ComplexTypeNoMeta")
 @Fluent
 public final class ComplexTypeNoMeta {

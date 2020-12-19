@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The ListContainersResponse model. */
+/** An enumeration of containers. */
 @JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent
 public final class ListContainersResponse {

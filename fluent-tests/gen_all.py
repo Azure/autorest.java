@@ -45,7 +45,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str):
+def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str) -> subprocess.CompletedProcess:
     logging.info(f'generate code for RP: {sdk}')
 
     readme_dir = os.path.join(specs_dir, sdk, 'resource-manager', 'readme.md')
@@ -64,7 +64,6 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str):
         '--fluent=lite',
         '--java.fluent=lite',
         '--java.license-header=MICROSOFT_MIT_SMALL',
-        '--pipeline.modelerfour.flatten-payloads=false',
         '--java.output-folder=' + output_sdk_dir,
         '--java.namespace=' + namespace,
         readme_dir]
@@ -76,7 +75,7 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str):
     return result
 
 
-def maven_build(output_sdk_dir: str, sdk: str):
+def maven_build(output_sdk_dir: str, sdk: str) -> subprocess.CompletedProcess:
     logging.info(f'maven build for RP: {sdk}')
 
     command = [
@@ -100,7 +99,7 @@ class CodegenResult:
     stderr: str = ''
 
 
-def report_markdown(report_dir: str, results: List[CodegenResult]):
+def report_markdown(report_dir: str, results: List[CodegenResult]) -> None:
     sdks_success = [result.sdk for result in results if result.success]
     sdks_failure_codegen_java = [result.sdk for result in results
                                  if not result.success and result.failure_cause.startswith('codegen_java')]

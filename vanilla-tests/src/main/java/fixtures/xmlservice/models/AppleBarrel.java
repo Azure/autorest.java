@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The AppleBarrel model. */
+/** A barrel of apples. */
 @JacksonXmlRootElement(localName = "AppleBarrel")
 @Fluent
 public final class AppleBarrel {
