@@ -19,6 +19,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -55,7 +56,8 @@ public class SchemaNameNormalization {
 
     public CodeModel process(CodeModel codeModel) {
         codeModel = namingOverride(codeModel);
-        codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
+        codeModel = normalizeUnnamedAdditionalProperties(codeModel);
+        codeModel = normalizeUnnamedBaseType(codeModel);
         codeModel = normalizeUnnamedChoiceSchema(codeModel);
         return codeModel;
     }
@@ -127,7 +129,9 @@ public class SchemaNameNormalization {
         }
     }
 
-    protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
+    protected CodeModel normalizeUnnamedAdditionalProperties(CodeModel codeModel) {
+        // unnamed type is named by modelerfour as e.g. ComponentsQit0EtSchemasManagedclusterpropertiesPropertiesIdentityprofileAdditionalproperties
+
         final String prefix = "Components";
         final String postfix = "Additionalproperties";
 
@@ -143,15 +147,50 @@ public class SchemaNameNormalization {
                     }
 
                     for (Schema type : subtypes) {
-                        if (Utils.getDefaultName(type).startsWith(prefix)
-                                && Utils.getDefaultName(type).endsWith(postfix)) {
-                            String name = Utils.getDefaultName(type);
+                        String name = Utils.getDefaultName(type);
+                        if (name.startsWith(prefix) && name.endsWith(postfix)) {
                             String newName = Utils.getDefaultName(dict);
                             type.getLanguage().getDefault().setName(newName);
                             logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
                         }
                     }
                 });
+
+        return codeModel;
+    }
+
+    protected CodeModel normalizeUnnamedBaseType(CodeModel codeModel) {
+        // unnamed base type is named by modelerfour as e.g.Components1Q1Og48SchemasManagedclusterAllof1
+
+        final String prefix = "Components";
+        final String allOf = "Allof";
+
+        codeModel.getSchemas().getObjects().forEach(schema -> {
+            String name = Utils.getDefaultName(schema);
+            if (schema.getChildren() != null && !CoreUtils.isNullOrEmpty(schema.getChildren().getImmediate())
+                    && name.startsWith(prefix) && name.contains(allOf)) {
+                int index = name.lastIndexOf(allOf) + allOf.length();
+                boolean unnamed = false;
+                String restName = name.substring(index);
+                if (restName.isEmpty()) {
+                    unnamed = true;
+                } else {
+                    try {
+                        Integer.parseInt(restName);
+                        unnamed = true;
+                    } catch (NumberFormatException e) {
+                        // ignore
+                    }
+                }
+
+                if (unnamed) {
+                    Schema firstChild = schema.getChildren().getImmediate().iterator().next();
+                    String newName = "Base" + Utils.getDefaultName(firstChild);
+                    schema.getLanguage().getDefault().setName(newName);
+                    logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                }
+            }
+        });
 
         return codeModel;
     }
