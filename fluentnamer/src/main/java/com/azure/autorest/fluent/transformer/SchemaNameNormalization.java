@@ -21,6 +21,7 @@ import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +101,7 @@ public class SchemaNameNormalization {
                     .findFirst();
             if (property.isPresent()) {
                 String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(property.get().getSerializedName());
-                logger.info("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
+                logger.warn("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
                 schema.getLanguage().getDefault().setName(newName);
                 break;
             }
@@ -114,7 +115,7 @@ public class SchemaNameNormalization {
                         .findFirst();
                 if (parameter.isPresent()) {
                     String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
-                    logger.info("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                    logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
                     schema.getLanguage().getDefault().setName(newName);
                     done = true;
                     break;
@@ -132,13 +133,24 @@ public class SchemaNameNormalization {
 
         codeModel.getSchemas().getDictionaries().stream()
                 .filter(s -> s.getElementType() instanceof ObjectSchema)
-                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
                 .forEach(dict -> {
-                    Schema schema = dict.getElementType();
-                    String name = Utils.getDefaultName(schema);
-                    String newName = Utils.getDefaultName(dict);
-                    schema.getLanguage().getDefault().setName(newName);
-                    logger.info("Rename schema default name, from '{}' to '{}'", name, newName);
+                    ObjectSchema schema = (ObjectSchema) dict.getElementType();
+
+                    List<Schema> subtypes = new ArrayList<>();
+                    subtypes.add(schema);
+                    if (schema.getChildren() != null && schema.getChildren().getAll() != null) {
+                        subtypes.addAll(schema.getChildren().getAll());
+                    }
+
+                    for (Schema type : subtypes) {
+                        if (Utils.getDefaultName(type).startsWith(prefix)
+                                && Utils.getDefaultName(type).endsWith(postfix)) {
+                            String name = Utils.getDefaultName(type);
+                            String newName = Utils.getDefaultName(dict);
+                            type.getLanguage().getDefault().setName(newName);
+                            logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                        }
+                    }
                 });
 
         return codeModel;
