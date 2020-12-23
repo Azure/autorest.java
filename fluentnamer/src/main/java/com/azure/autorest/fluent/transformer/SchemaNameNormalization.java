@@ -19,8 +19,10 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,8 @@ public class SchemaNameNormalization {
 
     public CodeModel process(CodeModel codeModel) {
         codeModel = namingOverride(codeModel);
-        codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
+        codeModel = normalizeUnnamedAdditionalProperties(codeModel);
+        codeModel = normalizeUnnamedBaseType(codeModel);
         codeModel = normalizeUnnamedChoiceSchema(codeModel);
         return codeModel;
     }
@@ -100,7 +103,7 @@ public class SchemaNameNormalization {
                     .findFirst();
             if (property.isPresent()) {
                 String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(property.get().getSerializedName());
-                logger.info("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
+                logger.warn("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
                 schema.getLanguage().getDefault().setName(newName);
                 break;
             }
@@ -114,7 +117,7 @@ public class SchemaNameNormalization {
                         .findFirst();
                 if (parameter.isPresent()) {
                     String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
-                    logger.info("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                    logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
                     schema.getLanguage().getDefault().setName(newName);
                     done = true;
                     break;
@@ -126,20 +129,68 @@ public class SchemaNameNormalization {
         }
     }
 
-    protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
+    protected CodeModel normalizeUnnamedAdditionalProperties(CodeModel codeModel) {
+        // unnamed type is named by modelerfour as e.g. ComponentsQit0EtSchemasManagedclusterpropertiesPropertiesIdentityprofileAdditionalproperties
+
         final String prefix = "Components";
         final String postfix = "Additionalproperties";
 
         codeModel.getSchemas().getDictionaries().stream()
                 .filter(s -> s.getElementType() instanceof ObjectSchema)
-                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
                 .forEach(dict -> {
-                    Schema schema = dict.getElementType();
-                    String name = Utils.getDefaultName(schema);
-                    String newName = Utils.getDefaultName(dict);
-                    schema.getLanguage().getDefault().setName(newName);
-                    logger.info("Rename schema default name, from '{}' to '{}'", name, newName);
+                    ObjectSchema schema = (ObjectSchema) dict.getElementType();
+
+                    List<Schema> subtypes = new ArrayList<>();
+                    subtypes.add(schema);
+                    if (schema.getChildren() != null && schema.getChildren().getAll() != null) {
+                        subtypes.addAll(schema.getChildren().getAll());
+                    }
+
+                    for (Schema type : subtypes) {
+                        String name = Utils.getDefaultName(type);
+                        if (name.startsWith(prefix) && name.endsWith(postfix)) {
+                            String newName = Utils.getDefaultName(dict);
+                            type.getLanguage().getDefault().setName(newName);
+                            logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                        }
+                    }
                 });
+
+        return codeModel;
+    }
+
+    protected CodeModel normalizeUnnamedBaseType(CodeModel codeModel) {
+        // unnamed base type is named by modelerfour as e.g.Components1Q1Og48SchemasManagedclusterAllof1
+
+        final String prefix = "Components";
+        final String allOf = "Allof";
+
+        codeModel.getSchemas().getObjects().forEach(schema -> {
+            String name = Utils.getDefaultName(schema);
+            if (schema.getChildren() != null && !CoreUtils.isNullOrEmpty(schema.getChildren().getImmediate())
+                    && name.startsWith(prefix) && name.contains(allOf)) {
+                int index = name.lastIndexOf(allOf) + allOf.length();
+                boolean unnamed = false;
+                String restName = name.substring(index);
+                if (restName.isEmpty()) {
+                    unnamed = true;
+                } else {
+                    try {
+                        Integer.parseInt(restName);
+                        unnamed = true;
+                    } catch (NumberFormatException e) {
+                        // ignore
+                    }
+                }
+
+                if (unnamed) {
+                    Schema firstChild = schema.getChildren().getImmediate().iterator().next();
+                    String newName = "Base" + Utils.getDefaultName(firstChild);
+                    schema.getLanguage().getDefault().setName(newName);
+                    logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                }
+            }
+        });
 
         return codeModel;
     }
