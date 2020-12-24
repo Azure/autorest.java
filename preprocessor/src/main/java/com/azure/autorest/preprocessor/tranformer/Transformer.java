@@ -13,6 +13,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
@@ -23,9 +24,11 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -107,6 +110,10 @@ public class Transformer {
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
           pagingOperations.add(operation);
+        }
+
+        if (JavaSettings.getInstance().isMergeOrphanOptionalParameters()) {
+          mergeOptionalParameters(operation);
         }
       }
     }
@@ -320,5 +327,40 @@ public class Transformer {
     contentType.getLanguage().setDefault(language);
     contentType.getLanguage().setJava(language);
     return contentType;
+  }
+
+  private Operation mergeOptionalParameters(Operation operation) {
+    for (Request request : operation.getRequests()) {
+      Parameter optionsBag = null;
+      boolean allOptionalParameterOtherwise = true;
+      for (Parameter parameter : request.getSignatureParameters()) {
+        if (parameter.getLanguage().getDefault().getName().endsWith("Options")) {
+          optionsBag = parameter;
+        } else if (parameter.isRequired() || !(parameter.getSchema() instanceof PrimitiveSchema)) {
+          allOptionalParameterOtherwise = false;
+          break;
+        }
+      }
+      if (optionsBag != null && allOptionalParameterOtherwise) {
+        ObjectSchema objectSchema = (ObjectSchema) optionsBag.getSchema();
+        if (objectSchema != null) {
+          for (Parameter parameter : request.getSignatureParameters()) {
+            if (parameter != optionsBag) {
+              Property property = new Property();
+              property.setSerializedName(parameter.getLanguage().getDefault().getSerializedName());
+              property.setLanguage(parameter.getLanguage());
+              property.setDescription(parameter.getDescription());
+              property.setOriginalParameter(Arrays.asList(parameter));
+              property.setSchema(parameter.getSchema());
+              objectSchema.getProperties().add(property);
+              parameter.setTargetProperty(property);
+              parameter.setGroupedBy(optionsBag);
+            }
+          }
+          request.setSignatureParameters(Arrays.asList(optionsBag));
+        }
+      }
+    }
+    return operation;
   }
 }
