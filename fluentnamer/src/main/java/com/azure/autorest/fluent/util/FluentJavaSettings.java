@@ -39,6 +39,8 @@ public class FluentJavaSettings {
      */
     private final Set<String> javaNamesForRemoveInner = new HashSet<>();
 
+    private final Set<String> javaNamesForRemoveModel = new HashSet<>();
+
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
 //     */
@@ -129,6 +131,10 @@ public class FluentJavaSettings {
         return renameModel;
     }
 
+    public Set<String> getJavaNamesForRemoveModel() {
+        return javaNamesForRemoveModel;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -179,6 +185,16 @@ public class FluentJavaSettings {
                         }
                     }
                 }
+            }
+        });
+
+        loadStringSetting("remove-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForRemoveModel.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
             }
         });
 
