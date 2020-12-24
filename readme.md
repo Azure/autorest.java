@@ -85,6 +85,7 @@ Following settings only works when `fluent` option is specified.
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
+| `--remove-model` | CSV. Remove classes. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.

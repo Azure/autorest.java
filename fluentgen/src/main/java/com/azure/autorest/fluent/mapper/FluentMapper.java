@@ -47,6 +47,7 @@ public class FluentMapper {
 
     public void preModelMap(CodeModel codeModel) {
         processInnerModel(codeModel);
+        FluentModelMapper.getInstance().addRemovedModels(fluentJavaSettings.getJavaNamesForRemoveModel());
     }
 
     public FluentClient map(CodeModel codeModel, Client client) {
