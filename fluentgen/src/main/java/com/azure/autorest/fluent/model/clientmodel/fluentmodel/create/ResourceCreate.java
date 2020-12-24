@@ -349,7 +349,6 @@ public class ResourceCreate extends ResourceOperation {
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         // parameters for parent method
         List<MethodParameter> parameters = this.getPathParameters();
-        logger.info("log1 " + parameters.stream().map(p -> p.getSerializedName()).collect(Collectors.joining(", ")));
         if (!this.isConstantResourceNamePathParameter()) {
             MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
             String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
