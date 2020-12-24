@@ -349,6 +349,7 @@ public class ResourceCreate extends ResourceOperation {
     private FluentMethod getExistingParentMethod(DefinitionStageParent stage) {
         // parameters for parent method
         List<MethodParameter> parameters = this.getPathParameters();
+        logger.info("log1 " + parameters.stream().map(p -> p.getSerializedName()).collect(Collectors.joining(", ")));
         if (!this.isConstantResourceNamePathParameter()) {
             MethodParameter resourceNamePathParameter = this.getResourceNamePathParameter();
             String serializedResourceNamePathParameterName = resourceNamePathParameter.getSerializedName();
@@ -365,18 +366,18 @@ public class ResourceCreate extends ResourceOperation {
         String resourceNameOfImmediateParent = null;
         for (UrlPathSegments.ParameterSegment parameterSegment : urlPathSegments.getReverseParameterSegments()) {
             if (serializedParameterNames.contains(parameterSegment.getParameterName())) {
-                resourceNameOfImmediateParent = CodeNamer.toPascalCase(FluentUtils.getSingular(parameterSegment.getSegmentName()));
-
-                if (resourceNameOfImmediateParent.isEmpty()) {
+                if (parameterSegment.getSegmentName().isEmpty()) {
                     // segment name is empty for SCOPE_AS_PARENT and SCOPE_NESTED_CHILD
                     resourceNameOfImmediateParent = CodeNamer.toPascalCase(FluentUtils.getSingular(parameterSegment.getParameterName()));
+                } else {
+                    resourceNameOfImmediateParent = CodeNamer.toPascalCase(FluentUtils.getSingular(parameterSegment.getSegmentName()));
                 }
                 break;
             }
         }
         if (resourceNameOfImmediateParent == null) {
-            throw new IllegalStateException(String.format("resource name of immediate parent not found for url %1$s, model %2$s",
-                    urlPathSegments.getPath(), resourceModel.getName()));
+            throw new IllegalStateException(String.format("resource name of immediate parent not found for url %1$s, model %2$s, candidate parameter names %3$s",
+                    urlPathSegments.getPath(), resourceModel.getName(), serializedParameterNames));
         }
         // if parent is resourceGroup, just set it as such
         if (resourceModel.getCategory() == ModelCategory.RESOURCE_GROUP_AS_PARENT) {
