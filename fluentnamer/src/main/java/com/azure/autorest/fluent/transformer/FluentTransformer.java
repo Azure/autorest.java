@@ -9,7 +9,9 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -34,6 +36,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
+        codeModel = normalizeParameterLocation(codeModel);
         codeModel = renameUngroupedOperationGroup(codeModel, fluentJavaSettings);
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
@@ -56,7 +59,33 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    public CodeModel renameUngroupedOperationGroup(CodeModel codeModel, FluentJavaSettings settings) {
+    protected CodeModel normalizeParameterLocation(CodeModel codeModel) {
+        List<Parameter> modifiedGlobalParameters = new ArrayList<>();
+        codeModel.getGlobalParameters().stream().filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT
+                && p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path).forEach(p -> {
+                    String name = Utils.getDefaultName(p);
+                    if (!"subscriptionId".equalsIgnoreCase(name)) {
+                        logger.warn("Modify parameter '{}' implementation from CLIENT to METHOD", name);
+                        p.setImplementation(Parameter.ImplementationLocation.METHOD);
+                        modifiedGlobalParameters.add(p);
+                    }
+                });
+        if (!modifiedGlobalParameters.isEmpty()) {
+            // add now METHOD parameter to signature parameters
+            codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
+                List<Parameter> parameters = o.getParameters();
+                List<Parameter> signatureParameters = o.getSignatureParameters();
+                for (Parameter parameter : modifiedGlobalParameters) {
+                    if (!signatureParameters.contains(parameter) && parameters.contains(parameter)) {
+                        signatureParameters.add(parameter);
+                    }
+                }
+            });
+        }
+        return codeModel;
+    }
+
+    protected CodeModel renameUngroupedOperationGroup(CodeModel codeModel, FluentJavaSettings settings) {
         final String nameForUngroupedOperations = getNameForUngroupedOperations(codeModel, settings);
         if (nameForUngroupedOperations == null) {
             return codeModel;
