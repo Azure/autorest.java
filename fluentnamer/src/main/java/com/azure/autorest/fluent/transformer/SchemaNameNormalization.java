@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.transformer;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
@@ -13,8 +14,10 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
@@ -59,6 +62,7 @@ public class SchemaNameNormalization {
         codeModel = normalizeUnnamedAdditionalProperties(codeModel);
         codeModel = normalizeUnnamedBaseType(codeModel);
         codeModel = normalizeUnnamedChoiceSchema(codeModel);
+        codeModel = normalizeUnnamedRequestBody(codeModel);
         return codeModel;
     }
 
@@ -109,8 +113,8 @@ public class SchemaNameNormalization {
             }
         }
 
+        boolean done = false;
         for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
-            boolean done = false;
             for (Operation operation : operationGroup.getOperations()) {
                 Optional<Parameter> parameter = Stream.concat(operation.getParameters().stream(), operation.getRequests().stream().flatMap(r -> r.getParameters().stream()))
                         .filter(p -> p.getSchema() == schema)
@@ -125,6 +129,25 @@ public class SchemaNameNormalization {
             }
             if (done) {
                 break;
+            }
+        }
+        if (!done) {
+            for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
+                for (Operation operation : operationGroup.getOperations()) {
+                    Optional<Parameter> parameter = Stream.concat(operation.getParameters().stream(), operation.getRequests().stream().flatMap(r -> r.getParameters().stream()))
+                            .filter(p -> (p.getSchema() instanceof ArraySchema) && ((ArraySchema) p.getSchema()).getElementType() == schema)
+                            .findFirst();
+                    if (parameter.isPresent()) {
+                        String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
+                        logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                        schema.getLanguage().getDefault().setName(newName);
+                        done = true;
+                        break;
+                    }
+                }
+                if (done) {
+                    break;
+                }
             }
         }
     }
@@ -190,6 +213,36 @@ public class SchemaNameNormalization {
                     logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
                 }
             }
+        });
+
+        return codeModel;
+    }
+
+    protected CodeModel normalizeUnnamedRequestBody(CodeModel codeModel) {
+        // unnamed request body is named by modelerfour as e.g. Paths1Ezr0XyApplicationsApplicationIdMicrosoftGraphGetmembergroupsPostRequestbodyContentApplicationJsonSchema
+
+        final String prefix = "Paths";
+        final String postfix = "Schema";
+        final String requestBody = "Requestbody";
+
+        codeModel.getOperationGroups().forEach(og -> {
+            og.getOperations().forEach(operation -> {
+                operation.getRequests().forEach(request -> {
+                    Optional<Schema> bodySchemaOpt = request.getParameters().stream()
+                            .filter(p -> p.getSchema() != null && p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Body)
+                            .map(Value::getSchema)
+                            .findFirst();
+                    if (bodySchemaOpt.isPresent()) {
+                        Schema schema = bodySchemaOpt.get();
+                        String name = Utils.getDefaultName(schema);
+                        if (name.startsWith(prefix) && name.endsWith(postfix) && name.contains(requestBody)) {
+                            String newName = Utils.getDefaultName(og) + Utils.getDefaultName(operation) + "RequestBody";
+                            schema.getLanguage().getDefault().setName(newName);
+                            logger.warn("Rename schema default name, from '{}' to '{}'", name, newName);
+                        }
+                    }
+                });
+            });
         });
 
         return codeModel;
