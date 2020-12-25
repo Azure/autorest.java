@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.transformer;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
@@ -109,8 +110,8 @@ public class SchemaNameNormalization {
             }
         }
 
+        boolean done = false;
         for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
-            boolean done = false;
             for (Operation operation : operationGroup.getOperations()) {
                 Optional<Parameter> parameter = Stream.concat(operation.getParameters().stream(), operation.getRequests().stream().flatMap(r -> r.getParameters().stream()))
                         .filter(p -> p.getSchema() == schema)
@@ -125,6 +126,25 @@ public class SchemaNameNormalization {
             }
             if (done) {
                 break;
+            }
+        }
+        if (!done) {
+            for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
+                for (Operation operation : operationGroup.getOperations()) {
+                    Optional<Parameter> parameter = Stream.concat(operation.getParameters().stream(), operation.getRequests().stream().flatMap(r -> r.getParameters().stream()))
+                            .filter(p -> (p.getSchema() instanceof ArraySchema) && ((ArraySchema) p.getSchema()).getElementType() == schema)
+                            .findFirst();
+                    if (parameter.isPresent()) {
+                        String newName = Utils.getDefaultName(operationGroup) + CodeNamer.toPascalCase(Utils.getDefaultName(parameter.get()));
+                        logger.warn("Rename schema from '{}' to '{}', based on operation group '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(operationGroup));
+                        schema.getLanguage().getDefault().setName(newName);
+                        done = true;
+                        break;
+                    }
+                }
+                if (done) {
+                    break;
+                }
             }
         }
     }
