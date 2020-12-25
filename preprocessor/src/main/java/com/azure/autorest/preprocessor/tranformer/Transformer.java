@@ -23,11 +23,13 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -124,18 +126,59 @@ public class Transformer {
     return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 
+  private static class PagingNextOperationSignature {
+    private final String operationGroup;
+    private final String operationName;
+
+    private PagingNextOperationSignature(String operationGroup, String operationName) {
+      this.operationGroup = operationGroup;
+      this.operationName = operationName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      PagingNextOperationSignature that = (PagingNextOperationSignature) o;
+      return Objects.equals(operationGroup, that.operationGroup) && Objects.equals(operationName, that.operationName);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(operationGroup, operationName);
+    }
+  }
+
+  private final Map<PagingNextOperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
+
   private void addPagingNextOperation(CodeModel codeModel, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
-    if (operation.getExtensions().getXmsPageable().getOperationName() != null && !JavaSettings.getInstance().isFluent()) {
+    if (operation.getExtensions().getXmsPageable().getOperationName() != null) {
       String operationGroupAndName = operation.getExtensions().getXmsPageable().getOperationName();
+      String operationNameTmp;
       if (operationGroupAndName.contains("_")) {
         String[] parts = operationGroupAndName.split("_", 2);
         operationGroupName = CodeNamer.getMethodGroupName(parts[0]);
-        operationName = CodeNamer.getMethodName(parts[1]);
+        operationNameTmp = CodeNamer.getMethodName(parts[1]);
       } else {
         operationGroupName = operationGroup.getLanguage().getJava().getName();
-        operationName = CodeNamer.getMethodName(operationGroupAndName);
+        operationNameTmp = CodeNamer.getMethodName(operationGroupAndName);
+      }
+
+      if (!operation.getResponses().isEmpty() && operation.getResponses().iterator().next().getSchema() != null) {
+        Schema responseSchema = operation.getResponses().iterator().next().getSchema();
+        PagingNextOperationSignature signature = new PagingNextOperationSignature(operationGroupName, operationNameTmp);
+        if (pagingNextOperationResponseSchemaMap.containsKey(signature) && pagingNextOperationResponseSchemaMap.get(signature) != responseSchema) {
+          // method signature conflict for different response schema, try a different operation name
+          operationName = operation.getLanguage().getJava().getName() + "Next";
+          signature = new PagingNextOperationSignature(operationGroupName, operationName);
+        } else {
+          operationName = operationNameTmp;
+        }
+        pagingNextOperationResponseSchemaMap.put(signature, responseSchema);
+      } else {
+        operationName= operationNameTmp;
       }
     } else {
       operationGroupName = operationGroup.getLanguage().getJava().getName();
