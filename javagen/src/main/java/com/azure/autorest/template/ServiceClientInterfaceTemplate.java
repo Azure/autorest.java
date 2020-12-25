@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.ModelNamer;
 
 import java.util.HashSet;
 
@@ -47,7 +48,7 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
                         comment.description(String.format("Gets %1$s", property.getDescription()));
                         comment.methodReturns(String.format("the %1$s value", property.getName()));
                     });
-                    interfaceBlock.publicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
+                    interfaceBlock.publicMethod(String.format("%1$s %2$s()", property.getType(), new ModelNamer().modelPropertyGetterName(property)));
 
                     /* if (!property.isReadOnly()) {
                         interfaceBlock.javadocComment(comment ->

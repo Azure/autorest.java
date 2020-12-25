@@ -23,6 +23,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class Transformer {
   private void addPagingNextOperation(CodeModel codeModel, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
-    if (operation.getExtensions().getXmsPageable().getOperationName() != null) {
+    if (operation.getExtensions().getXmsPageable().getOperationName() != null && !JavaSettings.getInstance().isFluent()) {
       String operationGroupAndName = operation.getExtensions().getXmsPageable().getOperationName();
       if (operationGroupAndName.contains("_")) {
         String[] parts = operationGroupAndName.split("_", 2);
