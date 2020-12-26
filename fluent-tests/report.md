@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2020-12-25T19:21:11.317229
+Generated at 2020-12-26T19:40:29.763611
 ## Success
 <details>
 <summary>RP count: 153</summary>
@@ -310,7 +310,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [DenyAssignment, ProviderOperationsMetadata, ClassicAdministrator, Error, Permission, RoleAssignment, RoleDefinition]
+INFORMATION (FluentMapper): Add Inner to response types: [DenyAssignment, RoleAssignment, RoleDefinition, ProviderOperationsMetadata, ClassicAdministrator, Error, Permission]
 
 ```
 **stderr**
@@ -1165,7 +1165,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-deploymentmanager
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [RolloutRequest, OperationsList, ServiceTopologyResource, ArtifactSource, StepResource, Rollout, ServiceUnitResource, ServiceResource]
+INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, ServiceResource, ServiceUnitResource, OperationsList, StepResource, RolloutRequest, ServiceTopologyResource, Rollout]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1202,8 +1202,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@78048281 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e96ae2e)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@78048281 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e96ae2e)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@46370e71 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb70ae3)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@46370e71 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb70ae3)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1242,8 +1242,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@78048281 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e96ae2e)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@78048281 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e96ae2e)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@46370e71 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb70ae3)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@46370e71 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@2cb70ae3)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1445,7 +1445,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-intune
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [FlaggedUser, AndroidMamPolicy, OperationResult, Application, WipeDeviceOperationResult, FlaggedEnrolledApp, Device, Location, IOsmamPolicy, GroupItem]
+INFORMATION (FluentMapper): Add Inner to response types: [Application, FlaggedEnrolledApp, IOsmamPolicy, GroupItem, WipeDeviceOperationResult, FlaggedUser, Location, Device, AndroidMamPolicy, OperationResult]
 
 ```
 **stderr**
@@ -1892,7 +1892,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-security
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [IotSensorsModel, ConnectorSetting, JitNetworkAccessPolicy, ScanResult, IoTSecurityAggregatedAlert, Alert, ServerVulnerabilityAssessment, WorkspaceSetting, IotRecommendation, RuleResults, Operation, IoTSecuritySolutionModel, SecuritySolutionsReferenceDataList, ComplianceResult, IoTSecurityAggregatedRecommendation, IotAlertType, RegulatoryComplianceAssessment, SecureScoreControlDetails, IoTSecuritySolutionAnalyticsModelList, AllowedConnectionsResource, Scan, SecureScoreItem, Pricing, Setting, SecurityTask, Device, Automation, AscLocation, DeviceSecurityGroup, IotAlertModel, AutomationValidationStatus, IotRecommendationType, OnPremiseIotSensorsList, SecuritySubAssessment, OnPremiseIotSensor, AdaptiveNetworkHardening, JitNetworkAccessRequest, IotDefenderSettingsList, IotRecommendationTypeList, AutoProvisioningSetting, SecurityAssessmentMetadata, TopologyResource, RulesResults, IotDefenderSettingsModel, AdaptiveApplicationControlGroup, IotSensorsList, IotAlert, ServerVulnerabilityAssessmentsList, IotAlertTypeList, DiscoveredSecuritySolution, Scans, AdaptiveApplicationControlGroups, AlertsSuppressionRule, ExternalSecuritySolution, InformationProtectionPolicy, RegulatoryComplianceStandard, Compliance, PackageDownloads, SecurityContact, IoTSecuritySolutionAnalyticsModel, SecuritySolution, ScanResults, IotRecommendationModel, IotSitesList, SecureScoreControlDefinitionItem, AdvancedThreatProtectionSetting, IotSitesModel, RegulatoryComplianceControl, PricingList, SecurityAssessment]
+INFORMATION (FluentMapper): Add Inner to response types: [IotRecommendation, Compliance, SecureScoreItem, IoTSecuritySolutionModel, ComplianceResult, ConnectorSetting, SecurityAssessmentMetadata, Alert, Setting, AdaptiveApplicationControlGroups, SecureScoreControlDetails, RegulatoryComplianceControl, AdaptiveApplicationControlGroup, SecurityAssessment, SecuritySubAssessment, SecuritySolution, IotDefenderSettingsModel, JitNetworkAccessPolicy, AutoProvisioningSetting, ScanResult, PackageDownloads, IotSensorsList, RegulatoryComplianceStandard, AdaptiveNetworkHardening, DeviceSecurityGroup, Scans, AllowedConnectionsResource, IotRecommendationModel, IoTSecuritySolutionAnalyticsModel, IotAlertTypeList, OnPremiseIotSensor, AdvancedThreatProtectionSetting, IoTSecurityAggregatedAlert, IotDefenderSettingsList, DiscoveredSecuritySolution, Device, IotAlertModel, ServerVulnerabilityAssessmentsList, ScanResults, Pricing, Scan, IotSensorsModel, PricingList, RegulatoryComplianceAssessment, AscLocation, SecurityContact, Operation, TopologyResource, Automation, AlertsSuppressionRule, IotSitesModel, InformationProtectionPolicy, SecureScoreControlDefinitionItem, SecurityTask, ExternalSecuritySolution, JitNetworkAccessRequest, IoTSecurityAggregatedRecommendation, RuleResults, IotAlert, AutomationValidationStatus, RulesResults, IotRecommendationType, SecuritySolutionsReferenceDataList, WorkspaceSetting, IotSitesList, IoTSecuritySolutionAnalyticsModelList, IotAlertType, OnPremiseIotSensorsList, ServerVulnerabilityAssessment, IotRecommendationTypeList]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -2182,7 +2182,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-service-map
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Process, ClientGroupMember, Port, MachinesSummary, ClientGroupMembersCount, Machine, Connection, Liveness, ClientGroup, MapResponse, MachineGroup]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroup, MachineGroup, Machine, Liveness, Process, MapResponse, MachinesSummary, ClientGroupMember, Connection, Port, ClientGroupMembersCount]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentGen): Write Java
@@ -2196,12 +2196,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:22897) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:23515) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:26:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:294:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:22897) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:22897) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:23515) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:23515) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2272,8 +2272,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.262 s
-[INFO] Finished at: 2020-12-25T19:09:38Z
+[INFO] Total time:  4.566 s
+[INFO] Finished at: 2020-12-26T19:25:08Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
