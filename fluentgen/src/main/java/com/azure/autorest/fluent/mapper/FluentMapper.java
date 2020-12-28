@@ -104,12 +104,12 @@ public class FluentMapper {
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage())));
-        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage())));
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentModelsSubpackage())));
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
 
         List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
         List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
-        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage()), openToModules));
+        openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentModelsSubpackage()), openToModules));
         openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
 
         return moduleInfo;
