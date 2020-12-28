@@ -33,7 +33,7 @@ public class TypeConversionUtilsTests {
     public void testConversionExpression() {
         JavaSettings settings = JavaSettings.getInstance();
         IType innerType = new ClassType.Builder()
-                .packageName(settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage()))
+                .packageName(settings.getPackage(settings.getFluentModelsSubpackage()))
                 .name("MockResourceInner")
                 .build();
 

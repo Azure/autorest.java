@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ModuleInfo {
     private final String moduleName;
@@ -35,6 +36,19 @@ public class ModuleInfo {
         public boolean isTransitive() {
             return isTransitive;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            RequireModule that = (RequireModule) o;
+            return isTransitive == that.isTransitive && Objects.equals(moduleName, that.moduleName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(moduleName, isTransitive);
+        }
     }
 
     public static class ExportModule {
@@ -46,6 +60,19 @@ public class ModuleInfo {
 
         public String getModuleName() {
             return moduleName;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ExportModule that = (ExportModule) o;
+            return Objects.equals(moduleName, that.moduleName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(moduleName);
         }
     }
 
@@ -73,6 +100,19 @@ public class ModuleInfo {
 
         public boolean isOpenTo() {
             return openToModules != null && !openToModules.isEmpty();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            OpenModule that = (OpenModule) o;
+            return Objects.equals(moduleName, that.moduleName) && Objects.equals(openToModules, that.openToModules);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(moduleName, openToModules);
         }
     }
 

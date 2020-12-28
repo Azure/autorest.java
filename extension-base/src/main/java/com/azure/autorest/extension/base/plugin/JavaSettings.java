@@ -382,10 +382,21 @@ public class JavaSettings
 
     private String fluentSubpackage;
     /**
-     * @return The sub-package specific to Fluent SDK.
+     * @return The sub-package for Fluent SDK, that contains Client and Builder types, which is not recommended to be used directly.
      */
     public final String getFluentSubpackage() {
         return fluentSubpackage;
+    }
+
+    /**
+     * @return The sub-package for Fluent SDK, that contains Enums, Exceptions, and Model types, which is not recommended to be used directly.
+     */
+    public final String getFluentModelsSubpackage() {
+        if (modelsSubpackage.contains(".")) {
+            return fluentSubpackage + "." + modelsSubpackage.substring(modelsSubpackage.lastIndexOf(".") + 1);
+        } else {
+            return fluentSubpackage + "." + modelsSubpackage;
+        }
     }
 
     /**
