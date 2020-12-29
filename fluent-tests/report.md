@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2020-12-28T19:39:08.708580
+Generated at 2020-12-29T19:36:51.349261
 ## Success
 <details>
 <summary>RP count: 153</summary>
@@ -310,7 +310,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-authorization
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Error, RoleDefinition, DenyAssignment, ProviderOperationsMetadata, RoleAssignment, ClassicAdministrator, Permission]
+INFORMATION (FluentMapper): Add Inner to response types: [RoleAssignment, Permission, RoleDefinition, DenyAssignment, ClassicAdministrator, Error, ProviderOperationsMetadata]
 
 ```
 **stderr**
@@ -1445,7 +1445,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-intune
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Application, FlaggedUser, WipeDeviceOperationResult, OperationResult, FlaggedEnrolledApp, Location, Device, GroupItem, IOsmamPolicy, AndroidMamPolicy]
+INFORMATION (FluentMapper): Add Inner to response types: [Application, FlaggedEnrolledApp, IOsmamPolicy, GroupItem, WipeDeviceOperationResult, FlaggedUser, Location, Device, AndroidMamPolicy, OperationResult]
 
 ```
 **stderr**
@@ -1892,7 +1892,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-security
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [RulesResults, PricingList, ServerVulnerabilityAssessment, Scan, AdvancedThreatProtectionSetting, Device, WorkspaceSetting, AdaptiveApplicationControlGroup, RegulatoryComplianceStandard, AllowedConnectionsResource, AutoProvisioningSetting, IotRecommendationModel, IoTSecuritySolutionModel, SecurityTask, IoTSecurityAggregatedAlert, ServerVulnerabilityAssessmentsList, IoTSecuritySolutionAnalyticsModelList, RegulatoryComplianceAssessment, Automation, DeviceSecurityGroup, ScanResults, Setting, SecurityAssessment, Compliance, Pricing, ScanResult, IotRecommendationTypeList, JitNetworkAccessPolicy, Alert, AlertsSuppressionRule, AdaptiveApplicationControlGroups, TopologyResource, IotSensorsList, AscLocation, AdaptiveNetworkHardening, SecurityAssessmentMetadata, OnPremiseIotSensor, SecureScoreControlDetails, ExternalSecuritySolution, IotAlertModel, SecureScoreItem, IotAlertType, DiscoveredSecuritySolution, IotDefenderSettingsList, IoTSecurityAggregatedRecommendation, RegulatoryComplianceControl, IoTSecuritySolutionAnalyticsModel, JitNetworkAccessRequest, IotDefenderSettingsModel, SecureScoreControlDefinitionItem, PackageDownloads, IotSensorsModel, Scans, SecuritySubAssessment, IotSitesModel, OnPremiseIotSensorsList, IotRecommendation, SecuritySolutionsReferenceDataList, ConnectorSetting, ComplianceResult, Operation, IotSitesList, IotRecommendationType, IotAlert, SecurityContact, RuleResults, AutomationValidationStatus, InformationProtectionPolicy, IotAlertTypeList, SecuritySolution]
+INFORMATION (FluentMapper): Add Inner to response types: [IoTSecurityAggregatedRecommendation, Device, SecuritySolutionsReferenceDataList, Scans, SecuritySubAssessment, AdvancedThreatProtectionSetting, Alert, OnPremiseIotSensor, RuleResults, ServerVulnerabilityAssessment, RulesResults, SecureScoreControlDefinitionItem, SecuritySolution, AdaptiveApplicationControlGroup, SecurityAssessment, AdaptiveNetworkHardening, ExternalSecuritySolution, ComplianceResult, Scan, Pricing, IotAlert, IotSensorsModel, IotSitesModel, TopologyResource, AllowedConnectionsResource, ConnectorSetting, AscLocation, PackageDownloads, Operation, JitNetworkAccessPolicy, SecurityTask, SecurityContact, PricingList, IoTSecuritySolutionAnalyticsModelList, Setting, IotDefenderSettingsList, ScanResults, OnPremiseIotSensorsList, IotRecommendationModel, RegulatoryComplianceStandard, IoTSecuritySolutionAnalyticsModel, Compliance, WorkspaceSetting, JitNetworkAccessRequest, IoTSecuritySolutionModel, DiscoveredSecuritySolution, IotSensorsList, SecureScoreItem, RegulatoryComplianceAssessment, IotRecommendationTypeList, AutomationValidationStatus, RegulatoryComplianceControl, IotDefenderSettingsModel, IotAlertModel, InformationProtectionPolicy, ServerVulnerabilityAssessmentsList, Automation, IotRecommendationType, SecurityAssessmentMetadata, AlertsSuppressionRule, SecureScoreControlDetails, DeviceSecurityGroup, IotAlertTypeList, IotRecommendation, IoTSecurityAggregatedAlert, AutoProvisioningSetting, IotSitesList, ScanResult, IotAlertType, AdaptiveApplicationControlGroups]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -2182,7 +2182,7 @@ INFORMATION (FluentJavaSettings): Option, string, base-folder : .
 INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-service-map
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Process, MachinesSummary, Liveness, Port, Machine, ClientGroupMember, Connection, MachineGroup, ClientGroup, MapResponse, ClientGroupMembersCount]
+INFORMATION (FluentMapper): Add Inner to response types: [Process, ClientGroupMember, Port, MachinesSummary, ClientGroupMembersCount, Machine, Connection, Liveness, ClientGroup, MapResponse, MachineGroup]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentGen): Write Java
@@ -2196,12 +2196,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:23548) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:23038) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:26:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6326/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:294:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:23548) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:23548) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:23038) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:23038) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2272,8 +2272,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.010 s
-[INFO] Finished at: 2020-12-28T19:25:42Z
+[INFO] Total time:  3.463 s
+[INFO] Finished at: 2020-12-29T19:25:07Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
