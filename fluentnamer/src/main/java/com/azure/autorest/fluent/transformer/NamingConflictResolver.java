@@ -51,7 +51,8 @@ public class NamingConflictResolver {
             }
         });
 
-        if (methodGroupNamesLowerCase.contains(Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT))) {
+        String clientNameLowerCase = Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT);
+        if (methodGroupNamesLowerCase.contains(clientNameLowerCase) || objectNamesLowerCase.contains(clientNameLowerCase)) {
             String name = Utils.getDefaultName(codeModel);
             String newName;
 
