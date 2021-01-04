@@ -60,9 +60,9 @@ You can set the `AZURE_LOG_LEVEL` environment variable to view logging statement
 View our [logging wiki][logging_wiki] for more detailed instructions on enabling logging.
 
 <!-- LINKS -->
-[azure_core_exceptions]: https://docs.microsoft.com/en-us/java/api/com.azure.core.exception?view=azure-java-stable
-[azure_exception]: https://docs.microsoft.com/en-us/java/api/com.azure.core.exception.azureexception?view=azure-java-stable
-[http_response_exception]: https://docs.microsoft.com/en-us/java/api/com.azure.core.exception.httpresponseexception?view=azure-java-stable
-[resource_not_found_exception]: https://docs.microsoft.com/en-us/java/api/com.azure.core.exception.resourcenotfoundexception?view=azure-java-stable
-[log_levels]: https://docs.microsoft.com/en-us/java/api/com.azure.core.util.logging.loglevel?view=azure-java-stable
+[azure_core_exceptions]: https://docs.microsoft.com/java/api/com.azure.core.exception?view=azure-java-stable
+[azure_exception]: https://docs.microsoft.com/java/api/com.azure.core.exception.azureexception?view=azure-java-stable
+[http_response_exception]: https://docs.microsoft.com/java/api/com.azure.core.exception.httpresponseexception?view=azure-java-stable
+[resource_not_found_exception]: https://docs.microsoft.com/java/api/com.azure.core.exception.resourcenotfoundexception?view=azure-java-stable
+[log_levels]: https://docs.microsoft.com/java/api/com.azure.core.util.logging.loglevel?view=azure-java-stable
 [logging_wiki]: https://github.com/Azure/azure-sdk-for-java/wiki/Logging-with-Azure-SDK

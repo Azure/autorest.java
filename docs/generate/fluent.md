@@ -5,6 +5,6 @@ Fluent interfaces look like [this][fluent_ex], and can be enabled with the flag 
 generating a fluent library, you have access to [additional flags][fluent_flags]
 
 <!-- LINKS -->
-[mgmt]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane
+[mgmt]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane
 [fluent_ex]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/resourcemanager#fluent-interface
 [fluent_flags]: ../../readme.md#additional-settings-for-fluent

@@ -5,14 +5,19 @@ that the client is the main point of access to the generated code.
 
 ## Importing Your Client
 
-You include the package from the namespace specified when generating (under flag `--namespace`). For the sake of this example,
-let's say the namespace is `com.azure.pets`.
+You include the generated client through Maven. In your application's `pom.xml` add a dependency with `groupId`, `artifactId`, and `version` specified in the generated client's `pom.xml` file. For the sake for this example, let's say the `groupId` is the same as the package name specified when generating (under flag `--namespace`), the `artifactId` is `azure-pets`, and the version is `1.0.0-beta.1`.
 
-Putting this together, we import our client like so:
-
-```java
-package com.azure.pets;
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.azure.pets</groupId>
+    <artifactId>azure-pets</artifactId>
+    <version>1.0.0-beta.1</version>
+  </dependency>
+</dependencies>
 ```
+
+Once this is included in your pom, you are free to use your client without specific imports!
 
 ## Initializing and Authenticating Your Client
 
@@ -73,9 +78,9 @@ Currently, we only support generating credentials of type `TokenCredential` and 
 [azure_core_library]: https://pypi.org/project/azure-core/
 [msrest_library]: https://pypi.org/project/msrest/
 [azure_mgmt_core_library]: https://pypi.org/project/azure-mgmt-core/
-[azure_identity_library]: https://docs.microsoft.com/en-us/java/api/com.azure.identity?view=azure-java-stable
+[azure_identity_library]: https://docs.microsoft.com/java/api/com.azure.identity?view=azure-java-stable
 [flag_index]: https://github.com/Azure/autorest/tree/master/docs/generate/flags.md
-[aad_authentication]: https://docs.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+[aad_authentication]: https://docs.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
 [identity_credentials]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/identity/azure-identity#credential-classes
-[default_azure_credential]: https://docs.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential?view=azure-java-stable
-[azure_key_credential]: https://docs.microsoft.com/en-us/java/api/com.azure.core.credential.azurekeycredential?view=azure-java-stable
+[default_azure_credential]: https://docs.microsoft.com/java/api/com.azure.identity.defaultazurecredential?view=azure-java-stable
+[azure_key_credential]: https://docs.microsoft.com/java/api/com.azure.core.credential.azurekeycredential?view=azure-java-stable

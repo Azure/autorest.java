@@ -3,7 +3,7 @@
 ### Settings
 
 ``` yaml
-input-file: ../../../../node_modules/@microsoft.azure/autorest.testserver/swagger/head.json
+input-file: https://github.com/Azure/autorest.testserver/blob/master/swagger/head.json
 namespace: com.azure.basic.sample
 license-header: MICROSOFT_MIT_NO_VERSION
 ```
