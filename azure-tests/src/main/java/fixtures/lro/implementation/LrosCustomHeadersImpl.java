@@ -1,5 +1,17 @@
 package fixtures.lro.implementation;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Headers;
+import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
+import com.azure.core.annotation.ReturnType;
+import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.Response;
+import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,9 +20,13 @@ import fixtures.lro.fluent.LrosCustomHeadersClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LrosCustomHeaders;
 import fixtures.lro.models.Product;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LrosCustomHeadersImpl.class);
+    @JsonIgnore
+    private final ClientLogger logger = new ClientLogger(LrosCustomHeadersImpl.class);
 
     private final LrosCustomHeadersClient innerClient;
 

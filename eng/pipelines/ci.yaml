@@ -50,7 +50,7 @@ jobs:
         displayName: 'Generate code'
 
       - script: |
-          git diff -- ':(exclude)azure-tests/src/main/java/fixtures/lrp/*'
+          git diff
         displayName: 'Git Diff'
 
       - script: |

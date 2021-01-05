@@ -2,13 +2,17 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsDeleteAsyncNoHeaderInRetryHeaders model. */
+/**
+ * The LROsDeleteAsyncNoHeaderInRetryHeaders model.
+ */
 @Fluent
 public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsDeleteAsyncNoHeaderInRetryHeaders.class);
+    @JsonIgnore
+    private final ClientLogger logger = new ClientLogger(LROsDeleteAsyncNoHeaderInRetryHeaders.class);
 
     /*
      * The Location property.
@@ -18,7 +22,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String location() {
@@ -27,7 +31,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsDeleteAsyncNoHeaderInRetryHeaders object itself.
      */
@@ -38,7 +42,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -3,15 +3,26 @@ package fixtures.lro.implementation;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpPipelinePolicy;
+import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.serializer.SerializerFactory;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.SerializerAdapter;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/** A builder for creating a new instance of the AutoRestLongRunningOperationTestServiceImpl type. */
+/**
+ * A builder for creating a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
+ */
 @ServiceClientBuilder(serviceClients = {AutoRestLongRunningOperationTestServiceImpl.class})
 public final class AutoRestLongRunningOperationTestServiceBuilder {
     /*
@@ -21,7 +32,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param endpoint the endpoint value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -37,7 +48,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The environment to connect to.
-     *
+     * 
      * @param environment the environment value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -53,7 +64,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The default poll interval for long-running operation.
-     *
+     * 
      * @param defaultPollInterval the defaultPollInterval value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -69,7 +80,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The HTTP pipeline to send requests through.
-     *
+     * 
      * @param pipeline the pipeline value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -85,7 +96,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Sets The serializer to serialize an object into a string.
-     *
+     * 
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestLongRunningOperationTestServiceBuilder.
      */
@@ -96,7 +107,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
 
     /**
      * Builds an instance of AutoRestLongRunningOperationTestServiceImpl with the provided parameters.
-     *
+     * 
      * @return an instance of AutoRestLongRunningOperationTestServiceImpl.
      */
     public AutoRestLongRunningOperationTestServiceImpl buildClient() {
@@ -110,17 +121,12 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
             this.defaultPollInterval = Duration.ofSeconds(30);
         }
         if (pipeline == null) {
-            this.pipeline =
-                new HttpPipelineBuilder()
-                    .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                    .build();
+            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         if (serializerAdapter == null) {
             this.serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
         }
-        AutoRestLongRunningOperationTestServiceImpl client =
-            new AutoRestLongRunningOperationTestServiceImpl(
-                pipeline, serializerAdapter, defaultPollInterval, environment, endpoint);
+        AutoRestLongRunningOperationTestServiceImpl client = new AutoRestLongRunningOperationTestServiceImpl(pipeline, serializerAdapter, defaultPollInterval, environment, endpoint);
         return client;
     }
 }

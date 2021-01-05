@@ -2,13 +2,17 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPutAsyncRetryFailedHeaders model. */
+/**
+ * The LROsPutAsyncRetryFailedHeaders model.
+ */
 @Fluent
 public final class LROsPutAsyncRetryFailedHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsPutAsyncRetryFailedHeaders.class);
+    @JsonIgnore
+    private final ClientLogger logger = new ClientLogger(LROsPutAsyncRetryFailedHeaders.class);
 
     /*
      * The Retry-After property.
@@ -30,7 +34,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer retryAfter() {
@@ -39,7 +43,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
      * @return the LROsPutAsyncRetryFailedHeaders object itself.
      */
@@ -50,7 +54,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
@@ -59,7 +63,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncRetryFailedHeaders object itself.
      */
@@ -70,7 +74,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String location() {
@@ -79,7 +83,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsPutAsyncRetryFailedHeaders object itself.
      */
@@ -90,7 +94,7 @@ public final class LROsPutAsyncRetryFailedHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -5,28 +5,26 @@ import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
 import fixtures.lro.fluent.models.ProductInner;
 
-/** Contains all response data for the putAsyncNoRetrycanceled operation. */
-public final class LROsPutAsyncNoRetrycanceledResponse
-    extends ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, ProductInner> {
+/**
+ * Contains all response data for the putAsyncNoRetrycanceled operation.
+ */
+public final class LROsPutAsyncNoRetrycanceledResponse extends ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, ProductInner> {
     /**
      * Creates an instance of LROsPutAsyncNoRetrycanceledResponse.
-     *
+     * 
      * @param request the request which resulted in this LROsPutAsyncNoRetrycanceledResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param value the deserialized value of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      */
-    public LROsPutAsyncNoRetrycanceledResponse(
-        HttpRequest request,
-        int statusCode,
-        HttpHeaders rawHeaders,
-        ProductInner value,
-        LROsPutAsyncNoRetrycanceledHeaders headers) {
+    public LROsPutAsyncNoRetrycanceledResponse(HttpRequest request, int statusCode, HttpHeaders rawHeaders, ProductInner value, LROsPutAsyncNoRetrycanceledHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
-    /** @return the deserialized response body. */
+    /**
+     * @return the deserialized response body.
+     */
     @Override
     public ProductInner getValue() {
         return super.getValue();

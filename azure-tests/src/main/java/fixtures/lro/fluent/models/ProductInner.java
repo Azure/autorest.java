@@ -4,16 +4,20 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fixtures.lro.models.ProductPropertiesProvisioningStateValues;
 import java.util.Map;
 
-/** The Product model. */
+/**
+ * The Product model.
+ */
 @JsonFlatten
 @Fluent
 public class ProductInner extends Resource {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ProductInner.class);
+    @JsonIgnore
+    private final ClientLogger logger = new ClientLogger(ProductInner.class);
 
     /*
      * The provisioningState property.
@@ -29,7 +33,7 @@ public class ProductInner extends Resource {
 
     /**
      * Get the provisioningState property: The provisioningState property.
-     *
+     * 
      * @return the provisioningState value.
      */
     public String provisioningState() {
@@ -38,7 +42,7 @@ public class ProductInner extends Resource {
 
     /**
      * Set the provisioningState property: The provisioningState property.
-     *
+     * 
      * @param provisioningState the provisioningState value to set.
      * @return the ProductInner object itself.
      */
@@ -48,22 +52,27 @@ public class ProductInner extends Resource {
     }
 
     /**
-     * Get the provisioningStateValues property: The provisioningStateValues property.
-     *
+     * Get the provisioningStateValues property: The provisioningStateValues
+     * property.
+     * 
      * @return the provisioningStateValues value.
      */
     public ProductPropertiesProvisioningStateValues provisioningStateValues() {
         return this.provisioningStateValues;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductInner withLocation(String location) {
         super.withLocation(location);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductInner withTags(Map<String, String> tags) {
         super.withTags(tags);
@@ -72,7 +81,7 @@ public class ProductInner extends Resource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

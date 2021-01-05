@@ -2,10 +2,13 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LrosCustomHeadersPutAsyncRetrySucceededHeaders model. */
+/**
+ * The LrosCustomHeadersPutAsyncRetrySucceededHeaders model.
+ */
 @Fluent
 public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
     @JsonIgnore
@@ -31,7 +34,7 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer retryAfter() {
@@ -40,9 +43,10 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
-     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object itself.
+     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object
+     * itself.
      */
     public LrosCustomHeadersPutAsyncRetrySucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
@@ -51,7 +55,7 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
@@ -60,9 +64,10 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
-     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object itself.
+     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object
+     * itself.
      */
     public LrosCustomHeadersPutAsyncRetrySucceededHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
@@ -71,7 +76,7 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String location() {
@@ -80,9 +85,10 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
-     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object itself.
+     * @return the LrosCustomHeadersPutAsyncRetrySucceededHeaders object
+     * itself.
      */
     public LrosCustomHeadersPutAsyncRetrySucceededHeaders withLocation(String location) {
         this.location = location;
@@ -91,7 +97,7 @@ public final class LrosCustomHeadersPutAsyncRetrySucceededHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
