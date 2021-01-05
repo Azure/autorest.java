@@ -1,18 +1,5 @@
 package fixtures.lro.implementation;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.Delete;
-import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Headers;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.Put;
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.rest.Response;
-import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,16 +12,12 @@ import fixtures.lro.models.LROs;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
-import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 public final class LROsImpl implements LROs {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(LROsImpl.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(LROsImpl.class);
 
     private final LROsClient innerClient;
 
@@ -102,7 +85,9 @@ public final class LROsImpl implements LROs {
     public List<Product> post202List() {
         List<ProductInner> inner = this.serviceClient().post202List();
         if (inner != null) {
-            return Collections.unmodifiableList(inner.stream().map(inner1 -> new ProductImpl(inner1, this.manager())).collect(Collectors.toList()));
+            return Collections
+                .unmodifiableList(
+                    inner.stream().map(inner1 -> new ProductImpl(inner1, this.manager())).collect(Collectors.toList()));
         } else {
             return Collections.emptyList();
         }
@@ -111,7 +96,9 @@ public final class LROsImpl implements LROs {
     public List<Product> post202List(Context context) {
         List<ProductInner> inner = this.serviceClient().post202List(context);
         if (inner != null) {
-            return Collections.unmodifiableList(inner.stream().map(inner1 -> new ProductImpl(inner1, this.manager())).collect(Collectors.toList()));
+            return Collections
+                .unmodifiableList(
+                    inner.stream().map(inner1 -> new ProductImpl(inner1, this.manager())).collect(Collectors.toList()));
         } else {
             return Collections.emptyList();
         }

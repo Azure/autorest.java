@@ -2,17 +2,15 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The LroRetrysDeleteProvisioning202Accepted200SucceededHeaders model.
- */
+/** The LroRetrysDeleteProvisioning202Accepted200SucceededHeaders model. */
 @Fluent
 public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
     @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(LroRetrysDeleteProvisioning202Accepted200SucceededHeaders.class);
+    private final ClientLogger logger =
+        new ClientLogger(LroRetrysDeleteProvisioning202Accepted200SucceededHeaders.class);
 
     /*
      * The Retry-After property.
@@ -28,7 +26,7 @@ public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     * 
+     *
      * @return the retryAfter value.
      */
     public Integer retryAfter() {
@@ -37,10 +35,9 @@ public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     * 
+     *
      * @param retryAfter the retryAfter value to set.
-     * @return the LroRetrysDeleteProvisioning202Accepted200SucceededHeaders
-     * object itself.
+     * @return the LroRetrysDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
     public LroRetrysDeleteProvisioning202Accepted200SucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
@@ -49,7 +46,7 @@ public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Get the location property: The Location property.
-     * 
+     *
      * @return the location value.
      */
     public String location() {
@@ -58,10 +55,9 @@ public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Set the location property: The Location property.
-     * 
+     *
      * @param location the location value to set.
-     * @return the LroRetrysDeleteProvisioning202Accepted200SucceededHeaders
-     * object itself.
+     * @return the LroRetrysDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
     public LroRetrysDeleteProvisioning202Accepted200SucceededHeaders withLocation(String location) {
         this.location = location;
@@ -70,7 +66,7 @@ public final class LroRetrysDeleteProvisioning202Accepted200SucceededHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

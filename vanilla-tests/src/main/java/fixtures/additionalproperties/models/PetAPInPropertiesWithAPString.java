@@ -39,7 +39,7 @@ public final class PetAPInPropertiesWithAPString {
      * Dictionary of <number>
      */
     @JsonProperty(value = "additionalProperties")
-    private Map<String, Float> AdditionalPropertiesProperty;
+    private Map<String, Float> additionalPropertiesProperty;
 
     /*
      * Dictionary of <string>
@@ -116,23 +116,23 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     /**
-     * Get the AdditionalPropertiesProperty property: Dictionary of &lt;number&gt;.
+     * Get the additionalPropertiesProperty property: Dictionary of &lt;number&gt;.
      *
-     * @return the AdditionalPropertiesProperty value.
+     * @return the additionalPropertiesProperty value.
      */
     public Map<String, Float> getAdditionalPropertiesProperty() {
-        return this.AdditionalPropertiesProperty;
+        return this.additionalPropertiesProperty;
     }
 
     /**
-     * Set the AdditionalPropertiesProperty property: Dictionary of &lt;number&gt;.
+     * Set the additionalPropertiesProperty property: Dictionary of &lt;number&gt;.
      *
-     * @param AdditionalPropertiesProperty the AdditionalPropertiesProperty value to set.
+     * @param additionalPropertiesProperty the additionalPropertiesProperty value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
     public PetAPInPropertiesWithAPString setAdditionalPropertiesProperty(
-            Map<String, Float> AdditionalPropertiesProperty) {
-        this.AdditionalPropertiesProperty = AdditionalPropertiesProperty;
+            Map<String, Float> additionalPropertiesProperty) {
+        this.additionalPropertiesProperty = additionalPropertiesProperty;
         return this;
     }
 
