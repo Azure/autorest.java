@@ -9,9 +9,14 @@ import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.mapper.ModelMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class FluentModelMapper extends ModelMapper {
 
     private static final FluentModelMapper INSTANCE = new FluentModelMapper();
+
+    private final Set<String> removedModels = new HashSet<>();
 
     public static FluentModelMapper getInstance() {
         return INSTANCE;
@@ -19,6 +24,10 @@ public class FluentModelMapper extends ModelMapper {
 
     @Override
     protected boolean isPredefinedModel(ClassType modelType) {
-        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType);
+        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType) || removedModels.contains(modelType.getName());
+    }
+
+    public void addRemovedModels(Set<String> models) {
+        removedModels.addAll(models);
     }
 }

@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The RootWithRefAndNoMeta model. */
+/** I am root, and I ref a model with no meta. */
 @JacksonXmlRootElement(localName = "RootWithRefAndNoMeta")
 @Fluent
 public final class RootWithRefAndNoMeta {

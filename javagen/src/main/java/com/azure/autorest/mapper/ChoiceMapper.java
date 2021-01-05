@@ -41,7 +41,6 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
             _itype = ClassType.String;
         } else {
-            enumTypeName = CodeNamer.getTypeName(enumTypeName);
             String enumSubpackage = settings.getModelsSubpackage();
             if (settings.isCustomType(enumTypeName)) {
                 enumSubpackage = settings.getCustomTypesSubpackage();
@@ -52,6 +51,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
             for (ChoiceValue enumValue : enumType.getChoices()) {
                 String enumName = enumValue.getValue();
                 if (!settings.isFluent()) {
+                    // there exists cases that namer in modelerfour doing a really poor job on enum values, hence for Fluent still do this on raw enum values
                     if (enumValue.getLanguage() != null && enumValue.getLanguage().getJava() != null
                             && enumValue.getLanguage().getJava().getName() != null) {
                         enumName = enumValue.getLanguage().getJava().getName();

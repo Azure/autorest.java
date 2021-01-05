@@ -7,7 +7,6 @@
 
 package com.azure.autorest.template;
 
-
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -95,7 +94,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
-                propertiesBlock.tag("legal", "<![CDATA[[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.]]>");
+                propertiesBlock.tagCData("legal", "[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.");
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {

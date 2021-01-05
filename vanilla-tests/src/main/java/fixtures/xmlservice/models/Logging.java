@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The Logging model. */
+/** Azure Analytics Logging settings. */
 @JacksonXmlRootElement(localName = "Logging")
 @Fluent
 public final class Logging {

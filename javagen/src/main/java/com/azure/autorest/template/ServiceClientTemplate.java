@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.ModelNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,7 +117,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     comment.description(String.format("Gets %1$s", serviceClientProperty.getDescription()));
                     comment.methodReturns(String.format("the %1$s value.", serviceClientProperty.getName()));
                 });
-                classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s get%2$s()", serviceClientProperty.getType(), CodeNamer.toPascalCase(serviceClientProperty.getName())), function ->
+                classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
+                        serviceClientProperty.getType(), new ModelNamer().modelPropertyGetterName(serviceClientProperty)), function ->
                 {
                     function.methodReturn(String.format("this.%1$s", serviceClientProperty.getName()));
                 });

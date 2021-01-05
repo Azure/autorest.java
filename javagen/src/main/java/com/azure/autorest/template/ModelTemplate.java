@@ -19,6 +19,8 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.core.util.CoreUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -463,7 +465,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
                 if (parentModel != null) {
                     if (parentModel.getProperties() != null) {
-                        propertyReferences.addAll(parentModel.getProperties().stream().map(ClientModelPropertyReference::new).collect(Collectors.toList()));
+                        propertyReferences.addAll(parentModel.getProperties().stream()
+                                .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
+                                .map(ClientModelPropertyReference::new)
+                                .collect(Collectors.toList()));
                     }
                 }
 

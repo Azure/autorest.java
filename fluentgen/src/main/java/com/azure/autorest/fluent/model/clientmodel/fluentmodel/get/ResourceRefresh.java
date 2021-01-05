@@ -19,7 +19,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMeth
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentRefreshMethod;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.slf4j.Logger;
 
@@ -38,7 +37,7 @@ public class ResourceRefresh extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceRefresh: Fluent model {}, method reference {}",
+        logger.info("ResourceRefresh: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 
@@ -71,7 +70,8 @@ public class ResourceRefresh extends ResourceOperation {
             }
             return new FluentRefreshMethod(resourceModel, FluentMethodType.REFRESH,
                     parameters, this.getResourceLocalVariables(),
-                    resourceCollection, methodOpt.get());
+                    resourceCollection, methodOpt.get(),
+                    resourceModel.getResourceCreate().getResourceLocalVariables());
         } else {
             throw new IllegalStateException("refresh method not found on model " + resourceModel.getName());
         }
@@ -90,20 +90,22 @@ public class ResourceRefresh extends ResourceOperation {
         if (methodOpt.isPresent()) {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
-            String name = getGetByIdMethodName(collectionMethod.getInnerClientMethod().getName());
-            List<MethodParameter> pathParameters = this.getPathParameters();
+            String name = getGetByIdMethodName(collectionMethod.getMethodName());
+            if (!hasConflictingMethod(name)) {
+                List<MethodParameter> pathParameters = this.getPathParameters();
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, false, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, false, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, true, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, true, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
+            }
         }
         return methods;
     }

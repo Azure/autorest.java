@@ -18,6 +18,8 @@ import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
+import com.azure.mgmtlitetest.storage.models.BlobServices;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
@@ -45,17 +47,20 @@ public class LiteCompilationTests {
     }
 
     public void testStorage() {
+        String rgName = "rg1-weidxu-fluentlite";
+        String saName = "sa1weidxulite";
+
         StorageManager storageManager = mock(StorageManager.class);
 
-        StorageAccount storageAccount = storageManager.storageAccounts().define("sa1weidxu")
+        StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
                 .withRegion(Region.US_WEST)
-                .withExistingResourceGroup("rg-weidxu")
+                .withExistingResourceGroup(rgName)
                 .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                 .withKind(Kind.STORAGE_V2)
                 .withEnableHttpsTrafficOnly(true)
                 .create();
 
-        storageAccount = storageManager.storageAccounts().getByResourceGroup("rg-weidxu", "sa1weidxu");
+        storageAccount = storageManager.storageAccounts().getByResourceGroup(rgName, saName);
         storageAccount.update()
                 .withAccessTier(AccessTier.COOL)
                 .apply();
@@ -63,22 +68,30 @@ public class LiteCompilationTests {
         storageAccount.refresh();
 
         BlobContainer blobContainer = storageManager.blobContainers().define("container1")
-                .withExistingStorageAccount("rg-weidxu", "sa1weidxu")
+                .withExistingStorageAccount(rgName, saName)
                 .withPublicAccess(PublicAccess.BLOB)
                 .create(new Context("key", "value"));
 
-        blobContainer = storageManager.blobContainers().get("rg-weidxu", "sa1weidxu", "container1");
+        blobContainer = storageManager.blobContainers().get(rgName, saName, "container1");
         blobContainer.update()
                 .withPublicAccess(PublicAccess.NONE)
                 .apply(new Context("key", "value"));
 
         blobContainer.refresh();
+
+        BlobServiceProperties blobService = storageManager.blobServices().define()
+                .withExistingStorageAccount(rgName, saName)
+                .create();
+
+        storageManager.storageAccounts().deleteByResourceGroup(rgName, saName);
     }
 
     public void testResources() {
+        String rgName = "rg1-weidxu-fluentlite";
+
         ResourceManager resourceManager = mock(ResourceManager.class);
 
-        ResourceGroup resourceGroup = resourceManager.resourceGroups().define("rg-weidxu")
+        ResourceGroup resourceGroup = resourceManager.resourceGroups().define(rgName)
                 .withRegion(Region.US_WEST)
                 .create();
 

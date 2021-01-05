@@ -7,10 +7,14 @@
 package com.azure.autorest.fluent.model;
 
 public enum WellKnownMethodName {
+    // client
     LIST("list"),
     LIST_BY_RESOURCE_GROUP("listByResourceGroup"),
     GET_BY_RESOURCE_GROUP("getByResourceGroup"),
-    DELETE("delete");
+    DELETE("delete"),
+
+    // fluent
+    DELETE_BY_RESOURCE_GROUP("deleteByResourceGroup");
 
     private final String methodName;
 

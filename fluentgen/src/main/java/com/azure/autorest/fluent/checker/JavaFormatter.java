@@ -65,7 +65,7 @@ public class JavaFormatter {
             String formattedCode = (String) formatSourceMethod.invoke(formatterInstance, content);
             return fixOverlongStringLiteral(formattedCode);
         } catch (Exception e) {
-            logger.warn("Failed to parse Java file {}, message: {}", path, e.getMessage());
+            logger.warn("Failed to parse Java file '{}', message: '{}'", path, e.getMessage());
             return content;
         }
     }

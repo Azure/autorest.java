@@ -12,6 +12,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -99,16 +100,23 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         });
 
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes.toString()));
+
         javaFile.publicFinalClass(serviceClientBuilderName, classBlock ->
         {
             if (!settings.isAzureOrFluent()) {
                 classBlock.privateStaticFinalVariable("String SDK_NAME = \"name\"");
                 classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
+                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+                if (scopes != null && !scopes.isEmpty()) {
+                    classBlock.packagePrivateStaticFinalVariable(String.format("String[] DEFAULT_SCOPES = new String[] {%s}",
+                            String.join(", ", scopes)));
+                }
                 String propertiesValue = "new HashMap<>()";
                 if (!settings.getArtifactId().isEmpty()) {
                     propertiesValue = "CoreUtils.getProperties" + "(\"" + settings.getArtifactId() + ".properties\")";
                 }
                 classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
                 classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                     javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                 });
@@ -123,7 +131,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 {
                     comment.line(serviceClientProperty.getDescription());
                 });
-                classBlock.privateMemberVariable(String.format("%1$s %2$s", serviceClientProperty.getType(), serviceClientProperty.getName()));
+                classBlock.privateMemberVariable(String.format("%1$s%2$s %3$s",
+                        serviceClientProperty.isReadOnly() ? "final " : "",
+                        serviceClientProperty.getType(),
+                        serviceClientProperty.getName()));
 
                 if (!serviceClientProperty.isReadOnly()) {
                     classBlock.javadocComment(comment ->
@@ -265,9 +276,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
             if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL) && clientProperties.stream()
                     .anyMatch(clientProperty -> clientProperty.getName().equals("endpoint"))) {
+                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+                String scopeParams;
+                if (scopes == null || scopes.isEmpty()) {
+                    scopeParams = "String.format(\"%s/.default\", endpoint)";
+                } else {
+                    scopeParams = "DEFAULT_SCOPES";
+                }
                 function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, String"
-                            + ".format(\"%s/.default\", endpoint)));");
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", scopeParams);
                 });
             }
 

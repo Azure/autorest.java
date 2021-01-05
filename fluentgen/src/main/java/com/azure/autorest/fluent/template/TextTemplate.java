@@ -16,4 +16,6 @@ public class TextTemplate {
     public static final String PACKAGE_NAME = "package-name";
 
     public static final String MANAGER_CLASS = "manager-class";
+
+    public static final String DATE_UTC = "date-utc";
 }

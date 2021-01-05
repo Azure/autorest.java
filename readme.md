@@ -77,18 +77,18 @@ Following settings only works when `fluent` option is specified.
 | Option      | Description |
 | ----------- | ----------- |
 | `--fluent` | Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values. |
+| `--fluent-subpackage` | String. The sub-package that vanilla client and builder will be put into. Default is `fluent`. |
 | `--pom-file` | String. Name for Maven POM file. Default is `pom.xml`. |
 | `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
 | `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
-| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. |
-| `--track1-naming` | Boolean. Use track1 naming style (`withFoo` / `foo` as setter / getter). Default is `true`. |
+| `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
+| `--remove-model` | CSV. Remove classes. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
-| `--resource-property-as-subresource` | Boolean, experimental. Automatically correct input-only resource type as `SubResource`. Default is `false`. |
 
-Also `fluent` option will change the default value for some vanilla options.
+`fluent` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
 
 The code formatter would require Java 11+ runtime.
@@ -99,8 +99,8 @@ To set up customizations, create a Maven project with dependency:
 
 ```xml
 <dependency>
-  <groupId>com.azure</groupId>
-  <artifactId>autorest-java-customizations</artifactId>
+  <groupId>com.azure.tools</groupId>
+  <artifactId>azure-autorest-customizations</artifactId>
   <version>1.0.0-beta.1</version>
 </dependency>
 ```
@@ -664,7 +664,7 @@ public class Foo {
 }
 ```
 
-## Javadoc: Add / remove an exception's javadoc on a method 
+## Javadoc: Add / remove an exception's javadoc on a method
 A `FooClient` class
 ```java
 public class FooClient {
@@ -719,7 +719,7 @@ This contains the actual generator extension, including mappers that maps a code
 This contains the [generator extension for Azure Management Libraries](#additional-settings-for-fluent).
 
 ## tests
-This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 
+This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`.
 
 This also contains test code for these generated code under `src/test`. Running the tests will hit the test server running locally (see https://github.com/Azure/autorest.testserver for instructions) and verify the correctness of the generated code.
 

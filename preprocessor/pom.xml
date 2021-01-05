@@ -4,14 +4,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <parent>
-    <artifactId>autorest-java</artifactId>
-    <groupId>com.azure</groupId>
+    <artifactId>azure-autorest-parent</artifactId>
+    <groupId>com.azure.tools</groupId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>com.azure</groupId>
-  <artifactId>preprocessor</artifactId>
+  <groupId>com.azure.tools</groupId>
+  <artifactId>azure-autorest-preprocessor</artifactId>
   <version>1.0.0-beta.1</version>
   <modelVersion>4.0.0</modelVersion>
 
@@ -25,8 +25,8 @@
     </dependency>
 
     <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>extension-base</artifactId>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
     <dependency>

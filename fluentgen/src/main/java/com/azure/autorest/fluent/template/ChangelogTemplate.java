@@ -5,16 +5,11 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.fluent.model.projectmodel.Project;
-import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluent.model.projectmodel.Changelog;
 
 public class ChangelogTemplate {
 
-    public String write(Project project) {
-        return FluentUtils.loadTextFromResource("Changelog.txt",
-                TextTemplate.SERVICE_NAME, project.getServiceName(),
-                TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
-                TextTemplate.ARTIFACT_VERSION, project.getVersion()
-        );
+    public String write(Changelog changelog) {
+        return changelog.getContent();
     }
 }

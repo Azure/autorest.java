@@ -58,7 +58,7 @@ public final class Ints {
     /**
      * Put an int enum.
      *
-     * @param input List of integer enums.
+     * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -76,7 +76,7 @@ public final class Ints {
     /**
      * Put an int enum.
      *
-     * @param input List of integer enums.
+     * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -119,7 +119,7 @@ public final class Ints {
     /**
      * Put an int enum.
      *
-     * @param input List of integer enums.
+     * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

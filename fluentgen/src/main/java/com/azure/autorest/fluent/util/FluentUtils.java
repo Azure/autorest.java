@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -39,7 +40,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -75,7 +78,7 @@ public class FluentUtils {
 
     public static boolean isInnerClassType(String packageName, String name) {
         JavaSettings settings = JavaSettings.getInstance();
-        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
+        String innerPackageName = settings.getPackage(settings.getFluentModelsSubpackage());
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 
@@ -251,12 +254,12 @@ public class FluentUtils {
                         text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
                     }
                 } else {
-                    logger.warn("Replacements skipped due to incorrect length. {}", Arrays.asList(replacements));
+                    logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                 }
             }
             return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file {}", filename);
+            logger.warn("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }
@@ -264,6 +267,13 @@ public class FluentUtils {
     public static String getLocalMethodArgument(ClientMethodParameter parameter,
                                                 Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
                                                 FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod) {
+        return getLocalMethodArgument(parameter, inputParametersSet, localVariables, resourceModel, collectionMethod, null);
+    }
+
+    public static String getLocalMethodArgument(ClientMethodParameter parameter,
+                                                Set<ClientMethodParameter> inputParametersSet, ResourceLocalVariables localVariables,
+                                                FluentResourceModel resourceModel, FluentCollectionMethod collectionMethod,
+                                                ResourceLocalVariables resourceLocalVariablesDefinedInClass) {
         if (inputParametersSet.contains(parameter)) {
             // input parameter
             return parameter.getName();
@@ -278,17 +288,37 @@ public class FluentUtils {
             LocalVariable localVariable = localVariables.getLocalVariableByMethodParameter(parameter);
             if (localVariable == null) {
                 throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
-                        collectionMethod.getInnerClientMethod().getName(),
+                        collectionMethod.getMethodName(),
                         resourceModel.getName(),
                         parameter.getName(),
                         localVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));
             }
-            return localVariable.getName();
+            String name = localVariable.getName();
+
+            // there could be case that the variable used in method (ResourceUpdate or ResourceRefresh) is different from the one defined in class (by ResourceCreate)
+            LocalVariable localVariableDefinedInClass = resourceLocalVariablesDefinedInClass == null
+                    ? null
+                    : resourceLocalVariablesDefinedInClass.getLocalVariablesMap().values().stream()
+                    .filter(var -> localVariable.getName().equals(var.getName())).findFirst().orElse(null);
+            if (localVariableDefinedInClass != null
+                    && !Objects.equals(localVariableDefinedInClass.getVariableType().toString(), localVariable.getVariableType().toString())) {
+                if (localVariableDefinedInClass.getVariableType() == ClassType.String) {
+                    name = String.format("%1$s.fromString(%2$s)", localVariable.getVariableType().toString(), name);
+                } else if (localVariable.getVariableType() == ClassType.String) {
+                    name = String.format("%1$s.toString()", name);
+                }
+            }
+            return name;
         }
     }
 
     public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
         return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
                 && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
+    }
+
+    public static boolean modelHasLocationProperty(List<ClientModelProperty> properties) {
+        return properties.stream()
+                .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
     }
 }

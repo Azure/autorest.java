@@ -8,7 +8,6 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
@@ -40,15 +39,17 @@ public class FluentJavaSettings {
      */
     private final Set<String> javaNamesForRemoveInner = new HashSet<>();
 
-    /**
-     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
-     */
-    private boolean track1Naming = true;
+    private final Set<String> javaNamesForRemoveModel = new HashSet<>();
 
-    /**
-     * Whether to treat read-only resource property as SubResource type.
-     */
-    private boolean resourcePropertyAsSubResource = false;
+//    /**
+//     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
+//     */
+//    private boolean track1Naming = true;
+//
+//    /**
+//     * Whether to treat read-only resource property as SubResource type.
+//     */
+//    private boolean resourcePropertyAsSubResource = false;
 
     /**
      * Operation group name for ungrouped operations.
@@ -109,11 +110,13 @@ public class FluentJavaSettings {
     }
 
     public boolean isTrack1Naming() {
-        return track1Naming;
+        return true;
+        //return track1Naming;
     }
 
     public boolean isResourcePropertyAsSubResource() {
-        return resourcePropertyAsSubResource;
+        return false;
+        //return resourcePropertyAsSubResource;
     }
 
     public Optional<String> getNameForUngroupedOperations() {
@@ -126,6 +129,10 @@ public class FluentJavaSettings {
 
     public Map<String, String> getRenameModel() {
         return renameModel;
+    }
+
+    public Set<String> getJavaNamesForRemoveModel() {
+        return javaNamesForRemoveModel;
     }
 
     public String getPomFilename() {
@@ -181,8 +188,18 @@ public class FluentJavaSettings {
             }
         });
 
-        loadBooleanSetting("track1-naming", b -> track1Naming = b);
-        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
+        loadStringSetting("remove-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForRemoveModel.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
+
+//        loadBooleanSetting("track1-naming", b -> track1Naming = b);
+//        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
         loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = s);
 

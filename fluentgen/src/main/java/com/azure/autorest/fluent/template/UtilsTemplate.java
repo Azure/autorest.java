@@ -12,6 +12,7 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,13 +33,30 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
     private static final List<MethodTemplate> METHOD_TEMPLATES = new ArrayList<>();
     static {
         MethodTemplate getValueFromIdByNameMethod = MethodTemplate.builder()
-                .imports(Arrays.asList(Arrays.class.getName(), Iterator.class.getName()))
+                .imports(Arrays.asList(
+                        Arrays.class.getName(),
+                        Iterator.class.getName()))
                 .visibility(JavaVisibility.PackagePrivate)
                 .modifiers(Collections.singletonList(JavaModifier.Static))
                 .methodSignature("String getValueFromIdByName(String id, String name)")
                 .method(block -> block.line(FluentUtils.loadTextFromResource("Utils_getValueFromIdByName.txt")))
                 .build();
         METHOD_TEMPLATES.add(getValueFromIdByNameMethod);
+
+        MethodTemplate getValueFromIdByParameterNameMethod = MethodTemplate.builder()
+                .imports(Arrays.asList(
+                        Arrays.class.getName(),
+                        Iterator.class.getName(),
+                        List.class.getName(),
+                        ArrayList.class.getName(),
+                        CoreUtils.class.getName(),
+                        Collections.class.getName()))
+                .visibility(JavaVisibility.PackagePrivate)
+                .modifiers(Collections.singletonList(JavaModifier.Static))
+                .methodSignature("String getValueFromIdByParameterName(String id, String pathTemplate, String parameterName)")
+                .method(block -> block.line(FluentUtils.loadTextFromResource("Utils_getValueFromIdByParameterName.txt")))
+                .build();
+        METHOD_TEMPLATES.add(getValueFromIdByParameterNameMethod);
     }
 
     public void write(JavaFile javaFile) {

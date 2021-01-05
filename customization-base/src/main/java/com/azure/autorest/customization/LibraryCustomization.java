@@ -1,6 +1,9 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+
+import java.util.Optional;
 
 /**
  * The top level customization for an AutoRest generated client library.
@@ -32,7 +35,14 @@ public final class LibraryCustomization {
      * @return the class level customization
      */
     public ClassCustomization getClass(String packageName, String className) {
-        return new ClassCustomization(editor, languageClient, packageName, className);
+        String packagePath = packageName.replace(".", "/");
+        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
+                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+                .findFirst();
+        if (!classSymbol.isPresent()) {
+            throw new IllegalArgumentException(className + " does not exist in package " + packageName);
+        }
+        return new ClassCustomization(editor, languageClient, packageName, className, classSymbol.get());
     }
 
     /**
