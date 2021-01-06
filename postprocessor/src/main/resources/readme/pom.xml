@@ -10,8 +10,8 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <groupId>fixtures.bodycomplex</groupId>
-  <artifactId>bodycomplex-customization</artifactId>
+  <groupId>com.azure</groupId>
+  <artifactId>customization-loader</artifactId>
   <version>1.0.0-beta.1</version>
   <modelVersion>4.0.0</modelVersion>
 

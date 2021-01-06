@@ -130,6 +130,10 @@ public class EclipseLanguageClient {
         }
     }
 
+    public BuildWorkspaceStatus buildWorkspace(boolean forceRebuild) {
+        return connection.requestWithObject(new ObjectMapper().constructType(BuildWorkspaceStatus.class), "java/buildWorkspace", forceRebuild);
+    }
+
     public List<TextEdit> format(URI fileUri) {
         if (serverCapabilities.getDocumentFormattingProvider()) {
             DocumentFormattingParams params = new DocumentFormattingParams();
