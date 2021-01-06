@@ -1,5 +1,11 @@
 # Sample Basic Generation
 
+### Generation
+```ps
+cd <this folder>
+autorest readme.md --java
+```
+
 ### Settings
 
 ``` yaml

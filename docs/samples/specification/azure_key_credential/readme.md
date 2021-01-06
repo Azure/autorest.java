@@ -2,13 +2,19 @@
 
 Use the flag `--credential-types` to specify you want your credential to be of type [`AzureKeyCredential`][azure_key_credential].
 
+### Generation
+```ps
+cd <this folder>
+autorest readme.md --java
+```
+
 ### Settings
 
 ``` yaml
 input-file: https://github.com/Azure/autorest.testserver/blob/master/swagger/head.json
 namespace: com.azure.key.credential.sample
 license-header: MICROSOFT_MIT_NO_VERSION
-credential-types: AzureKeyCredential
+credential-types: azurekeycredential
 sync-methods: all
 ```
 
