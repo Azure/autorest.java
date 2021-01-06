@@ -1,4 +1,4 @@
-# <img align="center" src="../images/logo.png"> Sample Python Generation
+# <img align="center" src="../images/logo.png"> Sample Java Generation
 
 Here are our samples for common generation scenarios
 
@@ -16,6 +16,6 @@ Here are our samples for common generation scenarios
 [mgmt]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane
 [mgmt_readme]: ./specification/management/readme.md
 [mgmt_generated]: ./specification/management/generated
-[azure_key_credential]: https://docs.microsoft.com/python/api/azure-core/azure.core.credentials.azurekeycredential?view=azure-python
+[azure_key_credential]: https://docs.microsoft.com/java/api/com.azure.core.credential.azurekeycredential?view=azure-java-stable
 [azure_key_credential_readme]: ./specification/azure_key_credential/readme.md
 [azure_key_credential_generated]: ./specification/azure_key_credential/generated

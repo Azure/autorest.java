@@ -60,6 +60,12 @@ public static void main(String args[])
 }
 ```
 
+## Long Running Operations
+
+Long-running operations are operations which consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
+
+The Java team is in the process of building poller generation. Will update this section with details on how to use when available.
+
 ## Paging Operations
 
 A paging operation pages through lists of data, returning an iterator for the items. Network calls get made when users start iterating through the output, not when the operation
