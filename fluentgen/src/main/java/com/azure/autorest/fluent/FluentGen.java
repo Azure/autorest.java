@@ -269,8 +269,10 @@ public class FluentGen extends NewPlugin {
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
 
             // POM
-            Pom pom = new PomMapper().map(project);
-            javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+            if (javaSettings.shouldRegeneratePom()) {
+                Pom pom = new PomMapper().map(project);
+                javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
+            }
 
             if (isSdkIntegration) {
                 javaPackage.addReadme(project);

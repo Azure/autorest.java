@@ -66,6 +66,7 @@ public class JavaSettings
     {
         if (_instance == null)
         {
+            boolean regeneratePomDefault = false;
             String syncMethodsDefault = "essential";
             boolean addContextParameterDefault = false;
             boolean contextClientMethodParameterDefault = false;
@@ -77,6 +78,7 @@ public class JavaSettings
 
             String fluentSetting = host.getStringValue("fluent");
             if (fluentSetting != null) {
+                regeneratePomDefault = true;
                 syncMethodsDefault = "all";
                 addContextParameterDefault = true;
                 contextClientMethodParameterDefault = true;
@@ -91,7 +93,7 @@ public class JavaSettings
             _instance = new JavaSettings(
                     host.getBooleanValue("azure-arm", false),
                     fluentSetting,
-                    host.getBooleanValue("regenerate-pom", false),
+                    host.getBooleanValue("regenerate-pom", regeneratePomDefault),
                     _header,
                     80,
                     host.getStringValue("service-name"),
