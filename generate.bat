@@ -41,3 +41,7 @@ call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/A
 call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1 --required-parameter-client-methods
 
 call autorest --use:. customization-tests/swagger
+
+call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
+call autorest --use:. docs/samples/specification/basic/readme.md
+call autorest --use:. docs/samples/specification/management/readme.md
