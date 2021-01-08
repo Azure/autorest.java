@@ -1,6 +1,6 @@
 set VANILLA_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
 set AZURE_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set ARM_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --pom-file=pom_arm.xml
+set ARM_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
@@ -43,6 +43,5 @@ call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/A
 
 call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json --namespace=fixtures.lro
 del azure-tests\src\main\java\module-info.java
-del azure-tests\pom_arm.xml
 
 call autorest --use:. customization-tests/swagger
