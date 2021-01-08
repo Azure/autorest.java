@@ -9,6 +9,9 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 
+/**
+ * Class variable or local variable.
+ */
 public class LocalVariable {
     private final String name;
     private final IType variableType;

@@ -135,7 +135,7 @@ public abstract class ResourceOperation {
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
                 .filter(p -> parameterLocations.contains(p.getRequestParameterLocation()))
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
-        return clientMethod.getParameters().stream()
+        return clientMethod.getMethodParameters().stream()
                 .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());

@@ -75,6 +75,13 @@ public class FluentResourceModelInterfaceTemplate implements IJavaTemplate<Fluen
                                 interfaceBlock.publicMethod(refreshMethod.getInterfaceMethodSignature());
                             });
                 }
+                if (model.getResourceActions() != null) {
+                    model.getResourceActions().getFluentMethods().forEach(
+                            refreshMethod -> {
+                                interfaceBlock.javadocComment(refreshMethod::writeJavadoc);
+                                interfaceBlock.publicMethod(refreshMethod.getInterfaceMethodSignature());
+                            });
+                }
             }
         });
     }

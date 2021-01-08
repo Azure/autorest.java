@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
@@ -63,6 +64,9 @@ public class ResourceParser {
 
         // delete in collection
         resourceCreates.forEach(rc -> ResourceParser.resolveResourceDelete(collection, rc));
+
+        // resource actions
+        resourceCreates.forEach(rc -> ResourceParser.resourceResourceActions(collection, rc));
     }
 
     public static void processAdditionalMethods(FluentClient fluentClient) {
@@ -119,6 +123,8 @@ public class ResourceParser {
             FluentResourceCollection collection,
             List<FluentResourceModel> availableFluentModels,
             List<ClientModel> availableModels) {
+
+        // reference https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md
 
         Map<String, FluentResourceModel> fluentModelMapByName = availableFluentModels.stream()
                 .collect(Collectors.toMap(m -> m.getInterfaceType().toString(), Function.identity()));
@@ -230,6 +236,46 @@ public class ResourceParser {
         }
 
         return Optional.ofNullable(resourceDelete);
+    }
+
+    static Optional<ResourceActions> resourceResourceActions(
+            FluentResourceCollection collection,
+            ResourceCreate resourceCreate) {
+
+        // reference https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#resource-action-requests
+
+        ResourceActions resourceActions = null;
+        List<FluentCollectionMethod> actionMethods = new ArrayList<>();
+
+        for (FluentCollectionMethod method : collection.getMethods()) {
+            HttpMethod httpMethod = method.getInnerProxyMethod().getHttpMethod();
+            // POST
+            if (httpMethod == HttpMethod.POST) {
+                String url = method.getInnerProxyMethod().getUrlPath();
+                // except last literal segment, same url as create
+                if (url.startsWith(resourceCreate.getUrlPathSegments().getPath())
+                        && url.substring(0, url.lastIndexOf("/")).equals(resourceCreate.getUrlPathSegments().getPath())
+                        && !new UrlPathSegments(url).getReverseSegments().iterator().next().isParameterSegment()) {
+                    // parameter from request body
+                    if (method.getInnerProxyMethod().getParameters().stream()
+                            .allMatch(p -> p.getFromClient()
+                                    || !p.getIsRequired()
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Header && p.getIsConstant())
+                                    || p.getRequestParameterLocation() == RequestParameterLocation.Path
+                                    || p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
+                        actionMethods.add(method);
+                    }
+                }
+            }
+        }
+
+        if (!actionMethods.isEmpty()) {
+            resourceActions = new ResourceActions(resourceCreate.getResourceModel(), collection, actionMethods);
+
+            resourceCreate.getResourceModel().setResourceActions(resourceActions);
+        }
+
+        return Optional.ofNullable(resourceActions);
     }
 
     static Map<FluentResourceModel, ResourceCreate> findResourceCreateForCategory(

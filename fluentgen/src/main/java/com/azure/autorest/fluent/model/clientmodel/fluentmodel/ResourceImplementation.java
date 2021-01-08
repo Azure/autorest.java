@@ -39,6 +39,9 @@ public class ResourceImplementation {
             fluentMethods.addAll(fluentModel.getResourceRefresh().getFluentMethods());
             //localVariables.addAll(fluentModel.getResourceRefresh().getLocalVariables());
         }
+        if (fluentModel.getResourceActions() != null) {
+            fluentMethods.addAll(fluentModel.getResourceActions().getFluentMethods());
+        }
         this.groupMethods(fluentMethods);
         this.groupLocalVariables(localVariables);
     }
