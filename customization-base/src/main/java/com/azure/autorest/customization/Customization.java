@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 
 import java.io.File;
@@ -46,7 +47,7 @@ public abstract class Customization {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            deleteDirectory(tempDirWithPrefix.toFile());
+            Utils.deleteDirectory(tempDirWithPrefix.toFile());
             if (languageClient != null) {
                 languageClient.exit();
             }
@@ -58,15 +59,4 @@ public abstract class Customization {
      * @param libraryCustomization the top level customization object
      */
     public abstract void customize(LibraryCustomization libraryCustomization);
-
-    private void deleteDirectory(File directoryToBeDeleted) {
-        File[] allContents = directoryToBeDeleted.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                deleteDirectory(file);
-            }
-        }
-        directoryToBeDeleted.delete();
-    }
-
 }

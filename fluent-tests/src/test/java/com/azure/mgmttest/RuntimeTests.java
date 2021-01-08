@@ -3,7 +3,6 @@
 
 package com.azure.mgmttest;
 
-import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogDetailLevel;
@@ -21,12 +20,16 @@ import com.azure.core.util.Context;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.advisor.AdvisorManager;
+import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
+import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
-import com.azure.mgmtlitetest.storage.models.BlobContainers;
+import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
+import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
@@ -52,7 +55,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class RuntimeTests {
 
@@ -134,6 +140,7 @@ public class RuntimeTests {
                 .create();
 
         try {
+            // storage account
             StorageAccount storageAccount = storageManager.storageAccounts().define(saName)
                     .withRegion(rg.region())
                     .withExistingResourceGroup(rgName)
@@ -149,6 +156,7 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
+            // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
                     .withExistingStorageAccount(rgName, saName)
                     .withPublicAccess(PublicAccess.BLOB)
@@ -161,11 +169,70 @@ public class RuntimeTests {
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
+            // container blob service properties
+            BlobServiceProperties blobService = storageManager.blobServices().define()
+                    .withExistingStorageAccount(rgName, saName)
+                    .create();
+
+            blobService.update()
+                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(1))
+                    .apply();
+            Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
+            Assertions.assertEquals(1, blobService.deleteRetentionPolicy().days());
+
             storageManager.blobContainers().deleteById(blobContainer.id());
+
+            // test advisor for it requires a base resource
+            // disabled as generate is async and it takes too long for a new resource
+            //testAdvisor(storageAccount);
+
             storageManager.storageAccounts().deleteById(storageAccount.id());
         } finally {
             resourceManager.resourceGroups().delete(rgName);
         }
+    }
+
+    private void testAdvisor(StorageAccount storageAccount) {
+        AdvisorManager advisorManager = authenticateAdvisorManager();
+
+        // generate is async
+        advisorManager.recommendations().generate();
+
+        PagedIterable<ResourceRecommendationBase> recommendations = advisorManager.recommendations().list();
+        List<ResourceRecommendationBase> recommendationsForStorageAccount = recommendations.stream()
+                .filter(recommendation -> recommendation.resourceMetadata().resourceId().equals(storageAccount.id()))
+                .collect(Collectors.toList());
+
+        Assertions.assertFalse(recommendationsForStorageAccount.isEmpty());
+        long countBeforeSuppress = recommendationsForStorageAccount.size();
+
+        String recommendationId = recommendationsForStorageAccount.iterator().next().name();
+        SuppressionContract suppression = advisorManager.suppressions().define("HardcodedSuppressionName")
+                .withExistingRecommendation(storageAccount.id(), recommendationId)
+                .withTtl("1:00:00:00")
+                .create();
+
+        UUID suppressionId = UUID.fromString(suppression.suppressionId());
+
+        ResourceRecommendationBase recommendationForStorageAccount = advisorManager.recommendations().get(storageAccount.id(), recommendationId);
+        Assertions.assertTrue(recommendationForStorageAccount.suppressionIds().contains(suppressionId));
+
+        recommendations = advisorManager.recommendations().list();
+        long countAfterSuppress = recommendations.stream()
+                .filter(recommendation -> recommendation.resourceMetadata().resourceId().equals(storageAccount.id()) && !recommendation.suppressionIds().contains(suppressionId))
+                .count();
+        Assertions.assertEquals(countBeforeSuppress - 1, countAfterSuppress);
+
+        suppression.refresh();
+
+        SuppressionContract suppression2 = advisorManager.suppressions().getById(suppression.id());
+
+        advisorManager.suppressions().deleteById(suppression2.id());
+
+        long countAfterDelete = recommendations.stream()
+                .filter(recommendation -> recommendation.resourceMetadata().resourceId().equals(storageAccount.id()) && !recommendation.suppressionIds().contains(suppressionId))
+                .count();
+        Assertions.assertEquals(countBeforeSuppress, countAfterDelete);
     }
 
     private ResourceManager authenticateResourceManager() {
@@ -176,6 +243,12 @@ public class RuntimeTests {
 
     private StorageManager authenticateStorageManager() {
         return StorageManager.configure()
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
+    }
+
+    private AdvisorManager authenticateAdvisorManager() {
+        return AdvisorManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }

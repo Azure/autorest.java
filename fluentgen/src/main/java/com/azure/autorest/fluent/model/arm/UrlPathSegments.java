@@ -19,6 +19,7 @@ public class UrlPathSegments {
     public enum ParameterSegmentType {
         RESOURCE_GROUP,
         SUBSCRIPTION,
+        SCOPE,
         OTHER
     }
 
@@ -34,19 +35,27 @@ public class UrlPathSegments {
         private final ParameterSegmentType type;
 
         public ParameterSegment(String segmentName, String parameterName) {
+            this(segmentName, parameterName, false);
+        }
+
+        public ParameterSegment(String segmentName, String parameterName, boolean scopeSegment) {
             this.segmentName = segmentName;
             this.parameterName = parameterName;
 
-            switch (segmentName.toLowerCase(Locale.ROOT)) {
-                case "resourcegroups":
-                    this.type = ParameterSegmentType.RESOURCE_GROUP;
-                    break;
-                case "subscriptions":
-                    this.type = ParameterSegmentType.SUBSCRIPTION;
-                    break;
-                default:
-                    this.type = ParameterSegmentType.OTHER;
-                    break;
+            if (scopeSegment) {
+                this.type = ParameterSegmentType.SCOPE;
+            } else {
+                switch (segmentName.toLowerCase(Locale.ROOT)) {
+                    case "resourcegroups":
+                        this.type = ParameterSegmentType.RESOURCE_GROUP;
+                        break;
+                    case "subscriptions":
+                        this.type = ParameterSegmentType.SUBSCRIPTION;
+                        break;
+                    default:
+                        this.type = ParameterSegmentType.OTHER;
+                        break;
+                }
             }
         }
 
@@ -122,10 +131,8 @@ public class UrlPathSegments {
 
                     if (currentParameterName != null) {
                         reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName));
-                        currentParameterName = parameterName;
-                    } else {
-                        currentParameterName = parameterName;
                     }
+                    currentParameterName = parameterName;
                 } else {
                     String segmentName = segmentStr;
 
@@ -137,6 +144,9 @@ public class UrlPathSegments {
                     }
                 }
             }
+        }
+        if (currentParameterName != null) {
+            reverseSegments.add(new ParameterSegment(SEGMENT_NAME_EMPTY, currentParameterName, true));
         }
     }
 
@@ -169,6 +179,13 @@ public class UrlPathSegments {
                 .filter(Segment::isParameterSegment)
                 .map(s -> (ParameterSegment) s)
                 .anyMatch(s -> s.getType() == ParameterSegmentType.SUBSCRIPTION);
+    }
+
+    public boolean hasScope() {
+        return getNestLevel() >= 1 && reverseSegments.stream()
+                .filter(Segment::isParameterSegment)
+                .map(s -> (ParameterSegment) s)
+                .anyMatch(s -> s.getType() == ParameterSegmentType.SCOPE);
     }
 
     public boolean isNested() {

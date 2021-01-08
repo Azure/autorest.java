@@ -13,6 +13,7 @@ Azure Resource Manager {{service-name}} client library for Java.
 
 ### Adding the package to your product
 
+[//]: # ({x-version-update-start;{{group-id}}:{{artifact-id}};current})
 ```xml
 <dependency>
     <groupId>{{group-id}}</groupId>
@@ -20,6 +21,7 @@ Azure Resource Manager {{service-name}} client library for Java.
     <version>{{artifact-version}}</version>
 </dependency>
 ```
+[//]: # ({x-version-update-end})
 
 ### Include the recommended packages
 
@@ -39,7 +41,6 @@ In addition, Azure subscription ID can be configured via environment variable `A
 
 With above configuration, `azure` client can be authenticated by following code:
 
-[//]: # ({x-version-update-start;{{group-id}}:{{artifact-id}};current})
 ```java
 AzureProfile profile = new AzureProfile(AzureEnvironment.AZURE);
 TokenCredential credential = new DefaultAzureCredentialBuilder()
@@ -48,7 +49,6 @@ TokenCredential credential = new DefaultAzureCredentialBuilder()
 {{manager-class}} manager = {{manager-class}}
     .authenticate(credential, profile);
 ```
-[//]: # ({x-version-update-end})
 
 The sample code assumes global Azure. Please change `AzureEnvironment.AZURE` variable if otherwise.
 
@@ -66,8 +66,7 @@ See [API design][design] for general introduction on design and key concepts on 
 
 ## Contributing
 
-If you would like to become an active contributor to this project please follow the instructions provided in [Microsoft
-Azure Projects Contribution Guidelines](http://azure.github.io/guidelines.html).
+For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-java/blob/master/CONTRIBUTING.md).
 
 1. Fork it
 1. Create your feature branch (`git checkout -b my-new-feature`)

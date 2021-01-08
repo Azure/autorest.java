@@ -17,7 +17,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.Collection
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.slf4j.Logger;
 
@@ -34,7 +33,7 @@ public class ResourceDelete extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceDelete: Fluent model {}, method reference {}",
+        logger.info("ResourceDelete: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 
@@ -55,20 +54,22 @@ public class ResourceDelete extends ResourceOperation {
         if (methodOpt.isPresent()) {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
-            String name = getDeleteByIdMethodName(collectionMethod.getInnerClientMethod().getName());
-            List<MethodParameter> pathParameters = this.getPathParameters();
+            String name = getDeleteByIdMethodName(collectionMethod.getMethodName());
+            if (!hasConflictingMethod(name)) {
+                List<MethodParameter> pathParameters = this.getPathParameters();
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, false, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, false, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, true, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, true, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
+            }
         }
         return methods;
     }

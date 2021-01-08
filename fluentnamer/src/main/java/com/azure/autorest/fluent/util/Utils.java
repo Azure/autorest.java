@@ -48,7 +48,7 @@ public class Utils {
                 } catch (NoSuchFieldException ex) {
                     // skip it
                 } catch (IllegalAccessException ex) {
-                    logger.error("Failed to copy field: {}", f.getName());
+                    logger.error("Failed to copy field '{}'", f.getName());
                 }
             }
 

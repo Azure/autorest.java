@@ -23,13 +23,19 @@ import java.util.stream.Collectors;
 public class FluentCollectionMethod {
 
     private final ClientMethod method;
+    private final String methodName;
 
     private final IType fluentReturnType;
 
     private final ImmutableMethod immutableMethod;
 
     public FluentCollectionMethod(ClientMethod method) {
+        this(method, method.getName());
+    }
+
+    public FluentCollectionMethod(ClientMethod method, String methodName) {
         this.method = method;
+        this.methodName = methodName;
         this.fluentReturnType = FluentUtils.getFluentWrapperType(method.getReturnValue().getType());
 
         this.immutableMethod = this.fluentReturnType == method.getReturnValue().getType()
@@ -43,7 +49,11 @@ public class FluentCollectionMethod {
 
     // method signature
     public String getMethodSignature() {
-        return String.format("%1$s %2$s(%3$s)", this.getFluentReturnType(), method.getName(), method.getParametersDeclaration());
+        return String.format("%1$s %2$s(%3$s)", this.getFluentReturnType(), getMethodName(), method.getParametersDeclaration());
+    }
+
+    public String getMethodName() {
+        return methodName;
     }
 
     // method invocation

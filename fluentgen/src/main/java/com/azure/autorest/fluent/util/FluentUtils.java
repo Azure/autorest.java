@@ -78,7 +78,7 @@ public class FluentUtils {
 
     public static boolean isInnerClassType(String packageName, String name) {
         JavaSettings settings = JavaSettings.getInstance();
-        String innerPackageName = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
+        String innerPackageName = settings.getPackage(settings.getFluentModelsSubpackage());
         return packageName.equals(innerPackageName) && name.endsWith("Inner");
     }
 
@@ -254,12 +254,12 @@ public class FluentUtils {
                         text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
                     }
                 } else {
-                    logger.warn("Replacements skipped due to incorrect length. {}", Arrays.asList(replacements));
+                    logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));
                 }
             }
             return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file {}", filename);
+            logger.warn("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }
@@ -288,7 +288,7 @@ public class FluentUtils {
             LocalVariable localVariable = localVariables.getLocalVariableByMethodParameter(parameter);
             if (localVariable == null) {
                 throw new IllegalStateException(String.format("local variable not found for method %1$s, model %2$s, parameter %3$s, available local variables %4$s",
-                        collectionMethod.getInnerClientMethod().getName(),
+                        collectionMethod.getMethodName(),
                         resourceModel.getName(),
                         parameter.getName(),
                         localVariables.getLocalVariablesMap().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getName(), e -> e.getValue().getName()))));

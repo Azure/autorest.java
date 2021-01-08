@@ -46,7 +46,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                     classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
                 } else if (settings.isFluent() && isInnerModel(compositeType)) {
                     className += "Inner";
-                    classPackage = settings.getPackage(settings.getFluentSubpackage(), settings.getModelsSubpackage());
+                    classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
                 } else {
                     classPackage = settings.getPackage(settings.getModelsSubpackage());
                 }

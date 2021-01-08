@@ -1,11 +1,11 @@
 {
   "name": "@autorest/java",
-  "version": "4.0.5",
+  "version": "4.0.8",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "java -jar javagen/target/javagen-jar-with-dependencies.jar",
-    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar javagen/target/javagen-jar-with-dependencies.jar",
+    "start": "java -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
+    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
     "build": "mvn package -Dlocal",
     "generate": "./generate",
     "clean": "rm -rf tests/src/test/java/fixtures"

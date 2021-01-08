@@ -5,14 +5,20 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.azure</groupId>
-    <artifactId>autorest-java</artifactId>
+    <groupId>com.azure.tools</groupId>
+    <artifactId>azure-autorest-parent</artifactId>
     <version>1.0.0-beta.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>fluentgen</artifactId>
+  <artifactId>azure-autorest-fluentgen</artifactId>
   <version>1.0.0-beta.1</version>
+
+  <properties>
+    <jacoco.min.linecoverage>0.20</jacoco.min.linecoverage>
+    <jacoco.min.branchcoverage>0.20</jacoco.min.branchcoverage>
+    <jacoco.skip.coverage.check>false</jacoco.skip.coverage.check>
+  </properties>
 
   <repositories>
     <repository>
@@ -23,8 +29,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>fluentnamer</artifactId>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-fluentnamer</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
 
@@ -37,20 +43,19 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.9</version>
+      <version>3.10</version>
     </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.6.2</version>
+      <version>5.6.3</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.6.2</version>
+      <version>5.6.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -90,12 +95,80 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M4</version>
+            <version>3.0.0-M5</version>
             <configuration>
               <includes>
                 <include>**/*Tests.java</include>
               </includes>
+              <runOrder>alphabetical</runOrder>
+              <useSystemClassLoader>false</useSystemClassLoader>
+              <forkCount>1</forkCount>
+              <systemPropertyVariables>
+                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
+              </systemPropertyVariables>
             </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.6</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+<!--              <execution>-->
+<!--                <id>default-instrument</id>-->
+<!--                <goals>-->
+<!--                  <goal>instrument</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--              <execution>-->
+<!--                <id>default-restore-instrumented-classes</id>-->
+<!--                <goals>-->
+<!--                  <goal>restore-instrumented-classes</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+              <execution>
+                <id>post-unit-test</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.reporting.outputDirectory}/test-coverage</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>check</id>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <skip>${jacoco.skip.coverage.check}</skip>
+                  <rules>
+                    <rule>
+                      <element>BUNDLE</element>
+                      <limits>
+                        <limit>
+                          <counter>LINE</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>${jacoco.min.linecoverage}</minimum>
+                        </limit>
+                        <limit>
+                          <counter>BRANCH</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>${jacoco.min.branchcoverage}</minimum>
+                        </limit>
+                      </limits>
+                    </rule>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

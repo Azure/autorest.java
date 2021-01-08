@@ -85,7 +85,7 @@ public class ConstantSchemaOptimization {
         choice.setLanguage(constantSchema.getValue().getLanguage());
         sealedChoiceSchema.setChoices(Collections.singletonList(choice));
 
-        logger.info("Create sealed choice {}", Utils.getDefaultName(sealedChoiceSchema));
+        logger.info("Create sealed choice '{}'", Utils.getDefaultName(sealedChoiceSchema));
 
         return sealedChoiceSchema;
     }

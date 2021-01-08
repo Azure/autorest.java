@@ -8,7 +8,6 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
@@ -16,6 +15,7 @@ import org.slf4j.Logger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,15 +40,17 @@ public class FluentJavaSettings {
      */
     private final Set<String> javaNamesForRemoveInner = new HashSet<>();
 
-    /**
-     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
-     */
-    private boolean track1Naming = true;
+    private final Set<String> javaNamesForRemoveModel = new HashSet<>();
 
-    /**
-     * Whether to treat read-only resource property as SubResource type.
-     */
-    private boolean resourcePropertyAsSubResource = false;
+//    /**
+//     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
+//     */
+//    private boolean track1Naming = true;
+//
+//    /**
+//     * Whether to treat read-only resource property as SubResource type.
+//     */
+//    private boolean resourcePropertyAsSubResource = false;
 
     /**
      * Operation group name for ungrouped operations.
@@ -68,30 +70,7 @@ public class FluentJavaSettings {
 
     private boolean sdkIntegration = false;
 
-    private final AutorestSettings autorestSettings = new AutorestSettings();
-
-    public static class AutorestSettings {
-        private String tag;
-        private String baseFolder;
-        private String outputFolder;
-        private String azureLibrariesForJavaFolder;
-
-        public String getTag() {
-            return tag;
-        }
-
-        public String getBaseFolder() {
-            return baseFolder;
-        }
-
-        public String getOutputFolder() {
-            return outputFolder;
-        }
-
-        public Optional<String> getAzureLibrariesForJavaFolder() {
-            return Optional.ofNullable(azureLibrariesForJavaFolder);
-        }
-    }
+    private AutorestSettings autorestSettings;
 
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
@@ -109,11 +88,13 @@ public class FluentJavaSettings {
     }
 
     public boolean isTrack1Naming() {
-        return track1Naming;
+        return true;
+        //return track1Naming;
     }
 
     public boolean isResourcePropertyAsSubResource() {
-        return resourcePropertyAsSubResource;
+        return false;
+        //return resourcePropertyAsSubResource;
     }
 
     public Optional<String> getNameForUngroupedOperations() {
@@ -126,6 +107,10 @@ public class FluentJavaSettings {
 
     public Map<String, String> getRenameModel() {
         return renameModel;
+    }
+
+    public Set<String> getJavaNamesForRemoveModel() {
+        return javaNamesForRemoveModel;
     }
 
     public String getPomFilename() {
@@ -141,6 +126,22 @@ public class FluentJavaSettings {
     }
 
     public AutorestSettings getAutorestSettings() {
+        if (autorestSettings == null) {
+            autorestSettings = new AutorestSettings();
+
+            loadStringSetting("tag", autorestSettings::setTag);
+
+            loadStringSetting("base-folder", autorestSettings::setBaseFolder);
+            loadStringSetting("output-folder", autorestSettings::setOutputFolder);
+            loadStringSetting("azure-libraries-for-java-folder", autorestSettings::setAzureLibrariesForJavaFolder);
+
+            List<Object> inputFiles = host.getValue(List.class, "input-file");
+            if (inputFiles != null) {
+                autorestSettings.getInputFiles().addAll(inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                logger.info("List of input files : {}", autorestSettings.getInputFiles());
+            }
+        }
+
         return autorestSettings;
     }
 
@@ -181,8 +182,18 @@ public class FluentJavaSettings {
             }
         });
 
-        loadBooleanSetting("track1-naming", b -> track1Naming = b);
-        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
+        loadStringSetting("remove-model", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                javaNamesForRemoveModel.addAll(
+                        Arrays.stream(s.split(Pattern.quote(",")))
+                                .map(String::trim)
+                                .filter(s1 -> !s1.isEmpty())
+                                .collect(Collectors.toSet()));
+            }
+        });
+
+//        loadBooleanSetting("track1-naming", b -> track1Naming = b);
+//        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
         loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = s);
 
@@ -195,12 +206,6 @@ public class FluentJavaSettings {
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
-
-        loadStringSetting("tag", s -> autorestSettings.tag = s);
-
-        loadStringSetting("base-folder", s -> autorestSettings.baseFolder = s);
-        loadStringSetting("output-folder", s -> autorestSettings.outputFolder = s);
-        loadStringSetting("azure-libraries-for-java-folder", s -> autorestSettings.azureLibrariesForJavaFolder = s);
     }
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {

@@ -67,21 +67,21 @@ public class ResourcePropertyNormalization {
                             ObjectSchema candidateType = (ObjectSchema) type;
                             if (checkOnParentConvertToSubResource(candidateType)) {
                                 p.setSchema(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("SubResource for property {}.{}", Utils.getJavaName(compositeType), p.getSerializedName());
+                                logger.info("SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         } else if (type instanceof ArraySchema && ((ArraySchema) type).getElementType() instanceof ObjectSchema) {
                             ArraySchema arrayType = ((ArraySchema) type);
                             ObjectSchema candidateType = (ObjectSchema) (arrayType.getElementType());
                             if (checkConvertToSubResource(candidateType)) {
                                 arrayType.setElementType(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("Array of SubResource for property {}.{}", Utils.getJavaName(compositeType), p.getSerializedName());
+                                logger.info("Array of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         } else if (type instanceof DictionarySchema && ((DictionarySchema) type).getElementType() instanceof ObjectSchema) {
                             DictionarySchema dictType = ((DictionarySchema) type);
                             ObjectSchema candidateType = (ObjectSchema) (dictType.getElementType());
                             if (checkConvertToSubResource(candidateType)) {
                                 dictType.setElementType(ResourceTypeNormalization.subResourceSchema());
-                                logger.info("Dictionary of SubResource for property {}.{}", Utils.getJavaName(compositeType), p.getSerializedName());
+                                logger.info("Dictionary of SubResource for property '{}.{}'", Utils.getJavaName(compositeType), p.getSerializedName());
                             }
                         }
                     });

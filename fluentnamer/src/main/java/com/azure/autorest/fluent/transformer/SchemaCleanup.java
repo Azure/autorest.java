@@ -101,7 +101,7 @@ public class SchemaCleanup {
         codeModel.getSchemas().getObjects().removeIf(s -> {
             boolean unused = schemasNotInUse.contains(s);
             if (unused) {
-                logger.info("Remove unused schema {}", Utils.getJavaName(s));
+                logger.info("Remove unused schema '{}'", Utils.getJavaName(s));
             }
             return unused;
         });

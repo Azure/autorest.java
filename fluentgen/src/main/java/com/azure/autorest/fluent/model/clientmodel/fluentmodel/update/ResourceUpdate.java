@@ -50,7 +50,7 @@ public class ResourceUpdate extends ResourceOperation {
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
 
-        logger.info("ResourceUpdate: Fluent model {}, method reference {}, body parameter {}",
+        logger.info("ResourceUpdate: Fluent model '{}', method reference '{}', body parameter '{}'",
                 resourceModel.getName(), methodName, bodyParameterModel.getName());
     }
 

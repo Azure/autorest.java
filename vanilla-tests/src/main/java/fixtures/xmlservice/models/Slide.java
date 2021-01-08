@@ -7,7 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The Slide model. */
+/** A slide in a slideshow. */
 @JacksonXmlRootElement(localName = "slide")
 @Fluent
 public final class Slide {

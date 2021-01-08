@@ -149,6 +149,11 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(AnySchema.class);
                         break;
                     }
+                    case "times": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(TimeSchema.class);
+                        break;
+                    }
                     case "requests": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(Request.class);

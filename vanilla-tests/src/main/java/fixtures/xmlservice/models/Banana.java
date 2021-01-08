@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** The Banana model. */
+/** A banana. */
 @JacksonXmlRootElement(localName = "banana")
 @Fluent
 public final class Banana {

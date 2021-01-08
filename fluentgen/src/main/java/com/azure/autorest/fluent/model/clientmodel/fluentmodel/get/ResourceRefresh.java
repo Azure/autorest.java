@@ -37,7 +37,7 @@ public class ResourceRefresh extends ResourceOperation {
                            UrlPathSegments urlPathSegments, String methodName) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, null);
 
-        logger.info("ResourceRefresh: Fluent model {}, method reference {}",
+        logger.info("ResourceRefresh: Fluent model '{}', method reference '{}'",
                 resourceModel.getName(), methodName);
     }
 
@@ -90,20 +90,22 @@ public class ResourceRefresh extends ResourceOperation {
         if (methodOpt.isPresent()) {
             FluentCollectionMethod collectionMethod = methodOpt.get();
 
-            String name = getGetByIdMethodName(collectionMethod.getInnerClientMethod().getName());
-            List<MethodParameter> pathParameters = this.getPathParameters();
+            String name = getGetByIdMethodName(collectionMethod.getMethodName());
+            if (!hasConflictingMethod(name)) {
+                List<MethodParameter> pathParameters = this.getPathParameters();
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, false, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, false, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
 
-            methods.add(new CollectionMethodOperationByIdTemplate(
-                    resourceModel, name,
-                    pathParameters, urlPathSegments, true, getResourceLocalVariables(),
-                    collectionMethod)
-                    .getMethodTemplate());
+                methods.add(new CollectionMethodOperationByIdTemplate(
+                        resourceModel, name,
+                        pathParameters, urlPathSegments, true, getResourceLocalVariables(),
+                        collectionMethod)
+                        .getMethodTemplate());
+            }
         }
         return methods;
     }

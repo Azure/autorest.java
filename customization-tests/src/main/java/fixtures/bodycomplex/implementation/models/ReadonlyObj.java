@@ -52,6 +52,7 @@ public final class ReadonlyObj {
         this.size = size;
         return this;
     }
+
     /**
      * Set the ID of the object.
      *

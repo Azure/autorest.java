@@ -51,7 +51,8 @@ public class NamingConflictResolver {
             }
         });
 
-        if (methodGroupNamesLowerCase.contains(Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT))) {
+        String clientNameLowerCase = Utils.getDefaultName(codeModel).toLowerCase(Locale.ROOT);
+        if (methodGroupNamesLowerCase.contains(clientNameLowerCase) || objectNamesLowerCase.contains(clientNameLowerCase)) {
             String name = Utils.getDefaultName(codeModel);
             String newName;
 
@@ -65,7 +66,7 @@ public class NamingConflictResolver {
                 newName = name + keywordManagementClient;
             }
 
-            logger.info("Rename code model from {} to {}", name, newName);
+            logger.info("Rename code model from '{}' to '{}'", name, newName);
             codeModel.getLanguage().getDefault().setName(newName);
         }
 
@@ -78,7 +79,7 @@ public class NamingConflictResolver {
     private static String renameOperationGroup(Metadata m) {
         String name = Utils.getDefaultName(m);
         String newName = name + "Operation";
-        logger.info("Rename operation group from {} to {}", name, newName);
+        logger.info("Rename operation group from '{}' to '{}'", name, newName);
         m.getLanguage().getDefault().setName(newName);
         return newName;
     }
@@ -87,8 +88,8 @@ public class NamingConflictResolver {
         String name = Utils.getDefaultName(choice);
         if (objectNames.contains(name.toLowerCase(Locale.ROOT))) {
             String newName = name + "Value";
-            logger.warn("Name conflict of choice with object {}", name);
-            logger.info("Rename choice from {} to {}", name, newName);
+            logger.warn("Name conflict of choice with object '{}'", name);
+            logger.info("Rename choice from '{}' to '{}'", name, newName);
             choice.getLanguage().getDefault().setName(newName);
         }
     }

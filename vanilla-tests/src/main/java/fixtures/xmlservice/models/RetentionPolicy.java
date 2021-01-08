@@ -4,7 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The RetentionPolicy model. */
+/** the retention policy. */
 @JacksonXmlRootElement(localName = "RetentionPolicy")
 @Fluent
 public final class RetentionPolicy {

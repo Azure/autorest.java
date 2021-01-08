@@ -9,8 +9,18 @@ package com.azure.autorest.util;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
 public class ModelNamer {
+
+    public String modelPropertyGetterName(ServiceClientProperty property) {
+        return modelPropertyGetterName(
+                new ClientModelProperty.Builder()
+                        .name(property.getName())
+                        .isReadOnly(property.isReadOnly())
+                        .clientType(property.getType())
+                        .build());
+    }
 
     public String modelPropertyGetterName(ClientModelProperty property) {
         String prefix = "get";

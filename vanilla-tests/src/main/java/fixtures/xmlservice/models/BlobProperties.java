@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** The BlobProperties model. */
+/** Properties of a blob. */
 @JacksonXmlRootElement(localName = "BlobProperties")
 @Fluent
 public final class BlobProperties {
