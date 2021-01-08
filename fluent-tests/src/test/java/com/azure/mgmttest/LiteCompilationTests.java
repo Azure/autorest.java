@@ -25,6 +25,8 @@ import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
+import com.azure.mgmtlitetest.storage.models.StorageAccountListKeysResult;
+import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParameters;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 
 import java.time.Duration;
@@ -67,6 +69,9 @@ public class LiteCompilationTests {
 
         storageAccount.refresh();
 
+        StorageAccountListKeysResult keys = storageAccount.listKeys();
+        storageAccount.regenerateKey(new StorageAccountRegenerateKeyParameters().withKeyName(keys.keys().iterator().next().keyName()));
+
         BlobContainer blobContainer = storageManager.blobContainers().define("container1")
                 .withExistingStorageAccount(rgName, saName)
                 .withPublicAccess(PublicAccess.BLOB)
@@ -78,6 +83,8 @@ public class LiteCompilationTests {
                 .apply(new Context("key", "value"));
 
         blobContainer.refresh();
+
+        blobContainer.lease();
 
         BlobServiceProperties blobService = storageManager.blobServices().define()
                 .withExistingStorageAccount(rgName, saName)
