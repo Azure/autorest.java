@@ -16,15 +16,6 @@ jobs:
       - name: Clone azure-rest-api-specs
         run: git clone --depth 1 https://github.com/azure/azure-rest-api-specs
 
-      - name: Cache maven dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-            ${{ runner.os }}-
-
       - name: Setup node 14.x
         uses: actions/setup-node@v1
         with:

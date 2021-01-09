@@ -72,7 +72,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
             Set<String> pathParameterNames = pathParameters.stream()
                     .map(p -> p.getClientMethodParameter().getName())
                     .collect(Collectors.toSet());
-            parameters.addAll(collectionMethod.getInnerClientMethod().getParameters().stream()
+            parameters.addAll(collectionMethod.getInnerClientMethod().getMethodParameters().stream()
                     .filter(p -> !pathParameterNames.contains(p.getName()))
                     .collect(Collectors.toList()));
         }
