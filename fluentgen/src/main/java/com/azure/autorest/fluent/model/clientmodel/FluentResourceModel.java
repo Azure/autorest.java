@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceImplementation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
@@ -49,6 +50,7 @@ public class FluentResourceModel {
     private ResourceCreate resourceCreate;
     private ResourceUpdate resourceUpdate;
     private ResourceRefresh resourceRefresh;
+    private ResourceActions resourceActions;
     private final List<MethodTemplate> additionalMethods = new ArrayList<>();
 
     public FluentResourceModel(ClientModel innerModel, List<ClientModel> parentModels) {
@@ -163,6 +165,14 @@ public class FluentResourceModel {
         this.resourceRefresh = resourceRefresh;
     }
 
+    public ResourceActions getResourceActions() {
+        return resourceActions;
+    }
+
+    public void setResourceActions(ResourceActions resourceActions) {
+        this.resourceActions = resourceActions;
+    }
+
     public List<MethodTemplate> getAdditionalMethods() {
         return additionalMethods;
     }
@@ -184,6 +194,9 @@ public class FluentResourceModel {
         }
         if (resourceRefresh != null) {
             resourceRefresh.addImportsTo(imports, includeImplementationImports);
+        }
+        if (resourceActions != null) {
+            resourceActions.addImportsTo(imports, includeImplementationImports);
         }
         additionalMethods.forEach(m -> m.addImportsTo(imports));
     }

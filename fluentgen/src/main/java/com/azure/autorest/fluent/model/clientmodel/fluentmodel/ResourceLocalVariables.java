@@ -7,15 +7,23 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Collection of parameters that need to be provided during create/update flow, and hence need to be provided as class variable or local variable.
+ *
+ * E.g. resourceGroupName, resourceName, createParameters, etc.
+ */
 public class ResourceLocalVariables {
 
     private final Map<ClientMethodParameter, LocalVariable> localVariablesMap = new LinkedHashMap<>();
@@ -39,6 +47,16 @@ public class ResourceLocalVariables {
             var.setInitializeExpression(String.format("new %1$s()", bodyParameter.getClientType().toString()));
             localVariablesMap.put(bodyParameter, var);
         }
+    }
+
+    public ResourceLocalVariables(ClientMethod clientMethod) {
+        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
+        List<ClientMethodParameter> pathParameters =  clientMethod.getParameters().stream()
+                .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
+                .collect(Collectors.toList());
+        pathParameters.forEach(p -> localVariablesMap.put(p, new LocalVariable(p.getName(), p.getClientType(), RequestParameterLocation.Path, p)));
     }
 
     private ResourceLocalVariables() {
