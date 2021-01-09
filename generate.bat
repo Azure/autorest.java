@@ -45,3 +45,7 @@ call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azu
 del azure-tests\src\main\java\module-info.java
 
 call autorest --use:. customization-tests/swagger
+
+call autorest --use:. docs/samples/specification/azure_key_credential/readme.md
+call autorest --use:. docs/samples/specification/basic/readme.md
+call autorest --use:. docs/samples/specification/management/readme.md
