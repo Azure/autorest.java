@@ -13,6 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set env
+        run: |
+          echo ::set-env name=TAG_NAME::v${{ github.event.inputs.version }}
+          echo ::set-env name=RELEASE_ARTIFACT::autorest-java-${{ github.event.inputs.version }}.tgz
+
       - name: Checkout branch
         uses: actions/checkout@v2
         with:
@@ -35,8 +40,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           prerelease: true
-          tag_name: "v${{ github.event.inputs.version }}"
-          release_name: "AutoRest v${{ github.event.inputs.version }}"
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: AutoRest ${{ env.TAG_NAME }}
           body: ${{ github.event.inputs.release_notes }}
 
       - name: Upload Pre-release Asset
@@ -46,6 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "./autorest-java-${{ github.event.inputs.version }}.tgz"
-          asset_name: "autorest-java-${{ github.event.inputs.version }}.tgz"
+          asset_path: ${{ env.RELEASE_ARTIFACT }}
+          asset_name: ${{ env.RELEASE_ARTIFACT }}
           asset_content_type: application/x-gtar
