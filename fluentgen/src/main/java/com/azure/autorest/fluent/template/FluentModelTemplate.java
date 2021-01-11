@@ -59,8 +59,9 @@ public class FluentModelTemplate extends ModelTemplate {
     protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
         List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
         if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+            String lastParentName = model.getName();
             String parentModelName = model.getParentModelName();
-            while (parentModelName != null) {
+            while (parentModelName != null && !lastParentName.equals(parentModelName)) {
                 ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
                 if (parentModel == null) {
                     parentModel = getPredefinedModel(parentModelName).orElse(null);
@@ -74,6 +75,7 @@ public class FluentModelTemplate extends ModelTemplate {
                     }
                 }
 
+                lastParentName = parentModelName;
                 parentModelName = parentModel == null ? null : parentModel.getParentModelName();
             }
         }

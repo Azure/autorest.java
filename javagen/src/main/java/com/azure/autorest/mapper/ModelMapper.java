@@ -81,6 +81,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     modelImports.add(parentType.getPackage() + "." + parentModelName);
                 }
             }
+            if (parentModelName != null && parentModelName.equals(modelName)) {
+                throw new IllegalStateException("Parent model name is same as model name: " + modelName);
+            }
             builder.parentModelName(parentModelName);
 
             List<Property> compositeTypeProperties = compositeType.getProperties()
