@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-01-09T10:36:46.795855
+Generated at 2021-01-11T19:45:50.302621
 ## Success
 <details>
-<summary>RP count: 154</summary>
+<summary>RP count: 150</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -36,7 +36,6 @@ Generated at 2021-01-09T10:36:46.795855
 - commerce
 - communication
 - compute
-- confluent
 - consumption
 - containerinstance
 - containerregistry
@@ -48,6 +47,7 @@ Generated at 2021-01-09T10:36:46.795855
 - customerlockbox
 - customproviders
 - databox
+- databoxedge
 - databricks
 - datacatalog
 - datadog
@@ -60,7 +60,6 @@ Generated at 2021-01-09T10:36:46.795855
 - devops
 - devspaces
 - devtestlabs
-- digitaltwins
 - dnc
 - dns
 - domainservices
@@ -74,7 +73,6 @@ Generated at 2021-01-09T10:36:46.795855
 - hdinsight
 - healthbot
 - healthcareapis
-- hybridcompute
 - hybriddatamanager
 - hybridkubernetes
 - hybridnetwork
@@ -116,8 +114,6 @@ Generated at 2021-01-09T10:36:46.795855
 - powerbidedicated
 - powerbiembedded
 - privatedns
-- providerhub
-- purview
 - recoveryservices
 - recoveryservicesbackup
 - recoveryservicessiterecovery
@@ -161,11 +157,15 @@ Generated at 2021-01-09T10:36:46.795855
 </details>
 
 ## Failure at Codegen
+- confluent
 - deploymentmanager
+- digitaltwins
+- hybridcompute
+- providerhub
+- purview
 - security
 
 ## Failure at Build
-- databoxedge
 - servicefabric
 
 ## Logs
@@ -224,62 +224,117 @@ FATAL: Error: Not able to process media type default at this moment.
 </details>
 
 <details>
-<summary>databoxedge</summary>
+<summary>confluent</summary>
 
 **stdout**
 ```
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --< com.azure.resourcemanager:azure-resourcemanager-databoxedge-generated >--
-[INFO] Building Microsoft Azure SDK for DataBoxEdge Management 1.0.0-beta.1
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-databoxedge-generated ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-databoxedge-generated ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 229 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Share.java:[410,10] method refresh() is already defined in interface azure.resourcemanager.databoxedge.models.Share
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Share.java:[420,10] method refresh(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.databoxedge.models.Share
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Container.java:[183,10] method refresh() is already defined in interface azure.resourcemanager.databoxedge.models.Container
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Container.java:[193,10] method refresh(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.databoxedge.models.Container
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ShareImpl.java:[189,17] method refresh() is already defined in class azure.resourcemanager.databoxedge.implementation.ShareImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ShareImpl.java:[193,17] method refresh(com.azure.core.util.Context) is already defined in class azure.resourcemanager.databoxedge.implementation.ShareImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ContainerImpl.java:[152,17] method refresh() is already defined in class azure.resourcemanager.databoxedge.implementation.ContainerImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ContainerImpl.java:[156,17] method refresh(com.azure.core.util.Context) is already defined in class azure.resourcemanager.databoxedge.implementation.ContainerImpl
-[INFO] 8 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.263 s
-[INFO] Finished at: 2021-01-09T09:50:32Z
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-databoxedge-generated: Compilation failure: Compilation failure: 
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Share.java:[410,10] method refresh() is already defined in interface azure.resourcemanager.databoxedge.models.Share
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Share.java:[420,10] method refresh(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.databoxedge.models.Share
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Container.java:[183,10] method refresh() is already defined in interface azure.resourcemanager.databoxedge.models.Container
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/models/Container.java:[193,10] method refresh(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.databoxedge.models.Container
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ShareImpl.java:[189,17] method refresh() is already defined in class azure.resourcemanager.databoxedge.implementation.ShareImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ShareImpl.java:[193,17] method refresh(com.azure.core.util.Context) is already defined in class azure.resourcemanager.databoxedge.implementation.ShareImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ContainerImpl.java:[152,17] method refresh() is already defined in class azure.resourcemanager.databoxedge.implementation.ContainerImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-databoxedge/src/main/java/azure/resourcemanager/databoxedge/implementation/ContainerImpl.java:[156,17] method refresh(com.azure.core.util.Context) is already defined in class azure.resourcemanager.databoxedge.implementation.ContainerImpl
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+AutoRest code generation utility [cli version: 3.0.6322; node: v14.15.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'OrganizationResourceProperties.offerDetail' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'OrganizationResourceProperties.userDetail' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'OrganizationResource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OrganizationResourceProperties-offerDetail' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OrganizationResourceProperties-userDetail' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OrganizationResource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (OperationNameNormalization): Rename operation from 'listBySubscription' to 'list', in operation group 'Organization'
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Organization'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'ConfluentAgreementResource'
+INFORMATION (ResourceTypeNormalization): Add parent Resource, for 'OrganizationResource'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [ConfluentAgreementResource, OrganizationResource, OperationResult]
 
 ```
 **stderr**
 ```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: OrganizationResourceProperties
+java.lang.IllegalStateException: Parent model name is same as model name: OrganizationResourceProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: OrganizationResourceProperties
+java.lang.IllegalStateException: Parent model name is same as model name: OrganizationResourceProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
 
 ```
 </details>
@@ -399,6 +454,8 @@ WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowDebugResource' with an
 WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ManagedPrivateEndpointResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1056,73 +1113,28 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
 INFORMATION (FluentMapper): Add Inner to response types: [StepResource, Rollout, ServiceUnitResource, ServiceTopologyResource, RolloutRequest, ArtifactSource, OperationsList, ServiceResource]
-INFORMATION (FluentGen): Java template for client model
-INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceTopologyResource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceTopologyResource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceTopologyResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceResource', method reference 'createOrUpdate', body parameter 'ServiceResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceResource' as category NESTED_CHILD
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceResource', method reference 'createOrUpdate', body parameter 'ServiceResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceResource', method reference 'get'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceUnitResource', method reference 'createOrUpdate', body parameter 'ServiceUnitResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceUnitResource' as category NESTED_CHILD
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceUnitResource', method reference 'createOrUpdate', body parameter 'ServiceUnitResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceUnitResource', method reference 'get'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceUnitResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'StepResource', method reference 'createOrUpdate', body parameter 'StepResourceInner'
-INFORMATION (ResourceParser): Fluent model 'StepResource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'StepResource', method reference 'createOrUpdate', body parameter 'StepResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'StepResource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'StepResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'RolloutRequest', method reference 'createOrUpdate', body parameter 'RolloutRequestInner'
-INFORMATION (ResourceParser): Fluent model 'RolloutRequest' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'RolloutRequest', method reference 'createOrUpdate', body parameter 'RolloutRequestInner'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'RolloutRequest', method reference 'delete'
-INFORMATION (ResourceActions): ResourceActions: Fluent model 'RolloutRequest', action methods: [cancel, restart]
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ArtifactSource', method reference 'createOrUpdate', body parameter 'ArtifactSourceInner'
-INFORMATION (ResourceParser): Fluent model 'ArtifactSource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ArtifactSource', method reference 'createOrUpdate', body parameter 'ArtifactSourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ArtifactSource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', method reference 'delete'
 
 ```
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@351f391c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@22a94495)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@351f391c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@22a94495)
-	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
-	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
-	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: ArtifactSourceProperties
+java.lang.IllegalStateException: Parent model name is same as model name: ArtifactSourceProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
 	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:137)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:130)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getPathParameters(ResourceOperation.java:150)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh.getGetByIdCollectionMethods(ResourceRefresh.java:95)
-	at com.azure.autorest.fluent.mapper.ResourceParser.lambda$processAdditionalCollectionMethods$8(ResourceParser.java:112)
-	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:271)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalCollectionMethods(ResourceParser.java:113)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalMethods(ResourceParser.java:75)
-	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:59)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:244)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1133,36 +1145,337 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@351f391c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@22a94495)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@351f391c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@22a94495)
-	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
-	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
-	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: ArtifactSourceProperties
+java.lang.IllegalStateException: Parent model name is same as model name: ArtifactSourceProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
 	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:137)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:130)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getPathParameters(ResourceOperation.java:150)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh.getGetByIdCollectionMethods(ResourceRefresh.java:95)
-	at com.azure.autorest.fluent.mapper.ResourceParser.lambda$processAdditionalCollectionMethods$8(ResourceParser.java:112)
-	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:271)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
+<summary>digitaltwins</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6322; node: v14.15.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'GroupIdInformation.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ConnectionProperties.privateEndpoint' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ConnectionProperties.privateLinkServiceConnectionState' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'PrivateEndpointConnection.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DigitalTwinsResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DigitalTwinsIdentity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DigitalTwinsEndpointResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DigitalTwinsEndpointResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'GroupIdInformation-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties-privateEndpoint' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties-privateLinkServiceConnectionState' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnection-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'DigitalTwins'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'PrivateEndpointConnection'
+INFORMATION (ResourceTypeNormalization): Add parent Resource, for 'DigitalTwinsResource'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'ExternalResource'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [GroupIdInformationResponse, Operation, PrivateEndpointConnection, DigitalTwinsDescription, CheckNameResult, PrivateEndpointConnectionsResponse, GroupIdInformation, DigitalTwinsEndpointResource]
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: GroupIdInformationProperties
+java.lang.IllegalStateException: Parent model name is same as model name: GroupIdInformationProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
 	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalCollectionMethods(ResourceParser.java:113)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalMethods(ResourceParser.java:75)
-	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:59)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:244)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: GroupIdInformationProperties
+java.lang.IllegalStateException: Parent model name is same as model name: GroupIdInformationProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
+<summary>hybridcompute</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6322; node: v14.15.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'OperationValue.display' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineProperties.osProfile' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'Machine.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'Machine.identity' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineUpdate.identity' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineUpdate.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineExtension.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineExtensionUpdate.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'MachineExtensionProperties.instanceView' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationListResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationValue' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationValue-display' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationValueDisplay' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OSProfile' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineProperties-osProfile' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineUpdateProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Machine' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Machine-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Machine-identity' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineUpdate' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineUpdate-identity' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineUpdate-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineListResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'UpdateResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtension' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtension-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionUpdate' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionUpdate-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionProperties-instanceView' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionUpdateProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionInstanceView' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionInstanceView-status' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineExtensionsListResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'TrackedResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Machines'
+INFORMATION (OperationNameNormalization): Rename operation from 'listBySubscription' to 'list', in operation group 'Machines'
+INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'Machine'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'TrackedResource'
+INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'MachineExtension'
+INFORMATION (SchemaCleanup): Remove unused schema 'TrackedResource'
+INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [MachineExtension, Machine, OperationValue]
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: MachineProperties
+java.lang.IllegalStateException: Parent model name is same as model name: MachineProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: MachineProperties
+java.lang.IllegalStateException: Parent model name is same as model name: MachineProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1506,6 +1819,471 @@ FATAL: Error: 1 errors occured -- cannot continue.
 </details>
 
 <details>
+<summary>providerhub</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6322; node: v14.15.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'CustomRolloutSpecification.canary' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'CustomRolloutSpecification.providerRegistration' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'CustomRolloutProperties.specification' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'CustomRolloutProperties.status' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'InnerError.innerError' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'Error.innerError' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ErrorResponse.error' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.canary' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.lowTraffic' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.mediumTraffic' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.highTraffic' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.restOfTheWorldGroupOne' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.restOfTheWorldGroupTwo' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutSpecification.providerRegistration' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutProperties.specification' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DefaultRolloutProperties.status' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'LoggingRule.hiddenPropertyPaths' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderEndpoint.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceType.identityManagement' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceType.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceType.requestHeaderOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceType.templateDeploymentPolicy' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifest.providerAuthentication' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifest.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifest.requestHeaderOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifest.management' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifest.reRegisterSubscriptionMetadata' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'NotificationRegistration.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'OperationsDefinition.display' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ProviderHubMetadata.providerAuthentication' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ProviderHubMetadata.thirdPartyProviderAuthorization' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifestProperties.providerAuthentication' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifestProperties.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifestProperties.requestHeaderOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifestProperties.management' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceProviderManifestProperties.templateDeploymentOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ProviderRegistrationProperties.providerHubMetadata' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ProviderRegistrationProperties.subscriptionLifecycleNotificationSpecifications' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ProviderRegistration.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeEndpoint.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeExtensionOptions.resourceCreationBegin' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.extensionOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.featuresRule' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.subscriptionLifecycleNotificationSpecifications' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.identityManagement' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.checkNameAvailabilitySpecifications' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.requestHeaderOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.templateDeploymentOptions' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistrationProperties.resourceMovePolicy' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ResourceTypeRegistration.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'SkuSetting.capacity' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'SkuResource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ProxyResource' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomRolloutSpecification-canary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomRolloutSpecification-providerRegistration' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomRolloutProperties-specification' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomRolloutProperties-status' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'InnerError-innerError' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Error-innerError' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse-error' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-canary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-lowTraffic' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-mediumTraffic' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-highTraffic' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-restOfTheWorldGroupOne' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-restOfTheWorldGroupTwo' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutSpecification-providerRegistration' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutProperties-specification' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DefaultRolloutProperties-status' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'LoggingRule-hiddenPropertyPaths' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderEndpoint-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceType-identityManagement' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceType-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceType-requestHeaderOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceType-templateDeploymentPolicy' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifest-providerAuthentication' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifest-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifest-requestHeaderOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifest-management' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifest-reRegisterSubscriptionMetadata' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'NotificationRegistration-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationsDefinition-display' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProviderHubMetadata-providerAuthentication' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProviderHubMetadata-thirdPartyProviderAuthorization' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifestProperties-providerAuthentication' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifestProperties-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifestProperties-requestHeaderOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifestProperties-management' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProviderManifestProperties-templateDeploymentOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProviderRegistrationProperties-providerHubMetadata' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProviderRegistrationProperties-subscriptionLifecycleNotificationSpecifications' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProviderRegistration-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeEndpoint-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeExtensionOptions-resourceCreationBegin' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-extensionOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-featuresRule' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-subscriptionLifecycleNotificationSpecifications' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-identityManagement' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-checkNameAvailabilitySpecifications' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-requestHeaderOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-templateDeploymentOptions' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistrationProperties-resourceMovePolicy' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceTypeRegistration-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SkuSetting-capacity' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SkuResource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProxyResource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+
+WARNING (Modeler/MissingType): The schema 'ResourceProviderManagement-resourceAccessRolesItem' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2020-11-20/providerhub.json#/components/schemas/ResourceProviderManagement-resourceAccessRolesItem
+
+WARNING (Modeler/MissingType): The schema 'ResourceProviderManifestProperties-metadata' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2020-11-20/providerhub.json#/components/schemas/ResourceProviderManifestProperties-metadata
+
+WARNING (Modeler/MissingType): The schema 'ResourceType-metadata' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2020-11-20/providerhub.json#/components/schemas/ResourceType-metadata
+
+WARNING (Modeler/MissingType): The schema 'ResourceProviderManifest-metadata' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2020-11-20/providerhub.json#/components/schemas/ResourceProviderManifest-metadata
+
+WARNING (Modeler/MissingType): The schema 'OperationsDefinition-properties' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2020-11-20/providerhub.json#/components/schemas/OperationsDefinition-properties
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (FluentTransformer): Rename ungrouped operation group to 'ResourceProvider'
+INFORMATION (NamingConflictResolver): Rename operation group from 'ResourceTypeRegistration' to 'ResourceTypeRegistrationOperation'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'CustomRollout'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProviderRegistration'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ResourceTypeRegistration'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'DefaultRollout'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'NotificationRegistration'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'OperationsContent'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'SkuResource'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ProxyResource'
+INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
+INFORMATION (SchemaCleanup): Remove unused schema 'ProxyResource'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [CheckinManifestInfo, ResourceProviderManifest, OperationsContent, ProviderRegistrationArrayResponseWithContinuation, NotificationRegistration, CustomRollout, ProviderRegistration, OperationsDefinition, DefaultRollout, SkuResource, ResourceTypeRegistration]
+INFORMATION (FluentMapper): Add Inner for type 'ProviderRegistration': [DefaultRolloutSpecification, CustomRolloutSpecification]
+INFORMATION (FluentMapper): Add Inner for type 'DefaultRolloutSpecification': []
+INFORMATION (FluentMapper): Add Inner for type 'CustomRolloutSpecification': []
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: ProviderRegistrationProperties
+java.lang.IllegalStateException: Parent model name is same as model name: ProviderRegistrationProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: ProviderRegistrationProperties
+java.lang.IllegalStateException: Parent model name is same as model name: ProviderRegistrationProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
+<summary>purview</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.0.6322; node: v14.15.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
+   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'AccountProperties.endpoints' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'AccountProperties.managedResources' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ErrorResponseModel.error' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'DeletedAccount.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AccountProperties-endpoints' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AccountProperties-managedResources' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponseModel-error' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'DeletedAccount-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (OperationNameNormalization): Rename operation from 'listBySubscription' to 'list', in operation group 'Accounts'
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Accounts'
+INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'Account'
+INFORMATION (SchemaCleanup): Remove unused schema 'TrackedResource'
+INFORMATION (SchemaCleanup): Remove unused schema 'DeletedAccountList'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [Account, Operation, DefaultAccountPayload, PrivateLinkResource, PrivateEndpointConnection, CheckNameAvailabilityResult, AccessKeys]
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Parent model name is same as model name: DeletedAccountProperties
+java.lang.IllegalStateException: Parent model name is same as model name: DeletedAccountProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+FATAL (FluentGen): Unhandled error: Parent model name is same as model name: DeletedAccountProperties
+java.lang.IllegalStateException: Parent model name is same as model name: DeletedAccountProperties
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:85)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:100)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
 <summary>resources</summary>
 
 **stdout**
@@ -1751,7 +2529,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Pricing, SecurityTask, SecuritySubAssessment, IotSensorsModel, IotSensorsList, IotDefenderSettingsModel, IotSitesList, RuleResults, IotRecommendationModel, AscLocation, AdaptiveNetworkHardening, IoTSecuritySolutionModel, SecureScoreControlDefinitionItem, SecureScoreControlDetails, AlertsSuppressionRule, RegulatoryComplianceAssessment, Scan, Setting, ConnectorSetting, OnPremiseIotSensor, SecurityContact, IotRecommendationType, SecuritySolutionsReferenceDataList, PricingList, WorkspaceSetting, ServerVulnerabilityAssessment, Alert, ComplianceResult, IoTSecuritySolutionAnalyticsModelList, AdaptiveApplicationControlGroup, JitNetworkAccessRequest, InformationProtectionPolicy, Operation, AllowedConnectionsResource, Scans, IoTSecurityAggregatedAlert, IotAlert, Automation, ServerVulnerabilityAssessmentsList, DeviceSecurityGroup, IotDefenderSettingsList, AdvancedThreatProtectionSetting, IotRecommendationTypeList, IotAlertModel, AdaptiveApplicationControlGroups, ScanResults, JitNetworkAccessPolicy, AutomationValidationStatus, SecuritySolution, SecurityAssessment, DiscoveredSecuritySolution, SecureScoreItem, IoTSecurityAggregatedRecommendation, IotRecommendation, ExternalSecuritySolution, PackageDownloads, TopologyResource, IotSitesModel, RulesResults, RegulatoryComplianceControl, SecurityAssessmentMetadata, Device, IoTSecuritySolutionAnalyticsModel, RegulatoryComplianceStandard, ScanResult, OnPremiseIotSensorsList, AutoProvisioningSetting, IotAlertTypeList, IotAlertType, Compliance]
+INFORMATION (FluentMapper): Add Inner to response types: [RegulatoryComplianceStandard, Automation, SecureScoreControlDetails, DeviceSecurityGroup, Compliance, SecuritySolution, IotAlert, IotSitesModel, IotDefenderSettingsModel, ConnectorSetting, ScanResults, SecureScoreItem, SecuritySubAssessment, IoTSecuritySolutionAnalyticsModel, AlertsSuppressionRule, IotSensorsModel, IoTSecurityAggregatedRecommendation, SecurityAssessmentMetadata, IotRecommendationModel, PricingList, Operation, RulesResults, IotRecommendationTypeList, SecurityAssessment, RuleResults, AutomationValidationStatus, ServerVulnerabilityAssessment, Scans, IotDefenderSettingsList, IoTSecuritySolutionAnalyticsModelList, WorkspaceSetting, AutoProvisioningSetting, RegulatoryComplianceAssessment, TopologyResource, AscLocation, IotAlertModel, SecurityContact, SecuritySolutionsReferenceDataList, AdaptiveApplicationControlGroup, SecurityTask, JitNetworkAccessRequest, Device, SecureScoreControlDefinitionItem, IotRecommendationType, Scan, IotSensorsList, AdaptiveNetworkHardening, JitNetworkAccessPolicy, Pricing, InformationProtectionPolicy, PackageDownloads, AdaptiveApplicationControlGroups, OnPremiseIotSensor, RegulatoryComplianceControl, OnPremiseIotSensorsList, DiscoveredSecuritySolution, IoTSecuritySolutionModel, IotSitesList, ComplianceResult, AllowedConnectionsResource, Setting, IotRecommendation, ServerVulnerabilityAssessmentsList, ScanResult, IoTSecurityAggregatedAlert, Alert, AdvancedThreatProtectionSetting, IotAlertTypeList, IotAlertType, ExternalSecuritySolution]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1761,8 +2539,8 @@ INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:100)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:169)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
 	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
 	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
@@ -1789,8 +2567,8 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 FATAL (FluentGen): Unhandled error: discriminator not found in type ExternalSecuritySolution and its parents
 java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:100)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:169)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:185)
 	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:97)
 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
 	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
@@ -1842,6 +2620,12 @@ https://aka.ms/autorest
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MachineReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
 
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ClientGroupReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
 
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'Summary' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
 
@@ -1907,13 +2691,7 @@ WARNING (PreCheck/SchemaMissingType): The schema 'VirtualMachineConfiguration' w
 
 WARNING (PreCheck/SchemaMissingType): The schema 'HypervisorConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
-
 WARNING (PreCheck/SchemaMissingType): The schema 'HostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
 
 WARNING (PreCheck/SchemaMissingType): The schema 'AzureHostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1952,6 +2730,12 @@ WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive 
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2097:6
+
+WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
+
+WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
 
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6937:4
@@ -1997,12 +2781,6 @@ WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive 
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: filterProcesses
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8490:4
-
-WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
-
-WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -2033,7 +2811,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Machine, MachinesSummary, MachineGroup, ClientGroupMembersCount, Connection, MapResponse, Port, ClientGroupMember, Process, ClientGroup, Liveness]
+INFORMATION (FluentMapper): Add Inner to response types: [Machine, MapResponse, Connection, Liveness, ClientGroup, ClientGroupMember, Process, MachineGroup, MachinesSummary, Port, ClientGroupMembersCount]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2052,12 +2830,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:23578) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:22927) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:23578) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:23578) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:22927) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:22927) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2128,8 +2906,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.066 s
-[INFO] Finished at: 2021-01-09T10:23:24Z
+[INFO] Total time:  4.143 s
+[INFO] Finished at: 2021-01-11T19:32:32Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
