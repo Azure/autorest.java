@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: version
+        description: release version
         required: true
       release_notes:
         description: release notes
