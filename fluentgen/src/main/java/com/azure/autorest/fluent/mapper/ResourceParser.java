@@ -124,6 +124,23 @@ public class ResourceParser {
             List<FluentResourceModel> availableFluentModels,
             List<ClientModel> availableModels) {
 
+        List<ModelCategory> categories = Arrays.asList(
+                ModelCategory.RESOURCE_GROUP_AS_PARENT,
+                ModelCategory.SUBSCRIPTION_AS_PARENT,
+                ModelCategory.NESTED_CHILD,
+                ModelCategory.SCOPE_AS_PARENT,
+                ModelCategory.SCOPE_NESTED_CHILD);
+
+        return resolveResourceCreate(collection, availableFluentModels, availableModels, categories);
+    }
+
+    // for unit test purpose
+    static List<ResourceCreate> resolveResourceCreate(
+            FluentResourceCollection collection,
+            List<FluentResourceModel> availableFluentModels,
+            List<ClientModel> availableModels,
+            List<ModelCategory> categories) {
+
         // reference https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md
 
         Map<String, FluentResourceModel> fluentModelMapByName = availableFluentModels.stream()
@@ -131,13 +148,6 @@ public class ResourceParser {
 
         List<ResourceCreate> supportsCreateList = new ArrayList<>();
         Set<FluentResourceModel> foundModels = new HashSet<>();
-
-        List<ModelCategory> categories = Arrays.asList(
-                ModelCategory.RESOURCE_GROUP_AS_PARENT,
-                ModelCategory.SUBSCRIPTION_AS_PARENT,
-                ModelCategory.NESTED_CHILD,
-                ModelCategory.SCOPE_AS_PARENT,
-                ModelCategory.SCOPE_NESTED_CHILD);
 
         for (ModelCategory category : categories) {
             Map<FluentResourceModel, ResourceCreate> modelOfResourceGroupAsParent =

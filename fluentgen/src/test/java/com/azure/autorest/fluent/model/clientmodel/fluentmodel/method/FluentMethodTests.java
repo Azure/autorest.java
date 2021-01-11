@@ -5,12 +5,11 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.method;
 
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
-import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -18,14 +17,16 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCr
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class FluentMethodTests {
 
@@ -54,11 +55,10 @@ public class FluentMethodTests {
 
         Assertions.assertEquals("ManagementLockObjectImpl(ManagementLockObjectInner innerObject, ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
 
-        JavaFile javaFile = new JavaFile("dummy");
-        constructor.getMethodTemplate().writeMethod(new JavaClass(javaFile.getContents()));
-        Assertions.assertTrue(javaFile.getContents().toString().contains("this.innerObject = innerObject;"));
-        Assertions.assertTrue(javaFile.getContents().toString().contains("this.serviceManager = serviceManager;"));
-        Assertions.assertTrue(javaFile.getContents().toString().contains("this.lockName = Utils.getValueFromIdByName(innerObject.id(), \"locks\")"));
+        String methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
+        Assertions.assertTrue(methodContent.contains("this.innerObject = innerObject;"));
+        Assertions.assertTrue(methodContent.contains("this.serviceManager = serviceManager;"));
+        Assertions.assertTrue(methodContent.contains("this.lockName = Utils.getValueFromIdByName(innerObject.id(), \"locks\")"));
 
         List<FluentMethod> applyMethods = lockUpdate.getApplyMethods();
         Assertions.assertEquals(2, applyMethods.size());
@@ -66,9 +66,8 @@ public class FluentMethodTests {
         FluentMethod applyMethod = applyMethods.iterator().next();
         Assertions.assertEquals("ManagementLockObject apply()", applyMethod.getInterfaceMethodSignature());
 
-        javaFile = new JavaFile("dummy");
-        applyMethod.getMethodTemplate().writeMethod(new JavaClass(javaFile.getContents()));
-        Assertions.assertTrue(javaFile.getContents().toString().contains("createOrUpdateAtResourceGroupLevelWithResponse(resourceGroupName, lockName, this.innerModel(), Context.NONE)"));
+        methodContent = TestUtils.getMethodTemplateContent(applyMethod.getMethodTemplate());
+        Assertions.assertTrue(methodContent.contains("createOrUpdateAtResourceGroupLevelWithResponse(resourceGroupName, lockName, this.innerModel(), Context.NONE)"));
     }
 
     @Test
@@ -85,10 +84,33 @@ public class FluentMethodTests {
         Assertions.assertEquals(2, deleteByIdMethods.size());
 
         MethodTemplate deleteByIdMethod = deleteByIdMethods.iterator().next();
-        JavaFile javaFile = new JavaFile("dummy");
-        deleteByIdMethod.writeMethod(new JavaClass(javaFile.getContents()));
+        String methodContent = TestUtils.getMethodTemplateContent(deleteByIdMethod);
 
-        Assertions.assertTrue(javaFile.getContents().toString().contains("void deleteById(String id)"));
-        Assertions.assertTrue(javaFile.getContents().toString().contains("this.deleteWithResponse(resourceGroupName, lockName, Context.NONE)"));
+        Assertions.assertTrue(methodContent.contains("void deleteById(String id)"));
+        Assertions.assertTrue(methodContent.contains("this.deleteWithResponse(resourceGroupName, lockName, Context.NONE)"));
+    }
+
+    @Test
+    public void testOperationByIdForScope() {
+        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
+        Client client = content.getClient();
+        FluentResourceCollection lockCollection = content.getLockCollection();
+
+        Map<String, FluentResourceModel> fluentModelMapByName = content.getFluentModels().stream()
+                .collect(Collectors.toMap(m -> m.getInterfaceType().toString(), Function.identity()));
+
+        // SCOPE_AS_PARENT
+        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels(), Collections.singletonList(ModelCategory.SCOPE_AS_PARENT));
+        ResourceCreate lockCreate = resourceCreates.iterator().next();
+        ResourceDelete lockDelete = ResourceParserAccessor.resolveResourceDelete(lockCollection, lockCreate).get();
+
+        List<MethodTemplate> deleteByIdMethods = lockDelete.getDeleteByIdCollectionMethods();
+        Assertions.assertEquals(2, deleteByIdMethods.size());
+
+        MethodTemplate deleteByIdMethod = deleteByIdMethods.iterator().next();
+        String methodContent = TestUtils.getMethodTemplateContent(deleteByIdMethod);
+
+        Assertions.assertTrue(methodContent.contains("void deleteById(String id)"));
+        Assertions.assertTrue(methodContent.contains("this.deleteByScopeWithResponse(scope, lockName, Context.NONE)"));
     }
 }

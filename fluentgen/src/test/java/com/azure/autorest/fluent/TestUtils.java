@@ -17,6 +17,9 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -157,5 +160,11 @@ public class TestUtils {
                 .findFirst().get();
 
         return new ContentLocks(codeModel, client, fluentClient, fluentModels, lockModel, lockCollection);
+    }
+
+    public static String getMethodTemplateContent(MethodTemplate methodTemplate) {
+        JavaFile javaFile = new JavaFile("dummy");
+        methodTemplate.writeMethod(new JavaClass(javaFile.getContents()));
+        return javaFile.getContents().toString();
     }
 }
