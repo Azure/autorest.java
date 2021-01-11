@@ -52,6 +52,10 @@ public class FluentModelProperty {
         return String.format("%1$s %2$s()", this.getFluentType(), this.getGetterName());
     }
 
+    public String getMethodName() {
+        return this.getGetterName();
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         this.fluentType.addImportsTo(imports, false);
 

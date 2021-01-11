@@ -8,13 +8,12 @@ package com.azure.autorest.fluent.model.clientmodel.fluentmodel.action;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
+import com.azure.autorest.fluent.model.clientmodel.FluentModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentActionMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -49,18 +48,38 @@ public class ResourceActions {
     }
 
     public List<FluentMethod> getFluentMethods() {
+        Set<String> unavailableMethodNames = this.getUnavailableMethodNames();
         if (resourceActionMethods == null) {
             resourceActionMethods = new ArrayList<>();
-            resourceActionMethods.addAll(actionMethods.stream()
-                    .map(method -> new FluentActionMethod(resourceModel, FluentMethodType.OTHER,
+            for (FluentCollectionMethod method : actionMethods) {
+                if (!unavailableMethodNames.contains(method.getMethodName())) {
+                    resourceActionMethods.add(new FluentActionMethod(resourceModel, FluentMethodType.OTHER,
                             resourceCollection, method,
-                            resourceModel.getResourceCreate().getResourceLocalVariables()))
-                    .collect(Collectors.toList()));
+                            resourceModel.getResourceCreate().getResourceLocalVariables()));
+                }
+            }
         }
         return resourceActionMethods;
     }
 
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         this.getFluentMethods().forEach(m -> m.addImportsTo(imports, includeImplementationImports));
+    }
+
+    private Set<String> getUnavailableMethodNames() {
+        Set<String> unavailableMethodNames = resourceModel.getProperties().stream()
+                .map(FluentModelProperty::getMethodName)
+                .collect(Collectors.toSet());
+        if (resourceModel.getResourceCreate() != null) {
+            unavailableMethodNames.add("create");
+        }
+        if (resourceModel.getResourceUpdate() != null) {
+            unavailableMethodNames.add("update");
+            unavailableMethodNames.add("apply");
+        }
+        if (resourceModel.getResourceUpdate() != null) {
+            unavailableMethodNames.add("refresh");
+        }
+        return unavailableMethodNames;
     }
 }
