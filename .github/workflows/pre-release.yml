@@ -2,7 +2,7 @@ name: Pre-release autorest.java
 on:
   workflow_dispatch:
     inputs:
-      tag_name:
+      version:
         description: version
         required: true
       release_notes:
