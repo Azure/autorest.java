@@ -9,17 +9,18 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
-import com.azure.autorest.fluent.mapper.FluentMapperAccessor;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -38,22 +39,12 @@ public class FluentMethodTests {
 
     @Test
     public void testUpdateConstructorAndApply() {
-        CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
-        Client client = FluentStatic.getClient();
-        FluentClient fluentClient = new FluentMapperAccessor(fluentgenAccessor.getFluentMapper()).basicMap(codeModel, client);
+        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
+        Client client = content.getClient();
+        FluentResourceModel lockModel = content.getLockModel();
+        FluentResourceCollection lockCollection = content.getLockCollection();
 
-        List<FluentResourceModel> fluentModels = fluentClient.getResourceModels();
-        List<FluentResourceCollection> fluentCollections = fluentClient.getResourceCollections();
-
-        FluentResourceModel lockModel = fluentModels.stream()
-                .filter(m -> m.getName().equals("ManagementLockObject"))
-                .findFirst().get();
-
-        FluentResourceCollection lockCollection = fluentCollections.stream()
-                .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("ManagementLocks"))
-                .findFirst().get();
-
-        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, fluentModels, client.getModels());
+        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels());
         ResourceCreate lockCreate = resourceCreates.iterator().next();
         ResourceUpdate lockUpdate = ResourceParserAccessor.resolveResourceUpdate(lockCollection, lockCreate, client.getModels()).get();
 
@@ -78,5 +69,26 @@ public class FluentMethodTests {
         javaFile = new JavaFile("dummy");
         applyMethod.getMethodTemplate().writeMethod(new JavaClass(javaFile.getContents()));
         Assertions.assertTrue(javaFile.getContents().toString().contains("createOrUpdateAtResourceGroupLevelWithResponse(resourceGroupName, lockName, this.innerModel(), Context.NONE)"));
+    }
+
+    @Test
+    public void testOperationById() {
+        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
+        Client client = content.getClient();
+        FluentResourceCollection lockCollection = content.getLockCollection();
+
+        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels());
+        ResourceCreate lockCreate = resourceCreates.iterator().next();
+        ResourceDelete lockDelete = ResourceParserAccessor.resolveResourceDelete(lockCollection, lockCreate).get();
+
+        List<MethodTemplate> deleteByIdMethods = lockDelete.getDeleteByIdCollectionMethods();
+        Assertions.assertEquals(2, deleteByIdMethods.size());
+
+        MethodTemplate deleteByIdMethod = deleteByIdMethods.iterator().next();
+        JavaFile javaFile = new JavaFile("dummy");
+        deleteByIdMethod.writeMethod(new JavaClass(javaFile.getContents()));
+
+        Assertions.assertTrue(javaFile.getContents().toString().contains("void deleteById(String id)"));
+        Assertions.assertTrue(javaFile.getContents().toString().contains("this.deleteWithResponse(resourceGroupName, lockName, Context.NONE)"));
     }
 }

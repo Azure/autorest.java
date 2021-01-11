@@ -8,6 +8,7 @@ package com.azure.autorest.fluent.mapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.ClientModel;
 
@@ -28,5 +29,11 @@ public class ResourceParserAccessor {
             ResourceCreate resourceCreate,
             List<ClientModel> availableModels) {
         return ResourceParser.resolveResourceUpdate(collection, resourceCreate, availableModels);
+    }
+
+    public static Optional<ResourceDelete> resolveResourceDelete(
+            FluentResourceCollection collection,
+            ResourceCreate resourceCreate) {
+        return ResourceParser.resolveResourceDelete(collection, resourceCreate);
     }
 }
