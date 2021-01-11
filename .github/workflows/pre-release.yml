@@ -14,9 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set env
+        env:
+          VERSION: ${{ github.event.inputs.version }}
         run: |
-          echo ::set-env name=TAG_NAME::v${{ github.event.inputs.version }}
-          echo ::set-env name=RELEASE_ARTIFACT::autorest-java-${{ github.event.inputs.version }}.tgz
+          echo "TAG_NAME=v$VERSION" >> $GITHUB_ENV
+          echo "RELEASE_ARTIFACT=autorest-java-$VERSION.tgz" >> $GITHUB_ENV
 
       - name: Checkout branch
         uses: actions/checkout@v2
