@@ -101,6 +101,7 @@ public class ResourceCreate extends ResourceOperation {
                     // first property
                     if (isLocationProperty(property)) {
                         definitionStageBlank.setExtendStages(stage.getName());
+                        definitionStageBlank.setNextStage(stage);
 
                         if (definitionStageParent != null) {
                             // insert parent stage as 2nd stage
@@ -112,6 +113,7 @@ public class ResourceCreate extends ResourceOperation {
                     } else if (definitionStageParent != null) {
                         // insert parent stage as 1st stage
                         definitionStageBlank.setExtendStages(definitionStageParent.getName());
+                        definitionStageBlank.setNextStage(definitionStageParent);
 
                         definitionStages.add(definitionStageParent);
                         lastStage = definitionStageParent;
