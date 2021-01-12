@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.model.clientmodel.Client;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -62,6 +63,7 @@ public class ResourceCreateTests {
         Assertions.assertNull(levelStage.getExtendStages());
         Assertions.assertEquals(createStage, levelStage.getNextStage());
         Assertions.assertNotNull(levelStage.getModelProperty());
+        Assertions.assertEquals(1, levelStage.getMethods().size());
         Assertions.assertEquals("level", levelStage.getModelProperty().getName());
 
         Assertions.assertEquals("WithCreate", createStage.getName());
@@ -76,5 +78,23 @@ public class ResourceCreateTests {
         Assertions.assertEquals("WithOwners", optionalOwnersStage.getName());
         Assertions.assertNull(optionalOwnersStage.getExtendStages());
         Assertions.assertEquals(createStage, optionalOwnersStage.getNextStage());
+
+        FluentMethod createMethod = createStage.getMethods().iterator().next();
+        String methodContent = TestUtils.getMethodTemplateContent(createMethod.getMethodTemplate());
+
+        Assertions.assertTrue(methodContent.contains("ManagementLockObject create()"));
+        Assertions.assertTrue(methodContent.contains("serviceManager.serviceClient().getManagementLocks().createOrUpdateAtResourceGroupLevelWithResponse(resourceGroupName, lockName, this.innerModel(), Context.NONE)"));
+
+        FluentMethod parentMethod = parentStage.getMethods().iterator().next();
+        methodContent = TestUtils.getMethodTemplateContent(parentMethod.getMethodTemplate());
+
+        Assertions.assertTrue(methodContent.contains("ManagementLockObjectImpl withExistingResourceGroup(String resourceGroupName)"));
+        Assertions.assertTrue(methodContent.contains("this.resourceGroupName = resourceGroupName"));
+
+        FluentMethod propertyMethod = levelStage.getMethods().iterator().next();
+        methodContent = TestUtils.getMethodTemplateContent(propertyMethod.getMethodTemplate());
+
+        Assertions.assertTrue(methodContent.contains("ManagementLockObjectImpl withLevel(LockLevel level)"));
+        Assertions.assertTrue(methodContent.contains("this.innerModel().withLevel(level)"));
     }
 }
