@@ -45,6 +45,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     public final void write(ClientModel model, JavaFile javaFile) {
+        if (model.getParentModelName() != null && model.getParentModelName().equals(model.getName())) {
+            throw new IllegalStateException("Parent model name is same as model name: " + model.getName());
+        }
+
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
