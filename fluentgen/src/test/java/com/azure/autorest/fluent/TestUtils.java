@@ -9,10 +9,17 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettingsAccessor;
+import com.azure.autorest.fluent.mapper.FluentMapperAccessor;
 import com.azure.autorest.fluent.mapper.ResourceParserTests;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -22,6 +29,7 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestUtils {
@@ -87,5 +95,76 @@ public class TestUtils {
             Assertions.fail(e);
             return null;
         }
+    }
+
+    public static class ContentLocks {
+        private final CodeModel codeModel;
+        private final Client client;
+        private final FluentClient fluentClient;
+
+        private final List<FluentResourceModel> fluentModels;
+
+        private final FluentResourceModel lockModel;
+        private final FluentResourceCollection lockCollection;
+
+        public ContentLocks(CodeModel codeModel, Client client, FluentClient fluentClient,
+                            List<FluentResourceModel> fluentModels,
+                            FluentResourceModel lockModel, FluentResourceCollection lockCollection) {
+            this.codeModel = codeModel;
+            this.client = client;
+            this.fluentClient = fluentClient;
+            this.fluentModels = fluentModels;
+            this.lockModel = lockModel;
+            this.lockCollection = lockCollection;
+        }
+
+        public CodeModel getCodeModel() {
+            return codeModel;
+        }
+
+        public Client getClient() {
+            return client;
+        }
+
+        public FluentClient getFluentClient() {
+            return fluentClient;
+        }
+
+        public List<FluentResourceModel> getFluentModels() {
+            return fluentModels;
+        }
+
+        public FluentResourceModel getLockModel() {
+            return lockModel;
+        }
+
+        public FluentResourceCollection getLockCollection() {
+            return lockCollection;
+        }
+    }
+
+    public static ContentLocks initContentLocks(FluentGenAccessor fluentgenAccessor) {
+        CodeModel codeModel = loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
+        Client client = FluentStatic.getClient();
+        FluentClient fluentClient = new FluentMapperAccessor(fluentgenAccessor.getFluentMapper()).basicMap(codeModel, client);
+
+        List<FluentResourceModel> fluentModels = fluentClient.getResourceModels();
+        List<FluentResourceCollection> fluentCollections = fluentClient.getResourceCollections();
+
+        FluentResourceModel lockModel = fluentModels.stream()
+                .filter(m -> m.getName().equals("ManagementLockObject"))
+                .findFirst().get();
+
+        FluentResourceCollection lockCollection = fluentCollections.stream()
+                .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("ManagementLocks"))
+                .findFirst().get();
+
+        return new ContentLocks(codeModel, client, fluentClient, fluentModels, lockModel, lockCollection);
+    }
+
+    public static String getMethodTemplateContent(MethodTemplate methodTemplate) {
+        JavaFile javaFile = new JavaFile("dummy");
+        methodTemplate.writeMethod(new JavaClass(javaFile.getContents()));
+        return javaFile.getContents().toString();
     }
 }
