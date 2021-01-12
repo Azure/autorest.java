@@ -18,7 +18,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
