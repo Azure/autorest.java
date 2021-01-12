@@ -58,9 +58,7 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
         }
       }
 
-      List<ClientMethodParameter> parameters = clientMethod.getOnlyRequiredParameters()
-          ? clientMethod.getMethodRequiredParameters()
-          : clientMethod.getMethodParameters();
+      List<ClientMethodParameter> parameters = clientMethod.getMethodInputParameters();
       function
           .line((shouldReturn ? "return " : "" ) + "this.serviceClient.%1$s(%2$s);", clientMethod.getName(),
               parameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", ")));
@@ -70,9 +68,7 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
   protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
     typeBlock.javadocComment(comment -> {
       comment.description(clientMethod.getDescription());
-      List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
-          ? clientMethod.getMethodRequiredParameters()
-          : clientMethod.getMethodParameters();
+      List<ClientMethodParameter> methodParameters = clientMethod.getMethodInputParameters();
       for (ClientMethodParameter parameter : methodParameters) {
         comment.param(parameter.getName(), parameter.getDescription());
       }

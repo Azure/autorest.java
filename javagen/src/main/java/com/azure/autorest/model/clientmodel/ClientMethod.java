@@ -185,6 +185,13 @@ public class ClientMethod {
         return getProxyMethod().getName() + "WithResponseAsync";
     }
 
+    /**
+     * Get the input parameters of the client method, taking configure of onlyRequiredParameters.
+     */
+    public final List<ClientMethodParameter> getMethodInputParameters() {
+        return getOnlyRequiredParameters() ? getMethodRequiredParameters() : getMethodParameters();
+    }
+
     public final List<ClientMethodParameter> getMethodParameters() {
         return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
@@ -192,7 +199,7 @@ public class ClientMethod {
                 .collect(Collectors.toList());
     }
 
-    public final List<ClientMethodParameter> getMethodNonConstantParameters() {
+    private final List<ClientMethodParameter> getMethodNonConstantParameters() {
         return getMethodParameters().stream().filter(parameter -> !parameter.getIsConstant())
                 .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
                 .collect(Collectors.toList());
