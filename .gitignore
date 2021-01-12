@@ -59,7 +59,9 @@ Thumbs.db
 # reduced pom files should not be included
 dependency-reduced-pom.xml
 package-lock.json
-*.yaml
+preprocessor/*.yaml
+fluentnamer/*.yaml
+/*.yaml
 *.log
 *.log.gz
 

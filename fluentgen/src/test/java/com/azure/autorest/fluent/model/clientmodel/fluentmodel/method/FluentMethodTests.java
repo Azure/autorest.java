@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
@@ -112,5 +113,25 @@ public class FluentMethodTests {
 
         Assertions.assertTrue(methodContent.contains("void deleteById(String id)"));
         Assertions.assertTrue(methodContent.contains("this.deleteByScopeWithResponse(scope, lockName, Context.NONE)"));
+    }
+
+    @Test
+    public void testActionMethod() {
+        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
+        Client client = content.getClient();
+        FluentResourceCollection lockCollection = content.getLockCollection();
+
+        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels());
+        ResourceCreate lockCreate = resourceCreates.iterator().next();
+        ResourceActions lockActions = ResourceParserAccessor.resourceResourceActions(lockCollection, lockCreate).get();
+
+        List<FluentMethod> refreshMethods = lockActions.getFluentMethods();
+        Assertions.assertEquals(2, refreshMethods.size());
+
+        FluentMethod refreshMethod = refreshMethods.iterator().next();
+        String methodContent = TestUtils.getMethodTemplateContent(refreshMethod.getMethodTemplate());
+
+        Assertions.assertTrue(methodContent.contains("void refreshAtResourceGroupLevel()"));
+        Assertions.assertTrue(methodContent.contains("serviceManager.managementLocks().refreshAtResourceGroupLevel(resourceGroupName, lockName)"));
     }
 }
