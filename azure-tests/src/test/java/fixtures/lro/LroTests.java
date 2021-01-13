@@ -173,7 +173,6 @@ public class LroTests {
     }
 
     @Test
-    @Disabled("Invalid URL in Location header")
     public void putAsyncNoHeaderInRetry() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
@@ -189,7 +188,6 @@ public class LroTests {
     }
 
     @Test
-    @Disabled("Invalid URL in Location header")
     public void putAsyncNonResource() throws Exception {
         SkuInner sku = new SkuInner();
         SkuInner response = client.getLROs().putAsyncNonResource(sku);
@@ -204,7 +202,6 @@ public class LroTests {
     }
 
     @Test
-    @Disabled("Invalid URL in Location header")
     public void putAsyncSubResource() throws Exception {
         SubProductInner subProduct = new SubProductInner();
         SubProductInner response = client.getLROs().putAsyncSubResource(subProduct);
@@ -250,7 +247,6 @@ public class LroTests {
     }
 
     @Test
-    @Disabled("Invalid URL in Location header")
     public void deleteAsyncNoHeaderInRetry() throws Exception {
         client.getLROs().deleteAsyncNoHeaderInRetry();
     }
