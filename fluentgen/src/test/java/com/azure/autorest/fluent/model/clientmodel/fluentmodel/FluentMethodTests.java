@@ -5,23 +5,30 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageMisc;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodType;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -154,5 +161,30 @@ public class FluentMethodTests {
 
         Assertions.assertTrue(methodContent.contains("void refreshAtResourceGroupLevel()"));
         Assertions.assertTrue(methodContent.contains("serviceManager.managementLocks().refreshAtResourceGroupLevel(resourceGroupName, lockName)"));
+    }
+
+    @Test
+    public void testParameterMethod() {
+        // the "lockName" parameter is actually not valid for FluentMethodParameterMethod
+
+        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
+        FluentResourceModel lockModel = content.getLockModel();
+        FluentResourceCollection lockCollection = content.getLockCollection();
+
+        FluentCollectionMethod method = lockCollection.getMethods().stream()
+                .filter(m -> m.getMethodName().equals("createOrUpdateAtResourceGroupLevel"))
+                .findFirst().get();
+        ClientMethodParameter lockParameter = method.getInnerClientMethod().getParameters().stream()
+                .filter(p -> p.getName().equals("lockName"))
+                .findFirst().get();
+
+        DefinitionStageMisc stage = new DefinitionStageMisc("WithLockName", lockParameter);
+        DefinitionStageCreate nextStage = new DefinitionStageCreate();
+        stage.setNextStage(nextStage);
+
+        LocalVariable variable = new LocalVariable("lockName", ClassType.String, RequestParameterLocation.Path, lockParameter);
+
+        FluentMethodParameterMethod parameterMethod = new FluentMethodParameterMethod(lockModel, FluentMethodType.CREATE_WITH, stage, lockParameter, variable);
+        Assertions.assertEquals("WithCreate withLockName(String lockName)", parameterMethod.getInterfaceMethodSignature());
     }
 }

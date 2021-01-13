@@ -15,8 +15,8 @@
   <version>1.0.0-beta.1</version>
 
   <properties>
-    <jacoco.min.linecoverage>0.40</jacoco.min.linecoverage>
-    <jacoco.min.branchcoverage>0.30</jacoco.min.branchcoverage>
+    <jacoco.min.linecoverage>0.60</jacoco.min.linecoverage>
+    <jacoco.min.branchcoverage>0.50</jacoco.min.branchcoverage>
     <jacoco.skip.coverage.check>false</jacoco.skip.coverage.check>
   </properties>
 
@@ -117,6 +117,8 @@
             <configuration>
               <excludes>
                 <exclude>com/azure/autorest/fluent/template/**/*</exclude>
+                <exclude>com/azure/autorest/fluent/FluentGen.*</exclude>
+                <exclude>com/azure/autorest/fluent/Main.*</exclude>
               </excludes>
             </configuration>
             <executions>

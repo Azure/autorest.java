@@ -19,6 +19,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,21 +37,27 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
 
     @Override
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {
-        List<IType> interfaces = new ArrayList<>();
         if (!JavaSettings.getInstance().isFluentLite()) {
-            Optional<IType> classTypeForGet = supportGetMethod(clientMethods);
-            Optional<IType> classTypeForList = supportListMethod(clientMethods);
-            Optional<IType> classTypeForDelete = supportDeleteMethod(clientMethods);
+            return findSupportedInterfaces(operationGroup, clientMethods);
+        } else {
+            return Collections.emptyList();
+        }
+    }
 
-            classTypeForGet.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsGet(iType)));
-            classTypeForList.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsList(iType)));
-            classTypeForDelete.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsDelete(iType)));
+    List<IType> findSupportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {
+        List<IType> interfaces = new ArrayList<>();
+        Optional<IType> classTypeForGet = supportGetMethod(clientMethods);
+        Optional<IType> classTypeForList = supportListMethod(clientMethods);
+        Optional<IType> classTypeForDelete = supportDeleteMethod(clientMethods);
 
-            if (!interfaces.isEmpty()) {
-                logger.info("Method group '{}' support interfaces {}",
-                        Utils.getJavaName(operationGroup),
-                        interfaces.stream().map(IType::toString).collect(Collectors.toList()));
-            }
+        classTypeForGet.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsGet(iType)));
+        classTypeForList.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsList(iType)));
+        classTypeForDelete.ifPresent(iType -> interfaces.add(FluentType.InnerSupportsDelete(iType)));
+
+        if (!interfaces.isEmpty()) {
+            logger.info("Method group '{}' support interfaces {}",
+                    Utils.getJavaName(operationGroup),
+                    interfaces.stream().map(IType::toString).collect(Collectors.toList()));
         }
         return interfaces;
     }

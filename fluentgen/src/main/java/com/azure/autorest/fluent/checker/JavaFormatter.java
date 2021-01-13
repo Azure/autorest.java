@@ -63,21 +63,21 @@ public class JavaFormatter {
             Object formatterInstance = formatterClass.getConstructor().newInstance();
             Method formatSourceMethod = formatterClass.getMethod("formatSourceAndFixImports", String.class);
             String formattedCode = (String) formatSourceMethod.invoke(formatterInstance, content);
-            return fixOverlongStringLiteral(formattedCode);
+            final int lengthLimit = 120;
+            return fixOverlongStringLiteral(formattedCode, lengthLimit);
         } catch (Exception e) {
             logger.warn("Failed to parse Java file '{}', message: '{}'", path, e.getMessage());
             return content;
         }
     }
 
-    private static String fixOverlongStringLiteral(String content) {
-        final int limit = 120;
+    static String fixOverlongStringLiteral(String content, int lengthLimit) {
         final String quote = "\"";
 
         List<String> formattedLines = new ArrayList<>();
         String[] lines = content.split("\r?\n", -1);
         for (String line : lines) {
-            if (line.length() > limit) {
+            if (line.length() > lengthLimit) {
                 int firstQuote = line.indexOf(quote);
                 int lastQuote = line.lastIndexOf(quote);
                 if (firstQuote < lastQuote) {
@@ -103,17 +103,17 @@ public class JavaFormatter {
                         breakChar = ' ';
                     }
 
-                    for (int i = Math.min(lastQuote, limit) - 2; i >= 0; --i) {
+                    for (int i = Math.min(lastQuote, lengthLimit) - 2; i >= 0; --i) {
                         char c = line.charAt(i + 1);
                         if (breakChar == 0 || breakChar == c) {
                             String firstLine = line.substring(0, i + 1) + quote;
                             formattedLines.add(firstLine);
 
                             String breakedLine = lineIndentStr + "+ " + quote + line.substring(i + 1);
-                            while (breakedLine.length() > limit) {
+                            while (breakedLine.length() > lengthLimit) {
                                 lastQuote = breakedLine.lastIndexOf(quote);
 
-                                for (int j = Math.min(lastQuote, limit) - 2; j >= 0; --j) {
+                                for (int j = Math.min(lastQuote, lengthLimit) - 2; j >= 0; --j) {
                                     c = breakedLine.charAt(j + 1);
                                     if (breakChar == 0 || breakChar == c) {
                                         String nextBreakedLine = lineIndentStr + "+ " + quote + breakedLine.substring(j + 1);
