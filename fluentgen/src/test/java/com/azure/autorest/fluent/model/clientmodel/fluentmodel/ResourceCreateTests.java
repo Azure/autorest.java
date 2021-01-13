@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
+package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
@@ -11,6 +11,11 @@ import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.model.clientmodel.Client;
 import org.junit.jupiter.api.Assertions;
