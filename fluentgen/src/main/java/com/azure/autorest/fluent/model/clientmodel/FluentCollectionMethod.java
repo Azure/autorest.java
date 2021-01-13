@@ -58,7 +58,7 @@ public class FluentCollectionMethod {
 
     // method invocation
     public String getMethodInvocation() {
-        List<ClientMethodParameter> methodParameters = method.getOnlyRequiredParameters() ? method.getMethodRequiredParameters() : method.getMethodParameters();
+        List<ClientMethodParameter> methodParameters = method.getMethodInputParameters();
         String argumentsLine = methodParameters.stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
         return String.format("%1$s(%2$s)", method.getName(), argumentsLine);
     }

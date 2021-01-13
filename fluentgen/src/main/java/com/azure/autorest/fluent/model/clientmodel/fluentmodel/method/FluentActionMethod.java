@@ -56,7 +56,7 @@ public class FluentActionMethod extends FluentMethod {
 
         // remove path parameters from input parameter, as they are provided by the variables of resource model
         ClientMethod method = collectionMethod.getInnerClientMethod();
-        List<ClientMethodParameter> parameters = method.getOnlyRequiredParameters() ? method.getMethodRequiredParameters() : method.getMethodParameters();
+        List<ClientMethodParameter> parameters = method.getMethodInputParameters();
         ResourceLocalVariables resourceLocalVariables = new ResourceLocalVariables(collectionMethod.getInnerClientMethod());
         parameters.removeAll(resourceLocalVariables.getLocalVariablesMap().entrySet().stream()
                 .filter(e -> e.getValue().getParameterLocation() == RequestParameterLocation.Path)
@@ -81,7 +81,7 @@ public class FluentActionMethod extends FluentMethod {
 
         // method invocation
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
-        List<ClientMethodParameter> methodParameters = method.getOnlyRequiredParameters() ? method.getMethodRequiredParameters() : method.getMethodParameters();;
+        List<ClientMethodParameter> methodParameters = method.getMethodInputParameters();
         String argumentsLine = methodParameters.stream()
                 .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod, resourceLocalVariablesDefinedInClass))
                 .collect(Collectors.joining(", "));

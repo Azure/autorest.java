@@ -66,7 +66,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
 
         // method invocation
         Set<ClientMethodParameter> parametersSet = new HashSet<>(parameters);
-        List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getOnlyRequiredParameters() ? collectionMethod.getInnerClientMethod().getMethodRequiredParameters() : collectionMethod.getInnerClientMethod().getMethodParameters();
+        List<ClientMethodParameter> methodParameters = collectionMethod.getInnerClientMethod().getMethodInputParameters();
         String argumentsLine = methodParameters.stream()
                 .map(p -> FluentUtils.getLocalMethodArgument(p, parametersSet, resourceLocalVariables, model, collectionMethod, resourceLocalVariablesDefinedInClass))
                 .collect(Collectors.joining(", "));
