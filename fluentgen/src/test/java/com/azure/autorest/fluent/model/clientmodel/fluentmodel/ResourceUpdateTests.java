@@ -10,7 +10,6 @@ import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
-import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.UpdateStage;
@@ -35,7 +34,6 @@ public class ResourceUpdateTests {
     public void testUpdateStages() {
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         Client client = content.getClient();
-        FluentResourceModel lockModel = content.getLockModel();
         FluentResourceCollection lockCollection = content.getLockCollection();
 
         List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels());

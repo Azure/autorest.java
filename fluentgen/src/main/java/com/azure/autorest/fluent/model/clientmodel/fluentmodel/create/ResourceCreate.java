@@ -243,7 +243,7 @@ public class ResourceCreate extends ResourceOperation {
                 stage, parameter, this.getLocalVariableByMethodParameter(parameter));
     }
 
-    public FluentMethod getDefineMethod() {
+    public FluentDefineMethod getDefineMethod() {
         if (defineMethod == null) {
             String resourceName = this.getResourceName();
             logger.info("ResourceCreate: Fluent model '{}', resource define method '{}'", resourceModel.getName(), "define" + resourceName);
