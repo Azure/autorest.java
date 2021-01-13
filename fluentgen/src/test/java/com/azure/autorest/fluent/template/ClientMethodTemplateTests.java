@@ -75,8 +75,10 @@ public class ClientMethodTemplateTests {
             Assertions.assertTrue(clientMethod.isPresent());
             JavaFile javaFile = new JavaFile("dummy");
             template.write(clientMethod.get(), new JavaClass(javaFile.getContents()));
+            String content = javaFile.getContents().toString();
             if (criterion.includeString != VerificationCriterion.IGNORE) {
-                Assertions.assertTrue(javaFile.getContents().toString().contains(criterion.includeString));
+                Assertions.assertTrue(content.contains(criterion.includeString),
+                        String.format("Expected content not found: '%s'\nMethod content:\n%s", criterion.includeString, content));
             }
         }
     }
