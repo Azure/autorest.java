@@ -5,15 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel.create;
 
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class DefinitionStageCreate extends DefinitionStage {
-
-    private FluentMethod createMethod;
-    private FluentMethod createMethodWithContext;
 
     public DefinitionStageCreate() {
         super("WithCreate");

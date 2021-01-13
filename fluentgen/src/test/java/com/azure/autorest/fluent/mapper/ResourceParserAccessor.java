@@ -8,8 +8,10 @@ package com.azure.autorest.fluent.mapper;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.ClientModel;
 
@@ -42,18 +44,21 @@ public class ResourceParserAccessor {
         return ResourceParser.resolveResourceUpdate(collection, resourceCreate, availableModels);
     }
 
+    static Optional<ResourceRefresh> resolveResourceRefresh(
+            FluentResourceCollection collection,
+            ResourceCreate resourceCreate) {
+        return ResourceParser.resolveResourceRefresh(collection, resourceCreate);
+    }
+
     public static Optional<ResourceDelete> resolveResourceDelete(
             FluentResourceCollection collection,
             ResourceCreate resourceCreate) {
         return ResourceParser.resolveResourceDelete(collection, resourceCreate);
     }
 
-    public static Map<FluentResourceModel, ResourceCreate> findResourceCreateForCategory(
+    public static Optional<ResourceActions> resourceResourceActions(
             FluentResourceCollection collection,
-            Map<String, FluentResourceModel> fluentModelMapByName,
-            List<ClientModel> availableModels,
-            Set<FluentResourceModel> excludeModels,
-            ModelCategory category) {
-        return ResourceParser.findResourceCreateForCategory(collection, fluentModelMapByName, availableModels, excludeModels, category);
+            ResourceCreate resourceCreate) {
+        return ResourceParser.resourceResourceActions(collection, resourceCreate);
     }
 }
