@@ -69,7 +69,7 @@ public class ResourceParser {
         resourceCreates.forEach(rc -> ResourceParser.resourceResourceActions(collection, rc));
     }
 
-    public static void processAdditionalMethods(FluentClient fluentClient) {
+    static void processAdditionalMethods(FluentClient fluentClient) {
         fluentClient.getResourceModels().forEach(ResourceParser::processAdditionalProperties);
 
         fluentClient.getResourceCollections().forEach(ResourceParser::processAdditionalCollectionMethods);
