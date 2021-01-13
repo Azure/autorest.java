@@ -25,7 +25,7 @@ public class FluentGenTests {
     }
 
     @Test
-    //@Disabled("no validation")
+    @Disabled("no validation")
     public void testProcess() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
         Client client = FluentStatic.getClient();
