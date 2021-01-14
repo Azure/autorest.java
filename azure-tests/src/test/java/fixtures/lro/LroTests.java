@@ -7,11 +7,7 @@ package fixtures.lro;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.HttpPipelineCallContext;
-import com.azure.core.http.HttpPipelineNextPolicy;
-import com.azure.core.http.HttpResponse;
 import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.exception.ManagementException;
@@ -24,11 +20,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Locale;
-import java.util.UUID;
 
 public class LroTests {
 
@@ -36,16 +30,15 @@ public class LroTests {
 
     @BeforeAll
     public static void setup() {
-        HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(), new HttpPipelinePolicy() {
-            @Override
-            public Mono<HttpResponse> process(HttpPipelineCallContext context, HttpPipelineNextPolicy next) {
-                String requestId = context.getHttpRequest().getHeaders().getValue("x-ms-client-request-id");
-                if (requestId == null) {
-                    context.getHttpRequest().getHeaders().put("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-                }
-                return next.process();
+        HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(), (context, next) -> {
+            String requestId = context.getHttpRequest().getHeaders().getValue("x-ms-client-request-id");
+            if (requestId == null) {
+                context.getHttpRequest().getHeaders().put("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             }
-        }).build();
+            return next.process();
+        }
+//        , new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+        ).build();
 
         client = new AutoRestLongRunningOperationTestServiceBuilder()
                 .endpoint("http://localhost:3000")
@@ -370,6 +363,8 @@ public class LroTests {
 
     @Test
     public void customHeaderPutAsyncSucceded() {
+        // not work as testserver expected, Azure-AsyncOperation header is ignored.
+
         ProductInner product = client.getLrosCustomHeaders().putAsyncRetrySucceeded();
         Assertions.assertNotNull(product.id());
     }
