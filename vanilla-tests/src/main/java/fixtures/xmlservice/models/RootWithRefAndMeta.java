@@ -11,7 +11,7 @@ public final class RootWithRefAndMeta {
     /*
      * XML will use XMLComplexTypeWithMeta
      */
-    @JsonProperty(value = "XMLComplexTypeWithMeta")
+    @JsonProperty(value = "RefToModel")
     private ComplexTypeWithMeta refToModel;
 
     /*
