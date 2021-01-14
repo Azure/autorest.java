@@ -21,6 +21,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.Definition
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDelete;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByInner;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentConstructorByName;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentDefineMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethodParameterMethod;
@@ -51,7 +52,7 @@ public class FluentMethodTests {
     }
 
     @Test
-    public void testUpdateConstructorAndMethods() {
+    public void testConstructorAndMethods() {
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         Client client = content.getClient();
         FluentResourceModel lockModel = content.getLockModel();
@@ -61,7 +62,7 @@ public class FluentMethodTests {
         ResourceCreate lockCreate = resourceCreates.iterator().next();
         ResourceUpdate lockUpdate = ResourceParserAccessor.resolveResourceUpdate(lockCollection, lockCreate, client.getModels()).get();
 
-        // constructor
+        // constructor by inner
         FluentMethod constructor = new FluentConstructorByInner(lockModel, FluentMethodType.CONSTRUCTOR,
                 lockUpdate.getPathParameters(), lockUpdate.getResourceLocalVariables(),
                 FluentStatic.getFluentManager().getType(), lockUpdate.getUrlPathSegments());
@@ -72,6 +73,29 @@ public class FluentMethodTests {
         Assertions.assertTrue(methodContent.contains("this.innerObject = innerObject;"));
         Assertions.assertTrue(methodContent.contains("this.serviceManager = serviceManager;"));
         Assertions.assertTrue(methodContent.contains("this.lockName = Utils.getValueFromIdByName(innerObject.id(), \"locks\")"));
+
+        // constructor by name
+        constructor = new FluentConstructorByName(lockModel, FluentMethodType.CONSTRUCTOR,
+                ClassType.String, "lockName",
+                FluentStatic.getFluentManager().getType(), lockCreate.getResourceLocalVariables());
+
+        Assertions.assertEquals("ManagementLockObjectImpl(String name, ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
+
+        methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
+        Assertions.assertTrue(methodContent.contains("new ManagementLockObjectInner();"));
+        Assertions.assertTrue(methodContent.contains("this.serviceManager = serviceManager;"));
+        Assertions.assertTrue(methodContent.contains("this.lockName = name;"));
+
+        // this constructor without name (when name is constant) is not valid for Locks
+        constructor = FluentConstructorByName.constructorMethodWithConstantResourceName(lockModel, FluentMethodType.CONSTRUCTOR,
+                FluentStatic.getFluentManager().getType(), lockCreate.getResourceLocalVariables());
+
+        Assertions.assertEquals("ManagementLockObjectImpl(ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
+
+        methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
+        Assertions.assertTrue(methodContent.contains("new ManagementLockObjectInner();"));
+        Assertions.assertTrue(methodContent.contains("this.serviceManager = serviceManager;"));
+        Assertions.assertFalse(methodContent.contains("this.lockName = name;"));
 
         // update()
         FluentMethod updateMethod = lockUpdate.getUpdateMethod();
@@ -165,7 +189,7 @@ public class FluentMethodTests {
 
     @Test
     public void testParameterMethod() {
-        // the "lockName" parameter is actually not valid for FluentMethodParameterMethod
+        // the "lockName" parameter is not valid as FluentMethodParameterMethod for Locks
 
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         FluentResourceModel lockModel = content.getLockModel();
