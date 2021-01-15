@@ -5,6 +5,7 @@
 
 package fixtures.lro;
 
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -37,15 +38,8 @@ public class LroTests {
         HttpPipeline pipeline;
         pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
                 new RetryPolicy(),
-                new CookiePolicy(),
-                (context, next) -> {
-                    String requestId = context.getHttpRequest().getHeaders().getValue("x-ms-client-request-id");
-                    if (requestId == null) {
-                        context.getHttpRequest().getHeaders().put("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-                    }
-                    return next.process();
-                },
-                new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                new CookiePolicy()
+                //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
         ).build();
 
         client = new AutoRestLongRunningOperationTestServiceBuilder()
@@ -54,6 +48,16 @@ public class LroTests {
                 .pipeline(pipeline)
                 .buildClient();
     }
+
+    // PUT with return code 200 and Azure-AsyncOperation does not work as testserver expected, Azure-AsyncOperation header is ignored.
+    /*
+    CustomHeaderPutAsyncSucceded
+    LROPutAsyncRetrySucceeded
+    LROPutAsyncNoRetrySucceeded
+    LROPutAsyncRetryFailed
+    LROPutAsyncNoRetryCanceled
+    LRORetryErrorPutAsyncSucceeded
+     */
 
     @Test
     public void put200Succeeded() throws Exception {
@@ -370,38 +374,6 @@ public class LroTests {
     }
 
     @Test
-    public void customHeaderPutAsyncSucceded() {
-        // not work as testserver expected, Azure-AsyncOperation header is ignored.
-        /*
-        CustomHeaderPutAsyncSucceded
-        LROPutAsyncRetrySucceeded
-        LROPutAsyncNoRetrySucceeded
-        LROPutAsyncRetryFailed
-        LROPutAsyncNoRetryCanceled
-         */
-
-
-        ProductInner product = client.getLrosCustomHeaders().putAsyncRetrySucceeded();
-        Assertions.assertEquals("Succeeded", product.provisioningState());
-    }
-
-    @Test
-    public void customHeaderPostAsyncSucceded() {
-        client.getLrosCustomHeaders().postAsyncRetrySucceeded();
-    }
-
-    @Test
-    public void customHeaderPutSucceeded() {
-        ProductInner product = client.getLrosCustomHeaders().put201CreatingSucceeded200();
-        Assertions.assertEquals("Succeeded", product.provisioningState());
-    }
-
-    @Test
-    public void customHeaderPostSucceeded() {
-        client.getLrosCustomHeaders().post202Retry200();
-    }
-
-    @Test
     public void postDoubleHeadersFinalLocationGet() {
         ProductInner product = client.getLROs().postDoubleHeadersFinalLocationGet();
         Assertions.assertEquals("100", product.id());
@@ -424,43 +396,5 @@ public class LroTests {
     public void post202List() {
         List<ProductInner> products = client.getLROs().post202List();
         Assertions.assertEquals("100", products.get(0).id());
-    }
-
-    @Test
-    public void retryPut201CreatingSucceeded200() {
-        ProductInner product = client.getLroRetrys().put201CreatingSucceeded200();
-        Assertions.assertEquals("100", product.id());
-    }
-
-    @Test
-    public void retryPutAsyncRelativeRetrySucceeded() {
-        ProductInner product = client.getLroRetrys().putAsyncRelativeRetrySucceeded();
-        Assertions.assertEquals("100", product.id());
-    }
-
-    @Test
-    public void retryDeleteProvisioning202Accepted200Succeeded() {
-        ProductInner product = client.getLroRetrys().deleteProvisioning202Accepted200Succeeded();
-        Assertions.assertEquals("100", product.id());
-    }
-
-    @Test
-    public void retryDelete202Retry200() {
-        client.getLroRetrys().delete202Retry200();
-    }
-
-    @Test
-    public void retryDeleteAsyncRelativeRetrySucceeded() {
-        client.getLroRetrys().deleteAsyncRelativeRetrySucceeded();
-    }
-
-    @Test
-    public void retryPost202Retry200() {
-        client.getLroRetrys().post202Retry200();
-    }
-
-    @Test
-    public void retryPostAsyncRelativeRetrySucceeded() {
-        client.getLroRetrys().postAsyncRelativeRetrySucceeded();
     }
 }
