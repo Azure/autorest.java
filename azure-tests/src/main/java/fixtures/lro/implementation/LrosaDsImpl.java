@@ -1,18 +1,5 @@
 package fixtures.lro.implementation;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.Delete;
-import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Headers;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.Put;
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.rest.Response;
-import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,13 +8,9 @@ import fixtures.lro.fluent.LrosaDsClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LrosaDs;
 import fixtures.lro.models.Product;
-import java.nio.ByteBuffer;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 public final class LrosaDsImpl implements LrosaDs {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(LrosaDsImpl.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(LrosaDsImpl.class);
 
     private final LrosaDsClient innerClient;
 

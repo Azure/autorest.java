@@ -47,8 +47,8 @@ autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/a
 autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1
 autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
 
-autorest $ARM_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json --namespace=fixtures.lro
-rm azure-tests/src/main/java/module-info.java
+# autorest $ARM_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json --namespace=fixtures.lro
+# rm azure-tests/src/main/java/module-info.java
 
 # customization
 autorest --use:. customization-tests/swagger

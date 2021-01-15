@@ -2,13 +2,10 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders model.
- */
+/** The LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders model. */
 @Fluent
 public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
     @JsonIgnore
@@ -34,7 +31,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     * 
+     *
      * @return the retryAfter value.
      */
     public Integer retryAfter() {
@@ -43,10 +40,9 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     * 
+     *
      * @param retryAfter the retryAfter value to set.
-     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object
-     * itself.
+     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
     public LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
@@ -55,7 +51,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     * 
+     *
      * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
@@ -64,10 +60,9 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     * 
+     *
      * @param azureAsyncOperation the azureAsyncOperation value to set.
-     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object
-     * itself.
+     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
     public LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
@@ -76,7 +71,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the location property: The Location property.
-     * 
+     *
      * @return the location value.
      */
     public String location() {
@@ -85,10 +80,9 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the location property: The Location property.
-     * 
+     *
      * @param location the location value to set.
-     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object
-     * itself.
+     * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
     public LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders withLocation(String location) {
         this.location = location;
@@ -97,7 +91,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

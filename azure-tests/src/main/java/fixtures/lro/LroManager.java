@@ -6,8 +6,8 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -18,24 +18,21 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import fixtures.lro.fluent.AutoRestLongRunningOperationTestService;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceBuilder;
-import fixtures.lro.implementation.LroRetrysImpl;
-import fixtures.lro.implementation.LrosaDsImpl;
-import fixtures.lro.implementation.LrosCustomHeadersImpl;
 import fixtures.lro.implementation.LROsImpl;
-import fixtures.lro.models.LroRetrys;
+import fixtures.lro.implementation.LroRetrysImpl;
+import fixtures.lro.implementation.LrosCustomHeadersImpl;
+import fixtures.lro.implementation.LrosaDsImpl;
 import fixtures.lro.models.LROs;
-import fixtures.lro.models.LrosaDs;
+import fixtures.lro.models.LroRetrys;
 import fixtures.lro.models.LrosCustomHeaders;
+import fixtures.lro.models.LrosaDs;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Entry point to LroManager.
- * Long-running Operation for AutoRest.
- */
+/** Entry point to LroManager. Long-running Operation for AutoRest. */
 public final class LroManager {
     private LROs lROs;
 
@@ -50,16 +47,17 @@ public final class LroManager {
     private LroManager(HttpPipeline httpPipeline, AzureProfile profile, Duration defaultPollInterval) {
         Objects.requireNonNull(httpPipeline, "'httpPipeline' cannot be null.");
         Objects.requireNonNull(profile, "'profile' cannot be null.");
-        this.clientObject = new AutoRestLongRunningOperationTestServiceBuilder()
-            .pipeline(httpPipeline)
-            .endpoint(profile.getEnvironment().getResourceManagerEndpoint())
-            .defaultPollInterval(defaultPollInterval)
-            .buildClient();
+        this.clientObject =
+            new AutoRestLongRunningOperationTestServiceBuilder()
+                .pipeline(httpPipeline)
+                .endpoint(profile.getEnvironment().getResourceManagerEndpoint())
+                .defaultPollInterval(defaultPollInterval)
+                .buildClient();
     }
 
     /**
      * Creates an instance of Lro service API entry point.
-     * 
+     *
      * @param credential the credential to use.
      * @param profile the Azure profile for client.
      * @return the Lro service API instance.
@@ -72,16 +70,14 @@ public final class LroManager {
 
     /**
      * Gets a Configurable instance that can be used to create LroManager with optional configuration.
-     * 
+     *
      * @return the Configurable instance allowing configurations.
      */
     public static Configurable configure() {
         return new LroManager.Configurable();
     }
 
-    /**
-     * The Configurable allowing configurations to be set.
-     */
+    /** The Configurable allowing configurations to be set. */
     public static final class Configurable {
         private final ClientLogger logger = new ClientLogger(Configurable.class);
 
@@ -167,24 +163,28 @@ public final class LroManager {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
             List<HttpPipelinePolicy> policies = new ArrayList<>();
-            policies.add(new UserAgentPolicy(null, "fixtures.lro", "1.0.0-beta.1", Configuration.getGlobalConfiguration()));
+            policies
+                .add(new UserAgentPolicy(null, "fixtures.lro", "1.0.0-beta.1", Configuration.getGlobalConfiguration()));
             policies.add(new RequestIdPolicy());
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
             policies.add(new AddDatePolicy());
-            policies.add(new BearerTokenAuthenticationPolicy(credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+            policies
+                .add(
+                    new BearerTokenAuthenticationPolicy(
+                        credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
             HttpPolicyProviders.addAfterRetryPolicies(policies);
             policies.add(new HttpLoggingPolicy(httpLogOptions));
-            HttpPipeline httpPipeline = new HttpPipelineBuilder()
-                .httpClient(httpClient)
-                .policies(policies.toArray(new HttpPipelinePolicy[0])).build();
+            HttpPipeline httpPipeline =
+                new HttpPipelineBuilder()
+                    .httpClient(httpClient)
+                    .policies(policies.toArray(new HttpPipelinePolicy[0]))
+                    .build();
             return new LroManager(httpPipeline, profile, defaultPollInterval);
         }
     }
 
-    /**
-     * @return Resource collection API of LROs.
-     */
+    /** @return Resource collection API of LROs. */
     public LROs lROs() {
         if (this.lROs == null) {
             this.lROs = new LROsImpl(clientObject.getLROs(), this);
@@ -192,9 +192,7 @@ public final class LroManager {
         return lROs;
     }
 
-    /**
-     * @return Resource collection API of LroRetrys.
-     */
+    /** @return Resource collection API of LroRetrys. */
     public LroRetrys lroRetrys() {
         if (this.lroRetrys == null) {
             this.lroRetrys = new LroRetrysImpl(clientObject.getLroRetrys(), this);
@@ -202,9 +200,7 @@ public final class LroManager {
         return lroRetrys;
     }
 
-    /**
-     * @return Resource collection API of LrosaDs.
-     */
+    /** @return Resource collection API of LrosaDs. */
     public LrosaDs lrosaDs() {
         if (this.lrosaDs == null) {
             this.lrosaDs = new LrosaDsImpl(clientObject.getLrosaDs(), this);
@@ -212,9 +208,7 @@ public final class LroManager {
         return lrosaDs;
     }
 
-    /**
-     * @return Resource collection API of LrosCustomHeaders.
-     */
+    /** @return Resource collection API of LrosCustomHeaders. */
     public LrosCustomHeaders lrosCustomHeaders() {
         if (this.lrosCustomHeaders == null) {
             this.lrosCustomHeaders = new LrosCustomHeadersImpl(clientObject.getLrosCustomHeaders(), this);
@@ -223,7 +217,8 @@ public final class LroManager {
     }
 
     /**
-     * @return Wrapped service client AutoRestLongRunningOperationTestService providing direct access to the underlying auto-generated API implementation, based on Azure REST API.
+     * @return Wrapped service client AutoRestLongRunningOperationTestService providing direct access to the underlying
+     *     auto-generated API implementation, based on Azure REST API.
      */
     public AutoRestLongRunningOperationTestService serviceClient() {
         return this.clientObject;

@@ -2,17 +2,13 @@ package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The LrosaDsPost202NonRetry400Headers model.
- */
+/** The LrosaDsPost202NonRetry400Headers model. */
 @Fluent
 public final class LrosaDsPost202NonRetry400Headers {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(LrosaDsPost202NonRetry400Headers.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(LrosaDsPost202NonRetry400Headers.class);
 
     /*
      * The Retry-After property.
@@ -28,7 +24,7 @@ public final class LrosaDsPost202NonRetry400Headers {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     * 
+     *
      * @return the retryAfter value.
      */
     public Integer retryAfter() {
@@ -37,7 +33,7 @@ public final class LrosaDsPost202NonRetry400Headers {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     * 
+     *
      * @param retryAfter the retryAfter value to set.
      * @return the LrosaDsPost202NonRetry400Headers object itself.
      */
@@ -48,7 +44,7 @@ public final class LrosaDsPost202NonRetry400Headers {
 
     /**
      * Get the location property: The Location property.
-     * 
+     *
      * @return the location value.
      */
     public String location() {
@@ -57,7 +53,7 @@ public final class LrosaDsPost202NonRetry400Headers {
 
     /**
      * Set the location property: The Location property.
-     * 
+     *
      * @param location the location value to set.
      * @return the LrosaDsPost202NonRetry400Headers object itself.
      */
@@ -68,7 +64,7 @@ public final class LrosaDsPost202NonRetry400Headers {
 
     /**
      * Validates the instance.
-     * 
+     *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

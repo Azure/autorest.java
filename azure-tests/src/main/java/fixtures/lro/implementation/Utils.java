@@ -26,14 +26,13 @@ final class Utils {
             }
         }
         return null;
-
     }
 
     static String getValueFromIdByParameterName(String id, String pathTemplate, String parameterName) {
         if (id == null || pathTemplate == null) {
             return null;
         }
-        String parameterNameParentheses = "{" + parameterName +  "}";
+        String parameterNameParentheses = "{" + parameterName + "}";
         List<String> idSegmentsReverted = Arrays.asList(id.split("/"));
         List<String> pathSegments = Arrays.asList(pathTemplate.split("/"));
         Collections.reverse(idSegmentsReverted);
@@ -60,6 +59,5 @@ final class Utils {
             }
         }
         return null;
-
     }
 }
