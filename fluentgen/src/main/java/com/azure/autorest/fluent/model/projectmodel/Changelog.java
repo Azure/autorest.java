@@ -120,10 +120,10 @@ public class Changelog {
     }
 
     public String getContent() {
-        return String.join("\n", lines);
+        return String.join("\n", lines) + "\n";
     }
 
-    public List<String> getLines() {
+    List<String> getLines() {
         return lines;
     }
 
