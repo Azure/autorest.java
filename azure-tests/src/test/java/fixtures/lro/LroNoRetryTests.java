@@ -91,7 +91,7 @@ public class LroNoRetryTests {
     }
 
     @Test
-    @Disabled
+    @Disabled("expect error when no payload")
     public void putError201NoProvisioningStatePayload() {
         Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().putError201NoProvisioningStatePayload());
     }

@@ -5,7 +5,6 @@
 
 package fixtures.lro;
 
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -57,6 +56,11 @@ public class LroTests {
     LROPutAsyncRetryFailed
     LROPutAsyncNoRetryCanceled
     LRORetryErrorPutAsyncSucceeded
+    LRONonRetryPutAsyncRetry400
+    LROErrorPutAsyncNoPollingStatus
+    LROErrorPutAsyncNoPollingStatusPayload
+    LROErrorPutAsyncInvalidJsonPolling
+    LROErrorDeleteAsyncInvalidJsonPolling
      */
 
     @Test
