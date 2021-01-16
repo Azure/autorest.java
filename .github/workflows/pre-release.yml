@@ -43,7 +43,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
-          release_name: AutoRest ${{ env.TAG_NAME }}
+          release_name: AutoRest Java ${{ env.TAG_NAME }}
           body: ${{ github.event.inputs.release_notes }}
 
       - name: Upload Pre-release Asset
