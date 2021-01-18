@@ -87,9 +87,9 @@ public class LroTests {
         Assertions.assertEquals("100", response.id());
     }
 
-    @Test
-    @Disabled("Can cause flakiness - only run manually")
-    public void put202Retry200Async() throws Exception {
+//    @Test
+//    @Disabled("Can cause flakiness - only run manually")
+//    public void put202Retry200Async() throws Exception {
 //        final CountDownLatch lock = new CountDownLatch(1);
 //        long startTime = System.currentTimeMillis();
 //        final long[] callbackTime = new long[1];
@@ -114,7 +114,7 @@ public class LroTests {
 //        Assert.assertTrue(lock.await(3000, TimeUnit.MILLISECONDS));
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
 //        Assert.assertTrue(1000 < callbackTime[0] - startTime);
-    }
+//    }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
