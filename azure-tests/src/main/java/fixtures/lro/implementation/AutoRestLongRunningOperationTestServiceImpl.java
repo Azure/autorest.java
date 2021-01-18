@@ -3,17 +3,13 @@ package fixtures.lro.implementation;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpResponse;
-import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.management.polling.PollResult;
+import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.AsyncPollResponse;
@@ -22,10 +18,10 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import fixtures.lro.fluent.AutoRestLongRunningOperationTestService;
-import fixtures.lro.fluent.LroRetrysClient;
-import fixtures.lro.fluent.LrosaDsClient;
 import fixtures.lro.fluent.LROsClient;
+import fixtures.lro.fluent.LroRetrysClient;
 import fixtures.lro.fluent.LrosCustomHeadersClient;
+import fixtures.lro.fluent.LrosaDsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
@@ -36,119 +32,101 @@ import java.util.Map;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
- */
+/** Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type. */
 @ServiceClient(builder = AutoRestLongRunningOperationTestServiceBuilder.class)
 public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRestLongRunningOperationTestService {
     private final ClientLogger logger = new ClientLogger(AutoRestLongRunningOperationTestServiceImpl.class);
 
-    /**
-     * server parameter.
-     */
+    /** server parameter. */
     private final String endpoint;
 
     /**
      * Gets server parameter.
-     * 
+     *
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /**
-     * The HTTP pipeline to send requests through.
-     */
+    /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     * 
+     *
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /**
-     * The serializer to serialize an object into a string.
-     */
+    /** The serializer to serialize an object into a string. */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     * 
+     *
      * @return the serializerAdapter value.
      */
     SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /**
-     * The default poll interval for long-running operation.
-     */
+    /** The default poll interval for long-running operation. */
     private final Duration defaultPollInterval;
 
     /**
      * Gets The default poll interval for long-running operation.
-     * 
+     *
      * @return the defaultPollInterval value.
      */
     public Duration getDefaultPollInterval() {
         return this.defaultPollInterval;
     }
 
-    /**
-     * The LROsClient object to access its operations.
-     */
+    /** The LROsClient object to access its operations. */
     private final LROsClient lROs;
 
     /**
      * Gets the LROsClient object to access its operations.
-     * 
+     *
      * @return the LROsClient object.
      */
     public LROsClient getLROs() {
         return this.lROs;
     }
 
-    /**
-     * The LroRetrysClient object to access its operations.
-     */
+    /** The LroRetrysClient object to access its operations. */
     private final LroRetrysClient lroRetrys;
 
     /**
      * Gets the LroRetrysClient object to access its operations.
-     * 
+     *
      * @return the LroRetrysClient object.
      */
     public LroRetrysClient getLroRetrys() {
         return this.lroRetrys;
     }
 
-    /**
-     * The LrosaDsClient object to access its operations.
-     */
+    /** The LrosaDsClient object to access its operations. */
     private final LrosaDsClient lrosaDs;
 
     /**
      * Gets the LrosaDsClient object to access its operations.
-     * 
+     *
      * @return the LrosaDsClient object.
      */
     public LrosaDsClient getLrosaDs() {
         return this.lrosaDs;
     }
 
-    /**
-     * The LrosCustomHeadersClient object to access its operations.
-     */
+    /** The LrosCustomHeadersClient object to access its operations. */
     private final LrosCustomHeadersClient lrosCustomHeaders;
 
     /**
      * Gets the LrosCustomHeadersClient object to access its operations.
-     * 
+     *
      * @return the LrosCustomHeadersClient object.
      */
     public LrosCustomHeadersClient getLrosCustomHeaders() {
@@ -157,14 +135,19 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
-     * 
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
      * @param endpoint server parameter.
      */
-    AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, Duration defaultPollInterval, AzureEnvironment environment, String endpoint) {
+    AutoRestLongRunningOperationTestServiceImpl(
+        HttpPipeline httpPipeline,
+        SerializerAdapter serializerAdapter,
+        Duration defaultPollInterval,
+        AzureEnvironment environment,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.defaultPollInterval = defaultPollInterval;
@@ -177,7 +160,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
 
     /**
      * Gets default client context.
-     * 
+     *
      * @return the default client context.
      */
     public Context getContext() {
@@ -186,7 +169,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
 
     /**
      * Merges default client context with provided context.
-     * 
+     *
      * @param context the context to be merged with default client context.
      * @return the merged context.
      */
@@ -199,7 +182,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
 
     /**
      * Gets long running operation result.
-     * 
+     *
      * @param activationResponse the response of activation operation.
      * @param httpPipeline the http pipeline.
      * @param pollResultType type of poll result.
@@ -209,13 +192,26 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
      * @param <U> type of final result.
      * @return poller flux for poll result and final result.
      */
-    public <T, U> PollerFlux<PollResult<T>, U> getLroResult(Mono<Response<Flux<ByteBuffer>>> activationResponse, HttpPipeline httpPipeline, Type pollResultType, Type finalResultType, Context context) {
-        return PollerFactory.create(serializerAdapter, httpPipeline, pollResultType, finalResultType, defaultPollInterval, activationResponse, context);
+    public <T, U> PollerFlux<PollResult<T>, U> getLroResult(
+        Mono<Response<Flux<ByteBuffer>>> activationResponse,
+        HttpPipeline httpPipeline,
+        Type pollResultType,
+        Type finalResultType,
+        Context context) {
+        return PollerFactory
+            .create(
+                serializerAdapter,
+                httpPipeline,
+                pollResultType,
+                finalResultType,
+                defaultPollInterval,
+                activationResponse,
+                context);
     }
 
     /**
      * Gets the final result, or an error, based on last async poll response.
-     * 
+     *
      * @param response the last async poll response.
      * @param <T> type of poll result.
      * @param <U> type of final result.
@@ -228,14 +224,19 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
             HttpResponse errorResponse = null;
             PollResult.Error lroError = response.getValue().getError();
             if (lroError != null) {
-                errorResponse = new HttpResponseImpl(lroError.getResponseStatusCode(), lroError.getResponseHeaders(), lroError.getResponseBody());
+                errorResponse =
+                    new HttpResponseImpl(
+                        lroError.getResponseStatusCode(), lroError.getResponseHeaders(), lroError.getResponseBody());
 
                 errorMessage = response.getValue().getError().getMessage();
                 String errorBody = response.getValue().getError().getResponseBody();
                 if (errorBody != null) {
                     // try to deserialize error body to ManagementError
                     try {
-                        managementError = this.getSerializerAdapter().deserialize(errorBody, ManagementError.class, SerializerEncoding.JSON);
+                        managementError =
+                            this
+                                .getSerializerAdapter()
+                                .deserialize(errorBody, ManagementError.class, SerializerEncoding.JSON);
                         if (managementError.getCode() == null || managementError.getMessage() == null) {
                             managementError = null;
                         }
@@ -255,7 +256,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl implements AutoRe
         } else {
             return response.getFinalResult();
         }
-}
+    }
 
     private static final class HttpResponseImpl extends HttpResponse {
         private final int statusCode;

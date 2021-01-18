@@ -5,6 +5,14 @@
 
 package fixtures.lro;
 
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.exception.ManagementException;
 import fixtures.lro.fluent.AutoRestLongRunningOperationTestService;
 import fixtures.lro.fluent.models.ProductInner;
@@ -17,6 +25,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Locale;
 
 public class LroTests {
@@ -25,11 +34,34 @@ public class LroTests {
 
     @BeforeAll
     public static void setup() {
+        HttpPipeline pipeline;
+        pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
+                new RetryPolicy(),
+                new CookiePolicy()
+                //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+        ).build();
+
         client = new AutoRestLongRunningOperationTestServiceBuilder()
                 .endpoint("http://localhost:3000")
                 .defaultPollInterval(Duration.ofMillis(1))
+                .pipeline(pipeline)
                 .buildClient();
     }
+
+    // PUT with return code 200 and Azure-AsyncOperation does not work as testserver expected, Azure-AsyncOperation header is ignored.
+    /*
+    CustomHeaderPutAsyncSucceded
+    LROPutAsyncRetrySucceeded
+    LROPutAsyncNoRetrySucceeded
+    LROPutAsyncRetryFailed
+    LROPutAsyncNoRetryCanceled
+    LRORetryErrorPutAsyncSucceeded
+    LRONonRetryPutAsyncRetry400
+    LROErrorPutAsyncNoPollingStatus
+    LROErrorPutAsyncNoPollingStatusPayload
+    LROErrorPutAsyncInvalidJsonPolling
+    LROErrorDeleteAsyncInvalidJsonPolling
+     */
 
     @Test
     public void put200Succeeded() throws Exception {
@@ -55,9 +87,9 @@ public class LroTests {
         Assertions.assertEquals("100", response.id());
     }
 
-    @Test
-    @Disabled("Can cause flakiness - only run manually")
-    public void put202Retry200Async() throws Exception {
+//    @Test
+//    @Disabled("Can cause flakiness - only run manually")
+//    public void put202Retry200Async() throws Exception {
 //        final CountDownLatch lock = new CountDownLatch(1);
 //        long startTime = System.currentTimeMillis();
 //        final long[] callbackTime = new long[1];
@@ -82,7 +114,7 @@ public class LroTests {
 //        Assert.assertTrue(lock.await(3000, TimeUnit.MILLISECONDS));
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
 //        Assert.assertTrue(1000 < callbackTime[0] - startTime);
-    }
+//    }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
@@ -337,5 +369,36 @@ public class LroTests {
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
         }
+    }
+
+    @Test
+    public void putInlineComplete201() {
+        ProductInner product = client.getLROs().put201Succeeded();
+        Assertions.assertEquals("Succeeded", product.provisioningState());
+    }
+
+    @Test
+    public void postDoubleHeadersFinalLocationGet() {
+        ProductInner product = client.getLROs().postDoubleHeadersFinalLocationGet();
+        Assertions.assertEquals("100", product.id());
+    }
+
+    @Test
+    @Disabled("final-state-via not supported")
+    public void postDoubleHeadersFinalAzureHeaderGet() {
+        ProductInner product = client.getLROs().postDoubleHeadersFinalAzureHeaderGet();
+        Assertions.assertEquals("100", product.id());
+    }
+
+    @Test
+    public void postDoubleHeadersFinalAzureHeaderGetDefault() {
+        ProductInner product = client.getLROs().postDoubleHeadersFinalAzureHeaderGetDefault();
+        Assertions.assertEquals("100", product.id());
+    }
+
+    @Test
+    public void post202List() {
+        List<ProductInner> products = client.getLROs().post202List();
+        Assertions.assertEquals("100", products.get(0).id());
     }
 }
