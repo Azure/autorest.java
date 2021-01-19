@@ -86,7 +86,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 .xmlNamespace(xmlNamespace);
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
-            add(String.format("value = \"%s\"", serializedName.toString()));
+            add(String.format("value = \"%s\"", xmlParamName));
         }};
         if (property.isRequired()) {
             annotationArgumentList.add("required = true");
