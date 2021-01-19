@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.google.googlejavaformat.java.Formatter;
+import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -50,7 +51,16 @@ public class Postprocessor extends NewPlugin {
     String className = JavaSettings.getInstance().getCustomizationClass();
     Map.Entry<String, String> readme = getReadme();
 
-    if (className == null || (jarPath == null && readme == null)) {
+    if (className == null) {
+      try {
+        writeToFiles(fileContents);
+      } catch (FormatterException e) {
+        return false;
+      }
+      return true;
+    }
+
+    if (jarPath == null && readme == null) {
       logger.warn("Must provide a JAR path or a README.md config containing the customization class {}", className);
       return false;
     }
@@ -99,24 +109,28 @@ public class Postprocessor extends NewPlugin {
       }
 
       //Step 2: Print to files
-      Formatter formatter = new Formatter();
-      for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
-        String formattedSource = javaFile.getValue();
-        if (javaFile.getKey().endsWith(".java")) {
-          try {
-            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-          } catch (Exception e) {
-            logger.error("Unable to format output file " + javaFile.getKey(), e);
-            return false;
-          }
-        }
-        writeFile(javaFile.getKey(), formattedSource, null);
-      }
+      writeToFiles(fileContents);
     } catch (Exception e) {
       logger.error("Failed to complete postprocessing.", e);
       return false;
     }
     return true;
+  }
+
+  private void writeToFiles(Map<String, String> fileContents) throws FormatterException {
+    Formatter formatter = new Formatter();
+    for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
+      String formattedSource = javaFile.getValue();
+      if (javaFile.getKey().endsWith(".java")) {
+        try {
+          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+        } catch (Exception e) {
+          logger.error("Unable to format output file " + javaFile.getKey(), e);
+          throw e;
+        }
+      }
+      writeFile(javaFile.getKey(), formattedSource, null);
+    }
   }
 
   private Map.Entry<String, String> getReadme() {
