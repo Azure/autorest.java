@@ -7,6 +7,7 @@ package fixtures.bodycomplex.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -54,51 +55,68 @@ public final class PolymorphismsImpl {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Fish>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Fish>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
-                @HostParam("$host") String host, @BodyParam("application/json") Fish complexBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Fish complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/complex/polymorphism/dotsyntax")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFish>> getDotSyntax(@HostParam("$host") String host, Context context);
+        Mono<Response<DotFish>> getDotSyntax(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithDiscriminator(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Salmon>> getComplicated(@HostParam("$host") String host, Context context);
+        Mono<Response<Salmon>> getComplicated(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplicated(
-                @HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Salmon complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/complex/polymorphism/missingdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Salmon>> putMissingDiscriminator(
-                @HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Salmon complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValidMissingRequired(
-                @HostParam("$host") String host, @BodyParam("application/json") Fish complexBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Fish complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -110,7 +128,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -124,7 +143,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponseAsync(Context context) {
-        return service.getValid(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, context);
     }
 
     /**
@@ -211,7 +231,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -231,7 +252,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody, Context context) {
-        return service.putValid(this.client.getHost(), complexBody, context);
+        final String accept = "application/json";
+        return service.putValid(this.client.getHost(), complexBody, accept, context);
     }
 
     /**
@@ -320,7 +342,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getDotSyntax(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDotSyntax(this.client.getHost(), accept, context));
     }
 
     /**
@@ -334,7 +357,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync(Context context) {
-        return service.getDotSyntax(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getDotSyntax(this.client.getHost(), accept, context);
     }
 
     /**
@@ -416,7 +440,9 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getComposedWithDiscriminator(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getComposedWithDiscriminator(this.client.getHost(), accept, context));
     }
 
     /**
@@ -432,7 +458,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync(Context context) {
-        return service.getComposedWithDiscriminator(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getComposedWithDiscriminator(this.client.getHost(), accept, context);
     }
 
     /**
@@ -522,7 +549,9 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getComposedWithoutDiscriminator(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getComposedWithoutDiscriminator(this.client.getHost(), accept, context));
     }
 
     /**
@@ -538,7 +567,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync(Context context) {
-        return service.getComposedWithoutDiscriminator(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getComposedWithoutDiscriminator(this.client.getHost(), accept, context);
     }
 
     /**
@@ -627,7 +657,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getComplicated(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplicated(this.client.getHost(), accept, context));
     }
 
     /**
@@ -642,7 +673,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync(Context context) {
-        return service.getComplicated(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getComplicated(this.client.getHost(), accept, context);
     }
 
     /**
@@ -728,7 +760,9 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
-        return FluxUtil.withContext(context -> service.putComplicated(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putComplicated(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -743,7 +777,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody, Context context) {
-        return service.putComplicated(this.client.getHost(), complexBody, context);
+        final String accept = "application/json";
+        return service.putComplicated(this.client.getHost(), complexBody, accept, context);
     }
 
     /**
@@ -814,8 +849,9 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putMissingDiscriminator(this.client.getHost(), complexBody, context));
+                context -> service.putMissingDiscriminator(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -830,7 +866,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody, Context context) {
-        return service.putMissingDiscriminator(this.client.getHost(), complexBody, context);
+        final String accept = "application/json";
+        return service.putMissingDiscriminator(this.client.getHost(), complexBody, accept, context);
     }
 
     /**
@@ -923,8 +960,9 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValidMissingRequired(this.client.getHost(), complexBody, context));
+                context -> service.putValidMissingRequired(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -944,7 +982,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody, Context context) {
-        return service.putValidMissingRequired(this.client.getHost(), complexBody, context);
+        final String accept = "application/json";
+        return service.putValidMissingRequired(this.client.getHost(), complexBody, accept, context);
     }
 
     /**

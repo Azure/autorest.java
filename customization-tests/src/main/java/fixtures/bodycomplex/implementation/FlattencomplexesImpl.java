@@ -6,6 +6,7 @@ package fixtures.bodycomplex.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -50,7 +51,8 @@ public final class FlattencomplexesImpl {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<MyBaseType>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -60,7 +62,8 @@ public final class FlattencomplexesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -72,7 +75,8 @@ public final class FlattencomplexesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
-        return service.getValid(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, context);
     }
 
     /**
