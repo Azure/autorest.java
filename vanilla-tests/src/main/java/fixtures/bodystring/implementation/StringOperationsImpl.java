@@ -3,6 +3,7 @@ package fixtures.bodystring.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -50,74 +51,97 @@ public final class StringOperationsImpl implements StringOperations {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNull(
-                @HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") String stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(
-                @HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") String stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getMbcs(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getMbcs(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMbcs(
-                @HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") String stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getWhitespace(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getWhitespace(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putWhitespace(
-                @HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") String stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<String>> getNotProvided(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getBase64Encoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getBase64Encoded(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getBase64UrlEncoded(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBase64UrlEncoded(
-                @HostParam("$host") String host, @BodyParam("application/json") Base64Url stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Base64Url stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNullBase64UrlEncoded(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -133,7 +157,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -183,7 +208,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
@@ -251,7 +277,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -300,7 +327,8 @@ public final class StringOperationsImpl implements StringOperations {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "";
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), stringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
@@ -339,7 +367,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), accept, context));
     }
 
     /**
@@ -388,7 +417,8 @@ public final class StringOperationsImpl implements StringOperations {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
-        return FluxUtil.withContext(context -> service.putMbcs(this.client.getHost(), stringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMbcs(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
@@ -429,7 +459,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), accept, context));
     }
 
     /**
@@ -483,7 +514,9 @@ public final class StringOperationsImpl implements StringOperations {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
-        return FluxUtil.withContext(context -> service.putWhitespace(this.client.getHost(), stringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putWhitespace(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
@@ -524,7 +557,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
     }
 
     /**
@@ -572,7 +606,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBase64Encoded(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBase64Encoded(this.client.getHost(), accept, context));
     }
 
     /**
@@ -620,7 +655,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBase64UrlEncoded(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBase64UrlEncoded(this.client.getHost(), accept, context));
     }
 
     /**
@@ -673,9 +709,10 @@ public final class StringOperationsImpl implements StringOperations {
         if (stringBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         return FluxUtil.withContext(
-                context -> service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, context));
+                context -> service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, accept, context));
     }
 
     /**
@@ -718,7 +755,8 @@ public final class StringOperationsImpl implements StringOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNullBase64UrlEncoded(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNullBase64UrlEncoded(this.client.getHost(), accept, context));
     }
 
     /**

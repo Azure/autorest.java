@@ -2,6 +2,7 @@ package fixtures.report;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -115,13 +116,19 @@ public final class AutoRestReportService {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getReport(
-                @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("qualifier") String qualifier,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/report/optional")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getOptionalReport(
-                @HostParam("$host") String host, @QueryParam("qualifier") String qualifier, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("qualifier") String qualifier,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -139,7 +146,8 @@ public final class AutoRestReportService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getReport(this.getHost(), qualifier, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getReport(this.getHost(), qualifier, accept, context));
     }
 
     /**
@@ -229,7 +237,8 @@ public final class AutoRestReportService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOptionalReport(this.getHost(), qualifier, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOptionalReport(this.getHost(), qualifier, accept, context));
     }
 
     /**

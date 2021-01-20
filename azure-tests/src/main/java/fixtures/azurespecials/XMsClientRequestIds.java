@@ -55,6 +55,7 @@ public final class XMsClientRequestIds {
         Mono<Response<Void>> paramGet(
                 @HostParam("$host") String host,
                 @HeaderParam("x-ms-client-request-id") String xMsClientRequestId,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -117,7 +118,9 @@ public final class XMsClientRequestIds {
             return Mono.error(
                     new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.paramGet(this.client.getHost(), xMsClientRequestId, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.paramGet(this.client.getHost(), xMsClientRequestId, accept, context));
     }
 
     /**

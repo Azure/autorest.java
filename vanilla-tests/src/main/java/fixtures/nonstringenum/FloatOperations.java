@@ -3,6 +3,7 @@ package fixtures.nonstringenum;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -48,12 +49,16 @@ public final class FloatOperations {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> put(
-                @HostParam("$host") String host, @BodyParam("application/json") FloatEnum input, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") FloatEnum input,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/nonStringEnums/float/get")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<FloatEnum>> get(@HostParam("$host") String host, Context context);
+        Mono<Response<FloatEnum>> get(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -71,7 +76,8 @@ public final class FloatOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.put(this.client.getHost(), input, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put(this.client.getHost(), input, accept, context));
     }
 
     /**
@@ -157,7 +163,8 @@ public final class FloatOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
     }
 
     /**

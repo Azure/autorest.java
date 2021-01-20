@@ -2,6 +2,7 @@ package fixtures.url;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -55,6 +56,7 @@ public final class PathItems {
                 @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @QueryParam("localStringQuery") String localStringQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get(
@@ -69,6 +71,7 @@ public final class PathItems {
                 @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @QueryParam("localStringQuery") String localStringQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get(
@@ -83,6 +86,7 @@ public final class PathItems {
                 @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @QueryParam("localStringQuery") String localStringQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get(
@@ -97,6 +101,7 @@ public final class PathItems {
                 @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @QueryParam("localStringQuery") String localStringQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -134,6 +139,7 @@ public final class PathItems {
             return Mono.error(
                     new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getAllWithValues(
@@ -144,6 +150,7 @@ public final class PathItems {
                                 this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 localStringQuery,
+                                accept,
                                 context));
     }
 
@@ -261,6 +268,7 @@ public final class PathItems {
             return Mono.error(
                     new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalQueryNull(
@@ -271,6 +279,7 @@ public final class PathItems {
                                 this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 localStringQuery,
+                                accept,
                                 context));
     }
 
@@ -388,6 +397,7 @@ public final class PathItems {
             return Mono.error(
                     new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalAndLocalQueryNull(
@@ -398,6 +408,7 @@ public final class PathItems {
                                 this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 localStringQuery,
+                                accept,
                                 context));
     }
 
@@ -517,6 +528,7 @@ public final class PathItems {
             return Mono.error(
                     new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getLocalPathItemQueryNull(
@@ -527,6 +539,7 @@ public final class PathItems {
                                 this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 localStringQuery,
+                                accept,
                                 context));
     }
 

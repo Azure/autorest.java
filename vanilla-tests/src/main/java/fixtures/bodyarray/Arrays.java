@@ -3,6 +3,7 @@ package fixtures.bodyarray;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -58,17 +59,20 @@ public final class Arrays {
         @Get("/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/empty")
         @ExpectedResponses({200})
@@ -76,12 +80,14 @@ public final class Arrays {
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<String> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanTfft(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/boolean/tfft")
         @ExpectedResponses({200})
@@ -89,22 +95,26 @@ public final class Arrays {
         Mono<Response<Void>> putBooleanTfft(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Boolean> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Boolean>>> getBooleanInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntegerValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
@@ -112,64 +122,80 @@ public final class Arrays {
         Mono<Response<Void>> putIntegerValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Integer> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Integer>>> getIntInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Long>>> getLongValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLongValid(
-                @HostParam("$host") String host, @BodyParam("application/json") List<Long> arrayBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<Long> arrayBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/array/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Long>>> getLongInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Float>>> getFloatValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloatValid(
-                @HostParam("$host") String host, @BodyParam("application/json") List<Float> arrayBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<Float> arrayBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/array/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Float>>> getFloatInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -177,22 +203,26 @@ public final class Arrays {
         Mono<Response<Void>> putDoubleValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Double> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Double>>> getDoubleInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<String>>> getStringValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -200,12 +230,14 @@ public final class Arrays {
         Mono<Response<Void>> putStringValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<String> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<FooEnum>>> getEnumValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<FooEnum>>> getEnumValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -213,49 +245,62 @@ public final class Arrays {
         Mono<Response<Void>> putEnumValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<FooEnum> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/string-enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Enum0>>> getStringEnumValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Enum0>>> getStringEnumValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/string-enum/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putStringEnumValid(
-                @HostParam("$host") String host, @BodyParam("application/json") List<Enum1> arrayBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<Enum1> arrayBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/array/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<String>>> getStringWithNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringWithNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<String>>> getStringWithInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<UUID>>> getUuidValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<UUID>>> getUuidValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUuidValid(
-                @HostParam("$host") String host, @BodyParam("application/json") List<UUID> arrayBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") List<UUID> arrayBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/array/prim/uuid/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<UUID>>> getUuidInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<List<UUID>>> getUuidInvalidChars(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date/valid")
         @ExpectedResponses({200})
@@ -263,23 +308,27 @@ public final class Arrays {
         Mono<Response<Void>> putDateValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<LocalDate> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<List<LocalDate>>> getDateInvalidChars(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date-time/valid")
         @ExpectedResponses({200})
@@ -287,25 +336,29 @@ public final class Arrays {
         Mono<Response<Void>> putDateTimeValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<OffsetDateTime> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidChars(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123Valid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
@@ -313,12 +366,14 @@ public final class Arrays {
         Mono<Response<Void>> putDateTimeRfc1123Valid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<DateTimeRfc1123> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Duration>>> getDurationValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/duration/valid")
         @ExpectedResponses({200})
@@ -326,12 +381,14 @@ public final class Arrays {
         Mono<Response<Void>> putDurationValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Duration> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getByteValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/byte/valid")
         @ExpectedResponses({200})
@@ -339,43 +396,51 @@ public final class Arrays {
         Mono<Response<Void>> putByteValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<byte[]> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getByteInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
+        Mono<Response<List<byte[]>>> getBase64Url(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Product>>> getComplexNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Product>>> getComplexEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Product>>> getComplexItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexItemNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Product>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexItemEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Product>>> getComplexValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Product>>> getComplexValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/complex/valid")
         @ExpectedResponses({200})
@@ -383,32 +448,38 @@ public final class Arrays {
         Mono<Response<Void>> putComplexValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Product> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayItemNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayItemEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<List<String>>>> getArrayValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/array/valid")
         @ExpectedResponses({200})
@@ -416,34 +487,38 @@ public final class Arrays {
         Mono<Response<Void>> putArrayValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<List<String>> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/array/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Map<String, String>>>> getDictionaryNull(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Map<String, String>>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryItemNull(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryItemEmpty(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<Map<String, String>>>> getDictionaryValid(@HostParam("$host") String host, Context context);
+        Mono<Response<List<Map<String, String>>>> getDictionaryValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/dictionary/valid")
         @ExpectedResponses({200})
@@ -451,6 +526,7 @@ public final class Arrays {
         Mono<Response<Void>> putDictionaryValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Map<String, String>> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -467,7 +543,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -515,7 +592,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -563,7 +641,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -616,7 +695,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -659,7 +739,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), accept, context));
     }
 
     /**
@@ -712,7 +793,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putBooleanTfft(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putBooleanTfft(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -755,7 +838,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -803,7 +887,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -851,7 +936,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -904,7 +990,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putIntegerValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putIntegerValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -947,7 +1035,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -995,7 +1084,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1043,7 +1133,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1096,7 +1187,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1139,7 +1231,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1187,7 +1280,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1235,7 +1329,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1288,7 +1383,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putFloatValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putFloatValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1331,7 +1428,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1379,7 +1477,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1427,7 +1526,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1480,7 +1580,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDoubleValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDoubleValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1523,7 +1625,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1571,7 +1674,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1619,7 +1723,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1672,7 +1777,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putStringValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putStringValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1715,7 +1822,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEnumValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEnumValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1768,7 +1876,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putEnumValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putEnumValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1811,7 +1920,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringEnumValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringEnumValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1864,7 +1974,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putStringEnumValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putStringEnumValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1907,7 +2019,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1955,7 +2068,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2005,7 +2119,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUuidValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUuidValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2064,7 +2179,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putUuidValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putUuidValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2111,7 +2227,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUuidInvalidChars(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUuidInvalidChars(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2159,7 +2276,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2212,7 +2330,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2255,7 +2374,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2303,7 +2423,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2351,7 +2472,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2405,7 +2527,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDateTimeValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDateTimeValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2450,7 +2574,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2498,7 +2623,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2548,7 +2674,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2607,10 +2734,11 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         List<DateTimeRfc1123> arrayBodyConverted =
                 arrayBody.stream().map(el -> new DateTimeRfc1123(el)).collect(java.util.stream.Collectors.toList());
         return FluxUtil.withContext(
-                context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, context));
+                context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, accept, context));
     }
 
     /**
@@ -2657,7 +2785,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2710,7 +2839,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDurationValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDurationValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2753,7 +2884,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2807,7 +2939,8 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2852,7 +2985,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2902,7 +3036,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2954,7 +3089,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3002,7 +3138,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3050,7 +3187,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3098,7 +3236,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3148,7 +3287,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3209,7 +3349,9 @@ public final class Arrays {
         } else {
             arrayBody.forEach(e -> e.validate());
         }
-        return FluxUtil.withContext(context -> service.putComplexValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putComplexValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -3256,7 +3398,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3304,7 +3447,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3352,7 +3496,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3400,7 +3545,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3448,7 +3594,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3501,7 +3648,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putArrayValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putArrayValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -3544,7 +3693,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3592,7 +3742,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3642,7 +3793,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3696,7 +3848,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3750,7 +3903,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3810,7 +3964,9 @@ public final class Arrays {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDictionaryValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDictionaryValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**

@@ -2,6 +2,7 @@ package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -49,6 +50,7 @@ public final class Odatas {
                 @QueryParam("$filter") String filter,
                 @QueryParam("$top") Integer top,
                 @QueryParam("$orderby") String orderby,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -69,8 +71,9 @@ public final class Odatas {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getWithFilter(this.client.getHost(), filter, top, orderby, context));
+                context -> service.getWithFilter(this.client.getHost(), filter, top, orderby, accept, context));
     }
 
     /**

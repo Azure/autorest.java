@@ -2,6 +2,7 @@ package fixtures.custombaseuri.moreoptions;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -52,6 +53,7 @@ public final class Paths {
                 @PathParam("keyName") String keyName,
                 @PathParam("subscriptionId") String subscriptionId,
                 @QueryParam("keyVersion") String keyVersion,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -89,6 +91,7 @@ public final class Paths {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getEmpty(
@@ -98,6 +101,7 @@ public final class Paths {
                                 keyName,
                                 this.client.getSubscriptionId(),
                                 keyVersion,
+                                accept,
                                 context));
     }
 

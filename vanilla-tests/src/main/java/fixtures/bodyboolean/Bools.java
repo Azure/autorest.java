@@ -3,6 +3,7 @@ package fixtures.bodyboolean;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -45,34 +46,44 @@ public final class Bools {
         @Get("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> getTrue(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getTrue(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putTrue(
-                @HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") boolean boolBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> getFalse(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getFalse(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFalse(
-                @HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") boolean boolBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Boolean>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -88,7 +99,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getTrue(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getTrue(this.client.getHost(), accept, context));
     }
 
     /**
@@ -106,7 +118,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getTrue(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getTrue(this.client.getHost(), accept, context);
     }
 
     /**
@@ -196,7 +209,8 @@ public final class Bools {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolBody = true;
-        return FluxUtil.withContext(context -> service.putTrue(this.client.getHost(), boolBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putTrue(this.client.getHost(), boolBody, accept, context));
     }
 
     /**
@@ -215,7 +229,8 @@ public final class Bools {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolBody = true;
-        return service.putTrue(this.client.getHost(), boolBody, context);
+        final String accept = "application/json";
+        return service.putTrue(this.client.getHost(), boolBody, accept, context);
     }
 
     /**
@@ -282,7 +297,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFalse(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFalse(this.client.getHost(), accept, context));
     }
 
     /**
@@ -300,7 +316,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getFalse(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getFalse(this.client.getHost(), accept, context);
     }
 
     /**
@@ -390,7 +407,8 @@ public final class Bools {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolBody = false;
-        return FluxUtil.withContext(context -> service.putFalse(this.client.getHost(), boolBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putFalse(this.client.getHost(), boolBody, accept, context));
     }
 
     /**
@@ -409,7 +427,8 @@ public final class Bools {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolBody = false;
-        return service.putFalse(this.client.getHost(), boolBody, context);
+        final String accept = "application/json";
+        return service.putFalse(this.client.getHost(), boolBody, accept, context);
     }
 
     /**
@@ -476,7 +495,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -494,7 +514,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getNull(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
     }
 
     /**
@@ -583,7 +604,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -601,7 +623,8 @@ public final class Bools {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getInvalid(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
     }
 
     /**

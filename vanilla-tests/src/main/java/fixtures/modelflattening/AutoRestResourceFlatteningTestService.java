@@ -3,6 +3,7 @@ package fixtures.modelflattening;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -131,12 +132,14 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<Void>> putArray(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<Resource> resourceArray,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<FlattenedProduct>>> getArray(@HostParam("$host") String host, Context context);
+        Mono<Response<List<FlattenedProduct>>> getArray(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
@@ -144,12 +147,14 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<Void>> putWrappedArray(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") List<WrappedProduct> resourceArray,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<List<ProductWrapper>>> getWrappedArray(@HostParam("$host") String host, Context context);
+        Mono<Response<List<ProductWrapper>>> getWrappedArray(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/dictionary")
         @ExpectedResponses({200})
@@ -157,12 +162,14 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<Void>> putDictionary(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, FlattenedProduct> resourceDictionary,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, FlattenedProduct>>> getDictionary(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, FlattenedProduct>>> getDictionary(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
@@ -170,12 +177,14 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<Void>> putResourceCollection(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ResourceCollection resourceComplexObject,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ResourceCollection>> getResourceCollection(@HostParam("$host") String host, Context context);
+        Mono<Response<ResourceCollection>> getResourceCollection(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/customFlattening")
         @ExpectedResponses({200})
@@ -183,6 +192,7 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<SimpleProduct>> putSimpleProduct(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/model-flatten/customFlattening")
@@ -191,6 +201,7 @@ public final class AutoRestResourceFlatteningTestService {
         Mono<Response<SimpleProduct>> postFlattenedSimpleProduct(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/model-flatten/customFlattening/parametergrouping/{name}/")
@@ -200,6 +211,7 @@ public final class AutoRestResourceFlatteningTestService {
                 @HostParam("$host") String host,
                 @PathParam("name") String name,
                 @BodyParam("application/json") SimpleProduct simpleBodyProduct,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -220,7 +232,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
         }
-        return FluxUtil.withContext(context -> service.putArray(this.getHost(), resourceArray, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putArray(this.getHost(), resourceArray, accept, context));
     }
 
     /**
@@ -287,7 +300,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArray(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArray(this.getHost(), accept, context));
     }
 
     /**
@@ -340,7 +354,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
         }
-        return FluxUtil.withContext(context -> service.putWrappedArray(this.getHost(), resourceArray, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putWrappedArray(this.getHost(), resourceArray, accept, context));
     }
 
     /**
@@ -412,7 +427,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getWrappedArray(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getWrappedArray(this.getHost(), accept, context));
     }
 
     /**
@@ -473,7 +489,9 @@ public final class AutoRestResourceFlatteningTestService {
                                 }
                             });
         }
-        return FluxUtil.withContext(context -> service.putDictionary(this.getHost(), resourceDictionary, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDictionary(this.getHost(), resourceDictionary, accept, context));
     }
 
     /**
@@ -540,7 +558,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionary(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionary(this.getHost(), accept, context));
     }
 
     /**
@@ -592,8 +611,9 @@ public final class AutoRestResourceFlatteningTestService {
         if (resourceComplexObject != null) {
             resourceComplexObject.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putResourceCollection(this.getHost(), resourceComplexObject, context));
+                context -> service.putResourceCollection(this.getHost(), resourceComplexObject, accept, context));
     }
 
     /**
@@ -662,7 +682,8 @@ public final class AutoRestResourceFlatteningTestService {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getResourceCollection(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getResourceCollection(this.getHost(), accept, context));
     }
 
     /**
@@ -714,7 +735,9 @@ public final class AutoRestResourceFlatteningTestService {
         if (simpleBodyProduct != null) {
             simpleBodyProduct.validate();
         }
-        return FluxUtil.withContext(context -> service.putSimpleProduct(this.getHost(), simpleBodyProduct, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
     }
 
     /**
@@ -814,6 +837,7 @@ public final class AutoRestResourceFlatteningTestService {
         if (productId == null) {
             return Mono.error(new IllegalArgumentException("Parameter productId is required and cannot be null."));
         }
+        final String accept = "application/json";
         SimpleProduct simpleBodyProductInternal = null;
         if (description != null || maxProductDisplayName != null || genericValue != null || odataValue != null) {
             simpleBodyProductInternal = new SimpleProduct();
@@ -825,7 +849,7 @@ public final class AutoRestResourceFlatteningTestService {
         }
         SimpleProduct simpleBodyProduct = simpleBodyProductInternal;
         return FluxUtil.withContext(
-                context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, context));
+                context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
     }
 
     /**
@@ -955,6 +979,7 @@ public final class AutoRestResourceFlatteningTestService {
         } else {
             flattenParameterGroup.validate();
         }
+        final String accept = "application/json";
         String name = flattenParameterGroup.getName();
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(flattenParameterGroup.getProductId());
@@ -963,7 +988,8 @@ public final class AutoRestResourceFlatteningTestService {
         simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
         simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
         return FluxUtil.withContext(
-                context -> service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, context));
+                context ->
+                        service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, accept, context));
     }
 
     /**

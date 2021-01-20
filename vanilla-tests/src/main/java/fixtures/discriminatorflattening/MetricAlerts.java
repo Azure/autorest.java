@@ -2,6 +2,7 @@ package fixtures.discriminatorflattening;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -45,7 +46,8 @@ public final class MetricAlerts {
         @Get("/providers/Microsoft.Insights/metricAlerts")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MetricAlertResource>> get(@HostParam("$host") String host, Context context);
+        Mono<Response<MetricAlertResource>> get(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -61,7 +63,8 @@ public final class MetricAlerts {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
     }
 
     /**

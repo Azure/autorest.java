@@ -51,6 +51,7 @@ public final class Headers {
         Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestId(
                 @HostParam("$host") String host,
                 @HeaderParam("foo-client-request-id") String fooClientRequestId,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/azurespecials/customNamedRequestIdParamGrouping")
@@ -59,6 +60,7 @@ public final class Headers {
         Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(
                 @HostParam("$host") String host,
                 @HeaderParam("foo-client-request-id") String fooClientRequestId,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Head("/azurespecials/customNamedRequestIdHead")
@@ -67,6 +69,7 @@ public final class Headers {
         Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(
                 @HostParam("$host") String host,
                 @HeaderParam("foo-client-request-id") String fooClientRequestId,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -89,8 +92,9 @@ public final class Headers {
             return Mono.error(
                     new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.customNamedRequestId(this.client.getHost(), fooClientRequestId, context));
+                context -> service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context));
     }
 
     /**
@@ -145,10 +149,12 @@ public final class Headers {
         } else {
             headerCustomNamedRequestIdParamGroupingParameters.validate();
         }
+        final String accept = "application/json";
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.getFooClientRequestId();
         return FluxUtil.withContext(
                 context ->
-                        service.customNamedRequestIdParamGrouping(this.client.getHost(), fooClientRequestId, context));
+                        service.customNamedRequestIdParamGrouping(
+                                this.client.getHost(), fooClientRequestId, accept, context));
     }
 
     /**
@@ -203,8 +209,10 @@ public final class Headers {
             return Mono.error(
                     new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, context));
+                context ->
+                        service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context));
     }
 
     /**

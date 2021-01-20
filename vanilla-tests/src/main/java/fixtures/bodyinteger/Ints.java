@@ -3,6 +3,7 @@ package fixtures.bodyinteger;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -47,80 +48,104 @@ public final class Ints {
         @Get("/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/overflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getOverflowInt32(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getOverflowInt32(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/underflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getUnderflowInt32(@HostParam("$host") String host, Context context);
+        Mono<Response<Integer>> getUnderflowInt32(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/overflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Long>> getOverflowInt64(@HostParam("$host") String host, Context context);
+        Mono<Response<Long>> getOverflowInt64(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/underflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Long>> getUnderflowInt64(@HostParam("$host") String host, Context context);
+        Mono<Response<Long>> getUnderflowInt64(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/max/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMax32(
-                @HostParam("$host") String host, @BodyParam("application/json") int intBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") int intBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/int/max/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMax64(
-                @HostParam("$host") String host, @BodyParam("application/json") long intBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") long intBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/int/min/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMin32(
-                @HostParam("$host") String host, @BodyParam("application/json") int intBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") int intBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/int/min/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMin64(
-                @HostParam("$host") String host, @BodyParam("application/json") long intBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") long intBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/int/unixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUnixTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/unixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUnixTimeDate(
-                @HostParam("$host") String host, @BodyParam("application/json") long intBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") long intBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/int/invalidunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getInvalidUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getInvalidUnixTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/nullunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getNullUnixTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getNullUnixTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -136,7 +161,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -189,7 +215,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -242,7 +269,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOverflowInt32(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOverflowInt32(this.client.getHost(), accept, context));
     }
 
     /**
@@ -295,7 +323,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnderflowInt32(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnderflowInt32(this.client.getHost(), accept, context));
     }
 
     /**
@@ -348,7 +377,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOverflowInt64(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOverflowInt64(this.client.getHost(), accept, context));
     }
 
     /**
@@ -401,7 +431,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnderflowInt64(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnderflowInt64(this.client.getHost(), accept, context));
     }
 
     /**
@@ -456,7 +487,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMax32(this.client.getHost(), intBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMax32(this.client.getHost(), intBody, accept, context));
     }
 
     /**
@@ -501,7 +533,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMax64(this.client.getHost(), intBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMax64(this.client.getHost(), intBody, accept, context));
     }
 
     /**
@@ -546,7 +579,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMin32(this.client.getHost(), intBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMin32(this.client.getHost(), intBody, accept, context));
     }
 
     /**
@@ -591,7 +625,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMin64(this.client.getHost(), intBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMin64(this.client.getHost(), intBody, accept, context));
     }
 
     /**
@@ -634,7 +669,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnixTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnixTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -687,9 +723,10 @@ public final class Ints {
         if (intBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         long intBodyConverted = intBody.toEpochSecond();
         return FluxUtil.withContext(
-                context -> service.putUnixTimeDate(this.client.getHost(), intBodyConverted, context));
+                context -> service.putUnixTimeDate(this.client.getHost(), intBodyConverted, accept, context));
     }
 
     /**
@@ -732,7 +769,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalidUnixTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalidUnixTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -780,7 +818,8 @@ public final class Ints {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNullUnixTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNullUnixTime(this.client.getHost(), accept, context));
     }
 
     /**

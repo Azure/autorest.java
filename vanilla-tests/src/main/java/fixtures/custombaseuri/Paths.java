@@ -2,6 +2,7 @@ package fixtures.custombaseuri;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -44,7 +45,10 @@ public final class Paths {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getEmpty(
-                @HostParam("accountName") String accountName, @HostParam("host") String host, Context context);
+                @HostParam("accountName") String accountName,
+                @HostParam("host") String host,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -65,7 +69,8 @@ public final class Paths {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(accountName, this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(accountName, this.client.getHost(), accept, context));
     }
 
     /**

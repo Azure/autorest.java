@@ -2,6 +2,7 @@ package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -47,25 +48,37 @@ public final class ApiVersionDefaults {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodGlobalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodGlobalNotProvidedValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathGlobalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerGlobalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -81,8 +94,11 @@ public final class ApiVersionDefaults {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getMethodGlobalValid(this.client.getHost(), this.client.getApiVersion(), context));
+                context ->
+                        service.getMethodGlobalValid(
+                                this.client.getHost(), this.client.getApiVersion(), accept, context));
     }
 
     /**
@@ -121,10 +137,11 @@ public final class ApiVersionDefaults {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getMethodGlobalNotProvidedValid(
-                                this.client.getHost(), this.client.getApiVersion(), context));
+                                this.client.getHost(), this.client.getApiVersion(), accept, context));
     }
 
     /**
@@ -163,8 +180,11 @@ public final class ApiVersionDefaults {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getPathGlobalValid(this.client.getHost(), this.client.getApiVersion(), context));
+                context ->
+                        service.getPathGlobalValid(
+                                this.client.getHost(), this.client.getApiVersion(), accept, context));
     }
 
     /**
@@ -203,8 +223,11 @@ public final class ApiVersionDefaults {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getSwaggerGlobalValid(this.client.getHost(), this.client.getApiVersion(), context));
+                context ->
+                        service.getSwaggerGlobalValid(
+                                this.client.getHost(), this.client.getApiVersion(), accept, context));
     }
 
     /**

@@ -778,7 +778,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryNull() {
+    public Map<String, Map<String, String>> getDictionaryNull() {
         return this.serviceClient.getDictionaryNull();
     }
 
@@ -790,7 +790,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryEmpty() {
+    public Map<String, Map<String, String>> getDictionaryEmpty() {
         return this.serviceClient.getDictionaryEmpty();
     }
 
@@ -804,7 +804,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryItemNull() {
+    public Map<String, Map<String, String>> getDictionaryItemNull() {
         return this.serviceClient.getDictionaryItemNull();
     }
 
@@ -818,7 +818,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryItemEmpty() {
+    public Map<String, Map<String, String>> getDictionaryItemEmpty() {
         return this.serviceClient.getDictionaryItemEmpty();
     }
 
@@ -832,7 +832,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryValid() {
+    public Map<String, Map<String, String>> getDictionaryValid() {
         return this.serviceClient.getDictionaryValid();
     }
 
@@ -848,7 +848,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDictionaryValid(Map<String, Object> arrayBody) {
+    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         this.serviceClient.putDictionaryValid(arrayBody);
     }
 }

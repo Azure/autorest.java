@@ -7,6 +7,7 @@ package fixtures.bodycomplex.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -52,7 +53,8 @@ public final class ReadonlypropertiesImpl {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ReadonlyObj>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<ReadonlyObj>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
@@ -60,6 +62,7 @@ public final class ReadonlypropertiesImpl {
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ReadonlyObj complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -72,7 +75,8 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync() {
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -86,7 +90,8 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync(Context context) {
-        return service.getValid(this.client.getHost(), context);
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, context);
     }
 
     /**
@@ -168,7 +173,8 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -183,7 +189,8 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody, Context context) {
-        return service.putValid(this.client.getHost(), complexBody, context);
+        final String accept = "application/json";
+        return service.putValid(this.client.getHost(), complexBody, accept, context);
     }
 
     /**

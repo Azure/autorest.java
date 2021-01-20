@@ -2,6 +2,7 @@ package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -47,25 +48,37 @@ public final class ApiVersionLocals {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodLocalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/local/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodLocalNull(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathLocalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerLocalValid(
-                @HostParam("$host") String host, @QueryParam("api-version") String apiVersion, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -82,7 +95,9 @@ public final class ApiVersionLocals {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
-        return FluxUtil.withContext(context -> service.getMethodLocalValid(this.client.getHost(), apiVersion, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getMethodLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
@@ -124,7 +139,9 @@ public final class ApiVersionLocals {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
@@ -195,7 +212,9 @@ public final class ApiVersionLocals {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
-        return FluxUtil.withContext(context -> service.getPathLocalValid(this.client.getHost(), apiVersion, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getPathLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
@@ -235,8 +254,9 @@ public final class ApiVersionLocals {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getSwaggerLocalValid(this.client.getHost(), apiVersion, context));
+                context -> service.getSwaggerLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**

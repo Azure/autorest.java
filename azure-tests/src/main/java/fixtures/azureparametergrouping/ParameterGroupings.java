@@ -59,6 +59,7 @@ public final class ParameterGroupings {
                 @QueryParam("query") Integer query,
                 @PathParam("path") String path,
                 @BodyParam("application/json") int body,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/parameterGrouping/postOptional")
@@ -68,6 +69,7 @@ public final class ParameterGroupings {
                 @HostParam("$host") String host,
                 @HeaderParam("customHeader") String customHeader,
                 @QueryParam("query") Integer query,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/parameterGrouping/postMultipleParameterGroups")
@@ -79,6 +81,7 @@ public final class ParameterGroupings {
                 @QueryParam("query-one") Integer queryOne,
                 @HeaderParam("header-two") String headerTwo,
                 @QueryParam("query-two") Integer queryTwo,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/parameterGrouping/sharedParameterGroupObject")
@@ -88,6 +91,7 @@ public final class ParameterGroupings {
                 @HostParam("$host") String host,
                 @HeaderParam("header-one") String headerOne,
                 @QueryParam("query-one") Integer queryOne,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -114,12 +118,14 @@ public final class ParameterGroupings {
         } else {
             parameterGroupingPostRequiredParameters.validate();
         }
+        final String accept = "application/json";
         String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
         Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         int body = parameterGroupingPostRequiredParameters.getBody();
         return FluxUtil.withContext(
-                context -> service.postRequired(this.client.getHost(), customHeader, query, path, body, context));
+                context ->
+                        service.postRequired(this.client.getHost(), customHeader, query, path, body, accept, context));
     }
 
     /**
@@ -170,6 +176,7 @@ public final class ParameterGroupings {
         if (parameterGroupingPostOptionalParameters != null) {
             parameterGroupingPostOptionalParameters.validate();
         }
+        final String accept = "application/json";
         String customHeaderInternal = null;
         if (parameterGroupingPostOptionalParameters != null) {
             customHeaderInternal = parameterGroupingPostOptionalParameters.getCustomHeader();
@@ -181,7 +188,7 @@ public final class ParameterGroupings {
         }
         Integer query = queryInternal;
         return FluxUtil.withContext(
-                context -> service.postOptional(this.client.getHost(), customHeader, query, context));
+                context -> service.postOptional(this.client.getHost(), customHeader, query, accept, context));
     }
 
     /**
@@ -264,6 +271,7 @@ public final class ParameterGroupings {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             parameterGroupingPostMultiParamGroupsSecondParamGroup.validate();
         }
+        final String accept = "application/json";
         String headerOneInternal = null;
         if (firstParameterGroup != null) {
             headerOneInternal = firstParameterGroup.getHeaderOne();
@@ -287,7 +295,7 @@ public final class ParameterGroupings {
         return FluxUtil.withContext(
                 context ->
                         service.postMultiParamGroups(
-                                this.client.getHost(), headerOne, queryOne, headerTwo, queryTwo, context));
+                                this.client.getHost(), headerOne, queryOne, headerTwo, queryTwo, accept, context));
     }
 
     /**
@@ -377,6 +385,7 @@ public final class ParameterGroupings {
         if (firstParameterGroup != null) {
             firstParameterGroup.validate();
         }
+        final String accept = "application/json";
         String headerOneInternal = null;
         if (firstParameterGroup != null) {
             headerOneInternal = firstParameterGroup.getHeaderOne();
@@ -388,7 +397,9 @@ public final class ParameterGroupings {
         }
         Integer queryOne = queryOneInternal;
         return FluxUtil.withContext(
-                context -> service.postSharedParameterGroupObject(this.client.getHost(), headerOne, queryOne, context));
+                context ->
+                        service.postSharedParameterGroupObject(
+                                this.client.getHost(), headerOne, queryOne, accept, context));
     }
 
     /**

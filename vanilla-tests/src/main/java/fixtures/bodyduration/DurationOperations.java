@@ -3,6 +3,7 @@ package fixtures.bodyduration;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -48,23 +49,29 @@ public final class DurationOperations {
         @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putPositiveDuration(
-                @HostParam("$host") String host, @BodyParam("application/json") Duration durationBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Duration durationBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getPositiveDuration(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getPositiveDuration(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Duration>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -80,7 +87,8 @@ public final class DurationOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -133,8 +141,9 @@ public final class DurationOperations {
         if (durationBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putPositiveDuration(this.client.getHost(), durationBody, context));
+                context -> service.putPositiveDuration(this.client.getHost(), durationBody, accept, context));
     }
 
     /**
@@ -177,7 +186,8 @@ public final class DurationOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), accept, context));
     }
 
     /**
@@ -225,7 +235,8 @@ public final class DurationOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**

@@ -61,22 +61,26 @@ public final class Pagings {
         @Get("/paging/noitemname")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResultValue>> getNoItemNamePages(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResultValue>> getNoItemNamePages(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/nullnextlink")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getNullNextLinkNamePages(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getNullNextLinkNamePages(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/single")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getSinglePages(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getSinglePages(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/firstResponseEmpty/1")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResultValue>> firstResponseEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResultValue>> firstResponseEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple")
         @ExpectedResponses({200})
@@ -86,6 +90,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/getWithQueryParams")
@@ -95,13 +100,17 @@ public final class Pagings {
                 @HostParam("$host") String host,
                 @QueryParam("requiredQueryParameter") int requiredQueryParameter,
                 @QueryParam("queryConstant") boolean queryConstant,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/nextOperationWithQueryParams")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> nextOperationWithQueryParams(
-                @HostParam("$host") String host, @QueryParam("queryConstant") boolean queryConstant, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("queryConstant") boolean queryConstant,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/paging/multiple/odata")
         @ExpectedResponses({200})
@@ -111,6 +120,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/withpath/{offset}")
@@ -122,32 +132,38 @@ public final class Pagings {
                 @HeaderParam("maxresults") Integer maxresults,
                 @PathParam("offset") int offset,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/retryfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getMultiplePagesRetryFirst(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getMultiplePagesRetryFirst(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/retrysecond")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getMultiplePagesRetrySecond(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getMultiplePagesRetrySecond(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/single/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getSinglePagesFailure(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getSinglePagesFailure(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getMultiplePagesFailure(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getMultiplePagesFailure(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/failureuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getMultiplePagesFailureUri(@HostParam("$host") String host, Context context);
+        Mono<Response<ProductResult>> getMultiplePagesFailureUri(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}")
         @ExpectedResponses({200})
@@ -156,6 +172,7 @@ public final class Pagings {
                 @HostParam("$host") String host,
                 @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
@@ -165,6 +182,7 @@ public final class Pagings {
                 @HostParam("$host") String host,
                 @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/paging/multiple/lro")
@@ -175,6 +193,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
@@ -185,6 +204,7 @@ public final class Pagings {
                 @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
@@ -195,13 +215,14 @@ public final class Pagings {
                 @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/paging/itemNameWithXMSClientName")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientName(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
@@ -209,6 +230,7 @@ public final class Pagings {
         Mono<Response<ProductResultValue>> getNoItemNamePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -217,6 +239,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getSinglePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -225,6 +248,7 @@ public final class Pagings {
         Mono<Response<ProductResultValue>> firstResponseEmptyNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -236,6 +260,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -247,6 +272,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -258,6 +284,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -266,6 +293,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getMultiplePagesRetryFirstNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -274,6 +302,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getMultiplePagesRetrySecondNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -282,6 +311,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getSinglePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -290,6 +320,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getMultiplePagesFailureNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -298,6 +329,7 @@ public final class Pagings {
         Mono<Response<ProductResult>> getMultiplePagesFailureUriNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -309,6 +341,7 @@ public final class Pagings {
                 @HeaderParam("client-request-id") String clientRequestId,
                 @HeaderParam("maxresults") Integer maxresults,
                 @HeaderParam("timeout") Integer timeout,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("{nextLink}")
@@ -317,6 +350,7 @@ public final class Pagings {
         Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientNameNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -333,7 +367,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNoItemNamePages(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNoItemNamePages(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -383,7 +418,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNullNextLinkNamePages(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNullNextLinkNamePages(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -432,7 +468,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -483,7 +520,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.firstResponseEmpty(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.firstResponseEmpty(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -542,6 +580,7 @@ public final class Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             pagingGetMultiplePagesOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresultsInternal = pagingGetMultiplePagesOptions.getMaxresults();
@@ -555,7 +594,7 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePages(
-                                        this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        this.client.getHost(), clientRequestId, maxresults, timeout, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -650,10 +689,11 @@ public final class Pagings {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean queryConstant = true;
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getWithQueryParams(
-                                        this.client.getHost(), requiredQueryParameter, queryConstant, context))
+                                        this.client.getHost(), requiredQueryParameter, queryConstant, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -711,8 +751,11 @@ public final class Pagings {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean queryConstant = true;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.nextOperationWithQueryParams(this.client.getHost(), queryConstant, context))
+                        context ->
+                                service.nextOperationWithQueryParams(
+                                        this.client.getHost(), queryConstant, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -744,6 +787,7 @@ public final class Pagings {
         if (pagingGetOdataMultiplePagesOptions != null) {
             pagingGetOdataMultiplePagesOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetOdataMultiplePagesOptions != null) {
             maxresultsInternal = pagingGetOdataMultiplePagesOptions.getMaxresults();
@@ -757,7 +801,7 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getOdataMultiplePages(
-                                        this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        this.client.getHost(), clientRequestId, maxresults, timeout, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -861,13 +905,20 @@ public final class Pagings {
         } else {
             pagingGetMultiplePagesWithOffsetOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffset(
-                                        this.client.getHost(), clientRequestId, maxresults, offset, timeout, context))
+                                        this.client.getHost(),
+                                        clientRequestId,
+                                        maxresults,
+                                        offset,
+                                        timeout,
+                                        accept,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -971,7 +1022,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirst(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getMultiplePagesRetryFirst(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1025,7 +1078,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecond(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getMultiplePagesRetrySecond(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1078,7 +1133,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getSinglePagesFailure(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getSinglePagesFailure(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1129,7 +1185,8 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailure(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMultiplePagesFailure(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1180,7 +1237,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailureUri(this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getMultiplePagesFailureUri(this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1241,10 +1300,11 @@ public final class Pagings {
         if (tenant == null) {
             return Mono.error(new IllegalArgumentException("Parameter tenant is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), apiVersion, tenant, context))
+                                        this.client.getHost(), apiVersion, tenant, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1310,12 +1370,13 @@ public final class Pagings {
         } else {
             customParameterGroup.validate();
         }
+        final String accept = "application/json";
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), apiVersion, tenant, context))
+                                        this.client.getHost(), apiVersion, tenant, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1379,6 +1440,7 @@ public final class Pagings {
         if (pagingGetMultiplePagesLroOptions != null) {
             pagingGetMultiplePagesLroOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetMultiplePagesLroOptions != null) {
             maxresultsInternal = pagingGetMultiplePagesLroOptions.getMaxresults();
@@ -1392,7 +1454,7 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesLRO(
-                                        this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        this.client.getHost(), clientRequestId, maxresults, timeout, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1498,8 +1560,11 @@ public final class Pagings {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, context))
+                        context ->
+                                service.nextFragment(
+                                        this.client.getHost(), apiVersion, tenant, nextLink, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1537,12 +1602,13 @@ public final class Pagings {
         } else {
             customParameterGroup.validate();
         }
+        final String accept = "application/json";
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(), apiVersion, tenant, nextLink, context))
+                                        this.client.getHost(), apiVersion, tenant, nextLink, accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1567,8 +1633,11 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getPagingModelWithItemNameWithXMSClientName(this.client.getHost(), context))
+                        context ->
+                                service.getPagingModelWithItemNameWithXMSClientName(
+                                        this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1624,7 +1693,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNoItemNamePagesNext(nextLink, this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getNoItemNamePagesNext(nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1654,7 +1725,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getSinglePagesNext(nextLink, this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getSinglePagesNext(nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1684,7 +1757,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.firstResponseEmptyNext(nextLink, this.client.getHost(), context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.firstResponseEmptyNext(nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1720,6 +1795,7 @@ public final class Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             pagingGetMultiplePagesOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresultsInternal = pagingGetMultiplePagesOptions.getMaxresults();
@@ -1733,7 +1809,13 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesNext(
-                                        nextLink, this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        nextLink,
+                                        this.client.getHost(),
+                                        clientRequestId,
+                                        maxresults,
+                                        timeout,
+                                        accept,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1771,6 +1853,7 @@ public final class Pagings {
         if (pagingGetOdataMultiplePagesOptions != null) {
             pagingGetOdataMultiplePagesOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetOdataMultiplePagesOptions != null) {
             maxresultsInternal = pagingGetOdataMultiplePagesOptions.getMaxresults();
@@ -1784,7 +1867,13 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getOdataMultiplePagesNext(
-                                        nextLink, this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        nextLink,
+                                        this.client.getHost(),
+                                        clientRequestId,
+                                        maxresults,
+                                        timeout,
+                                        accept,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1826,12 +1915,19 @@ public final class Pagings {
         } else {
             pagingGetMultiplePagesWithOffsetOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesWithOffsetNext(
-                                        nextLink, this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        nextLink,
+                                        this.client.getHost(),
+                                        clientRequestId,
+                                        maxresults,
+                                        timeout,
+                                        accept,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1861,8 +1957,11 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesRetryFirstNext(nextLink, this.client.getHost(), context))
+                        context ->
+                                service.getMultiplePagesRetryFirstNext(
+                                        nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1892,8 +1991,11 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesRetrySecondNext(nextLink, this.client.getHost(), context))
+                        context ->
+                                service.getMultiplePagesRetrySecondNext(
+                                        nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1923,8 +2025,9 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getSinglePagesFailureNext(nextLink, this.client.getHost(), context))
+                        context -> service.getSinglePagesFailureNext(nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1954,8 +2057,10 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), context))
+                        context ->
+                                service.getMultiplePagesFailureNext(nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1985,8 +2090,11 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getMultiplePagesFailureUriNext(nextLink, this.client.getHost(), context))
+                        context ->
+                                service.getMultiplePagesFailureUriNext(
+                                        nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2024,6 +2132,7 @@ public final class Pagings {
         if (pagingGetMultiplePagesLroOptions != null) {
             pagingGetMultiplePagesLroOptions.validate();
         }
+        final String accept = "application/json";
         Integer maxresultsInternal = null;
         if (pagingGetMultiplePagesLroOptions != null) {
             maxresultsInternal = pagingGetMultiplePagesLroOptions.getMaxresults();
@@ -2037,7 +2146,13 @@ public final class Pagings {
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesLRONext(
-                                        nextLink, this.client.getHost(), clientRequestId, maxresults, timeout, context))
+                                        nextLink,
+                                        this.client.getHost(),
+                                        clientRequestId,
+                                        maxresults,
+                                        timeout,
+                                        accept,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2068,10 +2183,11 @@ public final class Pagings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getPagingModelWithItemNameWithXMSClientNameNext(
-                                        nextLink, this.client.getHost(), context))
+                                        nextLink, this.client.getHost(), accept, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(

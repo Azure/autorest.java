@@ -3,6 +3,7 @@ package fixtures.multipleinheritance;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -121,57 +122,77 @@ public final class MultipleInheritanceServiceClient {
         @Get("/multipleInheritance/horse")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Horse>> getHorse(@HostParam("$host") String host, Context context);
+        Mono<Response<Horse>> getHorse(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/multipleInheritance/horse")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putHorse(
-                @HostParam("$host") String host, @BodyParam("application/json") Horse horse, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Horse horse,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/multipleInheritance/pet")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Pet>> getPet(@HostParam("$host") String host, Context context);
+        Mono<Response<Pet>> getPet(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/multipleInheritance/pet")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putPet(
-                @HostParam("$host") String host, @BodyParam("application/json") Pet pet, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Pet pet,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/multipleInheritance/feline")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Feline>> getFeline(@HostParam("$host") String host, Context context);
+        Mono<Response<Feline>> getFeline(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/multipleInheritance/feline")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putFeline(
-                @HostParam("$host") String host, @BodyParam("application/json") Feline feline, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Feline feline,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/multipleInheritance/cat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Cat>> getCat(@HostParam("$host") String host, Context context);
+        Mono<Response<Cat>> getCat(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/multipleInheritance/cat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putCat(
-                @HostParam("$host") String host, @BodyParam("application/json") Cat cat, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Cat cat,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/multipleInheritance/kitten")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Kitten>> getKitten(@HostParam("$host") String host, Context context);
+        Mono<Response<Kitten>> getKitten(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/multipleInheritance/kitten")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putKitten(
-                @HostParam("$host") String host, @BodyParam("application/json") Kitten kitten, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Kitten kitten,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -186,7 +207,8 @@ public final class MultipleInheritanceServiceClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getHorse(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getHorse(this.getHost(), accept, context));
     }
 
     /**
@@ -240,7 +262,8 @@ public final class MultipleInheritanceServiceClient {
         } else {
             horse.validate();
         }
-        return FluxUtil.withContext(context -> service.putHorse(this.getHost(), horse, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putHorse(this.getHost(), horse, accept, context));
     }
 
     /**
@@ -291,7 +314,8 @@ public final class MultipleInheritanceServiceClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getPet(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getPet(this.getHost(), accept, context));
     }
 
     /**
@@ -345,7 +369,8 @@ public final class MultipleInheritanceServiceClient {
         } else {
             pet.validate();
         }
-        return FluxUtil.withContext(context -> service.putPet(this.getHost(), pet, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putPet(this.getHost(), pet, accept, context));
     }
 
     /**
@@ -396,7 +421,8 @@ public final class MultipleInheritanceServiceClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFeline(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFeline(this.getHost(), accept, context));
     }
 
     /**
@@ -450,7 +476,8 @@ public final class MultipleInheritanceServiceClient {
         } else {
             feline.validate();
         }
-        return FluxUtil.withContext(context -> service.putFeline(this.getHost(), feline, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putFeline(this.getHost(), feline, accept, context));
     }
 
     /**
@@ -501,7 +528,8 @@ public final class MultipleInheritanceServiceClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getCat(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getCat(this.getHost(), accept, context));
     }
 
     /**
@@ -555,7 +583,8 @@ public final class MultipleInheritanceServiceClient {
         } else {
             cat.validate();
         }
-        return FluxUtil.withContext(context -> service.putCat(this.getHost(), cat, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putCat(this.getHost(), cat, accept, context));
     }
 
     /**
@@ -606,7 +635,8 @@ public final class MultipleInheritanceServiceClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getKitten(this.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getKitten(this.getHost(), accept, context));
     }
 
     /**
@@ -660,7 +690,8 @@ public final class MultipleInheritanceServiceClient {
         } else {
             kitten.validate();
         }
-        return FluxUtil.withContext(context -> service.putKitten(this.getHost(), kitten, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putKitten(this.getHost(), kitten, accept, context));
     }
 
     /**

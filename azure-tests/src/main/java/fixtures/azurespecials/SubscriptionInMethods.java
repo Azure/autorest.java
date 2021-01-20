@@ -1,6 +1,7 @@
 package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -47,25 +48,37 @@ public final class SubscriptionInMethods {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodLocalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodLocalNull(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postPathLocalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postSwaggerLocalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -87,8 +100,9 @@ public final class SubscriptionInMethods {
         if (subscriptionId == null) {
             return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postMethodLocalValid(this.client.getHost(), subscriptionId, context));
+                context -> service.postMethodLocalValid(this.client.getHost(), subscriptionId, accept, context));
     }
 
     /**
@@ -140,8 +154,9 @@ public final class SubscriptionInMethods {
         if (subscriptionId == null) {
             return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postMethodLocalNull(this.client.getHost(), subscriptionId, context));
+                context -> service.postMethodLocalNull(this.client.getHost(), subscriptionId, accept, context));
     }
 
     /**
@@ -194,8 +209,9 @@ public final class SubscriptionInMethods {
         if (subscriptionId == null) {
             return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postPathLocalValid(this.client.getHost(), subscriptionId, context));
+                context -> service.postPathLocalValid(this.client.getHost(), subscriptionId, accept, context));
     }
 
     /**
@@ -246,8 +262,9 @@ public final class SubscriptionInMethods {
         if (subscriptionId == null) {
             return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postSwaggerLocalValid(this.client.getHost(), subscriptionId, context));
+                context -> service.postSwaggerLocalValid(this.client.getHost(), subscriptionId, accept, context));
     }
 
     /**

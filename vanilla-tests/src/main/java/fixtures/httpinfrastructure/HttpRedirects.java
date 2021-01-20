@@ -5,6 +5,7 @@ import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -65,84 +66,113 @@ public final class HttpRedirects {
         @Head("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead300Response> head300(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsHead300Response> head300(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet300Response> get300(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsGet300Response> get300(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead301Response> head301(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsHead301Response> head301(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet301Response> get301(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsGet301Response> get301(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPut301Response> put301(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Head("/http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead302Response> head302(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsHead302Response> head302(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet302Response> get302(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsGet302Response> get302(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPatch302Response> patch302(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPost303Response> post303(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Head("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead307Response> head307(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsHead307Response> head307(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet307Response> get307(@HostParam("$host") String host, Context context);
+        Mono<HttpRedirectsGet307Response> get307(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPut307Response> put307(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Patch("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPatch307Response> patch307(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsPost307Response> post307(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Delete("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HttpRedirectsDelete307Response> delete307(
-                @HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Boolean booleanValue,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -158,7 +188,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.head300(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head300(this.client.getHost(), accept, context));
     }
 
     /**
@@ -197,7 +228,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get300(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get300(this.client.getHost(), accept, context));
     }
 
     /**
@@ -245,7 +277,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.head301(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head301(this.client.getHost(), accept, context));
     }
 
     /**
@@ -284,7 +317,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get301(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get301(this.client.getHost(), accept, context));
     }
 
     /**
@@ -325,7 +359,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.put301(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put301(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -366,7 +401,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.head302(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head302(this.client.getHost(), accept, context));
     }
 
     /**
@@ -405,7 +441,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get302(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get302(this.client.getHost(), accept, context));
     }
 
     /**
@@ -446,7 +483,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.patch302(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.patch302(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -489,7 +527,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.post303(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post303(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -530,7 +569,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.head307(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head307(this.client.getHost(), accept, context));
     }
 
     /**
@@ -569,7 +609,8 @@ public final class HttpRedirects {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.get307(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get307(this.client.getHost(), accept, context));
     }
 
     /**
@@ -609,7 +650,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.put307(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put307(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -649,7 +691,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.patch307(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.patch307(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -689,7 +732,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.post307(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.post307(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
@@ -729,7 +773,8 @@ public final class HttpRedirects {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
-        return FluxUtil.withContext(context -> service.delete307(this.client.getHost(), booleanValue, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.delete307(this.client.getHost(), booleanValue, accept, context));
     }
 
     /**
