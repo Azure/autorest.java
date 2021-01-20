@@ -530,26 +530,26 @@ public class DictionaryOperationsTests {
 
   @Test
   public void getDictionaryEmpty() {
-    Map<String, Object> result = client.getDictionaryEmpty();
+    Map<String, Map<String, String>> result = client.getDictionaryEmpty();
     assertEquals(0, result.size());
   }
 
   @Test
   public void getDictionaryItemNull() {
-    Map<String, Object> result = client.getDictionaryItemNull();
+    Map<String, Map<String, String>> result = client.getDictionaryItemNull();
     assertNull(result.get("1"));
   }
 
   @Test
   public void getDictionaryItemEmpty() {
-    Map<String, Object> result = client.getDictionaryItemEmpty();
+    Map<String, Map<String, String>> result = client.getDictionaryItemEmpty();
     Map<String, String> value = (Map<String, String>) result.get("1");
     assertEquals(0, value.size());
   }
 
   @Test
   public void getDictionaryValid() {
-    Map<String, Object> result = client.getDictionaryValid();
+    Map<String, Map<String, String>> result = client.getDictionaryValid();
     Map<String, String> map1 = new HashMap<>();
     map1.put("1", "one");
     map1.put("2", "two");
@@ -583,7 +583,7 @@ public class DictionaryOperationsTests {
     map3.put("7", "seven");
     map3.put("8", "eight");
     map3.put("9", "nine");
-    Map<String, Object> body = new HashMap<>();
+    Map<String, Map<String, String>> body = new HashMap<>();
     body.put("0", map1);
     body.put("1", map2);
     body.put("2", map3);
