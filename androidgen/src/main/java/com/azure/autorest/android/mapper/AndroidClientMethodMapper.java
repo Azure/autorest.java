@@ -60,8 +60,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
      * RestAPI mapper will map API request to an Operation. For paging case, the paging request is mapped to
      * two operations, one for get first page and one for get next page.
      */
-    @Override
-    public List<ClientMethod> map(Operation operation) {
+    public List<ClientMethod> map(Operation operation, String clientClassName) {
         JavaSettings settings = JavaSettings.getInstance();
         if (parsed.containsKey(operation)) {
             return parsed.get(operation);
@@ -76,7 +75,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
         for (Request request : operation.getRequests()) {
             // create service client method builder
-            ClientMethod.Builder builder = createClientMethodBuilder()
+            ClientMethod.Builder builder = ((AndroidClientMethod.Builder) createClientMethodBuilder())
+                    .clientClassName(clientClassName)
                     .description(operation.getLanguage().getJava().getDescription())
                     .clientReference((operation.getOperationGroup() == null
                             || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty())
@@ -138,8 +138,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
                 // Transformations
                 //
-                //  1. From multiple client-method params    -> a single param in retrofit proxy.
-                //  2. From single client-method group param -> multiple retrofit proxy method params.
+                // 1. From multiple client-method params -> a single param in retrofit proxy.
+                // 2. From single client-method group param -> multiple retrofit proxy method params.
                 if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
                         && !(parameter.getSchema() instanceof ConstantSchema)) {
                     ClientMethodParameter outParameter;
@@ -199,11 +199,13 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             IType elementType = null;
             boolean isPaging = false;
             boolean isNextMethod = false;
+            boolean isLongRunning = false;
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
                 if (operation.getExtensions().isXmsLongRunningOperation()) {
-                    throw new UnsupportedOperationException();
+                    isLongRunning = true;
                 }
-                // In paging case, we should return Page<elementType> and require client method template to do conversion
+                // In paging case, we should return Page<elementType> and require client method
+                // template to do conversion
                 // between proxy return type and paged type
                 isPaging = true;
                 Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
@@ -265,13 +267,14 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
                 // Sync method with Optional parameters.
                 //
-                methodType = isPaging ? ClientMethodType.PagingSync : ClientMethodType.SimpleSync;
+                methodType = isPaging ? (isLongRunning ? ClientMethodType.LongRunningSync : ClientMethodType.PagingSync)
+                        : ClientMethodType.SimpleSync;
                 GenericType responseWithResultType = GenericType.AndroidHttpResponse(returnType.getClientType());
                 methods.add(builder
                     .parameters(parameters)
                     .returnValue(new ReturnValue(
-                        returnTypeDescription(operation, responseWithResultType, returnType),
-                        responseWithResultType))
+                            returnTypeDescription(operation, responseWithResultType, returnType),
+                            responseWithResultType))
                     .name(proxyMethod.getName() + "WithRestResponse")
                     .onlyRequiredParameters(false)
                     .type(methodType)
@@ -289,7 +292,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                         .isGroupedParameterRequired(false)
                         .build());
 
-                    IType pageCollection = GenericType.AndroidPageRCollection(elementType);
+                    IType pageCollection = GenericType.AndroidPageCollection(elementType);
                     methods.add(builder
                         .parameters(parameters)
                         .returnValue(new ReturnValue(returnTypeDescription(operation, pageCollection, elementType),
@@ -328,10 +331,13 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
                 List<ClientMethodParameter> withCollectionCallbackParameters = new ArrayList<>(parameters);
                 withCollectionCallbackParameters.add(callbackCollectionParam);
 
+                final Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
                 MethodPageDetails details = new MethodPageDetails(
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        getPageableItemName(operation), null, null);
-                methodType = ClientMethodType.PagingAsync;
+                        getPageableItemName(operation),
+                        (isNextMethod || nextOperation == null) ? null : Mappers.getClientMethodMapper().map(nextOperation).stream().findFirst().get(),
+                        null);
+                methodType = isLongRunning ? ClientMethodType.LongRunningAsync : ClientMethodType.PagingAsync;
                 methods.add(builder
                     .parameters(withCollectionCallbackParameters)
                     .returnValue(new ReturnValue(

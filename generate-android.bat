@@ -7,9 +7,21 @@ set INPUTFILE=%INPUTSOURCE%/body-array.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyarray --payload-flattening-threshold=1
 ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-boolean.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyboolean --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-boolean.quirks.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybooleanquirks --payload-flattening-threshold=1
+ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-byte.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybyte --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-complex.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodycomplex --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-date.json
 ECHO %INPUTFILE%
@@ -22,6 +34,10 @@ ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-datetime-rfc1123.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydatetimerfc1123 --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/body-dictionary.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodydictionary --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-integer.json
 ECHO %INPUTFILE%
@@ -39,6 +55,10 @@ set INPUTFILE=%INPUTSOURCE%/custom-baseUrl.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.custombaseurl --payload-flattening-threshold=1
 ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/paging.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.paging --payload-flattening-threshold=1
+ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/url.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.url --payload-flattening-threshold=1
@@ -46,3 +66,7 @@ ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/xms-error-responses.json
 ECHO %INPUTFILE%
 call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.errorResponse --payload-flattening-threshold=1
+ECHO =======================
+set INPUTFILE=%INPUTSOURCE%/report.json
+ECHO %INPUTFILE%
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.report --payload-flattening-threshold=1

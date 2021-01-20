@@ -304,7 +304,6 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
                                 null);
                     });
 
-
             classBlock.method(JavaVisibility.PackagePrivate,
                     modifiers,
                     "<T> retrofit2.Response<T> executeRetrofitCall(retrofit2.Call<T> call)",

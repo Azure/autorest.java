@@ -15,16 +15,20 @@ import java.util.List;
 public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty> {
     private static ModelPropertyMapper instance = new ModelPropertyMapper();
 
-    private ModelPropertyMapper() {
+    protected ModelPropertyMapper() {
     }
 
     public static ModelPropertyMapper getInstance() {
         return instance;
     }
 
+    protected ClientModelProperty.Builder getModelPropertyBuilder() {
+        return new ClientModelProperty.Builder();
+    }
+
     @Override
     public ClientModelProperty map(Property property) {
-        ClientModelProperty.Builder builder = new ClientModelProperty.Builder()
+        ClientModelProperty.Builder builder = getModelPropertyBuilder()
                 .name(property.getLanguage().getJava().getName())
                 .isRequired(property.isRequired())
                 .isReadOnly(property.isReadOnly());

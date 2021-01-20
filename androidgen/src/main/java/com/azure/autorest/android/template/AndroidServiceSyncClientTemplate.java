@@ -2,7 +2,11 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -10,12 +14,13 @@ import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.Templates;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate {
+public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate {
     private static final AndroidServiceSyncClientTemplate instance = new AndroidServiceSyncClientTemplate();
 
-    public static AndroidServiceSyncClientTemplate getInstance() { return instance;}
+    public static AndroidServiceSyncClientTemplate getInstance() { return instance; }
 
     private AndroidServiceSyncClientTemplate() {
     }
@@ -78,9 +83,7 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
             if (wrapServiceClient) {
                 serviceClient.getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
-                            || (clientMethod.getType() == ClientMethodType.PagingSync
-                                && clientMethod.getName().contains("WithPage")))
+                        .filter(this::shouldWriteMethod)
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
@@ -88,9 +91,7 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
                 methodGroupClient
                         .getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleSync
-                                || (clientMethod.getType() == ClientMethodType.PagingSync
-                                && clientMethod.getName().contains("WithPage")))
+                        .filter(this::shouldWriteMethod)
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
@@ -99,5 +100,26 @@ public class AndroidServiceSyncClientTemplate  extends ServiceSyncClientTemplate
             // Add embedded builder for this Sync ServiceClient
             embeddedBuilderTemplate.write(classBlock);
         });
+    }
+
+    private boolean shouldWriteMethod(ClientMethod clientMethod) {
+        ClientMethodType methodType = clientMethod.getType();
+        if (methodType == ClientMethodType.SimpleSync)
+            return true;
+
+        if (methodType != ClientMethodType.PagingSync)
+            return false;
+
+        String pageCollectionTypeName = GenericType.AndroidPageCollection(ClassType.Object).toString();
+        int leadingIndex = pageCollectionTypeName.indexOf("<");
+        final String pageCollectionMarker = pageCollectionTypeName.substring(0, leadingIndex);
+
+        String pageResponseCollectionTypeName = GenericType.AndroidPageResponseCollection(ClassType.Object).toString();
+        leadingIndex = pageResponseCollectionTypeName.indexOf("<");
+        final String pageResponseCollectionMarker = pageResponseCollectionTypeName.substring(0, leadingIndex);
+
+        IType returnType = clientMethod.getReturnValue().getType().getClientType();
+        return returnType.toString().contains(pageCollectionMarker)
+                || returnType.toString().contains(pageResponseCollectionMarker);
     }
 }

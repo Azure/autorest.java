@@ -3,6 +3,7 @@ package com.azure.autorest.android.template;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import com.azure.autorest.android.model.AndroidClientMethod;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -140,7 +141,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
@@ -409,7 +409,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
 
         clientMethod.getProxyMethod().getRequestContentType();
         switch (clientMethod.getType()) {
@@ -499,9 +498,15 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             return;
         }
 
+        ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
+        AsyncPageRetrieverTemplate asyncPageRetrieverTemplate = new AsyncPageRetrieverTemplate(clientMethod,
+                nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
+        asyncPageRetrieverTemplate.write((JavaClass) typeBlock);
+
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         typeBlock.publicMethod(clientMethod.getDeclaration(),
             function -> {
-                String retrieverClassName = AsyncPageRetrieverTemplate.getRetrieverClassName(elementType);
+                String retrieverClassName = asyncPageRetrieverTemplate.getRetrieverClassName();
                 StringBuilder retrieverConstructionBuilder = new StringBuilder();
                 retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
                 boolean hasPreviousParam = false;
@@ -533,10 +538,26 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             return;
         }
 
+        ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
+        String retrieverClassName;
+        if (methodReturnType.equals(GenericType.AndroidPageCollection(elementType))) {
+            PageRetrieverTemplate pageRetrieverTemplate = new PageRetrieverTemplate(clientMethod,
+                    nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
+            pageRetrieverTemplate.write((JavaClass) typeBlock);
+            retrieverClassName = pageRetrieverTemplate.getRetrieverClassName();
+        }
+        else if (methodReturnType.equals(GenericType.AndroidPageResponseCollection(elementType))) {
+            PageResponseRetrieverTemplate pageResponseRetrieverTemplate = new PageResponseRetrieverTemplate(clientMethod,
+                    nextMethod, ((AndroidClientMethod) clientMethod).clientClassName());
+            pageResponseRetrieverTemplate.write((JavaClass) typeBlock);
+            retrieverClassName = pageResponseRetrieverTemplate.getRetrieverClassName();
+        }
+        else {
+            return;
+        }
+
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            String retrieverClassName = methodReturnType.equals(GenericType.AndroidPageResponseCollection(elementType))
-                    ? PageResponseRetrieverTemplate.getRetrieverClassName(elementType)
-                    : PageRetrieverTemplate.getRetrieverClassName(elementType);
             StringBuilder retrieverConstructionBuilder = new StringBuilder();
             retrieverConstructionBuilder.append(String.format("%1$s retriever = new %1$s(", retrieverClassName));
             boolean hasPreviousParam = false;
@@ -563,6 +584,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                              boolean isPaging) {
         boolean generateSyncMethodWithOnlyRequiredParams = clientMethod.getOnlyRequiredParameters();
         if (generateSyncMethodWithOnlyRequiredParams) {
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
             typeBlock.publicMethod(clientMethod.getDeclaration(),
                     function -> {
                         // sync-method-with-only-required-params delegate call to
@@ -581,6 +603,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         } else {
             // ***WithRestResponse method.
             //
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
             typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
 
                 final String clientReferenceDot
@@ -693,15 +716,28 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             catchBlock.line(String.format("throw %s;", exceptionCreateExpression));
                         },
                         null);
-                ClientMethod nextMethod = clientMethod.getMethodPageDetails().getNextMethod();
-                String pageId = (nextMethod == null || nextMethod == clientMethod)
-                        ? clientMethod.getMethodPageDetails().getNextLinkName()
-                        : "response.raw().request().url().toString()";
+                MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
+                String pageId = "response.raw().request().url().toString()";
+                if (pageDetails.getNextMethod() == null) {
+                    final Optional<ProxyMethodParameter> lastPathParamOpt = clientMethod.getProxyMethod().getParameters().stream()
+                            .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                            .reduce((current, next) -> next);
+                    if (lastPathParamOpt.isPresent()) {
+                        pageId = lastPathParamOpt.get().getName();
+                    }
+                }
+                String nextLink = "null";
+                if (pageDetails.nonNullNextLink()) {
+                    nextLink = String.format("decodedResult.get%s()", CodeNamer.toPascalCase(pageDetails.getNextLinkName()));
+                }
                 succeededCodeBlock.methodReturn(String.format("new Response<>(response.raw().request(),\n" +
                                 "                        response.code(),\n" +
                                 "                        response.headers(),\n" +
-                                "                        new Page<%1$s>(%2$s, decodedResult.getValue(), decodedResult.getNextLink()))",
-                        elementType, pageId));
+                                "                        new Page<%1$s>(%2$s, decodedResult.get%3$s(), %4$s))",
+                        elementType,
+                        pageId,
+                        CodeNamer.toPascalCase(pageDetails.getItemName()),
+                        nextLink));
             } else {
                 IType clientType = bodyType.getClientType();
                 if (!bodyType.equals(clientType)) {
@@ -730,6 +766,8 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                                   ProxyMethod restAPIMethod,
                                                   boolean isPaging) {
         boolean generateAsyncMethodWithOnlyRequiredParams = clientMethod.getOnlyRequiredParameters();
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+
         if (generateAsyncMethodWithOnlyRequiredParams) {
             typeBlock.publicMethod(clientMethod.getDeclaration(),
                     function -> {
@@ -757,51 +795,51 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             clientReferenceDot = clientMethod.getClientReference().replace("this.", "") + ".";
                         }
 
-                        addValidations(function,
-                                clientMethod.getRequiredNullableParameterExpressions(),
-                                clientMethod.getValidateExpressions(),
-                                true,
-                                (exception, onError) -> {
-                                    onError.line("%s.onFailure(%s, null);", callbackParameterName, exception);
-                                    onError.line("return;");
-                                    return null;
-                                },
-                                settings);
-                        addOptionalAndConstantVariables(function,
-                                clientMethod,
-                                restAPIMethod.getParameters(),
-                                settings);
-                        applyParameterTransformations(function,
-                                clientMethod,
-                                settings);
-                        convertClientTypesToWireTypes(function,
-                                clientMethod,
-                                restAPIMethod.getParameters(),
-                                clientReferenceDot,
-                                (exception, onError) -> {
-                                    onError.line(String.format("%s.onFailure(%s, null);", callbackParameterName, exception));
-                                    onError.line("return;");
-                                    return null;
-                                },
-                                settings);
-                        String retrofitAPIArgsList = String.join(", ",
-                                clientMethod.getProxyMethodArguments(settings));
-                        String retrofitAPICall = String.format("service.%s(%s)",
-                                restAPIMethod.getName(),
-                                retrofitAPIArgsList);
+            addValidations(function,
+                    clientMethod.getRequiredNullableParameterExpressions(),
+                    clientMethod.getValidateExpressions(),
+                    true,
+                    (exception, onError) -> {
+                        onError.line("%s.onFailure(%s, null);", callbackParameterName, exception);
+                        onError.line("return;");
+                        return null;
+                    },
+                    settings);
+            addOptionalAndConstantVariables(function,
+                    clientMethod,
+                    restAPIMethod.getParameters(),
+                    settings);
+            applyParameterTransformations(function,
+                    clientMethod,
+                    settings);
+            convertClientTypesToWireTypes(function,
+                    clientMethod,
+                    restAPIMethod.getParameters(),
+                    clientReferenceDot,
+                    (exception, onError) -> {
+                        onError.line(String.format("%s.onFailure(%s, null);", callbackParameterName, exception));
+                        onError.line("return;");
+                        return null;
+                    },
+                    settings);
+            String retrofitAPIArgsList = String.join(", ",
+                    clientMethod.getProxyMethodArguments(settings));
+            String retrofitAPICall = String.format("service.%s(%s)",
+                    restAPIMethod.getName(),
+                    retrofitAPIArgsList);
 
-                        function.line("Call<ResponseBody> call = %s;", retrofitAPICall);
-                        function.anonymousClass("retrofit2.Callback<ResponseBody>",
-                            "retrofitCallback",
-                                anonymousCls -> {
-                            anonymousCls.annotation("Override");
-                            anonymousCls.publicMethod("void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response)",
-                                    onResponseBlock -> onResponseBlock.ifBlock("response.isSuccessful()", responseSuccessBlock -> {
-                                        List<HttpResponseStatus> successStatusCodes = clientMethod.getProxyMethod().getResponseExpectedStatusCodes();
-                                        String successCodeExpression = successStatusCodes
-                                                .stream()
-                                                .map(statusCode -> String.format("response.code() == %d", statusCode.code()))
-                                                .collect(Collectors.joining(" || "));
+            function.line("Call<ResponseBody> call = %s;", retrofitAPICall);
+            function.anonymousClass("retrofit2.Callback<ResponseBody>",
+                "retrofitCallback",
+                anonymousCls -> {
+                    anonymousCls.annotation("Override");
+                    anonymousCls.publicMethod("void onResponse(Call<okhttp3.ResponseBody> call, retrofit2.Response<ResponseBody> response)",
+                            onResponseBlock -> onResponseBlock.ifBlock("response.isSuccessful()", responseSuccessBlock -> {
+                                List<HttpResponseStatus> successStatusCodes = clientMethod.getProxyMethod().getResponseExpectedStatusCodes();
+                                String successCodeExpression = successStatusCodes
+                                        .stream()
+                                        .map(statusCode -> String.format("response.code() == %d", statusCode.code()))
+                                        .collect(Collectors.joining(" || "));
 
                                         responseSuccessBlock.ifBlock(successCodeExpression, succeededCodeBlock -> {
                                             writeAsyncSuccessBlock(clientMethod, callbackParameterName, clientReferenceDot, succeededCodeBlock, (JavaClass) typeBlock, isPaging);
@@ -824,10 +862,10 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                             anonymousCls.publicMethod("void onFailure(Call<ResponseBody> call, Throwable t)",
                                     onFailureBlock -> {
                                         onFailureBlock.line(String.format("%s.onFailure(t, null);", callbackParameterName));
-                                    });
                         });
-                        function.line("call.enqueue(retrofitCallback);");
                     });
+                    function.line("call.enqueue(retrofitCallback);");
+            });
         }
     }
 
@@ -881,11 +919,26 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 final GenericType pageType = (GenericType) callbackParameterType.getTypeArguments()[0];
                 final IType elementType = pageType.getTypeArguments()[0];
                 MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
-                final String pageId = (pageDetails.getNextMethod() == null) ? pageDetails.getNextLinkName() : "response.raw().request().url().toString()";
+                String pageId = "response.raw().request().url().toString()";
+                if (pageDetails.getNextMethod() == null) {
+                    final Optional<ProxyMethodParameter> lastPathParamOpt = clientMethod.getProxyMethod().getParameters().stream()
+                            .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Path)
+                            .reduce((current, next) -> next);
+                    if (lastPathParamOpt.isPresent()) {
+                        pageId = lastPathParamOpt.get().getName();
+                    }
+                }
+                String nextLink = "null";
+                if (pageDetails.nonNullNextLink()) {
+                    nextLink = String.format("decodedResult.get%s()", CodeNamer.toPascalCase(pageDetails.getNextLinkName()));
+                }
                 succeededCodeBlock
-                        .line(String.format("%1$s.onSuccess(new Page<%2$s>(%3$s, decodedResult.getValue(), decodedResult.getNextLink()), response.raw());",
-                                callbackParameterName, elementType, pageId));
-
+                        .line(String.format("%1$s.onSuccess(new Page<%2$s>(%3$s, decodedResult.get%4$s(), %5$s), response.raw());",
+                                callbackParameterName,
+                                elementType,
+                                pageId,
+                                CodeNamer.toPascalCase(pageDetails.getItemName()),
+                                nextLink));
             } else {
                 IType clientType = callbackParameterType.getTypeArguments()[0];
                 String callbackValueName = "decodedResult";

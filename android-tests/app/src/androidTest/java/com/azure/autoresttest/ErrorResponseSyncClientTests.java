@@ -105,7 +105,8 @@ public class ErrorResponseSyncClientTests {
             assertEquals(HttpResponseException.class, ex.getClass());
             HttpResponseException httpException = (HttpResponseException) ex;
             assertEquals(500, httpException.getResponse().code());
-            assertTrue(ex.getMessage().contains("{\"actionResponse\":\"grrrr\",\"errorType\":\"PetSadError\",\"errorMessage\":\"casper aint happy\",\"reason\":\"need more treats\"}"));
+            assertTrue(ex.getMessage().contains(
+                    "{\"actionResponse\":\"grrrr\",\"errorType\":\"PetSadError\",\"errorMessage\":\"casper aint happy\",\"reason\":\"need more treats\"}"));
         }
     }
 
@@ -118,7 +119,8 @@ public class ErrorResponseSyncClientTests {
             assertEquals(HttpResponseException.class, ex.getClass());
             HttpResponseException httpException = (HttpResponseException) ex;
             assertEquals(400, httpException.getResponse().code());
-            assertTrue(ex.getMessage().contains("{\"message\":\"The value of input param models is Dog,Cat,Pet and not the client default value of 'value1'\",\"status\":400}"));
+            assertTrue(ex.getMessage().contains(
+                    "{\"message\":\"The value of input param models is Dog,Cat,Pet and not the client default value of 'value1'\",\"status\":400}"));
         }
     }
 
@@ -131,7 +133,8 @@ public class ErrorResponseSyncClientTests {
             assertEquals(HttpResponseException.class, ex.getClass());
             HttpResponseException httpException = (HttpResponseException) ex;
             assertEquals(400, httpException.getResponse().code());
-            assertTrue(ex.getMessage().contains("{\"message\":\"The value of input param models is  and not the client default value of 'value1'\",\"status\":400}"));
+            assertTrue(ex.getMessage().contains(
+                    "{\"message\":\"The value of input param models is  and not the client default value of 'value1'\",\"status\":400}"));
         }
     }
 
@@ -144,7 +147,8 @@ public class ErrorResponseSyncClientTests {
             assertEquals(HttpResponseException.class, ex.getClass());
             HttpResponseException httpException = (HttpResponseException) ex;
             assertEquals(400, httpException.getResponse().code());
-            assertTrue(ex.getMessage().contains("{\"message\":\"The value of input param models is undefined and not the client default value of 'value1'\",\"status\":400}"));
+            assertTrue(ex.getMessage().contains(
+                    "{\"message\":\"The value of input param models is undefined and not the client default value of 'value1'\",\"status\":400}"));
         }
     }
 }

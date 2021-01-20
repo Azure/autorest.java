@@ -2,7 +2,11 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -10,12 +14,13 @@ import com.azure.autorest.template.ServiceAsyncClientTemplate;
 import com.azure.autorest.template.Templates;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplate {
     private static final AndroidServiceAsyncClientTemplate instance = new AndroidServiceAsyncClientTemplate();
 
-    public static AndroidServiceAsyncClientTemplate getInstance() { return instance;}
+    public static AndroidServiceAsyncClientTemplate getInstance() { return instance; }
 
     private AndroidServiceAsyncClientTemplate() {
     }
@@ -78,10 +83,7 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             if (wrapServiceClient) {
                 serviceClient.getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleAsyncRestResponse
-                                || clientMethod.getType() == ClientMethodType.SimpleAsync
-                                || (clientMethod.getType() == ClientMethodType.PagingAsync
-                                    && clientMethod.getName().contains("Pages")))
+                        .filter(this::shouldWriteMethod)
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
@@ -89,10 +91,7 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
                 methodGroupClient
                         .getClientMethods()
                         .stream()
-                        .filter(clientMethod -> clientMethod.getType() == ClientMethodType.SimpleAsyncRestResponse
-                                || clientMethod.getType() == ClientMethodType.SimpleAsync
-                                || (clientMethod.getType() == ClientMethodType.PagingAsync
-                                    && clientMethod.getName().contains("Pages")))
+                        .filter(this::shouldWriteMethod)
                         .forEach(clientMethod -> {
                             Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
                         });
@@ -101,5 +100,22 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
             // Add embedded builder for this AsyncServiceClient
             embeddedBuilderTemplate.write(classBlock);
         });
+    }
+
+    private boolean shouldWriteMethod(ClientMethod clientMethod) {
+        ClientMethodType methodType = clientMethod.getType();
+        if (methodType == ClientMethodType.SimpleAsyncRestResponse || methodType == ClientMethodType.SimpleAsync)
+            return true;
+
+        if (methodType != ClientMethodType.PagingAsync)
+            return false;
+
+        String collectionMarker = GenericType.AndroidAsyncPagedDataCollection(ClassType.Object).toString();
+        int leadingIndex = collectionMarker.indexOf("<");
+        final String finalCollectionMarker = collectionMarker.substring(0, leadingIndex);
+        Optional<ClientMethodParameter> callbackParam = clientMethod.getParameters().stream()
+                .filter(p -> p.getClientType().toString().contains(finalCollectionMarker))
+                .reduce((current, next) -> next);
+        return callbackParam.isPresent();
     }
 }

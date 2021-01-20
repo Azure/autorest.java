@@ -8,7 +8,6 @@ import com.azure.android.core.util.DateTimeRfc1123;
 import com.azure.androidtest.fixtures.bodyarray.AutoRestSwaggerBATArrayServiceClient;
 import com.azure.androidtest.fixtures.bodyarray.models.Enum0;
 import com.azure.androidtest.fixtures.bodyarray.models.Enum1;
-import com.azure.androidtest.fixtures.bodyarray.models.ErrorException;
 import com.azure.androidtest.fixtures.bodyarray.models.FooEnum;
 import com.azure.androidtest.fixtures.bodyarray.models.Product;
 

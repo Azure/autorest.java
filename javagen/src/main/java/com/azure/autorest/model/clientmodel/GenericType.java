@@ -123,7 +123,7 @@ public class GenericType implements IType {
         };
     }
 
-    public static IType AndroidPageRCollection(IType elementType) {
+    public static IType AndroidPageCollection(IType elementType) {
         return new GenericType("com.azure.android.core.util.paging", "PagedDataCollection", elementType) {
             @Override
             public String toString() {

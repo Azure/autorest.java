@@ -10,7 +10,7 @@ import com.azure.autorest.template.ExceptionTemplate;
 import com.azure.autorest.template.MethodGroupTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceAsyncClientTemplate;
-import com.azure.autorest.template.ServiceClientBuilderTemplate;
+import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.WrapperClientMethodTemplate;
@@ -59,5 +59,10 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ServiceSyncClientTemplate getServiceSynClientTemplate() {
         return AndroidServiceSyncClientTemplate.getInstance();
+    }
+
+    @Override
+    public ModelTemplate getModelTemplate() {
+        return AndroidModelTemplate.getInstance();
     }
 }

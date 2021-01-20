@@ -32,13 +32,18 @@ public class AndroidServiceClient extends ServiceClient {
                              boolean includeBuilderImports,
                              JavaSettings settings) {
         if (!includeBuilderImports) {
+            boolean hasPaging = false;
             for (ClientMethod clientMethod : getClientMethods()) {
                 clientMethod.addImportsTo(imports, includeImplementationImports, settings);
+                hasPaging = hasPaging || clientMethod.getType().name().contains("Paging");
+            }
+
+            if (hasPaging) {
+                imports.add("com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever");
+                imports.add("com.azure.android.core.http.responsepaging.PagedDataResponseRetriever");
+                imports.add("com.azure.android.core.util.paging.PagedDataRetriever");
             }
         }
-        imports.add("com.azure.android.core.http.responsepaging.AsyncPagedDataRetriever");
-        imports.add("com.azure.android.core.http.responsepaging.PagedDataResponseRetriever");
-        imports.add("com.azure.android.core.util.paging.PagedDataRetriever");
 
 //        for (ClientMethod clientMethod : getClientMethods()) {
 //            clientMethod.getProxyMethod()

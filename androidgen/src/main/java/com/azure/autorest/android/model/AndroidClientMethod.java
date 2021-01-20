@@ -22,13 +22,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AndroidClientMethod extends ClientMethod {
+    private final String clientClassName;
+
     private AndroidClientMethod(String description, ReturnValue returnValue,
                                 String name, List<ClientMethodParameter> parameters,
                                 boolean onlyRequiredParameters, ClientMethodType type,
                                 ProxyMethod proxyMethod, Map<String, String> validateExpressions,
                                 String clientReference, List<String> requiredNullableParameterExpressions,
                                 boolean isGroupedParameterRequired, String groupedParameterTypeName,
-                                MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+                                MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
+                                String clientClassName) {
         super(description, returnValue,
                 name, parameters,
                 onlyRequiredParameters, type,
@@ -36,6 +39,11 @@ public class AndroidClientMethod extends ClientMethod {
                 clientReference, requiredNullableParameterExpressions,
                 isGroupedParameterRequired, groupedParameterTypeName,
                 methodPageDetails, methodTransformationDetails);
+        this.clientClassName = clientClassName;
+    }
+
+    public String clientClassName() {
+        return clientClassName;
     }
 
     @Override
@@ -107,6 +115,8 @@ public class AndroidClientMethod extends ClientMethod {
     }
 
     public static class Builder extends ClientMethod.Builder {
+        private String clientClassName;
+
         public AndroidClientMethod build() {
             return new AndroidClientMethod(super.description, super.returnValue,
                     super.name, super.parameters,
@@ -114,7 +124,13 @@ public class AndroidClientMethod extends ClientMethod {
                     super.proxyMethod, super.validateExpressions,
                     super.clientReference, super.requiredNullableParameterExpressions,
                     super.isGroupedParameterRequired, super.groupedParameterTypeName,
-                    super.methodPageDetails, super.methodTransformationDetails);
+                    super.methodPageDetails, super.methodTransformationDetails,
+                    clientClassName);
+        }
+
+        public Builder clientClassName(String clientClassName) {
+            this.clientClassName = clientClassName;
+            return this;
         }
     }
 }

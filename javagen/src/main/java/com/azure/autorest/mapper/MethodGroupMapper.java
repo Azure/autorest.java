@@ -113,17 +113,22 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.packageName(packageName);
 
         List<ClientMethod> clientMethods = new ArrayList<>();
+        final String clientClassName = className;
         for (Operation operation : methodGroup.getOperations()) {
             // "options" is not supported in HttpMethod in azure-core
             // https://github.com/Azure/autorest.java/issues/453
             if (!"options".equals(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
-                clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
+                clientMethods.addAll(mapClientMethods(operation, clientClassName));
             }
         }
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
         return builder.build();
+    }
+
+    protected List<ClientMethod> mapClientMethods(Operation operation, String clientClassName) {
+        return Mappers.getClientMethodMapper().map(operation);
     }
 
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {
