@@ -2,6 +2,7 @@ package fixtures.additionalproperties;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -53,6 +54,7 @@ public final class Pets {
         Mono<Response<PetAPTrue>> createAPTrue(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPTrue createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/additionalProperties/true-subclass")
@@ -61,6 +63,7 @@ public final class Pets {
         Mono<Response<CatAPTrue>> createCatAPTrue(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") CatAPTrue createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/additionalProperties/type/object")
@@ -69,6 +72,7 @@ public final class Pets {
         Mono<Response<PetAPObject>> createAPObject(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPObject createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/additionalProperties/type/string")
@@ -77,6 +81,7 @@ public final class Pets {
         Mono<Response<PetAPString>> createAPString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPString createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/additionalProperties/in/properties")
@@ -85,6 +90,7 @@ public final class Pets {
         Mono<Response<PetAPInProperties>> createAPInProperties(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPInProperties createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/additionalProperties/in/properties/with/additionalProperties/string")
@@ -93,6 +99,7 @@ public final class Pets {
         Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") PetAPInPropertiesWithAPString createParameters,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -117,7 +124,9 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
-        return FluxUtil.withContext(context -> service.createAPTrue(this.client.getHost(), createParameters, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.createAPTrue(this.client.getHost(), createParameters, accept, context));
     }
 
     /**
@@ -177,8 +186,9 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createCatAPTrue(this.client.getHost(), createParameters, context));
+                context -> service.createCatAPTrue(this.client.getHost(), createParameters, accept, context));
     }
 
     /**
@@ -238,8 +248,9 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createAPObject(this.client.getHost(), createParameters, context));
+                context -> service.createAPObject(this.client.getHost(), createParameters, accept, context));
     }
 
     /**
@@ -299,8 +310,9 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createAPString(this.client.getHost(), createParameters, context));
+                context -> service.createAPString(this.client.getHost(), createParameters, accept, context));
     }
 
     /**
@@ -360,8 +372,9 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createAPInProperties(this.client.getHost(), createParameters, context));
+                context -> service.createAPInProperties(this.client.getHost(), createParameters, accept, context));
     }
 
     /**
@@ -422,8 +435,11 @@ public final class Pets {
         } else {
             createParameters.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createAPInPropertiesWithAPString(this.client.getHost(), createParameters, context));
+                context ->
+                        service.createAPInPropertiesWithAPString(
+                                this.client.getHost(), createParameters, accept, context));
     }
 
     /**

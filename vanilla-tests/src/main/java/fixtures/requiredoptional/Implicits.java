@@ -50,25 +50,37 @@ public final class Implicits {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getRequiredPath(
-                @HostParam("$host") String host, @PathParam("pathParameter") String pathParameter, Context context);
+                @HostParam("$host") String host,
+                @PathParam("pathParameter") String pathParameter,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/reqopt/implicit/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalQuery(
-                @HostParam("$host") String host, @QueryParam("queryParameter") String queryParameter, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("queryParameter") String queryParameter,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/reqopt/implicit/optional/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalHeader(
-                @HostParam("$host") String host, @HeaderParam("queryParameter") String queryParameter, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("queryParameter") String queryParameter,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Put("/reqopt/implicit/optional/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBody(
-                @HostParam("$host") String host, @BodyParam("application/json") String bodyParameter, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") String bodyParameter,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/reqopt/global/required/path/{required-global-path}")
         @ExpectedResponses({200})
@@ -76,6 +88,7 @@ public final class Implicits {
         Mono<Response<Void>> getRequiredGlobalPath(
                 @HostParam("$host") String host,
                 @PathParam("required-global-path") String requiredGlobalPath,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/reqopt/global/required/query")
@@ -84,6 +97,7 @@ public final class Implicits {
         Mono<Response<Void>> getRequiredGlobalQuery(
                 @HostParam("$host") String host,
                 @QueryParam("required-global-query") String requiredGlobalQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/reqopt/global/optional/query")
@@ -92,6 +106,7 @@ public final class Implicits {
         Mono<Response<Void>> getOptionalGlobalQuery(
                 @HostParam("$host") String host,
                 @QueryParam("optional-global-query") Integer optionalGlobalQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -113,7 +128,9 @@ public final class Implicits {
         if (pathParameter == null) {
             return Mono.error(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getRequiredPath(this.client.getHost(), pathParameter, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getRequiredPath(this.client.getHost(), pathParameter, accept, context));
     }
 
     /**
@@ -158,8 +175,9 @@ public final class Implicits {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putOptionalQuery(this.client.getHost(), queryParameter, context));
+                context -> service.putOptionalQuery(this.client.getHost(), queryParameter, accept, context));
     }
 
     /**
@@ -229,8 +247,9 @@ public final class Implicits {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putOptionalHeader(this.client.getHost(), queryParameter, context));
+                context -> service.putOptionalHeader(this.client.getHost(), queryParameter, accept, context));
     }
 
     /**
@@ -300,7 +319,9 @@ public final class Implicits {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putOptionalBody(this.client.getHost(), bodyParameter, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putOptionalBody(this.client.getHost(), bodyParameter, accept, context));
     }
 
     /**
@@ -373,10 +394,11 @@ public final class Implicits {
                     new IllegalArgumentException(
                             "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getRequiredGlobalPath(
-                                this.client.getHost(), this.client.getRequiredGlobalPath(), context));
+                                this.client.getHost(), this.client.getRequiredGlobalPath(), accept, context));
     }
 
     /**
@@ -420,10 +442,11 @@ public final class Implicits {
                     new IllegalArgumentException(
                             "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getRequiredGlobalQuery(
-                                this.client.getHost(), this.client.getRequiredGlobalQuery(), context));
+                                this.client.getHost(), this.client.getRequiredGlobalQuery(), accept, context));
     }
 
     /**
@@ -462,10 +485,11 @@ public final class Implicits {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getOptionalGlobalQuery(
-                                this.client.getHost(), this.client.getOptionalGlobalQuery(), context));
+                                this.client.getHost(), this.client.getOptionalGlobalQuery(), accept, context));
     }
 
     /**

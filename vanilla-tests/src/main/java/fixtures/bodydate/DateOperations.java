@@ -3,6 +3,7 @@ package fixtures.bodydate;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -47,44 +48,56 @@ public final class DateOperations {
         @Get("/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getInvalidDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getInvalidDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getOverflowDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getOverflowDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getUnderflowDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getUnderflowDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMaxDate(
-                @HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") LocalDate dateBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getMaxDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getMaxDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMinDate(
-                @HostParam("$host") String host, @BodyParam("application/json") LocalDate dateBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") LocalDate dateBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LocalDate>> getMinDate(@HostParam("$host") String host, Context context);
+        Mono<Response<LocalDate>> getMinDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -100,7 +113,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -148,7 +162,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalidDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalidDate(this.client.getHost(), accept, context));
     }
 
     /**
@@ -196,7 +211,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOverflowDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOverflowDate(this.client.getHost(), accept, context));
     }
 
     /**
@@ -244,7 +260,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnderflowDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnderflowDate(this.client.getHost(), accept, context));
     }
 
     /**
@@ -297,7 +314,8 @@ public final class DateOperations {
         if (dateBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMaxDate(this.client.getHost(), dateBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMaxDate(this.client.getHost(), dateBody, accept, context));
     }
 
     /**
@@ -340,7 +358,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMaxDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMaxDate(this.client.getHost(), accept, context));
     }
 
     /**
@@ -393,7 +412,8 @@ public final class DateOperations {
         if (dateBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putMinDate(this.client.getHost(), dateBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putMinDate(this.client.getHost(), dateBody, accept, context));
     }
 
     /**
@@ -436,7 +456,8 @@ public final class DateOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMinDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMinDate(this.client.getHost(), accept, context));
     }
 
     /**

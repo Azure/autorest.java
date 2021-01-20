@@ -2,6 +2,7 @@ package fixtures.url;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -52,157 +53,235 @@ public final class Queries {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanNull(
-                @HostParam("$host") String host, @QueryParam("boolQuery") Boolean boolQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") Boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host, @QueryParam("intQuery") int intQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host, @QueryParam("intQuery") int intQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntNull(
-                @HostParam("$host") String host, @QueryParam("intQuery") Integer intQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") Integer intQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host, @QueryParam("longQuery") long longQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host, @QueryParam("longQuery") long longQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getLongNull(
-                @HostParam("$host") String host, @QueryParam("longQuery") Long longQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") Long longQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host, @QueryParam("floatQuery") float floatQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host, @QueryParam("floatQuery") float floatQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatNull(
-                @HostParam("$host") String host, @QueryParam("floatQuery") Float floatQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") Float floatQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host, @QueryParam("doubleQuery") double doubleQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host, @QueryParam("doubleQuery") double doubleQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleNull(
-                @HostParam("$host") String host, @QueryParam("doubleQuery") Double doubleQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") Double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> enumValid(
-                @HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("enumQuery") UriColor enumQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> enumNull(
-                @HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("enumQuery") UriColor enumQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("byteQuery") String byteQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteEmpty(
-                @HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("byteQuery") String byteQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteNull(
-                @HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("byteQuery") String byteQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateValid(
-                @HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("dateQuery") LocalDate dateQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateNull(
-                @HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("dateQuery") LocalDate dateQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
@@ -210,6 +289,7 @@ public final class Queries {
         Mono<Response<Void>> dateTimeValid(
                 @HostParam("$host") String host,
                 @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/queries/datetime/null")
@@ -218,49 +298,71 @@ public final class Queries {
         Mono<Response<Void>> dateTimeNull(
                 @HostParam("$host") String host,
                 @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvValid(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvNull(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvEmpty(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/none/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringSsvValid(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringTsvValid(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringPipesValid(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -277,7 +379,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = true;
-        return FluxUtil.withContext(context -> service.getBooleanTrue(this.client.getHost(), boolQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
@@ -317,7 +421,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = false;
-        return FluxUtil.withContext(context -> service.getBooleanFalse(this.client.getHost(), boolQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
@@ -358,7 +464,9 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanNull(this.client.getHost(), boolQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanNull(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
@@ -427,7 +535,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = 1000000;
-        return FluxUtil.withContext(context -> service.getIntOneMillion(this.client.getHost(), intQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, context));
     }
 
     /**
@@ -467,8 +577,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = -1000000;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, context));
+                context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept, context));
     }
 
     /**
@@ -509,7 +620,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntNull(this.client.getHost(), intQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntNull(this.client.getHost(), intQuery, accept, context));
     }
 
     /**
@@ -578,7 +690,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = 10000000000L;
-        return FluxUtil.withContext(context -> service.getTenBillion(this.client.getHost(), longQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getTenBillion(this.client.getHost(), longQuery, accept, context));
     }
 
     /**
@@ -618,8 +732,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = -10000000000L;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, context));
+                context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, accept, context));
     }
 
     /**
@@ -660,7 +775,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongNull(this.client.getHost(), longQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongNull(this.client.getHost(), longQuery, accept, context));
     }
 
     /**
@@ -729,8 +845,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = 103400000000000000000f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificPositive(this.client.getHost(), floatQuery, context));
+                context -> service.floatScientificPositive(this.client.getHost(), floatQuery, accept, context));
     }
 
     /**
@@ -770,8 +887,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = -1.034E-20f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificNegative(this.client.getHost(), floatQuery, context));
+                context -> service.floatScientificNegative(this.client.getHost(), floatQuery, accept, context));
     }
 
     /**
@@ -812,7 +930,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.floatNull(this.client.getHost(), floatQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.floatNull(this.client.getHost(), floatQuery, accept, context));
     }
 
     /**
@@ -881,8 +1000,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = 9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalPositive(this.client.getHost(), doubleQuery, context));
+                context -> service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept, context));
     }
 
     /**
@@ -922,8 +1042,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = -9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalNegative(this.client.getHost(), doubleQuery, context));
+                context -> service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept, context));
     }
 
     /**
@@ -964,7 +1085,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.doubleNull(this.client.getHost(), doubleQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.doubleNull(this.client.getHost(), doubleQuery, accept, context));
     }
 
     /**
@@ -1033,7 +1155,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
-        return FluxUtil.withContext(context -> service.stringUnicode(this.client.getHost(), stringQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
@@ -1073,7 +1197,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
-        return FluxUtil.withContext(context -> service.stringUrlEncoded(this.client.getHost(), stringQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
@@ -1113,7 +1239,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "";
-        return FluxUtil.withContext(context -> service.stringEmpty(this.client.getHost(), stringQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
@@ -1154,7 +1282,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), stringQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
@@ -1224,7 +1353,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), enumQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), enumQuery, accept, context));
     }
 
     /**
@@ -1294,7 +1424,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), enumQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), enumQuery, accept, context));
     }
 
     /**
@@ -1364,9 +1495,10 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), byteQueryConverted, context));
+                context -> service.byteMultiByte(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
@@ -1435,8 +1567,10 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] byteQuery = "".getBytes();
+        final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return FluxUtil.withContext(context -> service.byteEmpty(this.client.getHost(), byteQueryConverted, context));
+        return FluxUtil.withContext(
+                context -> service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
@@ -1477,8 +1611,10 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return FluxUtil.withContext(context -> service.byteNull(this.client.getHost(), byteQueryConverted, context));
+        return FluxUtil.withContext(
+                context -> service.byteNull(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
@@ -1547,7 +1683,8 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
-        return FluxUtil.withContext(context -> service.dateValid(this.client.getHost(), dateQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.dateValid(this.client.getHost(), dateQuery, accept, context));
     }
 
     /**
@@ -1588,7 +1725,8 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), dateQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), dateQuery, accept, context));
     }
 
     /**
@@ -1657,7 +1795,9 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
-        return FluxUtil.withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context));
     }
 
     /**
@@ -1698,7 +1838,9 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.dateTimeNull(this.client.getHost(), dateTimeQuery, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.dateTimeNull(this.client.getHost(), dateTimeQuery, accept, context));
     }
 
     /**
@@ -1770,10 +1912,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -1847,10 +1990,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -1920,10 +2064,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -1994,12 +2139,13 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
                 context ->
                         service.arrayStringNoCollectionFormatEmpty(
-                                this.client.getHost(), arrayQueryConverted, context));
+                                this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -2077,10 +2223,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -2156,10 +2303,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -2236,10 +2384,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return FluxUtil.withContext(
-                context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**

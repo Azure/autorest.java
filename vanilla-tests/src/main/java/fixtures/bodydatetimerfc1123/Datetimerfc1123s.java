@@ -3,6 +3,7 @@ package fixtures.bodydatetimerfc1123;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -51,25 +52,29 @@ public final class Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getOverflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getOverflow(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUnderflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUnderflow(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetimerfc1123/max")
         @ExpectedResponses({200})
@@ -77,19 +82,22 @@ public final class Datetimerfc1123s {
         Mono<Response<Void>> putUtcMaxDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DateTimeRfc1123 datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetimerfc1123/min")
         @ExpectedResponses({200})
@@ -97,13 +105,15 @@ public final class Datetimerfc1123s {
         Mono<Response<Void>> putUtcMinDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DateTimeRfc1123 datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetimerfc1123/min")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcMinDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -119,7 +129,8 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -167,7 +178,8 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -215,7 +227,8 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), accept, context));
     }
 
     /**
@@ -263,7 +276,8 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), accept, context));
     }
 
     /**
@@ -316,9 +330,10 @@ public final class Datetimerfc1123s {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return FluxUtil.withContext(
-                context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted, context));
+                context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted, accept, context));
     }
 
     /**
@@ -361,7 +376,9 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -409,7 +426,9 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -462,9 +481,10 @@ public final class Datetimerfc1123s {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return FluxUtil.withContext(
-                context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted, context));
+                context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted, accept, context));
     }
 
     /**
@@ -507,7 +527,8 @@ public final class Datetimerfc1123s {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), accept, context));
     }
 
     /**

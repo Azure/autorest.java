@@ -3,6 +3,7 @@ package fixtures.extensibleenums;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -48,13 +49,19 @@ public final class Pets {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Pet>> getByPetId(
-                @HostParam("$host") String host, @PathParam("petId") String petId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("petId") String petId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/extensibleenums/pet/addPet")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Pet>> addPet(
-                @HostParam("$host") String host, @BodyParam("application/json") Pet petParam, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Pet petParam,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -75,7 +82,8 @@ public final class Pets {
         if (petId == null) {
             return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByPetId(this.client.getHost(), petId, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByPetId(this.client.getHost(), petId, accept, context));
     }
 
     /**
@@ -132,7 +140,8 @@ public final class Pets {
         if (petParam != null) {
             petParam.validate();
         }
-        return FluxUtil.withContext(context -> service.addPet(this.client.getHost(), petParam, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.addPet(this.client.getHost(), petParam, accept, context));
     }
 
     /**

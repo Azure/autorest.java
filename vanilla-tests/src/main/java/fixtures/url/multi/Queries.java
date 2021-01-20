@@ -2,6 +2,7 @@ package fixtures.url.multi;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -48,19 +49,28 @@ public final class Queries {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiNull(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/multi/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiEmpty(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/queries/array/multi/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiValid(
-                @HostParam("$host") String host, @QueryParam("arrayQuery") String arrayQuery, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("arrayQuery") String arrayQuery,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -78,10 +88,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -151,10 +162,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
@@ -226,10 +238,11 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         String arrayQueryConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, context));
+                context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**

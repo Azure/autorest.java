@@ -2,6 +2,7 @@ package fixtures.bodyfile;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -50,17 +51,20 @@ public final class Files {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFile(@HostParam("$host") String host, Context context);
+        Mono<StreamResponse> getFile(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFileLarge(@HostParam("$host") String host, Context context);
+        Mono<StreamResponse> getFileLarge(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String host, Context context);
+        Mono<StreamResponse> getEmptyFile(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -76,7 +80,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), context));
+        final String accept = "image/png, application/json";
+        return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), accept, context));
     }
 
     /**
@@ -94,7 +99,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getFile(this.client.getHost(), context);
+        final String accept = "image/png, application/json";
+        return service.getFile(this.client.getHost(), accept, context);
     }
 
     /**
@@ -176,7 +182,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), context));
+        final String accept = "image/png, application/json";
+        return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), accept, context));
     }
 
     /**
@@ -194,7 +201,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getFileLarge(this.client.getHost(), context);
+        final String accept = "image/png, application/json";
+        return service.getFileLarge(this.client.getHost(), accept, context);
     }
 
     /**
@@ -276,7 +284,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), context));
+        final String accept = "image/png, application/json";
+        return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), accept, context));
     }
 
     /**
@@ -294,7 +303,8 @@ public final class Files {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return service.getEmptyFile(this.client.getHost(), context);
+        final String accept = "image/png, application/json";
+        return service.getEmptyFile(this.client.getHost(), accept, context);
     }
 
     /**

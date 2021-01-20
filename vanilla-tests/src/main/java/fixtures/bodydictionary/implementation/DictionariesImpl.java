@@ -3,6 +3,7 @@ package fixtures.bodydictionary.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -55,12 +56,14 @@ public final class DictionariesImpl {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Integer>>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Integer>>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/empty")
         @ExpectedResponses({200})
@@ -68,32 +71,38 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, String> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getNullValue(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getNullValue(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getNullKey(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getNullKey(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getEmptyStringKey(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanTfft(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
@@ -101,22 +110,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putBooleanTfft(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Boolean> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Boolean>>> getBooleanInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntegerValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
@@ -124,22 +137,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putIntegerValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Integer> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Integer>>> getIntInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Long>>> getLongValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
@@ -147,22 +164,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putLongValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Long> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Long>>> getLongInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Float>>> getFloatValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -170,22 +191,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putFloatValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Float> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Float>>> getFloatInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
@@ -193,22 +218,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putDoubleValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Double> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Double>>> getDoubleInvalidString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getStringValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
@@ -216,22 +245,26 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putStringValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, String> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getStringWithNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringWithNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, String>>> getStringWithInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
@@ -239,23 +272,27 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putDateValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, LocalDate> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, LocalDate>>> getDateInvalidChars(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
@@ -263,6 +300,7 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putDateTimeValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, OffsetDateTime> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/date-time/invalidnull")
@@ -270,21 +308,21 @@ public final class DictionariesImpl {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
@@ -292,12 +330,14 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putDateTimeRfc1123Valid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, DateTimeRfc1123> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Duration>>> getDurationValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
@@ -305,12 +345,14 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putDurationValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Duration> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getByteValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
@@ -318,43 +360,51 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putByteValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, byte[]> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getByteInvalidNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, byte[]>>> getBase64Url(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexItemNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexItemEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Widget>>> getComplexValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/complex/valid")
         @ExpectedResponses({200})
@@ -362,32 +412,38 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putComplexValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, Widget> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayItemNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayItemEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, List<String>>>> getArrayValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/array/valid")
         @ExpectedResponses({200})
@@ -395,39 +451,46 @@ public final class DictionariesImpl {
         Mono<Response<Void>> putArrayValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Map<String, List<String>> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Map<String, String>>>> getDictionaryNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Map<String, String>>>> getDictionaryEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Map<String, Map<String, String>>>> getDictionaryValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDictionaryValid(
                 @HostParam("$host") String host,
-                @BodyParam("application/json") Map<String, Object> arrayBody,
+                @BodyParam("application/json") Map<String, Map<String, String>> arrayBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -444,7 +507,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -492,7 +556,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -545,7 +610,8 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -588,7 +654,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNullValue(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNullValue(this.client.getHost(), accept, context));
     }
 
     /**
@@ -636,7 +703,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNullKey(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNullKey(this.client.getHost(), accept, context));
     }
 
     /**
@@ -684,7 +752,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmptyStringKey(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmptyStringKey(this.client.getHost(), accept, context));
     }
 
     /**
@@ -732,7 +801,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -780,7 +850,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), accept, context));
     }
 
     /**
@@ -833,7 +904,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putBooleanTfft(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putBooleanTfft(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -876,7 +949,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -924,7 +998,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -972,7 +1047,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1025,7 +1101,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putIntegerValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putIntegerValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1068,7 +1146,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1116,7 +1195,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1164,7 +1244,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1217,7 +1298,8 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1260,7 +1342,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1308,7 +1391,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1356,7 +1440,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1409,7 +1494,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putFloatValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putFloatValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1452,7 +1539,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1500,7 +1588,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1548,7 +1637,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1601,7 +1691,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDoubleValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDoubleValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1644,7 +1736,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1692,7 +1785,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1740,7 +1834,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1793,7 +1888,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putStringValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putStringValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -1836,7 +1933,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1884,7 +1982,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1932,7 +2031,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1985,7 +2085,8 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2028,7 +2129,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2076,7 +2178,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2126,7 +2229,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2185,7 +2289,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDateTimeValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDateTimeValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2232,7 +2338,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2280,7 +2387,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2330,7 +2438,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2389,13 +2498,14 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         Map<String, DateTimeRfc1123> arrayBodyConverted =
                 arrayBody.entrySet().stream()
                         .collect(
                                 java.util.stream.Collectors.toMap(
                                         Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
         return FluxUtil.withContext(
-                context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, context));
+                context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, accept, context));
     }
 
     /**
@@ -2442,7 +2552,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2495,7 +2606,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDurationValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDurationValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2540,7 +2653,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2599,7 +2713,8 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -2646,7 +2761,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2696,7 +2812,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2748,7 +2865,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2796,7 +2914,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2846,7 +2965,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2900,7 +3020,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -2954,7 +3075,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3022,7 +3144,9 @@ public final class DictionariesImpl {
                                 }
                             });
         }
-        return FluxUtil.withContext(context -> service.putComplexValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putComplexValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -3069,7 +3193,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3117,7 +3242,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3165,7 +3291,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3213,7 +3340,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3261,7 +3389,8 @@ public final class DictionariesImpl {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3314,7 +3443,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putArrayValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putArrayValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -3352,12 +3483,13 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3368,10 +3500,10 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryNullAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithResponseAsync()
                 .flatMap(
-                        (Response<Map<String, Object>> res) -> {
+                        (Response<Map<String, Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3388,7 +3520,7 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryNull() {
+    public Map<String, Map<String, String>> getDictionaryNull() {
         return getDictionaryNullAsync().block();
     }
 
@@ -3400,12 +3532,13 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3416,10 +3549,10 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryEmptyAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithResponseAsync()
                 .flatMap(
-                        (Response<Map<String, Object>> res) -> {
+                        (Response<Map<String, Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3436,7 +3569,7 @@ public final class DictionariesImpl {
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryEmpty() {
+    public Map<String, Map<String, String>> getDictionaryEmpty() {
         return getDictionaryEmptyAsync().block();
     }
 
@@ -3450,12 +3583,13 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3468,10 +3602,10 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryItemNullAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithResponseAsync()
                 .flatMap(
-                        (Response<Map<String, Object>> res) -> {
+                        (Response<Map<String, Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3490,7 +3624,7 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryItemNull() {
+    public Map<String, Map<String, String>> getDictionaryItemNull() {
         return getDictionaryItemNullAsync().block();
     }
 
@@ -3504,12 +3638,13 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3522,10 +3657,10 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryItemEmptyAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithResponseAsync()
                 .flatMap(
-                        (Response<Map<String, Object>> res) -> {
+                        (Response<Map<String, Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3544,7 +3679,7 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryItemEmpty() {
+    public Map<String, Map<String, String>> getDictionaryItemEmpty() {
         return getDictionaryItemEmptyAsync().block();
     }
 
@@ -3558,12 +3693,13 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -3576,10 +3712,10 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, Object>> getDictionaryValidAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithResponseAsync()
                 .flatMap(
-                        (Response<Map<String, Object>> res) -> {
+                        (Response<Map<String, Map<String, String>>> res) -> {
                             if (res.getValue() != null) {
                                 return Mono.just(res.getValue());
                             } else {
@@ -3598,7 +3734,7 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Map<String, Object> getDictionaryValid() {
+    public Map<String, Map<String, String>> getDictionaryValid() {
         return getDictionaryValidAsync().block();
     }
 
@@ -3616,7 +3752,7 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
+    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Map<String, String>> arrayBody) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3624,7 +3760,9 @@ public final class DictionariesImpl {
         if (arrayBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putDictionaryValid(this.client.getHost(), arrayBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDictionaryValid(this.client.getHost(), arrayBody, accept, context));
     }
 
     /**
@@ -3641,7 +3779,7 @@ public final class DictionariesImpl {
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDictionaryValidAsync(Map<String, Object> arrayBody) {
+    public Mono<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
     }
 
@@ -3657,7 +3795,7 @@ public final class DictionariesImpl {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDictionaryValid(Map<String, Object> arrayBody) {
+    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         putDictionaryValidAsync(arrayBody).block();
     }
 }

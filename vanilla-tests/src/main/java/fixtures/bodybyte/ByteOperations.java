@@ -3,6 +3,7 @@ package fixtures.bodybyte;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -46,28 +47,35 @@ public final class ByteOperations {
         @Get("/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNonAscii(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getNonAscii(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNonAscii(
-                @HostParam("$host") String host, @BodyParam("application/json") byte[] byteBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") byte[] byteBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<byte[]>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -83,7 +91,8 @@ public final class ByteOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -131,7 +140,8 @@ public final class ByteOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -179,7 +189,8 @@ public final class ByteOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), accept, context));
     }
 
     /**
@@ -232,7 +243,8 @@ public final class ByteOperations {
         if (byteBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putNonAscii(this.client.getHost(), byteBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putNonAscii(this.client.getHost(), byteBody, accept, context));
     }
 
     /**
@@ -275,7 +287,8 @@ public final class ByteOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**

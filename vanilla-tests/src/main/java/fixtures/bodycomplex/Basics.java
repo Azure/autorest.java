@@ -3,6 +3,7 @@ package fixtures.bodycomplex;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -47,7 +48,8 @@ public final class Basics {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
@@ -56,27 +58,32 @@ public final class Basics {
                 @HostParam("$host") String host,
                 @QueryParam("api-version") String apiVersion,
                 @BodyParam("application/json") Basic complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<Basic>> getNotProvided(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -92,7 +99,8 @@ public final class Basics {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -147,8 +155,11 @@ public final class Basics {
         } else {
             complexBody.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody, context));
+                context ->
+                        service.putValid(
+                                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, context));
     }
 
     /**
@@ -191,7 +202,8 @@ public final class Basics {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -239,7 +251,8 @@ public final class Basics {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -287,7 +300,8 @@ public final class Basics {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -335,7 +349,8 @@ public final class Basics {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
     }
 
     /**

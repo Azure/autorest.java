@@ -3,6 +3,7 @@ package fixtures.bodycomplex;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -48,7 +49,8 @@ public final class Readonlyproperties {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ReadonlyObj>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<ReadonlyObj>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
@@ -56,6 +58,7 @@ public final class Readonlyproperties {
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ReadonlyObj complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -72,7 +75,8 @@ public final class Readonlyproperties {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -127,7 +131,8 @@ public final class Readonlyproperties {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
     }
 
     /**

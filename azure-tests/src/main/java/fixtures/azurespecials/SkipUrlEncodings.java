@@ -2,6 +2,7 @@ package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -50,6 +51,7 @@ public final class SkipUrlEncodings {
         Mono<Response<Void>> getMethodPathValid(
                 @HostParam("$host") String host,
                 @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
@@ -58,6 +60,7 @@ public final class SkipUrlEncodings {
         Mono<Response<Void>> getPathValid(
                 @HostParam("$host") String host,
                 @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
@@ -66,31 +69,44 @@ public final class SkipUrlEncodings {
         Mono<Response<Void>> getSwaggerPathValid(
                 @HostParam("$host") String host,
                 @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/azurespecials/skipUrlEncoding/method/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodQueryValid(
-                @HostParam("$host") String host, @QueryParam(value = "q1", encoded = true) String q1, Context context);
+                @HostParam("$host") String host,
+                @QueryParam(value = "q1", encoded = true) String q1,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/skipUrlEncoding/method/query/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodQueryNull(
-                @HostParam("$host") String host, @QueryParam(value = "q1", encoded = true) String q1, Context context);
+                @HostParam("$host") String host,
+                @QueryParam(value = "q1", encoded = true) String q1,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/skipUrlEncoding/path/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathQueryValid(
-                @HostParam("$host") String host, @QueryParam(value = "q1", encoded = true) String q1, Context context);
+                @HostParam("$host") String host,
+                @QueryParam(value = "q1", encoded = true) String q1,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/azurespecials/skipUrlEncoding/swagger/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerQueryValid(
-                @HostParam("$host") String host, @QueryParam(value = "q1", encoded = true) String q1, Context context);
+                @HostParam("$host") String host,
+                @QueryParam(value = "q1", encoded = true) String q1,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -112,8 +128,9 @@ public final class SkipUrlEncodings {
             return Mono.error(
                     new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getMethodPathValid(this.client.getHost(), unencodedPathParam, context));
+                context -> service.getMethodPathValid(this.client.getHost(), unencodedPathParam, accept, context));
     }
 
     /**
@@ -162,8 +179,9 @@ public final class SkipUrlEncodings {
             return Mono.error(
                     new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getPathValid(this.client.getHost(), unencodedPathParam, context));
+                context -> service.getPathValid(this.client.getHost(), unencodedPathParam, accept, context));
     }
 
     /**
@@ -207,8 +225,9 @@ public final class SkipUrlEncodings {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String unencodedPathParam = "path1/path2/path3";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getSwaggerPathValid(this.client.getHost(), unencodedPathParam, context));
+                context -> service.getSwaggerPathValid(this.client.getHost(), unencodedPathParam, accept, context));
     }
 
     /**
@@ -252,7 +271,8 @@ public final class SkipUrlEncodings {
         if (q1 == null) {
             return Mono.error(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMethodQueryValid(this.client.getHost(), q1, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMethodQueryValid(this.client.getHost(), q1, accept, context));
     }
 
     /**
@@ -297,7 +317,8 @@ public final class SkipUrlEncodings {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getMethodQueryNull(this.client.getHost(), q1, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getMethodQueryNull(this.client.getHost(), q1, accept, context));
     }
 
     /**
@@ -370,7 +391,8 @@ public final class SkipUrlEncodings {
         if (q1 == null) {
             return Mono.error(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getPathQueryValid(this.client.getHost(), q1, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getPathQueryValid(this.client.getHost(), q1, accept, context));
     }
 
     /**
@@ -414,7 +436,9 @@ public final class SkipUrlEncodings {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String q1 = "value1&q2=value2&q3=value3";
-        return FluxUtil.withContext(context -> service.getSwaggerQueryValid(this.client.getHost(), q1, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getSwaggerQueryValid(this.client.getHost(), q1, accept, context));
     }
 
     /**

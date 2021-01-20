@@ -3,6 +3,7 @@ package fixtures.bodystring.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -48,29 +49,38 @@ public final class EnumsImpl implements Enums {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Colors>> getNotExpandable(@HostParam("$host") String host, Context context);
+        Mono<Response<Colors>> getNotExpandable(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNotExpandable(
-                @HostParam("$host") String host, @BodyParam("application/json") Colors stringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Colors stringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Colors>> getReferenced(@HostParam("$host") String host, Context context);
+        Mono<Response<Colors>> getReferenced(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putReferenced(
-                @HostParam("$host") String host, @BodyParam("application/json") Colors enumStringBody, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Colors enumStringBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host, Context context);
+        Mono<Response<RefColorConstant>> getReferencedConstant(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
@@ -78,6 +88,7 @@ public final class EnumsImpl implements Enums {
         Mono<Response<Void>> putReferencedConstant(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") RefColorConstant enumStringBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -94,7 +105,8 @@ public final class EnumsImpl implements Enums {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNotExpandable(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNotExpandable(this.client.getHost(), accept, context));
     }
 
     /**
@@ -147,7 +159,9 @@ public final class EnumsImpl implements Enums {
         if (stringBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putNotExpandable(this.client.getHost(), stringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putNotExpandable(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
@@ -190,7 +204,8 @@ public final class EnumsImpl implements Enums {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), accept, context));
     }
 
     /**
@@ -243,7 +258,9 @@ public final class EnumsImpl implements Enums {
         if (enumStringBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putReferenced(this.client.getHost(), enumStringBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putReferenced(this.client.getHost(), enumStringBody, accept, context));
     }
 
     /**
@@ -286,7 +303,8 @@ public final class EnumsImpl implements Enums {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getReferencedConstant(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getReferencedConstant(this.client.getHost(), accept, context));
     }
 
     /**
@@ -341,8 +359,9 @@ public final class EnumsImpl implements Enums {
         } else {
             enumStringBody.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putReferencedConstant(this.client.getHost(), enumStringBody, context));
+                context -> service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, context));
     }
 
     /**

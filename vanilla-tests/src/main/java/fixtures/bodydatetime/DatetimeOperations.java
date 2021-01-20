@@ -3,6 +3,7 @@ package fixtures.bodydatetime;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -50,25 +51,29 @@ public final class DatetimeOperations {
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getNull(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getNull(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getInvalid(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getInvalid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getOverflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getOverflow(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUnderflow(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUnderflow(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/utc")
         @ExpectedResponses({200})
@@ -76,6 +81,7 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putUtcMaxDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/datetime/max/utc7ms")
@@ -84,26 +90,29 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putUtcMaxDateTime7Digits(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/max/utc/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/utc/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/utc7ms/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7Digits(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/localpositiveoffset")
         @ExpectedResponses({200})
@@ -111,6 +120,7 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putLocalPositiveOffsetMaxDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/max/localpositiveoffset/lowercase")
@@ -118,14 +128,14 @@ public final class DatetimeOperations {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/localpositiveoffset/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/localnegativeoffset")
         @ExpectedResponses({200})
@@ -133,6 +143,7 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putLocalNegativeOffsetMaxDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/max/localnegativeoffset/uppercase")
@@ -140,14 +151,14 @@ public final class DatetimeOperations {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/localnegativeoffset/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/utc")
         @ExpectedResponses({200})
@@ -155,13 +166,15 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putUtcMinDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/min/utc")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getUtcMinDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
@@ -169,6 +182,7 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putLocalPositiveOffsetMinDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/min/localpositiveoffset")
@@ -176,7 +190,7 @@ public final class DatetimeOperations {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
@@ -184,6 +198,7 @@ public final class DatetimeOperations {
         Mono<Response<Void>> putLocalNegativeOffsetMinDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") OffsetDateTime datetimeBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/datetime/min/localnegativeoffset")
@@ -191,13 +206,14 @@ public final class DatetimeOperations {
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTime(
-                @HostParam("$host") String host, Context context);
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/min/localnooffset")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -213,7 +229,8 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
     }
 
     /**
@@ -261,7 +278,8 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -309,7 +327,8 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOverflow(this.client.getHost(), accept, context));
     }
 
     /**
@@ -357,7 +376,8 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUnderflow(this.client.getHost(), accept, context));
     }
 
     /**
@@ -410,7 +430,9 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putUtcMaxDateTime(this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -458,8 +480,9 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putUtcMaxDateTime7Digits(this.client.getHost(), datetimeBody, context));
+                context -> service.putUtcMaxDateTime7Digits(this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -502,7 +525,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getUtcLowercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -550,7 +575,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getUtcUppercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -598,8 +625,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getUtcUppercaseMaxDateTime7Digits(this.client.getHost(), context));
+                context -> service.getUtcUppercaseMaxDateTime7Digits(this.client.getHost(), accept, context));
     }
 
     /**
@@ -652,8 +680,11 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putLocalPositiveOffsetMaxDateTime(this.client.getHost(), datetimeBody, context));
+                context ->
+                        service.putLocalPositiveOffsetMaxDateTime(
+                                this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -697,8 +728,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalPositiveOffsetLowercaseMaxDateTime(this.client.getHost(), context));
+                context -> service.getLocalPositiveOffsetLowercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -746,8 +778,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalPositiveOffsetUppercaseMaxDateTime(this.client.getHost(), context));
+                context -> service.getLocalPositiveOffsetUppercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -800,8 +833,11 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putLocalNegativeOffsetMaxDateTime(this.client.getHost(), datetimeBody, context));
+                context ->
+                        service.putLocalNegativeOffsetMaxDateTime(
+                                this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -845,8 +881,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalNegativeOffsetUppercaseMaxDateTime(this.client.getHost(), context));
+                context -> service.getLocalNegativeOffsetUppercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -894,8 +931,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalNegativeOffsetLowercaseMaxDateTime(this.client.getHost(), context));
+                context -> service.getLocalNegativeOffsetLowercaseMaxDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -948,7 +986,9 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putUtcMinDateTime(this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -991,7 +1031,8 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getUtcMinDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1044,8 +1085,11 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putLocalPositiveOffsetMinDateTime(this.client.getHost(), datetimeBody, context));
+                context ->
+                        service.putLocalPositiveOffsetMinDateTime(
+                                this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -1089,8 +1133,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalPositiveOffsetMinDateTime(this.client.getHost(), context));
+                context -> service.getLocalPositiveOffsetMinDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1143,8 +1188,11 @@ public final class DatetimeOperations {
         if (datetimeBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putLocalNegativeOffsetMinDateTime(this.client.getHost(), datetimeBody, context));
+                context ->
+                        service.putLocalNegativeOffsetMinDateTime(
+                                this.client.getHost(), datetimeBody, accept, context));
     }
 
     /**
@@ -1188,8 +1236,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getLocalNegativeOffsetMinDateTime(this.client.getHost(), context));
+                context -> service.getLocalNegativeOffsetMinDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1237,7 +1286,9 @@ public final class DatetimeOperations {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLocalNoOffsetMinDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getLocalNoOffsetMinDateTime(this.client.getHost(), accept, context));
     }
 
     /**

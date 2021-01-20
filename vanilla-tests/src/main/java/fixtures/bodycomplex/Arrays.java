@@ -3,6 +3,7 @@ package fixtures.bodycomplex;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -46,7 +47,8 @@ public final class Arrays {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ArrayWrapper>> getValid(@HostParam("$host") String host, Context context);
+        Mono<Response<ArrayWrapper>> getValid(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/array/valid")
         @ExpectedResponses({200})
@@ -54,12 +56,14 @@ public final class Arrays {
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ArrayWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ArrayWrapper>> getEmpty(@HostParam("$host") String host, Context context);
+        Mono<Response<ArrayWrapper>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/array/empty")
         @ExpectedResponses({200})
@@ -67,12 +71,14 @@ public final class Arrays {
         Mono<Response<Void>> putEmpty(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ArrayWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ArrayWrapper>> getNotProvided(@HostParam("$host") String host, Context context);
+        Mono<Response<ArrayWrapper>> getNotProvided(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -88,7 +94,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
     }
 
     /**
@@ -144,7 +151,8 @@ public final class Arrays {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -189,7 +197,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
     }
 
     /**
@@ -244,7 +253,8 @@ public final class Arrays {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -287,7 +297,8 @@ public final class Arrays {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
     }
 
     /**

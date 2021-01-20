@@ -3,6 +3,7 @@ package fixtures.validation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -156,6 +157,7 @@ public final class AutoRestValidationTest {
                 @PathParam("resourceGroupName") String resourceGroupName,
                 @PathParam("id") int id,
                 @QueryParam("apiVersion") String apiVersion,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Put("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
@@ -168,6 +170,7 @@ public final class AutoRestValidationTest {
                 @PathParam("id") int id,
                 @QueryParam("apiVersion") String apiVersion,
                 @BodyParam("application/json") Product body,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/validation/constantsInPath/{constantParam}/value")
@@ -183,6 +186,7 @@ public final class AutoRestValidationTest {
                 @HostParam("$host") String host,
                 @PathParam("constantParam") String constantParam,
                 @BodyParam("application/json") Product body,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -209,6 +213,7 @@ public final class AutoRestValidationTest {
             return Mono.error(
                     new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.validationOfMethodParameters(
@@ -217,6 +222,7 @@ public final class AutoRestValidationTest {
                                 resourceGroupName,
                                 id,
                                 this.getApiVersion(),
+                                accept,
                                 context));
     }
 
@@ -285,6 +291,7 @@ public final class AutoRestValidationTest {
         if (body != null) {
             body.validate();
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.validationOfBody(
@@ -294,6 +301,7 @@ public final class AutoRestValidationTest {
                                 id,
                                 this.getApiVersion(),
                                 body,
+                                accept,
                                 context));
     }
 
@@ -426,8 +434,9 @@ public final class AutoRestValidationTest {
             body.validate();
         }
         final String constantParam = "constant";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postWithConstantInBody(this.getHost(), constantParam, body, context));
+                context -> service.postWithConstantInBody(this.getHost(), constantParam, body, accept, context));
     }
 
     /**

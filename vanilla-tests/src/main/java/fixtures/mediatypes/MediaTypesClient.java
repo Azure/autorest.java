@@ -122,19 +122,26 @@ public final class MediaTypesClient {
                 @HeaderParam("Content-Type") ContentType contentType,
                 @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
                 @HeaderParam("Content-Length") long contentLength,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(
-                @HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("application/json") SourcePath input,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/mediatypes/contentTypeWithEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> contentTypeWithEncoding(
-                @HostParam("$host") String host, @BodyParam("text/plain") String input, Context context);
+                @HostParam("$host") String host,
+                @BodyParam("text/plain") String input,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -160,8 +167,9 @@ public final class MediaTypesClient {
         if (input == null) {
             return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
+                context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
     }
 
     /**
@@ -218,13 +226,14 @@ public final class MediaTypesClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
+        final String accept = "application/json";
         SourcePath inputInternal = null;
         if (source != null) {
             inputInternal = new SourcePath();
             inputInternal.setSource(source);
         }
         SourcePath input = inputInternal;
-        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), input, context));
+        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), input, accept, context));
     }
 
     /**
@@ -314,7 +323,8 @@ public final class MediaTypesClient {
         if (input == null) {
             return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.contentTypeWithEncoding(this.getHost(), input, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.contentTypeWithEncoding(this.getHost(), input, accept, context));
     }
 
     /**

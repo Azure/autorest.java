@@ -3,6 +3,7 @@ package fixtures.bodycomplex;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
@@ -57,7 +58,8 @@ public final class Primitives {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<IntWrapper>> getInt(@HostParam("$host") String host, Context context);
+        Mono<Response<IntWrapper>> getInt(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
@@ -65,12 +67,14 @@ public final class Primitives {
         Mono<Response<Void>> putInt(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") IntWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LongWrapper>> getLong(@HostParam("$host") String host, Context context);
+        Mono<Response<LongWrapper>> getLong(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
@@ -78,12 +82,14 @@ public final class Primitives {
         Mono<Response<Void>> putLong(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") LongWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<FloatWrapper>> getFloat(@HostParam("$host") String host, Context context);
+        Mono<Response<FloatWrapper>> getFloat(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
@@ -91,12 +97,14 @@ public final class Primitives {
         Mono<Response<Void>> putFloat(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") FloatWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DoubleWrapper>> getDouble(@HostParam("$host") String host, Context context);
+        Mono<Response<DoubleWrapper>> getDouble(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
@@ -104,12 +112,14 @@ public final class Primitives {
         Mono<Response<Void>> putDouble(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DoubleWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BooleanWrapper>> getBool(@HostParam("$host") String host, Context context);
+        Mono<Response<BooleanWrapper>> getBool(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
@@ -117,12 +127,14 @@ public final class Primitives {
         Mono<Response<Void>> putBool(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BooleanWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<StringWrapper>> getString(@HostParam("$host") String host, Context context);
+        Mono<Response<StringWrapper>> getString(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
@@ -130,12 +142,14 @@ public final class Primitives {
         Mono<Response<Void>> putString(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") StringWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DateWrapper>> getDate(@HostParam("$host") String host, Context context);
+        Mono<Response<DateWrapper>> getDate(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
@@ -143,12 +157,14 @@ public final class Primitives {
         Mono<Response<Void>> putDate(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DateWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DatetimeWrapper>> getDateTime(@HostParam("$host") String host, Context context);
+        Mono<Response<DatetimeWrapper>> getDateTime(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
@@ -156,12 +172,14 @@ public final class Primitives {
         Mono<Response<Void>> putDateTime(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DatetimeWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String host, Context context);
+        Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
@@ -169,12 +187,14 @@ public final class Primitives {
         Mono<Response<Void>> putDateTimeRfc1123(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Datetimerfc1123Wrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DurationWrapper>> getDuration(@HostParam("$host") String host, Context context);
+        Mono<Response<DurationWrapper>> getDuration(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
@@ -182,12 +202,14 @@ public final class Primitives {
         Mono<Response<Void>> putDuration(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DurationWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ByteWrapper>> getByte(@HostParam("$host") String host, Context context);
+        Mono<Response<ByteWrapper>> getByte(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
@@ -195,6 +217,7 @@ public final class Primitives {
         Mono<Response<Void>> putByte(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ByteWrapper complexBody,
+                @HeaderParam("Accept") String accept,
                 Context context);
     }
 
@@ -211,7 +234,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getInt(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getInt(this.client.getHost(), accept, context));
     }
 
     /**
@@ -266,7 +290,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putInt(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putInt(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -309,7 +334,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getLong(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getLong(this.client.getHost(), accept, context));
     }
 
     /**
@@ -364,7 +390,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putLong(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putLong(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -407,7 +434,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getFloat(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getFloat(this.client.getHost(), accept, context));
     }
 
     /**
@@ -462,7 +490,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putFloat(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putFloat(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -505,7 +534,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDouble(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDouble(this.client.getHost(), accept, context));
     }
 
     /**
@@ -560,7 +590,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putDouble(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putDouble(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -603,7 +634,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getBool(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getBool(this.client.getHost(), accept, context));
     }
 
     /**
@@ -658,7 +690,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putBool(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putBool(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -701,7 +734,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getString(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getString(this.client.getHost(), accept, context));
     }
 
     /**
@@ -756,7 +790,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putString(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putString(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -799,7 +834,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDate(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDate(this.client.getHost(), accept, context));
     }
 
     /**
@@ -854,7 +890,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putDate(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putDate(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -897,7 +934,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTime(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTime(this.client.getHost(), accept, context));
     }
 
     /**
@@ -952,7 +990,9 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putDateTime(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDateTime(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -995,7 +1035,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDateTimeRfc1123(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDateTimeRfc1123(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1050,7 +1091,9 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -1093,7 +1136,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getDuration(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getDuration(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1148,7 +1192,9 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putDuration(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putDuration(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
@@ -1191,7 +1237,8 @@ public final class Primitives {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.getByte(this.client.getHost(), context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getByte(this.client.getHost(), accept, context));
     }
 
     /**
@@ -1246,7 +1293,8 @@ public final class Primitives {
         } else {
             complexBody.validate();
         }
-        return FluxUtil.withContext(context -> service.putByte(this.client.getHost(), complexBody, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putByte(this.client.getHost(), complexBody, accept, context));
     }
 
     /**

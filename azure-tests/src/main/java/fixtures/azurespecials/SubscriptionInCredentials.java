@@ -1,6 +1,7 @@
 package fixtures.azurespecials;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -50,13 +51,19 @@ public final class SubscriptionInCredentials {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodGlobalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodGlobalNull(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post(
                 "/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
@@ -66,19 +73,26 @@ public final class SubscriptionInCredentials {
                 @HostParam("$host") String host,
                 @PathParam("subscriptionId") String subscriptionId,
                 @QueryParam("api-version") String apiVersion,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Post("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postPathGlobalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Post("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postSwaggerGlobalValid(
-                @HostParam("$host") String host, @PathParam("subscriptionId") String subscriptionId, Context context);
+                @HostParam("$host") String host,
+                @PathParam("subscriptionId") String subscriptionId,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -100,9 +114,11 @@ public final class SubscriptionInCredentials {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.postMethodGlobalValid(this.client.getHost(), this.client.getSubscriptionId(), context));
+                        service.postMethodGlobalValid(
+                                this.client.getHost(), this.client.getSubscriptionId(), accept, context));
     }
 
     /**
@@ -149,9 +165,11 @@ public final class SubscriptionInCredentials {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.postMethodGlobalNull(this.client.getHost(), this.client.getSubscriptionId(), context));
+                        service.postMethodGlobalNull(
+                                this.client.getHost(), this.client.getSubscriptionId(), accept, context));
     }
 
     /**
@@ -198,12 +216,14 @@ public final class SubscriptionInCredentials {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postMethodGlobalNotProvidedValid(
                                 this.client.getHost(),
                                 this.client.getSubscriptionId(),
                                 this.client.getApiVersion(),
+                                accept,
                                 context));
     }
 
@@ -251,9 +271,11 @@ public final class SubscriptionInCredentials {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.postPathGlobalValid(this.client.getHost(), this.client.getSubscriptionId(), context));
+                        service.postPathGlobalValid(
+                                this.client.getHost(), this.client.getSubscriptionId(), accept, context));
     }
 
     /**
@@ -300,10 +322,11 @@ public final class SubscriptionInCredentials {
                     new IllegalArgumentException(
                             "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postSwaggerGlobalValid(
-                                this.client.getHost(), this.client.getSubscriptionId(), context));
+                                this.client.getHost(), this.client.getSubscriptionId(), accept, context));
     }
 
     /**
