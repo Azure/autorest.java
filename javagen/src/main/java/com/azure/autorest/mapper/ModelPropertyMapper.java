@@ -96,7 +96,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
         builder.annotationArguments(String.join(", ", annotationArgumentList));
 
-//        String headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
+        String headerCollectionPrefix = null;
+        if (property.getExtensions() != null && property.getExtensions().getXmsHeaderCollectionPrefix() != null) {
+            headerCollectionPrefix = property.getExtensions().getXmsHeaderCollectionPrefix();
+        }
+        builder.headerCollectionPrefix(headerCollectionPrefix);
 
         IType propertyWireType = Mappers.getSchemaMapper().map(property.getSchema());
         if (propertyWireType != null && property.isNullable()) {

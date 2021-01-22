@@ -1,6 +1,7 @@
 package com.azure.autorest.extension.base.model.extensionmodel;
 
 import java.util.List;
+import java.util.Map;
 
 public class XmsExtensions {
     private XmsEnum xmsEnum;
@@ -20,6 +21,8 @@ public class XmsExtensions {
     private boolean xmsAzureResource;
 
     private List<String> xmsMutability;
+
+    private String xmsHeaderCollectionPrefix;
 
     public XmsEnum getXmsEnum() {
         return xmsEnum;
@@ -91,5 +94,13 @@ public class XmsExtensions {
 
     public void setXmsMutability(List<String> xmsMutability) {
         this.xmsMutability = xmsMutability;
+    }
+
+    public String getXmsHeaderCollectionPrefix() {
+        return xmsHeaderCollectionPrefix;
+    }
+
+    public void setXmsHeaderCollectionPrefix(String xmsHeaderCollectionPrefix) {
+        this.xmsHeaderCollectionPrefix = xmsHeaderCollectionPrefix;
     }
 }
