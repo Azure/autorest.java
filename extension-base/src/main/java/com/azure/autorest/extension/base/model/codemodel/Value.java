@@ -182,6 +182,17 @@ public class Value extends Metadata {
     }
 
     public void setSchema(Schema schema) {
+        // This should ideally be done by the modeler if the header collection prefix is set.
+        // The schema should be of type dictionary
+        // TODO: remove this when modeler is fixed.
+        if (this.getExtensions() != null
+                && this.getExtensions().getXmsHeaderCollectionPrefix() != null
+                && schema instanceof StringSchema) {
+            DictionarySchema dictionarySchema = new DictionarySchema();
+            dictionarySchema.setElementType(schema);
+            this.schema = dictionarySchema;
+            return;
+        }
         this.schema = schema;
     }
 

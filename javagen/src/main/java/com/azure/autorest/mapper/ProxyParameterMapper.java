@@ -36,8 +36,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .isRequired(parameter.isRequired())
                 .isNullable(parameter.isNullable());
 
-        //TODO: HeaderCollectionPrefix
-//        String parameterHeaderCollectionPrefix = parameter.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
+        String headerCollectionPrefix = null;
+        if (parameter.getExtensions() != null && parameter.getExtensions().getXmsHeaderCollectionPrefix() != null) {
+            headerCollectionPrefix = parameter.getExtensions().getXmsHeaderCollectionPrefix();
+        }
+        builder.headerCollectionPrefix(headerCollectionPrefix);
 
         Schema ParameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);

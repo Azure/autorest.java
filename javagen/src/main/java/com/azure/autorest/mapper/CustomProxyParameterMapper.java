@@ -38,6 +38,13 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
                 .isRequired(parameter.isRequired())
                 .isNullable(parameter.isNullable());
 
+        String headerCollectionPrefix = null;
+        if (parameter.getExtensions() != null && parameter.getExtensions().getXmsHeaderCollectionPrefix() != null) {
+            headerCollectionPrefix = parameter.getExtensions().getXmsHeaderCollectionPrefix();
+        }
+        builder.headerCollectionPrefix(headerCollectionPrefix);
+
+
         Schema parameterJvWireType = parameter.getSchema();
 
         IType wireType = Mappers.getSchemaMapper().map(parameterJvWireType);
