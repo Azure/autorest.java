@@ -3,6 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -238,7 +239,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         for (Response response : operation.getResponses()) {
             if (response.getProtocol().getHttp().getHeaders() != null) {
                 for (Header header : response.getProtocol().getHttp().getHeaders()) {
-                    headerMap.put(header.getHeader(), header.getSchema());
+                    if (header.getExtensions() != null && header.getExtensions().getXmsHeaderCollectionPrefix() != null) {
+                        DictionarySchema dictionarySchema = new DictionarySchema();
+                        dictionarySchema.setElementType(header.getSchema());
+                        headerMap.put(header.getExtensions().getXmsHeaderCollectionPrefix(), dictionarySchema);
+
+                    } else {
+                        headerMap.put(header.getHeader(), header.getSchema());
+                    }
                 }
             }
         }
