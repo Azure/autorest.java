@@ -13,6 +13,7 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
@@ -236,17 +237,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         String name = CodeNamer.getPlural(operation.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
+        Map<String, XmsExtensions> headerExtensions = new HashMap<>();
         for (Response response : operation.getResponses()) {
             if (response.getProtocol().getHttp().getHeaders() != null) {
                 for (Header header : response.getProtocol().getHttp().getHeaders()) {
-                    if (header.getExtensions() != null && header.getExtensions().getXmsHeaderCollectionPrefix() != null) {
-                        DictionarySchema dictionarySchema = new DictionarySchema();
-                        dictionarySchema.setElementType(header.getSchema());
-                        headerMap.put(header.getExtensions().getXmsHeaderCollectionPrefix(), dictionarySchema);
-
-                    } else {
-                        headerMap.put(header.getHeader(), header.getSchema());
-                    }
+                    headerExtensions.put(header.getHeader(), header.getExtensions());
+                    headerMap.put(header.getHeader(), header.getSchema());
                 }
             }
         }
@@ -267,6 +263,15 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             property.getLanguage().getJava().setDescription(header.getValue().getDescription());
             property.setSchema(header.getValue());
             property.setDescription(header.getValue().getDescription());
+            if (headerExtensions.get(header.getKey()) != null) {
+                property.setExtensions(headerExtensions.get(header.getKey()));
+                if (property.getExtensions().getXmsHeaderCollectionPrefix() != null) {
+                    property.setSerializedName(property.getExtensions().getXmsHeaderCollectionPrefix());
+                    DictionarySchema dictionarySchema = new DictionarySchema();
+                    dictionarySchema.setElementType(header.getValue());
+                    property.setSchema(dictionarySchema);
+                }
+            }
             headerSchema.getProperties().add(property);
         }
         return headerSchema;
