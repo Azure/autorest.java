@@ -1,6 +1,6 @@
-set VANILLA_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set AZURE_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
-set ARM_ARGUMENTS=--version=3.0.6350 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
+set VANILLA_ARGUMENTS=--version=3.0.6367 --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set AZURE_ARGUMENTS=--version=3.0.6367 --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods
+set ARM_ARGUMENTS=--version=3.0.6367 --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
 
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
 call autorest %VANILLA_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-array.json --namespace=fixtures.bodyarray
@@ -44,6 +44,7 @@ call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/A
 call autorest %AZURE_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1
 
 rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro.json --namespace=fixtures.lro
+rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints
 rem del azure-tests\src\main\java\module-info.java
 
 call autorest --use:. customization-tests/swagger
