@@ -19,7 +19,8 @@ public class PagingTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestPagingTestServiceBuilder().buildClient();
+        client = new AutoRestPagingTestServiceBuilder()
+                .buildClient();
     }
 
     @Test
@@ -124,4 +125,36 @@ public class PagingTests {
                 new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
         Assertions.assertEquals(10, response.stream().count());
     }
+
+    @Test
+    public void getNoItemNamePages() {
+        long count = client.getPagings().getNoItemNamePages().stream().count();
+        Assertions.assertEquals(1, count);
+    }
+
+    @Test
+    public void getNullNextLinkNamePages() {
+        long count = client.getPagings().getNullNextLinkNamePages().stream().count();
+        Assertions.assertEquals(1, count);
+    }
+
+    @Test
+    public void getWithQueryParams() {
+        long count = client.getPagings().getWithQueryParams(100).stream().count();
+        Assertions.assertEquals(2, count);
+    }
+
+    @Test
+    public void getPagingModelWithItemNameWithXMSClientName() {
+        long count = client.getPagings().getPagingModelWithItemNameWithXMSClientName().stream().count();
+        Assertions.assertEquals(1, count);
+    }
+
+    @Test
+    public void firstResponseEmpty() {
+        long count = client.getPagings().firstResponseEmpty().stream().count();
+        Assertions.assertEquals(1, count);
+    }
+
+    // getMultiplePagesLRO requires Fluent build
 }
