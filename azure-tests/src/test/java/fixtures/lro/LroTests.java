@@ -34,8 +34,7 @@ public class LroTests {
 
     @BeforeAll
     public static void setup() {
-        HttpPipeline pipeline;
-        pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
+        HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
                 new RetryPolicy(),
                 new CookiePolicy()
                 //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))

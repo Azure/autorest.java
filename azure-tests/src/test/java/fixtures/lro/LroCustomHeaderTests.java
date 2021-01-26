@@ -28,8 +28,7 @@ public class LroCustomHeaderTests {
 
     @BeforeAll
     public static void setup() {
-        HttpPipeline pipeline;
-        pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
+        HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
                 new RetryPolicy(),
                 new CookiePolicy(),
                 (context, next) -> {

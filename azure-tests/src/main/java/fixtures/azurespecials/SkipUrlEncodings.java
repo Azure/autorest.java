@@ -137,6 +137,30 @@ public final class SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getMethodPathValidWithResponseAsync(String unencodedPathParam, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (unencodedPathParam == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMethodPathValid(this.client.getHost(), unencodedPathParam, accept, context);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -151,6 +175,22 @@ public final class SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getMethodPathValidAsync(String unencodedPathParam, Context context) {
+        return getMethodPathValidWithResponseAsync(unencodedPathParam, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -158,6 +198,21 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getMethodPathValid(String unencodedPathParam) {
         getMethodPathValidAsync(unencodedPathParam).block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getMethodPathValidWithResponse(String unencodedPathParam, Context context) {
+        return getMethodPathValidWithResponseAsync(unencodedPathParam, context).block();
     }
 
     /**
@@ -188,6 +243,30 @@ public final class SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getPathValidWithResponseAsync(String unencodedPathParam, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (unencodedPathParam == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getPathValid(this.client.getHost(), unencodedPathParam, accept, context);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -202,6 +281,21 @@ public final class SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getPathValidAsync(String unencodedPathParam, Context context) {
+        return getPathValidWithResponseAsync(unencodedPathParam, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -209,6 +303,21 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getPathValid(String unencodedPathParam) {
         getPathValidAsync(unencodedPathParam).block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getPathValidWithResponse(String unencodedPathParam, Context context) {
+        return getPathValidWithResponseAsync(unencodedPathParam, context).block();
     }
 
     /**
@@ -233,6 +342,26 @@ public final class SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getSwaggerPathValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String unencodedPathParam = "path1/path2/path3";
+        final String accept = "application/json";
+        return service.getSwaggerPathValid(this.client.getHost(), unencodedPathParam, accept, context);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with unencoded path parameter with value 'path1/path2/path3'.
@@ -245,12 +374,40 @@ public final class SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getSwaggerPathValidAsync(Context context) {
+        return getSwaggerPathValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getSwaggerPathValid() {
         getSwaggerPathValidAsync().block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getSwaggerPathValidWithResponse(Context context) {
+        return getSwaggerPathValidWithResponseAsync(context).block();
     }
 
     /**
@@ -279,6 +436,29 @@ public final class SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getMethodQueryValidWithResponseAsync(String q1, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (q1 == null) {
+            return Mono.error(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMethodQueryValid(this.client.getHost(), q1, accept, context);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -293,6 +473,21 @@ public final class SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getMethodQueryValidAsync(String q1, Context context) {
+        return getMethodQueryValidWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -300,6 +495,21 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getMethodQueryValid(String q1) {
         getMethodQueryValidAsync(q1).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getMethodQueryValidWithResponse(String q1, Context context) {
+        return getMethodQueryValidWithResponseAsync(q1, context).block();
     }
 
     /**
@@ -319,6 +529,26 @@ public final class SkipUrlEncodings {
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getMethodQueryNull(this.client.getHost(), q1, accept, context));
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value null.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getMethodQueryNullWithResponseAsync(String q1, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMethodQueryNull(this.client.getHost(), q1, accept, context);
     }
 
     /**
@@ -352,6 +582,21 @@ public final class SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value null.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getMethodQueryNullAsync(String q1, Context context) {
+        return getMethodQueryNullWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -371,6 +616,21 @@ public final class SkipUrlEncodings {
     public void getMethodQueryNull() {
         final String q1 = null;
         getMethodQueryNullAsync(q1).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value null.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getMethodQueryNullWithResponse(String q1, Context context) {
+        return getMethodQueryNullWithResponseAsync(q1, context).block();
     }
 
     /**
@@ -399,6 +659,29 @@ public final class SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getPathQueryValidWithResponseAsync(String q1, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (q1 == null) {
+            return Mono.error(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getPathQueryValid(this.client.getHost(), q1, accept, context);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -413,6 +696,21 @@ public final class SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getPathQueryValidAsync(String q1, Context context) {
+        return getPathQueryValidWithResponseAsync(q1, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -420,6 +718,21 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getPathQueryValid(String q1) {
         getPathQueryValidAsync(q1).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getPathQueryValidWithResponse(String q1, Context context) {
+        return getPathQueryValidWithResponseAsync(q1, context).block();
     }
 
     /**
@@ -444,6 +757,26 @@ public final class SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getSwaggerQueryValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String q1 = "value1&q2=value2&q3=value3";
+        final String accept = "application/json";
+        return service.getSwaggerQueryValid(this.client.getHost(), q1, accept, context);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -456,11 +789,39 @@ public final class SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getSwaggerQueryValidAsync(Context context) {
+        return getSwaggerQueryValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getSwaggerQueryValid() {
         getSwaggerQueryValidAsync().block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getSwaggerQueryValidWithResponse(Context context) {
+        return getSwaggerQueryValidWithResponseAsync(context).block();
     }
 }
