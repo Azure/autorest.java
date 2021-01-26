@@ -54,7 +54,7 @@ public class AzureSpecialParametersTests {
 
     @Test
     public void get() {
-        client.getXMsClientRequestIds().get();
+        client.getXMsClientRequestIds().getWithResponse(CONTEXT);
     }
 
     @Test
