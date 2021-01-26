@@ -78,6 +78,24 @@ public final class XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.get(this.client.getHost(), context);
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -90,12 +108,40 @@ public final class XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getAsync(Context context) {
+        return getWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get() {
         getAsync().block();
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getWithResponse(Context context) {
+        return getWithResponseAsync(context).block();
     }
 
     /**
@@ -128,6 +174,31 @@ public final class XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value
      *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> paramGetWithResponseAsync(String xMsClientRequestId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (xMsClientRequestId == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.paramGet(this.client.getHost(), xMsClientRequestId, accept, context);
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value
+     *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -143,6 +214,22 @@ public final class XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value
      *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> paramGetAsync(String xMsClientRequestId, Context context) {
+        return paramGetWithResponseAsync(xMsClientRequestId, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value
+     *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -150,5 +237,21 @@ public final class XMsClientRequestIds {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramGet(String xMsClientRequestId) {
         paramGetAsync(xMsClientRequestId).block();
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value
+     *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> paramGetWithResponse(String xMsClientRequestId, Context context) {
+        return paramGetWithResponseAsync(xMsClientRequestId, context).block();
     }
 }

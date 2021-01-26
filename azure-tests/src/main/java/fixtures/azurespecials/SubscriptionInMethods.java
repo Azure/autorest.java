@@ -110,6 +110,30 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postMethodLocalValidWithResponseAsync(String subscriptionId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (subscriptionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postMethodLocalValid(this.client.getHost(), subscriptionId, accept, context);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -125,6 +149,23 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMethodLocalValidAsync(String subscriptionId, Context context) {
+        return postMethodLocalValidWithResponseAsync(subscriptionId, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -132,6 +173,22 @@ public final class SubscriptionInMethods {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMethodLocalValid(String subscriptionId) {
         postMethodLocalValidAsync(subscriptionId).block();
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postMethodLocalValidWithResponse(String subscriptionId, Context context) {
+        return postMethodLocalValidWithResponseAsync(subscriptionId, context).block();
     }
 
     /**
@@ -165,6 +222,31 @@ public final class SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
      *     prvenet the call.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postMethodLocalNullWithResponseAsync(String subscriptionId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (subscriptionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postMethodLocalNull(this.client.getHost(), subscriptionId, accept, context);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = null, client-side validation
+     * should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
+     *     prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -181,6 +263,24 @@ public final class SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
      *     prvenet the call.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMethodLocalNullAsync(String subscriptionId, Context context) {
+        return postMethodLocalNullWithResponseAsync(subscriptionId, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = null, client-side validation
+     * should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
+     *     prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -188,6 +288,23 @@ public final class SubscriptionInMethods {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMethodLocalNull(String subscriptionId) {
         postMethodLocalNullAsync(subscriptionId).block();
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = null, client-side validation
+     * should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
+     *     prvenet the call.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postMethodLocalNullWithResponse(String subscriptionId, Context context) {
+        return postMethodLocalNullWithResponseAsync(subscriptionId, context).block();
     }
 
     /**
@@ -219,6 +336,30 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postPathLocalValidWithResponseAsync(String subscriptionId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (subscriptionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postPathLocalValid(this.client.getHost(), subscriptionId, accept, context);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -234,6 +375,23 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postPathLocalValidAsync(String subscriptionId, Context context) {
+        return postPathLocalValidWithResponseAsync(subscriptionId, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -241,6 +399,22 @@ public final class SubscriptionInMethods {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postPathLocalValid(String subscriptionId) {
         postPathLocalValidAsync(subscriptionId).block();
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postPathLocalValidWithResponse(String subscriptionId, Context context) {
+        return postPathLocalValidWithResponseAsync(subscriptionId, context).block();
     }
 
     /**
@@ -272,6 +446,30 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postSwaggerLocalValidWithResponseAsync(String subscriptionId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (subscriptionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postSwaggerLocalValid(this.client.getHost(), subscriptionId, accept, context);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -287,6 +485,23 @@ public final class SubscriptionInMethods {
      * succeed.
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postSwaggerLocalValidAsync(String subscriptionId, Context context) {
+        return postSwaggerLocalValidWithResponseAsync(subscriptionId, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -294,5 +509,21 @@ public final class SubscriptionInMethods {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSwaggerLocalValid(String subscriptionId) {
         postSwaggerLocalValidAsync(subscriptionId).block();
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
+     * succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postSwaggerLocalValidWithResponse(String subscriptionId, Context context) {
+        return postSwaggerLocalValidWithResponseAsync(subscriptionId, context).block();
     }
 }

@@ -103,6 +103,26 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getMethodLocalValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String apiVersion = "2.0";
+        final String accept = "application/json";
+        return service.getMethodLocalValid(this.client.getHost(), apiVersion, accept, context);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method.
@@ -115,12 +135,40 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getMethodLocalValidAsync(Context context) {
+        return getMethodLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getMethodLocalValid() {
         getMethodLocalValidAsync().block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getMethodLocalValidWithResponse(Context context) {
+        return getMethodLocalValidWithResponseAsync(context).block();
     }
 
     /**
@@ -142,6 +190,27 @@ public final class ApiVersionLocals {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context));
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
+     *     parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context);
     }
 
     /**
@@ -177,6 +246,22 @@ public final class ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      *     parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getMethodLocalNullAsync(String apiVersion, Context context) {
+        return getMethodLocalNullWithResponseAsync(apiVersion, context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
+     *     parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -196,6 +281,22 @@ public final class ApiVersionLocals {
     public void getMethodLocalNull() {
         final String apiVersion = null;
         getMethodLocalNullAsync(apiVersion).block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
+     *     parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getMethodLocalNullWithResponse(String apiVersion, Context context) {
+        return getMethodLocalNullWithResponseAsync(apiVersion, context).block();
     }
 
     /**
@@ -220,6 +321,26 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getPathLocalValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String apiVersion = "2.0";
+        final String accept = "application/json";
+        return service.getPathLocalValid(this.client.getHost(), apiVersion, accept, context);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method.
@@ -232,12 +353,40 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getPathLocalValidAsync(Context context) {
+        return getPathLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getPathLocalValid() {
         getPathLocalValidAsync().block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getPathLocalValidWithResponse(Context context) {
+        return getPathLocalValidWithResponseAsync(context).block();
     }
 
     /**
@@ -262,6 +411,26 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String apiVersion = "2.0";
+        final String accept = "application/json";
+        return service.getSwaggerLocalValid(this.client.getHost(), apiVersion, accept, context);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method.
@@ -274,11 +443,39 @@ public final class ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getSwaggerLocalValidAsync(Context context) {
+        return getSwaggerLocalValidWithResponseAsync(context).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getSwaggerLocalValid() {
         getSwaggerLocalValidAsync().block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getSwaggerLocalValidWithResponse(Context context) {
+        return getSwaggerLocalValidWithResponseAsync(context).block();
     }
 }

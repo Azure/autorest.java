@@ -5,6 +5,9 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
+import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.projectmodel.Project;
@@ -31,6 +34,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
+import org.slf4j.Logger;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -44,6 +48,8 @@ import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
 
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
+
     private static final FluentManagerTemplate INSTANCE = new FluentManagerTemplate();
 
     public static FluentManagerTemplate getInstance() {
@@ -56,10 +62,12 @@ public class FluentManagerTemplate {
         final boolean hasEndpointParameter = serviceClient.getProperties().stream()
                 .anyMatch(p -> p.getName().equals("endpoint"));
         if (!hasEndpointParameter) {
-            throw new IllegalStateException("'endpoint' (or '$host') is required in ServiceClient properties, properties are "
-                    + serviceClient.getProperties().stream().map(ServiceClientProperty::getName).collect(Collectors.joining(",")));
+            logger.warn("'endpoint' (or '$host') is required in ServiceClient properties, candidate properties {}",
+                    serviceClient.getProperties().stream().map(ServiceClientProperty::getName).collect(Collectors.toList()));
         }
 
+        final boolean endpointAvailable = serviceClient.getProperties().stream()
+                .anyMatch(p -> p.getName().equals("endpoint"));
         final boolean requiresSubscriptionIdParameter = serviceClient.getProperties().stream()
                 .anyMatch(p -> p.getName().equals("subscriptionId"));
         final IType subscriptionIdParameterType = serviceClient.getProperties().stream()
@@ -132,7 +140,9 @@ public class FluentManagerTemplate {
                 methodBlock.line(String.format("this.%1$s = new %2$s()", ModelNaming.MANAGER_PROPERTY_CLIENT, builderTypeName));
                 methodBlock.indent(() -> {
                     methodBlock.line(".pipeline(httpPipeline)");
-                    methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())");
+                    if (endpointAvailable) {
+                        methodBlock.line(".endpoint(profile.getEnvironment().getResourceManagerEndpoint())");
+                    }
                     if (requiresSubscriptionIdParameter) {
                         if (subscriptionIdParameterType == ClassType.UUID) {
                             methodBlock.line(".subscriptionId(UUID.fromString(profile.getSubscriptionId()))");

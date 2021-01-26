@@ -10,6 +10,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -101,6 +102,31 @@ public final class Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithResponseAsync(
+            String fooClientRequestId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (fooClientRequestId == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context);
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -116,6 +142,22 @@ public final class Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> customNamedRequestIdAsync(String fooClientRequestId, Context context) {
+        return customNamedRequestIdWithResponseAsync(fooClientRequestId, context)
+                .flatMap((HeadersCustomNamedRequestIdResponse res) -> Mono.empty());
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -123,6 +165,21 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void customNamedRequestId(String fooClientRequestId) {
         customNamedRequestIdAsync(fooClientRequestId).block();
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> customNamedRequestIdWithResponse(String fooClientRequestId, Context context) {
+        return customNamedRequestIdWithResponseAsync(fooClientRequestId, context).block();
     }
 
     /**
@@ -162,6 +219,37 @@ public final class Headers {
      * group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithResponseAsync(
+            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (headerCustomNamedRequestIdParamGroupingParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException(
+                            "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
+        } else {
+            headerCustomNamedRequestIdParamGroupingParameters.validate();
+        }
+        final String accept = "application/json";
+        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.getFooClientRequestId();
+        return service.customNamedRequestIdParamGrouping(this.client.getHost(), fooClientRequestId, accept, context);
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -179,6 +267,26 @@ public final class Headers {
      * group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> customNamedRequestIdParamGroupingAsync(
+            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+            Context context) {
+        return customNamedRequestIdParamGroupingWithResponseAsync(
+                        headerCustomNamedRequestIdParamGroupingParameters, context)
+                .flatMap((HeadersCustomNamedRequestIdParamGroupingResponse res) -> Mono.empty());
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -187,6 +295,26 @@ public final class Headers {
     public void customNamedRequestIdParamGrouping(
             HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).block();
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> customNamedRequestIdParamGroupingWithResponse(
+            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+            Context context) {
+        return customNamedRequestIdParamGroupingWithResponseAsync(
+                        headerCustomNamedRequestIdParamGroupingParameters, context)
+                .block();
     }
 
     /**
@@ -219,6 +347,31 @@ public final class Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithResponseAsync(
+            String fooClientRequestId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (fooClientRequestId == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context);
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -227,6 +380,29 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId)
+                .flatMap(
+                        (HeadersCustomNamedRequestIdHeadResponse res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, Context context) {
+        return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context)
                 .flatMap(
                         (HeadersCustomNamedRequestIdHeadResponse res) -> {
                             if (res.getValue() != null) {
@@ -254,5 +430,20 @@ public final class Headers {
         } else {
             throw new NullPointerException();
         }
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> customNamedRequestIdHeadWithResponse(String fooClientRequestId, Context context) {
+        return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context).block();
     }
 }
