@@ -67,8 +67,7 @@ public final class ArrayClient {
      * @see ArrayAsyncClient#putValid(ArrayWrapper)
      * @since 1.0.0-beta.1
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayClient putValid(ArrayWrapper complexBody) {
+    ArrayClient putValid(ArrayWrapper complexBody) {
         this.serviceClient.putValid(complexBody);
         return this;
     }

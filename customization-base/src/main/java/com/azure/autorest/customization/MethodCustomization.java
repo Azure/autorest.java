@@ -116,6 +116,58 @@ public final class MethodCustomization {
     }
 
     /**
+     * Remove an annotation from the method.
+     *
+     * @param annotation the annotation to remove from the method. The leading @ can be omitted.
+     * @return the current method customization for chaining
+     */
+    public MethodCustomization removeAnnotation(String annotation) {
+        if (!annotation.startsWith("@")) {
+            annotation = "@" + annotation;
+        }
+
+        URI fileUri = symbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        String fileName = fileUri.toString().substring(i);
+        if (editor.getContents().containsKey(fileName)) {
+            int line = symbol.getLocation().getRange().getStart().getLine();
+            int annotationLine = -1;
+            String lineContent = editor.getFileLine(fileName, line);
+            while (!lineContent.trim().isEmpty()) {
+                if (lineContent.trim().startsWith(annotation)) {
+                    annotationLine = line;
+                }
+                lineContent = editor.getFileLine(fileName, --line);
+            }
+            if (annotationLine != -1) {
+                Position start = new Position(annotationLine, 0);
+                Position end = new Position(annotationLine + 1, 0);
+                editor.replace(fileName, start, end, "");
+
+                FileEvent fileEvent = new FileEvent();
+                fileEvent.setUri(fileUri);
+                fileEvent.setType(FileChangeType.CHANGED);
+                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+                Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, new Range(start, end))
+                        .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                        .findFirst();
+                if (generateAccessors.isPresent()) {
+                    WorkspaceEditCommand command;
+                    if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
+                        command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
+                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
+                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+                        }
+                    }
+                }
+            }
+        }
+        refreshSymbol();
+        return this;
+    }
+
+    /**
      * Change the modifier for the method. For package private, use empty string as the modifier.
      *
      * @param modifier the new modifier for the method

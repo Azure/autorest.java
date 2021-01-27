@@ -51,7 +51,7 @@ public class BodyComplexCustomization extends Customization {
         implementationModels.getClass("Goblinshark").rename("GoblinShark");
 
         ClassCustomization dotSalmon = implementationModels.getClass("DotSalmon");
-        dotSalmon.getProperty("iswild").rename("isWild");
+        dotSalmon.getProperty("iswild").rename("isWild").removeAnnotation("JsonProperty").addAnnotation("@JsonProperty(value = \"isWild\")");
         dotSalmon.getMethod("setIsWild")
                 .rename("setWild")
                 .setReturnType("void", null);
@@ -80,7 +80,8 @@ public class BodyComplexCustomization extends Customization {
 
         PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
         ClassCustomization arrayClient = root.getClass("ArrayClient");
-        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this");
+        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this").setModifier(Modifier.PACKAGE_PRIVATE)
+            .removeAnnotation("ServiceMethod");
         arrayClient.getJavadoc().setDescription("The sync client containing Array operations.");
         arrayClient.getMethod("putValid").getJavadoc()
                 .setReturn("The ArrayClient itself")
