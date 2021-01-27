@@ -27,6 +27,6 @@
   "homepage": "https://github.com/Azure/autorest.java/blob/v4/readme.md",
   "devDependencies": {
     "autorest": "^3.0.0",
-    "@microsoft.azure/autorest.testserver": "^2.10.57"
+    "@microsoft.azure/autorest.testserver": "^3.0.5"
   }
 }
