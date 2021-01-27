@@ -109,8 +109,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
-            // boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
-
+            boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
+            if (!settings.isFluent()) {
+                serviceClientPropertyIsReadOnly = false;
+            }
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
             if (serviceClientPropertyClientType == ClassType.TokenCredential) {
@@ -118,7 +120,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             } else {
                 ServiceClientProperty serviceClientProperty =
                         new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType,
-                                serviceClientPropertyName, false, serviceClientPropertyDefaultValueExpression);
+                                serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression);
                 if (!serviceClientProperties.contains(serviceClientProperty)) {
                     // Ignore duplicate client property.
                     serviceClientProperties.add(serviceClientProperty);
