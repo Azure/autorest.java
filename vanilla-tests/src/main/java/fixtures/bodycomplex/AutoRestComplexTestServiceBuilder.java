@@ -50,6 +50,22 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /*
+     * Api Version
+     */
+    private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     *
+     * @param apiVersion the apiVersion value.
+     * @return the AutoRestComplexTestServiceBuilder.
+     */
+    public AutoRestComplexTestServiceBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -172,13 +188,17 @@ public final class AutoRestComplexTestServiceBuilder {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
+        if (apiVersion == null) {
+            this.apiVersion = "2016-02-29";
+        }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline, serializerAdapter, host);
+        AutoRestComplexTestService client =
+                new AutoRestComplexTestService(pipeline, serializerAdapter, host, apiVersion);
         return client;
     }
 

@@ -176,15 +176,17 @@ public final class AutoRestAzureSpecialParametersTestClient {
      * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
      *     always '1234-5678-9012-3456'.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestAzureSpecialParametersTestClient(String subscriptionId, String host) {
+    AutoRestAzureSpecialParametersTestClient(String subscriptionId, String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -194,9 +196,11 @@ public final class AutoRestAzureSpecialParametersTestClient {
      * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
      *     always '1234-5678-9012-3456'.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestAzureSpecialParametersTestClient(HttpPipeline httpPipeline, String subscriptionId, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host);
+    AutoRestAzureSpecialParametersTestClient(
+            HttpPipeline httpPipeline, String subscriptionId, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host, apiVersion);
     }
 
     /**
@@ -207,14 +211,19 @@ public final class AutoRestAzureSpecialParametersTestClient {
      * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
      *     always '1234-5678-9012-3456'.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
     AutoRestAzureSpecialParametersTestClient(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String host) {
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String subscriptionId,
+            String host,
+            String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;
         this.host = host;
-        this.apiVersion = "2015-07-01-preview";
+        this.apiVersion = apiVersion;
         this.xMsClientRequestIds = new XMsClientRequestIds(this);
         this.subscriptionInCredentials = new SubscriptionInCredentials(this);
         this.subscriptionInMethods = new SubscriptionInMethods(this);

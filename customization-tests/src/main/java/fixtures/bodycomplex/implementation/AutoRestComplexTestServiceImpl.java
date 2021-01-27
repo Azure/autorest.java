@@ -174,14 +174,16 @@ public final class AutoRestComplexTestServiceImpl {
      * Initializes an instance of AutoRestComplexTestService client.
      *
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    public AutoRestComplexTestServiceImpl(String host) {
+    public AutoRestComplexTestServiceImpl(String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -189,9 +191,10 @@ public final class AutoRestComplexTestServiceImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, apiVersion);
     }
 
     /**
@@ -200,12 +203,14 @@ public final class AutoRestComplexTestServiceImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public AutoRestComplexTestServiceImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.apiVersion = "2016-02-29";
+        this.apiVersion = apiVersion;
         this.basics = new BasicsImpl(this);
         this.primitives = new PrimitivesImpl(this);
         this.arrays = new ArraysImpl(this);

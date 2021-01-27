@@ -170,14 +170,16 @@ public final class AutoRestComplexTestService {
      * Initializes an instance of AutoRestComplexTestService client.
      *
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestComplexTestService(String host) {
+    AutoRestComplexTestService(String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -185,9 +187,10 @@ public final class AutoRestComplexTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestComplexTestService(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    AutoRestComplexTestService(HttpPipeline httpPipeline, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, apiVersion);
     }
 
     /**
@@ -196,12 +199,14 @@ public final class AutoRestComplexTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestComplexTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    AutoRestComplexTestService(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.apiVersion = "2016-02-29";
+        this.apiVersion = apiVersion;
         this.basics = new Basics(this);
         this.primitives = new Primitives(this);
         this.arrays = new Arrays(this);

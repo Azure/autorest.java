@@ -87,15 +87,17 @@ public final class MicrosoftAzureTestUrl {
      *
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    MicrosoftAzureTestUrl(String subscriptionId, String host) {
+    MicrosoftAzureTestUrl(String subscriptionId, String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -104,9 +106,10 @@ public final class MicrosoftAzureTestUrl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    MicrosoftAzureTestUrl(HttpPipeline httpPipeline, String subscriptionId, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host);
+    MicrosoftAzureTestUrl(HttpPipeline httpPipeline, String subscriptionId, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host, apiVersion);
     }
 
     /**
@@ -116,14 +119,19 @@ public final class MicrosoftAzureTestUrl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
     MicrosoftAzureTestUrl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String host) {
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String subscriptionId,
+            String host,
+            String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;
         this.host = host;
-        this.apiVersion = "2014-04-01-preview";
+        this.apiVersion = apiVersion;
         this.groups = new Groups(this);
     }
 }

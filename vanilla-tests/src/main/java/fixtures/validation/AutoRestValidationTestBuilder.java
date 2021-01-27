@@ -66,6 +66,22 @@ public final class AutoRestValidationTestBuilder {
     }
 
     /*
+     * Api Version
+     */
+    private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     *
+     * @param apiVersion the apiVersion value.
+     * @return the AutoRestValidationTestBuilder.
+     */
+    public AutoRestValidationTestBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -188,13 +204,17 @@ public final class AutoRestValidationTestBuilder {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
+        if (apiVersion == null) {
+            this.apiVersion = "1.0.0";
+        }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestValidationTest client = new AutoRestValidationTest(pipeline, serializerAdapter, subscriptionId, host);
+        AutoRestValidationTest client =
+                new AutoRestValidationTest(pipeline, serializerAdapter, subscriptionId, host, apiVersion);
         return client;
     }
 

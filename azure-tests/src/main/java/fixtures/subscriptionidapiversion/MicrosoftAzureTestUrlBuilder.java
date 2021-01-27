@@ -66,6 +66,22 @@ public final class MicrosoftAzureTestUrlBuilder {
     }
 
     /*
+     * Api Version
+     */
+    private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     *
+     * @param apiVersion the apiVersion value.
+     * @return the MicrosoftAzureTestUrlBuilder.
+     */
+    public MicrosoftAzureTestUrlBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -188,13 +204,17 @@ public final class MicrosoftAzureTestUrlBuilder {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
+        if (apiVersion == null) {
+            this.apiVersion = "2014-04-01-preview";
+        }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        MicrosoftAzureTestUrl client = new MicrosoftAzureTestUrl(pipeline, serializerAdapter, subscriptionId, host);
+        MicrosoftAzureTestUrl client =
+                new MicrosoftAzureTestUrl(pipeline, serializerAdapter, subscriptionId, host, apiVersion);
         return client;
     }
 
