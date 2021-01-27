@@ -33,7 +33,7 @@ jobs:
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'package'
+          goals: 'install package'
           options: '-Dlocal'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
