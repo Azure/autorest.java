@@ -55,6 +55,7 @@ public class LroNoRetryTests {
     }
 
     @Test
+    @Disabled("PUT 200 AAO")
     public void putAsyncRelativeRetry400() {
         Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().putAsyncRelativeRetry400());
     }
@@ -102,7 +103,7 @@ public class LroNoRetryTests {
 
     @Test
     public void putAsyncRelativeRetryNoStatusPayload() {
-        Assertions.assertThrows(NullPointerException.class, () -> client.getLrosaDs().putAsyncRelativeRetryNoStatusPayload());
+        Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().putAsyncRelativeRetryNoStatusPayload());
     }
 
     @Test
@@ -136,6 +137,7 @@ public class LroNoRetryTests {
     }
 
     @Test
+    @Disabled("PUT 200 AAO")
     public void putAsyncRelativeRetryInvalidJsonPolling() {
         Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().putAsyncRelativeRetryInvalidJsonPolling());
     }
