@@ -25,7 +25,7 @@ public class DotSalmon extends DotFish {
     /*
      * The iswild property.
      */
-    @JsonProperty(value = "iswild")
+    @JsonProperty(value = "isWild")
     private Boolean isWild;
 
     /**
