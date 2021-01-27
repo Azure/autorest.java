@@ -146,7 +146,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     code.line("super(null);");
                     code.line("this.statusCode = statusCode;");
                     code.line("this.httpHeaders = httpHeaders;");
-                    code.line("this.responseBody = responseBody.getBytes(StandardCharsets.UTF_8);");
+                    code.line("this.responseBody = responseBody == null ? null : responseBody.getBytes(StandardCharsets.UTF_8);");
                 });
 
                 block.publicMethod("int getStatusCode()", code -> {
