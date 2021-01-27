@@ -195,9 +195,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (conditionalAssignment) {
                 function.decreaseIndent();
                 function.line("}");
+
+                String name = transformation.getOutParameter().getName();
+                if (clientMethod.getParameters().stream().anyMatch(param -> param.getName().equals(transformation.getOutParameter().getName()))) {
+                    name = name + "Local";
+                }
                 function.line(String.format("%s %s = %s;",
                         transformation.getOutParameter().getClientType(),
-                        transformation.getOutParameter().getName(),
+                        name,
                         outParameterName));
             }
         }
@@ -552,8 +557,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-                String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-                String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+
+                String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
                 if (settings.getAddContextParameter()) {
                     if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
@@ -588,8 +593,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 ApplyParameterTransformations(function, clientMethod, settings);
                 ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-                String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-                String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+
+                String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
                 if (settings.getAddContextParameter()) {
                     if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                         function.line(String.format("return %s", serviceMethodCall));
@@ -621,6 +626,22 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
+    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, JavaSettings settings) {
+        List<String> serviceMethodArgs = clientMethod.getProxyMethodArguments(settings)
+                .stream()
+                .map(argVal -> {
+                    if (clientMethod.getParameters().stream().filter(param -> param.getName().equals(argVal))
+                            .anyMatch(param -> clientMethod.getMethodTransformationDetails().stream()
+                                    .anyMatch(transformation -> param.getName().equals(transformation.getOutParameter().getName())))) {
+                        return argVal + "Local";
+                    }
+                    return argVal;
+                })
+                .collect(Collectors.toList());
+        String restAPIMethodArgumentList = String.join(", ", serviceMethodArgs);
+        return String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+    }
+
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
@@ -628,8 +649,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             ApplyParameterTransformations(function, clientMethod, settings);
             ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-            String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-            String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
             if (settings.getAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);

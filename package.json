@@ -1,6 +1,6 @@
 {
   "name": "@autorest/java",
-  "version": "4.0.14",
+  "version": "4.0.15",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",

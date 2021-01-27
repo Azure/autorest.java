@@ -100,15 +100,17 @@ public final class AutoRestValidationTest {
      *
      * @param subscriptionId Subscription ID.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestValidationTest(String subscriptionId, String host) {
+    AutoRestValidationTest(String subscriptionId, String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -117,9 +119,10 @@ public final class AutoRestValidationTest {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param subscriptionId Subscription ID.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host);
+    AutoRestValidationTest(HttpPipeline httpPipeline, String subscriptionId, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host, apiVersion);
     }
 
     /**
@@ -129,14 +132,19 @@ public final class AutoRestValidationTest {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param subscriptionId Subscription ID.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
     AutoRestValidationTest(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId, String host) {
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String subscriptionId,
+            String host,
+            String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;
         this.host = host;
-        this.apiVersion = "1.0.0";
+        this.apiVersion = apiVersion;
         this.service =
                 RestProxy.create(AutoRestValidationTestService.class, this.httpPipeline, this.getSerializerAdapter());
     }

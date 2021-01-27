@@ -68,6 +68,22 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
     }
 
     /*
+     * Api Version
+     */
+    private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     *
+     * @param apiVersion the apiVersion value.
+     * @return the AutoRestAzureSpecialParametersTestClientBuilder.
+     */
+    public AutoRestAzureSpecialParametersTestClientBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -190,6 +206,9 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
+        if (apiVersion == null) {
+            this.apiVersion = "2015-07-01-preview";
+        }
         if (pipeline == null) {
             this.pipeline = createHttpPipeline();
         }
@@ -197,7 +216,8 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
         AutoRestAzureSpecialParametersTestClient client =
-                new AutoRestAzureSpecialParametersTestClient(pipeline, serializerAdapter, subscriptionId, host);
+                new AutoRestAzureSpecialParametersTestClient(
+                        pipeline, serializerAdapter, subscriptionId, host, apiVersion);
         return client;
     }
 
