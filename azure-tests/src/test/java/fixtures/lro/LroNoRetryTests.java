@@ -155,6 +155,10 @@ public class LroNoRetryTests {
         Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().deleteAsyncRelativeRetryInvalidHeader());
     }
 
+    @Test void deleteAsyncRelativeRetryInvalidJsonPolling() {
+        Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().deleteAsyncRelativeRetryInvalidJsonPolling());
+    }
+
     @Test
     public void post202RetryInvalidHeader() {
         Assertions.assertThrows(HttpResponseException.class, () -> client.getLrosaDs().post202RetryInvalidHeader());
