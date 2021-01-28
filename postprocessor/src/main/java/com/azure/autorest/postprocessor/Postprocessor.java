@@ -17,9 +17,12 @@ import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
 import org.slf4j.Logger;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -32,6 +35,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -95,6 +99,8 @@ public class Postprocessor extends NewPlugin {
                   .warn("Customization class " + className + " not found in customization jar. Customization skipped.", e);
           return true;
         }
+      } else if (className.startsWith("src") && className.endsWith(".java")) {
+        customizationClass = loadCustomizationClassFromJavaCode(className);
       } else {
         customizationClass = loadCustomizationClassFromReadme(className, readme.getValue());
       }
@@ -148,7 +154,6 @@ public class Postprocessor extends NewPlugin {
     return null;
   }
 
-  @SuppressWarnings("unchecked")
   private Class<? extends Customization> loadCustomizationClassFromReadme(String className, String readmeContent) {
     String customizationFile = String.format("src/main/java/%s.java", className);
     String code;
@@ -163,6 +168,28 @@ public class Postprocessor extends NewPlugin {
       return null;
     }
 
+    return loadCustomizationClass(className, customizationFile, code);
+  }
+
+  private Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath) {
+    Path customizationFile = Paths.get(filePath);
+    if (!customizationFile.isAbsolute()) {
+      String baseDirectory = getBaseDirectory();
+      if (baseDirectory != null) {
+        customizationFile = Paths.get(baseDirectory, filePath);
+      }
+    }
+    try {
+      String code = new String(Files.readAllBytes(customizationFile), StandardCharsets.UTF_8);
+      return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
+    } catch (IOException e) {
+      logger.error("Cannot read customization from " + filePath);
+      return null;
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
     Path tempDirWithPrefix;
 
     // Populate editor
@@ -174,7 +201,7 @@ public class Postprocessor extends NewPlugin {
       byte[] buffer = new byte[pomStream.available()];
       pomStream.read(buffer);
       editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-      editor.addFile(customizationFile, code);
+      editor.addFile(fileName, code);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
