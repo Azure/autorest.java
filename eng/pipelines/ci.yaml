@@ -24,11 +24,6 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
-      - script: |
-          npm install -g autorest
-          npm install
-        displayName: 'Install npm packages'
-
       - task: Maven@3
         displayName: 'Build and Package'
         inputs:
@@ -78,6 +73,10 @@ jobs:
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
+
+      - script: |
+          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
+        displayName: 'Copy coverage report'
 
       - script: |
           npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
