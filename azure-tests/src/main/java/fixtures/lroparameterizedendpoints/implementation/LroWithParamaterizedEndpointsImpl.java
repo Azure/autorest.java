@@ -199,7 +199,7 @@ public final class LroWithParamaterizedEndpointsImpl implements LroWithParamater
                         if (managementError.getCode() == null || managementError.getMessage() == null) {
                             managementError = null;
                         }
-                    } catch (IOException ioe) {
+                    } catch (IOException | RuntimeException ioe) {
                         logger.logThrowableAsWarning(ioe);
                     }
                 }
