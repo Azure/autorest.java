@@ -67,6 +67,8 @@ public class ServiceClient {
 
     private String clientBaseName;
 
+    private String defaultCredentialScopes;
+
     /**
      * Create a new ServiceClient with the provided properties.
      * @param packageName The package that this service client belongs to.
@@ -84,7 +86,7 @@ public class ServiceClient {
      * @param defaultPollIntervalParameter The default poll interval parameter.
      */
     private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
-                          ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter) {
+                          ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -99,6 +101,7 @@ public class ServiceClient {
         this.serializerAdapterParameter = serializerAdapterParameter;
         this.defaultPollIntervalParameter = defaultPollIntervalParameter;
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
+        this.defaultCredentialScopes = defaultCredentialScopes;
     }
 
     public final String getPackage() {
@@ -155,6 +158,10 @@ public class ServiceClient {
 
     public final String getClientBaseName() {
         return clientBaseName;
+    }
+
+    public final String getDefaultCredentialScopes() {
+        return defaultCredentialScopes;
     }
 
     /**
@@ -236,6 +243,7 @@ public class ServiceClient {
         private ClientMethodParameter httpPipelineParameter;
         private ClientMethodParameter serializerAdapterParameter;
         private ClientMethodParameter defaultPollIntervalParameter;
+        private String defaultCredentialScopes;
 
         /**
          * Sets the package that this service client belongs to.
@@ -367,6 +375,16 @@ public class ServiceClient {
             return this;
         }
 
+        /**
+         * Sets the defaultCredentialScopes parameter.
+         * @param defaultCredentialScopes the default credential scopes
+         * @return the Builder itself
+         */
+        public Builder defaultCredentialScopes(String defaultCredentialScopes) {
+            this.defaultCredentialScopes = defaultCredentialScopes;
+            return this;
+        }
+
         public ServiceClient build() {
             return new ServiceClient(packageName,
                     className,
@@ -380,7 +398,8 @@ public class ServiceClient {
                     tokenCredentialParameter,
                     httpPipelineParameter,
                     serializerAdapterParameter,
-                    defaultPollIntervalParameter);
+                    defaultPollIntervalParameter,
+                    defaultCredentialScopes);
         }
     }
 }

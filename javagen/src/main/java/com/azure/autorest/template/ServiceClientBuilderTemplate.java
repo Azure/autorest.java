@@ -12,11 +12,11 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -207,7 +207,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             });
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName);
+                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName, serviceClient.getDefaultCredentialScopes());
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
@@ -257,7 +257,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
     }
 
-    private void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName) {
+    private void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName, String defaultCredentialScopes) {
         classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
                 buildMethodName), function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
@@ -274,17 +274,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     function.line("policies.add(new AzureKeyCredentialPolicy(\"api-key\", azureKeyCredential));");
                 });
             }
-            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL) && clientProperties.stream()
-                    .anyMatch(clientProperty -> clientProperty.getName().equals("endpoint"))) {
-                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
-                String scopeParams;
-                if (scopes == null || scopes.isEmpty()) {
-                    scopeParams = "String.format(\"%s/.default\", endpoint)";
-                } else {
-                    scopeParams = "DEFAULT_SCOPES";
-                }
+            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
                 function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", scopeParams);
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
             }
 
