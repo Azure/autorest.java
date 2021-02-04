@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-02-03T19:16:14.421744
+Generated at 2021-02-04T19:15:47.800549
 ## Success
 <details>
 <summary>RP count: 161</summary>
@@ -173,6 +173,7 @@ Generated at 2021-02-03T19:16:14.421744
 
 ## Failure at Build
 - servicefabric
+- servicefabricmanagedclusters
 
 ## Logs
 <details>
@@ -1012,7 +1013,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [StepResource, ServiceTopologyResource, ArtifactSource, OperationsList, ServiceResource, ServiceUnitResource, RolloutRequest, Rollout]
+INFORMATION (FluentMapper): Add Inner to response types: [Rollout, RolloutRequest, ServiceResource, ServiceUnitResource, StepResource, OperationsList, ServiceTopologyResource, ArtifactSource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1050,8 +1051,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@21ddc30 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@76375c88)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@21ddc30 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@76375c88)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1090,8 +1091,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@21ddc30 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@76375c88)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@21ddc30 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@76375c88)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1285,7 +1286,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Application, IOsmamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, WipeDeviceOperationResult, AndroidMamPolicy, Device, GroupItem]
+INFORMATION (FluentMapper): Add Inner to response types: [Device, AndroidMamPolicy, WipeDeviceOperationResult, FlaggedEnrolledApp, OperationResult, GroupItem, IOsmamPolicy, FlaggedUser, Application, Location]
 
 ```
 **stderr**
@@ -1400,6 +1401,12 @@ WARNING (PreCheck/SchemaMissingType): The schema 'keyProperties' with an undefin
 
 WARNING (PreCheck/SchemaMissingType): The schema 'EnterprisePolicyList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpoint' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateLinkServiceConnectionState' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
 WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponseBody' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
@@ -1407,12 +1414,6 @@ WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an und
 WARNING (PreCheck/SchemaMissingType): The schema 'Operation-properties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpoint' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateLinkServiceConnectionState' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -1673,7 +1674,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [PricingList, SecuritySubAssessment, JitNetworkAccessPolicy, IotRecommendation, AutomationValidationStatus, RegulatoryComplianceStandard, ServerVulnerabilityAssessmentsList, IotDefenderSettingsList, SecureScoreControlDefinitionItem, IoTSecurityAggregatedAlert, AdvancedThreatProtectionSetting, AutoProvisioningSetting, AllowedConnectionsResource, IotSensorsModel, SecureScoreControlDetails, ExternalSecuritySolution, RegulatoryComplianceAssessment, AdaptiveApplicationControlGroup, IoTSecuritySolutionAnalyticsModelList, SecurityContact, TopologyResource, SecuritySolution, RulesResults, Alert, IotSitesList, Setting, AlertsSuppressionRule, PackageDownloads, IotRecommendationModel, AdaptiveApplicationControlGroups, AdaptiveNetworkHardening, IotRecommendationType, Compliance, InformationProtectionPolicy, IotAlert, SecurityTask, WorkspaceSetting, IotAlertType, RegulatoryComplianceControl, Device, ScanResult, OnPremiseIotSensorsList, IotAlertTypeList, IotAlertModel, JitNetworkAccessRequest, IoTSecuritySolutionModel, DeviceSecurityGroup, Pricing, IotSitesModel, SecurityAssessmentMetadata, ComplianceResult, IotDefenderSettingsModel, Operation, ConnectorSetting, RuleResults, SecurityAssessment, DiscoveredSecuritySolution, SecureScoreItem, IotRecommendationTypeList, Automation, IotSensorsList, OnPremiseIotSensor, IoTSecuritySolutionAnalyticsModel, ServerVulnerabilityAssessment, Scans, AscLocation, SecuritySolutionsReferenceDataList, IoTSecurityAggregatedRecommendation, Scan, ScanResults]
+INFORMATION (FluentMapper): Add Inner to response types: [AlertsSuppressionRule, IotDefenderSettingsModel, SecureScoreControlDetails, RegulatoryComplianceStandard, Alert, IoTSecuritySolutionModel, SecurityAssessment, IoTSecuritySolutionAnalyticsModel, Automation, IotSitesModel, SecureScoreControlDefinitionItem, ServerVulnerabilityAssessment, ComplianceResult, IoTSecuritySolutionAnalyticsModelList, ConnectorSetting, IotSitesList, WorkspaceSetting, SecurityAssessmentMetadata, AdaptiveApplicationControlGroup, ScanResult, DeviceSecurityGroup, DiscoveredSecuritySolution, SecuritySolution, IoTSecurityAggregatedAlert, ExternalSecuritySolution, PricingList, IotSensorsList, OnPremiseIotSensorsList, SecuritySolutionsReferenceDataList, Pricing, SecureScoreItem, RuleResults, IotAlertModel, ScanResults, OnPremiseIotSensor, AscLocation, AutomationValidationStatus, InformationProtectionPolicy, Setting, IoTSecurityAggregatedRecommendation, IotSensorsModel, Scan, SecuritySubAssessment, ServerVulnerabilityAssessmentsList, IotRecommendationModel, AdaptiveNetworkHardening, AutoProvisioningSetting, IotDefenderSettingsList, Device, TopologyResource, IotRecommendation, IotRecommendationType, AdaptiveApplicationControlGroups, AdvancedThreatProtectionSetting, IotAlertType, RegulatoryComplianceAssessment, IotAlertTypeList, AllowedConnectionsResource, Scans, JitNetworkAccessRequest, RegulatoryComplianceControl, RulesResults, PackageDownloads, SecurityContact, IotRecommendationTypeList, SecurityTask, JitNetworkAccessPolicy, IotAlert, Compliance, Operation]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1761,6 +1762,12 @@ https://aka.ms/autorest
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
    Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
 
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
+
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MachineReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
 
 WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ClientGroupReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
@@ -1772,12 +1779,6 @@ WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined ty
 WARNING (PreCheck/SchemaMissingType): The schema 'ResourceReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'MachineReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ProcessReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1875,6 +1876,12 @@ WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2097:6
 
+WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
+
+WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
+
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6937:4
 
@@ -1919,12 +1926,6 @@ WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive 
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: filterProcesses
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8490:4
-
-WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
-
-WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1955,7 +1956,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MachinesSummary, MachineGroup, ClientGroupMembersCount, Machine, Liveness, ClientGroup, MapResponse, Process, Connection, ClientGroupMember, Port]
+INFORMATION (FluentMapper): Add Inner to response types: [MapResponse, Connection, Process, Machine, Port, Liveness, ClientGroupMembersCount, ClientGroupMember, ClientGroup, MachinesSummary, MachineGroup]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1974,12 +1975,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:23914) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24148) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:23914) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:23914) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24148) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24148) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2050,8 +2051,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.666 s
-[INFO] Finished at: 2021-02-03T19:02:47Z
+[INFO] Total time:  3.927 s
+[INFO] Finished at: 2021-02-04T19:02:14Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2093,6 +2094,103 @@ FATAL: [object Object]
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/implementation/OperationsImpl.java:[54,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabric.implementation.OperationsImpl
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/implementation/OperationsImpl.java:[59,43] method list() is already defined in class azure.resourcemanager.servicefabric.implementation.OperationsImpl
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/implementation/OperationsImpl.java:[64,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabric.implementation.OperationsImpl
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+```
+**stderr**
+```
+
+```
+</details>
+
+<details>
+<summary>servicefabricmanagedclusters</summary>
+
+**stdout**
+```
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.azure.resourcemanager:azure-resourcemanager-servicefabricmanagedclusters-generated >--
+[INFO] Building Microsoft Azure SDK for ServiceFabricManagedClusters Management 1.0.0-beta.1
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-servicefabricmanagedclusters-generated ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-servicefabricmanagedclusters-generated ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 142 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[57,41] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[67,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[79,41] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[39,36] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[50,36] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[59,36] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[70,36] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[39,43] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[44,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[49,43] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[54,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[227,55] method listSinglePageAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[260,55] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[290,45] method listAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[304,45] method listAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[317,48] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[331,48] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[343,55] method listSinglePageAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[376,55] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[406,45] method listAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[420,45] method listAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[433,48] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[447,48] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[76,45] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl.OperationsService
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[86,45] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl.OperationsService
+[INFO] 26 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.686 s
+[INFO] Finished at: 2021-02-04T19:02:35Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabricmanagedclusters-generated: Compilation failure: Compilation failure: 
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[57,41] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[67,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[79,41] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[39,36] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[50,36] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[59,36] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/models/Operations.java:[70,36] method list(com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.models.Operations
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[39,43] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[44,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[49,43] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsImpl.java:[54,43] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[227,55] method listSinglePageAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[260,55] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[290,45] method listAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[304,45] method listAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[317,48] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[331,48] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[343,55] method listSinglePageAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[376,55] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[406,45] method listAsync() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[420,45] method listAsync(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[433,48] method list() is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[447,48] method list(com.azure.core.util.Context) is already defined in class azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[76,45] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl.OperationsService
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/implementation/OperationsClientImpl.java:[86,45] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.implementation.OperationsClientImpl.OperationsService
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
