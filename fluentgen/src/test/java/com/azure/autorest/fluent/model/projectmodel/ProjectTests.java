@@ -40,6 +40,6 @@ public class ProjectTests {
 
         Optional<String> coreMgmtVer = Project.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management");
         Assertions.assertTrue(coreMgmtVer.isPresent());
-        Assertions.assertEquals(project.getPackageVersions().getAzureCoreManagementVersion(), coreMgmtVer.get());
+        Assertions.assertEquals("1.1.0", coreMgmtVer.get());
     }
 }
