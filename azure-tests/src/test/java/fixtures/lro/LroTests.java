@@ -47,21 +47,6 @@ public class LroTests {
                 .buildClient();
     }
 
-    // PUT with return code 200 and Azure-AsyncOperation does not work as testserver expected, Azure-AsyncOperation header is ignored.
-    /*
-    CustomHeaderPutAsyncSucceded
-    LROPutAsyncRetrySucceeded
-    LROPutAsyncNoRetrySucceeded
-    LROPutAsyncRetryFailed
-    LROPutAsyncNoRetryCanceled
-    LRORetryErrorPutAsyncSucceeded
-    LRONonRetryPutAsyncRetry400
-    LROErrorPutAsyncNoPollingStatus
-    LROErrorPutAsyncNoPollingStatusPayload
-    LROErrorPutAsyncInvalidJsonPolling
-    LROErrorDeleteAsyncInvalidJsonPolling
-     */
-
     @Test
     public void put200Succeeded() throws Exception {
         ProductInner product = new ProductInner();
@@ -85,35 +70,6 @@ public class LroTests {
         ProductInner response = client.getLROs().put202Retry200(product);
         Assertions.assertEquals("100", response.id());
     }
-
-//    @Test
-//    @Disabled("Can cause flakiness - only run manually")
-//    public void put202Retry200Async() throws Exception {
-//        final CountDownLatch lock = new CountDownLatch(1);
-//        long startTime = System.currentTimeMillis();
-//        final long[] callbackTime = new long[1];
-//        ProductInner product = new ProductInner();
-//        product.withLocation("West US");
-//        client.getAzureClient().setLongRunningOperationRetryTimeout(1);
-//        client.getLROs().put202Retry200Async(product, new ServiceCallback<Product>() {
-//            @Override
-//            public void failure(Throwable t) {
-//                Assertions.fail();
-//            }
-//
-//            @Override
-//            public void success(Product result) {
-//                Assertions.assertEquals("100", result.id());
-//                callbackTime[0] = System.currentTimeMillis();
-//                lock.countDown();
-//            }
-//        });
-//        long endTime = System.currentTimeMillis();
-//        Assert.assertTrue(500 > endTime - startTime);
-//        Assert.assertTrue(lock.await(3000, TimeUnit.MILLISECONDS));
-//        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
-//        Assert.assertTrue(1000 < callbackTime[0] - startTime);
-//    }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {

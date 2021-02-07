@@ -26,6 +26,8 @@ import fixtures.xmlservice.models.JsonInput;
 import fixtures.xmlservice.models.JsonOutput;
 import fixtures.xmlservice.models.ListBlobsResponse;
 import fixtures.xmlservice.models.ListContainersResponse;
+import fixtures.xmlservice.models.ModelWithByteProperty;
+import fixtures.xmlservice.models.ModelWithUrlProperty;
 import fixtures.xmlservice.models.ObjectWithXMsTextProperty;
 import fixtures.xmlservice.models.RootWithRefAndMeta;
 import fixtures.xmlservice.models.RootWithRefAndNoMeta;
@@ -274,6 +276,36 @@ public final class Xmls {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ObjectWithXMsTextProperty>> getXMsText(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/xml/bytes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<ModelWithByteProperty>> getBytes(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/xml/bytes")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> putBinary(
+                @HostParam("$host") String host,
+                @BodyParam("application/xml") ModelWithByteProperty slideshow,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Get("/xml/url")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<ModelWithUrlProperty>> getUri(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/xml/url")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> putUri(
+                @HostParam("$host") String host,
+                @BodyParam("application/xml") ModelWithUrlProperty model,
+                @HeaderParam("Accept") String accept,
+                Context context);
     }
 
     /**
@@ -1780,5 +1812,205 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ObjectWithXMsTextProperty getXMsText() {
         return getXMsTextAsync().block();
+    }
+
+    /**
+     * Get an XML document with binary property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with binary property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<ModelWithByteProperty>> getBytesWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/xml";
+        return FluxUtil.withContext(context -> service.getBytes(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Get an XML document with binary property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with binary property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithByteProperty> getBytesAsync() {
+        return getBytesWithResponseAsync()
+                .flatMap(
+                        (Response<ModelWithByteProperty> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Get an XML document with binary property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with binary property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithByteProperty getBytes() {
+        return getBytesAsync().block();
+    }
+
+    /**
+     * Put an XML document with binary property.
+     *
+     * @param slideshow The slideshow parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBinaryWithResponseAsync(ModelWithByteProperty slideshow) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (slideshow == null) {
+            return Mono.error(new IllegalArgumentException("Parameter slideshow is required and cannot be null."));
+        } else {
+            slideshow.validate();
+        }
+        final String accept = "application/xml";
+        return FluxUtil.withContext(context -> service.putBinary(this.client.getHost(), slideshow, accept, context));
+    }
+
+    /**
+     * Put an XML document with binary property.
+     *
+     * @param slideshow The slideshow parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBinaryAsync(ModelWithByteProperty slideshow) {
+        return putBinaryWithResponseAsync(slideshow).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Put an XML document with binary property.
+     *
+     * @param slideshow The slideshow parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putBinary(ModelWithByteProperty slideshow) {
+        putBinaryAsync(slideshow).block();
+    }
+
+    /**
+     * Get an XML document with uri property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with uri property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<ModelWithUrlProperty>> getUriWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/xml";
+        return FluxUtil.withContext(context -> service.getUri(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Get an XML document with uri property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with uri property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithUrlProperty> getUriAsync() {
+        return getUriWithResponseAsync()
+                .flatMap(
+                        (Response<ModelWithUrlProperty> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Get an XML document with uri property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with uri property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithUrlProperty getUri() {
+        return getUriAsync().block();
+    }
+
+    /**
+     * Put an XML document with uri property.
+     *
+     * @param model The model parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUriWithResponseAsync(ModelWithUrlProperty model) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (model == null) {
+            return Mono.error(new IllegalArgumentException("Parameter model is required and cannot be null."));
+        } else {
+            model.validate();
+        }
+        final String accept = "application/xml";
+        return FluxUtil.withContext(context -> service.putUri(this.client.getHost(), model, accept, context));
+    }
+
+    /**
+     * Put an XML document with uri property.
+     *
+     * @param model The model parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUriAsync(ModelWithUrlProperty model) {
+        return putUriWithResponseAsync(model).flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Put an XML document with uri property.
+     *
+     * @param model The model parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putUri(ModelWithUrlProperty model) {
+        putUriAsync(model).block();
     }
 }
