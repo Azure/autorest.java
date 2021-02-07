@@ -191,6 +191,7 @@ public final class Editor {
         Path path = paths.remove(fileName);
         Path newPath = Paths.get(rootDir.toString(), newName);
         path.toFile().renameTo(newPath.toFile());
+        paths.put(newName, newPath);
     }
 
     /**
