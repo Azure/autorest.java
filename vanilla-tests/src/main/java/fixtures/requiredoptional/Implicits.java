@@ -18,6 +18,8 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.requiredoptional.models.ErrorException;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Implicits. */
@@ -79,6 +81,16 @@ public final class Implicits {
         Mono<Response<Void>> putOptionalBody(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") String bodyParameter,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/reqopt/implicit/optional/binary-body")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> putOptionalBinaryBody(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
+                @HeaderParam("Content-Length") long contentLength,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -374,6 +386,63 @@ public final class Implicits {
     public void putOptionalBody() {
         final String bodyParameter = null;
         putOptionalBodyAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
+            Flux<ByteBuffer> bodyParameter, long contentLength) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.putOptionalBinaryBody(
+                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The contentLength parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, long contentLength) {
+        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
     }
 
     /**
