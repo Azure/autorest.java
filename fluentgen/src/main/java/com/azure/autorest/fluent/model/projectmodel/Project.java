@@ -40,7 +40,7 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreManagementVersion = "1.1.0";
+        private String azureCoreManagementVersion = "1.1.1";
         private String jacocoMavenPlugin = "0.8.5";
 
         public String getAzureClientSdkParentVersion() {
