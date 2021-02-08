@@ -44,7 +44,7 @@ public class TypeConversionUtils {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType) {
                     String nestedPropertyName = nextPropertyName(propertyName);
-                    expression = String.format("%1$s.mapPage(%2$s -> new %3$s(%4$s, this.%5$s()))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
+                    expression = String.format("Utils.mapPage(%1$s, %2$s -> new %3$s(%4$s, this.%5$s()))", propertyName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
                 }
             } else if (Response.class.getSimpleName().equals(type.getName())) {
                 IType valueType = type.getTypeArguments()[0];

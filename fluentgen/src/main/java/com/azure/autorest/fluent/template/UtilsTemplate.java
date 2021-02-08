@@ -12,7 +12,12 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.util.CoreUtils;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +26,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
 
@@ -59,6 +67,18 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
         METHOD_TEMPLATES.add(getValueFromIdByParameterNameMethod);
     }
 
+    private static final List<String> IMPORTS_UTILS_PAGED_ITERABLE = Arrays.asList(
+            PagedFlux.class.getName(),
+            PagedIterable.class.getName(),
+            PagedResponse.class.getName(),
+            PagedResponseBase.class.getName(),
+            Mono.class.getName(),
+            Iterator.class.getName(),
+            Function.class.getName(),
+            Collectors.class.getName(),
+            Stream.class.getName()
+    );
+
     public void write(JavaFile javaFile) {
         write(null, javaFile);
     }
@@ -67,10 +87,16 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
     public void write(Void ignored, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         METHOD_TEMPLATES.forEach(mt -> mt.addImportsTo(imports));
+        imports.addAll(IMPORTS_UTILS_PAGED_ITERABLE);
         javaFile.declareImport(imports);
 
         javaFile.classBlock(JavaVisibility.PackagePrivate, Collections.singletonList(JavaModifier.Final), ModelNaming.CLASS_UTILS, classBlock -> {
             METHOD_TEMPLATES.forEach(mt -> mt.writeMethod(classBlock));
+
+            // mapPage and PagedIterableImpl class
+            javaFile.line();
+            String configurableClassText = FluentUtils.loadTextFromResource("Utils_PagedIterableImpl.txt");
+            javaFile.text(configurableClassText);
         });
     }
 }
