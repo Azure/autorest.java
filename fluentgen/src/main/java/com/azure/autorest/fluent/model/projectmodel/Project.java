@@ -40,11 +40,16 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
+        private String azureCoreVersion = "1.13.0";
         private String azureCoreManagementVersion = "1.1.1";
         private String jacocoMavenPlugin = "0.8.5";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
+        }
+
+        public String getAzureCoreVersion() {
+            return azureCoreVersion;
         }
 
         public String getAzureCoreManagementVersion() {
@@ -164,6 +169,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
+                checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
             });

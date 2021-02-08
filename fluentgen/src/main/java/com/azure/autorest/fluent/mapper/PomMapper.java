@@ -23,6 +23,7 @@ public class PomMapper {
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         pom.setDependencyIdentifiers(Arrays.asList(
+                "com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion(),
                 "com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion()
         ));
 
