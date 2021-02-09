@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 // Implementation method template for return type requires conversion.
 // E.g.
 //    PagedIterable<StorageAccountInner> inner = this.inner().list();
-//    return inner.mapPage(inner1 -> new StorageAccountImpl(inner1, this.manager()));
+//    return Utils.mapPage(inner, inner1 -> new StorageAccountImpl(inner1, this.manager()));
 public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
 
     private final MethodTemplate conversionMethodTemplate;
