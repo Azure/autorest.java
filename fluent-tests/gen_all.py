@@ -80,7 +80,8 @@ def maven_build(output_sdk_dir: str, sdk: str) -> subprocess.CompletedProcess:
 
     command = [
         'mvn' + ('.cmd' if OS_WINDOWS else ''),
-        'package'
+        'package',
+        '--no-transfer-progress'
     ]
 
     logging.info(' '.join(command))
