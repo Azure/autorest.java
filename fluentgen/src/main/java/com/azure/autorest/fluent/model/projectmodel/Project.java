@@ -177,7 +177,7 @@ public class Project {
     }
 
     static Optional<String> checkArtifact(String line, String artifact) {
-        if (line.startsWith(artifact)) {
+        if (line.startsWith(artifact + ";")) {
             String[] segments = line.split(Pattern.quote(";"));
             if (segments.length >= 2) {
                 String version = segments[1];
