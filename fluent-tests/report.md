@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-02-08T19:19:51.529535
+Generated at 2021-02-10T19:21:01.318823
 ## Success
 <details>
-<summary>RP count: 161</summary>
+<summary>RP count: 162</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -157,6 +157,7 @@ Generated at 2021-02-08T19:19:51.529535
 - subscription
 - support
 - synapse
+- timeseriesinsights
 - trafficmanager
 - visualstudio
 - vmware
@@ -181,7 +182,7 @@ Generated at 2021-02-08T19:19:51.529535
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -206,7 +207,7 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -243,7 +244,7 @@ FATAL: Error: Not able to process media type default at this moment.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -888,7 +889,7 @@ FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. C
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1013,7 +1014,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ServiceUnitResource, RolloutRequest, Rollout, ArtifactSource, OperationsList, ServiceResource, StepResource, ServiceTopologyResource]
+INFORMATION (FluentMapper): Add Inner to response types: [ServiceTopologyResource, ServiceUnitResource, StepResource, Rollout, OperationsList, RolloutRequest, ArtifactSource, ServiceResource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1051,8 +1052,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@123b3a6c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7a0315b)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@123b3a6c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7a0315b)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1091,8 +1092,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@123b3a6c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7a0315b)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@123b3a6c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7a0315b)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1141,7 +1142,7 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1286,7 +1287,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Application, IOsmamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, WipeDeviceOperationResult, AndroidMamPolicy, Device, GroupItem]
+INFORMATION (FluentMapper): Add Inner to response types: [Device, AndroidMamPolicy, WipeDeviceOperationResult, FlaggedEnrolledApp, OperationResult, GroupItem, IOsmamPolicy, FlaggedUser, Application, Location]
 
 ```
 **stderr**
@@ -1338,7 +1339,7 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1362,7 +1363,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1386,7 +1387,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1433,7 +1434,7 @@ FATAL: Error: 1 errors occured -- cannot continue.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1457,7 +1458,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1674,7 +1675,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [PricingList, SecuritySubAssessment, JitNetworkAccessPolicy, IotRecommendation, AutomationValidationStatus, RegulatoryComplianceStandard, ServerVulnerabilityAssessmentsList, IotDefenderSettingsList, SecureScoreControlDefinitionItem, IoTSecurityAggregatedAlert, AdvancedThreatProtectionSetting, AutoProvisioningSetting, AllowedConnectionsResource, IotSensorsModel, SecureScoreControlDetails, ExternalSecuritySolution, RegulatoryComplianceAssessment, AdaptiveApplicationControlGroup, IoTSecuritySolutionAnalyticsModelList, SecurityContact, TopologyResource, SecuritySolution, RulesResults, Alert, IotSitesList, Setting, AlertsSuppressionRule, PackageDownloads, IotRecommendationModel, AdaptiveApplicationControlGroups, AdaptiveNetworkHardening, IotRecommendationType, Compliance, InformationProtectionPolicy, IotAlert, SecurityTask, WorkspaceSetting, IotAlertType, RegulatoryComplianceControl, Device, ScanResult, OnPremiseIotSensorsList, IotAlertTypeList, IotAlertModel, JitNetworkAccessRequest, IoTSecuritySolutionModel, DeviceSecurityGroup, Pricing, IotSitesModel, SecurityAssessmentMetadata, ComplianceResult, IotDefenderSettingsModel, Operation, ConnectorSetting, RuleResults, SecurityAssessment, DiscoveredSecuritySolution, SecureScoreItem, IotRecommendationTypeList, Automation, IotSensorsList, OnPremiseIotSensor, IoTSecuritySolutionAnalyticsModel, ServerVulnerabilityAssessment, Scans, AscLocation, SecuritySolutionsReferenceDataList, IoTSecurityAggregatedRecommendation, Scan, ScanResults]
+INFORMATION (FluentMapper): Add Inner to response types: [Scans, SecureScoreControlDefinitionItem, AlertsSuppressionRule, SecuritySolutionsReferenceDataList, IotRecommendationModel, OnPremiseIotSensorsList, Operation, ExternalSecuritySolution, IoTSecuritySolutionModel, RuleResults, AutoProvisioningSetting, RegulatoryComplianceAssessment, Pricing, IotDefenderSettingsModel, IotDefenderSettingsList, OnPremiseIotSensor, IotAlertTypeList, PackageDownloads, AdaptiveApplicationControlGroup, Setting, AllowedConnectionsResource, AdaptiveNetworkHardening, IotSensorsList, ComplianceResult, DiscoveredSecuritySolution, IotAlert, TopologyResource, SecureScoreControlDetails, DeviceSecurityGroup, Compliance, AutomationValidationStatus, AdaptiveApplicationControlGroups, ScanResult, PricingList, AscLocation, Scan, IotSitesModel, RegulatoryComplianceControl, IoTSecurityAggregatedAlert, Alert, IotRecommendation, ServerVulnerabilityAssessmentsList, IotAlertType, ServerVulnerabilityAssessment, JitNetworkAccessPolicy, ScanResults, IoTSecuritySolutionAnalyticsModel, ConnectorSetting, RulesResults, Automation, SecurityTask, IotSensorsModel, IotAlertModel, InformationProtectionPolicy, AdvancedThreatProtectionSetting, SecurityAssessment, IotSitesList, JitNetworkAccessRequest, SecuritySubAssessment, SecuritySolution, IotRecommendationTypeList, SecurityAssessmentMetadata, SecurityContact, Device, SecureScoreItem, RegulatoryComplianceStandard, IoTSecuritySolutionAnalyticsModelList, WorkspaceSetting, IotRecommendationType, IoTSecurityAggregatedRecommendation]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1747,7 +1748,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1956,7 +1957,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Port, ClientGroup, MapResponse, Process, Liveness, ClientGroupMembersCount, MachinesSummary, Machine, MachineGroup, Connection, ClientGroupMember]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMembersCount, Liveness, Connection, MachineGroup, ClientGroupMember, Port, MapResponse, Machine, Process, ClientGroup, MachinesSummary]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1975,12 +1976,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24213) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24384) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24213) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24213) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24384) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2051,8 +2052,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.131 s
-[INFO] Finished at: 2021-02-08T19:04:44Z
+[INFO] Total time:  3.942 s
+[INFO] Finished at: 2021-02-10T19:06:18Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2161,8 +2162,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.863 s
-[INFO] Finished at: 2021-02-08T19:05:07Z
+[INFO] Total time:  3.687 s
+[INFO] Finished at: 2021-02-10T19:06:40Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabricmanagedclusters-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
@@ -2202,125 +2203,6 @@ FATAL: [object Object]
 ```
 **stderr**
 ```
-
-```
-</details>
-
-<details>
-<summary>timeseriesinsights</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.0.6336; node: v14.15.4, max-memory: 2048 MB]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
-   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'EventHubEventSourceResourceProperties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'IoTHubEventSourceResourceProperties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationListResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TrackedResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CreateOrUpdateTrackedResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EnvironmentCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen1EnvironmentCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen2EnvironmentCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EnvironmentListResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen1EnvironmentResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen2EnvironmentResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen1EnvironmentCreationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen2EnvironmentCreationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EnvironmentResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen1EnvironmentResourceProperties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Gen2EnvironmentResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TimeSeriesIdProperty' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventSourceCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventHubEventSourceCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTHubEventSourceCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventSourceListResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventHubEventSourceResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTHubEventSourceResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventSourceCommonProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureEventSourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventHubEventSourceCommonProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventHubEventSourceCreationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EventHubEventSourceResourceProperties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTHubEventSourceCommonProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTHubEventSourceCreationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTHubEventSourceResourceProperties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetListResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetCreationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetResourceProperties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ReferenceDataSetKeyProperty' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyCreateOrUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyListResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyResourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
-```
-**stderr**
-```
-
-ERROR (PreCheck/DuplicateInheritance): Schema 'Gen1EnvironmentResourceProperties' inherits 'EnvironmentResourceProperties' via an allOf that is already coming from parent 'ResourceProperties'
-
-ERROR (PreCheck/DuplicateInheritance): Schema 'Gen2EnvironmentResourceProperties' inherits 'EnvironmentResourceProperties' via an allOf that is already coming from parent 'ResourceProperties'
-FATAL: Error: 2 errors occured -- cannot continue.
-  Error: Plugin prechecker reported failure.
 
 ```
 </details>
