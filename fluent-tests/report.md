@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-02-10T19:31:26.510349
+Generated at 2021-02-11T19:33:01.993716
 ## Success
 <details>
 <summary>RP count: 162</summary>
@@ -1014,7 +1014,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ServiceTopologyResource, ServiceUnitResource, StepResource, RolloutRequest, Rollout, ArtifactSource, ServiceResource, OperationsList]
+INFORMATION (FluentMapper): Add Inner to response types: [OperationsList, ArtifactSource, ServiceTopologyResource, ServiceResource, StepResource, Rollout, ServiceUnitResource, RolloutRequest]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1052,8 +1052,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@423e79ec and com.azure.autorest.model.clientmodel.ProxyMethodParameter@70a99d28)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@423e79ec and com.azure.autorest.model.clientmodel.ProxyMethodParameter@70a99d28)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@7ca1c8c1 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7bf8bf78)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@7ca1c8c1 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7bf8bf78)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1092,8 +1092,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@423e79ec and com.azure.autorest.model.clientmodel.ProxyMethodParameter@70a99d28)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@423e79ec and com.azure.autorest.model.clientmodel.ProxyMethodParameter@70a99d28)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@7ca1c8c1 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7bf8bf78)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@7ca1c8c1 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@7bf8bf78)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1145,6 +1145,10 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1342,6 +1346,10 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1366,6 +1374,10 @@ Use --help to get help information.
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1390,6 +1402,10 @@ Use --help to get help information.
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1402,6 +1418,12 @@ WARNING (PreCheck/SchemaMissingType): The schema 'keyProperties' with an undefin
 
 WARNING (PreCheck/SchemaMissingType): The schema 'EnterprisePolicyList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpoint' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PrivateLinkServiceConnectionState' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
 WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponseBody' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
@@ -1409,12 +1431,6 @@ WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an und
 WARNING (PreCheck/SchemaMissingType): The schema 'Operation-properties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'OperationList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpoint' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateLinkServiceConnectionState' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -1437,6 +1453,10 @@ FATAL: Error: 1 errors occured -- cannot continue.
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1461,6 +1481,10 @@ Use --help to get help information.
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
@@ -1675,7 +1699,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [TopologyResource, RegulatoryComplianceControl, AdaptiveApplicationControlGroup, IotSensorsModel, IotRecommendation, DiscoveredSecuritySolution, Scans, IoTSecurityAggregatedRecommendation, ComplianceResult, Scan, AdaptiveApplicationControlGroups, Compliance, SecuritySolution, IotSitesList, Device, IotAlert, ExternalSecuritySolution, SecureScoreItem, SecureScoreControlDetails, InformationProtectionPolicy, IotRecommendationType, IotAlertTypeList, PackageDownloads, WorkspaceSetting, AutomationValidationStatus, IoTSecuritySolutionAnalyticsModel, ServerVulnerabilityAssessment, SecuritySolutionsReferenceDataList, SecurityAssessmentMetadata, ScanResults, IotDefenderSettingsModel, Setting, Automation, AllowedConnectionsResource, IotDefenderSettingsList, AscLocation, IotAlertModel, AutoProvisioningSetting, ServerVulnerabilityAssessmentsList, SecurityAssessment, OnPremiseIotSensorsList, Operation, IotRecommendationModel, RuleResults, AdaptiveNetworkHardening, Alert, IotAlertType, DeviceSecurityGroup, Pricing, PricingList, SecuritySubAssessment, ConnectorSetting, RegulatoryComplianceAssessment, RulesResults, AlertsSuppressionRule, IoTSecuritySolutionAnalyticsModelList, IoTSecurityAggregatedAlert, RegulatoryComplianceStandard, IotSensorsList, IoTSecuritySolutionModel, SecureScoreControlDefinitionItem, SecurityContact, AdvancedThreatProtectionSetting, JitNetworkAccessRequest, JitNetworkAccessPolicy, SecurityTask, IotRecommendationTypeList, OnPremiseIotSensor, ScanResult, IotSitesModel]
+INFORMATION (FluentMapper): Add Inner to response types: [SecureScoreControlDetails, RegulatoryComplianceControl, TopologyResource, IotRecommendationTypeList, SecuritySubAssessment, SecurityContact, AutomationValidationStatus, RuleResults, Operation, IoTSecuritySolutionAnalyticsModelList, Pricing, AscLocation, AdaptiveApplicationControlGroup, PackageDownloads, IotSitesModel, DiscoveredSecuritySolution, RegulatoryComplianceStandard, SecurityAssessment, DeviceSecurityGroup, Compliance, AdaptiveNetworkHardening, ExternalSecuritySolution, ScanResults, AllowedConnectionsResource, OnPremiseIotSensorsList, PricingList, Automation, IotDefenderSettingsList, IotRecommendationType, SecurityAssessmentMetadata, AdaptiveApplicationControlGroups, IotAlertModel, SecurityTask, AutoProvisioningSetting, IotAlertTypeList, IotRecommendationModel, InformationProtectionPolicy, IoTSecurityAggregatedRecommendation, WorkspaceSetting, IotSensorsList, Scan, IotSensorsModel, IoTSecurityAggregatedAlert, IotAlertType, Alert, AdvancedThreatProtectionSetting, Setting, ComplianceResult, OnPremiseIotSensor, ServerVulnerabilityAssessmentsList, RulesResults, IotSitesList, SecureScoreItem, ScanResult, ServerVulnerabilityAssessment, JitNetworkAccessPolicy, SecureScoreControlDefinitionItem, SecuritySolutionsReferenceDataList, IotAlert, RegulatoryComplianceAssessment, IotDefenderSettingsModel, Device, IoTSecuritySolutionModel, AlertsSuppressionRule, ConnectorSetting, IotRecommendation, JitNetworkAccessRequest, IoTSecuritySolutionAnalyticsModel, SecuritySolution, Scans]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1751,6 +1775,10 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 AutoRest code generation utility [cli version: 3.0.6338; node: v14.15.4, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.0.6339).
+ > You can install the newer version with with npm install -g autorest@latest
+
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Installing AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.0.9)
@@ -1976,12 +2004,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24314) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24182) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24314) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24314) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24182) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24182) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2052,8 +2080,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.459 s
-[INFO] Finished at: 2021-02-10T19:15:31Z
+[INFO] Total time:  4.654 s
+[INFO] Finished at: 2021-02-11T19:16:44Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2162,8 +2190,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.122 s
-[INFO] Finished at: 2021-02-10T19:15:56Z
+[INFO] Total time:  4.258 s
+[INFO] Finished at: 2021-02-11T19:17:08Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabricmanagedclusters-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabricmanagedclusters/src/main/java/azure/resourcemanager/servicefabricmanagedclusters/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabricmanagedclusters.fluent.OperationsClient
