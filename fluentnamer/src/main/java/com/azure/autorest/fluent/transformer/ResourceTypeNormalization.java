@@ -116,15 +116,19 @@ class ResourceTypeNormalization {
 
         switch (Utils.getJavaName(compositeType)) {
             case ResourceTypeName.SUB_RESOURCE:
+            case ResourceTypeName.SUB_RESOURCE_AUTO_GENERATED:
                 type = ResourceType.SUB_RESOURCE;
                 break;
             case ResourceTypeName.PROXY_RESOURCE:
+            case ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED:
                 type = ResourceType.PROXY_RESOURCE;
                 break;
             case ResourceTypeName.TRACKED_RESOURCE:
+            case ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED:
                 type = ResourceType.RESOURCE;
                 break;
             case ResourceTypeName.RESOURCE:
+            case ResourceTypeName.RESOURCE_AUTO_GENERATED:
             {
                 if (hasProperties(compositeType, RESOURCE_EXTRA_FIELDS)) {
                     type = ResourceType.RESOURCE;
