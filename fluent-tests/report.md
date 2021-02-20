@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-02-19T19:27:22.464004
+Generated at 2021-02-20T19:17:09.177564
 ## Success
 <details>
 <summary>RP count: 163</summary>
@@ -182,7 +182,7 @@ Generated at 2021-02-19T19:27:22.464004
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -207,7 +207,7 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -244,7 +244,7 @@ FATAL: Error: Not able to process media type default at this moment.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -889,7 +889,7 @@ FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. C
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1002,6 +1002,7 @@ INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to
 INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'RolloutRequest'
 INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'Rollout'
 INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'ArtifactSource'
+INFORMATION (ErrorTypeNormalization): Rename error from CloudError to ManagementError
 INFORMATION (SchemaCleanup): Remove unused schema 'TrackedResource'
 INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
 INFORMATION (FluentGen): Read YAML
@@ -1014,7 +1015,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ServiceUnitResource, ServiceTopologyResource, ServiceResource, Rollout, ArtifactSource, StepResource, RolloutRequest, OperationsList]
+INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, OperationsList, RolloutRequest, ServiceTopologyResource, ServiceUnitResource, StepResource, ServiceResource, Rollout]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1052,8 +1053,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1528ddf2 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@45f0870a)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1528ddf2 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@45f0870a)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1092,8 +1093,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1528ddf2 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@45f0870a)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1528ddf2 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@45f0870a)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1142,7 +1143,7 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1277,6 +1278,7 @@ INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to
 INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
 INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
 INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (ErrorTypeNormalization): Rename error from Error to ManagementError
 INFORMATION (FluentGen): Read YAML
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1287,7 +1289,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [OperationResult, AndroidMamPolicy, IOsmamPolicy, Location, FlaggedEnrolledApp, WipeDeviceOperationResult, Device, Application, FlaggedUser, GroupItem]
+INFORMATION (FluentMapper): Add Inner to response types: [IOsmamPolicy, Application, OperationResult, GroupItem, Device, FlaggedUser, FlaggedEnrolledApp, Location, WipeDeviceOperationResult, AndroidMamPolicy]
 
 ```
 **stderr**
@@ -1339,7 +1341,7 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1363,7 +1365,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1387,7 +1389,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1434,7 +1436,7 @@ FATAL: Error: 1 errors occured -- cannot continue.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1458,7 +1460,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1663,6 +1665,7 @@ INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'Proxy
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IotSitesModel'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IotAlertModel'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IotRecommendationModel'
+INFORMATION (ErrorTypeNormalization): Rename error from CloudError to ManagementError
 INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
 INFORMATION (SchemaCleanup): Remove unused schema 'SecureScoreControlScore'
 INFORMATION (FluentGen): Read YAML
@@ -1675,7 +1678,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ServerVulnerabilityAssessmentsList, AllowedConnectionsResource, RulesResults, SecuritySolutionsReferenceDataList, OnPremiseIotSensor, ConnectorSetting, AdaptiveNetworkHardening, IotAlert, AdaptiveApplicationControlGroup, TopologyResource, SecurityTask, JitNetworkAccessPolicy, AscLocation, Operation, SecurityAssessment, PackageDownloads, OnPremiseIotSensorsList, AutomationValidationStatus, IotRecommendationModel, SecuritySubAssessment, AlertsSuppressionRule, IotRecommendationType, RegulatoryComplianceControl, IotDefenderSettingsModel, ServerVulnerabilityAssessment, RegulatoryComplianceStandard, IotAlertModel, RegulatoryComplianceAssessment, JitNetworkAccessRequest, IotRecommendationTypeList, IotSitesList, WorkspaceSetting, IotSensorsList, ExternalSecuritySolution, IoTSecuritySolutionModel, PricingList, Scan, IotSensorsModel, IoTSecurityAggregatedAlert, DiscoveredSecuritySolution, SecurityContact, IotAlertType, IotSitesModel, ScanResult, Compliance, SecureScoreControlDefinitionItem, AutoProvisioningSetting, InformationProtectionPolicy, SecuritySolution, Alert, IotRecommendation, IoTSecuritySolutionAnalyticsModelList, SecureScoreItem, RuleResults, AdaptiveApplicationControlGroups, IotDefenderSettingsList, ScanResults, Pricing, Scans, Device, IoTSecuritySolutionAnalyticsModel, SecurityAssessmentMetadata, ComplianceResult, DeviceSecurityGroup, AdvancedThreatProtectionSetting, Setting, IotAlertTypeList, SecureScoreControlDetails, IoTSecurityAggregatedRecommendation, Automation]
+INFORMATION (FluentMapper): Add Inner to response types: [SecuritySolutionsReferenceDataList, PricingList, SecuritySubAssessment, TopologyResource, Operation, IotDefenderSettingsList, IoTSecuritySolutionModel, PackageDownloads, RegulatoryComplianceControl, OnPremiseIotSensorsList, IotSensorsList, ServerVulnerabilityAssessment, SecurityContact, RegulatoryComplianceAssessment, Alert, ExternalSecuritySolution, IotDefenderSettingsModel, Setting, IoTSecuritySolutionAnalyticsModelList, SecureScoreControlDefinitionItem, JitNetworkAccessPolicy, IotRecommendation, SecureScoreItem, OnPremiseIotSensor, IotRecommendationType, DiscoveredSecuritySolution, ConnectorSetting, AdvancedThreatProtectionSetting, IotSensorsModel, IotAlertTypeList, IotAlertType, IotSitesModel, SecurityAssessmentMetadata, ScanResult, SecuritySolution, RuleResults, Compliance, AllowedConnectionsResource, ComplianceResult, RegulatoryComplianceStandard, AdaptiveApplicationControlGroup, ScanResults, InformationProtectionPolicy, AdaptiveApplicationControlGroups, AutomationValidationStatus, IoTSecurityAggregatedRecommendation, IoTSecurityAggregatedAlert, AlertsSuppressionRule, Device, DeviceSecurityGroup, IotRecommendationTypeList, ServerVulnerabilityAssessmentsList, IotAlert, AdaptiveNetworkHardening, AscLocation, JitNetworkAccessRequest, SecureScoreControlDetails, SecurityTask, SecurityAssessment, Scans, IotRecommendationModel, AutoProvisioningSetting, IoTSecuritySolutionAnalyticsModel, RulesResults, Pricing, IotSitesList, WorkspaceSetting, IotAlertModel, Scan, Automation]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1748,7 +1751,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.0.6339; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.0; node: v14.15.5, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1945,6 +1948,7 @@ INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'Proxy
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ClientGroupMember'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'MachinesSummary'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Summary'
+INFORMATION (ErrorTypeNormalization): Rename error from ErrorResponse to ManagementError
 INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
 INFORMATION (SchemaCleanup): Remove unused schema 'Summary'
 INFORMATION (FluentGen): Read YAML
@@ -1957,7 +1961,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Machine, MachinesSummary, ClientGroupMember, MapResponse, MachineGroup, Connection, ClientGroupMembersCount, Liveness, Process, ClientGroup, Port]
+INFORMATION (FluentMapper): Add Inner to response types: [MachineGroup, ClientGroupMember, MachinesSummary, ClientGroup, Connection, Process, Port, Machine, Liveness, ClientGroupMembersCount, MapResponse]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1976,12 +1980,14 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24111) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:23715) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at processImmediate (internal/timers.js:434:9)
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24111) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24111) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:23715) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:23715) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2052,8 +2058,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.991 s
-[INFO] Finished at: 2021-02-19T19:11:57Z
+[INFO] Total time:  3.356 s
+[INFO] Finished at: 2021-02-20T19:04:12Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
