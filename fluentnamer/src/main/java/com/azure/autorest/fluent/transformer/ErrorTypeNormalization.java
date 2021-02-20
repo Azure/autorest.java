@@ -85,51 +85,82 @@ public class ErrorTypeNormalization {
     private void normalizeErrorType(ObjectSchema error, ObjectSchema errorSchema) {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
+                logger.info("Rename error from `{}` to `ManagementError`", Utils.getJavaName(error));
+
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
 
                 if (errorSchema != error) {
                     errorSchema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
                 }
+
+                if (errorSchema != error) {
+                    error.setChildren(errorSchema.getChildren());
+                }
+
+                normalizeSubclass(errorSchema);
+
                 break;
 
             case SUBCLASS_MANAGEMENT_ERROR:
+                logger.info("Modify error `{}` as subclass of `ManagementError`", Utils.getJavaName(error));
+
                 error.getLanguage().getJava().setName(Utils.getJavaName(errorSchema));
 
                 // make it a subclass of ManagementError
                 Relations parents = new Relations();
                 parents.setAll(Collections.singletonList(DUMMY_ERROR));
                 parents.setImmediate(Collections.singletonList(DUMMY_ERROR));
-                error.setParents(parents);
+                errorSchema.setParents(parents);
 
                 if (errorSchema != error) {
-                    errorSchema.setParents(parents);
+                    error.setParents(parents);
                     error.setChildren(errorSchema.getChildren());
                 }
 
-                List<Property> properties = new ArrayList<>();
-                errorSchema.getProperties().forEach(p -> {
-                    if (!MANAGEMENT_ERROR_FIELDS.contains(p.getSerializedName())) {
-                        p.setReadOnly(true);
-                        properties.add(p);
-                    } else if (p.getSerializedName().equals("details")) {
-                        normalizeErrorDetailType(p);
-                        if (FluentType.nonManagementError(Utils.getJavaName(((ArraySchema) p.getSchema()).getElementType()))) {
-                            p.setReadOnly(true);
-                            properties.add(p);
-                        }
-                    }
-                });
-                error.setProperties(properties);
+                filterProperties(errorSchema);
 
                 if (errorSchema != error) {
-                    errorSchema.setProperties(properties);
+                    error.setProperties(errorSchema.getProperties());
                 }
+
+                normalizeSubclass(errorSchema);
 
                 break;
 
             case GENERIC:
                 break;
         }
+    }
+
+    private void normalizeSubclass(ObjectSchema errorSchema) {
+        if (errorSchema.getChildren() != null && errorSchema.getChildren().getImmediate() != null) {
+            for (Schema schema : errorSchema.getChildren().getImmediate()) {
+                if (schema instanceof ObjectSchema) {
+                    ObjectSchema error = (ObjectSchema) schema;
+
+                    logger.info("Modify type `{}` as subclass of `{}`", Utils.getJavaName(error), Utils.getJavaName(errorSchema));
+
+                    filterProperties(error);
+                }
+            }
+        }
+    }
+
+    private void filterProperties(ObjectSchema errorSchema) {
+        List<Property> properties = new ArrayList<>();
+        errorSchema.getProperties().forEach(p -> {
+            if (!MANAGEMENT_ERROR_FIELDS.contains(p.getSerializedName())) {
+                p.setReadOnly(true);
+                properties.add(p);
+            } else if (p.getSerializedName().equals("details")) {
+                normalizeErrorDetailType(p);
+                if (FluentType.nonManagementError(Utils.getJavaName(((ArraySchema) p.getSchema()).getElementType()))) {
+                    p.setReadOnly(true);
+                    properties.add(p);
+                }
+            }
+        });
+        errorSchema.setProperties(properties);
     }
 
     private void normalizeErrorDetailType(Property details) {
@@ -151,18 +182,7 @@ public class ErrorTypeNormalization {
                         parents.setImmediate(Collections.singletonList(DUMMY_ERROR));
                         error.setParents(parents);
 
-                        List<Property> properties = new ArrayList<>();
-                        error.getProperties().forEach(p -> {
-                            if (!MANAGEMENT_ERROR_FIELDS.contains(p.getSerializedName())) {
-                                p.setReadOnly(true);
-                                properties.add(p);
-                            } else if (p.getSerializedName().equals("details")) {
-                                normalizeErrorDetailType(p);
-                                p.setReadOnly(true);
-                                properties.add(p);
-                            }
-                        });
-                        error.setProperties(properties);
+                        filterProperties(error);
                         break;
                 }
             }
