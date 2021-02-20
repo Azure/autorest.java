@@ -85,6 +85,8 @@ public class ErrorTypeNormalization {
     private void normalizeErrorType(ObjectSchema error, ObjectSchema errorSchema) {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
+                logger.info("Rename error from `{}` to `ManagementError`", Utils.getJavaName(error));
+
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
 
                 if (errorSchema != error) {
@@ -93,6 +95,8 @@ public class ErrorTypeNormalization {
                 break;
 
             case SUBCLASS_MANAGEMENT_ERROR:
+                logger.info("Modify error `{}` as subclass of `ManagementError`", Utils.getJavaName(error));
+
                 error.getLanguage().getJava().setName(Utils.getJavaName(errorSchema));
 
                 // make it a subclass of ManagementError
