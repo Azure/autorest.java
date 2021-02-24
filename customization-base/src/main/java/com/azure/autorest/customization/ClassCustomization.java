@@ -126,10 +126,6 @@ public final class ClassCustomization {
         fileEvent.setType(FileChangeType.CHANGED);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-        // format
-        List<TextEdit> textEdits = languageClient.format(fileUri);
-        Utils.applyTextEdits(fileUri, textEdits, editor, languageClient);
-
         String methodSignature = editor.getFileLine(fileName, lineNum);
         return getMethod(methodSignature);
     }
