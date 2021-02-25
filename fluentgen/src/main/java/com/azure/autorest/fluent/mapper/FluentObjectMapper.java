@@ -43,6 +43,8 @@ public class FluentObjectMapper extends ObjectMapper {
             result = FluentType.SubResource;
         } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ManagementError.getName())) {
             result = FluentType.ManagementError;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SystemData.getName())) {
+            result = FluentType.SystemData;
         }
         return result;
     }
