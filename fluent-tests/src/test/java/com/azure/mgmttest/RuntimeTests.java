@@ -28,9 +28,17 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicy;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyDefinition;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyFilter;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyName;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyRule;
+import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicySchema;
 import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
 import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
+import com.azure.mgmtlitetest.storage.models.InventoryRuleType;
 import com.azure.mgmtlitetest.storage.models.Kind;
+import com.azure.mgmtlitetest.storage.models.MinimumTlsVersion;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
@@ -54,6 +62,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +142,7 @@ public class RuntimeTests {
         String rgName = "rg1-weidxu-fluentlite";
         String saName = "sa1weidxulite";
         String blobContainerName = "container1";
-        Region region = Region.US_WEST;
+        Region region = Region.US_EAST;
 
         ResourceGroup rg = resourceManager.resourceGroups().define(rgName)
                 .withRegion(region)
@@ -146,7 +155,9 @@ public class RuntimeTests {
                     .withExistingResourceGroup(rgName)
                     .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                     .withKind(Kind.STORAGE_V2)
+                    .withAccessTier(AccessTier.HOT)
                     .withEnableHttpsTrafficOnly(true)
+                    .withMinimumTlsVersion(MinimumTlsVersion.TLS1_2)
                     .create();
 
             storageAccount.refresh();
@@ -179,6 +190,21 @@ public class RuntimeTests {
                     .apply();
             Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
             Assertions.assertEquals(1, blobService.deleteRetentionPolicy().days());
+
+            BlobInventoryPolicy blobInventoryPolicy = storageManager.blobInventoryPolicies().define(BlobInventoryPolicyName.DEFAULT)
+                    .withExistingStorageAccount(rgName, saName)
+                    .withPolicy(new BlobInventoryPolicySchema()
+                            .withEnabled(true)
+                            .withDestination(blobContainerName)
+                            .withType(InventoryRuleType.INVENTORY)
+                            .withRules(Collections.singletonList(new BlobInventoryPolicyRule()
+                                    .withEnabled(true)
+                                    .withName("DefaultRule-BlockBlobs")
+                                    .withDefinition(new BlobInventoryPolicyDefinition()
+                                            .withFilters(new BlobInventoryPolicyFilter()
+                                                    .withBlobTypes(Collections.singletonList("blockBlob"))))
+                            )))
+                    .create();
 
             storageManager.blobContainers().deleteById(blobContainer.id());
 
