@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-02-28T19:06:38.540222
+Generated at 2021-03-01T19:13:57.268475
 ## Success
 <details>
 <summary>RP count: 164</summary>
@@ -1017,7 +1017,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Rollout, StepResource, ServiceResource, ArtifactSource, RolloutRequest, ServiceTopologyResource, OperationsList, ServiceUnitResource]
+INFORMATION (FluentMapper): Add Inner to response types: [Rollout, RolloutRequest, ServiceResource, ServiceUnitResource, StepResource, OperationsList, ServiceTopologyResource, ArtifactSource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1055,8 +1055,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@34b76716 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@cebc330)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@34b76716 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@cebc330)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1095,8 +1095,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@34b76716 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@cebc330)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@34b76716 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@cebc330)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e3a1f32 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@6879d4bc)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1290,7 +1290,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Device, Application, AndroidMamPolicy, OperationResult, GroupItem, IOsmamPolicy, FlaggedEnrolledApp, Location, FlaggedUser, WipeDeviceOperationResult]
+INFORMATION (FluentMapper): Add Inner to response types: [Application, IOsmamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, WipeDeviceOperationResult, AndroidMamPolicy, Device, GroupItem]
 
 ```
 **stderr**
@@ -1464,8 +1464,8 @@ Use --help to get help information.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.240 s
-[INFO] Finished at: 2021-02-28T18:41:03Z
+[INFO] Total time:  12.821 s
+[INFO] Finished at: 2021-03-01T18:45:50Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-network-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,50] reference to NetworkManager is ambiguous
@@ -1612,21 +1612,13 @@ FATAL: Error: 1 errors occured -- cannot continue.
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[48,5] class, interface, or enum expected
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[56,12] class, interface, or enum expected
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[58,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[39,1] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[40,9] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[41,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[45,12] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[47,9] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[48,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[56,12] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[58,5] class, interface, or enum expected
-[INFO] 16 errors 
+[INFO] 8 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.852 s
-[INFO] Finished at: 2021-02-28T18:44:43Z
+[INFO] Total time:  2.035 s
+[INFO] Finished at: 2021-03-01T18:49:45Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-providerhub-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[39,1] class, interface, or enum expected
@@ -1637,14 +1629,6 @@ FATAL: Error: 1 errors occured -- cannot continue.
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[48,5] class, interface, or enum expected
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[56,12] class, interface, or enum expected
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[58,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[39,1] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[40,9] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[41,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[45,12] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[47,9] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[48,5] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[56,12] class, interface, or enum expected
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/CustomRolloutProperties.java:[58,5] class, interface, or enum expected
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -1909,7 +1893,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ScanResult, Operation, PricingList, AutoProvisioningSetting, PackageDownloads, IotRecommendationType, IotAlertType, WorkspaceSetting, IotSitesModel, AdaptiveApplicationControlGroups, IoTSecuritySolutionAnalyticsModel, IotDefenderSettingsModel, IotRecommendationModel, SecurityContact, IotAlertModel, AdaptiveNetworkHardening, IotSensorsModel, RegulatoryComplianceControl, AllowedConnectionsResource, SecureScoreControlDetails, ServerVulnerabilityAssessment, IoTSecuritySolutionAnalyticsModelList, SecurityAssessment, JitNetworkAccessRequest, Pricing, AscLocation, SecuritySubAssessment, AutomationValidationStatus, IotSitesList, AdvancedThreatProtectionSetting, ServerVulnerabilityAssessmentsList, RegulatoryComplianceAssessment, Automation, IotAlert, IotRecommendationTypeList, SecuritySolution, SecureScoreControlDefinitionItem, Device, RegulatoryComplianceStandard, OnPremiseIotSensorsList, DiscoveredSecuritySolution, IotSensorsList, InformationProtectionPolicy, SecuritySolutionsReferenceDataList, ScanResults, RuleResults, IoTSecuritySolutionModel, Alert, ExternalSecuritySolution, IoTSecurityAggregatedRecommendation, Compliance, SecurityAssessmentMetadata, RulesResults, IotDefenderSettingsList, OnPremiseIotSensor, IotAlertTypeList, JitNetworkAccessPolicy, ComplianceResult, SecurityTask, AdaptiveApplicationControlGroup, TopologyResource, Scan, Scans, IotRecommendation, Setting, AlertsSuppressionRule, DeviceSecurityGroup, SecureScoreItem, IoTSecurityAggregatedAlert, ConnectorSetting]
+INFORMATION (FluentMapper): Add Inner to response types: [PackageDownloads, IoTSecurityAggregatedRecommendation, SecuritySubAssessment, Alert, IotAlertType, ServerVulnerabilityAssessmentsList, IoTSecuritySolutionModel, IotSensorsList, WorkspaceSetting, IoTSecuritySolutionAnalyticsModelList, RegulatoryComplianceStandard, JitNetworkAccessPolicy, Pricing, SecureScoreItem, ConnectorSetting, InformationProtectionPolicy, Device, IotSitesList, AutoProvisioningSetting, ScanResult, IoTSecurityAggregatedAlert, IotSensorsModel, RegulatoryComplianceControl, IotDefenderSettingsModel, AdaptiveApplicationControlGroups, AdaptiveApplicationControlGroup, AscLocation, ScanResults, IotDefenderSettingsList, PricingList, RegulatoryComplianceAssessment, ServerVulnerabilityAssessment, SecurityAssessmentMetadata, AdvancedThreatProtectionSetting, IotAlertModel, SecurityContact, SecurityTask, IotAlert, SecureScoreControlDefinitionItem, Scan, TopologyResource, AlertsSuppressionRule, RuleResults, OnPremiseIotSensor, JitNetworkAccessRequest, OnPremiseIotSensorsList, SecuritySolution, Scans, AllowedConnectionsResource, Automation, Operation, IoTSecuritySolutionAnalyticsModel, IotRecommendation, ExternalSecuritySolution, IotSitesModel, Setting, Compliance, AdaptiveNetworkHardening, SecuritySolutionsReferenceDataList, RulesResults, IotRecommendationTypeList, ComplianceResult, SecureScoreControlDetails, DiscoveredSecuritySolution, IotRecommendationType, AutomationValidationStatus, DeviceSecurityGroup, IotRecommendationModel, IotAlertTypeList, SecurityAssessment]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -2191,7 +2175,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MapResponse, Connection, Process, Machine, Port, Liveness, ClientGroupMembersCount, ClientGroupMember, ClientGroup, MachinesSummary, MachineGroup]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMembersCount, Liveness, Connection, MachineGroup, ClientGroupMember, Port, MapResponse, Machine, Process, ClientGroup, MachinesSummary]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2210,12 +2194,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24386) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24609) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24386) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24386) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24609) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24609) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2286,8 +2270,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.640 s
-[INFO] Finished at: 2021-02-28T18:53:17Z
+[INFO] Total time:  4.116 s
+[INFO] Finished at: 2021-03-01T18:58:51Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
