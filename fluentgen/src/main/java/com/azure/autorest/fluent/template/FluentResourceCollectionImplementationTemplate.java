@@ -39,8 +39,10 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         // ClientLogger
         imports.add(JsonIgnore.class.getName());
         ClassType.ClientLogger.addImportsTo(imports, false);
+        /* use full name for FooManager, to avoid naming conflict
         // manager
         imports.add(managerType.getFullName());
+         */
         // resource collection
         collection.addImportsTo(imports, true);
         if (collection.getResourceCreates() != null) {
@@ -61,10 +63,10 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             classBlock.privateFinalMemberVariable(collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);
 
             // variable for manager
-            classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.COLLECTION_PROPERTY_MANAGER);
+            classBlock.privateFinalMemberVariable(managerType.getFullName(), ModelNaming.COLLECTION_PROPERTY_MANAGER);
 
             // constructor
-            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
+            classBlock.publicConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", collection.getImplementationType().getName(), collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER, managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_INNER, ModelNaming.COLLECTION_PROPERTY_INNER));
                 methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.COLLECTION_PROPERTY_MANAGER, ModelNaming.COLLECTION_PROPERTY_MANAGER));
             });
@@ -78,7 +80,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
             });
 
             // method for manager
-            classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
+            classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getFullName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
 
