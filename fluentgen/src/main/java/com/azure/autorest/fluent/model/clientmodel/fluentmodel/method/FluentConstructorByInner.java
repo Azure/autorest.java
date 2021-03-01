@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 public class FluentConstructorByInner extends FluentMethod {
 
     private final List<MethodParameter> pathParameters;
-    private final IType managerType;
+    private final ClassType managerType;
 
     public FluentConstructorByInner(FluentResourceModel model, FluentMethodType type,
                                     List<MethodParameter> pathParameters, ResourceLocalVariables resourceLocalVariables,
-                                    IType managerType, UrlPathSegments urlPathSegments) {
+                                    ClassType managerType, UrlPathSegments urlPathSegments) {
         super(model, type);
 
         this.pathParameters = pathParameters;
@@ -74,7 +74,7 @@ public class FluentConstructorByInner extends FluentMethod {
         return String.format("%1$s(%2$s %3$s, %4$s %5$s)",
                 implementationReturnValue.getType().toString(),
                 fluentResourceModel.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER,
-                managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+                managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER);
     }
 
     @Override
@@ -91,7 +91,9 @@ public class FluentConstructorByInner extends FluentMethod {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (includeImplementationImports) {
             pathParameters.forEach(p -> p.getClientMethodParameter().addImportsTo(imports, false));
+            /* use full name for FooManager, to avoid naming conflict
             managerType.addImportsTo(imports, false);
+             */
         }
     }
 }

@@ -9,6 +9,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -21,15 +22,15 @@ public class FluentConstructorByName extends FluentMethod {
 
     private final boolean constantResourceName; // resource name is constant, "name" is not needed
     private final IType resourceNameType;
-    private final IType managerType;
+    private final ClassType managerType;
 
     public static FluentConstructorByName constructorMethodWithConstantResourceName(
-            FluentResourceModel model, FluentMethodType type, IType managerType, ResourceLocalVariables resourceLocalVariables) {
+            FluentResourceModel model, FluentMethodType type, ClassType managerType, ResourceLocalVariables resourceLocalVariables) {
         return new FluentConstructorByName(model, type, null, null, managerType, resourceLocalVariables);
     }
 
     public FluentConstructorByName(FluentResourceModel model, FluentMethodType type,
-                                   IType resourceNameType, String propertyNameForResourceName, IType managerType,
+                                   IType resourceNameType, String propertyNameForResourceName, ClassType managerType,
                                    ResourceLocalVariables resourceLocalVariables) {
         super(model, type);
 
@@ -64,12 +65,12 @@ public class FluentConstructorByName extends FluentMethod {
         if (constantResourceName) {
             return String.format("%1$s(%2$s %3$s)",
                     implementationReturnValue.getType().toString(),
-                    managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+                    managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER);
         } else {
             return String.format("%1$s(%2$s name, %3$s %4$s)",
                     implementationReturnValue.getType().toString(),
                     resourceNameType.toString(),
-                    managerType.toString(), ModelNaming.MODEL_PROPERTY_MANAGER);
+                    managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER);
         }
     }
 
@@ -89,7 +90,9 @@ public class FluentConstructorByName extends FluentMethod {
             if (resourceNameType != null) {
                 resourceNameType.addImportsTo(imports, false);
             }
+            /* use full name for FooManager, to avoid naming conflict
             managerType.addImportsTo(imports, false);
+             */
         }
     }
 }

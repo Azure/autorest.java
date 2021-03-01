@@ -67,7 +67,7 @@ public class FluentMethodTests {
                 lockUpdate.getPathParameters(), lockUpdate.getResourceLocalVariables(),
                 FluentStatic.getFluentManager().getType(), lockUpdate.getUrlPathSegments());
 
-        Assertions.assertEquals("ManagementLockObjectImpl(ManagementLockObjectInner innerObject, ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
+        Assertions.assertEquals("ManagementLockObjectImpl(ManagementLockObjectInner innerObject, com.azure.resourcemanager.mock.ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
 
         String methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("this.innerObject = innerObject;"));
@@ -79,7 +79,7 @@ public class FluentMethodTests {
                 ClassType.String, "lockName",
                 FluentStatic.getFluentManager().getType(), lockCreate.getResourceLocalVariables());
 
-        Assertions.assertEquals("ManagementLockObjectImpl(String name, ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
+        Assertions.assertEquals("ManagementLockObjectImpl(String name, com.azure.resourcemanager.mock.ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
 
         methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("new ManagementLockObjectInner();"));
@@ -90,7 +90,7 @@ public class FluentMethodTests {
         constructor = FluentConstructorByName.constructorMethodWithConstantResourceName(lockModel, FluentMethodType.CONSTRUCTOR,
                 FluentStatic.getFluentManager().getType(), lockCreate.getResourceLocalVariables());
 
-        Assertions.assertEquals("ManagementLockObjectImpl(ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
+        Assertions.assertEquals("ManagementLockObjectImpl(com.azure.resourcemanager.mock.ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
 
         methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("new ManagementLockObjectInner();"));
