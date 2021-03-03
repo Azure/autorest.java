@@ -29,7 +29,7 @@ public class Project {
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Project.class);
 
     private final String serviceName;
-    private final String serviceDescription;
+    private final ServiceDescription serviceDescription = new ServiceDescription();
 
     private final String namespace;
     private final String groupId = "com.azure.resourcemanager";
@@ -61,6 +61,31 @@ public class Project {
         }
     }
 
+    private static class ServiceDescription {
+        private String simpleDescription;
+        private String clientDescription;
+        private String tagDescription;
+
+        private String getServiceDescription() {
+            return String.format("%1$s %2$s %3$s",
+                    simpleDescription,
+                    clientDescription,
+                    tagDescription);
+        }
+
+        public String getServiceDescriptionForPom() {
+            return String.format("%1$s %2$s %3$s %4$s",
+                    simpleDescription,
+                    "For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt.",
+                    clientDescription,
+                    tagDescription);
+        }
+
+        public String getServiceDescriptionForMarkdown() {
+            return this.getServiceDescription() + " For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
+        }
+    }
+
     public Project(FluentClient fluentClient) {
         this(fluentClient.getManager().getServiceName(), fluentClient.getInnerClient().getClientDescription());
     }
@@ -81,12 +106,12 @@ public class Project {
             clientDescription += ".";
         }
 
-        String serviceDescription = String.format(
-                "This package contains Microsoft Azure SDK for %1$s Management SDK. %2$s Package tag %3$s.",
-                serviceName,
-                clientDescription,
-                settings.getAutorestSettings().getTag());
-        this.serviceDescription = serviceDescription;
+        final String simpleDescriptionTemplate = "This package contains Microsoft Azure SDK for %1$s Management SDK.";
+        final String tagDescriptionTemplate = "Package tag %1$s.";
+
+        this.serviceDescription.simpleDescription = String.format(simpleDescriptionTemplate, serviceName);
+        this.serviceDescription.clientDescription = clientDescription;
+        this.serviceDescription.tagDescription = String.format(tagDescriptionTemplate, settings.getAutorestSettings().getTag());
 
         this.changelog = new Changelog(this);
     }
@@ -215,15 +240,15 @@ public class Project {
     }
 
     public String getServiceDescription() {
-        return serviceDescription;
+        return this.serviceDescription.getServiceDescription();
     }
 
     public String getServiceDescriptionForPom() {
-        return this.getServiceDescription() + " For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt";
+        return this.serviceDescription.getServiceDescriptionForPom();
     }
 
     public String getServiceDescriptionForMarkdown() {
-        return this.getServiceDescription() + " For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
+        return this.serviceDescription.getServiceDescriptionForMarkdown();
     }
 
     public String getNamespace() {
