@@ -59,7 +59,11 @@ public class FluentType {
     }
 
     public static boolean nonSystemData(ClassType modelType) {
-        return !SystemData.getName().equals(modelType.getName());
+        return nonSystemData(modelType.getName());
+    }
+
+    public static boolean nonSystemData(String modelName) {
+        return !SystemData.getName().equals(modelName);
     }
 
     public static boolean nonManagementError(ClassType modelType) {
