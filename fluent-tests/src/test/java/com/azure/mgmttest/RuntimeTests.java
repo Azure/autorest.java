@@ -12,6 +12,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
+import com.azure.core.management.ResourceAuthorIdentityType;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.profile.AzureProfile;
@@ -23,20 +24,14 @@ import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
+import com.azure.mgmtlitetest.mediaservices.MediaservicesManager;
+import com.azure.mgmtlitetest.mediaservices.models.MediaService;
+import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicy;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyDefinition;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyFilter;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyName;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicyRule;
-import com.azure.mgmtlitetest.storage.models.BlobInventoryPolicySchema;
-import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
-import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
-import com.azure.mgmtlitetest.storage.models.InventoryRuleType;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.MinimumTlsVersion;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
@@ -180,35 +175,12 @@ public class RuntimeTests {
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
-            // container blob service properties
-            BlobServiceProperties blobService = storageManager.blobServices().define()
-                    .withExistingStorageAccount(rgName, saName)
-                    .create();
-
-            blobService.update()
-                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(1))
-                    .apply();
-            Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
-            Assertions.assertEquals(1, blobService.deleteRetentionPolicy().days());
-
-            BlobInventoryPolicy blobInventoryPolicy = storageManager.blobInventoryPolicies().define(BlobInventoryPolicyName.DEFAULT)
-                    .withExistingStorageAccount(rgName, saName)
-                    .withPolicy(new BlobInventoryPolicySchema()
-                            .withEnabled(true)
-                            .withDestination(blobContainerName)
-                            .withType(InventoryRuleType.INVENTORY)
-                            .withRules(Collections.singletonList(new BlobInventoryPolicyRule()
-                                    .withEnabled(true)
-                                    .withName("DefaultRule-BlockBlobs")
-                                    .withDefinition(new BlobInventoryPolicyDefinition()
-                                            .withFilters(new BlobInventoryPolicyFilter()
-                                                    .withBlobTypes(Collections.singletonList("blockBlob"))))
-                            )))
-                    .create();
-
             storageManager.blobContainers().deleteById(blobContainer.id());
 
-            // test advisor for it requires a base resource
+            // test media services for SystemData
+            testMediaServices(storageAccount);
+
+            // test advisor as it is an extension, which requires a base resource
             // disabled as generate is async and it takes too long for a new resource
             //testAdvisor(storageAccount);
 
@@ -216,6 +188,29 @@ public class RuntimeTests {
         } finally {
             resourceManager.resourceGroups().delete(rgName);
         }
+    }
+
+    private void testMediaServices(StorageAccount storageAccount) {
+        MediaservicesManager mediaservicesManager = authenticateMediaServicesManager();
+
+        String rgName = "rg1-weidxu-fluentlite";
+        String msName = "ms1weidxulite";
+
+        MediaService mediaService = mediaservicesManager.mediaservices().define(msName)
+                .withRegion(Region.US_EAST)
+                .withExistingResourceGroup(rgName)
+                .withStorageAccounts(Collections.singletonList(
+                        new com.azure.mgmtlitetest.mediaservices.models.StorageAccount()
+                                .withId(storageAccount.id())
+                                .withType(StorageAccountType.PRIMARY)))
+                .create();
+
+        Assertions.assertNotNull(mediaService.systemData());
+        Assertions.assertNotNull(mediaService.systemData().createdBy());
+        Assertions.assertNotNull(mediaService.systemData().createdAt());
+        Assertions.assertEquals(ResourceAuthorIdentityType.APPLICATION, mediaService.systemData().createdByType());
+
+        mediaservicesManager.mediaservices().deleteById(mediaService.id());
     }
 
     private void testAdvisor(StorageAccount storageAccount) {
@@ -275,6 +270,12 @@ public class RuntimeTests {
 
     private AdvisorManager authenticateAdvisorManager() {
         return AdvisorManager.configure()
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
+    }
+
+    private MediaservicesManager authenticateMediaServicesManager() {
+        return MediaservicesManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
