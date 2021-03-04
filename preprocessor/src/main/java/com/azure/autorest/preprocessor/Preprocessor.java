@@ -6,6 +6,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
@@ -100,7 +101,10 @@ public class Preprocessor extends NewPlugin {
 
 
   private CodeModel performPretransformUpdates(CodeModel codeModel) {
-    return convertOptionalConstantsToEnum(codeModel);
+    if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
+      return convertOptionalConstantsToEnum(codeModel);
+    }
+    return codeModel;
   }
 
   private CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
