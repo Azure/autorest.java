@@ -750,3 +750,96 @@ use: $(this-folder)/javagen
 ``` yaml $(java) && $(fluent)
 use: $(this-folder)/fluentgen
 ```
+
+#### Help
+
+```yaml
+help-content:
+  java:
+    activationScope: java
+    categoryFriendlyName: Java Generator
+    settings:
+      - key: enable-xml
+        type: bool
+        description: Generates models and clients that can be sent in XML over the wire. Default is false
+      - key: client-side-validations
+        type: bool
+        description: Generate validations for required parameters and required model properties. Default is false.
+      - key: generate-client-as-impl
+        type: bool
+        description: Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.
+      - key: generate-client-interfaces
+        type: bool
+        description: Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.
+      - key: generate-sync-async-clients
+        type: bool
+        description: Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.
+      - key: implementation-subpackage=STRING
+        type: string
+        description: The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.
+      - key: models-subpackage=STRING
+        type: string
+        description: The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.
+      - key: add-context-parameter
+        type: bool
+        description: Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.
+      - key: context-client-method-parameter
+        type: bool
+        description: Implies `--add-context-parameter` and indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Default is false.
+      - key: sync-methods
+        type: string
+        description: \[all|essential|none] Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods
+      - key: required-parameter-client-methods
+        type: bool
+        description: Indicates whether client method overloads with only required parameters should be generated. Default is false.
+      - key: custom-types
+        type: string
+        description: \[COMMA,SEPARATED,STRINGS] Specifies a list of files to put in the package specified in `--custom-types-subpackage`.
+      - key: custom-types-subpackage
+        type: string
+        description: The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage** You can set this lue to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.
+      - key: client-type-prefix
+        type: string
+        description: The prefix that will be added to each generated client type.
+      - key: model-override-setter-from-superclass
+        type: bool
+        description: Indicates whether to override the superclass setter method in model. Default is false.
+
+  javafluent:
+    activationScope: fluent
+    categoryFriendlyName: Java fluent Generator
+    settings:
+      - key: fluent
+        type: string
+        description: Enum. `LITE` for Fluent Lite; `PREMIUM` for Fluent Premium. Case insensitive. Default is `PREMIUM` if provided as other values.
+      - key: fluent-subpackage
+        type: string
+        description: String. The sub-package that vanilla client and builder will be put into. Default is `fluent`.
+      - key: pom-file
+        type: string
+        description: String. Name for Maven POM file. Default is `pom.xml`.
+      - key: package-version
+        type: string
+        description: String. Version number for Maven artifact. Default is `1.0.0-beta.1`.
+      - key: service-name
+        type: string
+        description: String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).
+      - key: sdk-integration
+        type: bool
+        description: Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance.
+      - key: add-inner
+        type: string
+        description: CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name).
+      - key: remove-inner
+        type: string
+        description: CSV. Exclude from inner classes.
+      - key: rename-model
+        type: string
+        description: CSV. Rename classes. Each item is of pattern `from:to`.
+      - key: remove-model
+        type: string
+        description: CSV. Remove classes.
+      - key: name-for-ungrouped-operations
+        type: string
+        description: String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite.
+```
