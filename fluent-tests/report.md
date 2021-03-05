@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-03-03T19:08:02.843632
+Generated at 2021-03-05T19:24:28.519516
 ## Success
 <details>
-<summary>RP count: 165</summary>
+<summary>RP count: 166</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -112,6 +112,7 @@ Generated at 2021-03-03T19:08:02.843632
 - msi
 - mysql
 - netapp
+- network
 - notificationhubs
 - operationalinsights
 - operationsmanagement
@@ -176,7 +177,6 @@ Generated at 2021-03-03T19:08:02.843632
 - security
 
 ## Failure at Build
-- network
 - providerhub
 - servicefabric
 
@@ -186,7 +186,7 @@ Generated at 2021-03-03T19:08:02.843632
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -211,7 +211,7 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -248,7 +248,7 @@ FATAL: Error: Not able to process media type default at this moment.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -893,7 +893,7 @@ FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. C
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1018,7 +1018,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, ServiceUnitResource, Rollout, OperationsList, StepResource, ServiceTopologyResource, ServiceResource, RolloutRequest]
+INFORMATION (FluentMapper): Add Inner to response types: [ServiceUnitResource, RolloutRequest, Rollout, ArtifactSource, OperationsList, ServiceResource, StepResource, ServiceTopologyResource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1056,8 +1056,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@524a2d2c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@4428b541)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@524a2d2c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@4428b541)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1096,8 +1096,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@524a2d2c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@4428b541)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@524a2d2c and com.azure.autorest.model.clientmodel.ProxyMethodParameter@4428b541)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@795f8e38 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@20c55e0c)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1146,7 +1146,7 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1291,7 +1291,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [WipeDeviceOperationResult, Application, OperationResult, FlaggedEnrolledApp, Device, GroupItem, AndroidMamPolicy, FlaggedUser, Location, IOsmamPolicy]
+INFORMATION (FluentMapper): Add Inner to response types: [Application, IOsmamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, WipeDeviceOperationResult, AndroidMamPolicy, Device, GroupItem]
 
 ```
 **stderr**
@@ -1343,7 +1343,7 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1367,7 +1367,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1387,162 +1387,11 @@ Use --help to get help information.
 </details>
 
 <details>
-<summary>network</summary>
-
-**stdout**
-```
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --< com.azure.resourcemanager:azure-resourcemanager-network-generated >--
-[INFO] Building Microsoft Azure SDK for Network Management 1.0.0-beta.1
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-network-generated ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-network-generated ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1554 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,50] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,66] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,93] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[24,19] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[96,13] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[111,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[121,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[131,37] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[142,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[152,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[162,57] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[169,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[179,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[9,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[24,19] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[26,67] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[31,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[40,21] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[63,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[68,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[73,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[78,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[85,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[105,21] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[169,13] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[10,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[19,14] azure.resourcemanager.network.implementation.NetworkManagersImpl is not abstract and does not override abstract method define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[173,31] define(java.lang.String) in azure.resourcemanager.network.implementation.NetworkManagersImpl cannot implement define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-  return type azure.resourcemanager.network.implementation.NetworkManagerImpl is not compatible with azure.resourcemanager.network.models.NetworkManager.DefinitionStages.Blank
-[INFO] 28 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.460 s
-[INFO] Finished at: 2021-03-03T18:43:31Z
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-network-generated: Compilation failure: Compilation failure: 
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,50] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,66] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,93] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[24,19] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[96,13] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[111,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[121,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[131,37] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[142,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[152,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[162,57] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[169,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[179,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[9,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[24,19] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[26,67] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[31,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[40,21] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[63,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[68,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[73,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[78,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[85,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[105,21] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[169,13] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[10,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[19,14] azure.resourcemanager.network.implementation.NetworkManagersImpl is not abstract and does not override abstract method define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[173,31] define(java.lang.String) in azure.resourcemanager.network.implementation.NetworkManagersImpl cannot implement define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR]   return type azure.resourcemanager.network.implementation.NetworkManagerImpl is not compatible with azure.resourcemanager.network.models.NetworkManager.DefinitionStages.Blank
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-```
-**stderr**
-```
-
-```
-</details>
-
-<details>
 <summary>powerplatform</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1626,8 +1475,8 @@ FATAL: Error: 1 errors occured -- cannot continue.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.870 s
-[INFO] Finished at: 2021-03-03T18:46:52Z
+[INFO] Total time:  2.395 s
+[INFO] Finished at: 2021-03-05T18:57:16Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-providerhub-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-providerhub/src/main/java/azure/resourcemanager/providerhub/models/DefaultRolloutProperties.java:[39,1] class, interface, or enum expected
@@ -1666,7 +1515,7 @@ FATAL: Error: 1 errors occured -- cannot continue.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1690,7 +1539,7 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1910,7 +1759,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [DiscoveredSecuritySolution, AdaptiveApplicationControlGroup, SecuritySolutionsReferenceDataList, IotRecommendationType, SecurityAssessment, AdvancedThreatProtectionSetting, IotAlertType, SecurityContact, IotDefenderSettingsList, IotSensorsModel, Compliance, IoTSecuritySolutionAnalyticsModel, ScanResults, PricingList, SecurityTask, ConnectorSetting, AdaptiveApplicationControlGroups, JitNetworkAccessPolicy, OnPremiseIotSensorsList, Automation, JitNetworkAccessRequest, IotSitesList, Alert, SecuritySubAssessment, AscLocation, ScanResult, Device, PackageDownloads, Operation, IotRecommendationModel, WorkspaceSetting, RegulatoryComplianceControl, Pricing, ServerVulnerabilityAssessment, IotAlertModel, IotRecommendationTypeList, IotSensorsList, SecuritySolution, IotSitesModel, AllowedConnectionsResource, InformationProtectionPolicy, IoTSecurityAggregatedAlert, ComplianceResult, AutomationValidationStatus, SecureScoreControlDefinitionItem, SecureScoreControlDetails, IoTSecuritySolutionModel, Scans, TopologyResource, IoTSecuritySolutionAnalyticsModelList, AutoProvisioningSetting, RegulatoryComplianceAssessment, Scan, IotDefenderSettingsModel, IotAlert, IoTSecurityAggregatedRecommendation, RulesResults, IotAlertTypeList, IotRecommendation, AlertsSuppressionRule, AdaptiveNetworkHardening, RuleResults, OnPremiseIotSensor, DeviceSecurityGroup, SecurityAssessmentMetadata, SecureScoreItem, Setting, ServerVulnerabilityAssessmentsList, ExternalSecuritySolution, RegulatoryComplianceStandard]
+INFORMATION (FluentMapper): Add Inner to response types: [IotSensorsList, IotDefenderSettingsList, Compliance, AlertsSuppressionRule, ScanResults, ExternalSecuritySolution, WorkspaceSetting, JitNetworkAccessPolicy, RulesResults, OnPremiseIotSensorsList, IotAlertModel, Pricing, Operation, SecurityTask, IoTSecurityAggregatedRecommendation, IotAlert, AdvancedThreatProtectionSetting, DiscoveredSecuritySolution, PricingList, IoTSecuritySolutionAnalyticsModel, IoTSecurityAggregatedAlert, PackageDownloads, IotSitesModel, RegulatoryComplianceStandard, DeviceSecurityGroup, SecurityAssessmentMetadata, IotAlertType, SecurityContact, ServerVulnerabilityAssessment, IotAlertTypeList, IoTSecuritySolutionAnalyticsModelList, AutoProvisioningSetting, Scan, SecureScoreControlDefinitionItem, TopologyResource, JitNetworkAccessRequest, SecureScoreControlDetails, SecuritySolution, IotRecommendationType, AllowedConnectionsResource, InformationProtectionPolicy, AutomationValidationStatus, Alert, AscLocation, IotRecommendationTypeList, RuleResults, ServerVulnerabilityAssessmentsList, Setting, AdaptiveApplicationControlGroups, IotRecommendation, OnPremiseIotSensor, IoTSecuritySolutionModel, RegulatoryComplianceAssessment, SecurityAssessment, ScanResult, ComplianceResult, Device, IotRecommendationModel, SecuritySubAssessment, IotSitesList, AdaptiveNetworkHardening, ConnectorSetting, Automation, RegulatoryComplianceControl, IotSensorsModel, AdaptiveApplicationControlGroup, SecuritySolutionsReferenceDataList, SecureScoreItem, Scans, IotDefenderSettingsModel]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1983,7 +1832,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.2; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -2192,7 +2041,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MachinesSummary, MachineGroup, ClientGroupMembersCount, Machine, Liveness, ClientGroup, MapResponse, Process, Connection, ClientGroupMember, Port]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMembersCount, MachineGroup, ClientGroup, Port, MapResponse, Machine, MachinesSummary, ClientGroupMember, Process, Connection, Liveness]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2211,12 +2060,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24572) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:25028) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24572) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24572) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:25028) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:25028) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2287,8 +2136,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.720 s
-[INFO] Finished at: 2021-03-03T18:54:46Z
+[INFO] Total time:  4.705 s
+[INFO] Finished at: 2021-03-05T19:07:34Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient
