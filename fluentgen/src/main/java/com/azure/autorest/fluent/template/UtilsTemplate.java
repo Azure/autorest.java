@@ -17,7 +17,7 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.util.CoreUtils;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
             PagedIterable.class.getName(),
             PagedResponse.class.getName(),
             PagedResponseBase.class.getName(),
-            Mono.class.getName(),
+            Flux.class.getName(),
             Iterator.class.getName(),
             Function.class.getName(),
             Collectors.class.getName(),
