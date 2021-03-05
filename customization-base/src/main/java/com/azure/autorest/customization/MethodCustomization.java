@@ -11,10 +11,10 @@ import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
-import com.azure.autorest.customization.models.Modifier;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -168,33 +168,20 @@ public final class MethodCustomization {
     }
 
     /**
-     * Replace the modifiers for this method.
+     * Replace the modifier for this method.
      * <p>
-     * If {@code modifier} is null the method modifiers are left unchanged.
+     * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers, {@code
+     * Modifier.PUBLIC | Modifier.ABSTRACT}.
      *
-     * @param modifier The {@link Modifier} for this method.
+     * @param modifiers The {@link Modifier Modifiers} for the method.
      * @return The updated MethodCustomization object.
+     * @throws IllegalArgumentException If the {@code modifier} is less than or equal to {@code 0} or any {@link
+     * Modifier} included in the bitwise OR isn't a valid method {@link Modifier}.
      */
-    public MethodCustomization setModifier(Modifier modifier) {
-        return setModifiers(modifier);
-    }
-
-    /**
-     * Replace the modifiers for this method.
-     * <p>
-     * If {@code modifiers} is null or empty the method modifiers are left unchanged.
-     *
-     * @param modifiers The {@link Modifier Modifiers} for this method.
-     * @return The updated MethodCustomization object.
-     */
-    public MethodCustomization setModifiers(Modifier... modifiers) {
-        if (Utils.isNullOrEmpty(modifiers)) {
-            return this;
-        }
-
+    public MethodCustomization setModifier(int modifiers) {
         Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
             oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
-            modifiers);
+            Modifier.methodModifiers(), modifiers);
         refreshSymbol();
         return this;
     }
