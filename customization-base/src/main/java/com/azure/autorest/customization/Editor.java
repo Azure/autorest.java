@@ -22,10 +22,10 @@ import java.util.Scanner;
  * The raw editor containing the current files being customized.
  */
 public final class Editor {
-    private Path rootDir;
-    private Map<String, String> contents;
-    private Map<String, List<String>> lines;
-    private Map<String, Path> paths;
+    private final Path rootDir;
+    private final Map<String, String> contents;
+    private final Map<String, List<String>> lines;
+    private final Map<String, Path> paths;
 
     /**
      * Creates an editor instance with the file contents and the root directory path.

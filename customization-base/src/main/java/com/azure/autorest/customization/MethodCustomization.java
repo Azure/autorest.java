@@ -168,27 +168,33 @@ public final class MethodCustomization {
     }
 
     /**
-     * Change the modifier for the method. For package private, use empty string as the modifier.
+     * Replace the modifiers for this method.
+     * <p>
+     * If {@code modifier} is null the method modifiers are left unchanged.
      *
-     * @param modifier the new modifier for the method
-     * @return the current class customization for chaining
+     * @param modifier The {@link Modifier} for this method.
+     * @return The updated MethodCustomization object.
      */
     public MethodCustomization setModifier(Modifier modifier) {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        Position start = new Position(line, 0);
-        String oldLineContent = editor.getFileLine(fileName, line);
-        Position end = new Position(line, oldLineContent.length());
-        String modifierPrefix = modifier == null || modifier.toString().isEmpty() ? "" : modifier + " ";
-        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", modifierPrefix + "$2 " + methodName + "(");
-        TextEdit textEdit = new TextEdit();
-        textEdit.setNewText(newLineContent);
-        textEdit.setRange(new Range(start, end));
-        WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-        workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+        return setModifiers(modifier);
+    }
+
+    /**
+     * Replace the modifiers for this method.
+     * <p>
+     * If {@code modifiers} is null or empty the method modifiers are left unchanged.
+     *
+     * @param modifiers The {@link Modifier Modifiers} for this method.
+     * @return The updated MethodCustomization object.
+     */
+    public MethodCustomization setModifiers(Modifier... modifiers) {
+        if (Utils.isNullOrEmpty(modifiers)) {
+            return this;
+        }
+
+        Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
+            oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
+            modifiers);
         refreshSymbol();
         return this;
     }

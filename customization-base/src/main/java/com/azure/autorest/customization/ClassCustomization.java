@@ -177,31 +177,36 @@ public final class ClassCustomization {
     }
 
     /**
-     * Change the modifier for this class. The current modifier will be replaced. For package private, use empty String.
+     * Replace the modifier for this class.
+     * <p>
+     * If {@code modifier} is null the class modifiers are left unchanged.
      *
-     * @param modifier the new modifier for the class
-     * @return the current class customization for chaining
+     * @param modifier The {@link Modifier} for the class.
+     * @return The updated ClassCustomization object.
      */
     public ClassCustomization setModifier(Modifier modifier) {
-        URI fileUri = classSymbol.getLocation().getUri();
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.CLASS)
-                .findFirst();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        if (symbol.isPresent()) {
-            int line = symbol.get().getLocation().getRange().getStart().getLine();
-            Position start = new Position(line, 0);
-            String oldLineContent = editor.getFileLine(fileName, line);
-            Position end = new Position(line, oldLineContent.length());
-            String newLineContent = oldLineContent.replaceFirst("\\w.* class " + className, modifier + " class " + className);
-            TextEdit textEdit = new TextEdit();
-            textEdit.setNewText(newLineContent);
-            textEdit.setRange(new Range(start, end));
-            WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-            workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+        return setModifiers(modifier);
+    }
+
+    /**
+     * Replace the modifiers for this class.
+     * <p>
+     * If {@code modifiers} is null or empty the class modifiers are left unchanged.
+     *
+     * @param modifiers The {@link Modifier Modifiers} for the class.
+     * @return The updated ClassCustomization object.
+     */
+    public ClassCustomization setModifiers(Modifier... modifiers) {
+        if (Utils.isNullOrEmpty(modifiers)) {
+            return this;
         }
+
+        languageClient.listDocumentSymbols(classSymbol.getLocation().getUri())
+            .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.CLASS)
+            .findFirst()
+            .ifPresent(symbolInformation ->
+                Utils.replaceModifier(symbolInformation, editor, languageClient, (oldLine, newModifiers) ->
+                    oldLine.replaceFirst("\\w.* class " + className, newModifiers + " class " + className), modifiers));
         refreshSymbol();
         return this;
     }
