@@ -156,6 +156,8 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
+            Assertions.assertEquals(1, storageManager.storageAccounts().list().stream().count());
+
             // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
                     .withExistingStorageAccount(rgName, saName)
@@ -175,10 +177,12 @@ public class RuntimeTests {
                     .create();
 
             blobService.update()
-                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(1))
+                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(3))
                     .apply();
             Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
-            Assertions.assertEquals(1, blobService.deleteRetentionPolicy().days());
+            Assertions.assertEquals(3, blobService.deleteRetentionPolicy().days());
+
+            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
 
             storageManager.blobContainers().deleteById(blobContainer.id());
 
