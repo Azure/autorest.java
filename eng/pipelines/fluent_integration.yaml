@@ -15,9 +15,9 @@ jobs:
     vmImage: 'vs2017-win2016'
 
   steps:
-  - task: UseNode@1
+  - task: NodeTool@0
     inputs:
-      versionSpec: '12.x'
+      versionSpec: '>=14.0.0'
 
   - script: npm install autorest -g
 
@@ -31,4 +31,4 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       goals: 'verify'
-      options: '-P local,testFluent'
+      options: '-P local,testFluent --no-transfer-progress'
