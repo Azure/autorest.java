@@ -15,7 +15,7 @@ jobs:
     vmImage: 'vs2017-win2016'
 
   steps:
-  - task: UseNode@1
+  - task: NodeTool@0
     inputs:
       versionSpec: '>=14.0.0'
 
@@ -24,7 +24,7 @@ jobs:
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
+      mavenOptions: '-Xmx3072m --no-transfer-progress'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
