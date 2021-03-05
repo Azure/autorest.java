@@ -156,7 +156,7 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
-            Assertions.assertEquals(1, storageManager.storageAccounts().list().stream().count());
+            Assertions.assertEquals(1, storageManager.storageAccounts().listByResourceGroup(rgName).stream().count());
 
             // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
