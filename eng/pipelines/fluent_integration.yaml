@@ -24,11 +24,11 @@ jobs:
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m --no-transfer-progress'
+      mavenOptions: '-Xmx3072m'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       goals: 'verify'
-      options: '-P local,testFluent'
+      options: '-P local,testFluent --no-transfer-progress'
