@@ -17,7 +17,7 @@ jobs:
   steps:
   - task: UseNode@1
     inputs:
-      versionSpec: '12.x'
+      versionSpec: '>=14.0.0'
 
   - script: npm install autorest -g
 
