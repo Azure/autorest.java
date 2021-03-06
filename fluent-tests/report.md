@@ -124,7 +124,6 @@ Generated at 2021-03-05T19:33:50.364280
 - powerbiembedded
 - powerplatform
 - privatedns
-- providerhub
 - purview
 - quantum
 - recoveryservices
@@ -1302,7 +1301,6 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
 INFORMATION (FluentMapper): Add Inner to response types: [AndroidMamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, Device, GroupItem, WipeDeviceOperationResult, IOsmamPolicy, Application]
-
 ```
 **stderr**
 ```
@@ -1397,6 +1395,7 @@ Use --help to get help information.
 </details>
 
 <details>
+
 <summary>resources</summary>
 
 **stdout**
