@@ -67,7 +67,7 @@ public class Androidgen extends NewPlugin {
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
-            JavaPackage javaPackage = new JavaPackage();
+            JavaPackage javaPackage = new JavaPackage(this);
             // Service client
             javaPackage
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
