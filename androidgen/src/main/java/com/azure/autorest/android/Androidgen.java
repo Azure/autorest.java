@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
@@ -18,21 +19,28 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Androidgen extends NewPlugin {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Androidgen.class);
+    private final Logger LOGGER = new PluginLogger(this, Androidgen.class);
+    private static Androidgen instance;
+
     public Androidgen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
+        instance = this;
+    }
+
+    public static Androidgen getPluginInstance() {
+        return instance;
     }
 
     @Override
@@ -90,11 +98,11 @@ public class Androidgen extends NewPlugin {
                 ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
                 for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addAsyncServiceClient(builderPackage, asyncClient);
+                    javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
                 }
 
                 for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addSyncServiceClient(builderPackage, syncClient);
+                    javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
                 }
             }
 
@@ -142,12 +150,21 @@ public class Androidgen extends NewPlugin {
             //Step 4: Print to files
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                writeFile(javaFile.getFilePath(), formattedSource, null);
+                try {
+                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
+                    writeFile(javaFile.getFilePath(), formattedSource, null);
+                } catch (Exception e) {
+                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                    return false;
+                }
+            }
+            String artifactId = JavaSettings.getInstance().getArtifactId();
+            if (!(artifactId == null || artifactId.isEmpty())) {
+                writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
-            LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
-            connection.sendError(1, 500, "Failed to generate code: " + ex.getMessage());
+            LOGGER.error("Failed to generate code.", ex);
             return false;
         }
         return true;

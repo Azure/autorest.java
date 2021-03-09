@@ -10,12 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jianghaolu/autorest.java.v4"
+    "url": "https://github.com/Azure/autorest.java"
   },
   "readme": "./readme.md",
   "keywords": [
     "autorest",
-    "java"
+    "java",
+    "android"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
