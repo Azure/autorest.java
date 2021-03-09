@@ -69,12 +69,12 @@ public class Utils {
         return array == null || array.length == 0;
     }
 
-    private static void validateModifiers(int validTypeModifiers, int newModifiers) {
+    static void validateModifiers(int validTypeModifiers, int newModifiers) {
         if (newModifiers <= 0) {
             throw new IllegalArgumentException("Modifiers aren't allowed to be less than or equal to 0.");
         }
 
-        if (validTypeModifiers != (validTypeModifiers & newModifiers)) {
+        if (validTypeModifiers != (validTypeModifiers | newModifiers)) {
             throw new IllegalArgumentException("Modifiers contain illegal modifiers for the type.");
         }
     }
