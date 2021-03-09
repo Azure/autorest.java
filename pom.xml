@@ -85,6 +85,7 @@
     <module>./extension-base</module>
     <module>./fluentgen</module>
     <module>./fluentnamer</module>
+    <module>./androidgen</module>
   </modules>
 
   <profiles>
