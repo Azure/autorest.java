@@ -25,6 +25,8 @@ public class FluentType {
 
     public static final ClassType Region = new ClassType.Builder().knownClass(com.azure.core.management.Region.class).build();
 
+    public static final ClassType SystemData = new ClassType.Builder().knownClass(com.azure.core.management.SystemData.class).build();
+
     private FluentType() {
     }
 
@@ -54,6 +56,14 @@ public class FluentType {
         return !(Resource.getName().equals(modelName)
                 || ProxyResource.getName().equals(modelName)
                 || SubResource.getName().equals(modelName));
+    }
+
+    public static boolean nonSystemData(ClassType modelType) {
+        return nonSystemData(modelType.getName());
+    }
+
+    public static boolean nonSystemData(String modelName) {
+        return !SystemData.getName().equals(modelName);
     }
 
     public static boolean nonManagementError(ClassType modelType) {

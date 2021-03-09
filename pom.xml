@@ -42,7 +42,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azure-core-management.version>1.1.1</azure-core-management.version>
+    <azure-core-management.version>1.2.0</azure-core-management.version>
   </properties>
 
   <dependencyManagement>

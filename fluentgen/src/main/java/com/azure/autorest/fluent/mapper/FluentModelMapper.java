@@ -24,7 +24,10 @@ public class FluentModelMapper extends ModelMapper {
 
     @Override
     protected boolean isPredefinedModel(ClassType modelType) {
-        return !FluentType.nonResourceType(modelType) || !FluentType.nonManagementError(modelType) || removedModels.contains(modelType.getName());
+        return !FluentType.nonResourceType(modelType)
+                || !FluentType.nonManagementError(modelType)
+                || !FluentType.nonSystemData(modelType)
+                || removedModels.contains(modelType.getName());
     }
 
     public void addRemovedModels(Set<String> models) {

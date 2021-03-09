@@ -12,6 +12,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
+import com.azure.core.management.ResourceAuthorIdentityType;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.profile.AzureProfile;
@@ -23,6 +24,9 @@ import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
+import com.azure.mgmtlitetest.mediaservices.MediaservicesManager;
+import com.azure.mgmtlitetest.mediaservices.models.MediaService;
+import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -31,6 +35,7 @@ import com.azure.mgmtlitetest.storage.models.BlobContainer;
 import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
 import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
+import com.azure.mgmtlitetest.storage.models.MinimumTlsVersion;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
@@ -54,6 +59,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +139,7 @@ public class RuntimeTests {
         String rgName = "rg1-weidxu-fluentlite";
         String saName = "sa1weidxulite";
         String blobContainerName = "container1";
-        Region region = Region.US_WEST;
+        Region region = Region.US_EAST;
 
         ResourceGroup rg = resourceManager.resourceGroups().define(rgName)
                 .withRegion(region)
@@ -146,7 +152,9 @@ public class RuntimeTests {
                     .withExistingResourceGroup(rgName)
                     .withSku(new Sku().withName(SkuName.STANDARD_LRS))
                     .withKind(Kind.STORAGE_V2)
+                    .withAccessTier(AccessTier.HOT)
                     .withEnableHttpsTrafficOnly(true)
+                    .withMinimumTlsVersion(MinimumTlsVersion.TLS1_2)
                     .create();
 
             storageAccount.refresh();
@@ -171,6 +179,10 @@ public class RuntimeTests {
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
+            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
+
+            storageManager.blobContainers().deleteById(blobContainer.id());
+
             // container blob service properties
             BlobServiceProperties blobService = storageManager.blobServices().define()
                     .withExistingStorageAccount(rgName, saName)
@@ -182,11 +194,10 @@ public class RuntimeTests {
             Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
             Assertions.assertEquals(3, blobService.deleteRetentionPolicy().days());
 
-            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
+            // test media services for SystemData
+            testMediaServices(storageAccount);
 
-            storageManager.blobContainers().deleteById(blobContainer.id());
-
-            // test advisor for it requires a base resource
+            // test advisor as it is an extension, which requires a base resource
             // disabled as generate is async and it takes too long for a new resource
             //testAdvisor(storageAccount);
 
@@ -194,6 +205,29 @@ public class RuntimeTests {
         } finally {
             resourceManager.resourceGroups().delete(rgName);
         }
+    }
+
+    private void testMediaServices(StorageAccount storageAccount) {
+        MediaservicesManager mediaservicesManager = authenticateMediaServicesManager();
+
+        String rgName = "rg1-weidxu-fluentlite";
+        String msName = "ms1weidxulite";
+
+        MediaService mediaService = mediaservicesManager.mediaservices().define(msName)
+                .withRegion(Region.US_EAST)
+                .withExistingResourceGroup(rgName)
+                .withStorageAccounts(Collections.singletonList(
+                        new com.azure.mgmtlitetest.mediaservices.models.StorageAccount()
+                                .withId(storageAccount.id())
+                                .withType(StorageAccountType.PRIMARY)))
+                .create();
+
+        Assertions.assertNotNull(mediaService.systemData());
+        Assertions.assertNotNull(mediaService.systemData().createdBy());
+        Assertions.assertNotNull(mediaService.systemData().createdAt());
+        Assertions.assertEquals(ResourceAuthorIdentityType.APPLICATION, mediaService.systemData().createdByType());
+
+        mediaservicesManager.mediaservices().deleteById(mediaService.id());
     }
 
     private void testAdvisor(StorageAccount storageAccount) {
@@ -253,6 +287,12 @@ public class RuntimeTests {
 
     private AdvisorManager authenticateAdvisorManager() {
         return AdvisorManager.configure()
+                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
+    }
+
+    private MediaservicesManager authenticateMediaServicesManager() {
+        return MediaservicesManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
