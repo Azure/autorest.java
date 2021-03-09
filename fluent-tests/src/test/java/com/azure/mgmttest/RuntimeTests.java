@@ -179,6 +179,8 @@ public class RuntimeTests {
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
+            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
+
             storageManager.blobContainers().deleteById(blobContainer.id());
 
             // container blob service properties
@@ -191,8 +193,6 @@ public class RuntimeTests {
                     .apply();
             Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
             Assertions.assertEquals(3, blobService.deleteRetentionPolicy().days());
-
-            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
 
             // test media services for SystemData
             testMediaServices(storageAccount);
