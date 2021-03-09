@@ -4,14 +4,20 @@ import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
+import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
+import com.azure.autorest.customization.models.Position;
+import com.azure.autorest.customization.models.Range;
 
 import java.io.File;
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 public class Utils {
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
@@ -57,6 +63,41 @@ public class Utils {
             }
         }
         directoryToBeDeleted.delete();
+    }
+
+    public static <T> boolean isNullOrEmpty(T[] array) {
+        return array == null || array.length == 0;
+    }
+
+    private static void validateModifiers(int validTypeModifiers, int newModifiers) {
+        if (newModifiers <= 0) {
+            throw new IllegalArgumentException("Modifiers aren't allowed to be less than or equal to 0.");
+        }
+
+        if (validTypeModifiers != (validTypeModifiers & newModifiers)) {
+            throw new IllegalArgumentException("Modifiers contain illegal modifiers for the type.");
+        }
+    }
+
+    public static void replaceModifier(SymbolInformation symbol, Editor editor, EclipseLanguageClient languageClient,
+        BiFunction<String, String, String> replacer, int validaTypeModifiers, int newModifiers) {
+        validateModifiers(validaTypeModifiers, newModifiers);
+
+        URI fileUri = symbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        String fileName = fileUri.toString().substring(i);
+
+        int line = symbol.getLocation().getRange().getStart().getLine();
+        Position start = new Position(line, 0);
+        String oldLineContent = editor.getFileLine(fileName, line);
+        Position end = new Position(line, oldLineContent.length());
+        String newLineContent = replacer.apply(oldLineContent, Modifier.toString(newModifiers));
+        TextEdit textEdit = new TextEdit();
+        textEdit.setNewText(newLineContent);
+        textEdit.setRange(new Range(start, end));
+        WorkspaceEdit workspaceEdit = new WorkspaceEdit();
+        workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
+        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
     }
 
     private Utils() {}

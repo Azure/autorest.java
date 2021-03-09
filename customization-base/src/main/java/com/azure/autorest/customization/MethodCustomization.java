@@ -11,10 +11,10 @@ import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
-import com.azure.autorest.customization.models.Modifier;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -168,27 +168,20 @@ public final class MethodCustomization {
     }
 
     /**
-     * Change the modifier for the method. For package private, use empty string as the modifier.
+     * Replace the modifier for this method.
+     * <p>
+     * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers, {@code
+     * Modifier.PUBLIC | Modifier.ABSTRACT}.
      *
-     * @param modifier the new modifier for the method
-     * @return the current class customization for chaining
+     * @param modifiers The {@link Modifier Modifiers} for the method.
+     * @return The updated MethodCustomization object.
+     * @throws IllegalArgumentException If the {@code modifier} is less than or equal to {@code 0} or any {@link
+     * Modifier} included in the bitwise OR isn't a valid method {@link Modifier}.
      */
-    public MethodCustomization setModifier(Modifier modifier) {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        Position start = new Position(line, 0);
-        String oldLineContent = editor.getFileLine(fileName, line);
-        Position end = new Position(line, oldLineContent.length());
-        String modifierPrefix = modifier == null || modifier.toString().isEmpty() ? "" : modifier + " ";
-        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", modifierPrefix + "$2 " + methodName + "(");
-        TextEdit textEdit = new TextEdit();
-        textEdit.setNewText(newLineContent);
-        textEdit.setRange(new Range(start, end));
-        WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-        workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
-        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+    public MethodCustomization setModifier(int modifiers) {
+        Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
+            oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
+            Modifier.methodModifiers(), modifiers);
         refreshSymbol();
         return this;
     }

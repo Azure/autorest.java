@@ -3,7 +3,6 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +19,7 @@ public abstract class Customization {
      * @param files the list of files generated in the previous steps in AutoRest
      * @return the list of files after customization
      */
-    public Map<String, String> run(Map<String, String> files) {
+    public final Map<String, String> run(Map<String, String> files) {
         Path tempDirWithPrefix;
 
         // Populate editor

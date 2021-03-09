@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.15.447"
+  "@autorest/modelerfour": "4.17.1"
 
 pipeline:
 
@@ -19,6 +19,7 @@ pipeline:
     lenient-model-deduplication: false
     flatten-models: true
     flatten-payloads: false
+    remove-empty-child-schemas: false
     naming:
       choiceValue: upper
       preserve-uppercase-max-length: 2

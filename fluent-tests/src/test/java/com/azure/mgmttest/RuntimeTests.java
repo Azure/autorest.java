@@ -32,6 +32,8 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
+import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
 import com.azure.mgmtlitetest.storage.models.MinimumTlsVersion;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
@@ -162,6 +164,8 @@ public class RuntimeTests {
                     .withAccessTier(AccessTier.COOL)
                     .apply();
 
+            Assertions.assertEquals(1, storageManager.storageAccounts().listByResourceGroup(rgName).stream().count());
+
             // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
                     .withExistingStorageAccount(rgName, saName)
@@ -176,6 +180,19 @@ public class RuntimeTests {
                     .apply(new Context("key", "value"));
 
             storageManager.blobContainers().deleteById(blobContainer.id());
+
+            // container blob service properties
+            BlobServiceProperties blobService = storageManager.blobServices().define()
+                    .withExistingStorageAccount(rgName, saName)
+                    .create();
+
+            blobService.update()
+                    .withDeleteRetentionPolicy(new DeleteRetentionPolicy().withEnabled(true).withDays(3))
+                    .apply();
+            Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
+            Assertions.assertEquals(3, blobService.deleteRetentionPolicy().days());
+
+            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
 
             // test media services for SystemData
             testMediaServices(storageAccount);

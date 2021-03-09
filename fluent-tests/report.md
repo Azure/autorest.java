@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-02-24T19:25:19.427623
+Generated at 2021-03-08T19:16:24.448868
 ## Success
 <details>
-<summary>RP count: 164</summary>
+<summary>RP count: 167</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -17,7 +17,6 @@ Generated at 2021-02-24T19:25:19.427623
 - attestation
 - authorization
 - automanage
-- automation
 - azure-kusto
 - azureactivedirectory
 - azuredata
@@ -56,9 +55,11 @@ Generated at 2021-02-24T19:25:19.427623
 - datalake-analytics
 - datalake-store
 - datamigration
+- dataprotection
 - datashare
 - desktopvirtualization
 - deviceprovisioningservices
+- deviceupdate
 - devops
 - devspaces
 - devtestlabs
@@ -110,6 +111,7 @@ Generated at 2021-02-24T19:25:19.427623
 - msi
 - mysql
 - netapp
+- network
 - notificationhubs
 - operationalinsights
 - operationsmanagement
@@ -120,6 +122,7 @@ Generated at 2021-02-24T19:25:19.427623
 - postgresqlhsc
 - powerbidedicated
 - powerbiembedded
+- powerplatform
 - privatedns
 - providerhub
 - purview
@@ -175,7 +178,7 @@ Generated at 2021-02-24T19:25:19.427623
 - security
 
 ## Failure at Build
-- network
+- automation
 - servicefabric
 
 ## Logs
@@ -184,14 +187,14 @@ Generated at 2021-02-24T19:25:19.427623
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -205,20 +208,69 @@ FATAL: Error: Name is empty!
 </details>
 
 <details>
+<summary>automation</summary>
+
+**stdout**
+```
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.azure.resourcemanager:azure-resourcemanager-automation-generated >--
+[INFO] Building Microsoft Azure SDK for Automation Management 1.0.0-beta.1
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-automation-generated ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-automation-generated ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 452 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface azure.resourcemanager.automation.fluent.DscConfigurationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/implementation/DscConfigurationsClientImpl.java:[1322,41] method updateAsync(java.lang.String,java.lang.String,java.lang.String) is already defined in class azure.resourcemanager.automation.implementation.DscConfigurationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/implementation/DscConfigurationsClientImpl.java:[1348,34] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in class azure.resourcemanager.automation.implementation.DscConfigurationsClientImpl
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.555 s
+[INFO] Finished at: 2021-03-08T18:24:41Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation-generated: Compilation failure: Compilation failure: 
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface azure.resourcemanager.automation.fluent.DscConfigurationsClient
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/implementation/DscConfigurationsClientImpl.java:[1322,41] method updateAsync(java.lang.String,java.lang.String,java.lang.String) is already defined in class azure.resourcemanager.automation.implementation.DscConfigurationsClientImpl
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/azure/resourcemanager/automation/implementation/DscConfigurationsClientImpl.java:[1348,34] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in class azure.resourcemanager.automation.implementation.DscConfigurationsClientImpl
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+```
+**stderr**
+```
+
+```
+</details>
+
+<details>
 <summary>changeanalysis</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ProxyResource' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -246,50 +298,14 @@ FATAL: Error: Not able to process media type default at this moment.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AzureDataLakeStoreLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'FileServerLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AzureFileStorageLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'FtpServerLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'SftpLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'HdfsLocation' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AvroFormat' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'OrcFormat' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ParquetFormat' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'DatasetBZip2Compression' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'DatasetTarCompression' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'SapBwCubeDataset' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'SsisFolder' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'WebAnonymousAuthentication' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ControlActivity' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'FileServerWriteSettings' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AzureFileStorageWriteSettings' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AzureQueueSink' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -891,24 +907,14 @@ FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. C
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ArtifactSource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ServiceTopologyResource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ServiceResource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): An anonymous inline schema for property 'ServiceUnitResource.properties' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'RolloutIdentityAuthentication' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'RolloutRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -981,6 +987,10 @@ WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined ty
 WARNING (PreCheck/SchemaMissingType): The schema 'TrackedResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'RolloutProperties' -> 'RolloutPropertiesAutoGenerated'
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ArtifactSourceProperties' -> 'ArtifactSourcePropertiesAutoGenerated'
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1017,7 +1027,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, OperationsList, RolloutRequest, ServiceTopologyResource, ServiceUnitResource, StepResource, ServiceResource, Rollout]
+INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, Rollout, RolloutRequest, OperationsList, ServiceTopologyResource, ServiceResource, ServiceUnitResource, StepResource]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
@@ -1055,8 +1065,8 @@ INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', met
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1b0e0632 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@64ed9dc4)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1b0e0632 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@64ed9dc4)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1095,8 +1105,8 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@10ca5b68 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5e91c96f)
+FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1b0e0632 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@64ed9dc4)
+java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@1b0e0632 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@64ed9dc4)
 	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
 	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
 	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
@@ -1145,14 +1155,14 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1291,7 +1301,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AndroidMamPolicy, FlaggedEnrolledApp, OperationResult, Location, FlaggedUser, Device, GroupItem, WipeDeviceOperationResult, IOsmamPolicy, Application]
+INFORMATION (FluentMapper): Add Inner to response types: [FlaggedEnrolledApp, GroupItem, Location, WipeDeviceOperationResult, AndroidMamPolicy, Device, FlaggedUser, Application, OperationResult, IOsmamPolicy]
 
 ```
 **stderr**
@@ -1343,14 +1353,14 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -1367,14 +1377,14 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -1387,216 +1397,18 @@ Use --help to get help information.
 </details>
 
 <details>
-<summary>network</summary>
-
-**stdout**
-```
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --< com.azure.resourcemanager:azure-resourcemanager-network-generated >--
-[INFO] Building Microsoft Azure SDK for Network Management 1.0.0-beta.1
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-network-generated ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-network-generated ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1554 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,50] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,66] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,93] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[24,19] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[96,13] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[111,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[121,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[131,37] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[142,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[152,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[162,57] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[169,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[179,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[9,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[24,19] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[26,67] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[31,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[40,21] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[63,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[68,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[73,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[78,26] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[85,12] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[105,21] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[169,13] reference to NetworkManager is ambiguous
-  both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[10,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[19,14] azure.resourcemanager.network.implementation.NetworkManagersImpl is not abstract and does not override abstract method define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[173,31] define(java.lang.String) in azure.resourcemanager.network.implementation.NetworkManagersImpl cannot implement define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-  return type azure.resourcemanager.network.implementation.NetworkManagerImpl is not compatible with azure.resourcemanager.network.models.NetworkManager.DefinitionStages.Blank
-[INFO] 28 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.393 s
-[INFO] Finished at: 2021-02-24T18:57:31Z
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-network-generated: Compilation failure: Compilation failure: 
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,50] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,66] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[21,93] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[24,19] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[96,13] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[111,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[121,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[131,37] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[142,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[152,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[162,57] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[169,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[179,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagerImpl.java:[9,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[24,19] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[26,67] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[31,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[40,21] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[63,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[68,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[73,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[78,26] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[85,12] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[105,21] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[169,13] reference to NetworkManager is ambiguous
-[ERROR]   both class azure.resourcemanager.network.NetworkManager in azure.resourcemanager.network and interface azure.resourcemanager.network.models.NetworkManager in azure.resourcemanager.network.models match
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[10,1] a type with the same simple name is already defined by the single-type-import of azure.resourcemanager.network.NetworkManager
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[19,14] azure.resourcemanager.network.implementation.NetworkManagersImpl is not abstract and does not override abstract method define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-network/src/main/java/azure/resourcemanager/network/implementation/NetworkManagersImpl.java:[173,31] define(java.lang.String) in azure.resourcemanager.network.implementation.NetworkManagersImpl cannot implement define(java.lang.String) in azure.resourcemanager.network.models.NetworkManagers
-[ERROR]   return type azure.resourcemanager.network.implementation.NetworkManagerImpl is not compatible with azure.resourcemanager.network.models.NetworkManager.DefinitionStages.Blank
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-```
-**stderr**
-```
-
-```
-</details>
-
-<details>
-<summary>powerplatform</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
-   Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-   Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-   Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ProxyResource' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/SchemaMissingType): The schema 'keyProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'EnterprisePolicyList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpoint' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateEndpointConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrivateLinkServiceConnectionState' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponseBody' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation-properties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
-```
-**stderr**
-```
-
-ERROR (PreCheck/PropertyRedeclaration): Schema 'TrackedResource' has a property 'location' that is conflicting with a property in the parent schema 'Resource' differs more than just description : [readOnly => '<removed>',x-ms-mutability => 'read,create']
-FATAL: Error: 1 errors occured -- cannot continue.
-  Error: Plugin prechecker reported failure.
-
-```
-</details>
-
-<details>
 <summary>resources</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -1613,54 +1425,14 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
    Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ConnectionToIpNotAllowed' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ConnectionFromIpNotAllowed' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'LocalUserNotAllowed' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ProcessNotAllowed' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ActiveConnectionsNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AmqpC2DMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MqttC2DMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'HttpC2DMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AmqpC2DRejectedMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MqttC2DRejectedMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'HttpC2DRejectedMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'AmqpD2CMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MqttD2CMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'HttpD2CMessagesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'DirectMethodInvokesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'FailedLocalLoginsNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'FileUploadsNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'QueuePurgesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'TwinUpdatesNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'UnauthorizedOperationsNotInAllowedRange' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceResultList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1741,14 +1513,14 @@ WARNING (SchemaNameNormalization): Rename schema from 'Enum40' to 'AdaptiveAppli
 
 WARNING (SchemaNameNormalization): Rename schema from 'Enum41' to 'AdaptiveApplicationControlsSummary', based on operation group 'AdaptiveApplicationControls'
 
-WARNING (NamingConflictResolver): Name conflict of choice with object 'protocol'
-INFORMATION (NamingConflictResolver): Rename choice from 'protocol' to 'protocolValue'
+WARNING (NamingConflictResolver): Name conflict of choice with object 'Protocol'
+INFORMATION (NamingConflictResolver): Rename choice from 'Protocol' to 'ProtocolValue'
 
 WARNING (NamingConflictResolver): Name conflict of choice with object 'ExternalSecuritySolutionKind'
 INFORMATION (NamingConflictResolver): Rename choice from 'ExternalSecuritySolutionKind' to 'ExternalSecuritySolutionKindValue'
 
-WARNING (NamingConflictResolver): Name conflict of choice with object 'kind'
-INFORMATION (NamingConflictResolver): Rename choice from 'kind' to 'kindValue'
+WARNING (NamingConflictResolver): Name conflict of choice with object 'Kind'
+INFORMATION (NamingConflictResolver): Rename choice from 'Kind' to 'KindValue'
 
 WARNING (NamingConflictResolver): Name conflict of choice with object 'AadConnectivityState'
 INFORMATION (NamingConflictResolver): Rename choice from 'AadConnectivityState' to 'AadConnectivityStateValue'
@@ -1834,7 +1606,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [IoTSecurityAggregatedRecommendation, IotAlertType, Automation, RegulatoryComplianceStandard, SecureScoreItem, Scan, Pricing, InformationProtectionPolicy, ServerVulnerabilityAssessment, SecurityAssessment, OnPremiseIotSensorsList, Alert, AdaptiveNetworkHardening, SecuritySolutionsReferenceDataList, IotSensorsModel, AdvancedThreatProtectionSetting, PricingList, SecurityAssessmentMetadata, AdaptiveApplicationControlGroups, IotDefenderSettingsList, ExternalSecuritySolution, ScanResults, IotAlert, IoTSecurityAggregatedAlert, AscLocation, RulesResults, Compliance, SecuritySolution, IotRecommendationType, Device, JitNetworkAccessRequest, IotDefenderSettingsModel, SecuritySubAssessment, PackageDownloads, IoTSecuritySolutionAnalyticsModelList, RuleResults, AllowedConnectionsResource, WorkspaceSetting, IotSensorsList, IotRecommendationTypeList, Scans, IotSitesModel, Setting, SecurityContact, SecureScoreControlDetails, AdaptiveApplicationControlGroup, ComplianceResult, IotAlertModel, IoTSecuritySolutionAnalyticsModel, IotAlertTypeList, AlertsSuppressionRule, RegulatoryComplianceControl, OnPremiseIotSensor, DiscoveredSecuritySolution, ServerVulnerabilityAssessmentsList, AutomationValidationStatus, JitNetworkAccessPolicy, RegulatoryComplianceAssessment, Operation, SecureScoreControlDefinitionItem, SecurityTask, AutoProvisioningSetting, ScanResult, ConnectorSetting, DeviceSecurityGroup, IotRecommendationModel, IotRecommendation, IotSitesList, IoTSecuritySolutionModel, TopologyResource]
+INFORMATION (FluentMapper): Add Inner to response types: [IotAlertModel, IoTSecurityAggregatedRecommendation, AutomationValidationStatus, ServerVulnerabilityAssessment, OnPremiseIotSensorsList, IoTSecuritySolutionAnalyticsModelList, IotRecommendationModel, SecurityTask, RuleResults, ExternalSecuritySolution, Scan, InformationProtectionPolicy, SecuritySubAssessment, DiscoveredSecuritySolution, SecureScoreControlDetails, OnPremiseIotSensor, AscLocation, AutoProvisioningSetting, AllowedConnectionsResource, Automation, AdaptiveApplicationControlGroups, PackageDownloads, Alert, Operation, Setting, AdaptiveNetworkHardening, IoTSecuritySolutionModel, AlertsSuppressionRule, Device, ComplianceResult, SecuritySolutionsReferenceDataList, RulesResults, IotSitesModel, IotSensorsModel, RegulatoryComplianceControl, TopologyResource, SecureScoreControlDefinitionItem, IotAlert, JitNetworkAccessPolicy, AdaptiveApplicationControlGroup, SecurityContact, IoTSecurityAggregatedAlert, JitNetworkAccessRequest, IotDefenderSettingsList, SecurityAssessmentMetadata, ConnectorSetting, IoTSecuritySolutionAnalyticsModel, ScanResult, Compliance, IotDefenderSettingsModel, IotRecommendationType, IotAlertTypeList, SecureScoreItem, RegulatoryComplianceAssessment, IotRecommendation, IotSensorsList, IotSitesList, IotRecommendationTypeList, RegulatoryComplianceStandard, IotAlertType, Scans, ScanResults, AdvancedThreatProtectionSetting, DeviceSecurityGroup, SecurityAssessment, ServerVulnerabilityAssessmentsList, Pricing, PricingList, SecuritySolution, WorkspaceSetting]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1907,7 +1679,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.1; node: v14.15.5, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.1.2; node: v14.16.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist' (3.0.6350)
@@ -1920,13 +1692,13 @@ https://aka.ms/autorest
    Installed AutoRest extension 'oav' (~0.4.20->0.4.70)
    Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
    Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-   Loading AutoRest extension '@autorest/modelerfour' (4.15.447->4.15.447)
+   Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
 
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'MachineReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
 
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'ClientGroupReference' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
-
-WARNING (PreCheck/AllOfWhenYouMeantRef): Schema 'Summary' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -2024,12 +1796,6 @@ WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this c
 
 WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
 
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
-
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:58:6
 
@@ -2102,11 +1868,9 @@ INFORMATION (SchemaNameNormalization): Create sealed choice 'ProcessHostingConfi
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'CoreResource'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Relationship'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ClientGroupMember'
-INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'MachinesSummary'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Summary'
 INFORMATION (ErrorTypeNormalization): Rename error from ErrorResponse to ManagementError
 INFORMATION (SchemaCleanup): Remove unused schema 'Resource'
-INFORMATION (SchemaCleanup): Remove unused schema 'Summary'
 INFORMATION (FluentGen): Read YAML
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -2117,7 +1881,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Liveness, ClientGroupMembersCount, Connection, MapResponse, Machine, ClientGroup, MachinesSummary, MachineGroup, Port, ClientGroupMember, Process]
+INFORMATION (FluentMapper): Add Inner to response types: [ClientGroup, ClientGroupMembersCount, Machine, Process, ClientGroupMember, Liveness, MapResponse, MachinesSummary, MachineGroup, Connection, Port]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2136,12 +1900,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24071) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24288) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/plugins/external.js:27:19
     at async ScheduleNode (/home/runner/.autorest/@autorest_core@3.0.6350/node_modules/@autorest/core/dist/lib/pipeline/pipeline.js:314:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24071) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24071) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24288) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24288) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
   Error: Plugin model-validator reported failure.
 
 ```
@@ -2212,8 +1976,8 @@ FATAL: [object Object]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.043 s
-[INFO] Finished at: 2021-02-24T19:10:14Z
+[INFO] Total time:  3.390 s
+[INFO] Finished at: 2021-03-08T19:04:09Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric-generated: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface azure.resourcemanager.servicefabric.fluent.OperationsClient

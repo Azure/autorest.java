@@ -40,7 +40,10 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
         methodTemplates.addAll(model.getAdditionalMethods());
 
         Set<String> imports = new HashSet<>();
+        /* use full name for FooManager, to avoid naming conflict
+        // manager
         imports.add(managerType.getFullName());
+         */
         model.addImportsTo(imports, true);
         javaFile.declareImport(imports);
 
@@ -58,12 +61,12 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             classBlock.privateMemberVariable(model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER);
 
             // variable for manager
-            classBlock.privateFinalMemberVariable(managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER);
+            classBlock.privateFinalMemberVariable(managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER);
 
             // if resource is updatable, use the constructor from resourceUpdate
             if (model.getCategory() == ModelCategory.IMMUTABLE || model.getResourceUpdate() == null) {
                 // constructor
-                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
+                classBlock.packagePrivateConstructor(String.format("%1$s(%2$s %3$s, %4$s %5$s)", model.getImplementationType().getName(), model.getInnerModel().getName(), ModelNaming.MODEL_PROPERTY_INNER, managerType.getFullName(), ModelNaming.MODEL_PROPERTY_MANAGER), methodBlock -> {
                     methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_INNER, ModelNaming.MODEL_PROPERTY_INNER));
                     methodBlock.line(String.format("this.%1$s = %2$s;", ModelNaming.MODEL_PROPERTY_MANAGER, ModelNaming.MODEL_PROPERTY_MANAGER));
                 });
@@ -78,7 +81,7 @@ public class FluentResourceModelImplementationTemplate implements IJavaTemplate<
             });
 
             // method for manager
-            classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
+            classBlock.privateMethod(String.format("%1$s %2$s()", managerType.getFullName(), FluentUtils.getGetterName(ModelNaming.METHOD_MANAGER)), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%s", ModelNaming.MODEL_PROPERTY_MANAGER));
             });
 
