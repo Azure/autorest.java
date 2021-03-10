@@ -2,7 +2,6 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
@@ -21,12 +20,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The class level customization for an AutoRest generated class.
  */
 public final class ClassCustomization {
+    /*
+     * This pattern attempts to find the first line of a method string that doesn't have a first non-space character of
+     * '*' or '/'. From there it captures all word and space characters before and inside '( )' ignoring any trailing
+     * spaces and an opening '{'.
+     */
+    private static final Pattern METHOD_SIGNATURE_PATTERN =
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]+\\))\\s*\\{?$", Pattern.MULTILINE);
+
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final String packageName;
@@ -106,6 +114,13 @@ public final class ClassCustomization {
      * @return the method level customization for the added method
      */
     public MethodCustomization addMethod(String method) {
+        // Get the signature of the method.
+        Matcher methodSignatureMatcher = METHOD_SIGNATURE_PATTERN.matcher(method);
+        String methodSignature = null;
+        if (methodSignatureMatcher.find()) {
+            methodSignature = methodSignatureMatcher.group(1);
+        }
+
         // find position
         URI fileUri = classSymbol.getLocation().getUri();
         int i = fileUri.toString().indexOf("src/main/java/");
@@ -126,7 +141,9 @@ public final class ClassCustomization {
         fileEvent.setType(FileChangeType.CHANGED);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-        String methodSignature = editor.getFileLine(fileName, lineNum);
+        if (methodSignature == null) {
+            methodSignature = editor.getFileLine(fileName, lineNum);
+        }
         return getMethod(methodSignature);
     }
 
@@ -227,18 +244,15 @@ public final class ClassCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                Optional<CodeAction> organizeImports = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst();
-                if (organizeImports.isPresent()) {
-                    WorkspaceEditCommand command;
-                    if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
-                        command = (WorkspaceEditCommand) organizeImports.get().getCommand();
-                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+                languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange()).stream()
+                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                    .findFirst()
+                    .ifPresent(action -> {
+                        if (action.getCommand() instanceof WorkspaceEditCommand) {
+                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
                         }
-                    }
-                }
+                    });
             }
         }
         refreshSymbol();
@@ -271,18 +285,15 @@ public final class ClassCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, range)
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst();
-                if (generateAccessors.isPresent()) {
-                    WorkspaceEditCommand command;
-                    if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                        command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+                languageClient.listCodeActions(fileUri, range).stream()
+                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                    .findFirst()
+                    .ifPresent(action -> {
+                        if (action.getCommand() instanceof WorkspaceEditCommand) {
+                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
                         }
-                    }
-                }
+                    });
             }
         }
         refreshSymbol();
@@ -298,13 +309,13 @@ public final class ClassCustomization {
      */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
         URI fileUri = classSymbol.getLocation().getUri();
-        List<SymbolInformation> symbols = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().toLowerCase().contains(enumMemberName.toLowerCase()))
-            .collect(Collectors.toList());
-        for (SymbolInformation symbol : symbols) {
-            WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
-            Utils.applyWorkspaceEdit(edit, editor, languageClient);
-        }
+        languageClient.listDocumentSymbols(fileUri).stream()
+            .filter(si -> si.getName().toLowerCase().contains(enumMemberName.toLowerCase()))
+            .forEach(symbol -> {
+                WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(),
+                    newName);
+                Utils.applyWorkspaceEdit(edit, editor, languageClient);
+            });
         return this;
     }
 

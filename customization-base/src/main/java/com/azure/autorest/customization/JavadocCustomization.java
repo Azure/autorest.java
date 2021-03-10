@@ -12,9 +12,10 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -28,7 +29,7 @@ public final class JavadocCustomization {
     private final String fileName;
     private final String indent;
 
-    private String descriptionDoc;
+    private String descriptionDocs;
     private final Map<String, String> paramDocs;
     private String returnDoc;
     private final Map<String, String> throwsDocs;
@@ -41,13 +42,13 @@ public final class JavadocCustomization {
         this.editor = editor;
         this.languageClient = languageClient;
 
-        this.paramDocs = new HashMap<>();
-        this.throwsDocs = new HashMap<>();
+        this.paramDocs = new LinkedHashMap<>();
+        this.throwsDocs = new LinkedHashMap<>();
         this.seeDocs = new ArrayList<>();
 
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
-                .findFirst();
+            .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+            .findFirst();
 
         fileUri = classSymbol.get().getLocation().getUri();
         int i = fileUri.toString().indexOf("src/main/java/");
@@ -57,14 +58,31 @@ public final class JavadocCustomization {
     }
 
     /**
+     * Gets the Javadoc description.
+     *
+     * @return The Javadoc description.
+     */
+    public String getDescription() {
+        return descriptionDocs;
+    }
+
+    /**
      * Sets the description in the Javadoc.
+     *
      * @param description the description for the current class/method.
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setDescription(String description) {
-        descriptionDoc = description;
-        commit();
-        return this;
+        return performChange(this.descriptionDocs, description, () -> this.descriptionDocs = description);
+    }
+
+    /**
+     * Gets a read-only view of the Javadoc params.
+     *
+     * @return Read-only view of the Javadoc params.
+     */
+    public Map<String, String> getParams() {
+        return Collections.unmodifiableMap(paramDocs);
     }
 
     /**
@@ -75,9 +93,8 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setParam(String parameterName, String description) {
-        paramDocs.put(parameterName, description);
-        commit();
-        return this;
+        return performChange(paramDocs.get(parameterName), description,
+            () -> paramDocs.put(parameterName, description));
     }
 
     /**
@@ -93,15 +110,22 @@ public final class JavadocCustomization {
     }
 
     /**
+     * Gets the Javadoc return.
+     *
+     * @return The Javadoc return.
+     */
+    public String getReturn() {
+        return returnDoc;
+    }
+
+    /**
      * Sets the return Javadoc on the method.
      *
      * @param description the description for the return value
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setReturn(String description) {
-        returnDoc = description;
-        commit();
-        return this;
+        return performChange(returnDoc, description, () -> this.returnDoc = description);
     }
 
     /**
@@ -110,25 +134,33 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization removeReturn() {
-        returnDoc = null;
-        commit();
-        return this;
+        return performChange(returnDoc, null, () -> this.returnDoc = null);
+    }
+
+    /**
+     * Gets a read-only view of the Javadoc throws.
+     *
+     * @return Read-only view of the Javadoc throws.
+     */
+    public Map<String, String> getThrows() {
+        return Collections.unmodifiableMap(throwsDocs);
     }
 
     /**
      * Adds a throws Javadoc for a method.
+     *
      * @param exceptionType the type of the exception the method will throw
      * @param description the description for the exception
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization addThrows(String exceptionType, String description) {
-        throwsDocs.put(exceptionType, description);
-        commit();
-        return this;
+        return performChange(throwsDocs.get(exceptionType), description,
+            () -> throwsDocs.put(exceptionType, description));
     }
 
     /**
      * Removes a throw Javadoc for a method.
+     *
      * @param exceptionType the type of the exception the method will throw
      * @return the Javadoc customization object for chaining
      */
@@ -139,15 +171,35 @@ public final class JavadocCustomization {
     }
 
     /**
+     * Gets a read-only view of the Javadoc sees.
+     *
+     * @return Read-only view of the Javadoc sees.
+     */
+    public List<String> getSees() {
+        return Collections.unmodifiableList(seeDocs);
+    }
+
+    /**
      * Adds a see Javadoc.
+     *
      * @param seeDoc the link to the extra documentation
      * @return the Javadoc customization object for chaining
-     * @see <a href=https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#see>Oracle docs on see tag</a>
+     * @see <a href=https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#see>Oracle docs on see
+     * tag</a>
      */
     public JavadocCustomization addSee(String seeDoc) {
         seeDocs.add(seeDoc);
         commit();
         return this;
+    }
+
+    /**
+     * Gets the Javadoc since.
+     *
+     * @return The Javadoc since.
+     */
+    public String getSince() {
+        return sinceDoc;
     }
 
     /**
@@ -157,9 +209,25 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setSince(String sinceDoc) {
-        this.sinceDoc = sinceDoc;
-        commit();
-        return this;
+        return performChange(this.sinceDoc, sinceDoc, () -> this.sinceDoc = sinceDoc);
+    }
+
+    /**
+     * Removes the Javadoc since.
+     *
+     * @return The updated JavadocCustomization object.
+     */
+    public JavadocCustomization removeSince() {
+        return performChange(this.sinceDoc, null, () -> this.sinceDoc = null);
+    }
+
+    /**
+     * Gets the Javadoc deprecated.
+     *
+     * @return The Javadoc deprecated.
+     */
+    public String getDeprecated() {
+        return deprecatedDoc;
     }
 
     /**
@@ -169,9 +237,16 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setDeprecated(String deprecatedDoc) {
-        this.deprecatedDoc = deprecatedDoc;
-        commit();
-        return this;
+        return performChange(this.deprecatedDoc, deprecatedDoc, () -> this.deprecatedDoc = deprecatedDoc);
+    }
+
+    /**
+     * Removes the Javadoc deprecated.
+     *
+     * @return The updated JavadocCustomization object.
+     */
+    public JavadocCustomization removeDeprecated() {
+        return performChange(this.deprecatedDoc, null, () -> this.deprecatedDoc = null);
     }
 
     private void initialize(int symbolLine) {
@@ -244,7 +319,7 @@ public final class JavadocCustomization {
                 descriptionEndLineContent = editor.getFileLine(fileName, --currentDocEndLine);
             }
             Position descriptionEnd = new Position(currentDocEndLine, descriptionEndLineContent.replaceFirst(" \\*/$", "").length());
-            this.descriptionDoc = editor.getTextInRange(fileName, new Range(descriptionStart, descriptionEnd), " ").replaceAll(" +\\* ", " ").trim();
+            this.descriptionDocs = editor.getTextInRange(fileName, new Range(descriptionStart, descriptionEnd), " ").replaceAll(" +\\* ", " ").trim();
         } else {
             initialize(symbolLine);
         }
@@ -254,8 +329,8 @@ public final class JavadocCustomization {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         printWriter.println("/**");
-        if (descriptionDoc != null) {
-            printWriter.println(indent + " * " + descriptionDoc);
+        if (descriptionDocs != null) {
+            printWriter.println(indent + " * " + descriptionDocs);
         }
         if (!paramDocs.isEmpty() || !throwsDocs.isEmpty() || returnDoc != null) {
             printWriter.println(indent + " * ");
@@ -272,7 +347,7 @@ public final class JavadocCustomization {
                 printWriter.println(indent + " * @throws " + throwsDoc.getKey() + " " + throwsDoc.getValue());
             }
 
-            for (String seeDoc: seeDocs) {
+            for (String seeDoc : seeDocs) {
                 printWriter.println(indent + " * @see " + seeDoc);
             }
 
@@ -299,5 +374,14 @@ public final class JavadocCustomization {
             lineContent = editor.getFileLine(fileName, ++javadocStartLine);
         }
         parseJavadoc(javadocStartLine + 1);
+    }
+
+    private JavadocCustomization performChange(String oldValue, String newValue, Runnable changePerformer) {
+        if (!Objects.equals(oldValue, newValue)) {
+            changePerformer.run();
+            commit();
+        }
+
+        return this;
     }
 }
