@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
     private static MethodGroupTemplate _instance = new MethodGroupTemplate();
 
-    private MethodGroupTemplate() {
+    protected MethodGroupTemplate() {
     }
 
     public static MethodGroupTemplate getInstance() {

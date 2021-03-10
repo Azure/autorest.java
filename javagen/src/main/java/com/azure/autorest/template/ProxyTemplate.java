@@ -73,14 +73,11 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     }
 
                     if (restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
-                        for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-                            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
-                                    exception.getKey(), exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
-                        }
+                        writeUnexpectedExceptions(restAPIMethod, interfaceBlock);
                     }
 
                     if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                        interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
+                        writeSingleUnexpectedException(restAPIMethod, interfaceBlock);
                     }
 
                     ArrayList<String> parameterDeclarationList = new ArrayList<String>();
@@ -137,12 +134,27 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         parameterDeclarationList.add(parameterDeclarationBuilder.toString());
                     }
 
-                    String parameterDeclarations = String.join(", ", parameterDeclarationList);
-                    IType restAPIMethodReturnValueClientType = restAPIMethod.getReturnType().getClientType();
-                    interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
+                    writeProxyMethodSignature(parameterDeclarationList, restAPIMethod, interfaceBlock);
                 }
             });
         }
+    }
+
+    protected void writeUnexpectedExceptions(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+        for (Map.Entry<ClassType, List<HttpResponseStatus>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
+                    exception.getKey(), exception.getValue().stream().map(status -> String.valueOf(status.code())).collect(Collectors.joining(", "))));
+        }
+    }
+
+    protected void writeSingleUnexpectedException(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+        interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
+    }
+
+    protected void writeProxyMethodSignature(java.util.ArrayList<String> parameterDeclarationList, ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+        String parameterDeclarations = String.join(", ", parameterDeclarationList);
+        IType restAPIMethodReturnValueClientType = restAPIMethod.getReturnType().getClientType();
+        interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
     }
 
     private static String serviceInterfaceWithLengthLimit(String serviceInterfaceName) {
