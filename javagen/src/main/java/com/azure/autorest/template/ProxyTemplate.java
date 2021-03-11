@@ -115,6 +115,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 //                                parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
 //                                break;
 
+                            case None:
+                                break;
+
                             default:
                                 if (!restAPIMethod.getIsResumable() && parameter.getWireType() != ClassType.Context) {
                                     throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());

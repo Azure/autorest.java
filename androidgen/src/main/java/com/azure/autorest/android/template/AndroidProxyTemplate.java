@@ -8,6 +8,7 @@ import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.template.ProxyTemplate;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,9 +42,9 @@ public class AndroidProxyTemplate extends ProxyTemplate {
         annotationBuilder.append("})\n");
         interfaceBlock.annotation(annotationBuilder.toString());
     }
-
+/*
     @Override
-    protected void writeProxyMethodSignature(java.util.ArrayList<String> parameterDeclarationList, ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
+    protected void writeProxyMethodSignature(ArrayList<String> parameterDeclarationList, ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
         String parameterDeclarations = String.join(", ", parameterDeclarationList);
         IType restAPIMethodReturnValueClientType = restAPIMethod.getReturnType().getClientType();
         if(restAPIMethodReturnValueClientType instanceof GenericType) {
@@ -52,7 +53,10 @@ public class AndroidProxyTemplate extends ProxyTemplate {
                 restAPIMethodReturnValueClientType = Arrays.stream(genericReturnType.getTypeArguments()).findFirst().get();
             }
         }
-        parameterDeclarations += String.format(", Context context, Callback<%1$s> callback", restAPIMethodReturnValueClientType.toString());
+        parameterDeclarations += String.format(", Callback<%1$s> callback", restAPIMethodReturnValueClientType.toString());
         interfaceBlock.publicMethod(String.format("void %1$s(%2$s)", restAPIMethod.getName(), parameterDeclarations));
+        interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
     }
+
+ */
 }

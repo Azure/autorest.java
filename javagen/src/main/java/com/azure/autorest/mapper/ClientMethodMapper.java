@@ -62,13 +62,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-        ClientMethod.Builder builder = new ClientMethod.Builder()
+        ClientMethod.Builder builder = getClientMethodBuilder()
                 .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
 
         IType asyncRestResponseReturnType;
-        IType asyncReturnType;
-        IType syncReturnType;
+        IType asyncReturnType = PrimitiveType.Void;
+        IType syncReturnType = PrimitiveType.Void;
         IType syncReturnWithResponse;
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -89,19 +89,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
-            asyncRestResponseReturnType = GenericType.Mono(GenericType.PagedResponse(elementType));
-            asyncReturnType = GenericType.PagedFlux(elementType);
-            syncReturnType = GenericType.PagedIterable(elementType);
+            asyncRestResponseReturnType = createPagedRestResponseReturnType(elementType);
+            asyncReturnType = createPagedAsyncReturnType(elementType);
+            syncReturnType = createPagedSyncReturnType(elementType);
         } else {
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-                asyncReturnType = GenericType.Flux(ClassType.ByteBuffer);
+                asyncReturnType = createAsyncBinaryReturnType();
             } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
-                asyncReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
+                asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
             } else {
-                asyncReturnType = GenericType.Mono(ClassType.Void);
+                asyncReturnType = createAsyncVoidReturnType();
             }
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
                 syncReturnType = ClassType.InputStream;
@@ -211,7 +211,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .methodTransformationDetails(methodTransformationDetails)
                     .methodPageDetails(null);
 
-            if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
+            if (operation.getExtensions() != null
+                    && operation.getExtensions().getXmsPageable() != null
+                    && shouldGeneratePagingMethods()) {
                 String pageableItemName = getPageableItemName(operation);
                 if (pageableItemName != null) {
                     boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
@@ -516,6 +518,38 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
         parsed.put(operation, methods);
         return methods;
+    }
+
+    protected boolean shouldGeneratePagingMethods() {
+        return true;
+    }
+
+    protected IType createAsyncVoidReturnType() {
+        return GenericType.Mono(ClassType.Void);
+    }
+
+    protected IType createAsyncBodyReturnType(IType restAPIMethodReturnBodyClientType) {
+        return GenericType.Mono(restAPIMethodReturnBodyClientType);
+    }
+
+    protected IType createAsyncBinaryReturnType() {
+        return GenericType.Flux(ClassType.ByteBuffer);
+    }
+
+    protected IType createPagedSyncReturnType(IType elementType) {
+        return GenericType.PagedIterable(elementType);
+    }
+
+    protected IType createPagedAsyncReturnType(IType elementType) {
+        return GenericType.PagedFlux(elementType);
+    }
+
+    protected IType createPagedRestResponseReturnType(IType elementType) {
+        return GenericType.Mono(GenericType.PagedResponse(elementType));
+    }
+
+    protected ClientMethod.Builder getClientMethodBuilder() {
+        return new ClientMethod.Builder();
     }
 
     protected static final JavaVisibility NOT_VISIBLE = JavaVisibility.Private;
