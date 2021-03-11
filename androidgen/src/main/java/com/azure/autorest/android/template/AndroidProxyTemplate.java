@@ -38,5 +38,4 @@ public class AndroidProxyTemplate extends ProxyTemplate {
     protected void writeSingleUnexpectedException(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
         // REVISIT: For some reason this can be called even when writeUnexpectedExceptions is called already
     }
-
 }
