@@ -40,6 +40,7 @@ public class ClassType implements IType {
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
     public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
     public static final ClassType RestProxy = new ClassType.Builder().knownClass(com.azure.core.http.rest.RestProxy.class).build();
+    public static final ClassType AndroidRestProxy = new ClassType.Builder().packageName("com.azure.android.core.rest").name("RestProxy").build();
     public static final ClassType SerializerAdapter = new ClassType.Builder().knownClass(com.azure.core.util.serializer.SerializerAdapter.class).build();
     public static final ClassType Function = new ClassType.Builder().knownClass(java.util.function.Function.class).build();
     public static final ClassType ByteBuffer = new ClassType.Builder().knownClass(java.nio.ByteBuffer.class).build();
@@ -48,6 +49,7 @@ public class ClassType implements IType {
     public static final ClassType StreamResponse = new ClassType.Builder().knownClass(com.azure.core.http.rest.StreamResponse.class).build();
     public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
+    public static final ClassType AndroidContext = new ClassType.Builder().packageName("com.azure.android.core.util").name("Context").build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
     public static final ClassType HttpClient = new ClassType.Builder().knownClass(com.azure.core.http.HttpClient.class).build();
