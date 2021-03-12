@@ -55,6 +55,7 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
+<<<<<<< HEAD
                 imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
                 imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
@@ -76,6 +77,29 @@ public class AndroidProxyMethod extends ProxyMethod {
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
+=======
+                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionType");
+                getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
+            }
+            if (getUnexpectedResponseExceptionTypes() != null) {
+                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
+                getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
+            }
+            if (getIsResumable()) {
+                imports.add("com.azure.android.core.annotation.ResumeOperation");
+            }
+            imports.add(String.format("com.azure.android.core.annotation.%1$s", com.azure.autorest.util.CodeNamer
+                    .toPascalCase(getHttpMethod().toString().toLowerCase())));
+
+            if (settings.isFluent()) {
+                imports.add("com.azure.android.core.annotation.Headers");
+            }
+            imports.add("com.azure.android.core.annotation.ExpectedResponses");
+
+            if (getReturnValueWireType() != null) {
+                imports.add("com.azure.android.core.annotation.ReturnValueWireType");
+>>>>>>> ec3af70a... Get imports right in rest proxy
                 returnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 
