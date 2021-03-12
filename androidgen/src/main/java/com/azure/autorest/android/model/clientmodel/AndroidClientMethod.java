@@ -1,5 +1,6 @@
-package com.azure.autorest.android.model.clientmethod;
+package com.azure.autorest.android.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -11,6 +12,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AndroidClientMethod extends ClientMethod {
 
@@ -53,6 +55,29 @@ public class AndroidClientMethod extends ClientMethod {
                 methodPageDetails,
                 methodTransformationDetails,
                 methodVisibility);
+    }
+
+    @Override
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+        getReturnValue().addImportsTo(imports, includeImplementationImports);
+
+        imports.add("com.azure.android.core.annotation.ServiceMethod");
+        imports.add("com.azure.android.core.annotation.ReturnType");
+
+        for (ClientMethodParameter parameter : getParameters()) {
+            parameter.addImportsTo(imports, includeImplementationImports);
+        }
+
+        if (getMethodPageDetails() != null) {
+            imports.add("com.azure.android.core.http.rest.PagedResponseBase");
+        }
+
+        if (includeImplementationImports) {
+            getProxyMethod().addImportsTo(imports, includeImplementationImports, settings);
+            for (com.azure.autorest.model.clientmodel.ProxyMethodParameter parameter : getProxyMethod().getParameters()) {
+                parameter.getClientType().addImportsTo(imports, true);
+            }
+        }
     }
 
     public static class Builder extends ClientMethod.Builder {

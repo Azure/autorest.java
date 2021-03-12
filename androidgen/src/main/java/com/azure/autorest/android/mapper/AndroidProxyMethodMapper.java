@@ -1,6 +1,6 @@
 package com.azure.autorest.android.mapper;
 
-import com.azure.autorest.android.model.clientmethod.AndroidProxyMethod;
+import com.azure.autorest.android.model.clientmodel.AndroidProxyMethod;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -46,6 +46,11 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     @Override
     protected IType createSingleValueAsyncReturnType(IType singleValueType) {
         return PrimitiveType.Void; // return GenericType.CompletableFuture(singleValueType);
+    }
+
+    @Override
+    protected ClassType getContextClass() {
+        return ClassType.AndroidContext;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.azure.autorest.android.mapper;
 
-import com.azure.autorest.android.model.clientmethod.AndroidClientMethod;
+import com.azure.autorest.android.model.clientmodel.AndroidClientMethod;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;

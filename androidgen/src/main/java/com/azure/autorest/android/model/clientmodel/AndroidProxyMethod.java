@@ -1,4 +1,4 @@
-package com.azure.autorest.android.model.clientmethod;
+package com.azure.autorest.android.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -55,6 +55,7 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
+                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
                 imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }

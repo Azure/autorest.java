@@ -141,10 +141,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameters.add(proxyMethodParameter);
             }
             if (settings.getAddContextParameter()) {
+                ClassType contextClassType = getContextClass();
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
                         .description("The context to associate with this operation.")
-                        .wireType(ClassType.Context)
-                        .clientType(ClassType.Context)
+                        .wireType(contextClassType)
+                        .clientType(contextClassType)
                         .name("context")
                         .requestParameterLocation(RequestParameterLocation.None)
                         .requestParameterName("context")
@@ -166,6 +167,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             parsed.put(request, proxyMethod);
         }
         return result;
+    }
+
+    protected ClassType getContextClass() {
+        return ClassType.Context;
     }
 
     protected void appendCallbackParameter(java.util.List<ProxyMethodParameter> parameters, IType responseBodyType) {
