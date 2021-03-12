@@ -32,11 +32,6 @@ public class SimpleProduct extends BaseProduct {
     @JsonProperty(value = "details.max_product_image.@odata\\.value")
     private String odataValue;
 
-    /** Creates an instance of SimpleProduct class. */
-    public SimpleProduct() {
-        capacity = "Large";
-    }
-
     /**
      * Get the maxProductDisplayName property: Display name of product.
      *

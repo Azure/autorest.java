@@ -12,11 +12,6 @@ public final class HttpRedirectsPost303Headers {
     @JsonProperty(value = "Location")
     private String location;
 
-    /** Creates an instance of HttpRedirectsPost303Headers class. */
-    public HttpRedirectsPost303Headers() {
-        location = "/http/success/get/200";
-    }
-
     /**
      * Get the location property: The Location property.
      *

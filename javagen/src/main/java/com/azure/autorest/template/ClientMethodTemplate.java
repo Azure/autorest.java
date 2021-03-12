@@ -114,7 +114,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
-            if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
+            if (!parameter.getFromClient()
+                    && !alwaysNull
+                    && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired())
+                    || (addConstant && parameter.getIsConstant() && (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired())))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
                 function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
             }

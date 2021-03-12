@@ -269,7 +269,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                     property.setSerializedName(property.getExtensions().getXmsHeaderCollectionPrefix());
                     DictionarySchema dictionarySchema = new DictionarySchema();
                     dictionarySchema.setElementType(header.getValue());
-                    property.setSchema(dictionarySchema);
+                    property.setSchema(header.getValue());
                 }
             }
             headerSchema.getProperties().add(property);

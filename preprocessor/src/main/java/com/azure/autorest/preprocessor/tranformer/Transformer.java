@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.AndSchema;
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -78,6 +79,8 @@ public class Transformer {
           Stream<Parameter> newParameters = Stream.concat(operation.getParameters().stream(), request.getParameters().stream());
           request.setParameters(newParameters.collect(Collectors.toList()));
           Stream<Parameter> newSignatureParameters = Stream.concat(operation.getSignatureParameters().stream(), request.getSignatureParameters().stream());
+          newSignatureParameters =
+                  newSignatureParameters.filter(param -> param.getGroupedBy() == null);
           request.setSignatureParameters(newSignatureParameters.collect(Collectors.toList()));
           for (int i = 0; i < request.getParameters().size(); i++) {
             Parameter parameter = request.getParameters().get(i);
