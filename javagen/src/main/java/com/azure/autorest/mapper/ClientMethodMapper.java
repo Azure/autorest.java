@@ -113,11 +113,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (syncReturnType == ClassType.InputStream) {
             syncReturnWithResponse = ClassType.StreamResponse;
         } else {
-            syncReturnWithResponse = GenericType.Response(syncReturnType);
-            if (SchemaUtil.responseContainsHeaderSchemas(operation)) {
-                // method with schema in headers would require a ClientResponse
-                syncReturnWithResponse = ClientMapper.getClientResponseClassType(operation, settings);
-            }
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
         for (Request request : operation.getRequests()) {
@@ -235,9 +231,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
                             && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
                         methods.add(builder
-                                .returnValue(new ReturnValue(
-                                        returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
-                                        asyncRestResponseReturnType))
+                                .returnValue(createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType))
                                 .name(proxyMethod.getPagingAsyncSinglePageMethodName())
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.PagingAsyncSinglePage)
@@ -249,17 +243,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, true));
                         addClientMethodWithContext(methods, builder, proxyMethod, parameters,
                                 ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
-                                new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
-                                        asyncRestResponseReturnType),
+                                createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType),
                                 details);
                     }
 
                     if (!isNextMethod) {
                         if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                             methods.add(builder
-                                    .returnValue(
-                                            new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-                                                    asyncReturnType))
+                                    .returnValue(createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                                     .name(proxyMethod.getSimpleAsyncMethodName())
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingAsync)
@@ -281,7 +272,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             pageableItemName,
                                             nextMethods.stream()
                                                     .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
-                                                    .filter(m -> m.getMethodParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()))).findFirst().get(),
+                                                    .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
                                             lroIntermediateType);
                                 }
 
@@ -289,8 +280,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                         builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true)),
                                         proxyMethod, parameters,
                                         ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
-                                        new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-                                                asyncReturnType),
+                                        createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType),
                                         detailsWithContext);
                             }
                         }
@@ -299,8 +289,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             builder.methodVisibility(VISIBLE);
 
                             builder
-                                    .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
-                                            syncReturnType))
+                                    .returnValue(createPagingSyncReturnValue(operation, syncReturnType))
                                     .name(proxyMethod.getName())
                                     .onlyRequiredParameters(false)
                                     .type(ClientMethodType.PagingSync)
@@ -328,8 +317,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
                 // WithResponseAsync, with required and optional parameters
                 methods.add(builder
-                        .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                                proxyMethod.getReturnType().getClientType()))
+                        .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
                         .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
@@ -346,8 +334,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     // begin method async
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                                    GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
+                            .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginAsync)
@@ -367,8 +354,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     // begin method sync
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
-                                    GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable())))
+                            .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType))
                             .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningBeginSync)
@@ -382,8 +368,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-                                    asyncReturnType))
+                            .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncMethodName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningAsync)
@@ -408,8 +393,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     builder.methodVisibility(VISIBLE);
 
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
-                                    syncReturnType))
+                            .returnValue(createLongRunningSyncReturnValue(operation, syncReturnType))
                             .name(proxyMethod.getName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.LongRunningSync)
@@ -433,10 +417,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     methods.add(builder
                         .parameters(parameters) // update builder parameters to include context
-                        .returnValue(new ReturnValue(
-                            returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
-                                syncReturnType),
-                            proxyMethod.getReturnType().getClientType()))
+                        .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
                         .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
@@ -450,15 +431,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
                         proxyMethod, parameters,
                         ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                        new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(),
-                            syncReturnType), proxyMethod.getReturnType().getClientType()),
+                        createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType),
                         null);
                 }
 
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                     methods.add(builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
-                                    asyncReturnType))
+                            .returnValue(createSimpleAsyncReturnValue(operation, asyncReturnType, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncMethodName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleAsync)
@@ -486,8 +465,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     builder.methodVisibility(VISIBLE);
 
                     builder
-                            .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
-                                    syncReturnType))
+                            .returnValue(createSimpleSyncReturnValue(operation, syncReturnType))
                             .name(proxyMethod.getName())
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleSync)
@@ -509,8 +487,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder.type(ClientMethodType.SimpleSyncRestResponse)
                                 .onlyRequiredParameters(false)
                                 .name(proxyMethod.getSimpleRestResponseMethodName())
-                                .returnValue(new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
-                                        syncReturnWithResponse), syncReturnWithResponse));
+                                .returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse));
                         addClientMethodWithContext(methods, builder, parameters);
                     }
                 }
@@ -518,6 +495,74 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
         parsed.put(operation, methods);
         return methods;
+    }
+
+    protected IType getContextType() {
+        return ClassType.Context;
+    }
+
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
+        IType syncReturnWithResponse = GenericType.Response(syncReturnType);
+        if (SchemaUtil.responseContainsHeaderSchemas(operation)) {
+            // method with schema in headers would require a ClientResponse
+            syncReturnWithResponse = ClientMapper.getClientResponseClassType(operation, settings);
+        }
+        return GenericType.Response(syncReturnType);
+    }
+
+    protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse) {
+        return new ReturnValue(returnTypeDescription(operation, syncReturnWithResponse,
+                syncReturnWithResponse), syncReturnWithResponse);
+    }
+
+    protected ReturnValue createSimpleAsyncRestResponseReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                proxyMethod.getReturnType().getClientType());
+    }
+
+    protected ReturnValue createSimpleSyncReturnValue(Operation operation, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
+                syncReturnType);
+    }
+
+    protected ReturnValue createSimpleAsyncReturnValue(Operation operation, IType asyncReturnType, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
+                asyncReturnType);
+    }
+
+    protected ReturnValue createLongRunningSyncReturnValue(Operation operation, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
+                syncReturnType);
+    }
+
+    protected ReturnValue createLongRunningAsyncReturnValue(Operation operation, IType asyncReturnType, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
+                asyncReturnType);
+    }
+
+    private ReturnValue createLongRunningBeginSyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                GenericType.SyncPoller(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+    }
+
+    protected ReturnValue createLongRunningBeginAsyncReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+                GenericType.PollerFlux(GenericType.PollResult(syncReturnType.asNullable()), syncReturnType.asNullable()));
+    }
+
+    protected ReturnValue createPagingSyncReturnValue(Operation operation, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, syncReturnType, syncReturnType),
+                syncReturnType);
+    }
+
+    protected ReturnValue createPagingAsyncReturnValue(Operation operation, IType asyncReturnType, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, asyncReturnType, syncReturnType),
+                asyncReturnType);
+    }
+
+    protected ReturnValue createPagingAsyncSinglePageReturnValue(Operation operation, IType asyncRestResponseReturnType, IType syncReturnType) {
+        return new ReturnValue(returnTypeDescription(operation, asyncRestResponseReturnType, syncReturnType),
+                asyncRestResponseReturnType);
     }
 
     protected boolean shouldGeneratePagingMethods() {
@@ -585,7 +630,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
         ReturnValue returnValue, MethodPageDetails details) {
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
-        withContextParameters.add(CONTEXT_PARAM);
+        withContextParameters.add(getContextParameter());
 
         methods.add(builder
             .parameters(withContextParameters) // update builder parameters to include context
@@ -600,10 +645,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         builder.parameters(parameters);
     }
 
+    protected ClientMethodParameter getContextParameter() {
+        return CONTEXT_PARAM;
+    }
+
     private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
                                             List<ClientMethodParameter> parameters) {
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
-        withContextParameters.add(CONTEXT_PARAM);
+        withContextParameters.add(getContextParameter());
 
         methods.add(builder
                 .parameters(withContextParameters) // update builder parameters to include context
@@ -626,7 +675,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return parameters.stream().anyMatch(p -> !p.getIsRequired());
     }
 
-    private static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
+    protected static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
         String description = null;
         if (returnType != PrimitiveType.Void) {
             if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {

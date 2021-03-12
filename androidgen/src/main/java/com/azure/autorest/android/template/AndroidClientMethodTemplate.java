@@ -29,6 +29,11 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     }
 
     @Override
+    protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    @Override
     protected void generateResumable(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
     }
 
@@ -78,4 +83,5 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
              */
         }));
     }
+
 }
