@@ -205,5 +205,4 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
-
 }
