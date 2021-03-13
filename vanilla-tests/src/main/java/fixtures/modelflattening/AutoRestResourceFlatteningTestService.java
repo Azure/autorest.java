@@ -31,6 +31,7 @@ import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
+import fixtures.modelflattening.models.SimpleProductPropertiesMaxProductCapacity;
 import fixtures.modelflattening.models.WrappedProduct;
 import java.util.List;
 import java.util.Map;
@@ -817,6 +818,7 @@ public final class AutoRestResourceFlatteningTestService {
      *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -829,6 +831,7 @@ public final class AutoRestResourceFlatteningTestService {
             String productId,
             String description,
             String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
             String genericValue,
             String odataValue) {
         if (this.getHost() == null) {
@@ -839,11 +842,16 @@ public final class AutoRestResourceFlatteningTestService {
         }
         final String accept = "application/json";
         SimpleProduct simpleBodyProductInternal = null;
-        if (description != null || maxProductDisplayName != null || genericValue != null || odataValue != null) {
+        if (description != null
+                || maxProductDisplayName != null
+                || capacity != null
+                || genericValue != null
+                || odataValue != null) {
             simpleBodyProductInternal = new SimpleProduct();
             simpleBodyProductInternal.setProductId(productId);
             simpleBodyProductInternal.setDescription(description);
             simpleBodyProductInternal.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProductInternal.setCapacity(capacity);
             simpleBodyProductInternal.setGenericValue(genericValue);
             simpleBodyProductInternal.setOdataValue(odataValue);
         }
@@ -859,6 +867,7 @@ public final class AutoRestResourceFlatteningTestService {
      *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -871,10 +880,11 @@ public final class AutoRestResourceFlatteningTestService {
             String productId,
             String description,
             String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
             String genericValue,
             String odataValue) {
         return postFlattenedSimpleProductWithResponseAsync(
-                        productId, description, maxProductDisplayName, genericValue, odataValue)
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
                 .flatMap(
                         (Response<SimpleProduct> res) -> {
                             if (res.getValue() != null) {
@@ -899,10 +909,11 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<SimpleProduct> postFlattenedSimpleProductAsync(String productId) {
         final String description = null;
         final String maxProductDisplayName = null;
+        final SimpleProductPropertiesMaxProductCapacity capacity = null;
         final String genericValue = null;
         final String odataValue = null;
         return postFlattenedSimpleProductWithResponseAsync(
-                        productId, description, maxProductDisplayName, genericValue, odataValue)
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
                 .flatMap(
                         (Response<SimpleProduct> res) -> {
                             if (res.getValue() != null) {
@@ -920,6 +931,7 @@ public final class AutoRestResourceFlatteningTestService {
      *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -932,9 +944,11 @@ public final class AutoRestResourceFlatteningTestService {
             String productId,
             String description,
             String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
             String genericValue,
             String odataValue) {
-        return postFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue)
+        return postFlattenedSimpleProductAsync(
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
                 .block();
     }
 
@@ -952,9 +966,11 @@ public final class AutoRestResourceFlatteningTestService {
     public SimpleProduct postFlattenedSimpleProduct(String productId) {
         final String description = null;
         final String maxProductDisplayName = null;
+        final SimpleProductPropertiesMaxProductCapacity capacity = null;
         final String genericValue = null;
         final String odataValue = null;
-        return postFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue)
+        return postFlattenedSimpleProductAsync(
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
                 .block();
     }
 
@@ -985,6 +1001,7 @@ public final class AutoRestResourceFlatteningTestService {
         simpleBodyProduct.setProductId(flattenParameterGroup.getProductId());
         simpleBodyProduct.setDescription(flattenParameterGroup.getDescription());
         simpleBodyProduct.setMaxProductDisplayName(flattenParameterGroup.getMaxProductDisplayName());
+        simpleBodyProduct.setCapacity(flattenParameterGroup.getCapacity());
         simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
         simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
         return FluxUtil.withContext(

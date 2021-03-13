@@ -18,7 +18,7 @@ public class SimpleProduct extends BaseProduct {
      * Capacity of product. For example, 4 people.
      */
     @JsonProperty(value = "details.max_product_capacity")
-    private String capacity;
+    private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
@@ -57,7 +57,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the capacity value.
      */
-    public String getCapacity() {
+    public SimpleProductPropertiesMaxProductCapacity getCapacity() {
         return this.capacity;
     }
 
@@ -67,7 +67,7 @@ public class SimpleProduct extends BaseProduct {
      * @param capacity the capacity value to set.
      * @return the SimpleProduct object itself.
      */
-    public SimpleProduct setCapacity(String capacity) {
+    public SimpleProduct setCapacity(SimpleProductPropertiesMaxProductCapacity capacity) {
         this.capacity = capacity;
         return this;
     }

@@ -42,7 +42,7 @@ public final class FlattenParameterGroup {
      * Capacity of product. For example, 4 people.
      */
     @JsonProperty(value = "capacity")
-    private String capacity;
+    private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
@@ -163,7 +163,7 @@ public final class FlattenParameterGroup {
      *
      * @return the capacity value.
      */
-    public String getCapacity() {
+    public SimpleProductPropertiesMaxProductCapacity getCapacity() {
         return this.capacity;
     }
 
@@ -173,7 +173,7 @@ public final class FlattenParameterGroup {
      * @param capacity the capacity value to set.
      * @return the FlattenParameterGroup object itself.
      */
-    public FlattenParameterGroup setCapacity(String capacity) {
+    public FlattenParameterGroup setCapacity(SimpleProductPropertiesMaxProductCapacity capacity) {
         this.capacity = capacity;
         return this;
     }
