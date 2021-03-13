@@ -6,6 +6,7 @@ import fixtures.modelflattening.models.FlattenedProductPropertiesProvisioningSta
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
+import fixtures.modelflattening.models.SimpleProductPropertiesMaxProductCapacity;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -195,7 +196,7 @@ public class ModelFlatteningTests {
     simpleProduct.setDescription("product description");
     simpleProduct.setProductId("123");
     simpleProduct.setMaxProductDisplayName("max name");
-    simpleProduct.setCapacity("Large");
+    simpleProduct.setCapacity(SimpleProductPropertiesMaxProductCapacity.LARGE);
     simpleProduct.setOdataValue("http://foo");
     simpleProduct.setGenericValue("https://generic");
 
@@ -209,9 +210,10 @@ public class ModelFlatteningTests {
     simpleProduct.setDescription("product description");
     simpleProduct.setProductId("123");
     simpleProduct.setMaxProductDisplayName("max name");
-    simpleProduct.setCapacity("Large");
+    simpleProduct.setCapacity(SimpleProductPropertiesMaxProductCapacity.LARGE);
     simpleProduct.setOdataValue("http://foo");
-    client.postFlattenedSimpleProduct("123", "product description", "max name", null, "http://foo");
+    client.postFlattenedSimpleProduct("123", "product description", "max name",
+            SimpleProductPropertiesMaxProductCapacity.LARGE, null, "http://foo");
   }
 
   @Test
@@ -220,7 +222,7 @@ public class ModelFlatteningTests {
     simpleProduct.setDescription("product description");
     simpleProduct.setProductId("123");
     simpleProduct.setMaxProductDisplayName("max name");
-    simpleProduct.setCapacity("Large");
+    simpleProduct.setCapacity(SimpleProductPropertiesMaxProductCapacity.LARGE);
     simpleProduct.setOdataValue("http://foo");
 
     FlattenParameterGroup flattenParameterGroup = new FlattenParameterGroup();
