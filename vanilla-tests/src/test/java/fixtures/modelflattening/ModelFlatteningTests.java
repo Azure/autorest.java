@@ -231,6 +231,7 @@ public class ModelFlatteningTests {
     flattenParameterGroup.setMaxProductDisplayName("max name");
     flattenParameterGroup.setOdataValue("http://foo");
     flattenParameterGroup.setName("groupproduct");
+    flattenParameterGroup.setCapacity(SimpleProductPropertiesMaxProductCapacity.LARGE);
 
     SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup);
     assertSimpleProductEquals(simpleProduct, product);
