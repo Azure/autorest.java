@@ -185,7 +185,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            List<ClientModelProperty> constantProperties = model.getProperties().stream().filter(ClientModelProperty::getIsConstant).collect(Collectors.toList());
+            List<ClientModelProperty> constantProperties = model.getProperties().stream()
+                    .filter(clientModelProperty -> clientModelProperty.getIsConstant() && clientModelProperty.isRequired())
+                    .collect(Collectors.toList());
             List<ClientModelProperty> requiredProperties =
                 model.getProperties().stream().filter(ClientModelProperty::isRequired).collect(Collectors.toList());
 
@@ -256,8 +258,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                 methodBlock.ifBlock(String.format("%s == null", property.getName()),
                                     (ifBlock) -> ifBlock.line("this.%s = null;", property.getName()))
                                     .elseBlock((elseBlock) -> {
-                                        String sourceTypeName = propertyClientType.toString();
-                                        String targetTypeName = propertyType.toString();
                                         String propertyConversion = propertyType.convertFromClientType(expression);
                                         elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
                                     });

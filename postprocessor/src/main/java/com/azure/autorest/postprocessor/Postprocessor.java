@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +50,12 @@ public class Postprocessor extends NewPlugin {
 
     String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
     String className = JavaSettings.getInstance().getCustomizationClass();
-    Map.Entry<String, String> readme = getReadme();
+    String readme = null;
+    try {
+      readme = new String(Files.readAllBytes(Paths.get(new URI(getReadme()))));
+    } catch (IOException | URISyntaxException e) {
+      return false;
+    }
 
     if (className == null) {
       try {
@@ -98,7 +104,7 @@ public class Postprocessor extends NewPlugin {
       } else if (className.startsWith("src") && className.endsWith(".java")) {
         customizationClass = loadCustomizationClassFromJavaCode(className);
       } else {
-        customizationClass = loadCustomizationClassFromReadme(className, readme.getValue());
+        customizationClass = loadCustomizationClassFromReadme(className, readme);
       }
 
       try {
@@ -135,15 +141,15 @@ public class Postprocessor extends NewPlugin {
     }
   }
 
-  private Map.Entry<String, String> getReadme() {
-    LinkedHashMap<String, String> configurationFiles = getValue(LinkedHashMap.class, "configurationFiles");
-    return configurationFiles.entrySet().stream().filter(key -> !key.getKey().contains(".autorest")).findFirst().orElse(null);
+  private String getReadme() {
+    List<String> configurationFiles = getValue(List.class, "configurationFiles");
+    return configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
   }
 
   private String getBaseDirectory() {
-    Map.Entry<String, String> readme = getReadme();
+    String readme = getReadme();
     if (readme != null) {
-      return new File(URI.create(readme.getKey()).getPath()).getParent();
+      return new File(URI.create(readme).getPath()).getParent();
     }
 
     // TODO: get autorest running directory

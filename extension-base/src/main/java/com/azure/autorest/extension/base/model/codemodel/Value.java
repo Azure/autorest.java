@@ -191,7 +191,7 @@ public class Value extends Metadata {
             DictionarySchema dictionarySchema = new DictionarySchema();
             dictionarySchema.setElementType(schema);
             this.schema = dictionarySchema;
-            return;
+            // return;
         }
         this.schema = schema;
     }
