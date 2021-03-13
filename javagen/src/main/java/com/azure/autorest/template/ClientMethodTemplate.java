@@ -694,7 +694,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     protected boolean contextInParameters(ClientMethod clientMethod) {
-        return clientMethod.getParameters().stream().anyMatch(param -> ClassType.Context.equals(param.getClientType()));
+        return clientMethod.getParameters().stream().anyMatch(param -> getContextType().equals(param.getClientType()));
+    }
+
+    protected IType getContextType() {
+        return ClassType.Context;
     }
 
     /**
