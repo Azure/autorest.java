@@ -199,19 +199,20 @@ public class AzureSpecialParametersTests {
 
     @Test
     public void customNamedRequestId() {
-        HeadersCustomNamedRequestIdResponse response = client.getHeaders().customNamedRequestIdWithResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").block();
+        HeadersCustomNamedRequestIdResponse response = client.getHeaders().customNamedRequestIdWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 
     @Test
     public void customNamedRequestIdHead() {
-        HeadersCustomNamedRequestIdHeadResponse response = client.getHeaders().customNamedRequestIdHeadWithResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").block();
+        HeadersCustomNamedRequestIdHeadResponse response = client.getHeaders().customNamedRequestIdHeadWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 
     @Test
     public void customNamedRequestIdParamGrouping() {
-        HeadersCustomNamedRequestIdParamGroupingResponse response = client.getHeaders().customNamedRequestIdParamGroupingWithResponseAsync(new HeaderCustomNamedRequestIdParamGroupingParameters().setFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")).block();
+        HeadersCustomNamedRequestIdParamGroupingResponse response = client.getHeaders().customNamedRequestIdParamGroupingWithResponse(
+                new HeaderCustomNamedRequestIdParamGroupingParameters().setFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"), Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 }
