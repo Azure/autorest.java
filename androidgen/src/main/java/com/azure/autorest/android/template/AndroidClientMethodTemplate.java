@@ -4,8 +4,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaType;
@@ -120,5 +122,46 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             function.line("return %s(%s).thenApply(response -> response.getValue());", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
         }));
     }
+
+    @Override
+    protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+        if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
+            asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+        }
+        String effectiveAsyncMethodName = asyncMethodName;
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+                throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
+            } else {
+                IType returnType = clientMethod.getReturnValue().getType();
+                if (returnType instanceof PrimitiveType) {
+                    if (returnType != PrimitiveType.Void) {
+                        function.methodReturn(String.format("%s(%s).get()",
+                                effectiveAsyncMethodName, clientMethod.getArgumentList()));
+                    } else {
+                        function.line(String.format("%s(%s).get();",effectiveAsyncMethodName, clientMethod.getArgumentList()));
+                    }
+                } else {
+                    String proxyMethodCall = String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList());
+
+                    function.line("try {");
+                    if (returnType != PrimitiveType.Void) {
+                        function.methodReturn(proxyMethodCall);
+                    } else {
+                        function.line(proxyMethodCall + ";");
+                    }
+                    function.line("} catch (InterruptedException e) {");
+                    function.line("throw new RuntimeException(e);");
+                    function.line("} catch (ExecutionException e) {");
+                    function.line("throw new RuntimeException(e);");
+                    function.line("}");
+                }
+            }
+        });
+    }
+
 
 }
