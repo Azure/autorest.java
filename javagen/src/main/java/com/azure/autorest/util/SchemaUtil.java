@@ -108,7 +108,7 @@ public class SchemaUtil {
      * @param operation the operation
      * @return whether response of the operation contains headers
      */
-    public static boolean isResponseContainsHeaders(Operation operation) {
+    public static boolean responseContainsHeaderSchemas(Operation operation) {
         return operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))

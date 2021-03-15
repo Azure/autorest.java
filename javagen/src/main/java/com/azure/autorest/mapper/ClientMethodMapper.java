@@ -114,7 +114,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             syncReturnWithResponse = ClassType.StreamResponse;
         } else {
             syncReturnWithResponse = GenericType.Response(syncReturnType);
-            if (SchemaUtil.isResponseContainsHeaders(operation)) {
+            if (SchemaUtil.responseContainsHeaderSchemas(operation)) {
                 // method with schema in headers would require a ClientResponse
                 syncReturnWithResponse = ClientMapper.getClientResponseClassType(operation, settings);
             }

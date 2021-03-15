@@ -1,6 +1,5 @@
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
@@ -22,7 +21,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -73,7 +71,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
             builder.returnType(GenericType.Mono(singleValueType));
-        } else if (SchemaUtil.isResponseContainsHeaders(operation)) {
+        } else if (SchemaUtil.responseContainsHeaderSchemas(operation)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
