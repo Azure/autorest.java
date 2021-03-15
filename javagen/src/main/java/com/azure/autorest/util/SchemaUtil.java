@@ -1,6 +1,7 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
+import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -101,5 +102,16 @@ public class SchemaUtil {
                     compositeType.getLanguage().getJava().getName()));
         }
         return discriminator;
+    }
+
+    /**
+     * @param operation the operation
+     * @return whether response of the operation contains headers
+     */
+    public static boolean isResponseContainsHeaders(Operation operation) {
+        return operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
+                .anyMatch(Objects::nonNull);
     }
 }
