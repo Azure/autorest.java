@@ -13,6 +13,8 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
 
+import java.util.stream.Stream;
+
 public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
     private static ClientMethodTemplate _instance = new AndroidClientMethodTemplate();
@@ -39,7 +41,51 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            ApplyParameterTransformations(function, clientMethod, settings);
+            //ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
+            if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                final String completeFutureVariableName = "completableFuture";
+                function.line(declareCompletableFuture(clientMethod, completeFutureVariableName));
+
+                final String callbackVariableName = "callbackVariable";
+                function.line(declareSinglePageCallback(restAPIMethod, completeFutureVariableName, callbackVariableName));
+
+                String serviceMethodCall = generateProxyMethodCall(clientMethod, restAPIMethod, settings, callbackVariableName);
+                function.line(serviceMethodCall);
+                function.methodReturn(completeFutureVariableName);
+            } else {
+                // REVISIT: Is there a use case for this?
+            }
+        });
+    }
+
+    private String declareSinglePageCallback(ProxyMethod restAPIMethod, String completeFutureVariableName, String callbackVariableName) {
+        ProxyMethodParameter callbackParam = restAPIMethod.getParameters().stream().filter(param -> param.getName().equals("callback")).findFirst().get();
+        IType callbackDataType = ((GenericType) callbackParam.getClientType()).getTypeArguments()[0];
+
+        StringBuilder callbackBuilder = new StringBuilder();
+        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {\n", callbackDataType, callbackVariableName));
+        callbackBuilder.append("\t@Override\n");
+        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {\n", callbackDataType));
+        callbackBuilder.append(String.format("\t\t%s.complete(new PagedResponseBase<>(response.getRequest(),\n" +
+                "response.getStatusCode(),\n" +
+                "response.getHeaders(),\n" +
+                "response.getValue().getValue(),\n" +
+                "response.getValue().getNextLink(),\n" +
+                "null));\n", completeFutureVariableName));
+        callbackBuilder.append("\t}\n");
+        callbackBuilder.append("\t@Override\n");
+        callbackBuilder.append("\tpublic void onFailure(Throwable error) {\n");
+        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);\n", completeFutureVariableName));
+        callbackBuilder.append("\t}\n");
+        callbackBuilder.append("};\n");
+
+        return callbackBuilder.toString();
     }
 
     @Override
@@ -137,13 +183,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
             } else {
                 IType returnType = clientMethod.getReturnValue().getType();
-                if (returnType instanceof PrimitiveType) {
-                    if (returnType != PrimitiveType.Void) {
-                        function.methodReturn(String.format("%s(%s).get()",
-                                effectiveAsyncMethodName, clientMethod.getArgumentList()));
-                    } else {
-                        function.line(String.format("%s(%s).get();",effectiveAsyncMethodName, clientMethod.getArgumentList()));
-                    }
+                if (returnType instanceof PrimitiveType
+                        && returnType != PrimitiveType.Void) {
+                    function.methodReturn(String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
                 } else {
                     String proxyMethodCall = String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList());
 
