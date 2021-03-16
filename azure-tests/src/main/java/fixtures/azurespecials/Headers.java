@@ -10,7 +10,6 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -178,7 +177,8 @@ public final class Headers {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> customNamedRequestIdWithResponse(String fooClientRequestId, Context context) {
+    public HeadersCustomNamedRequestIdResponse customNamedRequestIdWithResponse(
+            String fooClientRequestId, Context context) {
         return customNamedRequestIdWithResponseAsync(fooClientRequestId, context).block();
     }
 
@@ -309,7 +309,7 @@ public final class Headers {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> customNamedRequestIdParamGroupingWithResponse(
+    public HeadersCustomNamedRequestIdParamGroupingResponse customNamedRequestIdParamGroupingWithResponse(
             HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
             Context context) {
         return customNamedRequestIdParamGroupingWithResponseAsync(
@@ -443,7 +443,8 @@ public final class Headers {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> customNamedRequestIdHeadWithResponse(String fooClientRequestId, Context context) {
+    public HeadersCustomNamedRequestIdHeadResponse customNamedRequestIdHeadWithResponse(
+            String fooClientRequestId, Context context) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context).block();
     }
 }

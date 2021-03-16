@@ -19,13 +19,11 @@ import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.core.http.rest.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -161,8 +159,8 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
     private static IType getReturnType(IType collectionMethodReturnType, boolean removeResponse) {
         IType returnType;
         if (removeResponse) {
-            if (collectionMethodReturnType instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) collectionMethodReturnType).getName())) {
-                returnType = ((GenericType) collectionMethodReturnType).getTypeArguments()[0];
+            if (FluentUtils.isResponseType(collectionMethodReturnType)) {
+                returnType = FluentUtils.getValueTypeFromResponseType(collectionMethodReturnType);
                 if (returnType == ClassType.Void) {
                     returnType = PrimitiveType.Void;
                 }
