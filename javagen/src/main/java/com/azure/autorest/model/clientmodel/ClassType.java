@@ -39,9 +39,11 @@ public class ClassType implements IType {
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
     public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
+    public static final ClassType AndroidHttpPipeline = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipeline").build();
     public static final ClassType RestProxy = new ClassType.Builder().knownClass(com.azure.core.http.rest.RestProxy.class).build();
     public static final ClassType AndroidRestProxy = new ClassType.Builder().packageName("com.azure.android.core.rest").name("RestProxy").build();
     public static final ClassType SerializerAdapter = new ClassType.Builder().knownClass(com.azure.core.util.serializer.SerializerAdapter.class).build();
+    public static final ClassType AndroidJacksonSerder = new ClassType.Builder().packageName("com.azure.android.core.serde.jackson").name("JacksonSerder").build();
     public static final ClassType Function = new ClassType.Builder().knownClass(java.util.function.Function.class).build();
     public static final ClassType ByteBuffer = new ClassType.Builder().knownClass(java.nio.ByteBuffer.class).build();
     public static final ClassType URL = new ClassType.Builder().knownClass(java.net.URL.class).build();
