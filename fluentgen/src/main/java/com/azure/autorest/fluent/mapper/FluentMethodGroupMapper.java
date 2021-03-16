@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
+import com.azure.autorest.fluent.util.TypeConversionUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.MethodGroupMapper;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -95,7 +96,7 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
                 ? listType
                 : Optional.empty();
 
-        return commonListType.filter(t -> t instanceof GenericType && ((GenericType) t).getName().equals("PagedIterable"))
+        return commonListType.filter(TypeConversionUtils::isPagedIterable)
                 .map(t -> ((GenericType) t).getTypeArguments()[0]);
     }
 
