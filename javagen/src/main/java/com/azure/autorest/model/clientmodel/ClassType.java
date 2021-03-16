@@ -55,12 +55,16 @@ public class ClassType implements IType {
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
     public static final ClassType HttpClient = new ClassType.Builder().knownClass(com.azure.core.http.HttpClient.class).build();
+    public static final ClassType AndroidHttpClient = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpClient").build();
     public static final ClassType HttpPipelinePolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpPipelinePolicy.class).build();
+    public static final ClassType AndroidHttpPipelinePolicy = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipelinePolicy").build();
     public static final ClassType HttpLogOptions = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpLogOptions.class).build();
+    public static final ClassType AndroidHttpLogOptions = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("HttpLogOptions").build();
     public static final ClassType Configuration = new ClassType.Builder().knownClass(com.azure.core.util.Configuration.class).build();
     public static final ClassType ServiceVersion = new ClassType.Builder().knownClass(com.azure.core.util.ServiceVersion.class).build();
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
+    public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
 
