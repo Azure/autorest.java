@@ -312,4 +312,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
     protected ClassType getHttpResponseExceptionType() {
         return ClassType.HttpResponseException;
     }
+
+    protected ClassType getHttpResponseExceptionType() {
+        return ClassType.HttpResponseException;
+    }
 }
