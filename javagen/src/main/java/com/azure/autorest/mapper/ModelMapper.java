@@ -3,7 +3,6 @@
 
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
@@ -48,7 +47,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
         if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !isPredefinedModel(modelType))) {
-            ClientModel.Builder builder = new ClientModel.Builder()
+            ClientModel.Builder builder = createModelBuilder()
                     .name(modelName)
                     .packageName(modelType.getPackage());
 
@@ -226,6 +225,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         }
 
         return result;
+    }
+
+    protected ClientModel.Builder createModelBuilder() {
+        return new ClientModel.Builder();
     }
 
     private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {
