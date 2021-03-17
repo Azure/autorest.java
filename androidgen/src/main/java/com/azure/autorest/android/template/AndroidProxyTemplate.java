@@ -1,15 +1,11 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.template.ProxyTemplate;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AndroidProxyTemplate extends ProxyTemplate {
@@ -42,21 +38,4 @@ public class AndroidProxyTemplate extends ProxyTemplate {
         annotationBuilder.append("})\n");
         interfaceBlock.annotation(annotationBuilder.toString());
     }
-/*
-    @Override
-    protected void writeProxyMethodSignature(ArrayList<String> parameterDeclarationList, ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
-        String parameterDeclarations = String.join(", ", parameterDeclarationList);
-        IType restAPIMethodReturnValueClientType = restAPIMethod.getReturnType().getClientType();
-        if(restAPIMethodReturnValueClientType instanceof GenericType) {
-            GenericType genericReturnType = (GenericType) restAPIMethodReturnValueClientType;
-            if (genericReturnType.getName().startsWith("Mono")) {
-                restAPIMethodReturnValueClientType = Arrays.stream(genericReturnType.getTypeArguments()).findFirst().get();
-            }
-        }
-        parameterDeclarations += String.format(", Callback<%1$s> callback", restAPIMethodReturnValueClientType.toString());
-        interfaceBlock.publicMethod(String.format("void %1$s(%2$s)", restAPIMethod.getName(), parameterDeclarations));
-        interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
-    }
-
- */
 }
