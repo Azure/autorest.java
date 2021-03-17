@@ -54,6 +54,11 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     }
 
     @Override
+    protected ClassType getHttpResponseExceptionType() {
+        return ClassType.AndroidHttpResponseException;
+    }
+
+    @Override
     protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
         ProxyMethodParameter callbackParameter = new ProxyMethodParameter.Builder()
                 .description("The async callback associated with this operation.")

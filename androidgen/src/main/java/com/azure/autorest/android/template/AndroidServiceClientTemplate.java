@@ -32,4 +32,9 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     protected String writeRetryPolicyInitialization() {
         return "RetryPolicy.withExponentialBackoff()";
     }
+
+    @Override
+    protected void writeSerializerMemberInitialization(com.azure.autorest.model.javamodel.JavaBlock constructorBlock) {
+        constructorBlock.line("this.jacksonSerder = jacksonSerder;");
+    }
 }

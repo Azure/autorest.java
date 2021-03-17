@@ -2,6 +2,8 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.DefaultTemplateFactory;
+import com.azure.autorest.template.EnumTemplate;
+import com.azure.autorest.template.ExceptionTemplate;
 import com.azure.autorest.template.MethodGroupTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
@@ -32,5 +34,15 @@ public class AndroidTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
         return AndroidServiceClientBuilderTemplate.getInstance();
+    }
+
+    @Override
+    public EnumTemplate getEnumTemplate() {
+        return AndroidEnumTemplate.getInstance();
+    }
+
+    @Override
+    public ExceptionTemplate getExceptionTemplate() {
+        return AndroidExceptionTemplate.getInstance();
     }
 }

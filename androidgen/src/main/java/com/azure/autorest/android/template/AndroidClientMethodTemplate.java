@@ -147,7 +147,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     }
 
                     if (!contextInParameters(clientMethod) && argVal.equals("context")) {
-                        return "Context.None";
+                        return "Context.NONE";
                     }
 
                     if (argVal.startsWith("callback")) {

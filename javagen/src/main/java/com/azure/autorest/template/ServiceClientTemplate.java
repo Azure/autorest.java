@@ -258,7 +258,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 //                            }
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter()))) {
                             constructorBlock.line("this.httpPipeline = httpPipeline;");
-                            constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+                            writeSerializerMemberInitialization(constructorBlock);
                             constructorParametersCodes.accept(constructorBlock);
 
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
@@ -289,6 +289,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
             this.writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
+        constructorBlock.line("this.serializerAdapter = serializerAdapter;");
     }
 
     protected String writeRetryPolicyInitialization() {

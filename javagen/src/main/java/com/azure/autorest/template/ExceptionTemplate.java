@@ -17,7 +17,7 @@ import java.util.Set;
 public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFile> {
     private static ExceptionTemplate _instance = new ExceptionTemplate();
 
-    private ExceptionTemplate() {
+    protected ExceptionTemplate() {
     }
 
     public static ExceptionTemplate getInstance() {
@@ -26,7 +26,7 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
 
     public final void write(ClientException exception, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
-        imports.add("com.azure.core.http.HttpResponse");
+        imports.add(getHttpResponseImport());
         exception.getParentType().addImportsTo(imports, false);
         javaFile.declareImport(imports);
         javaFile.javadocComment((comment) ->
@@ -64,5 +64,9 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
                 methodBlock.methodReturn(String.format("(%1$s) super.getValue()", exception.getErrorName()));
             });
         });
+    }
+
+    protected String getHttpResponseImport() {
+        return "com.azure.core.http.HttpResponse";
     }
 }

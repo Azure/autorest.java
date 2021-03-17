@@ -18,8 +18,8 @@ public class AndroidProxy extends Proxy {
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (includeImplementationImports) {
-            imports.add("com.azure.android.core.annotation.Host");
-            imports.add("com.azure.android.core.annotation.ServiceInterface");
+            imports.add("com.azure.android.core.rest.annotation.Host");
+            imports.add("com.azure.android.core.rest.annotation.ServiceInterface");
         }
 
         for (ProxyMethod method : getMethods()) {

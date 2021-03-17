@@ -55,27 +55,27 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
-                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
-                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionType");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
             if (getUnexpectedResponseExceptionTypes() != null) {
-                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
             if (getIsResumable()) {
-                imports.add("com.azure.android.core.annotation.ResumeOperation");
+                imports.add("com.azure.android.core.rest.annotation.ResumeOperation");
             }
-            imports.add(String.format("com.azure.android.core.annotation.%1$s", com.azure.autorest.util.CodeNamer
+            imports.add(String.format("com.azure.android.core.rest.annotation.%1$s", com.azure.autorest.util.CodeNamer
                     .toPascalCase(getHttpMethod().toString().toLowerCase())));
 
             if (settings.isFluent()) {
-                imports.add("com.azure.android.core.annotation.Headers");
+                imports.add("com.azure.android.core.rest.annotation.Headers");
             }
-            imports.add("com.azure.android.core.annotation.ExpectedResponses");
+            imports.add("com.azure.android.core.rest.annotation.ExpectedResponses");
 
             if (getReturnValueWireType() != null) {
-                imports.add("com.azure.android.core.annotation.ReturnValueWireType");
+                imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
                 returnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 

@@ -61,15 +61,16 @@ public class AndroidClientMethod extends ClientMethod {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        imports.add("com.azure.android.core.annotation.ServiceMethod");
-        imports.add("com.azure.android.core.annotation.ReturnType");
+        imports.add("com.azure.android.core.rest.annotation.ServiceMethod");
+        imports.add("com.azure.android.core.rest.annotation.ReturnType");
+        imports.add("java.util.concurrent.ExecutionException");
 
         for (ClientMethodParameter parameter : getParameters()) {
             parameter.addImportsTo(imports, includeImplementationImports);
         }
 
         if (getMethodPageDetails() != null) {
-            imports.add("com.azure.android.core.http.rest.PagedResponseBase");
+            imports.add("com.azure.android.core.rest.PagedResponseBase");
         }
 
         if (includeImplementationImports) {

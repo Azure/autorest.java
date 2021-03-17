@@ -20,7 +20,7 @@ import java.util.Set;
 public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     private static EnumTemplate _instance = new EnumTemplate();
 
-    private EnumTemplate() {
+    protected EnumTemplate() {
     }
 
     public static EnumTemplate getInstance() {
@@ -30,7 +30,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     public final void write(EnumType enumType, JavaFile javaFile) {
         String enumTypeComment = String.format("Defines values for %1$s.", enumType.getName());
         if (enumType.getExpandable()) {
-            javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", "com.azure.core.util.ExpandableStringEnum");
+            javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", getStringEnumImport());
             javaFile.javadocComment(comment ->
             {
                 comment.description(enumTypeComment);
@@ -155,5 +155,9 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 });
             });
         }
+    }
+
+    protected String getStringEnumImport() {
+        return "com.azure.core.util.ExpandableStringEnum";
     }
 }

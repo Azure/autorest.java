@@ -64,7 +64,7 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
     @Override
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (getRequestParameterLocation() != RequestParameterLocation.None) {
-            imports.add(String.format("com.azure.android.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
+            imports.add(String.format("com.azure.android.core.rest.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
             if (getClientType() == com.azure.autorest.model.clientmodel.ArrayType.ByteArray) {
