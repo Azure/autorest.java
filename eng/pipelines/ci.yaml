@@ -1,12 +1,12 @@
 trigger:
   branches:
     include:
-    - v4
+    - autorest_v4_android_v2
 
 pr:
   branches:
     include:
-    - v4
+    - autorest_v4_android_v2
 
 jobs:
   - job: Build
