@@ -17,7 +17,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Utils {
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
@@ -69,6 +72,10 @@ public class Utils {
         return array == null || array.length == 0;
     }
 
+    public static <T> boolean isNullOrEmpty(Iterable<T> iterable) {
+        return (iterable == null || !iterable.iterator().hasNext());
+    }
+
     static void validateModifiers(int validTypeModifiers, int newModifiers) {
         if (newModifiers <= 0) {
             throw new IllegalArgumentException("Modifiers aren't allowed to be less than or equal to 0.");
@@ -98,6 +105,22 @@ public class Utils {
         WorkspaceEdit workspaceEdit = new WorkspaceEdit();
         workspaceEdit.setChanges(Collections.singletonMap(fileUri, Collections.singletonList(textEdit)));
         Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+    }
+
+    public static <T, S> S returnIfPresentOrThrow(Optional<T> optional, Function<T, S> returnFormatter,
+        Supplier<RuntimeException> orThrow) {
+        if (optional.isPresent()) {
+            return returnFormatter.apply(optional.get());
+        }
+
+        throw orThrow.get();
+    }
+
+    public static <T, S> S returnIfPresentOrElse(Optional<T> optional, Function<T, S> returnFormatter,
+        Supplier<S> orElse) {
+        return optional.isPresent()
+            ? returnFormatter.apply(optional.get())
+            : orElse.get();
     }
 
     private Utils() {}

@@ -16,7 +16,6 @@ import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -46,8 +45,8 @@ public final class PropertyCustomization {
     }
 
     /**
-     * Rename a property in the class. This is a refactor operation. All references of the property will be renamed
-     * and the getter and setter method(s) for this property will be renamed accordingly as well.
+     * Rename a property in the class. This is a refactor operation. All references of the property will be renamed and
+     * the getter and setter method(s) for this property will be renamed accordingly as well.
      *
      * @param newName the new name for the property
      * @return the current class customization for chaining
@@ -55,8 +54,8 @@ public final class PropertyCustomization {
     public PropertyCustomization rename(String newName) {
         URI fileUri = classSymbol.getLocation().getUri();
         List<SymbolInformation> symbols = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().toLowerCase().contains(propertyName.toLowerCase()))
-                .collect(Collectors.toList());
+            .stream().filter(si -> si.getName().toLowerCase().contains(propertyName.toLowerCase()))
+            .collect(Collectors.toList());
         String propertyPascalName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
         String newPascalName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
         for (SymbolInformation symbol : symbols) {
@@ -65,7 +64,7 @@ public final class PropertyCustomization {
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             } else if (symbol.getKind() == SymbolKind.METHOD) {
                 String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
-                        .replace(propertyName, newName).replaceFirst("\\(.*\\)", "");
+                    .replace(propertyName, newName).replaceFirst("\\(.*\\)", "");
                 WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName);
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }
@@ -86,8 +85,8 @@ public final class PropertyCustomization {
 
         URI fileUri = classSymbol.getLocation().getUri();
         Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-                .findFirst();
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .findFirst();
         if (symbol.isPresent()) {
             int i = fileUri.toString().indexOf("src/main/java/");
             String fileName = fileUri.toString().substring(i);
@@ -102,8 +101,8 @@ public final class PropertyCustomization {
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
                 Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                        .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                        .findFirst();
+                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                    .findFirst();
                 if (generateAccessors.isPresent()) {
                     WorkspaceEditCommand command;
                     if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
@@ -132,8 +131,8 @@ public final class PropertyCustomization {
 
         URI fileUri = classSymbol.getLocation().getUri();
         Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-                .findFirst();
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .findFirst();
         if (symbol.isPresent()) {
             int i = fileUri.toString().indexOf("src/main/java/");
             String fileName = fileUri.toString().substring(i);
@@ -158,8 +157,8 @@ public final class PropertyCustomization {
                     languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
                     Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, new Range(start, end))
-                            .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                            .findFirst();
+                        .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                        .findFirst();
                     if (generateAccessors.isPresent()) {
                         WorkspaceEditCommand command;
                         if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
@@ -176,20 +175,20 @@ public final class PropertyCustomization {
     }
 
     /**
-     * Generates a getter and a setter method(s) for a property in the class. This is a refactor operation.
-     * If a getter or a setter is already available on the class, the current getter or setter will be kept.
+     * Generates a getter and a setter method(s) for a property in the class. This is a refactor operation. If a getter
+     * or a setter is already available on the class, the current getter or setter will be kept.
      *
      * @return the current class customization for chaining
      */
     public PropertyCustomization generateGetterAndSetter() {
         URI fileUri = classSymbol.getLocation().getUri();
         Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-                .findFirst();
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .findFirst();
         if (symbol.isPresent()) {
             Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                    .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
-                    .findFirst();
+                .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
+                .findFirst();
             if (generateAccessors.isPresent()) {
                 WorkspaceEditCommand command;
                 if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {

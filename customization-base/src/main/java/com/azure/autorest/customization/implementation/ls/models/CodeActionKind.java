@@ -3,6 +3,9 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public enum CodeActionKind {
     /**
      * Base kind for quickfix actions: 'quickfix'
@@ -56,7 +59,14 @@ public enum CodeActionKind {
     SOURCE_ORGANIZEIMPORTS("source.organizeImports");
 
 
-    private String value;
+    private static final Map<String, CodeActionKind> STRING_TO_CODE_ACTION_KIND;
+
+    static {
+        STRING_TO_CODE_ACTION_KIND = new ConcurrentHashMap<>();
+
+    }
+
+    private final String value;
 
     CodeActionKind(String value) {
         this.value = value;

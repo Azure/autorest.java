@@ -2,7 +2,6 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
@@ -45,6 +44,24 @@ public final class MethodCustomization {
     }
 
     /**
+     * Gets the name of the method this customization is using.
+     *
+     * @return The name of the method.
+     */
+    public String getMethodName() {
+        return methodName;
+    }
+
+    /**
+     * Gets the name of the class containing the method.
+     *
+     * @return The name of the class containing the method.
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
      * Gets the Javadoc customization for this method.
      *
      * @return the Javadoc customization
@@ -65,9 +82,9 @@ public final class MethodCustomization {
         URI fileUri = symbol.getLocation().getUri();
         WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
         Utils.applyWorkspaceEdit(edit, editor, languageClient);
-        Optional<SymbolInformation> newMethodSymbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(newName) && si.getKind() == SymbolKind.METHOD)
-                .findFirst();
+        Optional<SymbolInformation> newMethodSymbol = languageClient.listDocumentSymbols(fileUri).stream()
+            .filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(newName) && si.getKind() == SymbolKind.METHOD)
+            .findFirst();
         if (!newMethodSymbol.isPresent()) {
             throw new IllegalArgumentException("Renamed failed with new method " + newName + " not found.");
         }
@@ -98,18 +115,15 @@ public final class MethodCustomization {
             fileEvent.setType(FileChangeType.CHANGED);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-            Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst();
-            if (generateAccessors.isPresent()) {
-                WorkspaceEditCommand command;
-                if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                    command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                    for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-                        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+            languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
+                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                .findFirst()
+                .ifPresent(action -> {
+                    if (action.getCommand() instanceof WorkspaceEditCommand) {
+                        ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
                     }
-                }
-            }
+                });
         }
         refreshSymbol();
         return this;
@@ -149,18 +163,15 @@ public final class MethodCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, new Range(start, end))
-                        .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                        .findFirst();
-                if (generateAccessors.isPresent()) {
-                    WorkspaceEditCommand command;
-                    if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                        command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
+                languageClient.listCodeActions(fileUri, new Range(start, end))
+                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                    .findFirst()
+                    .ifPresent(action -> {
+                        if (action.getCommand() instanceof WorkspaceEditCommand) {
+                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
                         }
-                    }
-                }
+                    });
             }
         }
         refreshSymbol();
@@ -180,7 +191,7 @@ public final class MethodCustomization {
      */
     public MethodCustomization setModifier(int modifiers) {
         Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
-            oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
+                oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
             Modifier.methodModifiers(), modifiers);
         refreshSymbol();
         return this;
@@ -190,11 +201,11 @@ public final class MethodCustomization {
      * Change the return type of the method. The new return type will be automatically imported.
      *
      * <p>
-     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is
-     * {@code void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is
-     * {@code void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new
-     * return type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains
-     * exactly 1 instance of {@code %s}.
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
+     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
+     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
+     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
+     * instance of {@code %s}.
      *
      * @param newReturnType the simple name of the new return type
      * @param returnValueFormatter the return value String formatter as described above
@@ -228,7 +239,7 @@ public final class MethodCustomization {
             if (oldLineContent.contains("return ")) {
                 returnLine = line;
             }
-            oldLineContent = editor.getFileLine(fileName, ++ line);
+            oldLineContent = editor.getFileLine(fileName, ++line);
         }
         if (returnLine == -1) {
             // no return statement, originally void return type
@@ -278,18 +289,15 @@ public final class MethodCustomization {
         workspaceEdit.setChanges(Collections.singletonMap(fileUri, edits));
         Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
 
-        Optional<CodeAction> organizeImports = languageClient.listCodeActions(fileUri, new Range(start, end))
-                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                .findFirst();
-        if (organizeImports.isPresent()) {
-            WorkspaceEditCommand command;
-            if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
-                command = (WorkspaceEditCommand) organizeImports.get().getCommand();
-                for(WorkspaceEdit importEdit : command.getArguments()) {
-                    Utils.applyWorkspaceEdit(importEdit, editor, languageClient);
+        languageClient.listCodeActions(fileUri, new Range(start, end))
+            .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+            .findFirst()
+            .ifPresent(action -> {
+                if (action.getCommand() instanceof WorkspaceEditCommand) {
+                    ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(importEdit ->
+                        Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
                 }
-            }
-        }
+            });
         methodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
         refreshSymbol();
         return this;
@@ -299,11 +307,11 @@ public final class MethodCustomization {
      * Change the return type of a method. The new return type will be automatically imported.
      *
      * <p>
-     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is
-     * {@code void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is
-     * {@code void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new
-     * return type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains
-     * exactly 1 instance of {@code %s}.
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
+     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
+     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
+     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
+     * instance of {@code %s}.
      *
      * @param newReturnType the simple name of the new return type
      * @param returnValueFormatter the return value String formatter as described above
@@ -318,9 +326,9 @@ public final class MethodCustomization {
         int i = fileUri.toString().indexOf("src/main/java/");
         String fileName = fileUri.toString().substring(i);
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-                .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
-                .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
-                .findFirst();
+            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
+            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
+            .findFirst();
         if (!methodSymbol.isPresent()) {
             throw new IllegalArgumentException("Method " + methodSignature + " does not exist in class " + className);
         }
