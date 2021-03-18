@@ -16,12 +16,10 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.core.http.rest.Response;
 
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +54,7 @@ abstract public class FluentBaseMethod extends FluentMethod {
         this.collectionMethod = collectionMethod;
 
         IType returnType = collectionMethod.getInnerClientMethod().getReturnValue().getType();
-        final boolean returnIsResponseType = returnType instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) returnType).getName());
+        final boolean returnIsResponseType = FluentUtils.isResponseType(returnType);
 
         // resource collection from manager
         String innerClientGetMethod = FluentStatic.getFluentManager().getProperties().stream()

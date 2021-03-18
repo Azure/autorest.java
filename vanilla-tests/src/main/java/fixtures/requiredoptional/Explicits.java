@@ -64,7 +64,7 @@ public final class Explicits {
         Mono<Response<Void>> putOptionalBinaryBody(
                 @HostParam("$host") String host,
                 @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
-                @HeaderParam("Content-Length") long contentLength,
+                @HeaderParam("Content-Length") Long contentLength,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -289,13 +289,10 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
-            Flux<ByteBuffer> bodyParameter, long contentLength) {
+            Flux<ByteBuffer> bodyParameter, Long contentLength) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (bodyParameter == null) {
-            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -315,7 +312,22 @@ public final class Explicits {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, long contentLength) {
+    public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBinaryBodyAsync() {
+        final Flux<ByteBuffer> bodyParameter = null;
+        final Long contentLength = null;
         return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
                 .flatMap((Response<Void> res) -> Mono.empty());
     }
@@ -330,7 +342,20 @@ public final class Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, long contentLength) {
+    public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, Long contentLength) {
+        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalBinaryBody() {
+        final Flux<ByteBuffer> bodyParameter = null;
+        final Long contentLength = null;
         putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
     }
 

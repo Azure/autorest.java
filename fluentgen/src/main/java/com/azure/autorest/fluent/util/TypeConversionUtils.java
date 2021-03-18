@@ -28,6 +28,14 @@ public class TypeConversionUtils {
             ClassType type = (ClassType) clientType;
             if (FluentUtils.isInnerClassType(type)) {
                 expression = String.format("new %1$s(%2$s, this.%3$s())", getModelImplName(type), propertyName, ModelNaming.METHOD_MANAGER);
+            } else if (FluentUtils.isResponseType(type)) {
+                IType valueType = FluentUtils.getValueTypeFromResponseType(type);
+                if (valueType instanceof ClassType || valueType instanceof GenericType) {
+                    String valuePropertyName = propertyName + ".getValue()";
+                    expression = String.format("new SimpleResponse<>(%1$s.getRequest(), %1$s.getStatusCode(), %1$s.getHeaders(), %2$s)", propertyName, conversionExpression(valueType, valuePropertyName));
+                } else {
+                    expression = propertyName;
+                }
             }
         } else if (clientType instanceof ListType) {
             ListType type = (ListType) clientType;
@@ -87,17 +95,6 @@ public class TypeConversionUtils {
         if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
             if (PagedIterable.class.getSimpleName().equals(type.getName())) {
-                ret = true;
-            }
-        }
-        return ret;
-    }
-
-    public static boolean isResponse(IType clientType) {
-        boolean ret = false;
-        if (clientType instanceof GenericType) {
-            GenericType type = (GenericType) clientType;
-            if (Response.class.getSimpleName().equals(type.getName())) {
                 ret = true;
             }
         }
