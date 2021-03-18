@@ -50,12 +50,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
             if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                 final String completeFutureVariableName = "completableFuture";
-                function.line(declareCompletableFuture(clientMethod, completeFutureVariableName));
+                function.line(declarePagedCompletableFuture(clientMethod, restAPIMethod, completeFutureVariableName));
 
-                final String callbackVariableName = "callbackVariable";
-                function.line(declareSinglePageCallback(restAPIMethod, completeFutureVariableName, callbackVariableName));
-
-                String serviceMethodCall = generateProxyMethodCall(clientMethod, restAPIMethod, settings, callbackVariableName);
+                String serviceMethodCall = generateProxyMethodCall(clientMethod, restAPIMethod, settings, completeFutureVariableName);
                 function.line(serviceMethodCall);
                 function.methodReturn(completeFutureVariableName);
             } else {
@@ -64,7 +61,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         });
     }
 
-    private String declareSinglePageCallback(ProxyMethod restAPIMethod, String completeFutureVariableName, String callbackVariableName) {
+    private String declarePagedCompletableFuture(ClientMethod clientMethod,
+                                                 ProxyMethod restAPIMethod,
+                                                 String completeFutureVariableName) {
         ProxyMethodParameter callbackParam = restAPIMethod.getParameters().stream().filter(param -> param.getName().equals("callback")).findFirst().get();
         IType callbackDataType = ((GenericType) callbackParam.getClientType()).getTypeArguments()[0];
 
@@ -88,6 +87,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         return callbackBuilder.toString();
     }
 
+
     @Override
     protected void generateResumable(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
     }
@@ -103,12 +103,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             // ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             final String completeFutureVariableName = "completableFuture";
-            function.line(declareCompletableFuture(clientMethod, completeFutureVariableName));
+            function.line(declareResponseCompletableFuture(clientMethod, completeFutureVariableName));
 
-            final String callbackVariableName = "callbackVariable";
-            function.line(declareCallback(clientMethod, completeFutureVariableName, callbackVariableName));
-
-            String serviceMethodCall = generateProxyMethodCall(clientMethod, restAPIMethod, settings, callbackVariableName);
+            String serviceMethodCall = generateProxyMethodCall(clientMethod, restAPIMethod, settings, completeFutureVariableName);
             function.line(serviceMethodCall);
             function.methodReturn(completeFutureVariableName);
         });
@@ -193,12 +190,12 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                     if (returnType != PrimitiveType.Void) {
                         function.methodReturn(proxyMethodCall);
                     } else {
-                        function.line(proxyMethodCall + ";");
+                        function.line("\t" + proxyMethodCall + ";");
                     }
                     function.line("} catch (InterruptedException e) {");
-                    function.line("throw new RuntimeException(e);");
+                    function.line("\tthrow new RuntimeException(e);");
                     function.line("} catch (ExecutionException e) {");
-                    function.line("throw new RuntimeException(e);");
+                    function.line("\tthrow new RuntimeException(e);");
                     function.line("}");
                 }
             }

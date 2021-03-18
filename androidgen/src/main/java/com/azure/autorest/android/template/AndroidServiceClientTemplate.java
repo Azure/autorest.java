@@ -1,6 +1,9 @@
 package com.azure.autorest.android.template;
 
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ServiceClientTemplate;
+
+import static com.azure.autorest.model.javamodel.JavaVisibility.PackagePrivate;
 
 public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     private static ServiceClientTemplate _instance = new AndroidServiceClientTemplate();

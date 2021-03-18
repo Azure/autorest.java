@@ -105,6 +105,11 @@ public class AndroidProxyMethod extends ProxyMethod {
             for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
+
+            if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
+                imports.remove(ClassType.UnixTimeDateTime.getFullName());
+                imports.add(ClassType.AndroidDateTime.getFullName());
+            }
         }
     }
 

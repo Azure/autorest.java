@@ -38,6 +38,7 @@ public class ClassType implements IType {
     public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
     public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
+    public static final ClassType AndroidDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
     public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
     public static final ClassType AndroidHttpPipeline = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipeline").build();
