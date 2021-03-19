@@ -191,7 +191,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 boolean isDefaultError = true;
                 if (exception.getProtocol() != null && exception.getProtocol().getHttp() != null) {
                     List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
-                    if (statusCodes != null && !statusCodes.isEmpty() && exception.getSchema() != null) {
+                    if (statusCodes != null && !statusCodes.isEmpty()) {
                         try {
                             ClassType exceptionType = getExceptionType(exception, settings);
                             List<HttpResponseStatus> statusCodeList = statusCodes.stream()
