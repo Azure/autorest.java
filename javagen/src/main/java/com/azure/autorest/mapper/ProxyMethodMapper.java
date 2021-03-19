@@ -219,7 +219,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             }
 
             if (errorType == null) {
-                // no default exception, use the 1st to keep backward compatibility
+                // no default error, use the 1st to keep backward compatibility
                 errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
             }
         }
