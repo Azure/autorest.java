@@ -100,8 +100,8 @@ To set up customizations, create a Maven project with dependency:
 ```xml
 <dependency>
   <groupId>com.azure.tools</groupId>
-  <artifactId>azure-autorest-customizations</artifactId>
-  <version>1.0.0-beta.1</version>
+  <artifactId>azure-autorest-customization</artifactId>
+  <version>1.0.0-beta.2</version>
 </dependency>
 ```
 

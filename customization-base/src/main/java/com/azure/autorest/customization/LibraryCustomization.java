@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 
@@ -36,17 +37,18 @@ public final class LibraryCustomization {
      */
     public ClassCustomization getClass(String packageName, String className) {
         String packagePath = packageName.replace(".", "/");
-        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
-                .findFirst();
-        if (!classSymbol.isPresent()) {
-            throw new IllegalArgumentException(className + " does not exist in package " + packageName);
-        }
-        return new ClassCustomization(editor, languageClient, packageName, className, classSymbol.get());
+        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className).stream()
+            .filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+            .findFirst();
+
+        return Utils.returnIfPresentOrThrow(classSymbol,
+            symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
+            () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
     }
 
     /**
      * Gets the raw editor containing the current files being edited and eventually emitted to the disk.
+     *
      * @return the raw editor
      */
     public Editor getRawEditor() {

@@ -50,6 +50,15 @@ public final class ClassCustomization {
     }
 
     /**
+     * Gets the name of the class this customization is using.
+     *
+     * @return The name of the class.
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
      * Gets the method level customization for a method in the class.
      *
      * @param methodNameOrSignature the method name or signature

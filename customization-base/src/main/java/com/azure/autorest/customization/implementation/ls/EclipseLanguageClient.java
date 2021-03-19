@@ -57,6 +57,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EclipseLanguageClient {
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     private final EclipseLanguageServerFacade server;
     private final Connection connection;
     private final ServerSocket serverSocket;
@@ -120,7 +122,7 @@ public class EclipseLanguageClient {
         for (JavaCodeActionKind kind : JavaCodeActionKind.values()) {
             initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(kind.toString());
         }
-        InitializeResponse response = connection.requestWithObject(new ObjectMapper().constructType(InitializeResponse.class), "initialize", initializeParams);
+        InitializeResponse response = connection.requestWithObject(OBJECT_MAPPER.constructType(InitializeResponse.class), "initialize", initializeParams);
         serverCapabilities = response.getCapabilities();
         connection.notifyWithObject("initialized", null);
         try {
@@ -131,7 +133,7 @@ public class EclipseLanguageClient {
     }
 
     public BuildWorkspaceStatus buildWorkspace(boolean forceRebuild) {
-        return connection.requestWithObject(new ObjectMapper().constructType(BuildWorkspaceStatus.class), "java/buildWorkspace", forceRebuild);
+        return connection.requestWithObject(OBJECT_MAPPER.constructType(BuildWorkspaceStatus.class), "java/buildWorkspace", forceRebuild);
     }
 
     public List<TextEdit> format(URI fileUri) {
@@ -142,7 +144,7 @@ public class EclipseLanguageClient {
             params.getOptions().setTabSize(4);
             params.getOptions().setInsertSpaces(true);
             params.getOptions().setTrimTrailingWhitespace(true);
-            return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, TextEdit.class), "textDocument/formatting", params);
+            return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, TextEdit.class), "textDocument/formatting", params);
         } else {
             return Collections.emptyList();
         }
@@ -226,13 +228,13 @@ public class EclipseLanguageClient {
     public List<SymbolInformation> findWorkspaceSymbol(String query) {
         Map<String, Object> workspaceSymbolParams = new HashMap<>();
         workspaceSymbolParams.put("query", query);
-        return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "workspace/symbol", workspaceSymbolParams);
+        return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "workspace/symbol", workspaceSymbolParams);
     }
 
     public List<SymbolInformation> listDocumentSymbols(URI fileUri) {
         DocumentSymbolParams documentSymbolParams = new DocumentSymbolParams();
         documentSymbolParams.setTextDocument(new TextDocumentIdentifier(fileUri));
-        return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "textDocument/documentSymbol", documentSymbolParams);
+        return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, SymbolInformation.class), "textDocument/documentSymbol", documentSymbolParams);
     }
 
     public WorkspaceEdit renameSymbol(URI fileUri, Position symbolPosition, String newName) {
@@ -240,7 +242,7 @@ public class EclipseLanguageClient {
         renameParams.setTextDocument(new TextDocumentIdentifier(fileUri));
         renameParams.setPosition(symbolPosition);
         renameParams.setNewName(newName);
-        return connection.requestWithObject(new ObjectMapper().constructType(WorkspaceEdit.class), "textDocument/rename", renameParams);
+        return connection.requestWithObject(OBJECT_MAPPER.constructType(WorkspaceEdit.class), "textDocument/rename", renameParams);
     }
 
     public List<CodeAction> listCodeActions(URI fileUri, Range range) {
@@ -249,7 +251,7 @@ public class EclipseLanguageClient {
         codeActionParams.put("range", range);
         codeActionParams.put("context", Collections.singletonMap("diagnostics", new ArrayList<Object>()));
 
-        return connection.requestWithObject(new ObjectMapper().getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction",  codeActionParams);
+        return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction",  codeActionParams);
     }
 
     public void exit() {
