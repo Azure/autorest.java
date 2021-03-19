@@ -121,6 +121,11 @@ public class ClassType implements IType {
         return Objects.equals(this.name, that.name) && Objects.equals(this.packageName, that.packageName);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(packageName, name);
+    }
+
     public final IType asNullable() {
         return this;
     }
