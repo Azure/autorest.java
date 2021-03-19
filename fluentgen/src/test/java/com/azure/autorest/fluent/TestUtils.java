@@ -5,6 +5,8 @@
 
 package com.azure.autorest.fluent;
 
+import com.azure.autorest.Javagen;
+import com.azure.autorest.MockJavagen;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -49,6 +51,8 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("required-parameter-client-methods", true);
         }
 
+        private Javagen javagen;
+
         public MockFluentGen() {
             super(new Connection(System.out, System.in), "dummy", "dummy");
             instance = this;
@@ -56,6 +60,8 @@ public class TestUtils {
             JavaSettingsAccessor.setHost(this);
 
             FluentStatic.setFluentJavaSettings(new FluentJavaSettings(this));
+
+            javagen = new MockJavagen();
         }
 
         @Override

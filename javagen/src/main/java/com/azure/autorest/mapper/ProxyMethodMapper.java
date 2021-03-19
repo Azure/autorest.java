@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -15,6 +16,7 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,6 +29,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
+
+    //private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
+
     private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
         , ClassType.UnixTimeDateTime);
     private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
@@ -177,8 +182,44 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                                                          Operation operation, List<HttpResponseStatus> expectedStatusCodes,
                                                          JavaSettings settings) {
         ClassType errorType = null;
+        Map<ClassType, List<HttpResponseStatus>> errorTypeMap = new HashMap<>();
+
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+            //errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+            for (Response exception : operation.getExceptions()) {
+                boolean isDefaultError = true;
+                if (exception.getProtocol() != null && exception.getProtocol().getHttp() != null) {
+                    List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
+                    if (statusCodes != null && !statusCodes.isEmpty() && exception.getSchema() != null) {
+                        try {
+                            ClassType errorTypeWithStatusCodes = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
+                            List<HttpResponseStatus> statusCodeList = statusCodes.stream()
+                                    .map(code -> HttpResponseStatus.valueOf(Integer.parseInt(code)))
+                                    .collect(Collectors.toList());
+
+                            if (errorTypeMap.containsKey(errorTypeWithStatusCodes)) {
+                                errorTypeMap.get(errorTypeWithStatusCodes).addAll(statusCodeList);
+                            } else {
+                                errorTypeMap.put(errorTypeWithStatusCodes, statusCodeList);
+                            }
+                        } catch (NumberFormatException ex) {
+                            // statusCodes can be 'default'
+                            //logger.warn("Failed to parse status code, exception {}", ex.toString());
+                        }
+
+                        isDefaultError = false;
+                    }
+
+                    if (errorType == null && isDefaultError && exception.getSchema() != null) {
+                        errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
+                    }
+                }
+            }
+
+            if (errorType == null && !errorTypeMap.isEmpty()) {
+                // no default exception, use any one to keep backward compatibility
+                errorType = errorTypeMap.keySet().iterator().next();
+            }
         }
 
         if (errorType != null) {
@@ -201,6 +242,32 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     .build());
         } else {
             builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
+        }
+
+        if (!errorTypeMap.isEmpty()) {
+            builder.unexpectedResponseExceptionTypes(errorTypeMap.entrySet().stream()
+                    .map(entry -> {
+                        ClassType errorTypeWithStatusCodes = entry.getKey();
+                        String exceptionName = errorTypeWithStatusCodes.getExtensions() == null ? null : errorTypeWithStatusCodes.getExtensions().getXmsClientName();
+                        if (exceptionName == null || exceptionName.isEmpty()) {
+                            exceptionName = errorTypeWithStatusCodes.getName();
+                            exceptionName += "Exception";
+                        }
+
+                        String exceptionPackage;
+                        if (settings.isCustomType(exceptionName)) {
+                            exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                        } else {
+                            exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
+                        }
+
+                        ClassType exceptionType = new ClassType.Builder()
+                                .packageName(exceptionPackage)
+                                .name(exceptionName)
+                                .build();
+
+                        return new AbstractMap.SimpleEntry<>(exceptionType, entry.getValue());
+                    }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         }
     }
 }
