@@ -184,6 +184,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         ClassType errorType = null;
         Map<ClassType, List<HttpResponseStatus>> errorTypeMap = new HashMap<>();
 
+        /*
+        1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
+        2. If exception does not have status codes, or have 'default' or invalid number, put the first to unexpectedResponseExceptionType, ignore the rest
+        3. After processing, if no model in unexpectedResponseExceptionType, take any from unexpectedResponseExceptionTypes and put it to unexpectedResponseExceptionType
+         */
+
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
             //errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
             for (Response exception : operation.getExceptions()) {
