@@ -1,6 +1,5 @@
 package fixtures.lro.implementation;
 
-import fixtures.lro.LroManager;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.ProductPropertiesProvisioningStateValues;
@@ -10,9 +9,9 @@ import java.util.Map;
 public final class ProductImpl implements Product {
     private ProductInner innerObject;
 
-    private final LroManager serviceManager;
+    private final fixtures.lro.LroManager serviceManager;
 
-    ProductImpl(ProductInner innerObject, LroManager serviceManager) {
+    ProductImpl(ProductInner innerObject, fixtures.lro.LroManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
     }
@@ -54,7 +53,7 @@ public final class ProductImpl implements Product {
         return this.innerObject;
     }
 
-    private LroManager manager() {
+    private fixtures.lro.LroManager manager() {
         return this.serviceManager;
     }
 }

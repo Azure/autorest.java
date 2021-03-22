@@ -3,7 +3,6 @@ package fixtures.lro.implementation;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import fixtures.lro.LroManager;
 import fixtures.lro.fluent.LroRetrysClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LroRetrys;
@@ -14,9 +13,9 @@ public final class LroRetrysImpl implements LroRetrys {
 
     private final LroRetrysClient innerClient;
 
-    private final LroManager serviceManager;
+    private final fixtures.lro.LroManager serviceManager;
 
-    public LroRetrysImpl(LroRetrysClient innerClient, LroManager serviceManager) {
+    public LroRetrysImpl(LroRetrysClient innerClient, fixtures.lro.LroManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -137,7 +136,7 @@ public final class LroRetrysImpl implements LroRetrys {
         return this.innerClient;
     }
 
-    private LroManager manager() {
+    private fixtures.lro.LroManager manager() {
         return this.serviceManager;
     }
 }

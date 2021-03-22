@@ -3,7 +3,6 @@ package fixtures.lro.implementation;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import fixtures.lro.LroManager;
 import fixtures.lro.fluent.LROsClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.fluent.models.SkuInner;
@@ -21,9 +20,9 @@ public final class LROsImpl implements LROs {
 
     private final LROsClient innerClient;
 
-    private final LroManager serviceManager;
+    private final fixtures.lro.LroManager serviceManager;
 
-    public LROsImpl(LROsClient innerClient, LroManager serviceManager) {
+    public LROsImpl(LROsClient innerClient, fixtures.lro.LroManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -875,7 +874,7 @@ public final class LROsImpl implements LROs {
         return this.innerClient;
     }
 
-    private LroManager manager() {
+    private fixtures.lro.LroManager manager() {
         return this.serviceManager;
     }
 }
