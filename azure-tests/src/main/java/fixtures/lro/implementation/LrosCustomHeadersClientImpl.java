@@ -122,7 +122,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putAsyncRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -365,7 +365,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         return FluxUtil
             .withContext(
                 context -> service.put201CreatingSucceeded200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -609,7 +609,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202Retry200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -833,7 +833,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         return FluxUtil
             .withContext(
                 context -> service.postAsyncRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**

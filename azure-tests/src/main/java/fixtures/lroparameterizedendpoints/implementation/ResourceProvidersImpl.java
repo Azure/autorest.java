@@ -3,7 +3,6 @@ package fixtures.lroparameterizedendpoints.implementation;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import fixtures.lroparameterizedendpoints.LroparameterizedendpointsManager;
 import fixtures.lroparameterizedendpoints.fluent.ResourceProvidersClient;
 import fixtures.lroparameterizedendpoints.models.ResourceProviders;
 
@@ -12,9 +11,11 @@ public final class ResourceProvidersImpl implements ResourceProviders {
 
     private final ResourceProvidersClient innerClient;
 
-    private final LroparameterizedendpointsManager serviceManager;
+    private final fixtures.lroparameterizedendpoints.LroparameterizedendpointsManager serviceManager;
 
-    public ResourceProvidersImpl(ResourceProvidersClient innerClient, LroparameterizedendpointsManager serviceManager) {
+    public ResourceProvidersImpl(
+        ResourceProvidersClient innerClient,
+        fixtures.lroparameterizedendpoints.LroparameterizedendpointsManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -31,7 +32,7 @@ public final class ResourceProvidersImpl implements ResourceProviders {
         return this.innerClient;
     }
 
-    private LroparameterizedendpointsManager manager() {
+    private fixtures.lroparameterizedendpoints.LroparameterizedendpointsManager manager() {
         return this.serviceManager;
     }
 }

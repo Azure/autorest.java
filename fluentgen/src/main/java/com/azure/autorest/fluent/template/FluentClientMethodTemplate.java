@@ -110,7 +110,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         }
                     });
                     if (addContextParameter) {
-                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
+                        function.line(String.format(".contextWrite(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext()).readOnly()));", clientMethod.getClientReference()));
                     }
                 });
             });
@@ -189,7 +189,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                         }
                     });
                     if (addContextParameter) {
-                        function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
+                        function.line(String.format(".contextWrite(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext()).readOnly()));", clientMethod.getClientReference()));
                     }
                 });
             });
@@ -216,7 +216,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 function.line(String.format("return FluxUtil.withContext(context -> %s)",
                         serviceMethodCall));
                 function.indent(() -> {
-                    function.line(String.format(".subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext())));", clientMethod.getClientReference()));
+                    function.line(String.format(".contextWrite(context -> context.putAll(FluxUtil.toReactorContext(%s.getContext()).readOnly()));", clientMethod.getClientReference()));
                 });
             } else {
                 function.methodReturn(serviceMethodCall);

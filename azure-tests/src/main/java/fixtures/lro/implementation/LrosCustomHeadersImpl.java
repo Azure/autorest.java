@@ -3,7 +3,6 @@ package fixtures.lro.implementation;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import fixtures.lro.LroManager;
 import fixtures.lro.fluent.LrosCustomHeadersClient;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.models.LrosCustomHeaders;
@@ -14,9 +13,9 @@ public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
 
     private final LrosCustomHeadersClient innerClient;
 
-    private final LroManager serviceManager;
+    private final fixtures.lro.LroManager serviceManager;
 
-    public LrosCustomHeadersImpl(LrosCustomHeadersClient innerClient, LroManager serviceManager) {
+    public LrosCustomHeadersImpl(LrosCustomHeadersClient innerClient, fixtures.lro.LroManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -103,7 +102,7 @@ public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
         return this.innerClient;
     }
 
-    private LroManager manager() {
+    private fixtures.lro.LroManager manager() {
         return this.serviceManager;
     }
 }

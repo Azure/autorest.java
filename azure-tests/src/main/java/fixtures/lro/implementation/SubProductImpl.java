@@ -1,6 +1,5 @@
 package fixtures.lro.implementation;
 
-import fixtures.lro.LroManager;
 import fixtures.lro.fluent.models.SubProductInner;
 import fixtures.lro.models.SubProduct;
 import fixtures.lro.models.SubProductPropertiesProvisioningStateValues;
@@ -8,9 +7,9 @@ import fixtures.lro.models.SubProductPropertiesProvisioningStateValues;
 public final class SubProductImpl implements SubProduct {
     private SubProductInner innerObject;
 
-    private final LroManager serviceManager;
+    private final fixtures.lro.LroManager serviceManager;
 
-    SubProductImpl(SubProductInner innerObject, LroManager serviceManager) {
+    SubProductImpl(SubProductInner innerObject, fixtures.lro.LroManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
     }
@@ -31,7 +30,7 @@ public final class SubProductImpl implements SubProduct {
         return this.innerObject;
     }
 
-    private LroManager manager() {
+    private fixtures.lro.LroManager manager() {
         return this.serviceManager;
     }
 }

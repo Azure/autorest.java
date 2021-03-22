@@ -24,7 +24,7 @@ import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
-import com.azure.mgmtlitetest.mediaservices.MediaservicesManager;
+import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
 import com.azure.mgmtlitetest.resources.ResourceManager;
@@ -208,7 +208,7 @@ public class RuntimeTests {
     }
 
     private void testMediaServices(StorageAccount storageAccount) {
-        MediaservicesManager mediaservicesManager = authenticateMediaServicesManager();
+        MediaServicesManager mediaservicesManager = authenticateMediaServicesManager();
 
         String rgName = "rg1-weidxu-fluentlite";
         String msName = "ms1weidxulite";
@@ -291,8 +291,8 @@ public class RuntimeTests {
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 
-    private MediaservicesManager authenticateMediaServicesManager() {
-        return MediaservicesManager.configure()
+    private MediaServicesManager authenticateMediaServicesManager() {
+        return MediaServicesManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }

@@ -443,7 +443,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.put200Succeeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -660,7 +660,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.put201Succeeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -872,7 +872,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202List(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1055,7 +1055,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.put200SucceededNoState(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1273,7 +1273,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.put202Retry200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1492,7 +1492,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.put201CreatingSucceeded200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1726,7 +1726,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.put200UpdatingSucceeded204(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1960,7 +1960,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.put201CreatingFailed200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2193,7 +2193,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.put200Acceptedcanceled200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2425,7 +2425,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putNoHeaderInRetry(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2644,7 +2644,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putAsyncRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2875,7 +2875,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.putAsyncNoRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3108,7 +3108,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putAsyncRetryFailed(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3339,7 +3339,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.putAsyncNoRetrycanceled(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3571,7 +3571,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.putAsyncNoHeaderInRetry(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3790,7 +3790,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putNonResource(this.client.getEndpoint(), sku, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3993,7 +3993,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putAsyncNonResource(this.client.getEndpoint(), sku, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4196,7 +4196,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putSubResource(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4401,7 +4401,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putAsyncSubResource(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4607,7 +4607,7 @@ public final class LROsClientImpl implements LROsClient {
             .withContext(
                 context ->
                     service.deleteProvisioning202Accepted200Succeeded(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4791,7 +4791,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.deleteProvisioning202DeletingFailed200(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4972,7 +4972,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.deleteProvisioning202Deletingcanceled200(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5153,7 +5153,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete204Succeeded(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5306,7 +5306,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete202Retry200(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5472,7 +5472,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete202NoRetry204(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5638,7 +5638,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteNoHeaderInRetry(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5800,7 +5800,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncNoHeaderInRetry(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5962,7 +5962,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncRetrySucceeded(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6124,7 +6124,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncNoRetrySucceeded(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6286,7 +6286,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncRetryFailed(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6448,7 +6448,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncRetrycanceled(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6610,7 +6610,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post200WithPayload(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6781,7 +6781,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202Retry200(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -6991,7 +6991,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202NoRetry204(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -7204,7 +7204,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.postDoubleHeadersFinalLocationGet(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -7374,7 +7374,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.postDoubleHeadersFinalAzureHeaderGet(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -7547,7 +7547,7 @@ public final class LROsClientImpl implements LROsClient {
             .withContext(
                 context ->
                     service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -7736,7 +7736,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.postAsyncRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -7969,7 +7969,7 @@ public final class LROsClientImpl implements LROsClient {
         return FluxUtil
             .withContext(
                 context -> service.postAsyncNoRetrySucceeded(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -8202,7 +8202,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.postAsyncRetryFailed(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -8425,7 +8425,7 @@ public final class LROsClientImpl implements LROsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.postAsyncRetrycanceled(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
