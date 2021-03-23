@@ -62,16 +62,8 @@ public class SchemaCleanup {
                     .flatMap(s -> s.getProperties().stream())
 //                    .filter(Utils::nonFlattenedProperty)
                     .map(Property::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-            choicesSchemasNotInUse.removeAll(schemasInUse);
-        }
-        if (!schemasNotInUse.isEmpty()) {
-            // elements of array or dictionary
-            schemasInUse = Stream.concat(
-                    codeModel.getSchemas().getArrays().stream().map(ArraySchema::getElementType),
-                    codeModel.getSchemas().getDictionaries().stream().map(DictionarySchema::getElementType))
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
             choicesSchemasNotInUse.removeAll(schemasInUse);
@@ -83,6 +75,7 @@ public class SchemaCleanup {
                     .flatMap(o -> o.getRequests().stream())
                     .flatMap(r -> r.getParameters().stream())
                     .map(Parameter::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
@@ -94,6 +87,7 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getResponses().stream())
                     .map(Response::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
@@ -105,6 +99,7 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getExceptions().stream())
                     .map(Response::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
@@ -136,6 +131,16 @@ public class SchemaCleanup {
         });
 
         return codeModel;
+    }
+
+    private static Schema schemaOrElementInCollection(Schema schema) {
+        if (schema instanceof ArraySchema) {
+            return schemaOrElementInCollection(((ArraySchema) schema).getElementType());
+        } else if (schema instanceof DictionarySchema) {
+            return schemaOrElementInCollection(((DictionarySchema) schema).getElementType());
+        } else {
+            return schema;
+        }
     }
 
 //    private static boolean hasFlattenedExtension(Schema schema) {
