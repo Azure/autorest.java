@@ -11,14 +11,14 @@ import java.util.Set;
  * The details needed to create an XML sequence wrapper class for the client.
  */
 public class XmlSequenceWrapper {
-    private ListType sequenceType;
+    private IType sequenceType;
     private String xmlRootElementName;
     private String xmlListElementName;
     private String wrapperClassName;
     private Set<String> imports;
     private String packageName;
 
-    public XmlSequenceWrapper(String package_Keyword, ListType sequenceType, String xmlRootElementName, String xmlListElementName, Set<String> imports) {
+    public XmlSequenceWrapper(String package_Keyword, IType sequenceType, String xmlRootElementName, String xmlListElementName, Set<String> imports) {
         this.packageName = package_Keyword;
         this.sequenceType = sequenceType;
         this.xmlRootElementName = xmlRootElementName;
@@ -31,7 +31,7 @@ public class XmlSequenceWrapper {
         return packageName;
     }
 
-    public final ListType getSequenceType() {
+    public final IType getSequenceType() {
         return sequenceType;
     }
 

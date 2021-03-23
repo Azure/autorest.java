@@ -1,7 +1,9 @@
 package fixtures.bodydictionary;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import fixtures.bodydictionary.models.Widget;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -142,7 +144,7 @@ public class DictionaryOperationsTests {
       fail();
     } catch (RuntimeException ex) {
       // expected
-      assertTrue(ex.getCause().getMessage().contains("not a valid Integer value"));
+      assertTrue(ex.getCause().getMessage().contains("not a valid `int` value"));
     }
   }
 
@@ -180,7 +182,7 @@ public class DictionaryOperationsTests {
       fail();
     } catch (RuntimeException ex) {
       // expected
-      assertTrue(ex.getCause().getMessage().contains("not a valid Long value"));
+      assertTrue(ex.getCause().getMessage().contains("not a valid `long` value"));
     }
   }
 
@@ -216,7 +218,7 @@ public class DictionaryOperationsTests {
       fail();
     } catch (RuntimeException ex) {
       // expected
-      assertTrue(ex.getCause().getMessage().contains("not a valid Float value"));
+      assertTrue(ex.getCause().getMessage().contains("not a valid `Float` value"));
     }
   }
 
@@ -253,7 +255,7 @@ public class DictionaryOperationsTests {
       fail();
     } catch (RuntimeException ex) {
       // expected
-      assertTrue(ex.getCause().getMessage().contains("not a valid Double value"));
+      assertTrue(ex.getCause().getMessage().contains("not a valid `Double` value"));
     }
   }
 
@@ -330,7 +332,11 @@ public class DictionaryOperationsTests {
     expected.put("0", OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC));
     expected.put("1", OffsetDateTime.of(1980, 1, 1, 23, 11, 35, 0, ZoneOffset.UTC));
     expected.put("2", OffsetDateTime.of(1492, 10, 12, 18, 15, 1, 0, ZoneOffset.UTC));
-    assertEquals(expected, result);
+
+    expected.entrySet()
+            .stream()
+            .forEach(entry -> Assert.assertEquals(entry.getValue().toInstant().toEpochMilli(),
+                    result.get(entry.getKey()).toInstant().toEpochMilli()));
   }
 
   @Test
@@ -354,7 +360,7 @@ public class DictionaryOperationsTests {
       client.getDateTimeInvalidChars();
       fail();
     } catch (RuntimeException ex) {
-      assertEquals(InvalidFormatException.class, ex.getCause().getClass());
+      assertEquals(JsonMappingException.class, ex.getCause().getClass());
     }
   }
 

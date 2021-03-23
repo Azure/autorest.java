@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -220,6 +221,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                             property.getName(),
                                             propertyXmlWrapperClassName.apply(property),
                                             ((ListType) property.getWireType()).getElementType()));
+                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+                        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof IterableType) {
+                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
+                                            property.getName(),
+                                            propertyXmlWrapperClassName.apply(property),
+                                            ((IterableType) property.getWireType()).getElementType()));
                             methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
                         } else {
                             methodBlock.methodReturn(expression);

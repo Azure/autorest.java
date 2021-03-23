@@ -30,12 +30,12 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.7.0</version>
+      <version>1.14.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.5.4</version>
+      <version>1.9.0</version>
     </dependency>
 
     <!-- Test Dependencies -->

@@ -1,39 +1,20 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.Set;
 
-/**
- * A sequence type used by a client.
- */
-public class ListType extends GenericType {
+public class IterableType extends GenericType {
     /**
-     * Create a new ListType from the provided properties.
+     * Create a new IterableType from the provided properties.
      * @param elementType The type of elements that are stored in this sequence.
      */
-    public ListType(IType elementType) {
-        super(getTypePackage(), getType(), elementType);
+    public IterableType(IType elementType) {
+        super("java.lang", "Iterable", elementType);
     }
 
-    private static String getTypePackage() {
-        // if (JavaSettings.getInstance().shouldUseIterable()) {
-        //     return "java.lang";
-        // }
-        return "java.util";
-    }
-
-    private static String getType() {
-        // if (JavaSettings.getInstance().shouldUseIterable()) {
-        //     return "Iterable";
-        // }
-        return "List";
-    }
 
     /**
-     * The type of elements that are stored in this sequence.
+     * The type of elements that are stored in this iterable.
      */
     public final IType getElementType() {
         return getTypeArguments()[0];
