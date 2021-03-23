@@ -49,7 +49,7 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str) -
     logging.info(f'generate code for RP: {sdk}')
 
     readme_dir = os.path.join(specs_dir, sdk, 'resource-manager', 'readme.md')
-    namespace = f'azure.resourcemanager.{sdk}'.lower()
+    namespace = f'com.azure.resourcemanager.{sdk}'.lower()
     namespace = re.sub('[^a-z.]', '', namespace)
 
     command = [
