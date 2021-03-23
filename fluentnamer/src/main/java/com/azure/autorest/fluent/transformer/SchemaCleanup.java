@@ -135,9 +135,9 @@ public class SchemaCleanup {
 
     private static Schema schemaOrElementInCollection(Schema schema) {
         if (schema instanceof ArraySchema) {
-            return ((ArraySchema) schema).getElementType();
+            return schemaOrElementInCollection(((ArraySchema) schema).getElementType());
         } else if (schema instanceof DictionarySchema) {
-            return ((DictionarySchema) schema).getElementType();
+            return schemaOrElementInCollection(((DictionarySchema) schema).getElementType());
         } else {
             return schema;
         }
