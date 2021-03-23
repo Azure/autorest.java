@@ -7,17 +7,18 @@ Use the flag `--azure-arm` to specify you want to generate [management plane][mg
 cd <this folder>
 autorest readme.md --java
 ```
->Note: You can also generate automatically with the fluent generator instead of the java generator. To do so, replace the `--java` in the generation example
-with `--fluent`. With this, you don't need to set the `fluent` flag to true in this readme.
+>Note: You can also generate automatically with the fluent generator instead of the java generator. To do so, add the `--fluent` to the generation example. With this, you don't need to set the `fluent` flag in this readme.
+
+>Use e.g. `--use=@autorest/java@4.0.21` to choose a specific java extension version.
 
 ### Settings
 
 ``` yaml
-input-file: https://github.com/Azure/autorest.testserver/blob/master/swagger/head.json
-namespace: com.azure.mgmt.sample
-license-header: MICROSOFT_MIT_NO_VERSION
+input-file: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
+namespace: com.azure.resourcemanager.locks
+license-header: MICROSOFT_MIT_SMALL
 azure-arm: true
-fluent: true
+fluent: lite
 ```
 
 <!-- LINKS -->
