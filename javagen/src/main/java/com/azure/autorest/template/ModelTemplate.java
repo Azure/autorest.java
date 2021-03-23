@@ -290,7 +290,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     classBlock.annotation("Override");
-                    classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), parentProperty.getSetterName(), parentProperty.getClientType(), parentProperty.getName()),
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                            model.getName(),
+                            parentProperty.getSetterName(),
+                            parentProperty.getWireType() == null ? parentProperty.getClientType() : parentProperty.getWireType().getClientType(),
+                            parentProperty.getName()),
                             methodBlock -> {
                                 methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
                                 methodBlock.methodReturn("this");
