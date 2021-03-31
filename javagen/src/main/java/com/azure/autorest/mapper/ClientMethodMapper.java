@@ -507,7 +507,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             // method with schema in headers would require a ClientResponse
             syncReturnWithResponse = ClientMapper.getClientResponseClassType(operation, settings);
         }
-        return GenericType.Response(syncReturnType);
+        return syncReturnWithResponse;
     }
 
     protected ReturnValue createSimpleSyncRestResponseReturnValue(Operation operation, IType syncReturnWithResponse) {
