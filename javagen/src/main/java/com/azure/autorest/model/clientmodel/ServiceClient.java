@@ -83,7 +83,7 @@ public class ServiceClient {
      * @param serializerAdapterParameter The SerializerAdapter parameter.
      * @param defaultPollIntervalParameter The default poll interval parameter.
      */
-    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
+    ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                           ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter) {
         this.packageName = packageName;
         this.className = className;
@@ -173,7 +173,7 @@ public class ServiceClient {
             serviceClientProperty.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (includeImplementationImports) {
+        if (includeImplementationImports && !settings.isLowLevelClient()) {
             if (settings.isFluentPremium()) {
                 imports.add("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
             }
@@ -198,7 +198,7 @@ public class ServiceClient {
             }
         }
 
-        if (includeBuilderImports || includeImplementationImports) {
+        if (includeBuilderImports || (includeImplementationImports && !settings.isLowLevelClient())) {
             if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {

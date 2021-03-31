@@ -128,10 +128,15 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.HttpPipeline, "httpPipeline", true, null));
-        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+                ClassType.HttpPipeline, "pipeline", true, null));
+        if (settings.isLowLevelClient()) {
+            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                    ClassType.ObjectSerializer, "objectSerializer", false, null));
+        } else {
+            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+        }
         if (settings.isFluent()) {
             serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running operation.",
                     ClassType.Duration, "defaultPollInterval", true, null));

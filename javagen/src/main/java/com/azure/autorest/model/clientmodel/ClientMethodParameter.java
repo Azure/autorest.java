@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,6 +51,8 @@ public class ClientMethodParameter {
      */
     private List<ClassType> annotations;
 
+    private RequestParameterLocation location;
+
     /**
      * Create a new Parameter with the provided properties.
      * @param description The description of this parameter.
@@ -60,7 +64,7 @@ public class ClientMethodParameter {
      * @param fromClient Whether or not this parameter is from a client property.
      * @param annotations The annotations that should be part of this Parameter's declaration.
      */
-    private ClientMethodParameter(String description, boolean isFinal, IType wireType, String name, boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations) {
+    private ClientMethodParameter(String description, boolean isFinal, IType wireType, String name, boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations, RequestParameterLocation location) {
         this.description = description;
         this.isFinal = isFinal;
         this.wireType = wireType;
@@ -70,6 +74,7 @@ public class ClientMethodParameter {
         this.fromClient = fromClient;
         this.defaultValue = defaultValue;
         this.annotations = annotations;
+        this.location = location;
     }
 
     public final String getDescription() {
@@ -115,6 +120,10 @@ public class ClientMethodParameter {
         return annotations;
     }
 
+    public final RequestParameterLocation getLocation() {
+        return location;
+    }
+
     /**
      * The full declaration of this parameter as it appears in a method signature.
      */
@@ -144,6 +153,7 @@ public class ClientMethodParameter {
         private boolean fromClient;
         private String defaultValue;
         private List<ClassType> annotations;
+        private RequestParameterLocation location;
 
         /**
          * Sets the description of this parameter.
@@ -235,6 +245,16 @@ public class ClientMethodParameter {
             return this;
         }
 
+        /**
+         * Sets the location of the parameter.
+         * @param location the location of the parameter
+         * @return the Builder itself
+         */
+        public Builder location(RequestParameterLocation location) {
+            this.location = location;
+            return this;
+        }
+
         public ClientMethodParameter build() {
             return new ClientMethodParameter(description,
                     isFinal,
@@ -244,7 +264,8 @@ public class ClientMethodParameter {
                     isConstant,
                     fromClient,
                     defaultValue,
-                    annotations);
+                    annotations,
+                    location);
         }
     }
 }

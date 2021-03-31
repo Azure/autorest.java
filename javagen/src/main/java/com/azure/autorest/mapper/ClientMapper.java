@@ -123,7 +123,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -155,7 +155,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-        } else {
+        } else if (!settings.isLowLevelClient()) {
             if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
                 .getImplementationSubpackage().isEmpty()) {
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -167,26 +167,28 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
-            && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
-            // add package-info models package only if the models package is not empty
-            && !clientModels.isEmpty()) {
-            String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-            if (!packageInfos.containsKey(modelsPackage)) {
-                packageInfos.put(modelsPackage, new PackageInfo(
-                    modelsPackage,
-                    String.format("Package containing the data models for %s.\n%s", serviceClientName,
-                        serviceClientDescription)));
+        if (!settings.isLowLevelClient()) {
+            if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
+                    && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
+                    // add package-info models package only if the models package is not empty
+                    && !clientModels.isEmpty()) {
+                String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
+                if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
+                    packageInfos.put(modelsPackage, new PackageInfo(
+                            modelsPackage,
+                            String.format("Package containing the data models for %s.\n%s", serviceClientName,
+                                    serviceClientDescription)));
+                }
             }
-        }
-        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
-            && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
-            String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            if (!packageInfos.containsKey(customTypesPackage)) {
-                packageInfos.put(customTypesPackage, new PackageInfo(
-                    customTypesPackage,
-                    String.format("Package containing classes for %s.\n%s", serviceClientName,
-                        serviceClientDescription)));
+            if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
+                    && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
+                String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                if (!packageInfos.containsKey(customTypesPackage)) {
+                    packageInfos.put(customTypesPackage, new PackageInfo(
+                            customTypesPackage,
+                            String.format("Package containing classes for %s.\n%s", serviceClientName,
+                                    serviceClientDescription)));
+                }
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));

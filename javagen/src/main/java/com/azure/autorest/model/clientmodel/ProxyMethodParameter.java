@@ -207,20 +207,22 @@ public class ProxyMethodParameter {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
-            imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
-        }
-        if (getRequestParameterLocation() != RequestParameterLocation.Body) {
-            if (getClientType() == ArrayType.ByteArray) {
-                imports.add("com.azure.core.util.Base64Util");
-            } else if (getClientType() instanceof ListType) {
-                imports.add("com.azure.core.util.serializer.CollectionFormat");
-                imports.add("com.azure.core.util.serializer.JacksonAdapter");
+        if (!settings.isLowLevelClient()) {
+            if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
+                imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
             }
-        }
+            if (getRequestParameterLocation() != RequestParameterLocation.Body) {
+                if (getClientType() == ArrayType.ByteArray) {
+                    imports.add("com.azure.core.util.Base64Util");
+                } else if (getClientType() instanceof ListType) {
+                    imports.add("com.azure.core.util.serializer.CollectionFormat");
+                    imports.add("com.azure.core.util.serializer.JacksonAdapter");
+                }
+            }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
 //            imports.add(String.format("com.azure.core.annotation.FormParam"));
 //        }
+        }
 
         getWireType().addImportsTo(imports, includeImplementationImports);
     }

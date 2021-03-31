@@ -1,5 +1,8 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.template.llc.LlcClientTemplate;
+import com.azure.autorest.template.llc.LlcMethodTemplate;
+
 public interface TemplateFactory {
 
     ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate();
@@ -37,6 +40,10 @@ public interface TemplateFactory {
     ServiceSyncClientTemplate getServiceSynClientTemplate();
 
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
+
+    LlcMethodTemplate getLlcMethodTemplate();
+
+    LlcClientTemplate getLlcClientTemplate();
 
     PomTemplate getPomTemplate();
 

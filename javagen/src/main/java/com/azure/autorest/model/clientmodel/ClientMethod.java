@@ -266,45 +266,51 @@ public class ClientMethod {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         imports.add("com.azure.core.annotation.ServiceMethod");
         imports.add("com.azure.core.annotation.ReturnType");
 
-        for (ClientMethodParameter parameter : getParameters()) {
-            parameter.addImportsTo(imports, includeImplementationImports);
-        }
+        if (settings.isLowLevelClient()) {
+            imports.add("com.azure.core.http.HttpMethod");
+            imports.add("com.azure.core.experimental.http.DynamicRequest");
+        } else {
+            getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        if (getMethodPageDetails() != null) {
-            imports.add("com.azure.core.http.rest.PagedResponseBase");
-        }
-
-        if (includeImplementationImports) {
-            proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
-            for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
-                parameter.getClientType().addImportsTo(imports, true);
+            for (ClientMethodParameter parameter : getParameters()) {
+                parameter.addImportsTo(imports, includeImplementationImports);
             }
 
-            if (getReturnValue().getType() == ClassType.InputStream) {
-                imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
-                imports.add("java.io.SequenceInputStream");
-                imports.add("java.util.Enumeration");
-                imports.add("java.util.Iterator");
+            if (getMethodPageDetails() != null) {
+                imports.add("com.azure.core.http.rest.PagedResponseBase");
             }
 
-            if (settings.getAddContextParameter()
-                && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
-                && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                || this.getType() == ClientMethodType.LongRunningAsync)) {
-                imports.add("com.azure.core.util.FluxUtil");
-            }
-        }
+            if (includeImplementationImports) {
+                proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+                for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                    parameter.getClientType().addImportsTo(imports, true);
+                }
 
-        if (type == ClientMethodType.LongRunningBeginAsync) {
-            if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                if (getReturnValue().getType() == ClassType.InputStream) {
+                    imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
+                    imports.add("java.io.SequenceInputStream");
+                    imports.add("java.util.Enumeration");
+                    imports.add("java.util.Iterator");
+                }
+
+                if (settings.getAddContextParameter()
+                        && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                        && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
+                        && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
+                        || this.getType() == ClientMethodType.PagingAsyncSinglePage
+                        || this.getType() == ClientMethodType.LongRunningAsync)) {
+                    imports.add("com.azure.core.util.FluxUtil");
+                }
+            }
+
+            if (type == ClientMethodType.LongRunningBeginAsync) {
+                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                }
             }
         }
     }

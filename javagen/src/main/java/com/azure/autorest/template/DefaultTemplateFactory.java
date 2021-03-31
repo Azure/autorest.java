@@ -1,5 +1,8 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.template.llc.LlcClientTemplate;
+import com.azure.autorest.template.llc.LlcMethodTemplate;
+
 public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate() {
@@ -89,6 +92,16 @@ public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public WrapperClientMethodTemplate getWrapperClientMethodTemplate() {
         return WrapperClientMethodTemplate.getInstance();
+    }
+
+    @Override
+    public LlcMethodTemplate getLlcMethodTemplate() {
+        return LlcMethodTemplate.getInstance();
+    }
+
+    @Override
+    public LlcClientTemplate getLlcClientTemplate() {
+        return LlcClientTemplate.getInstance();
     }
 
     @Override

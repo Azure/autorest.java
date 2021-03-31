@@ -6,13 +6,16 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.CredentialType;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -64,10 +67,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        List<AsyncSyncClient> lowLevelClients = new ArrayList<>();
+        if (settings.shouldGenerateSyncAsyncClients()) {
             ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
         }
-        final boolean singleBuilder = asyncClients.size() == 1;
+        if (settings.isLowLevelClient()) {
+            ClientModelUtil.getLowLevelClients(serviceClient, lowLevelClients);
+        }
+        final boolean singleBuilder = asyncClients.size() == 1 || lowLevelClients.size() == 1;
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
@@ -87,6 +94,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
                 client.addImportsTo(imports, false);
             }
+        } else if (JavaSettings.getInstance().isLowLevelClient()) {
+            builderTypes.append(lowLevelClients.stream().map(c -> c.getClassName() + ".class").collect(Collectors.joining(", ")));
         } else {
             builderTypes.append(serviceClient.getClassName()).append(".class");
         }
@@ -169,45 +178,48 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
 
             String buildMethodName = this.primaryBuildMethodName(settings);
-            JavaVisibility visibility = settings.shouldGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
-            // build method
-            classBlock.javadocComment(comment ->
-            {
-                comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
-                comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
-            });
-            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
-            {
-                for (ServiceClientProperty serviceClientProperty : clientProperties) {
-                    if (serviceClientProperty.getDefaultValueExpression() != null) {
-                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
-                        {
-                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
-                        });
+            if (!settings.isLowLevelClient()) {
+                JavaVisibility visibility = settings.shouldGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
+
+                // build method
+                classBlock.javadocComment(comment ->
+                {
+                    comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
+                    comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
+                });
+                classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
+                {
+                    for (ServiceClientProperty serviceClientProperty : clientProperties) {
+                        if (serviceClientProperty.getDefaultValueExpression() != null) {
+                            function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
+                            {
+                                function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
+                            });
+                        }
                     }
-                }
 
-                // additional service client properties in constructor arguments
-                String constructorArgs = serviceClient.getProperties().stream()
-                        .filter(p -> !p.isReadOnly())
-                        .map(ServiceClientProperty::getName)
-                        .collect(Collectors.joining(", "));
-                if (!constructorArgs.isEmpty()) {
-                    constructorArgs = ", " + constructorArgs;
-                }
+                    // additional service client properties in constructor arguments
+                    String constructorArgs = serviceClient.getProperties().stream()
+                            .filter(p -> !p.isReadOnly())
+                            .map(ServiceClientProperty::getName)
+                            .collect(Collectors.joining(", "));
+                    if (!constructorArgs.isEmpty()) {
+                        constructorArgs = ", " + constructorArgs;
+                    }
 
-                if (settings.isFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter, defaultPollInterval, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
-                } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter%3$s);",
-                        serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
-                }
-                function.line("return client;");
-            });
+                    if (settings.isFluent()) {
+                        function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter, defaultPollInterval, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                    } else {
+                        function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter%3$s);",
+                                serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                    }
+                    function.line("return client;");
+                });
+            }
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, buildReturnType, classBlock, clientProperties, buildMethodName);
+                addCreateHttpPipelineMethod(settings, classBlock, clientProperties);
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
@@ -253,13 +265,42 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                             });
                 }
             }
+
+            if (settings.isLowLevelClient()) {
+                for (AsyncSyncClient syncClient : lowLevelClients) {
+                    classBlock.javadocComment(comment ->
+                    {
+                        comment.description(String
+                                .format("Builds an instance of %1$s low level client", syncClient.getClassName()));
+                        comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
+                    });
+                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
+                            function -> {
+                                for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties()) {
+                                    if (serviceClientProperty.getDefaultValueExpression() != null) {
+                                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
+                                        {
+                                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
+                                        });
+                                    }
+                                }
+
+                                // additional service client properties in constructor arguments
+                                String constructorArgs = serviceClient.getProperties().stream()
+                                        .map(ServiceClientProperty::getName)
+                                        .collect(Collectors.joining(", "));
+                                function.line(String.format("%1$s client = new %2$s(%3$s);",
+                                        syncClient.getClassName(), syncClient.getClassName(), constructorArgs));
+                                function.line("return client;");
+                            });
+                }
+            }
         });
 
     }
 
-    private void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName) {
-        classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
-                buildMethodName), function -> {
+    private void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, List<ServiceClientProperty> clientProperties) {
+        classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 
@@ -320,9 +361,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
                 settings.isAzureOrFluent() ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()" : "createHttpPipeline()"));
 
-        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-          ClassType.SerializerAdapter, "serializerAdapter", false,
-          settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+        if (!settings.isLowLevelClient()) {
+            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+                    ClassType.SerializerAdapter, "serializerAdapter", false,
+                    settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+        }
 
         if (!settings.isAzureOrFluent()) {
 

@@ -89,10 +89,53 @@ public class ClientModelUtil {
         }
     }
 
+    public static void getLowLevelClients(ServiceClient serviceClient, List<AsyncSyncClient> lowLevelClients) {
+        String packageName = getAsyncSyncClientPackageName(serviceClient);
+
+        if (serviceClient.getProxy() != null) {
+            AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
+                    .serviceClient(serviceClient);
+
+            String lowLevelClassName =
+                    serviceClient.getClientBaseName().endsWith("Client")
+                            ? serviceClient.getClientBaseName()
+                            : serviceClient.getClientBaseName() + "Client";
+            lowLevelClients.add(builder.className(lowLevelClassName).build());
+        }
+
+        final int count = serviceClient.getMethodGroupClients().size() + lowLevelClients.size();
+        for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+            AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
+                    .packageName(packageName)
+                    .serviceClient(serviceClient)
+                    .methodGroupClient(methodGroupClient);
+
+            if (count == 1) {
+                // if it is the only method group, use service client name as base.
+
+                String lowLevelClassName =
+                        serviceClient.getClientBaseName().endsWith("Client")
+                                ? serviceClient.getClientBaseName()
+                                : serviceClient.getClientBaseName() + "Client";
+                lowLevelClients.add(builder.className(lowLevelClassName).build());
+            } else {
+                String lowLevelClassName =
+                        methodGroupClient.getClassBaseName().endsWith("Client")
+                                ? methodGroupClient.getClassBaseName()
+                                : methodGroupClient.getClassBaseName() + "Client";
+                lowLevelClients.add(builder.className(lowLevelClassName).build());
+            }
+        }
+    }
+
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
-        if (!settings.isFluent() && settings.shouldGenerateClientAsImpl() && !settings.shouldGenerateSyncAsyncClients()) {
+        if (!settings.isFluent()
+                && settings.shouldGenerateClientAsImpl()
+                && !settings.shouldGenerateSyncAsyncClients()
+                && !settings.isLowLevelClient()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
@@ -102,7 +145,7 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if (settings.shouldGenerateSyncAsyncClients() && !settings.isFluent()) {
+        if ((settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) && !settings.isFluent()) {
             builderPackage = settings.getPackage();
         } else if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());
