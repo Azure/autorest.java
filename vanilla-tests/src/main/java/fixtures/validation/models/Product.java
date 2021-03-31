@@ -59,7 +59,6 @@ public final class Product {
     public Product() {
         constInt = 0;
         constString = "constant";
-        constStringAsEnum = "constant_string_as_enum";
     }
 
     /**

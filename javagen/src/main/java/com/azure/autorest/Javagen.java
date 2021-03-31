@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
     private final Logger LOGGER = new PluginLogger(this, Javagen.class);
-    private static Javagen instance;
+    static Javagen instance;
 
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);

@@ -35,7 +35,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.10.0</version>
+      <version>1.14.0</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -53,7 +53,6 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
       <artifactId>google-java-format</artifactId>

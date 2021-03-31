@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.immutablemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.TypeConversionUtils;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -39,7 +40,7 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
             // Collections.unmodifiableList
             imports.add(Collections.class.getName());
         }
-        if (TypeConversionUtils.isResponse(innerType)) {
+        if (FluentUtils.isResponseType(innerType)) {
             imports.add(SimpleResponse.class.getName());
         }
 

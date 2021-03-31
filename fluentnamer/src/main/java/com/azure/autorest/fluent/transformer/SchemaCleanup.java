@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,24 +48,25 @@ public class SchemaCleanup {
                         }))
                 .collect(Collectors.toSet());
 
+        Set<Schema> choicesSchemasNotInUse = new HashSet<>(codeModel.getSchemas().getSealedChoices());
+        choicesSchemasNotInUse.addAll(codeModel.getSchemas().getChoices());
+
         Set<Schema> schemasInUse;
         if (!schemasNotInUse.isEmpty()) {
             // properties of object
             schemasInUse = codeModel.getSchemas().getObjects().stream()
+                    .filter(o -> {
+                        String name = Utils.getJavaName(o);
+                        return FluentType.nonSystemData(name) && FluentType.nonManagementError(name);
+                    })
                     .flatMap(s -> s.getProperties().stream())
 //                    .filter(Utils::nonFlattenedProperty)
                     .map(Property::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
-        }
-        if (!schemasNotInUse.isEmpty()) {
-            // elements of array or dictionary
-            schemasInUse = Stream.concat(
-                    codeModel.getSchemas().getArrays().stream().map(ArraySchema::getElementType),
-                    codeModel.getSchemas().getDictionaries().stream().map(DictionarySchema::getElementType))
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
+            choicesSchemasNotInUse.removeAll(schemasInUse);
         }
         if (!schemasNotInUse.isEmpty()) {
             // operation requests
@@ -73,9 +75,11 @@ public class SchemaCleanup {
                     .flatMap(o -> o.getRequests().stream())
                     .flatMap(r -> r.getParameters().stream())
                     .map(Parameter::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
+            choicesSchemasNotInUse.removeAll(schemasInUse);
         }
         if (!schemasNotInUse.isEmpty()) {
             // operation responses
@@ -83,9 +87,11 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getResponses().stream())
                     .map(Response::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
+            choicesSchemasNotInUse.removeAll(schemasInUse);
         }
         if (!schemasNotInUse.isEmpty()) {
             // operation exception
@@ -93,20 +99,48 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getExceptions().stream())
                     .map(Response::getSchema)
+                    .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
+            choicesSchemasNotInUse.removeAll(schemasInUse);
         }
 
         codeModel.getSchemas().getObjects().removeIf(s -> {
             boolean unused = schemasNotInUse.contains(s);
             if (unused) {
-                logger.info("Remove unused schema '{}'", Utils.getJavaName(s));
+                logger.info("Remove unused object schema '{}'", Utils.getJavaName(s));
+            }
+            return unused;
+        });
+
+        codeModel.getSchemas().getSealedChoices().removeIf(s -> {
+            boolean unused = choicesSchemasNotInUse.contains(s);
+            if (unused) {
+                logger.info("Remove unused sealed choice schema '{}'", Utils.getJavaName(s));
+            }
+            return unused;
+        });
+
+        codeModel.getSchemas().getChoices().removeIf(s -> {
+            boolean unused = choicesSchemasNotInUse.contains(s);
+            if (unused) {
+                logger.info("Remove unused choice schema '{}'", Utils.getJavaName(s));
             }
             return unused;
         });
 
         return codeModel;
+    }
+
+    private static Schema schemaOrElementInCollection(Schema schema) {
+        if (schema instanceof ArraySchema) {
+            return schemaOrElementInCollection(((ArraySchema) schema).getElementType());
+        } else if (schema instanceof DictionarySchema) {
+            return schemaOrElementInCollection(((DictionarySchema) schema).getElementType());
+        } else {
+            return schema;
+        }
     }
 
 //    private static boolean hasFlattenedExtension(Schema schema) {

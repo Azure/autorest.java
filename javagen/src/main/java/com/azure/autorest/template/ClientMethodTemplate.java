@@ -114,7 +114,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             boolean alwaysNull = ignoreParameterNeedConvert && parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
-            if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
+            if (!parameter.getFromClient()
+                    && !alwaysNull
+                    && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired())
+                    || (addConstant && parameter.getIsConstant() && (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired())))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
                 function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
             }
@@ -261,7 +264,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         if (alwaysNull) {
                             expression = "null";
                         } else {
-                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
+                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
+                                            ".serializeList(%s, CollectionFormat.%s)", parameterName,
+                                    parameter.getCollectionFormat().toString().toUpperCase());
+                            if (settings.shouldUseIterable()) {
+                                expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
+                                                ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
+                                        parameter.getCollectionFormat().toString().toUpperCase());
+                            }
                         }
                         function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;

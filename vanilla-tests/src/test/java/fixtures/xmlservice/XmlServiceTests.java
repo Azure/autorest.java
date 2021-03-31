@@ -22,6 +22,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class XmlServiceTests {
   private static AutoRestSwaggerBATXMLService client;
@@ -123,12 +124,7 @@ public class XmlServiceTests {
   @Test
   public void getEmptyList() {
     Slideshow slideshow = client.getXmls().getEmptyListAsync().block();
-    assertNotNull(slideshow);
-    assertNotNull(slideshow.getSlides());
-    assertEquals(null, slideshow.getTitle());
-    assertEquals(null, slideshow.getAuthor());
-    assertEquals(null, slideshow.getDate());
-    assertEquals(0, slideshow.getSlides().size());
+    assertNull(slideshow);
   }
 
   @Test
@@ -199,14 +195,12 @@ public class XmlServiceTests {
   @Test
   public void getEmptyRootList() {
     List<Banana> bananas = client.getXmls().getEmptyRootListAsync().block();
-    assertNotNull(bananas);
-    assertEquals(0, bananas.size());
+    assertNull(bananas);
   }
 
   @Test
   public void putEmptyRootList() {
-    List<Banana> bananas = client.getXmls().getEmptyRootListAsync().block();
-    client.getXmls().putEmptyRootListAsync(bananas).block();
+    client.getXmls().putEmptyRootListAsync(new ArrayList<>()).block();
   }
 
   @Test

@@ -85,7 +85,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
         return FluxUtil
             .withContext(
                 context -> service.pollWithParameterizedEndpoints(accountName, this.client.getHost(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**

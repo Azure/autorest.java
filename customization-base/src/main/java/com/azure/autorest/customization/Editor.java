@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The raw editor containing the current files being customized.
@@ -29,6 +32,7 @@ public final class Editor {
 
     /**
      * Creates an editor instance with the file contents and the root directory path.
+     *
      * @param contents the map from file relative paths (starting with "src/main/java") and file contents
      * @param rootDir the root directory path containing the files
      */
@@ -95,6 +99,7 @@ public final class Editor {
 
     /**
      * Gets the content of a file.
+     *
      * @param name the relative path of a file, starting with "src/main/java"
      * @return the file content
      */
@@ -104,6 +109,7 @@ public final class Editor {
 
     /**
      * Gets the file content split into lines.
+     *
      * @param name the relative path of a file, starting with "src/main/java"
      * @return the file content split into lines
      */
@@ -202,23 +208,7 @@ public final class Editor {
      * @return the list of ranges containing the occurrences
      */
     public List<Range> searchText(String fileName, String text) {
-        if (!lines.containsKey(fileName)) {
-            return null;
-        } else {
-            List<Range> occurrences = new ArrayList<>();
-            for (int i = 0; i != lines.get(fileName).size(); i++) {
-                String line = lines.get(fileName).get(i);
-                if (line.contains(text)) {
-                    int start = line.indexOf(text);
-                    while (start != -1) {
-                        int end = start + text.length();
-                        occurrences.add(new Range(new Position(i, start), new Position(i, end)));
-                        start = line.indexOf(text, end);
-                    }
-                }
-            }
-            return occurrences;
-        }
+        return searchTextInternal(fileName, text, false);
     }
 
     /**
@@ -229,17 +219,30 @@ public final class Editor {
      * @return the range containing the occurrence
      */
     public Range searchTextFirstOccurrence(String fileName, String text) {
-        if (lines.containsKey(fileName)) {
-            for (int i = 0; i != lines.get(fileName).size(); i++) {
-                String line = lines.get(fileName).get(i);
-                if (line.contains(text)) {
-                    int start = line.indexOf(text);
-                    int end = start + text.length();
-                    return new Range(new Position(i, start), new Position(i, end));
+        List<Range> rangeList = searchTextInternal(fileName, text, true);
+
+        return Utils.isNullOrEmpty(rangeList) ? null : rangeList.get(0);
+    }
+
+    private List<Range> searchTextInternal(String fileName, String text, boolean findFirst) {
+        if (Utils.isNullOrEmpty(lines.get(fileName))) {
+            return null;
+        }
+
+        List<Range> occurrences = new ArrayList<>();
+        Pattern pattern = Pattern.compile(text);
+        for (int i = 0; i != lines.get(fileName).size(); i++) {
+            Matcher matcher = pattern.matcher(lines.get(fileName).get(i));
+            while (matcher.find()) {
+                occurrences.add(new Range(new Position(i, matcher.start()), new Position(i, matcher.end())));
+
+                if (findFirst) {
+                    return occurrences;
                 }
             }
         }
-        return null;
+
+        return occurrences;
     }
 
     /**
@@ -258,8 +261,8 @@ public final class Editor {
             String lineContent = getFileLine(fileName, line);
             int truncateIndex = 0;
             if (line == range.getStart().getLine()) {
-               lineContent = lineContent.substring(range.getStart().getCharacter());
-               truncateIndex = range.getStart().getCharacter();
+                lineContent = lineContent.substring(range.getStart().getCharacter());
+                truncateIndex = range.getStart().getCharacter();
             }
             if (line == range.getEnd().getLine()) {
                 lineContent = lineContent.substring(0, range.getEnd().getCharacter() - truncateIndex);
@@ -287,11 +290,6 @@ public final class Editor {
     }
 
     private static String joinLinesIntoContent(List<String> lines) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        for (String line : lines) {
-            printWriter.println(line);
-        }
-        return stringWriter.toString();
+        return String.join(System.lineSeparator(), lines);
     }
 }

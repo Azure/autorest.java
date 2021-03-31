@@ -121,7 +121,7 @@ public final class MediaTypesClient {
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") ContentType contentType,
                 @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
-                @HeaderParam("Content-Length") long contentLength,
+                @HeaderParam("Content-Length") Long contentLength,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -157,15 +157,12 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(
-            ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
+            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
         if (contentType == null) {
             return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -184,7 +181,31 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
+    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+        return analyzeBodyWithResponseAsync(contentType, input, contentLength)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> analyzeBodyAsync(ContentType contentType) {
+        final Flux<ByteBuffer> input = null;
+        final Long contentLength = null;
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
                 .flatMap(
                         (Response<String> res) -> {
@@ -208,7 +229,23 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, long contentLength) {
+    public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+        return analyzeBodyAsync(contentType, input, contentLength).block();
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     *
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String analyzeBody(ContentType contentType) {
+        final Flux<ByteBuffer> input = null;
+        final Long contentLength = null;
         return analyzeBodyAsync(contentType, input, contentLength).block();
     }
 
@@ -320,9 +357,6 @@ public final class MediaTypesClient {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.contentTypeWithEncoding(this.getHost(), input, accept, context));
     }
@@ -352,6 +386,27 @@ public final class MediaTypesClient {
     /**
      * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
      *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> contentTypeWithEncodingAsync() {
+        final String input = null;
+        return contentTypeWithEncodingWithResponseAsync(input)
+                .flatMap(
+                        (Response<String> res) -> {
+                            if (res.getValue() != null) {
+                                return Mono.just(res.getValue());
+                            } else {
+                                return Mono.empty();
+                            }
+                        });
+    }
+
+    /**
+     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     *
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -360,6 +415,19 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String contentTypeWithEncoding(String input) {
+        return contentTypeWithEncodingAsync(input).block();
+    }
+
+    /**
+     * Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String contentTypeWithEncoding() {
+        final String input = null;
         return contentTypeWithEncodingAsync(input).block();
     }
 }

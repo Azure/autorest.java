@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -174,6 +175,10 @@ public class FluentUtils {
             ClassType type = (ClassType) clientType;
             if (FluentUtils.isInnerClassType(type)) {
                 wrapperType = FluentUtils.resourceModelInterfaceClassType(type);
+            } else if (FluentUtils.isResponseType(type)) {
+                IType bodyType = FluentUtils.getValueTypeFromResponseType(type);
+                IType wrapperItemType = getFluentWrapperType(bodyType);
+                wrapperType = wrapperItemType == bodyType ? type : GenericType.Response(wrapperItemType);
             }
         } else if (clientType instanceof ListType) {
             ListType type = (ListType) clientType;
@@ -320,5 +325,43 @@ public class FluentUtils {
     public static boolean modelHasLocationProperty(List<ClientModelProperty> properties) {
         return properties.stream()
                 .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
+    }
+
+    public static boolean isResponseType(IType clientType) {
+        boolean ret = false;
+        if (clientType instanceof GenericType) {
+            // Response<>
+            GenericType type = (GenericType) clientType;
+            if (Response.class.getSimpleName().equals(type.getName())) {
+                ret = true;
+            }
+        } else if (clientType instanceof ClassType) {
+            // ClientResponse is type of a subclass of Response<>
+            ClassType type = (ClassType) clientType;
+            Optional<ClientResponse> clientResponse = FluentStatic.getClient().getResponseModels().stream()
+                    .filter(r -> r.getName().equals(type.getName()))
+                    .findAny();
+            ret = clientResponse.isPresent();
+        }
+        return ret;
+    }
+
+    public static IType getValueTypeFromResponseType(IType clientType) {
+        IType bodyType = null;
+        if (clientType instanceof GenericType) {
+            GenericType type = (GenericType) clientType;
+            if (Response.class.getSimpleName().equals(type.getName())) {
+                bodyType = type.getTypeArguments()[0];
+            }
+        } else if (clientType instanceof ClassType) {
+            ClassType type = (ClassType) clientType;
+            Optional<ClientResponse> clientResponse = FluentStatic.getClient().getResponseModels().stream()
+                    .filter(r -> r.getName().equals(type.getName()))
+                    .findFirst();
+            if (clientResponse.isPresent()) {
+                bodyType = clientResponse.get().getBodyType();
+            };
+        }
+        return bodyType;
     }
 }

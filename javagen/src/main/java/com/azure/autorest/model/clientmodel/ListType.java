@@ -1,10 +1,10 @@
-package com.azure.autorest.model.clientmodel;
-
-import java.util.Set;
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+package com.azure.autorest.model.clientmodel;
+
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import java.util.Set;
 
 /**
  * A sequence type used by a client.
@@ -15,7 +15,21 @@ public class ListType extends GenericType {
      * @param elementType The type of elements that are stored in this sequence.
      */
     public ListType(IType elementType) {
-        super("java.util", "List", elementType);
+        super(getTypePackage(), getType(), elementType);
+    }
+
+    private static String getTypePackage() {
+        // if (JavaSettings.getInstance().shouldUseIterable()) {
+        //     return "java.lang";
+        // }
+        return "java.util";
+    }
+
+    private static String getType() {
+        // if (JavaSettings.getInstance().shouldUseIterable()) {
+        //     return "Iterable";
+        // }
+        return "List";
     }
 
     /**

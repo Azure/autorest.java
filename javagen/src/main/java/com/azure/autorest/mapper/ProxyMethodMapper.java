@@ -1,10 +1,10 @@
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -73,10 +72,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
             builder.returnType(GenericType.Mono(singleValueType));
-        } else if (operation.getResponses().stream()
-                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
-                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
-                .anyMatch(Objects::nonNull)) {
+        } else if (SchemaUtil.responseContainsHeaderSchemas(operation)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
@@ -182,8 +178,50 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                                                          Operation operation, List<HttpResponseStatus> expectedStatusCodes,
                                                          JavaSettings settings) {
         ClassType errorType = null;
+        Map<ClassType, List<HttpResponseStatus>> exceptionTypeMap = new HashMap<>();
+
+        /*
+        1. If exception has valid numeric status codes, group them to unexpectedResponseExceptionTypes
+        2. If exception does not have status codes, or have 'default' or invalid number, put the first to unexpectedResponseExceptionType, ignore the rest
+        3. After processing, if no model in unexpectedResponseExceptionType, take any from unexpectedResponseExceptionTypes and put it to unexpectedResponseExceptionType
+         */
+
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+            for (Response exception : operation.getExceptions()) {
+                boolean isDefaultError = true;
+                if (exception.getProtocol() != null && exception.getProtocol().getHttp() != null) {
+                    List<String> statusCodes = exception.getProtocol().getHttp().getStatusCodes();
+                    if (statusCodes != null && !statusCodes.isEmpty()) {
+                        try {
+                            ClassType exceptionType = getExceptionType(exception, settings);
+                            List<HttpResponseStatus> statusCodeList = statusCodes.stream()
+                                    .map(code -> HttpResponseStatus.valueOf(Integer.parseInt(code)))
+                                    .collect(Collectors.toList());
+
+                            if (exceptionTypeMap.containsKey(exceptionType)) {
+                                exceptionTypeMap.get(exceptionType).addAll(statusCodeList);
+                            } else {
+                                exceptionTypeMap.put(exceptionType, statusCodeList);
+                            }
+
+                            isDefaultError = false;
+                        } catch (NumberFormatException ex) {
+                            // statusCodes can be 'default'
+                            //logger.warn("Failed to parse status code, exception {}", ex.toString());
+                            isDefaultError = true;
+                        }
+                    }
+                }
+
+                if (errorType == null && isDefaultError && exception.getSchema() != null) {
+                    errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
+                }
+            }
+
+            if (errorType == null) {
+                // no default error, use the 1st to keep backward compatibility
+                errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+            }
         }
 
         if (errorType != null) {
@@ -207,5 +245,38 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         } else {
             builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
         }
+
+        if (!exceptionTypeMap.isEmpty()) {
+            builder.unexpectedResponseExceptionTypes(exceptionTypeMap);
+        }
+    }
+
+    private static ClassType getExceptionType(Response exception, JavaSettings settings) {
+        ClassType exceptionType = ClassType.HttpResponseException;  // default as HttpResponseException
+
+        if (exception != null && exception.getSchema() != null) {
+            ClassType errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());
+            if (errorType != null) {
+                String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
+                if (exceptionName == null || exceptionName.isEmpty()) {
+                    exceptionName = errorType.getName();
+                    exceptionName += "Exception";
+                }
+
+                String exceptionPackage;
+                if (settings.isCustomType(exceptionName)) {
+                    exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                } else {
+                    exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
+                }
+
+                exceptionType = new ClassType.Builder()
+                        .packageName(exceptionPackage)
+                        .name(exceptionName)
+                        .build();
+            }
+        }
+
+        return exceptionType;
     }
 }

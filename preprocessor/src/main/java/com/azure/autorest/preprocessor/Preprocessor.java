@@ -69,6 +69,7 @@ public class Preprocessor extends NewPlugin {
 
     performPretransformUpdates(codeModel);
     codeModel = new Transformer().transform(codeModel);
+    performPosttransformUpdates(codeModel);
 
     Representer representer = new Representer() {
       @Override
@@ -99,6 +100,12 @@ public class Preprocessor extends NewPlugin {
     return true;
   }
 
+  private CodeModel performPosttransformUpdates(CodeModel codeModel) {
+    if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
+      return convertOptionalConstantsToEnum(codeModel);
+    }
+    return codeModel;
+  }
 
   private CodeModel performPretransformUpdates(CodeModel codeModel) {
     if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {

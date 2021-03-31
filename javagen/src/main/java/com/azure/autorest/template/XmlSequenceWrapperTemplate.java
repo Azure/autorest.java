@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -29,7 +30,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
         String xmlElementNameCamelCase = CodeNamer.toCamelCase(xmlRootElementName);
 
-        ListType sequenceType = xmlSequenceWrapper.getSequenceType();
+        IType sequenceType = xmlSequenceWrapper.getSequenceType();
 
         javaFile.declareImport(xmlSequenceWrapper.getImports());
 

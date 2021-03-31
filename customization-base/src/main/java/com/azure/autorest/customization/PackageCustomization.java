@@ -1,16 +1,9 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.TextEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -35,12 +28,12 @@ public final class PackageCustomization {
      */
     public ClassCustomization getClass(String className) {
         String packagePath = packageName.replace(".", "/");
-        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
-                .findFirst();
-        if (!classSymbol.isPresent()) {
-            throw new IllegalArgumentException(className + " does not exist in package " + packageName);
-        }
-        return new ClassCustomization(editor, languageClient, packageName, className, classSymbol.get());
+        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className).stream()
+            .filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+            .findFirst();
+
+        return Utils.returnIfPresentOrThrow(classSymbol,
+            symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
+            () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
     }
 }

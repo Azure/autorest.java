@@ -315,7 +315,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.putNonRetry400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -521,7 +521,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.putNonRetry201Creating400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -733,7 +733,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.putNonRetry201Creating400InvalidJson(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -949,7 +949,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.putAsyncRelativeRetry400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1164,7 +1164,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteNonRetry400(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1316,7 +1316,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete202NonRetry400(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1469,7 +1469,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.deleteAsyncRelativeRetry400(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1635,7 +1635,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.postNonRetry400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -1833,7 +1833,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202NonRetry400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2034,7 +2034,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.postAsyncRelativeRetry400(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2250,7 +2250,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.putError201NoProvisioningStatePayload(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2468,7 +2468,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.putAsyncRelativeRetryNoStatus(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2704,7 +2704,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.putAsyncRelativeRetryNoStatusPayload(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -2935,7 +2935,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete204Succeeded(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3089,7 +3089,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.deleteAsyncRelativeRetryNoStatus(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3257,7 +3257,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.post202NoLocation(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3458,7 +3458,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.postAsyncRelativeRetryNoPayload(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3683,7 +3683,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.put200InvalidJson(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -3891,7 +3891,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.putAsyncRelativeRetryInvalidHeader(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4122,7 +4122,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
                 context ->
                     service
                         .putAsyncRelativeRetryInvalidJsonPolling(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4355,7 +4355,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete202RetryInvalidHeader(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4518,7 +4518,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.deleteAsyncRelativeRetryInvalidHeader(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4684,7 +4684,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getEndpoint(), accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -4857,7 +4857,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
         return FluxUtil
             .withContext(
                 context -> service.post202RetryInvalidHeader(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5074,7 +5074,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
             .withContext(
                 context ->
                     service.postAsyncRelativeRetryInvalidHeader(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -5298,7 +5298,7 @@ public final class LrosaDsClientImpl implements LrosaDsClient {
                 context ->
                     service
                         .postAsyncRelativeRetryInvalidJsonPolling(this.client.getEndpoint(), product, accept, context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
