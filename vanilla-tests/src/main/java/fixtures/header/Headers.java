@@ -513,7 +513,7 @@ public final class Headers {
      * @return a response with header value "User-Agent": "overwrite".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseExistingKeyResponse responseExistingKeyWithResponse(Context context) {
+    public Response<Void> responseExistingKeyWithResponse(Context context) {
         return responseExistingKeyWithResponseAsync(context).block();
     }
 
@@ -705,7 +705,7 @@ public final class Headers {
      * @return a response with header value "Content-Type": "text/html".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseProtectedKeyResponse responseProtectedKeyWithResponse(Context context) {
+    public Response<Void> responseProtectedKeyWithResponse(Context context) {
         return responseProtectedKeyWithResponseAsync(context).block();
     }
 
@@ -918,7 +918,7 @@ public final class Headers {
      * @return a response with header value "value": 1 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseIntegerResponse responseIntegerWithResponse(String scenario, Context context) {
+    public Response<Void> responseIntegerWithResponse(String scenario, Context context) {
         return responseIntegerWithResponseAsync(scenario, context).block();
     }
 
@@ -1136,7 +1136,7 @@ public final class Headers {
      * @return a response with header value "value": 105 or -2.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseLongResponse responseLongWithResponse(String scenario, Context context) {
+    public Response<Void> responseLongWithResponse(String scenario, Context context) {
         return responseLongWithResponseAsync(scenario, context).block();
     }
 
@@ -1354,7 +1354,7 @@ public final class Headers {
      * @return a response with header value "value": 0.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseFloatResponse responseFloatWithResponse(String scenario, Context context) {
+    public Response<Void> responseFloatWithResponse(String scenario, Context context) {
         return responseFloatWithResponseAsync(scenario, context).block();
     }
 
@@ -1573,7 +1573,7 @@ public final class Headers {
      * @return a response with header value "value": 7e120 or -3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseDoubleResponse responseDoubleWithResponse(String scenario, Context context) {
+    public Response<Void> responseDoubleWithResponse(String scenario, Context context) {
         return responseDoubleWithResponseAsync(scenario, context).block();
     }
 
@@ -1785,7 +1785,7 @@ public final class Headers {
      * @return a response with header value "value": true or false.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseBoolResponse responseBoolWithResponse(String scenario, Context context) {
+    public Response<Void> responseBoolWithResponse(String scenario, Context context) {
         return responseBoolWithResponseAsync(scenario, context).block();
     }
 
@@ -2035,7 +2035,7 @@ public final class Headers {
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseStringResponse responseStringWithResponse(String scenario, Context context) {
+    public Response<Void> responseStringWithResponse(String scenario, Context context) {
         return responseStringWithResponseAsync(scenario, context).block();
     }
 
@@ -2259,7 +2259,7 @@ public final class Headers {
      * @return a response with header values "2010-01-01" or "0001-01-01".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseDateResponse responseDateWithResponse(String scenario, Context context) {
+    public Response<Void> responseDateWithResponse(String scenario, Context context) {
         return responseDateWithResponseAsync(scenario, context).block();
     }
 
@@ -2485,7 +2485,7 @@ public final class Headers {
      * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseDatetimeResponse responseDatetimeWithResponse(String scenario, Context context) {
+    public Response<Void> responseDatetimeWithResponse(String scenario, Context context) {
         return responseDatetimeWithResponseAsync(scenario, context).block();
     }
 
@@ -2748,8 +2748,7 @@ public final class Headers {
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseDatetimeRfc1123Response responseDatetimeRfc1123WithResponse(
-            String scenario, Context context) {
+    public Response<Void> responseDatetimeRfc1123WithResponse(String scenario, Context context) {
         return responseDatetimeRfc1123WithResponseAsync(scenario, context).block();
     }
 
@@ -2969,7 +2968,7 @@ public final class Headers {
      * @return a response with header values "P123DT22H14M12.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseDurationResponse responseDurationWithResponse(String scenario, Context context) {
+    public Response<Void> responseDurationWithResponse(String scenario, Context context) {
         return responseDurationWithResponseAsync(scenario, context).block();
     }
 
@@ -3189,7 +3188,7 @@ public final class Headers {
      * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseByteResponse responseByteWithResponse(String scenario, Context context) {
+    public Response<Void> responseByteWithResponse(String scenario, Context context) {
         return responseByteWithResponseAsync(scenario, context).block();
     }
 
@@ -3430,7 +3429,7 @@ public final class Headers {
      * @return a response with header values "GREY" or null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersResponseEnumResponse responseEnumWithResponse(String scenario, Context context) {
+    public Response<Void> responseEnumWithResponse(String scenario, Context context) {
         return responseEnumWithResponseAsync(scenario, context).block();
     }
 

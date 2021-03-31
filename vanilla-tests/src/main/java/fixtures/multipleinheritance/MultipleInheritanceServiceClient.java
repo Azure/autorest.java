@@ -1,5 +1,6 @@
 package fixtures.multipleinheritance;
 
+import com.azure.android.core.http.HttpPipeline;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;

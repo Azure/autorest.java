@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.android.core.http.HttpPipeline;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;

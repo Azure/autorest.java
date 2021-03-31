@@ -2,6 +2,7 @@ package com.azure.autorest.android.mapper;
 
 import com.azure.autorest.android.model.clientmodel.AndroidClientMethod;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -79,7 +80,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected IType createSyncReturnWithResponseType(IType syncReturnType) {
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
         return (GenericType.AndroidResponse(syncReturnType));
     }
 
