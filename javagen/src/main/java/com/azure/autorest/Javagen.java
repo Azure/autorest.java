@@ -159,6 +159,11 @@ public class Javagen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
+            // Module-info
+            if (JavaSettings.getInstance().isLowLevelClient()) {
+                javaPackage.addModuleInfo(client.getModuleInfo());
+            }
+
             // TODO: POM, Manager
             //Step 4: Print to files
             Formatter formatter = new Formatter();

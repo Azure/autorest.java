@@ -276,7 +276,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     });
                     classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
                             function -> {
-                                for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties()) {
+                                for (ServiceClientProperty serviceClientProperty : clientProperties) {
                                     if (serviceClientProperty.getDefaultValueExpression() != null) {
                                         function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
                                         {

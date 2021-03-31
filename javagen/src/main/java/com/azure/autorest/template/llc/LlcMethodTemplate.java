@@ -24,6 +24,7 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
@@ -170,7 +171,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
         commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Description</th></tr>");
         for (ProxyMethodParameter parameter : parameters) {
             commentBlock.line(String.format("    <tr><td>%s</td><td>%s</td><td>%s</td></tr>",
-                    parameter.getName(), parameter.getClientType(), parameterDescriptionOrDefault(parameter)));
+                    parameter.getName(), CodeNamer.escapeXmlComment(parameter.getClientType().toString()), parameterDescriptionOrDefault(parameter)));
         }
         commentBlock.line("</table>");
     }
@@ -250,6 +251,6 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
         if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
-        return paramJavadoc;
+        return CodeNamer.escapeXmlComment(paramJavadoc);
     }
 }

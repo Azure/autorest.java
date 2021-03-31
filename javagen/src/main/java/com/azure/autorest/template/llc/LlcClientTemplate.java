@@ -64,7 +64,7 @@ public class LlcClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFil
                     .collect(Collectors.joining(", "));
 
             classBlock.constructor(JavaVisibility.PackagePrivate,
-                    "TextAnalyticsClient(" + constructorArgs + ")",
+                    client.getClassName() + "(" + constructorArgs + ")",
                     constructor -> {
                 for (ServiceClientProperty property : client.getServiceClient().getProperties()) {
                     constructor.line("this.%1$s = %1$s;", property.getName());

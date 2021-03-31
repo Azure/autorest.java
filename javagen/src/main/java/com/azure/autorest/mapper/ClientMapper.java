@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
@@ -192,7 +193,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
-
+        builder.moduleInfo(moduleInfo());
         return builder.build();
     }
 
@@ -291,6 +292,21 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
         builder.bodyType(SchemaUtil.getOperationResponseType(method));
         return builder.build();
+    }
+
+    private static ModuleInfo moduleInfo() {
+        // WARNING: Only tested for low level clients
+        JavaSettings settings = JavaSettings.getInstance();
+        ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
+
+        List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.experimental", true));
+
+        List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+
+        return moduleInfo;
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {

@@ -50,6 +50,10 @@ public class Client {
      * The serviceClient for this service.
      */
     private ServiceClient serviceClient;
+    /**
+     * Get the module info.
+     */
+    private ModuleInfo moduleInfo;
 
     /**
      * Create a new Client with the provided values.
@@ -63,7 +67,7 @@ public class Client {
      * @param manager the manager class that is used by the client.
      * @param serviceClient the service client that is used by the client.
      */
-    private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions, List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels, List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager, ServiceClient serviceClient) {
+    private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions, List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels, List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager, ServiceClient serviceClient, ModuleInfo moduleInfo) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
         this.enums = enums;
@@ -74,6 +78,7 @@ public class Client {
         this.packageInfos = packageInfos;
         this.manager = manager;
         this.serviceClient = serviceClient;
+        this.moduleInfo = moduleInfo;
     }
 
     public final String getClientName() {
@@ -108,6 +113,10 @@ public class Client {
         return packageInfos;
     }
 
+    public final ModuleInfo getModuleInfo() {
+        return moduleInfo;
+    }
+
     public final Manager getManager() {
         return manager;
     }
@@ -127,6 +136,7 @@ public class Client {
         private List<PackageInfo> packageInfos;
         private Manager manager;
         private ServiceClient serviceClient;
+        private ModuleInfo moduleInfo;
 
         /**
          * Sets the name of this service client.
@@ -228,6 +238,16 @@ public class Client {
             return this;
         }
 
+        /**
+         * Sets the module info for this client.
+         * @param moduleInfo the module info
+         * @return the Builder itself
+         */
+        public Builder moduleInfo(ModuleInfo moduleInfo) {
+            this.moduleInfo = moduleInfo;
+            return this;
+        }
+
         public Client build() {
             return new Client(clientName,
                     clientDescription,
@@ -238,7 +258,8 @@ public class Client {
                     models,
                     packageInfos,
                     manager,
-                    serviceClient);
+                    serviceClient,
+                    moduleInfo);
         }
     }
 }

@@ -216,6 +216,10 @@ public class ServiceClient {
             imports.add(String.format("%1$s.%2$s", getPackage(), getClassName()));
         }
 
+        if (includeBuilderImports && settings.isLowLevelClient()) {
+            imports.add("com.azure.core.util.serializer.JsonSerializerProviders");
+        }
+
         Proxy proxy = getProxy();
         if (proxy != null) {
             proxy.addImportsTo(imports, includeImplementationImports, settings);
