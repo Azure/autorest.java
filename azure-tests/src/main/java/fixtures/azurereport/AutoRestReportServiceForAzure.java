@@ -1,6 +1,5 @@
 package fixtures.azurereport;
 
-import com.azure.android.core.http.HttpPipeline;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;

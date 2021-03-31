@@ -245,7 +245,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.AndroidHttpPipeline, "httpPipeline", true, null));
+                ClassType.HttpPipeline, "httpPipeline", true, null));
     }
 
     protected ServiceClient.Builder createClientBuilder() {

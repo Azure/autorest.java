@@ -4,7 +4,6 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.azure.android.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
