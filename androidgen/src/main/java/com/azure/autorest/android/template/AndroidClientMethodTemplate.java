@@ -122,16 +122,16 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         GenericType clientReturnGenericType = (GenericType) clientMethod.getReturnValue().getType().getClientType();
         IType responseType = clientReturnGenericType.getTypeArguments()[0];
         StringBuilder callbackBuilder = new StringBuilder();
-        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {\n", responseType, callbackVariableName));
-        callbackBuilder.append("\t@Override\n");
-        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {\n", responseType));
-        callbackBuilder.append(String.format("\t\t%s.complete(response);\n", completeFutureVariableName));
-        callbackBuilder.append("\t}\n");
-        callbackBuilder.append("\t@Override\n");
-        callbackBuilder.append("\tpublic void onFailure(Throwable error) {\n");
-        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);\n", completeFutureVariableName));
-        callbackBuilder.append("\t}\n");
-        callbackBuilder.append("};\n");
+        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {%n", responseType, callbackVariableName));
+        callbackBuilder.append(String.format("\t@Override%n"));
+        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {%n", responseType));
+        callbackBuilder.append(String.format("\t\t%s.complete(response);%n", completeFutureVariableName));
+        callbackBuilder.append(String.format("\t}%n"));
+        callbackBuilder.append(String.format("\t@Override%n"));
+        callbackBuilder.append(String.format("\tpublic void onFailure(Throwable error) {%n"));
+        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);%n", completeFutureVariableName));
+        callbackBuilder.append(String.format("\t}%n"));
+        callbackBuilder.append(String.format("};%n"));
 
         return callbackBuilder.toString();
     }
