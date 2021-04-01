@@ -69,21 +69,21 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         IType callbackDataType = ((GenericType) callbackParam.getClientType()).getTypeArguments()[0];
 
         StringBuilder callbackBuilder = new StringBuilder();
-        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {\n", callbackDataType, callbackVariableName));
-        callbackBuilder.append("\t@Override\n");
-        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {\n", callbackDataType));
-        callbackBuilder.append(String.format("\t\t%s.complete(new PagedResponseBase<>(response.getRequest(),\n" +
-                "response.getStatusCode(),\n" +
-                "response.getHeaders(),\n" +
-                "response.getValue().getValue(),\n" +
-                "response.getValue().getNextLink(),\n" +
-                "null));\n", completeFutureVariableName));
-        callbackBuilder.append("\t}\n");
-        callbackBuilder.append("\t@Override\n");
-        callbackBuilder.append("\tpublic void onFailure(Throwable error) {\n");
-        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);\n", completeFutureVariableName));
-        callbackBuilder.append("\t}\n");
-        callbackBuilder.append("};\n");
+        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {%n", callbackDataType, callbackVariableName));
+        callbackBuilder.append(String.format("\t@Override%n"));
+        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {%n", callbackDataType));
+        callbackBuilder.append(String.format("\t\t%s.complete(new PagedResponseBase<>(response.getRequest(),%n" +
+                "response.getStatusCode(),%n" +
+                "response.getHeaders(),%n" +
+                "response.getValue().getValue(),%n" +
+                "response.getValue().getNextLink(),%n" +
+                "null));%n", completeFutureVariableName));
+        callbackBuilder.append(String.format("\t}%n"));
+        callbackBuilder.append(String.format("\t@Override%n"));
+        callbackBuilder.append(String.format("\tpublic void onFailure(Throwable error) {%n"));
+        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);%n", completeFutureVariableName));
+        callbackBuilder.append(String.format("\t}%n"));
+        callbackBuilder.append(String.format("};%n"));
 
         return callbackBuilder.toString();
     }
