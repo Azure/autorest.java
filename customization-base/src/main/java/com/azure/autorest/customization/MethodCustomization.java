@@ -219,18 +219,17 @@ public final class MethodCustomization {
             bodyPositionFinder = editor.getFileLine(fileName, ++line);
         }
 
-        // Then increment an additional line to get to the beginning of the body.
-        line += 1;
-
         // Then determine the base indentation level for the method body.
-        String methodContentIndent = editor.getFileLine(fileName, line).replaceAll("\\w.*$", "");
-        Position oldBodyStart = new Position(line, methodContentIndent.length());
+        String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
+        Position oldBodyStart = new Position(line + 1, methodContentIndent.length());
+        int lastLineLength = methodContentIndent.length();
 
         // Then continue iterating over lines until the method close line is found.
         while (!bodyPositionFinder.matches(methodIndent + "\\}\\s*")) {
+            lastLineLength = bodyPositionFinder.length();
             bodyPositionFinder = editor.getFileLine(fileName, ++line);
         }
-        Position oldBodyEnd = new Position(line - 1, methodContentIndent.length());
+        Position oldBodyEnd = new Position(line - 1, lastLineLength);
 
         editor.replace(fileName, oldBodyStart, oldBodyEnd, newBody);
         FileEvent fileEvent = new FileEvent();
