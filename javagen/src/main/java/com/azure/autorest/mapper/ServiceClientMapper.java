@@ -22,6 +22,8 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,6 +59,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
+
+        Proxy proxy = null;
         if (!codeModelRestAPIMethods.isEmpty()) {
             // TODO: Assume all operations share the same base url
             Proxy.Builder proxyBuilder = new Proxy.Builder()
@@ -72,7 +76,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
             }
             proxyBuilder.methods(restAPIMethods);
-            builder.proxy(proxyBuilder.build());
+            proxy = proxyBuilder.build();
+            builder.proxy(proxy);
             builder.clientMethods(codeModelRestAPIMethods.stream()
                     .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
                     .collect(Collectors.toList()));
@@ -92,17 +97,20 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         boolean usesCredentials = false;
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
-        for (Parameter p : Stream.concat(codeModel.getGlobalParameters().stream(),
+        List<Parameter> clientParameters = Stream.concat(codeModel.getGlobalParameters().stream(),
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
                         .flatMap(o -> o.getRequests().stream())
                         .flatMap(r -> r.getParameters().stream()))
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
-                .collect(Collectors.toList())) {
+                .collect(Collectors.toList());
+        for (Parameter p : clientParameters) {
             String serviceClientPropertyDescription = p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
+
+            String serviceClientPropertySerializedName = p.getLanguage().getJava().getSerializedName();
 
             IType serviceClientPropertyClientType = Mappers.getSchemaMapper().map(p.getSchema());
             if (p.isNullable() && serviceClientPropertyClientType != null) {
@@ -119,8 +127,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 usesCredentials = true;
             } else {
                 ServiceClientProperty serviceClientProperty =
-                        new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType,
-                                serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression);
+                        new ServiceClientProperty(serviceClientPropertyDescription,
+                                serviceClientPropertyClientType,
+                                serviceClientPropertyName,
+                                serviceClientPropertyIsReadOnly,
+                                serviceClientPropertyDefaultValueExpression);
                 if (!serviceClientProperties.contains(serviceClientProperty)) {
                     // Ignore duplicate client property.
                     serviceClientProperties.add(serviceClientProperty);
@@ -185,6 +196,38 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         ? Arrays.asList(ClassType.NonNull)
                         : new ArrayList<>())
                 .build();
+
+        if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
+            Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
+            String scopeParams;
+            if (scopes != null && !scopes.isEmpty()) {
+                scopeParams = "DEFAULT_SCOPES";
+            } else {
+                // Remove trailing / and all relative paths
+                if (proxy == null) {
+                    proxy = serviceClientMethodGroupClients.get(0).getProxy();
+                }
+                String host = proxy.getBaseURL().replaceAll("/+$", "").replaceAll("(?<!/)[/][^/]+", "");
+                List<String> parameters = new ArrayList<>();
+                int start = host.indexOf("{");
+                while (start >= 0) {
+                    int end = host.indexOf("}", start);
+                    String serializedName = host.substring(start + 1, end);
+                    Optional<Parameter> hostParam = clientParameters.stream().filter(p -> serializedName.equals(p.getLanguage().getJava().getSerializedName())).findFirst();
+                    if (hostParam.isPresent()) {
+                        parameters.add(hostParam.get().getLanguage().getJava().getName());
+                        host = host.substring(0, start) + "%s" + host.substring(end + 1);
+                    }
+                    start = host.indexOf("{", start + 1);
+                }
+                if (parameters.isEmpty()) {
+                    scopeParams = String.format("\"%s/.default\"", host);
+                } else {
+                    scopeParams = String.format("String.format(\"%s/.default\", %s)", host, String.join(", ", parameters));
+                }
+            }
+            builder.defaultCredentialScopes(scopeParams);
+        }
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
 

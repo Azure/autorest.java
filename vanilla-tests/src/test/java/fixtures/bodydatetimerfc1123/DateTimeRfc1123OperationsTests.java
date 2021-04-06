@@ -22,7 +22,12 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getNull() {
-        Assert.assertNull(client.getDatetimerfc1123s().getNull());
+        try {
+            client.getDatetimerfc1123s().getNull();
+            Assert.fail();
+        } catch (Exception exception) {
+            Assert.assertEquals(NullPointerException.class, exception.getClass());
+        }
     }
 
     @Test

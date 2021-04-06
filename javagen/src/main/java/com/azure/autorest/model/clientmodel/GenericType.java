@@ -153,6 +153,8 @@ public class GenericType implements IType {
             if (clientTypeArguments[i] != wireTypeArguments[i]) {
                 if (this instanceof ListType) {
                     clientType = new ListType(clientTypeArguments[0]);
+                } else if (this instanceof IterableType) {
+                    clientType = new IterableType(clientTypeArguments[0]);
                 } else if (this instanceof MapType) {
                     clientType = new MapType(clientTypeArguments[1]);
                 } else {
@@ -177,6 +179,10 @@ public class GenericType implements IType {
             if (clientTypeArguments[i] != wireTypeArguments[i]) {
                 if (this instanceof ListType) {
                     expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].convertToClientType("el"));
+                } else if (this instanceof IterableType) {
+                    expression = String.format("java.util.stream.StreamSupport.stream(%1$s.spliterator(), false).map" +
+                            "(el -> %2$s).collect(java.util.stream.Collectors.toList())",
+                            expression, wireTypeArguments[i].convertToClientType("el"));
                 } else if (this instanceof MapType) {
                     // Key is always String in Swagger 2
                     expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].convertToClientType("el.getValue()"));
@@ -204,6 +210,10 @@ public class GenericType implements IType {
             if (clientTypeArguments[i] != wireTypeArguments[i]) {
                 if (this instanceof ListType) {
                     expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].convertFromClientType("el"));
+                } else if (this instanceof IterableType) {
+                    expression = String.format("java.util.stream.StreamSupport.stream(%1$s.spliterator(), false).map" +
+                            "(el -> %2$s).collect(java.util.stream.Collectors.toList())",
+                            expression, wireTypeArguments[i].convertFromClientType("el"));
                 } else if (this instanceof MapType) {
                     // Key is always String in Swagger 2
                     expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].convertFromClientType("el.getValue()"));

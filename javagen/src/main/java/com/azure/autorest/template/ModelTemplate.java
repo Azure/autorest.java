@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -221,6 +222,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                             propertyXmlWrapperClassName.apply(property),
                                             ((ListType) property.getWireType()).getElementType()));
                             methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+                        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof IterableType) {
+                            methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());",
+                                            property.getName(),
+                                            propertyXmlWrapperClassName.apply(property),
+                                            ((IterableType) property.getWireType()).getElementType()));
+                            methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
                         } else {
                             methodBlock.methodReturn(expression);
                         }
@@ -290,7 +298,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     classBlock.annotation("Override");
-                    classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), parentProperty.getSetterName(), parentProperty.getClientType(), parentProperty.getName()),
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                            model.getName(),
+                            parentProperty.getSetterName(),
+                            parentProperty.getWireType() == null ? parentProperty.getClientType() : parentProperty.getWireType().getClientType(),
+                            parentProperty.getName()),
                             methodBlock -> {
                                 methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
                                 methodBlock.methodReturn("this");

@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.junit.Assert.assertEquals;
+
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
@@ -47,7 +49,7 @@ public class ArrayTests {
     @Test
     public void getEmpty() throws Exception {
         List<Integer> result = client.getArrays().getEmpty();
-        Assert.assertEquals(0, result.size());
+        assertEquals(0, result.size());
     }
 
     @Test
@@ -339,12 +341,16 @@ public class ArrayTests {
     @Test
     public void getDateTimeValid() throws Exception {
         List<OffsetDateTime> result = client.getArrays().getDateTimeValid();
-        Object[] expected = new OffsetDateTime[] {
+        OffsetDateTime[] expected = new OffsetDateTime[] {
                 OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC),
                 OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.UTC),
                 OffsetDateTime.of(1492, 10, 12, 10, 15, 1, 0, ZoneOffset.UTC)
         };
-        Assert.assertArrayEquals(expected, result.toArray());
+
+        assertEquals(result.size(), expected.length);
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(result.get(i).toEpochSecond(), expected[i].toEpochSecond());
+        }
     }
 
     @Test
@@ -446,10 +452,10 @@ public class ArrayTests {
     @Test
     public void getBase64Url() throws Exception {
         List<byte[]> result = client.getArrays().getBase64Url();
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals("a string that gets encoded with base64url", new String(result.get(0)));
-        Assert.assertEquals("test string", new String(result.get(1)));
-        Assert.assertEquals("Lorem ipsum", new String(result.get(2)));
+        assertEquals(3, result.size());
+        assertEquals("a string that gets encoded with base64url", new String(result.get(0)));
+        assertEquals("test string", new String(result.get(1)));
+        assertEquals("Lorem ipsum", new String(result.get(2)));
     }
 
     @Test
@@ -465,29 +471,29 @@ public class ArrayTests {
     @Test
     public void getComplexEmpty() throws Exception {
         List<Product> result = client.getArrays().getComplexEmpty();
-        Assert.assertEquals(0, result.size());
+        assertEquals(0, result.size());
     }
 
     @Test
     public void getComplexItemNull() throws Exception {
         List<Product> result = client.getArrays().getComplexItemNull();
-        Assert.assertEquals(3, result.size());
+        assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getComplexItemEmpty() throws Exception {
         List<Product> result = client.getArrays().getComplexItemEmpty();
-        Assert.assertEquals(3, result.size());
+        assertEquals(3, result.size());
         Assert.assertNull(result.get(1).getString());
     }
 
     @Test
     public void getComplexValid() throws Exception {
         List<Product> result = client.getArrays().getComplexValid();
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals(5, result.get(2).getInteger().intValue());
-        Assert.assertEquals("6", result.get(2).getString());
+        assertEquals(3, result.size());
+        assertEquals(5, result.get(2).getInteger().intValue());
+        assertEquals("6", result.get(2).getString());
     }
 
     @Test
@@ -521,21 +527,21 @@ public class ArrayTests {
     @Test
     public void getArrayEmpty() throws Exception {
         List<List<String>> result = client.getArrays().getArrayEmpty();
-        Assert.assertEquals(0, result.size());
+        assertEquals(0, result.size());
     }
 
     @Test
     public void getArrayItemNull() throws Exception {
         List<List<String>> result = client.getArrays().getArrayItemNull();
-        Assert.assertEquals(3, result.size());
+        assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getArrayItemEmpty() throws Exception {
         List<List<String>> result = client.getArrays().getArrayItemEmpty();
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals(0, result.get(1).size());
+        assertEquals(3, result.size());
+        assertEquals(0, result.get(1).size());
     }
 
     @Test
@@ -568,29 +574,29 @@ public class ArrayTests {
     @Test
     public void getDictionaryEmpty() throws Exception {
         List<Map<String, String>> result = client.getArrays().getDictionaryEmpty();
-        Assert.assertEquals(0, result.size());
+        assertEquals(0, result.size());
     }
 
     @Test
     public void getDictionaryItemNull() throws Exception {
         List<Map<String, String>> result = client.getArrays().getDictionaryItemNull();
-        Assert.assertEquals(3, result.size());
+        assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getDictionaryItemEmpty() throws Exception {
         List<Map<String, String>> result = client.getArrays().getDictionaryItemEmpty();
-        Assert.assertEquals(3, result.size());
-        Assert.assertEquals(0, result.get(1).size());
+        assertEquals(3, result.size());
+        assertEquals(0, result.get(1).size());
     }
 
     @Test
     public void getDictionaryValid() throws Exception {
         List<Map<String, String>> result = client.getArrays().getDictionaryValid();
-        Assert.assertEquals("seven", result.get(2).get("7"));
-        Assert.assertEquals("five", result.get(1).get("5"));
-        Assert.assertEquals("three", result.get(0).get("3"));
+        assertEquals("seven", result.get(2).get("7"));
+        assertEquals("five", result.get(1).get("5"));
+        assertEquals("three", result.get(0).get("3"));
     }
 
     @Test

@@ -16,19 +16,19 @@ public class ByteOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
+    public void getNull() {
         byte[] result = client.getByteOperations().getNull();
-        Assert.assertNull(result);
+        Assert.assertEquals(0, result.length);
     }
 
     @Test
-    public void getEmpty() throws Exception {
+    public void getEmpty() {
         byte[] result = client.getByteOperations().getEmpty();
         Assert.assertArrayEquals("\"\"".getBytes(StandardCharsets.UTF_8), result);
     }
 
     @Test
-    public void getNonAscii() throws Exception {
+    public void getNonAscii() {
         byte[] result = client.getByteOperations().getNonAscii();
         // Previously, byte[] response bodies were automatically base64 decoded by the runtime.
         // This conflicts with the octet-stream  (e.g. file/media download) use case,
@@ -38,7 +38,7 @@ public class ByteOperationsTests {
     }
 
     @Test
-    public void putNonAscii() throws Exception {
+    public void putNonAscii() {
         byte[] body = new byte[] {
                 (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 251,
                 (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
@@ -48,7 +48,7 @@ public class ByteOperationsTests {
     }
 
     @Test
-    public void getInvalid() throws Exception {
+    public void getInvalid() {
         try {
             byte[] result = client.getByteOperations().getInvalid();
             Assert.assertArrayEquals("\"::::SWAGGER::::\"".getBytes(StandardCharsets.UTF_8), result);

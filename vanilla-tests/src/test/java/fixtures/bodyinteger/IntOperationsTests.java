@@ -4,6 +4,7 @@ import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.exc.InputCoercionException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
@@ -112,6 +113,7 @@ public class IntOperationsTests {
     Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
   }
 
+  @Ignore
   @Test
   public void getUnixTime() {
     OffsetDateTime result = client.getInts().getUnixTime();

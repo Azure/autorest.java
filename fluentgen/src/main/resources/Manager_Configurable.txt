@@ -110,6 +110,7 @@ public static final class Configurable {
         policies.add(retryPolicy);
         policies.add(new AddDatePolicy());
         policies.add(new BearerTokenAuthenticationPolicy(credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+        policies.addAll(this.policies);
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
         HttpPipeline httpPipeline = new HttpPipelineBuilder()

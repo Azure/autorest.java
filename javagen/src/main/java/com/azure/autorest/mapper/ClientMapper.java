@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -208,8 +209,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             allMethods.forEach(o -> Stream.concat(o.getParameters().stream(), o.getRequests().stream().flatMap(r -> r.getParameters().stream())).forEach(param -> {
                 if (param.getSchema() instanceof ArraySchema) {
                     ArraySchema arraySchema = (ArraySchema) param.getSchema();
-                    if (arraySchema.getSerialization() != null && arraySchema.getSerialization().getXml() != null) { ;
-                        ListType listType = (ListType) Mappers.getSchemaMapper().map(arraySchema);
+                    if (arraySchema.getSerialization() != null && arraySchema.getSerialization().getXml() != null) {
+                        IType type = Mappers.getSchemaMapper().map(arraySchema);
                         String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
                         String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
                         if (xmlSequenceWrappers.stream().noneMatch(
@@ -221,12 +222,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                             packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
-                            listType.addImportsTo(packageImports, true);
+                            type.addImportsTo(packageImports, true);
                             boolean isCustomType = settings
                                 .isCustomType(CodeNamer.toPascalCase(xmlRootElementName + "Wrapper"));
                             String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() :
                                 settings.getImplementationSubpackage());
-                            xmlSequenceWrappers.add(new XmlSequenceWrapper(packageName, listType, xmlRootElementName,
+                            xmlSequenceWrappers.add(new XmlSequenceWrapper(packageName, type, xmlRootElementName,
                                 xmlListElementName, packageImports));
                         }
                     }

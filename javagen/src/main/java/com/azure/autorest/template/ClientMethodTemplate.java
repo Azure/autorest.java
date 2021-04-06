@@ -264,7 +264,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         if (alwaysNull) {
                             expression = "null";
                         } else {
-                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
+                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
+                                            ".serializeList(%s, CollectionFormat.%s)", parameterName,
+                                    parameter.getCollectionFormat().toString().toUpperCase());
+                            if (settings.shouldUseIterable()) {
+                                expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
+                                                ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
+                                        parameter.getCollectionFormat().toString().toUpperCase());
+                            }
                         }
                         function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;

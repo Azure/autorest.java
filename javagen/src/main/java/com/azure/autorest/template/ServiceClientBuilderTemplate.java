@@ -20,6 +20,7 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -219,7 +220,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             }
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, classBlock, clientProperties);
+                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes());
             }
 
             if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
@@ -299,7 +300,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
     }
 
-    private void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, List<ServiceClientProperty> clientProperties) {
+    private void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
@@ -315,17 +316,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     function.line("policies.add(new AzureKeyCredentialPolicy(\"api-key\", azureKeyCredential));");
                 });
             }
-            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL) && clientProperties.stream()
-                    .anyMatch(clientProperty -> clientProperty.getName().equals("endpoint"))) {
-                Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
-                String scopeParams;
-                if (scopes == null || scopes.isEmpty()) {
-                    scopeParams = "String.format(\"%s/.default\", endpoint)";
-                } else {
-                    scopeParams = "DEFAULT_SCOPES";
-                }
+            if (settings.getCredentialTypes().contains(CredentialType.TOKEN_CREDENTIAL)) {
                 function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", scopeParams);
+                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
             }
 
