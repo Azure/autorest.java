@@ -33,7 +33,8 @@ public final class MethodCustomization {
     private String methodSignature;
     private SymbolInformation symbol;
 
-    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, String methodName, String methodSignature, SymbolInformation symbol) {
+    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
+        String methodName, String methodSignature, SymbolInformation symbol) {
         this.editor = editor;
         this.languageClient = languageClient;
         this.packageName = packageName;
@@ -195,6 +196,50 @@ public final class MethodCustomization {
             Modifier.methodModifiers(), modifiers);
         refreshSymbol();
         return this;
+    }
+
+    /**
+     * Replace the body of the method.
+     *
+     * @param newBody New method body.
+     * @return The updated MethodCustomization object.
+     */
+    public MethodCustomization replaceBody(String newBody) {
+        URI fileUri = symbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        String fileName = fileUri.toString().substring(i);
+
+        // Beginning line of the method.
+        int line = symbol.getLocation().getRange().getStart().getLine();
+        String bodyPositionFinder = editor.getFileLine(fileName, line);
+        String methodIndent = bodyPositionFinder.replaceAll("\\w.*$", "");
+
+        // Loop until the line containing the method body start is found.
+        while (!bodyPositionFinder.matches(".*\\{\\s*")) {
+            bodyPositionFinder = editor.getFileLine(fileName, ++line);
+        }
+
+        // Then determine the base indentation level for the method body.
+        String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
+        Position oldBodyStart = new Position(line + 1, methodContentIndent.length());
+        int lastLineLength = methodContentIndent.length();
+
+        // Then continue iterating over lines until the method close line is found.
+        while (!bodyPositionFinder.matches(methodIndent + "\\}\\s*")) {
+            lastLineLength = bodyPositionFinder.length();
+            bodyPositionFinder = editor.getFileLine(fileName, ++line);
+        }
+        Position oldBodyEnd = new Position(line - 1, lastLineLength);
+
+        editor.replace(fileName, oldBodyStart, oldBodyEnd, newBody);
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(methodSignature);
     }
 
     /**
