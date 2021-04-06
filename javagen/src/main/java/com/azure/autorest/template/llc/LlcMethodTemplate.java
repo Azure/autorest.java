@@ -80,7 +80,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                     .stream().filter(p -> p.getIsRequired() && RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
                     .collect(Collectors.toList())) {
                 String value;
-                if (queryParam.getIsConstant()) {
+                if (!queryParam.getFromClient() && queryParam.getIsConstant()) {
                     value = "\"" + queryParam.getDefaultValue() + "\"";
                 } else {
                     value = queryParam.getWireType() == ClassType.String ? queryParam.getName() : String.format("String.valueOf(%s)", queryParam.getName());
@@ -93,7 +93,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                     .collect(Collectors.toList())) {
                 headerParams.add(headerParam.getRequestParameterName());
                 String value;
-                if (headerParam.getIsConstant()) {
+                if (!headerParam.getFromClient() && headerParam.getIsConstant()) {
                     value = "\"" + headerParam.getDefaultValue() + "\"";
                 } else {
                     value = headerParam.getWireType() == ClassType.String ? headerParam.getName() : String.format("String.valueOf(%s)", headerParam.getName());
