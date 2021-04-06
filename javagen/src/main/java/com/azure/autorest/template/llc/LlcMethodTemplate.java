@@ -85,7 +85,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                 } else {
                     value = queryParam.getWireType() == ClassType.String ? queryParam.getName() : String.format("String.valueOf(%s)", queryParam.getName());
                 }
-                methodBlock.line("    .setQueryParam(\"%s\", %s)", queryParam.getRequestParameterName(), value);
+                methodBlock.line("    .addQueryParam(\"%s\", %s)", queryParam.getRequestParameterName(), value);
             }
             Set<String> headerParams = new HashSet<>();
             for (ProxyMethodParameter headerParam : clientMethod.getProxyMethod().getParameters()
@@ -104,7 +104,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                 methodBlock.line("    .addHeader(\"Content-Type\", \"%s\")", clientMethod.getProxyMethod().getRequestContentType());
             }
             if (!headerParams.contains("Accept")) {
-                methodBlock.line("    .addHeader(\"Accept\", \"%s\");", String.join(", ", clientMethod.getProxyMethod().getResponseContentTypes()));
+                methodBlock.line("    .addHeader(\"Accept\", \"%s\")", String.join(", ", clientMethod.getProxyMethod().getResponseContentTypes()));
             }
             methodBlock.line("    .setHttpMethod(HttpMethod.%s);", clientMethod.getProxyMethod().getHttpMethod());
         });

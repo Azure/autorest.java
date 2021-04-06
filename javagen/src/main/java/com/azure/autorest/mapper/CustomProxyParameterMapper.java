@@ -83,6 +83,8 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             wireType = ClassType.String;
+        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+            wireType = ClassType.String;
         }
         builder.wireType(wireType);
 
