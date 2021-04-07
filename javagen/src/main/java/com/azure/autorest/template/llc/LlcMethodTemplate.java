@@ -27,6 +27,7 @@ import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -208,7 +209,9 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
             } else {
                 commentBlock.line(indent + "{");
             }
-            for (ClientModelProperty property : model.getProperties()) {
+            List<ClientModelProperty> properties = new ArrayList<>();
+            traverseProperties(model, properties);
+            for (ClientModelProperty property : properties) {
                 bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc);
             }
             commentBlock.line(indent + "}");
@@ -244,6 +247,13 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                 commentBlock.line(indent + type.toString());
             }
         }
+    }
+
+    private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
+        if (model.getParentModelName() != null) {
+            traverseProperties(ClientModels.Instance.getModel(model.getParentModelName()), properties);
+        }
+        properties.addAll(model.getProperties());
     }
 
     protected static String parameterDescriptionOrDefault(ProxyMethodParameter parameter) {
