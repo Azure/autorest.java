@@ -3,6 +3,8 @@ import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
 
+import java.lang.reflect.Modifier;
+
 public class BodyComplexCustomization extends Customization {
     @Override
     public void customize(LibraryCustomization customization) {
@@ -31,7 +33,7 @@ public class BodyComplexCustomization extends Customization {
         ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj");
         readonlyObj.getProperty("id").generateGetterAndSetter();
         readonlyObj.getMethod("getId").setReturnType("UUID", "UUID.fromString(%s)");
-        readonlyObj.getMethod("setId").setModifier(0);
+        readonlyObj.getMethod("setId").setModifier(Modifier.PRIVATE);
         readonlyObj.getMethod("getId").getJavadoc().setDescription("Get the ID of the object.");
         readonlyObj.getMethod("setId").getJavadoc().setDescription("Set the ID of the object.")
                 .setReturn("The current ReadonlyObj instance")
@@ -39,7 +41,7 @@ public class BodyComplexCustomization extends Customization {
 
         PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
         ClassCustomization arrayClient = root.getClass("ArrayClient");
-        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this").setModifier(0)
+        arrayClient.getMethod("putValid").setReturnType("ArrayClient", "this").setModifier(Modifier.PRIVATE)
                 .removeAnnotation("ServiceMethod");
         arrayClient.getJavadoc().setDescription("The sync client containing Array operations.");
         arrayClient.getMethod("putValid").getJavadoc()
