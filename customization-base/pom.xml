@@ -13,7 +13,7 @@
 
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-customization</artifactId>
-  <version>1.0.0-beta.3</version>
+  <version>1.0.0-beta.4</version>
 
   <name>Microsoft Azure AutoRest for Java Customization</name>
   <description>This module contains the base classes needed for customizing a generated library.</description>

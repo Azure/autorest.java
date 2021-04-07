@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UtilsTests {
     @ParameterizedTest
     @ValueSource(ints = { Modifier.PUBLIC, Modifier.PROTECTED, Modifier.PRIVATE, Modifier.ABSTRACT, Modifier.STATIC,
-        Modifier.FINAL })
+        Modifier.FINAL, 0 })
     public void validClassModifiers(int modifier) {
         assertDoesNotThrow(() -> validateModifiers(Modifier.classModifiers(), modifier));
     }
@@ -31,7 +31,7 @@ public class UtilsTests {
 
     @ParameterizedTest
     @ValueSource(ints = { Modifier.PUBLIC, Modifier.PROTECTED, Modifier.PRIVATE, Modifier.ABSTRACT, Modifier.STATIC,
-        Modifier.FINAL, Modifier.SYNCHRONIZED })
+        Modifier.FINAL, Modifier.SYNCHRONIZED, 0 })
     public void validMethodModifiers(int modifier) {
         assertDoesNotThrow(() -> validateModifiers(Modifier.methodModifiers(), modifier));
     }
