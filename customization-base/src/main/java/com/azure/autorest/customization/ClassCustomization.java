@@ -207,11 +207,13 @@ public final class ClassCustomization {
      * <p>
      * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers, {@code
      * Modifier.PUBLIC | Modifier.ABSTRACT}.
+     * <p>
+     * Pass {@code 0} for {@code modifiers} to indicate that the method has no modifiers.
      *
      * @param modifiers The {@link Modifier Modifiers} for the class.
      * @return The updated ClassCustomization object.
-     * @throws IllegalArgumentException If the {@code modifier} is less than or equal to {@code 0} or any {@link
-     * Modifier} included in the bitwise OR isn't a valid class {@link Modifier}.
+     * @throws IllegalArgumentException If the {@code modifier} is less than {@code 0} or any {@link Modifier} included
+     * in the bitwise OR isn't a valid class {@link Modifier}.
      */
     public ClassCustomization setModifier(int modifiers) {
         languageClient.listDocumentSymbols(classSymbol.getLocation().getUri())

@@ -77,7 +77,12 @@ public class Utils {
     }
 
     static void validateModifiers(int validTypeModifiers, int newModifiers) {
-        if (newModifiers <= 0) {
+        // 0 indicates no modifiers.
+        if (newModifiers == 0) {
+            return;
+        }
+
+        if (newModifiers < 0) {
             throw new IllegalArgumentException("Modifiers aren't allowed to be less than or equal to 0.");
         }
 
