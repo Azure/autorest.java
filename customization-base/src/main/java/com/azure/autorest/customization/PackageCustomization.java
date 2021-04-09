@@ -39,6 +39,10 @@ public final class PackageCustomization {
             () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
     }
 
+    /**
+     * This method lists all the classes in this package.
+     * @return A list of classes that are in this package.
+     */
     public List<ClassCustomization> listClasses() {
         List<ClassCustomization> classCustomizations = languageClient.findWorkspaceSymbol("*")
                 .stream()
