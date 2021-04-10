@@ -4,7 +4,9 @@ import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The package level customization for an AutoRest generated client library.
@@ -35,5 +37,19 @@ public final class PackageCustomization {
         return Utils.returnIfPresentOrThrow(classSymbol,
             symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
             () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
+    }
+
+    /**
+     * This method lists all the classes in this package.
+     * @return A list of classes that are in this package.
+     */
+    public List<ClassCustomization> listClasses() {
+        List<ClassCustomization> classCustomizations = languageClient.findWorkspaceSymbol("*")
+                .stream()
+                .filter(si -> si.getContainerName().equals(packageName))
+                .map(classSymbol -> new ClassCustomization(editor, languageClient, packageName,
+                        classSymbol.getName(), classSymbol))
+                .collect(Collectors.toList());
+        return classCustomizations;
     }
 }

@@ -2,10 +2,11 @@ import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
+import org.slf4j.Logger;
 
 public class BodyComplexCustomization extends Customization {
     @Override
-    public void customize(LibraryCustomization customization) {
+    public void customize(LibraryCustomization customization, Logger logger) {
         PackageCustomization implementationModels = customization.getPackage("fixtures.bodycomplex.implementation.models");
         implementationModels.getClass("Goblinshark").rename("GoblinShark");
 

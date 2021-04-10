@@ -110,7 +110,7 @@ public class Postprocessor extends NewPlugin {
       try {
         Customization customization = customizationClass.getConstructor().newInstance();
         logger.info("Running customization, this may take a while...");
-        fileContents = customization.run(fileContents);
+        fileContents = customization.run(fileContents, logger);
       } catch (Exception e) {
         logger.error("Unable to complete customization", e);
         return false;
