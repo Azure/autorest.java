@@ -29,9 +29,11 @@ public final class MethodCustomization {
     private final Editor editor;
     private final String packageName;
     private final String className;
+    private final URI fileUri;
+    private final String fileName;
     private final String methodName;
-    private String methodSignature;
-    private SymbolInformation symbol;
+    private final String methodSignature;
+    private final SymbolInformation symbol;
 
     MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
         String methodName, String methodSignature, SymbolInformation symbol) {
@@ -39,6 +41,9 @@ public final class MethodCustomization {
         this.languageClient = languageClient;
         this.packageName = packageName;
         this.className = className;
+        this.fileUri = symbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        this.fileName = fileUri.toString().substring(i);
         this.methodName = methodName;
         this.methodSignature = methodSignature;
         this.symbol = symbol;
@@ -80,7 +85,6 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization rename(String newName) {
-        URI fileUri = symbol.getLocation().getUri();
         WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
         Utils.applyWorkspaceEdit(edit, editor, languageClient);
         Optional<SymbolInformation> newMethodSymbol = languageClient.listDocumentSymbols(fileUri).stream()
@@ -103,9 +107,6 @@ public final class MethodCustomization {
             annotation = "@" + annotation;
         }
 
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
         if (editor.getContents().containsKey(fileName)) {
             int line = symbol.getLocation().getRange().getStart().getLine();
             Position position = editor.insertBlankLine(fileName, line, true);
@@ -126,8 +127,9 @@ public final class MethodCustomization {
                     }
                 });
         }
-        refreshSymbol();
-        return this;
+
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
+            refreshSymbol());
     }
 
     /**
@@ -141,9 +143,6 @@ public final class MethodCustomization {
             annotation = "@" + annotation;
         }
 
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
         if (editor.getContents().containsKey(fileName)) {
             int line = symbol.getLocation().getRange().getStart().getLine();
             int annotationLine = -1;
@@ -175,8 +174,9 @@ public final class MethodCustomization {
                     });
             }
         }
-        refreshSymbol();
-        return this;
+
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
+            refreshSymbol());
     }
 
     /**
@@ -196,8 +196,55 @@ public final class MethodCustomization {
         Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
                 oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
             Modifier.methodModifiers(), modifiers);
-        refreshSymbol();
-        return this;
+
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
+            refreshSymbol());
+    }
+
+    /**
+     * Replace the parameters of the method.
+     *
+     * @param newParameters New method parameters.
+     * @return The updated MethodCustomization object.
+     */
+    public MethodCustomization replaceParameters(String newParameters) {
+        // Beginning line of the method.
+        int line = symbol.getLocation().getRange().getStart().getLine();
+        String parametersPositionFinder = editor.getFileLine(fileName, line);
+
+        // First find the starting location of the parameters.
+        // The beginning of the parameters may not be on the same line as the start of the signature.
+        while (!parametersPositionFinder.contains("(")) {
+            parametersPositionFinder = editor.getFileLine(fileName, ++line);
+        }
+
+        // Now that the line where the method parameters begin is found create its position.
+        int parametersStartCharacter = parametersPositionFinder.indexOf("(");
+
+        // Starting character is inclusive of the character offset, so increment the index one.
+        Position parametersStart = new Position(line, parametersStartCharacter + 1);
+
+        // Then find where the parameters end.
+        // The ending of the parameters may not be on the same line as the start of the parameters.
+        while (!parametersPositionFinder.contains(")")) {
+            parametersPositionFinder = editor.getFileLine(fileName, ++line);
+        }
+
+        // Now that the line where the method parameters end is found gets create its position.
+        int parametersEndCharacter = parametersPositionFinder.indexOf(")");
+
+        // Ending character is exclusive of the character offset, so use the index as is.
+        Position parametersEnd = new Position(line, parametersEndCharacter);
+
+        editor.replace(fileName, parametersStart, parametersEnd, newParameters);
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(String.format("%s(%s)", methodName, newParameters));
     }
 
     /**
@@ -207,10 +254,6 @@ public final class MethodCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceBody(String newBody) {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-
         // Beginning line of the method.
         int line = symbol.getLocation().getRange().getStart().getLine();
         String bodyPositionFinder = editor.getFileLine(fileName, line);
@@ -227,7 +270,7 @@ public final class MethodCustomization {
         int lastLineLength = methodContentIndent.length();
 
         // Then continue iterating over lines until the method close line is found.
-        while (!bodyPositionFinder.matches(methodIndent + "\\}\\s*")) {
+        while (!bodyPositionFinder.matches(methodIndent + "}\\s*")) {
             lastLineLength = bodyPositionFinder.length();
             bodyPositionFinder = editor.getFileLine(fileName, ++line);
         }
@@ -242,6 +285,24 @@ public final class MethodCustomization {
         return new PackageCustomization(editor, languageClient, packageName)
             .getClass(className)
             .getMethod(methodSignature);
+    }
+
+    /**
+     * Change the return type of a method. The new return type will be automatically imported.
+     *
+     * <p>
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
+     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
+     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
+     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
+     * instance of {@code %s}.
+     *
+     * @param newReturnType the simple name of the new return type
+     * @param returnValueFormatter the return value String formatter as described above
+     * @return the current class customization for chaining
+     */
+    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
+        return setReturnType(newReturnType, returnValueFormatter, false);
     }
 
     /**
@@ -262,10 +323,6 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter, boolean replaceReturnStatement) {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-
         List<TextEdit> edits = new ArrayList<>();
 
         int line = symbol.getLocation().getRange().getStart().getLine();
@@ -345,33 +402,12 @@ public final class MethodCustomization {
                         Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
                 }
             });
-        methodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
-        refreshSymbol();
-        return this;
+        String newMethodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, newMethodSignature,
+            refreshSymbol());
     }
 
-    /**
-     * Change the return type of a method. The new return type will be automatically imported.
-     *
-     * <p>
-     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
-     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
-     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
-     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
-     * instance of {@code %s}.
-     *
-     * @param newReturnType the simple name of the new return type
-     * @param returnValueFormatter the return value String formatter as described above
-     * @return the current class customization for chaining
-     */
-    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
-        return setReturnType(newReturnType, returnValueFormatter, false);
-    }
-
-    private void refreshSymbol() {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
+    private SymbolInformation refreshSymbol() {
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
@@ -379,6 +415,6 @@ public final class MethodCustomization {
         if (!methodSymbol.isPresent()) {
             throw new IllegalArgumentException("Method " + methodSignature + " does not exist in class " + className);
         }
-        symbol = methodSymbol.get();
+        return methodSymbol.get();
     }
 }
