@@ -7,8 +7,6 @@ import com.azure.autorest.customization.implementation.ls.models.SymbolInformati
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+
+import static com.azure.autorest.customization.implementation.Utils.writeLine;
 
 
 /**
@@ -292,7 +292,7 @@ public final class JavadocCustomization {
                     seeDocs.add(editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim());
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@deprecated")) {
-                    Position docStart = new Position(symbolLine, lineContent.indexOf("@see") + 5);
+                    Position docStart = new Position(symbolLine, lineContent.indexOf("@deprecated") + 5);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
                     deprecatedDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
                     currentDocEndLine = symbolLine - 1;
@@ -326,43 +326,53 @@ public final class JavadocCustomization {
     }
 
     private void commit() {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        printWriter.println("/**");
+        // Given this method is self contained use StringBuilder as it doesn't have synchronization.
+        // Additional start with a sizeable 4kb buffer to reduce chances of resizing while keeping it small.
+        StringBuilder stringBuilder = new StringBuilder(4096);
+
+        writeLine(stringBuilder, "/**");
         if (descriptionDocs != null) {
-            printWriter.println(indent + " * " + descriptionDocs);
+            writeLine(stringBuilder.append(indent).append(" * "), descriptionDocs);
         }
+
         if (!paramDocs.isEmpty() || !throwsDocs.isEmpty() || returnDoc != null) {
-            printWriter.println(indent + " * ");
+            writeLine(stringBuilder.append(indent), " * ");
 
             for (Map.Entry<String, String> paramDoc : paramDocs.entrySet()) {
-                printWriter.println(indent + " * @param " + paramDoc.getKey() + " " + paramDoc.getValue());
+                writeLine(stringBuilder.append(indent)
+                    .append(" * @param ")
+                    .append(paramDoc.getKey())
+                    .append(" "), paramDoc.getValue());
             }
 
             if (returnDoc != null) {
-                printWriter.println(indent + " * @return " + returnDoc);
+                writeLine(stringBuilder.append(indent).append(" * @return "), returnDoc);
             }
 
             for (Map.Entry<String, String> throwsDoc : throwsDocs.entrySet()) {
-                printWriter.println(indent + " * @throws " + throwsDoc.getKey() + " " + throwsDoc.getValue());
+                writeLine(stringBuilder.append(indent)
+                    .append(" * @throws ")
+                    .append(throwsDoc.getKey())
+                    .append(" "), throwsDoc.getValue());
             }
 
             for (String seeDoc : seeDocs) {
-                printWriter.println(indent + " * @see " + seeDoc);
+                writeLine(stringBuilder.append(indent).append(" * @see "), seeDoc);
             }
 
             if (sinceDoc != null) {
-                printWriter.println(indent + " * @since " + sinceDoc);
+                writeLine(stringBuilder.append(indent).append(" * @since "), sinceDoc);
             }
 
             if (deprecatedDoc != null) {
-                printWriter.println(indent + " * @deprecated " + deprecatedDoc);
+                writeLine(stringBuilder.append(indent).append(" * @deprecated "), deprecatedDoc);
             }
 
         }
-        printWriter.print(indent + " */");
 
-        editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringWriter.toString());
+        stringBuilder.append(indent).append(" */");
+
+        editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringBuilder.toString());
         FileEvent replaceEvent = new FileEvent();
         replaceEvent.setUri(fileUri);
         replaceEvent.setType(FileChangeType.CHANGED);

@@ -128,5 +128,9 @@ public class Utils {
             : orElse.get();
     }
 
+    public static void writeLine(StringBuilder stringBuilder, String text) {
+        stringBuilder.append(text).append(System.lineSeparator());
+    }
+
     private Utils() {}
 }

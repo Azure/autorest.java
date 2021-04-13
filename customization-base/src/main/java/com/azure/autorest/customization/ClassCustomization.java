@@ -39,7 +39,10 @@ public final class ClassCustomization {
     private final Editor editor;
     private final String packageName;
     private final String className;
-    private SymbolInformation classSymbol;
+    private final SymbolInformation classSymbol;
+
+    private final URI fileUri;
+    private final String fileName;
 
     ClassCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, SymbolInformation classSymbol) {
         this.editor = editor;
@@ -47,6 +50,10 @@ public final class ClassCustomization {
         this.packageName = packageName;
         this.className = className;
         this.classSymbol = classSymbol;
+
+        this.fileUri = classSymbol.getLocation().getUri();
+        int i = fileUri.toString().indexOf("src/main/java/");
+        this.fileName = fileUri.toString().substring(i);
     }
 
     /**
@@ -79,9 +86,6 @@ public final class ClassCustomization {
         } else {
             methodName = methodNameOrSignature;
         }
-        URI fileUri = classSymbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodNameOrSignature))
@@ -131,9 +135,6 @@ public final class ClassCustomization {
         }
 
         // find position
-        URI fileUri = classSymbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
         List<String> fileLines = editor.getFileLines(fileName);
         int lineNum = fileLines.size();
         String currentLine = fileLines.get(--lineNum);
@@ -162,7 +163,7 @@ public final class ClassCustomization {
      * @param newName the new simple name for this class
      */
     public ClassCustomization rename(String newName) {
-        WorkspaceEdit workspaceEdit = languageClient.renameSymbol(classSymbol.getLocation().getUri(),
+        WorkspaceEdit workspaceEdit = languageClient.renameSymbol(fileUri,
             classSymbol.getLocation().getRange().getStart(), newName);
         List<FileEvent> changes = new ArrayList<>();
         for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
@@ -223,8 +224,8 @@ public final class ClassCustomization {
                 Utils.replaceModifier(symbolInformation, editor, languageClient, (oldLine, newModifiers) ->
                         oldLine.replaceFirst("\\w.* class " + className, newModifiers + " class " + className),
                     Modifier.classModifiers(), modifiers));
-        refreshSymbol();
-        return this;
+
+        return refreshSymbol();
     }
 
     /**
@@ -243,8 +244,6 @@ public final class ClassCustomization {
             .stream().filter(si -> si.getKind() == SymbolKind.CLASS)
             .findFirst();
         if (symbol.isPresent()) {
-            int i = fileUri.toString().indexOf("src/main/java/");
-            String fileName = fileUri.toString().substring(i);
             if (editor.getContents().containsKey(fileName)) {
                 int line = symbol.get().getLocation().getRange().getStart().getLine();
                 Position position = editor.insertBlankLine(fileName, line, true);
@@ -266,8 +265,8 @@ public final class ClassCustomization {
                     });
             }
         }
-        refreshSymbol();
-        return this;
+
+        return refreshSymbol();
     }
 
     /**
@@ -281,9 +280,6 @@ public final class ClassCustomization {
             annotation = "@" + annotation;
         }
 
-        URI fileUri = classSymbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
         if (editor.getContents().containsKey(fileName)) {
             Range range = editor.searchTextFirstOccurrence(fileName, annotation);
             if (range != null) {
@@ -307,8 +303,8 @@ public final class ClassCustomization {
                     });
             }
         }
-        refreshSymbol();
-        return this;
+
+        return refreshSymbol();
     }
 
     /**
@@ -330,7 +326,7 @@ public final class ClassCustomization {
         return this;
     }
 
-    private void refreshSymbol() {
-        this.classSymbol = new PackageCustomization(editor, languageClient, packageName).getClass(className).classSymbol;
+    private ClassCustomization refreshSymbol() {
+        return new PackageCustomization(editor, languageClient, packageName).getClass(className);
     }
 }

@@ -4,13 +4,10 @@ import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,6 +17,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.azure.autorest.customization.implementation.Utils.writeLine;
 
 /**
  * The raw editor containing the current files being customized.
@@ -71,9 +70,10 @@ public final class Editor {
         boolean fileCreated;
         try {
             fileCreated = newFile.createNewFile();
-            FileOutputStream stream = new FileOutputStream(newFile);
-            stream.write(content.getBytes(StandardCharsets.UTF_8));
-            stream.close();
+
+            try (BufferedWriter writer = Files.newBufferedWriter(newFile.toPath())) {
+                writer.write(content);
+            }
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -158,29 +158,40 @@ public final class Editor {
      * @param newContent the new content to replace the chunk
      */
     public void replace(String fileName, Position start, Position end, String newContent) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        StringBuilder stringBuilder = new StringBuilder(4096);
         List<String> lineContent = lines.get(fileName);
+
+        // Copy lines until the start of the change is reached.
         for (int i = 0; i != start.getLine(); i++) {
-            printWriter.println(lineContent.get(i));
+            writeLine(stringBuilder, lineContent.get(i));
         }
-        printWriter.print(lineContent.get(start.getLine()).substring(0, start.getCharacter()));
+
+        // Copy until the start of the change.
+        stringBuilder.append(lineContent.get(start.getLine()), 0, start.getCharacter());
+
         List<String> replacementLineContent = splitContentIntoLines(newContent);
+
+        // Add the change.
         if (replacementLineContent.size() > 0) {
             for (int i = 0; i != replacementLineContent.size() - 1; i++) {
-                printWriter.println(replacementLineContent.get(i));
+                writeLine(stringBuilder, replacementLineContent.get(i));
             }
-            printWriter.print(replacementLineContent.get(replacementLineContent.size() - 1));
+
+            stringBuilder.append(replacementLineContent.get(replacementLineContent.size() - 1));
         }
-        printWriter.println(lineContent.get(end.getLine()).substring(end.getCharacter()));
+
+        writeLine(stringBuilder, lineContent.get(end.getLine()).substring(end.getCharacter()));
+
+        // Copy the rest of the file until its end.
         for (int i = end.getLine() + 1; i != lineContent.size(); i++) {
-            printWriter.println(lineContent.get(i));
+            writeLine(stringBuilder, lineContent.get(i));
         }
-        contents.put(fileName, stringWriter.toString());
+
+        contents.put(fileName, stringBuilder.toString());
         lines.put(fileName, splitContentIntoLines(contents.get(fileName)));
-        try (PrintWriter fileWriter = new PrintWriter(paths.get(fileName).toFile())) {
-            fileWriter.print(contents.get(fileName));
-        } catch (FileNotFoundException e) {
+        try (BufferedWriter fileWriter = Files.newBufferedWriter(paths.get(fileName))) {
+            fileWriter.write(contents.get(fileName));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -255,8 +266,7 @@ public final class Editor {
      * @return the text in the range
      */
     public String getTextInRange(String fileName, Range range, String delimiter) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        StringBuilder stringBuilder = new StringBuilder(4096);
         for (int line = range.getStart().getLine(); line <= range.getEnd().getLine(); line++) {
             String lineContent = getFileLine(fileName, line);
             int truncateIndex = 0;
@@ -268,13 +278,12 @@ public final class Editor {
                 lineContent = lineContent.substring(0, range.getEnd().getCharacter() - truncateIndex);
             }
             if (delimiter == null) {
-                printWriter.println(lineContent);
+                writeLine(stringBuilder, lineContent);
             } else {
-                printWriter.print(lineContent);
-                printWriter.print(delimiter);
+                stringBuilder.append(lineContent).append(delimiter);
             }
         }
-        return stringWriter.toString();
+        return stringBuilder.toString();
     }
 
     private static List<String> splitContentIntoLines(String content) {
