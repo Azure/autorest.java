@@ -70,9 +70,10 @@ public final class Editor {
         boolean fileCreated;
         try {
             fileCreated = newFile.createNewFile();
-            BufferedWriter writer = Files.newBufferedWriter(newFile.toPath());
-            writer.write(content);
-            writer.close();
+
+            try (BufferedWriter writer = Files.newBufferedWriter(newFile.toPath())) {
+                writer.write(content);
+            }
         } catch (IOException e) {
             throw new RuntimeException();
         }

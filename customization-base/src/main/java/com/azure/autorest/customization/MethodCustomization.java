@@ -93,7 +93,10 @@ public final class MethodCustomization {
         if (!newMethodSymbol.isPresent()) {
             throw new IllegalArgumentException("Renamed failed with new method " + newName + " not found.");
         }
-        return new MethodCustomization(editor, languageClient, packageName, className, newName, methodSignature.replace(methodName + "(", newName + "("), newMethodSymbol.get());
+
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(methodSignature.replace(methodName + "(", newName + "("));
     }
 
     /**
@@ -282,9 +285,8 @@ public final class MethodCustomization {
         fileEvent.setType(FileChangeType.CHANGED);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getMethod(methodSignature);
+        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
+            refreshSymbol());
     }
 
     /**
@@ -402,9 +404,12 @@ public final class MethodCustomization {
                         Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
                 }
             });
+
         String newMethodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, newMethodSignature,
-            refreshSymbol());
+
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(newMethodSignature);
     }
 
     private SymbolInformation refreshSymbol() {
