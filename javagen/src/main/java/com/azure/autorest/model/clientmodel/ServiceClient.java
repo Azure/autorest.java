@@ -83,7 +83,7 @@ public class ServiceClient {
      * @param serializerAdapterParameter The SerializerAdapter parameter.
      * @param defaultPollIntervalParameter The default poll interval parameter.
      */
-    private ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
+    protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                           ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter) {
         this.packageName = packageName;
         this.className = className;
@@ -206,10 +206,8 @@ public class ServiceClient {
                 }
             }
 
-            imports.add("com.azure.core.http.HttpPipelineBuilder");
-            imports.add("com.azure.core.http.policy.CookiePolicy");
-            imports.add("com.azure.core.http.policy.RetryPolicy");
-            imports.add("com.azure.core.http.policy.UserAgentPolicy");
+            addPipelineBuilderImport(imports);
+            addHttpPolicyImports(imports);
         }
 
         if (includeBuilderImports) {
@@ -222,20 +220,30 @@ public class ServiceClient {
         }
     }
 
+    protected void addHttpPolicyImports(java.util.Set<String> imports) {
+        imports.add("com.azure.core.http.policy.CookiePolicy");
+        imports.add("com.azure.core.http.policy.RetryPolicy");
+        imports.add("com.azure.core.http.policy.UserAgentPolicy");
+    }
+
+    protected void addPipelineBuilderImport(Set<String> imports) {
+        imports.add("com.azure.core.http.HttpPipelineBuilder");
+    }
+
     public static class Builder {
-        private String packageName;
-        private String className;
-        private String interfaceName;
-        private Proxy proxy;
-        private List<MethodGroupClient> methodGroupClients;
-        private List<ServiceClientProperty> properties;
-        private List<Constructor> constructors;
-        private List<ClientMethod> clientMethods;
-        private ClientMethodParameter azureEnvironmentParameter;
-        private ClientMethodParameter tokenCredentialParameter;
-        private ClientMethodParameter httpPipelineParameter;
-        private ClientMethodParameter serializerAdapterParameter;
-        private ClientMethodParameter defaultPollIntervalParameter;
+        protected String packageName;
+        protected String className;
+        protected String interfaceName;
+        protected Proxy proxy;
+        protected List<MethodGroupClient> methodGroupClients;
+        protected List<ServiceClientProperty> properties;
+        protected List<Constructor> constructors;
+        protected List<ClientMethod> clientMethods;
+        protected ClientMethodParameter azureEnvironmentParameter;
+        protected ClientMethodParameter tokenCredentialParameter;
+        protected ClientMethodParameter httpPipelineParameter;
+        protected ClientMethodParameter serializerAdapterParameter;
+        protected ClientMethodParameter defaultPollIntervalParameter;
 
         /**
          * Sets the package that this service client belongs to.

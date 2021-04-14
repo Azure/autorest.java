@@ -19,7 +19,7 @@ public class ClientException {
      * @param errorName The name of the error type contained by the ServiceException.
      * @param parentType The type of parent exception.
      */
-    private ClientException(String package_Keyword, String name, String errorName, IType parentType) {
+    protected ClientException(String package_Keyword, String name, String errorName, IType parentType) {
         this.package_Keyword = package_Keyword;
         this.name = name;
         this.errorName = errorName;
@@ -58,10 +58,10 @@ public class ClientException {
      * Builder for ClientException.
      */
     public static class Builder {
-        private String name;
-        private String errorName;
-        private String packageName;
-        private IType parentType = ClassType.HttpResponseException;
+        protected String name;
+        protected String errorName;
+        protected String packageName;
+        protected IType parentType = ClassType.HttpResponseException;
 
         /**
          * Sets exception name.

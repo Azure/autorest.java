@@ -1,10 +1,13 @@
 package com.azure.autorest.android;
 
+import com.azure.autorest.android.mapper.AndroidMapperFactory;
+import com.azure.autorest.android.template.AndroidTemplateFactory;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.mapper.MapperFactory;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
@@ -17,6 +20,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -72,9 +76,11 @@ public class Androidgen extends NewPlugin {
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
             // Step 2: Map
+            Mappers.setFactory(new AndroidMapperFactory());
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
+            Templates.setFactory(new AndroidTemplateFactory());
             JavaPackage javaPackage = new JavaPackage(this);
             // Service client
             javaPackage

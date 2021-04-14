@@ -82,7 +82,7 @@ public class ClientModel {
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
      */
-    private ClientModel(String package_Keyword, String name, List<String> imports, String description,
+    protected ClientModel(String package_Keyword, String name, List<String> imports, String description,
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences) {
@@ -172,13 +172,13 @@ public class ClientModel {
      */
     public final void addImportsTo(Set<String> imports, JavaSettings settings) {
         if (properties.stream().anyMatch(p -> !p.getIsReadOnly())) {
-            imports.add("com.azure.core.annotation.Fluent");
+            addFluentAnnotationImport(imports);
         } else {
-            imports.add("com.azure.core.annotation.Immutable");
+            addImmutableAnnotationImport(imports);
         }
 
         if (needsFlatten) {
-            imports.add("com.azure.core.annotation.JsonFlatten");
+            addJsonFlattenAnnotationImport(imports);
         }
 
         for (String import_Keyword : getImports()) {
@@ -200,21 +200,33 @@ public class ClientModel {
         }
     }
 
+    protected void addJsonFlattenAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.JsonFlatten");
+    }
+
+    protected void addImmutableAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.Immutable");
+    }
+
+    protected void addFluentAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.Fluent");
+    }
+
     public static class Builder {
-        private String packageName;
-        private String name;
-        private List<String> imports;
-        private String description;
-        private boolean isPolymorphic;
-        private String polymorphicDiscriminator;
-        private String serializedName;
-        private boolean needsFlatten = false;
-        private String parentModelName;
-        private List<ClientModel> derivedModels;
-        private String xmlName;
-        private List<ClientModelProperty> properties;
-        private String xmlNamespace;
-        private List<ClientModelPropertyReference> propertyReferences;
+        protected String packageName;
+        protected String name;
+        protected List<String> imports;
+        protected String description;
+        protected boolean isPolymorphic;
+        protected String polymorphicDiscriminator;
+        protected String serializedName;
+        protected boolean needsFlatten = false;
+        protected String parentModelName;
+        protected List<ClientModel> derivedModels;
+        protected String xmlName;
+        protected List<ClientModelProperty> properties;
+        protected String xmlNamespace;
+        protected List<ClientModelPropertyReference> propertyReferences;
 
         /**
          * Sets the package that this model class belongs to.
