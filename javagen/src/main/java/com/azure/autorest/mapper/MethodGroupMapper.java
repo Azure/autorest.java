@@ -33,7 +33,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         if (parsed.containsKey(methodGroup)) {
             return parsed.get(methodGroup);
         }
-        MethodGroupClient.Builder builder = new MethodGroupClient.Builder();
+        MethodGroupClient.Builder builder = createMethodGroupClientBuilder();
 
         String classBaseName = methodGroup.getLanguage().getJava().getName();
         builder.classBaseName(classBaseName);
@@ -56,7 +56,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         builder.className(className);
 
-        Proxy.Builder proxyBuilder = new Proxy.Builder();
+        Proxy.Builder proxyBuilder = createProxyBuilder();
 
         String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
         restAPIName += "Service";
@@ -123,6 +123,14 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         parsed.put(methodGroup, methodGroupClient);
 
         return methodGroupClient;
+    }
+
+    protected MethodGroupClient.Builder createMethodGroupClientBuilder() {
+        return new MethodGroupClient.Builder();
+    }
+
+    protected Proxy.Builder createProxyBuilder() {
+        return new Proxy.Builder();
     }
 
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {

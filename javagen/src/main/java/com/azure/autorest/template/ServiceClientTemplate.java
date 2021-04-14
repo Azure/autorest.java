@@ -66,12 +66,12 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
 
         if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients()) {
-            imports.add("com.azure.core.annotation.ServiceClient");
+            addServiceClientAnnotationImport(imports);
             imports.add(String.format("%1$s.%2$s",
                 ClientModelUtil.getServiceClientBuilderPackageName(serviceClient),
                 serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
         } else {
-            imports.add("com.azure.core.util.serializer.JacksonAdapter");
+            addSerializerImport(imports);
         }
 
         serviceClient.addImportsTo(imports, true, false, settings);
@@ -234,9 +234,12 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter()%1$s);", constructorArgsFinal);
+                            final String initializeRetryPolicy = writeRetryPolicyInitialization();
+                            final String initializeSerializer = writeSerializerInitialization();
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), %1$s, new CookiePolicy()).build(), %2$s%3$s);", initializeRetryPolicy, initializeSerializer, constructorArgsFinal);
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line("this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter()%1$s);", constructorArgsFinal);
+                            final String createDefaultSerializerAdapter = writeSerializerInitialization();
+                            constructorBlock.line("this(httpPipeline, %1$s%2$s);", createDefaultSerializerAdapter, constructorArgsFinal);
 //                            constructorBlock.line("this.httpPipeline = httpPipeline;");
 //                            constructorParametersCodes.accept(constructorBlock);
 //
@@ -255,7 +258,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 //                            }
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter()))) {
                             constructorBlock.line("this.httpPipeline = httpPipeline;");
-                            constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+                            writeSerializerMemberInitialization(constructorBlock);
                             constructorParametersCodes.accept(constructorBlock);
 
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
@@ -286,6 +289,26 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
             this.writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
+        constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+    }
+
+    protected String writeRetryPolicyInitialization() {
+        return "new RetryPolicy()";
+    }
+
+    protected String writeSerializerInitialization() {
+        return "JacksonAdapter.createDefaultSerializerAdapter()";
+    }
+
+    protected void addSerializerImport(Set<String> imports) {
+        imports.add("com.azure.core.util.serializer.JacksonAdapter");
+    }
+
+    protected void addServiceClientAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.ServiceClient");
     }
 
     /**

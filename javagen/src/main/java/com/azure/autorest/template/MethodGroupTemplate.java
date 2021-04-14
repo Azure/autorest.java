@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
     private static MethodGroupTemplate _instance = new MethodGroupTemplate();
 
-    private MethodGroupTemplate() {
+    protected MethodGroupTemplate() {
     }
 
     public static MethodGroupTemplate getInstance() {
@@ -80,8 +81,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             classBlock.constructor(visibility, String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
             {
                 if (methodGroupClient.getProxy() != null) {
-                    ClassType proxyType = ClassType.RestProxy;
-                    constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());", proxyType.getName(), methodGroupClient.getProxy().getName()));
+                    writeServiceProxyConstruction(constructor, methodGroupClient);
                 }
                 constructor.line("this.client = client;");
             });
@@ -92,5 +92,11 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
         });
+    }
+
+    protected void writeServiceProxyConstruction(JavaBlock constructor, MethodGroupClient methodGroupClient) {
+        ClassType proxyType = ClassType.RestProxy;
+        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());",
+                proxyType.getName(), methodGroupClient.getProxy().getName()));
     }
 }

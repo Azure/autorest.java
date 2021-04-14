@@ -35,12 +35,16 @@ public class ClassType implements IType {
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
     public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
+    public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
     public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
     public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
+    public static final ClassType AndroidHttpPipeline = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipeline").build();
     public static final ClassType RestProxy = new ClassType.Builder().knownClass(com.azure.core.http.rest.RestProxy.class).build();
+    public static final ClassType AndroidRestProxy = new ClassType.Builder().packageName("com.azure.android.core.rest").name("RestProxy").build();
     public static final ClassType SerializerAdapter = new ClassType.Builder().knownClass(com.azure.core.util.serializer.SerializerAdapter.class).build();
+    public static final ClassType AndroidJacksonSerder = new ClassType.Builder().packageName("com.azure.android.core.serde.jackson").name("JacksonSerder").build();
     public static final ClassType Function = new ClassType.Builder().knownClass(java.util.function.Function.class).build();
     public static final ClassType ByteBuffer = new ClassType.Builder().knownClass(java.nio.ByteBuffer.class).build();
     public static final ClassType URL = new ClassType.Builder().knownClass(java.net.URL.class).build();
@@ -48,15 +52,20 @@ public class ClassType implements IType {
     public static final ClassType StreamResponse = new ClassType.Builder().knownClass(com.azure.core.http.rest.StreamResponse.class).build();
     public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
     public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
+    public static final ClassType AndroidContext = new ClassType.Builder().packageName("com.azure.android.core.util").name("Context").build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();
     public static final ClassType HttpClient = new ClassType.Builder().knownClass(com.azure.core.http.HttpClient.class).build();
+    public static final ClassType AndroidHttpClient = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpClient").build();
     public static final ClassType HttpPipelinePolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpPipelinePolicy.class).build();
+    public static final ClassType AndroidHttpPipelinePolicy = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipelinePolicy").build();
     public static final ClassType HttpLogOptions = new ClassType.Builder().knownClass(com.azure.core.http.policy.HttpLogOptions.class).build();
+    public static final ClassType AndroidHttpLogOptions = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("HttpLogOptions").build();
     public static final ClassType Configuration = new ClassType.Builder().knownClass(com.azure.core.util.Configuration.class).build();
     public static final ClassType ServiceVersion = new ClassType.Builder().knownClass(com.azure.core.util.ServiceVersion.class).build();
     public static final ClassType AzureKeyCredential = new ClassType.Builder().knownClass(com.azure.core.credential.AzureKeyCredential.class).build();
     public static final ClassType RetryPolicy = new ClassType.Builder().knownClass(com.azure.core.http.policy.RetryPolicy.class).build();
+    public static final ClassType AndroidRetryPolicy = new ClassType.Builder().packageName("com.azure.android.core.http.policy").name("RetryPolicy").build();
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
 
