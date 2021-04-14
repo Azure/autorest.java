@@ -210,5 +210,8 @@ public class FluentMethodTests {
 
         FluentMethodParameterMethod parameterMethod = new FluentMethodParameterMethod(lockModel, FluentMethodType.CREATE_WITH, stage, lockParameter, variable);
         Assertions.assertEquals("WithCreate withLockName(String lockName)", parameterMethod.getInterfaceMethodSignature());
+
+        parameterMethod = new FluentMethodParameterMethod(lockModel, FluentMethodType.CREATE_WITH, stage, lockParameter, variable, "withLockNameParameter");
+        Assertions.assertEquals("WithCreate withLockNameParameter(String lockName)", parameterMethod.getInterfaceMethodSignature());
     }
 }
