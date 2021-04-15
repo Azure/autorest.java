@@ -3,7 +3,6 @@ package com.azure.autorest.android.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -12,8 +11,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
-
-import java.util.stream.Stream;
 
 public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
@@ -120,28 +117,6 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         }
 
         return String.format("ResponseCompletableFuture<%1$s> %2$s = new ResponseCompletableFuture<>(); ", modelType, completeFutureVariableName);
-    }
-
-    private String declareCompletableFuture(ClientMethod clientMethod, String completeFutureVariableName) {
-        return String.format("%1$s %2$s = new CompletableFuture<>();", clientMethod.getReturnValue().getType(), completeFutureVariableName);
-    }
-
-    private String declareCallback(ClientMethod clientMethod, String completeFutureVariableName, String callbackVariableName) {
-        GenericType clientReturnGenericType = (GenericType) clientMethod.getReturnValue().getType().getClientType();
-        IType responseType = clientReturnGenericType.getTypeArguments()[0];
-        StringBuilder callbackBuilder = new StringBuilder();
-        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {%n", responseType, callbackVariableName));
-        callbackBuilder.append(String.format("\t@Override%n"));
-        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {%n", responseType));
-        callbackBuilder.append(String.format("\t\t%s.complete(response);%n", completeFutureVariableName));
-        callbackBuilder.append(String.format("\t}%n"));
-        callbackBuilder.append(String.format("\t@Override%n"));
-        callbackBuilder.append(String.format("\tpublic void onFailure(Throwable error) {%n"));
-        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);%n", completeFutureVariableName));
-        callbackBuilder.append(String.format("\t}%n"));
-        callbackBuilder.append(String.format("};%n"));
-
-        return callbackBuilder.toString();
     }
 
     private String generateProxyMethodCall(ClientMethod clientMethod, ProxyMethod restAPIMethod, JavaSettings settings, String callbackVariableName) {

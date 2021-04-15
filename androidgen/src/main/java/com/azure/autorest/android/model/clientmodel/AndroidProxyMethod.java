@@ -76,12 +76,13 @@ public class AndroidProxyMethod extends ProxyMethod {
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
-                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionTypes");
-                imports.add("com.azure.android.core.annotation.UnexpectedResponseExceptionType");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
             if (getUnexpectedResponseExceptionTypes() != null) {
                 imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
             if (getIsResumable()) {
@@ -96,7 +97,7 @@ public class AndroidProxyMethod extends ProxyMethod {
             imports.add("com.azure.android.core.rest.annotation.ExpectedResponses");
 
             if (getReturnValueWireType() != null) {
-                imports.add("com.azure.android.core.annotation.ReturnValueWireType");
+                imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
                 returnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 
@@ -117,6 +118,9 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         @Override
         public ProxyMethod build() {
+            if (unexpectedResponseExceptionTypes.containsKey(unexpectedResponseExceptionType)) {
+                unexpectedResponseExceptionType = null;
+            }
             return new AndroidProxyMethod(requestContentType,
                     returnType,
                     httpMethod,
