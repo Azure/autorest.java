@@ -325,7 +325,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             List<ClientModelProperty> ctorArgs =
                 parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
-                        .filter(property -> !property.getIsConstant())
+                    .filter(property -> !property.getIsConstant())
                     .collect(Collectors.toList());
             // this will be reversed again, so, it will be in the right order if a
             // super class has multiple ctor args
@@ -340,7 +340,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .isEmpty())) {
 
             String requiredCtorArgs = requiredProperties.stream()
-                    .filter(property -> !property.getIsConstant())
                 .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
                     property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
 
