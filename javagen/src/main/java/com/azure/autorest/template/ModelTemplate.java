@@ -315,14 +315,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock,
-        List<ClientModelProperty> constantProperties, List<ClientModelProperty> requiredProperties) {
+        List<ClientModelProperty> constantProperties, List<ClientModelProperty> allRequiredProperties) {
 
+        List<ClientModelProperty> requiredProperties =
+                allRequiredProperties.stream().filter(property -> !property.getIsConstant()).collect(Collectors.toList());
         String lastParentName = model.getName();
         ClientModel parentModel = ClientModels.Instance.getModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             List<ClientModelProperty> ctorArgs =
                 parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
+                        .filter(property -> !property.getIsConstant())
                     .collect(Collectors.toList());
             // this will be reversed again, so, it will be in the right order if a
             // super class has multiple ctor args
@@ -336,8 +339,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.isRequiredFieldsAsConstructorArgs() && (!requiredProperties.isEmpty() || !requiredParentProperties
             .isEmpty())) {
 
-
             String requiredCtorArgs = requiredProperties.stream()
+                    .filter(property -> !property.getIsConstant())
                 .map(property -> String.format("@JsonProperty(%1$s )%2$s %3$s", property.getAnnotationArguments(),
                     property.getClientType().toString(), property.getName())).collect(Collectors.joining(", "));
 
