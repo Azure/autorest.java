@@ -118,7 +118,8 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         @Override
         public ProxyMethod build() {
-            if (unexpectedResponseExceptionTypes.containsKey(unexpectedResponseExceptionType)) {
+            if (unexpectedResponseExceptionTypes != null
+                && unexpectedResponseExceptionTypes.containsKey(unexpectedResponseExceptionType)) {
                 unexpectedResponseExceptionType = null;
             }
             return new AndroidProxyMethod(requestContentType,
