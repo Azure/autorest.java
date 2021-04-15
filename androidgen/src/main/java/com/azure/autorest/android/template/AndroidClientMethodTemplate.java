@@ -65,26 +65,26 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                                                  ProxyMethod restAPIMethod,
                                                  String completeFutureVariableName) {
         ProxyMethodParameter callbackParam = restAPIMethod.getParameters().stream().filter(param -> param.getName().equals("callback")).findFirst().get();
-        IType callbackDataType = ((GenericType) callbackParam.getClientType()).getTypeArguments()[0];
+        GenericType callbackResponseType = (com.azure.autorest.model.clientmodel.GenericType) ((GenericType) callbackParam.getClientType()).getTypeArguments()[0];
+        IType callbackDataType = callbackResponseType.getTypeArguments()[0];
 
-        StringBuilder callbackBuilder = new StringBuilder();
-        callbackBuilder.append(String.format("Callback<%1$s> %2$s = new Callback<%1$s>() {%n", callbackDataType, callbackVariableName));
-        callbackBuilder.append(String.format("\t@Override%n"));
-        callbackBuilder.append(String.format("\tpublic void onSuccess(%s response) {%n", callbackDataType));
-        callbackBuilder.append(String.format("\t\t%s.complete(new PagedResponseBase<>(response.getRequest(),%n" +
-                "response.getStatusCode(),%n" +
-                "response.getHeaders(),%n" +
-                "response.getValue().getValue(),%n" +
-                "response.getValue().getNextLink(),%n" +
-                "null));%n", completeFutureVariableName));
-        callbackBuilder.append(String.format("\t}%n"));
-        callbackBuilder.append(String.format("\t@Override%n"));
-        callbackBuilder.append(String.format("\tpublic void onFailure(Throwable error) {%n"));
-        callbackBuilder.append(String.format("\t\t%s.completeExceptionally(error);%n", completeFutureVariableName));
-        callbackBuilder.append(String.format("\t}%n"));
-        callbackBuilder.append(String.format("};%n"));
+        GenericType clientReturnGenericType = (GenericType) clientMethod.getReturnValue().getType().getClientType();
+        GenericType responseType = (GenericType) clientReturnGenericType.getTypeArguments()[0];
+        IType modelType = responseType.getTypeArguments()[0];
 
-        return callbackBuilder.toString();
+        StringBuilder completableBuilder = new StringBuilder();
+        completableBuilder.append(String.format("PagedResponseCompletableFuture<%1$s, %2$s> %3$s =%n", callbackDataType, modelType, completeFutureVariableName));
+        completableBuilder.append(String.format("\tnew PagedResponseCompletableFuture<>(%n"));
+        completableBuilder.append(String.format("\t\t response -> {%n"));
+        completableBuilder.append(String.format("\t\t\t return new PagedResponseBase<>(%n"));
+        completableBuilder.append(String.format("\t\t\t\t response.getRequest(),%n"));
+        completableBuilder.append(String.format("\t\t\t\t response.getStatusCode(),%n"));
+        completableBuilder.append(String.format("\t\t\t\t response.getHeaders(),%n"));
+        completableBuilder.append(String.format("\t\t\t\t response.getValue().getValue(),%n"));
+        completableBuilder.append(String.format("\t\t\t\t response.getValue().getNextLink(),%n"));
+        completableBuilder.append(String.format("\t\t\t\t null);%n"));
+        completableBuilder.append(String.format("\t\t\t });%n"));
+        return completableBuilder.toString();
     }
 
 
@@ -109,6 +109,17 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
             function.line(serviceMethodCall);
             function.methodReturn(completeFutureVariableName);
         });
+    }
+
+    private String declareResponseCompletableFuture(ClientMethod clientMethod, String completeFutureVariableName) {
+        GenericType clientReturnGenericType = (GenericType) clientMethod.getReturnValue().getType().getClientType();
+        GenericType responseType = (GenericType) clientReturnGenericType.getTypeArguments()[0];
+        IType modelType = responseType.getTypeArguments()[0];
+        if (modelType.equals(PrimitiveType.Void)) {
+            modelType = ClassType.Void;
+        }
+
+        return String.format("ResponseCompletableFuture<%1$s> %2$s = new ResponseCompletableFuture<>(); ", modelType, completeFutureVariableName);
     }
 
     private String declareCompletableFuture(ClientMethod clientMethod, String completeFutureVariableName) {
