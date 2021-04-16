@@ -215,6 +215,12 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
                 bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc);
             }
             commentBlock.line(indent + "}");
+        } else if (typesInJavadoc.contains(type)) {
+            if (name != null) {
+                commentBlock.line(indent + name + ": (recursive schema, see " + name + " above)");
+            } else {
+                commentBlock.line(indent + "(recursive schema, see above)");
+            }
         } else if (type instanceof ListType) {
             if (name != null) {
                 commentBlock.line(indent + name + ": [");
