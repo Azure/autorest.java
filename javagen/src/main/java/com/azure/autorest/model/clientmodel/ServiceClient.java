@@ -178,7 +178,7 @@ public class ServiceClient {
                 imports.add("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
             }
             if (!getClientMethods().isEmpty()) {
-                imports.add("com.azure.core.http.rest.RestProxy");
+                addRestProxyImport(imports);
             }
 
             for (Constructor constructor : getConstructors()) {
@@ -220,7 +220,11 @@ public class ServiceClient {
         }
     }
 
-    protected void addHttpPolicyImports(java.util.Set<String> imports) {
+    protected void addRestProxyImport(Set<String> imports) {
+        imports.add("com.azure.core.http.rest.RestProxy");
+    }
+
+    protected void addHttpPolicyImports(Set<String> imports) {
         imports.add("com.azure.core.http.policy.CookiePolicy");
         imports.add("com.azure.core.http.policy.RetryPolicy");
         imports.add("com.azure.core.http.policy.UserAgentPolicy");

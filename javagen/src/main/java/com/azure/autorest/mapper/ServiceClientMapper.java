@@ -59,7 +59,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .collect(Collectors.toList());
         if (!codeModelRestAPIMethods.isEmpty()) {
             // TODO: Assume all operations share the same base url
-            Proxy.Builder proxyBuilder = new Proxy.Builder()
+            Proxy.Builder proxyBuilder = getProxyBuilder()
                     .name(serviceClientInterfaceName + "Service")
                     .clientTypeName(serviceClientInterfaceName)
                     .baseURL(codeModel.getOperationGroups().stream()
@@ -215,6 +215,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
 
         return builder.build();
+    }
+
+    protected Proxy.Builder getProxyBuilder() {
+        return new Proxy.Builder();
     }
 
     protected ClientMethodParameter createSerializerAdapterParameter() {

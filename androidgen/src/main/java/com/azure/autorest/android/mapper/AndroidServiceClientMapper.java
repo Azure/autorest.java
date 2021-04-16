@@ -1,9 +1,11 @@
 package com.azure.autorest.android.mapper;
 
+import com.azure.autorest.android.model.clientmodel.AndroidProxy;
 import com.azure.autorest.android.model.clientmodel.AndroidServiceClient;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ServiceClientMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -24,6 +26,11 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
     @Override
     protected ServiceClient.Builder createClientBuilder() {
         return new AndroidServiceClient.Builder();
+    }
+
+    @Override
+    protected Proxy.Builder getProxyBuilder() {
+        return new AndroidProxy.Builder();
     }
 
     @Override

@@ -41,6 +41,11 @@ public class AndroidServiceClient extends ServiceClient {
     }
 
     @Override
+    protected void addRestProxyImport(java.util.Set<String> imports) {
+        imports.add("com.azure.android.core.rest.RestProxy");
+    }
+
+    @Override
     protected void addPipelineBuilderImport(java.util.Set<String> imports) {
         imports.add("com.azure.android.core.http.HttpPipelineBuilder");
     }
