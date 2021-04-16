@@ -3,6 +3,7 @@ package com.azure.autorest.android.template;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.MethodGroupTemplate;
 
 import static com.azure.autorest.model.javamodel.JavaVisibility.PackagePrivate;
@@ -25,7 +26,7 @@ public class AndroidMethodGroupTemplate extends MethodGroupTemplate {
     }
 
     @Override
-    protected void writeAdditionalClassBlock(com.azure.autorest.model.javamodel.JavaClass classBlock) {
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
         classBlock.privateStaticFinalClass("ResponseCompletableFuture<T> extends CompletableFuture<Response<T>> implements Callback<Response<T>>",
                 embeddedClass -> {
                     embeddedClass.annotation("Override");

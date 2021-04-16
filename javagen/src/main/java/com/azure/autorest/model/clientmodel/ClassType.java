@@ -26,10 +26,12 @@ public class ClassType implements IType {
     public static final ClassType Character = new ClassType.Builder().knownClass(java.lang.Character.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0)))).build();
     public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + defaultValueExpression + "\"").build();
     public static final ClassType Base64Url = new ClassType.Builder().knownClass(com.azure.core.util.Base64Url.class).build();
+    public static final ClassType AndroidBase64Url = new ClassType.Builder().packageName("com.azure.android.core.util").name("Base64Url").build();
     public static final ClassType LocalDate = new ClassType.Builder().knownClass(java.time.LocalDate.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType DateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType Duration = new ClassType.Builder().knownClass(java.time.Duration.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType DateTimeRfc1123 = new ClassType.Builder().knownClass(com.azure.core.util.DateTimeRfc1123.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").build();
     public static final ClassType BigDecimal = new ClassType.Builder().knownClass(java.math.BigDecimal.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).build();
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();

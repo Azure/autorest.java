@@ -72,7 +72,6 @@ public class AndroidProxyMethod extends ProxyMethod {
             if (settings.isFluent()) {
                 imports.add("com.azure.android.core.rest.annotation.Headers");
             }
-            imports.add("com.azure.android.core.rest.annotation.ExpectedResponses");
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
@@ -95,6 +94,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                 imports.add("com.azure.android.core.rest.annotation.Headers");
             }
             imports.add("com.azure.android.core.rest.annotation.ExpectedResponses");
+            imports.add("com.azure.android.core.rest.PagedResponse");
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
@@ -110,6 +110,16 @@ public class AndroidProxyMethod extends ProxyMethod {
             if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
                 imports.remove(ClassType.UnixTimeDateTime.getFullName());
                 imports.add(ClassType.AndroidDateTime.getFullName());
+            }
+
+            if (imports.contains(ClassType.Base64Url.getFullName())) {
+                imports.remove(ClassType.Base64Url.getFullName());
+                imports.add(ClassType.AndroidBase64Url.getFullName());
+            }
+
+            if (imports.contains(ClassType.DateTimeRfc1123.getFullName())) {
+                imports.remove(ClassType.DateTimeRfc1123.getFullName());
+                imports.add(ClassType.AndroidDateTimeRfc1123.getFullName());
             }
         }
     }

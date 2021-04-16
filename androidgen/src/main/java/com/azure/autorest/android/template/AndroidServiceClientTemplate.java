@@ -2,6 +2,8 @@ package com.azure.autorest.android.template;
 
 import com.azure.autorest.template.ServiceClientTemplate;
 
+import java.util.Set;
+
 
 public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     private static ServiceClientTemplate _instance = new AndroidServiceClientTemplate();
@@ -15,12 +17,12 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     }
 
     @Override
-    protected void addServiceClientAnnotationImport(java.util.Set<String> imports) {
+    protected void addServiceClientAnnotationImport(Set<String> imports) {
         imports.add("com.azure.android.core.rest.annotation.ServiceClient");
     }
 
     @Override
-    protected void addSerializerImport(java.util.Set<String> imports) {
+    protected void addSerializerImport(Set<String> imports) {
         imports.add("com.azure.android.core.serde.jackson.JacksonSerder");
     }
 
