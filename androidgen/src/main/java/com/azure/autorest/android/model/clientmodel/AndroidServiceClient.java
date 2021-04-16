@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 
 import java.util.List;
+import java.util.Set;
 
 public class AndroidServiceClient extends ServiceClient {
 
@@ -41,17 +42,17 @@ public class AndroidServiceClient extends ServiceClient {
     }
 
     @Override
-    protected void addRestProxyImport(java.util.Set<String> imports) {
+    protected void addRestProxyImport(Set<String> imports) {
         imports.add("com.azure.android.core.rest.RestProxy");
     }
 
     @Override
-    protected void addPipelineBuilderImport(java.util.Set<String> imports) {
+    protected void addPipelineBuilderImport(Set<String> imports) {
         imports.add("com.azure.android.core.http.HttpPipelineBuilder");
     }
 
     @Override
-    protected void addHttpPolicyImports(java.util.Set<String> imports) {
+    protected void addHttpPolicyImports(Set<String> imports) {
         imports.add("com.azure.android.core.http.policy.CookiePolicy");
         imports.add("com.azure.android.core.http.policy.RetryPolicy");
         imports.add("com.azure.android.core.http.policy.UserAgentPolicy");

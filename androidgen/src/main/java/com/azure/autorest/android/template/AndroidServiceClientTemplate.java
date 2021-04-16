@@ -1,8 +1,11 @@
 package com.azure.autorest.android.template;
 
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ServiceClientTemplate;
 
 import java.util.Set;
+
+import static com.azure.autorest.model.javamodel.JavaVisibility.PackagePrivate;
 
 
 public class AndroidServiceClientTemplate extends ServiceClientTemplate {
@@ -39,5 +42,45 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     @Override
     protected void writeSerializerMemberInitialization(com.azure.autorest.model.javamodel.JavaBlock constructorBlock) {
         constructorBlock.line("this.jacksonSerder = jacksonSerder;");
+    }
+
+    @Override
+    protected String getSerializerPhrase() {
+        return "this.jacksonSerder";
+    }
+
+    @Override
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
+        classBlock.privateStaticFinalClass("ResponseCompletableFuture<T> extends CompletableFuture<Response<T>> implements Callback<Response<T>>",
+                embeddedClass -> {
+                    embeddedClass.annotation("Override");
+                    embeddedClass.publicMethod("void onSuccess(Response<T> response)", method -> {
+                        method.line("this.complete(response);");
+                    });
+
+                    embeddedClass.annotation("Override");
+                    embeddedClass.publicMethod("void onFailure(Throwable error)", method -> {
+                        method.line("this.completeExceptionally(error);");
+                    });
+                });
+
+        classBlock.privateStaticFinalClass("PagedResponseCompletableFuture<P, T> extends CompletableFuture<PagedResponse<T>> implements Callback<Response<P>>",
+                embeddedClass -> {
+                    embeddedClass.privateFinalMemberVariable("Function<Response<P>, PagedResponse<T>>", "converter");
+                    embeddedClass.constructor(PackagePrivate,
+                            "PagedResponseCompletableFuture(Function<Response<P>, PagedResponse<T>> converter)",
+                            constructorBody ->{
+                                constructorBody.line("this.converter = converter;");
+                            });
+                    embeddedClass.annotation("Override");
+                    embeddedClass.publicMethod("void onSuccess(Response<P> response)", method -> {
+                        method.line("this.complete(this.converter.apply(response));");
+                    });
+
+                    embeddedClass.annotation("Override");
+                    embeddedClass.publicMethod("void onFailure(Throwable error)", method -> {
+                        method.line("this.completeExceptionally(error);");
+                    });
+                });
     }
 }

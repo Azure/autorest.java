@@ -229,7 +229,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName()));
+                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, %3$s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), getSerializerPhrase()));
                             }
                         }
                     } else {
@@ -272,7 +272,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
+                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), getSerializerPhrase());
                             }
                         }
                     }
@@ -289,6 +289,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
             this.writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    protected String getSerializerPhrase() {
+        return "this.getSerializerAdapter()";
     }
 
     protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
