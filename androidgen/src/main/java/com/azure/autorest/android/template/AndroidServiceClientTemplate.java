@@ -27,6 +27,12 @@ public class AndroidServiceClientTemplate extends ServiceClientTemplate {
     @Override
     protected void addSerializerImport(Set<String> imports) {
         imports.add("com.azure.android.core.serde.jackson.JacksonSerder");
+
+        imports.add("com.azure.android.core.rest.Callback");
+        imports.add("com.azure.android.core.rest.Response");
+        imports.add("com.azure.android.core.rest.PagedResponse");
+        imports.add("java9.util.concurrent.CompletableFuture");
+        imports.add("java9.util.function.Function");
     }
 
     @Override
