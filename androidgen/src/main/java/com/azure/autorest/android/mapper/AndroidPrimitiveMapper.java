@@ -20,8 +20,10 @@ public class AndroidPrimitiveMapper extends PrimitiveMapper {
 
     @Override
     public IType map(PrimitiveSchema primaryType) {
-        if (primaryType == null) {
-            return null;
+        IType baseResolved = super.map(primaryType);
+        if (primaryType == null
+                || primaryType.getType() == null) {
+            return baseResolved;
         }
         switch (primaryType.getType()) {
             case BYTE_ARRAY:
@@ -45,7 +47,7 @@ public class AndroidPrimitiveMapper extends PrimitiveMapper {
             case UNIXTIME:
                 return ClassType.AndroidDateTime;
             default:
-               return super.map(primaryType);
+               return baseResolved;
         }
     }
 }
