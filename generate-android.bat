@@ -13,13 +13,11 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-boolean.json
 ECHO %INPUTFILE%
-REM "ResponseCompletableFuture cannot use primitive type boolean"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyboolean --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyboolean --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-boolean.quirks.json
 ECHO %INPUTFILE%
-REM "ResponseCompletableFuture cannot use primitive type boolean"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybooleanquirks --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodybooleanquirks --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-complex.json
 ECHO %INPUTFILE%
@@ -45,8 +43,7 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/head.json
 ECHO %INPUTFILE%
-REM "ResponseCompletableFuture cannot use primitive type boolean"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.head --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.head --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/head-exceptions.json
 ECHO %INPUTFILE%
@@ -54,7 +51,7 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/header.json
 ECHO %INPUTFILE%
-REM "Need to fix imports"
+REM "Requires byte[] clone from android core"
 REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.header --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-dictionary.json
@@ -67,13 +64,11 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-integer.json
 ECHO %INPUTFILE%
-REM "ResponseCompletableFuture cannot use primitive type integer"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyinteger --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodyinteger --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-number.json
 ECHO %INPUTFILE%
-REM "ResponseCompletableFuture cannot use primitive type float, double"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodynumber --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.bodynumber --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/httpInfrastructure.json
 ECHO %INPUTFILE%
