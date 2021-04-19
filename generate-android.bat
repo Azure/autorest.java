@@ -77,8 +77,7 @@ REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESP
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/httpInfrastructure.json
 ECHO %INPUTFILE%
-REM "Needs to fix imports"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.httpinfrastructure --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.httpinfrastructure --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/body-byte.json
 ECHO %INPUTFILE%

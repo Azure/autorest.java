@@ -114,6 +114,16 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         IType modelType = responseType.getTypeArguments()[0];
         if (modelType.equals(PrimitiveType.Void)) {
             modelType = ClassType.Void;
+        } else if (modelType.equals(PrimitiveType.Boolean)) {
+            modelType = ClassType.Boolean;
+        } else if (modelType.equals(PrimitiveType.Double)) {
+            modelType = ClassType.Double;
+        } else if (modelType.equals(PrimitiveType.Float)) {
+            modelType = ClassType.Float;
+        } else if (modelType.equals(PrimitiveType.Int)) {
+            modelType = ClassType.Integer;
+        } else if (modelType.equals(PrimitiveType.Long)) {
+            modelType = ClassType.Long;
         }
 
         return String.format("ResponseCompletableFuture<%1$s> %2$s = new ResponseCompletableFuture<>(); ", modelType, completeFutureVariableName);
@@ -166,24 +176,20 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
                 throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
             } else {
                 IType returnType = clientMethod.getReturnValue().getType();
-                if (returnType instanceof PrimitiveType
-                        && returnType != PrimitiveType.Void) {
-                    function.methodReturn(String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
-                } else {
-                    String proxyMethodCall = String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList());
+                String proxyMethodCall = String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList());
 
-                    function.line("try {");
-                    if (returnType != PrimitiveType.Void) {
-                        function.methodReturn(proxyMethodCall);
-                    } else {
-                        function.line("\t" + proxyMethodCall + ";");
-                    }
-                    function.line("} catch (InterruptedException e) {");
-                    function.line("\tthrow new RuntimeException(e);");
-                    function.line("} catch (ExecutionException e) {");
-                    function.line("\tthrow new RuntimeException(e);");
-                    function.line("}");
+                function.line("try {");
+                if (returnType != PrimitiveType.Void) {
+                    function.methodReturn(proxyMethodCall);
+                } else {
+                    function.line("\t" + proxyMethodCall + ";");
                 }
+                function.line("} catch (InterruptedException e) {");
+                function.line("\tthrow new RuntimeException(e);");
+                function.line("} catch (ExecutionException e) {");
+                function.line("\tthrow new RuntimeException(e);");
+                function.line("}");
+
             }
         });
     }

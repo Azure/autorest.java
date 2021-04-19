@@ -20,7 +20,7 @@ import java.util.Set;
 public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile> {
     private static ResponseTemplate _instance = new ResponseTemplate();
 
-    private ResponseTemplate() {
+    protected ResponseTemplate() {
     }
 
     public static ResponseTemplate getInstance() {
@@ -28,11 +28,9 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
     }
 
     public final void write(ClientResponse response, JavaFile javaFile) {
-        Set<String> imports = new HashSet<String>() {{
-            add("com.azure.core.http.HttpRequest");
-            add("com.azure.core.http.HttpHeaders");
-        }};
-        IType restResponseType = GenericType.RestResponse(response.getHeadersType(), response.getBodyType());
+        Set<String> imports = new HashSet<String>();
+        addRequestAndHeaderImports(imports);
+        IType restResponseType = getRestResponseType(response);
         restResponseType.addImportsTo(imports, true);
 
         boolean isStreamResponse = response.getBodyType().equals(GenericType.FluxByteBuffer);
@@ -80,5 +78,14 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
                 classBlock.publicMethod("void close()", methodBlock -> methodBlock.line("value().subscribe(bb -> { }, t -> { }).dispose();"));
             }
         });
+    }
+
+    protected IType getRestResponseType(ClientResponse response) {
+        return  GenericType.RestResponse(response.getHeadersType(), response.getBodyType());
+    }
+
+    protected void addRequestAndHeaderImports(java.util.Set<String> imports) {
+        imports.add("com.azure.core.http.HttpRequest");
+        imports.add("com.azure.core.http.HttpHeaders");
     }
 }
