@@ -39,6 +39,7 @@ public class AndroidClientModel extends ClientModel {
 
     @Override
     protected void addJsonFlattenAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.android.core.serde.jackson.JsonFlatten");
     }
 
     @Override

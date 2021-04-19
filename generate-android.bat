@@ -125,8 +125,7 @@ call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/model-flattening.json
 ECHO %INPUTFILE%
-REM "Need to fix import of annotation"
-REM call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.modelflattening --payload-flattening-threshold=1
+call autorest %AZURE_ARGUMENTS% --input-file=%INPUTFILE% --namespace=%NAMESPACE%.fixtures.modelflattening --payload-flattening-threshold=1
 ECHO =======================
 set INPUTFILE=%INPUTSOURCE%/media_types.json
 ECHO %INPUTFILE%
