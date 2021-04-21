@@ -57,8 +57,7 @@ public final class ConstructorCustomization {
      * @return The Javadoc customization for this constructor.
      */
     public JavadocCustomization getJavadoc() {
-        String packagePath = packageName.replace(".", "/");
-        return new JavadocCustomization(editor, languageClient, packagePath, className,
+        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
             symbol.getLocation().getRange().getStart().getLine());
     }
 

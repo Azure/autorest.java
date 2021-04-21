@@ -75,8 +75,8 @@ public final class MethodCustomization {
      * @return the Javadoc customization
      */
     public JavadocCustomization getJavadoc() {
-        String packagePath = packageName.replace(".", "/");
-        return new JavadocCustomization(editor, languageClient, packagePath, className, symbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
+            symbol.getLocation().getRange().getStart().getLine());
     }
 
     /**

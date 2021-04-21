@@ -15,8 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.azure.autorest.customization.implementation.Utils.writeLine;
 
@@ -138,12 +141,19 @@ public final class Editor {
      * @return the position of the cursor after indentation (if indented) in this line
      */
     public Position insertBlankLine(String fileName, int line, boolean indented) {
-        List<String> lineContent = lines.get(fileName);
-        String nextLine = lineContent.get(line);
-        String indentation = "";
-        if (indented) {
-            indentation = nextLine.replaceFirst("[^ ].*$", "");
+        if (!indented) {
+            return insertBlankLineWithIndent(fileName, line, 0);
+        } else {
+            int indentAmount = lines.get(fileName).get(line)
+                .replaceFirst("[^ ].*$", "")
+                .length();
+
+            return insertBlankLineWithIndent(fileName, line, indentAmount);
         }
+    }
+
+    public Position insertBlankLineWithIndent(String fileName, int line, int indentAmount) {
+        String indentation = IntStream.range(0, indentAmount).mapToObj(ignored -> " ").collect(Collectors.joining());
         lines.get(fileName).add(line, indentation);
         contents.put(fileName, joinLinesIntoContent(lines.get(fileName)));
         return new Position(line, indentation.length());
@@ -158,6 +168,12 @@ public final class Editor {
      * @param newContent the new content to replace the chunk
      */
     public void replace(String fileName, Position start, Position end, String newContent) {
+        replaceWithIndentedContent(fileName, start, end, newContent, 0);
+    }
+
+    public void replaceWithIndentedContent(String fileName, Position start, Position end, String newContent,
+        int newLineIndent) {
+        String indent = IntStream.range(0, newLineIndent).mapToObj(ignored -> " ").collect(Collectors.joining());
         StringBuilder stringBuilder = new StringBuilder(4096);
         List<String> lineContent = lines.get(fileName);
 
@@ -174,10 +190,14 @@ public final class Editor {
         // Add the change.
         if (replacementLineContent.size() > 0) {
             for (int i = 0; i != replacementLineContent.size() - 1; i++) {
+                if (i > 0) {
+                    stringBuilder.append(indent);
+                }
+
                 writeLine(stringBuilder, replacementLineContent.get(i));
             }
 
-            stringBuilder.append(replacementLineContent.get(replacementLineContent.size() - 1));
+            stringBuilder.append(indent).append(replacementLineContent.get(replacementLineContent.size() - 1));
         }
 
         writeLine(stringBuilder, lineContent.get(end.getLine()).substring(end.getCharacter()));
@@ -266,6 +286,25 @@ public final class Editor {
      * @return the text in the range
      */
     public String getTextInRange(String fileName, Range range, String delimiter) {
+        return getTextInRange(fileName, range, delimiter, str -> str);
+    }
+
+    /**
+     * Gets the text content in a range in the file.
+     * <p>
+     * If {@code delimiter} isn't null the lines will be joined using the delimiter. Otherwise, the lines will be joined
+     * using newline.
+     * <p>
+     * If {@code lineCleaner} isn't null each line of content read from the file will use the line cleaner before adding
+     * it to the result.
+     *
+     * @param fileName The name of the file where content will be read.
+     * @param range The range in the file where content will be read.
+     * @param delimiter Optional delimiter to join read lines of the file.
+     * @param lineCleaner Optional function that will cleanse each line of the file that is read.
+     * @return The text in the range.
+     */
+    public String getTextInRange(String fileName, Range range, String delimiter, Function<String, String> lineCleaner) {
         StringBuilder stringBuilder = new StringBuilder(4096);
         for (int line = range.getStart().getLine(); line <= range.getEnd().getLine(); line++) {
             String lineContent = getFileLine(fileName, line);
@@ -274,15 +313,26 @@ public final class Editor {
                 lineContent = lineContent.substring(range.getStart().getCharacter());
                 truncateIndex = range.getStart().getCharacter();
             }
+
             if (line == range.getEnd().getLine()) {
                 lineContent = lineContent.substring(0, range.getEnd().getCharacter() - truncateIndex);
             }
+
+            if (lineCleaner != null) {
+                lineContent = lineCleaner.apply(lineContent);
+            }
+
             if (delimiter == null) {
                 writeLine(stringBuilder, lineContent);
             } else {
-                stringBuilder.append(lineContent).append(delimiter);
+                if (stringBuilder.length() == 0) {
+                    stringBuilder.append(lineContent);
+                } else {
+                    stringBuilder.append(delimiter).append(lineContent);
+                }
             }
         }
+
         return stringBuilder.toString();
     }
 

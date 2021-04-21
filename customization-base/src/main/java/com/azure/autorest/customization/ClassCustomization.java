@@ -34,7 +34,7 @@ public final class ClassCustomization {
      * spaces and an opening '{'.
      */
     private static final Pattern METHOD_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]+\\))\\s*\\{?$", Pattern.MULTILINE);
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
     /*
      * This pattern attempts to find the first line of a constructor string that doesn't have a first non-space
@@ -42,7 +42,7 @@ public final class ClassCustomization {
      * characters before and inside '( )' ignoring any trailing spaces and an opening '{'.
      */
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]+\\))\\s*\\{?$", Pattern.MULTILINE);
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
@@ -178,8 +178,8 @@ public final class ClassCustomization {
      * @return the Javadoc customization
      */
     public JavadocCustomization getJavadoc() {
-        String packagePath = packageName.replace(".", "/");
-        return new JavadocCustomization(editor, languageClient, packagePath, className, classSymbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
+            classSymbol.getLocation().getRange().getStart().getLine());
     }
 
     /**
@@ -226,10 +226,13 @@ public final class ClassCustomization {
             }
         }
 
-        editor.insertBlankLine(fileName, ++constructorStartLine, false);
-        Position constructorPosition = editor.insertBlankLine(fileName, ++constructorStartLine, false);
+        int indentAmount = editor.getFileLine(fileName, constructorStartLine).replaceFirst("[^ ].*$", "").length();
 
-        editor.replace(fileName, constructorPosition, constructorPosition, constructor);
+        editor.insertBlankLine(fileName, ++constructorStartLine, false);
+        Position constructorPosition = editor.insertBlankLineWithIndent(fileName, ++constructorStartLine, indentAmount);
+
+        editor.replaceWithIndentedContent(fileName, constructorPosition, constructorPosition, constructor,
+            constructorPosition.getCharacter());
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
         fileEvent.setType(FileChangeType.CHANGED);
@@ -263,11 +266,14 @@ public final class ClassCustomization {
         while (!currentLine.endsWith("}") || currentLine.startsWith("}")) {
             currentLine = fileLines.get(--lineNum);
         }
+
+        int indentAmount = currentLine.replaceFirst("[^ ].*$", "").length();
+
         editor.insertBlankLine(fileName, ++lineNum, false);
-        Position newMethod = editor.insertBlankLine(fileName, ++lineNum, false);
+        Position newMethod = editor.insertBlankLineWithIndent(fileName, ++lineNum, indentAmount);
 
         // replace
-        editor.replace(fileName, newMethod, newMethod, method);
+        editor.replaceWithIndentedContent(fileName, newMethod, newMethod, method, newMethod.getCharacter());
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
         fileEvent.setType(FileChangeType.CHANGED);
