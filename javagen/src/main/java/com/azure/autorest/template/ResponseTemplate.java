@@ -81,7 +81,7 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
     }
 
     protected IType getRestResponseType(ClientResponse response) {
-        return  GenericType.RestResponse(response.getHeadersType(), response.getBodyType());
+        return GenericType.RestResponse(response.getHeadersType(), response.getBodyType());
     }
 
     protected void addRequestAndHeaderImports(java.util.Set<String> imports) {
