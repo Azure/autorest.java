@@ -20,9 +20,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.azure.autorest.customization.implementation.Utils.replaceModifier;
+
 
 /**
- * The Javadoc customization for an AutoRest generated classes and methods.
+ * The method level customization for an AutoRest generated method.
  */
 public final class MethodCustomization {
     private final EclipseLanguageClient languageClient;
@@ -106,30 +108,7 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization addAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            Position position = editor.insertBlankLine(fileName, line, true);
-            editor.replace(fileName, position, position, annotation);
-
-            FileEvent fileEvent = new FileEvent();
-            fileEvent.setUri(fileUri);
-            fileEvent.setType(FileChangeType.CHANGED);
-            languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-            languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
-                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                .findFirst()
-                .ifPresent(action -> {
-                    if (action.getCommand() instanceof WorkspaceEditCommand) {
-                        ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                    }
-                });
-        }
+        Utils.addAnnotation(annotation, editor, fileName, symbol, fileUri, languageClient);
 
         return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
             refreshSymbol());
@@ -196,9 +175,8 @@ public final class MethodCustomization {
      * included in the bitwise OR isn't a valid method {@link Modifier}.
      */
     public MethodCustomization setModifier(int modifiers) {
-        Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
-                oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
-            Modifier.methodModifiers(), modifiers);
+        replaceModifier(symbol, editor, languageClient, "(?:.+ )?(\\w+ )" + methodName + "\\(",
+            "$1" + methodName + "(", Modifier.methodModifiers(), modifiers);
 
         return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
             refreshSymbol());
