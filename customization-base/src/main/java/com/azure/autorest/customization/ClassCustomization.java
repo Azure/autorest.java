@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * The class level customization for an AutoRest generated class.
@@ -33,7 +34,15 @@ public final class ClassCustomization {
      * spaces and an opening '{'.
      */
     private static final Pattern METHOD_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]+\\))\\s*\\{?$", Pattern.MULTILINE);
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
+
+    /*
+     * This pattern attempts to find the first line of a constructor string that doesn't have a first non-space
+     * character of '*' or '/', effectively the first non-Javadoc line. From there it captures all word and space
+     * characters before and inside '( )' ignoring any trailing spaces and an opening '{'.
+     */
+    private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
@@ -101,6 +110,59 @@ public final class ClassCustomization {
     }
 
     /**
+     * Gets the constructor level customization for a constructor in the class.
+     * <p>
+     * If only the constructor name is passed and the class has multiple constructors an error will be thrown to prevent
+     * ambiguous runtime behavior.
+     *
+     * @param constructorNameOrSignature The constructor name or signature.
+     * @return The constructor level customization.
+     * @throws IllegalStateException If only the constructor name is passed and the class has multiple constructors.
+     */
+    public ConstructorCustomization getConstructor(String constructorNameOrSignature) {
+        String constructorName;
+        String constructorSignature = null;
+        if (constructorNameOrSignature.contains("(")) {
+            // method signature
+            constructorSignature = constructorNameOrSignature.replaceFirst("\\) *\\{", "")
+                .replaceFirst(" *public ", "")
+                .replaceFirst(" *private ", "");
+            String returnTypeAndMethodName = constructorNameOrSignature.split("\\(")[0];
+            if (returnTypeAndMethodName.contains(" ")) {
+                constructorName = returnTypeAndMethodName.replaceAll(".* ", "");
+            } else {
+                constructorName = returnTypeAndMethodName;
+            }
+        } else {
+            constructorName = constructorNameOrSignature;
+        }
+
+        List<SymbolInformation> constructorSymbol = languageClient.listDocumentSymbols(fileUri)
+            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(constructorName)
+                && si.getKind() == SymbolKind.CONSTRUCTOR)
+            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
+                .contains(constructorNameOrSignature))
+            .collect(Collectors.toList());
+
+        if (constructorSymbol.size() > 1) {
+            throw new IllegalStateException("Multiple instances of " + constructorNameOrSignature + " exist in the "
+                + "class. Use a more specific constructor signature.");
+        }
+
+        if (constructorSymbol.size() == 0) {
+            throw new IllegalArgumentException("Constructor " + constructorNameOrSignature + " does not exist in class "
+                + className);
+        }
+
+        if (constructorSignature == null) {
+            constructorSignature = editor.getFileLine(fileName, constructorSymbol.get(0).getLocation().getRange().getStart().getLine())
+                .replaceFirst("\\) *\\{", "").replaceFirst(" *public ", "").replaceFirst(" *private ", "");
+        }
+        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
+            constructorSymbol.get(0));
+    }
+
+    /**
      * Gets the property level customization for a property in the class.
      *
      * @param propertyName the property name
@@ -116,15 +178,78 @@ public final class ClassCustomization {
      * @return the Javadoc customization
      */
     public JavadocCustomization getJavadoc() {
-        String packagePath = packageName.replace(".", "/");
-        return new JavadocCustomization(editor, languageClient, packagePath, className, classSymbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
+            classSymbol.getLocation().getRange().getStart().getLine());
+    }
+
+    /**
+     * Adds a constructor to this class.
+     *
+     * @param constructor The entire constructor as a literal string.
+     * @return The constructor level customization for the added constructor.
+     */
+    public ConstructorCustomization addConstructor(String constructor) {
+        // Get the signature of the constructor.
+        Matcher constructorSignatureMatcher = CONSTRUCTOR_SIGNATURE_PATTERN.matcher(constructor);
+        String constructorSignature = null;
+        if (constructorSignatureMatcher.find()) {
+            constructorSignature = constructorSignatureMatcher.group(1);
+        }
+
+        // Find all constructor and field symbols.
+        List<SymbolInformation> constructorLocationFinder = languageClient.listDocumentSymbols(fileUri).stream()
+            .filter(symbol -> symbol.getKind() == SymbolKind.FIELD || symbol.getKind() == SymbolKind.CONSTRUCTOR)
+            .collect(Collectors.toList());
+
+        // If no constructors or fields exist in the class place the constructor after the class declaration line.
+        // Otherwise place the constructor after the last constructor or field.
+        int constructorStartLine;
+        if (Utils.isNullOrEmpty(constructorLocationFinder)) {
+            constructorStartLine = classSymbol.getLocation().getRange().getStart().getLine();
+        } else {
+            SymbolInformation symbol = constructorLocationFinder.get(constructorLocationFinder.size() - 1);
+
+            // If the last symbol before the new constructor is a field only a new line needs to be inserted.
+            // Otherwise if the last symbol is a constructor its closing '}' needs to be found and then a new line
+            // needs to be inserted.
+            if (symbol.getKind() == SymbolKind.FIELD) {
+                constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
+            } else {
+                constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
+
+                List<String> fileLines = editor.getFileLines(fileName);
+                String currentLine = fileLines.get(constructorStartLine);
+                String constructorIdent = currentLine.replaceAll("\\w.*$", "");
+                while (!currentLine.endsWith("}") || !currentLine.equals(constructorIdent + "}")) {
+                    currentLine = fileLines.get(++constructorStartLine);
+                }
+            }
+        }
+
+        int indentAmount = editor.getFileLine(fileName, constructorStartLine).replaceFirst("[^ ].*$", "").length();
+
+        editor.insertBlankLine(fileName, ++constructorStartLine, false);
+        Position constructorPosition = editor.insertBlankLineWithIndent(fileName, ++constructorStartLine, indentAmount);
+
+        editor.replaceWithIndentedContent(fileName, constructorPosition, constructorPosition, constructor,
+            constructorPosition.getCharacter());
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        if (constructorSignature == null) {
+            constructorSignature = editor.getFileLine(fileName, constructorStartLine);
+        }
+        return getConstructor(constructorSignature);
     }
 
     /**
      * Adds a method to this class.
      *
-     * @param method the entire literal string of the method
-     * @return the method level customization for the added method
+     * @param method The entire method as a literal string.
+     * @return The method level customization for the added method.
      */
     public MethodCustomization addMethod(String method) {
         // Get the signature of the method.
@@ -141,11 +266,14 @@ public final class ClassCustomization {
         while (!currentLine.endsWith("}") || currentLine.startsWith("}")) {
             currentLine = fileLines.get(--lineNum);
         }
+
+        int indentAmount = currentLine.replaceFirst("[^ ].*$", "").length();
+
         editor.insertBlankLine(fileName, ++lineNum, false);
-        Position newMethod = editor.insertBlankLine(fileName, ++lineNum, false);
+        Position newMethod = editor.insertBlankLineWithIndent(fileName, ++lineNum, indentAmount);
 
         // replace
-        editor.replace(fileName, newMethod, newMethod, method);
+        editor.replaceWithIndentedContent(fileName, newMethod, newMethod, method, newMethod.getCharacter());
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
         fileEvent.setType(FileChangeType.CHANGED);
@@ -220,10 +348,8 @@ public final class ClassCustomization {
         languageClient.listDocumentSymbols(classSymbol.getLocation().getUri())
             .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.CLASS)
             .findFirst()
-            .ifPresent(symbolInformation ->
-                Utils.replaceModifier(symbolInformation, editor, languageClient, (oldLine, newModifiers) ->
-                        oldLine.replaceFirst("\\w.* class " + className, newModifiers + " class " + className),
-                    Modifier.classModifiers(), modifiers));
+            .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
+                "(?:.+ )?class " + className, "class " + className, Modifier.classModifiers(), modifiers));
 
         return refreshSymbol();
     }
@@ -239,7 +365,6 @@ public final class ClassCustomization {
             annotation = "@" + annotation;
         }
 
-        URI fileUri = classSymbol.getLocation().getUri();
         Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> si.getKind() == SymbolKind.CLASS)
             .findFirst();
