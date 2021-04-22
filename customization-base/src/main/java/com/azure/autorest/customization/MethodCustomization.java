@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
@@ -14,7 +15,6 @@ import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
 import java.lang.reflect.Modifier;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,29 +26,23 @@ import static com.azure.autorest.customization.implementation.Utils.replaceModif
 /**
  * The method level customization for an AutoRest generated method.
  */
-public final class MethodCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+public final class MethodCustomization extends CodeCustomization {
     private final String packageName;
     private final String className;
-    private final URI fileUri;
-    private final String fileName;
     private final String methodName;
     private final String methodSignature;
-    private final SymbolInformation symbol;
 
     MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
         String methodName, String methodSignature, SymbolInformation symbol) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+        super(editor, languageClient, symbol);
         this.packageName = packageName;
         this.className = className;
-        this.fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        this.fileName = fileUri.toString().substring(i);
         this.methodName = methodName;
         this.methodSignature = methodSignature;
-        this.symbol = symbol;
+    }
+
+    SymbolInformation getSymbol() {
+        return symbol;
     }
 
     /**
@@ -108,10 +102,8 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization addAnnotation(String annotation) {
-        Utils.addAnnotation(annotation, editor, fileName, symbol, fileUri, languageClient);
-
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
-            refreshSymbol());
+        return Utils.addAnnotation(annotation, this, () -> new MethodCustomization(editor, languageClient, packageName,
+            className, methodName, methodSignature, refreshSymbol()));
     }
 
     /**
@@ -121,44 +113,8 @@ public final class MethodCustomization {
      * @return the current method customization for chaining
      */
     public MethodCustomization removeAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            int annotationLine = -1;
-            String lineContent = editor.getFileLine(fileName, line);
-            while (!lineContent.trim().isEmpty()) {
-                if (lineContent.trim().startsWith(annotation)) {
-                    annotationLine = line;
-                }
-                lineContent = editor.getFileLine(fileName, --line);
-            }
-            if (annotationLine != -1) {
-                Position start = new Position(annotationLine, 0);
-                Position end = new Position(annotationLine + 1, 0);
-                editor.replace(fileName, start, end, "");
-
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                languageClient.listCodeActions(fileUri, new Range(start, end))
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
-            }
-        }
-
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
-            refreshSymbol());
+        return Utils.removeAnnotation(annotation, this, () -> new MethodCustomization(editor, languageClient,
+            packageName, className, methodName, methodSignature, refreshSymbol()));
     }
 
     /**
@@ -235,36 +191,8 @@ public final class MethodCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceBody(String newBody) {
-        // Beginning line of the method.
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        String bodyPositionFinder = editor.getFileLine(fileName, line);
-        String methodIndent = bodyPositionFinder.replaceAll("\\w.*$", "");
-
-        // Loop until the line containing the method body start is found.
-        while (!bodyPositionFinder.matches(".*\\{\\s*")) {
-            bodyPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Then determine the base indentation level for the method body.
-        String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
-        Position oldBodyStart = new Position(line + 1, methodContentIndent.length());
-        int lastLineLength = methodContentIndent.length();
-
-        // Then continue iterating over lines until the method close line is found.
-        while (!bodyPositionFinder.matches(methodIndent + "}\\s*")) {
-            lastLineLength = bodyPositionFinder.length();
-            bodyPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-        Position oldBodyEnd = new Position(line - 1, lastLineLength);
-
-        editor.replace(fileName, oldBodyStart, oldBodyEnd, newBody);
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
-            refreshSymbol());
+        return Utils.replaceBody(newBody, this, () -> new MethodCustomization(editor, languageClient, packageName,
+            className, methodName, methodSignature, refreshSymbol()));
     }
 
     /**
@@ -315,8 +243,8 @@ public final class MethodCustomization {
         signatureEdit.setRange(new Range(start, end));
         edits.add(signatureEdit);
 
-        String methodIndent = editor.getFileLine(fileName, line).replaceAll("\\w.*$", "");
-        String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
+        String methodIndent = Utils.getIndent(editor.getFileLine(fileName, line));
+        String methodContentIndent = Utils.getIndent(editor.getFileLine(fileName, line + 1));
         String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "").replaceFirst(methodIndent + "(\\w.* )?", "").trim();
         int returnLine = -1;
         while (!oldLineContent.startsWith(methodIndent + "}")) {

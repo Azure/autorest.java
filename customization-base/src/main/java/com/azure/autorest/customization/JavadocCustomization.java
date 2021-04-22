@@ -35,8 +35,9 @@ public final class JavadocCustomization {
      * 5. A Javadoc where the closing line contains text
      * 6. An indented Javadoc where the closing line contains text
      */
-    private static final Pattern JAVADOC_LINE_CLEANER =
-        Pattern.compile("^\\s*\\/?\\*{1,2}\\s?(.*?)(?:\\s*\\*\\/)?$");
+    private static final Pattern JAVADOC_LINE_CLEANER = Pattern.compile("^\\s*\\/?\\*{1,2}\\s?(.*?)(?:\\s*\\*\\/)?$");
+
+    private static final Pattern EMPTY_JAVADOC_LINE_PATTERN = Pattern.compile("\\s*\\*\\/?\\s*");
 
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
@@ -314,7 +315,7 @@ public final class JavadocCustomization {
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
                     paramDocs.put(name, readJavadocTextRange(editor, fileName, docStart, docEnd));
                     currentDocEndLine = symbolLine - 1;
-                } else if (lineContent.matches("\\s*\\*\\/?\\s*")) {
+                } else if (EMPTY_JAVADOC_LINE_PATTERN.matcher(lineContent).matches()) {
                     // empty line
                     currentDocEndLine--;
                 }
