@@ -21,9 +21,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
+    /**
+     * This pattern matches a single line Javadoc and captures its content in group 1.
+     */
+    public static final Pattern SINGLE_LINE_JAVADOC_PATTERN = Pattern.compile("^\\s*\\/\\*\\*(.*?)\\*\\/\\s*$");
+
+    /**
+     * This pattern matches a Javadoc start line.
+     */
+    public static final Pattern JAVADOC_START_PATTERN = Pattern.compile("^\\s*\\/\\*\\*\\s*$");
+
+    /**
+     * This pattern matches a Javadoc end line.
+     */
+    public static final Pattern JAVADOC_END_PATTERN = Pattern.compile("^\\s*\\*\\/\\s*$");
+
+    /**
+     * This pattern determines the indentation of the passed string. Effectively it creates a group containing all
+     * spaces before the first word character.
+     */
+    public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*)\\w.*$");
+
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
         List<FileEvent> changes = new ArrayList<>();
         for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
@@ -153,8 +177,78 @@ public class Utils {
         stringBuilder.append(text).append(System.lineSeparator());
     }
 
-    public static void addAnnotation(String annotation, Editor editor, String fileName, SymbolInformation symbol,
-        URI fileUri, EclipseLanguageClient languageClient) {
+    /**
+     * Walks down the lines of a file until the line matches a predicate.
+     *
+     * @param editor The editor containing the file's information.
+     * @param fileName The name of the file.
+     * @param startLine The line to start walking.
+     * @param linePredicate The predicate that determines when a matching line is found.
+     * @return The first line that matches the predicate. If no line in the file matches the predicate {@code -1} is
+     * returned.
+     */
+    public static int walkDownFileUntilLineMatches(Editor editor, String fileName, int startLine,
+        Predicate<String> linePredicate) {
+        return walkFileUntilLineMatches(editor, fileName, startLine, linePredicate, true);
+    }
+
+    /**
+     * Walks up the lines of a file until the line matches a predicate.
+     *
+     * @param editor The editor containing the file's information.
+     * @param fileName The name of the file.
+     * @param startLine The line to start walking.
+     * @param linePredicate The predicate that determines when a matching line is found.
+     * @return The first line that matches the predicate. If no line in the file matches the predicate {@code -1} is
+     * returned.
+     */
+    public static int walkUpFileUntilLineMatches(Editor editor, String fileName, int startLine,
+        Predicate<String> linePredicate) {
+        return walkFileUntilLineMatches(editor, fileName, startLine, linePredicate, false);
+    }
+
+    private static int walkFileUntilLineMatches(Editor editor, String fileName, int startLine,
+        Predicate<String> linePredicate, boolean isWalkingDown) {
+        int matchingLine = -1;
+
+        List<String> fileLines = editor.getFileLines(fileName);
+        if (isWalkingDown) {
+            for (int line = startLine; line < fileLines.size(); line++) {
+                if (linePredicate.test(fileLines.get(line))) {
+                    matchingLine = line;
+                    break;
+                }
+            }
+        } else {
+            for (int line = startLine; line >= 0; line--) {
+                if (linePredicate.test(fileLines.get(line))) {
+                    matchingLine = line;
+                    break;
+                }
+            }
+        }
+
+        return matchingLine;
+    }
+
+    /**
+     * Utility method to add an annotation to a code block.
+     *
+     * @param annotation The annotation to add.
+     * @param customization The customization having an annotation added.
+     * @param refreshedCustomizationSupplier A supplier that returns a refreshed customization after the annotation is
+     * added.
+     * @param <T> The type of the customization.
+     * @return A refreshed customization after the annotation was added.
+     */
+    public static <T extends CodeCustomization> T addAnnotation(String annotation, T customization,
+        Supplier<T> refreshedCustomizationSupplier) {
+        SymbolInformation symbol = customization.getSymbol();
+        Editor editor = customization.getEditor();
+        String fileName = customization.getFileName();
+        URI fileUri = customization.getFileUri();
+        EclipseLanguageClient languageClient = customization.getLanguageClient();
+
         if (!annotation.startsWith("@")) {
             annotation = "@" + annotation;
         }
@@ -179,10 +273,28 @@ public class Utils {
                     }
                 });
         }
+
+        return refreshedCustomizationSupplier.get();
     }
 
-    public static void removeAnnotation(String annotation, Editor editor, String fileName, SymbolInformation symbol,
-        URI fileUri, EclipseLanguageClient languageClient) {
+    /**
+     * Utility method to remove an annotation from a code block.
+     *
+     * @param annotation The annotation to remove.
+     * @param customization The customization having an annotation removed.
+     * @param refreshedCustomizationSupplier A supplier that returns a refreshed customization after the annotation is
+     * removed.
+     * @param <T> The type of the customization.
+     * @return A refreshed customization after the annotation was removed.
+     */
+    public static <T extends CodeCustomization> T removeAnnotation(String annotation, T customization,
+        Supplier<T> refreshedCustomizationSupplier) {
+        SymbolInformation symbol = customization.getSymbol();
+        Editor editor = customization.getEditor();
+        String fileName = customization.getFileName();
+        URI fileUri = customization.getFileUri();
+        EclipseLanguageClient languageClient = customization.getLanguageClient();
+
         if (!annotation.startsWith("@")) {
             annotation = "@" + annotation;
         }
@@ -218,6 +330,57 @@ public class Utils {
                     });
             }
         }
+
+        return refreshedCustomizationSupplier.get();
+    }
+
+    /**
+     * Utility method to replace a body of a code block.
+     *
+     * @param newBody The new body.
+     * @param customization The customization having its body replaced.
+     * @param refreshedCustomizationSupplier A supplier that returns a refreshed customization after the body is
+     * replaced.
+     * @param <T> The type of the customization.
+     * @return A refreshed customization after the body was replaced.
+     */
+    public static <T extends CodeCustomization> T replaceBody(String newBody, T customization,
+        Supplier<T> refreshedCustomizationSupplier) {
+        SymbolInformation symbol = customization.getSymbol();
+        Editor editor = customization.getEditor();
+        String fileName = customization.getFileName();
+
+        int line = symbol.getLocation().getRange().getStart().getLine();
+        String methodBlockIndent = getIndent(editor.getFileLine(fileName, line));
+
+        // Loop until the line containing the body start is found.
+        Pattern startPattern = Pattern.compile(".*\\{\\s*");
+        int startLine = walkDownFileUntilLineMatches(editor, fileName, line, lineContent ->
+            startPattern.matcher(lineContent).matches()) + 1; // Plus one since the start is after the opening '{'
+
+        // Then determine the base indentation level for the body.
+        String methodContentIndent = getIndent(editor.getFileLine(fileName, startLine));
+        Position oldBodyStart = new Position(startLine, methodContentIndent.length());
+
+        // Then continue iterating over lines until the body close line is found.
+        Pattern closePattern = Pattern.compile(methodBlockIndent + "}\\s*");
+        int lastLine = walkDownFileUntilLineMatches(editor, fileName, startLine, lineContent ->
+            closePattern.matcher(lineContent).matches()) - 1; // Minus one since the end is before the closing '}'
+        Position oldBodyEnd = new Position(lastLine, editor.getFileLine(fileName, lastLine).length());
+
+        editor.replaceWithIndentedContent(fileName, oldBodyStart, oldBodyEnd, newBody, methodContentIndent.length());
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(customization.getFileUri());
+        fileEvent.setType(FileChangeType.CHANGED);
+        customization.getLanguageClient().notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        // Return the refreshed customization.
+        return refreshedCustomizationSupplier.get();
+    }
+
+    public static String getIndent(String content) {
+        Matcher matcher = INDENT_DETERMINATION_PATTERN.matcher(content);
+        return matcher.matches() ? matcher.group(1) : "";
     }
 
     private Utils() {

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
@@ -12,34 +13,23 @@ import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.models.Position;
 
 import java.lang.reflect.Modifier;
-import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
 
 /**
  * The constructor level customization for an AutoRest generated constructor.
  */
-public final class ConstructorCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+public final class ConstructorCustomization extends CodeCustomization {
     private final String packageName;
     private final String className;
-    private final URI fileUri;
-    private final String fileName;
     private final String constructorSignature;
-    private final SymbolInformation symbol;
 
     ConstructorCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
         String constructorSignature, SymbolInformation symbol) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+        super(editor, languageClient, symbol);
         this.packageName = packageName;
         this.className = className;
-        this.fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        this.fileName = fileUri.toString().substring(i);
         this.constructorSignature = constructorSignature;
-        this.symbol = symbol;
     }
 
     /**
@@ -68,10 +58,8 @@ public final class ConstructorCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization addAnnotation(String annotation) {
-        Utils.addAnnotation(annotation, editor, fileName, symbol, fileUri, languageClient);
-
-        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
-            refreshSymbol());
+        return Utils.addAnnotation(annotation, this, () -> new ConstructorCustomization(editor, languageClient,
+            packageName, className, constructorSignature, refreshSymbol()));
     }
 
     /**
@@ -81,10 +69,8 @@ public final class ConstructorCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
-        Utils.removeAnnotation(annotation, editor, fileName, symbol, fileUri, languageClient);
-
-        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
-            refreshSymbol());
+        return Utils.removeAnnotation(annotation, this, () -> new ConstructorCustomization(editor, languageClient,
+            packageName, className, constructorSignature, refreshSymbol()));
     }
 
     /**
@@ -161,36 +147,8 @@ public final class ConstructorCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceBody(String newBody) {
-        // Beginning line of the symbol.
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        String bodyPositionFinder = editor.getFileLine(fileName, line);
-        String methodIndent = bodyPositionFinder.replaceAll("\\w.*$", "");
-
-        // Loop until the line containing the body start is found.
-        while (!bodyPositionFinder.matches(".*\\{\\s*")) {
-            bodyPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Then determine the base indentation level for the body.
-        String bodyIdent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
-        Position oldBodyStart = new Position(line + 1, bodyIdent.length());
-        int lastLineLength = bodyIdent.length();
-
-        // Then continue iterating over lines until the body close line is found.
-        while (!bodyPositionFinder.matches(methodIndent + "}\\s*")) {
-            lastLineLength = bodyPositionFinder.length();
-            bodyPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-        Position oldBodyEnd = new Position(line - 1, lastLineLength);
-
-        editor.replace(fileName, oldBodyStart, oldBodyEnd, newBody);
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
-            refreshSymbol());
+        return Utils.replaceBody(newBody, this, () -> new ConstructorCustomization(editor, languageClient, packageName,
+            className, constructorSignature, refreshSymbol()));
     }
 
     private SymbolInformation refreshSymbol() {

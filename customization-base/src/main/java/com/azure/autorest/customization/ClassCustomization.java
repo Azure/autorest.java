@@ -1,5 +1,6 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * The class level customization for an AutoRest generated class.
  */
-public final class ClassCustomization {
+public final class ClassCustomization extends CodeCustomization {
     /*
      * This pattern attempts to find the first line of a method string that doesn't have a first non-space character of
      * '*' or '/'. From there it captures all word and space characters before and inside '( )' ignoring any trailing
@@ -44,25 +45,15 @@ public final class ClassCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
     private final String packageName;
     private final String className;
-    private final SymbolInformation classSymbol;
 
-    private final URI fileUri;
-    private final String fileName;
+    ClassCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
+        SymbolInformation classSymbol) {
+        super(editor, languageClient, classSymbol);
 
-    ClassCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, SymbolInformation classSymbol) {
-        this.editor = editor;
-        this.languageClient = languageClient;
         this.packageName = packageName;
         this.className = className;
-        this.classSymbol = classSymbol;
-
-        this.fileUri = classSymbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        this.fileName = fileUri.toString().substring(i);
     }
 
     /**
@@ -169,7 +160,16 @@ public final class ClassCustomization {
      * @return the property level customization
      */
     public PropertyCustomization getProperty(String propertyName) {
-        return new PropertyCustomization(editor, languageClient, packageName, className, classSymbol, this, propertyName);
+        Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .findFirst();
+
+        if (!propertySymbol.isPresent()) {
+            throw new IllegalArgumentException("Property " + propertyName + " does not exist in class " + className);
+        }
+
+        return new PropertyCustomization(editor, languageClient, packageName, className, propertySymbol.get(),
+            propertyName);
     }
 
     /**
@@ -179,7 +179,7 @@ public final class ClassCustomization {
      */
     public JavadocCustomization getJavadoc() {
         return new JavadocCustomization(editor, languageClient, fileUri, fileName,
-            classSymbol.getLocation().getRange().getStart().getLine());
+            symbol.getLocation().getRange().getStart().getLine());
     }
 
     /**
@@ -205,7 +205,7 @@ public final class ClassCustomization {
         // Otherwise place the constructor after the last constructor or field.
         int constructorStartLine;
         if (Utils.isNullOrEmpty(constructorLocationFinder)) {
-            constructorStartLine = classSymbol.getLocation().getRange().getStart().getLine();
+            constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
         } else {
             SymbolInformation symbol = constructorLocationFinder.get(constructorLocationFinder.size() - 1);
 
@@ -219,7 +219,7 @@ public final class ClassCustomization {
 
                 List<String> fileLines = editor.getFileLines(fileName);
                 String currentLine = fileLines.get(constructorStartLine);
-                String constructorIdent = currentLine.replaceAll("\\w.*$", "");
+                String constructorIdent = Utils.getIndent(currentLine);
                 while (!currentLine.endsWith("}") || !currentLine.equals(constructorIdent + "}")) {
                     currentLine = fileLines.get(++constructorStartLine);
                 }
@@ -286,13 +286,67 @@ public final class ClassCustomization {
     }
 
     /**
+     * Removes a method from this class.
+     * <p>
+     * If there exists multiple methods with the same name or signature only the first one found will be removed.
+     * <p>
+     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages
+     * will have to be updated or removed in another customization, or customizations.
+     * <p>
+     * If this removes the only method contained in the class this will result in a class with no methods.
+     *
+     * @param methodNameOrSignature The name or signature of the method being removed.
+     * @return The current ClassCustomization.
+     */
+    public ClassCustomization removeMethod(String methodNameOrSignature) {
+        // Begin by getting the method.
+        SymbolInformation methodSymbol = getMethod(methodNameOrSignature).getSymbol();
+
+        int methodSignatureLine = methodSymbol.getLocation().getRange().getStart().getLine();
+
+        // Find the beginning location of the method being removed.
+        // If the method has a multi-line Javadoc walk until the start line is found.
+        // Else if the method has a single line Javadoc use the beginning of that line.
+        // Else using the beginning of the method signature.
+        Position start;
+        String lineAboveMethodSignature = editor.getFileLine(fileName, methodSignatureLine - 1);
+        if (Utils.JAVADOC_END_PATTERN.matcher(lineAboveMethodSignature).matches()) {
+            int startLine = Utils.walkUpFileUntilLineMatches(editor, fileName, methodSignatureLine - 2,
+                lineContent -> Utils.JAVADOC_START_PATTERN.matcher(lineContent).matches());
+            start = new Position(startLine, 0);
+        } else if (Utils.SINGLE_LINE_JAVADOC_PATTERN.matcher(lineAboveMethodSignature).matches()) {
+            start = new Position(methodSignatureLine - 1, 0);
+        } else {
+            start = new Position(methodSignatureLine, 0);
+        }
+
+        // Find the ending location of the method being removed.
+        String bodyPositionFinder = editor.getFileLine(fileName, methodSignatureLine);
+        String methodBlockIndent = Utils.getIndent(bodyPositionFinder);
+
+        // Go until the beginning of the next method is found.
+        int endLine = Utils.walkDownFileUntilLineMatches(editor, fileName, methodSignatureLine,
+            lineContent -> lineContent.matches(methodBlockIndent + "."));
+        Position end = new Position(endLine, editor.getFileLine(fileName, endLine).length());
+
+        // Remove the method.
+        editor.replace(fileName, start, end, "");
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        return this;
+    }
+
+    /**
      * Renames a class in the package.
      *
      * @param newName the new simple name for this class
      */
     public ClassCustomization rename(String newName) {
         WorkspaceEdit workspaceEdit = languageClient.renameSymbol(fileUri,
-            classSymbol.getLocation().getRange().getStart(), newName);
+            symbol.getLocation().getRange().getStart(), newName);
         List<FileEvent> changes = new ArrayList<>();
         for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
             int i = edit.getKey().toString().indexOf("src/main/java/");
@@ -345,7 +399,7 @@ public final class ClassCustomization {
      * in the bitwise OR isn't a valid class {@link Modifier}.
      */
     public ClassCustomization setModifier(int modifiers) {
-        languageClient.listDocumentSymbols(classSymbol.getLocation().getUri())
+        languageClient.listDocumentSymbols(symbol.getLocation().getUri())
             .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.CLASS)
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
@@ -440,7 +494,7 @@ public final class ClassCustomization {
      * @return the current class customization for chaining
      */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
-        URI fileUri = classSymbol.getLocation().getUri();
+        URI fileUri = symbol.getLocation().getUri();
         languageClient.listDocumentSymbols(fileUri).stream()
             .filter(si -> si.getName().toLowerCase().contains(enumMemberName.toLowerCase()))
             .forEach(symbol -> {
