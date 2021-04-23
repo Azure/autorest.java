@@ -9,6 +9,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.List;
@@ -257,6 +258,10 @@ public class ProxyMethod {
             }
 
             returnType.addImportsTo(imports, includeImplementationImports);
+
+            if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(this.requestContentType)) {
+                imports.add("com.azure.core.annotation.FormParam");
+            }
 
             for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
