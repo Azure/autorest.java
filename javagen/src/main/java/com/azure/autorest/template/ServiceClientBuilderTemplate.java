@@ -20,7 +20,6 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -288,9 +287,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
                                 // additional service client properties in constructor arguments
                                 String constructorArgs = serviceClient.getProperties().stream()
+                                        .filter(p -> !p.isReadOnly())
                                         .map(ServiceClientProperty::getName)
                                         .collect(Collectors.joining(", "));
-                                function.line(String.format("%1$s client = new %2$s(%3$s);",
+                                function.line(String.format("%1$s client = new %2$s(%3$s, pipeline, objectSerializer);",
                                         syncClient.getClassName(), syncClient.getClassName(), constructorArgs));
                                 function.line("return client;");
                             });
@@ -358,6 +358,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
                     ClassType.SerializerAdapter, "serializerAdapter", false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
+        } else {
+            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
+                    ClassType.ObjectSerializer, "objectSerializer", false, "JsonSerializerProviders.createInstance()"));
         }
 
         if (!settings.isAzureOrFluent()) {

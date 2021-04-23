@@ -139,10 +139,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.HttpPipeline, "pipeline", true, null));
+                ClassType.HttpPipeline, "httpPipeline", true, null));
         if (settings.isLowLevelClient()) {
             serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                    ClassType.ObjectSerializer, "objectSerializer", false, "JsonSerializerProviders.createInstance()"));
+                    ClassType.ObjectSerializer, "objectSerializer", true, "JsonSerializerProviders.createInstance()"));
         } else {
             serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
                     ClassType.SerializerAdapter, "serializerAdapter", true, null,

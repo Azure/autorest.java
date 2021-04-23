@@ -63,7 +63,7 @@ public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> 
         typeBlock.publicMethod(String.format("DynamicRequest %s(%s)", clientMethod.getProxyMethod().getName(), methodArgs), methodBlock -> {
             String url = clientMethod.getProxyMethod().getBaseUrl().replaceAll("/$", "")
                     + "/" + clientMethod.getProxyMethod().getUrlPath().replaceAll("^/", "");
-            methodBlock.line("return new DynamicRequest(objectSerializer, pipeline)");
+            methodBlock.line("return new DynamicRequest(objectSerializer, httpPipeline)");
             methodBlock.line("    .setUrl(\"%s\")", url);
             for (ProxyMethodParameter hostParam : clientMethod.getProxyMethod().getParameters()
                     .stream().filter(p -> RequestParameterLocation.Uri.equals(p.getRequestParameterLocation()))
