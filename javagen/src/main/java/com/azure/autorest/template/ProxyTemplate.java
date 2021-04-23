@@ -112,7 +112,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
 
                             case Body:
-                                if (restAPIMethod.getRequestContentType() != null && restAPIMethod.getRequestContentType().equals(ContentType.APPLICATION_X_WWW_FORM_URLENCODED)) {
+                                if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(restAPIMethod.getRequestContentType())) {
                                     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
                                             parameter.getRequestParameterName()));
                                     break;
