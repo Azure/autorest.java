@@ -287,6 +287,13 @@ public final class ClassCustomization extends CodeCustomization {
 
     /**
      * Removes a method from this class.
+     * <p>
+     * If there exists multiple methods with the same name or signature only the first one found will be removed.
+     * <p>
+     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages
+     * will have to be updated or removed in another customization, or customizations.
+     * <p>
+     * If this removes the only method contained in the class this will result in a class with no methods.
      *
      * @param methodNameOrSignature The name or signature of the method being removed.
      * @return The current ClassCustomization.
