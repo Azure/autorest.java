@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.ContentType;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.ArrayList;
@@ -111,12 +112,17 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
 
                             case Body:
+                                if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(restAPIMethod.getRequestContentType())) {
+                                    parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
+                                            parameter.getRequestParameterName()));
+                                    break;
+                                }
                                 parameterDeclarationBuilder.append(String.format("@BodyParam(\"%1$s\") ", restAPIMethod.getRequestContentType()));
                                 break;
 
-//                            case FormData:
-//                                parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
-//                                break;
+                           // case FormData:
+                           //     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
+                           //     break;
 
                             default:
                                 if (!restAPIMethod.getIsResumable() && parameter.getWireType() != ClassType.Context) {
