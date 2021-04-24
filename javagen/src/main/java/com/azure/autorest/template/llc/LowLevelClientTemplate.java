@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 /**
  * Template to create a synchronous client.
  */
-public class LlcClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
+public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
 
-    private static LlcClientTemplate _instance = new LlcClientTemplate();
-    private LlcClientTemplate() {
+    private static LowLevelClientTemplate _instance = new LowLevelClientTemplate();
+    private LowLevelClientTemplate() {
     }
 
-    public static LlcClientTemplate getInstance() {
+    public static LowLevelClientTemplate getInstance() {
       return _instance;
     }
 

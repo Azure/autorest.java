@@ -36,13 +36,13 @@ import java.util.stream.Collectors;
 /**
  * Writes a ClientMethod to a JavaType block.
  */
-public class LlcMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
-    private static LlcMethodTemplate _instance = new LlcMethodTemplate();
+public class LowLevelMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
+    private static LowLevelMethodTemplate _instance = new LowLevelMethodTemplate();
 
-    protected LlcMethodTemplate() {
+    protected LowLevelMethodTemplate() {
     }
 
-    public static LlcMethodTemplate getInstance() {
+    public static LowLevelMethodTemplate getInstance() {
         return _instance;
     }
 

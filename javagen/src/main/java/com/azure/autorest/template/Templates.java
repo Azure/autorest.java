@@ -4,8 +4,8 @@
 package com.azure.autorest.template;
 
 
-import com.azure.autorest.template.llc.LlcClientTemplate;
-import com.azure.autorest.template.llc.LlcMethodTemplate;
+import com.azure.autorest.template.llc.LowLevelClientTemplate;
+import com.azure.autorest.template.llc.LowLevelMethodTemplate;
 
 /**
  * A collection of templates for writing JV models to Java files and contexts.
@@ -90,11 +90,11 @@ public class Templates {
         return factory.getServiceSynClientTemplate();
     }
 
-    public static LlcMethodTemplate getLlcMethodTemplate() {
+    public static LowLevelMethodTemplate getLlcMethodTemplate() {
         return factory.getLlcMethodTemplate();
     }
 
-    public static LlcClientTemplate getLlcClientTemplate() {
+    public static LowLevelClientTemplate getLlcClientTemplate() {
         return factory.getLlcClientTemplate();
     }
 

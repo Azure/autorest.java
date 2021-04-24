@@ -1,7 +1,7 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.llc.LlcClientTemplate;
-import com.azure.autorest.template.llc.LlcMethodTemplate;
+import com.azure.autorest.template.llc.LowLevelClientTemplate;
+import com.azure.autorest.template.llc.LowLevelMethodTemplate;
 
 public class DefaultTemplateFactory implements TemplateFactory {
     @Override
@@ -95,13 +95,13 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public LlcMethodTemplate getLlcMethodTemplate() {
-        return LlcMethodTemplate.getInstance();
+    public LowLevelMethodTemplate getLlcMethodTemplate() {
+        return LowLevelMethodTemplate.getInstance();
     }
 
     @Override
-    public LlcClientTemplate getLlcClientTemplate() {
-        return LlcClientTemplate.getInstance();
+    public LowLevelClientTemplate getLlcClientTemplate() {
+        return LowLevelClientTemplate.getInstance();
     }
 
     @Override

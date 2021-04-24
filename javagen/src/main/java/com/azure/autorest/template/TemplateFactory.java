@@ -1,7 +1,7 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.llc.LlcClientTemplate;
-import com.azure.autorest.template.llc.LlcMethodTemplate;
+import com.azure.autorest.template.llc.LowLevelClientTemplate;
+import com.azure.autorest.template.llc.LowLevelMethodTemplate;
 
 public interface TemplateFactory {
 
@@ -41,9 +41,9 @@ public interface TemplateFactory {
 
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
 
-    LlcMethodTemplate getLlcMethodTemplate();
+    LowLevelMethodTemplate getLlcMethodTemplate();
 
-    LlcClientTemplate getLlcClientTemplate();
+    LowLevelClientTemplate getLlcClientTemplate();
 
     PomTemplate getPomTemplate();
 
