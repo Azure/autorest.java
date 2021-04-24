@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class FormDataUrlEncodedTests {
 
     @Test
-    public void test() {
+    public void testFormDataUpdate() {
         BodyFormsDataURLEncoded bodyFormsDataURLEncoded = new BodyFormsDataURLEncodedBuilder()
                 .buildClient();
         Response<Void> response = bodyFormsDataURLEncoded.getFormdataurlencodeds()
