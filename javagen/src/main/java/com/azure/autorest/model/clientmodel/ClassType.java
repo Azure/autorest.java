@@ -26,10 +26,14 @@ public class ClassType implements IType {
     public static final ClassType Character = new ClassType.Builder().knownClass(java.lang.Character.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0)))).build();
     public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + defaultValueExpression + "\"").build();
     public static final ClassType Base64Url = new ClassType.Builder().knownClass(com.azure.core.util.Base64Url.class).build();
+    public static final ClassType AndroidBase64Url = new ClassType.Builder().packageName("com.azure.android.core.util").name("Base64Url").build();
     public static final ClassType LocalDate = new ClassType.Builder().knownClass(java.time.LocalDate.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidLocalDate = new ClassType.Builder().packageName("org.threeten.bp").name("LocalDate").build();
     public static final ClassType DateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType Duration = new ClassType.Builder().knownClass(java.time.Duration.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDuration = new ClassType.Builder().packageName("org.threeten.bp").name("Duration").build();
     public static final ClassType DateTimeRfc1123 = new ClassType.Builder().knownClass(com.azure.core.util.DateTimeRfc1123.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").build();
     public static final ClassType BigDecimal = new ClassType.Builder().knownClass(java.math.BigDecimal.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).build();
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
@@ -38,6 +42,7 @@ public class ClassType implements IType {
     public static final ClassType AndroidHttpResponseException = new ClassType.Builder().packageName("com.azure.android.core.http.exception").name("HttpResponseException").build();
     public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
     public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
+    public static final ClassType AndroidDateTime = new ClassType.Builder().packageName("org.threeten.bp").name("OffsetDateTime").build();
     public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
     public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
     public static final ClassType AndroidHttpPipeline = new ClassType.Builder().packageName("com.azure.android.core.http").name("HttpPipeline").build();
@@ -182,7 +187,8 @@ public class ClassType implements IType {
     }
 
     public String convertToClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123) {
+        if (this == ClassType.DateTimeRfc1123
+                || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
@@ -192,7 +198,8 @@ public class ClassType implements IType {
     }
 
     public String convertFromClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123) {
+        if (this == ClassType.DateTimeRfc1123
+                || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);

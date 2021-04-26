@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
@@ -91,7 +92,12 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
+
+            writeAdditionalClassBlock(classBlock);
         });
+    }
+
+    protected void writeAdditionalClassBlock(JavaClass classBlock) {
     }
 
     protected void writeServiceProxyConstruction(JavaBlock constructor, MethodGroupClient methodGroupClient) {

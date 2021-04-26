@@ -1,15 +1,11 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.GenericType;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.template.ProxyTemplate;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AndroidProxyTemplate extends ProxyTemplate {
@@ -38,5 +34,4 @@ public class AndroidProxyTemplate extends ProxyTemplate {
     protected void writeSingleUnexpectedException(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
         // REVISIT: For some reason this can be called even when writeUnexpectedExceptions is called already
     }
-
 }

@@ -23,7 +23,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
 
     @Override
     protected String getSerializerMemberName() {
-        return "jacksonSerder";
+        return "JacksonSerder.createDefault()";
     }
 
     @Override
@@ -36,12 +36,6 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
                 "pipeline",
                 false,
                 "createHttpPipeline()"));
-
-        commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                ClassType.AndroidJacksonSerder,
-                getSerializerMemberName(),
-                false,
-                "JacksonSerder.createDefault()"));
 
         commonProperties.add(new ServiceClientProperty("The HTTP client used to send the request.",
                 ClassType.AndroidHttpClient,
@@ -87,6 +81,7 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
 
     @Override
     protected void addSerializerImport(Set<String> imports, JavaSettings settings) {
+        imports.add("com.azure.android.core.serde.jackson.JacksonSerder");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.azure.autorest.android.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -64,6 +65,7 @@ public class AndroidClientMethod extends ClientMethod {
         imports.add("com.azure.android.core.rest.annotation.ServiceMethod");
         imports.add("com.azure.android.core.rest.annotation.ReturnType");
         imports.add("java.util.concurrent.ExecutionException");
+        imports.add("java9.util.function.Function");
 
         for (ClientMethodParameter parameter : getParameters()) {
             parameter.addImportsTo(imports, includeImplementationImports);
@@ -78,6 +80,11 @@ public class AndroidClientMethod extends ClientMethod {
             for (com.azure.autorest.model.clientmodel.ProxyMethodParameter parameter : getProxyMethod().getParameters()) {
                 parameter.getClientType().addImportsTo(imports, true);
             }
+        }
+
+        if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
+            imports.remove(ClassType.UnixTimeDateTime.getFullName());
+            imports.add(ClassType.AndroidDateTime.getFullName());
         }
     }
 

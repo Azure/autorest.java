@@ -170,7 +170,7 @@ public class ClientModel {
      * @param imports The set of imports to add to.
      * @param settings The settings for this Java generator session.
      */
-    public final void addImportsTo(Set<String> imports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, JavaSettings settings) {
         if (properties.stream().anyMatch(p -> !p.getIsReadOnly())) {
             addFluentAnnotationImport(imports);
         } else {

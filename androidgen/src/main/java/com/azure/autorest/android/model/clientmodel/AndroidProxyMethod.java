@@ -72,7 +72,29 @@ public class AndroidProxyMethod extends ProxyMethod {
             if (settings.isFluent()) {
                 imports.add("com.azure.android.core.rest.annotation.Headers");
             }
+
+            if (getReturnValueWireType() != null) {
+                imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
+                getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
+            }
+            if (getUnexpectedResponseExceptionTypes() != null) {
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionTypes");
+                imports.add("com.azure.android.core.rest.annotation.UnexpectedResponseExceptionType");
+                getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
+            }
+            if (getIsResumable()) {
+                imports.add("com.azure.android.core.rest.annotation.ResumeOperation");
+            }
+            imports.add(String.format("com.azure.android.core.rest.annotation.%1$s", com.azure.autorest.util.CodeNamer
+                    .toPascalCase(getHttpMethod().toString().toLowerCase())));
+
+            if (settings.isFluent()) {
+                imports.add("com.azure.android.core.rest.annotation.Headers");
+            }
             imports.add("com.azure.android.core.rest.annotation.ExpectedResponses");
+            imports.add("com.azure.android.core.rest.PagedResponse");
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.android.core.rest.annotation.ReturnValueWireType");
@@ -84,6 +106,21 @@ public class AndroidProxyMethod extends ProxyMethod {
             for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
+
+            if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
+                imports.remove(ClassType.UnixTimeDateTime.getFullName());
+                imports.add(ClassType.AndroidDateTime.getFullName());
+            }
+
+            if (imports.contains(ClassType.Base64Url.getFullName())) {
+                imports.remove(ClassType.Base64Url.getFullName());
+                imports.add(ClassType.AndroidBase64Url.getFullName());
+            }
+
+            if (imports.contains(ClassType.DateTimeRfc1123.getFullName())) {
+                imports.remove(ClassType.DateTimeRfc1123.getFullName());
+                imports.add(ClassType.AndroidDateTimeRfc1123.getFullName());
+            }
         }
     }
 
@@ -91,6 +128,10 @@ public class AndroidProxyMethod extends ProxyMethod {
 
         @Override
         public ProxyMethod build() {
+            if (unexpectedResponseExceptionTypes != null
+                && unexpectedResponseExceptionTypes.containsKey(unexpectedResponseExceptionType)) {
+                unexpectedResponseExceptionType = null;
+            }
             return new AndroidProxyMethod(requestContentType,
                     returnType,
                     httpMethod,

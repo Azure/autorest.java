@@ -1,6 +1,10 @@
 package com.azure.autorest.android.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+
+import java.util.Set;
 
 public class AndroidClientModel extends ClientModel {
     protected AndroidClientModel(String package_Keyword, String name, java.util.List<String> imports, String description,
@@ -24,17 +28,28 @@ public class AndroidClientModel extends ClientModel {
     }
 
     @Override
-    protected void addFluentAnnotationImport(java.util.Set<String> imports) {
+    protected void addFluentAnnotationImport(Set<String> imports) {
         imports.add("com.azure.android.core.rest.annotation.Fluent");
     }
 
     @Override
-    protected void addImmutableAnnotationImport(java.util.Set<String> imports) {
+    protected void addImmutableAnnotationImport(Set<String> imports) {
         imports.add("com.azure.android.core.rest.annotation.Immutable");
     }
 
     @Override
-    protected void addJsonFlattenAnnotationImport(java.util.Set<String> imports) {
+    protected void addJsonFlattenAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.android.core.serde.jackson.JsonFlatten");
+    }
+
+    @Override
+    public void addImportsTo(Set<String> imports, JavaSettings settings) {
+        super.addImportsTo(imports, settings);
+
+        if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
+            imports.remove(ClassType.UnixTimeDateTime.getFullName());
+            imports.add(ClassType.AndroidDateTime.getFullName());
+        }
     }
 
     public static class Builder extends ClientModel.Builder {
