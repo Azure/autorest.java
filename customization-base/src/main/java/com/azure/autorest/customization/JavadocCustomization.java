@@ -3,12 +3,9 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,13 +13,32 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.azure.autorest.customization.implementation.Utils.writeLine;
 
 
 /**
  * The Javadoc customization for an AutoRest generated classes and methods.
  */
 public final class JavadocCustomization {
+    /*
+     * This pattern attempts to cleanse a line of a Javadoc.
+     *
+     * The scenarios handled by this pattern are the following:
+     *
+     * 1. A single line Javadoc
+     * 2. An indented single line Javadoc
+     * 3. A part of a Javadoc
+     * 4. An indented part of a Javadoc
+     * 5. A Javadoc where the closing line contains text
+     * 6. An indented Javadoc where the closing line contains text
+     */
+    private static final Pattern JAVADOC_LINE_CLEANER = Pattern.compile("^\\s*\\/?\\*{1,2}\\s?(.*?)(?:\\s*\\*\\/)?$");
+
+    private static final Pattern EMPTY_JAVADOC_LINE_PATTERN = Pattern.compile("\\s*\\*\\/?\\s*");
+
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
     private final URI fileUri;
@@ -38,7 +54,8 @@ public final class JavadocCustomization {
     private String deprecatedDoc;
     private Range javadocRange;
 
-    JavadocCustomization(Editor editor, EclipseLanguageClient languageClient, String packagePath, String className, int symbolLine) {
+    JavadocCustomization(Editor editor, EclipseLanguageClient languageClient, URI fileUri, String fileName,
+        int symbolLine) {
         this.editor = editor;
         this.languageClient = languageClient;
 
@@ -46,13 +63,9 @@ public final class JavadocCustomization {
         this.throwsDocs = new LinkedHashMap<>();
         this.seeDocs = new ArrayList<>();
 
-        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className)
-            .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
-            .findFirst();
+        this.fileUri = fileUri;
+        this.fileName = fileName;
 
-        fileUri = classSymbol.get().getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        fileName = fileUri.toString().substring(i);
         this.indent = editor.getFileLine(fileName, symbolLine).replaceAll("[^ ].*$", "");
         parseJavadoc(symbolLine);
     }
@@ -274,35 +287,35 @@ public final class JavadocCustomization {
                     String type = lineContent.replaceFirst(".*@throws ", "").replaceFirst(" .*", "");
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@throws") + 8);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    throwsDocs.put(type, editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim());
+                    throwsDocs.put(type, readJavadocTextRange(editor, fileName, docStart, docEnd));
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@return")) {
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@return") + 8);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    returnDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
+                    returnDoc = readJavadocTextRange(editor, fileName, docStart, docEnd);
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@since")) {
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@since") + 7);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    sinceDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
+                    sinceDoc = readJavadocTextRange(editor, fileName, docStart, docEnd);
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@see")) {
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@see") + 5);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    seeDocs.add(editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim());
+                    seeDocs.add(readJavadocTextRange(editor, fileName, docStart, docEnd));
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@deprecated")) {
-                    Position docStart = new Position(symbolLine, lineContent.indexOf("@see") + 5);
+                    Position docStart = new Position(symbolLine, lineContent.indexOf("@deprecated") + 5);
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    deprecatedDoc = editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim();
+                    deprecatedDoc = readJavadocTextRange(editor, fileName, docStart, docEnd);
                     currentDocEndLine = symbolLine - 1;
                 } else if (lineContent.contains("@param")) {
                     String name = lineContent.replaceFirst(".*@param ", "").replaceFirst(" .*", "");
                     Position docStart = new Position(symbolLine, lineContent.indexOf("@param") + 8 + name.length());
                     Position docEnd = new Position(currentDocEndLine, editor.getFileLine(fileName, currentDocEndLine).length());
-                    paramDocs.put(name, editor.getTextInRange(fileName, new Range(docStart, docEnd), " ").replaceAll(" +\\* ", " ").trim());
+                    paramDocs.put(name, readJavadocTextRange(editor, fileName, docStart, docEnd));
                     currentDocEndLine = symbolLine - 1;
-                } else if (lineContent.startsWith(indent + " */") || lineContent.endsWith(" *")) {
+                } else if (EMPTY_JAVADOC_LINE_PATTERN.matcher(lineContent).matches()) {
                     // empty line
                     currentDocEndLine--;
                 }
@@ -325,44 +338,62 @@ public final class JavadocCustomization {
         }
     }
 
+    private static String readJavadocTextRange(Editor editor, String fileName, Position docStart,
+        Position docEnd) {
+        return editor.getTextInRange(fileName, new Range(docStart, docEnd), " ", line -> {
+            Matcher lineCleaningMatch = JAVADOC_LINE_CLEANER.matcher(line);
+            return (lineCleaningMatch.find()) ? lineCleaningMatch.group(1) : line;
+        }).trim();
+    }
+
     private void commit() {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        printWriter.println("/**");
+        // Given this method is self contained use StringBuilder as it doesn't have synchronization.
+        // Additional start with a sizeable 4kb buffer to reduce chances of resizing while keeping it small.
+        StringBuilder stringBuilder = new StringBuilder(4096);
+
+        writeLine(stringBuilder, "/**");
         if (descriptionDocs != null) {
-            printWriter.println(indent + " * " + descriptionDocs);
+            writeLine(stringBuilder.append(indent).append(" * "), descriptionDocs);
         }
+
         if (!paramDocs.isEmpty() || !throwsDocs.isEmpty() || returnDoc != null) {
-            printWriter.println(indent + " * ");
+            writeLine(stringBuilder.append(indent), " * ");
 
             for (Map.Entry<String, String> paramDoc : paramDocs.entrySet()) {
-                printWriter.println(indent + " * @param " + paramDoc.getKey() + " " + paramDoc.getValue());
+                writeLine(stringBuilder.append(indent)
+                    .append(" * @param ")
+                    .append(paramDoc.getKey())
+                    .append(" "), paramDoc.getValue());
             }
 
             if (returnDoc != null) {
-                printWriter.println(indent + " * @return " + returnDoc);
+                writeLine(stringBuilder.append(indent).append(" * @return "), returnDoc);
             }
 
             for (Map.Entry<String, String> throwsDoc : throwsDocs.entrySet()) {
-                printWriter.println(indent + " * @throws " + throwsDoc.getKey() + " " + throwsDoc.getValue());
+                writeLine(stringBuilder.append(indent)
+                    .append(" * @throws ")
+                    .append(throwsDoc.getKey())
+                    .append(" "), throwsDoc.getValue());
             }
 
             for (String seeDoc : seeDocs) {
-                printWriter.println(indent + " * @see " + seeDoc);
+                writeLine(stringBuilder.append(indent).append(" * @see "), seeDoc);
             }
 
             if (sinceDoc != null) {
-                printWriter.println(indent + " * @since " + sinceDoc);
+                writeLine(stringBuilder.append(indent).append(" * @since "), sinceDoc);
             }
 
             if (deprecatedDoc != null) {
-                printWriter.println(indent + " * @deprecated " + deprecatedDoc);
+                writeLine(stringBuilder.append(indent).append(" * @deprecated "), deprecatedDoc);
             }
 
         }
-        printWriter.print(indent + " */");
 
-        editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringWriter.toString());
+        stringBuilder.append(indent).append(" */");
+
+        editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringBuilder.toString());
         FileEvent replaceEvent = new FileEvent();
         replaceEvent.setUri(fileUri);
         replaceEvent.setType(FileChangeType.CHANGED);

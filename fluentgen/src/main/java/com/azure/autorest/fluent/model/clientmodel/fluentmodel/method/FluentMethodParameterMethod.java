@@ -44,6 +44,29 @@ public class FluentMethodParameterMethod extends FluentMethod {
                 .build();
     }
 
+    public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,
+                                       FluentInterfaceStage stage,
+                                       ClientMethodParameter methodParameter, LocalVariable localVariable,
+                                       String name) {
+        super(model, type);
+
+        this.methodParameter = methodParameter;
+        this.localVariable = localVariable;
+
+        this.name = name;
+        this.description = String.format("Specifies the %1$s property: %2$s.", methodParameter.getName(), methodParameter.getDescription());
+        this.interfaceReturnValue = new ReturnValue("the next definition stage.", new ClassType.Builder().name(stage.getNextStage().getName()).build());
+        this.implementationReturnValue = new ReturnValue("", model.getImplementationType());
+
+        this.implementationMethodTemplate = MethodTemplate.builder()
+                .methodSignature(this.getImplementationMethodSignature())
+                .method(block -> {
+                    block.line("this.%1$s = %2$s;", localVariable.getName(), methodParameter.getName());
+                    block.methodReturn("this");
+                })
+                .build();
+    }
+
     @Override
     protected String getBaseMethodSignature() {
         return String.format("%1$s(%2$s %3$s)",

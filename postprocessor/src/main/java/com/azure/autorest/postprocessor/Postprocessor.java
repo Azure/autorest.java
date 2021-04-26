@@ -3,6 +3,7 @@ package com.azure.autorest.postprocessor;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.BuildWorkspaceStatus;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
@@ -110,7 +111,7 @@ public class Postprocessor extends NewPlugin {
       try {
         Customization customization = customizationClass.getConstructor().newInstance();
         logger.info("Running customization, this may take a while...");
-        fileContents = customization.run(fileContents);
+        fileContents = customization.run(fileContents, logger);
       } catch (Exception e) {
         logger.error("Unable to complete customization", e);
         return false;
@@ -229,10 +230,13 @@ public class Postprocessor extends NewPlugin {
           }
         }
       }
-      languageClient.buildWorkspace(true);
-      URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();
-      URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl}, ClassLoader.getSystemClassLoader());
-      return (Class<? extends Customization>) Class.forName(className, true, classLoader);
+      BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
+      if (status == BuildWorkspaceStatus.SUCCEED) {
+        URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();
+        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl}, ClassLoader.getSystemClassLoader());
+        return (Class<? extends Customization>) Class.forName(className, true, classLoader);
+      }
+      throw new RuntimeException("Failed to build with status code " + status);
     } catch (Exception e) {
       throw new RuntimeException(e);
     } finally {

@@ -76,10 +76,13 @@ public class ResourceUpdate extends ResourceOperation {
         // header and query parameters
         List<ClientMethodParameter> miscParameters = this.getMiscParameters();
         for (ClientMethodParameter parameter : miscParameters) {
-            UpdateStage stage = new UpdateStageMisc("With" + CodeNamer.toPascalCase(parameter.getName()), parameter);
+            String parameterNameForMethodSignature = deduplicateParameterNameForMethodSignature(
+                    updateStages, parameter.getName());
+
+            UpdateStage stage = new UpdateStageMisc("With" + parameterNameForMethodSignature, parameter);
             stage.setNextStage(updateStageApply);
 
-            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter));
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter, parameterNameForMethodSignature));
 
             updateStages.add(stage);
         }
@@ -111,9 +114,21 @@ public class ResourceUpdate extends ResourceOperation {
                 .collect(Collectors.toList());
     }
 
-    private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter) {
+    private FluentMethod getParameterSetterMethod(UpdateStage stage, ClientMethodParameter parameter,
+                                                  String parameterNameForMethodSignature) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
-                stage, parameter, this.getLocalVariableByMethodParameter(parameter));
+                stage, parameter, this.getLocalVariableByMethodParameter(parameter),
+                parameterNameForMethodSignature);
+    }
+
+    private String deduplicateParameterNameForMethodSignature(List<UpdateStage> stages, String parameterName) {
+        String stageName = "With" + CodeNamer.toPascalCase(parameterName);
+        for (UpdateStage stage : stages) {
+            if (stageName.equals(stage.getName())) {
+                return parameterName + "Parameter";
+            }
+        }
+        return parameterName;
     }
 
     private FluentMethod getPropertyMethod(UpdateStage stage, ClientModel model, ClientModelProperty property) {

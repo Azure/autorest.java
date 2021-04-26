@@ -2,11 +2,13 @@ trigger:
   branches:
     include:
     - v4
+    - main
 
 pr:
   branches:
     include:
     - v4
+    - main
 
 jobs:
   - job: Build

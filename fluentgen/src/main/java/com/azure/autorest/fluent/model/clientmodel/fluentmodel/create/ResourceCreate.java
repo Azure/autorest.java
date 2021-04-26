@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ResourceCreate extends ResourceOperation {
 
@@ -172,10 +173,14 @@ public class ResourceCreate extends ResourceOperation {
         // header and query parameters
         List<ClientMethodParameter> miscParameters = this.getMiscParameters();
         for (ClientMethodParameter parameter : miscParameters) {
-            DefinitionStage stage = new DefinitionStageMisc("With" + CodeNamer.toPascalCase(parameter.getName()), parameter);
+            // it is possible that parameter got same name as one of the model properties
+            String parameterNameForMethodSignature = deduplicateParameterNameForMethodSignature(
+                    definitionStages, optionalDefinitionStages, parameter.getName());
+
+            DefinitionStage stage = new DefinitionStageMisc("With" + CodeNamer.toPascalCase(parameterNameForMethodSignature), parameter);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter));
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter, parameterNameForMethodSignature));
 
             optionalDefinitionStages.add(stage);
         }
@@ -238,9 +243,22 @@ public class ResourceCreate extends ResourceOperation {
         return "create";
     }
 
-    private FluentMethod getParameterSetterMethod(DefinitionStage stage, ClientMethodParameter parameter) {
+    private FluentMethod getParameterSetterMethod(DefinitionStage stage, ClientMethodParameter parameter,
+                                                  String parameterNameForMethodSignature) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.CREATE_WITH,
-                stage, parameter, this.getLocalVariableByMethodParameter(parameter));
+                stage, parameter, this.getLocalVariableByMethodParameter(parameter),
+                CodeNamer.getModelNamer().modelPropertySetterName(parameterNameForMethodSignature));
+    }
+
+    private String deduplicateParameterNameForMethodSignature(
+            List<DefinitionStage> stages1, List<DefinitionStage> stages2, String parameterName) {
+        String stageName = "With" + CodeNamer.toPascalCase(parameterName);
+        for (DefinitionStage stage : Stream.concat(stages1.stream(), stages2.stream()).collect(Collectors.toList())) {
+            if (stageName.equals(stage.getName())) {
+                return parameterName + "Parameter";
+            }
+        }
+        return parameterName;
     }
 
     public FluentDefineMethod getDefineMethod() {

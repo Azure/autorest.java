@@ -42,8 +42,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azure-core.version>1.14.1</azure-core.version>
-    <azure-core-management.version>1.2.0</azure-core-management.version>
+    <azure-core.version>1.15.0</azure-core.version>
+    <azure-core-management.version>1.2.1</azure-core-management.version>
   </properties>
 
   <dependencyManagement>
@@ -73,8 +73,46 @@
             <target>1.8</target>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.1.1</version>
+          <configuration>
+            <source>1.8</source>
+            <quiet>true</quiet>
+          </configuration>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <outputDirectory>${packageOutputDirectory}</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <modules>
