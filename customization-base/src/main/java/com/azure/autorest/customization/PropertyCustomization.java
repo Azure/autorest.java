@@ -56,7 +56,7 @@ public final class PropertyCustomization extends CodeCustomization {
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }
         }
-        return new PropertyCustomization(editor, languageClient, packageName, className, symbol, newName);
+        return refreshCustomization(newName);
     }
 
     /**
@@ -66,8 +66,7 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> new PropertyCustomization(editor, languageClient,
-            packageName, className, refreshSymbol(), propertyName));
+        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(propertyName));
     }
 
     /**
@@ -77,8 +76,7 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> new PropertyCustomization(editor, languageClient,
-            packageName, className, refreshSymbol(), propertyName));
+        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(propertyName));
     }
 
     /**
@@ -88,42 +86,32 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization generateGetterAndSetter() {
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+        Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
+            .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
             .findFirst();
-        if (symbol.isPresent()) {
-            Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
-                .findFirst();
-            if (generateAccessors.isPresent()) {
-                WorkspaceEditCommand command;
-                if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                    command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                    for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-                    }
-                    List<TextEdit> formats = languageClient.format(fileUri);
-                    Utils.applyTextEdits(fileUri, formats, editor, languageClient);
-
-                    String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-                    new PackageCustomization(editor, languageClient, packageName)
-                        .getClass(className)
-                        .getMethod(setterMethod).setReturnType(className, "this");
+        if (generateAccessors.isPresent()) {
+            WorkspaceEditCommand command;
+            if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
+                command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
+                for (WorkspaceEdit workspaceEdit : command.getArguments()) {
+                    Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                 }
+                List<TextEdit> formats = languageClient.format(fileUri);
+                Utils.applyTextEdits(fileUri, formats, editor, languageClient);
+
+                String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+                new PackageCustomization(editor, languageClient, packageName)
+                    .getClass(className)
+                    .getMethod(setterMethod).setReturnType(className, "this");
             }
         }
+
         return this;
     }
 
-    private SymbolInformation refreshSymbol() {
-        Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-            .findFirst();
-
-        if (!propertySymbol.isPresent()) {
-            throw new IllegalArgumentException("Property " + propertyName + " does not exist in class " + className);
-        }
-
-        return propertySymbol.get();
+    private PropertyCustomization refreshCustomization(String propertyName) {
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getProperty(propertyName);
     }
 }
