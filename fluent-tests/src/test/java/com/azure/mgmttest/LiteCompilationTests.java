@@ -12,6 +12,9 @@ import com.azure.core.management.Region;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Context;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
+import com.azure.mgmtlitetest.mediaservices.models.MediaService;
+import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -115,5 +118,12 @@ public class LiteCompilationTests {
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .withDefaultPollInterval(Duration.ofSeconds(10))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
+    }
+
+    public void testMediaServices() {
+        MediaServicesManager mediaServicesManager = mock(MediaServicesManager.class);
+
+        MediaService mediaService = mediaServicesManager.mediaservices().getById(mock(String.class));
+        mediaService.syncStorageKeys(mock(SyncStorageKeysInput.class));
     }
 }

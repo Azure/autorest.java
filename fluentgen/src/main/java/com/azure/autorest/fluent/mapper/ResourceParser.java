@@ -270,7 +270,8 @@ public class ResourceParser {
                     if (method.getInnerProxyMethod().getParameters().stream()
                             .allMatch(p -> p.getFromClient()
                                     || !p.getIsRequired()
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Header && p.getIsConstant())
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Query && p.getIsConstant())     // usually 'api-version' query parameter
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.Header && p.getIsConstant())    // usually 'accept' header
                                     || p.getRequestParameterLocation() == RequestParameterLocation.Path
                                     || p.getRequestParameterLocation() == RequestParameterLocation.Body)) {
                         actionMethods.add(method);
