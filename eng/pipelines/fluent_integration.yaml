@@ -12,7 +12,7 @@ pr:
 
 jobs:
 - job: 'Build'
-  timeoutInMinutes: 20
+  timeoutInMinutes: 30
   pool:
     vmImage: 'vs2017-win2016'
 
