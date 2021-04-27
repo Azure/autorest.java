@@ -16,7 +16,6 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -283,9 +282,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName) {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String methodName, String defaultCredentialScopes) {
         classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
-                buildMethodName), function -> {
+                defaultCredentialScopes), function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 

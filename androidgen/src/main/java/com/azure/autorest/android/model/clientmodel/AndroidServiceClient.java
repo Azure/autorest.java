@@ -25,7 +25,8 @@ public class AndroidServiceClient extends ServiceClient {
                                    ClientMethodParameter tokenCredentialParameter,
                                    ClientMethodParameter httpPipelineParameter,
                                    ClientMethodParameter serializerAdapterParameter,
-                                   ClientMethodParameter defaultPollIntervalParameter) {
+                                   ClientMethodParameter defaultPollIntervalParameter,
+                                    String defaultCredentialScopes) {
         super(packageName,
                 className,
                 interfaceName,
@@ -38,7 +39,8 @@ public class AndroidServiceClient extends ServiceClient {
                 tokenCredentialParameter,
                 httpPipelineParameter,
                 serializerAdapterParameter,
-                defaultPollIntervalParameter);
+                defaultPollIntervalParameter,
+                defaultCredentialScopes);
     }
 
     @Override
@@ -73,7 +75,8 @@ public class AndroidServiceClient extends ServiceClient {
                     tokenCredentialParameter,
                     httpPipelineParameter,
                     serializerAdapterParameter,
-                    defaultPollIntervalParameter);
+                    defaultPollIntervalParameter,
+                    defaultCredentialScopes);
         }
     }
 }

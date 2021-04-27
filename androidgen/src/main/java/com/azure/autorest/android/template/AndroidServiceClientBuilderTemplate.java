@@ -4,11 +4,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
-import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTemplate {
@@ -85,13 +83,13 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
     }
 
     @Override
-    protected void addCreateHttpPipelineMethod(JavaSettings settings,
+    protected void addCreateHttpPipelineMethod(com.azure.autorest.extension.base.plugin.JavaSettings settings,
                                                String buildReturnType,
-                                               JavaClass classBlock,
-                                               List<ServiceClientProperty> clientProperties,
-                                               String buildMethodName) {
+                                               com.azure.autorest.model.javamodel.JavaClass classBlock,
+                                               java.util.List<com.azure.autorest.model.clientmodel.ServiceClientProperty> clientProperties,
+                                               String methodName, String defaultCredentialScopes) {
         classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
-                buildMethodName), function -> {
+                defaultCredentialScopes), function -> {
 
             function.ifBlock("httpLogOptions == null", action -> {
                 function.line("httpLogOptions = new HttpLogOptions();");
