@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.17.1"
+  "@autorest/modelerfour": "4.18.1"
 
 pipeline:
 
