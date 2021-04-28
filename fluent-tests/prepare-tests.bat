@@ -12,7 +12,7 @@ RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.1.3
 SET MODELERFOUR_ARGUMENTS=--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true
-SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL --use=@autorest/modelerfour@4.18.0
+SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
 SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite
 

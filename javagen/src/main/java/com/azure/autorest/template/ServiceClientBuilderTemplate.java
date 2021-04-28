@@ -282,9 +282,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String methodName, String defaultCredentialScopes) {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, String buildReturnType, JavaClass classBlock, List<ServiceClientProperty> clientProperties, String buildMethodName, String defaultCredentialScopes) {
         classBlock.privateMethod(String.format("HttpPipeline createHttpPipeline()", buildReturnType,
-                defaultCredentialScopes), function -> {
+                buildMethodName), function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 

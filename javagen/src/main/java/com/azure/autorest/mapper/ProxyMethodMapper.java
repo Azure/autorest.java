@@ -170,7 +170,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         return ClassType.Context;
     }
 
-    protected void appendCallbackParameter(java.util.List<ProxyMethodParameter> parameters, IType responseBodyType) {
+    protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
     }
 
     protected IType createSingleValueAsyncReturnType(IType singleValueType) {
