@@ -747,7 +747,7 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 use: $(this-folder)/javagen
 ```
 
-``` yaml $(java) && $(fluent) && && !$(android)
+``` yaml $(java) && $(fluent) && !$(android)
 use: $(this-folder)/fluentgen
 ```
 
