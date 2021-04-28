@@ -11,7 +11,7 @@
 </parent>
 <groupId>com.azure.tools</groupId>
 <artifactId>androidgen</artifactId>
-<version>1.0.0-SNAPSHOT</version>
+<version>1.0.0-beta.1</version>
 
 <repositories>
     <repository>
