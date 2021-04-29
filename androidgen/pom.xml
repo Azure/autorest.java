@@ -10,7 +10,7 @@
     <relativePath>../pom.xml</relativePath>
 </parent>
 <groupId>com.azure.tools</groupId>
-<artifactId>androidgen</artifactId>
+<artifactId>azure-autorest-androidgen</artifactId>
 <version>1.0.0-beta.1</version>
 
 <repositories>
