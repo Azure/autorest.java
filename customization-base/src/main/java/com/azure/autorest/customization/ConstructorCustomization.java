@@ -6,15 +6,9 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
-import com.azure.autorest.customization.models.Position;
 
 import java.lang.reflect.Modifier;
-import java.util.Collections;
-import java.util.Optional;
 
 /**
  * The constructor level customization for an AutoRest generated constructor.
@@ -58,8 +52,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> new ConstructorCustomization(editor, languageClient,
-            packageName, className, constructorSignature, refreshSymbol()));
+        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
     }
 
     /**
@@ -69,8 +62,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> new ConstructorCustomization(editor, languageClient,
-            packageName, className, constructorSignature, refreshSymbol()));
+        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
     }
 
     /**
@@ -90,8 +82,7 @@ public final class ConstructorCustomization extends CodeCustomization {
         Utils.replaceModifier(symbol, editor, languageClient, "(?:.+ )?" + className + "\\(", className + "(",
             Modifier.constructorModifiers(), modifiers);
 
-        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
-            refreshSymbol());
+        return refreshCustomization(constructorSignature);
     }
 
     /**
@@ -101,43 +92,8 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceParameters(String newParameters) {
-        // Beginning line of the symbol.
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        String parametersPositionFinder = editor.getFileLine(fileName, line);
-
-        // First find the starting location of the parameters.
-        // The beginning of the parameters may not be on the same line as the start of the signature.
-        while (!parametersPositionFinder.contains("(")) {
-            parametersPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Now that the line where the parameters begin is found create its position.
-        int parametersStartCharacter = parametersPositionFinder.indexOf("(");
-
-        // Starting character is inclusive of the character offset, so increment the index one.
-        Position parametersStart = new Position(line, parametersStartCharacter + 1);
-
-        // Then find where the parameters end.
-        // The ending of the parameters may not be on the same line as the start of the parameters.
-        while (!parametersPositionFinder.contains(")")) {
-            parametersPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Now that the line where the parameters end is found gets create its position.
-        int parametersEndCharacter = parametersPositionFinder.indexOf(")");
-
-        // Ending character is exclusive of the character offset, so use the index as is.
-        Position parametersEnd = new Position(line, parametersEndCharacter);
-
-        editor.replace(fileName, parametersStart, parametersEnd, newParameters);
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getConstructor(String.format("%s(%s)", className, newParameters));
+        return Utils.replaceParameters(newParameters, this,
+            () -> refreshCustomization(String.format("%s(%s)", className, newParameters)));
     }
 
     /**
@@ -147,21 +103,12 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceBody(String newBody) {
-        return Utils.replaceBody(newBody, this, () -> new ConstructorCustomization(editor, languageClient, packageName,
-            className, constructorSignature, refreshSymbol()));
+        return Utils.replaceBody(newBody, this, () -> refreshCustomization(constructorSignature));
     }
 
-    private SymbolInformation refreshSymbol() {
-        Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(className)
-                && si.getKind() == SymbolKind.CONSTRUCTOR)
-            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
-                .contains(constructorSignature))
-            .findFirst();
-        if (!methodSymbol.isPresent()) {
-            throw new IllegalArgumentException("Constructor " + constructorSignature + " does not exist in class "
-                + className);
-        }
-        return methodSymbol.get();
+    private ConstructorCustomization refreshCustomization(String constructorSignature) {
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getConstructor(constructorSignature);
     }
 }

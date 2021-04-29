@@ -7,7 +7,6 @@ import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
@@ -18,7 +17,6 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static com.azure.autorest.customization.implementation.Utils.replaceModifier;
 
@@ -83,16 +81,8 @@ public final class MethodCustomization extends CodeCustomization {
     public MethodCustomization rename(String newName) {
         WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
         Utils.applyWorkspaceEdit(edit, editor, languageClient);
-        Optional<SymbolInformation> newMethodSymbol = languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(newName) && si.getKind() == SymbolKind.METHOD)
-            .findFirst();
-        if (!newMethodSymbol.isPresent()) {
-            throw new IllegalArgumentException("Renamed failed with new method " + newName + " not found.");
-        }
 
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getMethod(methodSignature.replace(methodName + "(", newName + "("));
+        return refreshCustomization(methodSignature.replace(methodName + "(", newName + "("));
     }
 
     /**
@@ -102,8 +92,7 @@ public final class MethodCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> new MethodCustomization(editor, languageClient, packageName,
-            className, methodName, methodSignature, refreshSymbol()));
+        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
     }
 
     /**
@@ -113,8 +102,7 @@ public final class MethodCustomization extends CodeCustomization {
      * @return the current method customization for chaining
      */
     public MethodCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(annotation, this, () -> new MethodCustomization(editor, languageClient,
-            packageName, className, methodName, methodSignature, refreshSymbol()));
+        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
     }
 
     /**
@@ -134,8 +122,7 @@ public final class MethodCustomization extends CodeCustomization {
         replaceModifier(symbol, editor, languageClient, "(?:.+ )?(\\w+ )" + methodName + "\\(",
             "$1" + methodName + "(", Modifier.methodModifiers(), modifiers);
 
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature,
-            refreshSymbol());
+        return refreshCustomization(methodSignature);
     }
 
     /**
@@ -145,43 +132,8 @@ public final class MethodCustomization extends CodeCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceParameters(String newParameters) {
-        // Beginning line of the method.
-        int line = symbol.getLocation().getRange().getStart().getLine();
-        String parametersPositionFinder = editor.getFileLine(fileName, line);
-
-        // First find the starting location of the parameters.
-        // The beginning of the parameters may not be on the same line as the start of the signature.
-        while (!parametersPositionFinder.contains("(")) {
-            parametersPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Now that the line where the method parameters begin is found create its position.
-        int parametersStartCharacter = parametersPositionFinder.indexOf("(");
-
-        // Starting character is inclusive of the character offset, so increment the index one.
-        Position parametersStart = new Position(line, parametersStartCharacter + 1);
-
-        // Then find where the parameters end.
-        // The ending of the parameters may not be on the same line as the start of the parameters.
-        while (!parametersPositionFinder.contains(")")) {
-            parametersPositionFinder = editor.getFileLine(fileName, ++line);
-        }
-
-        // Now that the line where the method parameters end is found gets create its position.
-        int parametersEndCharacter = parametersPositionFinder.indexOf(")");
-
-        // Ending character is exclusive of the character offset, so use the index as is.
-        Position parametersEnd = new Position(line, parametersEndCharacter);
-
-        editor.replace(fileName, parametersStart, parametersEnd, newParameters);
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getMethod(String.format("%s(%s)", methodName, newParameters));
+        return Utils.replaceParameters(newParameters, this,
+            () -> refreshCustomization(String.format("%s(%s)", methodName, newParameters)));
     }
 
     /**
@@ -191,8 +143,7 @@ public final class MethodCustomization extends CodeCustomization {
      * @return The updated MethodCustomization object.
      */
     public MethodCustomization replaceBody(String newBody) {
-        return Utils.replaceBody(newBody, this, () -> new MethodCustomization(editor, languageClient, packageName,
-            className, methodName, methodSignature, refreshSymbol()));
+        return Utils.replaceBody(newBody, this, () -> refreshCustomization(methodSignature));
     }
 
     /**
@@ -237,7 +188,8 @@ public final class MethodCustomization extends CodeCustomization {
         Position start = new Position(line, 0);
         String oldLineContent = editor.getFileLine(fileName, line);
         Position end = new Position(line, oldLineContent.length());
-        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", "$1" + newReturnType + " " + methodName + "(");
+        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(",
+            "$1" + newReturnType + " " + methodName + "(");
         TextEdit signatureEdit = new TextEdit();
         signatureEdit.setNewText(newLineContent);
         signatureEdit.setRange(new Range(start, end));
@@ -245,7 +197,8 @@ public final class MethodCustomization extends CodeCustomization {
 
         String methodIndent = Utils.getIndent(editor.getFileLine(fileName, line));
         String methodContentIndent = Utils.getIndent(editor.getFileLine(fileName, line + 1));
-        String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "").replaceFirst(methodIndent + "(\\w.* )?", "").trim();
+        String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "")
+            .replaceFirst(methodIndent + "(\\w.* )?", "").trim();
         int returnLine = -1;
         while (!oldLineContent.startsWith(methodIndent + "}")) {
             if (oldLineContent.contains("return ")) {
@@ -313,19 +266,12 @@ public final class MethodCustomization extends CodeCustomization {
 
         String newMethodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
 
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getMethod(newMethodSignature);
+        return refreshCustomization(newMethodSignature);
     }
 
-    private SymbolInformation refreshSymbol() {
-        Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
-            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
-            .findFirst();
-        if (!methodSymbol.isPresent()) {
-            throw new IllegalArgumentException("Method " + methodSignature + " does not exist in class " + className);
-        }
-        return methodSymbol.get();
+    private MethodCustomization refreshCustomization(String methodSignature) {
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(methodSignature);
     }
 }
