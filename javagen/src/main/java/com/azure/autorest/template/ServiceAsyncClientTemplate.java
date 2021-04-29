@@ -18,7 +18,7 @@ import java.util.Set;
 public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile> {
 
   private static ServiceAsyncClientTemplate _instance = new ServiceAsyncClientTemplate();
-  private ServiceAsyncClientTemplate() {
+  protected ServiceAsyncClientTemplate() {
   }
 
   public static ServiceAsyncClientTemplate getInstance() {
@@ -47,7 +47,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
       imports.add(methodGroupClient.getPackage() + "." + methodGroupClient.getClassName());
     }
     imports.add(builderPackageName + "." + builderClassName);
-    imports.add("com.azure.core.annotation.ServiceClient");
+    addServiceClientAnnotationImports(imports);
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
@@ -105,5 +105,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
       }
     });
+  }
+
+  protected void addServiceClientAnnotationImports(Set<String> imports) {
+    imports.add("com.azure.core.annotation.ServiceClient");
   }
 }
