@@ -48,6 +48,28 @@ public class Utils {
      */
     public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*)\\w.*$");
 
+    /*
+     * This pattern determines if a line is a beginning of constructor or method. The following is an explanation of
+     * the pattern:
+     *
+     * 1. Capture all leading space characters.
+     * 2. Capture all modifiers for the constructor or method.
+     * 3. If a method, capture the return type.
+     * 4. Capture the name of the constructor or method.
+     *
+     * The following are the groups return:
+     *
+     * 1. The entire matching declaration from the beginning of the string used to determine the beginning offset of the
+     * parameters in the constructor or method.
+     * 2. Any modifiers for the constructor or method. This may be empty/null.
+     * 3. If a method, the return type. If a constructor, empty/null.
+     * 4. The name of the constructor or method.
+     */
+    private static final Pattern BEGINNING_OF_PARAMETERS_PATTERN =
+        Pattern.compile("^(\\s*(?:([\\w\\s]*?)\\s)?(?:([a-zA-Z$_][\\w]*?)\\s+)?([a-zA-Z$_][\\w]*?)\\s*)\\(.*$");
+
+    private static final Pattern ENDING_OF_PARAMETERS_PATTERN = Pattern.compile("^(.*)\\)\\s*\\{.*$");
+
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
         List<FileEvent> changes = new ArrayList<>();
         for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
@@ -376,6 +398,48 @@ public class Utils {
 
         // Return the refreshed customization.
         return refreshedCustomizationSupplier.get();
+    }
+
+    public static <T extends CodeCustomization> T replaceParameters(String newParameters, T customization,
+        Supplier<T> refreshCustomizationSupplier) {
+        SymbolInformation symbol = customization.getSymbol();
+        Editor editor = customization.getEditor();
+        String fileName = customization.getFileName();
+        URI fileUri = customization.getFileUri();
+        EclipseLanguageClient languageClient = customization.getLanguageClient();
+
+        // Beginning line of the symbol.
+        int line = symbol.getLocation().getRange().getStart().getLine();
+
+        // First find the starting location of the parameters.
+        // The beginning of the parameters may not be on the same line as the start of the signature.
+        Matcher matcher = BEGINNING_OF_PARAMETERS_PATTERN.matcher(editor.getFileLine(fileName, line));
+        while (!matcher.matches()) {
+            matcher = BEGINNING_OF_PARAMETERS_PATTERN.matcher(editor.getFileLine(fileName, ++line));
+        }
+
+        // Now that the line where the parameters begin is found create its position.
+        // Starting character is inclusive of the character offset, so add one as ')' isn't included in the capture.
+        Position parametersStart = new Position(line, matcher.group(1).length() + 1);
+
+        // Then find where the parameters end.
+        // The ending of the parameters may not be on the same line as the start of the parameters.
+        matcher = ENDING_OF_PARAMETERS_PATTERN.matcher(editor.getFileLine(fileName, line));
+        while (!matcher.matches()) {
+            matcher = ENDING_OF_PARAMETERS_PATTERN.matcher(editor.getFileLine(fileName, ++line));
+        }
+
+        // Now that the line where the parameters end is found gets create its position.
+        // Ending character is exclusive of the character offset.
+        Position parametersEnd = new Position(line, matcher.group(1).length());
+
+        editor.replace(fileName, parametersStart, parametersEnd, newParameters);
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        return refreshCustomizationSupplier.get();
     }
 
     public static String getIndent(String content) {

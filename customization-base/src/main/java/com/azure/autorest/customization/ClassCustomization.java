@@ -35,7 +35,7 @@ public final class ClassCustomization extends CodeCustomization {
      * spaces and an opening '{'.
      */
     private static final Pattern METHOD_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
     /*
      * This pattern attempts to find the first line of a constructor string that doesn't have a first non-space
@@ -43,7 +43,7 @@ public final class ClassCustomization extends CodeCustomization {
      * characters before and inside '( )' ignoring any trailing spaces and an opening '{'.
      */
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
+        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
     private final String packageName;
     private final String className;
