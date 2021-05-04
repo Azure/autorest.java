@@ -233,8 +233,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
-                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType) &&
+                    (parameter.getExplode() == false)) {
                 parameterWireType = ClassType.String;
+            } else if (parameter.getExplode()){
+                parameterWireType = parameterClientType;
             }
 
             if (parameterWireType != parameterClientType) {
@@ -283,7 +286,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                         parameter.getCollectionFormat().toString().toUpperCase());
                             }
                         }
-                        function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
+                        // don't convert if explode is true
+                        if (parameter.getExplode()) {
+                            function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, parameterName);
+                        }
+                    	else {
+                            function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
+                    	}
                         addedConversion = true;
                     }
                 }
