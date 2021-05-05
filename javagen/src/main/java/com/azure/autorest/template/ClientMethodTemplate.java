@@ -223,11 +223,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
                     //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
-                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType) &&
-                    (parameter.getExplode() == false)) {
-                parameterWireType = ClassType.String;
-            } else if (parameter.getExplode()){
-                parameterWireType = parameterClientType;
+                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+            	if (parameter.getExplode() == false) {
+                    parameterWireType = ClassType.String;
+            	} else {
+            		parameterWireType = new ListType(ClassType.String);
+            	}
             }
 
             if (parameterWireType != parameterClientType) {
@@ -266,7 +267,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         String expression;
                         if (alwaysNull) {
                             expression = "null";
-                        } else {
+                        } else if (!parameter.getExplode()){
                             expression = String.format("JacksonAdapter.createDefaultSerializerAdapter()" +
                                             ".serializeList(%s, CollectionFormat.%s)", parameterName,
                                     parameter.getCollectionFormat().toString().toUpperCase());
@@ -275,14 +276,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                                 ".serializeIterable(%s, CollectionFormat.%s)", parameterName,
                                         parameter.getCollectionFormat().toString().toUpperCase());
                             }
+                        } else {
+                        	expression = String.format("%s.stream().map(Object::toString)"+ 
+                        			".collect(Collectors.toList())",
+                        			parameterName);
                         }
-                        // don't convert if explode is true
-                        if (parameter.getExplode()) {
-                            function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, parameterName);
-                        }
-                    	else {
-                            function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
-                    	}
+                        function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;
                     }
                 }
