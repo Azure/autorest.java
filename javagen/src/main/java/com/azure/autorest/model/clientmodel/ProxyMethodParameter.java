@@ -225,7 +225,7 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
                 imports.add("com.azure.core.util.serializer.JacksonAdapter");
             } else if (getClientType() instanceof ListType && getExplode()) {
-                imports.add("java.util.stream");
+                imports.add("java.util.stream.Collectors");
             }
         }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
