@@ -221,9 +221,11 @@ public class ProxyMethodParameter {
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
             if (getClientType() == ArrayType.ByteArray) {
                 imports.add("com.azure.core.util.Base64Util");
-            } else if (getClientType() instanceof ListType) {
+            } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
                 imports.add("com.azure.core.util.serializer.JacksonAdapter");
+            } else if (getClientType() instanceof ListType && getExplode()) {
+                imports.add("java.util.stream");
             }
         }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
