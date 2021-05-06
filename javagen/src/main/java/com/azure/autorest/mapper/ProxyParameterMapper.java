@@ -71,11 +71,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 wireType = ClassType.String;
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
-        	if (parameter.getProtocol().getHttp().getExplode()) {
+            if (parameter.getProtocol().getHttp().getExplode()) {
                 wireType = new ListType(ClassType.String);
-        	} else {
+            } else {
                 wireType = ClassType.String;
-        	}
+            }
         }
         builder.wireType(wireType);
 
