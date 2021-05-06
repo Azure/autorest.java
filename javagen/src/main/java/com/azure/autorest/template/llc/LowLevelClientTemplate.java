@@ -1,8 +1,11 @@
 package com.azure.autorest.template.llc;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -79,6 +82,24 @@ public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, Ja
             }
             for (ClientMethod method : methods) {
                 Templates.getLlcMethodTemplate().write(method, classBlock);
+            }
+
+            if (methods.stream().flatMap(m -> m.getProxyMethod().getParameters().stream())
+                    .filter(ProxyMethodParameter::getIsRequired)
+                    .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query
+                            || p.getRequestParameterLocation() == RequestParameterLocation.Path
+                            || p.getRequestParameterLocation() == RequestParameterLocation.Header)
+                    .anyMatch(p -> p.getClientType() instanceof ListType)) {
+                classBlock.privateMethod("String serializeIterable(Iterable<?> iterable, CollectionFormat format)", methodBlock -> {
+                    methodBlock.ifBlock("iterable == null", ifBlock -> {
+                        ifBlock.methodReturn("null");
+                    });
+                    methodBlock.line("return StreamSupport.stream(iterable.spliterator(), false)");
+                    methodBlock.increaseIndent();
+                    methodBlock.line(".map(item -> item == null ? \"\" : new String(serializer.serializeToBytes(item), StandardCharsets.UTF_8))");
+                    methodBlock.line(".map(serialized -> serialized.replace(\"^\\\"*|\\\"*$\", \"\"))");
+                    methodBlock.line(".collect(Collectors.joining(format.getDelimiter()));");
+                });
             }
         });
     }

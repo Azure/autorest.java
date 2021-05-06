@@ -274,7 +274,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                 .format("Builds an instance of %1$s low level client", syncClient.getClassName()));
                         comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
                     });
-                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "RestClient" : syncClient.getClassName()),
+                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "BaseClient" : syncClient.getClassName()),
                             function -> {
                                 for (ServiceClientProperty serviceClientProperty : clientProperties) {
                                     if (serviceClientProperty.getDefaultValueExpression() != null) {

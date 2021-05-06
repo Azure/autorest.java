@@ -98,12 +98,12 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient);
 
             String lowLevelClassName;
-            if (serviceClient.getClientBaseName().endsWith("RestClient")) {
+            if (serviceClient.getClientBaseName().endsWith("BaseClient")) {
                 lowLevelClassName = serviceClient.getClientBaseName();
             } else if (serviceClient.getClientBaseName().endsWith("Client")) {
-                lowLevelClassName = serviceClient.getClientBaseName().replaceAll("Client$", "RestClient");
+                lowLevelClassName = serviceClient.getClientBaseName().replaceAll("Client$", "BaseClient");
             } else {
-                lowLevelClassName = serviceClient.getClientBaseName() + "RestClient";
+                lowLevelClassName = serviceClient.getClientBaseName() + "BaseClient";
             }
             lowLevelClients.add(builder.className(lowLevelClassName).build());
         }
