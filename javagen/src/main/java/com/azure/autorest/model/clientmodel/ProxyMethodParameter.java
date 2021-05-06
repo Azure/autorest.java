@@ -98,7 +98,7 @@ public class ProxyMethodParameter {
      * @param collectionFormat The collection format if the parameter is a list type.
      * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
-    private ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
+    protected ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
         this.description = description;
         this.wireType = wireType;
         this.clientType = clientType;

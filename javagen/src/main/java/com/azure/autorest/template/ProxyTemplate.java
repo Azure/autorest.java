@@ -101,7 +101,8 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true, multipleQueryParams = true", parameter.getRequestParameterName()));
                                 } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Query && parameter.getExplode()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", multipleQueryParams = true", parameter.getRequestParameterName()));
-                                } else if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query)
+                                } else if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path ||
+                                            parameter.getRequestParameterLocation() == RequestParameterLocation.Query)
                                         && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
                                 } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null
