@@ -290,7 +290,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                                         .filter(p -> !p.isReadOnly())
                                         .map(ServiceClientProperty::getName)
                                         .collect(Collectors.joining(", "));
-                                function.line(String.format("%1$s client = new %2$s(%3$s, pipeline, objectSerializer);",
+                                function.line(String.format("%1$s client = new %2$s(%3$s, pipeline, serializer);",
                                         syncClient.getClassName(), syncClient.getClassName(), constructorArgs));
                                 function.line("return client;");
                             });
@@ -360,7 +360,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
         } else {
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                    ClassType.ObjectSerializer, "objectSerializer", false, "JsonSerializerProviders.createInstance()"));
+                    ClassType.ObjectSerializer, "serializer", false, "JsonSerializerProviders.createInstance()"));
         }
 
         if (!settings.isAzureOrFluent()) {

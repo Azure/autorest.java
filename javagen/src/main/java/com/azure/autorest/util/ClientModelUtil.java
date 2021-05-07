@@ -117,17 +117,24 @@ public class ClientModelUtil {
 
             if (count == 1) {
                 // if it is the only method group, use service client name as base.
-
-                String lowLevelClassName =
-                        serviceClient.getClientBaseName().endsWith("Client")
-                                ? serviceClient.getClientBaseName()
-                                : serviceClient.getClientBaseName() + "Client";
+                String lowLevelClassName;
+                if (serviceClient.getClientBaseName().endsWith("BaseClient")) {
+                    lowLevelClassName = serviceClient.getClientBaseName();
+                } else if (serviceClient.getClientBaseName().endsWith("Client")) {
+                    lowLevelClassName = serviceClient.getClientBaseName().replaceAll("Client$", "BaseClient");
+                } else {
+                    lowLevelClassName = serviceClient.getClientBaseName() + "BaseClient";
+                }
                 lowLevelClients.add(builder.className(lowLevelClassName).build());
             } else {
-                String lowLevelClassName =
-                        methodGroupClient.getClassBaseName().endsWith("Client")
-                                ? methodGroupClient.getClassBaseName()
-                                : methodGroupClient.getClassBaseName() + "Client";
+                String lowLevelClassName;
+                if (methodGroupClient.getClassBaseName().endsWith("BaseClient")) {
+                    lowLevelClassName = methodGroupClient.getClassBaseName();
+                } else if (methodGroupClient.getClassBaseName().endsWith("Client")) {
+                    lowLevelClassName = methodGroupClient.getClassBaseName().replaceAll("Client$", "BaseClient");
+                } else {
+                    lowLevelClassName = methodGroupClient.getClassBaseName() + "BaseClient";
+                }
                 lowLevelClients.add(builder.className(lowLevelClassName).build());
             }
         }
