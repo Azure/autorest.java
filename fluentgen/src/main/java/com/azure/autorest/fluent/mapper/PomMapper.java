@@ -24,7 +24,10 @@ public class PomMapper {
 
         pom.setDependencyIdentifiers(Arrays.asList(
                 "com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion(),
-                "com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion()
+                "com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion(),
+                "com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test",
+                "com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test",
+                "com.azure.resourcemanager:azure-resourcemanager-resources:" + project.getPackageVersions().getAzureResourceManagerResourcesVersion() + ":test"
         ));
 
         if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
