@@ -79,10 +79,11 @@ public class ResourceUpdate extends ResourceOperation {
             String parameterNameForMethodSignature = deduplicateParameterNameForMethodSignature(
                     updateStages, parameter.getName());
 
-            UpdateStage stage = new UpdateStageMisc("With" + parameterNameForMethodSignature, parameter);
+            UpdateStage stage = new UpdateStageMisc("With" + CodeNamer.toPascalCase(parameterNameForMethodSignature), parameter);
             stage.setNextStage(updateStageApply);
 
-            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter, parameterNameForMethodSignature));
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter,
+                    CodeNamer.getModelNamer().modelPropertySetterName(parameterNameForMethodSignature)));
 
             updateStages.add(stage);
         }
