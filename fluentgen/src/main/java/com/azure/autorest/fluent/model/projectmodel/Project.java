@@ -42,6 +42,9 @@ public class Project {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureCoreVersion = "1.15.0";
         private String azureCoreManagementVersion = "1.2.1";
+        private String azureCoreTestVersion = "1.6.1";
+        private String azureIdentityVersion = "1.2.5";
+        private String azureResourceManagerResourcesVersion = "2.4.0";
         private String jacocoMavenPlugin = "0.8.5";
 
         public String getAzureClientSdkParentVersion() {
@@ -54,6 +57,18 @@ public class Project {
 
         public String getAzureCoreManagementVersion() {
             return azureCoreManagementVersion;
+        }
+
+        public String getAzureCoreTestVersion() {
+            return azureCoreTestVersion;
+        }
+
+        public String getAzureIdentityVersion() {
+            return azureIdentityVersion;
+        }
+
+        public String getAzureResourceManagerResourcesVersion() {
+            return azureResourceManagerResourcesVersion;
         }
 
         public String getJacocoMavenPlugin() {
@@ -196,6 +211,9 @@ public class Project {
                 checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
+                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
+                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
+                checkArtifact(line, "com.azure.resourcemanager:azure-resourcemanager-resources").ifPresent(v -> packageVersions.azureResourceManagerResourcesVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
             });
         }
