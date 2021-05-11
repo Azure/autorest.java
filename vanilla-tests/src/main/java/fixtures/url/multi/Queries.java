@@ -14,10 +14,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.multi.models.ErrorException;
 import java.util.List;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -51,7 +50,7 @@ public final class Queries {
         Mono<Response<Void>> arrayStringMultiNull(
                 @HostParam("$host") String host,
                 @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
+                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
                 Context context);
 
         @Get("/queries/array/multi/string/empty")
@@ -59,7 +58,7 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiEmpty(
                 @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
+                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -68,7 +67,7 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiValid(
                 @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
+                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
                 @HeaderParam("Accept") String accept,
                 Context context);
     }
@@ -89,8 +88,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        List<String> arrayQueryConverted = arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -163,8 +161,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        List<String> arrayQueryConverted = arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -239,8 +236,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        List<String> arrayQueryConverted = arrayQuery.stream().map(Object::toString).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
