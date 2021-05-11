@@ -49,8 +49,8 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiNull(
                 @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
                 @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+                @HeaderParam("Accept") String accept,
                 Context context);
 
         @Get("/queries/array/multi/string/empty")
