@@ -252,7 +252,7 @@ public class ProxyMethodParameter {
         protected String parameterReference;
         protected String defaultValue;
         protected CollectionFormat collectionFormat;
-        private boolean explode;
+        protected boolean explode;
 
         /**
          * Sets the description of this parameter.
