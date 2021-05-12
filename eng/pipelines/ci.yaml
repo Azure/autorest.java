@@ -39,7 +39,7 @@ jobs:
 
       - script: |
           npm install -g autorest
-          npm install
+          npm install --no-bin-links
         displayName: 'Prepare Environment for Generation'
 
       - script: |

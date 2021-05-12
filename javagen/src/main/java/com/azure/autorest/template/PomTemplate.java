@@ -116,11 +116,15 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                             scope = null;
                         }
                         dependenciesBlock.block("dependency", dependencyBlock -> {
+                            boolean externalDependency = !groupId.startsWith("com.azure");
                             dependenciesBlock.tag("groupId", groupId);
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
                                 dependencyBlock.tagWithInlineComment("version", version,
-                                        String.format("{x-version-update;%1$s:%2$s;dependency}", groupId, artifactId));
+                                        String.format("{x-version-update;%1$s:%2$s;%3$s}",
+                                                groupId,
+                                                artifactId,
+                                                externalDependency ? "external_dependency" : "dependency"));
                             }
                             if (scope != null) {
                                 dependenciesBlock.tag("scope", scope);

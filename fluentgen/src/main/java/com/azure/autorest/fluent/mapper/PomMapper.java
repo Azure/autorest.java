@@ -9,7 +9,9 @@ import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.Pom;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PomMapper {
 
@@ -22,13 +24,14 @@ public class PomMapper {
         pom.setServiceName(project.getServiceName());
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
-        pom.setDependencyIdentifiers(Arrays.asList(
-                "com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion(),
-                "com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion(),
-                "com.azure:azure-identity:" + project.getPackageVersions().getAzureIdentityVersion() + ":test",
-                "com.azure:azure-core-test:" + project.getPackageVersions().getAzureCoreTestVersion() + ":test",
-                "com.azure.resourcemanager:azure-resourcemanager-resources:" + project.getPackageVersions().getAzureResourceManagerResourcesVersion() + ":test"
-        ));
+        List<String> dependencyIdentifiers = new ArrayList<>();
+        dependencyIdentifiers.add("com.azure:azure-core:" + project.getPackageVersions().getAzureCoreVersion());
+        dependencyIdentifiers.add("com.azure:azure-core-management:" + project.getPackageVersions().getAzureCoreManagementVersion());
+        dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
+                .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith("com.azure:azure-core:")
+                        && !dependencyIdentifier.startsWith("com.azure:azure-core-management:"))
+                .collect(Collectors.toList()));
+        pom.setDependencyIdentifiers(dependencyIdentifiers);
 
         if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
             pom.setParentIdentifier("com.azure:azure-client-sdk-parent:" + project.getPackageVersions().getAzureClientSdkParentVersion());
