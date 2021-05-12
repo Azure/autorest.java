@@ -14,13 +14,24 @@ import com.azure.autorest.fluent.template.FluentPomTemplate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
 import org.slf4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -37,14 +48,15 @@ public class Project {
     private String version = "1.0.0-beta.1";
     private final PackageVersions packageVersions = new PackageVersions();
     private Changelog changelog;
+    private final List<String> pomDependencyIdentifiers = new ArrayList<>();
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureCoreVersion = "1.15.0";
         private String azureCoreManagementVersion = "1.2.1";
-        private String azureCoreTestVersion = "1.6.1";
-        private String azureIdentityVersion = "1.2.5";
-        private String azureResourceManagerResourcesVersion = "2.4.0";
+//        private String azureCoreTestVersion = "1.6.1";
+//        private String azureIdentityVersion = "1.2.5";
+//        private String azureResourceManagerResourcesVersion = "2.4.0";
         private String jacocoMavenPlugin = "0.8.5";
 
         public String getAzureClientSdkParentVersion() {
@@ -59,17 +71,17 @@ public class Project {
             return azureCoreManagementVersion;
         }
 
-        public String getAzureCoreTestVersion() {
-            return azureCoreTestVersion;
-        }
-
-        public String getAzureIdentityVersion() {
-            return azureIdentityVersion;
-        }
-
-        public String getAzureResourceManagerResourcesVersion() {
-            return azureResourceManagerResourcesVersion;
-        }
+//        public String getAzureCoreTestVersion() {
+//            return azureCoreTestVersion;
+//        }
+//
+//        public String getAzureIdentityVersion() {
+//            return azureIdentityVersion;
+//        }
+//
+//        public String getAzureResourceManagerResourcesVersion() {
+//            return azureResourceManagerResourcesVersion;
+//        }
 
         public String getJacocoMavenPlugin() {
             return jacocoMavenPlugin;
@@ -135,6 +147,8 @@ public class Project {
         FluentPomTemplate.setProject(this);
 
         findPackageVersions();
+
+        findPomDependencies();
 
         updateChangelog();
     }
@@ -209,12 +223,12 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
+                checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
-                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
-                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
-                checkArtifact(line, "com.azure.resourcemanager:azure-resourcemanager-resources").ifPresent(v -> packageVersions.azureResourceManagerResourcesVersion = v);
-                checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
+//                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
+//                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
+//                checkArtifact(line, "com.azure.resourcemanager:azure-resourcemanager-resources").ifPresent(v -> packageVersions.azureResourceManagerResourcesVersion = v);
             });
         }
     }
@@ -250,6 +264,80 @@ public class Project {
             }
         } else {
             logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
+        }
+    }
+
+    private void findPomDependencies() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
+            Path pomPath = Paths.get(outputFolder, "pom.xml");
+
+            if (Files.isReadable(pomPath)) {
+                try {
+                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                    Document doc = dBuilder.parse(pomPath.toFile());
+                    NodeList nodeList = doc.getDocumentElement().getChildNodes();
+                    for (int i = 0; i < nodeList.getLength(); ++i) {
+                        Node node = nodeList.item(i);
+                        if (node.getNodeType() == Node.ELEMENT_NODE) {
+                            Element elementNode = (Element) node;
+                            if ("dependencies".equals(elementNode.getTagName())) {
+                                NodeList dependencyNodeList = elementNode.getChildNodes();
+                                for (int j = 0; j < dependencyNodeList.getLength(); ++j) {
+                                    Node dependencyNode = dependencyNodeList.item(j);
+                                    if (dependencyNode.getNodeType() == Node.ELEMENT_NODE) {
+                                        Element dependencyElementNode = (Element) dependencyNode;
+                                        if ("dependency".equals(dependencyElementNode.getTagName())) {
+                                            String groupId = null;
+                                            String artifactId = null;
+                                            String version = null;
+                                            String scope = null;
+                                            NodeList itemNodeList = dependencyElementNode.getChildNodes();
+                                            for (int k = 0; k < itemNodeList.getLength(); ++k) {
+                                                Node itemNode = itemNodeList.item(k);
+                                                if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                    Element elementItemNode = (Element) itemNode;
+                                                    switch (elementItemNode.getTagName()) {
+                                                        case "groupId":
+                                                            groupId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                                            break;
+                                                        case "artifactId":
+                                                            artifactId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                                            break;
+                                                        case "version":
+                                                            version = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                                            break;
+                                                        case "scope":
+                                                            scope = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                                            break;
+                                                    }
+                                                }
+                                            }
+
+                                            if (groupId != null && artifactId != null && version != null) {
+                                                String dependencyIdentifier = String.format("%s:%s:%s", groupId, artifactId, version);
+                                                if (scope != null) {
+                                                    dependencyIdentifier += ":" + scope;
+                                                }
+                                                this.pomDependencyIdentifiers.add(dependencyIdentifier);
+                                                logger.info("Found dependency identifier'{}'", dependencyIdentifier);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (IOException | ParserConfigurationException | SAXException e) {
+                    logger.warn("Failed to parse 'pom.xml'", e);
+                }
+            } else {
+                logger.info("'pom.xml' not found or not readable");
+            }
+        } else {
+            logger.warn("'output-folder' parameter is not an absolute path, fall back to default dependencies");
         }
     }
 
@@ -291,5 +379,9 @@ public class Project {
 
     public Changelog getChangelog() {
         return changelog;
+    }
+
+    public List<String> getPomDependencyIdentifiers() {
+        return pomDependencyIdentifiers;
     }
 }
