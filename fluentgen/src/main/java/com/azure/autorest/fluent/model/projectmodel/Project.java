@@ -322,7 +322,7 @@ public class Project {
                                                     dependencyIdentifier += ":" + scope;
                                                 }
                                                 this.pomDependencyIdentifiers.add(dependencyIdentifier);
-                                                logger.info("Found dependency identifier'{}'", dependencyIdentifier);
+                                                logger.info("Found dependency identifier '{}' from POM", dependencyIdentifier);
                                             }
                                         }
                                     }
