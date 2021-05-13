@@ -180,8 +180,7 @@ public class ResourceCreate extends ResourceOperation {
             DefinitionStage stage = new DefinitionStageMisc("With" + CodeNamer.toPascalCase(parameterNameForMethodSignature), parameter);
             stage.setNextStage(definitionStageCreate);
 
-            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter,
-                    CodeNamer.getModelNamer().modelPropertySetterName(parameterNameForMethodSignature)));
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter, parameterNameForMethodSignature));
 
             optionalDefinitionStages.add(stage);
         }
