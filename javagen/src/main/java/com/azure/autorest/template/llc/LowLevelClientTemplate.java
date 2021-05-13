@@ -84,6 +84,16 @@ public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, Ja
                 Templates.getLlcMethodTemplate().write(method, classBlock);
             }
 
+            // invoke() method
+            classBlock.javadocComment(comment -> {
+                comment.description("Create an empty DynamicRequest with the serializer and pipeline initialized for this client.");
+                comment.methodReturns("a DynamicRequest where customizations can be made before sent to the service.");
+            });
+            classBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+            classBlock.publicMethod("DynamicRequest invoke()", method -> {
+                method.methodReturn("new DynamicRequest(serializer, httpPipeline)");
+            });
+
             if (methods.stream().flatMap(m -> m.getProxyMethod().getParameters().stream())
                     .filter(ProxyMethodParameter::getIsRequired)
                     .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.Query

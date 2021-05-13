@@ -318,6 +318,6 @@ public class LowLevelMethodTemplate implements IJavaTemplate<ClientMethod, JavaT
             }
         }
 
-        return parameterWireType.convertFromClientType(parameterName);
+        return parameterClientType.convertFromClientType(parameterName);
     }
 }
