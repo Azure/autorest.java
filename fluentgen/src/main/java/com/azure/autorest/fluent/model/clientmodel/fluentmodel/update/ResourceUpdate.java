@@ -82,8 +82,7 @@ public class ResourceUpdate extends ResourceOperation {
             UpdateStage stage = new UpdateStageMisc("With" + CodeNamer.toPascalCase(parameterNameForMethodSignature), parameter);
             stage.setNextStage(updateStageApply);
 
-            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter,
-                    CodeNamer.getModelNamer().modelPropertySetterName(parameterNameForMethodSignature)));
+            stage.getMethods().add(this.getParameterSetterMethod(stage, parameter, parameterNameForMethodSignature));
 
             updateStages.add(stage);
         }
@@ -119,7 +118,7 @@ public class ResourceUpdate extends ResourceOperation {
                                                   String parameterNameForMethodSignature) {
         return new FluentMethodParameterMethod(this.getResourceModel(), FluentMethodType.UPDATE_WITH,
                 stage, parameter, this.getLocalVariableByMethodParameter(parameter),
-                parameterNameForMethodSignature);
+                CodeNamer.getModelNamer().modelPropertySetterName(parameterNameForMethodSignature));
     }
 
     private String deduplicateParameterNameForMethodSignature(List<UpdateStage> stages, String parameterName) {
