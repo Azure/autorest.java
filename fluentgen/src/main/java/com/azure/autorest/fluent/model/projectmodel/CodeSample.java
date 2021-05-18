@@ -31,6 +31,8 @@ public class CodeSample {
     }
 
     public static CodeSample fromTestFile(Path testFilePath) {
+        // the assumption is there is a try block in a @Test method
+
         CodeSample codeSample = new CodeSample();
 
         try (BufferedReader reader = Files.newBufferedReader(testFilePath, StandardCharsets.UTF_8)) {
@@ -43,6 +45,8 @@ public class CodeSample {
             for (String line : reader.lines().collect(Collectors.toList())) {
                 if (!testMethodBegin) {
                     if (line.trim().equals(TEST_ANNOTATION)) {
+                        // first get inside @Test method
+
                         testMethodBegin = true;
                         int indent = line.indexOf(TEST_ANNOTATION);
                         char[] chars = new char[indent];
@@ -51,9 +55,13 @@ public class CodeSample {
                     }
                 } else if (!tryMethodBegin) {
                     if (line.startsWith(testMethodIndent + "}")) {
+                        // method ends without try block
+
                         testMethodBegin = false;
                         break;
                     } else if (line.trim().equals("try {")) {
+                        // next get inside try block
+
                         tryMethodBegin = true;
                         int indent = line.indexOf("try {");
                         char[] chars = new char[indent];
@@ -62,9 +70,13 @@ public class CodeSample {
                     }
                 } else  {
                     if (line.startsWith(tryMethodIndent + "} finally {") || line.startsWith(tryMethodIndent + "} catch (")) {
+                        // try block ends
+
                         tryMethodBegin = false;
                         break;
                     } else {
+                        // extract the code line (except Assertions)
+
                         if (!line.trim().startsWith("Assertions.")) {
                             codeLines.add(line);
                         }
