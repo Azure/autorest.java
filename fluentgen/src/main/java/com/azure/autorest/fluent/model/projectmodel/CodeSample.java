@@ -72,7 +72,7 @@ public class CodeSample {
                 }
             }
 
-            if (!codeLines.isEmpty()) {
+            if (!codeLines.isEmpty() && !tryMethodBegin) {
                 codeLines = removeIndent(codeLines);
                 codeSample.code = String.join("\n", codeLines) + "\n";
 
