@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -49,6 +50,7 @@ public class Project {
     private final PackageVersions packageVersions = new PackageVersions();
     private Changelog changelog;
     private final List<String> pomDependencyIdentifiers = new ArrayList<>();
+    private final List<CodeSample> codeSamples = new ArrayList<>();
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
@@ -151,6 +153,8 @@ public class Project {
         findPomDependencies();
 
         updateChangelog();
+
+        findCodeSamples();
     }
 
     private Optional<String> findSdkFolder() {
@@ -264,6 +268,30 @@ public class Project {
             }
         } else {
             logger.warn("'output-folder' parameter is not an absolute path, fallback to default CHANGELOG.md");
+        }
+    }
+
+    private void findCodeSamples() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
+            Path srcTestJavaPath = Paths.get(outputFolder).resolve(Paths.get("src", "test", "java"));
+            if (Files.isDirectory(srcTestJavaPath)) {
+                try {
+                    Files.walk(srcTestJavaPath).forEach(path -> {
+                        if (!Files.isDirectory(path) && Files.isReadable(path)
+                                && (path.getFileName().toString().endsWith("Tests.java")
+                                || path.getFileName().toString().endsWith("Test.java"))) {
+                            logger.info("Attempt to find code sample from test file '{}'", path);
+                            codeSamples.add(CodeSample.fromTestFile(path));
+                        }
+                    });
+                } catch (IOException e) {
+                    logger.warn("Failed to walk path '" + srcTestJavaPath + "'", e);
+                }
+            }
+        } else {
+            logger.warn("'output-folder' parameter is not an absolute path, skip code samples");
         }
     }
 
@@ -383,5 +411,9 @@ public class Project {
 
     public List<String> getPomDependencyIdentifiers() {
         return pomDependencyIdentifiers;
+    }
+
+    public List<CodeSample> getCodeSamples() {
+        return codeSamples;
     }
 }
