@@ -171,7 +171,7 @@ public class JavaPackage {
     }
 
     public final void addPom(String name, Pom pom) {
-        XmlFile xmlFile = new XmlFile(name);
+        XmlFile xmlFile = new XmlFile(name, new XmlFile.Options().setIndent(2));
         Templates.getPomTemplate().write(pom, xmlFile);
         this.checkDuplicateFile(xmlFile.getFilePath());
         xmlFiles.add(xmlFile);
