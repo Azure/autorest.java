@@ -24,6 +24,8 @@ public class CodeSample {
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), Project.class);
 
     private static final String TEST_ANNOTATION = "@Test";
+    private static final String EMBEDME_START_COMMENT = "// @embedmeStart";
+    private static final String EMBEDME_END_COMMENT = "// @embedmeEnd";
 
     private String code;
 
@@ -39,9 +41,9 @@ public class CodeSample {
             List<String> codeLines = new ArrayList<>();
 
             boolean testMethodBegin = false;
-            boolean tryMethodBegin = false;
+            boolean embedmeBlockBegin = false;
             String testMethodIndent = "";
-            String tryMethodIndent = "";
+            String embedmeBlockIndent = "";
             for (String line : reader.lines().collect(Collectors.toList())) {
                 if (!testMethodBegin) {
                     if (line.trim().equals(TEST_ANNOTATION)) {
@@ -53,26 +55,26 @@ public class CodeSample {
                         Arrays.fill(chars, ' ');
                         testMethodIndent = String.valueOf(chars);
                     }
-                } else if (!tryMethodBegin) {
+                } else if (!embedmeBlockBegin) {
                     if (line.startsWith(testMethodIndent + "}")) {
-                        // method ends without try block
+                        // method ends without embedme block
 
                         testMethodBegin = false;
                         break;
-                    } else if (line.trim().equals("try {")) {
-                        // next get inside try block
+                    } else if (line.trim().equals(EMBEDME_START_COMMENT)) {
+                        // next get inside embedme block, similar to https://github.com/zakhenry/embedme/issues/48
 
-                        tryMethodBegin = true;
-                        int indent = line.indexOf("try {");
+                        embedmeBlockBegin = true;
+                        int indent = line.indexOf(EMBEDME_START_COMMENT);
                         char[] chars = new char[indent];
                         Arrays.fill(chars, ' ');
-                        tryMethodIndent = String.valueOf(chars);
+                        embedmeBlockIndent = String.valueOf(chars);
                     }
                 } else  {
-                    if (line.startsWith(tryMethodIndent + "} finally {") || line.startsWith(tryMethodIndent + "} catch (")) {
-                        // try block ends
+                    if (line.startsWith(embedmeBlockIndent + EMBEDME_END_COMMENT)) {
+                        // embedme block ends
 
-                        tryMethodBegin = false;
+                        embedmeBlockBegin = false;
                         break;
                     } else {
                         // extract the code line (except Assertions)
@@ -84,7 +86,7 @@ public class CodeSample {
                 }
             }
 
-            if (!codeLines.isEmpty() && !tryMethodBegin) {
+            if (!codeLines.isEmpty() && !embedmeBlockBegin) {
                 codeLines = removeIndent(codeLines);
                 codeSample.code = String.join("\n", codeLines) + "\n";
 
