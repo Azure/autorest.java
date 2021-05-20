@@ -79,9 +79,15 @@ public class JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addLowLevelClient(String packageKeyWord, AsyncSyncClient syncClient) {
+    public final void addLowLevelSyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
-        Templates.getLlcClientTemplate().write(syncClient, javaFile);
+        Templates.getLowLevelSyncClientTemplate().write(syncClient, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addLowLevelAsyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
+        Templates.getLowLevelAsyncClientTemplate().write(syncClient, javaFile);
         addJavaFile(javaFile);
     }
 

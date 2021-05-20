@@ -1,4 +1,4 @@
-package com.azure.autorest.template.llc;
+package com.azure.autorest.template.protocol;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6,7 +6,6 @@ package com.azure.autorest.template.llc;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -20,10 +19,9 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.javamodel.JavaInterface;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
@@ -35,93 +33,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Writes a ClientMethod to a JavaType block.
+ * Writes a protocol method to a JavaType block.
  */
-public class LowLevelMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
-    private static LowLevelMethodTemplate _instance = new LowLevelMethodTemplate();
-
-    protected LowLevelMethodTemplate() {
-    }
-
-    public static LowLevelMethodTemplate getInstance() {
-        return _instance;
-    }
-
-    public final void write(ClientMethod clientMethod, JavaType typeBlock) {
-        final boolean writingInterface = typeBlock instanceof JavaInterface;
-        if (clientMethod.getMethodVisibility() != JavaVisibility.Public && writingInterface) {
-            return;
-        }
-
-        generateJavadoc(clientMethod, typeBlock);
-
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        String methodArgs = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.getIsRequired() && !p.getFromClient() && !p.getIsConstant()
-                        && p.getRequestParameterLocation() != RequestParameterLocation.Body)
-                .map(p -> {
-                    IType clientType = p.getClientType();
-                    if (clientType instanceof ClassType || clientType instanceof EnumType) {
-                        clientType = ClassType.String;
-                    }
-                    return clientType + " " + p.getName();
-                })
-                .collect(Collectors.joining(", "));
-        typeBlock.publicMethod(String.format("DynamicRequest %s(%s)", clientMethod.getProxyMethod().getName(), methodArgs), methodBlock -> {
-            String url = clientMethod.getProxyMethod().getBaseUrl().replaceAll("/$", "")
-                    + "/" + clientMethod.getProxyMethod().getUrlPath().replaceAll("^/", "");
-            methodBlock.line("return new DynamicRequest(serializer, httpPipeline)");
-            methodBlock.line("    .setUrl(\"%s\")", url);
-            for (ProxyMethodParameter hostParam : clientMethod.getProxyMethod().getParameters()
-                    .stream().filter(p -> RequestParameterLocation.Uri.equals(p.getRequestParameterLocation()))
-                    .collect(Collectors.toList())) {
-                String parameterReference = convertClientTypeToWireType(hostParam, JavaSettings.getInstance());
-                String value = hostParam.getWireType() == ClassType.String? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                methodBlock.line("    .setPathParam(\"%s\", %s)", hostParam.getRequestParameterName(), value);
-            }
-            for (ProxyMethodParameter pathParam : clientMethod.getProxyMethod().getParameters()
-                    .stream().filter(p -> RequestParameterLocation.Path.equals(p.getRequestParameterLocation()))
-                    .collect(Collectors.toList())) {
-                String parameterReference = convertClientTypeToWireType(pathParam, JavaSettings.getInstance());
-                String value = pathParam.getWireType() == ClassType.String? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                methodBlock.line("    .setPathParam(\"%s\", %s)", pathParam.getRequestParameterName(), value);
-            }
-            for (ProxyMethodParameter queryParam : clientMethod.getProxyMethod().getParameters()
-                    .stream().filter(p -> p.getIsRequired() && RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
-                    .collect(Collectors.toList())) {
-                String value;
-                if (!queryParam.getFromClient() && queryParam.getIsConstant()) {
-                    value = "\"" + queryParam.getDefaultValue() + "\"";
-                } else {
-                    String parameterReference = convertClientTypeToWireType(queryParam, JavaSettings.getInstance());
-                    value = queryParam.getWireType() == ClassType.String ? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                }
-                methodBlock.line("    .addQueryParam(\"%s\", %s)", queryParam.getRequestParameterName(), value);
-            }
-            Set<String> headerParams = new HashSet<>();
-            for (ProxyMethodParameter headerParam : clientMethod.getProxyMethod().getParameters()
-                    .stream().filter(p -> p.getIsRequired() && RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
-                    .collect(Collectors.toList())) {
-                headerParams.add(headerParam.getRequestParameterName());
-                String value;
-                if (!headerParam.getFromClient() && headerParam.getIsConstant()) {
-                    value = "\"" + headerParam.getDefaultValue() + "\"";
-                } else {
-                    String parameterReference = convertClientTypeToWireType(headerParam, JavaSettings.getInstance());
-                    value = headerParam.getWireType() == ClassType.String ? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                }
-                methodBlock.line("    .addHeader(\"%s\", %s)", headerParam.getRequestParameterName(), value);
-            }
-            if (!headerParams.contains("Content-Type")) {
-                methodBlock.line("    .addHeader(\"Content-Type\", \"%s\")", clientMethod.getProxyMethod().getRequestContentType());
-            }
-            if (!headerParams.contains("Accept")) {
-                methodBlock.line("    .addHeader(\"Accept\", \"%s\")", String.join(", ", clientMethod.getProxyMethod().getResponseContentTypes()));
-            }
-            methodBlock.line("    .setHttpMethod(HttpMethod.%s);", clientMethod.getProxyMethod().getHttpMethod());
-        });
-    }
-
+public abstract class ProtocolMethodBaseTemplate implements IJavaTemplate<ClientMethod, JavaClass> {
     /**
      * Generate javadoc for client method.
      *
@@ -169,7 +83,7 @@ public class LowLevelMethodTemplate implements IJavaTemplate<ClientMethod, JavaT
 
         clientMethod.getProxyMethod().getParameters()
                 .stream().filter(p -> p.getIsRequired() && !p.getFromClient() && !p.getIsConstant()
-                    && p.getRequestParameterLocation() != RequestParameterLocation.Body)
+                && p.getRequestParameterLocation() != RequestParameterLocation.Body)
                 .forEach(parameter ->
                         commentBlock.param(parameter.getName(), parameterDescriptionOrDefault(parameter)));
 
@@ -279,45 +193,5 @@ public class LowLevelMethodTemplate implements IJavaTemplate<ClientMethod, JavaT
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
         return CodeNamer.escapeXmlComment(paramJavadoc);
-    }
-
-    private static String convertClientTypeToWireType(ProxyMethodParameter parameter, JavaSettings settings) {
-        IType parameterWireType = parameter.getWireType();
-
-        if (parameter.getIsNullable()) {
-            parameterWireType = parameterWireType.asNullable();
-        }
-        IType parameterClientType = parameter.getClientType();
-
-        if (parameterWireType != ClassType.Base64Url &&
-                parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
-                (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-            parameterWireType = ClassType.String;
-        }
-
-        String parameterName = parameter.getName();
-
-        if (parameterWireType.equals(parameterClientType)) {
-            return parameterName;
-        }
-
-        RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
-        if (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType) {
-            String parameterWireTypeName = parameterWireType.toString();
-
-            if (parameterClientType == ArrayType.ByteArray) {
-                if (parameterWireType == ClassType.String) {
-                    return String.format("Base64Util.encodeToString(%s)", parameterName);
-                } else {
-                    return String.format("Base64Url.encode(%s)", parameterName);
-                }
-            } else if (parameterClientType instanceof ListType) {
-                return String.format("serializeIterable(%s, CollectionFormat.%s)", parameterName,
-                        parameter.getCollectionFormat().toString().toUpperCase());
-            }
-        }
-
-        return parameterClientType.convertFromClientType(parameterName);
     }
 }

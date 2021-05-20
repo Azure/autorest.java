@@ -67,18 +67,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
-        List<AsyncSyncClient> lowLevelClients = new ArrayList<>();
-        if (settings.shouldGenerateSyncAsyncClients()) {
+        if (settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
             ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
         }
-        if (settings.isLowLevelClient()) {
-            ClientModelUtil.getLowLevelClients(serviceClient, lowLevelClients);
-        }
-        final boolean singleBuilder = asyncClients.size() == 1 || lowLevelClients.size() == 1;
+        final boolean singleBuilder = asyncClients.size() == 1;
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()
+                || JavaSettings.getInstance().isLowLevelClient()) {
             List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
             if (!settings.isFluentLite()) {
                 clients.addAll(asyncClients);
@@ -94,8 +91,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
                 client.addImportsTo(imports, false);
             }
-        } else if (JavaSettings.getInstance().isLowLevelClient()) {
-            builderTypes.append(lowLevelClients.stream().map(c -> c.getClassName() + ".class").collect(Collectors.joining(", ")));
         } else {
             builderTypes.append(serviceClient.getClassName()).append(".class");
         }
@@ -222,7 +217,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes());
             }
 
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()
+                    || JavaSettings.getInstance().isLowLevelClient()) {
                 if (!settings.isFluentLite()) {
                     for (AsyncSyncClient asyncClient : asyncClients) {
                         final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
@@ -235,11 +231,20 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         });
                         classBlock.publicMethod(String.format("%1$s build%2$s()", asyncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClient.getClassName()),
                                 function -> {
-                                    if (wrapServiceClient) {
-                                        function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
-                                    } else {
-                                        function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
-                                                CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
+                                    if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                                        if (wrapServiceClient) {
+                                            function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
+                                        } else {
+                                            function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
+                                                    CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
+                                        }
+                                    } else if (JavaSettings.getInstance().isLowLevelClient()) {
+                                        String constructorArgs = serviceClient.getProperties().stream()
+                                                .filter(p -> !p.isReadOnly())
+                                                .map(ServiceClientProperty::getName)
+                                                .collect(Collectors.joining(", "));
+                                        function.methodReturn(String.format("new %1$s(%2$s, pipeline)",
+                                                asyncClient.getClassName(), constructorArgs));
                                     }
                                 });
                     }
@@ -256,43 +261,18 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                     });
                     classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "Client" : syncClient.getClassName()),
                             function -> {
-                                if (wrapServiceClient) {
-                                    function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
-                                } else {
-                                    function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
-                                            CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
-                                }
-                            });
-                }
-            }
-
-            if (settings.isLowLevelClient()) {
-                for (AsyncSyncClient syncClient : lowLevelClients) {
-                    classBlock.javadocComment(comment ->
-                    {
-                        comment.description(String
-                                .format("Builds an instance of %1$s low level client", syncClient.getClassName()));
-                        comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
-                    });
-                    classBlock.publicMethod(String.format("%1$s build%2$s()", syncClient.getClassName(), singleBuilder ? "BaseClient" : syncClient.getClassName()),
-                            function -> {
-                                for (ServiceClientProperty serviceClientProperty : clientProperties) {
-                                    if (serviceClientProperty.getDefaultValueExpression() != null) {
-                                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock ->
-                                        {
-                                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
-                                        });
+                                if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+                                    if (wrapServiceClient) {
+                                        function.line("return new %1$s(%2$s());", syncClient.getClassName(), buildMethodName);
+                                    } else {
+                                        function.line("return new %1$s(%2$s().get%3$s());", syncClient.getClassName(), buildMethodName,
+                                                CodeNamer.toPascalCase(syncClient.getMethodGroupClient().getVariableName()));
                                     }
+                                } else if (JavaSettings.getInstance().isLowLevelClient()) {
+                                    String asyncClientName = syncClient.getClassName().replace("Client", "AsyncClient");
+                                    function.methodReturn(String.format("new %s(build%s())",
+                                            syncClient.getClassName(), singleBuilder ? "AsyncClient" : asyncClientName));
                                 }
-
-                                // additional service client properties in constructor arguments
-                                String constructorArgs = serviceClient.getProperties().stream()
-                                        .filter(p -> !p.isReadOnly())
-                                        .map(ServiceClientProperty::getName)
-                                        .collect(Collectors.joining(", "));
-                                function.line(String.format("%1$s client = new %2$s(%3$s, pipeline, serializer);",
-                                        syncClient.getClassName(), syncClient.getClassName(), constructorArgs));
-                                function.line("return client;");
                             });
                 }
             }
@@ -358,9 +338,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
                     ClassType.SerializerAdapter, "serializerAdapter", false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
-        } else {
-            commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                    ClassType.ObjectSerializer, "serializer", false, "JsonSerializerProviders.createInstance()"));
         }
 
         if (!settings.isAzureOrFluent()) {

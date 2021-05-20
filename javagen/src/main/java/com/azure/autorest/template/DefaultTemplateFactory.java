@@ -1,7 +1,9 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.llc.LowLevelClientTemplate;
-import com.azure.autorest.template.llc.LowLevelMethodTemplate;
+import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
 
 public class DefaultTemplateFactory implements TemplateFactory {
     @Override
@@ -95,13 +97,23 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public LowLevelMethodTemplate getLlcMethodTemplate() {
-        return LowLevelMethodTemplate.getInstance();
+    public ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate() {
+        return ProtocolAsyncMethodTemplate.getInstance();
     }
 
     @Override
-    public LowLevelClientTemplate getLlcClientTemplate() {
-        return LowLevelClientTemplate.getInstance();
+    public ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate() {
+        return ProtocolSyncMethodTemplate.getInstance();
+    }
+
+    @Override
+    public ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
+        return ProtocolSyncClientTemplate.getInstance();
+    }
+
+    @Override
+    public ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate() {
+        return ProtocolAsyncClientTemplate.getInstance();
     }
 
     @Override

@@ -272,7 +272,18 @@ public class ClientMethod {
 
         if (settings.isLowLevelClient()) {
             imports.add("com.azure.core.http.HttpMethod");
-            imports.add("com.azure.core.experimental.http.DynamicRequest");
+            imports.add("com.azure.core.http.rest.Response");
+            imports.add("com.azure.core.http.rest.SimpleResponse");
+            imports.add("com.azure.core.util.BinaryData");
+            imports.add("com.azure.core.http.HttpRequest");
+            imports.add("com.azure.core.http.RequestOptions");
+
+            if (settings.getAddContextParameter() || settings.isContextClientMethodParameter()) {
+                imports.add("com.azure.core.util.FluxUtil");
+            }
+            if (settings.isContextClientMethodParameter()) {
+                imports.add("com.azure.core.util.Context");
+            }
         } else {
             getReturnValue().addImportsTo(imports, includeImplementationImports);
 

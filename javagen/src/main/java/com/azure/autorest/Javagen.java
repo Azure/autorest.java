@@ -118,11 +118,16 @@ public class Javagen extends NewPlugin {
             }
 
             if (JavaSettings.getInstance().isLowLevelClient()) {
-                List<AsyncSyncClient> lowLevelClients = new ArrayList<>();
-                ClientModelUtil.getLowLevelClients(client.getServiceClient(), lowLevelClients);
+                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+                List<AsyncSyncClient> syncClients = new ArrayList<>();
+                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
 
-                for (AsyncSyncClient lowLevelClient : lowLevelClients) {
-                    javaPackage.addLowLevelClient(lowLevelClient.getPackageName(), lowLevelClient);
+                for (AsyncSyncClient asyncClient : asyncClients) {
+                    javaPackage.addLowLevelAsyncClient(asyncClient.getPackageName(), asyncClient);
+                }
+
+                for (AsyncSyncClient syncClient : syncClients) {
+                    javaPackage.addLowLevelSyncClient(syncClient.getPackageName(), syncClient);
                 }
             }
 
@@ -169,8 +174,8 @@ public class Javagen extends NewPlugin {
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 try {
-                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-//                    String formattedSource = javaFile.getContents().toString();
+//                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
+                    String formattedSource = javaFile.getContents().toString();
                     writeFile(javaFile.getFilePath(), formattedSource, null);
                 } catch (Exception e) {
                     LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);

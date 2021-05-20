@@ -89,57 +89,6 @@ public class ClientModelUtil {
         }
     }
 
-    public static void getLowLevelClients(ServiceClient serviceClient, List<AsyncSyncClient> lowLevelClients) {
-        String packageName = getAsyncSyncClientPackageName(serviceClient);
-
-        if (serviceClient.getProxy() != null) {
-            AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
-                    .packageName(packageName)
-                    .serviceClient(serviceClient);
-
-            String lowLevelClassName;
-            if (serviceClient.getClientBaseName().endsWith("BaseClient")) {
-                lowLevelClassName = serviceClient.getClientBaseName();
-            } else if (serviceClient.getClientBaseName().endsWith("Client")) {
-                lowLevelClassName = serviceClient.getClientBaseName().replaceAll("Client$", "BaseClient");
-            } else {
-                lowLevelClassName = serviceClient.getClientBaseName() + "BaseClient";
-            }
-            lowLevelClients.add(builder.className(lowLevelClassName).build());
-        }
-
-        final int count = serviceClient.getMethodGroupClients().size() + lowLevelClients.size();
-        for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
-            AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
-                    .packageName(packageName)
-                    .serviceClient(serviceClient)
-                    .methodGroupClient(methodGroupClient);
-
-            if (count == 1) {
-                // if it is the only method group, use service client name as base.
-                String lowLevelClassName;
-                if (serviceClient.getClientBaseName().endsWith("BaseClient")) {
-                    lowLevelClassName = serviceClient.getClientBaseName();
-                } else if (serviceClient.getClientBaseName().endsWith("Client")) {
-                    lowLevelClassName = serviceClient.getClientBaseName().replaceAll("Client$", "BaseClient");
-                } else {
-                    lowLevelClassName = serviceClient.getClientBaseName() + "BaseClient";
-                }
-                lowLevelClients.add(builder.className(lowLevelClassName).build());
-            } else {
-                String lowLevelClassName;
-                if (methodGroupClient.getClassBaseName().endsWith("BaseClient")) {
-                    lowLevelClassName = methodGroupClient.getClassBaseName();
-                } else if (methodGroupClient.getClassBaseName().endsWith("Client")) {
-                    lowLevelClassName = methodGroupClient.getClassBaseName().replaceAll("Client$", "BaseClient");
-                } else {
-                    lowLevelClassName = methodGroupClient.getClassBaseName() + "BaseClient";
-                }
-                lowLevelClients.add(builder.className(lowLevelClassName).build());
-            }
-        }
-    }
-
     public static String getBuilderSuffix() {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();

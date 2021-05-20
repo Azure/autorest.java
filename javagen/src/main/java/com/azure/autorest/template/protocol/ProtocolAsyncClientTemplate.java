@@ -1,9 +1,10 @@
-package com.azure.autorest.template.llc;
+package com.azure.autorest.template.protocol;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
@@ -21,13 +22,13 @@ import java.util.stream.Collectors;
 /**
  * Template to create a synchronous client.
  */
-public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
+public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
 
-    private static LowLevelClientTemplate _instance = new LowLevelClientTemplate();
-    private LowLevelClientTemplate() {
+    private static ProtocolAsyncClientTemplate _instance = new ProtocolAsyncClientTemplate();
+    private ProtocolAsyncClientTemplate() {
     }
 
-    public static LowLevelClientTemplate getInstance() {
+    public static ProtocolAsyncClientTemplate getInstance() {
       return _instance;
     }
 
@@ -35,12 +36,12 @@ public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, Ja
     public final void write(AsyncSyncClient client, JavaFile javaFile) {
         Set<String> imports = new HashSet<>();
         client.getServiceClient().addImportsTo(imports, true, false, JavaSettings.getInstance());
-        imports.add(client.getServiceClient().getPackage() + "." + client.getServiceClient().getClassName());
         if (client.getMethodGroupClient() != null) {
             client.getMethodGroupClient().addImportsTo(imports, true, JavaSettings.getInstance());
             imports.add(client.getMethodGroupClient().getPackage() + "." + client.getMethodGroupClient().getClassName());
         }
         imports.add("com.azure.core.annotation.ServiceClient");
+        imports.add("reactor.core.publisher.Mono");
 
         javaFile.declareImport(imports);
         javaFile.javadocComment(comment ->
@@ -80,18 +81,51 @@ public class LowLevelClientTemplate implements IJavaTemplate<AsyncSyncClient, Ja
             } else {
                 methods = client.getServiceClient().getClientMethods();
             }
-            for (ClientMethod method : methods) {
-                Templates.getLlcMethodTemplate().write(method, classBlock);
-            }
+            methods.stream().filter(m -> m.getType() == ClientMethodType.SimpleAsyncRestResponse).forEach(method -> {
+                Templates.getProtocolAsyncMethodTemplate().write(method, classBlock);
+            });
 
             // invoke() method
+            String invokeMethodArgs = "String url, HttpMethod httpMethod, byte[] body, RequestOptions options";
+            JavaVisibility visibility;
+            if (!JavaSettings.getInstance().isContextClientMethodParameter()) {
+                visibility = JavaVisibility.Public;
+            } else {
+                visibility = JavaVisibility.PackagePrivate;
+
+                // actual public invoke() without context param
+                classBlock.publicMethod(String.format("Mono<HttpResponse> invoke(%s)", invokeMethodArgs), method -> {
+                    method.methodReturn(String.format("invoke(%s)", "url, httpMethod, body, options, context"));
+                });
+                invokeMethodArgs = invokeMethodArgs + ", Context context";
+            }
             classBlock.javadocComment(comment -> {
                 comment.description("Create an empty DynamicRequest with the serializer and pipeline initialized for this client.");
                 comment.methodReturns("a DynamicRequest where customizations can be made before sent to the service.");
             });
             classBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-            classBlock.publicMethod("DynamicRequest invoke()", method -> {
-                method.methodReturn("new DynamicRequest(serializer, httpPipeline)");
+            classBlock.method(visibility, null, String.format("Mono<Response<BinaryData>> invoke(%s)", invokeMethodArgs), methodBlock -> {
+                methodBlock.line("HttpRequest request = new HttpRequest(HttpMethod.GET, url);");
+                methodBlock.ifBlock("options != null", ifBlock -> {
+                    methodBlock.line("options.getRequestCallback().accept(request);");
+                });
+                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                    methodBlock.line("return httpPipeline.send(request, context)");
+                } else if (JavaSettings.getInstance().getAddContextParameter()) {
+                    methodBlock.line("return FluxUtil.withContext(c -> httpPipeline.send(request, c))");
+                } else {
+                    methodBlock.line("return httpPipeline.send(request)");
+                }
+                methodBlock.increaseIndent();
+                methodBlock.line(".flatMap(httpResponse -> BinaryData.fromFlux(httpResponse.getBody())");
+                methodBlock.line(".map(binaryData -> new SimpleResponse<>(");
+                methodBlock.increaseIndent();
+                methodBlock.line("httpResponse.getRequest(),");
+                methodBlock.line("httpResponse.getStatusCode(),");
+                methodBlock.line("httpResponse.getHeaders(),");
+                methodBlock.line("binaryData)));");
+                methodBlock.decreaseIndent();
+                methodBlock.decreaseIndent();
             });
 
             if (methods.stream().flatMap(m -> m.getProxyMethod().getParameters().stream())
