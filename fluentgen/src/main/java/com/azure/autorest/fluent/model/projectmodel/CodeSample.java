@@ -33,7 +33,7 @@ public class CodeSample {
     }
 
     public static CodeSample fromTestFile(Path testFilePath) {
-        // the assumption is there is a try block in a @Test method
+        // the assumption is there is a embedme block in a @Test method
 
         CodeSample codeSample = new CodeSample();
 
