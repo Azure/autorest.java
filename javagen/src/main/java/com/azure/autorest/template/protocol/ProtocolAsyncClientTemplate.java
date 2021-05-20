@@ -38,7 +38,6 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
         client.getServiceClient().addImportsTo(imports, true, false, JavaSettings.getInstance());
         if (client.getMethodGroupClient() != null) {
             client.getMethodGroupClient().addImportsTo(imports, true, JavaSettings.getInstance());
-            imports.add(client.getMethodGroupClient().getPackage() + "." + client.getMethodGroupClient().getClassName());
         }
         imports.add("com.azure.core.annotation.ServiceClient");
         imports.add("reactor.core.publisher.Mono");
@@ -86,7 +85,7 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
             });
 
             // invoke() method
-            String invokeMethodArgs = "String url, HttpMethod httpMethod, byte[] body, RequestOptions options";
+            String invokeMethodArgs = "String url, HttpMethod httpMethod, BinaryData body, RequestOptions options";
             JavaVisibility visibility;
             if (!JavaSettings.getInstance().isContextClientMethodParameter()) {
                 visibility = JavaVisibility.Public;
@@ -94,8 +93,8 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
                 visibility = JavaVisibility.PackagePrivate;
 
                 // actual public invoke() without context param
-                classBlock.publicMethod(String.format("Mono<HttpResponse> invoke(%s)", invokeMethodArgs), method -> {
-                    method.methodReturn(String.format("invoke(%s)", "url, httpMethod, body, options, context"));
+                classBlock.publicMethod(String.format("Mono<Response<BinaryData>> invoke(%s)", invokeMethodArgs), method -> {
+                    method.methodReturn(String.format("FluxUtil.withContext(c -> invoke(%s))", "url, httpMethod, body, options, c"));
                 });
                 invokeMethodArgs = invokeMethodArgs + ", Context context";
             }
@@ -105,7 +104,8 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
             });
             classBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
             classBlock.method(visibility, null, String.format("Mono<Response<BinaryData>> invoke(%s)", invokeMethodArgs), methodBlock -> {
-                methodBlock.line("HttpRequest request = new HttpRequest(HttpMethod.GET, url);");
+                methodBlock.line("HttpRequest request = new HttpRequest(httpMethod, url);");
+                methodBlock.line("request.setBody(body.toBytes());");
                 methodBlock.ifBlock("options != null", ifBlock -> {
                     methodBlock.line("options.getRequestCallback().accept(request);");
                 });

@@ -219,14 +219,12 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
                 if (!settings.isLowLevelClient()) {
                     imports.add("com.azure.core.util.serializer.JacksonAdapter");
+                } else if (getIsRequired()) {
+                    getClientType().addImportsTo(imports, false);
+                    imports.add("java.nio.charset.StandardCharsets");
+                    imports.add("java.util.stream.StreamSupport");
+                    imports.add("java.util.stream.Collectors");
                 }
-            }
-
-            if (getIsRequired()) {
-                getClientType().addImportsTo(imports, false);
-                imports.add("java.nio.charset.StandardCharsets");
-                imports.add("java.util.stream.StreamSupport");
-                imports.add("java.util.stream.Collectors");
             }
         }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {

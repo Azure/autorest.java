@@ -40,7 +40,7 @@ public class ProtocolSyncMethodTemplate extends ProtocolMethodBaseTemplate {
                     clientType = ClassType.String;
                 }
                 if (p.getRequestParameterLocation() == RequestParameterLocation.Body) {
-                    clientType = ArrayType.ByteArray;
+                    clientType = ClassType.BinaryData;
                 }
                 methodArgsDeclare.append(clientType).append(" ").append(p.getName()).append(", ");
                 methodArgsInvoke.append(p.getName()).append(", ");

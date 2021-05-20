@@ -55,23 +55,24 @@ public class ProtocolAsyncMethodTemplate extends ProtocolMethodBaseTemplate {
                     clientType = ClassType.String;
                 }
                 if (p.getRequestParameterLocation() == RequestParameterLocation.Body) {
-                    clientType = ArrayType.ByteArray;
+                    clientType = ClassType.BinaryData;
                 }
                 methodArgsDeclare.append(clientType).append(" ").append(p.getName()).append(", ");
                 methodArgsInvoke.append(p.getName()).append(", ");
             }
         }
         methodArgsDeclare.append("RequestOptions options");
+        methodArgsInvoke.append("options");
         JavaVisibility visibility = JavaVisibility.Public;
         if (JavaSettings.getInstance().isContextClientMethodParameter()) {
             visibility = JavaVisibility.PackagePrivate;
-            String publicMethodArgs = methodArgsDeclare.toString();
-            methodArgsDeclare.append(", Context context");
+            methodArgsInvoke.append(", c");
 
             // Actual method without context param
-            typeBlock.publicMethod(String.format("%s %s(%s)", returnType, methodName, publicMethodArgs), methodBlock -> {
+            typeBlock.publicMethod(String.format("%s %s(%s)", returnType, methodName, methodArgsDeclare), methodBlock -> {
                 methodBlock.methodReturn(String.format("FluxUtil.withContext(c -> %s(%s))", methodName, methodArgsInvoke));
             });
+            methodArgsDeclare.append(", Context context");
         }
         typeBlock.method(visibility, null, String.format("%s %s(%s)", returnType, methodName, methodArgsDeclare), methodBlock -> {
             String url = clientMethod.getProxyMethod().getBaseUrl().replaceAll("/$", "")
@@ -128,7 +129,7 @@ public class ProtocolAsyncMethodTemplate extends ProtocolMethodBaseTemplate {
                     .stream().filter(p -> p.getIsRequired() && p.getRequestParameterLocation() == RequestParameterLocation.Body)
                     .findFirst();
             if (bodyParameter.isPresent()) {
-                methodBlock.line("request.setBody(%s);", bodyParameter.get().getName());
+                methodBlock.line("request.setBody(%s.toBytes());", bodyParameter.get().getName());
             }
             methodBlock.ifBlock("options != null", ifBlock -> {
                 methodBlock.line("options.getRequestCallback().accept(request);");

@@ -2,6 +2,7 @@ package com.azure.autorest.template.protocol;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -31,10 +32,10 @@ public class ProtocolSyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     public final void write(AsyncSyncClient client, JavaFile javaFile) {
         String asyncClientName = client.getClassName().replace("Client", "AsyncClient");
         Set<String> imports = new HashSet<>();
-        client.getServiceClient().addImportsTo(imports, true, false, JavaSettings.getInstance());
+        client.getServiceClient().addImportsTo(imports, false, false, JavaSettings.getInstance());
+        imports.remove(ClassType.HttpPipeline.getFullName());
         if (client.getMethodGroupClient() != null) {
-            client.getMethodGroupClient().addImportsTo(imports, true, JavaSettings.getInstance());
-            imports.add(client.getMethodGroupClient().getPackage() + "." + client.getMethodGroupClient().getClassName());
+            client.getMethodGroupClient().addImportsTo(imports, false, JavaSettings.getInstance());
         }
         imports.add("com.azure.core.annotation.ServiceClient");
 
@@ -72,7 +73,7 @@ public class ProtocolSyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
 
             // invoke() method
-            String invokeMethodArgs = "String url, HttpMethod httpMethod, byte[] body, RequestOptions options";
+            String invokeMethodArgs = "String url, HttpMethod httpMethod, BinaryData body, RequestOptions options";
             String invokeMethodArgsInvoke;
             if (JavaSettings.getInstance().isContextClientMethodParameter()) {
                 invokeMethodArgs = invokeMethodArgs + ", Context context";
