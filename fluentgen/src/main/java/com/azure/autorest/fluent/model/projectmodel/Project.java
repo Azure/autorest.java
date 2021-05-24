@@ -54,8 +54,8 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.15.0";
-        private String azureCoreManagementVersion = "1.2.1";
+        private String azureCoreVersion = "1.16.0";
+        private String azureCoreManagementVersion = "1.2.2";
 //        private String azureCoreTestVersion = "1.6.1";
 //        private String azureIdentityVersion = "1.2.5";
 //        private String azureResourceManagerResourcesVersion = "2.4.0";
