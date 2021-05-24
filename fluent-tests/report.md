@@ -1,5 +1,5 @@
 # Java Codegen Report
-Generated at 2021-05-23T19:33:44.299975
+Generated at 2021-05-24T19:36:43.883853
 ## Success
 <details>
 <summary>RP count: 173</summary>
@@ -13,6 +13,7 @@ Generated at 2021-05-23T19:33:44.299975
 - analysisservices
 - apimanagement
 - appconfiguration
+- applicationinsights
 - appplatform
 - attestation
 - authorization
@@ -163,7 +164,6 @@ Generated at 2021-05-23T19:33:44.299975
 - storagesync
 - storsimple8000series
 - streamanalytics
-- subscription
 - support
 - synapse
 - testbase
@@ -185,7 +185,6 @@ Generated at 2021-05-23T19:33:44.299975
 - security
 
 ## Failure at Build
-- applicationinsights
 - automation
 - privatedns
 - purview
@@ -220,106 +219,6 @@ FATAL: Error: Name is empty!
 </details>
 
 <details>
-<summary>applicationinsights</summary>
-
-**stdout**
-```
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --< com.azure.resourcemanager:azure-resourcemanager-applicationinsights >--
-[INFO] Building Microsoft Azure SDK for ApplicationInsights Management 1.0.0-beta.1
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-applicationinsights ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-applicationinsights ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 205 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/target/classes
-[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/fluent/OperationsClient.java:[46,39] method list() is already defined in interface com.azure.resourcemanager.applicationinsights.fluent.OperationsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/fluent/OperationsClient.java:[58,39] method list(com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.fluent.OperationsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/models/Operations.java:[39,34] method list() is already defined in interface com.azure.resourcemanager.applicationinsights.models.Operations
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/models/Operations.java:[50,34] method list(com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.models.Operations
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[42,41] method list() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[47,41] method list(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[220,53] method listSinglePageAsync() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[253,53] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[284,43] method listAsync() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[298,43] method listAsync(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[311,46] method list() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[325,46] method list(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[78,46] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl.OperationsService
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[43,76] incompatible types: com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner> cannot be converted to com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner>
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[48,76] incompatible types: com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner> cannot be converted to com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner>
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[233,42] incompatible types: bad return type in lambda expression
-    cannot infer type arguments for com.azure.core.http.rest.PagedResponseBase<>
-      reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[265,17] incompatible types: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[285,29] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedFlux<>
-    reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[299,29] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedFlux<>
-    reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[312,33] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedIterable<>
-    reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[326,33] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedIterable<>
-    reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[INFO] 21 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.371 s
-[INFO] Finished at: 2021-05-23T18:19:51Z
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-applicationinsights: Compilation failure: Compilation failure: 
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/fluent/OperationsClient.java:[46,39] method list() is already defined in interface com.azure.resourcemanager.applicationinsights.fluent.OperationsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/fluent/OperationsClient.java:[58,39] method list(com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.fluent.OperationsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/models/Operations.java:[39,34] method list() is already defined in interface com.azure.resourcemanager.applicationinsights.models.Operations
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/models/Operations.java:[50,34] method list(com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.models.Operations
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[42,41] method list() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[47,41] method list(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[220,53] method listSinglePageAsync() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[253,53] method listSinglePageAsync(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[284,43] method listAsync() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[298,43] method listAsync(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[311,46] method list() is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[325,46] method list(com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[78,46] method list(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.applicationinsights.implementation.OperationsClientImpl.OperationsService
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[43,76] incompatible types: com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner> cannot be converted to com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner>
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsImpl.java:[48,76] incompatible types: com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner> cannot be converted to com.azure.core.http.rest.PagedIterable<com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner>
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[233,42] incompatible types: bad return type in lambda expression
-[ERROR]     cannot infer type arguments for com.azure.core.http.rest.PagedResponseBase<>
-[ERROR]       reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[265,17] incompatible types: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[285,29] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedFlux<>
-[ERROR]     reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[299,29] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedFlux<>
-[ERROR]     reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[312,33] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedIterable<>
-[ERROR]     reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-applicationinsights/src/main/java/com/azure/resourcemanager/applicationinsights/implementation/OperationsClientImpl.java:[326,33] incompatible types: cannot infer type arguments for com.azure.core.http.rest.PagedIterable<>
-[ERROR]     reason: inference variable T has incompatible equality constraints com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner,com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-```
-**stderr**
-```
-
-```
-</details>
-
-<details>
 <summary>automation</summary>
 
 **stdout**
@@ -348,8 +247,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.900 s
-[INFO] Finished at: 2021-05-23T18:22:03Z
+[INFO] Total time:  6.124 s
+[INFO] Finished at: 2021-05-24T18:25:30Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/com/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.automation.fluent.DscConfigurationsClient
@@ -1049,7 +948,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [IntegrationRuntimeStatusResponse, CreateDataFlowDebugSessionResponse, GitHubAccessTokenResponse, LinkedServiceResource, AccessPolicyResponse, SsisObjectMetadataStatusResponse, SsisObjectMetadataListResponse, DatasetResource, DataFlowDebugSessionInfo, CreateRunResponse, PipelineRunsQueryResponse, SelfHostedIntegrationRuntimeNode, IntegrationRuntimeNodeIpAddress, IntegrationRuntimeAuthKeys, PipelineRun, ActivityRunsQueryResponse, IntegrationRuntimeMonitoringData, ManagedPrivateEndpointResource, ManagedVirtualNetworkResource, ExposureControlResponse, IntegrationRuntimeConnectionInfo, AddDataFlowToDebugSessionResponse, Operation, PrivateEndpointConnectionResource, TriggerSubscriptionOperationStatus, PrivateLinkResourcesWrapper, IntegrationRuntimeResource, TriggerQueryResponse, TriggerResource, DataFlowResource, ExposureControlBatchResponse, TriggerRunsQueryResponse, PipelineResource, Factory, DataFlowDebugCommandResponse]
+INFORMATION (FluentMapper): Add Inner to response types: [AccessPolicyResponse, TriggerRunsQueryResponse, AddDataFlowToDebugSessionResponse, ManagedVirtualNetworkResource, IntegrationRuntimeConnectionInfo, PipelineRun, ExposureControlResponse, CreateDataFlowDebugSessionResponse, TriggerQueryResponse, SsisObjectMetadataListResponse, IntegrationRuntimeNodeIpAddress, ManagedPrivateEndpointResource, LinkedServiceResource, IntegrationRuntimeAuthKeys, Operation, IntegrationRuntimeMonitoringData, ExposureControlBatchResponse, IntegrationRuntimeResource, PipelineRunsQueryResponse, SsisObjectMetadataStatusResponse, SelfHostedIntegrationRuntimeNode, GitHubAccessTokenResponse, DataFlowDebugCommandResponse, PrivateEndpointConnectionResource, DataFlowDebugSessionInfo, PrivateLinkResourcesWrapper, DataFlowResource, IntegrationRuntimeStatusResponse, PipelineResource, ActivityRunsQueryResponse, TriggerSubscriptionOperationStatus, CreateRunResponse, TriggerResource, Factory, DatasetResource]
 
 ```
 **stderr**
@@ -1265,7 +1164,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Application, IOsmamPolicy, GroupItem, FlaggedUser, Location, Device, OperationResult, WipeDeviceOperationResult, AndroidMamPolicy, FlaggedEnrolledApp]
+INFORMATION (FluentMapper): Add Inner to response types: [Device, Application, Location, FlaggedEnrolledApp, IOsmamPolicy, FlaggedUser, WipeDeviceOperationResult, GroupItem, OperationResult, AndroidMamPolicy]
 
 ```
 **stderr**
@@ -1463,8 +1362,8 @@ Use --help to get help information.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.890 s
-[INFO] Finished at: 2021-05-23T19:06:02Z
+[INFO] Total time:  3.800 s
+[INFO] Finished at: 2021-05-24T19:09:15Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-privatedns: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[284,20] method createOrUpdate(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
@@ -1612,8 +1511,8 @@ Use --help to get help information.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.111 s
-[INFO] Finished at: 2021-05-23T19:06:43Z
+[INFO] Total time:  3.094 s
+[INFO] Finished at: 2021-05-24T19:09:56Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-purview: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[14,56] cannot inherit from final com.azure.core.management.SystemData
@@ -1697,7 +1596,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AvailableScopeProperties, QuotaRequestSubmitResponse201, ReservationOrderResponse, CurrentQuotaLimitBase, QuotaRequestDetails, Catalog, ReservationResponse, CalculatePriceResponse, QuotaRequestOneResourceSubmitResponse, AppliedReservations, ExchangeOperationResultResponse, CalculateExchangeOperationResultResponse, OperationResponse]
+INFORMATION (FluentMapper): Add Inner to response types: [AppliedReservations, ExchangeOperationResultResponse, AvailableScopeProperties, ReservationOrderResponse, Catalog, QuotaRequestDetails, CurrentQuotaLimitBase, OperationResponse, ReservationResponse, QuotaRequestOneResourceSubmitResponse, CalculateExchangeOperationResultResponse, CalculatePriceResponse, QuotaRequestSubmitResponse201]
 
 ```
 **stderr**
@@ -1980,7 +1879,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [IoTSecuritySolutionAnalyticsModel, TopologyResource, AscLocation, IngestionSettingToken, SecuritySolution, RuleResults, IoTSecurityAggregatedRecommendation, IoTSecuritySolutionAnalyticsModelList, IotSitesList, ServerVulnerabilityAssessment, RulesResults, ConnectorSetting, IotDefenderSettingsModel, PricingList, RegulatoryComplianceStandard, IotSitesModel, Scan, IotRecommendationTypeList, AdvancedThreatProtectionSetting, Alert, Device, SecuritySolutionsReferenceDataList, DiscoveredSecuritySolution, SecurityAssessment, ExternalSecuritySolution, SecureScoreControlDefinitionItem, AdaptiveNetworkHardening, IotSensorsModel, Compliance, ScanResult, Operation, IoTSecurityAggregatedAlert, RegulatoryComplianceAssessment, AllowedConnectionsResource, Scans, ComplianceResult, ServerVulnerabilityAssessmentsList, JitNetworkAccessPolicy, JitNetworkAccessRequest, IotAlert, PackageDownloads, ConnectionStrings, WorkspaceSetting, Automation, Pricing, Software, IoTSecuritySolutionModel, IotRecommendationType, IotRecommendation, SecuritySubAssessment, IotAlertModel, RegulatoryComplianceControl, AlertsSuppressionRule, SecureScoreItem, IotAlertTypeList, InformationProtectionPolicy, SecurityContact, DeviceSecurityGroup, SecurityTask, Setting, IotSensorsList, OnPremiseIotSensorsList, IotRecommendationModel, IngestionSetting, ScanResults, AutomationValidationStatus, OnPremiseIotSensor, AutoProvisioningSetting, SecurityAssessmentMetadata, AdaptiveApplicationControlGroup, IotAlertType, AdaptiveApplicationControlGroups, SecureScoreControlDetails, IotDefenderSettingsList]
+INFORMATION (FluentMapper): Add Inner to response types: [Alert, AdvancedThreatProtectionSetting, Software, Operation, ConnectorSetting, PackageDownloads, AutomationValidationStatus, AscLocation, InformationProtectionPolicy, ServerVulnerabilityAssessment, SecurityAssessmentMetadata, AdaptiveNetworkHardening, AllowedConnectionsResource, Pricing, IotSensorsList, RegulatoryComplianceControl, IotSitesModel, IotAlertType, IoTSecurityAggregatedAlert, ServerVulnerabilityAssessmentsList, AdaptiveApplicationControlGroup, RuleResults, SecurityContact, IoTSecuritySolutionModel, SecurityTask, IoTSecurityAggregatedRecommendation, ConnectionStrings, WorkspaceSetting, IotAlert, AdaptiveApplicationControlGroups, JitNetworkAccessRequest, IngestionSetting, Compliance, IotAlertModel, IoTSecuritySolutionAnalyticsModelList, IotAlertTypeList, JitNetworkAccessPolicy, RegulatoryComplianceStandard, IoTSecuritySolutionAnalyticsModel, SecuritySolutionsReferenceDataList, ScanResults, RegulatoryComplianceAssessment, IotRecommendationType, IotSitesList, SecureScoreItem, OnPremiseIotSensor, RulesResults, Setting, ExternalSecuritySolution, IngestionSettingToken, ComplianceResult, Automation, ScanResult, IotRecommendationTypeList, IotDefenderSettingsModel, DeviceSecurityGroup, IotRecommendation, Device, SecurityAssessment, DiscoveredSecuritySolution, SecuritySolution, TopologyResource, IotDefenderSettingsList, SecureScoreControlDefinitionItem, PricingList, OnPremiseIotSensorsList, IotRecommendationModel, Scan, SecureScoreControlDetails, SecuritySubAssessment, AlertsSuppressionRule, Scans, AutoProvisioningSetting, IotSensorsModel]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -2179,11 +2078,11 @@ WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive 
 WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
 
-WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
-
 WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:2
+
+WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
 
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6937:4
@@ -2259,7 +2158,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ClientGroup, MapResponse, MachinesSummary, ClientGroupMember, Connection, Port, Liveness, Process, MachineGroup, Machine, ClientGroupMembersCount]
+INFORMATION (FluentMapper): Add Inner to response types: [Port, ClientGroup, Machine, ClientGroupMembersCount, MachinesSummary, Liveness, ClientGroupMember, Process, Connection, MapResponse, MachineGroup]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2278,14 +2177,12 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24587) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24509) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:3015:19
-    at runNextTicks (internal/process/task_queues.js:60:5)
-    at processImmediate (internal/timers.js:435:9)
     at ScheduleNode (/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:1809:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24587) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24587) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24509) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24509) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 
 ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is defined without a 200 or 204 error response implementation,please add it.'
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6869:4
@@ -2359,8 +2256,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.269 s
-[INFO] Finished at: 2021-05-23T19:15:54Z
+[INFO] Total time:  4.402 s
+[INFO] Finished at: 2021-05-24T19:18:58Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/com/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface com.azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2533,8 +2430,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.929 s
-[INFO] Finished at: 2021-05-23T19:17:14Z
+[INFO] Total time:  2.817 s
+[INFO] Finished at: 2021-05-24T19:20:17Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-softwareplan: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsImpl.java:[72,49] method list(java.lang.String) is already defined in class com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsImpl
@@ -2643,6 +2540,26 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 </details>
 
 <details>
+<summary>subscription</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+
+```
+**stderr**
+```
+FATAL: Failed to install extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+  Error: Unable to acquire shared lock on '/tmp' before timeout 20000 msec.
+
+```
+</details>
+
+<details>
 <summary>visualstudio</summary>
 
 **stdout**
@@ -2680,8 +2597,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.832 s
-[INFO] Finished at: 2021-05-23T19:28:08Z
+[INFO] Total time:  1.877 s
+[INFO] Finished at: 2021-05-24T19:31:12Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-visualstudio: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
