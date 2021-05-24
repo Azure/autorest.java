@@ -60,6 +60,7 @@ public class Project {
 //        private String azureIdentityVersion = "1.2.5";
 //        private String azureResourceManagerResourcesVersion = "2.4.0";
         private String jacocoMavenPlugin = "0.8.5";
+        private String revapiMavenPlugin = "0.11.2";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
@@ -87,6 +88,10 @@ public class Project {
 
         public String getJacocoMavenPlugin() {
             return jacocoMavenPlugin;
+        }
+
+        public String getRevapiMavenPlugin() {
+            return revapiMavenPlugin;
         }
     }
 
@@ -227,6 +232,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 checkArtifact(line, "org.jacoco:jacoco-maven-plugin").ifPresent(v -> packageVersions.jacocoMavenPlugin = v);
+                checkArtifact(line, "org.revapi:revapi-maven-plugin").ifPresent(v -> packageVersions.revapiMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
