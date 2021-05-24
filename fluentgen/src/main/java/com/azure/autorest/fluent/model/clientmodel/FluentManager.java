@@ -33,11 +33,11 @@ public class FluentManager {
 
         this.client = client;
 
-        this.serviceName = CodeNamer.toPascalCase(FluentUtils.getServiceName(clientName));
+        this.serviceName = FluentUtils.getServiceName(clientName);
 
         this.type = new ClassType.Builder()
                 .packageName(settings.getPackage())
-                .name(this.serviceName + "Manager")
+                .name(CodeNamer.toPascalCase(this.serviceName) + "Manager")
                 .build();
     }
 
