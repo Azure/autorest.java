@@ -49,7 +49,7 @@ public class FluentPomTemplate extends PomTemplate {
                         pluginBlock.tag("groupId", "org.revapi");
                         pluginBlock.tag("artifactId", "revapi-maven-plugin");
                         pluginBlock.tagWithInlineComment("version", project.getPackageVersions().getRevapiMavenPlugin(),
-                                "{x-version-update;org.jacoco:jacoco-maven-plugin;external_dependency}");
+                                "{x-version-update;org.revapi:revapi-maven-plugin;external_dependency}");
                         pluginBlock.block("configuration", configurationBlock -> {
                             configurationBlock.block("analysisConfiguration", analysisConfigurationBlock -> {
                                 analysisConfigurationBlock.block("revapi.ignore", ignoreBlock -> {
