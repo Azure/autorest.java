@@ -54,6 +54,10 @@ public class FluentPomTemplate extends PomTemplate {
                             configurationBlock.block("analysisConfiguration", analysisConfigurationBlock -> {
                                 analysisConfigurationBlock.block("revapi.ignore", ignoreBlock -> {
                                     ignoreBlock.block("item", itemBlock -> {
+                                        itemBlock.tag("code", "java.method.addedToInterface");
+                                    });
+
+                                    ignoreBlock.block("item", itemBlock -> {
                                         itemBlock.tag("regex", "true");
                                         itemBlock.tag("code", ".*");
                                         itemBlock.tag("package", "com\\.azure\\.resourcemanager(\\.[^.]+)+\\.fluent(\\.[^.]+)*");
