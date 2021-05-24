@@ -24,6 +24,8 @@ public class XmsExtensions {
 
     private String xmsHeaderCollectionPrefix;
 
+    private XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -102,5 +104,13 @@ public class XmsExtensions {
 
     public void setXmsHeaderCollectionPrefix(String xmsHeaderCollectionPrefix) {
         this.xmsHeaderCollectionPrefix = xmsHeaderCollectionPrefix;
+    }
+
+    public XmsInternalAutorestAnonymousSchema getXmsInternalAutorestAnonymousSchema() {
+        return xmsInternalAutorestAnonymousSchema;
+    }
+
+    public void setXmsInternalAutorestAnonymousSchema(XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema) {
+        this.xmsInternalAutorestAnonymousSchema = xmsInternalAutorestAnonymousSchema;
     }
 }
