@@ -76,9 +76,9 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-#      - script: |
-#          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
-#        displayName: 'Copy coverage report'
+      - script: |
+          cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
+        displayName: 'Copy coverage report'
 
       - script: |
           npm --prefix node_modules/@microsoft.azure/autorest.testserver run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
