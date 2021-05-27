@@ -70,5 +70,8 @@ fluent-tests/src/main/java/com/azure/mgmttest/**
 fluent-tests/src/main/java/com/azure/mgmtlitetest/**
 fluent-tests/pom_generated_*.xml
 
+# Coverage report
+/coverage/
+
 # language server
 postprocessor/jdt-language-server
