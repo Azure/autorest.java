@@ -48,11 +48,15 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
                 : settings.getModelsSubpackage();
         String packageName = settings.getPackage(exceptionSubPackage);
 
-        ClientException exception = new ClientException.Builder()
+        ClientException exception = createClientExceptionBuilder()
                 .packageName(packageName)
                 .name(methodOperationExceptionTypeName)
                 .errorName(errorName)
                 .build();
         return exception;
+    }
+
+    protected ClientException.Builder createClientExceptionBuilder() {
+        return new ClientException.Builder();
     }
 }

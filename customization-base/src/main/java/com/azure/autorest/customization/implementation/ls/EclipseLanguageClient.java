@@ -1,6 +1,5 @@
 package com.azure.autorest.customization.implementation.ls;
 
-import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.customization.implementation.ls.models.ClientCapabilities;
 import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionClientCapabilities;
@@ -19,8 +18,6 @@ import com.azure.autorest.customization.implementation.ls.models.FormattingOptio
 import com.azure.autorest.customization.implementation.ls.models.InitializeParams;
 import com.azure.autorest.customization.implementation.ls.models.InitializeResponse;
 import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
 import com.azure.autorest.customization.implementation.ls.models.RenameParams;
 import com.azure.autorest.customization.implementation.ls.models.ServerCapabilities;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
@@ -37,6 +34,9 @@ import com.azure.autorest.customization.implementation.ls.models.WorkspaceCapabi
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceFolder;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceSymbolClientCapabilities;
+import com.azure.autorest.customization.models.Position;
+import com.azure.autorest.customization.models.Range;
+import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -152,7 +152,7 @@ public class EclipseLanguageClient {
 
     public void notifyFileOpened(URI fileUri, String content, int version) {
         if (serverCapabilities.getTextDocumentSync() != null
-                && serverCapabilities.getTextDocumentSync().isOpenClose()) {
+            && serverCapabilities.getTextDocumentSync().isOpenClose()) {
             DidOpenTextDocumentParams params = new DidOpenTextDocumentParams();
             TextDocumentItem item = new TextDocumentItem();
             item.setUri(fileUri);
@@ -165,7 +165,7 @@ public class EclipseLanguageClient {
 
     public void notifyFileClosed(URI fileUri) {
         if (serverCapabilities.getTextDocumentSync() != null
-                && serverCapabilities.getTextDocumentSync().isOpenClose()) {
+            && serverCapabilities.getTextDocumentSync().isOpenClose()) {
             DidCloseTextDocumentParams params = new DidCloseTextDocumentParams();
             TextDocumentIdentifier item = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(item);
@@ -175,7 +175,7 @@ public class EclipseLanguageClient {
 
     public void notifyFileChanged(URI fileUri, String newContent, List<TextEdit> textEdits, int version) {
         if (serverCapabilities.getTextDocumentSync() != null
-                && serverCapabilities.getTextDocumentSync().getChange() != 0) {
+            && serverCapabilities.getTextDocumentSync().getChange() != 0) {
             DidChangeTextDocumentParams params = new DidChangeTextDocumentParams();
             VersionedTextDocumentIdentifier item = new VersionedTextDocumentIdentifier(fileUri);
             item.setVersion(version);
@@ -204,7 +204,7 @@ public class EclipseLanguageClient {
 
     public void notifyFileToSave(URI fileUri) {
         if (serverCapabilities.getTextDocumentSync() != null
-                && serverCapabilities.getTextDocumentSync().isWillSave()) {
+            && serverCapabilities.getTextDocumentSync().isWillSave()) {
             WillSaveTextDocumentParams params = new WillSaveTextDocumentParams();
             TextDocumentIdentifier identifier = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(identifier);
@@ -214,7 +214,7 @@ public class EclipseLanguageClient {
 
     public void notifyFileSaved(URI fileUri, String content) {
         if (serverCapabilities.getTextDocumentSync() != null
-                && serverCapabilities.getTextDocumentSync().getSave() != null) {
+            && serverCapabilities.getTextDocumentSync().getSave() != null) {
             DidSaveTextDocumentParams params = new DidSaveTextDocumentParams();
             TextDocumentIdentifier identifier = new TextDocumentIdentifier(fileUri);
             params.setTextDocument(identifier);
@@ -251,7 +251,7 @@ public class EclipseLanguageClient {
         codeActionParams.put("range", range);
         codeActionParams.put("context", Collections.singletonMap("diagnostics", new ArrayList<Object>()));
 
-        return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction",  codeActionParams);
+        return connection.requestWithObject(OBJECT_MAPPER.getTypeFactory().constructCollectionLikeType(List.class, CodeAction.class), "textDocument/codeAction", codeActionParams);
     }
 
     public void exit() {
@@ -268,6 +268,7 @@ public class EclipseLanguageClient {
 
     private interface CLibrary extends Library {
         CLibrary INSTANCE = (CLibrary) Native.loadLibrary("c", CLibrary.class);
+
         int getpid();
     }
 }

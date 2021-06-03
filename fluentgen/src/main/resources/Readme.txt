@@ -74,6 +74,8 @@ See [API design][design] for general introduction on design and key concepts on 
 
 ## Examples
 
+{{sample-codes}}
+
 ## Troubleshooting
 
 ## Next steps

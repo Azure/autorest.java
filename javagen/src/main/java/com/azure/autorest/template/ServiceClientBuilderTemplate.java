@@ -57,13 +57,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
-        imports.add("com.azure.core.annotation.ServiceClientBuilder");
-        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
-        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
-        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
-        imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
-        imports.add("com.azure.core.util.CoreUtils");
-        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.SerializerFactory" : "com.azure.core.util.serializer.JacksonAdapter");
+        addServiceClientBuilderAnnotationImport(imports);
+        addHttpPolicyImports(imports);
+        addImportForCoreUtils(imports);
+        addSerializerImport(imports, settings);
 
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -203,11 +200,17 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                         constructorArgs = ", " + constructorArgs;
                     }
 
+                    final String serializerMemberName = getSerializerMemberName();
+
                     if (settings.isFluent()) {
-                        function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter, defaultPollInterval, environment%3$s);", serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                        function.line(String.format("%1$s client = new %2$s(pipeline, %3$s, defaultPollInterval, environment%4$s);",
+                                serviceClient.getClassName(),
+                                serviceClient.getClassName(),
+                                serializerMemberName,
+                                constructorArgs));
                     } else {
-                        function.line(String.format("%1$s client = new %2$s(pipeline, serializerAdapter%3$s);",
-                                serviceClient.getClassName(), serviceClient.getClassName(), constructorArgs));
+                        function.line(String.format("%1$s client = new %2$s(pipeline, %3$s%4$s);",
+                                serviceClient.getClassName(), serviceClient.getClassName(), serializerMemberName, constructorArgs));
                     }
                     function.line("return client;");
                 });
@@ -307,10 +310,32 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 }
             }
         });
-
     }
 
-    private void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
+    protected String getSerializerMemberName() {
+        return "serializerAdapter";
+    }
+
+    protected void addSerializerImport(Set<String> imports, JavaSettings settings) {
+        imports.add(settings.isFluent() ? "com.azure.core.management.serializer.SerializerFactory" : "com.azure.core.util.serializer.JacksonAdapter");
+    }
+
+    protected void addImportForCoreUtils(Set<String> imports) {
+        imports.add("com.azure.core.util.CoreUtils");
+    }
+
+    protected void addHttpPolicyImports(Set<String> imports) {
+        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
+        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
+        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
+        imports.add("com.azure.core.http.policy.HttpPipelinePolicy");
+    }
+
+    protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
+        imports.add("com.azure.core.annotation.ServiceClientBuilder");
+    }
+
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes) {
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
@@ -352,7 +377,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         });
     }
 
-    private ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings) {
+    protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
@@ -362,11 +387,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         }
 
         commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
-                settings.isAzureOrFluent() ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()" : "createHttpPipeline()"));
+                settings.isAzureOrFluent()
+                        ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"
+                        : "createHttpPipeline()"));
 
         if (!settings.isLowLevelClient()) {
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                    ClassType.SerializerAdapter, "serializerAdapter", false,
+                    ClassType.SerializerAdapter, getSerializerMemberName(), false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : "JacksonAdapter.createDefaultSerializerAdapter()"));
         }
 

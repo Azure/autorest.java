@@ -11,13 +11,14 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
     private static ProxyParameterMapper instance = new ProxyParameterMapper();
 
-    private ProxyParameterMapper() {
+    protected ProxyParameterMapper() {
     }
 
     public static ProxyParameterMapper getInstance() {
@@ -30,7 +31,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         String name = parameter.getLanguage().getJava().getName();
 
-        ProxyMethodParameter.Builder builder = new ProxyMethodParameter.Builder()
+        Builder builder = createProxyMethodParameterBuilder()
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
                 .name(name)
                 .isRequired(parameter.isRequired())
@@ -150,5 +151,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         builder.collectionFormat(collectionFormat);
 
         return builder.build();
+    }
+
+    protected ProxyMethodParameter.Builder createProxyMethodParameterBuilder() {
+        return new ProxyMethodParameter.Builder();
     }
 }

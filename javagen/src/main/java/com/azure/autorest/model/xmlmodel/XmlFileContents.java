@@ -10,13 +10,14 @@ package com.azure.autorest.model.xmlmodel;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class XmlFileContents {
-    private static final String singleIndent = "    ";
+    private String singleIndent = "    ";
 
     private StringBuilder contents;
     private StringBuilder linePrefix;
@@ -30,6 +31,18 @@ public class XmlFileContents {
     }
 
     public XmlFileContents(String fileContents) {
+        this(fileContents, null);
+    }
+
+    public XmlFileContents(String fileContents, XmlFile.Options options) {
+        if (options != null) {
+            if (options.getIndent() > 0) {
+                char[] chars = new char[options.getIndent()];
+                Arrays.fill(chars, ' ');
+                singleIndent = String.valueOf(chars);
+            }
+        }
+
         contents = new StringBuilder();
         linePrefix = new StringBuilder();
 

@@ -10,6 +10,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
@@ -28,7 +29,7 @@ public class ProxyMethod {
     /**
      * The value that is returned from this method.
      */
-    private IType returnType;
+    protected IType returnType;
     /**
      * Get the HTTP method that will be used for this method.
      */
@@ -58,7 +59,7 @@ public class ProxyMethod {
     /**
      * Get the parameters that are provided to this method.
      */
-    private List<ProxyMethodParameter> parameters;
+    protected List<ProxyMethodParameter> parameters;
     /**
      * Get the description of this method.
      */
@@ -66,7 +67,7 @@ public class ProxyMethod {
     /**
      * The value of the ReturnValueWireType annotation for this method.
      */
-    private IType returnValueWireType;
+    protected IType returnValueWireType;
     /**
      * The response body type.
      */
@@ -251,7 +252,7 @@ public class ProxyMethod {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (settings.isLowLevelClient()) {
             getParameters().stream()
                     .filter(p -> p.getIsRequired() && !p.getFromClient() && !p.getIsConstant()
@@ -283,6 +284,10 @@ public class ProxyMethod {
             }
 
             returnType.addImportsTo(imports, includeImplementationImports);
+
+            if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(this.requestContentType)) {
+                imports.add("com.azure.core.annotation.FormParam");
+            }
 
             for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);

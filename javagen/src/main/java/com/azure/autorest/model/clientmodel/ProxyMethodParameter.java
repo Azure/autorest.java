@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.serializer.CollectionFormat;
+
 import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -93,7 +94,7 @@ public class ProxyMethodParameter {
      * @param defaultValue The default value of the parameter.
      * @param collectionFormat The collection format if the parameter is a list type.
      */
-    private ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat) {
+    protected ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat) {
         this.description = description;
         this.wireType = wireType;
         this.clientType = clientType;
@@ -206,7 +207,7 @@ public class ProxyMethodParameter {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (!settings.isLowLevelClient()) {
             if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
                 imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
@@ -235,21 +236,21 @@ public class ProxyMethodParameter {
     }
 
     public static class Builder {
-        private String description;
-        private IType wireType;
-        private IType clientType;
-        private String name;
-        private RequestParameterLocation requestParameterLocation = RequestParameterLocation.values()[0];
-        private String requestParameterName;
-        private boolean alreadyEncoded = false;
-        private boolean isConstant = false;
-        private boolean isRequired;
-        private boolean isNullable;
-        private boolean fromClient;
-        private String headerCollectionPrefix;
-        private String parameterReference;
-        private String defaultValue;
-        private CollectionFormat collectionFormat;
+        protected String description;
+        protected IType wireType;
+        protected IType clientType;
+        protected String name;
+        protected RequestParameterLocation requestParameterLocation = RequestParameterLocation.values()[0];
+        protected String requestParameterName;
+        protected boolean alreadyEncoded = false;
+        protected boolean isConstant = false;
+        protected boolean isRequired;
+        protected boolean isNullable;
+        protected boolean fromClient;
+        protected String headerCollectionPrefix;
+        protected String parameterReference;
+        protected String defaultValue;
+        protected CollectionFormat collectionFormat;
 
         /**
          * Sets the description of this parameter.

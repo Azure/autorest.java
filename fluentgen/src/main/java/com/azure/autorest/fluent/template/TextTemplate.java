@@ -17,5 +17,7 @@ public class TextTemplate {
 
     public static final String MANAGER_CLASS = "manager-class";
 
+    public static final String SAMPLE_CODES = "sample-codes";
+
     public static final String DATE_UTC = "date-utc";
 }

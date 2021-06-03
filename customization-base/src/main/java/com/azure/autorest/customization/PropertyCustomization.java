@@ -1,22 +1,16 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeAction;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
 
-import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,22 +19,16 @@ import java.util.stream.Collectors;
 /**
  * The Javadoc customization for an AutoRest generated classes and methods.
  */
-public final class PropertyCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+public final class PropertyCustomization extends CodeCustomization {
     private final String packageName;
     private final String className;
-    private final SymbolInformation classSymbol;
-    private final ClassCustomization classCustomization;
     private final String propertyName;
 
-    PropertyCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, SymbolInformation classSymbol, ClassCustomization classCustomization, String propertyName) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+    PropertyCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
+        SymbolInformation symbol, String propertyName) {
+        super(editor, languageClient, symbol);
         this.packageName = packageName;
         this.className = className;
-        this.classSymbol = classSymbol;
-        this.classCustomization = classCustomization;
         this.propertyName = propertyName;
     }
 
@@ -52,7 +40,6 @@ public final class PropertyCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization rename(String newName) {
-        URI fileUri = classSymbol.getLocation().getUri();
         List<SymbolInformation> symbols = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> si.getName().toLowerCase().contains(propertyName.toLowerCase()))
             .collect(Collectors.toList());
@@ -69,7 +56,7 @@ public final class PropertyCustomization {
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
             }
         }
-        return new PropertyCustomization(editor, languageClient, packageName, className, classSymbol, classCustomization, newName);
+        return refreshCustomization(newName);
     }
 
     /**
@@ -79,42 +66,7 @@ public final class PropertyCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization addAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        URI fileUri = classSymbol.getLocation().getUri();
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-            .findFirst();
-        if (symbol.isPresent()) {
-            int i = fileUri.toString().indexOf("src/main/java/");
-            String fileName = fileUri.toString().substring(i);
-            if (editor.getContents().containsKey(fileName)) {
-                int line = symbol.get().getLocation().getRange().getStart().getLine();
-                Position position = editor.insertBlankLine(fileName, line, true);
-                editor.replace(fileName, position, position, annotation);
-
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst();
-                if (generateAccessors.isPresent()) {
-                    WorkspaceEditCommand command;
-                    if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                        command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                        for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-                        }
-                    }
-                }
-            }
-        }
-        return this;
+        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(propertyName));
     }
 
     /**
@@ -124,54 +76,7 @@ public final class PropertyCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-
-        URI fileUri = classSymbol.getLocation().getUri();
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
-            .findFirst();
-        if (symbol.isPresent()) {
-            int i = fileUri.toString().indexOf("src/main/java/");
-            String fileName = fileUri.toString().substring(i);
-            if (editor.getContents().containsKey(fileName)) {
-                int line = symbol.get().getLocation().getRange().getStart().getLine();
-                int annotationLine = -1;
-                String lineContent = editor.getFileLine(fileName, line);
-                while (!lineContent.trim().isEmpty()) {
-                    if (lineContent.trim().startsWith(annotation)) {
-                        annotationLine = line;
-                    }
-                    lineContent = editor.getFileLine(fileName, --line);
-                }
-                if (annotationLine != -1) {
-                    Position start = new Position(annotationLine, 0);
-                    Position end = new Position(annotationLine + 1, 0);
-                    editor.replace(fileName, start, end, "");
-
-                    FileEvent fileEvent = new FileEvent();
-                    fileEvent.setUri(fileUri);
-                    fileEvent.setType(FileChangeType.CHANGED);
-                    languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                    Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, new Range(start, end))
-                        .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                        .findFirst();
-                    if (generateAccessors.isPresent()) {
-                        WorkspaceEditCommand command;
-                        if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                            command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                            for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return this;
+        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(propertyName));
     }
 
     /**
@@ -181,29 +86,32 @@ public final class PropertyCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization generateGetterAndSetter() {
-        URI fileUri = classSymbol.getLocation().getUri();
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+        Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
+            .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
             .findFirst();
-        if (symbol.isPresent()) {
-            Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange())
-                .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
-                .findFirst();
-            if (generateAccessors.isPresent()) {
-                WorkspaceEditCommand command;
-                if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                    command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                    for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                        Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-                    }
-                    List<TextEdit> formats = languageClient.format(fileUri);
-                    Utils.applyTextEdits(fileUri, formats, editor, languageClient);
-
-                    String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-                    classCustomization.getMethod(setterMethod).setReturnType(className, "this");
+        if (generateAccessors.isPresent()) {
+            WorkspaceEditCommand command;
+            if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
+                command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
+                for (WorkspaceEdit workspaceEdit : command.getArguments()) {
+                    Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
                 }
+                List<TextEdit> formats = languageClient.format(fileUri);
+                Utils.applyTextEdits(fileUri, formats, editor, languageClient);
+
+                String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+                new PackageCustomization(editor, languageClient, packageName)
+                    .getClass(className)
+                    .getMethod(setterMethod).setReturnType(className, "this");
             }
         }
+
         return this;
+    }
+
+    private PropertyCustomization refreshCustomization(String propertyName) {
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getProperty(propertyName);
     }
 }

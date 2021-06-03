@@ -46,6 +46,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -256,7 +257,7 @@ public class FluentUtils {
                     for (int i = 0; i < replacements.length; i += 2) {
                         String key = replacements[i];
                         String value = replacements[i+1];
-                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), value);
+                        text = text.replaceAll(Pattern.quote("{{" + key + "}}"), Matcher.quoteReplacement(value));
                     }
                 } else {
                     logger.warn("Replacements skipped due to incorrect length: {}", Arrays.asList(replacements));

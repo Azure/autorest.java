@@ -4,13 +4,10 @@ import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,8 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static com.azure.autorest.customization.implementation.Utils.writeLine;
 
 /**
  * The raw editor containing the current files being customized.
@@ -71,9 +73,10 @@ public final class Editor {
         boolean fileCreated;
         try {
             fileCreated = newFile.createNewFile();
-            FileOutputStream stream = new FileOutputStream(newFile);
-            stream.write(content.getBytes(StandardCharsets.UTF_8));
-            stream.close();
+
+            try (BufferedWriter writer = Files.newBufferedWriter(newFile.toPath())) {
+                writer.write(content);
+            }
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -138,12 +141,19 @@ public final class Editor {
      * @return the position of the cursor after indentation (if indented) in this line
      */
     public Position insertBlankLine(String fileName, int line, boolean indented) {
-        List<String> lineContent = lines.get(fileName);
-        String nextLine = lineContent.get(line);
-        String indentation = "";
-        if (indented) {
-            indentation = nextLine.replaceFirst("[^ ].*$", "");
+        if (!indented) {
+            return insertBlankLineWithIndent(fileName, line, 0);
+        } else {
+            int indentAmount = lines.get(fileName).get(line)
+                .replaceFirst("[^ ].*$", "")
+                .length();
+
+            return insertBlankLineWithIndent(fileName, line, indentAmount);
         }
+    }
+
+    public Position insertBlankLineWithIndent(String fileName, int line, int indentAmount) {
+        String indentation = IntStream.range(0, indentAmount).mapToObj(ignored -> " ").collect(Collectors.joining());
         lines.get(fileName).add(line, indentation);
         contents.put(fileName, joinLinesIntoContent(lines.get(fileName)));
         return new Position(line, indentation.length());
@@ -158,29 +168,50 @@ public final class Editor {
      * @param newContent the new content to replace the chunk
      */
     public void replace(String fileName, Position start, Position end, String newContent) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        replaceWithIndentedContent(fileName, start, end, newContent, 0);
+    }
+
+    public void replaceWithIndentedContent(String fileName, Position start, Position end, String newContent,
+        int newLineIndent) {
+        String indent = IntStream.range(0, newLineIndent).mapToObj(ignored -> " ").collect(Collectors.joining());
+        StringBuilder stringBuilder = new StringBuilder(4096);
         List<String> lineContent = lines.get(fileName);
+
+        // Copy lines until the start of the change is reached.
         for (int i = 0; i != start.getLine(); i++) {
-            printWriter.println(lineContent.get(i));
+            writeLine(stringBuilder, lineContent.get(i));
         }
-        printWriter.print(lineContent.get(start.getLine()).substring(0, start.getCharacter()));
+
+        // Copy until the start of the change.
+        stringBuilder.append(lineContent.get(start.getLine()), 0, start.getCharacter());
+
         List<String> replacementLineContent = splitContentIntoLines(newContent);
+
+        // Add the change.
         if (replacementLineContent.size() > 0) {
             for (int i = 0; i != replacementLineContent.size() - 1; i++) {
-                printWriter.println(replacementLineContent.get(i));
+                if (i > 0) {
+                    stringBuilder.append(indent);
+                }
+
+                writeLine(stringBuilder, replacementLineContent.get(i));
             }
-            printWriter.print(replacementLineContent.get(replacementLineContent.size() - 1));
+
+            stringBuilder.append(indent).append(replacementLineContent.get(replacementLineContent.size() - 1));
         }
-        printWriter.println(lineContent.get(end.getLine()).substring(end.getCharacter()));
+
+        writeLine(stringBuilder, lineContent.get(end.getLine()).substring(end.getCharacter()));
+
+        // Copy the rest of the file until its end.
         for (int i = end.getLine() + 1; i != lineContent.size(); i++) {
-            printWriter.println(lineContent.get(i));
+            writeLine(stringBuilder, lineContent.get(i));
         }
-        contents.put(fileName, stringWriter.toString());
+
+        contents.put(fileName, stringBuilder.toString());
         lines.put(fileName, splitContentIntoLines(contents.get(fileName)));
-        try (PrintWriter fileWriter = new PrintWriter(paths.get(fileName).toFile())) {
-            fileWriter.print(contents.get(fileName));
-        } catch (FileNotFoundException e) {
+        try (BufferedWriter fileWriter = Files.newBufferedWriter(paths.get(fileName))) {
+            fileWriter.write(contents.get(fileName));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -255,8 +286,26 @@ public final class Editor {
      * @return the text in the range
      */
     public String getTextInRange(String fileName, Range range, String delimiter) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        return getTextInRange(fileName, range, delimiter, str -> str);
+    }
+
+    /**
+     * Gets the text content in a range in the file.
+     * <p>
+     * If {@code delimiter} isn't null the lines will be joined using the delimiter. Otherwise, the lines will be joined
+     * using newline.
+     * <p>
+     * If {@code lineCleaner} isn't null each line of content read from the file will use the line cleaner before adding
+     * it to the result.
+     *
+     * @param fileName The name of the file where content will be read.
+     * @param range The range in the file where content will be read.
+     * @param delimiter Optional delimiter to join read lines of the file.
+     * @param lineCleaner Optional function that will cleanse each line of the file that is read.
+     * @return The text in the range.
+     */
+    public String getTextInRange(String fileName, Range range, String delimiter, Function<String, String> lineCleaner) {
+        StringBuilder stringBuilder = new StringBuilder(4096);
         for (int line = range.getStart().getLine(); line <= range.getEnd().getLine(); line++) {
             String lineContent = getFileLine(fileName, line);
             int truncateIndex = 0;
@@ -264,17 +313,27 @@ public final class Editor {
                 lineContent = lineContent.substring(range.getStart().getCharacter());
                 truncateIndex = range.getStart().getCharacter();
             }
+
             if (line == range.getEnd().getLine()) {
                 lineContent = lineContent.substring(0, range.getEnd().getCharacter() - truncateIndex);
             }
+
+            if (lineCleaner != null) {
+                lineContent = lineCleaner.apply(lineContent);
+            }
+
             if (delimiter == null) {
-                printWriter.println(lineContent);
+                writeLine(stringBuilder, lineContent);
             } else {
-                printWriter.print(lineContent);
-                printWriter.print(delimiter);
+                if (stringBuilder.length() == 0) {
+                    stringBuilder.append(lineContent);
+                } else {
+                    stringBuilder.append(delimiter).append(lineContent);
+                }
             }
         }
-        return stringWriter.toString();
+
+        return stringBuilder.toString();
     }
 
     private static List<String> splitContentIntoLines(String content) {

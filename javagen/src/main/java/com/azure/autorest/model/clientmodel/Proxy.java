@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Proxy {
      * @param baseURL The base URL that will be used for each REST API method.
      * @param methods The methods of this REST API.
      */
-    private Proxy(String name, String clientTypeName, String baseURL, List<ProxyMethod> methods) {
+    protected Proxy(String name, String clientTypeName, String baseURL, List<ProxyMethod> methods) {
         this.name = name;
         this.clientTypeName = clientTypeName;
         this.baseURL = baseURL;
@@ -64,7 +65,7 @@ public class Proxy {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (includeImplementationImports && !settings.isLowLevelClient()) {
             imports.add("com.azure.core.annotation.Host");
             imports.add("com.azure.core.annotation.ServiceInterface");
@@ -75,11 +76,11 @@ public class Proxy {
         }
     }
 
-    public static final class Builder {
-        private String name;
-        private String clientTypeName;
-        private String baseURL;
-        private List<ProxyMethod> methods;
+    public static class Builder {
+        protected String name;
+        protected String clientTypeName;
+        protected String baseURL;
+        protected List<ProxyMethod> methods;
 
         /**
          * Sets the name of the REST API interface.

@@ -1,13 +1,14 @@
 # Java Codegen Report
-Generated at 2021-04-05T19:35:26.569512
+Generated at 2021-06-03T20:13:30.025703
 ## Success
 <details>
-<summary>RP count: 169</summary>
+<summary>RP count: 175</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
 - adp
 - advisor
+- agfood
 - alertsmanagement
 - analysisservices
 - apimanagement
@@ -58,12 +59,14 @@ Generated at 2021-04-05T19:35:26.569512
 - datamigration
 - dataprotection
 - datashare
+- deploymentmanager
 - desktopvirtualization
 - deviceprovisioningservices
 - deviceupdate
 - devops
 - devspaces
 - devtestlabs
+- dfp
 - digitaltwins
 - dnc
 - dns
@@ -96,6 +99,7 @@ Generated at 2021-04-05T19:35:26.569512
 - labservices
 - logic
 - logz
+- m365securityandcompliance
 - machinelearningcompute
 - machinelearningexperimentation
 - machinelearningservices
@@ -107,8 +111,10 @@ Generated at 2021-04-05T19:35:26.569512
 - maps
 - mariadb
 - marketplace
+- marketplacenotifications
 - marketplaceordering
 - mediaservices
+- migrate
 - migrateprojects
 - mixedreality
 - monitor
@@ -120,15 +126,14 @@ Generated at 2021-04-05T19:35:26.569512
 - operationalinsights
 - operationsmanagement
 - peering
-- policyinsights
 - portal
 - postgresql
 - postgresqlhsc
 - powerbidedicated
 - powerbiembedded
 - powerplatform
+- privatedns
 - providerhub
-- purview
 - quantum
 - recoveryservices
 - recoveryservicesbackup
@@ -137,7 +142,6 @@ Generated at 2021-04-05T19:35:26.569512
 - redis
 - redisenterprise
 - relay
-- reservations
 - resourcegraph
 - resourcehealth
 - resourcemover
@@ -164,26 +168,31 @@ Generated at 2021-04-05T19:35:26.569512
 - subscription
 - support
 - synapse
+- testbase
 - timeseriesinsights
 - trafficmanager
-- visualstudio
+- videoanalyzer
 - vmware
 - vmwarecloudsimple
 - web
+- webpubsub
 - windowsesu
 - windowsiot
 - workloadmonitor
 </details>
 
 ## Failure at Codegen
-- deploymentmanager
+- datafactory
+- policyinsights
+- reservations
 - security
 
 ## Failure at Build
 - automation
-- privatedns
+- purview
 - servicefabric
 - softwareplan
+- visualstudio
 
 ## Logs
 <details>
@@ -191,14 +200,14 @@ Generated at 2021-04-05T19:35:26.569512
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -240,8 +249,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.999 s
-[INFO] Finished at: 2021-04-05T18:23:07Z
+[INFO] Total time:  6.325 s
+[INFO] Finished at: 2021-06-03T18:59:15Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/com/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.automation.fluent.DscConfigurationsClient
@@ -267,705 +276,606 @@ FATAL: Error: Name is empty!
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SubResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SubResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SubResourceDebugResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SubResourceDebugResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeDebugResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeDebugResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeStatusResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IntegrationRuntimeStatusResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FactoryRepoUpdate' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FactoryRepoUpdate' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GitHubAccessTokenRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GitHubAccessTokenRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GitHubAccessTokenResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GitHubAccessTokenResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'UserAccessPolicy' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'UserAccessPolicy' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AccessPolicyResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FactoryProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FactoryProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'EncryptionConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'EncryptionConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CMKIdentityDefinition' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CMKIdentityDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PipelineReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PipelineReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TriggerPipelineReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TriggerPipelineReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TriggerResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TriggerResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FactoryUpdateParameters' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FactoryUpdateParameters' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FactoryIdentity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FactoryIdentity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatasetReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatasetReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatasetResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatasetResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatasetDebugResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatasetDebugResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceDebugResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LinkedServiceDebugResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationListResponse' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationListResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowStagingInfo' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowStagingInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowDebugResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowDebugResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedPrivateEndpointResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedPrivateEndpointResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedVirtualNetworkResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MappingDataFlowTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MappingDataFlowTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowSource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowSource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowSink' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataFlowSink' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3DatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3DatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AvroDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AvroDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExcelDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExcelDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ParquetDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ParquetDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DelimitedTextDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DelimitedTextDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'JsonDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'JsonDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'XmlDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'XmlDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OrcDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OrcDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlMITableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlMITableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDWTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDWTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CassandraTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CassandraTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbSqlApiCollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbSqlApiCollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DocumentDbCollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DocumentDbCollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsEntityDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsEntityDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsCrmEntityDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsCrmEntityDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CommonDataServiceForAppsEntityDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CommonDataServiceForAppsEntityDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeStoreDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeStoreDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobFSDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobFSDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Office365DatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Office365DatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FileShareDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FileShareDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbCollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbCollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbAtlasCollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbAtlasCollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbV2CollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbV2CollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbMongoDbApiCollectionDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbMongoDbApiCollectionDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ODataResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ODataResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OracleTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OracleTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TeradataTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TeradataTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMySqlTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMySqlTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonRedshiftTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonRedshiftTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Db2TableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Db2TableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RelationalTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RelationalTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'InformixTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'InformixTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OdbcTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OdbcTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MySqlTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MySqlTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PostgreSqlTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PostgreSqlTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MicrosoftAccessTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MicrosoftAccessTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceObjectDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceObjectDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceServiceCloudObjectDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceServiceCloudObjectDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SybaseTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SybaseTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapCloudForCustomerResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapCloudForCustomerResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapEccResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapEccResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapHanaTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapHanaTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapOpenHubTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapOpenHubTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RestResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RestResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapTableResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapTableResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSearchIndexDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSearchIndexDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HttpDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HttpDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GenericDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GenericDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzurePostgreSqlTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzurePostgreSqlTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DrillDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DrillDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GoogleBigQueryDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GoogleBigQueryDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GreenplumDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GreenplumDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HiveDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HiveDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ImpalaDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ImpalaDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PhoenixDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PhoenixDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PrestoDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PrestoDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SparkDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SparkDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'NetezzaTableDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'NetezzaTableDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'VerticaDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'VerticaDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsAXResourceDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsAXResourceDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SnowflakeDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SnowflakeDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SharePointOnlineListDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SharePointOnlineListDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksDeltaLakeDatasetTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksDeltaLakeDatasetTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeOperationResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeOperationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeNode' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeNode' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeError' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ManagedIntegrationRuntimeError' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SelfHostedIntegrationRuntimeNode' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SelfHostedIntegrationRuntimeNode' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureStorageLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureStorageLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobStorageLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobStorageLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDWLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDWLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDatabaseLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlDatabaseLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlMILinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSqlMILinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SqlAlwaysEncryptedProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SqlAlwaysEncryptedProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureBatchLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureBatchLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureKeyVaultLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureKeyVaultLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsCrmLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsCrmLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CommonDataServiceForAppsLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CommonDataServiceForAppsLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FileServerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FileServerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureFileStorageLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureFileStorageLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3CompatibleLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3CompatibleLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OracleCloudStorageLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OracleCloudStorageLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GoogleCloudStorageLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GoogleCloudStorageLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OracleLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OracleLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMySqlLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMySqlLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MySqlLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MySqlLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PostgreSqlLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PostgreSqlLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SybaseLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SybaseLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Db2LinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Db2LinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TeradataLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TeradataLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLServiceLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLServiceLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OdbcLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OdbcLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'InformixLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'InformixLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MicrosoftAccessLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MicrosoftAccessLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HdfsLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HdfsLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ODataLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ODataLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/SchemaMissingType): The schema 'WebAnonymousAuthentication' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebBasicAuthentication' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebBasicAuthentication' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebClientCertificateAuthentication' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebClientCertificateAuthentication' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CassandraLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CassandraLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbAtlasLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbAtlasLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbV2LinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MongoDbV2LinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbMongoDbApiLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CosmosDbMongoDbApiLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeStoreLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeStoreLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobFSLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureBlobFSLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Office365LinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Office365LinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceServiceCloudLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceServiceCloudLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapCloudForCustomerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapCloudForCustomerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapEccLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapEccLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapOpenHubLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapOpenHubLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RestServiceLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RestServiceLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3LinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonS3LinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonRedshiftLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonRedshiftLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureSearchLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureSearchLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HttpLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HttpLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FtpServerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FtpServerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SftpServerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SftpServerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapBWLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapBWLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapHanaLinkedServiceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapHanaLinkedServiceProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AmazonMWSLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AmazonMWSLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzurePostgreSqlLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzurePostgreSqlLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ConcurLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ConcurLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CouchbaseLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CouchbaseLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DrillLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DrillLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'EloquaLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'EloquaLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GoogleBigQueryLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GoogleBigQueryLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GreenplumLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GreenplumLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HBaseLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HBaseLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HiveLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HiveLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HubspotLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HubspotLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ImpalaLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ImpalaLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'JiraLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'JiraLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MagentoLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MagentoLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MariaDBLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MariaDBLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMariaDBLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMariaDBLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MarketoLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MarketoLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PaypalLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PaypalLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PhoenixLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PhoenixLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PrestoLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PrestoLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'QuickBooksLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'QuickBooksLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceNowLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ServiceNowLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ShopifyLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ShopifyLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SparkLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SparkLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SquareLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SquareLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'XeroLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'XeroLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ZohoLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ZohoLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'VerticaLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'VerticaLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'NetezzaLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'NetezzaLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceMarketingCloudLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SalesforceMarketingCloudLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightOnDemandLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightOnDemandLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeAnalyticsLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataLakeAnalyticsLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksDetltaLakeLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDatabricksDetltaLakeLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ResponsysLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ResponsysLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsAXLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DynamicsAXLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OracleServiceCloudLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OracleServiceCloudLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GoogleAdWordsLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GoogleAdWordsLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SapTableLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SapTableLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SnowflakeLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SnowflakeLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SharePointOnlineListLinkedServiceTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SharePointOnlineListLinkedServiceTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ControlActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ControlActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecutionActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecutionActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CopyActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CopyActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CopyActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CopyActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightHiveActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightHiveActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightHiveActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightHiveActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightPigActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightPigActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightPigActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightPigActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightMapReduceActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightMapReduceActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightMapReduceActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightMapReduceActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightStreamingActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightStreamingActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightStreamingActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightStreamingActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightSparkActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightSparkActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightSparkActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'HDInsightSparkActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteSSISPackageActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteSSISPackageActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteSSISPackageActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteSSISPackageActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivityReferenceObject' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomActivityReferenceObject' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerStoredProcedureActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerStoredProcedureActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerStoredProcedureActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SqlServerStoredProcedureActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecutePipelineActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecutePipelineActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecutePipelineActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecutePipelineActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DeleteActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DeleteActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DeleteActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DeleteActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerCommandActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerCommandActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerCommandActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureDataExplorerCommandActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LookupActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LookupActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LookupActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LookupActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebActivityAuthentication' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebActivityAuthentication' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GetMetadataActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GetMetadataActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GetMetadataActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GetMetadataActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IfConditionActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IfConditionActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IfConditionActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IfConditionActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SwitchActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SwitchActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SwitchActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SwitchActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SwitchCase' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SwitchCase' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ForEachActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ForEachActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ForEachActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ForEachActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLBatchExecutionActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLBatchExecutionActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLBatchExecutionActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLBatchExecutionActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLUpdateResourceActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLUpdateResourceActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLUpdateResourceActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLUpdateResourceActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLExecutePipelineActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLExecutePipelineActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLExecutePipelineActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureMLExecutePipelineActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataLakeAnalyticsUSQLActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataLakeAnalyticsUSQLActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DataLakeAnalyticsUSQLActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DataLakeAnalyticsUSQLActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WaitActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WaitActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WaitActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WaitActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'UntilActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'UntilActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'UntilActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'UntilActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ValidationActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ValidationActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ValidationActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ValidationActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FilterActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FilterActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FilterActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FilterActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksNotebookActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksNotebookActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksNotebookActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksNotebookActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkJarActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkJarActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkJarActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkJarActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkPythonActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkPythonActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkPythonActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DatabricksSparkPythonActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SetVariableActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SetVariableActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SetVariableActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'SetVariableActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AppendVariableActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AppendVariableActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AppendVariableActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AppendVariableActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureFunctionActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebHookActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebHookActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WebHookActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WebHookActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteDataFlowActivity' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteDataFlowActivity' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteDataFlowActivityTypeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExecuteDataFlowActivityTypeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MultiplePipelineTrigger' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MultiplePipelineTrigger' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ScheduleTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'BlobTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'BlobTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'BlobEventsTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'BlobEventsTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'CustomEventsTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CustomEventsTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TumblingWindowTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TumblingWindowTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RetryPolicy' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RetryPolicy' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RerunTumblingWindowTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RerunTumblingWindowTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ChainingTrigger-typeProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ChainingTrigger-typeProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
 WARNING (PreCheck/DuplicateSchema): Duplicate Schema named BlobEventTypes -- type: undefined => "string",items: {"$ref":"#/components/schemas/BlobEventTypes"} => <none>,enum: undefined => ["Microsoft.Storage.BlobCreated","Microsoft.Storage.BlobDeleted"],x-ms-enum: undefined => {"name":"BlobEventTypes","modelAsString":true} 
-
-```
-**stderr**
-```
-FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. Correct your input (JsonFormatFilePattern).
-  Error: Plugin modelerfour reported failure.
-
-```
-</details>
-
-<details>
-<summary>deploymentmanager</summary>
-
-**stdout**
-```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
-(C) 2018 Microsoft Corporation.
-https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
-INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RolloutRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RolloutRequestProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'StepGroup' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PrePostStep' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ArtifactSource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ArtifactSource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ArtifactSourceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'SasProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Rollout' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Rollout-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RolloutProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RolloutOperationInfo' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceTopologyResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceTopologyResource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceTopologyProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceResource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Service' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceUnitResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceUnitResource-properties' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceUnit' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceUnitProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ServiceUnitArtifacts' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RolloutStep' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'StepOperationInfo' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ResourceOperation' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Message' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CloudError' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CloudErrorBody' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationDetail' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'StepResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TrackedResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'RolloutProperties' -> 'RolloutPropertiesAutoGenerated'
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ArtifactSourceProperties' -> 'ArtifactSourcePropertiesAutoGenerated'
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -976,22 +886,60 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentNamer): Transform code model
-INFORMATION (SchemaNameNormalization): Override default name, from 'timeStamp' to 'timestamp'
-INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'ServiceTopologies'
-INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Steps'
-INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Rollouts'
-INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'ArtifactSources'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'ServiceTopologyResource'
-INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'TrackedResource'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'ServiceResource'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'ServiceUnitResource'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'StepResource'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'RolloutRequest'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'Rollout'
-INFORMATION (ResourceTypeNormalization): Change parent from 'TrackedResource' to 'Resource', for 'ArtifactSource'
+INFORMATION (SchemaNameNormalization): Override default name, from 'WebHookActivity' to 'WebhookActivity'
+INFORMATION (SchemaNameNormalization): Override default name, from 'eTag' to 'etag'
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (SchemaNameNormalization): Override default name, from 'catalogAdminUserName' to 'catalogAdminUsername'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (SchemaNameNormalization): Override default name, from 'hostName' to 'hostname'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'allowHostNameCNMismatch' to 'allowHostnameCNMismatch'
+INFORMATION (SchemaNameNormalization): Override default name, from 'clusterUserName' to 'clusterUsername'
+INFORMATION (SchemaNameNormalization): Override default name, from 'clusterSshUserName' to 'clusterSshUsername'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'userName' to 'username'
+INFORMATION (SchemaNameNormalization): Override default name, from 'WebHookActivityMethod' to 'WebhookActivityMethod'
+INFORMATION (NamingConflictResolver): Rename operation group from 'PrivateEndpointConnection' to 'PrivateEndpointConnectionOperation'
+INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByResourceGroup', in operation group 'Factories'
 INFORMATION (ErrorTypeNormalization): Rename error from 'CloudError' to 'ManagementError'
-INFORMATION (SchemaCleanup): Remove unused object schema 'TrackedResource'
-INFORMATION (SchemaCleanup): Remove unused object schema 'Resource'
+INFORMATION (SchemaCleanup): Remove unused object schema 'IntegrationRuntimeStatusListResponse'
+INFORMATION (SchemaCleanup): Remove unused object schema 'DatasetDataElement'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'JsonFormatFilePattern'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'DatasetCompressionLevel'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'CompressionCodec'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'DynamicsDeploymentType'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'DynamicsAuthenticationType'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'ServicePrincipalCredentialType'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'HdiNodeTypes'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'JsonWriteFilePattern'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'CopyBehaviorType'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'SqlPartitionOption'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'SapHanaPartitionOption'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'SapTablePartitionOption'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'OraclePartitionOption'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'TeradataPartitionOption'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'NetezzaPartitionOption'
 INFORMATION (FluentGen): Read YAML
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1002,74 +950,29 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ArtifactSource, ServiceTopologyResource, ServiceUnitResource, ServiceResource, OperationsList, StepResource, RolloutRequest, Rollout]
-INFORMATION (FluentGen): Java template for client model
-INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceTopologyResource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceTopologyResource', method reference 'createOrUpdate', body parameter 'ServiceTopologyResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceTopologyResource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceTopologyResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceResource', method reference 'createOrUpdate', body parameter 'ServiceResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceResource' as category NESTED_CHILD
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceResource', method reference 'createOrUpdate', body parameter 'ServiceResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceResource', method reference 'get'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ServiceUnitResource', method reference 'createOrUpdate', body parameter 'ServiceUnitResourceInner'
-INFORMATION (ResourceParser): Fluent model 'ServiceUnitResource' as category NESTED_CHILD
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ServiceUnitResource', method reference 'createOrUpdate', body parameter 'ServiceUnitResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ServiceUnitResource', method reference 'get'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ServiceUnitResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'StepResource', method reference 'createOrUpdate', body parameter 'StepResourceInner'
-INFORMATION (ResourceParser): Fluent model 'StepResource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'StepResource', method reference 'createOrUpdate', body parameter 'StepResourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'StepResource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'StepResource', method reference 'delete'
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'RolloutRequest', method reference 'createOrUpdate', body parameter 'RolloutRequestInner'
-INFORMATION (ResourceParser): Fluent model 'RolloutRequest' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'RolloutRequest', method reference 'createOrUpdate', body parameter 'RolloutRequestInner'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'RolloutRequest', method reference 'delete'
-INFORMATION (ResourceActions): ResourceActions: Fluent model 'RolloutRequest', action methods: [cancel, restart]
-INFORMATION (ResourceCreate): ResourceCreate: Fluent model 'ArtifactSource', method reference 'createOrUpdate', body parameter 'ArtifactSourceInner'
-INFORMATION (ResourceParser): Fluent model 'ArtifactSource' as category RESOURCE_GROUP_AS_PARENT
-INFORMATION (ResourceUpdate): ResourceUpdate: Fluent model 'ArtifactSource', method reference 'createOrUpdate', body parameter 'ArtifactSourceInner'
-INFORMATION (ResourceRefresh): ResourceRefresh: Fluent model 'ArtifactSource', method reference 'getByResourceGroup'
-INFORMATION (ResourceDelete): ResourceDelete: Fluent model 'ArtifactSource', method reference 'delete'
+INFORMATION (FluentMapper): Add Inner to response types: [Operation, DataFlowResource, IntegrationRuntimeConnectionInfo, PipelineRunsQueryResponse, IntegrationRuntimeMonitoringData, PipelineRun, IntegrationRuntimeResource, SelfHostedIntegrationRuntimeNode, LinkedServiceResource, IntegrationRuntimeNodeIpAddress, TriggerResource, IntegrationRuntimeStatusResponse, IntegrationRuntimeAuthKeys, TriggerSubscriptionOperationStatus, GitHubAccessTokenResponse, ExposureControlBatchResponse, SsisObjectMetadataStatusResponse, TriggerRunsQueryResponse, ActivityRunsQueryResponse, PipelineResource, DataFlowDebugCommandResponse, PrivateLinkResourcesWrapper, AddDataFlowToDebugSessionResponse, DatasetResource, Factory, AccessPolicyResponse, SsisObjectMetadataListResponse, DataFlowDebugSessionInfo, CreateDataFlowDebugSessionResponse, PrivateEndpointConnectionResource, ExposureControlResponse, ManagedVirtualNetworkResource, CreateRunResponse, TriggerQueryResponse, ManagedPrivateEndpointResource]
 
 ```
 **stderr**
 ```
 
-ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2efda5c3 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5672056)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2efda5c3 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5672056)
-	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
-	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
-	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalArgumentException: discriminator not found in type ManagedVirtualNetwork and its parents
+java.lang.IllegalArgumentException: discriminator not found in type ManagedVirtualNetwork and its parents
+	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:101)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:165)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:100)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
 	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:137)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:130)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getPathParameters(ResourceOperation.java:150)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh.getGetByIdCollectionMethods(ResourceRefresh.java:95)
-	at com.azure.autorest.fluent.mapper.ResourceParser.lambda$processAdditionalCollectionMethods$8(ResourceParser.java:112)
-	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:271)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalCollectionMethods(ResourceParser.java:113)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalMethods(ResourceParser.java:75)
-	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:59)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:244)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:103)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1078,38 +981,25 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
-FATAL (FluentGen): Unhandled error: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2efda5c3 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5672056)
-java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging values com.azure.autorest.model.clientmodel.ProxyMethodParameter@2efda5c3 and com.azure.autorest.model.clientmodel.ProxyMethodParameter@5672056)
-	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
-	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
-	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+FATAL (FluentGen): Unhandled error: discriminator not found in type ManagedVirtualNetwork and its parents
+java.lang.IllegalArgumentException: discriminator not found in type ManagedVirtualNetwork and its parents
+	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:101)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:165)
+	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:100)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
 	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:137)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getParametersByLocation(ResourceOperation.java:130)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation.getPathParameters(ResourceOperation.java:150)
-	at com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh.getGetByIdCollectionMethods(ResourceRefresh.java:95)
-	at com.azure.autorest.fluent.mapper.ResourceParser.lambda$processAdditionalCollectionMethods$8(ResourceParser.java:112)
-	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:271)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalCollectionMethods(ResourceParser.java:113)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-	at com.azure.autorest.fluent.mapper.ResourceParser.processAdditionalMethods(ResourceParser.java:75)
-	at com.azure.autorest.fluent.mapper.FluentMapper.map(FluentMapper.java:59)
-	at com.azure.autorest.fluent.FluentGen.handleFluentLite(FluentGen.java:244)
-	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:92)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:103)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
 	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
 	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
 	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
@@ -1118,7 +1008,7 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
   Error: Plugin fluentgen reported failure.
 
@@ -1130,90 +1020,90 @@ java.lang.IllegalStateException: Duplicate key subscriptionId (attempted merging
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Location' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Location' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LocationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LocationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Error' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'LocationCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'LocationCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GroupsCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GroupsCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GroupItem' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GroupItem' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'GroupProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'GroupProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Application' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Application' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ApplicationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IOSMAMPolicyCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IOSMAMPolicyCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicy' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicy' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicy' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicy' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppIdOrGroupIdPayload' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppIdOrGroupIdPayload' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppOrGroupIdProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyAppOrGroupIdProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MAMPolicyProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicyProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'iOSMAMPolicyProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AndroidMAMPolicyProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DeviceCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DeviceCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Device' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Device' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DeviceProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DeviceProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResultProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WipeDeviceOperationResultProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationResult' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationResultProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'operationMetadataProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'operationMetadataProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'StatusesDefault' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'StatusesDefault' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'StatusesProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'StatusesProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUser' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUser' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedUserProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppCollection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledApp' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledApp' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppError' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'FlaggedEnrolledAppError' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 INFORMATION (FluentNamer): Load fluent settings
@@ -1276,7 +1166,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [Device, FlaggedUser, IOsmamPolicy, GroupItem, AndroidMamPolicy, Application, FlaggedEnrolledApp, WipeDeviceOperationResult, Location, OperationResult]
+INFORMATION (FluentMapper): Add Inner to response types: [WipeDeviceOperationResult, AndroidMamPolicy, IOsmamPolicy, Application, Location, FlaggedUser, Device, OperationResult, GroupItem, FlaggedEnrolledApp]
 
 ```
 **stderr**
@@ -1286,7 +1176,7 @@ ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.Illegal
 java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not found among properties of client model StatusesDefault
 	at com.azure.autorest.mapper.ClientMethodMapper.map(ClientMethodMapper.java:87)
 	at com.azure.autorest.mapper.MethodGroupMapper.map(MethodGroupMapper.java:115)
-	at com.azure.autorest.mapper.ServiceClientMapper.map(ServiceClientMapper.java:88)
+	at com.azure.autorest.mapper.ServiceClientMapper.map(ServiceClientMapper.java:93)
 	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:119)
 	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
 	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
@@ -1298,13 +1188,13 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
 FATAL (FluentGen): Unhandled error: [JavaCheck/SchemaError] item name value not found among properties of client model StatusesDefault
 java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not found among properties of client model StatusesDefault
 	at com.azure.autorest.mapper.ClientMethodMapper.map(ClientMethodMapper.java:87)
 	at com.azure.autorest.mapper.MethodGroupMapper.map(MethodGroupMapper.java:115)
-	at com.azure.autorest.mapper.ServiceClientMapper.map(ServiceClientMapper.java:88)
+	at com.azure.autorest.mapper.ServiceClientMapper.map(ServiceClientMapper.java:93)
 	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:119)
 	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
 	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
@@ -1316,7 +1206,7 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
   Error: Plugin fluentgen reported failure.
 
@@ -1328,14 +1218,14 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -1348,260 +1238,232 @@ Use --help to get help information.
 </details>
 
 <details>
-<summary>migrate</summary>
+<summary>policyinsights</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
-[Exception] No input files provided.
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
-Use --help to get help information.
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyTrackedResourcesQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeploymentsListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeployment' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Remediation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationFilters' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeploymentSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyEventsQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyStatesQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SummarizeResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SummaryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceDetail' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyAssignmentSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyDefinitionSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyGroupSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperationsListResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Operation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadata' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataSlimProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SlimPolicyMetadata' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResourceDetails' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PendingField' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResult-contentEvaluationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'FieldRestrictions' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'FieldRestriction' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyEvaluationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'PolicyReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AttestationListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Attestation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AttestationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AttestationEvidence' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+
+WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ErrorResponse -- properties.error.$ref: undefined => "#/components/schemas/schemas:283" 
+
+WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ErrorDefinition -- properties.details.$ref: undefined => "#/components/schemas/schemas:287" 
+
+WARNING (Modeler/MissingType): The schema 'TypedErrorInfo-info' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-07-01/remediations.json#/components/schemas/TypedErrorInfo-info
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json#/components/schemas/TypedErrorInfo-info
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2021-01-01/attestations.json#/components/schemas/TypedErrorInfo-info
+
+WARNING (Modeler/MissingType): The schema 'components·1twbxlw·schemas·policyevent·additionalproperties' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json#/components/schemas/components·1twbxlw·schemas·policyevent·additionalproperties
+
+WARNING (Modeler/MissingType): The schema 'components·nwpyyh·schemas·componenteventdetails·additionalproperties' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json#/components/schemas/components·nwpyyh·schemas·componenteventdetails·additionalproperties
+
+WARNING (Modeler/MissingType): The schema 'components·1yhb3ub·schemas·policystate·additionalproperties' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json#/components/schemas/components·1yhb3ub·schemas·policystate·additionalproperties
+
+WARNING (Modeler/MissingType): The schema 'components·hezmy5·schemas·componentstatedetails·additionalproperties' has no type or format information whatsoever. Location:
+   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json#/components/schemas/components·hezmy5·schemas·componentstatedetails·additionalproperties
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated'
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorDefinition' -> 'ErrorDefinitionAutoGenerated'
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated2'
+
+WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorDefinition' -> 'ErrorDefinitionAutoGenerated2'
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
 
 ```
 **stderr**
 ```
 
+ERROR (FluentNamer): Failed to successfully run fluentnamer plugin.
+java.lang.NullPointerException
+	at com.azure.autorest.preprocessor.tranformer.Transformer.addPagingNextOperation(Transformer.java:293)
+	at com.azure.autorest.preprocessor.tranformer.Transformer.transformOperationGroups(Transformer.java:123)
+	at com.azure.autorest.preprocessor.tranformer.Transformer.transform(Transformer.java:43)
+	at com.azure.autorest.fluentnamer.FluentNamer.transform(FluentNamer.java:125)
+	at com.azure.autorest.fluentnamer.FluentNamer.processInternal(FluentNamer.java:62)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluentnamer.Main.lambda$main$1(Main.java:19)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+  Error: Plugin fluentnamer reported failure.
+
 ```
 </details>
 
 <details>
-<summary>privatedns</summary>
+<summary>purview</summary>
 
 **stdout**
 ```
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] -----< com.azure.resourcemanager:azure-resourcemanager-privatedns >-----
-[INFO] Building Microsoft Azure SDK for PrivateDns Management 1.0.0-beta.1
+[INFO] ------< com.azure.resourcemanager:azure-resourcemanager-purview >-------
+[INFO] Building Microsoft Azure SDK for Purview Management 1.0.0-beta.1
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-privatedns ---
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-purview ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/resources
+[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/resources
 [INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-privatedns ---
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-purview ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 54 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/target/classes
-[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] Compiling 83 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/target/classes
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[284,20] method createOrUpdate(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[312,30] method createOrUpdateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[337,20] method update(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[362,30] method updateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[384,10] method delete(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[403,20] method deleteWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[424,20] method get(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[441,30] method getWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[460,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[479,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[498,35] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[516,35] method list(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[535,20] method createOrUpdate(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[563,30] method createOrUpdateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[588,20] method update(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[613,30] method updateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[635,10] method delete(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[654,20] method deleteWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[675,20] method get(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[692,30] method getWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[711,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[730,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[749,35] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[767,35] method list(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[436,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[463,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[490,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[511,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[536,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[561,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[585,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[609,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[629,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[652,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[676,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[696,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[718,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[733,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[751,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[770,29] method get(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[785,39] method getWithResponse(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[799,44] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[815,44] method list(java.lang.String,java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[836,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[863,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[890,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[911,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[936,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[961,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[985,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1009,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1029,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1052,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1076,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1096,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1118,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1133,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1151,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1170,29] method get(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1185,39] method getWithResponse(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1199,44] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1215,44] method list(java.lang.String,java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[588,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[605,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[621,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[634,10] method delete(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[650,10] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[664,35] method get(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[679,45] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[690,50] method list() is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[703,50] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[715,50] method listByResourceGroup(java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[729,50] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[950,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[967,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[983,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[996,10] method delete(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1012,10] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1026,36] method get(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1041,46] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1052,51] method list() is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1065,51] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1077,51] method listByResourceGroup(java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1091,51] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[91,17] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[95,17] method delete(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[99,17] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[103,37] method get(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[112,47] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[127,52] method list() is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[132,52] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[137,52] method listByResourceGroup(java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[143,52] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[150,17] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[154,17] method delete(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[158,17] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[162,38] method get(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[171,48] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[186,53] method list() is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[191,53] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[INFO] 100 errors 
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[14,56] cannot inherit from final com.azure.core.management.SystemData
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[22,5] method does not override or implement a method from a supertype
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[24,14] cannot find symbol
+  symbol: method validate()
+[INFO] 3 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.213 s
-[INFO] Finished at: 2021-04-05T19:07:39Z
+[INFO] Total time:  3.453 s
+[INFO] Finished at: 2021-06-03T19:45:42Z
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-privatedns: Compilation failure: Compilation failure: 
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[284,20] method createOrUpdate(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[312,30] method createOrUpdateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[337,20] method update(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[362,30] method updateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[384,10] method delete(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[403,20] method deleteWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[424,20] method get(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[441,30] method getWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[460,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[479,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[498,35] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[516,35] method list(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[535,20] method createOrUpdate(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[563,30] method createOrUpdateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[588,20] method update(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[613,30] method updateWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.RecordSetInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[635,10] method delete(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[654,20] method deleteWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[675,20] method get(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[692,30] method getWithResponse(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[711,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[730,35] method listByType(java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.models.RecordType,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[749,35] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/RecordSetsClient.java:[767,35] method list(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.RecordSetsClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[436,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[463,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[490,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[511,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[536,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[561,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[585,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[609,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[629,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[652,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[676,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[696,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[718,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[733,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[751,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[770,29] method get(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[785,39] method getWithResponse(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[799,44] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[815,44] method list(java.lang.String,java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[836,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[863,78] method beginCreateOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[890,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[911,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[936,29] method createOrUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[961,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[985,78] method beginUpdate(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1009,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1029,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1052,29] method update(java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.privatedns.fluent.models.VirtualNetworkLinkInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1076,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1096,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1118,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1133,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1151,10] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1170,29] method get(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1185,39] method getWithResponse(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1199,44] method list(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/VirtualNetworkLinksClient.java:[1215,44] method list(java.lang.String,java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.VirtualNetworkLinksClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[588,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[605,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[621,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[634,10] method delete(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[650,10] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[664,35] method get(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[679,45] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[690,50] method list() is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[703,50] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[715,50] method listByResourceGroup(java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[729,50] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[950,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[967,40] method beginDelete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[983,10] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[996,10] method delete(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1012,10] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1026,36] method get(java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1041,46] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1052,51] method list() is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1065,51] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1077,51] method listByResourceGroup(java.lang.String) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/fluent/PrivateZonesClient.java:[1091,51] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.privatedns.fluent.PrivateZonesClient
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[91,17] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[95,17] method delete(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[99,17] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[103,37] method get(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[112,47] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[127,52] method list() is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[132,52] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[137,52] method listByResourceGroup(java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[143,52] method listByResourceGroup(java.lang.String,java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[150,17] method delete(java.lang.String,java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[154,17] method delete(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[158,17] method delete(java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[162,38] method get(java.lang.String,java.lang.String) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[171,48] method getWithResponse(java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[186,53] method list() is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
-[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-privatedns/src/main/java/com/azure/resourcemanager/privatedns/implementation/PrivateZonesImpl.java:[191,53] method list(java.lang.Integer,com.azure.core.util.Context) is already defined in class com.azure.resourcemanager.privatedns.implementation.PrivateZonesImpl
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-purview: Compilation failure: Compilation failure: 
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[14,56] cannot inherit from final com.azure.core.management.SystemData
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[22,5] method does not override or implement a method from a supertype
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-purview/src/main/java/com/azure/resourcemanager/purview/models/AccountPropertiesSystemData.java:[24,14] cannot find symbol
+[ERROR]   symbol: method validate()
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -1618,18 +1480,143 @@ Use --help to get help information.
 </details>
 
 <details>
-<summary>resources</summary>
+<summary>reservations</summary>
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceName' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QuotaLimits' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'QuotaLimitsResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+
+WARNING (Modeler/MissingType): The enum schema 'ResourceType' with an undefined type and enum values is ambigious. This has been auto-corrected to 'type:string'
+
+WARNING (Modeler/MissingType): The enum schema 'QuotaRequestState' with an undefined type and enum values is ambigious. This has been auto-corrected to 'type:string'
+INFORMATION (FluentNamer): Load fluent settings
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentNamer): Transform code model
+INFORMATION (FluentTransformer): Rename ungrouped operation group to 'ResourceProvider'
+INFORMATION (SchemaNameNormalization): Override response header, from 'ETag' to 'Etag'
+INFORMATION (SchemaNameNormalization): Override response header, from 'ETag' to 'Etag'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'ReservationOrderResponse'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'ReservationResponse'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'QuotaRequestOneResourceSubmitResponse'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'QuotaRequestDetails'
+INFORMATION (ResourceTypeNormalization): Add parent ProxyResource, for 'QuotaRequestSubmitResponse'
+INFORMATION (ErrorTypeNormalization): Rename error from 'Error' to 'ManagementError'
+INFORMATION (ErrorTypeNormalization): Rename error from 'ExceptionResponse' to 'ManagementError'
+INFORMATION (SchemaCleanup): Remove unused object schema 'ManagementError'
+INFORMATION (SchemaCleanup): Remove unused object schema 'ManagementError'
+INFORMATION (SchemaCleanup): Remove unused object schema 'ServiceErrorDetail'
+INFORMATION (SchemaCleanup): Remove unused object schema 'QuotaLimitsResponse'
+INFORMATION (SchemaCleanup): Remove unused object schema 'CreateGenericQuotaRequestParameters'
+INFORMATION (SchemaCleanup): Remove unused object schema 'QuotaRequestSubmitResponse'
+INFORMATION (SchemaCleanup): Remove unused choice schema 'ErrorResponseCode'
+INFORMATION (FluentGen): Read YAML
+INFORMATION (FluentJavaSettings): Option, string, add-inner : null
+INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
+INFORMATION (FluentJavaSettings): Option, string, rename-model : null
+INFORMATION (FluentJavaSettings): Option, string, remove-model : null
+INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
+INFORMATION (FluentJavaSettings): Option, string, pom-file : null
+INFORMATION (FluentJavaSettings): Option, string, package-version : null
+INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
+INFORMATION (FluentGen): Map code model to client model
+INFORMATION (FluentMapper): Add Inner to response types: [CalculatePriceResponse, Catalog, QuotaRequestOneResourceSubmitResponse, ExchangeOperationResultResponse, AppliedReservations, ReservationOrderResponse, QuotaRequestDetails, AvailableScopeProperties, CurrentQuotaLimitBase, OperationResponse, CalculateExchangeOperationResultResponse, QuotaRequestSubmitResponse201, ReservationResponse]
+
+```
+**stderr**
+```
+
+ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.azure.autorest.mapper.ChoiceMapper.lambda$map$0(ChoiceMapper.java:64)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.ReduceOps$5.evaluateSequential(ReduceOps.java:257)
+	at java.base/java.util.stream.ReduceOps$5.evaluateSequential(ReduceOps.java:248)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.count(ReferencePipeline.java:605)
+	at com.azure.autorest.mapper.ChoiceMapper.map(ChoiceMapper.java:64)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:60)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+FATAL (FluentGen): Unhandled error: null
+java.lang.NullPointerException
+	at com.azure.autorest.mapper.ChoiceMapper.lambda$map$0(ChoiceMapper.java:64)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.ReduceOps$5.evaluateSequential(ReduceOps.java:257)
+	at java.base/java.util.stream.ReduceOps$5.evaluateSequential(ReduceOps.java:248)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.count(ReferencePipeline.java:605)
+	at com.azure.autorest.mapper.ChoiceMapper.map(ChoiceMapper.java:64)
+	at com.azure.autorest.mapper.ClientMapper.map(ClientMapper.java:60)
+	at com.azure.autorest.fluent.FluentGen.handleMap(FluentGen.java:145)
+	at com.azure.autorest.fluent.FluentGen.processInternal(FluentGen.java:86)
+	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:202)
+	at com.azure.autorest.fluent.Main.lambda$main$1(Main.java:18)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
+	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+  Error: Plugin fluentgen reported failure.
+
+```
+</details>
+
+<details>
+<summary>resources</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 [Exception] No input files provided.
 
 Use --help to get help information.
@@ -1646,64 +1633,70 @@ Use --help to get help information.
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceResultList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceResultList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'PricingList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PricingList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedThreatProtectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AdvancedThreatProtectionProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TagsResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TagsResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionsList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionsList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelProperties-devicesMetricsItem' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelProperties-devicesMetricsItem' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecuritySolutionAnalyticsModelList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedAlertList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedAlertList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedRecommendationList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedRecommendationList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedAlertProperties-topDevicesListItem' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IoTSecurityAggregatedAlertProperties-topDevicesListItem' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'TagsResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'TagsResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'WorkspaceSettingList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'WorkspaceSettingList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceStandardList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceStandardList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceControlList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceControlList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceAssessmentList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'RegulatoryComplianceAssessmentList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AutomationList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AutomationList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'Rule' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Rule' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'EffectiveNetworkSecurityGroups' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'EffectiveNetworkSecurityGroups' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardeningProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardeningProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardening' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardening' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardeningsList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'AdaptiveNetworkHardeningsList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ExternalSecuritySolutionList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ExternalSecuritySolutionList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'DeviceList' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'DeviceList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorAdditionalInfo' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'IngestionSettingList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionStrings' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SoftwareProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ErrorAdditionalInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -1760,6 +1753,7 @@ INFORMATION (OperationNameNormalization): Rename operation from 'get' to 'getByR
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[list]', in operation group 'AssessmentsMetadata'
 
 WARNING (OperationNameNormalization): Conflict operation name found after attempted rename '[list]', in operation group 'SecureScoreControlDefinitions'
+INFORMATION (OperationNameNormalization): Rename operation from 'listBySubscription' to 'list', in operation group 'SoftwareInventories'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'ComplianceResult'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Pricing'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Setting'
@@ -1814,6 +1808,8 @@ INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'Proxy
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IotAlertModel'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IotRecommendationModel'
 INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Alert'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'IngestionSetting'
+INFORMATION (ResourceTypeNormalization): Change parent from 'Resource' to 'ProxyResource', for 'Software'
 INFORMATION (ErrorTypeNormalization): Rename error from 'CloudError' to 'ManagementError'
 INFORMATION (SchemaCleanup): Remove unused object schema 'Resource'
 INFORMATION (SchemaCleanup): Remove unused object schema 'SecureScoreControlScore'
@@ -1828,7 +1824,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [AdaptiveApplicationControlGroups, ComplianceResult, TopologyResource, Device, ScanResult, AdvancedThreatProtectionSetting, IoTSecuritySolutionAnalyticsModelList, ConnectorSetting, IoTSecuritySolutionAnalyticsModel, AlertsSuppressionRule, IotAlert, IotDefenderSettingsList, ScanResults, IotSensorsModel, Compliance, AutomationValidationStatus, IoTSecuritySolutionModel, ServerVulnerabilityAssessmentsList, RegulatoryComplianceControl, RegulatoryComplianceAssessment, SecuritySolutionsReferenceDataList, SecurityContact, WorkspaceSetting, Automation, RulesResults, AutoProvisioningSetting, DeviceSecurityGroup, SecurityAssessmentMetadata, AdaptiveNetworkHardening, OnPremiseIotSensorsList, Operation, RegulatoryComplianceStandard, IotAlertType, RuleResults, IotRecommendationType, SecurityTask, SecuritySubAssessment, AllowedConnectionsResource, SecuritySolution, IoTSecurityAggregatedRecommendation, IotRecommendation, ExternalSecuritySolution, PackageDownloads, Pricing, JitNetworkAccessRequest, OnPremiseIotSensor, IoTSecurityAggregatedAlert, AscLocation, IotRecommendationModel, ServerVulnerabilityAssessment, SecureScoreControlDefinitionItem, IotSensorsList, IotAlertTypeList, IotAlertModel, JitNetworkAccessPolicy, DiscoveredSecuritySolution, SecureScoreItem, IotRecommendationTypeList, AdaptiveApplicationControlGroup, SecureScoreControlDetails, Alert, PricingList, Scans, Scan, IotDefenderSettingsModel, IotSitesModel, Setting, IotSitesList, SecurityAssessment, InformationProtectionPolicy]
+INFORMATION (FluentMapper): Add Inner to response types: [IotSensorsList, IotAlertModel, AlertsSuppressionRule, Software, IoTSecurityAggregatedRecommendation, ConnectionStrings, Compliance, PricingList, AdvancedThreatProtectionSetting, Automation, RegulatoryComplianceAssessment, AdaptiveNetworkHardening, ConnectorSetting, IoTSecuritySolutionAnalyticsModel, RegulatoryComplianceControl, ServerVulnerabilityAssessmentsList, OnPremiseIotSensor, SecurityTask, InformationProtectionPolicy, ComplianceResult, RulesResults, OnPremiseIotSensorsList, Scans, ExternalSecuritySolution, IotRecommendation, SecurityAssessmentMetadata, PackageDownloads, Alert, SecurityAssessment, AllowedConnectionsResource, RuleResults, SecuritySolutionsReferenceDataList, IngestionSetting, IotRecommendationType, AscLocation, JitNetworkAccessRequest, IngestionSettingToken, IotSitesList, AdaptiveApplicationControlGroup, SecuritySubAssessment, Device, ScanResult, IotDefenderSettingsList, IoTSecurityAggregatedAlert, AutomationValidationStatus, IotSensorsModel, Operation, IotAlertTypeList, IotAlert, JitNetworkAccessPolicy, ServerVulnerabilityAssessment, IotDefenderSettingsModel, Pricing, DiscoveredSecuritySolution, DeviceSecurityGroup, SecurityContact, IotRecommendationTypeList, IotAlertType, WorkspaceSetting, IotSitesModel, SecureScoreItem, IoTSecuritySolutionModel, Setting, IotRecommendationModel, SecuritySolution, TopologyResource, SecureScoreControlDetails, AutoProvisioningSetting, RegulatoryComplianceStandard, AdaptiveApplicationControlGroups, ScanResults, IoTSecuritySolutionAnalyticsModelList, Scan, SecureScoreControlDefinitionItem]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1838,8 +1834,8 @@ INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem
 ERROR (FluentGen): Failed to successfully run fluentgen plugin java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:101)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:165)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:181)
 	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:100)
 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
 	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
@@ -1861,13 +1857,13 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
 FATAL (FluentGen): Unhandled error: discriminator not found in type ExternalSecuritySolution and its parents
 java.lang.IllegalArgumentException: discriminator not found in type ExternalSecuritySolution and its parents
 	at com.azure.autorest.util.SchemaUtil.getDiscriminatorSerializedName(SchemaUtil.java:101)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:166)
-	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:182)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:165)
+	at com.azure.autorest.mapper.ModelMapper.map(ModelMapper.java:181)
 	at com.azure.autorest.mapper.ClientMapper.lambda$map$5(ClientMapper.java:100)
 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
 	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:175)
@@ -1889,7 +1885,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
+	at java.base/java.lang.Thread.run(Thread.java:829)
 
   Error: Plugin fluentgen reported failure.
 
@@ -1901,7 +1897,7 @@ java.lang.IllegalArgumentException: discriminator not found in type ExternalSecu
 
 **stdout**
 ```
-AutoRest code generation utility [cli version: 3.1.4; node: v14.16.0, max-memory: 2048 MB]
+AutoRest code generation utility [cli version: 3.2.1; node: v14.17.0, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
    Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
@@ -1909,110 +1905,110 @@ INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/w
 INFORMATION: > Installing AutoRest extension 'oav' (~0.4.20)
 INFORMATION: > Installed AutoRest extension 'oav' (~0.4.20->0.4.70)
 INFORMATION: > Installing AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5)
-INFORMATION: > Installed AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5->1.1.6)
+INFORMATION: > Installed AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5->1.1.8)
 INFORMATION: > Installing AutoRest extension '@microsoft.azure/openapi-validator' (~1.7.0)
 INFORMATION: > Installed AutoRest extension '@microsoft.azure/openapi-validator' (~1.7.0->1.7.0)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
-INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.17.1->4.17.1)
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ResourceReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PortReference' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineReferenceWithHints' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CoreResource' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Machine' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Process' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Port' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroup' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupMember' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroup' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachinesSummary' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Relationship' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Connection' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Acceptor' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RelationshipProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AcceptorProperties' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Ipv4NetworkInterface' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Ipv6NetworkInterface' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'NetworkConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AgentConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Timezone' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperatingSystemConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineResourcesConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'VirtualMachineConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'HypervisorConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
 
-WARNING (PreCheck/SchemaMissingType): The schema 'HostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
 WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureHostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureCloudServiceConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ResourceReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureVmScaleSetConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureServiceFabricClusterConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ImageConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'PortReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessUser' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineReferenceWithHints' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessDetails' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupReference' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostedService' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'CoreResource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Machine' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'AzureProcessHostingConfiguration' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Process' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'SingleMachineDependencyMapRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'Port' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MultipleMachinesMapRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroup' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineListMapRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'ClientGroupMember' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
-WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroupMapRequest' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroup' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachinesSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Relationship' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Connection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Acceptor' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'RelationshipProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ConnectionProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AcceptorProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Ipv4NetworkInterface' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Ipv6NetworkInterface' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'NetworkConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AgentConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'Timezone' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'OperatingSystemConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineResourcesConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'VirtualMachineConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'HypervisorConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'HostingConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureHostingConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureCloudServiceConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureVmScaleSetConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureServiceFabricClusterConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ImageConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessUser' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessDetails' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostedService' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'ProcessHostingConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'AzureProcessHostingConfiguration' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'SingleMachineDependencyMapRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MultipleMachinesMapRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineListMapRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
+
+WARNING (PreCheck/SchemaMissingType): The schema 'MachineGroupMapRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
@@ -2029,9 +2025,6 @@ WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention f
 
 WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
-
-WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:2
 
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6937:4
@@ -2056,6 +2049,9 @@ WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-
 
 WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8450:4
+
+WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:2
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7419:4
@@ -2107,7 +2103,7 @@ INFORMATION (FluentJavaSettings): Option, string, pom-file : null
 INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [ClientGroupMember, Process, Port, MapResponse, Connection, MachinesSummary, ClientGroupMembersCount, MachineGroup, Liveness, ClientGroup, Machine]
+INFORMATION (FluentMapper): Add Inner to response types: [Liveness, Connection, Machine, MapResponse, Process, Port, ClientGroupMember, ClientGroup, MachineGroup, MachinesSummary, ClientGroupMembersCount]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -2116,7 +2112,7 @@ INFORMATION (FluentJavaSettings): Option, string, output-folder : /home/runner/w
 INFORMATION (FluentJavaSettings): Option, string, azure-libraries-for-java-folder : null
 INFORMATION (FluentJavaSettings): List of input files : [Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json]
 INFORMATION (FluentGen): Write Java
-INFORMATION (JavaFormatter): Java version: 11.0.10
+INFORMATION (JavaFormatter): Java version: 11.0.11
 INFORMATION (JavaFormatter): Java formatter enabled
 INFORMATION (FluentGen): Write Xml
 INFORMATION (FluentGen): Write Text
@@ -2124,14 +2120,14 @@ INFORMATION (FluentGen): Write Text
 ```
 **stderr**
 ```
+FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:24306) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
+(node:24570) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
     at /home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:3015:19
     at ScheduleNode (/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:1809:33)
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24306) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:24306) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
+(node:24570) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
+(node:24570) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 
 ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is defined without a 200 or 204 error response implementation,please add it.'
     - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6869:4
@@ -2205,8 +2201,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.477 s
-[INFO] Finished at: 2021-04-05T19:18:11Z
+[INFO] Total time:  4.250 s
+[INFO] Finished at: 2021-06-03T19:55:14Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-servicefabric: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-servicefabric/src/main/java/com/azure/resourcemanager/servicefabric/fluent/OperationsClient.java:[45,41] method list() is already defined in interface com.azure.resourcemanager.servicefabric.fluent.OperationsClient
@@ -2379,8 +2375,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.141 s
-[INFO] Finished at: 2021-04-05T19:19:51Z
+[INFO] Total time:  3.175 s
+[INFO] Finished at: 2021-06-03T19:56:38Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-softwareplan: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsImpl.java:[72,49] method list(java.lang.String) is already defined in class com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsImpl
@@ -2473,6 +2469,75 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsClientImpl.java:[157,52] method update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.resourcemanager.softwareplan.fluent.models.HybridUseBenefitModelInner,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsClientImpl.HybridUseBenefitsService
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsClientImpl.java:[170,52] method get(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsClientImpl.HybridUseBenefitsService
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsClientImpl.java:[182,30] method delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.azure.core.util.Context) is already defined in interface com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsClientImpl.HybridUseBenefitsService
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+```
+**stderr**
+```
+
+```
+</details>
+
+<details>
+<summary>visualstudio</summary>
+
+**stdout**
+```
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.azure.resourcemanager:azure-resourcemanager-visualstudio >----
+[INFO] Building Microsoft Azure SDK for VisualStudio Management 1.0.0-beta.1
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ azure-resourcemanager-visualstudio ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ azure-resourcemanager-visualstudio ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 59 source files to /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[17,5] ',', '}', or ';' expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[17,9] '}' expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[37,19] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[39,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[41,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[50,19] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[52,9] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[55,13] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[58,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[62,12] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[64,5] class, interface, or enum expected
+[INFO] 12 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.951 s
+[INFO] Finished at: 2021-06-03T20:07:44Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-visualstudio: Compilation failure: Compilation failure: 
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[17,5] ',', '}', or ';' expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[17,9] '}' expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[37,19] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[39,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[41,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[50,19] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[52,9] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[55,13] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[58,5] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[62,12] class, interface, or enum expected
+[ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[64,5] class, interface, or enum expected
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

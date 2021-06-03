@@ -48,7 +48,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         JavaSettings settings = JavaSettings.getInstance();
         Map<Request, ProxyMethod> result = new LinkedHashMap<>();
 
-        ProxyMethod.Builder builder = new ProxyMethod.Builder()
+        ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
                 .name(operation.getLanguage().getJava().getName())
                 .isResumable(false);
@@ -63,12 +63,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
         builder.responseBodyType(responseBodyType);
 
-        IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
                 && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
-            returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
-            builder.returnType(GenericType.Mono(returnType));
+            builder.returnType(createBinaryContentAsyncReturnType());
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
@@ -77,7 +75,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-            builder.returnType(GenericType.Mono(clientResponseClassType));
+            builder.returnType(createAsyncResponseReturnType(clientResponseClassType));
         } else {
             IType singleValueType;
             if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
@@ -87,7 +85,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             } else {
                 singleValueType = GenericType.Response(responseBodyType);
             }
-            builder.returnType(GenericType.Mono(singleValueType));
+            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
         }
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
@@ -141,10 +139,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameters.add(proxyMethodParameter);
             }
             if (settings.getAddContextParameter()) {
+                ClassType contextClassType = getContextClass();
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
                         .description("The context to associate with this operation.")
-                        .wireType(ClassType.Context)
-                        .clientType(ClassType.Context)
+                        .wireType(contextClassType)
+                        .clientType(contextClassType)
                         .name("context")
                         .requestParameterLocation(RequestParameterLocation.None)
                         .requestParameterName("context")
@@ -156,7 +155,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .parameterReference("context")
                         .build();
                 parameters.add(contextParameter);
-            }    
+            }
+            appendCallbackParameter(parameters, responseBodyType);
             builder.parameters(parameters);
 
             ProxyMethod proxyMethod = builder.build();
@@ -165,6 +165,35 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             parsed.put(request, proxyMethod);
         }
         return result;
+    }
+
+    protected ClassType getContextClass() {
+        return ClassType.Context;
+    }
+
+    protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
+    }
+
+    protected IType createSingleValueAsyncReturnType(IType singleValueType) {
+        return GenericType.Mono(singleValueType);
+    }
+
+    protected IType createAsyncResponseReturnType(ClassType clientResponseClassType) {
+        return GenericType.Mono(clientResponseClassType);
+    }
+
+    protected IType createStreamContentAsyncReturnType() {
+        IType singleValueType = ClassType.StreamResponse;
+        return GenericType.Mono(singleValueType);
+    }
+
+    protected IType createBinaryContentAsyncReturnType() {
+        IType returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
+        return GenericType.Mono(returnType);
+    }
+
+    protected ProxyMethod.Builder createProxyMethodBuilder() {
+        return new ProxyMethod.Builder();
     }
 
     /**
@@ -244,7 +273,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     .name(exceptionName)
                     .build());
         } else {
-            builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
+            builder.unexpectedResponseExceptionType(getHttpResponseExceptionType());
         }
 
         if (!exceptionTypeMap.isEmpty()) {
@@ -279,5 +308,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         }
 
         return exceptionType;
+    }
+
+    protected ClassType getHttpResponseExceptionType() {
+        return ClassType.HttpResponseException;
     }
 }

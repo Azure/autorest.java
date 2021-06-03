@@ -1,12 +1,12 @@
 package com.azure.autorest.customization;
 
+import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
@@ -14,33 +14,33 @@ import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
 import java.lang.reflect.Modifier;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
+import static com.azure.autorest.customization.implementation.Utils.replaceModifier;
 
 
 /**
- * The Javadoc customization for an AutoRest generated classes and methods.
+ * The method level customization for an AutoRest generated method.
  */
-public final class MethodCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+public final class MethodCustomization extends CodeCustomization {
     private final String packageName;
     private final String className;
     private final String methodName;
-    private String methodSignature;
-    private SymbolInformation symbol;
+    private final String methodSignature;
 
-    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className, String methodName, String methodSignature, SymbolInformation symbol) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+    MethodCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
+        String methodName, String methodSignature, SymbolInformation symbol) {
+        super(editor, languageClient, symbol);
         this.packageName = packageName;
         this.className = className;
         this.methodName = methodName;
         this.methodSignature = methodSignature;
-        this.symbol = symbol;
+    }
+
+    SymbolInformation getSymbol() {
+        return symbol;
     }
 
     /**
@@ -67,8 +67,8 @@ public final class MethodCustomization {
      * @return the Javadoc customization
      */
     public JavadocCustomization getJavadoc() {
-        String packagePath = packageName.replace(".", "/");
-        return new JavadocCustomization(editor, languageClient, packagePath, className, symbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
+            symbol.getLocation().getRange().getStart().getLine());
     }
 
     /**
@@ -79,16 +79,10 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization rename(String newName) {
-        URI fileUri = symbol.getLocation().getUri();
         WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
         Utils.applyWorkspaceEdit(edit, editor, languageClient);
-        Optional<SymbolInformation> newMethodSymbol = languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(newName) && si.getKind() == SymbolKind.METHOD)
-            .findFirst();
-        if (!newMethodSymbol.isPresent()) {
-            throw new IllegalArgumentException("Renamed failed with new method " + newName + " not found.");
-        }
-        return new MethodCustomization(editor, languageClient, packageName, className, newName, methodSignature.replace(methodName + "(", newName + "("), newMethodSymbol.get());
+
+        return refreshCustomization(methodSignature.replace(methodName + "(", newName + "("));
     }
 
     /**
@@ -98,35 +92,7 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization addAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            Position position = editor.insertBlankLine(fileName, line, true);
-            editor.replace(fileName, position, position, annotation);
-
-            FileEvent fileEvent = new FileEvent();
-            fileEvent.setUri(fileUri);
-            fileEvent.setType(FileChangeType.CHANGED);
-            languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-            languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
-                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                .findFirst()
-                .ifPresent(action -> {
-                    if (action.getCommand() instanceof WorkspaceEditCommand) {
-                        ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                    }
-                });
-        }
-        refreshSymbol();
-        return this;
+        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
     }
 
     /**
@@ -136,46 +102,7 @@ public final class MethodCustomization {
      * @return the current method customization for chaining
      */
     public MethodCustomization removeAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        if (editor.getContents().containsKey(fileName)) {
-            int line = symbol.getLocation().getRange().getStart().getLine();
-            int annotationLine = -1;
-            String lineContent = editor.getFileLine(fileName, line);
-            while (!lineContent.trim().isEmpty()) {
-                if (lineContent.trim().startsWith(annotation)) {
-                    annotationLine = line;
-                }
-                lineContent = editor.getFileLine(fileName, --line);
-            }
-            if (annotationLine != -1) {
-                Position start = new Position(annotationLine, 0);
-                Position end = new Position(annotationLine + 1, 0);
-                editor.replace(fileName, start, end, "");
-
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                languageClient.listCodeActions(fileUri, new Range(start, end))
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
-            }
-        }
-        refreshSymbol();
-        return this;
+        return Utils.removeAnnotation(annotation, this, () -> refreshCustomization(methodSignature));
     }
 
     /**
@@ -183,18 +110,58 @@ public final class MethodCustomization {
      * <p>
      * For compound modifiers such as {@code public abstract} use bitwise OR ({@code |}) of multiple Modifiers, {@code
      * Modifier.PUBLIC | Modifier.ABSTRACT}.
+     * <p>
+     * Pass {@code 0} for {@code modifiers} to indicate that the method has no modifiers.
      *
      * @param modifiers The {@link Modifier Modifiers} for the method.
      * @return The updated MethodCustomization object.
-     * @throws IllegalArgumentException If the {@code modifier} is less than or equal to {@code 0} or any {@link
-     * Modifier} included in the bitwise OR isn't a valid method {@link Modifier}.
+     * @throws IllegalArgumentException If the {@code modifier} is less than to {@code 0} or any {@link Modifier}
+     * included in the bitwise OR isn't a valid method {@link Modifier}.
      */
     public MethodCustomization setModifier(int modifiers) {
-        Utils.replaceModifier(symbol, editor, languageClient, (oldLine, newModifiers) ->
-                oldLine.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", newModifiers + "$2 " + methodName + "("),
-            Modifier.methodModifiers(), modifiers);
-        refreshSymbol();
-        return this;
+        replaceModifier(symbol, editor, languageClient, "(?:.+ )?(\\w+ )" + methodName + "\\(",
+            "$1" + methodName + "(", Modifier.methodModifiers(), modifiers);
+
+        return refreshCustomization(methodSignature);
+    }
+
+    /**
+     * Replace the parameters of the method.
+     *
+     * @param newParameters New method parameters.
+     * @return The updated MethodCustomization object.
+     */
+    public MethodCustomization replaceParameters(String newParameters) {
+        return Utils.replaceParameters(newParameters, this,
+            () -> refreshCustomization(String.format("%s(%s)", methodName, newParameters)));
+    }
+
+    /**
+     * Replace the body of the method.
+     *
+     * @param newBody New method body.
+     * @return The updated MethodCustomization object.
+     */
+    public MethodCustomization replaceBody(String newBody) {
+        return Utils.replaceBody(newBody, this, () -> refreshCustomization(methodSignature));
+    }
+
+    /**
+     * Change the return type of a method. The new return type will be automatically imported.
+     *
+     * <p>
+     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
+     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
+     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
+     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
+     * instance of {@code %s}.
+     *
+     * @param newReturnType the simple name of the new return type
+     * @param returnValueFormatter the return value String formatter as described above
+     * @return the current class customization for chaining
+     */
+    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
+        return setReturnType(newReturnType, returnValueFormatter, false);
     }
 
     /**
@@ -215,25 +182,23 @@ public final class MethodCustomization {
      * @return the current class customization for chaining
      */
     public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter, boolean replaceReturnStatement) {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-
         List<TextEdit> edits = new ArrayList<>();
 
         int line = symbol.getLocation().getRange().getStart().getLine();
         Position start = new Position(line, 0);
         String oldLineContent = editor.getFileLine(fileName, line);
         Position end = new Position(line, oldLineContent.length());
-        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(", "$1" + newReturnType + " " + methodName + "(");
+        String newLineContent = oldLineContent.replaceFirst("(\\w.* )?(\\w+) " + methodName + "\\(",
+            "$1" + newReturnType + " " + methodName + "(");
         TextEdit signatureEdit = new TextEdit();
         signatureEdit.setNewText(newLineContent);
         signatureEdit.setRange(new Range(start, end));
         edits.add(signatureEdit);
 
-        String methodIndent = editor.getFileLine(fileName, line).replaceAll("\\w.*$", "");
-        String methodContentIndent = editor.getFileLine(fileName, line + 1).replaceAll("\\w.*$", "");
-        String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "").replaceFirst(methodIndent + "(\\w.* )?", "").trim();
+        String methodIndent = Utils.getIndent(editor.getFileLine(fileName, line));
+        String methodContentIndent = Utils.getIndent(editor.getFileLine(fileName, line + 1));
+        String oldReturnType = oldLineContent.replaceAll(" " + methodName + "\\(.*", "")
+            .replaceFirst(methodIndent + "(\\w.* )?", "").trim();
         int returnLine = -1;
         while (!oldLineContent.startsWith(methodIndent + "}")) {
             if (oldLineContent.contains("return ")) {
@@ -298,40 +263,15 @@ public final class MethodCustomization {
                         Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
                 }
             });
-        methodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
-        refreshSymbol();
-        return this;
+
+        String newMethodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
+
+        return refreshCustomization(newMethodSignature);
     }
 
-    /**
-     * Change the return type of a method. The new return type will be automatically imported.
-     *
-     * <p>
-     * The {@code returnValueFormatter} can be used to transform the return value. If the original return type is {@code
-     * void}, simply pass the new return expression to {@code returnValueFormatter}; if the new return type is {@code
-     * void}, pass {@code null} to {@code returnValueFormatter}; if either the original return type nor the new return
-     * type is {@code void}, the {@code returnValueFormatter} should be a String formatter that contains exactly 1
-     * instance of {@code %s}.
-     *
-     * @param newReturnType the simple name of the new return type
-     * @param returnValueFormatter the return value String formatter as described above
-     * @return the current class customization for chaining
-     */
-    public MethodCustomization setReturnType(String newReturnType, String returnValueFormatter) {
-        return setReturnType(newReturnType, returnValueFormatter, false);
-    }
-
-    private void refreshSymbol() {
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
-        Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().replaceFirst("\\(.*\\)", "").equals(methodName) && si.getKind() == SymbolKind.METHOD)
-            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodSignature))
-            .findFirst();
-        if (!methodSymbol.isPresent()) {
-            throw new IllegalArgumentException("Method " + methodSignature + " does not exist in class " + className);
-        }
-        symbol = methodSymbol.get();
+    private MethodCustomization refreshCustomization(String methodSignature) {
+        return new PackageCustomization(editor, languageClient, packageName)
+            .getClass(className)
+            .getMethod(methodSignature);
     }
 }

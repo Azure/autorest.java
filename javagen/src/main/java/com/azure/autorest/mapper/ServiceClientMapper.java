@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static ServiceClientMapper instance = new ServiceClientMapper();
 
-    private ServiceClientMapper() {
+    protected ServiceClientMapper() {
     }
 
     public static ServiceClientMapper getInstance() {
@@ -41,7 +41,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     public ServiceClient map(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        ServiceClient.Builder builder = new ServiceClient.Builder();
+        ServiceClient.Builder builder = createClientBuilder();
 
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
@@ -63,7 +63,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         Proxy proxy = null;
         if (!codeModelRestAPIMethods.isEmpty()) {
             // TODO: Assume all operations share the same base url
-            Proxy.Builder proxyBuilder = new Proxy.Builder()
+            Proxy.Builder proxyBuilder = getProxyBuilder()
                     .name(serviceClientInterfaceName + "Service")
                     .clientTypeName(serviceClientInterfaceName)
                     .baseURL(codeModel.getOperationGroups().stream()
@@ -138,13 +138,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 }
             }
         }
-        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.HttpPipeline, "httpPipeline", true, null));
-        if (!settings.isLowLevelClient()) {
-            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
-        }
+        addHttpPipelineProperty(serviceClientProperties);
+        addSerializerAdapterProperty(serviceClientProperties, settings);
         if (settings.isFluent()) {
             serviceClientProperties.add(new ServiceClientProperty("The default poll interval for long-running operation.",
                     ClassType.Duration, "defaultPollInterval", true, null));
@@ -169,7 +164,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         ClientMethodParameter httpPipelineParameter = new ClientMethodParameter.Builder()
                 .description("The HTTP pipeline to send requests through")
                 .isFinal(false)
-                .wireType(ClassType.HttpPipeline)
+                .wireType(getHttpPipelineClassType())
                 .name("httpPipeline")
                 .isRequired(true)
                 .isConstant(false)
@@ -180,19 +175,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         : new ArrayList<>())
                 .build();
 
-        ClientMethodParameter serializerAdapterParameter = new ClientMethodParameter.Builder()
-                .description("The serializer to serialize an object into a string")
-                .isFinal(false)
-                .wireType(ClassType.SerializerAdapter)
-                .name("serializerAdapter")
-                .isRequired(true)
-                .isConstant(false)
-                .fromClient(true)
-                .defaultValue(null)
-                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>())
-                .build();
+        ClientMethodParameter serializerAdapterParameter = createSerializerAdapterParameter();
 
         if (settings.getCredentialTypes().contains(JavaSettings.CredentialType.TOKEN_CREDENTIAL)) {
             Set<String> scopes = JavaSettings.getInstance().getCredentialScopes();
@@ -275,5 +258,46 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
 
         return builder.build();
+    }
+
+    protected Proxy.Builder getProxyBuilder() {
+        return new Proxy.Builder();
+    }
+
+    protected ClientMethodParameter createSerializerAdapterParameter() {
+        return  new ClientMethodParameter.Builder()
+                .description("The serializer to serialize an object into a string")
+                .isFinal(false)
+                .wireType(ClassType.SerializerAdapter)
+                .name("serializerAdapter")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                        ? Arrays.asList(ClassType.NonNull)
+                        : new ArrayList<>())
+                .build();
+    }
+
+    protected IType getHttpPipelineClassType() {
+        return ClassType.HttpPipeline;
+    }
+
+    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
+        if (!settings.isLowLevelClient()) {
+            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+        }
+    }
+
+    protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
+        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
+                ClassType.HttpPipeline, "httpPipeline", true, null));
+    }
+
+    protected ServiceClient.Builder createClientBuilder() {
+        return new ServiceClient.Builder();
     }
 }

@@ -322,45 +322,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         //MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
-        // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
         generateJavadoc(clientMethod, typeBlock, restAPIMethod, writingInterface);
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
-                });
+                generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
-
             case PagingAsync:
-//                typeBlock.javadocComment(comment ->
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                        AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                        function.line("return new PagedFlux<>(");
-                        function.indent(() -> {
-                            function.line("() -> %s(%s),",
-                                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                                    clientMethod.getArgumentList());
-                            function.line("nextLink -> %s(%s));",
-                                    clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                                    clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
-                        });
-                    });
-                } else {
-                    writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                        AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                        function.line("return new PagedFlux<>(");
-                        function.indent(() -> {
-                            function.line("() -> %s(%s));",
-                                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                                    clientMethod.getArgumentList());
-                        });
-                    });
-                }
+                generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
             case PagingAsyncSinglePage:
                 generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
@@ -416,56 +385,13 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case Resumable:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
-                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                    function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), parameter.getName()));
-                });
+                generateResumable(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case SimpleSync:
             case SimpleSyncRestResponse:
             case LongRunningSync:
-                String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
-                if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
-                    asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
-                }
-                String effectiveAsyncMethodName = asyncMethodName;
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
-                        function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                                effectiveAsyncMethodName, clientMethod.getArgumentList());
-                        function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
-                            javaBlock.annotation("Override");
-                            javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
-                            javaBlock.annotation("Override");
-                            javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
-                        });
-                        function.methodReturn("new SequenceInputStream(enumeration)");
-                    } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
-                        IType returnType = clientMethod.getReturnValue().getType();
-                        if (returnType instanceof PrimitiveType) {
-                            function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                                    effectiveAsyncMethodName, clientMethod.getArgumentList());
-                            function.ifBlock("value != null", ifAction -> {
-                                ifAction.methodReturn("value");
-                            }).elseBlock(elseAction -> {
-                                if (settings.shouldClientLogger()) {
-                                    elseAction.line("throw logger.logExceptionAsError(new NullPointerException());");
-                                } else {
-                                    elseAction.line("throw new NullPointerException();");
-                                }
-                            });
-                        } else {
-                            function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
-                        }
-                    } else {
-                        function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
-                    }
-                });
+                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case SimpleAsyncRestResponse:
@@ -473,35 +399,127 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 break;
 
             case SimpleAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
-                    function.indent((() -> {
-                        GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
-                        IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.getTypeArguments()[0];
-                        if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
-                            function.text(".flatMapMany(StreamResponse::getValue);");
-                        } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
-                                !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
-                            function.text(".flatMap(");
-                            function.lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
-                                lambda.ifBlock("res.getValue() != null", ifAction -> {
-                                    ifAction.methodReturn("Mono.just(res.getValue())");
-                                }).elseBlock(elseAction -> {
-                                    elseAction.methodReturn("Mono.empty()");
-                                });
-                            });
-                            function.line(");");
-                        } else {
-                            function.text(".flatMap(");
-                            function.lambda(returnValueTypeArgumentClientType.toString(), "res", "Mono.empty()");
-                            function.line(");");
-                        }
-                    }));
-                }));
+                generateSimpleAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
         }
+    }
+
+    protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+        });
+    }
+
+    protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        //                typeBlock.javadocComment(comment ->
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                function.line("return new PagedFlux<>(");
+                function.indent(() -> {
+                    function.line("() -> %s(%s),",
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList());
+                    function.line("nextLink -> %s(%s));",
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
+                });
+            });
+        } else {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                function.line("return new PagedFlux<>(");
+                function.indent(() -> {
+                    function.line("() -> %s(%s));",
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList());
+                });
+            });
+        }
+    }
+
+    protected void generateResumable(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
+            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), parameter.getName()));
+        });
+    }
+
+    protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.indent((() -> {
+                GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
+                IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.getTypeArguments()[0];
+                if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
+                    function.text(".flatMapMany(StreamResponse::getValue);");
+                } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
+                        !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
+                    function.text(".flatMap(");
+                    function.lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
+                        lambda.ifBlock("res.getValue() != null", ifAction -> {
+                            ifAction.methodReturn("Mono.just(res.getValue())");
+                        }).elseBlock(elseAction -> {
+                            elseAction.methodReturn("Mono.empty()");
+                        });
+                    });
+                    function.line(");");
+                } else {
+                    function.text(".flatMap(");
+                    function.lambda(returnValueTypeArgumentClientType.toString(), "res", "Mono.empty()");
+                    function.line(");");
+                }
+            }));
+        }));
+    }
+
+    protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+        if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
+            asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+        }
+        String effectiveAsyncMethodName = asyncMethodName;
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+            AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+                function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
+                        effectiveAsyncMethodName, clientMethod.getArgumentList());
+                function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
+                    javaBlock.annotation("Override");
+                    javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
+                    javaBlock.annotation("Override");
+                    javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
+                });
+                function.methodReturn("new SequenceInputStream(enumeration)");
+            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+                IType returnType = clientMethod.getReturnValue().getType();
+                if (returnType instanceof PrimitiveType) {
+                    function.line("%s value = %s(%s).block();", returnType.asNullable(),
+                            effectiveAsyncMethodName, clientMethod.getArgumentList());
+                    function.ifBlock("value != null", ifAction -> {
+                        ifAction.methodReturn("value");
+                    }).elseBlock(elseAction -> {
+                        if (settings.shouldClientLogger()) {
+                            elseAction.line("throw logger.logExceptionAsError(new NullPointerException());");
+                        } else {
+                            elseAction.line("throw new NullPointerException();");
+                        }
+                    });
+                } else {
+                    function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
+                }
+            } else {
+                function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
+            }
+        });
     }
 
     /**
@@ -513,6 +531,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
      * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
+        // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
         typeBlock.javadocComment(comment -> generateJavadoc(clientMethod, comment, restAPIMethod, useFullClassName));
     }
 
@@ -675,7 +694,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     protected boolean contextInParameters(ClientMethod clientMethod) {
-        return clientMethod.getParameters().stream().anyMatch(param -> ClassType.Context.equals(param.getClientType()));
+        return clientMethod.getParameters().stream().anyMatch(param -> getContextType().equals(param.getClientType()));
+    }
+
+    protected IType getContextType() {
+        return ClassType.Context;
     }
 
     /**

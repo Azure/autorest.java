@@ -104,17 +104,30 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                         String groupId = parts[0];
                         String artifactId = parts[1];
                         String version;
-                        if (parts.length == 3) {
+                        if (parts.length >= 3) {
                             version = parts[2];
                         } else {
                             version = null;
                         }
+                        String scope;
+                        if (parts.length >= 4) {
+                            scope = parts[3];
+                        } else {
+                            scope = null;
+                        }
                         dependenciesBlock.block("dependency", dependencyBlock -> {
+                            boolean externalDependency = !groupId.startsWith("com.azure");
                             dependenciesBlock.tag("groupId", groupId);
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
                                 dependencyBlock.tagWithInlineComment("version", version,
-                                        String.format("{x-version-update;%1$s:%2$s;dependency}", groupId, artifactId));
+                                        String.format("{x-version-update;%1$s:%2$s;%3$s}",
+                                                groupId,
+                                                artifactId,
+                                                externalDependency ? "external_dependency" : "dependency"));
+                            }
+                            if (scope != null) {
+                                dependenciesBlock.tag("scope", scope);
                             }
                         });
                     }

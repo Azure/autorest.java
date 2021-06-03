@@ -101,7 +101,7 @@ To set up customizations, create a Maven project with dependency:
 <dependency>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-customization</artifactId>
-  <version>1.0.0-beta.2</version>
+  <version>1.0.0-beta.4</version>
 </dependency>
 ```
 
@@ -743,12 +743,16 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 #### Javagen
 
-``` yaml $(java) && !$(fluent)
+``` yaml $(java) && !$(fluent) && !$(android)
 use: $(this-folder)/javagen
 ```
 
-``` yaml $(java) && $(fluent)
+``` yaml $(java) && $(fluent) && !$(android)
 use: $(this-folder)/fluentgen
+```
+
+```  yaml $(java) && $(android)
+use: $(this-folder)/androidgen
 ```
 
 #### Help

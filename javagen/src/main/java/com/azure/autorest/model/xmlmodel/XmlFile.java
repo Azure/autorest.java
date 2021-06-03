@@ -7,13 +7,34 @@ public class XmlFile {
     private String FilePath;
     private XmlFileContents Contents;
 
+    public static class Options {
+        private int indent = 4;
+
+        public int getIndent() {
+            return indent;
+        }
+
+        public Options setIndent(int indent) {
+            this.indent = indent;
+            return this;
+        }
+    }
+
     public XmlFile(String filePath) {
-        this(filePath, null);
+        this(filePath, null, null);
+    }
+
+    public XmlFile(String filePath, Options options) {
+        this(filePath, null, options);
     }
 
     public XmlFile(String filePath, String fileContents) {
+        this(filePath, fileContents, null);
+    }
+
+    public XmlFile(String filePath, String fileContents, Options options) {
         FilePath = filePath;
-        Contents = new XmlFileContents(fileContents);
+        Contents = new XmlFileContents(fileContents, options);
     }
 
     public final String getFilePath() {
