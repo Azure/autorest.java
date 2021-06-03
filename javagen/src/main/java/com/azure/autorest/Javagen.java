@@ -174,8 +174,8 @@ public class Javagen extends NewPlugin {
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 try {
-//                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
-                    String formattedSource = javaFile.getContents().toString();
+                    String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
+//                    String formattedSource = javaFile.getContents().toString();
                     writeFile(javaFile.getFilePath(), formattedSource, null);
                 } catch (Exception e) {
                     LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);

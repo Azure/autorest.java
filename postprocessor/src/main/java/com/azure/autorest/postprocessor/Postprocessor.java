@@ -131,7 +131,7 @@ public class Postprocessor extends NewPlugin {
       String formattedSource = javaFile.getValue();
       if (javaFile.getKey().endsWith(".java")) {
         try {
-//          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+          formattedSource = formatter.formatSourceAndFixImports(formattedSource);
         } catch (Exception e) {
           logger.error("Unable to format output file " + javaFile.getKey(), e);
           throw e;
