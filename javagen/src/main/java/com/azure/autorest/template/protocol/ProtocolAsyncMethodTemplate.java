@@ -83,14 +83,14 @@ public class ProtocolAsyncMethodTemplate extends ProtocolMethodBaseTemplate {
                     .collect(Collectors.toList())) {
                 String parameterReference = convertClientTypeToWireType(hostParam, JavaSettings.getInstance());
                 String value = hostParam.getWireType() == ClassType.String? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                methodBlock.line("url = url.replace(\"%s\", %s);", hostParam.getRequestParameterName(), value);
+                methodBlock.line("url = url.replace(\"{%s}\", %s);", hostParam.getRequestParameterName(), value);
             }
             for (ProxyMethodParameter pathParam : clientMethod.getProxyMethod().getParameters()
                     .stream().filter(p -> RequestParameterLocation.Path.equals(p.getRequestParameterLocation()))
                     .collect(Collectors.toList())) {
                 String parameterReference = convertClientTypeToWireType(pathParam, JavaSettings.getInstance());
                 String value = pathParam.getWireType() == ClassType.String? parameterReference : String.format("String.valueOf(%s)", parameterReference);
-                methodBlock.line("url = url.replace(\"%s\", %s);", pathParam.getRequestParameterName(), value);
+                methodBlock.line("url = url.replace(\"{%s}\", %s);", pathParam.getRequestParameterName(), value);
             }
             for (ProxyMethodParameter queryParam : clientMethod.getProxyMethod().getParameters()
                     .stream().filter(p -> p.getIsRequired() && RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
@@ -102,7 +102,7 @@ public class ProtocolAsyncMethodTemplate extends ProtocolMethodBaseTemplate {
                     String parameterReference = convertClientTypeToWireType(queryParam, JavaSettings.getInstance());
                     value = queryParam.getWireType() == ClassType.String ? parameterReference : String.format("String.valueOf(%s)", parameterReference);
                 }
-                methodBlock.line("url = url + (url.contains(\"?\") ? \"&\" : \"?\") + \"%s=\" + value;", queryParam.getRequestParameterName(), value);
+                methodBlock.line("url = url + (url.contains(\"?\") ? \"&\" : \"?\") + \"%s=\" + %s;", queryParam.getRequestParameterName(), value);
             }
             methodBlock.line("HttpRequest request = new HttpRequest(HttpMethod.%s, url);", clientMethod.getProxyMethod().getHttpMethod());
             Set<String> headerParams = new HashSet<>();
