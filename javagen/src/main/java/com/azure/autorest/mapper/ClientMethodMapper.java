@@ -325,7 +325,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
                         .build());
 
-                if (settings.isContextClientMethodParameter()) {
+                if (!settings.isLowLevelClient() && settings.isContextClientMethodParameter()) {
                     addClientMethodWithContext(methods,
                             builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
                             parameters);
@@ -426,7 +426,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .build());
                 }
 
-                if (settings.isContextClientMethodParameter()) {
+                if (!settings.isLowLevelClient() && settings.isContextClientMethodParameter()) {
                     addClientMethodWithContext(methods,
                         builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
                         proxyMethod, parameters,

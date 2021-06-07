@@ -125,6 +125,7 @@ public class JavaSettings
                     host.getBooleanValue("model-override-setter-from-superclass",
                             modelOverrideSetterFromSuperclassDefault),
                     host.getBooleanValue("optional-constant-as-enum", false),
+                    host.getBooleanValue("low-level-client", false),
                     host.getBooleanValue("use-iterable", false));
         }
         return _instance;
@@ -181,6 +182,7 @@ public class JavaSettings
                          String customizationClass,
                          boolean overrideSetterFromSuperclass,
                          boolean optionalConstantAsEnum,
+                         boolean lowLevelClient,
                          boolean useIterable)
     {
         this.azure = azure;
@@ -212,6 +214,7 @@ public class JavaSettings
         this.artifactId = artifactId;
         this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
+        this.lowLevelClient = lowLevelClient;
         this.useIterable = useIterable;
 
         if (credentialType != null) {
@@ -530,6 +533,11 @@ public class JavaSettings
     private final boolean optionalConstantAsEnum;
     public boolean isOptionalConstantAsEnum() {
         return optionalConstantAsEnum;
+    }
+
+    private final boolean lowLevelClient;
+    public boolean isLowLevelClient() {
+        return lowLevelClient;
     }
 
     private final boolean useIterable;

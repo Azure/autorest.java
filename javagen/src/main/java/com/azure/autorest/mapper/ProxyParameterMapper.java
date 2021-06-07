@@ -72,14 +72,27 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             wireType = ClassType.String;
+        } else if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+            wireType = ClassType.String;
         }
         builder.wireType(wireType);
 
-        String parameterDescription = parameter.getDescription();
-        if (parameterDescription == null || parameterDescription.isEmpty()) {
-            parameterDescription = String.format("the %s value", clientType);
+        String description = null;
+        // parameter description
+        if (parameter.getLanguage() != null) {
+            description = parameter.getLanguage().getDefault().getDescription();
         }
-        builder.description(parameterDescription);
+        // fallback to parameter schema description
+        if (description == null || description.isEmpty()) {
+            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
+                description = parameter.getSchema().getLanguage().getDefault().getDescription();
+            }
+        }
+        // fallback to dummy description
+        if (description == null || description.isEmpty()) {
+            description = String.format("The %s parameter", name);
+        }
+        builder.description(description);
 
         if (parameter.getExtensions() != null) {
             builder.alreadyEncoded(parameter.getExtensions().isXmsSkipUrlEncoding());

@@ -61,6 +61,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+        builder.responseBodyType(responseBodyType);
 
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
@@ -122,7 +123,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 requestContentType = request.getProtocol().getHttp().getKnownMediaType().getContentType();
             }
             builder.requestContentType(requestContentType);
-
+            builder.baseURL(request.getProtocol().getHttp().getUri());
             builder.urlPath(request.getProtocol().getHttp().getPath());
             builder.httpMethod(HttpMethod.valueOf(request.getProtocol().getHttp().getMethod().toUpperCase()));
 

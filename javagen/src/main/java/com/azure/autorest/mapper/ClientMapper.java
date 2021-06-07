@@ -23,6 +23,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
@@ -124,7 +125,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -156,7 +157,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-        } else {
+        } else if (!settings.isLowLevelClient()) {
             if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
                 .getImplementationSubpackage().isEmpty()) {
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -168,30 +169,32 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
-            && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
-            // add package-info models package only if the models package is not empty
-            && !clientModels.isEmpty()) {
-            String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-            if (!packageInfos.containsKey(modelsPackage)) {
-                packageInfos.put(modelsPackage, new PackageInfo(
-                    modelsPackage,
-                    String.format("Package containing the data models for %s.\n%s", serviceClientName,
-                        serviceClientDescription)));
+        if (!settings.isLowLevelClient()) {
+            if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
+                    && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
+                    // add package-info models package only if the models package is not empty
+                    && !clientModels.isEmpty()) {
+                String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
+                if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
+                    packageInfos.put(modelsPackage, new PackageInfo(
+                            modelsPackage,
+                            String.format("Package containing the data models for %s.\n%s", serviceClientName,
+                                    serviceClientDescription)));
+                }
             }
-        }
-        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
-            && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
-            String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            if (!packageInfos.containsKey(customTypesPackage)) {
-                packageInfos.put(customTypesPackage, new PackageInfo(
-                    customTypesPackage,
-                    String.format("Package containing classes for %s.\n%s", serviceClientName,
-                        serviceClientDescription)));
+            if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
+                    && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
+                String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                if (!packageInfos.containsKey(customTypesPackage)) {
+                    packageInfos.put(customTypesPackage, new PackageInfo(
+                            customTypesPackage,
+                            String.format("Package containing classes for %s.\n%s", serviceClientName,
+                                    serviceClientDescription)));
+                }
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
-
+        builder.moduleInfo(moduleInfo());
         return builder.build();
     }
 
@@ -290,6 +293,21 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
         builder.bodyType(SchemaUtil.getOperationResponseType(method));
         return builder.build();
+    }
+
+    private static ModuleInfo moduleInfo() {
+        // WARNING: Only tested for low level clients
+        JavaSettings settings = JavaSettings.getInstance();
+        ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
+
+        List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
+        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.experimental", true));
+
+        List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
+        exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+
+        return moduleInfo;
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {

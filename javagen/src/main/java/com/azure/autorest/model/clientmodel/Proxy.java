@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.List;
 import java.util.Set;
 
@@ -65,7 +66,7 @@ public class Proxy {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (includeImplementationImports) {
+        if (includeImplementationImports && !settings.isLowLevelClient()) {
             imports.add("com.azure.core.annotation.Host");
             imports.add("com.azure.core.annotation.ServiceInterface");
         }

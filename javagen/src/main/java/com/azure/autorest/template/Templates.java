@@ -4,6 +4,11 @@
 package com.azure.autorest.template;
 
 
+import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
+
 /**
  * A collection of templates for writing JV models to Java files and contexts.
  */
@@ -85,6 +90,22 @@ public class Templates {
 
     public static ServiceSyncClientTemplate getServiceSyncClientTemplate() {
         return factory.getServiceSynClientTemplate();
+    }
+
+    public static ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate() {
+        return factory.getProtocolAsyncMethodTemplate();
+    }
+
+    public static ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate() {
+        return factory.getProtocolSyncMethodTemplate();
+    }
+
+    public static ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
+        return factory.getLowLevelSyncClientTemplate();
+    }
+
+    public static ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate() {
+        return factory.getLowLevelAsyncClientTemplate();
     }
 
     public static PomTemplate getPomTemplate() {

@@ -82,7 +82,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     }
 
                     ArrayList<String> parameterDeclarationList = new ArrayList<String>();
-                    if (restAPIMethod.getIsResumable()) {
+                    if (restAPIMethod.isResumable()) {
                         interfaceBlock.annotation(String.format("ResumeOperation"));
                     }
 
@@ -125,7 +125,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
 
                             default:
-                                if (!restAPIMethod.getIsResumable() && parameter.getWireType() != ClassType.Context) {
+                                if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
                                     throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());
                                 }
 

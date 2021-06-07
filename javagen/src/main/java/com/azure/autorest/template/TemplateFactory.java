@@ -1,5 +1,10 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
+import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
+
 public interface TemplateFactory {
 
     ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate();
@@ -37,6 +42,14 @@ public interface TemplateFactory {
     ServiceSyncClientTemplate getServiceSynClientTemplate();
 
     WrapperClientMethodTemplate getWrapperClientMethodTemplate();
+
+    ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate();
+
+    ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate();
+
+    ProtocolSyncClientTemplate getLowLevelSyncClientTemplate();
+
+    ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate();
 
     PomTemplate getPomTemplate();
 

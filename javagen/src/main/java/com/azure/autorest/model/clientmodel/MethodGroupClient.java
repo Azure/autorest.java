@@ -135,22 +135,24 @@ public class MethodGroupClient {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
-            imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
-        }
+        if (!settings.isLowLevelClient()) {
+            if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+                imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
+            }
 
-        for (IType type : supportedInterfaces) {
-            type.addImportsTo(imports, false);
-        }
+            for (IType type : supportedInterfaces) {
+                type.addImportsTo(imports, false);
+            }
 
         if (includeImplementationImports) {
             //ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
             ClassType proxyType = getProxyClassType();
             imports.add(proxyType.getFullName());
 
-            if (settings.shouldGenerateClientInterfaces()) {
-                String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-                imports.add(String.format("%1$s.%2$s", interfacePackage, this.getInterfaceName()));
+                if (settings.shouldGenerateClientInterfaces()) {
+                    String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
+                    imports.add(String.format("%1$s.%2$s", interfacePackage, this.getInterfaceName()));
+                }
             }
         }
 

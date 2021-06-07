@@ -1,6 +1,5 @@
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -77,6 +76,18 @@ public class JavaPackage {
     public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
         Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addLowLevelSyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
+        Templates.getLowLevelSyncClientTemplate().write(syncClient, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addLowLevelAsyncClient(String packageKeyWord, AsyncSyncClient syncClient) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
+        Templates.getLowLevelAsyncClientTemplate().write(syncClient, javaFile);
         addJavaFile(javaFile);
     }
 
