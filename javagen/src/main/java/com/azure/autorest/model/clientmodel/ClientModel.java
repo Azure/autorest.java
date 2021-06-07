@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.List;
 import java.util.Set;
 
@@ -181,9 +182,7 @@ public class ClientModel {
             addJsonFlattenAnnotationImport(imports);
         }
 
-        for (String import_Keyword : getImports()) {
-            imports.add(import_Keyword);
-        }
+        imports.addAll(getImports());
 
         if (getIsPolymorphic()) {
             imports.add("com.fasterxml.jackson.annotation.JsonTypeInfo");

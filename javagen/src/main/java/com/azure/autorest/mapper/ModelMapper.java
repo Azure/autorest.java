@@ -160,14 +160,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.description(compositeType.getLanguage().getDefault().getDescription());
             }
 
-            boolean discriminatorNeedEscape = false;
-            if (isPolymorphic) {
-                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
-                discriminatorNeedEscape = discriminatorSerializedName.contains(".");
-                discriminatorSerializedName = discriminatorNeedEscape ? discriminatorSerializedName.replace(".", "\\\\.") : discriminatorSerializedName;
-                builder.polymorphicDiscriminator(discriminatorSerializedName);
-            }
-
             String modelSerializedName = compositeType.getDiscriminatorValue();
             if (modelSerializedName == null && compositeType.getLanguage().getDefault() != null) {
                 modelSerializedName = compositeType.getLanguage().getDefault().getName();
@@ -195,7 +187,20 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            builder.needsFlatten(discriminatorNeedEscape || hasFlattenedProperty(compositeType, parentsNeedFlatten));
+            boolean needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
+            if (isPolymorphic) {
+                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                // OR the need flattening based on the model containing 'x-ms-flattened' and if the discriminator
+                // contains '.' and 'x-ms-flattened' isn't required for flattening.
+                needsFlatten |= (discriminatorSerializedName.contains(".") && !settings.requireXMsFlattenedToFlatten());
+
+                // Only escape the discriminator if the model will be flattened.
+                builder.polymorphicDiscriminator(needsFlatten
+                    ? discriminatorSerializedName.replace(".", "\\\\.")
+                    : discriminatorSerializedName);
+            }
+
+            builder.needsFlatten(needsFlatten);
 
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
