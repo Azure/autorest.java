@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
@@ -192,8 +194,10 @@ public abstract class NewPlugin {
                 .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
         Representer representer = new Representer();
         representer.getPropertyUtils().setSkipMissingProperties(true);
-        Constructor constructor = new CodeModelCustomConstructor();
-        yamlMapper = new Yaml(constructor, representer);
+        LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
+        yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
     }
 
     public boolean process() {
