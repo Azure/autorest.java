@@ -31,7 +31,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'install package'
-          options: '-Dlocal'
+          options: '-Dlocal -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -59,7 +59,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'test'
-          options: '-DtestVanilla -pl vanilla-tests'
+          options: '-DtestVanilla -pl vanilla-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -70,7 +70,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'test'
-          options: '-DtestAzure -pl azure-tests'
+          options: '-DtestAzure -pl azure-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
