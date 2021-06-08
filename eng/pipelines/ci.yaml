@@ -70,7 +70,7 @@ jobs:
         inputs:
           mergeTestResults: true
           testRunTitle: 'vanilla-tests'
-          searchFolder: '$(System.DefaultWorkingDirectory)/autorest.java/vanilla-tests/'
+          searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
         displayName: 'Run azure tests'
@@ -88,7 +88,7 @@ jobs:
         inputs:
           mergeTestResults: true
           testRunTitle: 'azure-tests'
-          searchFolder: '$(System.DefaultWorkingDirectory)/autorest.java/azure-tests/'
+          searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
       - script: |
           cp coverage/* node_modules/@microsoft.azure/autorest.testserver/legacy/coverage/
