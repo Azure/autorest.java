@@ -272,6 +272,32 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-long-running-operation-options".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsLongRunningOperationOptions",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            }
+                        }
+                        value.setValue(actualValues);
+                        break;
+                    }
+                    case "xmsLongRunningOperationOptions": {
+                        MappingNode value = (MappingNode) tuple.getValueNode();
+                        List<NodeTuple> actualValues = new ArrayList<>();
+                        for (NodeTuple extension : value.getValue()) {
+                            ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
+                            if ("final-state-via".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "finalStateVia",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);
