@@ -16,6 +16,8 @@ public class XmsExtensions {
 
     private boolean xmsLongRunningOperation;
 
+    private XmsLongRunningOperationOptions xmsLongRunningOperationOptions;
+
     private boolean xmsFlattened;
 
     private boolean xmsAzureResource;
@@ -112,5 +114,13 @@ public class XmsExtensions {
 
     public void setXmsInternalAutorestAnonymousSchema(XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema) {
         this.xmsInternalAutorestAnonymousSchema = xmsInternalAutorestAnonymousSchema;
+    }
+
+    public XmsLongRunningOperationOptions getXmsLongRunningOperationOptions() {
+        return xmsLongRunningOperationOptions;
+    }
+
+    public void setXmsLongRunningOperationOptions(XmsLongRunningOperationOptions xmsLongRunningOperationOptions) {
+        this.xmsLongRunningOperationOptions = xmsLongRunningOperationOptions;
     }
 }
