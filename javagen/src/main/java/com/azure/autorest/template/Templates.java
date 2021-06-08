@@ -4,10 +4,7 @@
 package com.azure.autorest.template;
 
 
-import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
+import com.azure.autorest.template.protocol.*;
 
 /**
  * A collection of templates for writing JV models to Java files and contexts.
@@ -98,6 +95,10 @@ public class Templates {
 
     public static ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate() {
         return factory.getProtocolSyncMethodTemplate();
+    }
+
+    public static ProtocolAsyncPagingMethodTemplate getProtocolAsyncPagingMethodTemplate() {
+        return factory.getProtocolAsyncPagingMethodTemplate();
     }
 
     public static ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {

@@ -1,9 +1,6 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
+import com.azure.autorest.template.protocol.*;
 
 public class DefaultTemplateFactory implements TemplateFactory {
     @Override
@@ -104,6 +101,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate() {
         return ProtocolSyncMethodTemplate.getInstance();
+    }
+
+    @Override
+    public ProtocolAsyncPagingMethodTemplate getProtocolAsyncPagingMethodTemplate() {
+        return ProtocolAsyncPagingMethodTemplate.getInstance();
     }
 
     @Override

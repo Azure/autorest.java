@@ -1,9 +1,6 @@
 package com.azure.autorest.template;
 
-import com.azure.autorest.template.protocol.ProtocolAsyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolAsyncMethodTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncClientTemplate;
-import com.azure.autorest.template.protocol.ProtocolSyncMethodTemplate;
+import com.azure.autorest.template.protocol.*;
 
 public interface TemplateFactory {
 
@@ -46,6 +43,8 @@ public interface TemplateFactory {
     ProtocolAsyncMethodTemplate getProtocolAsyncMethodTemplate();
 
     ProtocolSyncMethodTemplate getProtocolSyncMethodTemplate();
+
+    ProtocolAsyncPagingMethodTemplate getProtocolAsyncPagingMethodTemplate();
 
     ProtocolSyncClientTemplate getLowLevelSyncClientTemplate();
 
