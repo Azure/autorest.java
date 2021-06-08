@@ -11,7 +11,10 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.slf4j.Logger;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -84,7 +87,9 @@ public class Preprocessor extends NewPlugin {
         }
       }
     };
-    Yaml newYaml  = new Yaml(representer);
+    LoaderOptions loaderOptions = new LoaderOptions();
+    loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+    Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     String output = newYaml.dump(codeModel);
     try {
       File tempFile = new File("code-model-processed-no-tags.yaml");
