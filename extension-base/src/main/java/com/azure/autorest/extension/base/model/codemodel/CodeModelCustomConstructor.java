@@ -1,5 +1,6 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
@@ -14,6 +15,12 @@ import java.util.List;
 public class CodeModelCustomConstructor extends Constructor {
     public CodeModelCustomConstructor() {
         super();
+        yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
+        yamlClassConstructors.put(NodeId.mapping, new TypeMapConstruct());
+    }
+
+    public CodeModelCustomConstructor(LoaderOptions loaderOptions) {
+        super(loaderOptions);
         yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
         yamlClassConstructors.put(NodeId.mapping, new TypeMapConstruct());
     }
@@ -268,6 +275,32 @@ public class CodeModelCustomConstructor extends Constructor {
                                 actualValues.add(new NodeTuple(new ScalarNode(
                                         keyNode.getTag(),
                                         "xmsInternalAutorestAnonymousSchema",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-long-running-operation-options".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsLongRunningOperationOptions",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            }
+                        }
+                        value.setValue(actualValues);
+                        break;
+                    }
+                    case "xmsLongRunningOperationOptions": {
+                        MappingNode value = (MappingNode) tuple.getValueNode();
+                        List<NodeTuple> actualValues = new ArrayList<>();
+                        for (NodeTuple extension : value.getValue()) {
+                            ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
+                            if ("final-state-via".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "finalStateVia",
                                         keyNode.getStartMark(),
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
