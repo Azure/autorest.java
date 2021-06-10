@@ -18,7 +18,7 @@ public class ByteOperationsTests {
     @Test
     public void getNull() {
         byte[] result = client.getByteOperations().getNull();
-        Assert.assertEquals(0, result.length);
+        Assert.assertTrue(result == null || result.length == 0);
     }
 
     @Test

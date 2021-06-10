@@ -1,6 +1,8 @@
 package fixtures.bodyboolean;
 
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.implementation.serializer.MalformedValueException;
+import com.fasterxml.jackson.core.JsonParseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,9 +32,9 @@ public class BoolTests {
         try {
             client.getBools().getInvalid();
             Assert.assertTrue(false);
-        } catch (Exception exception) {
+        } catch (HttpResponseException exception) {
             // expected
-            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
+            Assert.assertTrue(exception.getCause() instanceof JsonParseException);
         }
     }
 
