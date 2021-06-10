@@ -1,6 +1,8 @@
 package fixtures.bodyinteger;
 
+import com.azure.core.exception.HttpResponseException;
 import com.azure.core.implementation.serializer.MalformedValueException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.exc.InputCoercionException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -44,8 +46,9 @@ public class IntOperationsTests {
     try {
       client.getInts().getInvalid();
       Assert.fail();
-    } catch (Exception exception) {
-      Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
+    } catch (HttpResponseException exception) {
+      // expected
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 
@@ -130,8 +133,9 @@ public class IntOperationsTests {
     try {
       client.getInts().getInvalidUnixTime();
       Assert.fail();
-    } catch (RuntimeException e) {
-      Assert.assertTrue(e.getMessage().contains("HTTP response has a malformed body"));
+    } catch (HttpResponseException exception) {
+      // expected
+      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
     }
   }
 
