@@ -23,7 +23,6 @@ import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -31,6 +30,7 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
@@ -103,7 +103,7 @@ public class FluentManagerTemplate {
                 AddDatePolicy.class.getName(),
                 HttpLoggingPolicy.class.getName(),
                 HttpLogOptions.class.getName(),
-                BearerTokenAuthenticationPolicy.class.getName(),
+                ArmChallengeAuthenticationPolicy.class.getName(),
                 UserAgentPolicy.class.getName(),
                 // azure-core-management
                 AzureProfile.class.getName()
