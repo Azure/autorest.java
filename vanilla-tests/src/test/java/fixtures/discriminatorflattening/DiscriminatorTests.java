@@ -10,6 +10,10 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import fixtures.discriminatorflattening.models.MetricAlertResource;
 import fixtures.discriminatorflattening.models.MetricAlertSingleResourceMultipleMetricCriteria;
+import fixtures.discriminatorflattening.models.VirtualMachineScaleSet;
+import fixtures.discriminatorflattening.models.VirtualMachineScaleSetNetworkConfiguration;
+import fixtures.discriminatorflattening.models.VirtualMachineScaleSetNetworkProfile;
+import fixtures.discriminatorflattening.models.VirtualMachineScaleSetVMProfile;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,6 +34,24 @@ public class DiscriminatorTests {
         MetricAlertResource metricAlert2 = adapter.deserialize(metricAlertJson, MetricAlertResource.class, SerializerEncoding.JSON);
         Assert.assertTrue(metricAlert2.getCriteria() instanceof MetricAlertSingleResourceMultipleMetricCriteria);
         Assert.assertTrue(metricAlert2.getCriteria().getAdditionalProperties().containsKey("key.1"));
+    }
+
+    @Test
+    public void serializationOnNestedFlatten() throws IOException {
+        SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
+
+        VirtualMachineScaleSet vmss = new VirtualMachineScaleSet()
+                .setVirtualMachineProfile(new VirtualMachineScaleSetVMProfile()
+                        .setNetworkProfile(new VirtualMachineScaleSetNetworkProfile()
+                                .setNetworkInterfaceConfigurations(Collections.singletonList(new VirtualMachineScaleSetNetworkConfiguration()
+                                        .setName("name").setPrimary(true)))));
+
+        String json = adapter.serialize(vmss, SerializerEncoding.JSON);
+        Assert.assertFalse(json.contains("\"properties."));
+
+        VirtualMachineScaleSet vmss2 = adapter.deserialize(json, VirtualMachineScaleSet.class, SerializerEncoding.JSON);
+        Assert.assertEquals("name", vmss2.getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().getName());
+        Assert.assertTrue(vmss2.getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().isPrimary());
     }
 
     private void verifyODataTypeInJson(String json) {
