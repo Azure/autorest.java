@@ -271,7 +271,7 @@ public class JavaSettings
     public enum Fluent {
         NONE, LITE, PREMIUM
     }
-    private Fluent fluent;
+    private final Fluent fluent;
     public final boolean isFluent()
     {
         return fluent != Fluent.NONE;
@@ -293,7 +293,7 @@ public class JavaSettings
         TYPE, FIELD
     }
     // target for @JsonFlatten annotation for x-ms-client-flatten
-    private ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;
+    private final ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;
     public ClientFlattenAnnotationTarget getClientFlattenAnnotationTarget() {
         return this.clientFlattenAnnotationTarget;
     }
