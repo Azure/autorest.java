@@ -47,7 +47,7 @@ public class DiscriminatorTests {
                                         .setName("name").setPrimary(true)))));
 
         String json = adapter.serialize(vmss, SerializerEncoding.JSON);
-        Assert.assertFalse(json.contains("\"properties."));
+        Assert.assertFalse(json.contains("\"properties.primary\""));
 
         VirtualMachineScaleSet vmss2 = adapter.deserialize(json, VirtualMachineScaleSet.class, SerializerEncoding.JSON);
         Assert.assertEquals("name", vmss2.getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().getName());
