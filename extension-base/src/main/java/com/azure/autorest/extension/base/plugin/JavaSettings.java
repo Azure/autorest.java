@@ -126,7 +126,8 @@ public class JavaSettings
                             modelOverrideSetterFromSuperclassDefault),
                     host.getBooleanValue("optional-constant-as-enum", false),
                     host.getBooleanValue("use-iterable", false),
-                    host.getBooleanValue("require-x-ms-flattened-to-flatten", false));
+                    host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
+                    host.getStringValue("client-flattened-annotation-target", ""));
         }
         return _instance;
     }
@@ -184,7 +185,8 @@ public class JavaSettings
                          boolean overrideSetterFromSuperclass,
                          boolean optionalConstantAsEnum,
                          boolean useIterable,
-                         boolean requireXMsFlattenedToFlatten)
+                         boolean requireXMsFlattenedToFlatten,
+                         String clientFlattenAnnotationTarget)
     {
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -217,6 +219,9 @@ public class JavaSettings
         this.optionalConstantAsEnum = optionalConstantAsEnum;
         this.useIterable = useIterable;
         this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
+        this.clientFlattenAnnotationTarget = (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
+                ? ClientFlattenAnnotationTarget.TYPE
+                : ClientFlattenAnnotationTarget.valueOf(clientFlattenAnnotationTarget.toUpperCase(Locale.ROOT));
 
         if (credentialType != null) {
             String[] splits = credentialType.split(",");
@@ -282,6 +287,15 @@ public class JavaSettings
     public final boolean isAzureOrFluent()
     {
         return isAzure() || isFluent();
+    }
+
+    public enum ClientFlattenAnnotationTarget {
+        TYPE, FIELD
+    }
+    // target for @JsonFlatten annotation for x-ms-client-flatten
+    private ClientFlattenAnnotationTarget clientFlattenAnnotationTarget;
+    public ClientFlattenAnnotationTarget getClientFlattenAnnotationTarget() {
+        return this.clientFlattenAnnotationTarget;
     }
 
     private boolean regeneratePom;
