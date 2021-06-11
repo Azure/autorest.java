@@ -178,7 +178,7 @@ public class ClientModel {
             addImmutableAnnotationImport(imports);
         }
 
-        if (needsFlatten) {
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && needsFlatten) {
             addJsonFlattenAnnotationImport(imports);
         }
 
