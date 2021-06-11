@@ -29,7 +29,7 @@ public class DiscriminatorTests {
 
         MetricAlertResource metricAlert2 = adapter.deserialize(metricAlertJson, MetricAlertResource.class, SerializerEncoding.JSON);
         Assert.assertTrue(metricAlert2.getCriteria() instanceof MetricAlertSingleResourceMultipleMetricCriteria);
-        Assert.assertTrue(((MetricAlertSingleResourceMultipleMetricCriteria) metricAlert2.getCriteria()).getAdditionalProperties().containsKey("key.1"));
+        Assert.assertTrue(metricAlert2.getCriteria().getAdditionalProperties().containsKey("key.1"));
     }
 
     private void verifyODataTypeInJson(String json) {
