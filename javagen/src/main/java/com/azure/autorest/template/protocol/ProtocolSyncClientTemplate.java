@@ -72,6 +72,11 @@ public class ProtocolSyncClientTemplate implements IJavaTemplate<AsyncSyncClient
                 Templates.getProtocolSyncMethodTemplate().write(method, classBlock);
             });
 
+            // PagingSync
+            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingSync).forEach(method -> {
+                Templates.getProtocolSyncPagingMethodTemplate().write(method, classBlock);
+            });
+
             // invoke() method
             String invokeMethodArgs = "String url, HttpMethod httpMethod, BinaryData body, RequestOptions options";
             String invokeMethodArgsInvoke;
