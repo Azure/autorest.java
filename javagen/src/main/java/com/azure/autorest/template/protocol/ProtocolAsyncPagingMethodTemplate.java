@@ -8,6 +8,9 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 
 import java.util.stream.Collectors;
 
+/**
+ * ClientMethodType.PagingAsync
+ */
 public class ProtocolAsyncPagingMethodTemplate extends ProtocolMethodBaseTemplate {
     private static ProtocolAsyncPagingMethodTemplate _instance = new ProtocolAsyncPagingMethodTemplate();
 
@@ -73,34 +76,26 @@ public class ProtocolAsyncPagingMethodTemplate extends ProtocolMethodBaseTemplat
         String methodSignature = String.format("%s %s(%s)", returnType, methodName, methodArgsDeclare);
         typeBlock.method(visibility, null, methodSignature, methodBlock -> {
             // Method body
-
-
-
-        });
-
-        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                function.line("return new PagedFlux<>(");
-                function.indent(() -> {
-                    function.line("() -> %s(%s),",
+            if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                // nextLink exists
+                methodBlock.line("return new PagedFlux<>(");
+                methodBlock.indent(() -> {
+                    methodBlock.line("() -> %s(%s),",
                             clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
                             clientMethod.getArgumentList());
-                    function.line("nextLink -> %s(%s));",
+                    methodBlock.line("nextLink -> %s(%s));",
                             clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
                             clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
                 });
-            });
-        } else {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                function.line("return new PagedFlux<>(");
-                function.indent(() -> {
-                    function.line("() -> %s(%s));",
+            } else {
+                // No nextLink
+                methodBlock.line("return new PagedFlux<>(");
+                methodBlock.indent(() -> {
+                    methodBlock.line("() -> %s(%s));",
                             clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
                             clientMethod.getArgumentList());
                 });
-            });
-        }
+            }
+        });
     }
 }
