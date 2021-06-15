@@ -15,6 +15,7 @@ import fixtures.discriminatorflattening.models.VirtualMachineScaleSetNetworkConf
 import fixtures.discriminatorflattening.models.VirtualMachineScaleSetNetworkProfile;
 import fixtures.discriminatorflattening.models.VirtualMachineScaleSetVMProfile;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class DiscriminatorTests {
     }
 
     @Test
+    @Ignore("bug in 1.17.0 azure-core")
     public void serializationOnNestedFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
