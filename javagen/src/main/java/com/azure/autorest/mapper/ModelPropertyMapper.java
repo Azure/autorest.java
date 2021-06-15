@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
@@ -26,6 +27,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
     @Override
     public ClientModelProperty map(Property property) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         ClientModelProperty.Builder builder = new ClientModelProperty.Builder()
                 .name(property.getLanguage().getJava().getName())
                 .isRequired(property.isRequired())
@@ -38,14 +41,19 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         boolean flattened = false;
-        if (property.getParentSchema() != null) {
-            flattened = property.getParentSchema().getProperties().stream()
-                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
-            if (!flattened) {
-                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
-                flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+            if (property.getParentSchema() != null) {
+                flattened = property.getParentSchema().getProperties().stream()
+                        .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+                if (!flattened) {
+                    String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
+                    flattened = discriminatorSerializedName != null && discriminatorSerializedName.contains(".");
+                }
             }
+        } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
+            flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
         }
+        builder.needsFlatten(flattened);
 
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {

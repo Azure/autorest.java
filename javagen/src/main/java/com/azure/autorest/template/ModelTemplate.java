@@ -107,7 +107,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
         }
 
-        if (model.getNeedsFlatten()) {
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && model.getNeedsFlatten()) {
             javaFile.annotation("JsonFlatten");
         }
 
@@ -157,6 +157,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     comment.line(property.getDescription());
                 });
 
+                if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
+                    classBlock.annotation("JsonFlatten");
+                }
                 if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
                     classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
                 } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
