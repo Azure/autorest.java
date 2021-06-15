@@ -126,6 +126,67 @@
         }
       },
       "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+    },
+    "VirtualMachineScaleSet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+        }
+      },
+      "description": "Describes a Virtual Machine Scale Set."
+    },
+    "VirtualMachineScaleSetProperties": {
+      "properties": {
+        "virtualMachineProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
+          "description": "The virtual machine profile."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Scale Set."
+    },
+    "VirtualMachineScaleSetVMProfile": {
+      "properties": {
+        "networkProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
+          "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
+        }
+      },
+      "description": "Describes a virtual machine scale set virtual machine profile."
+    },
+    "VirtualMachineScaleSetNetworkProfile": {
+      "properties": {
+        "networkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
+          },
+          "description": "The list of network configurations."
+        },
+      },
+      "description": "Describes a virtual machine scale set network profile."
+    },
+    "VirtualMachineScaleSetNetworkConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The network configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
+        }
+      },
+      "description": "Describes a virtual machine scale set network profile's network configurations."
+    },
+    "VirtualMachineScaleSetNetworkConfigurationProperties": {
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        }
+      },
+      "description": "Describes a virtual machine scale set network profile's IP configuration."
     }
   }
 }

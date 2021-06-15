@@ -79,7 +79,7 @@ public class CodeSample {
                     } else {
                         // extract the code line (except Assertions)
 
-                        if (!line.trim().startsWith("Assertions.")) {
+                        if (!line.trim().startsWith("Assertions.") && !line.trim().startsWith("assert")) {
                             codeLines.add(line);
                         }
                     }

@@ -5,12 +5,12 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The metric alert resource. */
-@JsonFlatten
 @Fluent
-public class MetricAlertResource {
+public final class MetricAlertResource {
     /*
      * defines the specific alert criteria information.
      */
+    @JsonFlatten
     @JsonProperty(value = "properties.criteria", required = true)
     private MetricAlertCriteria criteria;
 

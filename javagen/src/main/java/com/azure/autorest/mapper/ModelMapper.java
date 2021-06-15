@@ -187,17 +187,22 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                  builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
-            boolean needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
+            boolean needsFlatten = false;
+            if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+                needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
+                if (isPolymorphic) {
+                    String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+                    // OR the need flattening based on the model containing 'x-ms-flattened' and if the discriminator
+                    // contains '.' and 'x-ms-flattened' isn't required for flattening.
+                    needsFlatten |= (discriminatorSerializedName.contains(".") && !settings.requireXMsFlattenedToFlatten());
+                }
+            }
             if (isPolymorphic) {
                 String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
-                // OR the need flattening based on the model containing 'x-ms-flattened' and if the discriminator
-                // contains '.' and 'x-ms-flattened' isn't required for flattening.
-                needsFlatten |= (discriminatorSerializedName.contains(".") && !settings.requireXMsFlattenedToFlatten());
-
                 // Only escape the discriminator if the model will be flattened.
                 builder.polymorphicDiscriminator(needsFlatten
-                    ? discriminatorSerializedName.replace(".", "\\\\.")
-                    : discriminatorSerializedName);
+                        ? discriminatorSerializedName.replace(".", "\\\\.")
+                        : discriminatorSerializedName);
             }
 
             builder.needsFlatten(needsFlatten);
