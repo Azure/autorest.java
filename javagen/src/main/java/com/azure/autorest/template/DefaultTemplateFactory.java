@@ -109,6 +109,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
+    public ProtocolSyncPagingMethodTemplate getProtocolSyncPagingMethodTemplate() {
+        return ProtocolSyncPagingMethodTemplate.getInstance();
+    }
+
+    @Override
     public ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
         return ProtocolSyncClientTemplate.getInstance();
     }

@@ -46,6 +46,8 @@ public interface TemplateFactory {
 
     ProtocolAsyncPagingMethodTemplate getProtocolAsyncPagingMethodTemplate();
 
+    ProtocolSyncPagingMethodTemplate getProtocolSyncPagingMethodTemplate();
+
     ProtocolSyncClientTemplate getLowLevelSyncClientTemplate();
 
     ProtocolAsyncClientTemplate getLowLevelAsyncClientTemplate();

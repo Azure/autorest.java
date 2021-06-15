@@ -101,6 +101,10 @@ public class Templates {
         return factory.getProtocolAsyncPagingMethodTemplate();
     }
 
+    public static ProtocolSyncPagingMethodTemplate getProtocolSyncPagingMethodTemplate() {
+        return factory.getProtocolSyncPagingMethodTemplate();
+    }
+
     public static ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
         return factory.getLowLevelSyncClientTemplate();
     }

@@ -99,10 +99,10 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
             methods.stream().filter(m -> m.getType() == ClientMethodType.PagingAsync).forEach(method -> {
                 Templates.getProtocolAsyncPagingMethodTemplate().write(method, classBlock);
             });
-//            // PagingSync
-//            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingSync).forEach(method -> {
-//                Templates.getProtocolSyncPagingMethodTemplate().write(method, classBlock);
-//            });
+            // PagingSync
+            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingSync).forEach(method -> {
+                Templates.getProtocolSyncPagingMethodTemplate().write(method, classBlock);
+            });
 //            // PagingAsyncSinglePage
 //            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage).forEach(method -> {
 //                Templates.getProtocolAsyncPagingSinglePageMethodTemplate().write(method, classBlock);
