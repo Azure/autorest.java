@@ -101,6 +101,10 @@ public class Templates {
         return factory.getProtocolAsyncPagingMethodTemplate();
     }
 
+    public static ProtocolAsyncPagingSinglePageMethodTemplate getProtocolAsyncPagingSinglePageMethodTemplate() {
+        return factory.getProtocolAsyncPagingSinglePageMethodTemplate();
+    }
+
     public static ProtocolSyncPagingMethodTemplate getProtocolSyncPagingMethodTemplate() {
         return factory.getProtocolSyncPagingMethodTemplate();
     }
