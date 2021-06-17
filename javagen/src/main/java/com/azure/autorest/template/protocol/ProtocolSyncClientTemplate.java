@@ -38,6 +38,7 @@ public class ProtocolSyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             client.getMethodGroupClient().addImportsTo(imports, false, JavaSettings.getInstance());
         }
         imports.add("com.azure.core.annotation.ServiceClient");
+        imports.add("com.azure.core.exception.HttpResponseException");
 
         javaFile.declareImport(imports);
         javaFile.javadocComment(comment ->
@@ -68,8 +69,8 @@ public class ProtocolSyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             } else {
                 methods = client.getServiceClient().getClientMethods();
             }
-            methods.stream().filter(m -> m.getType() == ClientMethodType.SimpleAsyncRestResponse).forEach(method -> {
-                Templates.getProtocolSyncMethodTemplate().write(method, classBlock);
+            methods.stream().filter(m -> m.getType() == ClientMethodType.SimpleSyncRestResponse).forEach(method -> {
+                Templates.getClientMethodTemplate().write(method, classBlock);
             });
 
             // invoke() method

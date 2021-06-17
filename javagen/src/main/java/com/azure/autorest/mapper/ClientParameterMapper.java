@@ -2,10 +2,12 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -40,6 +42,13 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
+        }
+        if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
+            if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Body) {
+                wireType = ClassType.BinaryData;
+            } else {
+                wireType = ClassType.String;
+            }
         }
         builder.wireType(wireType);
 

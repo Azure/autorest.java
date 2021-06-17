@@ -76,24 +76,22 @@ public class Javagen extends NewPlugin {
 
             // Step 3: Write to templates
             JavaPackage javaPackage = new JavaPackage(this);
-            if (!JavaSettings.getInstance().isLowLevelClient()) {
-                // Service client
+            // Service client
+            javaPackage
+                    .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                            client.getServiceClient());
+
+            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
-                        .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                                client.getServiceClient());
+                        .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            }
 
+            // Method group
+            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
+                        methodGroupClient);
                 if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                    javaPackage
-                            .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
-                }
-
-                // Method group
-                for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                    javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
-                            methodGroupClient);
-                    if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                        javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
-                    }
+                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }
 
@@ -117,19 +115,19 @@ public class Javagen extends NewPlugin {
                 }
             }
 
-            if (JavaSettings.getInstance().isLowLevelClient()) {
-                List<AsyncSyncClient> asyncClients = new ArrayList<>();
-                List<AsyncSyncClient> syncClients = new ArrayList<>();
-                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
-
-                for (AsyncSyncClient asyncClient : asyncClients) {
-                    javaPackage.addLowLevelAsyncClient(asyncClient.getPackageName(), asyncClient);
-                }
-
-                for (AsyncSyncClient syncClient : syncClients) {
-                    javaPackage.addLowLevelSyncClient(syncClient.getPackageName(), syncClient);
-                }
-            }
+//            if (JavaSettings.getInstance().isLowLevelClient()) {
+//                List<AsyncSyncClient> asyncClients = new ArrayList<>();
+//                List<AsyncSyncClient> syncClients = new ArrayList<>();
+//                ClientModelUtil.getAsyncSyncClients(client.getServiceClient(), asyncClients, syncClients);
+//
+//                for (AsyncSyncClient asyncClient : asyncClients) {
+//                    javaPackage.addLowLevelAsyncClient(asyncClient.getPackageName(), asyncClient);
+//                }
+//
+//                for (AsyncSyncClient syncClient : syncClients) {
+//                    javaPackage.addLowLevelSyncClient(syncClient.getPackageName(), syncClient);
+//                }
+//            }
 
             if (!JavaSettings.getInstance().isLowLevelClient()) {
                 // Response

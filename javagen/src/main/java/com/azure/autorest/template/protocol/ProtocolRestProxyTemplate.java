@@ -33,30 +33,35 @@ public class ProtocolRestProxyTemplate implements IJavaTemplate<Proxy, JavaFile>
     @Override
     public final void write(Proxy proxy, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        if (proxy != null) {
-            javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
-            {
-                comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", proxy.getClientTypeName()));
-            });
-            javaFile.annotation(String.format("Host(\"%1$s\")", proxy.getBaseURL()));
-            javaFile.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(proxy.getClientTypeName())));
+        Set<String> imports = new HashSet<>();
+        proxy.addImportsTo(imports, true, settings);
+        for (String importPackage : imports) {
+            javaFile.declareImport(importPackage);
+        }
+        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
+        {
+            comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", proxy.getClientTypeName()));
+        });
+        javaFile.annotation(String.format("Host(\"%1$s\")", proxy.getBaseURL()));
+        javaFile.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(proxy.getClientTypeName())));
 
-            JavaVisibility visibility = JavaVisibility.Private;
-            if (settings.isServiceInterfaceAsPublic()) {
-                visibility = JavaVisibility.Public;
-            }
+        JavaVisibility visibility = JavaVisibility.PackagePrivate;
+        if (settings.isServiceInterfaceAsPublic()) {
+            visibility = JavaVisibility.Public;
+        }
 
-            javaFile.interfaceBlock(visibility, proxy.getName(), interfaceBlock ->
-            {
-                for (ProxyMethod restAPIMethod : proxy.getMethods()) {
-                    if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {
-                        interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
-                    }
+        javaFile.interfaceBlock(visibility, proxy.getName(), interfaceBlock ->
+        {
+            for (ProxyMethod restAPIMethod : proxy.getMethods()) {
+                if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {
+                    interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
+                }
 
-                    writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
+                writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
+                interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
+                if (!settings.isLowLevelClient()) {
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
                     }
@@ -73,73 +78,73 @@ public class ProtocolRestProxyTemplate implements IJavaTemplate<Proxy, JavaFile>
                     if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                         writeSingleUnexpectedException(restAPIMethod, interfaceBlock);
                     }
-
-                    ArrayList<String> parameterDeclarationList = new ArrayList<String>();
-                    if (restAPIMethod.isResumable()) {
-                        interfaceBlock.annotation(String.format("ResumeOperation"));
-                    }
-
-                    Set<String> usedParameterNames = new HashSet<>();
-
-                    for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
-                        StringBuilder parameterDeclarationBuilder = new StringBuilder();
-
-                        switch (parameter.getRequestParameterLocation()) {
-                            case Uri:
-                            case Path:
-                            case Query:
-                            case Header:
-                                parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
-                                if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
-                                    parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
-                                } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
-                                    parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
-                                } else {
-                                    parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getRequestParameterName()));
-                                }
-                                parameterDeclarationBuilder.append(") ");
-
-                                break;
-
-                            case Body:
-                                if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(restAPIMethod.getRequestContentType())) {
-                                    parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
-                                            parameter.getRequestParameterName()));
-                                    break;
-                                }
-                                parameterDeclarationBuilder.append(String.format("@BodyParam(\"%1$s\") ", restAPIMethod.getRequestContentType()));
-                                break;
-
-                            // case FormData:
-                            //     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
-                            //     break;
-
-                            case None:
-                                break;
-
-                            default:
-                                if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
-                                    throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());
-                                }
-
-                                break;
-                        }
-
-                        // avoid name conflict
-                        String parameterName = parameter.getName();
-                        if (usedParameterNames.contains(parameterName)) {
-                            parameterName = parameterName + "Param";
-                        }
-                        usedParameterNames.add(parameterName);
-
-                        parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameterName);
-                        parameterDeclarationList.add(parameterDeclarationBuilder.toString());
-                    }
-
-                    writeProxyMethodSignature(parameterDeclarationList, restAPIMethod, interfaceBlock);
                 }
-            });
-        }
+
+                ArrayList<String> parameterDeclarationList = new ArrayList<String>();
+                if (restAPIMethod.isResumable()) {
+                    interfaceBlock.annotation(String.format("ResumeOperation"));
+                }
+
+                Set<String> usedParameterNames = new HashSet<>();
+
+                for (ProxyMethodParameter parameter : restAPIMethod.getParameters()) {
+                    StringBuilder parameterDeclarationBuilder = new StringBuilder();
+
+                    switch (parameter.getRequestParameterLocation()) {
+                        case Uri:
+                        case Path:
+                        case Query:
+                        case Header:
+                            parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
+                            if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
+                                parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
+                            } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
+                                parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
+                            } else {
+                                parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getRequestParameterName()));
+                            }
+                            parameterDeclarationBuilder.append(") ");
+
+                            break;
+
+                        case Body:
+                            if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(restAPIMethod.getRequestContentType())) {
+                                parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ",
+                                        parameter.getRequestParameterName()));
+                                break;
+                            }
+                            parameterDeclarationBuilder.append(String.format("@BodyParam(\"%1$s\") ", restAPIMethod.getRequestContentType()));
+                            break;
+
+                        // case FormData:
+                        //     parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
+                        //     break;
+
+                        case None:
+                            break;
+
+                        default:
+                            if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
+                                throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + parameter.getRequestParameterLocation());
+                            }
+
+                            break;
+                    }
+
+                    // avoid name conflict
+                    String parameterName = parameter.getName();
+                    if (usedParameterNames.contains(parameterName)) {
+                        parameterName = parameterName + "Param";
+                    }
+                    usedParameterNames.add(parameterName);
+
+                    parameterDeclarationBuilder.append(parameter.getWireType() + " " + parameterName);
+                    parameterDeclarationList.add(parameterDeclarationBuilder.toString());
+                }
+
+                writeProxyMethodSignature(parameterDeclarationList, restAPIMethod, interfaceBlock);
+            }
+        });
     }
 
     protected void writeUnexpectedExceptions(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {

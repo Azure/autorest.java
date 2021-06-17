@@ -66,7 +66,7 @@ public class Proxy {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (includeImplementationImports && !settings.isLowLevelClient()) {
+        if (includeImplementationImports) {
             imports.add("com.azure.core.annotation.Host");
             imports.add("com.azure.core.annotation.ServiceInterface");
         }

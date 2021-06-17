@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -61,9 +62,24 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+        if (settings.isLowLevelClient()) {
+            if (responseBodyType instanceof ClassType) {
+                responseBodyType = ClassType.BinaryData;
+            } else if (responseBodyType instanceof EnumType) {
+                responseBodyType = ClassType.String;
+            }
+        }
         builder.responseBodyType(responseBodyType);
 
-        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+        if (settings.isLowLevelClient()) {
+            IType singleValueType;
+            if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.Response(responseBodyType);
+            }
+            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
+        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
                 && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
             builder.returnType(createBinaryContentAsyncReturnType());
@@ -131,13 +147,32 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             for (Parameter parameter : request.getParameters().stream()
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
-                parameter.setOperation(operation);
-                ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
-                if (requestContentType.startsWith("application/json-patch+json")) {
-                    proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
+                if (parameter.isRequired() || !settings.isLowLevelClient()) {
+                    parameter.setOperation(operation);
+                    ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
+                    if (requestContentType.startsWith("application/json-patch+json")) {
+                        proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
+                    }
+                    parameters.add(proxyMethodParameter);
                 }
-                parameters.add(proxyMethodParameter);
             }
+            // RequestOptions
+            ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
+                    .description("The options to configure the HTTP request before HTTP client sends it")
+                    .wireType(ClassType.RequestOptions)
+                    .clientType(ClassType.RequestOptions)
+                    .name("requestOptions")
+                    .requestParameterLocation(RequestParameterLocation.None)
+                    .requestParameterName("requestOptions")
+                    .alreadyEncoded(true)
+                    .isConstant(false)
+                    .isRequired(false)
+                    .isNullable(false)
+                    .fromClient(false)
+                    .parameterReference("requestOptions")
+                    .build();
+            parameters.add(requestOptions);
+
             if (settings.getAddContextParameter()) {
                 ClassType contextClassType = getContextClass();
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
@@ -254,7 +289,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             }
         }
 
-        if (errorType != null) {
+        if (errorType != null && !settings.isLowLevelClient()) {
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
             if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();

@@ -253,12 +253,7 @@ public class ProxyMethod {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (settings.isLowLevelClient()) {
-            getParameters().stream()
-                    .filter(p -> p.getIsRequired() && !p.getFromClient() && !p.getIsConstant()
-                            && p.getRequestParameterLocation() != RequestParameterLocation.Body)
-                    .forEach(p -> p.addImportsTo(imports, includeImplementationImports, settings));
-        } else if (includeImplementationImports) {
+        if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
                 imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);

@@ -326,13 +326,22 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                    generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
             case PagingAsync:
-                generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                    generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
             case PagingAsyncSinglePage:
-                generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                    generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
                 // TODO: Simulated paging
@@ -373,15 +382,31 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //                break;
 
             case LongRunningAsync:
-                generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1046
+                    generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case LongRunningBeginAsync:
-                generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1046
+                    generateLongRunningBeginAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case LongRunningBeginSync:
-                generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1046
+                    generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
+                break;
+
+            case LongRunningSync:
+                if (!settings.isLowLevelClient()) {
+                    // TODO: https://github.com/Azure/autorest.java/issues/1046
+                    generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case Resumable:
@@ -390,7 +415,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleSync:
             case SimpleSyncRestResponse:
-            case LongRunningSync:
                 generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 

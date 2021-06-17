@@ -3,19 +3,7 @@ package com.azure.autorest.model.javamodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClientException;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.Manager;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.clientmodel.ModuleInfo;
-import com.azure.autorest.model.clientmodel.PackageInfo;
-import com.azure.autorest.model.clientmodel.PageDetails;
-import com.azure.autorest.model.clientmodel.Pom;
-import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
@@ -178,6 +166,12 @@ public class JavaPackage {
     public final void addModuleInfo(ModuleInfo moduleInfo) {
         JavaFile javaFile = javaFileFactory.createEmptySourceFile("", "module-info");
         Templates.getModuleInfoTemplate().write(moduleInfo, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addRestProxy(String package_Keyword, String name, Proxy model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getProtocolRestProxyTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 

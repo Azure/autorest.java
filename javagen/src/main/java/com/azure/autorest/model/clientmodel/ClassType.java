@@ -74,6 +74,7 @@ public class ClassType implements IType {
     public static final ClassType JsonPatchDocument =
             new ClassType.Builder().knownClass(com.azure.core.models.JsonPatchDocument.class).build();
     public static final ClassType BinaryData = new ClassType.Builder().knownClass(com.azure.core.util.BinaryData.class).build();
+    public static final ClassType RequestOptions = new Builder().packageName("com.azure.core.http").name("RequestOptions").build();
 
 
     private final String packageName;

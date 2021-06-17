@@ -208,10 +208,8 @@ public class ProxyMethodParameter {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (!settings.isLowLevelClient()) {
-            if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
-                imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
-            }
+        if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
+            imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
             if (getClientType() == ArrayType.ByteArray) {
@@ -220,11 +218,6 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
                 if (!settings.isLowLevelClient()) {
                     imports.add("com.azure.core.util.serializer.JacksonAdapter");
-                } else if (getIsRequired()) {
-                    getClientType().addImportsTo(imports, false);
-                    imports.add("java.nio.charset.StandardCharsets");
-                    imports.add("java.util.stream.StreamSupport");
-                    imports.add("java.util.stream.Collectors");
                 }
             }
         }

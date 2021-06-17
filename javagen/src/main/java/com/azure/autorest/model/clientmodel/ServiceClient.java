@@ -180,7 +180,7 @@ public class ServiceClient {
             serviceClientProperty.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (includeImplementationImports && !settings.isLowLevelClient()) {
+        if (includeImplementationImports) {
             if (settings.isFluentPremium()) {
                 imports.add("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
             }
@@ -205,7 +205,7 @@ public class ServiceClient {
             }
         }
 
-        if (includeBuilderImports || (includeImplementationImports && !settings.isLowLevelClient())) {
+        if (includeBuilderImports || (includeImplementationImports)) {
             if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
@@ -219,10 +219,6 @@ public class ServiceClient {
 
         if (includeBuilderImports) {
             imports.add(String.format("%1$s.%2$s", getPackage(), getClassName()));
-        }
-
-        if (includeBuilderImports && settings.isLowLevelClient()) {
-            imports.add("com.azure.core.util.serializer.JsonSerializerProviders");
         }
 
         Proxy proxy = getProxy();

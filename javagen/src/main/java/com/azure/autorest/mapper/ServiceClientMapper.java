@@ -285,11 +285,9 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     }
 
     protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
-        if (!settings.isLowLevelClient()) {
-            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
-        }
+        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
     }
 
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {

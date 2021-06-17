@@ -36,8 +36,10 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
       case PagingSync:
       case PagingAsync:
       case PagingAsyncSinglePage:
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-        break;
+        return;
+// TODO: https://github.com/Azure/autorest.java/issues/1034
+//        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+//        break;
       default:
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         break;

@@ -2,12 +2,7 @@ package com.azure.autorest.template.protocol;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
@@ -34,12 +29,20 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
 
     @Override
     public final void write(AsyncSyncClient client, JavaFile javaFile) {
+        JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<>();
-        client.getServiceClient().addImportsTo(imports, true, false, JavaSettings.getInstance());
+        Proxy proxy;
+        client.getServiceClient().addImportsTo(imports, true, false, settings);
         if (client.getMethodGroupClient() != null) {
-            client.getMethodGroupClient().addImportsTo(imports, true, JavaSettings.getInstance());
+            client.getMethodGroupClient().addImportsTo(imports, true, settings);
+            proxy = client.getMethodGroupClient().getProxy();
+            proxy.addImportsTo(imports, true, settings);
+        } else {
+            client.getServiceClient().getProxy().addImportsTo(imports, true, settings);
+            proxy = client.getServiceClient().getProxy();
         }
         imports.add("com.azure.core.annotation.ServiceClient");
+        imports.add("com.azure.core.http.rest.RestProxy");
         imports.add("reactor.core.publisher.Mono");
 
         javaFile.declareImport(imports);
@@ -50,9 +53,13 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
         javaFile.annotation(String.format("ServiceClient(builder = %s.class)", client.getServiceClient().getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
         javaFile.publicFinalClass(client.getClassName(), classBlock -> {
 
+            Templates.getProxyTemplate().write(proxy, classBlock);
+
             for (ServiceClientProperty property : client.getServiceClient().getProperties()) {
                 classBlock.privateFinalMemberVariable(property.getType().toString(), property.getName());
             }
+
+            classBlock.privateFinalMemberVariable(proxy.getName(), "service");
 
             // Service Client Constructor
             classBlock.javadocComment(comment -> {
@@ -72,6 +79,7 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
                 for (ServiceClientProperty property : client.getServiceClient().getProperties()) {
                     constructor.line("this.%1$s = %1$s;", property.getName());
                 }
+                constructor.line("this.service = RestProxy.create(%s.class, httpPipeline);", proxy.getName());
             });
 
             List<ClientMethod> methods;
@@ -81,13 +89,13 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
                 methods = client.getServiceClient().getClientMethods();
             }
             methods.stream().filter(m -> m.getType() == ClientMethodType.SimpleAsyncRestResponse).forEach(method -> {
-                Templates.getProtocolAsyncMethodTemplate().write(method, classBlock);
+                Templates.getClientMethodTemplate().write(method, classBlock);
             });
 
             // invoke() method
             String invokeMethodArgs = "String url, HttpMethod httpMethod, BinaryData body, RequestOptions options";
             JavaVisibility visibility;
-            if (!JavaSettings.getInstance().isContextClientMethodParameter()) {
+            if (!settings.isContextClientMethodParameter()) {
                 visibility = JavaVisibility.Public;
             } else {
                 visibility = JavaVisibility.PackagePrivate;
@@ -109,9 +117,9 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
                 methodBlock.ifBlock("options != null", ifBlock -> {
                     methodBlock.line("options.getRequestCallback().accept(request);");
                 });
-                if (JavaSettings.getInstance().isContextClientMethodParameter()) {
+                if (settings.isContextClientMethodParameter()) {
                     methodBlock.line("return httpPipeline.send(request, context)");
-                } else if (JavaSettings.getInstance().getAddContextParameter()) {
+                } else if (settings.getAddContextParameter()) {
                     methodBlock.line("return FluxUtil.withContext(c -> httpPipeline.send(request, c))");
                 } else {
                     methodBlock.line("return httpPipeline.send(request)");
