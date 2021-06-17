@@ -127,7 +127,8 @@ public class JavaSettings
                     host.getBooleanValue("optional-constant-as-enum", false),
                     host.getBooleanValue("use-iterable", false),
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
-                    host.getStringValue("client-flattened-annotation-target", ""));
+                    host.getStringValue("client-flattened-annotation-target", ""),
+                    host.getStringValue("key-credential-header-name", ""));
         }
         return _instance;
     }
@@ -186,7 +187,8 @@ public class JavaSettings
                          boolean optionalConstantAsEnum,
                          boolean useIterable,
                          boolean requireXMsFlattenedToFlatten,
-                         String clientFlattenAnnotationTarget)
+                         String clientFlattenAnnotationTarget,
+                         String keyCredentialHeaderName)
     {
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -226,8 +228,8 @@ public class JavaSettings
         if (credentialType != null) {
             String[] splits = credentialType.split(",");
             this.credentialTypes = Arrays.stream(splits)
-                    .map(split -> split.trim())
-                    .map(type -> CredentialType.fromValue(credentialType))
+                    .map(String::trim)
+                    .map(CredentialType::fromValue)
                     .collect(Collectors.toSet());
         }
         if (credentialScopes != null) {
@@ -244,6 +246,12 @@ public class JavaSettings
         }
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
+        this.keyCredentialHeaderName = keyCredentialHeaderName;
+    }
+
+    private String keyCredentialHeaderName;
+    public String getKeyCredentialHeaderName() {
+        return this.keyCredentialHeaderName;
     }
 
     private Set<CredentialType> credentialTypes;

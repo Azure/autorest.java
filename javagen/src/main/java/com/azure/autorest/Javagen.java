@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
-    private final Logger LOGGER = new PluginLogger(this, Javagen.class);
+    private final Logger logger = new PluginLogger(this, Javagen.class);
     static Javagen instance;
 
     public Javagen(Connection connection, String plugin, String sessionId) {
@@ -44,6 +44,10 @@ public class Javagen extends NewPlugin {
 
     public static Javagen getPluginInstance() {
         return instance;
+    }
+
+    public Logger getLogger() {
+        return this.logger;
     }
 
     @Override
@@ -159,7 +163,7 @@ public class Javagen extends NewPlugin {
                     String formattedSource = formatter.formatSourceAndFixImports(javaFile.getContents().toString());
                     writeFile(javaFile.getFilePath(), formattedSource, null);
                 } catch (Exception e) {
-                    LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
+                    logger.error("Unable to format output file " + javaFile.getFilePath(), e);
                     return false;
                 }
             }
@@ -169,7 +173,7 @@ public class Javagen extends NewPlugin {
                         "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
-            LOGGER.error("Failed to generate code.", ex);
+            logger.error("Failed to generate code.", ex);
             return false;
         }
         return true;
