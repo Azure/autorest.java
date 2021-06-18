@@ -90,9 +90,7 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
             });
 
             for (ClientMethod m : methods) {
-                logger.debug(m.toString());
-                logger.debug(m.getName());
-                logger.debug(m.getType().toString());
+                System.err.println(m.getName() + " " + m.getType());
             }
 
             // PagingAsync
