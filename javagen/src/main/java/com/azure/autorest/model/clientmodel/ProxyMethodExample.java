@@ -71,8 +71,15 @@ public class ProxyMethodExample {
     public ProxyMethodExample() {
     }
 
+    @Override
+    public String toString() {
+        return "ProxyMethodExample{" +
+                "parameters=" + parameters +
+                '}';
+    }
+
     public static final class Builder {
-        private Map<String, ParameterValue> parameters = new HashMap<>();
+        private final Map<String, ParameterValue> parameters = new HashMap<>();
 
         public Builder() {
         }
