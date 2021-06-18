@@ -302,7 +302,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
         requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
-        requireModules.add(new ModuleInfo.RequireModule("com.azure.core.experimental", true));
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));

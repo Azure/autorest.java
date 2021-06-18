@@ -209,11 +209,9 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
                 context ->
-                        service.putNotExpandable(
-                                this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                        service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -231,8 +229,7 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putNotExpandable(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -419,11 +416,9 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
         return FluxUtil.withContext(
                 context ->
-                        service.putReferenced(
-                                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context));
+                        service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
@@ -441,8 +436,7 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
-        return service.putReferenced(this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context);
+        return service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context);
     }
 
     /**
@@ -630,11 +624,10 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
         return FluxUtil.withContext(
                 context ->
                         service.putReferencedConstant(
-                                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context));
+                                this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
@@ -652,9 +645,7 @@ public final class EnumsImpl {
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
-        return service.putReferencedConstant(
-                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context);
+        return service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, requestOptions, context);
     }
 
     /**

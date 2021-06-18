@@ -451,12 +451,10 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions) {
-        final String stringBody = "";
+        final BinaryData stringBody = BinaryData.fromObject("");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
-                context ->
-                        service.putEmpty(this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                context -> service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -471,10 +469,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringBody = "";
+        final BinaryData stringBody = BinaryData.fromObject("");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putEmpty(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putEmpty(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -650,12 +647,11 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions) {
-        final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
+        final BinaryData stringBody =
+                BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
-                context ->
-                        service.putMbcs(this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                context -> service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -670,10 +666,10 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
+        final BinaryData stringBody =
+                BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putMbcs(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putMbcs(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -863,13 +859,11 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions) {
-        final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
+        final BinaryData stringBody =
+                BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
-                context ->
-                        service.putWhitespace(
-                                this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                context -> service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -885,10 +879,10 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
+        final BinaryData stringBody =
+                BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putWhitespace(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putWhitespace(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
@@ -1285,11 +1279,10 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
                 context ->
                         service.putBase64UrlEncoded(
-                                this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                                this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
@@ -1307,8 +1300,7 @@ public final class StringOperationsImpl {
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putBase64UrlEncoded(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
