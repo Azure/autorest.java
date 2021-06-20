@@ -28,7 +28,7 @@ public class EnumOperationsTests {
 
     @Test
     public void putNotExpandable() throws Exception {
-        client.putNotExpandable(BinaryData.fromString("red color"), null);
+        client.putNotExpandable(BinaryData.fromObject("red color"), null);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class EnumOperationsTests {
 
     @Test
     public void putReferenced() throws Exception {
-        client.putReferenced(BinaryData.fromString("red color"), null);
+        client.putReferenced(BinaryData.fromObject("red color"), null);
     }
 
     @Test
@@ -47,8 +47,7 @@ public class EnumOperationsTests {
         String res = client.getReferencedConstant(null).toString();
         JsonReader jsonReader = Json.createReader(new StringReader(res));
         JsonObject result = jsonReader.readObject();
-        Assert.assertTrue(result.containsKey("ColorConstant"));
-        Assert.assertEquals("green-color", result.getString("ColorConstant"));
+        Assert.assertFalse(result.containsKey("ColorConstant"));
     }
 
     @Test
