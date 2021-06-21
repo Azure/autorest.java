@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
@@ -31,5 +32,6 @@ public class FluentGenTests {
         Client client = FluentStatic.getClient();
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
+        fluentClient.getResourceCollections().stream().forEach(rc -> rc.getMethods().stream().forEach(ExampleParser::parseMethod));
     }
 }

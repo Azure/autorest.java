@@ -24,7 +24,7 @@ public class ProxyMethodExample {
 
         public ParameterValue(String stringValue) {
             this.stringValue = stringValue;
-            this.objectValue = null;
+            this.objectValue = stringValue;
         }
 
         public ParameterValue(Object objectValue) {
