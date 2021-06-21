@@ -285,15 +285,7 @@ public class Utils {
             fileEvent.setType(FileChangeType.CHANGED);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-            languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
-                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                .findFirst()
-                .ifPresent(action -> {
-                    if (action.getCommand() instanceof WorkspaceEditCommand) {
-                        ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                    }
-                });
+            organizeImportsOnRange(languageClient, editor, fileUri, symbol.getLocation().getRange());
         }
 
         return refreshedCustomizationSupplier.get();
@@ -341,15 +333,7 @@ public class Utils {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                languageClient.listCodeActions(fileUri, new Range(start, end))
-                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
+                organizeImportsOnRange(languageClient, editor, fileUri, new Range(start, end));
             }
         }
 
@@ -445,6 +429,19 @@ public class Utils {
     public static String getIndent(String content) {
         Matcher matcher = INDENT_DETERMINATION_PATTERN.matcher(content);
         return matcher.matches() ? matcher.group(1) : "";
+    }
+
+    public static void organizeImportsOnRange(EclipseLanguageClient languageClient, Editor editor, URI fileUri,
+        Range range) {
+        languageClient.listCodeActions(fileUri, range).stream()
+            .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+            .findFirst()
+            .ifPresent(action -> {
+                if (action.getCommand() instanceof WorkspaceEditCommand) {
+                    ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(importEdit ->
+                        Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
+                }
+            });
     }
 
     private Utils() {

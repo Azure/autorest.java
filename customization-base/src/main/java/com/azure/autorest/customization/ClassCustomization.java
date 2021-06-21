@@ -3,14 +3,12 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
@@ -45,6 +43,9 @@ public final class ClassCustomization extends CodeCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
+    private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
+    private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
+
     private final String packageName;
     private final String className;
 
@@ -63,6 +64,64 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public String getClassName() {
         return className;
+    }
+
+    /**
+     * Adds an import to the class.
+     *
+     * @param importName Name of the package to import without {@code import} included.
+     * @return The current class customization.
+     */
+    public ClassCustomization addImport(String importName) {
+        List<String> fileLines = editor.getFileLines(fileName);
+
+        // If the class doesn't have any imports, have the import range begin one line after the package definition
+        // as a package definition is required.
+        int packageLine = 0;
+        for (int i = 0; i < fileLines.size(); i++) {
+            if (PACKAGE_PATTERN.matcher(fileLines.get(i)).matches()) {
+                packageLine = i;
+                break;
+            }
+        }
+
+        int importStartLine = packageLine;
+        int importEndLine = packageLine;
+        for (int i = packageLine; i < fileLines.size(); i++) {
+            if (IMPORT_PATTERN.matcher(fileLines.get(i)).matches()) {
+                importStartLine = i;
+                importEndLine = i;
+                break;
+            }
+        }
+
+        for (int i = importStartLine + 1; i < fileLines.size(); i++) {
+            if (IMPORT_PATTERN.matcher(fileLines.get(i)).matches()) {
+                importEndLine = i;
+            }
+        }
+
+        Position newImportPosition;
+        // If the line after the final import isn't empty insert a blank line.
+        if (!Utils.isNullOrEmpty(fileLines.get(importEndLine + 1))) {
+            newImportPosition = editor.insertBlankLine(fileName, importEndLine + 1, true);
+        } else {
+            newImportPosition = new Position(importEndLine + 1, 0);
+        }
+
+        editor.replace(fileName, newImportPosition, newImportPosition, "import " + importName + ";");
+
+        FileEvent fileEvent = new FileEvent();
+        fileEvent.setUri(fileUri);
+        fileEvent.setType(FileChangeType.CHANGED);
+        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+
+        Position importStartPosition = new Position(importStartLine, 0);
+        Position importEndPosition = new Position(importEndLine + 1, 0);
+        Utils.organizeImportsOnRange(languageClient, editor, fileUri,
+            new Range(importStartPosition, importEndPosition));
+
+        return refreshSymbol();
     }
 
     /**
@@ -290,8 +349,8 @@ public final class ClassCustomization extends CodeCustomization {
      * <p>
      * If there exists multiple methods with the same name or signature only the first one found will be removed.
      * <p>
-     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages
-     * will have to be updated or removed in another customization, or customizations.
+     * This method doesn't update usages of the method being removed. If the method was used elsewhere those usages will
+     * have to be updated or removed in another customization, or customizations.
      * <p>
      * If this removes the only method contained in the class this will result in a class with no methods.
      *
@@ -433,15 +492,7 @@ public final class ClassCustomization extends CodeCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                languageClient.listCodeActions(fileUri, symbol.get().getLocation().getRange()).stream()
-                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
+                Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.get().getLocation().getRange());
             }
         }
 
@@ -471,15 +522,7 @@ public final class ClassCustomization extends CodeCustomization {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                languageClient.listCodeActions(fileUri, range).stream()
-                    .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-                    .findFirst()
-                    .ifPresent(action -> {
-                        if (action.getCommand() instanceof WorkspaceEditCommand) {
-                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
-                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
-                        }
-                    });
+                Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.getLocation().getRange());
             }
         }
 
