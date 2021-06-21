@@ -261,6 +261,14 @@ public final class ClassCustomization extends CodeCustomization {
         return addMethod(method, null);
     }
 
+    /**
+     * Adds a method to this class.
+     *
+     * @param method The entire method as a literal string.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The method level customization for the added method.
+     */
     public MethodCustomization addMethod(String method, List<String> importsToAdd) {
         // Get the signature of the method.
         Matcher methodSignatureMatcher = METHOD_SIGNATURE_PATTERN.matcher(method);

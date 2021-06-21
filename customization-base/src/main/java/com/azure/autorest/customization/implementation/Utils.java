@@ -53,12 +53,12 @@ public class Utils {
     /**
      * This pattern matches a Java package declaration.
      */
-    public static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
+    private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
 
     /**
      * This pattern matches a Java import.
      */
-    public static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
+    private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
 
     /*
      * This pattern determines if a line is a beginning of constructor or method. The following is an explanation of
