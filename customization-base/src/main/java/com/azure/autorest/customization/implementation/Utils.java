@@ -1,6 +1,5 @@
 package com.azure.autorest.customization.implementation;
 
-import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
@@ -26,7 +25,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Utils {
     /**
@@ -49,16 +47,6 @@ public class Utils {
      * spaces before the first word character.
      */
     public static final Pattern INDENT_DETERMINATION_PATTERN = Pattern.compile("^(\\s*)\\w.*$");
-
-    /**
-     * This pattern matches a Java package declaration.
-     */
-    private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
-
-    /**
-     * This pattern matches a Java import.
-     */
-    private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
 
     /*
      * This pattern determines if a line is a beginning of constructor or method. The following is an explanation of
@@ -275,7 +263,7 @@ public class Utils {
      * @param <T> The type of the customization.
      * @return A refreshed customization after the annotation was added.
      */
-    public static <T extends CodeCustomization> T addAnnotation(String annotation, CodeCustomization customization,
+    public static <T extends CodeCustomization> T addAnnotation(String annotation, T customization,
         Supplier<T> refreshedCustomizationSupplier) {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
@@ -297,7 +285,15 @@ public class Utils {
             fileEvent.setType(FileChangeType.CHANGED);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-            organizeImportsOnRange(languageClient, editor, fileUri, symbol.getLocation().getRange());
+            languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
+                .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                .findFirst()
+                .ifPresent(action -> {
+                    if (action.getCommand() instanceof WorkspaceEditCommand) {
+                        ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
+                    }
+                });
         }
 
         return refreshedCustomizationSupplier.get();
@@ -313,7 +309,7 @@ public class Utils {
      * @param <T> The type of the customization.
      * @return A refreshed customization after the annotation was removed.
      */
-    public static <T extends CodeCustomization> T removeAnnotation(String annotation, CodeCustomization customization,
+    public static <T extends CodeCustomization> T removeAnnotation(String annotation, T customization,
         Supplier<T> refreshedCustomizationSupplier) {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
@@ -345,7 +341,15 @@ public class Utils {
                 fileEvent.setType(FileChangeType.CHANGED);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-                organizeImportsOnRange(languageClient, editor, fileUri, new Range(start, end));
+                languageClient.listCodeActions(fileUri, new Range(start, end))
+                    .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+                    .findFirst()
+                    .ifPresent(action -> {
+                        if (action.getCommand() instanceof WorkspaceEditCommand) {
+                            ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(workspaceEdit ->
+                                Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient));
+                        }
+                    });
             }
         }
 
@@ -362,7 +366,7 @@ public class Utils {
      * @param <T> The type of the customization.
      * @return A refreshed customization after the body was replaced.
      */
-    public static <T extends CodeCustomization> T replaceBody(String newBody, CodeCustomization customization,
+    public static <T extends CodeCustomization> T replaceBody(String newBody, T customization,
         Supplier<T> refreshedCustomizationSupplier) {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
@@ -396,8 +400,8 @@ public class Utils {
         return refreshedCustomizationSupplier.get();
     }
 
-    public static <T extends CodeCustomization> T replaceParameters(String newParameters,
-        CodeCustomization customization, Supplier<T> refreshCustomizationSupplier) {
+    public static <T extends CodeCustomization> T replaceParameters(String newParameters, T customization,
+        Supplier<T> refreshCustomizationSupplier) {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
         String fileName = customization.getFileName();
@@ -430,7 +434,6 @@ public class Utils {
         Position parametersEnd = new Position(line, matcher.group(1).length());
 
         editor.replace(fileName, parametersStart, parametersEnd, newParameters);
-
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
         fileEvent.setType(FileChangeType.CHANGED);
@@ -442,61 +445,6 @@ public class Utils {
     public static String getIndent(String content) {
         Matcher matcher = INDENT_DETERMINATION_PATTERN.matcher(content);
         return matcher.matches() ? matcher.group(1) : "";
-    }
-
-    /**
-     * Adds imports to the customization.
-     *
-     * @param importsToAdd Imports to add.
-     * @param customization Code customization to add imports.
-     * @param refreshCustomizationSupplier A supplier that returns a refreshed customization after the imports are
-     * added.
-     * @param <T> Type of the customization.
-     * @return A refreshed customization.
-     */
-    public static <T extends CodeCustomization> T addImports(List<String> importsToAdd,
-        ClassCustomization customization, Supplier<T> refreshCustomizationSupplier) {
-        CodeCustomization codeCustomization = customization;
-        EclipseLanguageClient languageClient = codeCustomization.getLanguageClient();
-        Editor editor = codeCustomization.getEditor();
-        URI fileUri = codeCustomization.getFileUri();
-        String fileName = codeCustomization.getFileName();
-
-        // Only add imports if they exist.
-        if (!isNullOrEmpty(importsToAdd)) {
-            // Always place imports after the package.
-            // The language server will format the imports once added, so location doesn't matter.
-            int importLine = Utils.walkDownFileUntilLineMatches(editor, fileName, 0,
-                line -> PACKAGE_PATTERN.matcher(line).matches()) + 1;
-
-            Position importPosition = new Position(importLine, 0);
-            String imports = importsToAdd.stream()
-                .map(importToAdd -> "import " + importToAdd + ";")
-                .collect(Collectors.joining("\n"));
-
-            editor.insertBlankLine(fileName, importLine, false);
-            editor.replace(fileName, importPosition, importPosition, imports);
-        }
-
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return refreshCustomizationSupplier.get();
-    }
-
-    public static void organizeImportsOnRange(EclipseLanguageClient languageClient, Editor editor, URI fileUri,
-        Range range) {
-        languageClient.listCodeActions(fileUri, range).stream()
-            .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-            .findFirst()
-            .ifPresent(action -> {
-                if (action.getCommand() instanceof WorkspaceEditCommand) {
-                    ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(importEdit ->
-                        Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
-                }
-            });
     }
 
     private Utils() {

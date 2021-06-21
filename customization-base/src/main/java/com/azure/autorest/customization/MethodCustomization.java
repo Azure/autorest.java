@@ -3,11 +3,13 @@ package com.azure.autorest.customization;
 import com.azure.autorest.customization.implementation.CodeCustomization;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
 import com.azure.autorest.customization.implementation.ls.models.FileEvent;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
+import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 
@@ -252,7 +254,15 @@ public final class MethodCustomization extends CodeCustomization {
         workspaceEdit.setChanges(Collections.singletonMap(fileUri, edits));
         Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
 
-        Utils.organizeImportsOnRange(languageClient, editor, fileUri, new Range(start, end));
+        languageClient.listCodeActions(fileUri, new Range(start, end))
+            .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+            .findFirst()
+            .ifPresent(action -> {
+                if (action.getCommand() instanceof WorkspaceEditCommand) {
+                    ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(importEdit ->
+                        Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
+                }
+            });
 
         String newMethodSignature = methodSignature.replace(oldReturnType + " " + methodName, newReturnType + " " + methodName);
 
