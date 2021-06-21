@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class FluentCollectionMethodExample {
 
+    private final FluentResourceCollection collection;
     private final FluentCollectionMethod collectionMethod;
     private final List<ParameterExample> parameters = new ArrayList<>();
 
@@ -26,7 +28,8 @@ public class FluentCollectionMethodExample {
         }
     }
 
-    public FluentCollectionMethodExample(FluentCollectionMethod collectionMethod) {
+    public FluentCollectionMethodExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+        this.collection = collection;
         this.collectionMethod = collectionMethod;
     }
 

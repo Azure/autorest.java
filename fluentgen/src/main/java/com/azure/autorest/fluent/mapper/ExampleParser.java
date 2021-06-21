@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
@@ -38,7 +39,7 @@ public class ExampleParser {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), ExampleParser.class);
 
-    public static List<FluentCollectionMethodExample> parseMethod(FluentCollectionMethod collectionMethod) {
+    public static List<FluentCollectionMethodExample> parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         List<FluentCollectionMethodExample> ret = null;
 
         ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
@@ -47,7 +48,7 @@ public class ExampleParser {
 
             List<MethodParameter> parameters = getParameters(clientMethod);
             for (ProxyMethodExample example : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().values()) {
-                FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(collectionMethod);
+                FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(collection, collectionMethod);
 
                 for (MethodParameter parameter : parameters) {
                     String serializedName = parameter.getSerializedName();
