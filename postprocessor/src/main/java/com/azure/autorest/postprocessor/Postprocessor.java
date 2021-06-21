@@ -5,11 +5,7 @@ import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.BuildWorkspaceStatus;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeAction;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
 import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -30,10 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -218,18 +212,7 @@ public class Postprocessor extends NewPlugin {
               .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
               .findFirst().get();
       URI fileUri = classSymbol.getLocation().getUri();
-      Optional<CodeAction> organizeImports = languageClient.listCodeActions(fileUri, classSymbol.getLocation().getRange())
-              .stream().filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
-              .findFirst();
-      if (organizeImports.isPresent()) {
-        WorkspaceEditCommand command;
-        if (organizeImports.get().getCommand() instanceof WorkspaceEditCommand) {
-          command = (WorkspaceEditCommand) organizeImports.get().getCommand();
-          for(WorkspaceEdit workspaceEdit : command.getArguments()) {
-            Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-          }
-        }
-      }
+      Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
       BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
       if (status == BuildWorkspaceStatus.SUCCEED) {
         URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();

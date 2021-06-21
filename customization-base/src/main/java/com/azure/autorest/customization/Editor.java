@@ -144,9 +144,7 @@ public final class Editor {
         if (!indented) {
             return insertBlankLineWithIndent(fileName, line, 0);
         } else {
-            int indentAmount = lines.get(fileName).get(line)
-                .replaceFirst("[^ ].*$", "")
-                .length();
+            int indentAmount = Utils.getIndent(lines.get(fileName).get(line)).length();
 
             return insertBlankLineWithIndent(fileName, line, indentAmount);
         }
