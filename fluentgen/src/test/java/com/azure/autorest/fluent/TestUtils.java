@@ -76,7 +76,7 @@ public class TestUtils {
     }
 
     public static CodeModel loadCodeModel(FluentGenAccessor fluentgenAccessor, String filename) {
-        String searchYamlContent = loadYaml(filename);   // the YAML is produced by fluentnamer on locks.json
+        String searchYamlContent = loadYaml(filename);   // the YAML is produced by fluentnamer on https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
 
         CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
         Client client = fluentgenAccessor.handleMap(codeModel);
