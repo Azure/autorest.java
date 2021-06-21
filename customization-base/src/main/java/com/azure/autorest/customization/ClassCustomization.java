@@ -43,9 +43,6 @@ public final class ClassCustomization extends CodeCustomization {
     private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
         Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
 
-    private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
-    private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
-
     private final String packageName;
     private final String className;
 
@@ -64,64 +61,6 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public String getClassName() {
         return className;
-    }
-
-    /**
-     * Adds an import to the class.
-     *
-     * @param importName Name of the package to import without {@code import} included.
-     * @return The current class customization.
-     */
-    public ClassCustomization addImport(String importName) {
-        List<String> fileLines = editor.getFileLines(fileName);
-
-        // If the class doesn't have any imports, have the import range begin one line after the package definition
-        // as a package definition is required.
-        int packageLine = 0;
-        for (int i = 0; i < fileLines.size(); i++) {
-            if (PACKAGE_PATTERN.matcher(fileLines.get(i)).matches()) {
-                packageLine = i;
-                break;
-            }
-        }
-
-        int importStartLine = packageLine;
-        int importEndLine = packageLine;
-        for (int i = packageLine; i < fileLines.size(); i++) {
-            if (IMPORT_PATTERN.matcher(fileLines.get(i)).matches()) {
-                importStartLine = i;
-                importEndLine = i;
-                break;
-            }
-        }
-
-        for (int i = importStartLine + 1; i < fileLines.size(); i++) {
-            if (IMPORT_PATTERN.matcher(fileLines.get(i)).matches()) {
-                importEndLine = i;
-            }
-        }
-
-        Position newImportPosition;
-        // If the line after the final import isn't empty insert a blank line.
-        if (!Utils.isNullOrEmpty(fileLines.get(importEndLine + 1))) {
-            newImportPosition = editor.insertBlankLine(fileName, importEndLine + 1, true);
-        } else {
-            newImportPosition = new Position(importEndLine + 1, 0);
-        }
-
-        editor.replace(fileName, newImportPosition, newImportPosition, "import " + importName + ";");
-
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        Position importStartPosition = new Position(importStartLine, 0);
-        Position importEndPosition = new Position(importEndLine + 1, 0);
-        Utils.organizeImportsOnRange(languageClient, editor, fileUri,
-            new Range(importStartPosition, importEndPosition));
-
-        return refreshSymbol();
     }
 
     /**
@@ -248,6 +187,18 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The constructor level customization for the added constructor.
      */
     public ConstructorCustomization addConstructor(String constructor) {
+        return addConstructor(constructor, null);
+    }
+
+    /**
+     * Adds a constructor to this class.
+     *
+     * @param constructor The entire constructor as a literal string.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The constructor level customization for the added constructor.
+     */
+    public ConstructorCustomization addConstructor(String constructor, List<String> importsToAdd) {
         // Get the signature of the constructor.
         Matcher constructorSignatureMatcher = CONSTRUCTOR_SIGNATURE_PATTERN.matcher(constructor);
         String constructorSignature = null;
@@ -292,16 +243,12 @@ public final class ClassCustomization extends CodeCustomization {
 
         editor.replaceWithIndentedContent(fileName, constructorPosition, constructorPosition, constructor,
             constructorPosition.getCharacter());
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
 
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
+        final String ctorSignature = (constructorSignature == null)
+            ? editor.getFileLine(fileName, constructorStartLine)
+            : constructorSignature;
 
-        if (constructorSignature == null) {
-            constructorSignature = editor.getFileLine(fileName, constructorStartLine);
-        }
-        return getConstructor(constructorSignature);
+        return Utils.addImports(importsToAdd, this, () -> getConstructor(ctorSignature));
     }
 
     /**
@@ -311,6 +258,10 @@ public final class ClassCustomization extends CodeCustomization {
      * @return The method level customization for the added method.
      */
     public MethodCustomization addMethod(String method) {
+        return addMethod(method, null);
+    }
+
+    public MethodCustomization addMethod(String method, List<String> importsToAdd) {
         // Get the signature of the method.
         Matcher methodSignatureMatcher = METHOD_SIGNATURE_PATTERN.matcher(method);
         String methodSignature = null;
@@ -333,15 +284,10 @@ public final class ClassCustomization extends CodeCustomization {
 
         // replace
         editor.replaceWithIndentedContent(fileName, newMethod, newMethod, method, newMethod.getCharacter());
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
-        if (methodSignature == null) {
-            methodSignature = editor.getFileLine(fileName, lineNum);
-        }
-        return getMethod(methodSignature);
+        final String mSig = (methodSignature == null) ? editor.getFileLine(fileName, lineNum) : methodSignature;
+
+        return Utils.addImports(importsToAdd, this, () -> getMethod(mSig));
     }
 
     /**
