@@ -126,7 +126,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             List<Parameter> codeModelParameters;
             if (settings.isLowLevelClient()) {
-                codeModelParameters = request.getParameters().stream().filter(Value::isRequired).collect(Collectors.toList());
+                codeModelParameters = request.getParameters().stream().filter(p ->
+                        p.isRequired() && !(p.getSchema().getType() == Schema.AllSchemaTypes.GROUP)).collect(Collectors.toList());
             } else {
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
             }
