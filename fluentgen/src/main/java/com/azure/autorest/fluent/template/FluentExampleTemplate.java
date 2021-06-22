@@ -27,20 +27,49 @@ public class FluentExampleTemplate {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentExampleTemplate.class);
 
-    public final void write(FluentCollectionMethodExample collectionMethodExample, JavaFile javaFile) {
+    private static final FluentExampleTemplate INSTANCE = new FluentExampleTemplate();
 
+    public static FluentExampleTemplate getInstance() {
+        return INSTANCE;
     }
 
-    public String writeSnippet(FluentCollectionMethodExample collectionMethodExample) {
+    public final void write(FluentCollectionMethodExample collectionMethodExample, JavaFile javaFile) {
+        String className = CodeNamer.toPascalCase(collectionMethodExample.getName()) + "Samples";
+        String methodName = CodeNamer.toCamelCase(collectionMethodExample.getName());
+        String managerName = CodeNamer.toCamelCase(collectionMethodExample.getManager().getType().getName());
+
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
         String parameterInvocations = collectionMethodExample.getParameters().stream()
                 .map(p -> visitor.accept(p.getExampleNode()))
                 .collect(Collectors.joining(", "));
 
-        visitor.imports.add(FluentStatic.getFluentManager().getType().getFullName());
+        String snippet = String.format("%1$s.%2$s().%3$s(%4$s);",
+                managerName,
+                CodeNamer.toCamelCase(collectionMethodExample.getResourceCollection().getInterfaceType().getName()),
+                collectionMethodExample.getCollectionMethod().getMethodName(),
+                parameterInvocations);
+
+        Set<String> imports = new HashSet<>(visitor.imports);
+        //imports.add(FluentStatic.getFluentManager().getType().getFullName());
+        javaFile.declareImport(imports);
+
+        javaFile.publicFinalClass(className, classBlock -> {
+            classBlock.publicMethod(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName), methodBlock -> {
+                methodBlock.line(snippet);
+            });
+        });
+    }
+
+    public String writeSnippet(FluentCollectionMethodExample collectionMethodExample) {
+        String managerName = CodeNamer.toCamelCase(collectionMethodExample.getManager().getType().getName());
+
+        ExampleNodeVisitor visitor = new ExampleNodeVisitor();
+        String parameterInvocations = collectionMethodExample.getParameters().stream()
+                .map(p -> visitor.accept(p.getExampleNode()))
+                .collect(Collectors.joining(", "));
 
         return String.format("%1$s.%2$s().%3$s(%4$s);",
-                CodeNamer.toCamelCase(FluentStatic.getFluentManager().getType().getFullName()),
+                managerName,
                 CodeNamer.toCamelCase(collectionMethodExample.getResourceCollection().getInterfaceType().getName()),
                 collectionMethodExample.getCollectionMethod().getMethodName(),
                 parameterInvocations);

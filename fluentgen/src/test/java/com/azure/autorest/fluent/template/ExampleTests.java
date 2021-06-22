@@ -16,6 +16,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollection
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -31,12 +32,13 @@ public class ExampleTests {
     }
 
     @Test
+    @Disabled
     public void testLocks() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
         Client client = FluentStatic.getClient();
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
-        fluentClient.getResourceCollections().stream().forEach(rc -> rc.getMethodsForTemplate().stream().forEach(m -> {
+        fluentClient.getResourceCollections().forEach(rc -> rc.getMethodsForTemplate().forEach(m -> {
             List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(rc, m);
             if (examples != null) {
                 examples.forEach(e -> {
@@ -47,12 +49,13 @@ public class ExampleTests {
     }
 
     @Test
+    @Disabled
     public void testStorage() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-storage.yaml");
         Client client = FluentStatic.getClient();
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
-        fluentClient.getResourceCollections().stream().forEach(rc -> rc.getMethodsForTemplate().stream().forEach(m -> {
+        fluentClient.getResourceCollections().forEach(rc -> rc.getMethodsForTemplate().forEach(m -> {
             List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(rc, m);
             if (examples != null) {
                 examples.forEach(e -> {

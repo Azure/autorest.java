@@ -18,6 +18,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
@@ -279,9 +280,15 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }
 
+            // Readme and Changelog
             if (isSdkIntegration) {
                 javaPackage.addReadme(project);
                 javaPackage.addChangelog(project.getChangelog());
+            }
+
+            // Samples
+            for (FluentCollectionMethodExample methodExample : fluentClient.getResourceCollectionMethodExamples()) {
+                javaPackage.addSample(methodExample);
             }
         }
 

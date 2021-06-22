@@ -24,7 +24,7 @@ public class ClassType implements IType {
     public static final ClassType Float = new ClassType.Builder().knownClass(java.lang.Float.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression))).build();
     public static final ClassType Double = new ClassType.Builder().knownClass(java.lang.Double.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression))).build();
     public static final ClassType Character = new ClassType.Builder().knownClass(java.lang.Character.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0)))).build();
-    public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + defaultValueExpression + "\"").build();
+    public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + escapeString(defaultValueExpression) + "\"").build();
     public static final ClassType Base64Url = new ClassType.Builder().knownClass(com.azure.core.util.Base64Url.class).build();
     public static final ClassType AndroidBase64Url = new ClassType.Builder().packageName("com.azure.android.core.util").name("Base64Url").build();
     public static final ClassType LocalDate = new ClassType.Builder().knownClass(java.time.LocalDate.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
@@ -256,5 +256,15 @@ public class ClassType implements IType {
         public ClassType build() {
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter);
         }
+    }
+
+    private static String escapeString(String str) {
+        return str.replace("\\", "\\\\")
+                .replace("\t", "\\t")
+                .replace("\b", "\\b")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\f", "\\f")
+                .replace("\"", "\\\"");
     }
 }
