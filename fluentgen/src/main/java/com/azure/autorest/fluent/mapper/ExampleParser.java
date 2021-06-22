@@ -47,8 +47,9 @@ public class ExampleParser {
             ret = new ArrayList<>();
 
             List<MethodParameter> parameters = getParameters(clientMethod);
-            for (ProxyMethodExample example : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().values()) {
-                FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(collection, collectionMethod);
+            for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
+                ProxyMethodExample example = entry.getValue();
+                FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(entry.getKey(), collection, collectionMethod);
 
                 for (MethodParameter parameter : parameters) {
                     String serializedName = parameter.getSerializedName();
@@ -60,9 +61,9 @@ public class ExampleParser {
                     FluentCollectionMethodExample.ParameterExample parameterExample;
                     if (parameterValue == null) {
                         if (ClassType.Context.equals(parameter.getClientMethodParameter().getClientType())) {
-                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Context, "Context.NONE"));
+                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Context, null).setLiteralsValue(""));
                         } else {
-                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Void, "null"));
+                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Void, null));
                         }
                     } else {
                         parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, parseNode(parameter.getClientMethodParameter().getClientType(), parameterValue.getObjectValue()));
@@ -84,6 +85,8 @@ public class ExampleParser {
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
             if (model != null) {
+                node.setClientModel(model);
+
                 for (ClientModelProperty property : model.getProperties()) {
                     String serializedName = property.getSerializedName();
 
@@ -107,7 +110,7 @@ public class ExampleParser {
                         }
                     }
                     if (found) {
-                        node.getChildNodes().add(parseNode(property.getClientType(), childObjectValue));
+                        node.getChildNodes().add(parseNode(property.getClientType(), childObjectValue).setClientModelProperty(property));
                     }
                 }
             }

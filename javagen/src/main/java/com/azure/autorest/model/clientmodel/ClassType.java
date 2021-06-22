@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.util.Context;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ClassType implements IType {
     public static final ClassType NonNull = new ClassType.Builder().knownClass(reactor.util.annotation.NonNull.class).build();
     public static final ClassType StreamResponse = new ClassType.Builder().knownClass(com.azure.core.http.rest.StreamResponse.class).build();
     public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
-    public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
+    public static final ClassType Context = new Builder().knownClass(com.azure.core.util.Context.class).defaultValueExpressionConverter(epr -> "Context.NONE").build();
     public static final ClassType AndroidContext = new ClassType.Builder().packageName("com.azure.android.core.util").name("Context").build();
     public static final ClassType ClientLogger = new ClassType.Builder().knownClass(com.azure.core.util.logging.ClientLogger.class).build();
     public static final ClassType AzureEnvironment = new ClassType.Builder().packageName("com.azure.core.management").name("AzureEnvironment").build();

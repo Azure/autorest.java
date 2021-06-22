@@ -17,23 +17,12 @@ public class ProxyMethodExample {
     // https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md
 
     public static class ParameterValue {
-        private final String stringValue;
         private final Object objectValue;
 
         private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-        public ParameterValue(String stringValue) {
-            this.stringValue = stringValue;
-            this.objectValue = stringValue;
-        }
-
         public ParameterValue(Object objectValue) {
-            this.stringValue = null;
             this.objectValue = objectValue;
-        }
-
-        public String getStringValue() {
-            return stringValue;
         }
 
         public Object getObjectValue() {
@@ -42,20 +31,14 @@ public class ProxyMethodExample {
 
         @Override
         public String toString() {
-            if (stringValue != null) {
+            try {
                 return "ParameterValue{" +
-                        "stringValue='" + stringValue + '\'' +
+                        "objectValue=" + PRETTY_PRINTER.writeValueAsString(objectValue) +
                         '}';
-            } else {
-                try {
-                    return "ParameterValue{" +
-                            "objectValue=" + (objectValue == null ? "null" : PRETTY_PRINTER.writeValueAsString(objectValue)) +
-                            '}';
-                } catch (JsonProcessingException e) {
-                    return "ParameterValue{" +
-                            "objectValue=" + objectValue +
-                            '}';
-                }
+            } catch (JsonProcessingException e) {
+                return "ParameterValue{" +
+                        "objectValue=" + objectValue +
+                        '}';
             }
         }
     }
@@ -85,11 +68,7 @@ public class ProxyMethodExample {
         }
 
         public Builder parameter(String parameterName, Object parameterValue) {
-            if (parameterValue instanceof String) {
-                this.parameters.put(parameterName, new ParameterValue((String) parameterValue));
-            } else {
-                this.parameters.put(parameterName, new ParameterValue(parameterValue));
-            }
+            this.parameters.put(parameterName, new ParameterValue(parameterValue));
             return this;
         }
 

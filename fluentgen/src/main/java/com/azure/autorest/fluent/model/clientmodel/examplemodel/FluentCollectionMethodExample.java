@@ -14,6 +14,7 @@ import java.util.List;
 
 public class FluentCollectionMethodExample {
 
+    private final String name;
     private final FluentResourceCollection collection;
     private final FluentCollectionMethod collectionMethod;
     private final List<ParameterExample> parameters = new ArrayList<>();
@@ -26,14 +27,31 @@ public class FluentCollectionMethodExample {
             this.parameter = parameter;
             this.exampleNode = exampleNode;
         }
+
+        public MethodParameter getParameter() {
+            return parameter;
+        }
+
+        public ExampleNode getExampleNode() {
+            return exampleNode;
+        }
     }
 
-    public FluentCollectionMethodExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+    public FluentCollectionMethodExample(String name, FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+        this.name = name;
         this.collection = collection;
         this.collectionMethod = collectionMethod;
     }
 
     public List<ParameterExample> getParameters() {
         return parameters;
+    }
+
+    public FluentResourceCollection getResourceCollection() {
+        return collection;
+    }
+
+    public FluentCollectionMethod getCollectionMethod() {
+        return collectionMethod;
     }
 }
