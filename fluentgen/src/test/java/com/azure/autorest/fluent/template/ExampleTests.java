@@ -46,14 +46,13 @@ public class ExampleTests {
         }));
     }
 
-
     @Test
     public void testStorage() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-storage.yaml");
         Client client = FluentStatic.getClient();
         FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
-        fluentClient.getResourceCollections().stream().forEach(rc -> rc.getMethods().stream().forEach(m -> {
+        fluentClient.getResourceCollections().stream().forEach(rc -> rc.getMethodsForTemplate().stream().forEach(m -> {
             List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(rc, m);
             if (examples != null) {
                 examples.forEach(e -> {

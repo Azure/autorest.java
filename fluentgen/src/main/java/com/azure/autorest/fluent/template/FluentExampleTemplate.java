@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
@@ -25,6 +26,10 @@ import java.util.stream.Collectors;
 public class FluentExampleTemplate {
 
     private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentExampleTemplate.class);
+
+    public final void write(FluentCollectionMethodExample collectionMethodExample, JavaFile javaFile) {
+
+    }
 
     public String writeSnippet(FluentCollectionMethodExample collectionMethodExample) {
         ExampleNodeVisitor visitor = new ExampleNodeVisitor();
