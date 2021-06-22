@@ -43,19 +43,26 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.headerCollectionPrefix(headerCollectionPrefix);
 
+        RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
+        builder.requestParameterLocation(parameterRequestLocation);
+
+        boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
+        builder.fromClient(parameterIsServiceClientProperty);
+
         Schema ParameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
         IType clientType = wireType.getClientType();
+        if (settings.isLowLevelClient() && !(clientType instanceof PrimitiveType)) {
+            if (parameterRequestLocation == RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
+                clientType = ClassType.BinaryData;
+            } else {
+                clientType = ClassType.String;
+            }
+        }
         builder.clientType(clientType);
-
-        RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
-        builder.requestParameterLocation(parameterRequestLocation);
-
-        boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
-        builder.fromClient(parameterIsServiceClientProperty);
 
         if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.Body){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
