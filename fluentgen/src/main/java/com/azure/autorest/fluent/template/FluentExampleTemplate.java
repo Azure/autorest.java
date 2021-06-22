@@ -18,6 +18,8 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentExampleTemplate {
@@ -30,8 +32,10 @@ public class FluentExampleTemplate {
                 .map(p -> visitor.accept(p.getExampleNode()))
                 .collect(Collectors.joining(", "));
 
+        visitor.imports.add(FluentStatic.getFluentManager().getType().getFullName());
+
         return String.format("%1$s.%2$s().%3$s(%4$s);",
-                CodeNamer.toCamelCase(FluentStatic.getFluentManager().getType().getName()),
+                CodeNamer.toCamelCase(FluentStatic.getFluentManager().getType().getFullName()),
                 CodeNamer.toCamelCase(collectionMethodExample.getResourceCollection().getInterfaceType().getName()),
                 collectionMethodExample.getCollectionMethod().getMethodName(),
                 parameterInvocations);
@@ -39,12 +43,18 @@ public class FluentExampleTemplate {
 
     private static class ExampleNodeVisitor {
 
+        private final Set<String> imports = new HashSet<>();
+
         private String accept(ExampleNode node) {
             if (node instanceof LiteralNode) {
+                node.getClientType().addImportsTo(imports, false);
+
                 return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
             } else if (node instanceof ListNode) {
-                StringBuilder builder = new StringBuilder();
+                imports.add(java.util.Arrays.class.getName());
 
+                StringBuilder builder = new StringBuilder();
+                // Arrays.asList(...)
                 builder.append("Arrays.asList(")
                         .append(node.getChildNodes().stream().map(this::accept).collect(Collectors.joining(", ")))
                         .append(")");
@@ -53,12 +63,15 @@ public class FluentExampleTemplate {
             } else if (node instanceof ClientModelNode) {
                 ClientModelNode clientModelNode = ((ClientModelNode) node);
 
-                StringBuilder builder = new StringBuilder();
-
                 ClientModel model = clientModelNode.getClientModel();
+
+                imports.add(model.getFullName());
+
+                StringBuilder builder = new StringBuilder();
                 builder.append("new ").append(model.getName()).append("()");
                 for (ExampleNode childNode : node.getChildNodes()) {
                     ClientModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
+                    // .withProperty(...)
                     builder.append(".").append(modelProperty.getSetterName())
                             .append("(").append(this.accept(childNode)).append(")");
                 }
