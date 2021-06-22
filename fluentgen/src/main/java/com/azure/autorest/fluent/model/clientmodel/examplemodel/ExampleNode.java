@@ -5,10 +5,6 @@
 
 package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.ArrayList;
@@ -20,13 +16,6 @@ public class ExampleNode {
     private final Object objectValue;
 
     private final IType clientType;
-
-    // only valid when it is a ClientModel
-    private ClientModel model;
-    private ClientModelProperty modelProperty;
-
-    // only valid when the node it the terminal (e.g. String, Enum)
-    private String literalsValue;
 
     private final List<ExampleNode> childNodes = new ArrayList<>();
 
@@ -45,32 +34,5 @@ public class ExampleNode {
 
     public IType getClientType() {
         return clientType;
-    }
-
-    public String getLiteralsValue() {
-        return literalsValue;
-    }
-
-    public ExampleNode setLiteralsValue(String literalsValue) {
-        this.literalsValue = literalsValue;
-        return this;
-    }
-
-    public ClientModel getClientModel() {
-        return model;
-    }
-
-    public ExampleNode setClientModel(ClientModel model) {
-        this.model = model;
-        return this;
-    }
-
-    public ClientModelProperty getClientModelProperty() {
-        return modelProperty;
-    }
-
-    public ExampleNode setClientModelProperty(ClientModelProperty modelProperty) {
-        this.modelProperty = modelProperty;
-        return this;
     }
 }

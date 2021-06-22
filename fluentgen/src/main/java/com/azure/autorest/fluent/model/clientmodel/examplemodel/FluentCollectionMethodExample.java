@@ -43,6 +43,10 @@ public class FluentCollectionMethodExample {
         this.collectionMethod = collectionMethod;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public List<ParameterExample> getParameters() {
         return parameters;
     }

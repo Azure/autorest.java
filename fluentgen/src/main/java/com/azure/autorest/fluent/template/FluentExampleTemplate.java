@@ -8,8 +8,11 @@ package com.azure.autorest.fluent.template;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.CodeNamer;
@@ -35,19 +38,33 @@ public class FluentExampleTemplate {
     }
 
     private static class ExampleNodeVisitor {
+
         private String accept(ExampleNode node) {
-            ClientModel model = node.getClientModel();
-            if (model == null) {
-                return node.getClientType().defaultValueExpression(node.getLiteralsValue());
-            } else {
+            if (node instanceof LiteralNode) {
+                return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
+            } else if (node instanceof ListNode) {
                 StringBuilder builder = new StringBuilder();
+
+                builder.append("Arrays.asList(")
+                        .append(node.getChildNodes().stream().map(this::accept).collect(Collectors.joining(", ")))
+                        .append(")");
+
+                return builder.toString();
+            } else if (node instanceof ClientModelNode) {
+                ClientModelNode clientModelNode = ((ClientModelNode) node);
+
+                StringBuilder builder = new StringBuilder();
+
+                ClientModel model = clientModelNode.getClientModel();
                 builder.append("new ").append(model.getName()).append("()");
                 for (ExampleNode childNode : node.getChildNodes()) {
-                    ClientModelProperty modelProperty = childNode.getClientModelProperty();
-                    builder.append(".").append(modelProperty.getSetterName()).append("(").append(accept(childNode)).append(")");
+                    ClientModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
+                    builder.append(".").append(modelProperty.getSetterName())
+                            .append("(").append(this.accept(childNode)).append(")");
                 }
                 return builder.toString();
             }
+            return null;
         }
     }
 }

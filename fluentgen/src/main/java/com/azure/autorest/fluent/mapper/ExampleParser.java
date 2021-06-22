@@ -11,16 +11,21 @@ import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
@@ -61,9 +66,9 @@ public class ExampleParser {
                     FluentCollectionMethodExample.ParameterExample parameterExample;
                     if (parameterValue == null) {
                         if (ClassType.Context.equals(parameter.getClientMethodParameter().getClientType())) {
-                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Context, null).setLiteralsValue(""));
+                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new LiteralNode(ClassType.Context, null).setLiteralsValue(""));
                         } else {
-                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new ExampleNode(ClassType.Void, null));
+                            parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, new LiteralNode(ClassType.Void, null));
                         }
                     } else {
                         parameterExample = new FluentCollectionMethodExample.ParameterExample(parameter, parseNode(parameter.getClientMethodParameter().getClientType(), parameterValue.getObjectValue()));
@@ -79,16 +84,38 @@ public class ExampleParser {
     }
 
     private static ExampleNode parseNode(IType type, Object objectValue) {
-        ExampleNode node = new ExampleNode(type, objectValue);
-        if (type instanceof ArrayType) {
-            // TODO array and dict
+        ExampleNode node = null;
+        if (type instanceof ListType && objectValue instanceof List) {
+            IType elementType = ((ListType) type).getElementType();
+            ListNode listNode = new ListNode(elementType, objectValue);
+            node = listNode;
+
+            List<Object> elements = (List<Object>) objectValue;
+            for (Object childObjectValue : elements) {
+                ExampleNode childNode = parseNode(elementType, childObjectValue);
+                node.getChildNodes().add(childNode);
+            }
+        } else if (type instanceof MapType && objectValue instanceof Map) {
+            IType elementType = ((MapType) type).getValueType();
+            MapNode mapNode = new MapNode(elementType, objectValue);
+            node = mapNode;
+
+            Map<String, Object> dict = (Map<String, Object>) objectValue;
+            for (Map.Entry<String, Object> entry: dict.entrySet()) {
+                ExampleNode childNode = parseNode(elementType, entry.getValue());
+                node.getChildNodes().add(childNode);
+                mapNode.getKeys().put(childNode, entry.getKey());
+            }
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
             if (model != null) {
-                node.setClientModel(model);
+                ClientModelNode clientModelNode = new ClientModelNode(type, objectValue);
+                node = clientModelNode;
 
-                for (ClientModelProperty property : model.getProperties()) {
-                    String serializedName = property.getSerializedName();
+                clientModelNode.setClientModel(model);
+
+                for (ClientModelProperty modelProperty : model.getProperties()) {
+                    String serializedName = modelProperty.getSerializedName();
 
                     List<String> flattenedNames = Collections.singletonList(serializedName);
                     if (model.getNeedsFlatten()) {
@@ -110,12 +137,19 @@ public class ExampleParser {
                         }
                     }
                     if (found) {
-                        node.getChildNodes().add(parseNode(property.getClientType(), childObjectValue).setClientModelProperty(property));
+                        ExampleNode childNode = parseNode(modelProperty.getClientType(), childObjectValue);
+                        node.getChildNodes().add(childNode);
+                        clientModelNode.getClientModelProperties().put(childNode, modelProperty);
                     }
                 }
+            } else {
+                // TODO error
             }
         } else {
-            node.setLiteralsValue(objectValue.toString());
+            LiteralNode literalNode = new LiteralNode(type, objectValue);
+            node = literalNode;
+
+            literalNode.setLiteralsValue(objectValue.toString());
         }
         return node;
     }
