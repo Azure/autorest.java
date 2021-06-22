@@ -335,20 +335,23 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                if (settings.isLowLevelClient()) {
+                    generateProtocolPagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
                     generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
             case PagingAsync:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                if (settings.isLowLevelClient()) {
+                    generateProtocolPagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
                     generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
             case PagingAsyncSinglePage:
-                if (!settings.isLowLevelClient()) {
-                    // TODO: https://github.com/Azure/autorest.java/issues/1034
+                if (settings.isLowLevelClient()) {
+                    generateProtocolPagingAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
                     generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
@@ -435,6 +438,18 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 generateSimpleAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
         }
+    }
+
+    protected void generateProtocolPagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+    }
+
+    protected void generateProtocolPagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
+    }
+
+    protected void generateProtocolPagingAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
