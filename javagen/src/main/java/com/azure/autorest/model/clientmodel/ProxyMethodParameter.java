@@ -188,8 +188,7 @@ public class ProxyMethodParameter {
     //C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
 //ORIGINAL LINE: public string ConvertFromClientType(string source, string target, bool alwaysNull = false, bool alwaysNonNull = false)
     public final String convertFromClientType(String source, String target, boolean alwaysNull, boolean alwaysNonNull) {
-        IType clientType = getWireType().getClientType();
-        if (clientType == getWireType()) {
+        if (getClientType() == getWireType()) {
             return String.format("%1$s %2$s = %3$s;", getWireType(), target, source);
         }
         if (alwaysNull) {

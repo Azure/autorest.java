@@ -9,7 +9,6 @@ import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
@@ -92,11 +91,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
@@ -108,12 +109,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -124,11 +126,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions) {
@@ -146,12 +150,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getNotExpandableAsync(RequestOptions requestOptions, Context context) {
@@ -169,11 +174,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotExpandable(RequestOptions requestOptions) {
@@ -183,12 +190,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions, Context context) {
@@ -198,52 +206,51 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
         return FluxUtil.withContext(
                 context ->
-                        service.putNotExpandable(
-                                this.client.getHost(), stringBodyConverted, accept, requestOptions, context));
+                        service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(
             BinaryData stringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData stringBodyConverted = stringBody;
-        return service.putNotExpandable(this.client.getHost(), stringBodyConverted, accept, requestOptions, context);
+        return service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context);
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions) {
@@ -254,13 +261,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
@@ -271,11 +278,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(BinaryData stringBody, RequestOptions requestOptions) {
@@ -285,13 +294,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(
@@ -302,11 +311,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
@@ -318,12 +329,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions, Context context) {
@@ -334,11 +346,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions) {
@@ -356,12 +370,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getReferencedAsync(RequestOptions requestOptions, Context context) {
@@ -379,11 +394,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getReferenced(RequestOptions requestOptions) {
@@ -393,12 +410,13 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions, Context context) {
@@ -408,52 +426,51 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
         return FluxUtil.withContext(
                 context ->
-                        service.putReferenced(
-                                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context));
+                        service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
-        return service.putReferenced(this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context);
+        return service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context);
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -464,13 +481,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
@@ -481,11 +498,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -495,13 +514,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(
@@ -512,11 +531,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(RequestOptions requestOptions) {
@@ -528,12 +549,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(
@@ -545,11 +567,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions) {
@@ -567,12 +591,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getReferencedConstantAsync(RequestOptions requestOptions, Context context) {
@@ -590,11 +615,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getReferencedConstant(RequestOptions requestOptions) {
@@ -604,12 +631,13 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions, Context context) {
@@ -619,53 +647,52 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
         return FluxUtil.withContext(
                 context ->
                         service.putReferencedConstant(
-                                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context));
+                                this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
             BinaryData enumStringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        BinaryData enumStringBodyConverted = enumStringBody;
-        return service.putReferencedConstant(
-                this.client.getHost(), enumStringBodyConverted, accept, requestOptions, context);
+        return service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, requestOptions, context);
     }
 
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -676,13 +703,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(
@@ -694,11 +721,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(BinaryData enumStringBody, RequestOptions requestOptions) {
@@ -708,13 +737,13 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody enum string body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(

@@ -157,21 +157,23 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 }
             }
             // RequestOptions
-            ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
-                    .description("The options to configure the HTTP request before HTTP client sends it")
-                    .wireType(ClassType.RequestOptions)
-                    .clientType(ClassType.RequestOptions)
-                    .name("requestOptions")
-                    .requestParameterLocation(RequestParameterLocation.None)
-                    .requestParameterName("requestOptions")
-                    .alreadyEncoded(true)
-                    .isConstant(false)
-                    .isRequired(false)
-                    .isNullable(false)
-                    .fromClient(false)
-                    .parameterReference("requestOptions")
-                    .build();
-            parameters.add(requestOptions);
+            if (settings.isLowLevelClient()) {
+                ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
+                        .description("The options to configure the HTTP request before HTTP client sends it")
+                        .wireType(ClassType.RequestOptions)
+                        .clientType(ClassType.RequestOptions)
+                        .name("requestOptions")
+                        .requestParameterLocation(RequestParameterLocation.None)
+                        .requestParameterName("requestOptions")
+                        .alreadyEncoded(true)
+                        .isConstant(false)
+                        .isRequired(false)
+                        .isNullable(false)
+                        .fromClient(false)
+                        .parameterReference("requestOptions")
+                        .build();
+                parameters.add(requestOptions);
+            }
 
             if (settings.getAddContextParameter()) {
                 ClassType contextClassType = getContextClass();
