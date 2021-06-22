@@ -75,8 +75,9 @@ public class TestUtils {
         }
     }
 
+    // code-model-fluentnamer-locks.yaml is produced by fluentnamer on https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
     public static CodeModel loadCodeModel(FluentGenAccessor fluentgenAccessor, String filename) {
-        String searchYamlContent = loadYaml(filename);   // the YAML is produced by fluentnamer on https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
+        String searchYamlContent = loadYaml(filename);
 
         CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
         Client client = fluentgenAccessor.handleMap(codeModel);
