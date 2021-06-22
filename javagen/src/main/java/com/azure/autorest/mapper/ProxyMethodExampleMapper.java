@@ -11,6 +11,15 @@ import java.util.Map;
 
 public class ProxyMethodExampleMapper implements IMapper<Object, ProxyMethodExample> {
 
+    private static ProxyMethodExampleMapper INSTANCE = new ProxyMethodExampleMapper();
+
+    protected ProxyMethodExampleMapper() {
+    }
+
+    public static ProxyMethodExampleMapper getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public ProxyMethodExample map(Object xmsExample) {
         ProxyMethodExample.Builder builder = new ProxyMethodExample.Builder();
