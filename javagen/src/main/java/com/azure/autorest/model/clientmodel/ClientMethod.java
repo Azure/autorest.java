@@ -273,8 +273,8 @@ public class ClientMethod {
         if (settings.isLowLevelClient()) {
             imports.add("com.azure.core.http.HttpMethod");
             imports.add("com.azure.core.http.rest.Response");
-            imports.add("com.azure.core.http.RequestOptions");
-            imports.add("com.azure.core.util.BinaryData");
+            ClassType.RequestOptions.addImportsTo(imports, true);
+            ClassType.BinaryData.addImportsTo(imports, true);
 
             if (includeImplementationImports) {
                 imports.add("com.azure.core.http.rest.SimpleResponse");

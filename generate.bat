@@ -53,6 +53,7 @@ rem call autorest %ARM_ARGUMENTS% --input-file=https://raw.githubusercontent.com
 rem del azure-tests\src\main\java\module-info.java
 
 call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring
+call autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/custom-baseUrl.json --namespace=fixtures.custombaseuri
 
 call autorest --use:. customization-tests/swagger
 

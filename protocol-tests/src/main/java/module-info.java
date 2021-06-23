@@ -1,5 +1,5 @@
-module fixtures.bodystring {
+module fixtures.custombaseuri {
     requires transitive com.azure.core;
 
-    exports fixtures.bodystring;
+    exports fixtures.custombaseuri;
 }
