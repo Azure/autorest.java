@@ -83,6 +83,10 @@ public abstract class ResourceOperation {
         return methodReferences;
     }
 
+    public ClientModel getRequestBodyParameterModel() {
+        return requestBodyParameterModel;
+    }
+
     abstract public List<FluentMethod> getFluentMethods();
 
     abstract public String getLocalVariablePrefix();
