@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
 
 public class FluentManagerTemplate {
 
-    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), JavaFormatter.class);
+    private static final Logger logger = new PluginLogger(FluentGen.getPluginInstance(), FluentManagerTemplate.class);
 
     private static final FluentManagerTemplate INSTANCE = new FluentManagerTemplate();
 

@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 
@@ -25,6 +26,8 @@ public class FluentClient {
     private final List<FluentResourceModel> resourceModels = new ArrayList<>();
 
     private final List<FluentResourceCollection> resourceCollections = new ArrayList<>();
+
+    private final List<FluentCollectionMethodExample> resourceCollectionMethodExamples = new ArrayList<>();
 
     public FluentClient(Client client) {
         this.client = client;
@@ -56,5 +59,9 @@ public class FluentClient {
 
     public void setModuleInfo(ModuleInfo moduleInfo) {
         this.moduleInfo = moduleInfo;
+    }
+
+    public List<FluentCollectionMethodExample> getResourceCollectionMethodExamples() {
+        return resourceCollectionMethodExamples;
     }
 }

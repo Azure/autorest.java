@@ -28,6 +28,8 @@ public class XmsExtensions {
 
     private XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema;
 
+    private XmsExamples xmsExamples;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -122,5 +124,13 @@ public class XmsExtensions {
 
     public void setXmsLongRunningOperationOptions(XmsLongRunningOperationOptions xmsLongRunningOperationOptions) {
         this.xmsLongRunningOperationOptions = xmsLongRunningOperationOptions;
+    }
+
+    public XmsExamples getXmsExamples() {
+        return xmsExamples;
+    }
+
+    public void setXmsExamples(XmsExamples xmsExamples) {
+        this.xmsExamples = xmsExamples;
     }
 }

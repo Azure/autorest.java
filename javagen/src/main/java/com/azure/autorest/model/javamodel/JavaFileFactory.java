@@ -25,17 +25,17 @@ public class JavaFileFactory {
     public final JavaFile createSourceFile(String package_Keyword, String fileNameWithoutExtension) {
         JavaFile javaFile = createEmptySourceFile(package_Keyword, fileNameWithoutExtension);
 
-        String headerComment = settings.getFileHeaderText();
-        if (headerComment != null && !headerComment.isEmpty()) {
-            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-            {
-                comment.line(headerComment);
-            });
-            javaFile.line();
-        }
+        addCommentAndPackage(javaFile, package_Keyword);
 
-        javaFile.declarePackage(package_Keyword);
-        javaFile.line();
+        return javaFile;
+    }
+
+    public final JavaFile createSampleFile(String package_Keyword, String fileNameWithoutExtension) {
+        String folderPath = Paths.get("src", "samples", "java", package_Keyword.replace('.', File.separatorChar)).toString();
+        String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
+        JavaFile javaFile = new JavaFile(filePath);
+
+        addCommentAndPackage(javaFile, package_Keyword);
 
         return javaFile;
     }
@@ -45,18 +45,22 @@ public class JavaFileFactory {
         String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
         JavaFile javaFile = new JavaFile(filePath);
 
+        addCommentAndPackage(javaFile, package_Keyword);
+
+        return javaFile;
+    }
+
+    private void addCommentAndPackage(JavaFile javaFile, String packageName) {
         String headerComment = settings.getFileHeaderText();
         if (headerComment != null && !headerComment.isEmpty()) {
-            javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
             {
-                comment.description(headerComment);
+                comment.line(headerComment);
             });
             javaFile.line();
         }
 
-        javaFile.declarePackage(package_Keyword);
+        javaFile.declarePackage(packageName);
         javaFile.line();
-
-        return javaFile;
     }
 }

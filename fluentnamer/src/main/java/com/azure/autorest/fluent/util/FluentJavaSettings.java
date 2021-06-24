@@ -68,6 +68,8 @@ public class FluentJavaSettings {
 
     private String artifactVersion;
 
+    private boolean generateSamples = false;
+
     private boolean sdkIntegration = false;
 
     private AutorestSettings autorestSettings;
@@ -119,6 +121,10 @@ public class FluentJavaSettings {
 
     public Optional<String> getArtifactVersion() {
         return Optional.ofNullable(artifactVersion);
+    }
+
+    public boolean isGenerateSamples() {
+        return generateSamples;
     }
 
     public boolean isSdkIntegration() {
@@ -199,6 +205,8 @@ public class FluentJavaSettings {
 
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
+
+        loadBooleanSetting("generate-samples", b -> generateSamples = b);
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 

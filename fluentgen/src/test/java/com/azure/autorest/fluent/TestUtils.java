@@ -49,6 +49,7 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("client-logger", true);
             DEFAULT_SETTINGS.put("generate-client-interfaces", true);
             DEFAULT_SETTINGS.put("required-parameter-client-methods", true);
+            DEFAULT_SETTINGS.put("generate-samples", true);
         }
 
         private Javagen javagen;
@@ -75,8 +76,9 @@ public class TestUtils {
         }
     }
 
+    // code-model-fluentnamer-locks.yaml is produced by fluentnamer on https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
     public static CodeModel loadCodeModel(FluentGenAccessor fluentgenAccessor, String filename) {
-        String searchYamlContent = loadYaml(filename);   // the YAML is produced by fluentnamer on locks.json
+        String searchYamlContent = loadYaml(filename);
 
         CodeModel codeModel = fluentgenAccessor.handleYaml(searchYamlContent);
         Client client = fluentgenAccessor.handleMap(codeModel);

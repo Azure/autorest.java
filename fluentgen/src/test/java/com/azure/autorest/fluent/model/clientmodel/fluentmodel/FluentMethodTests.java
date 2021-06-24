@@ -33,6 +33,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -168,6 +169,7 @@ public class FluentMethodTests {
     }
 
     @Test
+    @Disabled("locks.json does not have action method")
     public void testActionMethod() {
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         Client client = content.getClient();

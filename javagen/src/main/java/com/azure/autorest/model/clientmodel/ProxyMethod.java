@@ -71,6 +71,8 @@ public class ProxyMethod {
      */
     private Set<String> responseContentTypes;
 
+    private Map<String, ProxyMethodExample> examples;
+
     /**
      * Create a new RestAPIMethod with the provided properties.
      * @param requestContentType The Content-Type of the request.
@@ -85,13 +87,15 @@ public class ProxyMethod {
      * @param description The description of this method.
      * @param isResumable Whether or not this method is resumable.
      * @param responseContentTypes The metia-types in response.
+     * @param examples the examples for the method.
      */
     protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath,
-                        List<HttpResponseStatus> responseExpectedStatusCodes,
-                        ClassType unexpectedResponseExceptionType,
-                        Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
-                        String name, List<ProxyMethodParameter> parameters, String description,
-                        IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
+                          List<HttpResponseStatus> responseExpectedStatusCodes,
+                          ClassType unexpectedResponseExceptionType,
+                          Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
+                          String name, List<ProxyMethodParameter> parameters, String description,
+                          IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes,
+                          Map<String, ProxyMethodExample> examples) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -105,6 +109,7 @@ public class ProxyMethod {
         this.returnValueWireType = returnValueWireType;
         this.isResumable = isResumable;
         this.responseContentTypes = responseContentTypes;
+        this.examples = examples;
     }
 
     public final String getRequestContentType() {
@@ -173,6 +178,10 @@ public class ProxyMethod {
 
     public final Set<String> getResponseContentTypes() {
         return responseContentTypes;
+    }
+
+    public Map<String, ProxyMethodExample> getExamples() {
+        return examples;
     }
 
 //    private MethodType _methodType = null;
@@ -283,6 +292,7 @@ public class ProxyMethod {
         protected IType returnValueWireType;
         protected boolean isResumable;
         protected Set<String> responseContentTypes;
+        protected Map<String, ProxyMethodExample> examples;
 
         /*
          * Sets the Content-Type of the request.
@@ -415,6 +425,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets the examples for the method.
+         * @param examples the examples
+         * @return the Builder itself
+         */
+        public Builder examples(Map<String, ProxyMethodExample> examples) {
+            this.examples = examples;
+            return this;
+        }
+
+        /**
          * @return an immutable ProxyMethod instance with the configurations on this builder.
          */
         public ProxyMethod build() {
@@ -430,7 +450,8 @@ public class ProxyMethod {
                     description,
                     returnValueWireType,
                     isResumable,
-                    responseContentTypes);
+                    responseContentTypes,
+                    examples);
         }
     }
 }

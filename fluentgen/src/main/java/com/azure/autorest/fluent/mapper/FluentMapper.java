@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -27,8 +28,10 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -57,6 +60,27 @@ public class FluentMapper {
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
         ResourceParser.processAdditionalMethods(fluentClient);
+
+        // samples
+        if (fluentJavaSettings.isGenerateSamples()) {
+            final Set<String> exampleClassNames = new HashSet<>();
+            List<FluentCollectionMethodExample> methodExamples = new ArrayList<>();
+            fluentClient.getResourceCollections().forEach(rc -> rc.getMethodsForTemplate().forEach(m -> {
+                List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(rc, m);
+                if (examples != null) {
+                    for (FluentCollectionMethodExample example : examples) {
+                        String className = example.getClassName();
+                        int count = 0;
+                        while (exampleClassNames.contains(example.getClassName())) {
+                            example.setClassName(className + (++count));
+                        }
+                        exampleClassNames.add(example.getClassName());
+                        methodExamples.add(example);
+                    }
+                }
+            }));
+            fluentClient.getResourceCollectionMethodExamples().addAll(methodExamples);
+        }
 
         return fluentClient;
     }

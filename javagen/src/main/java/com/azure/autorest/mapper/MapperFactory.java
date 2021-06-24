@@ -26,6 +26,8 @@ public interface MapperFactory {
 
     ProxyMethodMapper getProxyMethodMapper();
 
+    ProxyMethodExampleMapper getProxyMethodExampleMapper();
+
     MethodGroupMapper getMethodGroupMapper();
 
     ClientParameterMapper getClientParameterMapper();

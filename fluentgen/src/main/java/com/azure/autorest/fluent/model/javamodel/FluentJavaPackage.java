@@ -11,10 +11,12 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
+import com.azure.autorest.fluent.template.FluentExampleTemplate;
 import com.azure.autorest.fluent.template.FluentManagerTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTemplate;
@@ -24,6 +26,7 @@ import com.azure.autorest.fluent.template.ReadmeTemplate;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +97,14 @@ public class FluentJavaPackage extends JavaPackage {
                 settings.getPackage(settings.getImplementationSubpackage()),
                 ModelNaming.CLASS_UTILS);
         UtilsTemplate.getInstance().write(javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addSample(FluentCollectionMethodExample example) {
+        JavaSettings settings = JavaSettings.getInstance();
+        JavaFile javaFile = getJavaFileFactory().createSampleFile(
+                settings.getPackage(), example.getClassName());
+        FluentExampleTemplate.getInstance().write(example, javaFile);
         addJavaFile(javaFile);
     }
 }
