@@ -67,7 +67,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
-        propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
+        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+            propertyReferences.forEach(p -> p.getReferenceProperty().addImportsTo(imports, false));
+        }
 
         model.addImportsTo(imports, settings);
 
@@ -122,7 +124,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (model.getParentModelName() != null) {
             classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
         }
-        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())) {
+        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
+                || propertyReferences.stream().anyMatch(p -> !p.getReferenceProperty().getIsReadOnly())) {
             javaFile.annotation("Fluent");
         } else {
             javaFile.annotation("Immutable");
@@ -296,20 +299,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            for (ClientModelPropertyReference propertyReference : propertyReferences) {
-                ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
-                if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
-                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                    classBlock.annotation("Override");
-                    classBlock.publicMethod(String.format("%s %s(%s %s)",
-                            model.getName(),
-                            parentProperty.getSetterName(),
-                            parentProperty.getWireType() == null ? parentProperty.getClientType() : parentProperty.getWireType().getClientType(),
-                            parentProperty.getName()),
-                            methodBlock -> {
-                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
-                                methodBlock.methodReturn("this");
-                            });
+            if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
+                for (ClientModelPropertyReference propertyReference : propertyReferences) {
+                    ClientModelProperty parentProperty = propertyReference.getReferenceProperty();
+                    if (!parentProperty.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                        classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                        classBlock.annotation("Override");
+                        classBlock.publicMethod(String.format("%s %s(%s %s)",
+                                model.getName(),
+                                parentProperty.getSetterName(),
+                                parentProperty.getWireType() == null ? parentProperty.getClientType() : parentProperty.getWireType().getClientType(),
+                                parentProperty.getName()),
+                                methodBlock -> {
+                                    methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(), parentProperty.getName()));
+                                    methodBlock.methodReturn("this");
+                                });
+                    }
                 }
             }
 
@@ -485,23 +490,21 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
         List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
-        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
-            String lastParentName = model.getName();
-            String parentModelName = model.getParentModelName();
-            while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-                ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
-                if (parentModel != null) {
-                    if (parentModel.getProperties() != null) {
-                        propertyReferences.addAll(parentModel.getProperties().stream()
-                                .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
-                                .map(ClientModelPropertyReference::new)
-                                .collect(Collectors.toList()));
-                    }
+        String lastParentName = model.getName();
+        String parentModelName = model.getParentModelName();
+        while (parentModelName != null && !lastParentName.equals(parentModelName)) {
+            ClientModel parentModel = ClientModels.Instance.getModel(parentModelName);
+            if (parentModel != null) {
+                if (parentModel.getProperties() != null) {
+                    propertyReferences.addAll(parentModel.getProperties().stream()
+                            .filter(p -> !("additionalProperties".equals(p.getName()) && CoreUtils.isNullOrEmpty(p.getSerializedName())))   // exclude `additionalProperties`
+                            .map(ClientModelPropertyReference::new)
+                            .collect(Collectors.toList()));
                 }
-
-                lastParentName = parentModelName;
-                parentModelName = parentModel == null ? null : parentModel.getParentModelName();
             }
+
+            lastParentName = parentModelName;
+            parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
         return propertyReferences;
     }
