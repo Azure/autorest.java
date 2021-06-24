@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -94,6 +95,8 @@ public class FluentExampleTemplate {
                         .append(")");
 
                 return builder.toString();
+            } else if (node instanceof MapNode) {
+                // TODO need some helper method to create Map
             } else if (node instanceof ClientModelNode) {
                 ClientModelNode clientModelNode = ((ClientModelNode) node);
 
