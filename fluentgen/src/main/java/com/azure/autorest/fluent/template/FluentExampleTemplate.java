@@ -34,7 +34,7 @@ public class FluentExampleTemplate {
     }
 
     public final void write(FluentCollectionMethodExample collectionMethodExample, JavaFile javaFile) {
-        String className = CodeNamer.toPascalCase(collectionMethodExample.getName()) + "Samples";
+        String className = collectionMethodExample.getClassName();
         String methodName = CodeNamer.toCamelCase(collectionMethodExample.getName());
         String managerName = CodeNamer.toCamelCase(collectionMethodExample.getManager().getType().getName());
 

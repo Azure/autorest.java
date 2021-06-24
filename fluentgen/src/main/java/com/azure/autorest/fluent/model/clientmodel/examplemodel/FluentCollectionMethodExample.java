@@ -9,17 +9,19 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FluentCollectionMethodExample {
 
-    private String name;
+    private final String name;
     private final FluentManager manager;
     private final FluentResourceCollection collection;
     private final FluentCollectionMethod collectionMethod;
     private final List<ParameterExample> parameters = new ArrayList<>();
+    private String className;
 
     public static class ParameterExample {
         private final MethodParameter parameter;
@@ -44,15 +46,12 @@ public class FluentCollectionMethodExample {
         this.manager = manager;
         this.collection = collection;
         this.collectionMethod = collectionMethod;
+
+        this.className = CodeNamer.toPascalCase(name) + "Samples";
     }
 
     public String getName() {
         return name;
-    }
-
-    public FluentCollectionMethodExample setName(String name) {
-        this.name = name;
-        return this;
     }
 
     public List<ParameterExample> getParameters() {
@@ -69,5 +68,13 @@ public class FluentCollectionMethodExample {
 
     public FluentCollectionMethod getCollectionMethod() {
         return collectionMethod;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }
