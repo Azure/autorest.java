@@ -172,11 +172,9 @@ public class ClientModel {
      * @param settings The settings for this Java generator session.
      */
     public void addImportsTo(Set<String> imports, JavaSettings settings) {
-        if (properties.stream().anyMatch(p -> !p.getIsReadOnly())) {
-            addFluentAnnotationImport(imports);
-        } else {
-            addImmutableAnnotationImport(imports);
-        }
+        // whether annotated as Immutable or Fluent is also determined by its superclass
+        addFluentAnnotationImport(imports);
+        addImmutableAnnotationImport(imports);
 
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && needsFlatten) {
             addJsonFlattenAnnotationImport(imports);
