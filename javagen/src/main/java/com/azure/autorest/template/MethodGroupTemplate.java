@@ -10,15 +10,11 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.model.javamodel.*;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.BinaryData;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,7 +89,21 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
+            writePagingHelperMethods(methodGroupClient, classBlock);
+
             writeAdditionalClassBlock(classBlock);
+        });
+    }
+
+    protected void writePagingHelperMethods(MethodGroupClient methodGroupClient, JavaClass classBlock) {
+        classBlock.privateMethod("List<BinaryData> getValue(BinaryData obj, String path)", block -> {
+            block.line("JsonArray array = JsonParser.parseString(obj.toString()).getAsJsonObject().getAsJsonArray(path);");
+            block.line("List<BinaryData> list = new ArrayList<>();");
+            block.line("for (JsonElement item : array) list.add(BinaryData.fromString(item.getAsString()));");
+            block.line("return list;");
+        });
+        classBlock.privateMethod("String getNextLink(BinaryData obj, String path)", block -> {
+            block.line("return JsonParser.parseString(obj.toString()).getAsJsonObject().get(path).getAsString();");
         });
     }
 

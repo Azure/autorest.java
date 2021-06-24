@@ -294,6 +294,12 @@ public class ClientMethod {
                 imports.add("com.azure.core.http.rest.PagedResponse");
                 imports.add("com.azure.core.http.rest.PagedFlux");
                 imports.add("com.azure.core.http.rest.PagedIterable");
+                imports.add("com.google.gson.JsonArray");
+                imports.add("com.google.gson.JsonElement");
+                imports.add("com.google.gson.JsonObject");
+                imports.add("com.google.gson.JsonParser");
+                imports.add("java.util.ArrayList");
+                imports.add("java.util.List");
             }
         } else {
             getReturnValue().addImportsTo(imports, includeImplementationImports);

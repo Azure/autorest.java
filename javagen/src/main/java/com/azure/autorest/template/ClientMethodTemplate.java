@@ -777,79 +777,53 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
-        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                ApplyParameterTransformations(function, clientMethod, settings);
-                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            ApplyParameterTransformations(function, clientMethod, settings);
+            ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-                String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
-                if (settings.getAddContextParameter()) {
-                    if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
-                        function.line(String.format("return %s", serviceMethodCall));
-                    } else {
-                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                            serviceMethodCall));
-                    }
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
+            if (settings.getAddContextParameter()) {
+                if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
+                    function.line(String.format("return %s", serviceMethodCall));
                 } else {
-                    function.line(String.format("return %s",
-                            serviceMethodCall));
+                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
+                        serviceMethodCall));
                 }
+            } else {
+                function.line(String.format("return %s",
+                        serviceMethodCall));
+            }
+            function.indent(() -> {
+                function.line(".map(res -> new PagedResponseBase<>(");
                 function.indent(() -> {
-                    function.line(".map(res -> new PagedResponseBase<>(");
-                    function.indent(() -> {
-                        function.line("res.getRequest(),");
-                        function.line("res.getStatusCode(),");
-                        function.line("res.getHeaders(),");
+                    function.line("res.getRequest(),");
+                    function.line("res.getStatusCode(),");
+                    function.line("res.getHeaders(),");
+                    if (settings.isLowLevelClient()) {
+                        function.line("getValue(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getItemName());
+                    } else {
                         function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
-                        IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                        if (responseType instanceof ClassType) {
-                            function.line("res.getDeserializedHeaders()));");
+                    }
+                    if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                        if (settings.isLowLevelClient()) {
+                            function.line("getValue(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getNextLinkName());
                         } else {
-                            function.line("null));");
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
                         }
-                    });
-                });
-            });
-        } else {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                ApplyParameterTransformations(function, clientMethod, settings);
-                ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-
-                String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, settings);
-                if (settings.getAddContextParameter()) {
-                    if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
-                        function.line(String.format("return %s", serviceMethodCall));
                     } else {
-                        function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                            serviceMethodCall));
-                    }
-                } else {
-                    function.line(String.format("return %s",
-                            serviceMethodCall));
-                }
-                function.indent(() -> {
-                    function.line(".map(res -> new PagedResponseBase<>(");
-                    function.indent(() -> {
-                        function.line("res.getRequest(),");
-                        function.line("res.getStatusCode(),");
-                        function.line("res.getHeaders(),");
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                         function.line("null,");
-                        IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                        if (responseType instanceof ClassType) {
-                            function.line("res.getDeserializedHeaders()));");
-                        } else {
-                            function.line("null));");
-                        }
-                    });
+                    }
+                    IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                    if (responseType instanceof ClassType) {
+                        function.line("res.getDeserializedHeaders()));");
+                    } else {
+                        function.line("null));");
+                    }
                 });
             });
-        }
+        });
     }
 
     private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, JavaSettings settings) {
