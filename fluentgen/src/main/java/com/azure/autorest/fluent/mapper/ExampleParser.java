@@ -64,7 +64,7 @@ public class ExampleParser {
                         serializedName = parameter.getProxyMethodParameter().getName();
                     }
 
-                    ProxyMethodExample.ParameterValue parameterValue = example.getParameters().get(serializedName);
+                    ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
                     FluentCollectionMethodExample.ParameterExample parameterExample;
                     if (parameterValue == null) {
                         if (ClassType.Context.equals(parameter.getClientMethodParameter().getClientType())) {
@@ -83,6 +83,13 @@ public class ExampleParser {
         }
 
         return ret;
+    }
+
+    private static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {
+        return example.getParameters().entrySet()
+                .stream().filter(p -> p.getKey().equalsIgnoreCase(serializedName))
+                .map(Map.Entry::getValue)
+                .findFirst().orElse(null);
     }
 
     private static ExampleNode parseNode(IType type, Object objectValue) {
