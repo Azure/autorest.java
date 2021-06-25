@@ -116,7 +116,7 @@ public class ExampleParser {
                 for (MethodParameter methodParameter : methodParameters) {
                     ExampleNode node = parseNodeFromParameter(example, methodParameter);
 
-                    if (node.getClientType() == ClassType.Void) {
+                    if (node.getObjectValue() == null) {
                         if (methodParameter.getClientMethodParameter().getIsRequired()) {
                             logger.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
                         }
@@ -160,7 +160,7 @@ public class ExampleParser {
                         MethodParameter methodParameter = findMethodParameter(methodParameters, defineMethod.getMethodParameter());
                         defineNode = parseNodeFromParameter(example, methodParameter);
 
-                        if (defineNode.getClientType() == ClassType.Void) {
+                        if (defineNode.getObjectValue() == null) {
                             logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
                         }
                     }
@@ -195,7 +195,7 @@ public class ExampleParser {
                                 }
                             }
 
-                            if (exampleNodes.stream().anyMatch(n -> n.getClientType() == ClassType.Void)) {
+                            if (exampleNodes.stream().anyMatch(n -> n.getObjectValue() == null)) {
                                 if (stage.isMandatoryStage()) {
                                     logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
                                 }
@@ -237,9 +237,9 @@ public class ExampleParser {
         ExampleNode node;
         if (parameterValue == null) {
             if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
-                node = new LiteralNode(ClassType.Context, null).setLiteralsValue("");
+                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
             } else {
-                node = new LiteralNode(ClassType.Void, null);
+                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }
         } else {
             node = parseNode(methodParameter.getClientMethodParameter().getClientType(), parameterValue.getObjectValue());
@@ -255,7 +255,7 @@ public class ExampleParser {
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
         ExampleNode node;
         if (parameterValue == null) {
-            node = new LiteralNode(ClassType.Void, null);
+            node = new LiteralNode(clientModelProperty.getClientType(), null);
         } else {
             List<String> flattenedNames = Collections.singletonList(clientModelProperty.getSerializedName());
             if (clientModel.getNeedsFlatten()) {
@@ -280,7 +280,7 @@ public class ExampleParser {
                 node = parseNode(clientModelProperty.getClientType(), childObjectValue);
             } else {
                 if (isRequired) {
-                    node = new LiteralNode(ClassType.Void, null);
+                    node = new LiteralNode(clientModelProperty.getClientType(), null);
                 } else {
                     node = null;
                 }

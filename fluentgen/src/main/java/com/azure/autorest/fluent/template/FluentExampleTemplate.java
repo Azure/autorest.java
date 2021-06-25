@@ -96,6 +96,12 @@ public class FluentExampleTemplate {
             String parameterInvocations = parameter.getExampleNodes().stream()
                     .map(visitor::accept)
                     .collect(Collectors.joining(", "));
+            if (parameter.getExampleNodes().size() == 1 && parameterInvocations.equals("null")) {
+                // avoid ambiguous type on "null"
+                parameterInvocations = String.format("(%1$s) %2$s",
+                        parameter.getExampleNodes().iterator().next().getClientType().toString(),
+                        parameterInvocations);
+            }
             sb.append(".").append(parameter.getFluentMethod().getName())
                     .append("(").append(parameterInvocations).append(")");
         }
