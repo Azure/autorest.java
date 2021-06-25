@@ -187,6 +187,47 @@
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration."
+    },
+    "LoadBalancer": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat",
+          "description": "Properties of load balancer."
+        }
+      },
+      "description": "LoadBalancer resource."
+    },
+    "LoadBalancerPropertiesFormat": {
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          },
+          "description": "Collection of backend address pools used by a load balancer."
+        }
+      },
+      "description": "Properties of the load balancer."
+    },
+    "BackendAddressPool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat",
+          "description": "Properties of load balancer backend address pool."
+        }
+      },
+      "description": "Pool of backend IP addresses."
+    },
+    "BackendAddressPoolPropertiesFormat": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the backend address pool."
+        }
+      },
+      "description": "Properties of the backend address pool."
     }
   }
 }

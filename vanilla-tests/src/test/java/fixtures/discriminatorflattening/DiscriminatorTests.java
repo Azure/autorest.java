@@ -8,6 +8,8 @@ package fixtures.discriminatorflattening;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
+import fixtures.discriminatorflattening.models.BackendAddressPool;
+import fixtures.discriminatorflattening.models.LoadBalancer;
 import fixtures.discriminatorflattening.models.MetricAlertResource;
 import fixtures.discriminatorflattening.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import fixtures.discriminatorflattening.models.VirtualMachineScaleSet;
@@ -19,6 +21,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class DiscriminatorTests {
@@ -54,6 +57,21 @@ public class DiscriminatorTests {
         VirtualMachineScaleSet vmss2 = adapter.deserialize(json, VirtualMachineScaleSet.class, SerializerEncoding.JSON);
         Assert.assertEquals("name", vmss2.getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().getName());
         Assert.assertTrue(vmss2.getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().isPrimary());
+    }
+
+    @Test
+    @Ignore("bug in 1.17.0 azure-core")
+    public void serializationOnNestedArrayFlatten() throws IOException {
+        SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
+
+        LoadBalancer lb = new LoadBalancer()
+                .setBackendAddressPools(Arrays.asList(new BackendAddressPool()));
+
+        String json = adapter.serialize(lb, SerializerEncoding.JSON);
+        Assert.assertFalse(json.contains("\"properties.backendAddressPools\""));
+        Assert.assertFalse(json.contains("\"properties.location\""));
+        // verify that null value is ignored
+        Assert.assertFalse(json.contains("\"location\":null\""));
     }
 
     private void verifyODataTypeInJson(String json) {
