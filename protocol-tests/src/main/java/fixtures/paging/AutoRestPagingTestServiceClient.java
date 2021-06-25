@@ -1,6 +1,13 @@
 package fixtures.paging;
 
+import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.RequestOptions;
+import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import fixtures.paging.implementation.PagingsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestPagingTestService type. */
@@ -26,6 +33,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
+        return this.serviceClient.getNoItemNamePages(requestOptions);
+    }
+
     /**
      * A paging operation that must return result of the default 'value' node.
      *
@@ -36,6 +48,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getNoItemNamePages(requestOptions, context);
+    }
+
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
@@ -45,6 +62,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
+        return this.serviceClient.getNullNextLinkNamePages(requestOptions);
+    }
+
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
@@ -55,6 +77,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getNullNextLinkNamePages(requestOptions, context);
+    }
+
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
@@ -64,6 +91,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
+        return this.serviceClient.getSinglePages(requestOptions);
+    }
+
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
@@ -74,6 +106,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getSinglePages(requestOptions, context);
+    }
+
     /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
@@ -84,6 +121,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
+        return this.serviceClient.firstResponseEmpty(requestOptions);
+    }
+
     /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
@@ -95,6 +137,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.firstResponseEmpty(requestOptions, context);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -104,6 +151,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePages(requestOptions);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -114,6 +166,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePages(requestOptions, context);
+    }
+
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
@@ -125,6 +182,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParams(requiredQueryParameter, requestOptions);
+    }
+
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
@@ -137,6 +199,12 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getWithQueryParams(
+            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getWithQueryParams(requiredQueryParameter, requestOptions, context);
+    }
+
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -146,6 +214,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
+        return this.serviceClient.getOdataMultiplePages(requestOptions);
+    }
+
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -156,6 +229,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getOdataMultiplePages(requestOptions, context);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -165,6 +243,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesWithOffset(requestOptions);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -175,6 +258,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesWithOffset(requestOptions, context);
+    }
+
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
@@ -185,6 +273,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesRetryFirst(requestOptions);
+    }
+
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
@@ -196,6 +289,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesRetryFirst(requestOptions, context);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
@@ -206,6 +304,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesRetrySecond(requestOptions);
+    }
+
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
@@ -217,6 +320,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesRetrySecond(requestOptions, context);
+    }
+
     /**
      * A paging operation that receives a 400 on the first call.
      *
@@ -226,6 +334,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
+        return this.serviceClient.getSinglePagesFailure(requestOptions);
+    }
+
     /**
      * A paging operation that receives a 400 on the first call.
      *
@@ -236,6 +349,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getSinglePagesFailure(requestOptions, context);
+    }
+
     /**
      * A paging operation that receives a 400 on the second call.
      *
@@ -245,6 +363,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFailure(requestOptions);
+    }
+
     /**
      * A paging operation that receives a 400 on the second call.
      *
@@ -255,6 +378,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFailure(requestOptions, context);
+    }
+
     /**
      * A paging operation that receives an invalid nextLink.
      *
@@ -264,6 +392,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFailureUri(requestOptions);
+    }
+
     /**
      * A paging operation that receives an invalid nextLink.
      *
@@ -274,6 +407,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFailureUri(requestOptions, context);
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
@@ -285,6 +423,12 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLink(apiVersion, tenant, requestOptions);
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
@@ -297,6 +441,12 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFragmentNextLink(apiVersion, tenant, requestOptions, context);
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
@@ -306,6 +456,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(requestOptions);
+    }
+
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
@@ -316,6 +471,12 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
+            RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(requestOptions, context);
+    }
+
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
@@ -325,6 +486,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesLRO(requestOptions);
+    }
+
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
@@ -335,6 +501,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesLRO(RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesLRO(requestOptions, context);
+    }
+
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
@@ -344,6 +515,11 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(RequestOptions requestOptions) {
+        return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(requestOptions);
+    }
+
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
@@ -354,4 +530,9 @@ public final class AutoRestPagingTestServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getPagingModelWithItemNameWithXMSClientName(
+            RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(requestOptions, context);
+    }
 }
