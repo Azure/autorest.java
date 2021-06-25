@@ -26,6 +26,7 @@ public class ResourceClientModel {
             .properties(Collections.singletonList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
+                            .serializedName(ResourceTypeName.FIELD_ID)
                             .description("Fully qualified resource Id for the resource.")
                             .clientType(ClassType.String)
                             .build()
@@ -36,6 +37,7 @@ public class ResourceClientModel {
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_ID)
+                            .serializedName(ResourceTypeName.FIELD_ID)
                             .description("Fully qualified resource Id for the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
@@ -43,6 +45,7 @@ public class ResourceClientModel {
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_NAME)
+                            .serializedName(ResourceTypeName.FIELD_NAME)
                             .description("The name of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
@@ -50,6 +53,7 @@ public class ResourceClientModel {
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_TYPE)
+                            .serializedName(ResourceTypeName.FIELD_TYPE)
                             .description("The type of the resource.")
                             .isRequired(true)
                             .isReadOnly(true)
@@ -64,6 +68,7 @@ public class ResourceClientModel {
             .properties(Arrays.asList(
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_LOCATION)
+                            .serializedName(ResourceTypeName.FIELD_LOCATION)
                             .description("The geo-location where the resource lives.")
                             .isRequired(true)
                             .isReadOnly(false)
@@ -72,6 +77,7 @@ public class ResourceClientModel {
                             .build(),
                     new ClientModelProperty.Builder()
                             .name(ResourceTypeName.FIELD_TAGS)
+                            .serializedName(ResourceTypeName.FIELD_TAGS)
                             .description("Resource tags.")
                             .isRequired(false)
                             .isReadOnly(false)
