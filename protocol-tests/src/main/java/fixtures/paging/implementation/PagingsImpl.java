@@ -334,7 +334,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -361,7 +361,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -576,7 +576,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -603,7 +603,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -699,7 +699,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -727,7 +727,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -826,7 +826,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -853,7 +853,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -959,7 +959,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -990,7 +990,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1155,7 +1155,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -1182,7 +1182,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -1280,7 +1280,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1308,7 +1308,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1410,7 +1410,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1438,7 +1438,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1540,7 +1540,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1568,7 +1568,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1668,7 +1668,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1695,7 +1695,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1791,7 +1791,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1818,7 +1818,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1915,7 +1915,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -1942,7 +1942,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2042,7 +2042,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2072,7 +2072,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2184,7 +2184,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2214,7 +2214,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2319,7 +2319,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2346,7 +2346,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2453,7 +2453,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2484,7 +2484,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2523,7 +2523,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2554,7 +2554,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2584,7 +2584,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "indexes"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2612,7 +2612,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "indexes"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2715,7 +2715,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2743,7 +2743,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2774,7 +2774,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2802,7 +2802,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2833,7 +2833,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2861,7 +2861,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "value"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2892,7 +2892,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2920,7 +2920,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -2951,7 +2951,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -2979,7 +2979,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "odataNextLink"),
+                                        getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
 
@@ -3010,7 +3010,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3038,7 +3038,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3069,7 +3069,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3097,7 +3097,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3128,7 +3128,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3156,7 +3156,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3187,7 +3187,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3215,7 +3215,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3246,7 +3246,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3274,7 +3274,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3305,7 +3305,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3333,7 +3333,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3364,7 +3364,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3392,7 +3392,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "values"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3423,7 +3423,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "indexes"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
@@ -3452,7 +3452,7 @@ public final class PagingsImpl {
                                         res.getStatusCode(),
                                         res.getHeaders(),
                                         getValue(res.getValue(), "indexes"),
-                                        getValue(res.getValue(), "nextLink"),
+                                        getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
