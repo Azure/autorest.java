@@ -314,7 +314,7 @@ public class ExampleParser {
             for (Map.Entry<String, Object> entry: dict.entrySet()) {
                 ExampleNode childNode = parseNode(elementType, entry.getValue());
                 node.getChildNodes().add(childNode);
-                mapNode.getKeys().put(childNode, entry.getKey());
+                mapNode.getKeys().add(entry.getKey());
             }
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
