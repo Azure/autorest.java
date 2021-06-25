@@ -16,13 +16,17 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCr
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,10 +58,27 @@ public class FluentExampleTemplate {
         Set<String> imports = exampleMethods.stream().flatMap(em -> em.getImports().stream()).collect(Collectors.toSet());
         javaFile.declareImport(imports);
 
+        Set<HelperMethod> helperMethods = exampleMethods.stream().flatMap(em -> em.getHelperMethods().stream()).collect(Collectors.toSet());
+
         javaFile.publicFinalClass(className, classBlock -> {
             for (ExampleMethod exampleMethod : exampleMethods) {
                 classBlock.publicStaticMethod(exampleMethod.getMethodSignature(), methodBlock -> {
                     methodBlock.line(exampleMethod.getMethodContent());
+                });
+            }
+
+            if (helperMethods.contains(HelperMethod.MapOfMethod)) {
+                classBlock.annotation("SuppressWarnings(\"unchecked\")");
+                classBlock.method(JavaVisibility.Private, Arrays.asList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
+                    methodBlock.line("Map<String, T> map = new HashMap<>();");
+                    methodBlock.line("for (int i = 0; i < inputs.length; i += 2) {");
+                    methodBlock.indent(() -> {
+                        methodBlock.line("String key = (String) inputs[i];");
+                        methodBlock.line("T value = (T) inputs[i + 1];");
+                        methodBlock.line("map.put(key, value);");
+                    });
+                    methodBlock.line("}");
+                    methodBlock.line("return map;");
                 });
             }
         });
@@ -81,7 +102,8 @@ public class FluentExampleTemplate {
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setImports(visitor.imports)
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
-                .setMethodContent(snippet);
+                .setMethodContent(snippet)
+                .setHelperMethods(visitor.helperMethods);
         return exampleMethod;
     }
 
@@ -110,13 +132,15 @@ public class FluentExampleTemplate {
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setImports(visitor.imports)
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
-                .setMethodContent(sb.toString());
+                .setMethodContent(sb.toString())
+                .setHelperMethods(visitor.helperMethods);
         return exampleMethod;
     }
 
     private static class ExampleNodeVisitor {
 
         private final Set<String> imports = new HashSet<>();
+        private final Set<HelperMethod> helperMethods = new HashSet<>();
 
         private String accept(ExampleNode node) {
             if (node instanceof LiteralNode) {
@@ -134,7 +158,29 @@ public class FluentExampleTemplate {
 
                 return builder.toString();
             } else if (node instanceof MapNode) {
-                // TODO need some helper method to create Map
+                imports.add(java.util.Map.class.getName());
+                imports.add(java.util.HashMap.class.getName());
+
+                helperMethods.add(HelperMethod.MapOfMethod);
+
+                List<String> keys = ((MapNode) node).getKeys();
+
+                StringBuilder builder = new StringBuilder();
+                // createMap(...)
+                builder.append("mapOf(");
+                for (int i = 0; i < keys.size(); ++i) {
+                    if (i != 0) {
+                        builder.append(", ");
+                    }
+                    String key = keys.get(i);
+                    ExampleNode elementNode = node.getChildNodes().get(i);
+                    builder.append(ClassType.String.defaultValueExpression(key))
+                            .append(", ")
+                            .append(this.accept(elementNode));
+                }
+                builder.append(")");
+
+                return builder.toString();
             } else if (node instanceof ClientModelNode) {
                 ClientModelNode clientModelNode = ((ClientModelNode) node);
 
@@ -156,10 +202,15 @@ public class FluentExampleTemplate {
         }
     }
 
+    private enum HelperMethod {
+        MapOfMethod
+    }
+
     private static class ExampleMethod {
         private Set<String> imports;
         private String methodSignature;
         private String methodContent;
+        private Set<HelperMethod> helperMethods;
 
         private Set<String> getImports() {
             return imports;
@@ -185,6 +236,15 @@ public class FluentExampleTemplate {
 
         private ExampleMethod setMethodContent(String methodContent) {
             this.methodContent = methodContent;
+            return this;
+        }
+
+        public Set<HelperMethod> getHelperMethods() {
+            return helperMethods;
+        }
+
+        public ExampleMethod setHelperMethods(Set<HelperMethod> helperMethods) {
+            this.helperMethods = helperMethods;
             return this;
         }
     }

@@ -7,18 +7,18 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.model.clientmodel.IType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapNode extends ExampleNode {
 
-    private final Map<ExampleNode, String> keys = new HashMap<>();
+    private final List<String> keys = new ArrayList<>();
 
     public MapNode(IType clientType, Object objectValue) {
         super(clientType, objectValue);
     }
 
-    public Map<ExampleNode, String> getKeys() {
+    public List<String> getKeys() {
         return keys;
     }
 }
