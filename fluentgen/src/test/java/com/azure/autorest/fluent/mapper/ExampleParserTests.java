@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-package com.azure.autorest.fluent.template;
+package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.fluent.FluentGen;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ExampleTests {
+public class ExampleParserTests {
 
     private static FluentGenAccessor fluentgenAccessor;
 
