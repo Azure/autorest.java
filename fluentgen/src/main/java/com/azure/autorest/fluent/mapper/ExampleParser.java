@@ -109,6 +109,8 @@ public class ExampleParser {
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
+                logger.info("Parse collection method example '{}'", entry.getKey());
+
                 ProxyMethodExample example = entry.getValue();
                 FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(entry.getKey(),
                         FluentStatic.getFluentManager(), collection, collectionMethod);
@@ -150,6 +152,8 @@ public class ExampleParser {
                         .findFirst().orElse(null);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
+                    logger.info("Parse resource create example '{}'", entry.getKey());
+
                     ProxyMethodExample example = entry.getValue();
                     FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(entry.getKey(),
                             FluentStatic.getFluentManager(), collection, resourceCreate);
