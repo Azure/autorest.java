@@ -20,6 +20,8 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageMisc;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageParent;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
@@ -82,7 +84,6 @@ public class ExampleParser {
                 ret.add(collectionMethodExample);
             }
         }
-
         return ret;
     }
 
@@ -124,39 +125,39 @@ public class ExampleParser {
                         List<FluentMethod> fluentMethods = stage.getMethods();
                         if (!fluentMethods.isEmpty()) {
                             FluentMethod fluentMethod = fluentMethods.iterator().next();
+                            List<ExampleNode> exampleNodes = new ArrayList<>();
                             if (stage instanceof DefinitionStageMisc) {
                                 DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
                                 MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
                                 ExampleNode node = parseNodeFromParameter(example, methodParameter);
-
-                                if (node.getClientType() == ClassType.Void) {
-                                    if (stage.isMandatoryStage()) {
-                                        logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
-                                    }
-                                }
-
-                                resourceCreateExample.getParameters().add(new FluentResourceCreateExample.ParameterExample(fluentMethod, node));
+                                exampleNodes.add(node);
                             } else if (stage instanceof DefinitionStageParent) {
                                 List<MethodParameter> parameters = fluentMethod.getParameters().stream()
                                         .map(p -> findMethodParameter(methodParameters, p))
                                         .collect(Collectors.toList());
-
-                                List<ExampleNode> nodes = parameters.stream()
+                                exampleNodes.addAll(parameters.stream()
                                         .map(p -> parseNodeFromParameter(example, p))
-                                        .collect(Collectors.toList());
-
-                                if (nodes.stream().anyMatch(n -> n.getClientType() == ClassType.Void)) {
-                                    if (stage.isMandatoryStage()) {
-                                        logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
-                                    }
-                                }
-
-                                resourceCreateExample.getParameters().add(new FluentResourceCreateExample.ParameterExample(fluentMethod, nodes));
+                                        .collect(Collectors.toList()));
+                            } else if (stage instanceof DefinitionStageBlank || stage instanceof DefinitionStageCreate) {
+                                // this stage does not have parameter
                             } else {
                                 ClientModelProperty clientModelProperty = stage.getModelProperty();
                                 if (clientModelProperty != null) {
-
+                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, clientModelProperty);
+                                    if (node != null) {
+                                        exampleNodes.add(node);
+                                    }
                                 }
+                            }
+
+                            if (exampleNodes.isEmpty() || exampleNodes.stream().anyMatch(n -> n.getClientType() == ClassType.Void)) {
+                                if (stage.isMandatoryStage()) {
+                                    logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
+                                }
+                            }
+
+                            if (!exampleNodes.isEmpty()) {
+                                resourceCreateExample.getParameters().add(new FluentResourceCreateExample.ParameterExample(fluentMethod, exampleNodes));
                             }
                         }
                     }
@@ -165,7 +166,6 @@ public class ExampleParser {
                 }
             }
         }
-
         return ret;
     }
 
@@ -198,6 +198,40 @@ public class ExampleParser {
             }
         } else {
             node = parseNode(methodParameter.getClientMethodParameter().getClientType(), parameterValue.getObjectValue());
+        }
+        return node;
+    }
+
+    private static ExampleNode parseNodeFromModelProperty(ProxyMethodExample example, MethodParameter methodParameter,
+                                                          ClientModel clientModel, ClientModelProperty clientModelProperty) {
+        String serializedName = methodParameter.getProxyMethodParameter().getName();
+
+        ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
+        ExampleNode node;
+        if (parameterValue == null) {
+            node = new LiteralNode(ClassType.Void, null);
+        } else {
+            List<String> flattenedNames = flattenedNames(clientModelProperty.getSerializedName());
+
+            boolean found = true;
+            Object childObjectValue = parameterValue.getObjectValue();
+            for (String name : flattenedNames) {
+                if (childObjectValue instanceof Map) {
+                    childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
+                    if (childObjectValue == null) {
+                        found = false;
+                        break;
+                    }
+                } else {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                node = parseNode(clientModelProperty.getClientType(), childObjectValue);
+            } else {
+                node = null;
+            }
         }
         return node;
     }
