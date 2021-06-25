@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentMethod;
 import com.azure.autorest.util.CodeNamer;
 
@@ -19,15 +20,14 @@ public class FluentResourceCreateExample {
     private final String name;
     private final FluentManager manager;
     private final FluentResourceCollection collection;
+    private final ResourceCreate resourceCreate;
     private final List<ParameterExample> parameters = new ArrayList<>();
-    private String className;
 
-    public FluentResourceCreateExample(String name, FluentManager manager, FluentResourceCollection collection) {
+    public FluentResourceCreateExample(String name, FluentManager manager, FluentResourceCollection collection, ResourceCreate resourceCreate) {
         this.name = name;
         this.manager = manager;
         this.collection = collection;
-
-        this.className = CodeNamer.toPascalCase(name) + "Samples";
+        this.resourceCreate = resourceCreate;
     }
 
     public static class ParameterExample {
@@ -67,15 +67,11 @@ public class FluentResourceCreateExample {
         return collection;
     }
 
+    public ResourceCreate getResourceCreate() {
+        return resourceCreate;
+    }
+
     public List<ParameterExample> getParameters() {
         return parameters;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 }

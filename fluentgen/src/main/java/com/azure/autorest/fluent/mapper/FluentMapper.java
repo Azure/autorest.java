@@ -64,28 +64,10 @@ public class FluentMapper {
 
         // samples
         if (fluentJavaSettings.isGenerateSamples()) {
-            final Set<String> exampleClassNames = new HashSet<>();
-            List<FluentCollectionMethodExample> methodExamples = new ArrayList<>();
-
-            for (FluentResourceCollection resourceCollection : fluentClient.getResourceCollections()) {
-                resourceCollection.getMethodsForTemplate().forEach(m -> {
-                    List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(resourceCollection, m);
-                    if (examples != null) {
-                        for (FluentCollectionMethodExample example : examples) {
-                            String className = example.getClassName();
-                            int count = 0;
-                            while (exampleClassNames.contains(example.getClassName())) {
-                                example.setClassName(className + (++count));
-                            }
-                            exampleClassNames.add(example.getClassName());
-                            methodExamples.add(example);
-                        }
-                    }
-                });
-
-                resourceCollection.getResourceCreates().forEach(rc -> ExampleParser.parseResourceCreate(resourceCollection, rc));
-            }
-            fluentClient.getResourceCollectionMethodExamples().addAll(methodExamples);
+            fluentClient.getExamples().addAll(
+                    fluentClient.getResourceCollections().stream()
+                            .flatMap(rc -> ExampleParser.parseResourceCollection(rc).stream())
+                            .collect(Collectors.toList()));
         }
 
         return fluentClient;

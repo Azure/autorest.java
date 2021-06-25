@@ -7,6 +7,7 @@ package com.azure.autorest.fluent.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -100,7 +101,7 @@ public class FluentJavaPackage extends JavaPackage {
         addJavaFile(javaFile);
     }
 
-    public final void addSample(FluentCollectionMethodExample example) {
+    public final void addSample(FluentExample example) {
         JavaSettings settings = JavaSettings.getInstance();
         JavaFile javaFile = getJavaFileFactory().createSampleFile(
                 settings.getPackage(), example.getClassName());
