@@ -166,7 +166,8 @@ public class FluentExampleTemplate {
                 List<String> keys = ((MapNode) node).getKeys();
 
                 StringBuilder builder = new StringBuilder();
-                // createMap(...)
+                // mapOf(...)
+                // similar to Map.of in Java 9
                 builder.append("mapOf(");
                 for (int i = 0; i < keys.size(); ++i) {
                     if (i != 0) {
