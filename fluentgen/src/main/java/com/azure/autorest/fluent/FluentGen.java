@@ -15,10 +15,10 @@ import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.mapper.PomMapper;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
@@ -287,8 +287,8 @@ public class FluentGen extends NewPlugin {
             }
 
             // Samples
-            for (FluentCollectionMethodExample methodExample : fluentClient.getResourceCollectionMethodExamples()) {
-                javaPackage.addSample(methodExample);
+            for (FluentExample example : fluentClient.getExamples()) {
+                javaPackage.addSample(example);
             }
         }
 

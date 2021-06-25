@@ -269,9 +269,9 @@ public class ResourceCreate extends ResourceOperation {
             if (this.isConstantResourceNamePathParameter()) {
                 defineMethod = FluentDefineMethod.defineMethodWithConstantResourceName(this.getResourceModel(), FluentMethodType.DEFINE, resourceName);
             } else {
-                IType resourceNameType = this.getResourceNamePathParameter().getClientMethodParameter().getClientType();
+                ClientMethodParameter clientMethodParameter = this.getResourceNamePathParameter().getClientMethodParameter();
                 defineMethod = new FluentDefineMethod(this.getResourceModel(), FluentMethodType.DEFINE,
-                        resourceName, resourceNameType);
+                        resourceName, clientMethodParameter);
             }
         }
         return defineMethod;

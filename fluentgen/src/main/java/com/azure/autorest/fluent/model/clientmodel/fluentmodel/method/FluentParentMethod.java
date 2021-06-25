@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 
 public class FluentParentMethod extends FluentMethod {
 
-    private List<ClientMethodParameter> parameters;
-
     public FluentParentMethod(FluentResourceModel model, FluentMethodType type,
                               FluentInterfaceStage stage, String parentResourceName,
                               List<ClientMethodParameter> parameters, ResourceLocalVariables resourceLocalVariables) {

@@ -5,12 +5,15 @@
 
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
+import com.azure.autorest.fluent.mapper.FluentMapperAccessor;
 import com.azure.autorest.fluent.mapper.ResourceParserAccessor;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
+import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -169,24 +172,32 @@ public class FluentMethodTests {
     }
 
     @Test
-    @Disabled("locks.json does not have action method")
     public void testActionMethod() {
-        TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
-        Client client = content.getClient();
-        FluentResourceCollection lockCollection = content.getLockCollection();
+        CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-storage.yaml");
+        Client client = FluentStatic.getClient();
+        FluentClient fluentClient = new FluentMapperAccessor(fluentgenAccessor.getFluentMapper()).basicMap(codeModel, client);
 
-        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(lockCollection, content.getFluentModels(), client.getModels());
-        ResourceCreate lockCreate = resourceCreates.iterator().next();
-        ResourceActions lockActions = ResourceParserAccessor.resourceResourceActions(lockCollection, lockCreate).get();
+        List<FluentResourceModel> fluentModels = fluentClient.getResourceModels();
+        List<FluentResourceCollection> fluentCollections = fluentClient.getResourceCollections();
 
-        List<FluentMethod> refreshMethods = lockActions.getFluentMethods();
-        Assertions.assertEquals(2, refreshMethods.size());
+        FluentResourceCollection blobContainerCollection = fluentCollections.stream()
+                .filter(c -> c.getInnerGroupClient().getClassBaseName().startsWith("BlobContainer"))
+                .findFirst().get();
 
-        FluentMethod refreshMethod = refreshMethods.iterator().next();
-        String methodContent = TestUtils.getMethodTemplateContent(refreshMethod.getMethodTemplate());
+        List<ResourceCreate> resourceCreates = ResourceParserAccessor.resolveResourceCreate(blobContainerCollection, fluentModels, client.getModels());
+        ResourceCreate blobContainerCreate = resourceCreates.iterator().next();
+        ResourceActions lockActions = ResourceParserAccessor.resourceResourceActions(blobContainerCollection, blobContainerCreate).get();
 
-        Assertions.assertTrue(methodContent.contains("void refreshAtResourceGroupLevel()"));
-        Assertions.assertTrue(methodContent.contains("serviceManager.managementLocks().refreshAtResourceGroupLevel(resourceGroupName, lockName)"));
+        List<FluentMethod> actionMethods = lockActions.getFluentMethods();
+        Assertions.assertEquals(6, actionMethods.size());
+
+        FluentMethod leaseMethod = actionMethods.stream()
+                .filter(m -> m.getName().equals("lease"))
+                .findFirst().get();
+        String methodContent = TestUtils.getMethodTemplateContent(leaseMethod.getMethodTemplate());
+
+        Assertions.assertTrue(methodContent.contains("LeaseContainerResponse lease()"));
+        Assertions.assertTrue(methodContent.contains("serviceManager.blobContainers().lease(resourceGroupName, accountName, containerName)"));
     }
 
     @Test

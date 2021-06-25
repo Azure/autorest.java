@@ -42,6 +42,8 @@ public class FluentMethodParameterMethod extends FluentMethod {
                     block.methodReturn("this");
                 })
                 .build();
+
+        this.parameters.add(methodParameter);
     }
 
     public FluentMethodParameterMethod(FluentResourceModel model, FluentMethodType type,

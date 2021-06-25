@@ -21,7 +21,6 @@ public class FluentCollectionMethodExample {
     private final FluentResourceCollection collection;
     private final FluentCollectionMethod collectionMethod;
     private final List<ParameterExample> parameters = new ArrayList<>();
-    private String className;
 
     public static class ParameterExample {
         private final MethodParameter parameter;
@@ -46,8 +45,6 @@ public class FluentCollectionMethodExample {
         this.manager = manager;
         this.collection = collection;
         this.collectionMethod = collectionMethod;
-
-        this.className = CodeNamer.toPascalCase(name) + "Samples";
     }
 
     public String getName() {
@@ -68,13 +65,5 @@ public class FluentCollectionMethodExample {
 
     public FluentCollectionMethod getCollectionMethod() {
         return collectionMethod;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 }

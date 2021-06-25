@@ -19,6 +19,7 @@ import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -63,23 +64,10 @@ public class FluentMapper {
 
         // samples
         if (fluentJavaSettings.isGenerateSamples()) {
-            final Set<String> exampleClassNames = new HashSet<>();
-            List<FluentCollectionMethodExample> methodExamples = new ArrayList<>();
-            fluentClient.getResourceCollections().forEach(rc -> rc.getMethodsForTemplate().forEach(m -> {
-                List<FluentCollectionMethodExample> examples = ExampleParser.parseMethod(rc, m);
-                if (examples != null) {
-                    for (FluentCollectionMethodExample example : examples) {
-                        String className = example.getClassName();
-                        int count = 0;
-                        while (exampleClassNames.contains(example.getClassName())) {
-                            example.setClassName(className + (++count));
-                        }
-                        exampleClassNames.add(example.getClassName());
-                        methodExamples.add(example);
-                    }
-                }
-            }));
-            fluentClient.getResourceCollectionMethodExamples().addAll(methodExamples);
+            fluentClient.getExamples().addAll(
+                    fluentClient.getResourceCollections().stream()
+                            .flatMap(rc -> ExampleParser.parseResourceCollection(rc).stream())
+                            .collect(Collectors.toList()));
         }
 
         return fluentClient;

@@ -64,4 +64,8 @@ public abstract class FluentMethod implements ImmutableMethod {
     public FluentResourceModel getFluentResourceModel() {
         return fluentResourceModel;
     }
+
+    public List<ClientMethodParameter> getParameters() {
+        return parameters;
+    }
 }
