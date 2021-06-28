@@ -62,4 +62,17 @@ public class FluentExampleTests {
             String content = javaFile.getContents().toString();
         }
     }
+
+    @Test
+    @Disabled
+    public void testPolicy() {
+        CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-policy.yaml");
+        Client client = FluentStatic.getClient();
+        FluentJavaPackage javaPackage = fluentgenAccessor.handleTemplate(client);
+        FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
+
+        List<FluentExample> examples = fluentClient.getExamples();
+        Assertions.assertTrue(!examples.isEmpty());
+        // TODO verification
+    }
 }
