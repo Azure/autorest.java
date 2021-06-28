@@ -265,7 +265,7 @@ public class FluentUtils {
             }
             return text;
         } catch (IOException e) {
-            logger.warn("Failed to read file '{}'", filename);
+            logger.error("Failed to read file '{}'", filename);
             throw new IllegalStateException(e);
         }
     }

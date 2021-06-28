@@ -55,6 +55,7 @@ public class FluentExampleTests {
 
         List<FluentExample> examples = fluentClient.getExamples();
         Assertions.assertTrue(!examples.isEmpty());
+
         // TODO verification
         for (FluentExample example : examples) {
             JavaFile javaFile = new JavaFile("dummy");
@@ -64,7 +65,6 @@ public class FluentExampleTests {
     }
 
     @Test
-    @Disabled
     public void testPolicy() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-policy.yaml");
         Client client = FluentStatic.getClient();
@@ -73,6 +73,27 @@ public class FluentExampleTests {
 
         List<FluentExample> examples = fluentClient.getExamples();
         Assertions.assertTrue(!examples.isEmpty());
-        // TODO verification
+
+        {
+            FluentExample example = examples.stream()
+                    .filter(e -> e.getClassName().equals("PolicyDefinitionsCreateOrUpdateAtManagementGroupSamples"))
+                    .findFirst().get();
+            JavaFile javaFile = new JavaFile("dummy");
+            FluentExampleTemplate.getInstance().write(example, javaFile);
+            String content = javaFile.getContents().toString();
+            // policyRule and metadata is Object
+            Assertions.assertTrue(content.contains(".withMetadata(SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"{\\\"category\\\":\\\"Naming\\\"}\", Object.class, SerializerEncoding.JSON))"));
+        }
+
+        {
+            FluentExample example = examples.stream()
+                    .filter(e -> e.getClassName().equals("PolicyDefinitionsCreateOrUpdateSamples"))
+                    .findFirst().get();
+            JavaFile javaFile = new JavaFile("dummy");
+            FluentExampleTemplate.getInstance().write(example, javaFile);
+            String content = javaFile.getContents().toString();
+            // allowedValues is array of Object
+            Assertions.assertTrue(content.contains(".withAllowedValues(Arrays.asList(SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"0\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"30\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"90\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"180\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"365\", Object.class, SerializerEncoding.JSON))).withDefaultValue(SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"365\", Object.class, SerializerEncoding.JSON))"));
+        }
     }
 }

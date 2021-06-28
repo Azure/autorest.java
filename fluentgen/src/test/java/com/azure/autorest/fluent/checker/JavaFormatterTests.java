@@ -51,7 +51,7 @@ public class JavaFormatterTests {
     @Test
     public void testFormatter() {
         JavaFormatter formatter = new JavaFormatter(JAVA_CONTENT, "mock");
-        formatter.format();
+        formatter.format(true);
     }
 
     @Test
