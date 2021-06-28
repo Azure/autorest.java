@@ -19,7 +19,7 @@ public class LiteralNode extends ExampleNode {
         return literalsValue;
     }
 
-    public ExampleNode setLiteralsValue(String literalsValue) {
+    public LiteralNode setLiteralsValue(String literalsValue) {
         this.literalsValue = literalsValue;
         return this;
     }

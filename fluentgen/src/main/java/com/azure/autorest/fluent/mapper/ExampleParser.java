@@ -261,26 +261,13 @@ public class ExampleParser {
         if (parameterValue == null) {
             node = new LiteralNode(clientModelProperty.getClientType(), null);
         } else {
-            List<String> flattenedNames = Collections.singletonList(clientModelProperty.getSerializedName());
+            List<String> jsonPropertyNames = Collections.singletonList(clientModelProperty.getSerializedName());
             if (clientModel.getNeedsFlatten()) {
-                flattenedNames = flattenedNames(clientModelProperty.getSerializedName());
+                jsonPropertyNames = flattenedNames(clientModelProperty.getSerializedName());
             }
 
-            boolean found = true;
-            Object childObjectValue = parameterValue.getObjectValue();
-            for (String name : flattenedNames) {
-                if (childObjectValue instanceof Map) {
-                    childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
-                    if (childObjectValue == null) {
-                        found = false;
-                        break;
-                    }
-                } else {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
+            Object childObjectValue = getChildObjectValue(jsonPropertyNames, parameterValue.getObjectValue());
+            if (childObjectValue != null) {
                 node = parseNode(clientModelProperty.getClientType(), childObjectValue);
             } else {
                 if (isRequired) {
@@ -319,7 +306,33 @@ public class ExampleParser {
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
             if (model != null) {
-                ClientModelNode clientModelNode = new ClientModelNode(type, objectValue);
+                if (model.getIsPolymorphic()) {
+                    // polymorphic, need to get the correct subclass from discriminator
+                    String serializedName = model.getPolymorphicDiscriminator();
+                    List<String> jsonPropertyNames = Collections.singletonList(serializedName);
+                    if (model.getNeedsFlatten()) {
+                        jsonPropertyNames = flattenedNames(serializedName);
+                    }
+
+                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
+                    if (childObjectValue instanceof String) {
+                        String discriminatorValue = (String) childObjectValue;
+                        ClientModel directiveModel = model.getDerivedModels().stream()
+                                .filter(m -> discriminatorValue.equalsIgnoreCase(m.getSerializedName()))
+                                .findFirst().orElse(null);
+                        if (directiveModel != null) {
+                            // use the subclass
+                            type = directiveModel.getType();
+                            model = directiveModel;
+                        } else {
+                            logger.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
+                        }
+                    } else {
+                        logger.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
+                    }
+                }
+
+                ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
                 node = clientModelNode;
 
                 clientModelNode.setClientModel(model);
@@ -327,26 +340,13 @@ public class ExampleParser {
                 for (ClientModelProperty modelProperty : model.getProperties()) {
                     String serializedName = modelProperty.getSerializedName();
 
-                    List<String> flattenedNames = Collections.singletonList(serializedName);
-                    if (model.getNeedsFlatten()) {
-                        flattenedNames = flattenedNames(serializedName);
+                    List<String> jsonPropertyNames = Collections.singletonList(serializedName);
+                    if (model.getNeedsFlatten() || modelProperty.getNeedsFlatten()) {
+                        jsonPropertyNames = flattenedNames(serializedName);
                     }
 
-                    boolean found = true;
-                    Object childObjectValue = objectValue;
-                    for (String name : flattenedNames) {
-                        if (childObjectValue instanceof Map) {
-                            childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
-                            if (childObjectValue == null) {
-                                found = false;
-                                break;
-                            }
-                        } else {
-                            found = false;
-                            break;
-                        }
-                    }
-                    if (found) {
+                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
+                    if (childObjectValue != null) {
                         ExampleNode childNode = parseNode(modelProperty.getClientType(), childObjectValue);
                         node.getChildNodes().add(childNode);
                         clientModelNode.getClientModelProperties().put(childNode, modelProperty);
@@ -367,6 +367,24 @@ public class ExampleParser {
     private static List<String> flattenedNames(String serializedName) {
         // TODO escaped .
         return Arrays.asList(serializedName.split(Pattern.quote(".")));
+    }
+
+    private static Object getChildObjectValue(List<String> jsonPropertyNames, Object objectValue) {
+        boolean found = true;
+        Object childObjectValue = objectValue;
+        for (String name : jsonPropertyNames) {
+            if (childObjectValue instanceof Map) {
+                childObjectValue = ((Map<String, Object>) childObjectValue).get(name);
+                if (childObjectValue == null) {
+                    found = false;
+                    break;
+                }
+            } else {
+                found = false;
+                break;
+            }
+        }
+        return found ? childObjectValue : null;
     }
 
     private static List<MethodParameter> getParameters(ClientMethod clientMethod) {

@@ -49,7 +49,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !isPredefinedModel(modelType))) {
             ClientModel.Builder builder = createModelBuilder()
                     .name(modelName)
-                    .packageName(modelType.getPackage());
+                    .packageName(modelType.getPackage())
+                    .type(modelType);
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.isPolymorphic(isPolymorphic);

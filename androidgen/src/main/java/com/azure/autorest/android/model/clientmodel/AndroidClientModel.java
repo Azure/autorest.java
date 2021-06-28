@@ -3,14 +3,16 @@ package com.azure.autorest.android.model.clientmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.Set;
 
 public class AndroidClientModel extends ClientModel {
     protected AndroidClientModel(String package_Keyword, String name, java.util.List<String> imports, String description,
-                          boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
-                          String parentModelName, java.util.List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName, String xmlNamespace,
-                          java.util.List<com.azure.autorest.model.clientmodel.ClientModelProperty> properties, java.util.List<com.azure.autorest.model.clientmodel.ClientModelPropertyReference> propertyReferences) {
+                                 boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
+                                 String parentModelName, java.util.List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName, String xmlNamespace,
+                                 java.util.List<com.azure.autorest.model.clientmodel.ClientModelProperty> properties, java.util.List<com.azure.autorest.model.clientmodel.ClientModelPropertyReference> propertyReferences,
+                                 IType modelType) {
         super(package_Keyword,
                 name,
                 imports,
@@ -24,7 +26,8 @@ public class AndroidClientModel extends ClientModel {
                 xmlName,
                 xmlNamespace,
                 properties,
-                propertyReferences);
+                propertyReferences,
+                modelType);
     }
 
     @Override
@@ -68,7 +71,8 @@ public class AndroidClientModel extends ClientModel {
                     xmlName,
                     xmlNamespace,
                     properties,
-                    propertyReferences);
+                    propertyReferences,
+                    modelType);
         }
     }
 }
