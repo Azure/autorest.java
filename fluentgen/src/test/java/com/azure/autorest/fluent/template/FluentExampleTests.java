@@ -93,7 +93,8 @@ public class FluentExampleTests {
             FluentExampleTemplate.getInstance().write(example, javaFile);
             String content = javaFile.getContents().toString();
             // allowedValues is array of Object
-            Assertions.assertTrue(content.contains(".withAllowedValues(Arrays.asList(SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"0\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"30\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"90\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"180\", Object.class, SerializerEncoding.JSON), SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"365\", Object.class, SerializerEncoding.JSON))).withDefaultValue(SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(\"365\", Object.class, SerializerEncoding.JSON))"));
+            Assertions.assertTrue(content.contains(".withAllowedValues(Arrays.asList(0, 30, 90, 180, 365))"));
+            Assertions.assertTrue(content.contains(".withDefaultValue(365)"));
         }
     }
 }
