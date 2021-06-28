@@ -102,7 +102,8 @@ public class FluentGen extends NewPlugin {
                 String path = javaFile.getFilePath();
 
                 // formatter
-                String formattedContent = new JavaFormatter(content, path).format();
+                boolean sampleFile = path.contains("src/samples/java/");
+                String formattedContent = new JavaFormatter(content, path).format(!sampleFile);
 
                 writeFile(path, formattedContent, null);
             }

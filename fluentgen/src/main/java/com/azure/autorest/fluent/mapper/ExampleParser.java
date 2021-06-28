@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCr
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageCreate;
@@ -298,11 +299,13 @@ public class ExampleParser {
             node = mapNode;
 
             Map<String, Object> dict = (Map<String, Object>) objectValue;
-            for (Map.Entry<String, Object> entry: dict.entrySet()) {
+            for (Map.Entry<String, Object> entry : dict.entrySet()) {
                 ExampleNode childNode = parseNode(elementType, entry.getValue());
                 node.getChildNodes().add(childNode);
                 mapNode.getKeys().add(entry.getKey());
             }
+        } else if (type == ClassType.Object) {
+            node = new ObjectNode(type, objectValue);
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = FluentUtils.getClientModel(((ClassType) type).getName());
             if (model != null) {
@@ -353,7 +356,7 @@ public class ExampleParser {
                     }
                 }
             } else {
-                // TODO error
+                throw new IllegalStateException("model type not found for type " + type + " and value " + objectValue);
             }
         } else {
             LiteralNode literalNode = new LiteralNode(type, objectValue);

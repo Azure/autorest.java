@@ -51,7 +51,7 @@ public class JavaFormatter {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public String format() {
+    public String format(boolean breakOverlongStringLiteral) {
         if (!ENABLED) {
             return content;
         }
@@ -63,8 +63,11 @@ public class JavaFormatter {
             Object formatterInstance = formatterClass.getConstructor().newInstance();
             Method formatSourceMethod = formatterClass.getMethod("formatSourceAndFixImports", String.class);
             String formattedCode = (String) formatSourceMethod.invoke(formatterInstance, content);
-            final int lengthLimit = 120;
-            return fixOverlongStringLiteral(formattedCode, lengthLimit);
+            if (breakOverlongStringLiteral) {
+                final int lengthLimit = 120;
+                formattedCode = fixOverlongStringLiteral(formattedCode, lengthLimit);
+            }
+            return formattedCode;
         } catch (Exception e) {
             logger.warn("Failed to parse Java file '{}', message: '{}'", path, e.getMessage());
             return content;
@@ -109,23 +112,23 @@ public class JavaFormatter {
                             String firstLine = line.substring(0, i + 1) + quote;
                             formattedLines.add(firstLine);
 
-                            String breakedLine = lineIndentStr + "+ " + quote + line.substring(i + 1);
-                            while (breakedLine.length() > lengthLimit) {
-                                lastQuote = breakedLine.lastIndexOf(quote);
+                            String brokenLine = lineIndentStr + "+ " + quote + line.substring(i + 1);
+                            while (brokenLine.length() > lengthLimit) {
+                                lastQuote = brokenLine.lastIndexOf(quote);
 
                                 for (int j = Math.min(lastQuote, lengthLimit) - 2; j >= 0; --j) {
-                                    c = breakedLine.charAt(j + 1);
+                                    c = brokenLine.charAt(j + 1);
                                     if (breakChar == 0 || breakChar == c) {
-                                        String nextBreakedLine = lineIndentStr + "+ " + quote + breakedLine.substring(j + 1);
-                                        breakedLine = breakedLine.substring(0, j + 1) + quote;
+                                        String nextBrokenLine = lineIndentStr + "+ " + quote + brokenLine.substring(j + 1);
+                                        brokenLine = brokenLine.substring(0, j + 1) + quote;
 
-                                        formattedLines.add(breakedLine);
-                                        breakedLine = nextBreakedLine;
+                                        formattedLines.add(brokenLine);
+                                        brokenLine = nextBrokenLine;
                                         break;
                                     }
                                 }
                             }
-                            formattedLines.add(breakedLine);
+                            formattedLines.add(brokenLine);
                             break;
                         }
                     }
