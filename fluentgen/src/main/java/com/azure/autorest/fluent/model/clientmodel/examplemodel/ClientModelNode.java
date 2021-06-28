@@ -25,7 +25,7 @@ public class ClientModelNode extends ExampleNode {
         return model;
     }
 
-    public ExampleNode setClientModel(ClientModel model) {
+    public ClientModelNode setClientModel(ClientModel model) {
         this.model = model;
         return this;
     }

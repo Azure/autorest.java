@@ -239,6 +239,23 @@ public class FluentUtils {
         return clientModel;
     }
 
+    public static ClientModel getObjectModel(String name) {
+        ClientModel clientModel = null;
+        for (ClientModel model : FluentStatic.getClient().getModels()) {
+            if (name.equals(model.getName())) {
+                clientModel = model;
+                break;
+            }
+        }
+        if (clientModel == null) {
+            Optional<ClientModel> modelOpt = ResourceClientModel.getResourceClientModel(name);
+            if (modelOpt.isPresent()) {
+                clientModel = modelOpt.get();
+            }
+        }
+        return clientModel;
+    }
+
     public static String loadTextFromResource(String filename, String... replacements) {
         String text = "";
         try (InputStream inputStream = UtilsTemplate.class.getClassLoader().getResourceAsStream(filename)) {
