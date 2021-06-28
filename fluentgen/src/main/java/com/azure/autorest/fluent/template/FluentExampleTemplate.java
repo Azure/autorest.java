@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -157,20 +158,37 @@ public class FluentExampleTemplate {
 
                 return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
             } else if (node instanceof ObjectNode) {
-                imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
-                imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
-                imports.add(java.io.IOException.class.getName());
+                PrimitiveType primitiveType = null;
+                if (node.getObjectValue() instanceof Integer) {
+                    primitiveType = PrimitiveType.Int;
+                } else if (node.getObjectValue() instanceof Long) {
+                    primitiveType = PrimitiveType.Long;
+                } else if (node.getObjectValue() instanceof Float) {
+                    primitiveType = PrimitiveType.Float;
+                } else if (node.getObjectValue() instanceof Double) {
+                    primitiveType = PrimitiveType.Double;
+                } else if (node.getObjectValue() instanceof Boolean) {
+                    primitiveType = PrimitiveType.Boolean;
+                }
 
-                helperFeatures.add(HelperFeature.ThrowsIOException);
+                if (primitiveType != null) {
+                    return primitiveType.defaultValueExpression(node.getObjectValue().toString());
+                } else {
+                    imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
+                    imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
+                    imports.add(java.io.IOException.class.getName());
 
-                try {
-                    String jsonStr = OBJECT_MAPPER.writeValueAsString(node.getObjectValue());
+                    helperFeatures.add(HelperFeature.ThrowsIOException);
 
-                    return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
-                            ClassType.String.defaultValueExpression(jsonStr));
-                } catch (JsonProcessingException e) {
-                    logger.error("Failed to write JSON {}", node.getObjectValue());
-                    throw new IllegalStateException(e);
+                    try {
+                        String jsonStr = OBJECT_MAPPER.writeValueAsString(node.getObjectValue());
+
+                        return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
+                                ClassType.String.defaultValueExpression(jsonStr));
+                    } catch (JsonProcessingException e) {
+                        logger.error("Failed to write JSON {}", node.getObjectValue());
+                        throw new IllegalStateException(e);
+                    }
                 }
             } else if (node instanceof ListNode) {
                 imports.add(java.util.Arrays.class.getName());
