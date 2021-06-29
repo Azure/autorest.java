@@ -17,11 +17,10 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentClient;
+import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
-import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -29,10 +28,8 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -64,10 +61,11 @@ public class FluentMapper {
 
         // samples
         if (fluentJavaSettings.isGenerateSamples()) {
-            fluentClient.getExamples().addAll(
-                    fluentClient.getResourceCollections().stream()
-                            .flatMap(rc -> ExampleParser.parseResourceCollection(rc).stream())
-                            .collect(Collectors.toList()));
+            List<FluentExample> examples = fluentClient.getResourceCollections().stream()
+                    .flatMap(rc -> ExampleParser.parseResourceCollection(rc).stream())
+                    .sorted()
+                    .collect(Collectors.toList());
+            fluentClient.getExamples().addAll(examples);
         }
 
         return fluentClient;

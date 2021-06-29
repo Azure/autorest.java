@@ -11,19 +11,17 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCr
 import java.util.ArrayList;
 import java.util.List;
 
-public class FluentExample {
+public class FluentExample implements Comparable<FluentExample> {
 
-    private final String name;
+    private final String groupName;
+    private final String methodName;
 
     private final List<FluentCollectionMethodExample> collectionMethodExamples = new ArrayList<>();
     private final List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
 
-    public FluentExample(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    public FluentExample(String groupName, String methodName) {
+        this.groupName = groupName;
+        this.methodName = methodName;
     }
 
     public List<FluentCollectionMethodExample> getCollectionMethodExamples() {
@@ -34,7 +32,24 @@ public class FluentExample {
         return resourceCreateExamples;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
     public String getClassName() {
-        return name + "Samples";
+        return groupName + methodName + "Samples";
+    }
+
+    @Override
+    public int compareTo(FluentExample o) {
+        int ret = this.groupName.compareTo(o.groupName);
+        if (ret == 0) {
+            ret = this.methodName.compareTo(o.methodName);
+        }
+        return ret;
     }
 }

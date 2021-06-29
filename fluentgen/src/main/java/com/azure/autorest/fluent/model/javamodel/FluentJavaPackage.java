@@ -12,7 +12,6 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.Project;
 import com.azure.autorest.fluent.model.projectmodel.TextFile;
@@ -24,10 +23,10 @@ import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTempl
 import com.azure.autorest.fluent.template.FluentResourceModelImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate;
 import com.azure.autorest.fluent.template.ReadmeTemplate;
+import com.azure.autorest.fluent.template.SampleTemplate;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +43,20 @@ public class FluentJavaPackage extends JavaPackage {
         return textFiles;
     }
 
-    public final void addReadme(Project project) {
+    public final void addReadmeMarkdown(Project project) {
         TextFile textFile = new TextFile("README.md", new ReadmeTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }
 
-    public final void addChangelog(Changelog changelog) {
+    public final void addChangelogMarkdown(Changelog changelog) {
         TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(changelog));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
+    }
+
+    public final void addSampleMarkdown(Project project, List<FluentExample> examples) {
+        TextFile textFile = new TextFile("SAMPLE.md", new SampleTemplate().write(project, examples));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

@@ -22,6 +22,12 @@ public class ReadmeTemplate {
             }
         }
 
+        if (project.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
+            sampleCodesBuilder.append("[Code snippets and samples]")
+                    .append("(").append(project.getSdkRepositoryUri().get()).append("/SAMPLE.md").append(")")
+                    .append("\n");
+        }
+
         return FluentUtils.loadTextFromResource("Readme.txt",
                 TextTemplate.SERVICE_NAME, project.getServiceName(),
                 TextTemplate.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
