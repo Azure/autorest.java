@@ -1,6 +1,7 @@
 package fixtures.paging;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.RequestOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
@@ -44,24 +45,26 @@ public class PagingTests {
         Assertions.assertEquals(10, list.size());
     }
 
-//    @Test
-//    public void getMultiplePagesWithOffset() throws Exception {
-//        PagedIterable<BinaryData> response = client.getMultiplePagesWithOffset(100, null);
-//        List<BinaryData> list = response.stream().collect(Collectors.toList());
-//        Assertions.assertEquals(10, list.size());
-//        Assertions.assertEquals(110, (int) list.get(list.size() - 1).getProperties().getId());
-//    }
+    @Test
+    public void getMultiplePagesWithOffset() throws Exception {
+        PagedIterable<BinaryData> response = client.getMultiplePagesWithOffset(100, null);
+        List<BinaryData> list = response.stream().collect(Collectors.toList());
+        Assertions.assertEquals(10, list.size());
+        Assertions.assertEquals("{\"properties\":{\"id\":110,\"name\":\"product\"}}", list.get(list.size() - 1).toString());
+    }
 
-//    @Test
-//    public void getMultiplePagesAsync() throws Exception {
-//        final CountDownLatch lock = new CountDownLatch(1);
-//        asyncClient.getMultiplePages("client-id", null)
-//                .doOnError(throwable -> Assertions.fail(throwable.getMessage()))
-//                .doOnComplete(lock::countDown)
-//                .blockLast();
-//
-//        Assertions.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
-//    }
+    @Test
+    public void getMultiplePagesAsync() throws Exception {
+        final CountDownLatch lock = new CountDownLatch(1);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addHeader("client-request-id", "client-id");
+        asyncClient.getMultiplePages(requestOptions)
+                .doOnError(throwable -> Assertions.fail(throwable.getMessage()))
+                .doOnComplete(lock::countDown)
+                .blockLast();
+
+        Assertions.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
+    }
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
@@ -111,11 +114,11 @@ public class PagingTests {
         }
     }
 
-//    @Test
-//    public void getMultiplePagesFragmentNextLink() throws Exception {
-//        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user");
-//        Assertions.assertEquals(10, response.stream().count());
-//    }
+    @Test
+    public void getMultiplePagesFragmentNextLink() throws Exception {
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user", null);
+        Assertions.assertEquals(10, response.stream().count());
+    }
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
