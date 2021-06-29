@@ -3,24 +3,22 @@ package fixtures.bodystring;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.BinaryData;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class StringOperationsTests {
     private static StringOperationClient client;
     private static StringOperationAsyncClient asyncClient;
     private CountDownLatch lock = new CountDownLatch(1);
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATServiceBuilder().buildStringOperationClient();
         asyncClient = new AutoRestSwaggerBATServiceBuilder().buildStringOperationAsyncClient();
@@ -29,7 +27,7 @@ public class StringOperationsTests {
     @Test
     public void getNull() throws Exception {
         String result = client.getNull(null).toObject(String.class);
-        Assert.assertEquals(null, result);
+        Assertions.assertEquals(null, result);
     }
 
     @Test
@@ -37,29 +35,29 @@ public class StringOperationsTests {
         try {
             client.putNull(null);
         } catch (Exception ex) {
-            Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
+            Assertions.assertEquals(IllegalArgumentException.class, ex.getClass());
+            Assertions.assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
         }
     }
 
     @Test
     public void getEmpty() throws Exception {
         String result = client.getEmpty(null).toObject(String.class);
-        Assert.assertEquals("", result);
+        Assertions.assertEquals("", result);
     }
 
     @Test
     public void putEmpty() throws Exception {
-        asyncClient.putEmptyWithResponse(null).subscribe(v -> {}, t -> fail(t.getMessage()),
+        asyncClient.putEmptyWithResponse(null).subscribe(v -> {}, t -> Assertions.fail(t.getMessage()),
             () -> lock.countDown());
-        assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        Assertions.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void getMbcs() throws Exception {
         String result = client.getMbcs(null).toObject(String.class);
         String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
-        Assert.assertEquals(expected, result);
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
@@ -70,7 +68,7 @@ public class StringOperationsTests {
     @Test
     public void getWhitespace() throws Exception {
         String result = client.getWhitespace(null).toObject(String.class);
-        Assert.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
+        Assertions.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
     }
 
     @Test
@@ -83,15 +81,15 @@ public class StringOperationsTests {
         try {
             client.getNotProvided(null);
         } catch (Exception ex) {
-            Assert.assertEquals(HttpResponseException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("JsonMappingException"));
+            Assertions.assertEquals(HttpResponseException.class, ex.getClass());
+            Assertions.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
     }
 
     @Test
     public void getBase64Encoded() throws Exception {
         byte[] result = client.getBase64Encoded(null);
-        Assert.assertEquals("a string that gets encoded with base64",
+        Assertions.assertEquals("a string that gets encoded with base64",
             new String(Base64.getDecoder().decode(unquote(new String(result, StandardCharsets.UTF_8))), StandardCharsets.UTF_8));
     }
 
@@ -113,14 +111,14 @@ public class StringOperationsTests {
     @Test
     public void getBase64UrlEncoded() throws Exception {
         String result = client.getBase64UrlEncoded(null).toObject(String.class);
-        Assert.assertEquals("a string that gets encoded with base64url",
+        Assertions.assertEquals("a string that gets encoded with base64url",
                 new String(Base64Util.decodeURL(result.getBytes(StandardCharsets.UTF_8))));
     }
 
     @Test
     public void getNullBase64UrlEncoded() throws Exception {
         byte[] result = client.getNullBase64UrlEncoded(null).toBytes();
-        Assert.assertEquals(0, result.length);
+        Assertions.assertEquals(0, result.length);
     }
 
     @Test
