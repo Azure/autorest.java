@@ -253,7 +253,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                             pageableItemName,
                             (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
-                            lroIntermediateType);
+                            lroIntermediateType,
+                            operation.getExtensions().getXmsPageable().getNextLinkName());
                     builder.methodPageDetails(details);
 
                     if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
@@ -301,7 +302,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             nextMethods.stream()
                                                     .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
                                                     .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
-                                            lroIntermediateType);
+                                            lroIntermediateType,
+                                            operation.getExtensions().getXmsPageable().getNextLinkName());
                                 }
 
                                 addClientMethodWithContext(methods,

@@ -808,7 +808,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     }
                     if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                         if (settings.isLowLevelClient()) {
-                            function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getNextLinkName());
+                            function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawNextLinkName());
                         } else {
                             function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
                         }

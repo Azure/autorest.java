@@ -12,6 +12,7 @@ public class MethodPageDetails {
      * Get whether or not this method is a request to get the next page of a sequence of pages.
      */
     private String nextLinkName;
+    private String rawNextLinkName;
     private String itemName;
     private ClientMethod nextMethod;
 
@@ -19,15 +20,21 @@ public class MethodPageDetails {
     // This intermediate type is the type of pagination response (the type with values and nextLink).
     private IType lroIntermediateType;
 
-    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType) {
+    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
+                             String rawNextLinkName) {
         this.nextLinkName = nextLinkName;
         this.itemName = itemName;
         this.nextMethod = nextMethod;
         this.lroIntermediateType = lroIntermediateType;
+        this.rawNextLinkName = rawNextLinkName;
     }
 
     public String getNextLinkName() {
         return nextLinkName;
+    }
+
+    public String getRawNextLinkName() {
+        return rawNextLinkName;
     }
 
     public String getItemName() {
