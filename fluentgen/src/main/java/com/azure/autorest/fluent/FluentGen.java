@@ -285,6 +285,9 @@ public class FluentGen extends NewPlugin {
             if (isSdkIntegration) {
                 javaPackage.addReadme(project);
                 javaPackage.addChangelog(project.getChangelog());
+                if (fluentJavaSettings.isGenerateSamples() && project.getSdkRepositoryUri().isPresent()) {
+                    javaPackage.addSample(project, fluentClient.getExamples());
+                }
             }
 
             // Samples

@@ -31,8 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -51,6 +51,7 @@ public class Project {
     private Changelog changelog;
     private final List<String> pomDependencyIdentifiers = new ArrayList<>();
     private final List<CodeSample> codeSamples = new ArrayList<>();
+    private String sdkRepositoryUri;
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
@@ -160,6 +161,33 @@ public class Project {
         updateChangelog();
 
         findCodeSamples();
+
+        findSdkRepositoryUri();
+    }
+
+    private void findSdkRepositoryUri() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        if (outputFolder != null) {
+            Path path = Paths.get(outputFolder).normalize();
+            List<String> pathSegment = new ArrayList<>();
+            while (path != null) {
+                Path childPath = path;
+                path = path.getParent();
+
+                pathSegment.add(childPath.getFileName().toString());
+
+                if ("sdk".equals(childPath.getFileName().toString())) {
+                    // childPath = azure-sdk-for-java/sdk, path = azure-sdk-for-java
+                    break;
+                }
+            }
+            if (path != null) {
+                Collections.reverse(pathSegment);
+                sdkRepositoryUri = "https://github.com/Azure/azure-sdk-for-java/blob/main/" + String.join("/", pathSegment);
+                logger.info("Repository URI '{}' deduced from 'output-folder' parameter", sdkRepositoryUri);
+            }
+        }
     }
 
     private Optional<String> findSdkFolder() {
@@ -421,5 +449,9 @@ public class Project {
 
     public List<CodeSample> getCodeSamples() {
         return codeSamples;
+    }
+
+    public Optional<String> getSdkRepositoryUri() {
+        return Optional.ofNullable(sdkRepositoryUri);
     }
 }

@@ -24,6 +24,7 @@ import com.azure.autorest.fluent.template.FluentResourceCollectionInterfaceTempl
 import com.azure.autorest.fluent.template.FluentResourceModelImplementationTemplate;
 import com.azure.autorest.fluent.template.FluentResourceModelInterfaceTemplate;
 import com.azure.autorest.fluent.template.ReadmeTemplate;
+import com.azure.autorest.fluent.template.SampleTemplate;
 import com.azure.autorest.fluent.template.UtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -52,6 +53,12 @@ public class FluentJavaPackage extends JavaPackage {
 
     public final void addChangelog(Changelog changelog) {
         TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(changelog));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
+    }
+
+    public final void addSample(Project project, List<FluentExample> examples) {
+        TextFile textFile = new TextFile("SAMPLE.md", new SampleTemplate().write(project, examples));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

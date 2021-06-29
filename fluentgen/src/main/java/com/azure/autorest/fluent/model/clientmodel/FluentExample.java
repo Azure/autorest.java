@@ -32,6 +32,14 @@ public class FluentExample implements Comparable<FluentExample> {
         return resourceCreateExamples;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
     public String getClassName() {
         return groupName + methodName + "Samples";
     }
