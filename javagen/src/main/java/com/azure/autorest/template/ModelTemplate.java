@@ -147,11 +147,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         IType propertyClientType = property.getWireType().getClientType();
 
                         String listElementName = property.getXmlListElementName();
-                        innerClass.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName));
+                        String jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\")", listElementName);
+                        if (property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+                            jacksonAnnotation = String.format("JacksonXmlProperty(localName = \"%1$s\", namespace = " +
+                                            "\"%2$s\")", listElementName, property.getXmlNamespace());
+                        }
+                        innerClass.annotation(jacksonAnnotation);
                         innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
 
                         innerClass.annotation("JsonCreator");
-                        innerClass.privateConstructor(String.format("%1$s(@JacksonXmlProperty(localName = \"%2$s\") %3$s items)", xmlWrapperClassName, listElementName, propertyClientType), constructor -> constructor.line("this.items = items;"));
+                        innerClass.privateConstructor(String.format("%1$s(@%2$s %3$s items)", xmlWrapperClassName, jacksonAnnotation, propertyClientType), constructor -> constructor.line("this.items = items;"));
                     });
                 }
 
