@@ -42,12 +42,14 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -340,7 +342,7 @@ public class ExampleParser {
 
                 clientModelNode.setClientModel(model);
 
-                for (ClientModelProperty modelProperty : model.getProperties()) {
+                for (ClientModelProperty modelProperty : getPropertiesIncludeSuperclass(model)) {
                     String serializedName = modelProperty.getSerializedName();
 
                     List<String> jsonPropertyNames = Collections.singletonList(serializedName);
@@ -398,6 +400,46 @@ public class ExampleParser {
                 .filter(p -> !p.getIsConstant() && !p.getFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    private static List<ClientModelProperty> getPropertiesIncludeSuperclass(ClientModel model) {
+        Map<String, ClientModelProperty> propertiesMap = new LinkedHashMap<>();
+        List<ClientModelProperty> properties = new ArrayList<>();
+
+        List<ClientModel> parentModels = new ArrayList<>();
+        String parentModelName = model.getParentModelName();
+        while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+            ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
+            if (parentModel != null) {
+                parentModels.add(parentModel);
+            }
+            parentModelName = parentModel == null ? null :parentModel.getParentModelName();
+        }
+
+        List<List<ClientModelProperty>> propertiesFromTypeAndParents = new ArrayList<>();
+        propertiesFromTypeAndParents.add(new ArrayList<>());
+        model.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly()).forEach(p -> {
+            if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
+                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+            }
+        });
+
+        for (ClientModel parent : parentModels) {
+            propertiesFromTypeAndParents.add(new ArrayList<>());
+
+            parent.getProperties().stream().filter(p -> !p.getIsConstant() && !p.getIsReadOnly()).forEach(p -> {
+                if (propertiesMap.putIfAbsent(p.getName(), p) == null) {
+                    propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                }
+            });
+        }
+
+        Collections.reverse(propertiesFromTypeAndParents);
+        for (List<ClientModelProperty> properties1 : propertiesFromTypeAndParents) {
+            properties.addAll(properties1);
+        }
+
+        return properties;
     }
 
     private static boolean requiresExample(ClientMethod clientMethod) {

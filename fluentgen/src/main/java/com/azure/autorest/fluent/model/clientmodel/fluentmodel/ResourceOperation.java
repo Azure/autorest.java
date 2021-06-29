@@ -236,12 +236,11 @@ public abstract class ResourceOperation {
             for (ClientModel parent : parentModels) {
                 propertiesFromTypeAndParents.add(new ArrayList<>());
 
-                parent.getProperties().stream()
-                        .forEach(p -> {
-                            if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
-                                propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
-                            }
-                        });
+                parent.getProperties().forEach(p -> {
+                    if (requestBodyModelPropertiesMap.putIfAbsent(p.getName(), p) == null) {
+                        propertiesFromTypeAndParents.get(propertiesFromTypeAndParents.size() - 1).add(p);
+                    }
+                });
             }
 
             Collections.reverse(propertiesFromTypeAndParents);
