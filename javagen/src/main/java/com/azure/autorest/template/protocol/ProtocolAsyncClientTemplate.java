@@ -97,20 +97,6 @@ public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClien
                 Templates.getClientMethodTemplate().write(method, classBlock);
             });
 
-            for (ClientMethod m : methods) {
-                System.err.println(m.getName() + " " + m.getType());
-            }
-
-            // PagingAsync
-            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingAsync).forEach(method -> {
-                Templates.getProtocolAsyncPagingMethodTemplate().write(method, classBlock);
-            });
-
-            // PagingAsyncSinglePage
-            methods.stream().filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage).forEach(method -> {
-                Templates.getProtocolAsyncPagingSinglePageMethodTemplate().write(method, classBlock);
-            });
-
             // invoke() method
             String invokeMethodArgs = "String url, HttpMethod httpMethod, BinaryData body, RequestOptions options";
             JavaVisibility visibility;

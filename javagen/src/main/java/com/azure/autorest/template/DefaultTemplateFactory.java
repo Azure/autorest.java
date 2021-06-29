@@ -104,21 +104,6 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public ProtocolAsyncPagingMethodTemplate getProtocolAsyncPagingMethodTemplate() {
-        return ProtocolAsyncPagingMethodTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolAsyncPagingSinglePageMethodTemplate getProtocolAsyncPagingSinglePageMethodTemplate() {
-        return ProtocolAsyncPagingSinglePageMethodTemplate.getInstance();
-    }
-
-    @Override
-    public ProtocolSyncPagingMethodTemplate getProtocolSyncPagingMethodTemplate() {
-        return ProtocolSyncPagingMethodTemplate.getInstance();
-    }
-
-    @Override
     public ProtocolSyncClientTemplate getLowLevelSyncClientTemplate() {
         return ProtocolSyncClientTemplate.getInstance();
     }
