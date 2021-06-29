@@ -13,17 +13,15 @@ import java.util.List;
 
 public class FluentExample {
 
-    private final String name;
+    private final String groupName;
+    private final String methodName;
 
     private final List<FluentCollectionMethodExample> collectionMethodExamples = new ArrayList<>();
     private final List<FluentResourceCreateExample> resourceCreateExamples = new ArrayList<>();
 
-    public FluentExample(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    public FluentExample(String groupName, String methodName) {
+        this.groupName = groupName;
+        this.methodName = methodName;
     }
 
     public List<FluentCollectionMethodExample> getCollectionMethodExamples() {
@@ -35,6 +33,6 @@ public class FluentExample {
     }
 
     public String getClassName() {
-        return name + "Samples";
+        return groupName + methodName + "Samples";
     }
 }

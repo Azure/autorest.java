@@ -97,7 +97,7 @@ public class ExampleParser {
         String name = CodeNamer.toPascalCase(groupName) + CodeNamer.toPascalCase(methodName);
         FluentExample example = examples.get(name);
         if (example == null) {
-            example = new FluentExample(name);
+            example = new FluentExample(groupName, methodName);
             examples.put(name, example);
         }
         return example;
