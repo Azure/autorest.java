@@ -11,7 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCr
 import java.util.ArrayList;
 import java.util.List;
 
-public class FluentExample {
+public class FluentExample implements Comparable<FluentExample> {
 
     private final String groupName;
     private final String methodName;
@@ -34,5 +34,14 @@ public class FluentExample {
 
     public String getClassName() {
         return groupName + methodName + "Samples";
+    }
+
+    @Override
+    public int compareTo(FluentExample o) {
+        int ret = this.groupName.compareTo(o.groupName);
+        if (ret == 0) {
+            ret = this.methodName.compareTo(o.methodName);
+        }
+        return ret;
     }
 }
