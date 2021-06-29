@@ -96,14 +96,14 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     }
 
     protected void writePagingHelperMethods(MethodGroupClient methodGroupClient, JavaClass classBlock) {
-        classBlock.privateMethod("List<BinaryData> getValue(BinaryData binaryData, String path)", block -> {
-            block.line("JsonArray array = JsonParser.parseString(binaryData.toString()).getAsJsonObject().getAsJsonArray(path);");
-            block.line("List<BinaryData> list = new ArrayList<>();");
-            block.line("for (JsonElement item : array) list.add(BinaryData.fromString(item.getAsString()));");
-            block.line("return list;");
+        classBlock.privateMethod("List<BinaryData> getValues(BinaryData binaryData, String path)", block -> {
+            block.line("Object obj = binaryData.toObject(Object.class);");
+            block.line("Object values = ((Map)obj).get(path);");
+            block.line("return (List<BinaryData>)(((List)values).stream().map(BinaryData::fromObject).collect(Collectors.toList()));");
         });
         classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
-            block.line("return JsonParser.parseString(binaryData.toString()).getAsJsonObject().get(path).getAsString();");
+            block.line("Object obj = binaryData.toObject(Object.class);");
+            block.line("return (String)((Map)obj).getOrDefault(path, null);");
         });
     }
 

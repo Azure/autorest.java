@@ -20,11 +20,9 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Pagings. */
@@ -333,7 +331,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -360,7 +358,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -457,7 +455,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         null,
                                         null));
     }
@@ -484,7 +482,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         null,
                                         null));
     }
@@ -575,7 +573,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -602,7 +600,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -698,7 +696,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -726,7 +724,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -825,7 +823,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -852,7 +850,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -958,7 +956,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -989,7 +987,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1097,7 +1095,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         null,
                                         null));
     }
@@ -1126,7 +1124,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         null,
                                         null));
     }
@@ -1154,7 +1152,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -1181,7 +1179,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -1267,7 +1265,8 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
+            int offset, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
@@ -1279,7 +1278,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1298,7 +1297,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(
-            RequestOptions requestOptions, Context context) {
+            int offset, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.getMultiplePagesWithOffset(this.client.getHost(), offset, accept, requestOptions, context)
                 .map(
@@ -1307,7 +1306,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1325,9 +1324,9 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getMultiplePagesWithOffsetSinglePageAsync(requestOptions),
+                () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions),
                 nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions));
     }
 
@@ -1344,9 +1343,10 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(RequestOptions requestOptions, Context context) {
+    public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(
+            int offset, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getMultiplePagesWithOffsetSinglePageAsync(requestOptions, context),
+                () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions, context),
                 nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions, context));
     }
 
@@ -1363,8 +1363,8 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(requestOptions));
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, requestOptions));
     }
 
     /**
@@ -1380,8 +1380,9 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(
+            int offset, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, requestOptions, context));
     }
 
     /**
@@ -1409,7 +1410,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1437,7 +1438,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1539,7 +1540,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1567,7 +1568,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1667,7 +1668,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1694,7 +1695,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1790,7 +1791,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1817,7 +1818,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1914,7 +1915,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -1941,7 +1942,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2041,7 +2042,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2071,7 +2072,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2171,7 +2172,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            RequestOptions requestOptions) {
+            String apiVersion, String tenant, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
@@ -2183,7 +2184,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2203,7 +2204,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.getMultiplePagesFragmentWithGroupingNextLink(
                         this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
@@ -2213,7 +2214,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2232,10 +2233,11 @@ public final class PagingsImpl {
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(nextLink, requestOptions));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions));
     }
 
     /**
@@ -2253,28 +2255,13 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(requestOptions, context),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(nextLink, requestOptions, context));
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(requestOptions));
+                () ->
+                        getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
+                                apiVersion, tenant, requestOptions, context),
+                nextLink ->
+                        nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions, context));
     }
 
     /**
@@ -2292,8 +2279,29 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(requestOptions, context));
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(
+                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(
+                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions, context));
     }
 
     /**
@@ -2318,7 +2326,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2345,7 +2353,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2452,7 +2460,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2483,7 +2491,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2504,7 +2512,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String nextLink, RequestOptions requestOptions) {
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
@@ -2522,7 +2530,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2543,7 +2551,7 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String nextLink, RequestOptions requestOptions, Context context) {
+            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.nextFragmentWithGrouping(
                         this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
@@ -2553,7 +2561,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2583,7 +2591,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "indexes"),
+                                        getValues(res.getValue(), "indexes"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2611,7 +2619,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "indexes"),
+                                        getValues(res.getValue(), "indexes"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2714,7 +2722,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2742,7 +2750,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2773,7 +2781,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2801,7 +2809,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2832,7 +2840,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2860,7 +2868,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "value"),
+                                        getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2891,7 +2899,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2919,7 +2927,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -2950,7 +2958,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -2978,7 +2986,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "odataNextLink"),
                                         null));
     }
@@ -3009,7 +3017,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3037,7 +3045,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3068,7 +3076,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3096,7 +3104,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3127,7 +3135,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3155,7 +3163,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3186,7 +3194,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3214,7 +3222,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3245,7 +3253,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3273,7 +3281,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3304,7 +3312,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3332,7 +3340,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3363,7 +3371,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3391,7 +3399,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "values"),
+                                        getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3422,7 +3430,7 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "indexes"),
+                                        getValues(res.getValue(), "indexes"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
@@ -3451,19 +3459,19 @@ public final class PagingsImpl {
                                         res.getRequest(),
                                         res.getStatusCode(),
                                         res.getHeaders(),
-                                        getValue(res.getValue(), "indexes"),
+                                        getValues(res.getValue(), "indexes"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
     }
 
-    private List<BinaryData> getValue(BinaryData obj, String path) {
-        JsonArray array = JsonParser.parseString(obj.toString()).getAsJsonObject().getAsJsonArray(path);
-        List<BinaryData> list = new ArrayList<>();
-        for (JsonElement item : array) list.add(BinaryData.fromString(item.getAsString()));
-        return list;
+    private List<BinaryData> getValues(BinaryData binaryData, String path) {
+        Object obj = binaryData.toObject(Object.class);
+        Object values = ((Map) obj).get(path);
+        return (List<BinaryData>) (((List) values).stream().map(BinaryData::fromObject).collect(Collectors.toList()));
     }
 
-    private String getNextLink(BinaryData obj, String path) {
-        return JsonParser.parseString(obj.toString()).getAsJsonObject().get(path).getAsString();
+    private String getNextLink(BinaryData binaryData, String path) {
+        Object obj = binaryData.toObject(Object.class);
+        return (String) ((Map) obj).getOrDefault(path, null);
     }
 }

@@ -237,6 +237,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -244,13 +245,14 @@ public final class AutoRestPagingTestServiceClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesWithOffset(requestOptions);
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesWithOffset(offset, requestOptions);
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -259,8 +261,9 @@ public final class AutoRestPagingTestServiceClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesWithOffset(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesWithOffset(requestOptions, context);
+    public PagedIterable<BinaryData> getMultiplePagesWithOffset(
+            int offset, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesWithOffset(offset, requestOptions, context);
     }
 
     /**
@@ -450,6 +453,8 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -457,13 +462,16 @@ public final class AutoRestPagingTestServiceClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(requestOptions);
+    public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
+            String apiVersion, String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -473,8 +481,9 @@ public final class AutoRestPagingTestServiceClient {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            RequestOptions requestOptions, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(requestOptions, context);
+            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(
+                apiVersion, tenant, requestOptions, context);
     }
 
     /**
