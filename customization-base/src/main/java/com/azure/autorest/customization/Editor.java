@@ -237,7 +237,23 @@ public final class Editor {
      * @return the list of ranges containing the occurrences
      */
     public List<Range> searchText(String fileName, String text) {
-        return searchTextInternal(fileName, text, false);
+        if (!lines.containsKey(fileName)) {
+            return null;
+        } else {
+            List<Range> occurrences = new ArrayList<>();
+            for (int i = 0; i != lines.get(fileName).size(); i++) {
+                String line = lines.get(fileName).get(i);
+                if (line.contains(text)) {
+                    int start = line.indexOf(text);
+                    while (start != -1) {
+                        int end = start + text.length();
+                        occurrences.add(new Range(new Position(i, start), new Position(i, end)));
+                        start = line.indexOf(text, end);
+                    }
+                }
+            }
+            return occurrences;
+        }
     }
 
     /**
@@ -248,30 +264,11 @@ public final class Editor {
      * @return the range containing the occurrence
      */
     public Range searchTextFirstOccurrence(String fileName, String text) {
-        List<Range> rangeList = searchTextInternal(fileName, text, true);
-
-        return Utils.isNullOrEmpty(rangeList) ? null : rangeList.get(0);
-    }
-
-    private List<Range> searchTextInternal(String fileName, String text, boolean findFirst) {
-        if (Utils.isNullOrEmpty(lines.get(fileName))) {
-            return null;
+        List<Range> ranges = searchText(fileName, text);
+        if (ranges != null && !ranges.isEmpty()) {
+            return ranges.get(0);
         }
-
-        List<Range> occurrences = new ArrayList<>();
-        Pattern pattern = Pattern.compile(text);
-        for (int i = 0; i != lines.get(fileName).size(); i++) {
-            Matcher matcher = pattern.matcher(lines.get(fileName).get(i));
-            while (matcher.find()) {
-                occurrences.add(new Range(new Position(i, matcher.start()), new Position(i, matcher.end())));
-
-                if (findFirst) {
-                    return occurrences;
-                }
-            }
-        }
-
-        return occurrences;
+        return null;
     }
 
     /**
