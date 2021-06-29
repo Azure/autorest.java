@@ -802,7 +802,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     function.line("res.getStatusCode(),");
                     function.line("res.getHeaders(),");
                     if (settings.isLowLevelClient()) {
-                        function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getItemName());
+                        function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawItemName());
                     } else {
                         function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                     }
