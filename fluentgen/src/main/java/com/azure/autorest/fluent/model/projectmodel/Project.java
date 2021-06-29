@@ -454,4 +454,9 @@ public class Project {
     public Optional<String> getSdkRepositoryUri() {
         return Optional.ofNullable(sdkRepositoryUri);
     }
+
+    public boolean isGenerateSamples() {
+        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
+        return settings.isGenerateSamples();
+    }
 }

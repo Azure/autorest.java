@@ -21,10 +21,6 @@ public class SampleTemplate {
     private static final String NEW_LINE = System.lineSeparator();
 
     public String write(Project project, List<FluentExample> examples) {
-        if (examples.isEmpty()) {
-            return "";
-        }
-
         final String repoUrl = project.getSdkRepositoryUri().get();
         final String sampleUrl = repoUrl + "/src/samples/java/" + project.getNamespace().replace(".", "/") + "/";
 
