@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
@@ -59,6 +60,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -165,8 +167,7 @@ public class ExampleParser {
     private static List<FluentResourceCreateExample> parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
         List<FluentResourceCreateExample> ret = null;
 
-        ResourceUpdate resourceUpdate = resourceCreate.getResourceModel().getResourceUpdate();
-        final boolean methodIsCreateOrUpdate = resourceUpdate != null && resourceUpdate.getMethodReferences().iterator().next() == resourceCreate.getMethodReferences().iterator().next();
+        final boolean methodIsCreateOrUpdate = methodIsCreateOrUpdate(resourceCreate.getResourceModel());
 
         List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
@@ -262,8 +263,7 @@ public class ExampleParser {
     private static List<FluentResourceUpdateExample> parseResourceUpdate(FluentResourceCollection collection, ResourceUpdate resourceUpdate) {
         List<FluentResourceUpdateExample> ret = null;
 
-        ResourceCreate resourceCreate = resourceUpdate.getResourceModel().getResourceCreate();
-        final boolean methodIsCreateOrUpdate = resourceCreate != null && resourceUpdate.getMethodReferences().iterator().next() == resourceCreate.getMethodReferences().iterator().next();
+        final boolean methodIsCreateOrUpdate = methodIsCreateOrUpdate(resourceUpdate.getResourceModel());
         FluentCollectionMethod resourceGetMethod = null;
         if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
             resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
@@ -285,7 +285,7 @@ public class ExampleParser {
                 }
 
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
-                ClientModel requestBodyClientModel = resourceCreate.getRequestBodyParameterModel();
+                ClientModel requestBodyClientModel = resourceUpdate.getRequestBodyParameterModel();
                 MethodParameter requestBodyParameter = methodParameters.stream()
                         .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.Body)
                         .findFirst().orElse(null);
@@ -574,5 +574,10 @@ public class ExampleParser {
     private static boolean exampleIsUpdate(String name) {
         name = name.toLowerCase(Locale.ROOT);
         return name.contains("update") && !name.contains("create");
+    }
+
+    private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {
+        return resourceModel.getResourceCreate() != null && resourceModel.getResourceUpdate() != null
+                && Objects.equals(resourceModel.getResourceCreate().getMethodReferences().iterator().next().getMethodName(), resourceModel.getResourceUpdate().getMethodReferences().iterator().next().getMethodName());
     }
 }
