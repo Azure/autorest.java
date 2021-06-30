@@ -3465,13 +3465,22 @@ public final class PagingsImpl {
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {
-        Object obj = binaryData.toObject(Object.class);
-        Object values = ((Map) obj).get(path);
-        return (List<BinaryData>) (((List) values).stream().map(BinaryData::fromObject).collect(Collectors.toList()));
+        try {
+            Object obj = binaryData.toObject(Object.class);
+            Object values = ((Map) obj).get(path);
+            return (List<BinaryData>)
+                    (((List) values).stream().map(BinaryData::fromObject).collect(Collectors.toList()));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private String getNextLink(BinaryData binaryData, String path) {
-        Object obj = binaryData.toObject(Object.class);
-        return (String) ((Map) obj).getOrDefault(path, null);
+        try {
+            Object obj = binaryData.toObject(Object.class);
+            return (String) ((Map) obj).getOrDefault(path, null);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
