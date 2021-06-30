@@ -80,6 +80,21 @@ public class FluentExampleTests {
             // create
             Assertions.assertTrue(content.contains(".create()"));
         }
+
+        {
+            FluentExample example = examples.stream()
+                    .filter(e -> e.getClassName().equals("StorageAccountsUpdateSamples"))
+                    .findFirst().get();
+            JavaFile javaFile = new JavaFile("dummy");
+            FluentExampleTemplate.getInstance().write(example, javaFile);
+            String content = javaFile.getContents().toString();
+            // get
+            Assertions.assertTrue(content.contains("storageManager.storageAccounts().getByResourceGroup"));
+            // update
+            Assertions.assertTrue(content.contains("resource.update()"));
+            // apply
+            Assertions.assertTrue(content.contains(".apply()"));
+        }
     }
 
     @Test

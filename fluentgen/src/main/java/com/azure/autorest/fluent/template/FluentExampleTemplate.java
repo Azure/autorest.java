@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.MapNode;
@@ -54,6 +55,10 @@ public class FluentExampleTemplate {
         List<ExampleMethod> exampleMethods = new ArrayList<>();
         exampleMethods.addAll(
                 example.getResourceCreateExamples().stream()
+                        .map(this::generateExampleMethod)
+                        .collect(Collectors.toList()));
+        exampleMethods.addAll(
+                example.getResourceUpdateExamples().stream()
                         .map(this::generateExampleMethod)
                         .collect(Collectors.toList()));
         exampleMethods.addAll(
@@ -138,6 +143,46 @@ public class FluentExampleTemplate {
                     .append("(").append(parameterInvocations).append(")");
         }
         sb.append(".create();");
+
+        ExampleMethod exampleMethod = new ExampleMethod()
+                .setImports(visitor.imports)
+                .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
+                .setMethodContent(sb.toString())
+                .setHelperFeatures(visitor.helperFeatures);
+        return exampleMethod;
+    }
+
+    private ExampleMethod generateExampleMethod(FluentResourceUpdateExample resourceUpdateExample) {
+        String methodName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(resourceUpdateExample.getName()));
+        String managerName = CodeNamer.toCamelCase(resourceUpdateExample.getManager().getType().getName());
+
+        ExampleNodeVisitor visitor = new ExampleNodeVisitor();
+
+        FluentCollectionMethodExample resourceGetExample = resourceUpdateExample.getResourceGetExample();
+        String parameterInvocations = resourceGetExample.getParameters().stream()
+                .map(p -> visitor.accept(p.getExampleNode()))
+                .collect(Collectors.joining(", "));
+
+        String resourceGetSnippet = String.format("%1$s %2$s = %3$s.%4$s().%5$s(%6$s).getValue();\n",
+                resourceUpdateExample.getResourceUpdate().getResourceModel().getInterfaceType().getName(),
+                "resource",
+                managerName,
+                CodeNamer.toCamelCase(resourceGetExample.getResourceCollection().getInterfaceType().getName()),
+                resourceGetExample.getCollectionMethod().getMethodName(),
+                parameterInvocations);
+
+        StringBuilder sb = new StringBuilder(resourceGetSnippet);
+        sb.append("resource").append(".update()");
+        for (FluentResourceCreateExample.ParameterExample parameter : resourceUpdateExample.getParameters()) {
+            parameterInvocations = parameter.getExampleNodes().stream()
+                    .map(visitor::accept)
+                    .collect(Collectors.joining(", "));
+            sb.append(".").append(parameter.getFluentMethod().getName())
+                    .append("(").append(parameterInvocations).append(")");
+        }
+        sb.append(".apply();");
+
+        resourceUpdateExample.getResourceUpdate().getResourceModel().getInterfaceType().addImportsTo(visitor.imports, false);
 
         ExampleMethod exampleMethod = new ExampleMethod()
                 .setImports(visitor.imports)
