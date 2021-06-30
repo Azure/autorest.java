@@ -35,4 +35,8 @@ public class ExampleNode {
     public IType getClientType() {
         return clientType;
     }
+
+    public boolean isNull() {
+        return objectValue == null;
+    }
 }

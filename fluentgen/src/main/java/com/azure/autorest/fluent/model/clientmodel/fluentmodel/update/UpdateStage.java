@@ -23,4 +23,8 @@ public class UpdateStage extends FluentInterfaceStage {
                 ? String.format("The stage of the %1$s update.", modelName)
                 : String.format("The stage of the %1$s update allowing to specify %2$s.", modelName, property.getName());
     }
+
+    public ClientModelProperty getModelProperty() {
+        return this.property;
+    }
 }
