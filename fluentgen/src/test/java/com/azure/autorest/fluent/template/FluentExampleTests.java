@@ -17,7 +17,6 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -33,7 +32,6 @@ public class FluentExampleTests {
     }
 
     @Test
-    @Disabled
     public void testLocks() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
         Client client = FluentStatic.getClient();
@@ -41,12 +39,11 @@ public class FluentExampleTests {
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
 
         List<FluentExample> examples = fluentClient.getExamples();
-        Assertions.assertTrue(!examples.isEmpty());
+        Assertions.assertFalse(examples.isEmpty());
         // TODO verification
     }
 
     @Test
-    @Disabled
     public void testStorage() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-storage.yaml");
         Client client = FluentStatic.getClient();
@@ -54,13 +51,34 @@ public class FluentExampleTests {
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
 
         List<FluentExample> examples = fluentClient.getExamples();
-        Assertions.assertTrue(!examples.isEmpty());
+        Assertions.assertFalse(examples.isEmpty());
 
-        // TODO verification
-        for (FluentExample example : examples) {
+        {
+            FluentExample example = examples.stream()
+                    .filter(e -> e.getClassName().equals("StorageAccountsCreateSamples"))
+                    .findFirst().get();
             JavaFile javaFile = new JavaFile("dummy");
             FluentExampleTemplate.getInstance().write(example, javaFile);
             String content = javaFile.getContents().toString();
+            // Map
+            Assertions.assertTrue(content.contains(".withTags(mapOf(\"key1\", \"value1\", \"key2\", \"value2\"))"));
+            // identity
+            Assertions.assertTrue(content.contains(".withIdentity(new Identity().withType(IdentityType.USER_ASSIGNED).withUserAssignedIdentities(mapOf(\"/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}\", new UserAssignedIdentity())))"));
+            // create
+            Assertions.assertTrue(content.contains(".create()"));
+        }
+
+        {
+            FluentExample example = examples.stream()
+                    .filter(e -> e.getClassName().equals("BlobContainersCreateOrUpdateImmutabilityPolicySamples"))
+                    .findFirst().get();
+            JavaFile javaFile = new JavaFile("dummy");
+            FluentExampleTemplate.getInstance().write(example, javaFile);
+            String content = javaFile.getContents().toString();
+            // optional property/parameter not provided in example
+            Assertions.assertFalse(content.contains(".withIfMatch"));
+            // create
+            Assertions.assertTrue(content.contains(".create()"));
         }
     }
 
@@ -72,7 +90,7 @@ public class FluentExampleTests {
         FluentClient fluentClient = fluentgenAccessor.handleFluentLite(codeModel, client, javaPackage);
 
         List<FluentExample> examples = fluentClient.getExamples();
-        Assertions.assertTrue(!examples.isEmpty());
+        Assertions.assertFalse(examples.isEmpty());
 
         {
             FluentExample example = examples.stream()

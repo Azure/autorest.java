@@ -178,11 +178,9 @@ public class ExampleParser {
                         if (!fluentMethods.isEmpty()) {
                             FluentMethod fluentMethod = fluentMethods.iterator().next();
                             List<ExampleNode> exampleNodes = new ArrayList<>();
-                            if (stage instanceof DefinitionStageMisc) {
-                                DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
-                                MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
-                                ExampleNode node = parseNodeFromParameter(example, methodParameter);
-                                exampleNodes.add(node);
+
+                            if (stage instanceof DefinitionStageBlank || stage instanceof DefinitionStageCreate) {
+                                // blank and create stage does not have parameter
                             } else if (stage instanceof DefinitionStageParent) {
                                 List<MethodParameter> parameters = fluentMethod.getParameters().stream()
                                         .map(p -> findMethodParameter(methodParameters, p))
@@ -190,19 +188,26 @@ public class ExampleParser {
                                 exampleNodes.addAll(parameters.stream()
                                         .map(p -> parseNodeFromParameter(example, p))
                                         .collect(Collectors.toList()));
-                            } else if (stage instanceof DefinitionStageBlank || stage instanceof DefinitionStageCreate) {
-                                // this stage does not have parameter
+                            } else if (stage instanceof DefinitionStageMisc) {
+                                DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
+                                MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
+                                ExampleNode node = parseNodeFromParameter(example, methodParameter);
+
+                                if (stage.isMandatoryStage() || !node.isNull()) {
+                                    exampleNodes.add(node);
+                                }
                             } else {
                                 ClientModelProperty clientModelProperty = stage.getModelProperty();
                                 if (clientModelProperty != null) {
-                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, clientModelProperty, stage.isMandatoryStage());
-                                    if (node != null) {
+                                    ExampleNode node = parseNodeFromModelProperty(example, requestBodyParameter, requestBodyClientModel, clientModelProperty);
+
+                                    if (stage.isMandatoryStage() || !node.isNull()) {
                                         exampleNodes.add(node);
                                     }
                                 }
                             }
 
-                            if (exampleNodes.stream().anyMatch(n -> n.getObjectValue() == null)) {
+                            if (exampleNodes.stream().anyMatch(ExampleNode::isNull)) {
                                 if (stage.isMandatoryStage()) {
                                     logger.warn("Failed to assign sample value to required stage '{}'", stage.getName());
                                 }
@@ -255,8 +260,7 @@ public class ExampleParser {
     }
 
     private static ExampleNode parseNodeFromModelProperty(ProxyMethodExample example, MethodParameter methodParameter,
-                                                          ClientModel clientModel, ClientModelProperty clientModelProperty,
-                                                          boolean isRequired) {
+                                                          ClientModel clientModel, ClientModelProperty clientModelProperty) {
         String serializedName = methodParameter.getProxyMethodParameter().getName();
 
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
@@ -273,11 +277,7 @@ public class ExampleParser {
             if (childObjectValue != null) {
                 node = parseNode(clientModelProperty.getClientType(), childObjectValue);
             } else {
-                if (isRequired) {
-                    node = new LiteralNode(clientModelProperty.getClientType(), null);
-                } else {
-                    node = null;
-                }
+                node = new LiteralNode(clientModelProperty.getClientType(), null);
             }
         }
         return node;
