@@ -15,6 +15,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ListNode;
@@ -127,7 +128,7 @@ public class ExampleParser {
                         }
                     }
 
-                    FluentCollectionMethodExample.ParameterExample parameterExample = new FluentCollectionMethodExample.ParameterExample(methodParameter, node);
+                    FluentCollectionMethodExample.ParameterExample parameterExample = new FluentBaseExample.ParameterExample(node);
                     collectionMethodExample.getParameters().add(parameterExample);
                 }
 
@@ -171,7 +172,7 @@ public class ExampleParser {
                             logger.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
                         }
                     }
-                    resourceCreateExample.getParameters().add(new FluentResourceCreateExample.ParameterExample(defineMethod, defineNode));
+                    resourceCreateExample.getParameters().add(new FluentBaseExample.ParameterExample(defineMethod, defineNode));
 
                     for (DefinitionStage stage : resourceCreate.getDefinitionStages()) {
                         List<FluentMethod> fluentMethods = stage.getMethods();
@@ -214,7 +215,7 @@ public class ExampleParser {
                             }
 
                             if (!exampleNodes.isEmpty()) {
-                                resourceCreateExample.getParameters().add(new FluentResourceCreateExample.ParameterExample(fluentMethod, exampleNodes));
+                                resourceCreateExample.getParameters().add(new FluentBaseExample.ParameterExample(fluentMethod, exampleNodes));
                             }
                         }
                     }
