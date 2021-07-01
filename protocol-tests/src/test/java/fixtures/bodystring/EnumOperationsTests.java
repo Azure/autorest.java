@@ -1,9 +1,9 @@
 package fixtures.bodystring;
 
 import com.azure.core.util.BinaryData;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -15,7 +15,7 @@ public class EnumOperationsTests {
     private static EnumClient client;
     private CountDownLatch lock = new CountDownLatch(1);
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATServiceBuilder().buildEnumClient();
     }
@@ -23,7 +23,7 @@ public class EnumOperationsTests {
     @Test
     public void getNotExpandable() throws Exception {
         String result = client.getNotExpandable(null);
-        Assert.assertEquals("red color", result);
+        Assertions.assertEquals("red color", result);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class EnumOperationsTests {
     @Test
     public void getReferenced() throws Exception {
         String actual = client.getReferenced(null);
-        Assert.assertEquals("red color", actual);
+        Assertions.assertEquals("red color", actual);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class EnumOperationsTests {
         String res = client.getReferencedConstant(null).toString();
         JsonReader jsonReader = Json.createReader(new StringReader(res));
         JsonObject result = jsonReader.readObject();
-        Assert.assertFalse(result.containsKey("ColorConstant"));
+        Assertions.assertFalse(result.containsKey("ColorConstant"));
     }
 
     @Test

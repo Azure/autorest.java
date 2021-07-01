@@ -287,6 +287,17 @@ public class ClientMethod {
             if (settings.isContextClientMethodParameter()) {
                 imports.add("com.azure.core.util.Context");
             }
+
+            // Paging
+            if (getMethodPageDetails() != null) {
+                imports.add("com.azure.core.http.rest.PagedResponseBase");
+                imports.add("com.azure.core.http.rest.PagedResponse");
+                imports.add("com.azure.core.http.rest.PagedFlux");
+                imports.add("com.azure.core.http.rest.PagedIterable");
+                imports.add("java.util.List");
+                imports.add("java.util.Map");
+                imports.add("java.util.stream.Collectors");
+            }
         } else {
             getReturnValue().addImportsTo(imports, includeImplementationImports);
 

@@ -10,15 +10,11 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.model.javamodel.*;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.BinaryData;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,7 +89,25 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
+            writePagingHelperMethods(methodGroupClient, classBlock);
+
             writeAdditionalClassBlock(classBlock);
+        });
+    }
+
+    protected void writePagingHelperMethods(MethodGroupClient methodGroupClient, JavaClass classBlock) {
+        classBlock.privateMethod("List<BinaryData> getValues(BinaryData binaryData, String path)", block -> {
+            block.line("try {");
+            block.line("Object obj = binaryData.toObject(Object.class);");
+            block.line("Object values = ((Map)obj).get(path);");
+            block.line("return (List<BinaryData>)(((List)values).stream().map(BinaryData::fromObject).collect(Collectors.toList()));");
+            block.line("} catch (Exception e) { return null; }");
+        });
+        classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
+            block.line("try {");
+            block.line("Object obj = binaryData.toObject(Object.class);");
+            block.line("return (String)((Map)obj).getOrDefault(path, null);");
+            block.line("} catch (Exception e) { return null; }");
         });
     }
 

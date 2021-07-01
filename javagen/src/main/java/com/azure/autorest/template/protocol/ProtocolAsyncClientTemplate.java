@@ -1,13 +1,16 @@
 package com.azure.autorest.template.protocol;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.*;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
+import org.slf4j.Logger;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
  * Template to create a synchronous client.
  */
 public class ProtocolAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient, JavaFile>  {
+
+    private static final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProtocolAsyncClientTemplate.class);
 
     private static ProtocolAsyncClientTemplate _instance = new ProtocolAsyncClientTemplate();
     private ProtocolAsyncClientTemplate() {

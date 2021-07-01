@@ -79,9 +79,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
-            asyncRestResponseReturnType = createPagedRestResponseReturnType(elementType);
-            asyncReturnType = createPagedAsyncReturnType(elementType);
-            syncReturnType = createPagedSyncReturnType(elementType);
+            if (settings.isLowLevelClient()) {
+                asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
+                asyncReturnType = createProtocolPagedAsyncReturnType();
+                syncReturnType = createProtocolPagedSyncReturnType();
+            } else {
+                asyncRestResponseReturnType = createPagedRestResponseReturnType(elementType);
+                asyncReturnType = createPagedAsyncReturnType(elementType);
+                syncReturnType = createPagedSyncReturnType(elementType);
+            }
         } else {
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
@@ -128,6 +134,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (settings.isLowLevelClient()) {
                 codeModelParameters = request.getParameters().stream().filter(p ->
                         p.isRequired() && !(p.getSchema().getType() == Schema.AllSchemaTypes.GROUP)).collect(Collectors.toList());
+//                Only path param is allowed
+//                codeModelParameters = request.getParameters().stream().filter(
+//                        p -> p.getProtocol().getHttp().getIn() == RequestParameterLocation.Path).collect(Collectors.toList());
             } else {
                 codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
             }
@@ -247,7 +256,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                             pageableItemName,
                             (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
-                            lroIntermediateType);
+                            lroIntermediateType,
+                            operation.getExtensions().getXmsPageable().getNextLinkName(),
+                            operation.getExtensions().getXmsPageable().getItemName());
                     builder.methodPageDetails(details);
 
                     if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
@@ -295,7 +306,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                             nextMethods.stream()
                                                     .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
                                                     .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
-                                            lroIntermediateType);
+                                            lroIntermediateType,
+                                            operation.getExtensions().getXmsPageable().getNextLinkName(),
+                                            operation.getExtensions().getXmsPageable().getItemName());
                                 }
 
                                 addClientMethodWithContext(methods,
@@ -619,6 +632,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     protected IType createPagedRestResponseReturnType(IType elementType) {
         return GenericType.Mono(GenericType.PagedResponse(elementType));
+    }
+
+    protected IType createProtocolPagedSyncReturnType() {
+        return GenericType.PagedIterable(ClassType.BinaryData);
+    }
+
+    protected IType createProtocolPagedAsyncReturnType() {
+        return GenericType.PagedFlux(ClassType.BinaryData);
+    }
+
+    protected IType createProtocolPagedRestResponseReturnType() {
+        return GenericType.Mono(GenericType.PagedResponse(ClassType.BinaryData));
     }
 
     protected ClientMethod.Builder getClientMethodBuilder() {
