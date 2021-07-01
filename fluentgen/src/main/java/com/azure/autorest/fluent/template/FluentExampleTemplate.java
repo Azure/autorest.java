@@ -11,6 +11,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentBaseExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
@@ -71,8 +72,16 @@ public class FluentExampleTemplate {
 
         Set<HelperFeature> helperFeatures = exampleMethods.stream().flatMap(em -> em.getHelperFeatures().stream()).collect(Collectors.toSet());
 
+        javaFile.javadocComment(commentBlock -> {
+            commentBlock.description(String.format("Samples for %1$s %2$s", example.getGroupName(), example.getMethodName()));
+        });
         javaFile.publicFinalClass(className, classBlock -> {
             for (ExampleMethod exampleMethod : exampleMethods) {
+                classBlock.javadocComment(commentBlock -> {
+                    commentBlock.description(String.format("Sample code: %1$s", exampleMethod.getExample().getName()));
+                    commentBlock.param(CodeNamer.toCamelCase(exampleMethod.getExample().getManager().getType().getName()),
+                            exampleMethod.getExample().getManager().getDescription());
+                });
                 String methodSignature = exampleMethod.getMethodSignature();
                 if (exampleMethod.getHelperFeatures().contains(HelperFeature.ThrowsIOException)) {
                     methodSignature += " throws IOException";
@@ -115,6 +124,7 @@ public class FluentExampleTemplate {
                 parameterInvocations);
 
         ExampleMethod exampleMethod = new ExampleMethod()
+                .setExample(collectionMethodExample)
                 .setImports(visitor.imports)
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
                 .setMethodContent(snippet)
@@ -145,6 +155,7 @@ public class FluentExampleTemplate {
         sb.append(".create();");
 
         ExampleMethod exampleMethod = new ExampleMethod()
+                .setExample(resourceCreateExample)
                 .setImports(visitor.imports)
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
                 .setMethodContent(sb.toString())
@@ -185,6 +196,7 @@ public class FluentExampleTemplate {
         resourceUpdateExample.getResourceUpdate().getResourceModel().getInterfaceType().addImportsTo(visitor.imports, false);
 
         ExampleMethod exampleMethod = new ExampleMethod()
+                .setExample(resourceUpdateExample)
                 .setImports(visitor.imports)
                 .setMethodSignature(String.format("void %1$s(%2$s %3$s)", methodName, FluentStatic.getFluentManager().getType().getFullName(), managerName))
                 .setMethodContent(sb.toString())
@@ -300,10 +312,20 @@ public class FluentExampleTemplate {
     }
 
     private static class ExampleMethod {
+        private FluentBaseExample example;
         private Set<String> imports;
         private String methodSignature;
         private String methodContent;
         private Set<HelperFeature> helperFeatures;
+
+        public FluentBaseExample getExample() {
+            return example;
+        }
+
+        public ExampleMethod setExample(FluentBaseExample example) {
+            this.example = example;
+            return this;
+        }
 
         private Set<String> getImports() {
             return imports;
