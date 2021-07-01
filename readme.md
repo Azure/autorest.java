@@ -69,7 +69,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
-|`--client-flattened-annotation-target`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Values can be `TYPE` or `FIELD`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
+|`--client-flattened-annotation-target=TYPE,FIELD`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Values can be `TYPE` or `FIELD`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
 
 ## Additional settings for Fluent
 
@@ -85,6 +85,7 @@ Following settings only works when `fluent` option is specified.
 | `--package-version` | String. Version number for Maven artifact. Default is `1.0.0-beta.1`. |
 | `--service-name` | String. Service name used in Manager class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme). |
 | `--sdk-integration` | Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance. |
+| `--generate-samples` | Boolean. Generate samples from `x-ms-examples` in swagger. Default is `false`. |
 | `--add-inner` | CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name). |
 | `--remove-inner` | CSV. Exclude from inner classes. |
 | `--rename-model` | CSV. Rename classes. Each item is of pattern `from:to`. |
@@ -837,6 +838,9 @@ help-content:
       - key: sdk-integration
         type: bool
         description: Boolean. Integrate to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/). Default is `false`. Provide `output-folder` as absolute path for best performance.
+      - key: generate-samples
+        type: bool
+        description: Boolean. Generate samples from `x-ms-examples` in swagger. Default is `false`.
       - key: add-inner
         type: string
         description: CSV. Treat as inner class (move to `fluent.models` namespace, append `Inner` to class name).
