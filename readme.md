@@ -69,7 +69,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
-|`--client-flattened-annotation-target=TYPE,FIELD`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Values can be `TYPE` or `FIELD`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
+|`--client-flattened-annotation-target=TYPE,FIELD`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
 
 ## Additional settings for Fluent
 
@@ -814,7 +814,7 @@ help-content:
         description: Indicates whether to override the superclass setter method in model. Default is false.
       - key: client-flattened-annotation-target
         type: string
-        description: Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Values can be `TYPE` or `FIELD`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
+        description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
 
   javafluent:
     activationScope: fluent
