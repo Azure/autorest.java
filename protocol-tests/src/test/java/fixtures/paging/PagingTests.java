@@ -95,7 +95,6 @@ public class PagingTests {
     public void getMultiplePagesFailure() throws Exception {
         try {
             List<BinaryData> list = client.getMultiplePagesFailure(null).stream().collect(Collectors.toList());
-            list.size();
             Assertions.fail();
         } catch (HttpResponseException ex) {
             Assertions.assertNotNull(ex.getResponse());

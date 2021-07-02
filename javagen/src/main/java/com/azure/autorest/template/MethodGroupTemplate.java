@@ -89,7 +89,9 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 Templates.getClientMethodTemplate().write(clientMethod, classBlock);
             }
 
-            writePagingHelperMethods(methodGroupClient, classBlock);
+            if (methodGroupClient.getClientMethods().stream().anyMatch(m -> m.getMethodPageDetails() != null)) {
+                writePagingHelperMethods(methodGroupClient, classBlock);
+            }
 
             writeAdditionalClassBlock(classBlock);
         });
@@ -106,7 +108,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         classBlock.privateMethod("String getNextLink(BinaryData binaryData, String path)", block -> {
             block.line("try {");
             block.line("Object obj = binaryData.toObject(Object.class);");
-            block.line("return (String)((Map)obj).getOrDefault(path, null);");
+            block.line("return (String)((Map)obj).get(path);");
             block.line("} catch (Exception e) { return null; }");
         });
     }
