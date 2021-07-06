@@ -36,9 +36,9 @@ public class AzureSpecialParametersTests {
     @BeforeAll
     public static void setup() {
         HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
+                new AddHeadersFromContextPolicy(),
                 new RetryPolicy(),
-                new CookiePolicy(),
-                new AddHeadersFromContextPolicy()
+                new CookiePolicy()
                 //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
         ).build();
 
