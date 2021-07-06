@@ -15,10 +15,12 @@ import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -43,6 +45,10 @@ class ResourceTypeNormalization {
             if (parentType.isPresent()) {
                 getSchemaResourceType(parentType.get())
                         .ifPresent(type -> adaptForParentSchema(compositeType, type));
+
+                if (FluentType.SystemData.getName().equals(Utils.getJavaName(parentType.get()))) {
+                    adaptAsSystemData(compositeType);
+                }
             } else {
                 if (compositeType.getExtensions() != null && compositeType.getExtensions().isXmsAzureResource()) {
                     tryAdaptAsResource(compositeType);
@@ -104,6 +110,19 @@ class ResourceTypeNormalization {
 
                 logger.info("Add parent ProxyResource, for '{}'", Utils.getJavaName(compositeType));
             }
+        }
+    }
+
+    private static void adaptAsSystemData(ObjectSchema compositeType) {
+        String previousName = Utils.getJavaName(compositeType);
+        compositeType.getLanguage().getJava().setName(FluentType.SystemData.getName());
+
+        logger.info("Rename system data from '{}' to 'SystemData'", previousName);
+
+        if (CoreUtils.isNullOrEmpty(compositeType.getProperties())) {
+            logger.warn("Ignored properties {}, for {}",
+                    compositeType.getProperties().stream().map(Utils::getJavaName).collect(Collectors.toList()),
+                    previousName);
         }
     }
 
