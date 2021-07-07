@@ -3478,7 +3478,7 @@ public final class PagingsImpl {
     private String getNextLink(BinaryData binaryData, String path) {
         try {
             Object obj = binaryData.toObject(Object.class);
-            return (String) ((Map) obj).getOrDefault(path, null);
+            return (String) ((Map) obj).get(path);
         } catch (Exception e) {
             return null;
         }

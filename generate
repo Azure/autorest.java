@@ -3,7 +3,7 @@
 VANILLA_ARGUMENTS='--version=3.1.3 --java --use=./ --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
 AZURE_ARGUMENTS='--version=3.1.3 --java --use=./ --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods'
 ARM_ARGUMENTS='--version=3.1.3 --java --use=./ --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false'
-PROTOCOL_ARGUMENTS='--version=3.1.3 --java --use=./ --output-folder=protocol-tests --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --low-level-client'
+PROTOCOL_ARGUMENTS='--version=3.1.3 --java --use=./ --output-folder=protocol-tests --sync-methods=all --generate-client-as-impl --add-context-parameter --context-client-method-parameter --generate-sync-async-clients --pipeline.modelerfour.flatten-models=false --pipeline.modelerfour.flatten-payloads=false --pipeline.modelerfour.group-parameters=false --low-level-client'
 
 # Vanilla
 autorest $VANILLA_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/additionalProperties.json --namespace=fixtures.additionalproperties
@@ -53,6 +53,9 @@ autorest $AZURE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/a
 
 # Protocol
 autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring
+autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging
+autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex
+autorest $PROTOCOL_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header
 
 # customization
 autorest --version=3.1.3 --use:. customization-tests/swagger
