@@ -5,33 +5,30 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Flattened product. */
+@JsonFlatten
 @Fluent
-public final class FlattenedProduct extends Resource {
+public class FlattenedProduct extends Resource {
     /*
      * The p.name property.
      */
-    @JsonFlatten
     @JsonProperty(value = "properties.p\\.name")
     private String pName;
 
     /*
      * The type property.
      */
-    @JsonFlatten
     @JsonProperty(value = "properties.type")
     private String typePropertiesType;
 
     /*
      * The provisioningStateValues property.
      */
-    @JsonFlatten
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private FlattenedProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /*
      * The provisioningState property.
      */
-    @JsonFlatten
     @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 

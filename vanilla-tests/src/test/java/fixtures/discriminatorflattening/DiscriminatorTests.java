@@ -41,7 +41,6 @@ public class DiscriminatorTests {
     }
 
     @Test
-    @Ignore("bug in 1.17.0 azure-core")
     public void serializationOnNestedFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
@@ -60,7 +59,7 @@ public class DiscriminatorTests {
     }
 
     @Test
-    @Ignore("bug in 1.17.0 azure-core")
+    @Ignore("bug in 1.18.0 azure-core")
     public void serializationOnNestedArrayFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
@@ -71,7 +70,7 @@ public class DiscriminatorTests {
         Assert.assertFalse(json.contains("\"properties.backendAddressPools\""));
         Assert.assertFalse(json.contains("\"properties.location\""));
         // verify that null value is ignored
-        Assert.assertFalse(json.contains("\"location\":null\""));
+        Assert.assertFalse(json.contains("\"location\":null"));
     }
 
     private void verifyODataTypeInJson(String json) {

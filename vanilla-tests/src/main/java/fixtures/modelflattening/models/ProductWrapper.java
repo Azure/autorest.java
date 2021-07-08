@@ -5,12 +5,12 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The wrapped produc. */
+@JsonFlatten
 @Fluent
-public final class ProductWrapper {
+public class ProductWrapper {
     /*
      * the product value
      */
-    @JsonFlatten
     @JsonProperty(value = "property.value")
     private String value;
 

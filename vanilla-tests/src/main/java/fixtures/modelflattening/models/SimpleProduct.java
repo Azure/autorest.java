@@ -5,33 +5,30 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The product documentation. */
+@JsonFlatten
 @Fluent
-public final class SimpleProduct extends BaseProduct {
+public class SimpleProduct extends BaseProduct {
     /*
      * Display name of product.
      */
-    @JsonFlatten
     @JsonProperty(value = "details.max_product_display_name")
     private String maxProductDisplayName;
 
     /*
      * Capacity of product. For example, 4 people.
      */
-    @JsonFlatten
     @JsonProperty(value = "details.max_product_capacity")
     private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
      */
-    @JsonFlatten
     @JsonProperty(value = "details.max_product_image.generic_value")
     private String genericValue;
 
     /*
      * URL value.
      */
-    @JsonFlatten
     @JsonProperty(value = "details.max_product_image.@odata\\.value")
     private String odataValue;
 
