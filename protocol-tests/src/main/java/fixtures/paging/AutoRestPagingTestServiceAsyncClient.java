@@ -171,7 +171,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -179,16 +178,14 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePage(
-            int requiredQueryParameter, RequestOptions requestOptions) {
-        return this.serviceClient.getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions);
+    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePage(RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParamsSinglePageAsync(requestOptions);
     }
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,8 +193,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
-        return this.serviceClient.getWithQueryParamsAsync(requiredQueryParameter, requestOptions);
+    public PagedFlux<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return this.serviceClient.getWithQueryParamsAsync(requestOptions);
     }
 
     /**
@@ -420,7 +417,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -430,14 +426,13 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePage(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions);
+            String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -446,15 +441,13 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions);
+    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -464,15 +457,13 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-                apiVersion, tenant, requestOptions);
+            String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -482,8 +473,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions);
+            String tenant, RequestOptions requestOptions) {
+        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions);
     }
 
     /**
@@ -517,7 +508,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -528,14 +518,13 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePage(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
-        return this.serviceClient.nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions);
+            String tenant, String nextLink, RequestOptions requestOptions) {
+        return this.serviceClient.nextFragmentSinglePageAsync(tenant, nextLink, requestOptions);
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -546,8 +535,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePage(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
-        return this.serviceClient.nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions);
+            String tenant, String nextLink, RequestOptions requestOptions) {
+        return this.serviceClient.nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptions);
     }
 
     /**

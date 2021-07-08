@@ -6,7 +6,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -88,8 +87,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/getWithQueryParams")
         Mono<Response<BinaryData>> getWithQueryParams(
                 @HostParam("$host") String host,
-                @QueryParam("requiredQueryParameter") int requiredQueryParameter,
-                @QueryParam("queryConstant") boolean queryConstant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -97,7 +94,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/nextOperationWithQueryParams")
         Mono<Response<BinaryData>> nextOperationWithQueryParams(
                 @HostParam("$host") String host,
-                @QueryParam("queryConstant") boolean queryConstant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -155,7 +151,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -164,7 +159,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
         Mono<Response<BinaryData>> getMultiplePagesFragmentWithGroupingNextLink(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -180,7 +174,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragment(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HeaderParam("Accept") String accept,
@@ -190,7 +183,6 @@ public final class PagingsImpl {
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
         Mono<Response<BinaryData>> nextFragmentWithGrouping(
                 @HostParam("$host") String host,
-                @QueryParam("api_version") String apiVersion,
                 @PathParam("tenant") String tenant,
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HeaderParam("Accept") String accept,
@@ -933,23 +925,13 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
-            int requiredQueryParameter, RequestOptions requestOptions) {
-        final boolean queryConstant = true;
+    public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getWithQueryParams(
-                                        this.client.getHost(),
-                                        requiredQueryParameter,
-                                        queryConstant,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                        context -> service.getWithQueryParams(this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -971,16 +953,13 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
-        final boolean queryConstant = true;
+            RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.getWithQueryParams(
-                        this.client.getHost(), requiredQueryParameter, queryConstant, accept, requestOptions, context)
+        return service.getWithQueryParams(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1002,13 +981,12 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(int requiredQueryParameter, RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions),
+                () -> getWithQueryParamsSinglePageAsync(requestOptions),
                 nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions));
     }
 
@@ -1022,14 +1000,12 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getWithQueryParamsAsync(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
+    public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter, requestOptions, context),
+                () -> getWithQueryParamsSinglePageAsync(requestOptions, context),
                 nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions, context));
     }
 
@@ -1043,12 +1019,11 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter, requestOptions));
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions));
     }
 
     /**
@@ -1061,13 +1036,11 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getWithQueryParams(
-            int requiredQueryParameter, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter, requestOptions, context));
+    public PagedIterable<BinaryData> getWithQueryParams(RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getWithQueryParamsAsync(requestOptions, context));
     }
 
     /**
@@ -1083,12 +1056,11 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
-        final boolean queryConstant = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextOperationWithQueryParams(
-                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
+                                        this.client.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1114,10 +1086,8 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
-        final boolean queryConstant = true;
         final String accept = "application/json";
-        return service.nextOperationWithQueryParams(
-                        this.client.getHost(), queryConstant, accept, requestOptions, context)
+        return service.nextOperationWithQueryParams(this.client.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2024,18 +1994,17 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentNextLink(
-                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
+                                        this.client.getHost(), tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2056,16 +2025,14 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.getMultiplePagesFragmentNextLink(
-                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
+        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2086,16 +2053,34 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
+        return new PagedFlux<>(
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions),
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptions));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
-                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions));
+                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions, context),
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptions, context));
     }
 
     /**
@@ -2107,16 +2092,12 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant, requestOptions, context),
-                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions, context));
+    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions));
     }
 
     /**
@@ -2128,33 +2109,13 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions));
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, requestOptions, context));
+            String tenant, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(tenant, requestOptions, context));
     }
 
     /**
@@ -2166,18 +2127,17 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.getMultiplePagesFragmentWithGroupingNextLink(
-                                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context))
+                                        this.client.getHost(), tenant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2198,16 +2158,15 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.getMultiplePagesFragmentWithGroupingNextLink(
-                        this.client.getHost(), apiVersion, tenant, accept, requestOptions, context)
+                        this.client.getHost(), tenant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2228,16 +2187,15 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
+            String tenant, RequestOptions requestOptions) {
         return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(apiVersion, tenant, requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions),
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptions));
     }
 
     /**
@@ -2249,19 +2207,15 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
+            String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
-                () ->
-                        getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
-                                apiVersion, tenant, requestOptions, context),
-                nextLink ->
-                        nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions, context));
+                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions, context),
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptions, context));
     }
 
     /**
@@ -2273,15 +2227,13 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions) {
-        return new PagedIterable<>(
-                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions));
+            String tenant, RequestOptions requestOptions) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions));
     }
 
     /**
@@ -2293,15 +2245,13 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(
-            String apiVersion, String tenant, RequestOptions requestOptions, Context context) {
-        return new PagedIterable<>(
-                getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, requestOptions, context));
+            String tenant, RequestOptions requestOptions, Context context) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(tenant, requestOptions, context));
     }
 
     /**
@@ -2435,25 +2385,18 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+            String tenant, String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragment(
-                                        this.client.getHost(),
-                                        apiVersion,
-                                        tenant,
-                                        nextLink,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2474,17 +2417,15 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.nextFragment(
-                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
+        return service.nextFragment(this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2505,25 +2446,18 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions) {
+            String tenant, String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextFragmentWithGrouping(
-                                        this.client.getHost(),
-                                        apiVersion,
-                                        tenant,
-                                        nextLink,
-                                        accept,
-                                        requestOptions,
-                                        context))
+                                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -2544,17 +2478,16 @@ public final class PagingsImpl {
      * BinaryData
      * }</pre>
      *
-     * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(
-            String apiVersion, String tenant, String nextLink, RequestOptions requestOptions, Context context) {
+            String tenant, String nextLink, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.nextFragmentWithGrouping(
-                        this.client.getHost(), apiVersion, tenant, nextLink, accept, requestOptions, context)
+                        this.client.getHost(), tenant, nextLink, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(

@@ -33,7 +33,7 @@ public class StringOperationsTests {
     @Test
     public void putNull() throws Exception {
         try {
-            client.putNull(null);
+            client.putNull(null, null);
         } catch (Exception ex) {
             Assertions.assertEquals(IllegalArgumentException.class, ex.getClass());
             Assertions.assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));

@@ -257,10 +257,16 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> putNullWithResponseAsync(BinaryData stringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), accept, requestOptions, context));
     }
@@ -268,10 +274,17 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNullWithResponseAsync(RequestOptions requestOptions, Context context) {
+    public Mono<Response<Void>> putNullWithResponseAsync(
+            BinaryData stringBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.putNull(this.client.getHost(), accept, requestOptions, context);
     }
@@ -279,41 +292,66 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync(RequestOptions requestOptions) {
-        return putNullWithResponseAsync(requestOptions).flatMap((Response<Void> res) -> Mono.empty());
+    public Mono<Void> putNullAsync(BinaryData stringBody, RequestOptions requestOptions) {
+        return putNullWithResponseAsync(stringBody, requestOptions).flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync(RequestOptions requestOptions, Context context) {
-        return putNullWithResponseAsync(requestOptions, context).flatMap((Response<Void> res) -> Mono.empty());
+    public Mono<Void> putNullAsync(BinaryData stringBody, RequestOptions requestOptions, Context context) {
+        return putNullWithResponseAsync(stringBody, requestOptions, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull(RequestOptions requestOptions) {
-        putNullAsync(requestOptions).block();
+    public void putNull(BinaryData stringBody, RequestOptions requestOptions) {
+        putNullAsync(stringBody, requestOptions).block();
     }
 
     /**
      * Set string value null.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNullWithResponse(RequestOptions requestOptions, Context context) {
-        return putNullWithResponseAsync(requestOptions, context).block();
+    public Response<Void> putNullWithResponse(BinaryData stringBody, RequestOptions requestOptions, Context context) {
+        return putNullWithResponseAsync(stringBody, requestOptions, context).block();
     }
 
     /**
