@@ -56,19 +56,21 @@ public final class StringOperationClient {
     /**
      * Set string value null.
      *
+     * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull(RequestOptions requestOptions) {
-        this.serviceClient.putNull(requestOptions);
+    public void putNull(BinaryData stringBody, RequestOptions requestOptions) {
+        this.serviceClient.putNull(stringBody, requestOptions);
     }
 
     /**
      * Set string value null.
      *
+     * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -77,8 +79,8 @@ public final class StringOperationClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNullWithResponse(RequestOptions requestOptions, Context context) {
-        return this.serviceClient.putNullWithResponse(requestOptions, context);
+    public Response<Void> putNullWithResponse(BinaryData stringBody, RequestOptions requestOptions, Context context) {
+        return this.serviceClient.putNullWithResponse(stringBody, requestOptions, context);
     }
 
     /**

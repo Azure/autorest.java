@@ -6,6 +6,7 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -115,13 +116,17 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFragmentNextLink() throws Exception {
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user", null);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("api_version", "1.6");
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentNextLink("test_user", requestOptions);
         Assertions.assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
-        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("1.6", "test_user", null);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("api_version", "1.6");
+        PagedIterable<BinaryData> response = client.getMultiplePagesFragmentWithGroupingNextLink("test_user", requestOptions);
         Assertions.assertEquals(10, response.stream().count());
     }
 
@@ -137,9 +142,11 @@ public class PagingTests {
         Assertions.assertEquals(1, count);
     }
 
-    @Test
+    @Disabled("NextLink has parameters")
     public void getWithQueryParams() {
-        long count = client.getWithQueryParams(100, null).stream().count();
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("requiredQueryParameter", "100").addQueryParam("queryConstant", "true");
+        long count = client.getWithQueryParams(requestOptions).stream().count();
         Assertions.assertEquals(2, count);
     }
 

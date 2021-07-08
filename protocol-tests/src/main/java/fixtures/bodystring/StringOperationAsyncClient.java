@@ -55,6 +55,7 @@ public final class StringOperationAsyncClient {
     /**
      * Set string value null.
      *
+     * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,13 +63,14 @@ public final class StringOperationAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNullWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putNullWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> putNullWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
+        return this.serviceClient.putNullWithResponseAsync(stringBody, requestOptions);
     }
 
     /**
      * Set string value null.
      *
+     * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -76,8 +78,8 @@ public final class StringOperationAsyncClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNull(RequestOptions requestOptions) {
-        return this.serviceClient.putNullAsync(requestOptions);
+    public Mono<Void> putNull(BinaryData stringBody, RequestOptions requestOptions) {
+        return this.serviceClient.putNullAsync(stringBody, requestOptions);
     }
 
     /**

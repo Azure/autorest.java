@@ -147,7 +147,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             for (Parameter parameter : request.getParameters().stream()
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
-                if (parameter.isRequired() || !settings.isLowLevelClient()) {
+                if (!settings.isLowLevelClient() || parameter.isRequired() &&
+                        parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header &&
+                        parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query ||
+                        parameter.getLanguage().getJava().getName().equals("accept")) {
+                        // Maybe we should allow constant parameter here, to be confirmed
                     parameter.setOperation(operation);
                     ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
                     if (requestContentType.startsWith("application/json-patch+json")) {
