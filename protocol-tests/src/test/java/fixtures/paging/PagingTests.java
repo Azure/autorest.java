@@ -1,7 +1,7 @@
 package fixtures.paging;
 
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.http.RequestOptions;
+import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;

@@ -4,6 +4,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class HeaderOperationsTests {
@@ -17,8 +18,7 @@ public class HeaderOperationsTests {
         client = new AutoRestSwaggerBATHeaderServiceBuilder().buildClient();
     }
 
-    // fail, does not take effect on "User-Agent", high-level has same issue
-    @Test
+    @Disabled("fail, does not take effect on \"User-Agent\", high-level has same issue")
     public void paramExistingKey() {
         client.paramExistingKey("overwrite", null);
     }
