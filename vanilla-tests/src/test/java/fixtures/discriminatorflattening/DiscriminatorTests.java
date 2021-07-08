@@ -41,7 +41,6 @@ public class DiscriminatorTests {
     }
 
     @Test
-    @Ignore("bug in 1.17.0 azure-core")
     public void serializationOnNestedFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
@@ -60,7 +59,7 @@ public class DiscriminatorTests {
     }
 
     @Test
-    @Ignore("bug in 1.17.0 azure-core")
+    @Ignore("bug in 1.18.0 azure-core")
     public void serializationOnNestedArrayFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
