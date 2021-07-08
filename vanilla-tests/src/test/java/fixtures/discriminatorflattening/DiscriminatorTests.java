@@ -70,7 +70,7 @@ public class DiscriminatorTests {
         Assert.assertFalse(json.contains("\"properties.backendAddressPools\""));
         Assert.assertFalse(json.contains("\"properties.location\""));
         // verify that null value is ignored
-        Assert.assertFalse(json.contains("\"location\":null\""));
+        Assert.assertFalse(json.contains("\"location\":null"));
     }
 
     private void verifyODataTypeInJson(String json) {
