@@ -170,6 +170,7 @@ class ResourceTypeNormalization {
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
                         .filter(p -> !SUB_RESOURCE_FIELDS.contains(p.getSerializedName()))
+                        .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
                 break;
@@ -178,12 +179,14 @@ class ResourceTypeNormalization {
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
                         .filter(p -> !PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
+                        .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
                 List<Property> mutableProperties = parentType.getProperties().stream()
                         .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
+                        .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(mutableProperties);
                 break;
@@ -192,6 +195,7 @@ class ResourceTypeNormalization {
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
                         .filter(p -> !RESOURCE_FIELDS.contains(p.getSerializedName()))
+                        .filter(p -> !hasProperty(compositeType, p))    // avoid conflict with property in this type
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
@@ -199,6 +203,7 @@ class ResourceTypeNormalization {
                 List<Property> mutableProperties = parentType.getProperties().stream()
                         .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
+                        .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(mutableProperties);
                 break;
@@ -296,5 +301,10 @@ class ResourceTypeNormalization {
             return false;
         }
         return compositeType.getProperties().stream().map(Property::getSerializedName).collect(Collectors.toSet()).containsAll(fieldNames);
+    }
+
+    private static boolean hasProperty(ObjectSchema compositeType, Property property) {
+        return compositeType.getProperties() != null && compositeType.getProperties().stream()
+                .anyMatch(p -> Utils.getJavaName(p) != null && Utils.getJavaName(p).equals(Utils.getJavaName(property)));
     }
 }
