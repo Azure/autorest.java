@@ -4,7 +4,6 @@ import com.azure.autorest.extension.base.model.codemodel.AndSchema;
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -24,6 +23,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 
 import java.util.ArrayList;
@@ -289,6 +289,12 @@ public class Transformer {
       Operation nextOperation = operationGroup.getOperations().stream()
           .filter(o -> o.getLanguage().getJava().getName().equals(operationName))
           .findFirst().get();
+      if (nextOperation.getExtensions() == null) {
+        nextOperation.setExtensions(new XmsExtensions());
+      }
+      if (nextOperation.getExtensions().getXmsPageable() == null) {
+        nextOperation.getExtensions().setXmsPageable(new XmsPageable());
+      }
       operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
     }
