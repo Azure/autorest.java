@@ -27,13 +27,13 @@ public class StringOperationsTests {
     @Test
     public void getNull() throws Exception {
         String result = client.getNull(null).toObject(String.class);
-        Assertions.assertEquals(null, result);
+        Assertions.assertNull(result);
     }
 
     @Test
     public void putNull() throws Exception {
         try {
-            client.putNull(null, null);
+            client.putNull(null);
         } catch (Exception ex) {
             Assertions.assertEquals(IllegalArgumentException.class, ex.getClass());
             Assertions.assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
