@@ -35,7 +35,7 @@ public class ClassType implements IType {
     public static final ClassType DateTimeRfc1123 = new ClassType.Builder().knownClass(com.azure.core.util.DateTimeRfc1123.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder().packageName("com.azure.android.core.util").name("DateTimeRfc1123").build();
     public static final ClassType BigDecimal = new ClassType.Builder().knownClass(java.math.BigDecimal.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression)).build();
-    public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).build();
+    public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression)).build();
     public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
     public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
     public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
