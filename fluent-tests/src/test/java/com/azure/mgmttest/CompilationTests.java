@@ -12,8 +12,6 @@ import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.authorization.models.GraphError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
-import com.azure.mgmttest.conainterservice.models.ContainerServiceMasterProfile;
-import com.azure.mgmttest.conainterservice.models.Count;
 import com.azure.mgmttest.cosmos.models.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
@@ -87,11 +85,11 @@ public class CompilationTests {
         sqlDatabaseGetPropertiesResource.colls();
     }
 
-    public void testIntEnum() {
-        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
-        containerServiceMasterProfile.withCount(Count.THREE);
-        int countInt = containerServiceMasterProfile.count().toInt();
-    }
+//    public void testIntEnum() {
+//        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
+//        containerServiceMasterProfile.withCount(Count.THREE);
+//        int countInt = containerServiceMasterProfile.count().toInt();
+//    }
 
     public void testException() {
         ManagementException exception = new DefaultErrorResponseErrorException(anyString(), null);
