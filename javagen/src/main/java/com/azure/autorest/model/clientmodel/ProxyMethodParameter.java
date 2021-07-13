@@ -168,7 +168,7 @@ public class ProxyMethodParameter {
     }
 
     public final String getParameterReferenceConverted() {
-        return String.format("%1$sConverted", CodeNamer.toCamelCase(getParameterReference()));
+        return String.format("%1$sConverted", CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(getParameterReference())));
     }
 
     public final CollectionFormat getCollectionFormat() {
