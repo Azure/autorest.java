@@ -166,6 +166,11 @@ public class ClientMethod {
         return getMethodParameters().stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
     }
 
+    public final String getArgumentListWithoutRequestOptions() {
+        return getMethodParameters().stream().map(ClientMethodParameter::getName)
+                .map(name -> name.equals("requestOptions") ? "null" : name).collect(Collectors.joining(", "));
+    }
+
     /**
      * The full declaration of this ClientMethod.
      */

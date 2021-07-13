@@ -6,6 +6,7 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -52,6 +53,7 @@ public final class BasicsImpl {
         @Put("/complex/basic/valid")
         Mono<Response<Void>> putValid(
                 @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -216,7 +218,14 @@ public final class BasicsImpl {
     public Mono<Response<Void>> putValidWithResponseAsync(BinaryData complexBody, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
+                context ->
+                        service.putValid(
+                                this.client.getHost(),
+                                this.client.getApiVersion(),
+                                complexBody,
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
@@ -234,7 +243,8 @@ public final class BasicsImpl {
     public Mono<Response<Void>> putValidWithResponseAsync(
             BinaryData complexBody, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
+        return service.putValid(
+                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, requestOptions, context);
     }
 
     /**

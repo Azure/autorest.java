@@ -473,7 +473,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             clientMethod.getArgumentList());
                     function.line("nextLink -> %s(%s));",
                             clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentListWithoutRequestOptions());
                 });
             });
         } else {

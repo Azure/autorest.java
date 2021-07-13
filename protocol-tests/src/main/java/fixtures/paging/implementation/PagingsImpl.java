@@ -6,6 +6,7 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -87,6 +88,7 @@ public final class PagingsImpl {
         @Get("/paging/multiple/getWithQueryParams")
         Mono<Response<BinaryData>> getWithQueryParams(
                 @HostParam("$host") String host,
+                @QueryParam("queryConstant") boolean queryConstant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -94,6 +96,7 @@ public final class PagingsImpl {
         @Get("/paging/multiple/nextOperationWithQueryParams")
         Mono<Response<BinaryData>> nextOperationWithQueryParams(
                 @HostParam("$host") String host,
+                @QueryParam("queryConstant") boolean queryConstant,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -370,7 +373,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -388,7 +391,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getNoItemNamePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -612,7 +615,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -630,7 +633,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getSinglePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getSinglePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -737,7 +740,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -756,7 +759,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> firstResponseEmptySinglePageAsync(requestOptions, context),
-                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -862,7 +865,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -880,7 +883,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -929,9 +932,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
+        final boolean queryConstant = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                        context -> service.getWithQueryParams(this.client.getHost(), accept, requestOptions, context))
+                        context ->
+                                service.getWithQueryParams(
+                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -958,8 +964,9 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
+        final boolean queryConstant = true;
         final String accept = "application/json";
-        return service.getWithQueryParams(this.client.getHost(), accept, requestOptions, context)
+        return service.getWithQueryParams(this.client.getHost(), queryConstant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -987,7 +994,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getWithQueryParamsSinglePageAsync(requestOptions),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions));
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null));
     }
 
     /**
@@ -1006,7 +1013,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getWithQueryParamsAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getWithQueryParamsSinglePageAsync(requestOptions, context),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync(requestOptions, context));
+                nextLink -> nextOperationWithQueryParamsSinglePageAsync(null, context));
     }
 
     /**
@@ -1056,11 +1063,12 @@ public final class PagingsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
+        final boolean queryConstant = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
                                 service.nextOperationWithQueryParams(
-                                        this.client.getHost(), accept, requestOptions, context))
+                                        this.client.getHost(), queryConstant, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1086,8 +1094,10 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(
             RequestOptions requestOptions, Context context) {
+        final boolean queryConstant = true;
         final String accept = "application/json";
-        return service.nextOperationWithQueryParams(this.client.getHost(), accept, requestOptions, context)
+        return service.nextOperationWithQueryParams(
+                        this.client.getHost(), queryConstant, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -1169,7 +1179,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1187,7 +1197,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getOdataMultiplePagesSinglePageAsync(requestOptions, context),
-                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1297,7 +1307,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1317,7 +1327,7 @@ public final class PagingsImpl {
             int offset, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesWithOffsetSinglePageAsync(offset, requestOptions, context),
-                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1429,7 +1439,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1448,7 +1458,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetryFirstSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1559,7 +1569,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1578,7 +1588,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesRetrySecondSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1685,7 +1695,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1703,7 +1713,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getSinglePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1808,7 +1818,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1826,7 +1836,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -1932,7 +1942,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -1950,7 +1960,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFailureUriSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -2060,7 +2070,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String tenant, RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptions));
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null));
     }
 
     /**
@@ -2080,7 +2090,7 @@ public final class PagingsImpl {
             String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, requestOptions, context),
-                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, requestOptions, context));
+                nextLink -> nextFragmentSinglePageAsync(tenant, nextLink, null, context));
     }
 
     /**
@@ -2195,7 +2205,7 @@ public final class PagingsImpl {
             String tenant, RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptions));
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null));
     }
 
     /**
@@ -2215,7 +2225,7 @@ public final class PagingsImpl {
             String tenant, RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(tenant, requestOptions, context),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, requestOptions, context));
+                nextLink -> nextFragmentWithGroupingSinglePageAsync(tenant, nextLink, null, context));
     }
 
     /**
@@ -2323,7 +2333,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getMultiplePagesLROSinglePageAsync(requestOptions),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -2341,7 +2351,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getMultiplePagesLROAsync(RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getMultiplePagesLROSinglePageAsync(requestOptions, context),
-                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, requestOptions, context));
+                nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink, null, context));
     }
 
     /**
@@ -2572,7 +2582,7 @@ public final class PagingsImpl {
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions requestOptions) {
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions),
-                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, requestOptions));
+                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null));
     }
 
     /**
@@ -2591,9 +2601,7 @@ public final class PagingsImpl {
             RequestOptions requestOptions, Context context) {
         return new PagedFlux<>(
                 () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(requestOptions, context),
-                nextLink ->
-                        getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(
-                                nextLink, requestOptions, context));
+                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink, null, context));
     }
 
     /**

@@ -114,7 +114,7 @@ public class PagingTests {
         }
     }
 
-    @Test
+    @Disabled
     public void getMultiplePagesFragmentNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("api_version", "1.6");
@@ -122,7 +122,7 @@ public class PagingTests {
         Assertions.assertEquals(10, response.stream().count());
     }
 
-    @Test
+    @Disabled
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("api_version", "1.6");
