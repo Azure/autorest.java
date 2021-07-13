@@ -1,8 +1,8 @@
 # Java Codegen Report
-Generated at 2021-07-11T19:40:32.572950
+Generated at 2021-07-13T07:13:47.037012
 ## Success
 <details>
-<summary>RP count: 177</summary>
+<summary>RP count: 173</summary>
 
 - EnterpriseKnowledgeGraph
 - addons
@@ -54,10 +54,8 @@ Generated at 2021-07-11T19:40:32.572950
 - databricks
 - datacatalog
 - datadog
-- datafactory
 - datalake-analytics
 - datalake-store
-- datamigration
 - dataprotection
 - datashare
 - deploymentmanager
@@ -65,7 +63,6 @@ Generated at 2021-07-11T19:40:32.572950
 - deviceprovisioningservices
 - deviceupdate
 - devops
-- devspaces
 - devtestlabs
 - dfp
 - digitaltwins
@@ -115,7 +112,6 @@ Generated at 2021-07-11T19:40:32.572950
 - marketplaceordering
 - mediaservices
 - migrate
-- migrateprojects
 - mixedreality
 - monitor
 - msi
@@ -126,6 +122,7 @@ Generated at 2021-07-11T19:40:32.572950
 - operationalinsights
 - operationsmanagement
 - peering
+- policyinsights
 - portal
 - postgresql
 - postgresqlhsc
@@ -139,7 +136,6 @@ Generated at 2021-07-11T19:40:32.572950
 - quota
 - recoveryservices
 - recoveryservicesbackup
-- recoveryservicessiterecovery
 - redhatopenshift
 - redis
 - redisenterprise
@@ -184,7 +180,6 @@ Generated at 2021-07-11T19:40:32.572950
 </details>
 
 ## Failure at Codegen
-- policyinsights
 - reservations
 - security
 
@@ -204,10 +199,10 @@ Generated at 2021-07-11T19:40:32.572950
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
@@ -250,8 +245,8 @@ FATAL: Error: Name is empty!
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  7.190 s
-[INFO] Finished at: 2021-07-11T18:14:00Z
+[INFO] Total time:  4.440 s
+[INFO] Finished at: 2021-07-13T06:16:39Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-automation: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-automation/src/main/java/com/azure/resourcemanager/automation/fluent/DscConfigurationsClient.java:[201,27] method update(java.lang.String,java.lang.String,java.lang.String) is already defined in interface com.azure.resourcemanager.automation.fluent.DscConfigurationsClient
@@ -273,6 +268,119 @@ FATAL: Error: Name is empty!
 </details>
 
 <details>
+<summary>datafactory</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PipelineRun > properties > invokedBy)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json:1420:5
+
+```
+**stderr**
+```
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > DataFlow)
+  discriminator: { propertyName: [32m'type'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json:24:3
+  Error: Semantic validation failed. There was some errors
+
+```
+</details>
+
+<details>
+<summary>datamigration</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/datamigration.json:12:2
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateSyncCompleteCommandProperties > properties > output)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Commands.json:73:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateMISyncCompleteCommandProperties > properties > output)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Commands.json:131:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectToSourceSqlServerTaskOutputDatabaseLevel > properties > compatibilityLevel)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json:173:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectToSourceSqlServerTaskOutputDatabaseLevel > properties > databaseState)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json:178:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectToSourceSqlServerTaskOutputLoginLevel > properties > loginType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json:200:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectToSourceSqlServerTaskOutputLoginLevel > properties > migrationEligibility)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json:215:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectToSourceSqlServerTaskOutputAgentJobLevel > properties > migrationEligibility)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json:266:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel > properties > state)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json:118:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel > properties > state)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json:171:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel > properties > stage)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json:176:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrateSchemaSqlTaskOutputError > properties > error)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json:252:5
+
+```
+**stderr**
+```
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > MigrateSchemaSqlServerSqlDbTaskOutput)
+  discriminator: { propertyName: [32m'resultType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json:264:3
+  Error: Semantic validation failed. There was some errors
+
+```
+</details>
+
+<details>
+<summary>devspaces</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+
+```
+**stderr**
+```
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > OrchestratorSpecificConnectionDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/devspaces/resource-manager/Microsoft.DevSpaces/stable/2019-04-01/devspaces.json:1040:3
+  Error: Semantic validation failed. There was some errors
+
+```
+</details>
+
+<details>
 <summary>intune</summary>
 
 **stdout**
@@ -280,10 +388,10 @@ FATAL: Error: Name is empty!
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
@@ -425,7 +533,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [FlaggedUser, Device, Application, Location, OperationResult, WipeDeviceOperationResult, GroupItem, AndroidMamPolicy, IOsmamPolicy, FlaggedEnrolledApp]
+INFORMATION (FluentMapper): Add Inner to response types: [WipeDeviceOperationResult, IOsmamPolicy, AndroidMamPolicy, GroupItem, FlaggedEnrolledApp, OperationResult, Device, Application, Location, FlaggedUser]
 
 ```
 **stderr**
@@ -500,8 +608,8 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.471 s
-[INFO] Finished at: 2021-07-11T18:47:47Z
+[INFO] Total time:  1.664 s
+[INFO] Finished at: 2021-07-13T06:38:03Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-iotspaces: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-iotspaces/src/main/java/module-info.java:[10,55] package is empty or does not exist: com.azure.resourcemanager.iotspaces.fluent.models
@@ -529,10 +637,10 @@ java.lang.IllegalArgumentException: [JavaCheck/SchemaError] item name value not 
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 [Exception] No input files provided.
 
@@ -546,189 +654,326 @@ Use --help to get help information.
 </details>
 
 <details>
-<summary>policyinsights</summary>
+<summary>migrateprojects</summary>
 
 **stdout**
 ```
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyTrackedResourcesQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeploymentsListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeployment' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Remediation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationFilters' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'RemediationDeploymentSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyEventsQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyStatesQueryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'SummarizeResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Summary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'SummaryResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceDetail' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyAssignmentSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyDefinitionSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyGroupSummary' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'QueryFailure-error' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'OperationsListResults' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Operation-display' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadata' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataSlimProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'SlimPolicyMetadata' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyMetadataCollection' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsRequest' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResourceDetails' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PendingField' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'CheckRestrictionsResult-contentEvaluationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'FieldRestrictions' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'FieldRestriction' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyEvaluationResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'PolicyReference' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AttestationListResult' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'Attestation' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AttestationProperties' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'AttestationEvidence' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'ErrorDefinition' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/SchemaMissingType): The schema 'TypedErrorInfo' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
-
-WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
-
-WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ErrorResponse -- properties.error.$ref: undefined => "#/components/schemas/schemas:283" 
-
-WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ErrorDefinition -- properties.details.$ref: undefined => "#/components/schemas/schemas:287" 
-
-WARNING (Modeler/MissingType): The schema 'TypedErrorInfo-info' has no type or format information whatsoever. Location:
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-07-01/remediations.json#/components/schemas/TypedErrorInfo-info
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json#/components/schemas/TypedErrorInfo-info
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2021-01-01/attestations.json#/components/schemas/TypedErrorInfo-info
-
-WARNING (Modeler/MissingType): The schema 'components·1twbxlw·schemas·policyevent·additionalproperties' has no type or format information whatsoever. Location:
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json#/components/schemas/components·1twbxlw·schemas·policyevent·additionalproperties
-
-WARNING (Modeler/MissingType): The schema 'components·nwpyyh·schemas·componenteventdetails·additionalproperties' has no type or format information whatsoever. Location:
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json#/components/schemas/components·nwpyyh·schemas·componenteventdetails·additionalproperties
-
-WARNING (Modeler/MissingType): The schema 'components·1yhb3ub·schemas·policystate·additionalproperties' has no type or format information whatsoever. Location:
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json#/components/schemas/components·1yhb3ub·schemas·policystate·additionalproperties
-
-WARNING (Modeler/MissingType): The schema 'components·hezmy5·schemas·componentstatedetails·additionalproperties' has no type or format information whatsoever. Location:
-   file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json#/components/schemas/components·hezmy5·schemas·componentstatedetails·additionalproperties
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated'
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorDefinition' -> 'ErrorDefinitionAutoGenerated'
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated2'
-
-WARNING (PreNamer/DeduplicateName): Deduplicating schema name: 'ErrorDefinition' -> 'ErrorDefinitionAutoGenerated2'
-INFORMATION (FluentNamer): Load fluent settings
-INFORMATION (FluentJavaSettings): Option, string, add-inner : null
-INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
-INFORMATION (FluentJavaSettings): Option, string, rename-model : null
-INFORMATION (FluentJavaSettings): Option, string, remove-model : null
-INFORMATION (FluentJavaSettings): Option, string, name-for-ungrouped-operations : null
-INFORMATION (FluentJavaSettings): Option, string, pom-file : null
-INFORMATION (FluentJavaSettings): Option, string, package-version : null
-INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
-INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
-INFORMATION (FluentNamer): Transform code model
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryOptions`1 > properties > filter)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:503:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > defaultQuerySettings)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:512:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > model)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:516:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > elementType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:520:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > navigationSource)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:524:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > path)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:532:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataQueryContext > properties > requestContainer)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:536:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > FilterQueryOption > properties > context)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:554:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > FilterQueryOption > properties > filterClause)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:561:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmModel > properties > directValueAnnotationsManager)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:630:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmModel > properties > entityContainer)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:634:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationSource > properties > path)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:671:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationSource > properties > type)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:675:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataPath > properties > edmType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:688:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataPath > properties > navigationSource)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:692:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > FilterClause > properties > expression)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:759:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > FilterClause > properties > rangeVariable)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:763:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > FilterClause > properties > itemType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:767:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmVocabularyAnnotation > properties > term)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:805:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmVocabularyAnnotation > properties > target)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:809:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmVocabularyAnnotation > properties > value)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:813:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationPropertyBinding > properties > navigationProperty)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:858:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationPropertyBinding > properties > target)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:862:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationPropertyBinding > properties > path)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:866:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ODataPathSegment > properties > edmType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:923:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SingleValueNode > properties > typeReference)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:954:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RangeVariable > properties > typeReference)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1007:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmTypeReference > properties > definition)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1025:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmTerm > properties > type)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1034:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmEntityContainerElement > properties > container)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1123:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationProperty > properties > partner)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1136:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationProperty > properties > referentialConstraint)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1152:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationProperty > properties > type)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1165:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmNavigationProperty > properties > declaringType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1169:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmStructuredType > properties > baseType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1202:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > EdmReferentialConstraintPropertyPair > properties > dependentProperty)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1234:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > EdmReferentialConstraintPropertyPair > properties > principalProperty)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1238:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmProperty > properties > type)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1256:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmProperty > properties > declaringType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1260:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmStructuralProperty > properties > type)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1286:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IEdmStructuralProperty > properties > declaringType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1290:5
 
 ```
 **stderr**
 ```
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > MigrateEventProperties)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:462:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProjectSummary)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1723:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > SolutionSummary)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json:1915:3
+  Error: Semantic validation failed. There was some errors
 
-ERROR (FluentNamer): Failed to successfully run fluentnamer plugin.
-java.lang.NullPointerException
-	at com.azure.autorest.preprocessor.tranformer.Transformer.addPagingNextOperation(Transformer.java:293)
-	at com.azure.autorest.preprocessor.tranformer.Transformer.transformOperationGroups(Transformer.java:123)
-	at com.azure.autorest.preprocessor.tranformer.Transformer.transform(Transformer.java:43)
-	at com.azure.autorest.fluentnamer.FluentNamer.transform(FluentNamer.java:130)
-	at com.azure.autorest.fluentnamer.FluentNamer.processInternal(FluentNamer.java:65)
-	at com.azure.autorest.extension.base.plugin.NewPlugin.process(NewPlugin.java:206)
-	at com.azure.autorest.fluentnamer.Main.lambda$main$1(Main.java:19)
-	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$dispatch$2(Connection.java:151)
-	at com.azure.autorest.extension.base.jsonrpc.Connection.lambda$process$3(Connection.java:270)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
+```
+</details>
 
-  Error: Plugin fluentnamer reported failure.
+<details>
+<summary>recoveryservicessiterecovery</summary>
+
+**stdout**
+```
+AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
+INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
+INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored. (info > x-ms-code-generation-settings)
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:11:2
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MigrationItemProperties > properties > currentJob)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24054:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ReplicationEligibilityResults > properties > properties)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26757:5
+
+```
+**stderr**
+```
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > AddDisksProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:16320:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ConfigurationSettings)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:16881:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > CreateProtectionIntentProviderSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17070:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > DisableProtectionProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17244:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EnableProtectionProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17502:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EventProviderSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17620:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > EventSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17674:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificCreateNetworkMappingInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17960:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificCreationInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17973:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:17986:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > FabricSpecificUpdateNetworkMappingInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:18000:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > GroupTaskDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:18114:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > HyperVReplicaPolicyInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:19397:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > HyperVVirtualMachineDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:19522:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > JobDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:23363:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > JobTaskDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:23590:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > MigrationProviderSpecificSettings)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24088:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > NetworkMappingFabricSpecificSettings)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24242:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PlannedFailoverProviderSpecificFailoverInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24520:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PolicyProviderSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24579:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > PolicyProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:24593:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProtectionContainerMappingProviderSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25267:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProtectionProfileCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25316:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ProviderSpecificRecoveryPointDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25356:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryAvailabilitySetCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25500:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanActionDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25675:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanGroupTaskDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:25784:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26165:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificFailoverInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26179:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryPlanProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26192:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryProximityPlacementGroupCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26434:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryResourceGroupCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26447:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RecoveryVirtualNetworkCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26587:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > RemoveDisksProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:26620:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProtectionIntentProviderSpecificSettings)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27059:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificContainerCreationInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27083:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificContainerMappingInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27096:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificSettings)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27109:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReplicationProviderSpecificUpdateContainerMappingInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27123:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > ReverseReplicationProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27396:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > StorageAccountCustomDetails)
+  discriminator: { propertyName: [32m'resourceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27603:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > SwitchProtectionProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27847:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > TaskTypeDetails)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:27957:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > TestFailoverProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28068:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UnplannedFailoverProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28178:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UpdateMigrationItemProviderSpecificInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28214:3
+ERROR: Semantic violation: Discriminator must be a required property. (components > schemas > UpdateReplicationProtectedItemProviderInput)
+  discriminator: { propertyName: [32m'instanceType'[39m }
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2021-04-01/service.json:28406:3
+  Error: Semantic validation failed. There was some errors
 
 ```
 </details>
@@ -741,11 +986,23 @@ java.lang.NullPointerException
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > QuotaProperties > properties > resourceType)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/reservations/resource-manager/Microsoft.Capacity/stable/2020-10-25/quota.json:86:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > QuotaRequestSubmitResponse > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/reservations/resource-manager/Microsoft.Capacity/stable/2020-10-25/quota.json:242:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > QuotaRequestStatusDetails > properties > provisioningState)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/reservations/resource-manager/Microsoft.Capacity/stable/2020-10-25/quota.json:284:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > quotaRequestOneResourceProperties > properties > provisioningState)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/reservations/resource-manager/Microsoft.Capacity/stable/2020-10-25/quota.json:372:5
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ResourceName' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -797,7 +1054,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [QuotaRequestSubmitResponse201, AppliedReservations, ExchangeOperationResultResponse, CurrentQuotaLimitBase, AvailableScopeProperties, QuotaRequestOneResourceSubmitResponse, QuotaRequestDetails, ReservationResponse, OperationResponse, ReservationOrderResponse, CalculatePriceResponse, CalculateExchangeOperationResultResponse, Catalog]
+INFORMATION (FluentMapper): Add Inner to response types: [CurrentQuotaLimitBase, Catalog, CalculatePriceResponse, CalculateExchangeOperationResultResponse, ReservationResponse, OperationResponse, AvailableScopeProperties, ExchangeOperationResultResponse, QuotaRequestSubmitResponse201, QuotaRequestDetails, ReservationOrderResponse, QuotaRequestOneResourceSubmitResponse, AppliedReservations]
 
 ```
 **stderr**
@@ -868,10 +1125,10 @@ java.lang.NullPointerException
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
 [Exception] No input files provided.
 
@@ -892,11 +1149,95 @@ Use --help to get help information.
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DeviceSecurityGroupProperties > properties > thresholdRules > items)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json:78:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DeviceSecurityGroupProperties > properties > timeWindowRules > items)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json:86:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DeviceSecurityGroupProperties > properties > allowlistRules > items)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json:94:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DeviceSecurityGroupProperties > properties > denylistRules > items)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json:102:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionModel > properties > systemData)
+  keys: [ [32m'readOnly'[39m, [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json:81:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionAnalyticsModelProperties > properties > metrics)
+  keys: [ [32m'type'[39m, [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json:76:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionAnalyticsModelProperties > properties > devicesMetrics > items > properties > devicesMetrics)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json:99:8
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionAnalyticsModelProperties > properties > topAlertedDevices)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json:107:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionAnalyticsModelProperties > properties > mostPrevalentDeviceAlerts)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json:112:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > IoTSecuritySolutionAnalyticsModelProperties > properties > mostPrevalentDeviceRecommendations)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json:117:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > InformationProtectionPolicyProperties > properties > labels > additionalProperties)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json:89:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > InformationProtectionPolicyProperties > properties > informationTypes > additionalProperties)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json:97:6
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AlertsSuppressionRuleProperties > properties > suppressionAlertsScope)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json:110:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AdaptiveApplicationControlGroupData > properties > configurationStatus)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json:78:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AdaptiveApplicationControlGroupData > properties > recommendationStatus)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json:82:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AdaptiveApplicationControlGroupData > properties > issues)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json:86:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AdaptiveApplicationControlGroupData > properties > sourceSystem)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json:90:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AllowedConnectionsResource > properties > properties)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/allowedConnections.json:58:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > TopologyResource > properties > properties)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/topologies.json:56:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SecureScoreItem > properties > properties)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/secureScore.json:60:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SecureScoreItemProperties > properties > score)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/secureScore.json:83:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SecureScoreControlDefinitionItemProperties > properties > source)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/secureScore.json:303:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SecureScoreControlDefinitionItemProperties > properties > assessmentDefinitions)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/stable/2020-01-01/secureScore.json:308:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectorSettingProperties > properties > hybridComputeSettings)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2020-01-01-preview/connectors.json:74:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ConnectorSettingProperties > properties > authenticationDetails)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2020-01-01-preview/connectors.json:79:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > HybridComputeSettingsProperties > properties > proxyServer)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2020-01-01-preview/connectors.json:152:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > HybridComputeSettingsProperties > properties > servicePrincipal)
+  keys: [ [32m'type'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2020-01-01-preview/connectors.json:157:5
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DeviceProperties > properties > site)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/security/resource-manager/Microsoft.Security/preview/2020-08-06-preview/devices.json:251:5
 
 WARNING (PreCheck/SchemaMissingType): The schema 'ComplianceResultList' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -956,9 +1297,9 @@ WARNING (PreCheck/SchemaMissingType): The schema 'ErrorAdditionalInfo' with an u
 
 WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
 
-WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ExternalSecuritySolutionKind -- type: undefined => "string",properties: {"kind":{"description":"The kind of the external solution","$ref":"#/components/schemas/ExternalSecuritySolutionKind"}} => <none>,enum: undefined => ["CEF","ATA","AAD"],x-ms-enum: undefined => {"name":"ExternalSecuritySolutionKind","modelAsString":true,"values":[{"value":"CEF"},{"value":"ATA"},{"value":"AAD"}]} 
+WARNING (PreCheck/DuplicateSchema): Duplicate Schema named ExternalSecuritySolutionKind -- type: undefined => "string",properties: {"kind":{"x-ms-enum":{"name":"ExternalSecuritySolutionKind","modelAsString":true,"values":[{"value":"CEF"},{"value":"ATA"},{"value":"AAD"}]},"$ref":"#/components/schemas/ExternalSecuritySolutionKind","description":"The kind of the external solution"}} => <none>,enum: undefined => ["CEF","ATA","AAD"],x-ms-enum: undefined => {"name":"ExternalSecuritySolutionKind","modelAsString":true,"values":[{"value":"CEF"},{"value":"ATA"},{"value":"AAD"}]} 
 
-WARNING (PreCheck/DuplicateSchema): Duplicate Schema named AadConnectivityState -- type: undefined => "string",properties: {"connectivityState":{"$ref":"#/components/schemas/AadConnectivityState"}} => <none>,title: undefined => "The connectivity state of the external AAD solution ",enum: undefined => ["Discovered","NotLicensed","Connected"],x-ms-enum: undefined => {"name":"AadConnectivityState","modelAsString":true,"values":[{"value":"Discovered"},{"value":"NotLicensed"},{"value":"Connected"}]} 
+WARNING (PreCheck/DuplicateSchema): Duplicate Schema named AadConnectivityState -- type: undefined => "string",properties: {"connectivityState":{"x-ms-enum":{"name":"AadConnectivityState","modelAsString":true,"values":[{"value":"Discovered"},{"value":"NotLicensed"},{"value":"Connected"}]},"$ref":"#/components/schemas/AadConnectivityState"}} => <none>,title: undefined => "The connectivity state of the external AAD solution ",enum: undefined => ["Discovered","NotLicensed","Connected"],x-ms-enum: undefined => {"name":"AadConnectivityState","modelAsString":true,"values":[{"value":"Discovered"},{"value":"NotLicensed"},{"value":"Connected"}]} 
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1068,7 +1409,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [IotRecommendationTypeList, IngestionSettingToken, OnPremiseIotSensor, ConnectionStrings, IoTSecurityAggregatedRecommendation, AdaptiveApplicationControlGroup, AdaptiveApplicationControlGroups, IotAlertModel, AdvancedThreatProtectionSetting, PackageDownloads, SecurityContact, RegulatoryComplianceStandard, IotSensorsList, IotRecommendationModel, IoTSecuritySolutionModel, SecuritySolutionsReferenceDataList, JitNetworkAccessRequest, Scans, AutoProvisioningSetting, InformationProtectionPolicy, TopologyResource, SecureScoreControlDetails, Automation, Pricing, IoTSecuritySolutionAnalyticsModelList, IotSitesModel, RegulatoryComplianceAssessment, WorkspaceSetting, PricingList, ServerVulnerabilityAssessmentsList, ServerVulnerabilityAssessment, SecureScoreControlDefinitionItem, ComplianceResult, DeviceSecurityGroup, ScanResult, IotAlertType, SecurityTask, SecurityAssessment, SecuritySolution, ConnectorSetting, OnPremiseIotSensorsList, IoTSecuritySolutionAnalyticsModel, RegulatoryComplianceControl, IotSitesList, IotDefenderSettingsList, SecurityAssessmentMetadata, Operation, AllowedConnectionsResource, RulesResults, AutomationValidationStatus, AscLocation, ScanResults, Software, AdaptiveNetworkHardening, Scan, Alert, Setting, IotDefenderSettingsModel, IngestionSetting, RuleResults, Compliance, SecureScoreItem, Device, JitNetworkAccessPolicy, IotRecommendationType, AlertsSuppressionRule, ExternalSecuritySolution, IotSensorsModel, IotAlertTypeList, IoTSecurityAggregatedAlert, DiscoveredSecuritySolution, SecuritySubAssessment]
+INFORMATION (FluentMapper): Add Inner to response types: [AutoProvisioningSetting, SecuritySolution, IotSitesModel, OnPremiseIotSensorsList, IoTSecuritySolutionModel, IoTSecuritySolutionAnalyticsModelList, SecurityTask, PackageDownloads, InformationProtectionPolicy, AutomationValidationStatus, AdvancedThreatProtectionSetting, IoTSecurityAggregatedAlert, RuleResults, Pricing, AlertsSuppressionRule, IotAlertModel, IotRecommendationTypeList, RulesResults, SecureScoreControlDetails, JitNetworkAccessPolicy, RegulatoryComplianceControl, SecureScoreControlDefinitionItem, ConnectionStrings, RegulatoryComplianceAssessment, AscLocation, IotSitesList, ScanResults, ServerVulnerabilityAssessmentsList, IotRecommendationType, Operation, AdaptiveApplicationControlGroup, IotRecommendationModel, AllowedConnectionsResource, Scan, SecuritySolutionsReferenceDataList, IotSensorsList, SecuritySubAssessment, AdaptiveNetworkHardening, ComplianceResult, ExternalSecuritySolution, IngestionSettingToken, SecurityAssessmentMetadata, AdaptiveApplicationControlGroups, IotAlertTypeList, DeviceSecurityGroup, OnPremiseIotSensor, Setting, IotDefenderSettingsModel, SecurityContact, IotAlertType, ServerVulnerabilityAssessment, SecureScoreItem, IoTSecurityAggregatedRecommendation, Scans, Device, SecurityAssessment, DiscoveredSecuritySolution, JitNetworkAccessRequest, TopologyResource, PricingList, Automation, ScanResult, IngestionSetting, IotSensorsModel, Alert, IotDefenderSettingsList, IoTSecuritySolutionAnalyticsModel, RegulatoryComplianceStandard, Compliance, WorkspaceSetting, ConnectorSetting, Software]
 INFORMATION (FluentMapper): Add Inner for type 'SecureScoreControlDefinitionItem': []
 
 ```
@@ -1146,17 +1487,41 @@ java.lang.IllegalArgumentException: discriminator not found in type CefExternalS
 AutoRest code generation utility [cli version: 3.2.3; node: v14.17.1, max-memory: 2048 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
-   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist' (3.1.3)
+   Loading AutoRest core      '/home/runner/.autorest/@autorest_core@3.4.5/node_modules/@autorest/core/dist' (3.4.5)
 INFORMATION: > Loading local AutoRest extension '@autorest/java' (/home/runner/work/autorest.java/autorest.java)
-INFORMATION: > Installing AutoRest extension 'oav' (~0.4.20)
-INFORMATION: > Installed AutoRest extension 'oav' (~0.4.20->0.4.70)
 INFORMATION: > Installing AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5)
 INFORMATION: > Installed AutoRest extension '@microsoft.azure/classic-openapi-validator' (~1.1.5->1.1.9)
 INFORMATION: > Installing AutoRest extension '@microsoft.azure/openapi-validator' (~1.7.0)
 INFORMATION: > Installed AutoRest extension '@microsoft.azure/openapi-validator' (~1.7.0->1.7.0)
+INFORMATION: > Installing AutoRest extension 'oav' (~0.4.20)
+INFORMATION: > Installed AutoRest extension 'oav' (~0.4.20->0.4.70)
 INFORMATION: > Loading local AutoRest extension '@autorest/java.fluent' (/home/runner/work/autorest.java/autorest.java/fluentgen)
-INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentgen/../fluentnamer)
+INFORMATION: > Loading local AutoRest extension '@autorest/java.fluentnamer' (/home/runner/work/autorest.java/autorest.java/fluentnamer)
 INFORMATION: > Loading AutoRest extension '@autorest/modelerfour' (4.18.1->4.18.1)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (definitions > ProcessReference > properties > properties > properties > machine)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1686:12 ($.definitions.ProcessReference.properties.properties.properties.machine)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (definitions > PortReference > properties > properties > properties > machine)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1709:12 ($.definitions.PortReference.properties.properties.properties.machine)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (definitions > MachineReferenceWithHints > properties > properties > properties > osFamilyHint)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1747:12 ($.definitions.MachineReferenceWithHints.properties.properties.properties.osFamilyHint)
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ProcessReference > properties > properties > properties > machine)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:118:7
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PortReference > properties > properties > properties > machine)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:141:7
+WARNING: Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > MachineReferenceWithHints > properties > properties > properties > osFamilyHint)
+  keys: [ [32m'readOnly'[39m ]
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:179:7
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1231:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/generateMap"].post.operationId)
+
+WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1405:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups"].post.operationId)
 
 WARNING (PreCheck/SchemaMissingType): The schema 'Resource' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'
 
@@ -1254,71 +1619,65 @@ WARNING (PreCheck/CheckDuplicateSchemas): Checking for duplicate schemas, this c
 
 WARNING (PreCheck/PropertyRedeclarationWarning): Schema 'MachineGroup' has a property 'etag' that is already declared the parent schema 'CoreResource' but isn't significantly different. The property has been removed from MachineGroup
 
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'generatemap' in:'Maps_Generate'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:4591:4
-
-WARNING (PostOperationIdContainsUrlVerb/R2066/SDKViolation): OperationId should contain the verb: 'machinegroups' in:'MachineGroups_Create'. Consider updating the operationId
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6557:4
+WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:63:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines"].get.parameters[4].name)
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:58:6
-
-WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2097:6
-
-WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:2
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:332:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes"].get.parameters[5].name)
 
 WARNING (OperationIdNounVerb/R1001/SDKViolation): Per the Noun_Verb convention for Operation Ids, the noun 'Machines' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3618:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:971:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups"].get.operationId)
+
+WARNING (PreviewVersionOverOneYear/R4024/SDKViolation): The API version:2015-11-01-preview having been in a preview state over one year , please move it to GA or retire.
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6:4 ($.info.version)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1645:8 ($.definitions.ResourceReference.properties.kind)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1778:8 ($.definitions.CoreResource.properties.kind)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2142:8 ($.definitions.Relationship.properties.kind)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2747:8 ($.definitions.HostingConfiguration.properties.provider)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2754:8 ($.definitions.HostingConfiguration.properties.kind)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3014:8 ($.definitions.ProcessHostingConfiguration.properties.provider)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3021:8 ($.definitions.ProcessHostingConfiguration.properties.kind)
+
+WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3158:8 ($.definitions.MapRequest.properties.kind)
 
 WARNING (PutInOperationName/R1006/SDKViolation): 'PUT' operation 'MachineGroups_Update' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6750:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6937:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7070:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7434:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8039:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8046:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: provider
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8306:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8313:4
-
-WARNING (XmsEnumValidation/R2018/SDKViolation): The enum types should have x-ms-enum type extension set with appropriate options. Property name: kind
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8450:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1515:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].put.operationId)
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7419:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2127:8 ($.definitions.MachinesSummary.properties.properties)
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7456:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2164:8 ($.definitions.Connection.properties.properties)
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:7471:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:2179:8 ($.definitions.Acceptor.properties.properties)
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'nodes' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8398:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3106:8 ($.definitions.Map.properties.nodes)
 
 WARNING (DescriptionAndTitleMissing/R4021/SDKViolation): 'edges' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8401:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3109:8 ($.definitions.Map.properties.edges)
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: live
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8424:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3132:8 ($.definitions.Liveness.properties.live)
 
 WARNING (EnumInsteadOfBoolean/R3018/ARMViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: filterProcesses
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:8490:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:3198:8 ($.definitions.MultipleMachinesMapRequest.properties.filterProcesses)
 INFORMATION (FluentNamer): Load fluent settings
 INFORMATION (FluentJavaSettings): Option, string, add-inner : null
 INFORMATION (FluentJavaSettings): Option, string, remove-inner : null
@@ -1351,7 +1710,7 @@ INFORMATION (FluentJavaSettings): Option, string, package-version : null
 INFORMATION (FluentJavaSettings): Option, boolean, generate-samples : null
 INFORMATION (FluentJavaSettings): Option, boolean, sdk-integration : null
 INFORMATION (FluentGen): Map code model to client model
-INFORMATION (FluentMapper): Add Inner to response types: [MachineGroup, MapResponse, Connection, ClientGroup, ClientGroupMembersCount, MachinesSummary, Process, Liveness, ClientGroupMember, Machine, Port]
+INFORMATION (FluentMapper): Add Inner to response types: [Machine, MachineGroup, Process, Liveness, MachinesSummary, ClientGroup, ClientGroupMembersCount, ClientGroupMember, Connection, Port, MapResponse]
 INFORMATION (FluentGen): Java template for client model
 INFORMATION (FluentGen): Process for Fluent Lite, SDK integration disabled
 INFORMATION (FluentJavaSettings): Option, string, tag : package-2015-11-preview
@@ -1370,15 +1729,9 @@ INFORMATION (FluentGen): Write Text
 ```
 FATAL: Failed validating: 'file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json', error encountered: TypeError: Cannot read property 'properties' of undefined
 FATAL: [object Object]
-(node:25125) UnhandledPromiseRejectionWarning: Error: Plugin model-validator reported failure.
-    at /home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:3015:19
-    at ScheduleNode (/home/runner/.autorest/@autorest_core@3.1.3/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:1809:33)
-(Use `node --trace-warnings ...` to show where the warning was created)
-(node:25125) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 60)
-(node:25125) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 
 ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is defined without a 200 or 204 error response implementation,please add it.'
-    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:6869:4
+    - file:///home/runner/work/autorest.java/autorest.java/azure-rest-api-specs/specification/service-map/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json:1591:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}"].delete.responses)
   Error: Plugin model-validator reported failure.
 
 ```
@@ -1500,8 +1853,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.426 s
-[INFO] Finished at: 2021-07-11T19:20:56Z
+[INFO] Total time:  2.210 s
+[INFO] Finished at: 2021-07-13T07:00:18Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-softwareplan: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-softwareplan/src/main/java/com/azure/resourcemanager/softwareplan/implementation/HybridUseBenefitsImpl.java:[72,49] method list(java.lang.String) is already defined in class com.azure.resourcemanager.softwareplan.implementation.HybridUseBenefitsImpl
@@ -1656,8 +2009,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.062 s
-[INFO] Finished at: 2021-07-11T19:29:53Z
+[INFO] Total time:  3.654 s
+[INFO] Finished at: 2021-07-13T07:06:15Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-streamanalytics: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-streamanalytics/src/main/java/com/azure/resourcemanager/streamanalytics/implementation/TestDatasourceResultImpl.java:[24,33] cannot find symbol
@@ -1734,8 +2087,8 @@ ERROR (DeleteOperationResponses/R4011/ARMViolation): The delete operation is def
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.970 s
-[INFO] Finished at: 2021-07-11T19:33:57Z
+[INFO] Total time:  1.405 s
+[INFO] Finished at: 2021-07-13T07:09:02Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project azure-resourcemanager-visualstudio: Compilation failure: Compilation failure: 
 [ERROR] /home/runner/work/autorest.java/autorest.java/fluent_generated/azure-resourcemanager-visualstudio/src/main/java/com/azure/resourcemanager/visualstudio/models/AccountResourceRequestOperationType.java:[13,50] <identifier> expected
