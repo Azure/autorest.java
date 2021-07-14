@@ -246,6 +246,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -258,6 +267,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -269,6 +287,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -278,6 +305,15 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -289,6 +325,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -299,6 +344,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>userAgent</td><td>String</td><td>Send a post request with header value "User-Agent": "overwrite"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -308,6 +362,14 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -321,6 +383,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -332,6 +402,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -341,6 +419,14 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -353,6 +439,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -363,6 +457,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -372,6 +474,15 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -385,6 +496,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -396,6 +516,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -405,6 +534,15 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -417,6 +555,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -427,6 +574,15 @@ public final class HeadersImpl {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>contentType</td><td>String</td><td>Send a post request with header value "Content-Type": "text/html"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -436,6 +592,14 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "Content-Type": "text/html".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -449,6 +613,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -460,6 +632,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -469,6 +649,14 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "Content-Type": "text/html".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -481,6 +669,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -491,6 +687,14 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -500,6 +704,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -513,6 +727,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -524,6 +748,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -533,6 +767,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -544,6 +788,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -554,6 +808,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>int</td><td>Send a post request with header values 1 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -563,6 +827,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 1 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -576,6 +849,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 1 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -587,6 +869,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 1 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -596,6 +887,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 1 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -607,6 +907,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 1 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -616,6 +925,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 1 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -627,6 +945,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -641,6 +969,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -653,6 +991,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -663,6 +1011,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -675,6 +1033,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -686,6 +1054,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>long</td><td>Send a post request with header values 105 or -2</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -695,6 +1073,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 105 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -708,6 +1095,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 105 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -719,6 +1115,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 105 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -728,6 +1133,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 105 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -739,6 +1153,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 105 or -2.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -748,6 +1171,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 105 or -2.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -759,6 +1191,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -773,6 +1215,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -785,6 +1237,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -795,6 +1257,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -807,6 +1279,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -818,6 +1300,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>float</td><td>Send a post request with header values 0.07 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -827,6 +1319,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -840,6 +1341,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -851,6 +1361,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -860,6 +1379,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -871,6 +1399,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -880,6 +1417,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -891,6 +1437,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -905,6 +1461,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -917,6 +1483,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -927,6 +1503,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -939,6 +1525,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -950,6 +1546,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>value</td><td>double</td><td>Send a post request with header values 7e120 or -3.0</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -959,6 +1565,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -972,6 +1587,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -983,6 +1607,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -992,6 +1625,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1003,6 +1645,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1013,6 +1664,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "positive" or "negative"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1022,6 +1682,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1035,6 +1705,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1046,6 +1726,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1055,6 +1745,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1066,6 +1766,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1076,6 +1786,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>value</td><td>boolean</td><td>Send a post request with header values true or false</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1085,6 +1805,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": true or false.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1098,6 +1827,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": true or false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1109,6 +1847,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": true or false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1118,6 +1865,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": true or false.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1129,6 +1885,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header value "value": true or false.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1138,6 +1903,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": true or false.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "true" or "false"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1149,6 +1923,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1163,6 +1947,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1175,6 +1969,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1185,6 +1989,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1197,6 +2011,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1208,6 +2032,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1217,6 +2051,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1230,6 +2073,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1241,6 +2093,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1250,6 +2111,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1261,6 +2131,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1270,6 +2149,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1281,6 +2169,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1295,6 +2193,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1307,6 +2215,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1317,6 +2235,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1329,6 +2257,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1340,6 +2278,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01" or "0001-01-01"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1349,6 +2297,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1362,6 +2319,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1373,6 +2339,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1382,6 +2357,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1393,6 +2377,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1402,6 +2395,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1413,6 +2415,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1427,6 +2439,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1439,6 +2461,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1449,6 +2481,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1461,6 +2503,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1472,6 +2524,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1481,6 +2543,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1494,6 +2565,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1505,6 +2585,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1514,6 +2603,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1525,6 +2623,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1534,6 +2641,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1545,6 +2661,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1559,6 +2685,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1571,6 +2707,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1581,6 +2727,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1594,6 +2750,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1605,6 +2771,16 @@ public final class HeadersImpl {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1614,6 +2790,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1627,6 +2812,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1639,6 +2833,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1648,6 +2851,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1660,6 +2872,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1670,6 +2891,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "min"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1679,6 +2909,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1692,6 +2932,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1703,6 +2953,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1712,6 +2972,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1723,6 +2993,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1733,6 +3013,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "P123DT22H14M12.011S"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1742,6 +3032,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1755,6 +3054,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1766,6 +3074,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1775,6 +3092,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1786,6 +3112,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1796,6 +3131,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1805,6 +3149,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1818,6 +3172,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1829,6 +3193,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1838,6 +3212,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1849,6 +3233,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1859,6 +3253,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1868,6 +3272,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1881,6 +3294,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1892,6 +3314,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1901,6 +3332,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1912,6 +3352,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1922,6 +3371,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1931,6 +3389,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1944,6 +3412,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1955,6 +3433,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1964,6 +3452,16 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1975,6 +3473,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1985,6 +3493,16 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>value</td><td>String</td><td>Send a post request with header values 'GREY' </td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1994,6 +3512,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "GREY" or null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -2007,6 +3534,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "GREY" or null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2018,6 +3554,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "GREY" or null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2027,6 +3572,15 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "GREY" or null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -2038,6 +3592,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "GREY" or null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2048,6 +3611,15 @@ public final class HeadersImpl {
     /**
      * Get a response with header values "GREY" or null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>scenario</td><td>String</td><td>Send a post request with header values "scenario": "valid" or "null" or "empty"</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2057,6 +3629,14 @@ public final class HeadersImpl {
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -2070,6 +3650,14 @@ public final class HeadersImpl {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2081,6 +3669,14 @@ public final class HeadersImpl {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2090,6 +3686,14 @@ public final class HeadersImpl {
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -2101,6 +3705,14 @@ public final class HeadersImpl {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2110,6 +3722,14 @@ public final class HeadersImpl {
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */

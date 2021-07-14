@@ -91,6 +91,14 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -113,6 +121,14 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -133,6 +149,14 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -162,6 +186,14 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -190,6 +222,14 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -210,6 +250,14 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -229,6 +277,22 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -259,6 +323,22 @@ public final class BasicsImpl {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -282,6 +362,22 @@ public final class BasicsImpl {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -301,6 +397,22 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -323,6 +435,22 @@ public final class BasicsImpl {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -343,6 +471,22 @@ public final class BasicsImpl {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Api Version</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -362,6 +506,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -385,6 +537,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -405,6 +565,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -434,6 +602,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -462,6 +638,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -482,6 +666,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -501,6 +693,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -524,6 +724,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -544,6 +752,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -573,6 +789,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -601,6 +825,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -621,6 +853,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -640,6 +880,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -662,6 +910,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -682,6 +938,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -711,6 +975,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -739,6 +1011,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -759,6 +1039,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -778,6 +1066,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -801,6 +1097,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -821,6 +1125,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -850,6 +1162,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -878,6 +1198,14 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -897,6 +1225,14 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *

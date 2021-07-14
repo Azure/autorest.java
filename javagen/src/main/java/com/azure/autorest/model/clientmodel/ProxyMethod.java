@@ -61,6 +61,10 @@ public class ProxyMethod {
      */
     protected List<ProxyMethodParameter> parameters;
     /**
+     * Get all parameters defined in swagger to this method.
+     */
+    protected List<ProxyMethodParameter> allParameters;
+    /**
      * Get the description of this method.
      */
     private String description;
@@ -105,7 +109,8 @@ public class ProxyMethod {
                         String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes,
                         ClassType unexpectedResponseExceptionType,
                         Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
-                        String name, List<ProxyMethodParameter> parameters, String description,
+                        String name, List<ProxyMethodParameter> parameters,
+                        List<ProxyMethodParameter> allParameters, String description,
                         IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
                         boolean isResumable, Set<String> responseContentTypes) {
         this.requestContentType = requestContentType;
@@ -118,6 +123,7 @@ public class ProxyMethod {
         this.unexpectedResponseExceptionTypes = unexpectedResponseExceptionTypes;
         this.name = name;
         this.parameters = parameters;
+        this.allParameters = allParameters;
         this.description = description;
         this.returnValueWireType = returnValueWireType;
         this.responseBodyType = responseBodyType;
@@ -164,6 +170,10 @@ public class ProxyMethod {
 
     public final List<ProxyMethodParameter> getParameters() {
         return parameters;
+    }
+
+    public final List<ProxyMethodParameter> getAllParameters() {
+        return allParameters;
     }
 
     public final String getDescription() {
@@ -310,6 +320,7 @@ public class ProxyMethod {
         protected Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes;
         protected String name;
         protected List<ProxyMethodParameter> parameters;
+        protected List<ProxyMethodParameter> allParameters;
         protected String description;
         protected IType returnValueWireType;
         protected IType responseBodyType;
@@ -417,6 +428,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets all parameters defined in swagger to this method.
+         * @param allParameters the parameters that are provided to this method
+         * @return the Builder itself
+         */
+        public Builder allParameters(List<ProxyMethodParameter> allParameters) {
+            this.allParameters = allParameters;
+            return this;
+        }
+
+        /**
          * Sets the description of this method.
          * @param description the description of this method
          * @return the Builder itself
@@ -490,6 +511,7 @@ public class ProxyMethod {
                     unexpectedResponseExceptionTypes,
                     name,
                     parameters,
+                    allParameters,
                     description,
                     returnValueWireType,
                     responseBodyType,

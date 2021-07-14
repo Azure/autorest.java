@@ -212,6 +212,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -232,6 +240,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -251,6 +267,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -279,6 +303,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -306,6 +338,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -325,6 +365,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -343,6 +391,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -365,6 +421,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -386,6 +450,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -404,6 +476,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -425,6 +505,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -444,6 +532,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with integer properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -462,6 +558,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -483,6 +587,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -502,6 +614,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -530,6 +650,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -557,6 +685,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -576,6 +712,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -594,6 +738,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -616,6 +768,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -637,6 +797,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -655,6 +823,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -676,6 +852,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -695,6 +879,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with long properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -713,6 +905,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -735,6 +935,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -754,6 +962,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -782,6 +998,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -809,6 +1033,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -828,6 +1060,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -846,6 +1086,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -868,6 +1116,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -889,6 +1145,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -907,6 +1171,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -928,6 +1200,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -947,6 +1227,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with float properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -965,6 +1253,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -987,6 +1283,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1006,6 +1310,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1034,6 +1346,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1061,6 +1381,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1080,6 +1408,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1098,6 +1434,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1120,6 +1464,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1141,6 +1493,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1159,6 +1519,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1180,6 +1548,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with double properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1198,6 +1574,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1219,6 +1603,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1239,6 +1631,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1258,6 +1658,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1286,6 +1694,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1313,6 +1729,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1332,6 +1756,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1350,6 +1782,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1372,6 +1812,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1393,6 +1841,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1411,6 +1867,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1432,6 +1896,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1451,6 +1923,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with bool properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1469,6 +1949,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1492,6 +1980,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1512,6 +2008,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1541,6 +2045,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1569,6 +2081,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1589,6 +2109,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1608,6 +2136,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1631,6 +2167,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1653,6 +2197,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1672,6 +2224,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1694,6 +2254,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with string properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1713,6 +2281,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1735,6 +2311,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1755,6 +2339,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1774,6 +2366,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1802,6 +2402,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1829,6 +2437,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1848,6 +2464,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1866,6 +2490,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1888,6 +2520,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1909,6 +2549,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1927,6 +2575,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1948,6 +2604,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1967,6 +2631,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with date properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1985,6 +2657,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2007,6 +2687,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2026,6 +2714,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2054,6 +2750,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2081,6 +2785,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2100,6 +2812,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2118,6 +2838,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2140,6 +2868,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2161,6 +2897,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2179,6 +2923,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2200,6 +2952,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetime properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2218,6 +2978,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2238,6 +3006,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2260,6 +3036,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2280,6 +3064,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2308,6 +3100,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2335,6 +3135,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2354,6 +3162,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2372,6 +3188,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2397,6 +3221,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2418,6 +3250,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2437,6 +3277,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2458,6 +3306,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2476,6 +3332,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2497,6 +3361,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2517,6 +3389,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2535,6 +3415,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2562,6 +3450,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2588,6 +3484,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2606,6 +3510,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2623,6 +3535,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2644,6 +3564,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2664,6 +3592,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2681,6 +3617,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2701,6 +3645,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with duration properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2718,6 +3670,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2738,6 +3698,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2757,6 +3725,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2775,6 +3751,14 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2802,6 +3786,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2828,6 +3820,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2846,6 +3846,14 @@ public final class PrimitivesImpl {
     /**
      * Get complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2863,6 +3871,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2884,6 +3900,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2904,6 +3928,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2921,6 +3953,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -2941,6 +3981,14 @@ public final class PrimitivesImpl {
     /**
      * Put complex types with byte properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -2958,6 +4006,14 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *

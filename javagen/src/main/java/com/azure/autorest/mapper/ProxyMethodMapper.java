@@ -145,18 +145,20 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             builder.httpMethod(HttpMethod.valueOf(request.getProtocol().getHttp().getMethod().toUpperCase()));
 
             List<ProxyMethodParameter> parameters = new ArrayList<>();
+            List<ProxyMethodParameter> allParameters = new ArrayList<>();
             for (Parameter parameter : request.getParameters().stream()
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
+                parameter.setOperation(operation);
+                ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
+                if (requestContentType.startsWith("application/json-patch+json")) {
+                    proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
+                }
+                allParameters.add(proxyMethodParameter);
                 if (!settings.isLowLevelClient() || (parameter.isRequired() &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Header &&
                         parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Query ||
                         parameter.getClientDefaultValue() != null)) {
-                    parameter.setOperation(operation);
-                    ProxyMethodParameter proxyMethodParameter = Mappers.getProxyParameterMapper().map(parameter);
-                    if (requestContentType.startsWith("application/json-patch+json")) {
-                        proxyMethodParameter = CustomProxyParameterMapper.getInstance().map(parameter);
-                    }
                     parameters.add(proxyMethodParameter);
                 }
             }
@@ -176,6 +178,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .fromClient(false)
                         .parameterReference("requestOptions")
                         .build();
+                allParameters.add(requestOptions);
                 parameters.add(requestOptions);
             }
 
@@ -195,9 +198,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         .fromClient(false)
                         .parameterReference("context")
                         .build();
+                allParameters.add(contextParameter);
                 parameters.add(contextParameter);
             }
             appendCallbackParameter(parameters, responseBodyType);
+            builder.allParameters(allParameters);
             builder.parameters(parameters);
 
             ProxyMethod proxyMethod = builder.build();

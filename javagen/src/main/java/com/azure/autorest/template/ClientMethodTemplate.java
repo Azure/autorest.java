@@ -634,18 +634,18 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     private static void generateProtocolMethodJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
         commentBlock.description(clientMethod.getDescription());
 
-        List<ProxyMethodParameter> optionalQueryParameters = clientMethod.getProxyMethod().getParameters()
-                .stream().filter(p -> RequestParameterLocation.Query.equals(p.getRequestParameterLocation()) && !p.getIsRequired())
+        List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters()
+                .stream().filter(p -> RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
-        if (!optionalQueryParameters.isEmpty()) {
-            optionalParametersJavadoc("Optional Query Parameters", optionalQueryParameters, commentBlock);
+        if (!queryParameters.isEmpty()) {
+            optionalParametersJavadoc("Optional Query Parameters", queryParameters, commentBlock);
         }
 
-        List<ProxyMethodParameter> optionalHeaderParameters = clientMethod.getProxyMethod().getParameters()
-                .stream().filter(p -> RequestParameterLocation.Header.equals(p.getRequestParameterLocation()) && !p.getIsRequired())
+        List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
+                .stream().filter(p -> RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
-        if (!optionalHeaderParameters.isEmpty()) {
-            optionalParametersJavadoc("Optional Header Parameters", optionalHeaderParameters, commentBlock);
+        if (!headerParameters.isEmpty()) {
+            optionalParametersJavadoc("Optional Header Parameters", headerParameters, commentBlock);
         }
 
         Set<IType> typesInJavadoc = new HashSet<>();

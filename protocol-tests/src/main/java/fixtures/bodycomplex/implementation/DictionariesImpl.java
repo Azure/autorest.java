@@ -91,6 +91,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -113,6 +121,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -133,6 +149,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -162,6 +186,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -190,6 +222,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -210,6 +250,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -229,6 +277,14 @@ public final class DictionariesImpl {
 
     /**
      * Put complex types with dictionary property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -252,6 +308,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -274,6 +338,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -293,6 +365,14 @@ public final class DictionariesImpl {
 
     /**
      * Put complex types with dictionary property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -315,6 +395,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -335,6 +423,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -354,6 +450,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property which is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -377,6 +481,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -397,6 +509,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property which is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -426,6 +546,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -454,6 +582,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -474,6 +610,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -493,6 +637,14 @@ public final class DictionariesImpl {
 
     /**
      * Put complex types with dictionary property which is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -516,6 +668,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -538,6 +698,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -557,6 +725,14 @@ public final class DictionariesImpl {
 
     /**
      * Put complex types with dictionary property which is empty.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -579,6 +755,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -599,6 +783,14 @@ public final class DictionariesImpl {
     /**
      * Put complex types with dictionary property which is empty.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -618,6 +810,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property which is null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -640,6 +840,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -660,6 +868,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property which is null.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -689,6 +905,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -717,6 +941,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -737,6 +969,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -756,6 +996,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -779,6 +1027,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -799,6 +1055,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -828,6 +1092,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -856,6 +1128,14 @@ public final class DictionariesImpl {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -875,6 +1155,14 @@ public final class DictionariesImpl {
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *

@@ -35,7 +35,11 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
         if (clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage) return;
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+        if (settings.isLowLevelClient()) {
+            generateProtocolJavadoc(clientMethod, typeBlock, restAPIMethod);
+        } else {
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+        }
 
         switch (clientMethod.getType()) {
             case PagingSync:
@@ -86,5 +90,11 @@ public class WrapperClientMethodTemplate implements IJavaTemplate<ClientMethod, 
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
+    }
+
+    protected void generateProtocolJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
+        // TODO
+        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+
     }
 }

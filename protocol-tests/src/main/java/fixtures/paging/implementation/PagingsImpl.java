@@ -307,6 +307,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -343,6 +351,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that must return result of the default 'value' node.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -381,6 +397,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -408,6 +432,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that must return result of the default 'value' node.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -437,6 +469,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -463,6 +503,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must return result of the default 'value' node.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -488,6 +536,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -528,6 +584,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -565,6 +629,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -590,6 +662,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -617,6 +697,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -643,6 +731,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -668,6 +764,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -706,6 +810,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -743,6 +855,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -770,6 +890,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -799,6 +927,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -824,6 +960,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -851,6 +995,14 @@ public final class PagingsImpl {
     /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -890,6 +1042,14 @@ public final class PagingsImpl {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -928,6 +1088,14 @@ public final class PagingsImpl {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -956,6 +1124,14 @@ public final class PagingsImpl {
     /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -986,6 +1162,14 @@ public final class PagingsImpl {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1013,6 +1197,14 @@ public final class PagingsImpl {
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1038,6 +1230,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1076,6 +1279,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1113,6 +1327,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1140,6 +1365,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1169,6 +1405,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1194,6 +1441,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1221,6 +1479,23 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1263,6 +1538,23 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1302,6 +1594,23 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1330,6 +1639,23 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1360,6 +1686,23 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1387,6 +1730,23 @@ public final class PagingsImpl {
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
      * nextOperationWithQueryParams. Returns a ProductResult.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>requiredQueryParameter</td><td>int</td><td>A required integer query parameter. Put in value '100' to pass test.</td></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True and will be passed as a query parameter to nextOperationWithQueryParams</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1412,6 +1772,22 @@ public final class PagingsImpl {
 
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1453,6 +1829,22 @@ public final class PagingsImpl {
     /**
      * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>queryConstant</td><td>boolean</td><td>A constant. Must be True</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1492,6 +1884,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1530,6 +1933,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1567,6 +1981,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1594,6 +2019,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1623,6 +2059,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1649,6 +2096,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1674,6 +2132,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1716,6 +2185,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1754,6 +2234,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1782,6 +2273,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1813,6 +2315,17 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1839,6 +2352,17 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1868,6 +2392,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1909,6 +2441,14 @@ public final class PagingsImpl {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1947,6 +2487,14 @@ public final class PagingsImpl {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1975,6 +2523,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2005,6 +2561,14 @@ public final class PagingsImpl {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2032,6 +2596,14 @@ public final class PagingsImpl {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a
      * nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2058,6 +2630,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2099,6 +2679,14 @@ public final class PagingsImpl {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2137,6 +2725,14 @@ public final class PagingsImpl {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2165,6 +2761,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2195,6 +2799,14 @@ public final class PagingsImpl {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2222,6 +2834,14 @@ public final class PagingsImpl {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
      * client should retry and finish all 10 pages eventually.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2247,6 +2867,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives a 400 on the first call.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2286,6 +2914,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the first call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2323,6 +2959,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the first call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2350,6 +2994,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives a 400 on the first call.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2379,6 +3031,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the first call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2405,6 +3065,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the first call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2430,6 +3098,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives a 400 on the second call.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2469,6 +3145,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the second call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2506,6 +3190,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the second call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2533,6 +3225,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives a 400 on the second call.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2562,6 +3262,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the second call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2588,6 +3296,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives a 400 on the second call.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2613,6 +3329,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives an invalid nextLink.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2653,6 +3377,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives an invalid nextLink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2690,6 +3422,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives an invalid nextLink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2717,6 +3457,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that receives an invalid nextLink.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2746,6 +3494,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives an invalid nextLink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2772,6 +3528,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that receives an invalid nextLink.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2797,6 +3561,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2839,6 +3619,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2877,6 +3673,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2905,6 +3717,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2936,6 +3764,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2962,6 +3806,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -2990,6 +3850,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3032,6 +3908,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3071,6 +3963,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3100,6 +4008,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3131,6 +4055,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3159,6 +4099,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3186,6 +4142,17 @@ public final class PagingsImpl {
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3224,6 +4191,17 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3261,6 +4239,17 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3288,6 +4277,17 @@ public final class PagingsImpl {
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3317,6 +4317,17 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3343,6 +4354,17 @@ public final class PagingsImpl {
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3368,6 +4390,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3411,6 +4449,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3449,6 +4503,22 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3492,6 +4562,22 @@ public final class PagingsImpl {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
+     * <p><strong>Optional Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>apiVersion</td><td>String</td><td>Sets the api version to use.</td></tr>
+     * </table>
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3531,6 +4617,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3572,6 +4666,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3610,6 +4712,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3637,6 +4747,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3667,6 +4785,14 @@ public final class PagingsImpl {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3692,6 +4818,14 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3719,6 +4853,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3761,6 +4903,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3798,6 +4948,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3840,6 +4998,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3877,6 +5043,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3919,6 +5093,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -3956,6 +5138,17 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3998,6 +5191,17 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4035,6 +5239,17 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4077,6 +5292,17 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4114,6 +5340,17 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4156,6 +5393,17 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4193,6 +5441,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4235,6 +5491,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4272,6 +5536,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4314,6 +5586,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4351,6 +5631,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4393,6 +5681,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4430,6 +5726,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4472,6 +5776,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4509,6 +5821,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4551,6 +5871,14 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4588,6 +5916,17 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4630,6 +5969,17 @@ public final class PagingsImpl {
     /**
      * Get the next page of items.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>clientRequestId</td><td>String</td><td>The clientRequestId parameter</td></tr>
+     *     <tr><td>maxresults</td><td>String</td><td>Sets the maximum number of items to return in the response.</td></tr>
+     *     <tr><td>timeout</td><td>String</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -4667,6 +6017,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4708,6 +6066,14 @@ public final class PagingsImpl {
 
     /**
      * Get the next page of items.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *

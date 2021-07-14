@@ -114,6 +114,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -138,6 +146,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -160,6 +176,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Get complex types that are polymorphic.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -191,6 +215,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -221,6 +253,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -243,6 +283,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -264,6 +312,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -289,6 +345,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -313,6 +377,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -334,6 +406,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -358,6 +438,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -379,6 +467,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -402,6 +498,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -422,6 +526,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -440,6 +552,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -467,6 +587,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -493,6 +621,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -510,6 +646,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -529,6 +673,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -565,6 +717,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -598,6 +758,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -639,6 +807,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -679,6 +855,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -710,6 +894,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -743,6 +935,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -780,6 +980,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -813,6 +1021,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -854,6 +1070,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -894,6 +1118,14 @@ public final class PolymorphismsImpl {
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -925,6 +1157,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -958,6 +1198,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -990,6 +1238,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1020,6 +1276,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1059,6 +1323,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1097,6 +1369,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1127,6 +1407,14 @@ public final class PolymorphismsImpl {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1156,6 +1444,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1189,6 +1485,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1221,6 +1525,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1251,6 +1563,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1283,6 +1603,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1312,6 +1640,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1343,6 +1679,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1385,6 +1729,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1422,6 +1774,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1466,6 +1826,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1512,6 +1880,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1547,6 +1923,14 @@ public final class PolymorphismsImpl {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1586,6 +1970,14 @@ public final class PolymorphismsImpl {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1614,6 +2006,14 @@ public final class PolymorphismsImpl {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1639,6 +2039,14 @@ public final class PolymorphismsImpl {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1662,6 +2070,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1688,6 +2104,14 @@ public final class PolymorphismsImpl {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
      *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1710,6 +2134,14 @@ public final class PolymorphismsImpl {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
+     *
+     * <p><strong>Optional Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Optional Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
+     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
