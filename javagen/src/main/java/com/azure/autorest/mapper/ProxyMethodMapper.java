@@ -63,6 +63,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
         if (settings.isLowLevelClient()) {
+            builder.rawResponseBodyType(responseBodyType);
             if (responseBodyType instanceof ClassType) {
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {

@@ -146,7 +146,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -163,7 +163,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -180,7 +180,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -204,7 +204,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -228,7 +228,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -244,7 +244,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -322,7 +322,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -340,7 +340,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -357,7 +357,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -381,7 +381,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -405,7 +405,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -421,7 +421,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -502,7 +502,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -519,7 +519,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -536,7 +536,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -560,7 +560,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -584,7 +584,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -600,7 +600,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -684,7 +684,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -703,7 +703,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -721,7 +721,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -746,7 +746,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -771,7 +771,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -788,7 +788,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -877,7 +877,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -895,7 +895,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -912,7 +912,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -936,7 +936,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -960,7 +960,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -976,7 +976,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1107,7 +1107,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1125,7 +1125,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1143,7 +1143,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1167,7 +1167,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1191,7 +1191,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1207,7 +1207,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1329,7 +1329,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1347,7 +1347,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1365,7 +1365,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1389,7 +1389,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1413,7 +1413,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1429,7 +1429,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * Base64Url
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

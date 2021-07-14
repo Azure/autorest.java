@@ -65,7 +65,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -83,7 +95,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -100,7 +124,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -124,7 +160,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -148,7 +196,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -164,7 +224,19 @@ public final class InheritancesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String
+     *     hates: [
+     *         {
+     *             id: Integer
+     *             name: String
+     *             food: String
+     *         }
+     *     ]
+     *     breed: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

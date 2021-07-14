@@ -117,7 +117,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -135,7 +141,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -152,7 +164,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -176,7 +194,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -200,7 +224,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -216,7 +246,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -333,7 +369,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -351,7 +389,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -368,7 +408,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -392,7 +434,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -416,7 +460,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -432,7 +478,9 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -449,7 +497,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -469,7 +532,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -488,7 +566,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -513,7 +606,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -538,7 +646,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -555,7 +678,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -573,7 +711,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -594,7 +747,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -613,7 +781,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -638,7 +821,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -663,7 +861,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -680,7 +893,22 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     sampleSalmon: {
+     *         species: String
+     *         location: String
+     *         iswild: Boolean
+     *     }
+     *     salmons: [
+     *         (recursive schema, see above)
+     *     ]
+     *     sampleFish: {
+     *         species: String
+     *     }
+     *     fishes: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -697,7 +925,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -715,7 +957,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -732,7 +988,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -756,7 +1026,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -780,7 +1064,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -796,7 +1094,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -921,7 +1233,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -948,7 +1274,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -972,7 +1312,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1002,7 +1356,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1033,7 +1401,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1055,7 +1437,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

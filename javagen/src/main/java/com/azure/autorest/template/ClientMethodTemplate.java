@@ -655,7 +655,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 .findFirst()
                 .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
 
-        IType responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
+        IType responseBodyType;
+        if (JavaSettings.getInstance().isLowLevelClient()) {
+            responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+        } else {
+            responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
+        }
         if (responseBodyType != null && !responseBodyType.equals(PrimitiveType.Void)) {
             responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
         }

@@ -49,6 +49,7 @@ public class AndroidProxyMethod extends ProxyMethod {
                 description,
                 returnValueWireType,
                 responseBodyType,
+                null,
                 isResumable,
                 responseContentTypes);
     }

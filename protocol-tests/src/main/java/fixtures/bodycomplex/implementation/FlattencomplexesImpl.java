@@ -54,7 +54,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -70,7 +75,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -85,7 +95,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -107,7 +122,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -129,7 +149,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -143,7 +168,12 @@ public final class FlattencomplexesImpl {
      * <strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     propB1: String
+     *     helper: {
+     *         propBH1: String
+     *     }
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

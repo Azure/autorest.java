@@ -86,7 +86,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -104,7 +108,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -121,7 +129,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -145,7 +157,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -169,7 +185,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -185,7 +205,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -302,7 +326,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -320,7 +348,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -337,7 +369,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -361,7 +397,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -385,7 +425,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -401,7 +445,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -518,7 +566,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -536,7 +588,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -553,7 +609,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -577,7 +637,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -601,7 +665,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -617,7 +685,11 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     array: [
+     *         String
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

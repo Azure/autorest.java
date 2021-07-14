@@ -215,7 +215,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -232,7 +235,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -249,7 +255,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -273,7 +282,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -297,7 +309,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -313,7 +328,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Integer
+     *     field2: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -430,7 +448,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -447,7 +468,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -464,7 +488,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -488,7 +515,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -512,7 +542,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -528,7 +561,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Long
+     *     field2: Long
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -645,7 +681,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -663,7 +702,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -680,7 +722,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -704,7 +749,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -728,7 +776,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -744,7 +795,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Float
+     *     field2: Float
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -861,7 +915,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -879,7 +936,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -896,7 +956,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -920,7 +983,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -944,7 +1010,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -960,7 +1029,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field1: Double
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1078,7 +1150,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1095,7 +1170,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1112,7 +1190,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1136,7 +1217,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1160,7 +1244,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1176,7 +1263,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     fieldTrue: Boolean
+     *     fieldFalse: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1293,7 +1383,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1311,7 +1405,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1328,7 +1426,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1352,7 +1454,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1376,7 +1482,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1392,7 +1502,11 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: String
+     *     empty: String
+     *     nullProperty: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1510,7 +1624,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1527,7 +1644,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1544,7 +1664,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1568,7 +1691,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1592,7 +1718,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1608,7 +1737,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: LocalDate
+     *     leap: LocalDate
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1725,7 +1857,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1743,7 +1878,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1760,7 +1898,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1784,7 +1925,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1808,7 +1952,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1824,7 +1971,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1942,7 +2092,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1960,7 +2113,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1978,7 +2134,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2002,7 +2161,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2026,7 +2188,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2042,7 +2207,10 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: OffsetDateTime
+     *     now: OffsetDateTime
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2164,7 +2332,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2182,7 +2352,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2199,7 +2371,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2223,7 +2397,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2247,7 +2423,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2263,7 +2441,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: Duration
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2381,7 +2561,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2398,7 +2580,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2415,7 +2599,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2439,7 +2625,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2463,7 +2651,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2479,7 +2669,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     field: byte[]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

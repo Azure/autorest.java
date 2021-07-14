@@ -310,7 +310,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -337,7 +347,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -364,7 +384,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -382,7 +412,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -400,7 +440,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -416,7 +466,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -432,7 +492,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -461,7 +531,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -488,7 +568,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -504,7 +594,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -520,7 +620,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -536,7 +646,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -552,7 +672,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -579,7 +709,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -606,7 +746,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -624,7 +774,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -642,7 +802,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -658,7 +828,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -675,7 +855,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -703,7 +893,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -731,7 +931,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -750,7 +960,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -769,7 +989,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -786,7 +1016,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -802,7 +1042,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -829,7 +1079,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -856,7 +1116,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -874,7 +1144,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -892,7 +1172,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -908,7 +1198,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -925,7 +1225,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -956,7 +1266,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -985,7 +1305,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1004,7 +1334,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1023,7 +1363,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1040,7 +1390,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1056,7 +1416,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1086,7 +1456,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1115,7 +1495,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1143,7 +1533,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1170,7 +1570,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1188,7 +1598,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1206,7 +1626,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1222,7 +1652,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1238,7 +1678,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1269,7 +1719,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1297,7 +1757,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1316,7 +1786,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1336,7 +1816,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1353,7 +1843,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param offset Offset of return value.
@@ -1372,7 +1872,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1402,7 +1912,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1430,7 +1950,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1449,7 +1979,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1468,7 +2008,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1485,7 +2035,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1502,7 +2062,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1532,7 +2102,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1560,7 +2140,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1579,7 +2169,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1598,7 +2198,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1615,7 +2225,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1631,7 +2251,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1659,7 +2289,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1686,7 +2326,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1704,7 +2354,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1722,7 +2382,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1738,7 +2408,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1754,7 +2434,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1782,7 +2472,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1809,7 +2509,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1827,7 +2537,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1845,7 +2565,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1861,7 +2591,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1877,7 +2617,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1906,7 +2656,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1933,7 +2693,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1951,7 +2721,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1969,7 +2749,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1985,7 +2775,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2001,7 +2801,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2032,7 +2842,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2060,7 +2880,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2079,7 +2909,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2099,7 +2939,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2116,7 +2966,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2134,7 +2994,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2165,7 +3035,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2194,7 +3074,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2214,7 +3104,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2234,7 +3134,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2252,7 +3162,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2270,7 +3190,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2297,7 +3227,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2324,7 +3264,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2342,7 +3292,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2360,7 +3320,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2376,7 +3346,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2392,7 +3372,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2424,7 +3414,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2453,7 +3453,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2485,7 +3495,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param tenant Sets the tenant to use.
@@ -2515,7 +3535,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2545,7 +3575,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2573,7 +3613,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2591,7 +3641,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2610,7 +3670,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2626,7 +3696,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -2643,7 +3723,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2674,7 +3764,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2702,7 +3802,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2733,7 +3843,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2761,7 +3881,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2792,7 +3922,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     value: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2820,7 +3960,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2851,7 +4001,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2879,7 +4039,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2910,7 +4080,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     odataNextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2938,7 +4118,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2969,7 +4159,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -2997,7 +4197,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3028,7 +4238,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3056,7 +4276,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3087,7 +4317,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3115,7 +4355,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3146,7 +4396,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3174,7 +4434,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3205,7 +4475,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3233,7 +4513,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3264,7 +4554,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3292,7 +4592,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3323,7 +4633,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     values: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3351,7 +4671,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.
@@ -3382,7 +4712,17 @@ public final class PagingsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     indexes: [
+     *         {
+     *             properties: {
+     *                 id: Integer
+     *                 name: String
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String
+     * }
      * }</pre>
      *
      * @param nextLink The nextLink parameter.

@@ -94,7 +94,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -112,7 +116,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -129,7 +137,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -153,7 +165,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -177,7 +193,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -193,7 +213,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -318,7 +342,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -336,7 +364,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -353,7 +385,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -377,7 +413,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -401,7 +441,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -417,7 +461,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -433,7 +481,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -451,7 +503,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -468,7 +524,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -492,7 +552,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -516,7 +580,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -532,7 +600,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -548,7 +620,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -565,7 +641,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -582,7 +662,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -606,7 +690,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -630,7 +718,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -646,7 +738,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -662,7 +758,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -680,7 +780,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -697,7 +801,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -721,7 +829,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -745,7 +857,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -761,7 +877,11 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: Integer
+     *     name: String
+     *     color: String(cyan/Magenta/YELLOW/blacK)
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

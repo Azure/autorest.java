@@ -73,6 +73,10 @@ public class ProxyMethod {
      */
     private IType responseBodyType;
     /**
+     * The raw response body type. responseBodyType is set to BinaryData in low-level mode. We need raw type.
+     */
+    private IType rawResponseBodyType;
+    /**
      * Get whether or not this method resumes polling of an LRO.
      */
     private boolean isResumable;
@@ -102,8 +106,8 @@ public class ProxyMethod {
                         ClassType unexpectedResponseExceptionType,
                         Map<ClassType, List<HttpResponseStatus>> unexpectedResponseExceptionTypes,
                         String name, List<ProxyMethodParameter> parameters, String description,
-                        IType returnValueWireType, IType responseBodyType, boolean isResumable,
-                        Set<String> responseContentTypes) {
+                        IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
+                        boolean isResumable, Set<String> responseContentTypes) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -117,6 +121,7 @@ public class ProxyMethod {
         this.description = description;
         this.returnValueWireType = returnValueWireType;
         this.responseBodyType = responseBodyType;
+        this.rawResponseBodyType = rawResponseBodyType;
         this.isResumable = isResumable;
         this.responseContentTypes = responseContentTypes;
     }
@@ -171,6 +176,10 @@ public class ProxyMethod {
 
     public IType getResponseBodyType() {
         return responseBodyType;
+    }
+
+    public IType getRawResponseBodyType() {
+        return rawResponseBodyType;
     }
 
     public final boolean isResumable() {
@@ -304,6 +313,7 @@ public class ProxyMethod {
         protected String description;
         protected IType returnValueWireType;
         protected IType responseBodyType;
+        protected IType rawResponseBodyType;
         protected boolean isResumable;
         protected Set<String> responseContentTypes;
 
@@ -437,6 +447,16 @@ public class ProxyMethod {
         }
 
         /**
+         * Sets the raw response body type.
+         * @param rawResponseBodyType the response body type
+         * @return the Builder itself
+         */
+        public Builder rawResponseBodyType(IType rawResponseBodyType) {
+            this.rawResponseBodyType = rawResponseBodyType;
+            return this;
+        }
+
+        /**
          * Sets whether or not this method resumes polling of an LRO.
          * @param isResumable whether or not this method resumes polling of an LRO
          * @return the Builder itself
@@ -473,6 +493,7 @@ public class ProxyMethod {
                     description,
                     returnValueWireType,
                     responseBodyType,
+                    rawResponseBodyType,
                     isResumable,
                     responseContentTypes);
         }
