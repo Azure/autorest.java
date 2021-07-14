@@ -243,8 +243,8 @@ class ResourceTypeNormalization {
         if (compositeType.getParents().getAll() == null) {
             compositeType.getParents().setAll(new ArrayList<>());
         }
-        compositeType.getParents().getImmediate().add(parentType);
-        compositeType.getParents().getAll().add(parentType);
+        compositeType.getParents().getImmediate().add(0, parentType);
+        compositeType.getParents().getAll().add(0, parentType);
     }
 
     private static void replaceDummyParentType(ObjectSchema compositeType, ObjectSchema parentType) {
