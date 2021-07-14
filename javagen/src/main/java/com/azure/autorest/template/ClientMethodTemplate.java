@@ -651,7 +651,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         Set<IType> typesInJavadoc = new HashSet<>();
         clientMethod.getMethodInputParameters()
                 .stream().filter(p -> RequestParameterLocation.Body.equals(p.getLocation()))
-                .map(ClientMethodParameter::getClientType)
+                .map(ClientMethodParameter::getRawType)
                 .findFirst()
                 .ifPresent(iType -> requestBodySchemaJavadoc(iType, commentBlock, typesInJavadoc));
 

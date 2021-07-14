@@ -199,7 +199,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -217,7 +220,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -235,7 +241,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -251,7 +260,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -268,7 +280,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -284,7 +299,10 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     id: String
+     *     size: Integer
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

@@ -217,7 +217,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -235,7 +241,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -253,7 +265,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -269,7 +287,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -286,7 +310,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -302,7 +332,13 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

@@ -209,7 +209,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -229,7 +229,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -247,7 +247,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -264,7 +264,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -281,7 +281,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -297,7 +297,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -429,7 +429,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -449,7 +449,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -467,7 +467,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -484,7 +484,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -501,7 +501,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -517,7 +517,7 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * String(red color/green-color/blue_color)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -668,7 +668,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -689,7 +692,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -707,7 +713,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -724,7 +733,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -742,7 +754,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -758,7 +773,10 @@ public final class EnumsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     colorConstant: String
+     *     field1: String
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.

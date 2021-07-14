@@ -43,6 +43,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
+        builder.rawType(wireType);
         if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
             if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.Body) {
                 wireType = ClassType.BinaryData;

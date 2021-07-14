@@ -268,7 +268,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -286,7 +292,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -304,7 +316,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -320,7 +338,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -337,7 +361,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -353,7 +383,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1124,7 +1160,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1142,7 +1192,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1160,7 +1224,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1175,62 +1253,6 @@ public final class PolymorphismsImpl {
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
      * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putComplicatedAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putComplicatedWithResponseAsync(complexBody, requestOptions, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putComplicated(BinaryData complexBody, RequestOptions requestOptions) {
-        putComplicatedAsync(complexBody, requestOptions).block();
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @return a DynamicRequest where customizations can be made before sent to the service.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplicatedWithResponse(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        return putComplicatedWithResponseAsync(complexBody, requestOptions, context).block();
-    }
-
-    /**
-     * Put complex types that are polymorphic, omitting the discriminator.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
@@ -1248,6 +1270,104 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putComplicatedAsync(BinaryData complexBody, RequestOptions requestOptions, Context context) {
+        return putComplicatedWithResponseAsync(complexBody, requestOptions, context)
+                .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putComplicated(BinaryData complexBody, RequestOptions requestOptions) {
+        putComplicatedAsync(complexBody, requestOptions).block();
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
+     * }</pre>
+     *
+     * @return a DynamicRequest where customizations can be made before sent to the service.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putComplicatedWithResponse(
+            BinaryData complexBody, RequestOptions requestOptions, Context context) {
+        return putComplicatedWithResponseAsync(complexBody, requestOptions, context).block();
+    }
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         {
+     *             species: String
+     *             length: float
+     *             siblings: [
+     *                 (recursive schema, see above)
+     *             ]
+     *         }
+     *     ]
+     *     location: String
+     *     iswild: Boolean
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1268,12 +1388,6 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
      * {
      *     species: String
      *     length: float
@@ -1289,6 +1403,12 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1306,12 +1426,6 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
      * {
      *     species: String
      *     length: float
@@ -1327,6 +1441,12 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1350,12 +1470,6 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
      * {
      *     species: String
      *     length: float
@@ -1371,6 +1485,12 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1395,12 +1515,6 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
      * {
      *     species: String
      *     length: float
@@ -1416,6 +1530,12 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1431,12 +1551,6 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
      * {
      *     species: String
      *     length: float
@@ -1452,6 +1566,12 @@ public final class PolymorphismsImpl {
      *     location: String
      *     iswild: Boolean
      * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * (recursive schema, see above)
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1469,7 +1589,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1491,7 +1617,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1510,7 +1642,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1528,7 +1666,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1547,7 +1691,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
@@ -1564,7 +1714,13 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     species: String
+     *     length: float
+     *     siblings: [
+     *         (recursive schema, see above)
+     *     ]
+     * }
      * }</pre>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
