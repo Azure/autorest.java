@@ -54,7 +54,7 @@ public final class FlattencomplexesImpl {
      * <strong>Optional Header Parameters</strong>
      *
      * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
+     *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
      *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
      * </table>
