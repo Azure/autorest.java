@@ -143,14 +143,6 @@ public final class StringOperationsImpl {
     /**
      * Get null string value value.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -168,14 +160,6 @@ public final class StringOperationsImpl {
     /**
      * Get null string value value.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -192,14 +176,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get null string value value.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -225,14 +201,6 @@ public final class StringOperationsImpl {
     /**
      * Get null string value value.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -257,14 +225,6 @@ public final class StringOperationsImpl {
     /**
      * Get null string value value.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -280,14 +240,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get null string value value.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -305,14 +257,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -323,14 +267,6 @@ public final class StringOperationsImpl {
 
     /**
      * Set string value null.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -343,14 +279,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -360,14 +288,6 @@ public final class StringOperationsImpl {
 
     /**
      * Set string value null.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -379,14 +299,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -397,14 +309,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value null.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -414,14 +318,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get empty string value value ''.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -441,14 +337,6 @@ public final class StringOperationsImpl {
     /**
      * Get empty string value value ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -465,14 +353,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get empty string value value ''.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -498,14 +378,6 @@ public final class StringOperationsImpl {
     /**
      * Get empty string value value ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -530,14 +402,6 @@ public final class StringOperationsImpl {
     /**
      * Get empty string value value ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -553,14 +417,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get empty string value value ''.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -578,14 +434,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value empty ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -599,14 +447,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value empty ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -619,14 +459,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value empty ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -636,14 +468,6 @@ public final class StringOperationsImpl {
 
     /**
      * Set string value empty ''.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -655,14 +479,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value empty ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -673,14 +489,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value empty ''.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -690,14 +498,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -716,14 +516,6 @@ public final class StringOperationsImpl {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -740,14 +532,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -773,14 +557,6 @@ public final class StringOperationsImpl {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -805,14 +581,6 @@ public final class StringOperationsImpl {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -828,14 +596,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -853,14 +613,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -875,14 +627,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -896,14 +640,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -913,14 +649,6 @@ public final class StringOperationsImpl {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -932,14 +660,6 @@ public final class StringOperationsImpl {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -949,14 +669,6 @@ public final class StringOperationsImpl {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -968,14 +680,6 @@ public final class StringOperationsImpl {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -996,14 +700,6 @@ public final class StringOperationsImpl {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1021,14 +717,6 @@ public final class StringOperationsImpl {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1055,14 +743,6 @@ public final class StringOperationsImpl {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1088,14 +768,6 @@ public final class StringOperationsImpl {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1112,14 +784,6 @@ public final class StringOperationsImpl {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1138,14 +802,6 @@ public final class StringOperationsImpl {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1161,14 +817,6 @@ public final class StringOperationsImpl {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1183,14 +831,6 @@ public final class StringOperationsImpl {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1201,14 +841,6 @@ public final class StringOperationsImpl {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
@@ -1221,14 +853,6 @@ public final class StringOperationsImpl {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1240,14 +864,6 @@ public final class StringOperationsImpl {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * @return a DynamicRequest where customizations can be made before sent to the service.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1257,14 +873,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1284,14 +892,6 @@ public final class StringOperationsImpl {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1308,14 +908,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1341,14 +933,6 @@ public final class StringOperationsImpl {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1373,14 +957,6 @@ public final class StringOperationsImpl {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1397,14 +973,6 @@ public final class StringOperationsImpl {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1420,14 +988,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get value that is base64 encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1447,14 +1007,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64 encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1471,14 +1023,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get value that is base64 encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1504,14 +1048,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64 encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1536,14 +1072,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64 encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1560,14 +1088,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64 encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1583,14 +1103,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get value that is base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1610,14 +1122,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1635,14 +1139,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get value that is base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1668,14 +1164,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1700,14 +1188,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1724,14 +1204,6 @@ public final class StringOperationsImpl {
     /**
      * Get value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1747,14 +1219,6 @@ public final class StringOperationsImpl {
 
     /**
      * Put value that is base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1777,14 +1241,6 @@ public final class StringOperationsImpl {
     /**
      * Put value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1803,14 +1259,6 @@ public final class StringOperationsImpl {
     /**
      * Put value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1827,14 +1275,6 @@ public final class StringOperationsImpl {
 
     /**
      * Put value that is base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1853,14 +1293,6 @@ public final class StringOperationsImpl {
     /**
      * Put value that is base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1876,14 +1308,6 @@ public final class StringOperationsImpl {
 
     /**
      * Put value that is base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1901,14 +1325,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1928,14 +1344,6 @@ public final class StringOperationsImpl {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1953,14 +1361,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1986,14 +1386,6 @@ public final class StringOperationsImpl {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2018,14 +1410,6 @@ public final class StringOperationsImpl {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -2041,14 +1425,6 @@ public final class StringOperationsImpl {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *

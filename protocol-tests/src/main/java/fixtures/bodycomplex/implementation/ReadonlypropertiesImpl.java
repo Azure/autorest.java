@@ -63,14 +63,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Get complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -92,14 +84,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Get complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -119,14 +103,6 @@ public final class ReadonlypropertiesImpl {
 
     /**
      * Get complex types that have readonly properties.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -155,14 +131,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Get complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -190,14 +158,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Get complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -217,14 +177,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Get complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -243,14 +195,6 @@ public final class ReadonlypropertiesImpl {
 
     /**
      * Put complex types that have readonly properties.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -273,14 +217,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Put complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -302,14 +238,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Put complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -328,14 +256,6 @@ public final class ReadonlypropertiesImpl {
 
     /**
      * Put complex types that have readonly properties.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -357,14 +277,6 @@ public final class ReadonlypropertiesImpl {
     /**
      * Put complex types that have readonly properties.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -383,14 +295,6 @@ public final class ReadonlypropertiesImpl {
 
     /**
      * Put complex types that have readonly properties.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *

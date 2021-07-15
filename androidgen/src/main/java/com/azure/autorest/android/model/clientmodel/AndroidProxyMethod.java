@@ -46,11 +46,11 @@ public class AndroidProxyMethod extends ProxyMethod {
                 unexpectedResponseExceptionTypes,
                 name,
                 parameters,
-                null,
+                parameters,
                 description,
                 returnValueWireType,
                 responseBodyType,
-                null,
+                responseBodyType,
                 isResumable,
                 responseContentTypes);
     }

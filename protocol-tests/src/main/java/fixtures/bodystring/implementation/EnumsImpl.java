@@ -91,14 +91,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -117,14 +109,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -141,14 +125,6 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -174,14 +150,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -206,14 +174,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -230,14 +190,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -253,14 +205,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -282,14 +226,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -308,14 +244,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -332,14 +260,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -358,14 +278,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -381,14 +293,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -406,14 +310,6 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -433,14 +329,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -457,14 +345,6 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -490,14 +370,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -522,14 +394,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -546,14 +410,6 @@ public final class EnumsImpl {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -569,14 +425,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -598,14 +446,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -624,14 +464,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -648,14 +480,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -674,14 +498,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -697,14 +513,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -722,14 +530,6 @@ public final class EnumsImpl {
 
     /**
      * Get value 'green-color' from the constant.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -752,14 +552,6 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -780,14 +572,6 @@ public final class EnumsImpl {
 
     /**
      * Get value 'green-color' from the constant.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -816,14 +600,6 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -851,14 +627,6 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -878,14 +646,6 @@ public final class EnumsImpl {
     /**
      * Get value 'green-color' from the constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -904,14 +664,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'green-color' from a constant.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -937,14 +689,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -966,14 +710,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -993,14 +729,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'green-color' from a constant.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1023,14 +751,6 @@ public final class EnumsImpl {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1049,14 +769,6 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'green-color' from a constant.
-     *
-     * <p><strong>Optional Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Optional Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Description</th></tr>
-     *     <tr><td>accept</td><td>String</td><td>Accept header</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *

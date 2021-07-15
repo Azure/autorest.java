@@ -638,14 +638,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 .stream().filter(p -> RequestParameterLocation.Query.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
         if (!queryParameters.isEmpty()) {
-            optionalParametersJavadoc("Optional Query Parameters", queryParameters, commentBlock);
+            optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
         }
 
         List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
+                .stream().filter(p -> p.getName().equals("Accept") && RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
         if (!headerParameters.isEmpty()) {
-            optionalParametersJavadoc("Optional Header Parameters", headerParameters, commentBlock);
+            optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
         }
 
         Set<IType> typesInJavadoc = new HashSet<>();
@@ -678,10 +678,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
-        commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Description</th></tr>");
+        commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>");
         for (ProxyMethodParameter parameter : parameters) {
-            commentBlock.line(String.format("    <tr><td>%s</td><td>%s</td><td>%s</td></tr>",
-                    parameter.getName(), CodeNamer.escapeXmlComment(parameter.getClientType().toString()), parameterDescriptionOrDefault(parameter)));
+            commentBlock.line(String.format(
+                    "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                    parameter.getName(),
+                    CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
+                    parameter.getIsRequired() ? "Yes" : "No",
+                    parameterDescriptionOrDefault(parameter)));
         }
         commentBlock.line("</table>");
     }
