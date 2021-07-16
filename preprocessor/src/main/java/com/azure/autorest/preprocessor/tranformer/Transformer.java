@@ -406,29 +406,4 @@ public class Transformer {
       parameterNames.add(parameter.getLanguage().getJava().getName());
     }
   }
-
-  /*
-  private static <T> void shallowCopy(T obj, T newObj, Class clazz) {
-    while (clazz != Object.class) {
-      Field[] fields = clazz.getDeclaredFields();
-      for (Field f : fields) {
-        try {
-          Field t = clazz.getDeclaredField(f.getName());
-
-          if (t.getType() == f.getType()) {
-            f.setAccessible(true);
-            t.setAccessible(true);
-            t.set(newObj, f.get(obj));
-          }
-        } catch (NoSuchFieldException ex) {
-          // skip it
-        } catch (IllegalAccessException ex) {
-          //logger.error("Failed to copy field '{}'", f.getName());
-        }
-      }
-
-      clazz = clazz.getSuperclass();
-    }
-  }
-  */
 }
