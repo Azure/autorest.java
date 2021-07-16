@@ -37,7 +37,6 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
         if (settings.isLowLevelClient()) {
             typeBlock.javadocComment(comment -> generateProtocolMethodJavadoc(clientMethod, comment));
-//            generateProtocolJavadoc(clientMethod, typeBlock, restAPIMethod);
         } else {
             generateJavadoc(clientMethod, typeBlock, restAPIMethod);
         }
@@ -91,11 +90,5 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
             comment.methodReturns(clientMethod.getReturnValue().getDescription());
         });
-    }
-
-    protected void generateProtocolJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
-        // TODO
-        generateJavadoc(clientMethod, typeBlock, restAPIMethod);
-
     }
 }

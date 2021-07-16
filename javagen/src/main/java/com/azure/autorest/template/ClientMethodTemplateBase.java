@@ -27,7 +27,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
 
         List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters()
-                .stream().filter(p -> p.getName().equals("Accept") && RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
+                .stream().filter(p -> !p.getName().equals("accept") && RequestParameterLocation.Header.equals(p.getRequestParameterLocation()))
                 .collect(Collectors.toList());
         if (!headerParameters.isEmpty()) {
             optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
