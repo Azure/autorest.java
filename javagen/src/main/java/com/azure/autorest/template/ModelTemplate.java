@@ -331,10 +331,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     generateGetterJavadoc(classBlock, model, property);
 
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, getGetterName(model, property)), methodBlock -> {
-                        methodBlock.ifBlock(String.format("this.%1$s == null", targetProperty.getName()), ifBlock -> {
+                        methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
                             methodBlock.methodReturn("null");
                         }).elseBlock(elseBlock -> {
-                            methodBlock.methodReturn(String.format("this.%1$s.%2$s()", targetProperty.getName(), property.getGetterName()));
+                            methodBlock.methodReturn(String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName()));
                         });
                     });
 
@@ -343,10 +343,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
 
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), property.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
-                            methodBlock.ifBlock(String.format("this.%1$s == null", targetProperty.getName()), ifBlock -> {
-                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), targetModel.getType().toString()));
+                            methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock -> {
+                                methodBlock.line(String.format("this.%1$s(new %2$s());", targetProperty.getSetterName(), targetModel.getType().toString()));
                             });
-                            methodBlock.line(String.format("this.%1$s.%2$s(%3$s);", targetProperty.getName(), property.getSetterName(), property.getName()));
+                            methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
                         });
                     }
