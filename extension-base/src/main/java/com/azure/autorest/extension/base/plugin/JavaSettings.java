@@ -128,7 +128,8 @@ public class JavaSettings
                     host.getBooleanValue("use-iterable", false),
                     host.getBooleanValue("require-x-ms-flattened-to-flatten", false),
                     host.getStringValue("client-flattened-annotation-target", ""),
-                    host.getStringValue("key-credential-header-name", ""));
+                    host.getStringValue("key-credential-header-name", ""),
+                    host.getBooleanValue("skip-formatting", false));
         }
         return _instance;
     }
@@ -188,7 +189,8 @@ public class JavaSettings
                          boolean useIterable,
                          boolean requireXMsFlattenedToFlatten,
                          String clientFlattenAnnotationTarget,
-                         String keyCredentialHeaderName)
+                         String keyCredentialHeaderName,
+                         boolean skipFormatting)
     {
         this.azure = azure;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -247,6 +249,7 @@ public class JavaSettings
         this.customizationJarPath = customizationJarPath;
         this.customizationClass = customizationClass;
         this.keyCredentialHeaderName = keyCredentialHeaderName;
+        this.skipFormatting = skipFormatting;
     }
 
     private String keyCredentialHeaderName;
@@ -545,12 +548,20 @@ public class JavaSettings
     }
 
     boolean overrideSetterFromParent;
+    boolean skipFormatting;
 
     /**
      * @return whether to override superclass setter method in model.
      */
     public boolean isOverrideSetterFromSuperclass() {
         return overrideSetterFromParent;
+    }
+
+    /**
+     * @return whether to skip formatting java files.
+     */
+    public boolean isSkipFormatting() {
+        return skipFormatting;
     }
 
     private final boolean optionalConstantAsEnum;

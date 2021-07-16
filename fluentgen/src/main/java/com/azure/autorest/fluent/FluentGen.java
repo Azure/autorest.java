@@ -74,6 +74,8 @@ public class FluentGen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        JavaSettings settings = JavaSettings.getInstance();
+
         List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
@@ -101,11 +103,13 @@ public class FluentGen extends NewPlugin {
                 String content = javaFile.getContents().toString();
                 String path = javaFile.getFilePath();
 
-                // formatter
-                boolean sampleFile = path.contains("src/samples/java/");
-                String formattedContent = new JavaFormatter(content, path).format(!sampleFile);
+                if (!settings.isSkipFormatting()) {
+                    // formatter
+                    boolean isSampleJavaFile = path.contains("src/samples/java/");
+                    content = new JavaFormatter(content, path).format(!isSampleJavaFile);
+                }
 
-                writeFile(path, formattedContent, null);
+                writeFile(path, content, null);
             }
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
